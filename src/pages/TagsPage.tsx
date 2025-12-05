@@ -13,6 +13,7 @@ import 'tippy.js/animations/scale.css';
 interface WordCloudWord {
   text: string;
   value: number;
+  [key: string]: unknown;
 }
 
 // WordCloud 콜백 타입

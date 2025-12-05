@@ -1,5 +1,66 @@
 [
   {
+    "title": "설정 파일 가이드",
+    "slug": "_guide/configuration",
+    "content": "설정 파일 가이드\nSEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.\n설정 파일 목록\n  파일   위치   용도  \n ------ ------ ------ \n     루트   사이트 기본 정보  \n     루트   테마 (색상, 폰트, 레이아웃)  \n     루트   네비게이션 메뉴  \n     src/styles   커스텀 CSS  \n     src   GitHub 저장소 연결 설정  \nsite.config.ts 상세\ntheme.config.ts 상세\n색상 (colors)\n폰트 (fonts)\n레이아웃 (layout)\n테두리 반경 (borderRadius)\nnavigation.config.ts 상세\nGitHub 저장소 설정\nRepository Secrets\nGitHub Repository Settings > Secrets에서 설정:\n  변수   필수   설명  \n ------ ------ ------ \n     O   OpenAI 호환 API URL  \n     O   API 키  \n     O   모델명 (예: gpt-4)  \nGitHub Pages 설정\nRepository Settings > Pages\nSource: \"GitHub Actions\" 선택\n브랜치 push 시 자동 배포\n환경 변수\n빌드 시\n개발 시\n 파일에 설정:",
+    "excerpt": "설정 파일 가이드\nSEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.\n설정 파일 목록\n  파일   위치   용도  \n ------ ------ ------ \n     루트   사이트 기본 정보  \n     루트   테마 (색상, 폰트, 레이아웃)  \n     루트   네비게이션 메뉴  \n     src/styles   커스텀 CSS...",
+    "tags": [
+      "설정",
+      "가이드",
+      "TypeScript"
+    ],
+    "lastModified": "2025-12-05T19:35:06.657Z"
+  },
+  {
+    "title": "테마 커스터마이징",
+    "slug": "_guide/customization",
+    "content": "테마 커스터마이징\nSEPilot Wiki는 Astro와 유사하게 설정 파일을 통해 다양한 커스터마이징을 지원합니다.\n설정 파일 구조\n사이트 설정 (site.config.ts)\n기본 정보\n로고 설정\nFooter 설정\n테마 설정 (theme.config.ts)\n색상 커스터마이징\n폰트 설정\n레이아웃 설정\n커스텀 CSS\n에서 추가 스타일을 정의할 수 있습니다:\n네비게이션 설정 (navigation.config.ts)\n사이드바에 커스텀 메뉴를 추가합니다:\n지원하는 lucide 아이콘\nlucide.dev/icons에서 사용 가능한 아이콘 이름을 확인할 수 있습니다.\n예: , , , , ,  등",
+    "excerpt": "테마 커스터마이징\nSEPilot Wiki는 Astro와 유사하게 설정 파일을 통해 다양한 커스터마이징을 지원합니다.\n설정 파일 구조\n사이트 설정 (site.config.ts)\n기본 정보\n로고 설정\nFooter 설정\n테마 설정 (theme.config.ts)\n색상 커스터마이징\n폰트 설정\n레이아웃 설정\n커스텀 CSS\n에서 추가 스타일을 정의할 수 있습니다:\n네...",
+    "tags": [
+      "테마",
+      "커스터마이징",
+      "설정"
+    ],
+    "lastModified": "2025-12-05T19:35:06.665Z"
+  },
+  {
+    "title": "FAQ",
+    "slug": "_guide/faq",
+    "content": "자주 묻는 질문\n일반\nQ: SEPilot Wiki는 무엇인가요?\nA: GitHub 저장소 기반의 AI 자동화 위키 시스템입니다. Astro 같은 정적 사이트 생성기처럼 설정 파일을 통해 커스터마이징이 가능하며, GitHub Issue와 LLM을 연동하여 문서를 자동 생성합니다.\nQ: 무료로 사용할 수 있나요?\nA: 네, SEPilot Wiki 자체는 오픈소스이며 무료입니다. 다만 LLM API 사용 시 해당 제공자의 요금이 발생할 수 있습니다.\n설치 및 배포\nQ: 어떤 런타임이 필요한가요?\nA: Bun 또는 Node.js 20+를 지원합니다. Bun 사용을 권장합니다.\nQ: 로컬에서 개발할 수 있나요?\nA: 네,  또는 로 로컬 개발 서버를 실행할 수 있습니다.\nQ: GitHub Pages 외에 다른 호스팅 서비스도 지원하나요?\nA: 네, Vite 기반이므로 Vercel, Netlify, Cloudflare Pages 등 모든 정적 호스팅 서비스에서 사용 가능합니다.\n테마 및 커스터마이징\nQ: 다크 모드를 지원하나요?\nA: 네, 라이트/다크/시스템 테마를 지원합니다. 에서 각 테마의 색상을 설정할 수 있습니다.\nQ: 로고를 이미지로 변경하려면 어떻게 하나요?\nA: 에서 다음과 같이 설정합니다:\nQ: 폰트를 변경하려면 어떻게 하나요?\nA: 의  설정에서 변경합니다. Google Fonts를 사용하려면 에 폰트 링크를 추가해야 합니다.\nLLM 및 AI 기능\nQ: OpenAI 외에 다른 LLM을 사용할 수 있나요?\nA: 네, OpenAI 호환 API를 제공하는 모든 서비스를 사용할 수 있습니다 (Azure OpenAI, Ollama, LM Studio 등).\nQ: AI가 생성한 문서를 수정할 수 있나요?\nA: 네, 세 가지 방법이 있습니다:\n폴더에서 마크다운 파일 직접 수정\nIssue 댓글로 피드백 작성 (AI가 자동 반영)\nPR로 변경 제안\nQ: AI 문서 생성이 실패하면 어떻게 하나요?\nA: GitHub Actions 로그에서 오류를 확인하세요. 주로 API 키 설정 오류이거나 LLM 서비스 장애일 수 있습니다.\n문서 관리\nQ: 문서를 직접 수정할 수 있나요?\nA: 네,  폴더의 마크다운 파일을 직접 수정하거나 PR을 통해 변경할 수 있습니다.\nQ: 문서에 이미지를 추가하려면 어떻게 하나요?\nA:  폴더에 이미지를 추가한 후 마크다운에서 참조합니다:\nQ: 검색이 잘 안 되는 것 같아요\nA: 검색 인덱스는 빌드 시점에 생성됩니다. 새 문서 추가 후 재배포가 필요합니다.\n문제 해결\nQ: 빌드가 실패해요\nA: 다음을 확인하세요:\n또는  실행 여부\n설정 파일의 TypeScript 문법 오류\nNode.js/Bun 버전 호환성\nQ: GitHub Pages에 배포가 안 돼요\nA: Repository Settings > Pages에서 Source가 \"GitHub Actions\"로 설정되어 있는지 확인하세요.\nQ: LLM 응답이 너무 느려요\nA: LLM 모델을 더 빠른 것으로 변경하거나 (예: gpt-4 대신 gpt-3.5-turbo), 로컬 LLM 사용을 고려해보세요.",
+    "excerpt": "자주 묻는 질문\n일반\nQ: SEPilot Wiki는 무엇인가요?\nA: GitHub 저장소 기반의 AI 자동화 위키 시스템입니다. Astro 같은 정적 사이트 생성기처럼 설정 파일을 통해 커스터마이징이 가능하며, GitHub Issue와 LLM을 연동하여 문서를 자동 생성합니다.\nQ: 무료로 사용할 수 있나요?\nA: 네, SEPilot Wiki 자체는 오픈소...",
+    "tags": [
+      "FAQ",
+      "도움말",
+      "문제해결"
+    ],
+    "lastModified": "2025-12-05T19:35:06.672Z"
+  },
+  {
+    "title": "시작하기",
+    "slug": "_guide/getting-started",
+    "content": "시작하기\nSEPilot Wiki를 사용하여 나만의 위키를 만드는 방법을 안내합니다.\n설치 및 배포\n템플릿 복제\n의존성 설치 및 개발 서버 실행\n설정 파일 수정\n루트 디렉토리의 설정 파일들을 수정합니다:\n- 사이트 기본 정보 (타이틀, 로고, 소셜 링크)\n- 테마 설정 (색상, 폰트, 레이아웃)\n- 사이드바 메뉴 설정\nGitHub Pages 배포\nGitHub Actions가 자동으로 빌드 후 GitHub Pages에 배포합니다.\n문서 작성 방식\n방법 1: 직접 작성\n 폴더에 마크다운 파일을 직접 추가합니다.\n방법 2: AI 자동 생성\nGitHub Issue에  라벨을 추가하면 AI가 문서 초안을 자동 생성합니다.\n다음 단계\n테마 커스터마이징 - 색상, 폰트, 로고 변경\nLLM 워크플로우 - AI 문서 생성 과정 이해\n설정 파일 가이드 - 상세 설정 옵션",
+    "excerpt": "시작하기\nSEPilot Wiki를 사용하여 나만의 위키를 만드는 방법을 안내합니다.\n설치 및 배포\n템플릿 복제\n의존성 설치 및 개발 서버 실행\n설정 파일 수정\n루트 디렉토리의 설정 파일들을 수정합니다:\n- 사이트 기본 정보 (타이틀, 로고, 소셜 링크)\n- 테마 설정 (색상, 폰트, 레이아웃)\n- 사이드바 메뉴 설정\nGitHub Pages 배포\nGitHub...",
+    "tags": [
+      "시작하기",
+      "설치",
+      "배포"
+    ],
+    "lastModified": "2025-12-05T19:35:06.679Z"
+  },
+  {
+    "title": "LLM 워크플로우",
+    "slug": "_guide/llm-workflow",
+    "content": "LLM 워크플로우\nSEPilot Wiki는 GitHub Actions와 LLM을 연동하여 자동으로 문서를 생성하고 관리합니다.\n워크플로우 개요\n지원하는 이벤트\nrequest 라벨 추가\nIssue에  라벨을 추가하면:\nAI가 Issue 제목과 본문을 분석\n관련 문서 초안 자동 생성\n폴더에 마크다운 파일 저장\nIssue에 결과 댓글 추가\n,  라벨 자동 추가\ninvalid 라벨 추가\n문서에 오류가 있을 때  라벨을 추가하면:\nAI가 Issue 댓글에서 오류 내용 파악\n해당 문서 자동 수정\n수정 결과 댓글로 알림\nMaintainer 댓글\nMaintainer가 댓글을 달면:\nAI가 댓글 내용 분석\n문서 수정, 삭제, 복구 등 작업 수행\n작업 결과 댓글로 알림\nIssue 종료\nIssue를 close하면:\n라벨 제거\n문서가 정식 게시 상태로 전환\nLLM 설정\n환경 변수\nGitHub Repository Secrets에 다음 값을 설정합니다:\n지원하는 LLM 제공자\nOpenAI 호환 API를 사용하는 모든 제공자를 지원합니다:\nOpenAI (GPT-4, GPT-3.5)\nAzure OpenAI\nAnthropic Claude (OpenAI 호환 API 사용 시)\nLocal LLM (Ollama, LM Studio 등)\n컨텍스트 수집\nAI는 다음 정보를 수집하여 작업을 수행합니다:\nIssue 본문: 사용자의 초기 요청\n모든 댓글: 대화 히스토리 및 피드백\n기존 문서: 관련 문서가 있으면 해당 내용\n이전 작업 결과: 이전에 생성된 문서 경로\n이를 통해 AI는 전체 맥락을 이해하고 적절한 작업을 수행합니다.\n문서 생성 규칙\nAI가 생성하는 문서는 다음 규칙을 따릅니다:\nYAML frontmatter 포함 (title, author, tags)\n한국어로 작성\n마크다운 형식\n코드 예시 포함 (해당되는 경우)\nfrontmatter 예시\n워크플로우 파일\n에서 워크플로우를 확인하고 수정할 수 있습니다.\n주요 스크립트:\n- 새 문서 생성\n- 피드백 처리\n- 오류 표시 처리\n- 문서 발행",
+    "excerpt": "LLM 워크플로우\nSEPilot Wiki는 GitHub Actions와 LLM을 연동하여 자동으로 문서를 생성하고 관리합니다.\n워크플로우 개요\n지원하는 이벤트\nrequest 라벨 추가\nIssue에  라벨을 추가하면:\nAI가 Issue 제목과 본문을 분석\n관련 문서 초안 자동 생성\n폴더에 마크다운 파일 저장\nIssue에 결과 댓글 추가\n,  라벨 자동 추가...",
+    "tags": [
+      "LLM",
+      "워크플로우",
+      "AI",
+      "GitHub Actions"
+    ],
+    "lastModified": "2025-12-05T19:35:06.687Z"
+  },
+  {
     "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
     "slug": "about/technology-stack",
     "content": "기술 스택\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n프론트엔드\nReact 18 - UI 라이브러리\nTypeScript - 타입 안전성을 위한 정적 타입 언어\nVite - 빌드 도구 및 개발 서버\nReact Router DOM - SPA 라우팅\nTanStack Query (React Query) - 서버 상태 관리\nNext.js 사용 여부\nSEPilot Wiki는 Next.js를 사용하지 않습니다.\n대신 Vite와 React를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\nNext.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n마크다운 렌더링\nreact-markdown - 마크다운 파싱 및 렌더링\nremark-gfm - GitHub Flavored Markdown 지원\nrehype-raw - HTML 태그 지원\nrehype-sanitize - XSS 방지를 위한 HTML 살균\nreact-syntax-highlighter - 코드 구문 강조\n스타일링\nCSS Variables - 테마 시스템\nLucide React - 아이콘 라이브러리\n개발 도구\nESLint - 코드 린팅\nVitest - 테스트 프레임워크\nHusky - Git hooks\nCI/CD\nGitHub Actions - 자동화 워크플로우\nGitHub Pages - 정적 사이트 호스팅\nBun - 패키지 매니저 및 런타임\nAI 통합\nOpenAI API 호환 - LLM을 통한 문서 자동 생성\n참고 링크\nSEPilot Wiki GitHub Repository",

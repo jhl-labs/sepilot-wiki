@@ -236,3 +236,29 @@ export function getGitHubInfoFromEnv() {
     token: process.env.GITHUB_TOKEN || '',
   };
 }
+
+/**
+ * GitHub API를 통해 PR의 변경된 파일 목록을 가져옴
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} pullNumber
+ * @param {string} token
+ * @returns {Promise<Array>} 변경된 파일 목록
+ */
+export async function fetchPullRequestFiles(owner, repo, pullNumber, token) {
+  const url = `https://api.github.com/repos/${owner}/${repo}/pulls/${pullNumber}/files`;
+
+  const response = await fetch(url, {
+    headers: {
+      Accept: 'application/vnd.github.v3+json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    console.warn(`PR 파일 목록 가져오기 실패: ${response.status}`);
+    return [];
+  }
+
+  return response.json();
+}

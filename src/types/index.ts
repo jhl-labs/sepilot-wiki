@@ -275,3 +275,10 @@ export interface DocumentAIHistory {
   title: string;
   entries: AIHistoryEntry[];
 }
+
+// 태그 통계 타입
+export interface TagStats {
+  tag: string;
+  count: number;
+  pages: { title: string; slug: string }[];
+}
