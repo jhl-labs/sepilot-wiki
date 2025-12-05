@@ -48,7 +48,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
           DRY_RUN: ${{ inputs.dry_run || 'false' }}
-        run: node scripts/maintain-wiki-tree.js
+        run: bun scripts/maintain-wiki-tree.js
 
       - name: Build wiki data
         if: steps.maintain.outputs.has_changes == 'true'
