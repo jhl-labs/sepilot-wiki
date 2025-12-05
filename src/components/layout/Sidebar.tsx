@@ -31,7 +31,7 @@ export function Sidebar() {
 
   // 기본 열린 섹션과 커스텀 섹션의 defaultOpen 상태를 합침
   const getInitialExpandedSections = () => {
-    const sections = new Set(['wiki', 'guide', 'issues']);
+    const sections = new Set(['wiki']);
     navigationConfig.sidebar?.forEach((section, index) => {
       if (section.defaultOpen !== false) {
         sections.add(`custom-${index}`);
@@ -47,7 +47,7 @@ export function Sidebar() {
   // 커스텀 섹션 설정이 변경되면 상태 업데이트
   const sidebarJson = JSON.stringify(navigationConfig.sidebar);
   useEffect(() => {
-    const sections = new Set(['wiki', 'guide', 'issues']);
+    const sections = new Set(['wiki']);
     navigationConfig.sidebar?.forEach((section, index) => {
       if (section.defaultOpen !== false) {
         sections.add(`custom-${index}`);
