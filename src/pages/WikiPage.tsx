@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom';
-import { useWikiPage } from '../hooks/useWiki';
+import { useParams, Link } from 'react-router-dom';
+import { useWikiPage, useDocumentAIHistory } from '../hooks/useWiki';
 import { MarkdownRenderer, TableOfContents, Breadcrumb, PageMeta } from '../components/wiki';
 import { RevisionHistory } from '../components/wiki/RevisionHistory';
 import { Skeleton } from '../components/ui/Skeleton';
-import { AlertTriangle, FileQuestion, MessageSquare } from 'lucide-react';
+import { AlertTriangle, FileQuestion, MessageSquare, Bot } from 'lucide-react';
 import { urls, LABELS } from '../config';
 
 export function WikiPage() {
@@ -11,6 +11,7 @@ export function WikiPage() {
   const { '*': wildcardPath } = useParams();
   const slug = wildcardPath || 'home';
   const { data: page, isLoading, error } = useWikiPage(slug);
+  const { data: aiHistory } = useDocumentAIHistory(slug);
 
   if (isLoading) {
     return (
@@ -108,6 +109,13 @@ export function WikiPage() {
 
         <footer className="wiki-footer">
           <div className="footer-actions">
+            {aiHistory && aiHistory.length > 0 && (
+              <Link to={`/ai-history/${slug}`} className="ai-history-link">
+                <Bot size={16} />
+                <span>AI 작업 히스토리</span>
+                <span className="count">{aiHistory.length}</span>
+              </Link>
+            )}
             <a
               href={urls.newIssue({ title: `문서 수정 요청: ${page.title}`, labels: LABELS.REQUEST })}
               target="_blank"

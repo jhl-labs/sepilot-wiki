@@ -1,5 +1,5 @@
 import { config, GITHUB_API_URL } from '../config';
-import type { WikiPage, GitHubIssue, WikiTree } from '../types';
+import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry } from '../types';
 import { formatTitle } from '../utils';
 
 // 빌드 시점에 생성된 정적 wiki 데이터 캐시
@@ -846,4 +846,32 @@ A: LLM 모델을 더 빠른 것으로 변경하거나 (예: gpt-4 대신 gpt-3.5
     content: `# ${formatTitle(slug)}\n\n이 페이지는 아직 작성되지 않았습니다.`,
     lastModified: new Date().toISOString(),
   };
+}
+
+// AI History 데이터 캐시
+let aiHistoryCache: AIHistory | null = null;
+
+// AI History 데이터 로드
+export async function fetchAIHistory(): Promise<AIHistory> {
+  if (aiHistoryCache) {
+    return aiHistoryCache;
+  }
+
+  try {
+    const response = await fetch(`${import.meta.env.BASE_URL}data/ai-history.json`);
+    if (!response.ok) {
+      return { entries: [], lastUpdated: new Date().toISOString() };
+    }
+    aiHistoryCache = await response.json();
+    return aiHistoryCache!;
+  } catch (error) {
+    console.error('Error loading AI history:', error);
+    return { entries: [], lastUpdated: new Date().toISOString() };
+  }
+}
+
+// 특정 문서의 AI History 조회
+export async function fetchDocumentAIHistory(slug: string): Promise<AIHistoryEntry[]> {
+  const history = await fetchAIHistory();
+  return history.entries.filter(entry => entry.documentSlug === slug);
 }

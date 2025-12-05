@@ -5,7 +5,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { SidebarProvider } from './context/SidebarContext';
 import { ConfigProvider } from './context/ConfigContext';
 import { Layout } from './components/layout';
-import { HomePage, WikiPage, SearchPage, IssuesPage, NotFoundPage } from './pages';
+import { HomePage, WikiPage, SearchPage, IssuesPage, NotFoundPage, AIHistoryPage } from './pages';
 import { config } from './config';
 import './styles/index.css';
 import './styles/custom.css';
@@ -57,6 +57,8 @@ function App() {
                     <Route path="wiki/*" element={<WikiPage />} />
                     <Route path="search" element={<SearchPage />} />
                     <Route path="issues" element={<IssuesPage />} />
+                    <Route path="ai-history" element={<AIHistoryPage />} />
+                    <Route path="ai-history/:slug" element={<AIHistoryPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                   </Route>
                 </Routes>

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, getGuidePages } from '../services/github';
+import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, getGuidePages, fetchAIHistory, fetchDocumentAIHistory } from '../services/github';
 
 export function useWikiPages() {
   return useQuery({
@@ -41,4 +41,23 @@ export function useGuidePages() {
     data: getGuidePages(),
     isLoading: false,
   };
+}
+
+// AI History 전체 조회
+export function useAIHistory() {
+  return useQuery({
+    queryKey: ['ai-history'],
+    queryFn: fetchAIHistory,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+// 특정 문서의 AI History 조회
+export function useDocumentAIHistory(slug: string) {
+  return useQuery({
+    queryKey: ['ai-history', 'document', slug],
+    queryFn: () => fetchDocumentAIHistory(slug),
+    enabled: !!slug,
+    staleTime: 5 * 60 * 1000,
+  });
 }

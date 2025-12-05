@@ -234,3 +234,35 @@ export interface SidebarNavItem {
   badge?: string;
   children?: SidebarNavItem[];
 }
+
+// AI History 관련 타입
+export type AIActionType = 'generate' | 'modify' | 'publish' | 'invalid' | 'delete' | 'recover';
+
+export interface AIHistoryEntry {
+  id: string;
+  timestamp: string;
+  actionType: AIActionType;
+  issueNumber: number;
+  issueTitle: string;
+  documentSlug: string;
+  documentTitle: string;
+  summary: string;
+  trigger: 'request_label' | 'invalid_label' | 'maintainer_comment' | 'issue_close';
+  triggerUser?: string;
+  model?: string;
+  changes?: {
+    additions?: number;
+    deletions?: number;
+  };
+}
+
+export interface AIHistory {
+  entries: AIHistoryEntry[];
+  lastUpdated: string;
+}
+
+export interface DocumentAIHistory {
+  slug: string;
+  title: string;
+  entries: AIHistoryEntry[];
+}

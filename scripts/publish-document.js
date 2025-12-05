@@ -26,6 +26,7 @@ import {
   updateFrontmatterStatus,
   setGitHubOutput,
 } from './lib/utils.js';
+import { addAIHistoryEntry } from './lib/ai-history.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
@@ -96,6 +97,20 @@ async function main() {
     });
 
     const result = await publishDocument(context);
+
+    // AI History 기록 (변경이 있을 때만)
+    if (result.hasChanges) {
+      const slug = result.filename ? result.filename.replace('.md', '') : '';
+      await addAIHistoryEntry({
+        actionType: 'publish',
+        issueNumber,
+        issueTitle,
+        documentSlug: slug,
+        documentTitle: issueTitle,
+        summary: `문서 발행: draft → published 상태 전환`,
+        trigger: 'issue_close',
+      });
+    }
 
     console.log('\n📄 처리 결과:');
     console.log(JSON.stringify(result, null, 2));

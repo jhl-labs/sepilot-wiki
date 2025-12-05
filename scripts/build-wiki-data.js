@@ -14,6 +14,8 @@ import { execSync } from 'child_process';
 const WIKI_DIR = join(process.cwd(), 'wiki');
 const OUTPUT_DIR = join(process.cwd(), 'public');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'wiki-data.json');
+const DATA_DIR = join(OUTPUT_DIR, 'data');
+const AI_HISTORY_FILE = join(DATA_DIR, 'ai-history.json');
 
 // 마크다운 프론트매터 파싱
 function parseMarkdownWithFrontmatter(content) {
@@ -194,6 +196,16 @@ async function buildWikiData() {
   const totalRevisions = pages.reduce((sum, p) => sum + (p.history?.length || 0), 0);
   console.log(`✅ Wiki 데이터 빌드 완료: ${pages.length}개 문서, ${totalRevisions}개 리비전`);
   console.log(`   출력: ${OUTPUT_FILE}`);
+
+  // AI History 파일이 없으면 빈 파일 생성
+  await mkdir(DATA_DIR, { recursive: true });
+  if (!existsSync(AI_HISTORY_FILE)) {
+    const emptyHistory = { entries: [], lastUpdated: new Date().toISOString() };
+    await writeFile(AI_HISTORY_FILE, JSON.stringify(emptyHistory, null, 2));
+    console.log(`✅ 빈 AI History 파일 생성: ${AI_HISTORY_FILE}`);
+  } else {
+    console.log(`ℹ️ AI History 파일 존재: ${AI_HISTORY_FILE}`);
+  }
 }
 
 buildWikiData().catch((err) => {

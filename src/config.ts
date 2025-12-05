@@ -40,6 +40,9 @@ export const urls = {
     return queryString ? `${base}?${queryString}` : base;
   },
 
+  // 특정 Issue URL
+  issue: (number: number) => `${urls.repo()}/issues/${number}`,
+
   // 커밋 URL
   commit: (sha: string) => `${urls.repo()}/commit/${sha}`,
 
