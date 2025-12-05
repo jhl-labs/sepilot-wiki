@@ -73,3 +73,4 @@ bun run test     # 테스트 실행
 GITHUB_TOKEN=        # GitHub API 토큰 (선택, 공개 저장소는 불필요)
 GITHUB_REPO=         # 대상 저장소 (owner/repo)
 ```
+- 항상 commit 전에는 lint 검사를 하게 해줘

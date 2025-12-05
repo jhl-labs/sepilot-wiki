@@ -337,19 +337,21 @@ export function Sidebar() {
                     <span className="nav-count">{openIssuesCount}</span>
                   )}
                 </NavLink>
-                <NavLink
-                  to="/tags"
-                  className={({ isActive }) =>
-                    clsx('nav-item nav-item-child', isActive && 'active')
-                  }
-                  onClick={handleLinkClick}
-                >
-                  <Tags size={14} />
-                  <span>전체 태그</span>
-                </NavLink>
               </div>
             )}
           </div>
+
+          {/* 전체 태그 링크 */}
+          <NavLink
+            to="/tags"
+            className={({ isActive }) =>
+              clsx('nav-item nav-item-home', isActive && 'active')
+            }
+            onClick={handleLinkClick}
+          >
+            <Tags size={18} />
+            <span>전체 태그</span>
+          </NavLink>
         </nav>
 
         <div className="sidebar-footer">
