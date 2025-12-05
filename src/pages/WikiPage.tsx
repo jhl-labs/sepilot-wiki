@@ -7,7 +7,9 @@ import { AlertTriangle, FileQuestion, MessageSquare } from 'lucide-react';
 import { config } from '../config';
 
 export function WikiPage() {
-  const { slug = 'home' } = useParams<{ slug: string }>();
+  // 와일드카드(*) 라우트에서 전체 경로를 가져옴
+  const { '*': wildcardPath } = useParams();
+  const slug = wildcardPath || 'home';
   const { data: page, isLoading, error } = useWikiPage(slug);
 
   if (isLoading) {

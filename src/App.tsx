@@ -25,7 +25,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} />
-                <Route path="wiki/:slug" element={<WikiPage />} />
+                <Route path="wiki/*" element={<WikiPage />} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="issues" element={<IssuesPage />} />
                 <Route path="*" element={<NotFoundPage />} />
