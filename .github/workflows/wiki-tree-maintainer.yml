@@ -1,9 +1,9 @@
 name: Wiki Tree Maintainer
 
 on:
-  # 매일 오전 9시 (KST) = UTC 0시
+  # 6시간마다 실행 (UTC 0, 6, 12, 18시 = KST 9, 15, 21, 3시)
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 */6 * * *'
 
   # 수동 실행 지원
   workflow_dispatch:
