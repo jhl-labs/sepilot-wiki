@@ -218,7 +218,7 @@ AI 에이전트 기반의 자동화된 위키 시스템입니다.
 
 ## 주요 기능
 
-- **GitHub Wiki 통합**: GitHub Wiki를 데이터 저장소로 활용
+- **저장소 기반 Wiki**: \`/wiki\` 폴더의 마크다운 파일을 GitHub Contents API로 관리
 - **AI 기반 문서 작성**: GitHub Issue의 \`request\` 라벨을 통해 AI가 자동으로 문서 초안 작성
 - **협업 워크플로우**: maintainer가 Issue 댓글로 수정 요청 시 자동 반영
 - **자동 정보 수집**: cron 스케줄을 통해 시스템 상태 정보 자동 업데이트
@@ -312,9 +312,10 @@ SEPilot Wiki는 GitHub API를 활용합니다.
 
 ## 사용되는 API
 
-### Wiki API
-- 문서 목록 조회
-- 문서 내용 조회
+### Contents API
+- \`/wiki\` 폴더의 파일 목록 조회
+- 마크다운 파일 내용 조회
+- Raw URL을 통한 파일 직접 접근
 
 ### Issues API
 - Issue 생성/조회
@@ -342,7 +343,7 @@ export GITHUB_TOKEN=your_token_here
 
 ## Q: 문서를 직접 수정할 수 있나요?
 
-A: 현재는 GitHub Issue를 통한 요청 방식만 지원합니다. 직접 Wiki를 수정하면 자동으로 반영됩니다.
+A: 네, 저장소의 \`/wiki\` 폴더에서 마크다운 파일을 직접 수정하거나 PR을 통해 변경할 수 있습니다. 또한 GitHub Issue를 통해 AI에게 수정을 요청할 수도 있습니다.
 
 ## Q: AI가 작성한 문서는 신뢰할 수 있나요?
 

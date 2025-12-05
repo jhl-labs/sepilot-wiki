@@ -1,10 +1,10 @@
 # SEPilot Wiki
 
-AI 에이전트 기반의 자동화된 위키 시스템입니다. GitHub Wiki를 백엔드로 활용하고, GitHub Issues를 통해 사용자와 소통하며, AI가 문서를 생성/수정/유지보수합니다.
+AI 에이전트 기반의 자동화된 위키 시스템입니다. 저장소의 `/wiki` 폴더를 데이터 저장소로 활용하고, GitHub Issues를 통해 사용자와 소통하며, AI가 문서를 생성/수정/유지보수합니다.
 
 ## 주요 기능
 
-- **GitHub Wiki 통합**: GitHub Wiki를 데이터 저장소로 활용
+- **저장소 기반 Wiki**: `/wiki` 폴더의 마크다운 파일을 GitHub Contents API로 관리
 - **GitHub Pages 프론트엔드**: 정적 사이트로 위키 콘텐츠 제공
 - **AI 기반 문서 작성**: GitHub Issue의 `request` 라벨을 통해 AI가 자동으로 문서 초안 작성
 - **협업 워크플로우**: maintainer가 Issue 댓글로 수정 요청 시 자동 반영
@@ -21,11 +21,11 @@ AI 에이전트 기반의 자동화된 위키 시스템입니다. GitHub Wiki를
 
 ### 문서 수정 워크플로우
 - `invalid` 라벨 추가 시: 페이지 상단에 "잘못됨, 수정 필요" 경고 표시
-- 직접 Wiki 수정: GitHub Actions가 트리거되어 Pages 자동 업데이트
+- 직접 `/wiki` 폴더 수정: GitHub Actions가 트리거되어 Pages 자동 업데이트
 
 ## 기술 스택
 
-- **프레임워크**: Next.js + React + TypeScript
+- **프레임워크**: React + TypeScript
 - **빌드 도구**: Vite
 - **런타임**: Bun
 - **CI/CD**: GitHub Actions
@@ -39,7 +39,8 @@ sepilot-wiki/
 │   └── commands/         # 슬래시 커맨드
 ├── .github/
 │   └── workflows/        # GitHub Actions 워크플로우
-├── src/                  # 소스 코드
+├── wiki/                 # Wiki 문서 (마크다운 파일)
+├── src/                  # 프론트엔드 소스 코드
 ├── CLAUDE.md            # 프로젝트별 Claude 지시사항
 ├── PROTOTYPE.md         # 프로토타입 명세
 └── README.md            # 프로젝트 문서
@@ -63,6 +64,28 @@ bun dev
 # 빌드
 bun run build
 ```
+
+## Wiki 문서 추가 방법
+
+### 직접 추가
+1. `/wiki` 폴더에 마크다운 파일 생성
+2. 프론트매터 작성 (선택사항)
+   ```markdown
+   ---
+   title: 문서 제목
+   author: 작성자
+   tags: [태그1, 태그2]
+   ---
+
+   # 문서 내용
+   ```
+3. PR 또는 직접 커밋으로 저장소에 반영
+
+### AI를 통한 추가
+1. GitHub Issue 생성
+2. `request` 라벨 추가
+3. 원하는 문서 내용 설명
+4. AI가 초안 작성 후 Maintainer 검토
 
 ## 기여 방법
 

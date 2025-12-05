@@ -1,7 +1,8 @@
 # SEPilot Wiki - Claude Code 프로젝트 지침
 
 ## 프로젝트 개요
-GitHub Wiki 기반의 AI 자동화 위키 시스템. Next.js + React + TypeScript + Vite + Bun 스택 사용.
+저장소 `/wiki` 폴더 기반의 AI 자동화 위키 시스템. React + TypeScript + Vite + Bun 스택 사용.
+GitHub Contents API를 통해 `/wiki` 폴더의 마크다운 파일을 관리.
 
 ## 코드 규칙
 
@@ -22,13 +23,17 @@ GitHub Wiki 기반의 AI 자동화 위키 시스템. Next.js + React + TypeScrip
 
 ### 파일 구조
 ```
-src/
-├── components/    # React 컴포넌트
-├── pages/         # Next.js 페이지
-├── hooks/         # 커스텀 훅
-├── utils/         # 유틸리티 함수
-├── types/         # TypeScript 타입 정의
-└── services/      # API 서비스 레이어
+sepilot-wiki/
+├── wiki/              # Wiki 문서 (마크다운 파일)
+├── src/
+│   ├── components/    # React 컴포넌트
+│   ├── pages/         # 페이지 컴포넌트
+│   ├── hooks/         # 커스텀 훅
+│   ├── context/       # React Context
+│   ├── types/         # TypeScript 타입 정의
+│   ├── services/      # API 서비스 레이어
+│   └── styles/        # CSS 스타일
+└── .github/workflows/ # GitHub Actions
 ```
 
 ### Git 규칙
@@ -38,9 +43,10 @@ src/
 
 ## GitHub 연동
 
-### Wiki 동기화
-- GitHub API를 통한 Wiki 콘텐츠 관리
-- Wiki 변경 시 GitHub Actions 트리거
+### Wiki 데이터 관리
+- Wiki 문서는 저장소 `/wiki` 폴더에 마크다운 파일로 저장
+- GitHub Contents API로 파일 목록 및 내용 조회
+- Raw URL (`raw.githubusercontent.com`)로 마크다운 파일 직접 접근
 
 ### Issue 처리
 - `request` 라벨: AI 문서 작성 요청
@@ -48,7 +54,7 @@ src/
 - Issue 댓글: maintainer 피드백
 
 ### GitHub Actions
-- Wiki 변경 → Pages 빌드 트리거
+- `/wiki` 폴더 변경 → Pages 빌드 트리거
 - cron 스케줄 → 시스템 정보 수집
 
 ## 주요 명령어
@@ -64,7 +70,6 @@ bun run test     # 테스트 실행
 ## 환경 변수
 
 ```env
-GITHUB_TOKEN=        # GitHub API 토큰
+GITHUB_TOKEN=        # GitHub API 토큰 (선택, 공개 저장소는 불필요)
 GITHUB_REPO=         # 대상 저장소 (owner/repo)
-GITHUB_WIKI_REPO=    # Wiki 저장소
 ```
