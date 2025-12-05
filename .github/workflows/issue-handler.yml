@@ -14,15 +14,10 @@ permissions:
 jobs:
   handle-request-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'request'
-    runs-on: ubuntu-latest
+    runs-on: jhl-space
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
 
       - name: Process request
         run: |
@@ -45,7 +40,7 @@ jobs:
 
   handle-invalid-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'invalid'
-    runs-on: ubuntu-latest
+    runs-on: jhl-space
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -59,7 +54,7 @@ jobs:
 
   handle-issue-close:
     if: github.event.action == 'closed'
-    runs-on: ubuntu-latest
+    runs-on: jhl-space
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -73,7 +68,7 @@ jobs:
 
   handle-maintainer-comment:
     if: github.event_name == 'issue_comment'
-    runs-on: ubuntu-latest
+    runs-on: jhl-space
     steps:
       - name: Check if maintainer
         id: check-maintainer
