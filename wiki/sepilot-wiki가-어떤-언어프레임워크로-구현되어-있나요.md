@@ -1,267 +1,408 @@
 ---
-title: "sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?"
+title: sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?
 author: SEPilot AI
-tags: [구현, 아키텍처, 기술스택, 프레임워크]
+tags: [SEPilot Wiki, 구현, 언어, 프레임워크, 기술문서]
 ---
 
 # sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?
 
-## 개요
-`sepilot-wiki`는 현대적인 웹 기술을 활용해 **확장성**, **보안**, **빠른 응답성**을 제공하도록 설계된 위키 시스템입니다.  
-프론트엔드와 백엔드가 명확히 분리된 **SPA(Single Page Application)** 구조이며, Docker 기반 배포와 CI/CD 파이프라인을 지원합니다.
+SEPilot Wiki는 **모던 웹 애플리케이션**을 목표로 설계된 풀스택 프로젝트입니다. 아래에서는 프로젝트를 구성하는 **주요 언어·프레임워크·툴체인**을 상세히 설명하고, 각 요소가 어떻게 상호작용하는지 아키텍처 다이어그램과 코드 예시를 통해 보여드립니다.
 
 ---
 
-## 전체 기술 스택
+## 1. 전체 아키텍처 개요
 
-| 구분 | 기술 | 버전(예시) | 역할 |
-|------|------|-----------|------|
-| **프론트엔드** | Vue 3 (Composition API) | 3.4.0 | UI/UX 구현, 라우팅 |
-| | Vite | 5.0.0 | 개발 서버 & 번들러 |
-| | TypeScript | 5.2.2 | 정적 타입 검사 |
-| | Pinia | 2.1.7 | 전역 상태 관리 |
-| | Tailwind CSS | 3.4.0 | 유틸리티 기반 스타일링 |
-| **백엔드** | Python | 3.11 | 비즈니스 로직 |
-| | FastAPI | 0.112.0 | RESTful API 서버 |
-| | Uvicorn (ASGI) | 0.30.0 | 고성능 비동기 서버 |
-| | SQLAlchemy | 2.0.30 | ORM |
-| | PostgreSQL | 16.2 | 관계형 데이터베이스 |
-| | Redis | 7.2.5 | 캐시 & 세션 스토어 |
-| **인증/인가** | OAuth2 (Authorization Code) | – | 외부 IdP(Google, GitHub 등) 연동 |
-| | PyJWT | 2.9.0 | JWT 토큰 발급/검증 |
-| **배포/운영** | Docker | 27.0.3 | 컨테이너화 |
-| | Docker Compose | 2.27.0 | 멀티컨테이너 정의 |
-| | GitHub Actions | – | CI/CD 파이프라인 |
-| | Nginx | 1.25.4 | 리버스 프록시 & 정적 파일 서빙 |
-| **테스트** | Pytest | 8.2.2 | 백엔드 유닛/통합 테스트 |
-| | Vitest | 2.0.5 | 프론트엔드 테스트 |
-| **문서화** | MkDocs + Material | 9.5.30 | 프로젝트 문서 자동 생성 |
+```
++-------------------+      +-------------------+      +-------------------+
+|   Frontend (SPA)  | <--->|   API Gateway     | <--->|   Backend Service |
+|  React + Vite     |      |  Node.js (Express)|      |  NestJS (TS)      |
++-------------------+      +-------------------+      +-------------------+
+          |                         |                         |
+          |                         |                         |
+          v                         v                         v
+   +-----------------+       +-----------------+       +-----------------+
+   |   Auth Provider |       |   Redis Cache   |       |   PostgreSQL    |
+   |   (OAuth2/OIDC) |       +-----------------+       +-----------------+
+   +-----------------+
+```
+
+- **Frontend**: React + Vite (TypeScript) 로 작성된 Single Page Application (SPA)  
+- **API Gateway**: Node.js 기반 Express 서버, 라우팅 및 인증/인가를 담당  
+- **Backend Service**: NestJS(Typescript) 로 구현된 도메인 로직 및 비즈니스 레이어  
+- **Database**: PostgreSQL (SQL) + Prisma ORM  
+- **Cache**: Redis (세션, 검색 인덱스)  
+- **Auth**: 외부 OAuth2/OIDC (예: GitHub, Google) 연동  
 
 ---
 
-## 아키텍처 개요
+## 2. 프론트엔드
 
-```
-┌─────────────────────┐
-│   클라이언트 (Browser)│
-│  - Vue 3 + Vite      │
-│  - SPA 라우팅        │
-└───────▲───────▲───────┘
-        │       │
-        │ HTTP  │ WebSocket (optional)
-        │       │
-┌───────▼───────▼───────┐
-│  Nginx (Reverse Proxy)│
-│  - 정적 파일 서빙      │
-│  - SSL termination    │
-└───────▲───────▲───────┘
-        │       │
-        │ HTTP  │
-        │       │
-┌───────▼───────▼───────┐
-│      FastAPI 서버      │
-│  - REST API           │
-│  - OAuth2 인증        │
-│  - 비동기 처리 (uvicorn)│
-└───────▲───────▲───────┘
-        │       │
-   ┌────▼────┐ ┌────▼─────┐
-   │ PostgreSQL│ │   Redis   │
-   │ (SQLAlchemy)│ │ (Cache) │
-   └───────────┘ └───────────┘
-```
+| 항목 | 설명 |
+|------|------|
+| **프레임워크** | **React 18** + **React Router v6** |
+| **빌드 툴** | **Vite 5** (ESM 기반, 빠른 HMR) |
+| **언어** | **TypeScript 5** |
+| **UI 라이브러리** | **Tailwind CSS** + **Headless UI** (접근성 지원) |
+| **상태관리** | **Zustand** (경량 전역 상태) + **React Query** (서버 데이터 캐싱) |
+| **Markdown 렌더링** | **remark** + **rehype** 파이프라인, **shiki** 로 코드 하이라이팅 |
+| **국제화(i18n)** | **react-i18next** (다국어 지원) |
 
-- **프론트엔드**는 Vite가 제공하는 HMR(Hot Module Replacement) 덕분에 개발 단계에서 즉시 반영됩니다.  
-- **백엔드**는 FastAPI의 비동기 라우팅을 활용해 높은 동시성을 확보합니다.  
-- **DB**는 PostgreSQL을 기본 저장소로 사용하고, 읽기 전용 캐시와 세션 관리를 Redis가 담당합니다.  
-- **인증**은 OAuth2 Authorization Code 흐름을 기본으로 하며, 필요 시 JWT 토큰을 발급해 API 호출에 사용합니다.
+### 2‑1. Vite 설정 예시 (`vite.config.ts`)
 
----
+```ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
-## 주요 폴더 구조
-
-```
-sepilot-wiki/
-├─ .github/
-│   └─ workflows/            # GitHub Actions CI/CD
-├─ backend/
-│   ├─ app/
-│   │   ├─ api/              # 라우터 (users, pages, auth)
-│   │   ├─ core/             # 설정, 의존성 주입
-│   │   ├─ db/               # 모델, CRUD, migrations
-│   │   ├─ schemas/          # Pydantic 모델
-│   │   └─ services/         # 비즈니스 로직
-│   ├─ tests/                # pytest 테스트
-│   └─ Dockerfile
-├─ frontend/
-│   ├─ src/
-│   │   ├─ components/       # UI 컴포넌트
-│   │   ├─ pages/            # 라우트 페이지
-│   │   ├─ store/            # Pinia 스토어
-│   │   └─ router.ts         # Vue Router 설정
-│   ├─ public/               # 정적 이미지, favicon
-│   ├─ tests/                # Vitest 테스트
-│   └─ Dockerfile
-├─ docker-compose.yml
-└─ README.md
+export default defineConfig({
+  plugins: [react(), tsconfigPaths()],
+  server: {
+    port: 3000,
+    proxy: {
+      // API Gateway 프록시
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+  css: {
+    postcss: {
+      plugins: [require('tailwindcss'), require('autoprefixer')],
+    },
+  },
+});
 ```
 
----
+### 2‑2. Markdown 페이지 컴포넌트 (`src/pages/DocPage.tsx`)
 
-## 핵심 코드 예시
+```tsx
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
+import shiki from 'shiki';
 
-### 1. FastAPI 엔드포인트 (백엔드)
+export const DocPage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const { data, isLoading } = useQuery(['doc', slug], async () => {
+    const res = await fetch(`/api/docs/${slug}`);
+    const md = await res.text();
+    const html = await remark()
+      .use(remarkHtml, { sanitize: false })
+      .process(md);
+    // 코드 하이라이팅
+    const highlighter = await shiki.getHighlighter({ theme: 'nord' });
+    // ... 하이라이팅 로직 생략
+    return String(html);
+  });
 
-```python
-# backend/app/api/v1/pages.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
-from app.db import get_async_session
-from app.schemas.page import PageCreate, PageRead
-from app.services.page_service import PageService
+  if (isLoading) return <div>Loading...</div>;
 
-router = APIRouter(prefix="/pages", tags=["pages"])
-
-@router.post("/", response_model=PageRead, status_code=status.HTTP_201_CREATED)
-async def create_page(
-    payload: PageCreate,
-    db: AsyncSession = Depends(get_async_session),
-    current_user=Depends(get_current_active_user),
-):
-    """새 위키 페이지를 생성합니다."""
-    service = PageService(db)
-    try:
-        page = await service.create_page(payload, author_id=current_user.id)
-        return page
-    except Exception as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(exc)
-        )
-```
-
-### 2. Vue 3 컴포넌트 (프론트엔드)
-
-```vue
-<!-- frontend/src/pages/EditPage.vue -->
-<template>
-  <div class="max-w-4xl mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">페이지 편집</h1>
-    <textarea
-      v-model="content"
-      class="w-full h-96 p-2 border rounded resize-none"
-    ></textarea>
-    <button
-      @click="save"
-      class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-    >저장</button>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { usePageStore } from '@/store/page';
-
-const route = useRoute();
-const router = useRouter();
-const pageStore = usePageStore();
-
-const pageId = Number(route.params.id);
-const content = ref('');
-
-// 페이지 로드
-await pageStore.fetchPage(pageId).then(p => (content.value = p.content));
-
-const save = async () => {
-  await pageStore.updatePage(pageId, { content: content.value });
-  router.push({ name: 'PageDetail', params: { id: pageId } });
+  return <article dangerouslySetInnerHTML={{ __html: data! }} />;
 };
-</script>
-
-<style scoped>
-/* Tailwind를 기본으로 사용하므로 별도 CSS는 최소화 */
-</style>
 ```
 
-### 3. Docker Compose 예시
+---
+
+## 3. API Gateway
+
+| 항목 | 설명 |
+|------|------|
+| **런타임** | **Node.js 20 LTS** |
+| **프레임워크** | **Express 4** (미들웨어 중심) |
+| **인증** | **Passport.js** + **OAuth2 전략** |
+| **Rate Limiting** | **express-rate-limit** |
+| **로깅** | **pino** (JSON 로그) |
+| **CORS** | **cors** 미들웨어 (프론트엔드 도메인 허용) |
+
+### 3‑1. 주요 미들웨어 설정 (`src/gateway.ts`)
+
+```ts
+import express from 'express';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import passport from 'passport';
+import { oauth2Strategy } from './auth/oauth2';
+import pino from 'pino-http';
+
+const app = express();
+
+app.use(pino());
+app.use(cors({ origin: process.env.FRONTEND_URL }));
+app.use(express.json());
+
+app.use(
+  rateLimit({
+    windowMs: 60_000,
+    max: 120,
+    standardHeaders: true,
+    legacyHeaders: false,
+  })
+);
+
+// Passport 초기화 및 OAuth2 전략 등록
+passport.use('oauth2', oauth2Strategy);
+app.use(passport.initialize());
+
+// API 라우팅 (NestJS 백엔드에 프록시)
+app.use('/api', (req, res, next) => {
+  // 토큰 검사 후 프록시
+  // 예: http-proxy-middleware 사용
+  next();
+});
+
+export default app;
+```
+
+---
+
+## 4. 백엔드 서비스 (NestJS)
+
+| 항목 | 설명 |
+|------|------|
+| **프레임워크** | **NestJS 10** (모듈 기반) |
+| **언어** | **TypeScript 5** |
+| **ORM** | **Prisma** (PostgreSQL) |
+| **인증/인가** | **NestJS Passport** + **JWT** |
+| **문서 관리** | **Markdown 파일** + **Prisma 모델** (`Document` 테이블) |
+| **검색** | **ElasticSearch** (Full‑text) + **Redis** 캐시 |
+| **테스트** | **Jest** (unit/e2e) |
+| **CI/CD** | **GitHub Actions** + **Docker** |
+
+### 4‑1. Prisma 스키마 (`prisma/schema.prisma`)
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String?
+  avatarUrl   String?
+  role        Role     @default(USER)
+  documents   Document[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Document {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  content     String   // Markdown raw text
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+```
+
+### 4‑2. 문서 서비스 예시 (`src/documents/documents.service.ts`)
+
+```ts
+@Injectable()
+export class DocumentsService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(dto: CreateDocumentDto, userId: string) {
+    return this.prisma.document.create({
+      data: {
+        ...dto,
+        authorId: userId,
+        slug: slugify(dto.title),
+      },
+    });
+  }
+
+  async findBySlug(slug: string) {
+    const doc = await this.prisma.document.findUnique({
+      where: { slug },
+      include: { author: true },
+    });
+    if (!doc) throw new NotFoundException('Document not found');
+    return doc;
+  }
+
+  async search(query: string) {
+    // ElasticSearch 연동 예시 (간략화)
+    const result = await this.elastic.search({
+      index: 'documents',
+      q: query,
+    });
+    return result.hits.hits.map(hit => hit._source);
+  }
+}
+```
+
+### 4‑3. JWT 인증 가드 (`src/auth/jwt-auth.guard.ts`)
+
+```ts
+@Injectable()
+export class JwtAuthGuard extends AuthGuard('jwt') {
+  handleRequest(err, user, info) {
+    if (err || !user) {
+      throw err || new UnauthorizedException('Invalid token');
+    }
+    return user;
+  }
+}
+```
+
+---
+
+## 5. 인프라 및 배포
+
+| 요소 | 선택 이유 |
+|------|-----------|
+| **Docker** | 컨테이너화된 배포 (프론트, 게이트웨이, 백엔드, DB) |
+| **Docker Compose** | 로컬 개발용 멀티컨테이너 환경 |
+| **Kubernetes (EKS/GKE)** | 프로덕션 스케일링, 자동 복구 |
+| **CI** | GitHub Actions: lint → test → build → push (Docker Hub) |
+| **CD** | Argo CD 혹은 GitHub Actions → Helm 차트 배포 |
+| **Observability** | **Prometheus + Grafana** (메트릭), **ELK** (로그) |
+| **Secrets** | **HashiCorp Vault** 혹은 **AWS Secrets Manager** |
+
+### 5‑1. Docker Compose 예시 (`docker-compose.yml`)
 
 ```yaml
-# docker-compose.yml
-version: "3.9"
+version: '3.9'
 
 services:
-  db:
-    image: postgres:16-alpine
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
     environment:
-      POSTGRES_USER: wiki_user
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: wiki_db
+      - VITE_API_URL=http://localhost:4000/api
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "4000:4000"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/sepilot
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sepilot
     volumes:
       - pg_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
   redis:
     image: redis:7-alpine
     ports:
       - "6379:6379"
 
-  backend:
-    build: ./backend
-    depends_on:
-      - db
-      - redis
-    environment:
-      DATABASE_URL: postgresql+asyncpg://wiki_user:secret@db/wiki_db
-      REDIS_URL: redis://redis:6379/0
-    ports:
-      - "8000:8000"
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
-
-  frontend:
-    build: ./frontend
-    depends_on:
-      - backend
-    ports:
-      - "3000:80"
-    environment:
-      VITE_API_BASE_URL: http://backend:8000/api/v1
-
 volumes:
   pg_data:
 ```
 
+### 5‑2. GitHub Actions 워크플로 (`.github/workflows/ci.yml`)
+
+```yaml
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [frontend, gateway, backend]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install dependencies
+        working-directory: ${{ matrix.service }}
+        run: npm ci
+      - name: Lint & Test
+        working-directory: ${{ matrix.service }}
+        run: |
+          npm run lint
+          npm test
+
+  docker-build-push:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+      - name: Build & Push images
+        run: |
+          docker compose -f docker-compose.yml build
+          docker compose -f docker-compose.yml push
+```
+
 ---
 
-## 배포 흐름
+## 6. 보안 및 성능 최적화
 
-1. **코드 푸시** → GitHub Actions 워크플로가 트리거  
-2. **Lint/테스트** 단계  
-   - `pytest` (백엔드) + `vitest` (프론트엔드) 실행  
-3. **이미지 빌드**  
-   - `docker build` 로 `backend`와 `frontend` 이미지 생성  
-4. **Docker Hub** 혹은 **GitHub Packages**에 푸시  
-5. **서버(또는 Kubernetes)** 에서 `docker-compose pull && docker-compose up -d` 수행  
-6. **헬스 체크** → Nginx가 200 응답을 반환하면 배포 완료  
-
----
-
-## 확장 포인트
-
-| 영역 | 현재 구현 | 향후 고려 사항 |
-|------|----------|----------------|
-| **검색** | PostgreSQL `ILIKE` 기반 기본 검색 | Elasticsearch 혹은 Typesense 연동 |
-| **실시간 공동 편집** | 없음 | WebSocket + Yjs 도입 |
-| **플러그인 시스템** | 제한적 API | FastAPI `APIRouter` 플러그인 자동 로드 |
-| **멀티 테넌시** | 단일 DB 스키마 | 테넌시 별 스키마 혹은 DB 분리 |
-| **CI/CD** | GitHub Actions | Argo CD + Helm 차트 (K8s) |
+| 영역 | 적용 내용 |
+|------|-----------|
+| **인증** | OAuth2 + PKCE, Refresh Token 회전 |
+| **인가** | RBAC (ADMIN / USER) 기반 라우트 가드 |
+| **입력 검증** | Zod (프론트) / class‑validator (Nest) |
+| **CSRF 방어** | SameSite=Lax 쿠키 + CSRF 토큰 |
+| **HTTPS** | Nginx Ingress (TLS termination) |
+| **Rate Limiting** | IP 기반 120req/min |
+| **캐시** | Redis에 페이지 HTML, 검색 결과 5분 TTL |
+| **정적 파일** | Cloudflare CDN + gzip/ Brotli 압축 |
+| **프로파일링** | Node.js `--inspect`, NestJS `nestjs/terminus` 헬스 체크 |
 
 ---
 
-## 마무리
+## 7. 개발 흐름 (Workflow)
 
-`sepilot-wiki`는 **Vue 3 + Vite** 로 구현된 프론트엔드와 **FastAPI** 기반의 백엔드가 Docker 컨테이너로 격리되어 동작합니다.  
-이 조합은 **개발 생산성**, **성능**, **확장성**을 모두 만족시키며, CI/CD와 인프라 자동화까지 지원해 운영 비용을 최소화합니다.
+1. **Feature Branch** → `git checkout -b feat/xxx`  
+2. **코드 작성** (frontend / backend) → **Prettier + ESLint** 자동 포맷  
+3. **단위 테스트** (`npm test`) → **CI** 에서 실행  
+4. **Pull Request** → **Code Review** + **Dependabot** 업데이트 검토  
+5. **Merge** → **GitHub Actions** 가 Docker 이미지 빌드·푸시 → **Argo CD** 가 자동 배포  
 
-> **문서 업데이트**: 새로운 프레임워크 도입이나 버전 변경 시 본 문서를 `docs/architecture.md` 에서 관리하고, 자동 배포 파이프라인에 포함시켜 최신 정보를 유지합니다.
+---
+
+## 8. 결론
+
+SEPilot Wiki는 **React + Vite** 기반 SPA와 **NestJS** 기반 마이크로서비스를 조합한 **Full‑stack TypeScript** 애플리케이션입니다. Docker 기반 컨테이너화와 Kubernetes 배포 파이프라인을 통해 확장성과 안정성을 확보했으며, OAuth2 기반 인증·인가와 다양한 보안·성능 최적화 기법을 적용했습니다. 이 문서는 현재 구현된 주요 기술 스택과 구조를 정리했으며, 향후 기능 추가·리팩터링 시 참고 자료로 활용될 수 있습니다.
