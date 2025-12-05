@@ -1,0 +1,44 @@
+{
+  "pages": [
+    {
+      "title": "홈",
+      "slug": "home",
+      "content": "\n# SEPilot Wiki에 오신 것을 환영합니다\n\nSEPilot Wiki는 AI 에이전트 기반의 자동화된 문서 관리 시스템입니다.\n\n## 이 Wiki의 특징\n\n### AI 기반 문서 작성\n- GitHub Issue에서 `request` 라벨로 새 문서를 요청하세요\n- AI가 자동으로 초안을 작성하고 Maintainer가 검토합니다\n- 피드백을 반영하여 지속적으로 문서가 개선됩니다\n\n### 협업 워크플로우\n- PR을 통한 문서 변경 리뷰\n- Issue 댓글을 통한 피드백\n- 변경 이력 추적\n\n### 자동 정보 수집\n- cron 스케줄을 통해 시스템 상태 정보 자동 업데이트\n- K8s 노드 상태, 서비스 health 등 실시간 정보 반영\n\n## 시작하기\n\n1. 왼쪽 사이드바에서 **문서** 섹션을 확인하세요\n2. 새 문서가 필요하면 [Issue 생성](https://github.com/jhl-labs/sepilot-wiki/issues/new) 후 `request` 라벨 추가\n3. 기존 문서 수정은 PR 또는 Issue 댓글로 요청\n\n## 문서 구조\n\n모든 문서는 마크다운 형식으로 작성됩니다:\n\n```markdown\n---\ntitle: 문서 제목\nauthor: 작성자\ntags: [태그1, 태그2]\n---\n\n# 문서 내용\n```\n\n## 라벨 시스템\n\n| 라벨 | 설명 |\n|------|------|\n| `request` | 새 문서 작성 요청 |\n| `invalid` | 문서 오류 신고 |\n| `draft` | 초안 상태 |\n| `ai-generated` | AI가 작성한 문서 |\n\n---\n\n문의사항이 있으시면 [GitHub Issues](https://github.com/jhl-labs/sepilot-wiki/issues)를 이용해주세요.\n",
+      "lastModified": "2025-12-05T14:11:27+09:00",
+      "author": "SEPilot Team",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "home",
+        "welcome",
+        "introduction"
+      ],
+      "history": [
+        {
+          "sha": "d66bcb5",
+          "message": "fix: Welcome.md를 home.md로 변경",
+          "author": "JHL",
+          "authorEmail": "bkperio@gmail.com",
+          "date": "2025-12-05T14:11:27+09:00",
+          "additions": 58,
+          "deletions": 0
+        },
+        {
+          "sha": "72f8eae",
+          "message": "docs: Wiki 폴더 및 Welcome 페이지 추가",
+          "author": "JHL",
+          "authorEmail": "bkperio@gmail.com",
+          "date": "2025-12-05T12:15:22+09:00",
+          "additions": 0,
+          "deletions": 0
+        }
+      ]
+    }
+  ],
+  "tree": [
+    {
+      "title": "홈",
+      "slug": "home"
+    }
+  ]
+}

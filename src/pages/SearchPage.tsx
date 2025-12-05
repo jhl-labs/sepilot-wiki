@@ -66,7 +66,7 @@ export function SearchPage() {
                     <div className="result-content">
                       <h3 className="result-title">{result.title}</h3>
                       <p className="result-excerpt">
-                        문서를 클릭하여 내용을 확인하세요
+                        {result.content || '문서를 클릭하여 내용을 확인하세요'}
                       </p>
                     </div>
                     <ArrowRight size={18} className="result-arrow" />

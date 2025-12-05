@@ -102,30 +102,89 @@ export async function fetchIssue(issueNumber: number): Promise<GitHubIssue | nul
   }
 }
 
-// 검색 기능
-export async function searchWiki(query: string): Promise<WikiPage[]> {
-  // GitHub Code Search API 사용 (제한적)
-  try {
-    const response = await fetch(
-      `${GITHUB_API_URL}/search/code?q=${encodeURIComponent(query)}+repo:${config.owner}/${config.repo}+path:wiki`,
-      {
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
-      }
-    );
+// 검색 인덱스 타입
+interface SearchIndexItem {
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  tags: string[];
+  lastModified: string;
+  author?: string;
+}
 
+// 검색 인덱스 캐시
+let searchIndexCache: SearchIndexItem[] | null = null;
+
+// 정적 검색 인덱스 로드
+async function loadSearchIndex(): Promise<SearchIndexItem[]> {
+  if (searchIndexCache) {
+    return searchIndexCache;
+  }
+
+  try {
+    const response = await fetch(`${import.meta.env.BASE_URL}search-index.json`);
     if (!response.ok) {
       return [];
     }
+    searchIndexCache = await response.json();
+    return searchIndexCache!;
+  } catch (error) {
+    console.error('Error loading search index:', error);
+    return [];
+  }
+}
 
-    const data = await response.json();
-    return data.items?.map((item: { name: string; path: string }) => ({
-      title: formatTitle(item.name.replace('.md', '')),
-      slug: item.name.replace('.md', ''),
-      content: '',
-      lastModified: new Date().toISOString(),
-    })) || [];
+// 검색 기능 (정적 인덱스 기반)
+export async function searchWiki(query: string): Promise<WikiPage[]> {
+  try {
+    const index = await loadSearchIndex();
+    const normalizedQuery = query.toLowerCase().trim();
+    const queryTerms = normalizedQuery.split(/\s+/);
+
+    // 검색 결과를 점수와 함께 저장
+    const scoredResults = index
+      .map((item) => {
+        let score = 0;
+        const titleLower = item.title.toLowerCase();
+        const contentLower = item.content.toLowerCase();
+        const tagsLower = item.tags.map((t) => t.toLowerCase());
+
+        for (const term of queryTerms) {
+          // 제목에서 매칭 (높은 점수)
+          if (titleLower.includes(term)) {
+            score += 10;
+            if (titleLower === term) score += 5; // 정확한 매칭
+          }
+
+          // 태그에서 매칭 (중간 점수)
+          if (tagsLower.some((tag) => tag.includes(term))) {
+            score += 5;
+          }
+
+          // 본문에서 매칭 (낮은 점수)
+          if (contentLower.includes(term)) {
+            score += 1;
+            // 매칭 횟수에 따라 추가 점수
+            const matches = contentLower.split(term).length - 1;
+            score += Math.min(matches, 5) * 0.5;
+          }
+        }
+
+        return { item, score };
+      })
+      .filter((result) => result.score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    // WikiPage 형태로 변환
+    return scoredResults.map((result) => ({
+      title: result.item.title,
+      slug: result.item.slug,
+      content: result.item.excerpt,
+      lastModified: result.item.lastModified,
+      author: result.item.author,
+      tags: result.item.tags,
+    }));
   } catch (error) {
     console.error('Error searching wiki:', error);
     return [];

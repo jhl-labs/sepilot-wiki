@@ -9,21 +9,20 @@ on:
   workflow_dispatch:
     inputs:
       target:
-        description: '수집 대상 시스템'
+        description: '수집 대상'
         required: false
         default: 'all'
         type: choice
         options:
           - all
-          - kubernetes
-          - services
-          - gitops
+          - actions
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
-  collect-status:
+  collect-actions-status:
     runs-on: jhl-space
     steps:
       - name: Checkout
@@ -37,28 +36,44 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Collect system status
+      - name: Collect GitHub Actions status
         run: |
-          echo "시스템 상태 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
-          echo "대상: ${{ github.event.inputs.target || 'all' }}"
-          # 상태 수집 스크립트 실행 예정
-          # bun run collect-status
+          echo "🚀 GitHub Actions 상태 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
+          node scripts/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
-      - name: Update Wiki
+      - name: Rebuild wiki data and search index
         run: |
-          echo "Wiki 업데이트"
-          # Wiki 업데이트 로직
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "📚 Wiki 데이터 및 검색 인덱스 재빌드..."
+          npm run build:wiki
+          npm run build:search
 
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff --staged --quiet || git commit -m "chore: 시스템 상태 자동 수집 - $(date '+%Y-%m-%d %H:%M')"
-          git push || echo "No changes to push"
+          if git diff --staged --quiet; then
+            echo "변경 사항 없음"
+          else
+            git commit -m "chore: 자동 상태 수집 - $(date '+%Y-%m-%d %H:%M')"
+            git push
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          echo "## 상태 수집 완료 ✅" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- 수집 시간: $(date '+%Y-%m-%d %H:%M:%S KST')" >> $GITHUB_STEP_SUMMARY
+          echo "- 대상: ${{ github.event.inputs.target || 'all' }}" >> $GITHUB_STEP_SUMMARY
+          if [ -f public/actions-status.json ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### GitHub Actions 상태" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+            cat public/actions-status.json | head -30 >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
