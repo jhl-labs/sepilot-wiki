@@ -30,12 +30,46 @@ import {
   callOpenAI,
   getExistingDocuments,
   setGitHubOutput,
+  updateFrontmatterStatus,
 } from './lib/utils.js';
 import { addAIHistoryEntry } from './lib/ai-history.js';
 import { updateIssue } from './lib/issues-store.js';
+import { readFile, readdir } from 'fs/promises';
+import { existsSync } from 'fs';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
+
+/**
+ * 모든 wiki 문서를 재귀적으로 스캔
+ */
+async function getAllDocuments(dir = WIKI_DIR, prefix = '') {
+  const docs = [];
+  if (!existsSync(dir)) return docs;
+
+  const entries = await readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name);
+    const relativePath = prefix ? `${prefix}/${entry.name}` : entry.name;
+
+    if (entry.isDirectory()) {
+      docs.push(...(await getAllDocuments(fullPath, relativePath)));
+    } else if (entry.name.endsWith('.md')) {
+      const content = await readFile(fullPath, 'utf-8');
+      const statusMatch = content.match(/status:\s*(\w+)/);
+      const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m);
+      docs.push({
+        path: relativePath,
+        fullPath,
+        filename: entry.name,
+        status: statusMatch ? statusMatch[1] : 'unknown',
+        title: titleMatch ? titleMatch[1] : entry.name.replace('.md', ''),
+        content,
+      });
+    }
+  }
+  return docs;
+}
 
 // 피드백 처리
 async function processFeedback(context, currentCommentBody) {
@@ -45,37 +79,57 @@ async function processFeedback(context, currentCommentBody) {
 
   // 문서 찾기
   const doc = await findDocument(context, WIKI_DIR);
+  const allDocs = await getAllDocuments();
   const existingDocs = await getExistingDocuments(WIKI_DIR, { includePreview: true });
+
+  // 문서 상태별 분류
+  const draftDocs = allDocs.filter((d) => d.status === 'draft');
+  const publishedDocs = allDocs.filter((d) => d.status === 'published');
+
+  // Wiki Maintainer Issue 여부 확인
+  const isWikiMaintainerIssue = context.issueTitle.includes('[Wiki Maintainer]');
 
   // 시스템 프롬프트
   const systemPrompt = `당신은 SEPilot Wiki의 기술 문서 편집 AI입니다.
-Maintainer의 피드백에 따라 문서를 수정, 생성, 또는 삭제합니다.
+Maintainer의 피드백에 따라 문서를 수정, 생성, 발행, 또는 삭제합니다.
 
 ## 핵심 원칙 (반드시 준수)
 - Issue의 전체 컨텍스트를 이해하고 적절한 작업을 수행하세요.
 - 피드백 내용을 정확히 반영하세요.
+- "진행해", "해줘", "실행", "OK", "네", "승인" 등의 긍정적 응답은 Issue에서 제안된 작업을 실행하라는 의미입니다.
 - 확실하게 알고 있는 사실만 작성하세요.
-- 불확실한 정보나 추측은 절대 포함하지 마세요.
 
 ## 현재 상황 분석
+- Issue 유형: ${isWikiMaintainerIssue ? 'Wiki Maintainer 자동 생성 Issue' : '일반 문서 요청'}
 - 문서 발견 여부: ${doc.found ? '예' : '아니오'}
-- 문서 경로: ${doc.filepath}
-${doc.found ? `- 문서 내용 길이: ${doc.content.length}자` : ''}
+${doc.found ? `- 문서 경로: ${doc.filepath}\n- 문서 상태: ${doc.content.match(/status:\s*(\w+)/)?.[1] || 'unknown'}` : ''}
+
+## 현재 Wiki 상태
+- 총 문서 수: ${allDocs.length}개
+- Draft 문서 (${draftDocs.length}개): ${draftDocs.map((d) => d.path).join(', ') || '없음'}
+- Published 문서 (${publishedDocs.length}개): ${publishedDocs.map((d) => d.path).join(', ') || '없음'}
 
 ## 작업 유형 결정
-피드백 내용을 분석하여 다음 중 하나를 수행하세요:
-1. **수정**: 기존 문서의 내용 변경
-2. **복구**: 삭제된 문서 재생성 (컨텍스트에서 이전 내용 참조)
-3. **삭제**: 문서 삭제 요청 시 빈 내용 반환
+피드백 내용을 분석하여 다음 중 하나 또는 여러 개를 수행하세요:
+1. **publish**: draft 문서를 published 상태로 변경 (status 필드만 변경)
+2. **unpublish**: published 문서를 draft 상태로 변경
+3. **modify**: 기존 문서의 내용 변경
+4. **create**: 새 문서 생성
+5. **delete**: 문서 삭제 (status를 deleted로 변경)
 
 ## 응답 형식
-반드시 다음 JSON 형식으로 응답하세요:
+반드시 다음 JSON 형식으로 응답하세요. 여러 문서를 처리할 경우 actions 배열에 여러 항목을 포함하세요:
 \`\`\`json
 {
-  "action": "modify" | "create" | "delete",
-  "targetPath": "wiki/파일명.md",
-  "content": "수정된 전체 마크다운 내용 (삭제 시 null)",
-  "summary": "수행한 작업 요약"
+  "actions": [
+    {
+      "action": "publish" | "unpublish" | "modify" | "create" | "delete",
+      "targetPath": "wiki/경로/파일명.md",
+      "content": "수정된 전체 마크다운 내용 (publish/unpublish/delete 시 null)",
+      "reason": "이 작업을 수행하는 이유"
+    }
+  ],
+  "summary": "전체 작업 요약"
 }
 \`\`\`
 
@@ -114,47 +168,100 @@ ${doc.found ? `## 현재 문서 내용\n\`\`\`markdown\n${doc.content}\n\`\`\`` 
   } catch (e) {
     console.error('JSON 파싱 실패, 기본 수정으로 처리:', e.message);
     result = {
-      action: 'modify',
-      targetPath: doc.filepath,
-      content: response,
+      actions: [
+        {
+          action: 'modify',
+          targetPath: doc.filepath,
+          content: response,
+          reason: '피드백 반영',
+        },
+      ],
       summary: '피드백 반영',
     };
   }
 
-  // 작업 수행
-  if (result.action === 'delete') {
-    console.log('🗑️ 문서 삭제 요청');
-    // 실제 삭제는 위험하므로 status만 변경
-    if (doc.found) {
-      const deletedContent = doc.content.replace(/status:\s*\w+/, 'status: deleted');
-      await writeFile(doc.filepath, deletedContent);
+  // 이전 형식 호환성 처리 (단일 action → actions 배열)
+  if (result.action && !result.actions) {
+    result.actions = [
+      {
+        action: result.action,
+        targetPath: result.targetPath,
+        content: result.content,
+        reason: result.summary || result.reason,
+      },
+    ];
+  }
+
+  // actions가 없거나 빈 배열이면 종료
+  if (!result.actions || result.actions.length === 0) {
+    console.log('ℹ️ 수행할 작업이 없습니다.');
+    return { hasChanges: false, reason: 'no_action_needed' };
+  }
+
+  // 각 액션 수행
+  const processedActions = [];
+  for (const actionItem of result.actions) {
+    const { action, targetPath, content, reason } = actionItem;
+    const fullPath = targetPath
+      ? targetPath.startsWith('/')
+        ? targetPath
+        : join(process.cwd(), targetPath)
+      : doc.filepath;
+
+    console.log(`\n🔧 작업: ${action} - ${targetPath || doc.filepath}`);
+    console.log(`   이유: ${reason}`);
+
+    try {
+      if (action === 'publish' || action === 'unpublish') {
+        // status 변경만 수행
+        const targetDoc = allDocs.find((d) => `wiki/${d.path}` === targetPath || d.fullPath === fullPath);
+        if (targetDoc) {
+          const newStatus = action === 'publish' ? 'published' : 'draft';
+          const newContent = updateFrontmatterStatus(targetDoc.content, newStatus);
+          await writeFile(targetDoc.fullPath, newContent);
+          console.log(`   ✅ ${action === 'publish' ? '발행' : '발행 취소'} 완료: ${targetDoc.path}`);
+          processedActions.push({ action, path: targetDoc.path, success: true });
+        } else {
+          console.log(`   ⚠️ 문서를 찾을 수 없음: ${targetPath}`);
+          processedActions.push({ action, path: targetPath, success: false, error: 'not_found' });
+        }
+      } else if (action === 'delete') {
+        // status를 deleted로 변경
+        const targetDoc = allDocs.find((d) => `wiki/${d.path}` === targetPath || d.fullPath === fullPath);
+        if (targetDoc) {
+          const newContent = updateFrontmatterStatus(targetDoc.content, 'deleted');
+          await writeFile(targetDoc.fullPath, newContent);
+          console.log(`   ✅ 삭제 완료: ${targetDoc.path}`);
+          processedActions.push({ action, path: targetDoc.path, success: true });
+        }
+      } else if (action === 'create' || action === 'modify') {
+        if (!content) {
+          console.log(`   ⚠️ 내용이 없어서 건너뜀`);
+          processedActions.push({ action, path: targetPath, success: false, error: 'no_content' });
+          continue;
+        }
+        // 디렉토리 생성
+        const { dirname } = await import('path');
+        await mkdir(dirname(fullPath), { recursive: true });
+        // 파일 저장
+        await writeFile(fullPath, content);
+        console.log(`   ✅ ${action === 'create' ? '생성' : '수정'} 완료`);
+        processedActions.push({ action, path: targetPath, success: true });
+      }
+    } catch (err) {
+      console.error(`   ❌ 오류: ${err.message}`);
+      processedActions.push({ action, path: targetPath, success: false, error: err.message });
     }
-    return { hasChanges: true, action: 'delete', summary: result.summary };
   }
 
-  if (result.action === 'create' || result.action === 'modify') {
-    const targetPath = result.targetPath || doc.filepath;
-    const fullPath = targetPath.startsWith('/') ? targetPath : join(process.cwd(), targetPath);
+  const successCount = processedActions.filter((a) => a.success).length;
+  const hasChanges = successCount > 0;
 
-    // 디렉토리 생성
-    await mkdir(WIKI_DIR, { recursive: true });
-
-    // 파일 저장
-    await writeFile(fullPath, result.content);
-
-    console.log(`✅ 문서 ${result.action === 'create' ? '생성' : '수정'} 완료`);
-    console.log(`   파일: ${fullPath}`);
-    console.log(`   요약: ${result.summary}`);
-
-    return {
-      hasChanges: true,
-      action: result.action,
-      filepath: fullPath,
-      summary: result.summary,
-    };
-  }
-
-  return { hasChanges: false, reason: 'no_action_needed' };
+  return {
+    hasChanges,
+    actions: processedActions,
+    summary: result.summary || `${successCount}개 작업 완료`,
+  };
 }
 
 // 메인 함수
@@ -195,20 +302,35 @@ async function main() {
         create: 'recover',
         modify: 'modify',
         delete: 'delete',
+        publish: 'publish',
+        unpublish: 'unpublish',
       };
-      const slug = result.filepath
-        ? result.filepath.replace(/.*wiki\//, '').replace('.md', '')
-        : issueTitle.toLowerCase().replace(/[^a-z0-9가-힣\s-]/g, '').replace(/\s+/g, '-');
 
-      await addAIHistoryEntry({
-        actionType: actionTypeMap[result.action] || 'modify',
-        issueNumber,
-        issueTitle,
-        documentSlug: slug,
-        documentTitle: issueTitle,
-        summary: result.summary || `피드백에 따라 문서 ${result.action === 'create' ? '복구' : result.action === 'delete' ? '삭제' : '수정'}`,
-        trigger: 'maintainer_comment',
-      });
+      // 성공한 액션들에 대해 AI History 기록
+      const successfulActions = result.actions?.filter((a) => a.success) || [];
+      for (const actionItem of successfulActions) {
+        const slug = actionItem.path
+          ? actionItem.path.replace(/.*wiki\//, '').replace('.md', '')
+          : issueTitle.toLowerCase().replace(/[^a-z0-9가-힣\s-]/g, '').replace(/\s+/g, '-');
+
+        const actionDescMap = {
+          create: '생성',
+          modify: '수정',
+          delete: '삭제',
+          publish: '발행',
+          unpublish: '발행 취소',
+        };
+
+        await addAIHistoryEntry({
+          actionType: actionTypeMap[actionItem.action] || 'modify',
+          issueNumber,
+          issueTitle,
+          documentSlug: slug,
+          documentTitle: issueTitle,
+          summary: `피드백에 따라 문서 ${actionDescMap[actionItem.action] || '처리'}`,
+          trigger: 'maintainer_comment',
+        });
+      }
 
       // Issue 업데이트 (JSON 파일) - comments 수 증가
       await updateIssue(issueNumber, { comments: (context.comments?.length || 0) + 1 });

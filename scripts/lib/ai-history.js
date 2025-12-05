@@ -106,6 +106,7 @@ export function getActionTypeLabel(actionType) {
     generate: '문서 생성',
     modify: '문서 수정',
     publish: '문서 발행',
+    unpublish: '발행 취소',
     invalid: '오류 수정',
     delete: '문서 삭제',
     recover: '문서 복구',
