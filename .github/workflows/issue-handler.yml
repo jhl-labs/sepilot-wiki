@@ -249,13 +249,18 @@ jobs:
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
 
-  # 모든 handle job이 완료된 후 배포 (handle-request-label에서 변경사항이 있을 때만 실행)
+  # 모든 handle job이 완료된 후 배포 (하나라도 성공하면 실행)
   deploy:
     needs: [handle-request-label, handle-invalid-label, handle-issue-close, handle-maintainer-comment]
     if: |
       always() &&
       !cancelled() &&
-      (needs.handle-request-label.result == 'success' && needs.handle-request-label.outputs.has_changes == 'true')
+      (
+        needs.handle-request-label.result == 'success' ||
+        needs.handle-invalid-label.result == 'success' ||
+        needs.handle-issue-close.result == 'success' ||
+        needs.handle-maintainer-comment.result == 'success'
+      )
     runs-on: jhl-space
     steps:
       - name: Trigger deploy workflow
