@@ -1,11 +1,20 @@
 [
   {
+    "title": "Wiki Maintainer Redirects For Renamed Korean Files",
+    "slug": "wiki-maintainer-redirects-for-renamed-korean-files",
+    "content": "Redirects for Renamed Korean Files\nThe following Korean‑named wiki pages have been renamed or moved.  Permanent (301) redirects are added so that existing external links continue to work and SEO value is preserved.\nRedirect table\n  Old file (URL)   New location   Redirect type  \n --- --- --- \n        301 (permanent)  \n        301 (permanent)  \n        301 (permanent)  \nImplementation\nIf the wiki is hosted on Netlify (or any platform that respects a  file), add the following lines to the root  file:\nThe trailing  forces a permanent redirect.\nIf the wiki platform provides a built‑in redirect feature (e.g., front‑matter ), create a stub page at each old path with the following front‑matter:\nRepeat the same pattern for the other two files, adjusting the target path accordingly.\nThis document was generated automatically to satisfy the maintainer request for permanent redirects.*",
+    "excerpt": "Redirects for Renamed Korean Files\nThe following Korean‑named wiki pages have been renamed or moved.  Permanent (301) redirects are added so that existing external links continue to work and SEO value...",
+    "tags": [],
+    "lastModified": "2025-12-05T12:24:00.827Z"
+  },
+  {
     "title": "Wiki Maintainer Publish Draft Documents Or Change ",
     "slug": "wiki-maintainer-publish-draft-documents-or-change-",
     "content": "{\n  \"action\": \"create\",\n  \"targetPath\": \"wiki/bun/overview.md\",\n  \"content\": \"---\\nstatus: published\\n---\\n\\n# Bun Overview\\n\\nThis document provides an overview of Bun. Content to be added.\\n\",\n  \"summary\": \"Created bun/overview.md with status set to published.\"\n}\n{\n  \"action\": \"create\",\n  \"targetPath\": \"wiki/bun/ci/github-actions.md\",\n  \"content\": \"---\\nstatus: published\\n---\\n\\n# Bun CI with GitHub Actions\\n\\nThis document describes how to set up CI for Bun projects using GitHub Actions. Content to be added.\\n\",\n  \"summary\": \"Created bun/ci/github-actions.md with status set to published.\"\n}",
     "excerpt": "{\n  \"action\": \"create\",\n  \"targetPath\": \"wiki/bun/overview.md\",\n  \"content\": \"---\\nstatus: published\\n---\\n\\n# Bun Overview\\n\\nThis document provides an overview of Bun. Content to be added.\\n\",\n  \"su...",
     "tags": [],
-    "lastModified": "2025-12-05T12:21:57.223Z"
+    "lastModified": "2025-12-05T12:21:57Z",
+    "author": "GitHub Action"
   },
   {
     "title": "github-actions로 bun을 쓰는 방법",
@@ -19,7 +28,7 @@
       "CI/CD",
       "node-alternative"
     ],
-    "lastModified": "2025-12-05T12:19:13Z",
+    "lastModified": "2025-12-05T12:21:57Z",
     "author": "SEPilot AI"
   }
 ]

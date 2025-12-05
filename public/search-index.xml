@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2025-12-05T12:21:57.253Z</generated>
-  <count>2</count>
+  <generated>2025-12-05T12:24:00.860Z</generated>
+  <count>3</count>
   <items>
+  <item>
+    <title>Wiki Maintainer Redirects For Renamed Korean Files</title>
+    <slug>wiki-maintainer-redirects-for-renamed-korean-files</slug>
+    <content>Redirects for Renamed Korean Files
+The following Korean‑named wiki pages have been renamed or moved.  Permanent (301) redirects are added so that existing external links continue to work and SEO value is preserved.
+Redirect table
+  Old file (URL)   New location   Redirect type  
+ --- --- --- 
+        301 (permanent)  
+        301 (permanent)  
+        301 (permanent)  
+Implementation
+If the wiki is hosted on Netlify (or any platform that respects a  file), add the following lines to the root  file:
+The trailing  forces a permanent redirect.
+If the wiki platform provides a built‑in redirect feature (e.g., front‑matter ), create a stub page at each old path with the following front‑matter:
+Repeat the same pattern for the other two files, adjusting the target path accordingly.
+This document was generated automatically to satisfy the maintainer request for permanent redirects.*</content>
+    <excerpt>Redirects for Renamed Korean Files
+The following Korean‑named wiki pages have been renamed or moved.  Permanent (301) redirects are added so that existing external links continue to work and SEO value...</excerpt>
+    <tags></tags>
+    <lastModified>2025-12-05T12:24:00.827Z</lastModified>
+    <author></author>
+  </item>
   <item>
     <title>Wiki Maintainer Publish Draft Documents Or Change </title>
     <slug>wiki-maintainer-publish-draft-documents-or-change-</slug>
@@ -24,8 +47,8 @@
   &quot;content&quot;: &quot;---\nstatus: published\n---\n\n# Bun Overview\n\nThis document provides an overview of Bun. Content to be added.\n&quot;,
   &quot;su...</excerpt>
     <tags></tags>
-    <lastModified>2025-12-05T12:21:57.223Z</lastModified>
-    <author></author>
+    <lastModified>2025-12-05T12:21:57Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>github-actions로 bun을 쓰는 방법</title>
@@ -74,7 +97,7 @@ GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매�
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.  
 워크플...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative</tags>
-    <lastModified>2025-12-05T12:19:13Z</lastModified>
+    <lastModified>2025-12-05T12:21:57Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   </items>
