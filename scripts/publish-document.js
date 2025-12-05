@@ -4,6 +4,12 @@
  * Issue가 닫히면 문서를 draft에서 published 상태로 전환하는 스크립트
  * GitHub Issue가 닫히면 issue-handler.yml에서 호출됨
  *
+ * Issue의 전체 컨텍스트를 수집하여 관련 문서를 정확히 찾음
+ *
+ * 환경 변수:
+ * - GITHUB_REPOSITORY: owner/repo 형식
+ * - GITHUB_TOKEN: GitHub API 토큰
+ *
  * 사용법:
  * node scripts/publish-document.js --issue-number 123 --issue-title "문서 제목"
  */
@@ -11,6 +17,11 @@
 import { writeFile, readFile, readdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
+import {
+  collectIssueContext,
+  resolveDocumentPath,
+  getGitHubInfoFromEnv,
+} from './lib/issue-context.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
@@ -36,55 +47,51 @@ function parseArgs() {
   return parsed;
 }
 
-// 슬러그로 문서 찾기
-async function findDocumentByTitle(issueTitle) {
-  if (!existsSync(WIKI_DIR)) {
-    return null;
+// 문서 찾기 (여러 방법 시도)
+async function findDocument(context) {
+  // 1. 컨텍스트에서 문서 경로 추출 시도
+  const docPath = resolveDocumentPath(context, WIKI_DIR);
+
+  if (existsSync(docPath.filepath)) {
+    const content = await readFile(docPath.filepath, 'utf-8');
+    return { ...docPath, content, found: true };
   }
 
-  // 제목에서 슬러그 생성
-  const expectedSlug = issueTitle
-    .toLowerCase()
-    .replace(/[^a-z0-9가-힣\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim()
-    .slice(0, 50);
+  // 2. wiki 폴더의 모든 문서 검색
+  if (existsSync(WIKI_DIR)) {
+    const files = await readdir(WIKI_DIR);
+    for (const file of files.filter((f) => f.endsWith('.md'))) {
+      const filepath = join(WIKI_DIR, file);
+      const content = await readFile(filepath, 'utf-8');
 
-  const expectedFilename = `${expectedSlug}.md`;
-  const filepath = join(WIKI_DIR, expectedFilename);
-
-  if (existsSync(filepath)) {
-    const content = await readFile(filepath, 'utf-8');
-    return { filepath, filename: expectedFilename, content };
-  }
-
-  // 슬러그가 맞지 않으면 모든 문서에서 제목으로 검색
-  const files = await readdir(WIKI_DIR);
-  for (const file of files.filter((f) => f.endsWith('.md'))) {
-    const content = await readFile(join(WIKI_DIR, file), 'utf-8');
-    const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m);
-    if (titleMatch && titleMatch[1].trim() === issueTitle) {
-      return { filepath: join(WIKI_DIR, file), filename: file, content };
+      // 제목으로 매칭
+      const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m);
+      if (titleMatch && titleMatch[1].trim() === context.issueTitle) {
+        return {
+          filepath,
+          filename: file,
+          slug: file.replace('.md', ''),
+          content,
+          found: true,
+          source: 'title_match',
+        };
+      }
     }
   }
 
-  return null;
+  return { ...docPath, content: null, found: false };
 }
 
 // frontmatter에서 status 변경
 function updateFrontmatterStatus(content, newStatus) {
-  // frontmatter 추출
   const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
   if (!frontmatterMatch) {
-    // frontmatter가 없으면 추가
     return `---\nstatus: ${newStatus}\n---\n${content}`;
   }
 
   const frontmatter = frontmatterMatch[1];
   const rest = content.slice(frontmatterMatch[0].length);
 
-  // status 필드가 있으면 변경, 없으면 추가
   if (/^status:/m.test(frontmatter)) {
     const newFrontmatter = frontmatter.replace(/^status:.*$/m, `status: ${newStatus}`);
     return `---\n${newFrontmatter}\n---${rest}`;
@@ -95,15 +102,16 @@ function updateFrontmatterStatus(content, newStatus) {
 }
 
 // 문서 발행
-async function publishDocument(issueNumber, issueTitle) {
+async function publishDocument(context) {
   console.log('📤 문서 발행 시작...');
-  console.log(`   Issue #${issueNumber}: ${issueTitle}`);
+  console.log(`   Issue #${context.issueNumber}: ${context.issueTitle}`);
 
   // 문서 찾기
-  const doc = await findDocumentByTitle(issueTitle);
-  if (!doc) {
+  const doc = await findDocument(context);
+
+  if (!doc.found) {
     console.log('⚠️ 해당 Issue에 연결된 문서를 찾을 수 없습니다.');
-    console.log(`   찾으려는 제목: ${issueTitle}`);
+    console.log(`   경로: ${doc.filepath}`);
     return { hasChanges: false, reason: 'document_not_found' };
   }
 
@@ -142,11 +150,23 @@ async function main() {
     process.exit(1);
   }
 
-  const issueNumber = args['issue-number'];
+  const issueNumber = parseInt(args['issue-number'], 10);
   const issueTitle = args['issue-title'] || '';
 
+  // GitHub 정보 가져오기
+  const githubInfo = getGitHubInfoFromEnv();
+
   try {
-    const result = await publishDocument(issueNumber, issueTitle);
+    // Issue 전체 컨텍스트 수집
+    const context = await collectIssueContext({
+      owner: githubInfo.owner,
+      repo: githubInfo.repo,
+      issueNumber,
+      issueTitle,
+      token: githubInfo.token,
+    });
+
+    const result = await publishDocument(context);
 
     console.log('\n📄 처리 결과:');
     console.log(JSON.stringify(result, null, 2));

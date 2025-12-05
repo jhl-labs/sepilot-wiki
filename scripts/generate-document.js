@@ -8,6 +8,8 @@
  * - OPENAI_BASE_URL: OpenAI API 호환 엔드포인트 (기본: https://api.openai.com/v1)
  * - OPENAI_API_KEY: API 키 (또는 OPENAI_TOKEN)
  * - OPENAI_MODEL: 사용할 모델 (기본: gpt-4o)
+ * - GITHUB_REPOSITORY: owner/repo 형식
+ * - GITHUB_TOKEN: GitHub API 토큰
  *
  * 사용법:
  * node scripts/generate-document.js --issue-number 123 --issue-title "문서 제목" --issue-body "요청 내용"
@@ -16,6 +18,11 @@
 import { writeFile, mkdir, readFile, readdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
+import {
+  collectIssueContext,
+  resolveDocumentPath,
+  getGitHubInfoFromEnv,
+} from './lib/issue-context.js';
 
 // 환경 변수
 const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1';
@@ -84,8 +91,8 @@ async function callOpenAI(messages, options = {}) {
     body: JSON.stringify({
       model: OPENAI_MODEL,
       messages,
-      temperature: options.temperature ?? 0.7,
-      max_tokens: options.maxTokens ?? 4000,
+      temperature: options.temperature ?? 0.1,
+      max_tokens: options.maxTokens ?? 8000,
     }),
   });
 
@@ -99,9 +106,9 @@ async function callOpenAI(messages, options = {}) {
 }
 
 // 문서 생성
-async function generateDocument(issueNumber, issueTitle, issueBody) {
+async function generateDocument(context) {
   console.log('🤖 AI 문서 생성 시작...');
-  console.log(`   Issue #${issueNumber}: ${issueTitle}`);
+  console.log(`   Issue #${context.issueNumber}: ${context.issueTitle}`);
   console.log(`   모델: ${OPENAI_MODEL}`);
   console.log(`   API: ${OPENAI_BASE_URL}`);
 
@@ -129,6 +136,7 @@ async function generateDocument(issueNumber, issueTitle, issueBody) {
    ---
    title: 문서 제목
    author: SEPilot AI
+   status: draft
    tags: [관련, 태그, 목록]
    ---
 4. frontmatter 다음에 바로 H2(##)부터 본문을 시작합니다. H1(#) 제목은 사용하지 마세요.
@@ -138,53 +146,42 @@ async function generateDocument(issueNumber, issueTitle, issueBody) {
 8. 외부 라이브러리나 도구를 언급할 때는 공식 문서 링크를 제공하세요.
 ${existingDocsContext}`;
 
-  // 사용자 프롬프트
-  const userPrompt = `다음 요청에 대한 문서를 작성해주세요:
+  // 사용자 프롬프트 - 전체 Issue 컨텍스트 포함
+  const userPrompt = `다음 Issue의 요청에 대한 문서를 작성해주세요:
 
-제목: ${issueTitle}
+${context.timeline}
 
-요청 내용:
-${issueBody || '(상세 내용 없음)'}
-
-위 요청에 맞는 완전한 마크다운 문서를 작성해주세요.`;
+위 요청에 맞는 완전한 마크다운 문서를 작성해주세요.
+마크다운 코드 블록(\`\`\`) 없이 순수 마크다운만 반환하세요.`;
 
   const messages = [
     { role: 'system', content: systemPrompt },
     { role: 'user', content: userPrompt },
   ];
 
-  // AI 호출 (temperature 0.1로 사실 기반 응답, max_tokens 넉넉하게)
+  // AI 호출
   const content = await callOpenAI(messages, {
     temperature: 0.1,
     maxTokens: 8000,
   });
 
-  // 슬러그 생성 (제목에서 파일명 생성)
-  const slug = issueTitle
-    .toLowerCase()
-    .replace(/[^a-z0-9가-힣\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim()
-    .slice(0, 50);
-
-  const filename = `${slug}.md`;
-  const filepath = join(WIKI_DIR, filename);
+  // 문서 경로 결정
+  const docPath = resolveDocumentPath(context, WIKI_DIR);
 
   // wiki 폴더 생성
   await mkdir(WIKI_DIR, { recursive: true });
 
   // 파일 저장
-  await writeFile(filepath, content);
+  await writeFile(docPath.filepath, content);
 
   console.log('✅ 문서 생성 완료');
-  console.log(`   파일: ${filepath}`);
-  console.log(`   슬러그: ${slug}`);
+  console.log(`   파일: ${docPath.filepath}`);
+  console.log(`   슬러그: ${docPath.slug}`);
 
   return {
-    filepath,
-    filename,
-    slug,
+    filepath: docPath.filepath,
+    filename: docPath.filename,
+    slug: docPath.slug,
     content,
   };
 }
@@ -196,16 +193,31 @@ async function main() {
   // 필수 인자 확인
   if (!args['issue-number']) {
     console.error('❌ 오류: --issue-number 인자가 필요합니다.');
-    console.error('사용법: node scripts/generate-document.js --issue-number 123 --issue-title "제목" --issue-body "내용"');
+    console.error(
+      '사용법: node scripts/generate-document.js --issue-number 123 --issue-title "제목" --issue-body "내용"'
+    );
     process.exit(1);
   }
 
-  const issueNumber = args['issue-number'];
+  const issueNumber = parseInt(args['issue-number'], 10);
   const issueTitle = args['issue-title'] || `문서 요청 #${issueNumber}`;
   const issueBody = args['issue-body'] || '';
 
+  // GitHub 정보 가져오기
+  const githubInfo = getGitHubInfoFromEnv();
+
   try {
-    const result = await generateDocument(issueNumber, issueTitle, issueBody);
+    // Issue 전체 컨텍스트 수집
+    const context = await collectIssueContext({
+      owner: githubInfo.owner,
+      repo: githubInfo.repo,
+      issueNumber,
+      issueTitle,
+      issueBody,
+      token: githubInfo.token,
+    });
+
+    const result = await generateDocument(context);
 
     // 결과를 JSON으로 출력 (GitHub Actions에서 활용)
     console.log('\n📄 생성 결과:');

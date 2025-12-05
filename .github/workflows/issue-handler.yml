@@ -66,6 +66,8 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Build wiki data
         run: |
@@ -174,6 +176,8 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Build wiki data
         run: |
@@ -230,6 +234,9 @@ jobs:
           bun run scripts/publish-document.js \
             --issue-number "${{ github.event.issue.number }}" \
             --issue-title "${{ github.event.issue.title }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Build wiki data
         run: |
@@ -353,6 +360,8 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Build wiki data
         if: steps.check-maintainer.outputs.result == 'true'

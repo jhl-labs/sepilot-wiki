@@ -136,7 +136,12 @@ export interface SocialLinks {
 }
 
 export interface FooterConfig {
-  text?: string;
+  enabled?: boolean;
+  copyright?: {
+    enabled?: boolean;
+    text?: string;
+    startYear?: number;
+  };
   links?: { label: string; url: string }[];
   showPoweredBy?: boolean;
 }

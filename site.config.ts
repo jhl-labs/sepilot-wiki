@@ -46,11 +46,21 @@ export const siteConfig: SiteConfig = {
 
   // 푸터 설정 (선택사항)
   footer: {
-    text: '© 2024 My Wiki. All rights reserved.',
+    enabled: true, // 푸터 표시 여부
+
+    // Copyright 설정
+    copyright: {
+      enabled: true, // Copyright 표시 여부
+      text: 'My Wiki. All rights reserved.', // Copyright 문구 (© 연도는 자동 추가)
+      startYear: 2024, // 시작 연도 (현재 연도와 다르면 "2024-2025" 형식으로 표시)
+    },
+
+    // 푸터 링크
     links: [
       { label: 'GitHub', url: 'https://github.com/your-username' },
       // { label: 'Twitter', url: 'https://twitter.com/your-username' },
     ],
+
     showPoweredBy: true, // 'Powered by SEPilot Wiki' 표시 여부
   },
 };
