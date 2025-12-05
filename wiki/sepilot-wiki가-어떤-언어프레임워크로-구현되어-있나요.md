@@ -1,7 +1,7 @@
 ---
 title: Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?
 author: SEPilot AI
-status: draft
+status: published
 tags: [sepilot-wiki, 기술스택, React, TypeScript, Vite]
 ---
 
