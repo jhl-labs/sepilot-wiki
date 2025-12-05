@@ -19,6 +19,8 @@ export const LABELS = {
   INVALID: 'invalid',
   DRAFT: 'draft',
   AI_GENERATED: 'ai-generated',
+  WIKI_MAINTENANCE: 'wiki-maintenance',
+  PUBLISHED: 'published',
 } as const;
 
 // GitHub URL 헬퍼 함수들

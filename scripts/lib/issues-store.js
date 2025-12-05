@@ -298,6 +298,27 @@ export async function syncFromGitHub() {
       }
     }
 
+    // wiki-maintenance 라벨이 있는 Issue (자동 정비 작업)
+    const maintenanceResponse = await fetch(
+      `https://api.github.com/repos/${repo}/issues?state=all&per_page=100&labels=wiki-maintenance`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    );
+
+    if (maintenanceResponse.ok) {
+      const maintenanceIssues = await maintenanceResponse.json();
+      // 중복 제거
+      for (const issue of maintenanceIssues) {
+        if (!allIssues.find((i) => i.id === issue.id)) {
+          allIssues.push(issue);
+        }
+      }
+    }
+
     console.log(`📥 GitHub에서 ${allIssues.length}개 Issue 가져옴`);
 
     const data = { issues: [], lastUpdated: new Date().toISOString() };

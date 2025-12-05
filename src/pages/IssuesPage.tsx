@@ -64,7 +64,8 @@ export function IssuesPage() {
             className="filter-select"
           >
             <option value="">모든 라벨</option>
-            <option value={LABELS.REQUEST}>request</option>
+            <option value={LABELS.REQUEST}>request (문서 요청)</option>
+            <option value={LABELS.WIKI_MAINTENANCE}>wiki-maintenance (자동 정비)</option>
             <option value={LABELS.INVALID}>invalid</option>
             <option value={LABELS.DRAFT}>draft</option>
           </select>
@@ -146,6 +147,10 @@ export function IssuesPage() {
                           ? 'invalid'
                           : label.name === LABELS.DRAFT
                           ? 'draft'
+                          : label.name === LABELS.WIKI_MAINTENANCE
+                          ? 'maintenance'
+                          : label.name === LABELS.PUBLISHED
+                          ? 'published'
                           : 'default'
                       }
                       className="issue-label"
