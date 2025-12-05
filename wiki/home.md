@@ -1,8 +1,7 @@
 ---
-title: Welcome to SEPilot Wiki
+title: 홈
 author: SEPilot Team
-tags: [welcome, introduction]
-lastModified: 2024-12-05
+tags: [home, welcome, introduction]
 ---
 
 # SEPilot Wiki에 오신 것을 환영합니다
