@@ -72,10 +72,10 @@ export function TagsPage() {
           <div className="tags-cloud">
             {isLoading ? (
               <div className="tags-cloud-loading">
-                {Array.from({ length: 12 }).map((_, i) => (
+                {[80, 100, 70, 110, 90, 75, 95, 85, 105, 65, 115, 88].map((width, i) => (
                   <Skeleton
                     key={i}
-                    width={60 + Math.random() * 60}
+                    width={width}
                     height={32}
                     style={{ borderRadius: '9999px' }}
                   />

@@ -19,7 +19,7 @@ on:
 
 jobs:
   maintain-wiki-tree:
-    runs-on: ubuntu-latest
+    runs-on: jhl-space
     permissions:
       contents: write
       issues: write
@@ -32,7 +32,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
 
