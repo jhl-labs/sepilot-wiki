@@ -19,7 +19,7 @@ import { Skeleton } from '../ui/Skeleton';
 import { LABELS, urls } from '../../config';
 import { DynamicIcon } from '../../utils/icons';
 import clsx from 'clsx';
-import type { SidebarSection, SidebarNavItem } from '../../types';
+import type { SidebarSection, SidebarNavItem, WikiTree } from '../../types';
 
 export function Sidebar() {
   const { isOpen, close } = useSidebar();
@@ -114,6 +114,33 @@ export function Sidebar() {
         <span>{item.label}</span>
         {item.badge && <span className="nav-badge-text">{item.badge}</span>}
       </NavLink>
+    );
+  };
+
+  // Wiki 트리 아이템 렌더링 (최대 depth 2까지)
+  const renderWikiTreeItem = (item: WikiTree, depth = 1): React.ReactNode => {
+    const hasChildren = item.children && item.children.length > 0;
+    const paddingLeft = depth > 1 ? `${1 + (depth - 1) * 0.75}rem` : undefined;
+
+    return (
+      <div key={item.slug}>
+        <NavLink
+          to={`/wiki/${item.slug}`}
+          className={({ isActive }) =>
+            clsx('nav-item nav-item-child', isActive && 'active')
+          }
+          style={{ paddingLeft }}
+          onClick={handleLinkClick}
+        >
+          <span>{item.title}</span>
+        </NavLink>
+        {/* depth 2까지만 children 렌더링 */}
+        {hasChildren && depth < 2 && (
+          <>
+            {item.children!.map((child) => renderWikiTreeItem(child, depth + 1))}
+          </>
+        )}
+      </div>
     );
   };
 
@@ -213,18 +240,7 @@ export function Sidebar() {
                     <Skeleton className="nav-skeleton" />
                   </>
                 ) : wikiPages && wikiPages.length > 0 ? (
-                  wikiPages.map((page) => (
-                    <NavLink
-                      key={page.slug}
-                      to={`/wiki/${page.slug}`}
-                      className={({ isActive }) =>
-                        clsx('nav-item nav-item-child', isActive && 'active')
-                      }
-                      onClick={handleLinkClick}
-                    >
-                      <span>{page.title}</span>
-                    </NavLink>
-                  ))
+                  wikiPages.map((page) => renderWikiTreeItem(page, 1))
                 ) : (
                   <span className="nav-empty">
                     아직 작성된 문서가 없습니다

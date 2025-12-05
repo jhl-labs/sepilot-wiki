@@ -12,31 +12,6 @@ import type { NavigationConfig } from './src/types';
 export const navigationConfig: NavigationConfig = {
   // 사이드바 섹션 설정
   sidebar: [
-    // 커스텀 링크 섹션 예시
-    {
-      title: '시작하기',
-      icon: 'Rocket',
-      collapsible: true,
-      defaultOpen: true,
-      items: [
-        {
-          label: '소개',
-          href: '/wiki/home',
-          icon: 'Home',
-        },
-        // {
-        //   label: '빠른 시작',
-        //   href: '/wiki/quick-start',
-        //   icon: 'Zap',
-        // },
-        // {
-        //   label: '설치 가이드',
-        //   href: '/wiki/installation',
-        //   icon: 'Download',
-        // },
-      ],
-    },
-
     // 외부 링크 섹션 예시
     // {
     //   title: '리소스',
