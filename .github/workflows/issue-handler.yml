@@ -200,30 +200,27 @@ jobs:
         with:
           script: |
             const commentUser = context.payload.comment.user.login;
+            console.log(`댓글 작성자: ${commentUser}`);
 
-            // repo owner 확인
-            const { data: repo } = await github.rest.repos.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
+            try {
+              // 사용자의 repo 권한 레벨 직접 확인
+              const { data: permissionData } = await github.rest.repos.getCollaboratorPermissionLevel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                username: commentUser,
+              });
 
-            if (repo.owner.login === commentUser) {
-              console.log(`${commentUser}은(는) repo owner입니다.`);
-              return true;
+              const permission = permissionData.permission;
+              console.log(`${commentUser}의 권한 레벨: ${permission}`);
+
+              // admin 또는 maintain 권한이면 true
+              const hasPermission = permission === 'admin' || permission === 'maintain';
+              console.log(`maintainer 권한 여부: ${hasPermission}`);
+              return hasPermission;
+            } catch (error) {
+              console.log(`권한 확인 실패: ${error.message}`);
+              return false;
             }
-
-            // collaborator 권한 확인
-            const { data: collaborators } = await github.rest.repos.listCollaborators({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-            const isMaintainer = collaborators.some(
-              c => c.login === commentUser &&
-                   (c.permissions.admin || c.permissions.maintain)
-            );
-
-            console.log(`${commentUser} maintainer 권한: ${isMaintainer}`);
-            return isMaintainer;
 
       - name: Checkout
         if: steps.check-maintainer.outputs.result == 'true'
