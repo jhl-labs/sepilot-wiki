@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import { vi, afterEach } from 'vitest';
 
 // Mock fetch for tests
-global.fetch = vi.fn();
+vi.stubGlobal('fetch', vi.fn());
 
 // Mock import.meta.env
 vi.stubGlobal('import.meta', {
