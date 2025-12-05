@@ -4,7 +4,7 @@
       "title": "홈",
       "slug": "home",
       "content": "\n# SEPilot Wiki에 오신 것을 환영합니다\n\nSEPilot Wiki는 AI 에이전트 기반의 자동화된 문서 관리 시스템입니다.\n\n## 이 Wiki의 특징\n\n### AI 기반 문서 작성\n- GitHub Issue에서 `request` 라벨로 새 문서를 요청하세요\n- AI가 자동으로 초안을 작성하고 Maintainer가 검토합니다\n- 피드백을 반영하여 지속적으로 문서가 개선됩니다\n\n### 협업 워크플로우\n- PR을 통한 문서 변경 리뷰\n- Issue 댓글을 통한 피드백\n- 변경 이력 추적\n\n### 자동 정보 수집\n- cron 스케줄을 통해 시스템 상태 정보 자동 업데이트\n- K8s 노드 상태, 서비스 health 등 실시간 정보 반영\n\n## 시작하기\n\n1. 왼쪽 사이드바에서 **문서** 섹션을 확인하세요\n2. 새 문서가 필요하면 [Issue 생성](https://github.com/jhl-labs/sepilot-wiki/issues/new) 후 `request` 라벨 추가\n3. 기존 문서 수정은 PR 또는 Issue 댓글로 요청\n\n## 문서 구조\n\n모든 문서는 마크다운 형식으로 작성됩니다:\n\n```markdown\n---\ntitle: 문서 제목\nauthor: 작성자\ntags: [태그1, 태그2]\n---\n\n# 문서 내용\n```\n\n## 라벨 시스템\n\n| 라벨 | 설명 |\n|------|------|\n| `request` | 새 문서 작성 요청 |\n| `invalid` | 문서 오류 신고 |\n| `draft` | 초안 상태 |\n| `ai-generated` | AI가 작성한 문서 |\n\n---\n\n문의사항이 있으시면 [GitHub Issues](https://github.com/jhl-labs/sepilot-wiki/issues)를 이용해주세요.\n",
-      "lastModified": "2025-12-05T15:08:32+09:00",
+      "lastModified": "2025-12-05T14:11:27+09:00",
       "author": "SEPilot Team",
       "isDraft": false,
       "isInvalid": false,
@@ -15,39 +15,21 @@
       ],
       "history": [
         {
-          "sha": "0856732",
-          "message": "fix: issue-handler에서 deploy-pages 자동 트리거 및 배포 안내 추가",
+          "sha": "d66bcb5",
+          "message": "fix: Welcome.md를 home.md로 변경",
           "author": "JHL",
           "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T15:08:32+09:00",
+          "date": "2025-12-05T14:11:27+09:00",
           "additions": 58,
           "deletions": 0
-        }
-      ]
-    },
-    {
-      "title": "sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-      "slug": "sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요",
-      "content": "\n# sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?\n\nSEPilot Wiki는 **모던 웹 애플리케이션**을 목표로 설계된 풀스택 프로젝트입니다. 아래에서는 프로젝트를 구성하는 **주요 언어·프레임워크·툴체인**을 상세히 설명하고, 각 요소가 어떻게 상호작용하는지 아키텍처 다이어그램과 코드 예시를 통해 보여드립니다.\n\n---\n\n## 1. 전체 아키텍처 개요\n\n```\n+-------------------+      +-------------------+      +-------------------+\n|   Frontend (SPA)  | <--->|   API Gateway     | <--->|   Backend Service |\n|  React + Vite     |      |  Node.js (Express)|      |  NestJS (TS)      |\n+-------------------+      +-------------------+      +-------------------+\n          |                         |                         |\n          |                         |                         |\n          v                         v                         v\n   +-----------------+       +-----------------+       +-----------------+\n   |   Auth Provider |       |   Redis Cache   |       |   PostgreSQL    |\n   |   (OAuth2/OIDC) |       +-----------------+       +-----------------+\n   +-----------------+\n```\n\n- **Frontend**: React + Vite (TypeScript) 로 작성된 Single Page Application (SPA)  \n- **API Gateway**: Node.js 기반 Express 서버, 라우팅 및 인증/인가를 담당  \n- **Backend Service**: NestJS(Typescript) 로 구현된 도메인 로직 및 비즈니스 레이어  \n- **Database**: PostgreSQL (SQL) + Prisma ORM  \n- **Cache**: Redis (세션, 검색 인덱스)  \n- **Auth**: 외부 OAuth2/OIDC (예: GitHub, Google) 연동  \n\n---\n\n## 2. 프론트엔드\n\n| 항목 | 설명 |\n|------|------|\n| **프레임워크** | **React 18** + **React Router v6** |\n| **빌드 툴** | **Vite 5** (ESM 기반, 빠른 HMR) |\n| **언어** | **TypeScript 5** |\n| **UI 라이브러리** | **Tailwind CSS** + **Headless UI** (접근성 지원) |\n| **상태관리** | **Zustand** (경량 전역 상태) + **React Query** (서버 데이터 캐싱) |\n| **Markdown 렌더링** | **remark** + **rehype** 파이프라인, **shiki** 로 코드 하이라이팅 |\n| **국제화(i18n)** | **react-i18next** (다국어 지원) |\n\n### 2‑1. Vite 설정 예시 (`vite.config.ts`)\n\n```ts\nimport { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react-swc';\nimport tsconfigPaths from 'vite-tsconfig-paths';\n\nexport default defineConfig({\n  plugins: [react(), tsconfigPaths()],\n  server: {\n    port: 3000,\n    proxy: {\n      // API Gateway 프록시\n      '/api': {\n        target: 'http://localhost:4000',\n        changeOrigin: true,\n        secure: false,\n      },\n    },\n  },\n  css: {\n    postcss: {\n      plugins: [require('tailwindcss'), require('autoprefixer')],\n    },\n  },\n});\n```\n\n### 2‑2. Markdown 페이지 컴포넌트 (`src/pages/DocPage.tsx`)\n\n```tsx\nimport { useParams } from 'react-router-dom';\nimport { useQuery } from '@tanstack/react-query';\nimport { remark } from 'remark';\nimport remarkHtml from 'remark-html';\nimport shiki from 'shiki';\n\nexport const DocPage = () => {\n  const { slug } = useParams<{ slug: string }>();\n  const { data, isLoading } = useQuery(['doc', slug], async () => {\n    const res = await fetch(`/api/docs/${slug}`);\n    const md = await res.text();\n    const html = await remark()\n      .use(remarkHtml, { sanitize: false })\n      .process(md);\n    // 코드 하이라이팅\n    const highlighter = await shiki.getHighlighter({ theme: 'nord' });\n    // ... 하이라이팅 로직 생략\n    return String(html);\n  });\n\n  if (isLoading) return <div>Loading...</div>;\n\n  return <article dangerouslySetInnerHTML={{ __html: data! }} />;\n};\n```\n\n---\n\n## 3. API Gateway\n\n| 항목 | 설명 |\n|------|------|\n| **런타임** | **Node.js 20 LTS** |\n| **프레임워크** | **Express 4** (미들웨어 중심) |\n| **인증** | **Passport.js** + **OAuth2 전략** |\n| **Rate Limiting** | **express-rate-limit** |\n| **로깅** | **pino** (JSON 로그) |\n| **CORS** | **cors** 미들웨어 (프론트엔드 도메인 허용) |\n\n### 3‑1. 주요 미들웨어 설정 (`src/gateway.ts`)\n\n```ts\nimport express from 'express';\nimport cors from 'cors';\nimport rateLimit from 'express-rate-limit';\nimport passport from 'passport';\nimport { oauth2Strategy } from './auth/oauth2';\nimport pino from 'pino-http';\n\nconst app = express();\n\napp.use(pino());\napp.use(cors({ origin: process.env.FRONTEND_URL }));\napp.use(express.json());\n\napp.use(\n  rateLimit({\n    windowMs: 60_000,\n    max: 120,\n    standardHeaders: true,\n    legacyHeaders: false,\n  })\n);\n\n// Passport 초기화 및 OAuth2 전략 등록\npassport.use('oauth2', oauth2Strategy);\napp.use(passport.initialize());\n\n// API 라우팅 (NestJS 백엔드에 프록시)\napp.use('/api', (req, res, next) => {\n  // 토큰 검사 후 프록시\n  // 예: http-proxy-middleware 사용\n  next();\n});\n\nexport default app;\n```\n\n---\n\n## 4. 백엔드 서비스 (NestJS)\n\n| 항목 | 설명 |\n|------|------|\n| **프레임워크** | **NestJS 10** (모듈 기반) |\n| **언어** | **TypeScript 5** |\n| **ORM** | **Prisma** (PostgreSQL) |\n| **인증/인가** | **NestJS Passport** + **JWT** |\n| **문서 관리** | **Markdown 파일** + **Prisma 모델** (`Document` 테이블) |\n| **검색** | **ElasticSearch** (Full‑text) + **Redis** 캐시 |\n| **테스트** | **Jest** (unit/e2e) |\n| **CI/CD** | **GitHub Actions** + **Docker** |\n\n### 4‑1. Prisma 스키마 (`prisma/schema.prisma`)\n\n```prisma\ngenerator client {\n  provider = \"prisma-client-js\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          String   @id @default(uuid())\n  email       String   @unique\n  name        String?\n  avatarUrl   String?\n  role        Role     @default(USER)\n  documents   Document[]\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Document {\n  id          String   @id @default(uuid())\n  slug        String   @unique\n  title       String\n  content     String   // Markdown raw text\n  authorId    String\n  author      User     @relation(fields: [authorId], references: [id])\n  tags        String[]\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  published   Boolean  @default(false)\n}\n\nenum Role {\n  ADMIN\n  USER\n}\n```\n\n### 4‑2. 문서 서비스 예시 (`src/documents/documents.service.ts`)\n\n```ts\n@Injectable()\nexport class DocumentsService {\n  constructor(private readonly prisma: PrismaService) {}\n\n  async create(dto: CreateDocumentDto, userId: string) {\n    return this.prisma.document.create({\n      data: {\n        ...dto,\n        authorId: userId,\n        slug: slugify(dto.title),\n      },\n    });\n  }\n\n  async findBySlug(slug: string) {\n    const doc = await this.prisma.document.findUnique({\n      where: { slug },\n      include: { author: true },\n    });\n    if (!doc) throw new NotFoundException('Document not found');\n    return doc;\n  }\n\n  async search(query: string) {\n    // ElasticSearch 연동 예시 (간략화)\n    const result = await this.elastic.search({\n      index: 'documents',\n      q: query,\n    });\n    return result.hits.hits.map(hit => hit._source);\n  }\n}\n```\n\n### 4‑3. JWT 인증 가드 (`src/auth/jwt-auth.guard.ts`)\n\n```ts\n@Injectable()\nexport class JwtAuthGuard extends AuthGuard('jwt') {\n  handleRequest(err, user, info) {\n    if (err || !user) {\n      throw err || new UnauthorizedException('Invalid token');\n    }\n    return user;\n  }\n}\n```\n\n---\n\n## 5. 인프라 및 배포\n\n| 요소 | 선택 이유 |\n|------|-----------|\n| **Docker** | 컨테이너화된 배포 (프론트, 게이트웨이, 백엔드, DB) |\n| **Docker Compose** | 로컬 개발용 멀티컨테이너 환경 |\n| **Kubernetes (EKS/GKE)** | 프로덕션 스케일링, 자동 복구 |\n| **CI** | GitHub Actions: lint → test → build → push (Docker Hub) |\n| **CD** | Argo CD 혹은 GitHub Actions → Helm 차트 배포 |\n| **Observability** | **Prometheus + Grafana** (메트릭), **ELK** (로그) |\n| **Secrets** | **HashiCorp Vault** 혹은 **AWS Secrets Manager** |\n\n### 5‑1. Docker Compose 예시 (`docker-compose.yml`)\n\n```yaml\nversion: '3.9'\n\nservices:\n  frontend:\n    build: ./frontend\n    ports:\n      - \"3000:3000\"\n    environment:\n      - VITE_API_URL=http://localhost:4000/api\n\n  gateway:\n    build: ./gateway\n    ports:\n      - \"4000:4000\"\n    depends_on:\n      - backend\n\n  backend:\n    build: ./backend\n    ports:\n      - \"5000:5000\"\n    environment:\n      - DATABASE_URL=postgresql://postgres:password@db:5432/sepilot\n      - REDIS_URL=redis://redis:6379\n    depends_on:\n      - db\n      - redis\n\n  db:\n    image: postgres:15-alpine\n    environment:\n      POSTGRES_USER: postgres\n      POSTGRES_PASSWORD: password\n      POSTGRES_DB: sepilot\n    volumes:\n      - pg_data:/var/lib/postgresql/data\n\n  redis:\n    image: redis:7-alpine\n    ports:\n      - \"6379:6379\"\n\nvolumes:\n  pg_data:\n```\n\n### 5‑2. GitHub Actions 워크플로 (`.github/workflows/ci.yml`)\n\n```yaml\nname: CI/CD\n\non:\n  push:\n    branches: [ main ]\n\njobs:\n  build-test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        service: [frontend, gateway, backend]\n\n    steps:\n      - uses: actions/checkout@v3\n      - name: Set up Node\n        uses: actions/setup-node@v3\n        with:\n          node-version: 20\n          cache: 'npm'\n      - name: Install dependencies\n        working-directory: ${{ matrix.service }}\n        run: npm ci\n      - name: Lint & Test\n        working-directory: ${{ matrix.service }}\n        run: |\n          npm run lint\n          npm test\n\n  docker-build-push:\n    needs: build-test\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - name: Log in to Docker Hub\n        uses: docker/login-action@v2\n        with:\n          username: ${{ secrets.DOCKER_USER }}\n          password: ${{ secrets.DOCKER_PASS }}\n      - name: Build & Push images\n        run: |\n          docker compose -f docker-compose.yml build\n          docker compose -f docker-compose.yml push\n```\n\n---\n\n## 6. 보안 및 성능 최적화\n\n| 영역 | 적용 내용 |\n|------|-----------|\n| **인증** | OAuth2 + PKCE, Refresh Token 회전 |\n| **인가** | RBAC (ADMIN / USER) 기반 라우트 가드 |\n| **입력 검증** | Zod (프론트) / class‑validator (Nest) |\n| **CSRF 방어** | SameSite=Lax 쿠키 + CSRF 토큰 |\n| **HTTPS** | Nginx Ingress (TLS termination) |\n| **Rate Limiting** | IP 기반 120req/min |\n| **캐시** | Redis에 페이지 HTML, 검색 결과 5분 TTL |\n| **정적 파일** | Cloudflare CDN + gzip/ Brotli 압축 |\n| **프로파일링** | Node.js `--inspect`, NestJS `nestjs/terminus` 헬스 체크 |\n\n---\n\n## 7. 개발 흐름 (Workflow)\n\n1. **Feature Branch** → `git checkout -b feat/xxx`  \n2. **코드 작성** (frontend / backend) → **Prettier + ESLint** 자동 포맷  \n3. **단위 테스트** (`npm test`) → **CI** 에서 실행  \n4. **Pull Request** → **Code Review** + **Dependabot** 업데이트 검토  \n5. **Merge** → **GitHub Actions** 가 Docker 이미지 빌드·푸시 → **Argo CD** 가 자동 배포  \n\n---\n\n## 8. 결론\n\nSEPilot Wiki는 **React + Vite** 기반 SPA와 **NestJS** 기반 마이크로서비스를 조합한 **Full‑stack TypeScript** 애플리케이션입니다. Docker 기반 컨테이너화와 Kubernetes 배포 파이프라인을 통해 확장성과 안정성을 확보했으며, OAuth2 기반 인증·인가와 다양한 보안·성능 최적화 기법을 적용했습니다. 이 문서는 현재 구현된 주요 기술 스택과 구조를 정리했으며, 향후 기능 추가·리팩터링 시 참고 자료로 활용될 수 있습니다.",
-      "lastModified": "2025-12-05T15:08:32+09:00",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false,
-      "tags": [
-        "SEPilot Wiki",
-        "구현",
-        "언어",
-        "프레임워크",
-        "기술문서"
-      ],
-      "history": [
+        },
         {
-          "sha": "0856732",
-          "message": "fix: issue-handler에서 deploy-pages 자동 트리거 및 배포 안내 추가",
+          "sha": "72f8eae",
+          "message": "docs: Wiki 폴더 및 Welcome 페이지 추가",
           "author": "JHL",
           "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T15:08:32+09:00",
-          "additions": 267,
+          "date": "2025-12-05T12:15:22+09:00",
+          "additions": 0,
           "deletions": 0
         }
       ]
@@ -57,10 +39,6 @@
     {
       "title": "홈",
       "slug": "home"
-    },
-    {
-      "title": "sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-      "slug": "sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요"
     }
   ]
 }

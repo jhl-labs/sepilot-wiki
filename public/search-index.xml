@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2025-12-05T06:09:53.787Z</generated>
-  <count>2</count>
+  <generated>2025-12-05T06:26:33.951Z</generated>
+  <count>1</count>
   <items>
   <item>
     <title>홈</title>
@@ -44,96 +44,8 @@ AI가 자동으로 초안을 작성하고 Maintainer가 검토합니다
 협업 워크플로우
 PR을...</excerpt>
     <tags>home, welcome, introduction</tags>
-    <lastModified>2025-12-05T15:08:32+09:00</lastModified>
+    <lastModified>2025-12-05T14:11:27+09:00</lastModified>
     <author>SEPilot Team</author>
-  </item>
-  <item>
-    <title>sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
-    <slug>sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요</slug>
-    <content>sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?
-SEPilot Wiki는 모던 웹 애플리케이션을 목표로 설계된 풀스택 프로젝트입니다. 아래에서는 프로젝트를 구성하는 주요 언어·프레임워크·툴체인을 상세히 설명하고, 각 요소가 어떻게 상호작용하는지 아키텍처 다이어그램과 코드 예시를 통해 보여드립니다.
-전체 아키텍처 개요
-Frontend: React + Vite (TypeScript) 로 작성된 Single Page Application (SPA)  
-API Gateway: Node.js 기반 Express 서버, 라우팅 및 인증/인가를 담당  
-Backend Service: NestJS(Typescript) 로 구현된 도메인 로직 및 비즈니스 레이어  
-Database: PostgreSQL (SQL) + Prisma ORM  
-Cache: Redis (세션, 검색 인덱스)  
-Auth: 외부 OAuth2/OIDC (예: GitHub, Google) 연동  
-프론트엔드
-  항목   설명  
- ------ ------ 
-  프레임워크   React 18 + React Router v6  
-  빌드 툴   Vite 5 (ESM 기반, 빠른 HMR)  
-  언어   TypeScript 5  
-  UI 라이브러리   Tailwind CSS + Headless UI (접근성 지원)  
-  상태관리   Zustand (경량 전역 상태) + React Query (서버 데이터 캐싱)  
-  Markdown 렌더링   remark + rehype 파이프라인, shiki 로 코드 하이라이팅  
-  국제화(i18n)   react-i18next (다국어 지원)  
-2‑1. Vite 설정 예시 ()
-2‑2. Markdown 페이지 컴포넌트 ()
-API Gateway
-  항목   설명  
- ------ ------ 
-  런타임   Node.js 20 LTS  
-  프레임워크   Express 4 (미들웨어 중심)  
-  인증   Passport.js + OAuth2 전략  
-  Rate Limiting   express-rate-limit  
-  로깅   pino (JSON 로그)  
-  CORS   cors 미들웨어 (프론트엔드 도메인 허용)  
-3‑1. 주요 미들웨어 설정 ()
-백엔드 서비스 (NestJS)
-  항목   설명  
- ------ ------ 
-  프레임워크   NestJS 10 (모듈 기반)  
-  언어   TypeScript 5  
-  ORM   Prisma (PostgreSQL)  
-  인증/인가   NestJS Passport + JWT  
-  문서 관리   Markdown 파일 + Prisma 모델 ( 테이블)  
-  검색   ElasticSearch (Full‑text) + Redis 캐시  
-  테스트   Jest (unit/e2e)  
-  CI/CD   GitHub Actions + Docker  
-4‑1. Prisma 스키마 ()
-4‑2. 문서 서비스 예시 ()
-4‑3. JWT 인증 가드 ()
-인프라 및 배포
-  요소   선택 이유  
- ------ ----------- 
-  Docker   컨테이너화된 배포 (프론트, 게이트웨이, 백엔드, DB)  
-  Docker Compose   로컬 개발용 멀티컨테이너 환경  
-  Kubernetes (EKS/GKE)   프로덕션 스케일링, 자동 복구  
-  CI   GitHub Actions: lint → test → build → push (Docker Hub)  
-  CD   Argo CD 혹은 GitHub Actions → Helm 차트 배포  
-  Observability   Prometheus + Grafana (메트릭), ELK (로그)  
-  Secrets   HashiCorp Vault 혹은 AWS Secrets Manager  
-5‑1. Docker Compose 예시 ()
-5‑2. GitHub Actions 워크플로 ()
-보안 및 성능 최적화
-  영역   적용 내용  
- ------ ----------- 
-  인증   OAuth2 + PKCE, Refresh Token 회전  
-  인가   RBAC (ADMIN / USER) 기반 라우트 가드  
-  입력 검증   Zod (프론트) / class‑validator (Nest)  
-  CSRF 방어   SameSite=Lax 쿠키 + CSRF 토큰  
-  HTTPS   Nginx Ingress (TLS termination)  
-  Rate Limiting   IP 기반 120req/min  
-  캐시   Redis에 페이지 HTML, 검색 결과 5분 TTL  
-  정적 파일   Cloudflare CDN + gzip/ Brotli 압축  
-  프로파일링   Node.js , NestJS  헬스 체크  
-개발 흐름 (Workflow)
-Feature Branch →   
-코드 작성 (frontend / backend) → Prettier + ESLint 자동 포맷  
-단위 테스트 () → CI 에서 실행  
-Pull Request → Code Review + Dependabot 업데이트 검토  
-Merge → GitHub Actions 가 Docker 이미지 빌드·푸시 → Argo CD 가 자동 배포  
-결론
-SEPilot Wiki는 React + Vite 기반 SPA와 NestJS 기반 마이크로서비스를 조합한 Full‑stack TypeScript 애플리케이션입니다. Docker 기반 컨테이너화와 Kubernetes 배포 파이프라인을 통해 확장성과 안정성을 확보했으며, OAuth2 기반 인증·인가와 다양한 보안·성능 최적화 기법을 적용했습니다. 이 문서는 현재 구현된 주요 기술 스택과 구조를 정리했으며, 향후 기능 추가·리팩터링 시 참고 자료로 활용될 수 있습니다.</content>
-    <excerpt>sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?
-SEPilot Wiki는 모던 웹 애플리케이션을 목표로 설계된 풀스택 프로젝트입니다. 아래에서는 프로젝트를 구성하는 주요 언어·프레임워크·툴체인을 상세히 설명하고, 각 요소가 어떻게 상호작용하는지 아키텍처 다이어그램과 코드 예시를 통해 보여드립니다.
-전체 아키텍처 개요
-Frontend: Re...</excerpt>
-    <tags>SEPilot Wiki, 구현, 언어, 프레임워크, 기술문서</tags>
-    <lastModified>2025-12-05T15:08:32+09:00</lastModified>
-    <author>SEPilot AI</author>
   </item>
   </items>
 </searchIndex>
