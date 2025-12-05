@@ -28,6 +28,7 @@ export interface WikiRevision {
 export interface WikiTree {
   title: string;
   slug: string;
+  menu?: string;
   children?: WikiTree[];
 }
 

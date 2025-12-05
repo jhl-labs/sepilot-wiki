@@ -131,6 +131,8 @@ export function Sidebar() {
   const renderWikiTreeItem = (item: WikiTree, depth = 1): React.ReactNode => {
     const hasChildren = item.children && item.children.length > 0;
     const paddingLeft = depth > 1 ? `${1 + (depth - 1) * 0.75}rem` : undefined;
+    // menu 필드가 있으면 menu 사용, 없으면 title 사용
+    const displayName = item.menu || item.title;
 
     return (
       <div key={item.slug}>
@@ -142,7 +144,7 @@ export function Sidebar() {
           style={{ paddingLeft }}
           onClick={handleLinkClick}
         >
-          <span>{item.title}</span>
+          <span>{displayName}</span>
         </NavLink>
         {/* depth 2까지만 children 렌더링 */}
         {hasChildren && depth < 2 && (

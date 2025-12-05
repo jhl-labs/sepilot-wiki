@@ -177,10 +177,16 @@ async function buildWikiData() {
     };
 
     pages.push(page);
-    tree.push({
+
+    // tree 항목 생성 (menu 필드가 있으면 포함)
+    const treeItem = {
       title: page.title,
       slug: page.slug,
-    });
+    };
+    if (metadata.menu) {
+      treeItem.menu = metadata.menu;
+    }
+    tree.push(treeItem);
   }
 
   // 제목 기준 정렬
