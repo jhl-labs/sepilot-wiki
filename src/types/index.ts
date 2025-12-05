@@ -108,3 +108,121 @@ export interface WikiConfig {
   description: string;
   baseUrl: string;
 }
+
+// 사이트 설정 타입
+export interface SiteConfig {
+  title: string;
+  description: string;
+  logo?: LogoConfig;
+  favicon?: string;
+  owner: string;
+  repo: string;
+  wikiPath: string;
+  social?: SocialLinks;
+  footer?: FooterConfig;
+}
+
+export interface LogoConfig {
+  type: 'text' | 'image' | 'icon';
+  value: string;
+  alt?: string;
+}
+
+export interface SocialLinks {
+  github?: string;
+  twitter?: string;
+  discord?: string;
+  website?: string;
+}
+
+export interface FooterConfig {
+  text?: string;
+  links?: { label: string; url: string }[];
+  showPoweredBy?: boolean;
+}
+
+// 테마 설정 타입
+export interface ThemeConfig {
+  colors: ThemeColors;
+  fonts?: ThemeFonts;
+  layout?: ThemeLayout;
+  borderRadius?: ThemeBorderRadius;
+}
+
+export interface ThemeColors {
+  light: ColorScheme;
+  dark: ColorScheme;
+}
+
+export interface ColorScheme {
+  primary: string;
+  primaryHover?: string;
+  background: string;
+  backgroundSecondary?: string;
+  backgroundTertiary?: string;
+  text: string;
+  textSecondary?: string;
+  textMuted?: string;
+  border?: string;
+  accent?: string;
+  success?: string;
+  warning?: string;
+  error?: string;
+  info?: string;
+}
+
+export interface ThemeFonts {
+  sans?: string;
+  mono?: string;
+  heading?: string;
+}
+
+export interface ThemeLayout {
+  headerHeight?: string;
+  sidebarWidth?: string;
+  contentMaxWidth?: string;
+  tocWidth?: string;
+}
+
+export interface ThemeBorderRadius {
+  sm?: string;
+  md?: string;
+  lg?: string;
+  xl?: string;
+}
+
+// 네비게이션 설정 타입
+export interface NavigationConfig {
+  main?: NavSection[];
+  sidebar?: SidebarSection[];
+}
+
+export interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+export interface NavItem {
+  label: string;
+  href: string;
+  icon?: string;
+  external?: boolean;
+  badge?: string;
+}
+
+export interface SidebarSection {
+  title: string;
+  icon?: string;
+  collapsible?: boolean;
+  defaultOpen?: boolean;
+  items: SidebarNavItem[];
+}
+
+export interface SidebarNavItem {
+  label: string;
+  href: string;
+  icon?: string;
+  external?: boolean;
+  badge?: string;
+  children?: SidebarNavItem[];
+}

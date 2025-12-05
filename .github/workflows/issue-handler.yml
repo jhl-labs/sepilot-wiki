@@ -142,14 +142,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Mark document as invalid
-        run: |
-          echo "Issue #${{ github.event.issue.number }} - Invalid 라벨 감지"
-          # 문서에 경고 표시 추가 로직
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
-      - name: Comment
+      - name: Install dependencies
+        run: bun install
+
+      - name: Notify start
         uses: actions/github-script@v7
         with:
           script: |
@@ -157,7 +158,54 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '⚠️ 이 문서에 오류가 보고되었습니다. 검토 후 수정하겠습니다.'
+              body: '⚠️ 오류가 보고되었습니다. AI가 문서를 검토하고 수정 중입니다...'
+            })
+
+      - name: Process invalid label with AI
+        id: process
+        run: |
+          echo "🤖 Invalid 처리 시작..."
+          bun run scripts/mark-invalid.js \
+            --issue-number "${{ github.event.issue.number }}" \
+            --issue-title "${{ github.event.issue.title }}" \
+            --issue-body "${{ github.event.issue.body }}"
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+
+      - name: Build wiki data
+        run: |
+          bun run build:wiki
+          bun run build:search
+
+      - name: Commit and push
+        id: commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "변경 사항 없음"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "fix: Issue #${{ github.event.issue.number }} - 오류 수정"
+            git push
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment with result
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ 문서가 수정되었습니다. 검토 후 문제가 해결되었다면 invalid 라벨을 제거해주세요.'
             });
 
   handle-issue-close:
@@ -167,10 +215,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Finalize document
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Publish document
+        id: publish
         run: |
-          echo "Issue #${{ github.event.issue.number }} - 종료됨"
-          # draft 라벨 제거, 정식 문서로 전환
+          echo "📤 문서 발행 시작..."
+          bun run scripts/publish-document.js \
+            --issue-number "${{ github.event.issue.number }}" \
+            --issue-title "${{ github.event.issue.title }}"
+
+      - name: Build wiki data
+        run: |
+          bun run build:wiki
+          bun run build:search
+
+      - name: Commit and push
+        id: commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "변경 사항 없음"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 발행"
+            git push
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -189,6 +268,18 @@ jobs:
             } catch (e) {
               console.log('draft 라벨이 없거나 제거 실패:', e.message);
             }
+
+      - name: Add published label
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['published']
+            });
 
   handle-maintainer-comment:
     if: github.event_name == 'issue_comment'
@@ -236,18 +327,68 @@ jobs:
         if: steps.check-maintainer.outputs.result == 'true'
         run: bun install
 
-      - name: Process maintainer feedback
+      - name: Notify start
         if: steps.check-maintainer.outputs.result == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🔄 피드백을 확인했습니다. AI가 문서를 수정 중입니다...'
+            })
+
+      - name: Process maintainer feedback with AI
+        if: steps.check-maintainer.outputs.result == 'true'
+        id: process
         run: |
-          echo "Maintainer 피드백 처리"
-          echo "댓글 작성자: ${{ github.event.comment.user.login }}"
-          echo "댓글 내용: ${{ github.event.comment.body }}"
-          # AI를 통한 피드백 반영 로직 (추후 구현)
+          echo "🤖 피드백 처리 시작..."
+          bun run scripts/process-feedback.js \
+            --issue-number "${{ github.event.issue.number }}" \
+            --issue-title "${{ github.event.issue.title }}" \
+            --comment-body "${{ github.event.comment.body }}"
         env:
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+
+      - name: Build wiki data
+        if: steps.check-maintainer.outputs.result == 'true'
+        run: |
+          bun run build:wiki
+          bun run build:search
+
+      - name: Commit and push
+        if: steps.check-maintainer.outputs.result == 'true'
+        id: commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "변경 사항 없음"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "docs: Issue #${{ github.event.issue.number }} - 피드백 반영"
+            git push
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment with result
+        if: steps.check-maintainer.outputs.result == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ 피드백이 반영되었습니다. 변경 사항을 확인해주세요.'
+            })
 
   # 모든 handle job이 완료된 후 배포 (하나라도 성공하면 실행)
   deploy:
