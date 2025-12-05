@@ -1,0 +1,64 @@
+name: Scheduled Status Collection
+
+on:
+  schedule:
+    # 매일 오전 9시 (KST) = UTC 0시
+    - cron: '0 0 * * *'
+    # 매 6시간마다
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: '수집 대상 시스템'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - kubernetes
+          - services
+          - gitops
+
+permissions:
+  contents: write
+
+jobs:
+  collect-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Collect system status
+        run: |
+          echo "시스템 상태 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
+          echo "대상: ${{ github.event.inputs.target || 'all' }}"
+          # 상태 수집 스크립트 실행 예정
+          # bun run collect-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Wiki
+        run: |
+          echo "Wiki 업데이트"
+          # Wiki 업데이트 로직
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: 시스템 상태 자동 수집 - $(date '+%Y-%m-%d %H:%M')"
+          git push || echo "No changes to push"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

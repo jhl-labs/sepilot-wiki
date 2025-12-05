@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# 커밋 메시지 검증
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+# 빈 커밋 메시지 검사
+if [ -z "$commit_msg" ]; then
+    echo "❌ 커밋 메시지가 비어있습니다."
+    exit 1
+fi
+
+# 최소 길이 검사
+if [ ${#commit_msg} -lt 5 ]; then
+    echo "❌ 커밋 메시지가 너무 짧습니다. (최소 5자)"
+    exit 1
+fi
+
+echo "✅ 커밋 메시지 검증 통과"

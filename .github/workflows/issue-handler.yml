@@ -1,0 +1,97 @@
+name: Issue Handler
+
+on:
+  issues:
+    types: [labeled, unlabeled, closed]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  handle-request-label:
+    if: github.event.action == 'labeled' && github.event.label.name == 'request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Process request
+        run: |
+          echo "Issue #${{ github.event.issue.number }} - Request 라벨 감지"
+          echo "제목: ${{ github.event.issue.title }}"
+          # AI 문서 생성 로직 추가 예정
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '📝 요청을 확인했습니다. AI가 문서 초안을 작성 중입니다...'
+            })
+
+  handle-invalid-label:
+    if: github.event.action == 'labeled' && github.event.label.name == 'invalid'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Mark document as invalid
+        run: |
+          echo "Issue #${{ github.event.issue.number }} - Invalid 라벨 감지"
+          # 문서에 경고 표시 추가 로직
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  handle-issue-close:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Finalize document
+        run: |
+          echo "Issue #${{ github.event.issue.number }} - 종료됨"
+          # (초안) 표기 제거 로직
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  handle-maintainer-comment:
+    if: github.event_name == 'issue_comment'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if maintainer
+        id: check-maintainer
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: collaborators } = await github.rest.repos.listCollaborators({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const isMaintainer = collaborators.some(
+              c => c.login === context.payload.comment.user.login &&
+                   (c.permissions.admin || c.permissions.maintain)
+            );
+            return isMaintainer;
+
+      - name: Process maintainer feedback
+        if: steps.check-maintainer.outputs.result == 'true'
+        run: |
+          echo "Maintainer 피드백 처리"
+          # 피드백 반영 로직
