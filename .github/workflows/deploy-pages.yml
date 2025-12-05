@@ -31,6 +31,12 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Sync Issues from GitHub
+        run: bun run sync:issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
       - name: Build
         run: bun run build
         env:

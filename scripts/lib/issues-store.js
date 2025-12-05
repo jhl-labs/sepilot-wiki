@@ -233,11 +233,15 @@ export async function syncFromGitHub() {
 
   if (!repo || !token) {
     console.log('⚠️ GitHub 정보 없음 - 동기화 건너뜀');
-    return;
+    return null;
   }
 
   try {
-    const response = await fetch(
+    // request 라벨이 있는 Issue와 없는 Issue 모두 가져오기 위해 두 번 호출
+    const allIssues = [];
+
+    // request 라벨이 있는 Issue
+    const requestResponse = await fetch(
       `https://api.github.com/repos/${repo}/issues?state=all&per_page=100&labels=request`,
       {
         headers: {
@@ -247,14 +251,58 @@ export async function syncFromGitHub() {
       }
     );
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    if (requestResponse.ok) {
+      const requestIssues = await requestResponse.json();
+      allIssues.push(...requestIssues);
     }
 
-    const issues = await response.json();
+    // draft 라벨이 있는 Issue (request가 없을 수도 있음)
+    const draftResponse = await fetch(
+      `https://api.github.com/repos/${repo}/issues?state=all&per_page=100&labels=draft`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    );
+
+    if (draftResponse.ok) {
+      const draftIssues = await draftResponse.json();
+      // 중복 제거
+      for (const issue of draftIssues) {
+        if (!allIssues.find((i) => i.id === issue.id)) {
+          allIssues.push(issue);
+        }
+      }
+    }
+
+    // published 라벨이 있는 Issue
+    const publishedResponse = await fetch(
+      `https://api.github.com/repos/${repo}/issues?state=all&per_page=100&labels=published`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    );
+
+    if (publishedResponse.ok) {
+      const publishedIssues = await publishedResponse.json();
+      // 중복 제거
+      for (const issue of publishedIssues) {
+        if (!allIssues.find((i) => i.id === issue.id)) {
+          allIssues.push(issue);
+        }
+      }
+    }
+
+    console.log(`📥 GitHub에서 ${allIssues.length}개 Issue 가져옴`);
+
     const data = { issues: [], lastUpdated: new Date().toISOString() };
 
-    for (const issue of issues) {
+    for (const issue of allIssues) {
       data.issues.push({
         id: issue.id,
         number: issue.number,
@@ -281,7 +329,7 @@ export async function syncFromGitHub() {
     }
 
     await saveIssuesData(data);
-    console.log(`✅ GitHub에서 ${issues.length}개 Issue 동기화 완료`);
+    console.log(`✅ GitHub에서 ${allIssues.length}개 Issue 동기화 완료`);
     return data;
   } catch (error) {
     console.error('❌ GitHub 동기화 실패:', error.message);

@@ -7,6 +7,7 @@
     "dev": "vite",
     "build:wiki": "node scripts/build-wiki-data.js",
     "build:search": "node scripts/build-search-index.js",
+    "sync:issues": "node scripts/sync-issues.js",
     "build": "npm run build:wiki && npm run build:search && vite build",
     "preview": "vite preview",
     "lint": "eslint . --max-warnings 0",
