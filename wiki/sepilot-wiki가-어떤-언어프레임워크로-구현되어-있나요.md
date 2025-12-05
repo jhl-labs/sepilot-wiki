@@ -1,16 +1,45 @@
-# Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?
+---
+title: Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?
+author: SEPilot AI
+status: draft
+tags: [sepilot-wiki, 기술스택, React, TypeScript, Vite]
+---
 
-## 현재 알려진 구현 정보
+## 기술 스택
 
-현재 공개된 문서 및 저장소(예: GitHub)에서는 **Sepilot Wiki**가 사용하고 있는 프로그래밍 언어와 프레임워크에 대한 구체적인 정보를 제공하고 있지 않습니다.
+SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
 
-## 확인 방법
+### 프론트엔드
+- **React 18** - UI 라이브러리
+- **TypeScript** - 타입 안전성을 위한 정적 타입 언어
+- **Vite** - 빌드 도구 및 개발 서버
+- **React Router DOM** - SPA 라우팅
+- **TanStack Query (React Query)** - 서버 상태 관리
 
-- **GitHub 저장소**: 프로젝트의 `README.md`, `package.json`, `go.mod` 등 빌드/의존성 파일을 확인하면 사용된 언어와 프레임워크를 파악할 수 있습니다.
-- **프로젝트 문서**: 프로젝트 위키나 공식 블로그에 구현 스택에 대한 언급이 있을 수 있습니다.
+### 마크다운 렌더링
+- **react-markdown** - 마크다운 파싱 및 렌더링
+- **remark-gfm** - GitHub Flavored Markdown 지원
+- **rehype-raw** - HTML 태그 지원
+- **rehype-sanitize** - XSS 방지를 위한 HTML 살균
+- **react-syntax-highlighter** - 코드 구문 강조
+
+### 스타일링
+- **CSS Variables** - 테마 시스템
+- **Lucide React** - 아이콘 라이브러리
+
+### 개발 도구
+- **ESLint** - 코드 린팅
+- **Vitest** - 테스트 프레임워크
+- **Husky** - Git hooks
+
+### CI/CD
+- **GitHub Actions** - 자동화 워크플로우
+- **GitHub Pages** - 정적 사이트 호스팅
+- **Bun** - 패키지 매니저 및 런타임
+
+### AI 통합
+- **OpenAI API 호환** - LLM을 통한 문서 자동 생성
 
 ## 참고 링크
 
-- [Sepilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki) *(링크는 예시이며 실제 저장소 주소를 확인해 주세요)*
-
-> **주의**: 위 내용은 현재 공개된 자료를 기반으로 작성되었습니다. 구현 스택이 업데이트되거나 새로운 정보가 공개될 경우, 해당 정보를 반영하여 문서를 수정해 주세요.
+- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)
