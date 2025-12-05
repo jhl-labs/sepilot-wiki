@@ -46,14 +46,14 @@ export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
     const { metadata, body } = parseMarkdownWithFrontmatter(content);
 
     return {
-      title: metadata.title || formatTitle(slug),
+      title: (metadata.title as string) || formatTitle(slug),
       slug,
       content: body,
-      lastModified: metadata.lastModified || new Date().toISOString(),
-      author: metadata.author,
-      isDraft: metadata.isDraft || false,
-      isInvalid: metadata.isInvalid || false,
-      tags: metadata.tags || [],
+      lastModified: (metadata.lastModified as string) || new Date().toISOString(),
+      author: metadata.author as string | undefined,
+      isDraft: (metadata.isDraft as boolean) || false,
+      isInvalid: (metadata.isInvalid as boolean) || false,
+      tags: (metadata.tags as string[]) || [],
     };
   } catch (error) {
     console.error('Error fetching wiki page:', error);
