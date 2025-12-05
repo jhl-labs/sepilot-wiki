@@ -12,7 +12,9 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
   }
 
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}wiki-data.json`);
+    // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
+    const cacheBuster = `?v=${Date.now()}`;
+    const response = await fetch(`${import.meta.env.BASE_URL}wiki-data.json${cacheBuster}`);
     if (!response.ok) {
       return { pages: [], tree: [] };
     }
@@ -124,7 +126,9 @@ async function loadSearchIndex(): Promise<SearchIndexItem[]> {
   }
 
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}search-index.json`);
+    // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
+    const cacheBuster = `?v=${Date.now()}`;
+    const response = await fetch(`${import.meta.env.BASE_URL}search-index.json${cacheBuster}`);
     if (!response.ok) {
       return [];
     }
@@ -858,7 +862,9 @@ export async function fetchAIHistory(): Promise<AIHistory> {
   }
 
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}data/ai-history.json`);
+    // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
+    const cacheBuster = `?v=${Date.now()}`;
+    const response = await fetch(`${import.meta.env.BASE_URL}data/ai-history.json${cacheBuster}`);
     if (!response.ok) {
       return { entries: [], lastUpdated: new Date().toISOString() };
     }
