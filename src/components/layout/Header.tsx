@@ -16,7 +16,7 @@ import { config } from '../../config';
 import { Input } from '../ui/Input';
 
 export function Header() {
-  const { theme, setTheme, actualTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { toggle } = useSidebar();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');

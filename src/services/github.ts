@@ -33,7 +33,7 @@ export async function fetchWikiPages(): Promise<WikiTree[]> {
 export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
   try {
     // 먼저 wiki 폴더에서 시도
-    let response = await fetch(
+    const response = await fetch(
       `${GITHUB_RAW_URL}/${config.owner}/${config.repo}/main/wiki/${slug}.md`
     );
 

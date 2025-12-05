@@ -137,7 +137,7 @@ export function Sidebar() {
                 </NavLink>
                 <NavLink
                   to="/issues?label=request&state=open"
-                  className={({ isActive }) =>
+                  className={() =>
                     clsx('nav-item nav-item-child', location.search.includes('state=open') && 'active')
                   }
                   onClick={() => window.innerWidth < 1024 && close()}

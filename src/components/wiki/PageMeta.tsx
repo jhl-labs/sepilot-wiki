@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { Calendar, User, Clock, Tag } from 'lucide-react';
+import { Calendar, User, Tag } from 'lucide-react';
 import { Badge } from '../ui/Badge';
 import type { WikiPage } from '../../types';
 
