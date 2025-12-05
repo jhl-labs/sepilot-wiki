@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Home,
   FileText,
@@ -10,22 +10,52 @@ import {
   Tag,
   X,
   BookOpen,
+  ExternalLink,
 } from 'lucide-react';
 import { useWikiPages, useIssues, useGuidePages } from '../../hooks/useWiki';
 import { useSidebar } from '../../context/SidebarContext';
+import { useNavigationConfig } from '../../context/ConfigContext';
 import { Skeleton } from '../ui/Skeleton';
 import { LABELS, urls } from '../../config';
+import { DynamicIcon } from '../../utils/icons';
 import clsx from 'clsx';
+import type { SidebarSection, SidebarNavItem } from '../../types';
 
 export function Sidebar() {
   const { isOpen, close } = useSidebar();
   const location = useLocation();
+  const navigationConfig = useNavigationConfig();
   const { data: wikiPages, isLoading: pagesLoading } = useWikiPages();
   const { data: guidePages } = useGuidePages();
   const { data: requestIssues } = useIssues(LABELS.REQUEST);
+
+  // 기본 열린 섹션과 커스텀 섹션의 defaultOpen 상태를 합침
+  const getInitialExpandedSections = () => {
+    const sections = new Set(['wiki', 'guide', 'issues']);
+    navigationConfig.sidebar?.forEach((section, index) => {
+      if (section.defaultOpen !== false) {
+        sections.add(`custom-${index}`);
+      }
+    });
+    return sections;
+  };
+
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set(['wiki', 'guide', 'issues'])
+    getInitialExpandedSections
   );
+
+  // 커스텀 섹션 설정이 변경되면 상태 업데이트
+  const sidebarJson = JSON.stringify(navigationConfig.sidebar);
+  useEffect(() => {
+    const sections = new Set(['wiki', 'guide', 'issues']);
+    navigationConfig.sidebar?.forEach((section, index) => {
+      if (section.defaultOpen !== false) {
+        sections.add(`custom-${index}`);
+      }
+    });
+    setExpandedSections(sections);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sidebarJson]);
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => {
@@ -40,6 +70,93 @@ export function Sidebar() {
   };
 
   const openIssuesCount = requestIssues?.filter((i) => i.state === 'open').length || 0;
+
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
+      close();
+    }
+  };
+
+  // 커스텀 네비게이션 아이템 렌더링
+  const renderNavItem = (item: SidebarNavItem, depth = 0) => {
+    const isExternal = item.external || item.href.startsWith('http');
+    const paddingLeft = depth > 0 ? `${1 + depth * 0.75}rem` : undefined;
+
+    if (isExternal) {
+      return (
+        <a
+          key={item.href}
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-item nav-item-child nav-item-external"
+          style={{ paddingLeft }}
+        >
+          {item.icon && <DynamicIcon name={item.icon} size={14} />}
+          <span>{item.label}</span>
+          <ExternalLink size={12} className="external-icon" />
+          {item.badge && <span className="nav-badge-text">{item.badge}</span>}
+        </a>
+      );
+    }
+
+    return (
+      <NavLink
+        key={item.href}
+        to={item.href}
+        className={({ isActive }) =>
+          clsx('nav-item nav-item-child', isActive && 'active')
+        }
+        style={{ paddingLeft }}
+        onClick={handleLinkClick}
+      >
+        {item.icon && <DynamicIcon name={item.icon} size={14} />}
+        <span>{item.label}</span>
+        {item.badge && <span className="nav-badge-text">{item.badge}</span>}
+      </NavLink>
+    );
+  };
+
+  // 커스텀 섹션 렌더링
+  const renderCustomSection = (section: SidebarSection, index: number) => {
+    const sectionKey = `custom-${index}`;
+    const isCollapsible = section.collapsible !== false;
+    const isExpanded = expandedSections.has(sectionKey);
+
+    return (
+      <div key={sectionKey} className="nav-section">
+        {isCollapsible ? (
+          <button
+            className="nav-section-header"
+            onClick={() => toggleSection(sectionKey)}
+          >
+            {section.icon && <DynamicIcon name={section.icon} size={18} />}
+            <span>{section.title}</span>
+            {isExpanded ? (
+              <ChevronDown size={16} className="chevron" />
+            ) : (
+              <ChevronRight size={16} className="chevron" />
+            )}
+          </button>
+        ) : (
+          <div className="nav-section-header nav-section-header-static">
+            {section.icon && <DynamicIcon name={section.icon} size={18} />}
+            <span>{section.title}</span>
+          </div>
+        )}
+        {(!isCollapsible || isExpanded) && (
+          <div className="nav-section-content">
+            {section.items.map((item) => (
+              <div key={item.href}>
+                {renderNavItem(item)}
+                {item.children?.map((child) => renderNavItem(child, 1))}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -62,11 +179,16 @@ export function Sidebar() {
             className={({ isActive }) =>
               clsx('nav-item nav-item-home', isActive && 'active')
             }
-            onClick={() => window.innerWidth < 1024 && close()}
+            onClick={handleLinkClick}
           >
             <Home size={18} />
             <span>홈</span>
           </NavLink>
+
+          {/* 커스텀 섹션 (navigation.config.ts에서 정의) */}
+          {navigationConfig.sidebar?.map((section, index) =>
+            renderCustomSection(section, index)
+          )}
 
           {/* Wiki 섹션 - 실제 GitHub Wiki 페이지 */}
           <div className="nav-section">
@@ -98,7 +220,7 @@ export function Sidebar() {
                       className={({ isActive }) =>
                         clsx('nav-item nav-item-child', isActive && 'active')
                       }
-                      onClick={() => window.innerWidth < 1024 && close()}
+                      onClick={handleLinkClick}
                     >
                       <span>{page.title}</span>
                     </NavLink>
@@ -135,7 +257,7 @@ export function Sidebar() {
                     className={({ isActive }) =>
                       clsx('nav-item nav-item-child', isActive && 'active')
                     }
-                    onClick={() => window.innerWidth < 1024 && close()}
+                    onClick={handleLinkClick}
                   >
                     <span>{page.title}</span>
                   </NavLink>
@@ -168,7 +290,7 @@ export function Sidebar() {
                   className={({ isActive }) =>
                     clsx('nav-item nav-item-child', isActive && location.pathname === '/issues' && 'active')
                   }
-                  onClick={() => window.innerWidth < 1024 && close()}
+                  onClick={handleLinkClick}
                 >
                   <Tag size={14} />
                   <span>모든 요청</span>
@@ -178,7 +300,7 @@ export function Sidebar() {
                   className={() =>
                     clsx('nav-item nav-item-child', location.search.includes('state=open') && 'active')
                   }
-                  onClick={() => window.innerWidth < 1024 && close()}
+                  onClick={handleLinkClick}
                 >
                   <AlertCircle size={14} />
                   <span>진행 중</span>

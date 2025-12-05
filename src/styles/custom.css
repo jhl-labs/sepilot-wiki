@@ -1,0 +1,104 @@
+/**
+ * 사용자 커스텀 CSS
+ *
+ * 이 파일에서 추가적인 스타일을 정의할 수 있습니다.
+ * theme.config.ts의 설정 외에 더 세밀한 스타일 조정이 필요할 때 사용하세요.
+ *
+ * 주의사항:
+ * - 기존 CSS 변수를 덮어쓸 수 있습니다
+ * - 특정 컴포넌트의 스타일을 수정할 수 있습니다
+ * - 새로운 유틸리티 클래스를 추가할 수 있습니다
+ */
+
+/* ===== 커스텀 CSS 변수 오버라이드 예시 ===== */
+/*
+:root {
+  --color-primary: #your-color;
+  --font-sans: 'Your Font', sans-serif;
+}
+*/
+
+/* ===== 컴포넌트 스타일 오버라이드 예시 ===== */
+
+/* 헤더 커스터마이징 */
+/*
+.header {
+  background: linear-gradient(90deg, #your-color1, #your-color2);
+}
+*/
+
+/* 사이드바 커스터마이징 */
+/*
+.sidebar {
+  border-right: 2px solid var(--color-primary);
+}
+*/
+
+/* 마크다운 컨텐츠 커스터마이징 */
+/*
+.markdown-content h1 {
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.markdown-content blockquote {
+  border-left-color: var(--color-accent);
+  background: var(--color-bg-tertiary);
+}
+*/
+
+/* 코드 블록 커스터마이징 */
+/*
+.markdown-content pre {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+*/
+
+/* ===== 커스텀 유틸리티 클래스 예시 ===== */
+/*
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+*/
+
+/* ===== 반응형 커스터마이징 예시 ===== */
+/*
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+  }
+}
+*/
+
+/* ===== 다크 테마 전용 스타일 예시 ===== */
+/*
+[data-theme="dark"] {
+  .markdown-content code {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+*/
+
+/* ===== 애니메이션 예시 ===== */
+/*
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+*/

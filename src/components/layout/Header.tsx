@@ -12,12 +12,15 @@ import {
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useSidebar } from '../../context/SidebarContext';
-import { config, urls } from '../../config';
+import { useSiteConfig } from '../../context/ConfigContext';
+import { urls } from '../../config';
 import { Input } from '../ui/Input';
+import { DynamicIcon } from '../../utils/icons';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
   const { toggle } = useSidebar();
+  const siteConfig = useSiteConfig();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
@@ -52,6 +55,48 @@ export function Header() {
 
   const ThemeIcon = theme === 'dark' ? Moon : theme === 'light' ? Sun : Monitor;
 
+  // 로고 렌더링
+  const renderLogo = () => {
+    const logo = siteConfig.logo;
+
+    if (!logo) {
+      // 기본 로고 (아이콘 + 텍스트)
+      return (
+        <>
+          <BookOpen size={24} className="logo-icon" />
+          <span className="logo-text">{siteConfig.title}</span>
+        </>
+      );
+    }
+
+    switch (logo.type) {
+      case 'image':
+        return (
+          <>
+            <img
+              src={logo.value}
+              alt={logo.alt || siteConfig.title}
+              className="logo-image"
+            />
+            <span className="logo-text">{siteConfig.title}</span>
+          </>
+        );
+      case 'icon':
+        return (
+          <>
+            <DynamicIcon name={logo.value} size={24} className="logo-icon" />
+            <span className="logo-text">{siteConfig.title}</span>
+          </>
+        );
+      case 'text':
+      default:
+        return <span className="logo-text logo-text-only">{logo.value}</span>;
+    }
+  };
+
+  // GitHub URL 결정
+  const githubUrl = siteConfig.social?.github || urls.repo();
+
   return (
     <header className="header">
       <div className="header-left">
@@ -63,8 +108,7 @@ export function Header() {
           <Menu size={20} />
         </button>
         <Link to="/" className="header-logo">
-          <BookOpen size={24} className="logo-icon" />
-          <span className="logo-text">{config.title}</span>
+          {renderLogo()}
         </Link>
       </div>
 
@@ -126,7 +170,7 @@ export function Header() {
         </div>
 
         <a
-          href={urls.repo()}
+          href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="header-btn github-link"

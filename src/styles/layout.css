@@ -92,6 +92,17 @@
   display: none;
 }
 
+.logo-text-only {
+  display: inline;
+  font-size: var(--font-size-xl);
+}
+
+.logo-image {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
 @media (min-width: 640px) {
   .logo-text {
     display: inline;
@@ -378,6 +389,38 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   font-style: italic;
+}
+
+.nav-item-external {
+  position: relative;
+}
+
+.nav-item-external .external-icon {
+  margin-left: auto;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.nav-item-external:hover .external-icon {
+  opacity: 1;
+}
+
+.nav-badge-text {
+  margin-left: auto;
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  background-color: var(--color-accent-secondary-light);
+  color: var(--color-accent-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.nav-section-header-static {
+  cursor: default;
+}
+
+.nav-section-header-static:hover {
+  background-color: transparent;
 }
 
 .sidebar-footer {
