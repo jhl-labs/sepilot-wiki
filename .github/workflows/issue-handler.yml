@@ -204,19 +204,35 @@ jobs:
     if: github.event_name == 'issue_comment'
     runs-on: jhl-space
     steps:
-      - name: Check if maintainer
+      - name: Check if maintainer or owner
         id: check-maintainer
         uses: actions/github-script@v7
         with:
           script: |
+            const commentUser = context.payload.comment.user.login;
+
+            // repo owner 확인
+            const { data: repo } = await github.rest.repos.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            if (repo.owner.login === commentUser) {
+              console.log(`${commentUser}은(는) repo owner입니다.`);
+              return true;
+            }
+
+            // collaborator 권한 확인
             const { data: collaborators } = await github.rest.repos.listCollaborators({
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
             const isMaintainer = collaborators.some(
-              c => c.login === context.payload.comment.user.login &&
+              c => c.login === commentUser &&
                    (c.permissions.admin || c.permissions.maintain)
             );
+
+            console.log(`${commentUser} maintainer 권한: ${isMaintainer}`);
             return isMaintainer;
 
       - name: Checkout
