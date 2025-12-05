@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useWikiPage } from '../hooks/useWiki';
 import { MarkdownRenderer, TableOfContents, Breadcrumb, PageMeta } from '../components/wiki';
+import { RevisionHistory } from '../components/wiki/RevisionHistory';
 import { Skeleton } from '../components/ui/Skeleton';
 import { AlertTriangle, FileQuestion, MessageSquare } from 'lucide-react';
 import { config } from '../config';
@@ -97,6 +98,11 @@ export function WikiPage() {
         <div className="wiki-body">
           <MarkdownRenderer content={page.content} />
         </div>
+
+        {/* 가이드 페이지가 아닌 경우에만 버전 히스토리 표시 */}
+        {page.history && page.history.length > 0 && !slug.startsWith('_guide/') && (
+          <RevisionHistory history={page.history} slug={slug} />
+        )}
 
         <footer className="wiki-footer">
           <div className="footer-actions">

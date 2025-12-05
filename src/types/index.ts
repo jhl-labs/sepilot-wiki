@@ -8,6 +8,18 @@ export interface WikiPage {
   isDraft?: boolean;
   isInvalid?: boolean;
   tags?: string[];
+  history?: WikiRevision[];
+}
+
+// Wiki 문서 버전(리비전) 타입
+export interface WikiRevision {
+  sha: string;
+  message: string;
+  author: string;
+  authorEmail?: string;
+  date: string;
+  additions?: number;
+  deletions?: number;
 }
 
 export interface WikiTree {
