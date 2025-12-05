@@ -128,7 +128,7 @@ export function AIHistoryPage() {
         </div>
         <div className="ai-history-content-section">
           {[1, 2, 3, 4, 5].map((i) => (
-            <Skeleton key={i} height={120} style={{ marginBottom: '1rem' }} />
+            <Skeleton key={i} height={120} className="ai-history-skeleton" />
           ))}
         </div>
       </div>
