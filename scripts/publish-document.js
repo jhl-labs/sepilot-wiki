@@ -14,92 +14,21 @@
  * node scripts/publish-document.js --issue-number 123 --issue-title "문서 제목"
  */
 
-import { writeFile, readFile, readdir } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 import { join } from 'path';
-import { existsSync } from 'fs';
 import {
   collectIssueContext,
-  resolveDocumentPath,
   getGitHubInfoFromEnv,
 } from './lib/issue-context.js';
+import {
+  parseArgs,
+  findDocument,
+  updateFrontmatterStatus,
+  setGitHubOutput,
+} from './lib/utils.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
-
-// 명령줄 인자 파싱
-function parseArgs() {
-  const args = process.argv.slice(2);
-  const parsed = {};
-
-  for (let i = 0; i < args.length; i++) {
-    if (args[i].startsWith('--')) {
-      const key = args[i].slice(2);
-      const value = args[i + 1];
-      if (value && !value.startsWith('--')) {
-        parsed[key] = value;
-        i++;
-      } else {
-        parsed[key] = true;
-      }
-    }
-  }
-
-  return parsed;
-}
-
-// 문서 찾기 (여러 방법 시도)
-async function findDocument(context) {
-  // 1. 컨텍스트에서 문서 경로 추출 시도
-  const docPath = resolveDocumentPath(context, WIKI_DIR);
-
-  if (existsSync(docPath.filepath)) {
-    const content = await readFile(docPath.filepath, 'utf-8');
-    return { ...docPath, content, found: true };
-  }
-
-  // 2. wiki 폴더의 모든 문서 검색
-  if (existsSync(WIKI_DIR)) {
-    const files = await readdir(WIKI_DIR);
-    for (const file of files.filter((f) => f.endsWith('.md'))) {
-      const filepath = join(WIKI_DIR, file);
-      const content = await readFile(filepath, 'utf-8');
-
-      // 제목으로 매칭
-      const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m);
-      if (titleMatch && titleMatch[1].trim() === context.issueTitle) {
-        return {
-          filepath,
-          filename: file,
-          slug: file.replace('.md', ''),
-          content,
-          found: true,
-          source: 'title_match',
-        };
-      }
-    }
-  }
-
-  return { ...docPath, content: null, found: false };
-}
-
-// frontmatter에서 status 변경
-function updateFrontmatterStatus(content, newStatus) {
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatterMatch) {
-    return `---\nstatus: ${newStatus}\n---\n${content}`;
-  }
-
-  const frontmatter = frontmatterMatch[1];
-  const rest = content.slice(frontmatterMatch[0].length);
-
-  if (/^status:/m.test(frontmatter)) {
-    const newFrontmatter = frontmatter.replace(/^status:.*$/m, `status: ${newStatus}`);
-    return `---\n${newFrontmatter}\n---${rest}`;
-  } else {
-    const newFrontmatter = `${frontmatter}\nstatus: ${newStatus}`;
-    return `---\n${newFrontmatter}\n---${rest}`;
-  }
-}
 
 // 문서 발행
 async function publishDocument(context) {
@@ -107,7 +36,7 @@ async function publishDocument(context) {
   console.log(`   Issue #${context.issueNumber}: ${context.issueTitle}`);
 
   // 문서 찾기
-  const doc = await findDocument(context);
+  const doc = await findDocument(context, WIKI_DIR);
 
   if (!doc.found) {
     console.log('⚠️ 해당 Issue에 연결된 문서를 찾을 수 없습니다.');
@@ -172,10 +101,7 @@ async function main() {
     console.log(JSON.stringify(result, null, 2));
 
     // GitHub Actions 출력 설정
-    if (process.env.GITHUB_OUTPUT) {
-      const output = [`has_changes=${result.hasChanges}`].join('\n');
-      await writeFile(process.env.GITHUB_OUTPUT, output, { flag: 'a' });
-    }
+    await setGitHubOutput({ has_changes: result.hasChanges });
   } catch (error) {
     console.error('❌ 문서 발행 실패:', error.message);
     process.exit(1);

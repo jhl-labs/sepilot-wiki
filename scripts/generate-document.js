@@ -15,105 +15,36 @@
  * node scripts/generate-document.js --issue-number 123 --issue-title "문서 제목" --issue-body "요청 내용"
  */
 
-import { writeFile, mkdir, readFile, readdir } from 'fs/promises';
+import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
-import { existsSync } from 'fs';
 import {
   collectIssueContext,
   resolveDocumentPath,
   getGitHubInfoFromEnv,
 } from './lib/issue-context.js';
-
-// 환경 변수
-const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1';
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY || process.env.OPENAI_TOKEN;
-const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o';
+import {
+  parseArgs,
+  callOpenAI,
+  getOpenAIConfig,
+  getExistingDocuments,
+  setGitHubOutput,
+} from './lib/utils.js';
+import { addAIHistoryEntry } from './lib/ai-history.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
 
-// 명령줄 인자 파싱
-function parseArgs() {
-  const args = process.argv.slice(2);
-  const parsed = {};
-
-  for (let i = 0; i < args.length; i++) {
-    if (args[i].startsWith('--')) {
-      const key = args[i].slice(2);
-      const value = args[i + 1];
-      if (value && !value.startsWith('--')) {
-        parsed[key] = value;
-        i++;
-      } else {
-        parsed[key] = true;
-      }
-    }
-  }
-
-  return parsed;
-}
-
-// 기존 문서 목록 가져오기 (컨텍스트용)
-async function getExistingDocuments() {
-  if (!existsSync(WIKI_DIR)) {
-    return [];
-  }
-
-  const files = await readdir(WIKI_DIR);
-  const docs = [];
-
-  for (const file of files.filter((f) => f.endsWith('.md'))) {
-    const content = await readFile(join(WIKI_DIR, file), 'utf-8');
-    const titleMatch = content.match(/^#\s+(.+)$/m) || content.match(/title:\s*(.+)$/m);
-    docs.push({
-      filename: file,
-      title: titleMatch ? titleMatch[1].trim() : file.replace('.md', ''),
-    });
-  }
-
-  return docs;
-}
-
-// OpenAI API 호출
-async function callOpenAI(messages, options = {}) {
-  if (!OPENAI_API_KEY) {
-    throw new Error('OPENAI_API_KEY 또는 OPENAI_TOKEN 환경 변수가 설정되지 않았습니다.');
-  }
-
-  const url = `${OPENAI_BASE_URL.replace(/\/$/, '')}/chat/completions`;
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: OPENAI_MODEL,
-      messages,
-      temperature: options.temperature ?? 0.1,
-      max_tokens: options.maxTokens ?? 8000,
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`OpenAI API 오류: ${response.status} - ${error}`);
-  }
-
-  const data = await response.json();
-  return data.choices[0].message.content;
-}
-
 // 문서 생성
 async function generateDocument(context) {
+  const openaiConfig = getOpenAIConfig();
+
   console.log('🤖 AI 문서 생성 시작...');
   console.log(`   Issue #${context.issueNumber}: ${context.issueTitle}`);
-  console.log(`   모델: ${OPENAI_MODEL}`);
-  console.log(`   API: ${OPENAI_BASE_URL}`);
+  console.log(`   모델: ${openaiConfig.model}`);
+  console.log(`   API: ${openaiConfig.baseUrl}`);
 
   // 기존 문서 목록 가져오기
-  const existingDocs = await getExistingDocuments();
+  const existingDocs = await getExistingDocuments(WIKI_DIR);
   const existingDocsContext =
     existingDocs.length > 0
       ? `\n기존 문서 목록:\n${existingDocs.map((d) => `- ${d.title} (${d.filename})`).join('\n')}`
@@ -219,19 +150,31 @@ async function main() {
 
     const result = await generateDocument(context);
 
+    // 문서 제목 추출 (frontmatter에서)
+    const titleMatch = result.content.match(/title:\s*["']?(.+?)["']?\s*$/m);
+    const documentTitle = titleMatch ? titleMatch[1].trim() : issueTitle;
+
+    // AI History 기록
+    await addAIHistoryEntry({
+      actionType: 'generate',
+      issueNumber,
+      issueTitle,
+      documentSlug: result.slug,
+      documentTitle,
+      summary: `새 문서 "${documentTitle}" 생성`,
+      trigger: 'request_label',
+    });
+
     // 결과를 JSON으로 출력 (GitHub Actions에서 활용)
     console.log('\n📄 생성 결과:');
     console.log(JSON.stringify(result, null, 2));
 
     // GitHub Actions 출력 설정
-    if (process.env.GITHUB_OUTPUT) {
-      const output = [
-        `filepath=${result.filepath}`,
-        `filename=${result.filename}`,
-        `slug=${result.slug}`,
-      ].join('\n');
-      await writeFile(process.env.GITHUB_OUTPUT, output, { flag: 'a' });
-    }
+    await setGitHubOutput({
+      filepath: result.filepath,
+      filename: result.filename,
+      slug: result.slug,
+    });
   } catch (error) {
     console.error('❌ 문서 생성 실패:', error.message);
     process.exit(1);

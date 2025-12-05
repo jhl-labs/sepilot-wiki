@@ -18,128 +18,23 @@
  * node scripts/mark-invalid.js --issue-number 123 --issue-title "문서 제목" --issue-body "오류 내용"
  */
 
-import { writeFile, readFile, readdir, mkdir } from 'fs/promises';
+import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
-import { existsSync } from 'fs';
 import {
   collectIssueContext,
-  resolveDocumentPath,
   getGitHubInfoFromEnv,
 } from './lib/issue-context.js';
-
-// 환경 변수
-const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1';
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY || process.env.OPENAI_TOKEN;
-const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o';
+import {
+  parseArgs,
+  findDocument,
+  callOpenAI,
+  updateFrontmatterStatus,
+  setGitHubOutput,
+} from './lib/utils.js';
+import { addAIHistoryEntry } from './lib/ai-history.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
-
-// 명령줄 인자 파싱
-function parseArgs() {
-  const args = process.argv.slice(2);
-  const parsed = {};
-
-  for (let i = 0; i < args.length; i++) {
-    if (args[i].startsWith('--')) {
-      const key = args[i].slice(2);
-      const value = args[i + 1];
-      if (value && !value.startsWith('--')) {
-        parsed[key] = value;
-        i++;
-      } else {
-        parsed[key] = true;
-      }
-    }
-  }
-
-  return parsed;
-}
-
-// 문서 찾기 (여러 방법 시도)
-async function findDocument(context) {
-  // 1. 컨텍스트에서 문서 경로 추출 시도
-  const docPath = resolveDocumentPath(context, WIKI_DIR);
-
-  if (existsSync(docPath.filepath)) {
-    const content = await readFile(docPath.filepath, 'utf-8');
-    return { ...docPath, content, found: true };
-  }
-
-  // 2. wiki 폴더의 모든 문서 검색
-  if (existsSync(WIKI_DIR)) {
-    const files = await readdir(WIKI_DIR);
-    for (const file of files.filter((f) => f.endsWith('.md'))) {
-      const filepath = join(WIKI_DIR, file);
-      const content = await readFile(filepath, 'utf-8');
-
-      // 제목으로 매칭
-      const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m);
-      if (titleMatch && titleMatch[1].trim() === context.issueTitle) {
-        return {
-          filepath,
-          filename: file,
-          slug: file.replace('.md', ''),
-          content,
-          found: true,
-          source: 'title_match',
-        };
-      }
-    }
-  }
-
-  return { ...docPath, content: null, found: false };
-}
-
-// OpenAI API 호출
-async function callOpenAI(messages, options = {}) {
-  if (!OPENAI_API_KEY) {
-    throw new Error('OPENAI_API_KEY 또는 OPENAI_TOKEN 환경 변수가 설정되지 않았습니다.');
-  }
-
-  const url = `${OPENAI_BASE_URL.replace(/\/$/, '')}/chat/completions`;
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: OPENAI_MODEL,
-      messages,
-      temperature: options.temperature ?? 0.1,
-      max_tokens: options.maxTokens ?? 8000,
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`OpenAI API 오류: ${response.status} - ${error}`);
-  }
-
-  const data = await response.json();
-  return data.choices[0].message.content;
-}
-
-// frontmatter에서 status 변경
-function updateFrontmatterStatus(content, newStatus) {
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatterMatch) {
-    return `---\nstatus: ${newStatus}\n---\n${content}`;
-  }
-
-  const frontmatter = frontmatterMatch[1];
-  const rest = content.slice(frontmatterMatch[0].length);
-
-  if (/^status:/m.test(frontmatter)) {
-    const newFrontmatter = frontmatter.replace(/^status:.*$/m, `status: ${newStatus}`);
-    return `---\n${newFrontmatter}\n---${rest}`;
-  } else {
-    const newFrontmatter = `${frontmatter}\nstatus: ${newStatus}`;
-    return `---\n${newFrontmatter}\n---${rest}`;
-  }
-}
 
 // Invalid 처리
 async function markInvalid(context) {
@@ -147,7 +42,7 @@ async function markInvalid(context) {
   console.log(`   Issue #${context.issueNumber}: ${context.issueTitle}`);
 
   // 문서 찾기
-  const doc = await findDocument(context);
+  const doc = await findDocument(context, WIKI_DIR);
 
   if (!doc.found) {
     console.log('⚠️ 해당 Issue에 연결된 문서를 찾을 수 없습니다.');
@@ -254,14 +149,25 @@ async function main() {
 
     const result = await markInvalid(context);
 
+    // AI History 기록 (변경이 있을 때만)
+    if (result.hasChanges) {
+      const slug = result.filename ? result.filename.replace('.md', '') : '';
+      await addAIHistoryEntry({
+        actionType: 'invalid',
+        issueNumber,
+        issueTitle,
+        documentSlug: slug,
+        documentTitle: issueTitle,
+        summary: `오류 수정: Issue #${issueNumber}에 보고된 문제 해결`,
+        trigger: 'invalid_label',
+      });
+    }
+
     console.log('\n📄 처리 결과:');
     console.log(JSON.stringify(result, null, 2));
 
     // GitHub Actions 출력 설정
-    if (process.env.GITHUB_OUTPUT) {
-      const output = [`has_changes=${result.hasChanges}`].join('\n');
-      await writeFile(process.env.GITHUB_OUTPUT, output, { flag: 'a' });
-    }
+    await setGitHubOutput({ has_changes: result.hasChanges });
   } catch (error) {
     console.error('❌ Invalid 처리 실패:', error.message);
     process.exit(1);
