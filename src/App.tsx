@@ -1,21 +1,41 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider } from './context/ThemeContext';
+import { SidebarProvider } from './context/SidebarContext';
+import { Layout } from './components/layout';
+import { HomePage, WikiPage, SearchPage, IssuesPage, NotFoundPage } from './pages';
+import { config } from './config';
+import './styles/index.css';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
 function App() {
   return (
-    <div className="app">
-      <header>
-        <h1>SEPilot Wiki</h1>
-        <p>AI 에이전트 기반 자동화 위키 시스템</p>
-      </header>
-      <main>
-        <section className="hero">
-          <h2>Wiki 시스템 준비 중...</h2>
-          <p>GitHub Wiki와 연동된 콘텐츠가 곧 표시됩니다.</p>
-        </section>
-      </main>
-      <footer>
-        <p>Powered by SEPilot</p>
-      </footer>
-    </div>
-  )
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <SidebarProvider>
+          <BrowserRouter basename={config.baseUrl}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route path="wiki/:slug" element={<WikiPage />} />
+                <Route path="search" element={<SearchPage />} />
+                <Route path="issues" element={<IssuesPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </SidebarProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
