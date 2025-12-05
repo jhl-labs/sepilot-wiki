@@ -109,6 +109,7 @@ export function getActionTypeLabel(actionType) {
     invalid: '오류 수정',
     delete: '문서 삭제',
     recover: '문서 복구',
+    maintain: '구조 정비',
   };
   return labels[actionType] || actionType;
 }
@@ -124,6 +125,7 @@ export function getTriggerLabel(trigger) {
     invalid_label: 'invalid 라벨',
     maintainer_comment: 'Maintainer 피드백',
     issue_close: 'Issue 종료',
+    scheduled: '정기 스케줄',
   };
   return labels[trigger] || trigger;
 }
