@@ -1,20 +1,15 @@
 {
-  "timestamp": "2025-12-05T12:19:13.047Z",
+  "timestamp": "2025-12-05T12:46:00.000Z",
   "model": "gpt-oss:120b-cloud",
   "analysis": {
-    "summary": "3개의 문서가 모두 루트에 존재하고 파일명이 한글 슬러그 형태이며, 내용에 따라 ‘bun’, ‘CI’, ‘기술 스택’ 등 서로 다른 주제로 구분될 수 있습니다. 현재 구조는 카테고리·디렉터리 구분이 없고, 한글 파일명 때문에 URL 가독성이 낮으며, draft 상태 문서가 공개되지 않은 점이 문제입니다.",
+    "summary": "Wiki 구조가 정리되었습니다. 문서들이 주제별로 분류되어 있고, 모든 문서가 published 상태입니다.",
     "totalDocuments": 3,
     "categories": [
       "bun",
-      "ci",
-      "technology"
+      "bun/ci",
+      "about"
     ],
-    "issues": [
-      "한글 파일명 사용 → 영문 slug 필요",
-      "모든 문서가 루트에 있어 주제별 구분이 없음",
-      "draft 상태 문서가 두 개 존재 (publish 여부 검토 필요)",
-      "중복된 ‘bun’ 관련 문서가 별도 디렉터리 없이 흩어짐"
-    ]
+    "issues": []
   },
   "suggestedStructure": {
     "bun": [
@@ -25,78 +20,16 @@
     ],
     "about": [
       "technology-stack.md"
-    ],
-    "home.md": []
-  },
-  "results": {
-    "appliedActions": 2,
-    "skippedActions": 4,
-    "createdIssues": 2
-  },
-  "actions": {
-    "applied": [
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "요청-bun이란.md",
-        "target": "bun/overview.md",
-        "reason": "한글 파일명을 영문 slug으로 변환하고, bun 소개 문서를 bun 카테고리로 이동",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요.md",
-        "target": "about/technology-stack.md",
-        "reason": "SEPilot Wiki 기술 스택 문서를 영문 slug으로 변환하고, about 카테고리로 이동",
-        "autoApply": true
-      }
-    ],
-    "skipped": [
-      {
-        "type": "move",
-        "priority": "high",
-        "source": "요청-github-actions로-bun을-쓰는-방법.md",
-        "target": "bun/ci/github-actions.md",
-        "reason": "bun을 CI에서 사용하는 방법을 CI 서브디렉터리로 정리",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "high",
-        "source": "",
-        "target": "bun",
-        "reason": "bun 관련 문서를 한곳에 모아 탐색성을 높임",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "high",
-        "source": "",
-        "target": "bun/ci",
-        "reason": "CI/CI‑CD 관련 문서를 별도 서브디렉터리로 구분",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "medium",
-        "source": "",
-        "target": "about",
-        "reason": "프로젝트 전반에 대한 설명을 담는 디렉터리",
-        "autoApply": false
-      }
     ]
   },
-  "createdIssues": [
-    {
-      "number": 14,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/14",
-      "title": "Redirects for renamed Korean files"
-    },
-    {
-      "number": 15,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/15",
-      "title": "Publish draft documents or change status"
-    }
-  ]
+  "results": {
+    "appliedActions": 0,
+    "skippedActions": 0,
+    "createdIssues": 0
+  },
+  "actions": {
+    "applied": [],
+    "skipped": []
+  },
+  "createdIssues": []
 }
