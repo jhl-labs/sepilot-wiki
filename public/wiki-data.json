@@ -1,6 +1,82 @@
 {
   "pages": [
     {
+      "title": "설정 파일 가이드",
+      "slug": "_guide/configuration",
+      "content": "\n# 설정 파일 가이드\n\nSEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.\n\n## 설정 파일 목록\n\n| 파일 | 위치 | 용도 |\n|------|------|------|\n| `site.config.ts` | 루트 | 사이트 기본 정보 |\n| `theme.config.ts` | 루트 | 테마 (색상, 폰트, 레이아웃) |\n| `navigation.config.ts` | 루트 | 네비게이션 메뉴 |\n| `custom.css` | src/styles | 커스텀 CSS |\n| `config.ts` | src | GitHub 저장소 연결 설정 |\n\n## site.config.ts 상세\n\n```typescript\ninterface SiteConfig {\n  // 필수\n  title: string;          // 사이트 제목\n  description: string;    // SEO 설명\n  owner: string;          // GitHub 사용자명/조직명\n  repo: string;           // 저장소 이름\n  wikiPath: string;       // wiki 폴더 경로 (기본: 'wiki')\n\n  // 선택\n  logo?: {\n    type: 'text' | 'image' | 'icon';\n    value: string;\n    alt?: string;\n  };\n  favicon?: string;       // 파비콘 경로\n  social?: {\n    github?: string;\n    twitter?: string;\n    discord?: string;\n    website?: string;\n  };\n  footer?: {\n    enabled?: boolean;\n    copyright?: {\n      enabled?: boolean;\n      text?: string;\n      startYear?: number;\n    };\n    links?: { label: string; url: string }[];\n    showPoweredBy?: boolean;\n  };\n}\n```\n\n## theme.config.ts 상세\n\n### 색상 (colors)\n\n```typescript\ninterface ColorScheme {\n  primary: string;           // 메인 브랜드 색상\n  primaryHover?: string;     // hover 시 색상\n  background: string;        // 배경색\n  backgroundSecondary?: string;\n  backgroundTertiary?: string;\n  text: string;              // 기본 텍스트 색상\n  textSecondary?: string;\n  textMuted?: string;\n  border?: string;           // 테두리 색상\n  accent?: string;           // 강조 색상\n  success?: string;          // 성공 상태\n  warning?: string;          // 경고 상태\n  error?: string;            // 오류 상태\n  info?: string;             // 정보 상태\n}\n```\n\n### 폰트 (fonts)\n\n```typescript\ninterface ThemeFonts {\n  sans?: string;     // 본문 폰트\n  mono?: string;     // 코드 폰트\n  heading?: string;  // 제목 폰트 (미지정시 sans 사용)\n}\n```\n\n### 레이아웃 (layout)\n\n```typescript\ninterface ThemeLayout {\n  headerHeight?: string;      // 기본: 64px\n  sidebarWidth?: string;      // 기본: 280px\n  contentMaxWidth?: string;   // 기본: 900px\n  tocWidth?: string;          // 기본: 240px\n}\n```\n\n### 테두리 반경 (borderRadius)\n\n```typescript\ninterface ThemeBorderRadius {\n  sm?: string;   // 기본: 0.25rem\n  md?: string;   // 기본: 0.5rem\n  lg?: string;   // 기본: 0.75rem\n  xl?: string;   // 기본: 1rem\n}\n```\n\n## navigation.config.ts 상세\n\n```typescript\ninterface NavigationConfig {\n  sidebar?: SidebarSection[];\n}\n\ninterface SidebarSection {\n  title: string;              // 섹션 제목\n  icon?: string;              // lucide 아이콘 이름\n  collapsible?: boolean;      // 접을 수 있는지 (기본: true)\n  defaultOpen?: boolean;      // 기본 열림 상태 (기본: true)\n  items: SidebarNavItem[];\n}\n\ninterface SidebarNavItem {\n  label: string;              // 메뉴 텍스트\n  href: string;               // 링크 URL\n  icon?: string;              // lucide 아이콘 이름\n  external?: boolean;         // 외부 링크 여부\n  badge?: string;             // 배지 텍스트 (예: 'Beta', 'New')\n  children?: SidebarNavItem[]; // 하위 메뉴\n}\n```\n\n## GitHub 저장소 설정\n\n### Repository Secrets\n\nGitHub Repository Settings > Secrets에서 설정:\n\n| 변수 | 필수 | 설명 |\n|------|------|------|\n| `OPENAI_BASE_URL` | O | OpenAI 호환 API URL |\n| `OPENAI_API_KEY` | O | API 키 |\n| `OPENAI_MODEL` | O | 모델명 (예: gpt-4) |\n\n### GitHub Pages 설정\n\n1. Repository Settings > Pages\n2. Source: \"GitHub Actions\" 선택\n3. `main` 브랜치 push 시 자동 배포\n\n## 환경 변수\n\n### 빌드 시\n\n```bash\nGITHUB_TOKEN=...      # GitHub API 토큰 (선택)\n```\n\n### 개발 시\n\n`.env` 파일에 설정:\n\n```env\nVITE_GITHUB_TOKEN=...  # 개발용 토큰 (선택)\n```\n",
+      "lastModified": "2025-12-05T19:35:06.657Z",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "설정",
+        "가이드",
+        "TypeScript"
+      ],
+      "history": []
+    },
+    {
+      "title": "테마 커스터마이징",
+      "slug": "_guide/customization",
+      "content": "\n# 테마 커스터마이징\n\nSEPilot Wiki는 Astro와 유사하게 설정 파일을 통해 다양한 커스터마이징을 지원합니다.\n\n## 설정 파일 구조\n\n```\nproject-root/\n├── site.config.ts      # 사이트 기본 설정\n├── theme.config.ts     # 테마 (색상, 폰트)\n├── navigation.config.ts # 네비게이션 메뉴\n└── src/styles/custom.css # 커스텀 CSS\n```\n\n## 사이트 설정 (site.config.ts)\n\n### 기본 정보\n\n```typescript\nexport const siteConfig: SiteConfig = {\n  title: 'My Wiki',\n  description: 'AI 기반 자동화 위키',\n\n  // GitHub 저장소\n  owner: 'your-username',\n  repo: 'your-wiki-repo',\n  wikiPath: 'wiki',\n};\n```\n\n### 로고 설정\n\n```typescript\n// 텍스트 로고\nlogo: {\n  type: 'text',\n  value: 'My Wiki',\n}\n\n// 이미지 로고\nlogo: {\n  type: 'image',\n  value: '/logo.png',\n  alt: 'My Wiki Logo',\n}\n\n// 아이콘 로고 (lucide-react)\nlogo: {\n  type: 'icon',\n  value: 'BookOpen',\n}\n```\n\n### Footer 설정\n\n```typescript\nfooter: {\n  enabled: true,\n  copyright: {\n    enabled: true,\n    text: 'My Company. All rights reserved.',\n    startYear: 2024,  // © 2024-2025 형식\n  },\n  links: [\n    { label: 'GitHub', url: 'https://github.com/...' },\n  ],\n  showPoweredBy: true,\n}\n```\n\n## 테마 설정 (theme.config.ts)\n\n### 색상 커스터마이징\n\n```typescript\nexport const themeConfig: ThemeConfig = {\n  colors: {\n    light: {\n      primary: '#3b82f6',      // 메인 브랜드 색상\n      background: '#ffffff',\n      text: '#0f172a',\n      accent: '#8b5cf6',\n    },\n    dark: {\n      primary: '#60a5fa',\n      background: '#0f172a',\n      text: '#f8fafc',\n      accent: '#a78bfa',\n    },\n  },\n};\n```\n\n### 폰트 설정\n\n```typescript\nfonts: {\n  sans: \"'Pretendard', sans-serif\",\n  mono: \"'JetBrains Mono', monospace\",\n}\n```\n\n### 레이아웃 설정\n\n```typescript\nlayout: {\n  headerHeight: '64px',\n  sidebarWidth: '280px',\n  contentMaxWidth: '900px',\n}\n```\n\n## 커스텀 CSS\n\n`src/styles/custom.css`에서 추가 스타일을 정의할 수 있습니다:\n\n```css\n/* 헤더 그라데이션 */\n.header {\n  background: linear-gradient(90deg, #3b82f6, #8b5cf6);\n}\n\n/* 커스텀 마크다운 스타일 */\n.markdown-content h1 {\n  border-bottom: 3px solid var(--color-primary);\n}\n```\n\n## 네비게이션 설정 (navigation.config.ts)\n\n사이드바에 커스텀 메뉴를 추가합니다:\n\n```typescript\nexport const navigationConfig: NavigationConfig = {\n  sidebar: [\n    {\n      title: '리소스',\n      icon: 'ExternalLink',\n      collapsible: true,\n      defaultOpen: false,\n      items: [\n        {\n          label: 'GitHub',\n          href: 'https://github.com/...',\n          icon: 'Github',\n          external: true,\n        },\n        {\n          label: 'API 문서',\n          href: '/wiki/api',\n          icon: 'FileCode',\n          badge: 'Beta',\n        },\n      ],\n    },\n  ],\n};\n```\n\n## 지원하는 lucide 아이콘\n\n[lucide.dev/icons](https://lucide.dev/icons)에서 사용 가능한 아이콘 이름을 확인할 수 있습니다.\n\n예: `Home`, `FileText`, `BookOpen`, `Github`, `ExternalLink`, `Settings` 등\n",
+      "lastModified": "2025-12-05T19:35:06.665Z",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "테마",
+        "커스터마이징",
+        "설정"
+      ],
+      "history": []
+    },
+    {
+      "title": "FAQ",
+      "slug": "_guide/faq",
+      "content": "\n# 자주 묻는 질문\n\n## 일반\n\n### Q: SEPilot Wiki는 무엇인가요?\n\nA: GitHub 저장소 기반의 AI 자동화 위키 시스템입니다. Astro 같은 정적 사이트 생성기처럼 설정 파일을 통해 커스터마이징이 가능하며, GitHub Issue와 LLM을 연동하여 문서를 자동 생성합니다.\n\n### Q: 무료로 사용할 수 있나요?\n\nA: 네, SEPilot Wiki 자체는 오픈소스이며 무료입니다. 다만 LLM API 사용 시 해당 제공자의 요금이 발생할 수 있습니다.\n\n## 설치 및 배포\n\n### Q: 어떤 런타임이 필요한가요?\n\nA: Bun 또는 Node.js 20+를 지원합니다. Bun 사용을 권장합니다.\n\n### Q: 로컬에서 개발할 수 있나요?\n\nA: 네, `bun dev` 또는 `npm run dev`로 로컬 개발 서버를 실행할 수 있습니다.\n\n### Q: GitHub Pages 외에 다른 호스팅 서비스도 지원하나요?\n\nA: 네, Vite 기반이므로 Vercel, Netlify, Cloudflare Pages 등 모든 정적 호스팅 서비스에서 사용 가능합니다.\n\n## 테마 및 커스터마이징\n\n### Q: 다크 모드를 지원하나요?\n\nA: 네, 라이트/다크/시스템 테마를 지원합니다. `theme.config.ts`에서 각 테마의 색상을 설정할 수 있습니다.\n\n### Q: 로고를 이미지로 변경하려면 어떻게 하나요?\n\nA: `site.config.ts`에서 다음과 같이 설정합니다:\n\n```typescript\nlogo: {\n  type: 'image',\n  value: '/logo.png',  // public 폴더 기준\n  alt: 'My Logo',\n}\n```\n\n### Q: 폰트를 변경하려면 어떻게 하나요?\n\nA: `theme.config.ts`의 `fonts` 설정에서 변경합니다. Google Fonts를 사용하려면 `index.html`에 폰트 링크를 추가해야 합니다.\n\n## LLM 및 AI 기능\n\n### Q: OpenAI 외에 다른 LLM을 사용할 수 있나요?\n\nA: 네, OpenAI 호환 API를 제공하는 모든 서비스를 사용할 수 있습니다 (Azure OpenAI, Ollama, LM Studio 등).\n\n### Q: AI가 생성한 문서를 수정할 수 있나요?\n\nA: 네, 세 가지 방법이 있습니다:\n1. `/wiki` 폴더에서 마크다운 파일 직접 수정\n2. Issue 댓글로 피드백 작성 (AI가 자동 반영)\n3. PR로 변경 제안\n\n### Q: AI 문서 생성이 실패하면 어떻게 하나요?\n\nA: GitHub Actions 로그에서 오류를 확인하세요. 주로 API 키 설정 오류이거나 LLM 서비스 장애일 수 있습니다.\n\n## 문서 관리\n\n### Q: 문서를 직접 수정할 수 있나요?\n\nA: 네, `/wiki` 폴더의 마크다운 파일을 직접 수정하거나 PR을 통해 변경할 수 있습니다.\n\n### Q: 문서에 이미지를 추가하려면 어떻게 하나요?\n\nA: `/public` 폴더에 이미지를 추가한 후 마크다운에서 참조합니다:\n\n```markdown\n![이미지 설명](/images/example.png)\n```\n\n### Q: 검색이 잘 안 되는 것 같아요\n\nA: 검색 인덱스는 빌드 시점에 생성됩니다. 새 문서 추가 후 재배포가 필요합니다.\n\n## 문제 해결\n\n### Q: 빌드가 실패해요\n\nA: 다음을 확인하세요:\n1. `bun install` 또는 `npm install` 실행 여부\n2. 설정 파일의 TypeScript 문법 오류\n3. Node.js/Bun 버전 호환성\n\n### Q: GitHub Pages에 배포가 안 돼요\n\nA: Repository Settings > Pages에서 Source가 \"GitHub Actions\"로 설정되어 있는지 확인하세요.\n\n### Q: LLM 응답이 너무 느려요\n\nA: LLM 모델을 더 빠른 것으로 변경하거나 (예: gpt-4 대신 gpt-3.5-turbo), 로컬 LLM 사용을 고려해보세요.\n",
+      "lastModified": "2025-12-05T19:35:06.672Z",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "FAQ",
+        "도움말",
+        "문제해결"
+      ],
+      "history": []
+    },
+    {
+      "title": "시작하기",
+      "slug": "_guide/getting-started",
+      "content": "\n# 시작하기\n\nSEPilot Wiki를 사용하여 나만의 위키를 만드는 방법을 안내합니다.\n\n## 설치 및 배포\n\n### 1. 템플릿 복제\n\n```bash\n# GitHub에서 템플릿 복제\ngh repo create my-wiki --template jhl-labs/sepilot-wiki --public\ncd my-wiki\n```\n\n### 2. 의존성 설치 및 개발 서버 실행\n\n```bash\nbun install\nbun dev\n```\n\n### 3. 설정 파일 수정\n\n루트 디렉토리의 설정 파일들을 수정합니다:\n\n- `site.config.ts` - 사이트 기본 정보 (타이틀, 로고, 소셜 링크)\n- `theme.config.ts` - 테마 설정 (색상, 폰트, 레이아웃)\n- `navigation.config.ts` - 사이드바 메뉴 설정\n\n### 4. GitHub Pages 배포\n\n```bash\ngit add -A && git commit -m \"Initial setup\"\ngit push origin main\n```\n\nGitHub Actions가 자동으로 빌드 후 GitHub Pages에 배포합니다.\n\n## 문서 작성 방식\n\n### 방법 1: 직접 작성\n`/wiki` 폴더에 마크다운 파일을 직접 추가합니다.\n\n### 방법 2: AI 자동 생성\nGitHub Issue에 `request` 라벨을 추가하면 AI가 문서 초안을 자동 생성합니다.\n\n## 다음 단계\n\n- [테마 커스터마이징](/wiki/_guide/customization) - 색상, 폰트, 로고 변경\n- [LLM 워크플로우](/wiki/_guide/llm-workflow) - AI 문서 생성 과정 이해\n- [설정 파일 가이드](/wiki/_guide/configuration) - 상세 설정 옵션\n",
+      "lastModified": "2025-12-05T19:35:06.679Z",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "시작하기",
+        "설치",
+        "배포"
+      ],
+      "history": []
+    },
+    {
+      "title": "LLM 워크플로우",
+      "slug": "_guide/llm-workflow",
+      "content": "\n# LLM 워크플로우\n\nSEPilot Wiki는 GitHub Actions와 LLM을 연동하여 자동으로 문서를 생성하고 관리합니다.\n\n## 워크플로우 개요\n\n```\n사용자                  GitHub Actions              LLM\n  │                         │                        │\n  ├─ Issue 생성 ───────────>│                        │\n  │  (request 라벨)         │                        │\n  │                         ├─ 컨텍스트 수집 ────────>│\n  │                         │  (Issue 본문+댓글)      │\n  │                         │                        │\n  │                         │<─ 문서 생성 ────────────┤\n  │                         │                        │\n  │<─ 댓글로 결과 알림 ──────┤                        │\n  │                         │                        │\n  ├─ 피드백 댓글 ──────────>│                        │\n  │                         ├─ 피드백 분석 ──────────>│\n  │                         │                        │\n  │                         │<─ 문서 수정 ────────────┤\n  │                         │                        │\n```\n\n## 지원하는 이벤트\n\n### 1. request 라벨 추가\n\nIssue에 `request` 라벨을 추가하면:\n\n1. AI가 Issue 제목과 본문을 분석\n2. 관련 문서 초안 자동 생성\n3. `wiki/` 폴더에 마크다운 파일 저장\n4. Issue에 결과 댓글 추가\n5. `draft`, `ai-generated` 라벨 자동 추가\n\n### 2. invalid 라벨 추가\n\n문서에 오류가 있을 때 `invalid` 라벨을 추가하면:\n\n1. AI가 Issue 댓글에서 오류 내용 파악\n2. 해당 문서 자동 수정\n3. 수정 결과 댓글로 알림\n\n### 3. Maintainer 댓글\n\nMaintainer가 댓글을 달면:\n\n1. AI가 댓글 내용 분석\n2. 문서 수정, 삭제, 복구 등 작업 수행\n3. 작업 결과 댓글로 알림\n\n### 4. Issue 종료\n\nIssue를 close하면:\n\n1. `draft` 라벨 제거\n2. 문서가 정식 게시 상태로 전환\n\n## LLM 설정\n\n### 환경 변수\n\nGitHub Repository Secrets에 다음 값을 설정합니다:\n\n```\nOPENAI_BASE_URL=https://api.openai.com/v1\nOPENAI_API_KEY=your-api-key\nOPENAI_MODEL=gpt-4\n```\n\n### 지원하는 LLM 제공자\n\nOpenAI 호환 API를 사용하는 모든 제공자를 지원합니다:\n\n- OpenAI (GPT-4, GPT-3.5)\n- Azure OpenAI\n- Anthropic Claude (OpenAI 호환 API 사용 시)\n- Local LLM (Ollama, LM Studio 등)\n\n## 컨텍스트 수집\n\nAI는 다음 정보를 수집하여 작업을 수행합니다:\n\n- **Issue 본문**: 사용자의 초기 요청\n- **모든 댓글**: 대화 히스토리 및 피드백\n- **기존 문서**: 관련 문서가 있으면 해당 내용\n- **이전 작업 결과**: 이전에 생성된 문서 경로\n\n이를 통해 AI는 전체 맥락을 이해하고 적절한 작업을 수행합니다.\n\n## 문서 생성 규칙\n\nAI가 생성하는 문서는 다음 규칙을 따릅니다:\n\n- YAML frontmatter 포함 (title, author, tags)\n- 한국어로 작성\n- 마크다운 형식\n- 코드 예시 포함 (해당되는 경우)\n\n### frontmatter 예시\n\n```markdown\n---\ntitle: 문서 제목\nauthor: SEPilot AI\ntags: [태그1, 태그2]\n---\n\n# 문서 제목\n\n본문 내용...\n```\n\n## 워크플로우 파일\n\n`.github/workflows/issue-handler.yml`에서 워크플로우를 확인하고 수정할 수 있습니다.\n\n주요 스크립트:\n\n- `scripts/generate-document.js` - 새 문서 생성\n- `scripts/process-feedback.js` - 피드백 처리\n- `scripts/mark-invalid.js` - 오류 표시 처리\n- `scripts/publish-document.js` - 문서 발행\n",
+      "lastModified": "2025-12-05T19:35:06.687Z",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "LLM",
+        "워크플로우",
+        "AI",
+        "GitHub Actions"
+      ],
+      "history": []
+    },
+    {
       "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
       "slug": "about/technology-stack",
       "content": "\n## 기술 스택\n\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n\n### 프론트엔드\n- **React 18** - UI 라이브러리\n- **TypeScript** - 타입 안전성을 위한 정적 타입 언어\n- **Vite** - 빌드 도구 및 개발 서버\n- **React Router DOM** - SPA 라우팅\n- **TanStack Query (React Query)** - 서버 상태 관리\n\n### Next.js 사용 여부\n- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.\n- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\n- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n\n### 마크다운 렌더링\n- **react-markdown** - 마크다운 파싱 및 렌더링\n- **remark-gfm** - GitHub Flavored Markdown 지원\n- **rehype-raw** - HTML 태그 지원\n- **rehype-sanitize** - XSS 방지를 위한 HTML 살균\n- **react-syntax-highlighter** - 코드 구문 강조\n\n### 스타일링\n- **CSS Variables** - 테마 시스템\n- **Lucide React** - 아이콘 라이브러리\n\n### 개발 도구\n- **ESLint** - 코드 린팅\n- **Vitest** - 테스트 프레임워크\n- **Husky** - Git hooks\n\n### CI/CD\n- **GitHub Actions** - 자동화 워크플로우\n- **GitHub Pages** - 정적 사이트 호스팅\n- **Bun** - 패키지 매니저 및 런타임\n\n### AI 통합\n- **OpenAI API 호환** - LLM을 통한 문서 자동 생성\n\n## 참고 링크\n\n- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)\n",
@@ -240,6 +316,33 @@
     }
   ],
   "tree": [
+    {
+      "name": "_guide",
+      "path": "_guide",
+      "isCategory": true,
+      "children": [
+        {
+          "title": "설정 파일 가이드",
+          "slug": "_guide/configuration"
+        },
+        {
+          "title": "시작하기",
+          "slug": "_guide/getting-started"
+        },
+        {
+          "title": "테마 커스터마이징",
+          "slug": "_guide/customization"
+        },
+        {
+          "title": "FAQ",
+          "slug": "_guide/faq"
+        },
+        {
+          "title": "LLM 워크플로우",
+          "slug": "_guide/llm-workflow"
+        }
+      ]
+    },
     {
       "name": "about",
       "path": "about",

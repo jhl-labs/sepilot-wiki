@@ -1,8 +1,269 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2025-12-05T13:03:02.758Z</generated>
-  <count>3</count>
+  <generated>2025-12-05T19:35:06.888Z</generated>
+  <count>8</count>
   <items>
+  <item>
+    <title>설정 파일 가이드</title>
+    <slug>_guide/configuration</slug>
+    <content>설정 파일 가이드
+SEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.
+설정 파일 목록
+  파일   위치   용도  
+ ------ ------ ------ 
+     루트   사이트 기본 정보  
+     루트   테마 (색상, 폰트, 레이아웃)  
+     루트   네비게이션 메뉴  
+     src/styles   커스텀 CSS  
+     src   GitHub 저장소 연결 설정  
+site.config.ts 상세
+theme.config.ts 상세
+색상 (colors)
+폰트 (fonts)
+레이아웃 (layout)
+테두리 반경 (borderRadius)
+navigation.config.ts 상세
+GitHub 저장소 설정
+Repository Secrets
+GitHub Repository Settings &gt; Secrets에서 설정:
+  변수   필수   설명  
+ ------ ------ ------ 
+     O   OpenAI 호환 API URL  
+     O   API 키  
+     O   모델명 (예: gpt-4)  
+GitHub Pages 설정
+Repository Settings &gt; Pages
+Source: &quot;GitHub Actions&quot; 선택
+브랜치 push 시 자동 배포
+환경 변수
+빌드 시
+개발 시
+ 파일에 설정:</content>
+    <excerpt>설정 파일 가이드
+SEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.
+설정 파일 목록
+  파일   위치   용도  
+ ------ ------ ------ 
+     루트   사이트 기본 정보  
+     루트   테마 (색상, 폰트, 레이아웃)  
+     루트   네비게이션 메뉴  
+     src/styles   커스텀 CSS...</excerpt>
+    <tags>설정, 가이드, TypeScript</tags>
+    <lastModified>2025-12-05T19:35:06.657Z</lastModified>
+    <author></author>
+  </item>
+  <item>
+    <title>테마 커스터마이징</title>
+    <slug>_guide/customization</slug>
+    <content>테마 커스터마이징
+SEPilot Wiki는 Astro와 유사하게 설정 파일을 통해 다양한 커스터마이징을 지원합니다.
+설정 파일 구조
+사이트 설정 (site.config.ts)
+기본 정보
+로고 설정
+Footer 설정
+테마 설정 (theme.config.ts)
+색상 커스터마이징
+폰트 설정
+레이아웃 설정
+커스텀 CSS
+에서 추가 스타일을 정의할 수 있습니다:
+네비게이션 설정 (navigation.config.ts)
+사이드바에 커스텀 메뉴를 추가합니다:
+지원하는 lucide 아이콘
+lucide.dev/icons에서 사용 가능한 아이콘 이름을 확인할 수 있습니다.
+예: , , , , ,  등</content>
+    <excerpt>테마 커스터마이징
+SEPilot Wiki는 Astro와 유사하게 설정 파일을 통해 다양한 커스터마이징을 지원합니다.
+설정 파일 구조
+사이트 설정 (site.config.ts)
+기본 정보
+로고 설정
+Footer 설정
+테마 설정 (theme.config.ts)
+색상 커스터마이징
+폰트 설정
+레이아웃 설정
+커스텀 CSS
+에서 추가 스타일을 정의할 수 있습니다:
+네...</excerpt>
+    <tags>테마, 커스터마이징, 설정</tags>
+    <lastModified>2025-12-05T19:35:06.665Z</lastModified>
+    <author></author>
+  </item>
+  <item>
+    <title>FAQ</title>
+    <slug>_guide/faq</slug>
+    <content>자주 묻는 질문
+일반
+Q: SEPilot Wiki는 무엇인가요?
+A: GitHub 저장소 기반의 AI 자동화 위키 시스템입니다. Astro 같은 정적 사이트 생성기처럼 설정 파일을 통해 커스터마이징이 가능하며, GitHub Issue와 LLM을 연동하여 문서를 자동 생성합니다.
+Q: 무료로 사용할 수 있나요?
+A: 네, SEPilot Wiki 자체는 오픈소스이며 무료입니다. 다만 LLM API 사용 시 해당 제공자의 요금이 발생할 수 있습니다.
+설치 및 배포
+Q: 어떤 런타임이 필요한가요?
+A: Bun 또는 Node.js 20+를 지원합니다. Bun 사용을 권장합니다.
+Q: 로컬에서 개발할 수 있나요?
+A: 네,  또는 로 로컬 개발 서버를 실행할 수 있습니다.
+Q: GitHub Pages 외에 다른 호스팅 서비스도 지원하나요?
+A: 네, Vite 기반이므로 Vercel, Netlify, Cloudflare Pages 등 모든 정적 호스팅 서비스에서 사용 가능합니다.
+테마 및 커스터마이징
+Q: 다크 모드를 지원하나요?
+A: 네, 라이트/다크/시스템 테마를 지원합니다. 에서 각 테마의 색상을 설정할 수 있습니다.
+Q: 로고를 이미지로 변경하려면 어떻게 하나요?
+A: 에서 다음과 같이 설정합니다:
+Q: 폰트를 변경하려면 어떻게 하나요?
+A: 의  설정에서 변경합니다. Google Fonts를 사용하려면 에 폰트 링크를 추가해야 합니다.
+LLM 및 AI 기능
+Q: OpenAI 외에 다른 LLM을 사용할 수 있나요?
+A: 네, OpenAI 호환 API를 제공하는 모든 서비스를 사용할 수 있습니다 (Azure OpenAI, Ollama, LM Studio 등).
+Q: AI가 생성한 문서를 수정할 수 있나요?
+A: 네, 세 가지 방법이 있습니다:
+폴더에서 마크다운 파일 직접 수정
+Issue 댓글로 피드백 작성 (AI가 자동 반영)
+PR로 변경 제안
+Q: AI 문서 생성이 실패하면 어떻게 하나요?
+A: GitHub Actions 로그에서 오류를 확인하세요. 주로 API 키 설정 오류이거나 LLM 서비스 장애일 수 있습니다.
+문서 관리
+Q: 문서를 직접 수정할 수 있나요?
+A: 네,  폴더의 마크다운 파일을 직접 수정하거나 PR을 통해 변경할 수 있습니다.
+Q: 문서에 이미지를 추가하려면 어떻게 하나요?
+A:  폴더에 이미지를 추가한 후 마크다운에서 참조합니다:
+Q: 검색이 잘 안 되는 것 같아요
+A: 검색 인덱스는 빌드 시점에 생성됩니다. 새 문서 추가 후 재배포가 필요합니다.
+문제 해결
+Q: 빌드가 실패해요
+A: 다음을 확인하세요:
+또는  실행 여부
+설정 파일의 TypeScript 문법 오류
+Node.js/Bun 버전 호환성
+Q: GitHub Pages에 배포가 안 돼요
+A: Repository Settings &gt; Pages에서 Source가 &quot;GitHub Actions&quot;로 설정되어 있는지 확인하세요.
+Q: LLM 응답이 너무 느려요
+A: LLM 모델을 더 빠른 것으로 변경하거나 (예: gpt-4 대신 gpt-3.5-turbo), 로컬 LLM 사용을 고려해보세요.</content>
+    <excerpt>자주 묻는 질문
+일반
+Q: SEPilot Wiki는 무엇인가요?
+A: GitHub 저장소 기반의 AI 자동화 위키 시스템입니다. Astro 같은 정적 사이트 생성기처럼 설정 파일을 통해 커스터마이징이 가능하며, GitHub Issue와 LLM을 연동하여 문서를 자동 생성합니다.
+Q: 무료로 사용할 수 있나요?
+A: 네, SEPilot Wiki 자체는 오픈소...</excerpt>
+    <tags>FAQ, 도움말, 문제해결</tags>
+    <lastModified>2025-12-05T19:35:06.672Z</lastModified>
+    <author></author>
+  </item>
+  <item>
+    <title>시작하기</title>
+    <slug>_guide/getting-started</slug>
+    <content>시작하기
+SEPilot Wiki를 사용하여 나만의 위키를 만드는 방법을 안내합니다.
+설치 및 배포
+템플릿 복제
+의존성 설치 및 개발 서버 실행
+설정 파일 수정
+루트 디렉토리의 설정 파일들을 수정합니다:
+- 사이트 기본 정보 (타이틀, 로고, 소셜 링크)
+- 테마 설정 (색상, 폰트, 레이아웃)
+- 사이드바 메뉴 설정
+GitHub Pages 배포
+GitHub Actions가 자동으로 빌드 후 GitHub Pages에 배포합니다.
+문서 작성 방식
+방법 1: 직접 작성
+ 폴더에 마크다운 파일을 직접 추가합니다.
+방법 2: AI 자동 생성
+GitHub Issue에  라벨을 추가하면 AI가 문서 초안을 자동 생성합니다.
+다음 단계
+테마 커스터마이징 - 색상, 폰트, 로고 변경
+LLM 워크플로우 - AI 문서 생성 과정 이해
+설정 파일 가이드 - 상세 설정 옵션</content>
+    <excerpt>시작하기
+SEPilot Wiki를 사용하여 나만의 위키를 만드는 방법을 안내합니다.
+설치 및 배포
+템플릿 복제
+의존성 설치 및 개발 서버 실행
+설정 파일 수정
+루트 디렉토리의 설정 파일들을 수정합니다:
+- 사이트 기본 정보 (타이틀, 로고, 소셜 링크)
+- 테마 설정 (색상, 폰트, 레이아웃)
+- 사이드바 메뉴 설정
+GitHub Pages 배포
+GitHub...</excerpt>
+    <tags>시작하기, 설치, 배포</tags>
+    <lastModified>2025-12-05T19:35:06.679Z</lastModified>
+    <author></author>
+  </item>
+  <item>
+    <title>LLM 워크플로우</title>
+    <slug>_guide/llm-workflow</slug>
+    <content>LLM 워크플로우
+SEPilot Wiki는 GitHub Actions와 LLM을 연동하여 자동으로 문서를 생성하고 관리합니다.
+워크플로우 개요
+지원하는 이벤트
+request 라벨 추가
+Issue에  라벨을 추가하면:
+AI가 Issue 제목과 본문을 분석
+관련 문서 초안 자동 생성
+폴더에 마크다운 파일 저장
+Issue에 결과 댓글 추가
+,  라벨 자동 추가
+invalid 라벨 추가
+문서에 오류가 있을 때  라벨을 추가하면:
+AI가 Issue 댓글에서 오류 내용 파악
+해당 문서 자동 수정
+수정 결과 댓글로 알림
+Maintainer 댓글
+Maintainer가 댓글을 달면:
+AI가 댓글 내용 분석
+문서 수정, 삭제, 복구 등 작업 수행
+작업 결과 댓글로 알림
+Issue 종료
+Issue를 close하면:
+라벨 제거
+문서가 정식 게시 상태로 전환
+LLM 설정
+환경 변수
+GitHub Repository Secrets에 다음 값을 설정합니다:
+지원하는 LLM 제공자
+OpenAI 호환 API를 사용하는 모든 제공자를 지원합니다:
+OpenAI (GPT-4, GPT-3.5)
+Azure OpenAI
+Anthropic Claude (OpenAI 호환 API 사용 시)
+Local LLM (Ollama, LM Studio 등)
+컨텍스트 수집
+AI는 다음 정보를 수집하여 작업을 수행합니다:
+Issue 본문: 사용자의 초기 요청
+모든 댓글: 대화 히스토리 및 피드백
+기존 문서: 관련 문서가 있으면 해당 내용
+이전 작업 결과: 이전에 생성된 문서 경로
+이를 통해 AI는 전체 맥락을 이해하고 적절한 작업을 수행합니다.
+문서 생성 규칙
+AI가 생성하는 문서는 다음 규칙을 따릅니다:
+YAML frontmatter 포함 (title, author, tags)
+한국어로 작성
+마크다운 형식
+코드 예시 포함 (해당되는 경우)
+frontmatter 예시
+워크플로우 파일
+에서 워크플로우를 확인하고 수정할 수 있습니다.
+주요 스크립트:
+- 새 문서 생성
+- 피드백 처리
+- 오류 표시 처리
+- 문서 발행</content>
+    <excerpt>LLM 워크플로우
+SEPilot Wiki는 GitHub Actions와 LLM을 연동하여 자동으로 문서를 생성하고 관리합니다.
+워크플로우 개요
+지원하는 이벤트
+request 라벨 추가
+Issue에  라벨을 추가하면:
+AI가 Issue 제목과 본문을 분석
+관련 문서 초안 자동 생성
+폴더에 마크다운 파일 저장
+Issue에 결과 댓글 추가
+,  라벨 자동 추가...</excerpt>
+    <tags>LLM, 워크플로우, AI, GitHub Actions</tags>
+    <lastModified>2025-12-05T19:35:06.687Z</lastModified>
+    <author></author>
+  </item>
   <item>
     <title>Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
     <slug>about/technology-stack</slug>
