@@ -1,29 +1,32 @@
-import { config, GITHUB_API_URL, GITHUB_RAW_URL } from '../config';
+import { config, GITHUB_API_URL } from '../config';
 import type { WikiPage, GitHubIssue, WikiTree } from '../types';
 
-// GitHub Wiki 페이지 목록 가져오기 (실제 wiki 폴더에서)
-export async function fetchWikiPages(): Promise<WikiTree[]> {
-  try {
-    const response = await fetch(
-      `${GITHUB_API_URL}/repos/${config.owner}/${config.repo}/contents/wiki`,
-      {
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
-      }
-    );
+// 빌드 시점에 생성된 정적 wiki 데이터 캐시
+let wikiDataCache: { pages: WikiPage[]; tree: WikiTree[] } | null = null;
 
-    if (!response.ok) {
-      // Wiki 폴더가 없으면 빈 배열 반환
-      return [];
-    }
-
-    const files = await response.json();
-    return parseWikiStructure(files);
-  } catch (error) {
-    console.error('Error fetching wiki pages:', error);
-    return [];
+// 정적 wiki 데이터 로드
+async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> {
+  if (wikiDataCache) {
+    return wikiDataCache;
   }
+
+  try {
+    const response = await fetch(`${import.meta.env.BASE_URL}wiki-data.json`);
+    if (!response.ok) {
+      return { pages: [], tree: [] };
+    }
+    wikiDataCache = await response.json();
+    return wikiDataCache!;
+  } catch (error) {
+    console.error('Error loading wiki data:', error);
+    return { pages: [], tree: [] };
+  }
+}
+
+// Wiki 페이지 목록 가져오기 (정적 데이터에서)
+export async function fetchWikiPages(): Promise<WikiTree[]> {
+  const data = await loadWikiData();
+  return data.tree;
 }
 
 // 기본 가이드 페이지 목록 (정적)
@@ -37,7 +40,7 @@ export function getGuidePages(): WikiTree[] {
   ];
 }
 
-// Wiki 페이지 내용 가져오기
+// Wiki 페이지 내용 가져오기 (정적 데이터에서)
 export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
   // 가이드 페이지인 경우
   if (slug.startsWith('_guide/')) {
@@ -45,33 +48,10 @@ export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
     return getGuidePage(guideSlug);
   }
 
-  try {
-    // 실제 wiki 폴더에서 가져오기
-    const response = await fetch(
-      `${GITHUB_RAW_URL}/${config.owner}/${config.repo}/main/wiki/${slug}.md`
-    );
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const content = await response.text();
-    const { metadata, body } = parseMarkdownWithFrontmatter(content);
-
-    return {
-      title: (metadata.title as string) || formatTitle(slug),
-      slug,
-      content: body,
-      lastModified: (metadata.lastModified as string) || new Date().toISOString(),
-      author: metadata.author as string | undefined,
-      isDraft: (metadata.isDraft as boolean) || false,
-      isInvalid: (metadata.isInvalid as boolean) || false,
-      tags: (metadata.tags as string[]) || [],
-    };
-  } catch (error) {
-    console.error('Error fetching wiki page:', error);
-    return null;
-  }
+  // 정적 데이터에서 페이지 찾기
+  const data = await loadWikiData();
+  const page = data.pages.find((p) => p.slug === slug);
+  return page || null;
 }
 
 // GitHub Issues 가져오기
@@ -150,51 +130,6 @@ export async function searchWiki(query: string): Promise<WikiPage[]> {
     console.error('Error searching wiki:', error);
     return [];
   }
-}
-
-// 마크다운 프론트매터 파싱
-function parseMarkdownWithFrontmatter(content: string): {
-  metadata: Record<string, unknown>;
-  body: string;
-} {
-  const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
-  const match = content.match(frontmatterRegex);
-
-  if (!match) {
-    return { metadata: {}, body: content };
-  }
-
-  const [, frontmatter, body] = match;
-  const metadata: Record<string, unknown> = {};
-
-  frontmatter.split('\n').forEach((line) => {
-    const [key, ...valueParts] = line.split(':');
-    if (key && valueParts.length) {
-      const value = valueParts.join(':').trim();
-      // YAML 배열 파싱
-      if (value.startsWith('[') && value.endsWith(']')) {
-        metadata[key.trim()] = value
-          .slice(1, -1)
-          .split(',')
-          .map((v) => v.trim().replace(/['"]/g, ''));
-      } else {
-        metadata[key.trim()] = value.replace(/['"]/g, '');
-      }
-    }
-  });
-
-  return { metadata, body };
-}
-
-// Wiki 구조 파싱
-function parseWikiStructure(files: Array<{ name: string; type: string; path: string }>): WikiTree[] {
-  return files
-    .filter((file) => file.name.endsWith('.md'))
-    .map((file) => ({
-      title: formatTitle(file.name.replace('.md', '')),
-      slug: file.name.replace('.md', ''),
-    }))
-    .sort((a, b) => a.title.localeCompare(b.title, 'ko'));
 }
 
 // 슬러그를 제목으로 변환
