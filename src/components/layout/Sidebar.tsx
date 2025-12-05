@@ -71,6 +71,16 @@ export function Sidebar() {
 
   const openIssuesCount = requestIssues?.filter((i) => i.state === 'open').length || 0;
 
+  // wiki/home.md 페이지 존재 여부 확인 (재귀적으로 트리 탐색)
+  const findHomeInTree = (pages: WikiTree[]): boolean => {
+    for (const page of pages) {
+      if (page.slug === 'home') return true;
+      if (page.children && findHomeInTree(page.children)) return true;
+    }
+    return false;
+  };
+  const hasWikiHome = wikiPages ? findHomeInTree(wikiPages) : false;
+
   const handleLinkClick = () => {
     if (window.innerWidth < 1024) {
       close();
@@ -200,9 +210,9 @@ export function Sidebar() {
         </div>
 
         <nav className="sidebar-nav">
-          {/* 홈 링크 */}
+          {/* 홈 링크 - wiki/home.md가 있으면 해당 페이지로, 없으면 기본 홈으로 */}
           <NavLink
-            to="/"
+            to={hasWikiHome ? '/wiki/home' : '/'}
             className={({ isActive }) =>
               clsx('nav-item nav-item-home', isActive && 'active')
             }
