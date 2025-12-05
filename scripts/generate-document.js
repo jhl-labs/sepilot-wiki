@@ -30,6 +30,7 @@ import {
   setGitHubOutput,
 } from './lib/utils.js';
 import { addAIHistoryEntry } from './lib/ai-history.js';
+import { upsertIssue, linkDocument, addLabels } from './lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
@@ -164,6 +165,22 @@ async function main() {
       summary: `새 문서 "${documentTitle}" 생성`,
       trigger: 'request_label',
     });
+
+    // Issue 상태 저장 (JSON 파일)
+    await upsertIssue({
+      number: issueNumber,
+      title: issueTitle,
+      body: issueBody,
+      state: 'open',
+      labels: [{ name: 'request', color: '0e8a16' }],
+      user: context.user || { login: 'unknown', avatar_url: '' },
+      created_at: context.createdAt || new Date().toISOString(),
+      html_url: `https://github.com/${githubInfo.owner}/${githubInfo.repo}/issues/${issueNumber}`,
+    });
+
+    // 문서 연결 및 라벨 추가
+    await linkDocument(issueNumber, result.slug, result.filepath);
+    await addLabels(issueNumber, ['draft', 'ai-generated']);
 
     // 결과를 JSON으로 출력 (GitHub Actions에서 활용)
     console.log('\n📄 생성 결과:');

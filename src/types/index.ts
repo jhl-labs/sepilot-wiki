@@ -45,6 +45,8 @@ export interface GitHubIssue {
   updated_at: string;
   comments: number;
   html_url: string;
+  documentSlug?: string | null;
+  documentPath?: string | null;
 }
 
 export interface GitHubLabel {

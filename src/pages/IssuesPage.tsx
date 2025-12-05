@@ -1,8 +1,8 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useIssues } from '../hooks/useWiki';
 import { Skeleton } from '../components/ui/Skeleton';
 import { Badge } from '../components/ui/Badge';
-import { MessageSquare, ExternalLink, Filter } from 'lucide-react';
+import { MessageSquare, ExternalLink, Filter, FileText } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { LABELS, urls } from '../config';
@@ -134,29 +134,41 @@ export function IssuesPage() {
                   </span>
                 )}
               </div>
-              <div className="issue-labels">
-                {issue.labels.map((label) => (
-                  <Badge
-                    key={label.id}
-                    variant={
-                      label.name === LABELS.REQUEST
-                        ? 'default'
-                        : label.name === LABELS.INVALID
-                        ? 'invalid'
-                        : label.name === LABELS.DRAFT
-                        ? 'draft'
-                        : 'default'
-                    }
-                    className="issue-label"
-                    style={
-                      {
-                        '--label-color': `#${label.color}`,
-                      } as React.CSSProperties
-                    }
+              <div className="issue-footer">
+                <div className="issue-labels">
+                  {issue.labels.map((label) => (
+                    <Badge
+                      key={label.id}
+                      variant={
+                        label.name === LABELS.REQUEST
+                          ? 'default'
+                          : label.name === LABELS.INVALID
+                          ? 'invalid'
+                          : label.name === LABELS.DRAFT
+                          ? 'draft'
+                          : 'default'
+                      }
+                      className="issue-label"
+                      style={
+                        {
+                          '--label-color': `#${label.color}`,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {label.name}
+                    </Badge>
+                  ))}
+                </div>
+                {issue.documentSlug && (
+                  <Link
+                    to={`/wiki/${issue.documentSlug}`}
+                    className="issue-document-link"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    {label.name}
-                  </Badge>
-                ))}
+                    <FileText size={14} />
+                    <span>문서 보기</span>
+                  </Link>
+                )}
               </div>
             </a>
           ))

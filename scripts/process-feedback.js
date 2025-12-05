@@ -32,6 +32,7 @@ import {
   setGitHubOutput,
 } from './lib/utils.js';
 import { addAIHistoryEntry } from './lib/ai-history.js';
+import { updateIssue } from './lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
@@ -208,6 +209,9 @@ async function main() {
         summary: result.summary || `피드백에 따라 문서 ${result.action === 'create' ? '복구' : result.action === 'delete' ? '삭제' : '수정'}`,
         trigger: 'maintainer_comment',
       });
+
+      // Issue 업데이트 (JSON 파일) - comments 수 증가
+      await updateIssue(issueNumber, { comments: (context.comments?.length || 0) + 1 });
     }
 
     console.log('\n📄 처리 결과:');

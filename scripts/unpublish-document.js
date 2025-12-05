@@ -27,6 +27,7 @@ import {
   setGitHubOutput,
 } from './lib/utils.js';
 import { addAIHistoryEntry } from './lib/ai-history.js';
+import { setIssueState, removeLabel, addLabels } from './lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
@@ -111,6 +112,11 @@ async function main() {
         trigger: 'issue_reopen',
       });
     }
+
+    // Issue 상태 업데이트 (JSON 파일)
+    await setIssueState(issueNumber, 'open');
+    await removeLabel(issueNumber, 'published');
+    await addLabels(issueNumber, ['draft']);
 
     console.log('\n📄 처리 결과:');
     console.log(JSON.stringify(result, null, 2));

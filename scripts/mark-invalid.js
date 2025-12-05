@@ -32,6 +32,7 @@ import {
   setGitHubOutput,
 } from './lib/utils.js';
 import { addAIHistoryEntry } from './lib/ai-history.js';
+import { addLabels } from './lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
@@ -161,6 +162,9 @@ async function main() {
         summary: `오류 수정: Issue #${issueNumber}에 보고된 문제 해결`,
         trigger: 'invalid_label',
       });
+
+      // Issue 라벨 업데이트 (JSON 파일)
+      await addLabels(issueNumber, ['invalid']);
     }
 
     console.log('\n📄 처리 결과:');

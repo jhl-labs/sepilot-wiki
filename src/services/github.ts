@@ -1,4 +1,3 @@
-import { config, GITHUB_API_URL } from '../config';
 import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry } from '../types';
 import { formatTitle } from '../utils';
 
@@ -57,48 +56,57 @@ export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
   return page || null;
 }
 
-// GitHub Issues 가져오기
+// Issues 데이터 캐시
+let issuesDataCache: { issues: GitHubIssue[]; lastUpdated: string } | null = null;
+
+// 정적 Issues 데이터 로드 (JSON 파일에서)
+async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: string }> {
+  if (issuesDataCache) {
+    return issuesDataCache;
+  }
+
+  try {
+    // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
+    const cacheBuster = `?v=${Date.now()}`;
+    const response = await fetch(`${import.meta.env.BASE_URL}data/issues.json${cacheBuster}`);
+    if (!response.ok) {
+      return { issues: [], lastUpdated: new Date().toISOString() };
+    }
+    issuesDataCache = await response.json();
+    return issuesDataCache!;
+  } catch (error) {
+    console.error('Error loading issues data:', error);
+    return { issues: [], lastUpdated: new Date().toISOString() };
+  }
+}
+
+// GitHub Issues 가져오기 (정적 JSON에서)
 export async function fetchIssues(label?: string): Promise<GitHubIssue[]> {
   try {
-    let url = `${GITHUB_API_URL}/repos/${config.owner}/${config.repo}/issues?state=all&per_page=50`;
-    if (label) {
-      url += `&labels=${encodeURIComponent(label)}`;
+    const data = await loadIssuesData();
+
+    if (!label) {
+      return data.issues;
     }
 
-    const response = await fetch(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
-
-    if (!response.ok) {
-      return [];
-    }
-
-    return response.json();
+    // 라벨 필터링
+    return data.issues.filter((issue) =>
+      issue.labels.some((l) => {
+        const labelName = typeof l === 'string' ? l : l.name;
+        return labelName === label;
+      })
+    );
   } catch (error) {
     console.error('Error fetching issues:', error);
     return [];
   }
 }
 
-// 특정 Issue 가져오기
+// 특정 Issue 가져오기 (정적 JSON에서)
 export async function fetchIssue(issueNumber: number): Promise<GitHubIssue | null> {
   try {
-    const response = await fetch(
-      `${GITHUB_API_URL}/repos/${config.owner}/${config.repo}/issues/${issueNumber}`,
-      {
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
-      }
-    );
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return response.json();
+    const data = await loadIssuesData();
+    return data.issues.find((issue) => issue.number === issueNumber) || null;
   } catch (error) {
     console.error('Error fetching issue:', error);
     return null;
