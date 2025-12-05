@@ -297,6 +297,37 @@
   flex: 1;
   padding: var(--spacing-4);
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-secondary) transparent;
+}
+
+/* 웹킷 브라우저용 스크롤바 스타일 */
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-secondary);
+  border-radius: var(--radius-full);
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-muted);
+}
+
+/* 모바일에서 스크롤바 항상 표시 */
+@media (max-width: 1023px) {
+  .sidebar-nav {
+    scrollbar-width: thin;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+  }
 }
 
 .nav-item {

@@ -10,8 +10,14 @@ interface SidebarContextType {
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
+// 모바일(1024px 미만)에서는 기본적으로 사이드바 닫힘
+const getInitialSidebarState = () => {
+  if (typeof window === 'undefined') return true;
+  return window.innerWidth >= 1024;
+};
+
 export function SidebarProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(getInitialSidebarState);
 
   const toggle = () => setIsOpen((prev) => !prev);
   const open = () => setIsOpen(true);
