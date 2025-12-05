@@ -166,18 +166,11 @@ ${doc.found ? `## 현재 문서 내용\n\`\`\`markdown\n${doc.content}\n\`\`\`` 
     const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : response;
     result = JSON.parse(jsonStr);
   } catch (e) {
-    console.error('JSON 파싱 실패, 기본 수정으로 처리:', e.message);
-    result = {
-      actions: [
-        {
-          action: 'modify',
-          targetPath: doc.filepath,
-          content: response,
-          reason: '피드백 반영',
-        },
-      ],
-      summary: '피드백 반영',
-    };
+    // JSON 파싱 실패 시 안전하게 처리 - 자동 수정하지 않음
+    console.error('❌ JSON 파싱 실패:', e.message);
+    console.error('   AI 응답을 파싱할 수 없습니다. 수동 처리가 필요합니다.');
+    console.log('   AI 응답 (처음 500자):', response.slice(0, 500));
+    return { hasChanges: false, reason: 'json_parse_failed', rawResponse: response.slice(0, 1000) };
   }
 
   // 이전 형식 호환성 처리 (단일 action → actions 배열)
@@ -240,6 +233,39 @@ ${doc.found ? `## 현재 문서 내용\n\`\`\`markdown\n${doc.content}\n\`\`\`` 
           processedActions.push({ action, path: targetPath, success: false, error: 'no_content' });
           continue;
         }
+
+        // 안전장치 1: frontmatter 필수 확인
+        if (!content.trim().startsWith('---')) {
+          console.log(`   ⚠️ frontmatter가 없는 content는 저장하지 않습니다.`);
+          console.log(`   content 시작: ${content.slice(0, 100)}...`);
+          processedActions.push({ action, path: targetPath, success: false, error: 'missing_frontmatter' });
+          continue;
+        }
+
+        // 안전장치 2: modify 시 기존 문서와 비교
+        if (action === 'modify') {
+          const targetDoc = allDocs.find((d) => `wiki/${d.path}` === targetPath || d.fullPath === fullPath);
+          if (targetDoc) {
+            const oldLength = targetDoc.content.length;
+            const newLength = content.length;
+            // 새 내용이 기존의 30% 미만이면 거부 (내용 손실 방지)
+            if (newLength < oldLength * 0.3) {
+              console.log(`   ⚠️ 내용이 너무 짧습니다. 기존: ${oldLength}자, 새: ${newLength}자 (${Math.round(newLength/oldLength*100)}%)`);
+              console.log(`   ⚠️ 내용 손실 방지를 위해 수정을 건너뜁니다.`);
+              processedActions.push({ action, path: targetPath, success: false, error: 'content_too_short' });
+              continue;
+            }
+          }
+        }
+
+        // 안전장치 3: JSON 형태의 content는 거부
+        const trimmedContent = content.trim();
+        if (trimmedContent.startsWith('{') && trimmedContent.endsWith('}')) {
+          console.log(`   ⚠️ JSON 형태의 content는 저장하지 않습니다.`);
+          processedActions.push({ action, path: targetPath, success: false, error: 'json_content_rejected' });
+          continue;
+        }
+
         // 디렉토리 생성
         const { dirname } = await import('path');
         await mkdir(dirname(fullPath), { recursive: true });
