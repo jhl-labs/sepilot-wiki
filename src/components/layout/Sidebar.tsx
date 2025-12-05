@@ -9,8 +9,9 @@ import {
   MessageSquare,
   Tag,
   X,
+  BookOpen,
 } from 'lucide-react';
-import { useWikiPages, useIssues } from '../../hooks/useWiki';
+import { useWikiPages, useIssues, useGuidePages } from '../../hooks/useWiki';
 import { useSidebar } from '../../context/SidebarContext';
 import { Skeleton } from '../ui/Skeleton';
 import { LABELS } from '../../config';
@@ -19,10 +20,11 @@ import clsx from 'clsx';
 export function Sidebar() {
   const { isOpen, close } = useSidebar();
   const location = useLocation();
-  const { data: pages, isLoading: pagesLoading } = useWikiPages();
+  const { data: wikiPages, isLoading: pagesLoading } = useWikiPages();
+  const { data: guidePages } = useGuidePages();
   const { data: requestIssues } = useIssues(LABELS.REQUEST);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set(['wiki', 'issues'])
+    new Set(['wiki', 'guide', 'issues'])
   );
 
   const toggleSection = (section: string) => {
@@ -66,7 +68,7 @@ export function Sidebar() {
             <span>홈</span>
           </NavLink>
 
-          {/* Wiki 섹션 */}
+          {/* Wiki 섹션 - 실제 GitHub Wiki 페이지 */}
           <div className="nav-section">
             <button
               className="nav-section-header"
@@ -88,8 +90,8 @@ export function Sidebar() {
                     <Skeleton className="nav-skeleton" />
                     <Skeleton className="nav-skeleton" />
                   </>
-                ) : (
-                  pages?.map((page) => (
+                ) : wikiPages && wikiPages.length > 0 ? (
+                  wikiPages.map((page) => (
                     <NavLink
                       key={page.slug}
                       to={`/wiki/${page.slug}`}
@@ -101,7 +103,43 @@ export function Sidebar() {
                       <span>{page.title}</span>
                     </NavLink>
                   ))
+                ) : (
+                  <span className="nav-empty">
+                    아직 작성된 문서가 없습니다
+                  </span>
                 )}
+              </div>
+            )}
+          </div>
+
+          {/* 가이드 섹션 - 정적 가이드 페이지 */}
+          <div className="nav-section">
+            <button
+              className="nav-section-header"
+              onClick={() => toggleSection('guide')}
+            >
+              <BookOpen size={18} />
+              <span>가이드</span>
+              {expandedSections.has('guide') ? (
+                <ChevronDown size={16} className="chevron" />
+              ) : (
+                <ChevronRight size={16} className="chevron" />
+              )}
+            </button>
+            {expandedSections.has('guide') && (
+              <div className="nav-section-content">
+                {guidePages?.map((page) => (
+                  <NavLink
+                    key={page.slug}
+                    to={`/wiki/${page.slug}`}
+                    className={({ isActive }) =>
+                      clsx('nav-item nav-item-child', isActive && 'active')
+                    }
+                    onClick={() => window.innerWidth < 1024 && close()}
+                  >
+                    <span>{page.title}</span>
+                  </NavLink>
+                ))}
               </div>
             )}
           </div>

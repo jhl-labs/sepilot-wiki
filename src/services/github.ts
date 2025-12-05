@@ -1,7 +1,7 @@
 import { config, GITHUB_API_URL, GITHUB_RAW_URL } from '../config';
 import type { WikiPage, GitHubIssue, WikiTree } from '../types';
 
-// GitHub Wiki 페이지 목록 가져오기
+// GitHub Wiki 페이지 목록 가져오기 (실제 wiki 폴더에서)
 export async function fetchWikiPages(): Promise<WikiTree[]> {
   try {
     const response = await fetch(
@@ -15,31 +15,44 @@ export async function fetchWikiPages(): Promise<WikiTree[]> {
 
     if (!response.ok) {
       // Wiki 폴더가 없으면 빈 배열 반환
-      if (response.status === 404) {
-        return getDefaultWikiStructure();
-      }
-      throw new Error('Failed to fetch wiki pages');
+      return [];
     }
 
     const files = await response.json();
     return parseWikiStructure(files);
   } catch (error) {
     console.error('Error fetching wiki pages:', error);
-    return getDefaultWikiStructure();
+    return [];
   }
+}
+
+// 기본 가이드 페이지 목록 (정적)
+export function getGuidePages(): WikiTree[] {
+  return [
+    { title: '홈', slug: '_guide/home' },
+    { title: '시작하기', slug: '_guide/getting-started' },
+    { title: '가이드', slug: '_guide/guide' },
+    { title: 'API 문서', slug: '_guide/api' },
+    { title: 'FAQ', slug: '_guide/faq' },
+  ];
 }
 
 // Wiki 페이지 내용 가져오기
 export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
+  // 가이드 페이지인 경우
+  if (slug.startsWith('_guide/')) {
+    const guideSlug = slug.replace('_guide/', '');
+    return getGuidePage(guideSlug);
+  }
+
   try {
-    // 먼저 wiki 폴더에서 시도
+    // 실제 wiki 폴더에서 가져오기
     const response = await fetch(
       `${GITHUB_RAW_URL}/${config.owner}/${config.repo}/main/wiki/${slug}.md`
     );
 
     if (!response.ok) {
-      // 기본 데모 페이지 반환
-      return getDefaultPage(slug);
+      return null;
     }
 
     const content = await response.text();
@@ -57,7 +70,7 @@ export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
     };
   } catch (error) {
     console.error('Error fetching wiki page:', error);
-    return getDefaultPage(slug);
+    return null;
   }
 }
 
@@ -192,23 +205,12 @@ function formatTitle(slug: string): string {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-// 기본 Wiki 구조
-function getDefaultWikiStructure(): WikiTree[] {
-  return [
-    { title: '홈', slug: 'home' },
-    { title: '시작하기', slug: 'getting-started' },
-    { title: '가이드', slug: 'guide' },
-    { title: 'API 문서', slug: 'api' },
-    { title: 'FAQ', slug: 'faq' },
-  ];
-}
-
-// 기본 페이지 내용
-function getDefaultPage(slug: string): WikiPage {
-  const defaultPages: Record<string, WikiPage> = {
+// 가이드 페이지 내용 (정적)
+function getGuidePage(slug: string): WikiPage {
+  const guidePages: Record<string, WikiPage> = {
     home: {
       title: 'SEPilot Wiki에 오신 것을 환영합니다',
-      slug: 'home',
+      slug: '_guide/home',
       content: `
 # SEPilot Wiki
 
@@ -230,14 +232,14 @@ AI 에이전트 기반의 자동화된 위키 시스템입니다.
 
 ## 문서 요청하기
 
-새로운 문서가 필요하시면 [GitHub Issue](https://github.com/jhl-labs/sepilot-wiki/issues/new)를 생성하고 \`request\` 라벨을 추가해주세요.
+새로운 문서가 필요하시면 [GitHub Issue](https://github.com/${config.owner}/${config.repo}/issues/new)를 생성하고 \`request\` 라벨을 추가해주세요.
       `,
       lastModified: new Date().toISOString(),
       tags: ['홈', '소개'],
     },
     'getting-started': {
       title: '시작하기',
-      slug: 'getting-started',
+      slug: '_guide/getting-started',
       content: `
 # 시작하기
 
@@ -267,7 +269,7 @@ SEPilot Wiki를 사용하는 방법을 안내합니다.
     },
     guide: {
       title: '가이드',
-      slug: 'guide',
+      slug: '_guide/guide',
       content: `
 # 사용자 가이드
 
@@ -302,7 +304,7 @@ SEPilot Wiki의 상세 사용법입니다.
     },
     api: {
       title: 'API 문서',
-      slug: 'api',
+      slug: '_guide/api',
       content: `
 # API 문서
 
@@ -334,7 +336,7 @@ export GITHUB_TOKEN=your_token_here
     },
     faq: {
       title: 'FAQ',
-      slug: 'faq',
+      slug: '_guide/faq',
       content: `
 # 자주 묻는 질문
 
@@ -359,10 +361,10 @@ A: 검색 기능은 GitHub Code Search API를 사용하며, 일부 제한이 있
     },
   };
 
-  return defaultPages[slug] || {
+  return guidePages[slug] || {
     title: formatTitle(slug),
-    slug,
-    content: `# ${formatTitle(slug)}\n\n이 페이지는 아직 작성되지 않았습니다.\n\n[문서 요청하기](https://github.com/jhl-labs/sepilot-wiki/issues/new)`,
+    slug: `_guide/${slug}`,
+    content: `# ${formatTitle(slug)}\n\n이 페이지는 아직 작성되지 않았습니다.`,
     lastModified: new Date().toISOString(),
   };
 }

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki } from '../services/github';
+import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, getGuidePages } from '../services/github';
 
 export function useWikiPages() {
   return useQuery({
@@ -33,4 +33,12 @@ export function useSearch(query: string) {
     enabled: query.length >= 2,
     staleTime: 1 * 60 * 1000, // 1분
   });
+}
+
+// 정적 가이드 페이지 hook
+export function useGuidePages() {
+  return {
+    data: getGuidePages(),
+    isLoading: false,
+  };
 }
