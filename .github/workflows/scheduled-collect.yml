@@ -39,7 +39,7 @@ jobs:
       - name: Collect GitHub Actions status
         run: |
           echo "🚀 GitHub Actions 상태 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
-          node scripts/collect-actions-status.js
+          bun run scripts/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -47,8 +47,8 @@ jobs:
       - name: Rebuild wiki data and search index
         run: |
           echo "📚 Wiki 데이터 및 검색 인덱스 재빌드..."
-          npm run build:wiki
-          npm run build:search
+          bun run build:wiki
+          bun run build:search
 
       - name: Commit changes
         run: |

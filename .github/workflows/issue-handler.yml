@@ -54,7 +54,7 @@ jobs:
         id: generate
         run: |
           echo "🤖 AI 문서 생성 시작..."
-          node scripts/generate-document.js \
+          bun run scripts/generate-document.js \
             --issue-number "${{ github.event.issue.number }}" \
             --issue-title "${{ github.event.issue.title }}" \
             --issue-body "${{ github.event.issue.body }}"
@@ -66,8 +66,8 @@ jobs:
 
       - name: Build wiki data
         run: |
-          npm run build:wiki
-          npm run build:search
+          bun run build:wiki
+          bun run build:search
 
       - name: Commit and push
         run: |
