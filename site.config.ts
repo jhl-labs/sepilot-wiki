@@ -15,7 +15,7 @@ import type { SiteConfig } from './src/types';
  */
 export const siteConfig: SiteConfig = {
   // 사이트 기본 정보
-  title: 'My Wiki',
+  title: 'SEPilot Wiki',
   description: 'AI 기반 자동화 위키 시스템',
 
   // 로고 설정
@@ -25,15 +25,15 @@ export const siteConfig: SiteConfig = {
   // - icon: value에 lucide 아이콘 이름 입력 (예: 'BookOpen')
   logo: {
     type: 'text',
-    value: 'My Wiki',
+    value: 'SEPilot Wiki',
   },
 
   // 파비콘 경로 (public 폴더 기준)
   favicon: '/favicon.ico',
 
   // GitHub 저장소 정보
-  owner: 'your-username',
-  repo: 'your-wiki-repo',
+  owner: 'jhl-labs',
+  repo: 'sepilot-wiki',
   wikiPath: 'wiki',
 
   // 소셜 링크 (선택사항)
@@ -51,13 +51,13 @@ export const siteConfig: SiteConfig = {
     // Copyright 설정
     copyright: {
       enabled: true, // Copyright 표시 여부
-      text: 'My Wiki. All rights reserved.', // Copyright 문구 (© 연도는 자동 추가)
+      text: 'SEPilot Wiki. All rights reserved.', // Copyright 문구 (© 연도는 자동 추가)
       startYear: 2024, // 시작 연도 (현재 연도와 다르면 "2024-2025" 형식으로 표시)
     },
 
     // 푸터 링크
     links: [
-      { label: 'GitHub', url: 'https://github.com/your-username' },
+      { label: 'GitHub', url: 'https://github.com/jhl-labs' },
       // { label: 'Twitter', url: 'https://twitter.com/your-username' },
     ],
 
