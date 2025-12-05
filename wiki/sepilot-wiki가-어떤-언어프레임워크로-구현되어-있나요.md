@@ -16,6 +16,12 @@ SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
 - **React Router DOM** - SPA 라우팅
 - **TanStack Query (React Query)** - 서버 상태 관리
 
+### Next.js 사용 여부
+- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.
+- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.
+- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.
+- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.
+
 ### 마크다운 렌더링
 - **react-markdown** - 마크다운 파싱 및 렌더링
 - **remark-gfm** - GitHub Flavored Markdown 지원
