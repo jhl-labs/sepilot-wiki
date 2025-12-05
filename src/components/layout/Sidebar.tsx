@@ -8,6 +8,7 @@ import {
   AlertCircle,
   MessageSquare,
   Tag,
+  Tags,
   X,
   BookOpen,
   ExternalLink,
@@ -335,6 +336,16 @@ export function Sidebar() {
                   {openIssuesCount > 0 && (
                     <span className="nav-count">{openIssuesCount}</span>
                   )}
+                </NavLink>
+                <NavLink
+                  to="/tags"
+                  className={({ isActive }) =>
+                    clsx('nav-item nav-item-child', isActive && 'active')
+                  }
+                  onClick={handleLinkClick}
+                >
+                  <Tags size={14} />
+                  <span>전체 태그</span>
                 </NavLink>
               </div>
             )}

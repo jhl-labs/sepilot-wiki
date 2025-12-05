@@ -31,6 +31,38 @@ export async function fetchWikiPages(): Promise<WikiTree[]> {
   return data.tree;
 }
 
+// 태그 통계 타입
+export interface TagStats {
+  tag: string;
+  count: number;
+  pages: { title: string; slug: string }[];
+}
+
+// Wiki 페이지의 모든 태그와 통계 가져오기
+export async function fetchWikiTags(): Promise<TagStats[]> {
+  const data = await loadWikiData();
+  const tagMap = new Map<string, { count: number; pages: { title: string; slug: string }[] }>();
+
+  for (const page of data.pages) {
+    if (page.tags && Array.isArray(page.tags)) {
+      for (const tag of page.tags) {
+        const existing = tagMap.get(tag);
+        if (existing) {
+          existing.count++;
+          existing.pages.push({ title: page.title, slug: page.slug });
+        } else {
+          tagMap.set(tag, { count: 1, pages: [{ title: page.title, slug: page.slug }] });
+        }
+      }
+    }
+  }
+
+  // 배열로 변환하고 개수 기준으로 정렬
+  return Array.from(tagMap.entries())
+    .map(([tag, stats]) => ({ tag, ...stats }))
+    .sort((a, b) => b.count - a.count);
+}
+
 // 기본 가이드 페이지 목록 (정적)
 export function getGuidePages(): WikiTree[] {
   return [

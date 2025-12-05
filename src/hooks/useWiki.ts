@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, getGuidePages, fetchAIHistory, fetchDocumentAIHistory } from '../services/github';
+import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, getGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags } from '../services/github';
 
 export function useWikiPages() {
   return useQuery({
@@ -58,6 +58,15 @@ export function useDocumentAIHistory(slug: string) {
     queryKey: ['ai-history', 'document', slug],
     queryFn: () => fetchDocumentAIHistory(slug),
     enabled: !!slug,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+// Wiki 태그 통계 조회
+export function useWikiTags() {
+  return useQuery({
+    queryKey: ['wiki-tags'],
+    queryFn: fetchWikiTags,
     staleTime: 5 * 60 * 1000,
   });
 }

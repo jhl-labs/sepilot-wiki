@@ -4,3 +4,4 @@ export { SearchPage } from './SearchPage';
 export { IssuesPage } from './IssuesPage';
 export { NotFoundPage } from './NotFoundPage';
 export { AIHistoryPage } from './AIHistoryPage';
+export { TagsPage } from './TagsPage';
