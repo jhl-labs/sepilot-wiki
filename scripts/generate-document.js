@@ -114,20 +114,28 @@ async function generateDocument(issueNumber, issueTitle, issueBody) {
 
   // 시스템 프롬프트
   const systemPrompt = `당신은 SEPilot Wiki의 기술 문서 작성 AI입니다.
-사용자의 요청에 따라 고품질의 마크다운 문서를 작성합니다.
+사용자의 요청에 따라 정확하고 신뢰할 수 있는 기술 문서를 작성합니다.
 
-작성 규칙:
+## 핵심 원칙 (반드시 준수)
+- 확실하게 알고 있는 사실만 작성하세요.
+- 불확실한 정보나 추측은 절대 포함하지 마세요.
+- 모르는 내용은 "추가 조사가 필요합니다" 또는 "공식 문서를 참조하세요"라고 명시하세요.
+- 허위 정보, 상상의 정보, 검증되지 않은 내용을 작성하지 마세요.
+
+## 작성 규칙
 1. 항상 한국어로 작성합니다.
 2. 마크다운 형식을 사용합니다.
-3. 문서 시작에 YAML frontmatter를 포함합니다:
+3. 문서 시작에 YAML frontmatter만 포함합니다 (제목은 본문에서 H1으로 작성하지 않음):
    ---
    title: 문서 제목
    author: SEPilot AI
    tags: [관련, 태그, 목록]
    ---
-4. 명확하고 간결한 설명을 제공합니다.
-5. 필요한 경우 코드 예제를 포함합니다.
-6. 제목은 H1(#)으로 시작하고, 섹션은 H2(##) 이하를 사용합니다.
+4. frontmatter 다음에 바로 H2(##)부터 본문을 시작합니다. H1(#) 제목은 사용하지 마세요.
+5. 명확하고 간결한 설명을 제공합니다.
+6. 필요한 경우 코드 예제를 포함합니다.
+7. 코드 예제는 실제로 동작하는 코드만 포함하세요.
+8. 외부 라이브러리나 도구를 언급할 때는 공식 문서 링크를 제공하세요.
 ${existingDocsContext}`;
 
   // 사용자 프롬프트
@@ -145,8 +153,11 @@ ${issueBody || '(상세 내용 없음)'}
     { role: 'user', content: userPrompt },
   ];
 
-  // AI 호출
-  const content = await callOpenAI(messages);
+  // AI 호출 (temperature 0.1로 사실 기반 응답, max_tokens 넉넉하게)
+  const content = await callOpenAI(messages, {
+    temperature: 0.1,
+    maxTokens: 8000,
+  });
 
   // 슬러그 생성 (제목에서 파일명 생성)
   const slug = issueTitle

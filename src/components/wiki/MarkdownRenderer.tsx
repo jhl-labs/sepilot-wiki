@@ -90,9 +90,9 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           blockquote({ children }) {
             return <blockquote className="blockquote">{children}</blockquote>;
           },
-          h1({ children }) {
-            const id = generateId(children);
-            return <h1 id={id} className="heading heading-1">{children}</h1>;
+          h1() {
+            // H1은 페이지 헤더에서 frontmatter title로 렌더링되므로 본문에서는 숨김
+            return null;
           },
           h2({ children }) {
             const id = generateId(children);
