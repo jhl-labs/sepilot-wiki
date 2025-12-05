@@ -5,6 +5,10 @@ on:
     types: [labeled, unlabeled, closed]
   issue_comment:
     types: [created]
+  # push 이벤트는 워크플로우 검증용으로만 사용 (실제 동작 없음)
+  push:
+    paths:
+      - '.github/workflows/issue-handler.yml'
 
 permissions:
   contents: write
@@ -12,6 +16,14 @@ permissions:
   pull-requests: write
 
 jobs:
+  # push 이벤트일 때 워크플로우 검증용 (실제 동작 없음)
+  validate-workflow:
+    if: github.event_name == 'push'
+    runs-on: jhl-space
+    steps:
+      - name: Workflow validation
+        run: echo "✅ issue-handler.yml 워크플로우 검증 완료"
+
   handle-request-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'request'
     runs-on: jhl-space
