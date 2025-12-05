@@ -132,8 +132,31 @@ export function Sidebar() {
   const renderWikiTreeItem = (item: WikiTree, depth = 1): React.ReactNode => {
     const hasChildren = item.children && item.children.length > 0;
     const paddingLeft = depth > 1 ? `${1 + (depth - 1) * 0.75}rem` : undefined;
-    // menu 필드가 있으면 menu 사용, 없으면 title 사용
-    const displayName = item.menu || item.title;
+
+    // 카테고리(폴더)인 경우
+    if (item.isCategory) {
+      const categoryName = item.name || item.path || '';
+      // 카테고리는 클릭 불가 헤더로 렌더링하고 children만 표시
+      return (
+        <div key={item.path}>
+          <div
+            className="nav-item nav-item-child nav-category-header"
+            style={{ paddingLeft }}
+          >
+            <span>{categoryName}</span>
+          </div>
+          {/* depth 2까지만 children 렌더링 */}
+          {hasChildren && depth < 2 && (
+            <>
+              {item.children!.map((child) => renderWikiTreeItem(child, depth + 1))}
+            </>
+          )}
+        </div>
+      );
+    }
+
+    // 페이지인 경우 - menu 필드가 있으면 menu 사용, 없으면 title 사용
+    const displayName = item.menu || item.title || item.slug;
 
     return (
       <div key={item.slug}>

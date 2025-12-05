@@ -138,59 +138,84 @@ async function findMarkdownFiles(dir, baseDir = dir) {
   return files;
 }
 
-// 트리 구조 생성
+// 트리 구조 생성 (중첩 카테고리 지원)
 function buildTreeStructure(pages) {
   const tree = [];
-  const categories = {};
+  const categories = {}; // path -> category object
 
+  // 1단계: 모든 카테고리 경로를 먼저 생성
   for (const page of pages) {
     const parts = page.slug.split('/');
+    if (parts.length > 1) {
+      // 모든 중간 카테고리 경로 생성 (예: bun/ci/github-actions -> bun, bun/ci)
+      for (let i = 1; i < parts.length; i++) {
+        const categoryPath = parts.slice(0, i).join('/');
+        if (!categories[categoryPath]) {
+          categories[categoryPath] = {
+            name: parts[i - 1],
+            path: categoryPath,
+            isCategory: true,
+            children: [],
+          };
+        }
+      }
+    }
+  }
+
+  // 2단계: 페이지를 해당 카테고리에 추가
+  for (const page of pages) {
+    const parts = page.slug.split('/');
+    const pageItem = {
+      title: page.title,
+      slug: page.slug,
+      menu: page.menu,
+    };
 
     if (parts.length === 1) {
       // 루트 레벨 문서
-      tree.push({
-        title: page.title,
-        slug: page.slug,
-        menu: page.menu,
-      });
+      tree.push(pageItem);
     } else {
-      // 하위 디렉토리 문서
-      const category = parts.slice(0, -1).join('/');
-      if (!categories[category]) {
-        categories[category] = {
-          name: parts[parts.length - 2],
-          path: category,
-          children: [],
-        };
+      // 직접 부모 카테고리에 추가
+      const parentPath = parts.slice(0, -1).join('/');
+      if (categories[parentPath]) {
+        categories[parentPath].children.push(pageItem);
       }
-      categories[category].children.push({
-        title: page.title,
-        slug: page.slug,
-        menu: page.menu,
-      });
     }
   }
 
-  // 카테고리를 트리에 추가
-  for (const [path, category] of Object.entries(categories)) {
-    const existingCategory = tree.find((item) => item.path === path);
-    if (!existingCategory) {
-      tree.push({
-        name: category.name,
-        path: category.path,
-        isCategory: true,
-        children: category.children,
-      });
+  // 3단계: 카테고리를 부모 카테고리 또는 루트에 추가 (깊은 것부터 처리)
+  const sortedPaths = Object.keys(categories).sort((a, b) => b.length - a.length);
+  for (const path of sortedPaths) {
+    const category = categories[path];
+    const parts = path.split('/');
+
+    if (parts.length === 1) {
+      // 최상위 카테고리 -> 루트 트리에 추가
+      tree.push(category);
+    } else {
+      // 중첩 카테고리 -> 부모 카테고리에 추가
+      const parentPath = parts.slice(0, -1).join('/');
+      if (categories[parentPath]) {
+        categories[parentPath].children.push(category);
+      }
     }
   }
 
-  // 정렬
-  tree.sort((a, b) => {
-    // 카테고리 우선
-    if (a.isCategory && !b.isCategory) return -1;
-    if (!a.isCategory && b.isCategory) return 1;
-    return (a.title || a.name || '').localeCompare(b.title || b.name || '', 'ko');
-  });
+  // 4단계: 재귀적으로 정렬
+  const sortChildren = (items) => {
+    items.sort((a, b) => {
+      // 카테고리 우선
+      if (a.isCategory && !b.isCategory) return -1;
+      if (!a.isCategory && b.isCategory) return 1;
+      return (a.title || a.name || '').localeCompare(b.title || b.name || '', 'ko');
+    });
+    for (const item of items) {
+      if (item.children && item.children.length > 0) {
+        sortChildren(item.children);
+      }
+    }
+  };
+  sortChildren(tree);
 
   return tree;
 }

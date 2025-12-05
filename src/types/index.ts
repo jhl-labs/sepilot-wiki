@@ -26,9 +26,15 @@ export interface WikiRevision {
 }
 
 export interface WikiTree {
-  title: string;
-  slug: string;
+  // 페이지인 경우
+  title?: string;
+  slug?: string;
   menu?: string;
+  // 카테고리(폴더)인 경우
+  name?: string;
+  path?: string;
+  isCategory?: boolean;
+  // 공통
   children?: WikiTree[];
 }
 

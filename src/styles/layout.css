@@ -403,6 +403,22 @@
   padding: var(--spacing-2) var(--spacing-3);
 }
 
+/* 카테고리(폴더) 헤더 스타일 */
+.nav-category-header {
+  cursor: default;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--spacing-2);
+}
+
+.nav-category-header:hover {
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
 .nav-count {
   margin-left: auto;
   font-size: var(--font-size-xs);
