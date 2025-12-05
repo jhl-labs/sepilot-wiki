@@ -14,6 +14,7 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  actions: write
 
 jobs:
   # push 이벤트일 때 워크플로우 검증용 (실제 동작 없음)
@@ -70,18 +71,33 @@ jobs:
           bun run build:search
 
       - name: Commit and push
+        id: commit
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
           if git diff --staged --quiet; then
             echo "변경 사항 없음"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
             git push
+            echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger deploy workflow
+        if: steps.commit.outputs.has_changes == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-pages.yml',
+              ref: 'main'
+            });
 
       - name: Add labels
         uses: actions/github-script@v7
@@ -112,6 +128,8 @@ jobs:
               '',
               '📄 **문서 위치**: `wiki/' + slug + '.md`',
               '🔗 **미리보기**: [문서 보기](https://' + context.repo.owner + '.github.io/' + context.repo.repo + '/wiki/' + slug + ')',
+              '',
+              '> ⏳ **참고**: 배포가 진행 중입니다. 링크가 활성화되기까지 1~2분 정도 소요될 수 있습니다.',
               '',
               '---',
               '',
