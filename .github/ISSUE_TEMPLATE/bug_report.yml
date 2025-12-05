@@ -1,0 +1,63 @@
+name: "\U0001F41B 버그 리포트"
+description: 버그나 오류를 신고합니다
+title: "[버그] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        버그 리포트를 제출해주셔서 감사합니다. 가능한 상세히 작성해주세요.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 버그 설명
+      description: 발생한 버그에 대해 명확하게 설명해주세요
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 재현 방법
+      description: 버그를 재현하기 위한 단계
+      placeholder: |
+        1. '...' 페이지로 이동
+        2. '...' 버튼 클릭
+        3. '...' 입력
+        4. 오류 발생
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 예상 동작
+      description: 정상적으로 동작했을 때 예상되는 결과
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 스크린샷
+      description: 가능하다면 스크린샷을 첨부해주세요
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: 브라우저
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - 기타
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: 운영체제
+      placeholder: 예) Windows 11, macOS Sonoma

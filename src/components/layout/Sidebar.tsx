@@ -14,7 +14,7 @@ import {
 import { useWikiPages, useIssues, useGuidePages } from '../../hooks/useWiki';
 import { useSidebar } from '../../context/SidebarContext';
 import { Skeleton } from '../ui/Skeleton';
-import { LABELS } from '../../config';
+import { LABELS, urls } from '../../config';
 import clsx from 'clsx';
 
 export function Sidebar() {
@@ -193,7 +193,7 @@ export function Sidebar() {
 
         <div className="sidebar-footer">
           <a
-            href="https://github.com/jhl-labs/sepilot-wiki/issues/new"
+            href={urls.newIssue({ labels: LABELS.REQUEST })}
             target="_blank"
             rel="noopener noreferrer"
             className="request-btn"

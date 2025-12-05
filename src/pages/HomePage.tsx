@@ -10,7 +10,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { useWikiPages, useIssues } from '../hooks/useWiki';
-import { LABELS, config } from '../config';
+import { LABELS, config, urls } from '../config';
 import { Skeleton } from '../components/ui/Skeleton';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
@@ -38,7 +38,7 @@ export function HomePage() {
               <span>문서 보기</span>
             </Link>
             <a
-              href={`https://github.com/${config.owner}/${config.repo}/issues/new`}
+              href={urls.newIssue({ labels: LABELS.REQUEST })}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary btn-lg"
@@ -202,7 +202,7 @@ export function HomePage() {
                 <MessageSquare size={32} />
                 <p>아직 요청이 없습니다</p>
                 <a
-                  href={`https://github.com/${config.owner}/${config.repo}/issues/new`}
+                  href={urls.newIssue({ labels: LABELS.REQUEST })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary btn-sm"
@@ -224,7 +224,7 @@ export function HomePage() {
             문서를 작성해드립니다.
           </p>
           <a
-            href={`https://github.com/${config.owner}/${config.repo}/issues/new`}
+            href={urls.newIssue({ labels: LABELS.REQUEST })}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary btn-lg"

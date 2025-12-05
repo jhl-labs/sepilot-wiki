@@ -3,7 +3,7 @@ import { History, ChevronDown, ChevronUp, GitCommit, Plus, Minus, User, Calendar
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import type { WikiRevision } from '../../types';
-import { config } from '../../config';
+import { urls } from '../../config';
 import clsx from 'clsx';
 
 interface RevisionHistoryProps {
@@ -42,7 +42,7 @@ export function RevisionHistory({ history, slug }: RevisionHistoryProps) {
                 <div className="revision-sha">
                   <GitCommit size={14} />
                   <a
-                    href={`https://github.com/${config.owner}/${config.repo}/commit/${revision.sha}`}
+                    href={urls.commit(revision.sha)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="sha-link"
@@ -95,7 +95,7 @@ export function RevisionHistory({ history, slug }: RevisionHistoryProps) {
           )}
 
           <a
-            href={`https://github.com/${config.owner}/${config.repo}/commits/main/wiki/${slug}.md`}
+            href={urls.fileHistory(`wiki/${slug}.md`)}
             target="_blank"
             rel="noopener noreferrer"
             className="view-all-link"

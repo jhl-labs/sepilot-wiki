@@ -10,8 +10,13 @@ on:
       - main
       - develop
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
-  lint-and-test:
+  lint:
+    name: Lint
     runs-on: jhl-space
     steps:
       - name: Checkout
@@ -31,12 +36,9 @@ jobs:
       - name: Type check
         run: bun run typecheck
 
-      - name: Test
-        run: bun run test
-
-  build:
+  test:
+    name: Test
     runs-on: jhl-space
-    needs: lint-and-test
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,5 +51,41 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Run tests with coverage
+        run: bun run test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
+          verbose: true
+
+  build:
+    name: Build
+    runs-on: jhl-space
+    needs: [lint, test]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
       - name: Build
         run: bun run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7

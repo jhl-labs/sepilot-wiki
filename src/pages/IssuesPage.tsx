@@ -5,7 +5,7 @@ import { Badge } from '../components/ui/Badge';
 import { MessageSquare, ExternalLink, Filter } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { config, LABELS } from '../config';
+import { LABELS, urls } from '../config';
 import clsx from 'clsx';
 
 export function IssuesPage() {
@@ -44,7 +44,7 @@ export function IssuesPage() {
           </p>
         </div>
         <a
-          href={`https://github.com/${config.owner}/${config.repo}/issues/new?labels=request`}
+          href={urls.newIssue({ labels: LABELS.REQUEST })}
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary"
@@ -168,7 +168,7 @@ export function IssuesPage() {
               아직 문서 요청이 없습니다. 새로운 문서가 필요하시면 요청해주세요.
             </p>
             <a
-              href={`https://github.com/${config.owner}/${config.repo}/issues/new?labels=request`}
+              href={urls.newIssue({ labels: LABELS.REQUEST })}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"

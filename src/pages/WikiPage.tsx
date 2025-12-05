@@ -4,7 +4,7 @@ import { MarkdownRenderer, TableOfContents, Breadcrumb, PageMeta } from '../comp
 import { RevisionHistory } from '../components/wiki/RevisionHistory';
 import { Skeleton } from '../components/ui/Skeleton';
 import { AlertTriangle, FileQuestion, MessageSquare } from 'lucide-react';
-import { config } from '../config';
+import { urls, LABELS } from '../config';
 
 export function WikiPage() {
   // 와일드카드(*) 라우트에서 전체 경로를 가져옴
@@ -40,7 +40,7 @@ export function WikiPage() {
           <h2>페이지를 찾을 수 없습니다</h2>
           <p>요청하신 문서가 존재하지 않거나 삭제되었습니다.</p>
           <a
-            href={`https://github.com/${config.owner}/${config.repo}/issues/new?title=${encodeURIComponent(`문서 요청: ${slug}`)}&labels=request`}
+            href={urls.newIssue({ title: `문서 요청: ${slug}`, labels: LABELS.REQUEST })}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary"
@@ -67,7 +67,7 @@ export function WikiPage() {
                 내용에 오류가 있거나 업데이트가 필요할 수 있습니다. 문제를
                 발견하셨다면{' '}
                 <a
-                  href={`https://github.com/${config.owner}/${config.repo}/issues`}
+                  href={urls.issues()}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -109,7 +109,7 @@ export function WikiPage() {
         <footer className="wiki-footer">
           <div className="footer-actions">
             <a
-              href={`https://github.com/${config.owner}/${config.repo}/issues/new?title=${encodeURIComponent(`문서 수정 요청: ${page.title}`)}&labels=request`}
+              href={urls.newIssue({ title: `문서 수정 요청: ${page.title}`, labels: LABELS.REQUEST })}
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"

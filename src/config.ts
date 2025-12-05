@@ -20,3 +20,33 @@ export const LABELS = {
   DRAFT: 'draft',
   AI_GENERATED: 'ai-generated',
 } as const;
+
+// GitHub URL 헬퍼 함수들
+export const urls = {
+  // 저장소 URL
+  repo: () => `https://github.com/${config.owner}/${config.repo}`,
+
+  // Issues URL
+  issues: () => `${urls.repo()}/issues`,
+
+  // 새 Issue 생성 URL
+  newIssue: (options?: { title?: string; labels?: string; body?: string }) => {
+    const base = `${urls.repo()}/issues/new`;
+    const params = new URLSearchParams();
+    if (options?.title) params.set('title', options.title);
+    if (options?.labels) params.set('labels', options.labels);
+    if (options?.body) params.set('body', options.body);
+    const queryString = params.toString();
+    return queryString ? `${base}?${queryString}` : base;
+  },
+
+  // 커밋 URL
+  commit: (sha: string) => `${urls.repo()}/commit/${sha}`,
+
+  // 파일 히스토리 URL
+  fileHistory: (path: string, branch = 'main') =>
+    `${urls.repo()}/commits/${branch}/${path}`,
+
+  // GitHub Pages URL
+  pages: () => `https://${config.owner}.github.io/${config.repo}`,
+};

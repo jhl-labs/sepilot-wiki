@@ -1,5 +1,6 @@
-import { config, GITHUB_API_URL } from '../config';
+import { config, GITHUB_API_URL, urls } from '../config';
 import type { WikiPage, GitHubIssue, WikiTree } from '../types';
+import { formatTitle } from '../utils';
 
 // 빌드 시점에 생성된 정적 wiki 데이터 캐시
 let wikiDataCache: { pages: WikiPage[]; tree: WikiTree[] } | null = null;
@@ -191,14 +192,6 @@ export async function searchWiki(query: string): Promise<WikiPage[]> {
   }
 }
 
-// 슬러그를 제목으로 변환
-function formatTitle(slug: string): string {
-  return slug
-    .replace(/-/g, ' ')
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-}
-
 // 가이드 페이지 내용 (정적)
 function getGuidePage(slug: string): WikiPage {
   const guidePages: Record<string, WikiPage> = {
@@ -226,7 +219,7 @@ AI 에이전트 기반의 자동화된 위키 시스템입니다.
 
 ## 문서 요청하기
 
-새로운 문서가 필요하시면 [GitHub Issue](https://github.com/${config.owner}/${config.repo}/issues/new)를 생성하고 \`request\` 라벨을 추가해주세요.
+새로운 문서가 필요하시면 [GitHub Issue](${urls.newIssue()})를 생성하고 \`request\` 라벨을 추가해주세요.
       `,
       lastModified: new Date().toISOString(),
       tags: ['홈', '소개'],

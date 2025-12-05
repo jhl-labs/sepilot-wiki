@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useSidebar } from '../../context/SidebarContext';
-import { config } from '../../config';
+import { config, urls } from '../../config';
 import { Input } from '../ui/Input';
 
 export function Header() {
@@ -126,7 +126,7 @@ export function Header() {
         </div>
 
         <a
-          href={`https://github.com/${config.owner}/${config.repo}`}
+          href={urls.repo()}
           target="_blank"
           rel="noopener noreferrer"
           className="header-btn github-link"
