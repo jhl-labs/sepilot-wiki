@@ -247,7 +247,7 @@ export interface AIHistoryEntry {
   documentSlug: string;
   documentTitle: string;
   summary: string;
-  trigger: 'request_label' | 'invalid_label' | 'maintainer_comment' | 'issue_close';
+  trigger: 'request_label' | 'invalid_label' | 'maintainer_comment' | 'issue_close' | 'issue_reopen';
   triggerUser?: string;
   model?: string;
   changes?: {

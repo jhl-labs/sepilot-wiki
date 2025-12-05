@@ -37,6 +37,7 @@ const triggerLabels: Record<string, string> = {
   invalid_label: 'invalid 라벨',
   maintainer_comment: 'Maintainer 피드백',
   issue_close: 'Issue 종료',
+  issue_reopen: 'Issue 재오픈',
 };
 
 function AIHistoryTimeline({ entries }: { entries: AIHistoryEntry[] }) {
