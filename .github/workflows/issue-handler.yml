@@ -16,6 +16,10 @@ permissions:
   pull-requests: write
   actions: write
 
+concurrency:
+  group: issue-handler
+  cancel-in-progress: false
+
 jobs:
   # push 이벤트일 때 워크플로우 검증용 (실제 동작 없음)
   validate-workflow:

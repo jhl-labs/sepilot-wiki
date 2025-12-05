@@ -21,6 +21,7 @@ import { addAIHistoryEntry } from './lib/ai-history.js';
 // 경로 설정
 const WIKI_DIR = join(process.cwd(), 'wiki');
 const REPORT_FILE = join(process.cwd(), 'public', 'data', 'wiki-tree-report.json');
+const IS_DRY_RUN = process.env.DRY_RUN === 'true';
 
 /**
  * Wiki 문서 전체 로드
@@ -194,6 +195,7 @@ ${JSON.stringify(docSummaries, null, 2)}`;
 async function applyAutoActions(actions, documents) {
   const applied = [];
   const skipped = [];
+  const dryRunPreviewed = [];
 
   for (const action of actions) {
     if (!action.autoApply) {
@@ -203,17 +205,32 @@ async function applyAutoActions(actions, documents) {
 
     try {
       if (action.type === 'rename') {
-        await applyRename(action, documents);
-        applied.push(action);
-        console.log(`✅ 적용: ${action.source} → ${action.target}`);
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 적용 예정: ${action.source} → ${action.target}`);
+          dryRunPreviewed.push(action);
+        } else {
+          await applyRename(action, documents);
+          console.log(`✅ 적용: ${action.source} → ${action.target}`);
+          applied.push(action);
+        }
       } else if (action.type === 'move') {
-        await applyMove(action, documents);
-        applied.push(action);
-        console.log(`✅ 이동: ${action.source} → ${action.target}`);
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 이동 예정: ${action.source} → ${action.target}`);
+          dryRunPreviewed.push(action);
+        } else {
+          await applyMove(action, documents);
+          console.log(`✅ 이동: ${action.source} → ${action.target}`);
+          applied.push(action);
+        }
       } else if (action.type === 'create_category') {
-        await applyCreateCategory(action);
-        applied.push(action);
-        console.log(`✅ 카테고리 생성: ${action.target}`);
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 카테고리 생성 예정: ${action.target}`);
+          dryRunPreviewed.push(action);
+        } else {
+          await applyCreateCategory(action);
+          console.log(`✅ 카테고리 생성: ${action.target}`);
+          applied.push(action);
+        }
       } else {
         skipped.push(action);
       }
@@ -223,7 +240,7 @@ async function applyAutoActions(actions, documents) {
     }
   }
 
-  return { applied, skipped };
+  return { applied, skipped, dryRunPreviewed };
 }
 
 /**
@@ -310,6 +327,11 @@ async function createGitHubIssues(issues) {
     return [];
   }
 
+  if (IS_DRY_RUN) {
+    console.log(`[DRY RUN] ${issues.length}개 Issue 생성 건너뜀`);
+    return [];
+  }
+
   const createdIssues = [];
 
   for (const issue of issues) {
@@ -352,23 +374,31 @@ async function saveReport(analysis, results) {
   const report = {
     timestamp: new Date().toISOString(),
     model: getOpenAIConfig().model,
+    isDryRun: IS_DRY_RUN,
     analysis: analysis.analysis,
     suggestedStructure: analysis.suggestedStructure,
     results: {
       appliedActions: results.applied.length,
       skippedActions: results.skipped.length,
+      dryRunPreviewedActions: results.dryRunPreviewed?.length || 0,
       createdIssues: results.createdIssues?.length || 0,
     },
     actions: {
       applied: results.applied,
       skipped: results.skipped,
+      dryRunPreviewed: results.dryRunPreviewed || [],
     },
     createdIssues: results.createdIssues || [],
   };
 
-  await mkdir(dirname(REPORT_FILE), { recursive: true });
-  await writeFile(REPORT_FILE, JSON.stringify(report, null, 2));
-  console.log(`📄 리포트 저장: ${REPORT_FILE}`);
+  if (IS_DRY_RUN) {
+    console.log('[DRY RUN] 리포트 저장 건너뜀');
+    console.log(`📋 리포트 미리보기:\n${JSON.stringify(report.results, null, 2)}`);
+  } else {
+    await mkdir(dirname(REPORT_FILE), { recursive: true });
+    await writeFile(REPORT_FILE, JSON.stringify(report, null, 2));
+    console.log(`📄 리포트 저장: ${REPORT_FILE}`);
+  }
 
   return report;
 }
@@ -399,6 +429,7 @@ async function recordHistory(report) {
  */
 async function main() {
   console.log('🌳 Wiki Tree Maintainer 시작');
+  if (IS_DRY_RUN) console.log('🧪 TEST MODE (DRY RUN) - 변경 사항이 저장되지 않습니다.');
   console.log(`📅 ${new Date().toISOString()}`);
   console.log('---');
 
@@ -418,17 +449,25 @@ async function main() {
     console.log(`🔍 분석 완료: ${analysis.actions?.length || 0}개 액션 제안됨`);
 
     // 3. 자동 적용
-    const { applied, skipped } = await applyAutoActions(analysis.actions || [], documents);
-    console.log(`✅ ${applied.length}개 자동 적용, ⏸️ ${skipped.length}개 보류`);
+    const { applied, skipped, dryRunPreviewed } = await applyAutoActions(analysis.actions || [], documents);
+    if (IS_DRY_RUN) {
+      console.log(`🔍 ${dryRunPreviewed.length}개 미리보기, ⏸️ ${skipped.length}개 보류`);
+    } else {
+      console.log(`✅ ${applied.length}개 자동 적용, ⏸️ ${skipped.length}개 보류`);
+    }
 
     // 4. Issue 생성 (복잡한 변경 사항)
     const createdIssues = await createGitHubIssues(analysis.issuesForHuman || []);
 
     // 5. 리포트 저장
-    const report = await saveReport(analysis, { applied, skipped, createdIssues });
+    const report = await saveReport(analysis, { applied, skipped, dryRunPreviewed, createdIssues });
 
-    // 6. History 기록
-    await recordHistory(report);
+    // 6. History 기록 (Dry Run 시 건너뜀)
+    if (!IS_DRY_RUN) {
+      await recordHistory(report);
+    } else {
+      console.log('[DRY RUN] 히스토리 기록 건너뜀');
+    }
 
     // 7. GitHub Actions 출력
     await setGitHubOutput({
