@@ -21,6 +21,7 @@ import { addAIHistoryEntry } from './lib/ai-history.js';
 // 경로 설정
 const WIKI_DIR = join(process.cwd(), 'wiki');
 const REPORT_FILE = join(process.cwd(), 'public', 'data', 'wiki-tree-report.json');
+const IS_DRY_RUN = process.env.DRY_RUN === 'true';
 
 /**
  * Wiki 문서 전체 로드
@@ -203,17 +204,29 @@ async function applyAutoActions(actions, documents) {
 
     try {
       if (action.type === 'rename') {
-        await applyRename(action, documents);
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 적용 예정: ${action.source} → ${action.target}`);
+        } else {
+          await applyRename(action, documents);
+          console.log(`✅ 적용: ${action.source} → ${action.target}`);
+        }
         applied.push(action);
-        console.log(`✅ 적용: ${action.source} → ${action.target}`);
       } else if (action.type === 'move') {
-        await applyMove(action, documents);
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 이동 예정: ${action.source} → ${action.target}`);
+        } else {
+          await applyMove(action, documents);
+          console.log(`✅ 이동: ${action.source} → ${action.target}`);
+        }
         applied.push(action);
-        console.log(`✅ 이동: ${action.source} → ${action.target}`);
       } else if (action.type === 'create_category') {
-        await applyCreateCategory(action);
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 카테고리 생성 예정: ${action.target}`);
+        } else {
+          await applyCreateCategory(action);
+          console.log(`✅ 카테고리 생성: ${action.target}`);
+        }
         applied.push(action);
-        console.log(`✅ 카테고리 생성: ${action.target}`);
       } else {
         skipped.push(action);
       }
@@ -310,6 +323,11 @@ async function createGitHubIssues(issues) {
     return [];
   }
 
+  if (IS_DRY_RUN) {
+    console.log(`[DRY RUN] ${issues.length}개 Issue 생성 건너뜀`);
+    return [];
+  }
+
   const createdIssues = [];
 
   for (const issue of issues) {
@@ -399,6 +417,7 @@ async function recordHistory(report) {
  */
 async function main() {
   console.log('🌳 Wiki Tree Maintainer 시작');
+  if (IS_DRY_RUN) console.log('🧪 TEST MODE (DRY RUN) - 변경 사항이 저장되지 않습니다.');
   console.log(`📅 ${new Date().toISOString()}`);
   console.log('---');
 
