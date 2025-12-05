@@ -17,7 +17,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: issue-handler
   cancel-in-progress: false
 
 jobs:
