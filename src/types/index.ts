@@ -1,10 +1,13 @@
 // Wiki 관련 타입
+export type WikiStatus = 'draft' | 'published' | 'needs_review' | 'deleted';
+
 export interface WikiPage {
   title: string;
   slug: string;
   content: string;
   lastModified: string;
   author?: string;
+  status?: WikiStatus;
   isDraft?: boolean;
   isInvalid?: boolean;
   tags?: string[];

@@ -156,14 +156,20 @@ async function buildWikiData() {
       }
     }
 
+    // status 필드 기반 상태 결정 (draft, published, needs_review, deleted 등)
+    const status = metadata.status || 'published';
+    const isDraft = status === 'draft' || metadata.isDraft === 'true' || metadata.isDraft === true;
+    const isInvalid = status === 'needs_review' || metadata.isInvalid === 'true' || metadata.isInvalid === true;
+
     const page = {
       title: metadata.title || formatTitle(slug),
       slug,
       content: body,
       lastModified,
       author,
-      isDraft: metadata.isDraft === 'true' || metadata.isDraft === true,
-      isInvalid: metadata.isInvalid === 'true' || metadata.isInvalid === true,
+      status,
+      isDraft,
+      isInvalid,
       tags: metadata.tags || [],
       history,
     };
