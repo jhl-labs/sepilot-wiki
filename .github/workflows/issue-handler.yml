@@ -28,6 +28,8 @@ jobs:
   handle-request-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'request'
     runs-on: jhl-space
+    outputs:
+      has_changes: ${{ steps.commit.outputs.has_changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -86,18 +88,6 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Trigger deploy workflow
-        if: steps.commit.outputs.has_changes == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'deploy-pages.yml',
-              ref: 'main'
-            });
 
       - name: Add labels
         uses: actions/github-script@v7
@@ -261,3 +251,25 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+
+  # 모든 handle job이 완료된 후 배포 (handle-request-label에서 변경사항이 있을 때만 실행)
+  deploy:
+    needs: [handle-request-label, handle-invalid-label, handle-issue-close, handle-maintainer-comment]
+    if: |
+      always() &&
+      !cancelled() &&
+      (needs.handle-request-label.result == 'success' && needs.handle-request-label.outputs.has_changes == 'true')
+    runs-on: jhl-space
+    steps:
+      - name: Trigger deploy workflow
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log('🚀 배포 워크플로우 트리거...');
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-pages.yml',
+              ref: 'main'
+            });
+            console.log('✅ 배포 워크플로우가 시작되었습니다.');
