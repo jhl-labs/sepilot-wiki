@@ -119,6 +119,82 @@ function getFileAtCommit(filePath, sha) {
   }
 }
 
+// 재귀적으로 모든 마크다운 파일 찾기
+async function findMarkdownFiles(dir, baseDir = dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await findMarkdownFiles(fullPath, baseDir)));
+    } else if (entry.name.endsWith('.md')) {
+      // 상대 경로 계산 (wiki/ 기준)
+      const relativePath = fullPath.replace(baseDir + '/', '');
+      files.push({ fullPath, relativePath });
+    }
+  }
+
+  return files;
+}
+
+// 트리 구조 생성
+function buildTreeStructure(pages) {
+  const tree = [];
+  const categories = {};
+
+  for (const page of pages) {
+    const parts = page.slug.split('/');
+
+    if (parts.length === 1) {
+      // 루트 레벨 문서
+      tree.push({
+        title: page.title,
+        slug: page.slug,
+        menu: page.menu,
+      });
+    } else {
+      // 하위 디렉토리 문서
+      const category = parts.slice(0, -1).join('/');
+      if (!categories[category]) {
+        categories[category] = {
+          name: parts[parts.length - 2],
+          path: category,
+          children: [],
+        };
+      }
+      categories[category].children.push({
+        title: page.title,
+        slug: page.slug,
+        menu: page.menu,
+      });
+    }
+  }
+
+  // 카테고리를 트리에 추가
+  for (const [path, category] of Object.entries(categories)) {
+    const existingCategory = tree.find((item) => item.path === path);
+    if (!existingCategory) {
+      tree.push({
+        name: category.name,
+        path: category.path,
+        isCategory: true,
+        children: category.children,
+      });
+    }
+  }
+
+  // 정렬
+  tree.sort((a, b) => {
+    // 카테고리 우선
+    if (a.isCategory && !b.isCategory) return -1;
+    if (!a.isCategory && b.isCategory) return 1;
+    return (a.title || a.name || '').localeCompare(b.title || b.name || '', 'ko');
+  });
+
+  return tree;
+}
+
 async function buildWikiData() {
   console.log('📚 Wiki 데이터 빌드 시작...');
 
@@ -131,21 +207,20 @@ async function buildWikiData() {
     return;
   }
 
-  // wiki 폴더의 모든 마크다운 파일 읽기
-  const files = await readdir(WIKI_DIR);
-  const mdFiles = files.filter((f) => f.endsWith('.md'));
+  // wiki 폴더의 모든 마크다운 파일 재귀적으로 찾기
+  const mdFiles = await findMarkdownFiles(WIKI_DIR);
+  console.log(`   발견된 마크다운 파일: ${mdFiles.length}개`);
 
   const pages = [];
-  const tree = [];
 
-  for (const file of mdFiles) {
-    const filePath = join(WIKI_DIR, file);
-    const content = await readFile(filePath, 'utf-8');
-    const slug = basename(file, '.md');
+  for (const { fullPath, relativePath } of mdFiles) {
+    const content = await readFile(fullPath, 'utf-8');
+    // 슬러그는 상대 경로에서 .md 제거
+    const slug = relativePath.replace('.md', '');
     const { metadata, body } = parseMarkdownWithFrontmatter(content);
 
     // Git 히스토리 가져오기
-    const history = getGitHistory(filePath);
+    const history = getGitHistory(fullPath);
 
     // 최신 커밋에서 lastModified와 author 추출 (프론트매터보다 우선)
     let lastModified = metadata.lastModified || new Date().toISOString();
@@ -173,24 +248,15 @@ async function buildWikiData() {
       isDraft,
       isInvalid,
       tags: metadata.tags || [],
+      menu: metadata.menu,
       history,
     };
 
     pages.push(page);
-
-    // tree 항목 생성 (menu 필드가 있으면 포함)
-    const treeItem = {
-      title: page.title,
-      slug: page.slug,
-    };
-    if (metadata.menu) {
-      treeItem.menu = metadata.menu;
-    }
-    tree.push(treeItem);
   }
 
-  // 제목 기준 정렬
-  tree.sort((a, b) => a.title.localeCompare(b.title, 'ko'));
+  // 트리 구조 생성
+  const tree = buildTreeStructure(pages);
 
   // public 폴더 생성
   await mkdir(OUTPUT_DIR, { recursive: true });
