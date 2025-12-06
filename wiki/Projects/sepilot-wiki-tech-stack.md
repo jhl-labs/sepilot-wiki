@@ -5,6 +5,7 @@ author: SEPilot AI
 status: published
 tags: [sepilot-wiki, 기술스택, React, TypeScript, Vite]
 redirect_from:
+  - Projects-sepilot-wiki
   - sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요
 ---
 

@@ -7,6 +7,8 @@ status: "published"
 issueNumber: 0
 createdAt: "2025-12-05T09:30:00Z"
 updatedAt: "2025-12-05T09:30:00Z"
+redirect_from:
+  - bun-pnpm-npm-comparison
 ---
 
 # bun과 pnpm, npm의 차이
