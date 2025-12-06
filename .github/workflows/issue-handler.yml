@@ -78,6 +78,12 @@ jobs:
           bun run build:wiki
           bun run build:search
 
+      - name: Collect workflow status
+        run: bun run scripts/collect-actions-status.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
       - name: Commit and push
         id: commit
         run: |
@@ -188,6 +194,12 @@ jobs:
           bun run build:wiki
           bun run build:search
 
+      - name: Collect workflow status
+        run: bun run scripts/collect-actions-status.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
       - name: Commit and push
         id: commit
         run: |
@@ -257,6 +269,12 @@ jobs:
         run: |
           bun run build:wiki
           bun run build:search
+
+      - name: Collect workflow status
+        run: bun run scripts/collect-actions-status.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Commit and push
         id: commit
@@ -376,6 +394,12 @@ jobs:
         run: |
           bun run build:wiki
           bun run build:search
+
+      - name: Collect workflow status
+        run: bun run scripts/collect-actions-status.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Commit and push
         id: commit
@@ -521,6 +545,13 @@ jobs:
         run: |
           bun run build:wiki
           bun run build:search
+
+      - name: Collect workflow status
+        if: steps.check-maintainer.outputs.result == 'true'
+        run: bun run scripts/collect-actions-status.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Commit and push
         if: steps.check-maintainer.outputs.result == 'true'

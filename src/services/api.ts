@@ -1,4 +1,4 @@
-import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats } from '../types';
+import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus } from '../types';
 
 // 빌드 시점에 생성된 정적 wiki 데이터 캐시
 let wikiDataCache: { pages: WikiPage[]; tree: WikiTree[] } | null = null;
@@ -176,4 +176,27 @@ export async function fetchAIHistory(): Promise<AIHistory> {
 export async function fetchDocumentAIHistory(slug: string): Promise<AIHistoryEntry[]> {
     const history = await fetchAIHistory();
     return history.entries.filter(entry => entry.documentSlug === slug);
+}
+
+// Actions Status 데이터 캐시
+let actionsStatusCache: ActionsStatus | null = null;
+
+// Actions Status 데이터 로드
+export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
+    if (actionsStatusCache) {
+        return actionsStatusCache;
+    }
+
+    try {
+        const cacheBuster = `?v=${Date.now()}`;
+        const response = await fetch(`${import.meta.env.BASE_URL}actions-status.json${cacheBuster}`);
+        if (!response.ok) {
+            return null;
+        }
+        actionsStatusCache = await response.json();
+        return actionsStatusCache;
+    } catch (error) {
+        console.error('Error loading actions status:', error);
+        return null;
+    }
 }

@@ -282,3 +282,41 @@ export interface TagStats {
   count: number;
   pages: { title: string; slug: string }[];
 }
+
+// GitHub Actions Status 타입을 추가합니다.
+export interface WorkflowRun {
+  id: number;
+  name: string;
+  status: string;
+  conclusion: string | null;
+  branch: string;
+  event: string;
+  createdAt: string;
+  updatedAt?: string;
+  url: string;
+  actor: string;
+}
+
+export interface WorkflowStatus {
+  id: number;
+  name: string;
+  path: string;
+  state: string;
+  overallStatus: string;
+  badgeUrl: string;
+  url: string;
+  recentRuns: WorkflowRun[];
+}
+
+export interface ActionsStatus {
+  collectedAt: string;
+  repository: string;
+  summary: {
+    totalWorkflows: number;
+    inProgressCount: number;
+    recentFailuresCount: number;
+  };
+  workflows: WorkflowStatus[];
+  inProgress: WorkflowRun[];
+  recentFailures: WorkflowRun[];
+}

@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { LABELS, urls } from '../config';
 import clsx from 'clsx';
+import { WorkflowStatus } from '../components/WorkflowStatus';
 
 export function IssuesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,6 +54,8 @@ export function IssuesPage() {
           <span>새 요청</span>
         </a>
       </header>
+
+      <WorkflowStatus />
 
       <div className="issues-filters">
         <div className="filter-group">
@@ -144,14 +147,14 @@ export function IssuesPage() {
                         label.name === LABELS.REQUEST
                           ? 'default'
                           : label.name === LABELS.INVALID
-                          ? 'invalid'
-                          : label.name === LABELS.DRAFT
-                          ? 'draft'
-                          : label.name === LABELS.WIKI_MAINTENANCE
-                          ? 'maintenance'
-                          : label.name === LABELS.PUBLISHED
-                          ? 'published'
-                          : 'default'
+                            ? 'invalid'
+                            : label.name === LABELS.DRAFT
+                              ? 'draft'
+                              : label.name === LABELS.WIKI_MAINTENANCE
+                                ? 'maintenance'
+                                : label.name === LABELS.PUBLISHED
+                                  ? 'published'
+                                  : 'default'
                       }
                       className="issue-label"
                       style={
