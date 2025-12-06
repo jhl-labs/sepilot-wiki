@@ -1,14 +1,33 @@
 # SEPilot Wiki
 
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-success)](https://sepilot.github.io/sepilot-wiki)
+[![Test Coverage](https://img.shields.io/badge/coverage-69%25-yellow)](./CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-SEPilot-blue)](./LICENSE)
+
 AI 에이전트 기반의 자동화된 위키 시스템입니다. 저장소의 `/wiki` 폴더를 데이터 저장소로 활용하고, GitHub Issues를 통해 사용자와 소통하며, AI가 문서를 생성/수정/유지보수합니다.
 
 ## 주요 기능
 
+### Core Features
 - **저장소 기반 Wiki**: `/wiki` 폴더의 마크다운 파일을 GitHub Contents API로 관리
-- **GitHub Pages 프론트엔드**: 정적 사이트로 위키 콘텐츠 제공
+- **GitHub Pages 프론트엔드**: React + TypeScript + Vite 기반 정적 사이트
 - **AI 기반 문서 작성**: GitHub Issue의 `request` 라벨을 통해 AI가 자동으로 문서 초안 작성
 - **협업 워크플로우**: maintainer가 Issue 댓글로 수정 요청 시 자동 반영
-- **자동 정보 수집**: cron 스케줄을 통해 시스템 상태 정보 자동 업데이트 (k8s 노드 상태, 서비스 health 등)
+- **Wiki Tree 자동 정비**: AI 기반 문서 구조 자동 유지보수
+- **자동 정보 수집**: cron 스케줄을 통해 시스템 상태 정보 자동 업데이트
+
+### Pages
+- **HomePage**: 최근 문서, 태그 워드클라우드, 통계 대시보드
+- **WikiPage**: 마크다운 렌더링, TOC, 리비전 히스토리
+- **SearchPage**: Fuse.js 기반 전문 검색
+- **IssuesPage**: GitHub Issues 연동 및 필터링
+- **TagsPage**: 태그별 문서 분류
+- **AIHistoryPage**: AI 작업 이력 타임라인
+
+### Components
+- **MarkdownRenderer**: GFM 지원, 코드 하이라이팅, Mermaid 다이어그램, Plotly 차트
+- **Sidebar**: 계층적 문서 네비게이션
+- **ThemeToggle**: 라이트/다크/시스템 테마 지원
 
 ## 워크플로우
 
@@ -25,31 +44,53 @@ AI 에이전트 기반의 자동화된 위키 시스템입니다. 저장소의 `
 
 ## 기술 스택
 
-- **프레임워크**: React + TypeScript
-- **빌드 도구**: Vite
-- **런타임**: Bun
-- **CI/CD**: GitHub Actions
-- **호스팅**: GitHub Pages
+| 카테고리 | 기술 |
+|---------|------|
+| **Framework** | React 18.3.1 + TypeScript 5.x |
+| **Build Tool** | Vite 7.2.6 |
+| **Runtime** | Bun 1.0+ |
+| **State Management** | TanStack Query 5.x |
+| **Routing** | React Router 7.x |
+| **Styling** | CSS Variables + Custom CSS |
+| **Testing** | Vitest + Testing Library |
+| **CI/CD** | GitHub Actions |
+| **Hosting** | GitHub Pages |
+
+### 보안
+- Path Traversal 방지 (경로 검증)
+- XSS 방지 (DOMPurify)
+- Content-Security-Policy 헤더
+- Prompt Injection 방지
 
 ## 프로젝트 구조
 
 ```
 sepilot-wiki/
-├── .claude/              # Claude Code 설정
-│   └── commands/         # 슬래시 커맨드
 ├── .github/
 │   └── workflows/        # GitHub Actions 워크플로우
+│       ├── deploy-pages.yml       # GitHub Pages 배포
+│       ├── issue-handler.yml      # Issue 이벤트 처리
+│       ├── wiki-tree-maintainer.yml # Wiki 구조 정비
+│       └── scheduled-collect.yml  # 시스템 정보 수집
 ├── wiki/                 # Wiki 문서 (마크다운 파일)
-├── src/                  # 프론트엔드 소스 코드
-├── CLAUDE.md            # 프로젝트별 Claude 지시사항
-├── PROTOTYPE.md         # 프로토타입 명세
-└── README.md            # 프로젝트 문서
+├── src/
+│   ├── components/       # React 컴포넌트
+│   ├── pages/           # 페이지 컴포넌트
+│   ├── hooks/           # 커스텀 훅
+│   ├── context/         # React Context
+│   ├── types/           # TypeScript 타입 정의
+│   ├── services/        # API 서비스 레이어
+│   └── styles/          # CSS 스타일
+├── scripts/             # Node.js 스크립트 (CI/CD용)
+├── CLAUDE.md           # 프로젝트별 Claude 지시사항
+├── CHANGELOG.md        # 변경 이력
+└── README.md           # 프로젝트 문서
 ```
 
 ## 시작하기
 
 ### 사전 요구사항
-- Bun 1.0 이상
+- Bun 1.0 이상 또는 Node.js 18+
 - GitHub 계정 및 저장소
 
 ### 설치
@@ -57,12 +98,27 @@ sepilot-wiki/
 ```bash
 # 의존성 설치
 bun install
+# 또는
+npm install
 
 # 개발 서버 실행
 bun dev
 
 # 빌드
 bun run build
+
+# 테스트 실행
+bun test
+
+# Lint 검사
+bun run lint
+```
+
+### 환경 변수 (선택)
+
+```env
+GITHUB_TOKEN=        # GitHub API 토큰 (rate limit 완화)
+GITHUB_REPO=         # 대상 저장소 (owner/repo)
 ```
 
 ## Wiki 문서 추가 방법
@@ -87,11 +143,42 @@ bun run build
 3. 원하는 문서 내용 설명
 4. AI가 초안 작성 후 Maintainer 검토
 
+## 테스트
+
+현재 테스트 커버리지: **69%**
+
+```bash
+# 전체 테스트 실행
+bun test
+
+# 커버리지 리포트
+bun test --coverage
+
+# Watch 모드
+bun test --watch
+```
+
+테스트 대상:
+- MarkdownRenderer 컴포넌트 (18개 테스트)
+- useWiki hooks (12개 테스트)
+- ThemeContext (10개 테스트)
+- config, utils (37개 테스트)
+
 ## 기여 방법
 
 1. Issue를 통해 기능 제안 또는 버그 리포트
 2. `request` 라벨로 문서 작성 요청
 3. PR을 통한 직접 기여
+
+### 개발 가이드
+- 코드 스타일: ESLint + Prettier 설정 준수
+- 커밋 전 lint 검사 필수 (`bun run lint`)
+- TypeScript strict 모드 사용
+- 테스트 작성 권장
+
+## 릴리즈 노트
+
+자세한 변경 이력은 [CHANGELOG.md](./CHANGELOG.md)를 참조하세요.
 
 ## 라이선스
 
