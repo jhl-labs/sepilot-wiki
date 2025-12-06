@@ -59,7 +59,7 @@ function App() {
                     <Route path="issues" element={<IssuesPage />} />
                     <Route path="tags" element={<TagsPage />} />
                     <Route path="ai-history" element={<AIHistoryPage />} />
-                    <Route path="ai-history/:slug" element={<AIHistoryPage />} />
+                    <Route path="ai-history/*" element={<AIHistoryPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                   </Route>
                 </Routes>

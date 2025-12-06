@@ -105,7 +105,9 @@ function AIHistoryTimeline({ entries }: { entries: AIHistoryEntry[] }) {
 }
 
 export function AIHistoryPage() {
-  const { slug } = useParams<{ slug: string }>();
+  // 와일드카드(*) 라우트에서 전체 경로를 가져옴
+  const { '*': wildcardPath } = useParams();
+  const slug = wildcardPath || '';
   const [filter, setFilter] = useState<AIActionType | 'all'>('all');
 
   // 문서별 히스토리 또는 전체 히스토리
