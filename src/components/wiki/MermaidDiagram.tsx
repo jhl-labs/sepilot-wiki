@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
+import DOMPurify from 'dompurify';
 import { useTheme } from '../../context/ThemeContext';
 
 interface MermaidDiagramProps {
@@ -28,15 +29,23 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
                 // parse로 먼저 유효성 검사 후 render
                 if (await mermaid.parse(chart)) {
                     const { svg } = await mermaid.render(id, chart);
-                    setSvg(svg);
+                    // XSS 방지: DOMPurify로 SVG 정제
+                    const sanitizedSvg = DOMPurify.sanitize(svg, {
+                        USE_PROFILES: { svg: true, svgFilters: true },
+                        ADD_TAGS: ['foreignObject'],
+                    });
+                    setSvg(sanitizedSvg);
                 }
             } catch (error) {
                 console.error('Mermaid render error:', error);
                 // 에러 발생 시 원본 코드 보여주기 혹은 에러 메시지 표시
                 // 여기서는 에러 메시지를 붉은 텍스트로 표시
+                // XSS 방지: 에러 메시지도 정제
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                const sanitizedError = DOMPurify.sanitize(errorMessage);
                 setSvg(`<div style="color: #ef4444; padding: 1rem; border: 1px solid #ef4444; border-radius: 4px;">
           <strong>Mermaid Error:</strong><br/>
-          <pre>${error instanceof Error ? error.message : String(error)}</pre>
+          <pre>${sanitizedError}</pre>
         </div>`);
             }
         };

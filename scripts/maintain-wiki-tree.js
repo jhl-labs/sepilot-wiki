@@ -13,13 +13,25 @@
  */
 
 import { readFile, readdir, writeFile, rename, mkdir, unlink } from 'fs/promises';
-import { join, dirname } from 'path';
+import { join, dirname, resolve } from 'path';
 import { existsSync } from 'fs';
 import { callOpenAI, getOpenAIConfig, setGitHubOutput } from './lib/utils.js';
 import { addAIHistoryEntry } from './lib/ai-history.js';
 
 // 경로 설정
-const WIKI_DIR = join(process.cwd(), 'wiki');
+const WIKI_DIR = resolve(process.cwd(), 'wiki');
+
+/**
+ * 경로가 WIKI_DIR 내부에 있는지 검증 (Path Traversal 방지)
+ */
+function validatePath(targetPath) {
+  const resolvedPath = resolve(targetPath);
+  const resolvedWikiDir = resolve(WIKI_DIR);
+  if (!resolvedPath.startsWith(resolvedWikiDir + '/') && resolvedPath !== resolvedWikiDir) {
+    throw new Error(`보안 오류: 경로가 wiki 디렉토리 외부를 가리킵니다: ${targetPath}`);
+  }
+  return resolvedPath;
+}
 const REPORT_FILE = join(process.cwd(), 'public', 'data', 'wiki-tree-report.json');
 const IS_DRY_RUN = process.env.DRY_RUN === 'true';
 
@@ -254,6 +266,10 @@ async function applyRename(action, documents) {
 
   const sourceFullPath = doc.fullPath;
   const targetPath = join(WIKI_DIR, action.target);
+
+  // Path Traversal 방지: 대상 경로가 WIKI_DIR 내부인지 검증
+  validatePath(targetPath);
+
   const targetDir = dirname(targetPath);
 
   // 대상 디렉토리 생성
@@ -283,6 +299,10 @@ async function applyMove(action, documents) {
  */
 async function applyCreateCategory(action) {
   const categoryPath = join(WIKI_DIR, action.target);
+
+  // Path Traversal 방지: 대상 경로가 WIKI_DIR 내부인지 검증
+  validatePath(categoryPath);
+
   if (!existsSync(categoryPath)) {
     await mkdir(categoryPath, { recursive: true });
     console.log(`📁 디렉토리 생성: ${action.target}`);
