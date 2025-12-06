@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2025-12-06T00:28:02.335Z</generated>
+  <generated>2025-12-06T00:29:55.232Z</generated>
   <count>9</count>
   <items>
   <item>
@@ -50,7 +50,7 @@ React Router DOM - SPA 라우팅
 TanStack Query (React Query) - 서버 상태 관리
 Next.js...</excerpt>
     <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -112,7 +112,7 @@ bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저
 번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
 패키지...</excerpt>
     <tags>bun, npm, yarn, 패키지 매니저, 가이드</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -167,8 +167,8 @@ pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하�
 은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
 이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
     <tags>bun, pnpm, npm, 비교, 가이드</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>GitHub Actions로 bun을 쓰는 방법</title>
@@ -217,7 +217,7 @@ GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매�
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
 워크플로우...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -266,8 +266,8 @@ SEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.
      루트   네비게이션 메뉴  
      src/styles   커스텀 CSS...</excerpt>
     <tags>설정, 가이드, TypeScript</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>테마 커스터마이징</title>
@@ -305,8 +305,8 @@ Footer 설정
 에서 추가 스타일을 정의할 수 있습니다:
 네...</excerpt>
     <tags>테마, 커스터마이징, 설정</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>시작하기</title>
@@ -345,68 +345,29 @@ SEPilot Wiki를 사용하여 나만의 위키를 만드는 방법을 안내합�
 GitHub Pages 배포
 GitHub...</excerpt>
     <tags>시작하기, 설치, 배포</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>FAQ</title>
     <slug>_guide/faq</slug>
-    <content>자주 묻는 질문
-일반
-Q: SEPilot Wiki는 무엇인가요?
-A: GitHub 저장소 기반의 AI 자동화 위키 시스템입니다. Astro 같은 정적 사이트 생성기처럼 설정 파일을 통해 커스터마이징이 가능하며, GitHub Issue와 LLM을 연동하여 문서를 자동 생성합니다.
-Q: 무료로 사용할 수 있나요?
-A: 네, SEPilot Wiki 자체는 오픈소스이며 무료입니다. 다만 LLM API 사용 시 해당 제공자의 요금이 발생할 수 있습니다.
-설치 및 배포
-Q: 어떤 런타임이 필요한가요?
-A: Bun 또는 Node.js 20+를 지원합니다. Bun 사용을 권장합니다.
-Q: 로컬에서 개발할 수 있나요?
-A: 네,  또는 로 로컬 개발 서버를 실행할 수 있습니다.
-Q: GitHub Pages 외에 다른 호스팅 서비스도 지원하나요?
-A: 네, Vite 기반이므로 Vercel, Netlify, Cloudflare Pages 등 모든 정적 호스팅 서비스에서 사용 가능합니다.
-테마 및 커스터마이징
-Q: 다크 모드를 지원하나요?
-A: 네, 라이트/다크/시스템 테마를 지원합니다. 에서 각 테마의 색상을 설정할 수 있습니다.
-Q: 로고를 이미지로 변경하려면 어떻게 하나요?
-A: 에서 다음과 같이 설정합니다:
-Q: 폰트를 변경하려면 어떻게 하나요?
-A: 의  설정에서 변경합니다. Google Fonts를 사용하려면 에 폰트 링크를 추가해야 합니다.
-LLM 및 AI 기능
-Q: OpenAI 외에 다른 LLM을 사용할 수 있나요?
-A: 네, OpenAI 호환 API를 제공하는 모든 서비스를 사용할 수 있습니다 (Azure OpenAI, Ollama, LM Studio 등).
-Q: AI가 생성한 문서를 수정할 수 있나요?
-A: 네, 세 가지 방법이 있습니다:
-폴더에서 마크다운 파일 직접 수정
-Issue 댓글로 피드백 작성 (AI가 자동 반영)
-PR로 변경 제안
-Q: AI 문서 생성이 실패하면 어떻게 하나요?
-A: GitHub Actions 로그에서 오류를 확인하세요. 주로 API 키 설정 오류이거나 LLM 서비스 장애일 수 있습니다.
-문서 관리
-Q: 문서를 직접 수정할 수 있나요?
-A: 네,  폴더의 마크다운 파일을 직접 수정하거나 PR을 통해 변경할 수 있습니다.
-Q: 문서에 이미지를 추가하려면 어떻게 하나요?
-A:  폴더에 이미지를 추가한 후 마크다운에서 참조합니다:
-Q: 검색이 잘 안 되는 것 같아요
-A: 검색 인덱스는 빌드 시점에 생성됩니다. 새 문서 추가 후 재배포가 필요합니다.
-문제 해결
-Q: 빌드가 실패해요
-A: 다음을 확인하세요:
-또는  실행 여부
-설정 파일의 TypeScript 문법 오류
-Node.js/Bun 버전 호환성
-Q: GitHub Pages에 배포가 안 돼요
-A: Repository Settings &gt; Pages에서 Source가 &quot;GitHub Actions&quot;로 설정되어 있는지 확인하세요.
-Q: LLM 응답이 너무 느려요
-A: LLM 모델을 더 빠른 것으로 변경하거나 (예: gpt-4 대신 gpt-3.5-turbo), 로컬 LLM 사용을 고려해보세요.</content>
-    <excerpt>자주 묻는 질문
-일반
-Q: SEPilot Wiki는 무엇인가요?
-A: GitHub 저장소 기반의 AI 자동화 위키 시스템입니다. Astro 같은 정적 사이트 생성기처럼 설정 파일을 통해 커스터마이징이 가능하며, GitHub Issue와 LLM을 연동하여 문서를 자동 생성합니다.
-Q: 무료로 사용할 수 있나요?
-A: 네, SEPilot Wiki 자체는 오픈소...</excerpt>
-    <tags>FAQ, 도움말, 문제해결</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
-    <author>GitHub Action</author>
+    <content>FAQ
+이 문서는 자주 묻는 질문(FAQ)을 모아놓은 가이드입니다.
+주의: 기존에 존재하던 이미지  파일이 현재 저장소에 없으므로 해당 이미지 링크를 제거했습니다. 필요 시 올바른 이미지 파일을 추가하고 링크를 업데이트하십시오.
+질문 1
+답변 내용...
+질문 2
+답변 내용...</content>
+    <excerpt>FAQ
+이 문서는 자주 묻는 질문(FAQ)을 모아놓은 가이드입니다.
+주의: 기존에 존재하던 이미지  파일이 현재 저장소에 없으므로 해당 이미지 링크를 제거했습니다. 필요 시 올바른 이미지 파일을 추가하고 링크를 업데이트하십시오.
+질문 1
+답변 내용...
+질문 2
+답변 내용...</excerpt>
+    <tags>FAQ</tags>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>LLM 워크플로우</title>
@@ -478,8 +439,8 @@ AI가 Issue 제목과 본문을 분석
 Issue에 결과 댓글 추가
 ,  라벨 자동 추가...</excerpt>
     <tags>LLM, 워크플로우, AI, GitHub Actions</tags>
-    <lastModified>2025-12-06T00:21:59Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2025-12-06T09:28:49+09:00</lastModified>
+    <author>JHL</author>
   </item>
   </items>
 </searchIndex>
