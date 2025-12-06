@@ -1,6 +1,146 @@
 {
   "issues": [
     {
+      "id": "I_kwDOQi3pD87cfXGK",
+      "number": 24,
+      "title": "[요청] Project 문서 추가",
+      "body": "### 문서 제목\n\nSEPilot Desktop 소개\n\n### 문서 내용 설명\n\n자체 개발한 여러 Project를 소개할 예정\nProjects 그룹 아래에 배치하고,  추가 정보에 있는 내용을 정리하여 작성하시오\n\n\n### 카테고리\n\n가이드\n\n### 추가 정보\n\n오픈소스 LLM\n데스크톱 앱\nChat, Editor, Browser 3가지 모드를 지원하는 강력하고 유연한 LLM 데스크톱 애플리케이션\nLangGraph 워크플로우, RAG (문서 편집/폴더 관리), MCP 도구, Monaco Editor + Terminal, Vision 기반 브라우저 자동화",
+      "state": "open",
+      "labels": [
+        {
+          "id": "LA_kwDOQi3pD88AAAACRoX4Xg",
+          "name": "request",
+          "color": "bbc772"
+        }
+      ],
+      "user": {
+        "login": "declue",
+        "avatar_url": "https://avatars.githubusercontent.com/u/22270938?v=4",
+        "html_url": "https://github.com/declue"
+      },
+      "created_at": "2025-12-06T00:41:13Z",
+      "updated_at": "2025-12-06T01:17:59Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/24",
+      "comments": 6,
+      "documentSlug": "projects/sepilot-desktop",
+      "documentPath": "wiki/projects/sepilot-desktop.md"
+    },
+    {
+      "id": "I_kwDOQi3pD87ce90A",
+      "number": 23,
+      "title": "[Wiki Maintainer] Create redirects for renamed paths",
+      "body": "Because several files and the `_guide` directory will be renamed, existing external links may break. Add redirect entries (e.g., in `netlify.toml`, `vercel.json`, or your static site router) for the following old → new paths:\n\n- `_guide/` → `guide/`\n- `_guide/customization.md` → `guide/theme-customization.md`\n\nThis ensures that users and search engines are seamlessly forwarded to the new URLs.\n\n---\n*🤖 이 Issue는 Wiki Tree Maintainer에 의해 자동 생성되었습니다.*",
+      "state": "closed",
+      "labels": [
+        {
+          "id": "LA_kwDOQi3pD88AAAACRqQooA",
+          "name": "published",
+          "color": "ededed"
+        },
+        {
+          "id": "LA_kwDOQi3pD88AAAACRq0Alw",
+          "name": "wiki-maintenance",
+          "color": "ededed"
+        }
+      ],
+      "user": {
+        "login": "github-actions",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "html_url": "https://github.com/apps/github-actions"
+      },
+      "created_at": "2025-12-06T00:16:01Z",
+      "updated_at": "2025-12-06T00:28:12Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/23",
+      "comments": 2,
+      "documentSlug": null,
+      "documentPath": null
+    },
+    {
+      "id": "I_kwDOQi3pD87ce9z3",
+      "number": 22,
+      "title": "[Wiki Maintainer] Set proper publication status for guide documents",
+      "body": "Five documents under the `_guide` (to be renamed `guide`) directory have `status: \"unknown\"`. Decide whether each should be `published` or remain `draft` and update the metadata accordingly.\n\n- `configuration.md`\n- `customization.md` (will become `theme-customization.md`)\n- `getting-started.md`\n- `faq.md`\n- `llm-workflow.md`\n\nAfter updating, run the build process to verify that the status changes are reflected in the generated site.\n\n---\n*🤖 이 Issue는 Wiki Tree Maintainer에 의해 자동 생성되었습니다.*",
+      "state": "closed",
+      "labels": [
+        {
+          "id": "LA_kwDOQi3pD88AAAACRqQooA",
+          "name": "published",
+          "color": "ededed"
+        },
+        {
+          "id": "LA_kwDOQi3pD88AAAACRq0Alw",
+          "name": "wiki-maintenance",
+          "color": "ededed"
+        }
+      ],
+      "user": {
+        "login": "github-actions",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "html_url": "https://github.com/apps/github-actions"
+      },
+      "created_at": "2025-12-06T00:16:01Z",
+      "updated_at": "2025-12-06T00:34:20Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/22",
+      "comments": 4,
+      "documentSlug": null,
+      "documentPath": null
+    },
+    {
+      "id": "I_kwDOQi3pD87ce9zu",
+      "number": 21,
+      "title": "[Wiki Maintainer] Add a home page (home.md) at the repository root",
+      "body": "The wiki currently lacks a landing page. Create `home.md` (or rename an existing introductory document) and place it at the repository root. This file will serve as the default entry point for all visitors.\n\n- Ensure the file contains a brief overview and navigation links to the main categories (`about`, `bun`, `guide`).\n- Add a redirect from the old root URL (if any) to the new `home.md`.\n\n---\n*🤖 이 Issue는 Wiki Tree Maintainer에 의해 자동 생성되었습니다.*",
+      "state": "closed",
+      "labels": [
+        {
+          "id": "LA_kwDOQi3pD88AAAACRq0Alw",
+          "name": "wiki-maintenance",
+          "color": "ededed"
+        }
+      ],
+      "user": {
+        "login": "github-actions",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "html_url": "https://github.com/apps/github-actions"
+      },
+      "created_at": "2025-12-06T00:16:00Z",
+      "updated_at": "2025-12-06T00:27:53Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/21",
+      "comments": 1,
+      "documentSlug": null,
+      "documentPath": null
+    },
+    {
+      "id": "I_kwDOQi3pD87ceqXD",
+      "number": 18,
+      "title": "[요청] bun, pnpm, npm의 차이를 작성해줘",
+      "body": "### 문서 제목\n\nbun과 다른 pnpm, npm의 차이\n\n### 문서 내용 설명\n\nbun 중심으로 pnpm, npm의 차이를 작성하시오\nnodejs (typescript) 개발자를 위해 쓰는 글임\n\n### 카테고리\n\n가이드\n\n### 추가 정보\n\n_No response_",
+      "state": "closed",
+      "labels": [
+        {
+          "id": "LA_kwDOQi3pD88AAAACRoX4Xg",
+          "name": "request",
+          "color": "bbc772"
+        },
+        {
+          "id": "LA_kwDOQi3pD88AAAACRqQooA",
+          "name": "published",
+          "color": "ededed"
+        }
+      ],
+      "user": {
+        "login": "declue",
+        "avatar_url": "https://avatars.githubusercontent.com/u/22270938?v=4",
+        "html_url": "https://github.com/declue"
+      },
+      "created_at": "2025-12-05T20:48:06Z",
+      "updated_at": "2025-12-06T00:20:10Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/18",
+      "comments": 11,
+      "documentSlug": null,
+      "documentPath": null
+    },
+    {
       "id": "I_kwDOQi3pD87cdqcZ",
       "number": 15,
       "title": "[Wiki Maintainer] Publish draft documents or change status",
@@ -176,5 +316,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2025-12-05T12:46:02.257Z"
+  "lastUpdated": "2025-12-06T10:20:00.000Z"
 }
