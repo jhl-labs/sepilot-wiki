@@ -76,7 +76,7 @@ export function WorkflowStatus() {
                                     <RotateCw className="spin" size={16} />
                                 </div>
                                 <div className="workflow-info">
-                                    <span className="workflow-name">{run.workflowName || run.name}</span>
+                                    <span className="workflow-name">{run.name}</span>
                                     <div className="workflow-meta">
                                         <span className="workflow-branch">
                                             <GitBranch size={12} /> {run.branch}
