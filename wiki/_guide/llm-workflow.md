@@ -9,23 +9,21 @@ SEPilot Wiki는 GitHub Actions와 LLM을 연동하여 자동으로 문서를 생
 
 ## 워크플로우 개요
 
-```
-사용자                  GitHub Actions              LLM
-  │                         │                        │
-  ├─ Issue 생성 ───────────>│                        │
-  │  (request 라벨)         │                        │
-  │                         ├─ 컨텍스트 수집 ────────>│
-  │                         │  (Issue 본문+댓글)      │
-  │                         │                        │
-  │                         │<─ 문서 생성 ────────────┤
-  │                         │                        │
-  │<─ 댓글로 결과 알림 ──────┤                        │
-  │                         │                        │
-  ├─ 피드백 댓글 ──────────>│                        │
-  │                         ├─ 피드백 분석 ──────────>│
-  │                         │                        │
-  │                         │<─ 문서 수정 ────────────┤
-  │                         │                        │
+```mermaid
+sequenceDiagram
+    participant User as 사용자
+    participant GHA as GitHub Actions
+    participant LLM as LLM
+
+    User->>GHA: Issue 생성 (request 라벨)
+    GHA->>LLM: 컨텍스트 수집 (Issue 본문+댓글)
+    LLM-->>GHA: 문서 생성
+    GHA-->>User: 댓글로 결과 알림
+    
+    User->>GHA: 피드백 댓글
+    GHA->>LLM: 피드백 분석
+    LLM-->>GHA: 문서 수정
+    GHA-->>User: 댓글로 결과 알림
 ```
 
 ## 지원하는 이벤트
