@@ -52,5 +52,6 @@ GitHub Issue에 `request` 라벨을 추가하면 AI가 문서 초안을 자동 �
 ## 다음 단계
 
 - [테마 커스터마이징](/wiki/_guide/customization) - 색상, 폰트, 로고 변경
+- [다이어그램 및 차트](/wiki/_guide/diagrams) - Mermaid 및 Plotly 사용법
 - [LLM 워크플로우](/wiki/_guide/llm-workflow) - AI 문서 생성 과정 이해
 - [설정 파일 가이드](/wiki/_guide/configuration) - 상세 설정 옵션
