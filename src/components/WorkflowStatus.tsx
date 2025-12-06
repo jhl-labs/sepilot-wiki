@@ -1,6 +1,7 @@
 
 import { useActionsStatus } from '../hooks/useWiki';
 import { Activity, CheckCircle, XCircle, Clock, RotateCw, GitBranch } from 'lucide-react';
+import type { WorkflowRun } from '../types';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import '../styles/workflow.css';
@@ -63,7 +64,7 @@ export function WorkflowStatus() {
                         <Clock size={16} /> 진행 중인 작업
                     </h3>
                     <div className="workflow-list">
-                        {status.inProgress.map((run: any) => (
+                        {status.inProgress.map((run: WorkflowRun) => (
                             <a
                                 key={run.id}
                                 href={run.url}

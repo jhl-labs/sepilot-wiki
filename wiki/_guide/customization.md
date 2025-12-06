@@ -27,8 +27,8 @@ export const siteConfig: SiteConfig = {
   description: 'AI 기반 자동화 위키',
 
   // GitHub 저장소
-  owner: 'your-username',
-  repo: 'your-wiki-repo',
+  owner: 'jhl-labs',
+  repo: 'sepilot-wiki',
   wikiPath: 'wiki',
 };
 ```

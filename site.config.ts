@@ -38,7 +38,7 @@ export const siteConfig: SiteConfig = {
 
   // 소셜 링크 (선택사항)
   social: {
-    github: 'https://github.com/your-username',
+    github: 'https://github.com/declue',
     // twitter: 'https://twitter.com/your-username',
     // discord: 'https://discord.gg/your-server',
     // website: 'https://your-website.com',
