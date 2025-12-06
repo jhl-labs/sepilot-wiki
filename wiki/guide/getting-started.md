@@ -1,6 +1,8 @@
 ---
 title: 시작하기
 tags: [시작하기, 설치, 배포]
+redirect_from:
+  - _guide-getting-started
 ---
 
 # 시작하기

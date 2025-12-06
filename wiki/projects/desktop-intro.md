@@ -7,6 +7,8 @@ status: "draft"
 issueNumber: 0
 createdAt: "2025-12-06T05:45:00Z"
 updatedAt: "2025-12-06T05:45:00Z"
+redirect_from:
+  - Projects-sepilot-desktop-intro
 ---
 
 # SEPilot Desktop 소개

@@ -7,6 +7,8 @@ status: "published"
 issueNumber: 0
 createdAt: "2025-12-06T00:30:00Z"
 updatedAt: "2025-12-06T12:00:00Z"
+redirect_from:
+  - _guide-faq
 ---
 
 # FAQ

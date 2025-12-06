@@ -1,6 +1,8 @@
 ---
 title: LLM 워크플로우
 tags: [LLM, 워크플로우, AI, GitHub Actions]
+redirect_from:
+  - _guide-llm-workflow
 ---
 
 # LLM 워크플로우

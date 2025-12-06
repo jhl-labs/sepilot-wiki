@@ -1,6 +1,8 @@
 ---
 title: 다이어그램 및 차트 사용 가이드
 tags: [mermaid, plotly, 차트, 다이어그램, 사용법]
+redirect_from:
+  - _guide-diagrams
 ---
 
 # 다이어그램 및 차트 사용 가이드
