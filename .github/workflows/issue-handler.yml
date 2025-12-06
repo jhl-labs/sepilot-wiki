@@ -95,6 +95,7 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
+            git pull --rebase
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -211,6 +212,7 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "fix: Issue #${{ github.event.issue.number }} - 오류 수정"
+            git pull --rebase
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -287,6 +289,7 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 발행"
+            git pull --rebase
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -412,6 +415,7 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 발행 취소"
+            git pull --rebase
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -565,6 +569,7 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - 피드백 반영"
+            git pull --rebase
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi

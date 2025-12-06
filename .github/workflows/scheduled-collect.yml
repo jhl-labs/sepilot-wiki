@@ -59,6 +59,7 @@ jobs:
             echo "변경 사항 없음"
           else
             git commit -m "chore: 자동 상태 수집 - $(date '+%Y-%m-%d %H:%M')"
+            git pull --rebase
             git push
           fi
         env:
