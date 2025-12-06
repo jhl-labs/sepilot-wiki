@@ -8,6 +8,8 @@ import { useTheme } from '../../context/ThemeContext';
 import { Link } from 'react-router-dom';
 import { Copy, Check, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
+import { MermaidDiagram } from './MermaidDiagram';
+import { PlotlyChart } from './PlotlyChart';
 
 interface MarkdownRendererProps {
   content: string;
@@ -35,9 +37,19 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
               );
             }
 
+            const language = match?.[1] || 'text';
+
+            if (language === 'mermaid') {
+              return <MermaidDiagram chart={String(children)} />;
+            }
+
+            if (language === 'plotly') {
+              return <PlotlyChart data={String(children)} />;
+            }
+
             return (
               <CodeBlock
-                language={match?.[1] || 'text'}
+                language={language}
                 theme={actualTheme}
               >
                 {String(children).replace(/\n$/, '')}
