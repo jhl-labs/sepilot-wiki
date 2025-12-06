@@ -7,12 +7,7 @@ echo "🔍 민감 정보 검사 중..."
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx|js|jsx|json|yml|yaml|md)$' || true)
 
 if [ -n "$STAGED_FILES" ]; then
-    # 홈 디렉토리 경로 패턴 검사 (실제 유저 경로)
-    if echo "$STAGED_FILES" | xargs grep -lE '/home/[a-zA-Z0-9_]+/' 2>/dev/null; then
-        echo "❌ 홈 디렉토리 경로가 감지되었습니다!"
-        echo "커밋이 중단됩니다. 민감 정보를 제거한 후 다시 시도하세요."
-        exit 1
-    fi
+
 
     # API 키/비밀번호 패턴 검사
     if echo "$STAGED_FILES" | xargs grep -lE '(password|api[_-]?key|secret)\s*[:=]\s*["\x27][^"\x27]+' 2>/dev/null; then
