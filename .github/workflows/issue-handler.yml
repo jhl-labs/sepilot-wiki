@@ -101,6 +101,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
 
       - name: Add labels
         uses: actions/github-script@v7
@@ -218,6 +219,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
 
       - name: Comment with result
         uses: actions/github-script@v7
@@ -295,6 +297,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
 
       - name: Remove draft label
         uses: actions/github-script@v7
@@ -421,6 +424,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
 
       - name: Remove published label
         uses: actions/github-script@v7
@@ -575,6 +579,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
 
       - name: Comment with result
         if: steps.check-maintainer.outputs.result == 'true'

@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import Plot from 'react-plotly.js';
 import type { Data, Layout, Config } from 'plotly.js';
 import { useTheme } from '../../context/ThemeContext';
@@ -15,17 +15,14 @@ interface ChartState {
 }
 
 export function PlotlyChart({ data }: PlotlyChartProps) {
-    const [chartData, setChartData] = useState<ChartState | null>(null);
-    const [error, setError] = useState<string | null>(null);
     const { actualTheme } = useTheme();
 
-    useEffect(() => {
+    const { chartData, error } = useMemo(() => {
         try {
-            const parsed = JSON.parse(data);
-            setChartData(parsed);
-            setError(null);
-        } catch (e) {
-            setError('Invalid JSON for Plotly chart');
+            const parsed = JSON.parse(data) as ChartState;
+            return { chartData: parsed, error: null };
+        } catch {
+            return { chartData: null, error: 'Invalid JSON for Plotly chart' };
         }
     }, [data]);
 

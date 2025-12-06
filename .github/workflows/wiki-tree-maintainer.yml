@@ -60,6 +60,8 @@ jobs:
 
       - name: Commit and push changes
         if: steps.maintain.outputs.has_changes == 'true'
+        env:
+          HUSKY: 0
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
