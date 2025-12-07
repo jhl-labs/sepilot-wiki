@@ -1,50 +1,46 @@
 {
-  "timestamp": "2025-12-07T00:18:51.214Z",
+  "timestamp": "2025-12-07T06:05:44.392Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "The wiki consists of 11 markdown files spread across three top‑level directories (projects, guide, bun). All filenames are already English but many do not follow the strict slug convention (lower‑case, hyphen‑separated) and several could be renamed for clarity. The guide section mixes introductory, configuration and advanced topics, making navigation harder. No home.md exists at the root, and many documents have an \"unknown\" status that should be clarified. No duplicate content was found, but there is overlapping information about the technology stack between tech‑stack.md and faq.md.",
-    "totalDocuments": 11,
+    "summary": "The wiki consists of 12 markdown files organized in three top‑level directories (projects, guide, bun). All filenames already follow the required slug convention. The main issues are a draft document, several files with unknown status, and two overlapping guides in the `guide` folder that should be merged. No exact duplicate content was found.",
+    "totalDocuments": 12,
     "categories": [
       "projects",
       "guide",
       "bun"
     ],
     "issues": [
-      "Missing home.md at repository root",
-      "Many documents have status \"unknown\" – need to set to draft/published",
-      "Guide directory mixes beginner and advanced topics – consider sub‑categories",
-      "File names are not fully slug‑compliant (uppercase letters, missing hyphens)",
-      "Potential broken external links if files are renamed without redirects"
+      "One draft document (desktop‑introduction.md) needs review before publishing.",
+      "Several files have status \"unknown\" – clarification required.",
+      "Two guides (theme‑customization.md, configuration‑guide.md) cover overlapping configuration topics and can be merged.",
+      "No redirects are needed because all filenames already match the slug format."
     ]
   },
   "suggestedStructure": {
     "projects": [
-      "desktop-introduction.md",
-      "technology-stack.md"
+      "technology-stack.md",
+      "sepilot-desktop-introduction.md"
     ],
-    "guide": {
-      "setup": [
-        "getting-started.md",
-        "configuration-guide.md",
-        "theme-customization.md"
-      ],
-      "advanced": [
-        "faq.md",
-        "llm-workflow.md",
-        "diagrams-guide.md"
-      ]
-    },
+    "guide": [
+      "getting-started.md",
+      "diagrams-guide.md",
+      "llm-workflow.md",
+      "configuration-and-theme.md"
+    ],
     "bun": [
       "bun-overview.md",
       "bun-comparison-pnpm-npm.md",
       "bun-github-actions-setup.md"
     ],
+    "reference": [
+      "faq.md"
+    ],
     "home.md": []
   },
   "results": {
-    "appliedActions": 9,
-    "skippedActions": 9,
+    "appliedActions": 1,
+    "skippedActions": 4,
     "dryRunPreviewedActions": 0,
     "createdIssues": 4
   },
@@ -52,148 +48,44 @@
     "applied": [
       {
         "type": "rename",
-        "priority": "high",
-        "source": "projects/desktop-intro.md",
-        "target": "projects/desktop-introduction.md",
-        "reason": "Slug should be lower‑case and use hyphens; more descriptive",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/tech-stack.md",
-        "target": "projects/technology-stack.md",
-        "reason": "Use full word \"technology\" for clarity and keep slug style",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "guide/configuration.md",
-        "target": "guide/configuration-guide.md",
-        "reason": "Adds context to the file name and follows slug convention",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "guide/customization.md",
-        "target": "guide/theme-customization.md",
-        "reason": "Explicitly mentions theme; slug‑compliant",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
         "priority": "low",
-        "source": "guide/llm-workflow.md",
-        "target": "guide/llm-workflow.md",
-        "reason": "File already follows slug rules – kept for consistency",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "guide/diagrams.md",
-        "target": "guide/diagrams-guide.md",
-        "reason": "Clarifies purpose and matches slug style",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "bun/comparison-pnpm-npm.md",
-        "target": "bun/bun-comparison-pnpm-npm.md",
-        "reason": "Prefix with \"bun\" for consistency with other bun files",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "bun/overview.md",
-        "target": "bun/bun-overview.md",
-        "reason": "Prefix with \"bun\" for consistency",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "bun/github-actions-setup.md",
-        "target": "bun/bun-github-actions-setup.md",
-        "reason": "Prefix with \"bun\" for consistency",
+        "source": "projects/desktop-introduction.md",
+        "target": "projects/sepilot-desktop-introduction.md",
+        "reason": "Add project prefix for consistency with other project docs.",
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "create_category",
-        "priority": "medium",
-        "source": "",
-        "target": "guide/setup",
-        "reason": "Group beginner‑oriented docs (getting‑started, configuration‑guide, theme‑customization)",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "medium",
-        "source": "",
-        "target": "guide/advanced",
-        "reason": "Group advanced/technical docs (llm‑workflow, diagrams‑guide, faq)",
-        "autoApply": false
-      },
-      {
         "type": "move",
-        "priority": "medium",
-        "source": "guide/getting-started.md",
-        "target": "guide/setup/getting-started.md",
-        "reason": "Place beginner guide into the new setup sub‑category",
-        "autoApply": false
-      },
-      {
-        "type": "move",
-        "priority": "medium",
-        "source": "guide/configuration-guide.md",
-        "target": "guide/setup/configuration-guide.md",
-        "reason": "Place configuration guide into the new setup sub‑category",
-        "autoApply": false
-      },
-      {
-        "type": "move",
-        "priority": "medium",
+        "priority": "low",
         "source": "guide/theme-customization.md",
-        "target": "guide/setup/theme-customization.md",
-        "reason": "Place theme customization into the new setup sub‑category",
+        "target": "guide/configuration-and-theme.md",
+        "reason": "Will be merged with configuration‑guide.md into a single comprehensive guide.",
+        "autoApply": false
+      },
+      {
+        "type": "merge",
+        "priority": "high",
+        "source": "guide/theme-customization.md & guide/configuration-guide.md",
+        "target": "guide/configuration-and-theme.md",
+        "reason": "Both files describe site configuration and theming; merging reduces redundancy and improves discoverability.",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
+        "priority": "medium",
+        "source": "",
+        "target": "reference",
+        "reason": "FAQ is a reference document; moving it to a dedicated `reference` folder clarifies its purpose.",
         "autoApply": false
       },
       {
         "type": "move",
         "priority": "medium",
         "source": "guide/faq.md",
-        "target": "guide/advanced/faq.md",
-        "reason": "Place FAQ into the advanced sub‑category",
-        "autoApply": false
-      },
-      {
-        "type": "move",
-        "priority": "medium",
-        "source": "guide/llm-workflow.md",
-        "target": "guide/advanced/llm-workflow.md",
-        "reason": "Place LLM workflow guide into the advanced sub‑category",
-        "autoApply": false
-      },
-      {
-        "type": "move",
-        "priority": "medium",
-        "source": "guide/diagrams-guide.md",
-        "target": "guide/advanced/diagrams-guide.md",
-        "reason": "Place diagrams guide into the advanced sub‑category",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "low",
-        "source": "",
-        "target": "home.md",
-        "reason": "Add a home page at repository root to serve as entry point",
+        "target": "reference/faq.md",
+        "reason": "Place FAQ under the new `reference` category.",
         "autoApply": false
       }
     ],
@@ -201,24 +93,24 @@
   },
   "createdIssues": [
     {
-      "number": 30,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/30",
-      "title": "Add missing home.md at repository root"
+      "number": 34,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/34",
+      "title": "Review and publish draft document"
     },
     {
-      "number": 31,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/31",
-      "title": "Clarify document statuses (draft / published)"
+      "number": 35,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/35",
+      "title": "Clarify status of documents with \"unknown\""
     },
     {
-      "number": 32,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/32",
-      "title": "Create redirects for renamed files"
+      "number": 36,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/36",
+      "title": "Merge Theme Customization and Configuration Guides"
     },
     {
-      "number": 33,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/33",
-      "title": "Review overlapping tech‑stack information"
+      "number": 37,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/37",
+      "title": "Create a `reference` category and relocate FAQ"
     }
   ]
 }

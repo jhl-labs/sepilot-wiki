@@ -16,7 +16,7 @@
   },
   {
     "title": "SEPilot Desktop 소개",
-    "slug": "projects/desktop-introduction",
+    "slug": "projects/sepilot-desktop-introduction",
     "content": "SEPilot Desktop 소개\nSEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통합했습니다.\n📦 다운로드 & 소스\n다운로드: SEPilot Desktop 다운로드\nGitHub: GitHub 저장소\n데모 영상: assets/videos/demo-main.mp4\n🧭 3가지 애플리케이션 모드\nChat 모드\nAI와 대화하고 질문할 수 있습니다.\nLangGraph 워크플로우 (Instant, Sequential, Deep, Coding, RAG, Browser 등 6가지)\nRAG 문서 검색 & 편집, 폴더 관리, Export/Import\nMCP 도구 통합 (GitHub, Brave Search, Filesystem 등)\n이미지 생성 & 해석 (ComfyUI, Vision API)\nPersona 시스템 (AI 역할 정의, SQLite 영구 저장)\nQuick Question (최대 5개 단축키)\nGitHub Sync (AES‑256‑GCM 암호화)\n데모: assets/videos/chat-mode-demo.mp4\nEditor 모드\n코드 작성 및 파일 관리에 최적화된 환경입니다.\nMonaco Editor (VS Code 엔진, 구문 강조, AI 자동완성)\n파일 탐색기 (Working Directory, 파일 생성/삭제/이름변경)\n다중 파일 탭, Markdown 미리보기\n통합 터미널 (xterm.js, PowerShell/bash/zsh, 탭 관리)\n전체 파일 검색 (ripgrep 기반, Ctrl+Shift+F)\nAdvanced Editor Agent (50회 반복, 9개 Built‑in Tools)\n10가지 Notion 스타일 Writing Tools\n데모: assets/videos/editor-mode-demo.mp4\nBrowser 모드\nAI와 함께 웹을 탐색하고 자동화합니다.\nChromium 기반 브라우저 (BrowserView, Chrome 스타일 탭)\n18개 자동화 도구 (Navigate, DOM Inspection, Vision Tools 등)\nGoogle Search Tools (검색, 뉴스, Scholar, 이미지, 고급 필터)\nVision 기반 UI 제어 (Set‑of‑Mark, 좌표 클릭)\nBot 감지 우회 (Stealth Fingerprint, 자연스러운 타이밍)\n페이지 캡처 (MHTML + 스크린샷, 오프라인 뷰어)\n북마크 관리 (폴더별 정리)\n데모: assets/videos/browser-mode-demo.mp4\n🌟 주요 기능\nLangGraph 워크플로우\n다양한 사고(Thinking) 모드 지원: Instant, Sequential, Tree‑of‑Thought, Deep 등. 실시간 스트리밍으로 사고 과정 시각화 및 conversationId 기반 격리.\nAI Persona 시스템 (v0.6.0)\n기본 페르소나: 일반 어시스턴트, 번역가, 영어 선생님, 시니어 개발자\n사용자 정의 페르소나 추가/수정/삭제\n슬래시 커맨드 자동완성 (/persona)\nSQLite 기반 영구 저장\nRAG (검색 증강 생성)\n텍스트, URL, 파일(PDF, DOCX, TXT, MD) 업로드 지원\nSQLite‑vec, OpenSearch, Elasticsearch, pgvector 지원\n문서 편집 AI (정제, 확장, 축약, 검증, 커스텀 프롬프트)\n폴더 구조 관리 (드래그 앤 드롭, Tree/List/Grid 뷰)\nExport/Import (JSON 형식, 백업/복원)\n데모: assets/videos/rag-demo.gif\n브라우저 자동화 (v0.6.0)\nElectron BrowserView 기반 Chromium 통합\nVision 기반 UI 제어 및 Google Search Tools\nDOM Inspection, Vision Tools, Bot 감지 우회 등 27개 도구\n데모: assets/videos/browser-automation.gif\nMCP 프로토콜\nModel Context Protocol을 통한 도구 및 컨텍스트 표준화\nGitHub, Brave Search, Git, Filesystem 등 템플릿 제공\n환경 변수 UI 설정, 실행 전 사용자 승인 (5분 타임아웃)\n데모: assets/videos/mcp-tools.gif\nGitHub Sync (v0.6.0)\nPersonal Access Token 기반 안전한 데이터 동기화\nAES‑256‑GCM 암호화로 민감 정보 보호\n설정, 문서, 페르소나, 이미지, 대화 내역 동기화\n데모: assets/videos/github-sync.gif\n이미지 기능\nComfyUI 통합 이미지 생성\nVision API 기반 이미지 해석 및 질의응답\n데모: assets/videos/image-generation.gif\n🛠️ 기술 스택\n프론트엔드: Next.js 15.3, React 19, TypeScript 5.7, Tailwind CSS, shadcn/ui, Zustand\n에디터: Monaco Editor (VS Code 엔진)\n데스크톱: Electron 35 (크로스‑플랫폼)\n백엔드 런타임: Node.js 20+\n데이터베이스: better‑sqlite3, SQLite‑vec (벡터 검색)\nIPC: Context Bridge (안전한 통신)\nLLM & AI: LangGraph, LangChain, OpenAI, Anthropic, Google, Groq, MCP Protocol, ComfyUI\n🚀 빠른 시작 (5분 안에 시작)\n다운로드 및 설치\n   - Windows: \n   - macOS: \n   - Linux: \nLLM 설정\n   - 좌측 하단 설정 아이콘 → LLM 제공자 및 API 키 입력\n   - 지원: OpenAI, Anthropic, Google, Custom (OpenAI‑compatible)\n모드 및 그래프 선택\n   - Chat, Editor, Browser 중 선택\n   - 필요 시 LangGraph 워크플로우 타입 선택 (Instant, RAG, Agent 등)\n대화 시작\n   - 준비가 완료되면 AI와 대화를 시작하세요!\n📋 시스템 요구사항\n최소: Node.js 20.9+, 4 GB RAM, 500 MB 디스크\n권장: Node.js 22+, 8 GB RAM, 1 GB 디스크\n이 문서는 초안(draft) 상태이며, 검토 후  로 전환될 예정입니다.",
     "excerpt": "SEPilot Desktop 소개\nSEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...",
     "tags": [
@@ -25,8 +25,7 @@
       "LLM",
       "Project"
     ],
-    "lastModified": "2025-12-07T00:18:51Z",
-    "author": "github-actions[bot]"
+    "lastModified": "2025-12-07T06:05:44.474Z"
   },
   {
     "title": "테마 커스터마이징",
@@ -51,7 +50,7 @@
       "설치",
       "배포"
     ],
-    "lastModified": "2025-12-07T00:18:51Z",
+    "lastModified": "2025-12-06T18:05:33Z",
     "author": "github-actions[bot]"
   },
   {
@@ -64,7 +63,7 @@
       "가이드",
       "도움말"
     ],
-    "lastModified": "2025-12-07T00:18:51Z",
+    "lastModified": "2025-12-06T18:05:33Z",
     "author": "github-actions[bot]"
   },
   {
