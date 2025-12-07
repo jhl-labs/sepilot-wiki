@@ -2,6 +2,7 @@
 title: 설정 파일 가이드
 tags: [설정, 가이드, TypeScript]
 redirect_from:
+  - guide-configuration
   - _guide-configuration
 ---
 

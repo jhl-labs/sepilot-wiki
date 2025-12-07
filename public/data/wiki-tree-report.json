@@ -1,128 +1,199 @@
 {
-  "timestamp": "2025-12-06T18:05:33.322Z",
+  "timestamp": "2025-12-07T00:18:51.214Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., \"_guide\"). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-    "totalDocuments": 12,
+    "summary": "The wiki consists of 11 markdown files spread across three top‑level directories (projects, guide, bun). All filenames are already English but many do not follow the strict slug convention (lower‑case, hyphen‑separated) and several could be renamed for clarity. The guide section mixes introductory, configuration and advanced topics, making navigation harder. No home.md exists at the root, and many documents have an \"unknown\" status that should be clarified. No duplicate content was found, but there is overlapping information about the technology stack between tech‑stack.md and faq.md.",
+    "totalDocuments": 11,
     "categories": [
       "projects",
-      "bun",
-      "guide"
+      "guide",
+      "bun"
     ],
     "issues": [
-      "Inconsistent folder naming (\"Projects\", \"_guide\").",
-      "Korean titles used as file names – not URL‑friendly.",
-      "Tech‑stack information duplicated between a project page and the FAQ.",
-      "Mixed case in paths may cause broken links when case‑sensitive servers are used."
+      "Missing home.md at repository root",
+      "Many documents have status \"unknown\" – need to set to draft/published",
+      "Guide directory mixes beginner and advanced topics – consider sub‑categories",
+      "File names are not fully slug‑compliant (uppercase letters, missing hyphens)",
+      "Potential broken external links if files are renamed without redirects"
     ]
   },
   "suggestedStructure": {
     "projects": [
-      "desktop-intro.md"
+      "desktop-introduction.md",
+      "technology-stack.md"
     ],
+    "guide": {
+      "setup": [
+        "getting-started.md",
+        "configuration-guide.md",
+        "theme-customization.md"
+      ],
+      "advanced": [
+        "faq.md",
+        "llm-workflow.md",
+        "diagrams-guide.md"
+      ]
+    },
     "bun": [
-      "overview.md",
-      "comparison-pnpm-npm.md",
-      "github-actions-setup.md"
+      "bun-overview.md",
+      "bun-comparison-pnpm-npm.md",
+      "bun-github-actions-setup.md"
     ],
-    "guide": [
-      "getting-started.md",
-      "configuration.md",
-      "customization.md",
-      "faq.md",
-      "llm-workflow.md",
-      "diagrams.md"
-    ]
+    "home.md": []
   },
   "results": {
-    "appliedActions": 8,
-    "skippedActions": 2,
+    "appliedActions": 9,
+    "skippedActions": 9,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 2
+    "createdIssues": 4
   },
   "actions": {
     "applied": [
       {
         "type": "rename",
         "priority": "high",
-        "source": "Projects/sepilot-wiki-tech-stack.md",
-        "target": "projects/tech-stack.md",
-        "reason": "Convert Korean title to an English slug and normalize folder name to lower‑case.",
+        "source": "projects/desktop-intro.md",
+        "target": "projects/desktop-introduction.md",
+        "reason": "Slug should be lower‑case and use hyphens; more descriptive",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "Projects/sepilot-desktop-intro.md",
-        "target": "projects/desktop-intro.md",
-        "reason": "English slug + lower‑case folder.",
+        "source": "projects/tech-stack.md",
+        "target": "projects/technology-stack.md",
+        "reason": "Use full word \"technology\" for clarity and keep slug style",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "medium",
-        "source": "_guide/configuration.md",
-        "target": "guide/configuration.md",
-        "reason": "Remove leading underscore from folder name for a clean URL.",
+        "source": "guide/configuration.md",
+        "target": "guide/configuration-guide.md",
+        "reason": "Adds context to the file name and follows slug convention",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "medium",
-        "source": "_guide/customization.md",
-        "target": "guide/customization.md",
-        "reason": "Remove leading underscore from folder name.",
+        "source": "guide/customization.md",
+        "target": "guide/theme-customization.md",
+        "reason": "Explicitly mentions theme; slug‑compliant",
         "autoApply": true
       },
       {
         "type": "rename",
-        "priority": "medium",
-        "source": "_guide/getting-started.md",
-        "target": "guide/getting-started.md",
-        "reason": "Remove leading underscore from folder name.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "_guide/faq.md",
-        "target": "guide/faq.md",
-        "reason": "Remove leading underscore from folder name.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "_guide/llm-workflow.md",
+        "priority": "low",
+        "source": "guide/llm-workflow.md",
         "target": "guide/llm-workflow.md",
-        "reason": "Remove leading underscore from folder name.",
+        "reason": "File already follows slug rules – kept for consistency",
         "autoApply": true
       },
       {
         "type": "rename",
-        "priority": "medium",
-        "source": "_guide/diagrams.md",
-        "target": "guide/diagrams.md",
-        "reason": "Remove leading underscore from folder name.",
+        "priority": "low",
+        "source": "guide/diagrams.md",
+        "target": "guide/diagrams-guide.md",
+        "reason": "Clarifies purpose and matches slug style",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "bun/comparison-pnpm-npm.md",
+        "target": "bun/bun-comparison-pnpm-npm.md",
+        "reason": "Prefix with \"bun\" for consistency with other bun files",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "bun/overview.md",
+        "target": "bun/bun-overview.md",
+        "reason": "Prefix with \"bun\" for consistency",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "bun/github-actions-setup.md",
+        "target": "bun/bun-github-actions-setup.md",
+        "reason": "Prefix with \"bun\" for consistency",
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "move",
-        "priority": "low",
-        "source": "Projects",
-        "target": "projects",
-        "reason": "Standardize folder name to lower‑case for all project docs.",
+        "type": "create_category",
+        "priority": "medium",
+        "source": "",
+        "target": "guide/setup",
+        "reason": "Group beginner‑oriented docs (getting‑started, configuration‑guide, theme‑customization)",
         "autoApply": false
       },
       {
-        "type": "merge",
+        "type": "create_category",
+        "priority": "medium",
+        "source": "",
+        "target": "guide/advanced",
+        "reason": "Group advanced/technical docs (llm‑workflow, diagrams‑guide, faq)",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
+        "source": "guide/getting-started.md",
+        "target": "guide/setup/getting-started.md",
+        "reason": "Place beginner guide into the new setup sub‑category",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
+        "source": "guide/configuration-guide.md",
+        "target": "guide/setup/configuration-guide.md",
+        "reason": "Place configuration guide into the new setup sub‑category",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
+        "source": "guide/theme-customization.md",
+        "target": "guide/setup/theme-customization.md",
+        "reason": "Place theme customization into the new setup sub‑category",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
+        "source": "guide/faq.md",
+        "target": "guide/advanced/faq.md",
+        "reason": "Place FAQ into the advanced sub‑category",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
+        "source": "guide/llm-workflow.md",
+        "target": "guide/advanced/llm-workflow.md",
+        "reason": "Place LLM workflow guide into the advanced sub‑category",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
+        "source": "guide/diagrams-guide.md",
+        "target": "guide/advanced/diagrams-guide.md",
+        "reason": "Place diagrams guide into the advanced sub‑category",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
         "priority": "low",
-        "source": "projects/tech-stack.md",
-        "target": "guide/faq.md",
-        "reason": "Tech‑stack details are duplicated in the FAQ; consider merging the concise table into the FAQ and removing the separate project page.",
+        "source": "",
+        "target": "home.md",
+        "reason": "Add a home page at repository root to serve as entry point",
         "autoApply": false
       }
     ],
@@ -130,14 +201,24 @@
   },
   "createdIssues": [
     {
-      "number": 27,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/27",
-      "title": "Consolidate Tech‑Stack Documentation"
+      "number": 30,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/30",
+      "title": "Add missing home.md at repository root"
     },
     {
-      "number": 28,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/28",
-      "title": "Rename `Projects` folder to lower‑case `projects`"
+      "number": 31,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/31",
+      "title": "Clarify document statuses (draft / published)"
+    },
+    {
+      "number": 32,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/32",
+      "title": "Create redirects for renamed files"
+    },
+    {
+      "number": 33,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/33",
+      "title": "Review overlapping tech‑stack information"
     }
   ]
 }

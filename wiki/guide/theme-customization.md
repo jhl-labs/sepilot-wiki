@@ -2,6 +2,7 @@
 title: 테마 커스터마이징
 tags: [테마, 커스터마이징, 설정]
 redirect_from:
+  - guide-customization
   - _guide-customization
 ---
 

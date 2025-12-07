@@ -8,6 +8,7 @@ issueNumber: 0
 createdAt: "2025-12-06T05:45:00Z"
 updatedAt: "2025-12-06T05:45:00Z"
 redirect_from:
+  - projects-desktop-intro
   - Projects-sepilot-desktop-intro
 ---
 
