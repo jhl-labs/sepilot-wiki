@@ -4,8 +4,8 @@
       "title": "SEPilot Desktop 소개",
       "slug": "projects/desktop-intro",
       "content": "\n# SEPilot Desktop 소개\n\nSEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, **Chat**, **Editor**, **Browser** 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통합했습니다.\n\n---\n\n## 📦 다운로드 & 소스\n- **다운로드**: [SEPilot Desktop 다운로드](https://jhl-labs.github.io/sepilot_desktop/#download)\n- **GitHub**: [GitHub 저장소](https://github.com/jhl-labs/sepilot_desktop)\n- **데모 영상**: assets/videos/demo-main.mp4\n\n---\n\n## 🧭 3가지 애플리케이션 모드\n\n### 1. Chat 모드\nAI와 대화하고 질문할 수 있습니다.\n- LangGraph 워크플로우 (Instant, Sequential, Deep, Coding, RAG, Browser 등 6가지)\n- RAG 문서 검색 & 편집, 폴더 관리, Export/Import\n- MCP 도구 통합 (GitHub, Brave Search, Filesystem 등)\n- 이미지 생성 & 해석 (ComfyUI, Vision API)\n- Persona 시스템 (AI 역할 정의, SQLite 영구 저장)\n- Quick Question (최대 5개 단축키)\n- GitHub Sync (AES‑256‑GCM 암호화)\n\n> **데모**: assets/videos/chat-mode-demo.mp4\n\n### 2. Editor 모드\n코드 작성 및 파일 관리에 최적화된 환경입니다.\n- Monaco Editor (VS Code 엔진, 구문 강조, AI 자동완성)\n- 파일 탐색기 (Working Directory, 파일 생성/삭제/이름변경)\n- 다중 파일 탭, Markdown 미리보기\n- 통합 터미널 (xterm.js, PowerShell/bash/zsh, 탭 관리)\n- 전체 파일 검색 (ripgrep 기반, Ctrl+Shift+F)\n- Advanced Editor Agent (50회 반복, 9개 Built‑in Tools)\n- 10가지 Notion 스타일 Writing Tools\n\n> **데모**: assets/videos/editor-mode-demo.mp4\n\n### 3. Browser 모드\nAI와 함께 웹을 탐색하고 자동화합니다.\n- Chromium 기반 브라우저 (BrowserView, Chrome 스타일 탭)\n- 18개 자동화 도구 (Navigate, DOM Inspection, Vision Tools 등)\n- Google Search Tools (검색, 뉴스, Scholar, 이미지, 고급 필터)\n- Vision 기반 UI 제어 (Set‑of‑Mark, 좌표 클릭)\n- Bot 감지 우회 (Stealth Fingerprint, 자연스러운 타이밍)\n- 페이지 캡처 (MHTML + 스크린샷, 오프라인 뷰어)\n- 북마크 관리 (폴더별 정리)\n\n> **데모**: assets/videos/browser-mode-demo.mp4\n\n---\n\n## 🌟 주요 기능\n\n### LangGraph 워크플로우\n다양한 사고(Thinking) 모드 지원: Instant, Sequential, Tree‑of‑Thought, Deep 등. 실시간 스트리밍으로 사고 과정 시각화 및 conversationId 기반 격리.\n\n### AI Persona 시스템 (v0.6.0)\n- 기본 페르소나: 일반 어시스턴트, 번역가, 영어 선생님, 시니어 개발자\n- 사용자 정의 페르소나 추가/수정/삭제\n- 슬래시 커맨드 자동완성 (/persona)\n- SQLite 기반 영구 저장\n\n### RAG (검색 증강 생성)\n- 텍스트, URL, 파일(PDF, DOCX, TXT, MD) 업로드 지원\n- SQLite‑vec, OpenSearch, Elasticsearch, pgvector 지원\n- 문서 편집 AI (정제, 확장, 축약, 검증, 커스텀 프롬프트)\n- 폴더 구조 관리 (드래그 앤 드롭, Tree/List/Grid 뷰)\n- Export/Import (JSON 형식, 백업/복원)\n\n> **데모**: assets/videos/rag-demo.gif\n\n### 브라우저 자동화 (v0.6.0)\n- Electron BrowserView 기반 Chromium 통합\n- Vision 기반 UI 제어 및 Google Search Tools\n- DOM Inspection, Vision Tools, Bot 감지 우회 등 27개 도구\n\n> **데모**: assets/videos/browser-automation.gif\n\n### MCP 프로토콜\n- Model Context Protocol을 통한 도구 및 컨텍스트 표준화\n- GitHub, Brave Search, Git, Filesystem 등 템플릿 제공\n- 환경 변수 UI 설정, 실행 전 사용자 승인 (5분 타임아웃)\n\n> **데모**: assets/videos/mcp-tools.gif\n\n### GitHub Sync (v0.6.0)\n- Personal Access Token 기반 안전한 데이터 동기화\n- AES‑256‑GCM 암호화로 민감 정보 보호\n- 설정, 문서, 페르소나, 이미지, 대화 내역 동기화\n\n> **데모**: assets/videos/github-sync.gif\n\n### 이미지 기능\n- ComfyUI 통합 이미지 생성\n- Vision API 기반 이미지 해석 및 질의응답\n\n> **데모**: assets/videos/image-generation.gif\n\n---\n\n## 🛠️ 기술 스택\n- **프론트엔드**: Next.js 15.3, React 19, TypeScript 5.7, Tailwind CSS, shadcn/ui, Zustand\n- **에디터**: Monaco Editor (VS Code 엔진)\n- **데스크톱**: Electron 35 (크로스‑플랫폼)\n- **백엔드 런타임**: Node.js 20+\n- **데이터베이스**: better‑sqlite3, SQLite‑vec (벡터 검색)\n- **IPC**: Context Bridge (안전한 통신)\n- **LLM & AI**: LangGraph, LangChain, OpenAI, Anthropic, Google, Groq, MCP Protocol, ComfyUI\n\n---\n\n## 🚀 빠른 시작 (5분 안에 시작)\n1. **다운로드 및 설치**\n   - Windows: `SEPilot-Setup-0.6.0.exe`\n   - macOS: `SEPilot-0.6.0.dmg`\n   - Linux: `SEPilot-0.6.0.AppImage`\n2. **LLM 설정**\n   - 좌측 하단 설정 아이콘 → LLM 제공자 및 API 키 입력\n   - 지원: OpenAI, Anthropic, Google, Custom (OpenAI‑compatible)\n3. **모드 및 그래프 선택**\n   - Chat, Editor, Browser 중 선택\n   - 필요 시 LangGraph 워크플로우 타입 선택 (Instant, RAG, Agent 등)\n4. **대화 시작**\n   - 준비가 완료되면 AI와 대화를 시작하세요!\n\n---\n\n## 📋 시스템 요구사항\n- **최소**: Node.js 20.9+, 4 GB RAM, 500 MB 디스크\n- **권장**: Node.js 22+, 8 GB RAM, 1 GB 디스크\n\n---\n\n*이 문서는 초안(draft) 상태이며, 검토 후 `published` 로 전환될 예정입니다.*",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "draft",
       "isDraft": true,
       "isInvalid": false,
@@ -17,11 +17,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 149,
           "deletions": 0
         }
@@ -31,7 +31,7 @@
       "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
       "slug": "projects/tech-stack",
       "content": "\n## 기술 스택\n\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n\n### 프론트엔드\n- **React 18** - UI 라이브러리\n- **TypeScript** - 타입 안전성을 위한 정적 타입 언어\n- **Vite** - 빌드 도구 및 개발 서버\n- **React Router DOM** - SPA 라우팅\n- **TanStack Query (React Query)** - 서버 상태 관리\n\n### Next.js 사용 여부\n- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.\n- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\n- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n\n### 마크다운 렌더링\n- **react-markdown** - 마크다운 파싱 및 렌더링\n- **remark-gfm** - GitHub Flavored Markdown 지원\n- **rehype-raw** - HTML 태그 지원\n- **rehype-sanitize** - XSS 방지를 위한 HTML 살균\n- **react-syntax-highlighter** - 코드 구문 강조\n\n### 스타일링\n- **CSS Variables** - 테마 시스템\n- **Lucide React** - 아이콘 라이브러리\n\n### 개발 도구\n- **ESLint** - 코드 린팅\n- **Vitest** - 테스트 프레임워크\n- **Husky** - Git hooks\n\n### CI/CD\n- **GitHub Actions** - 자동화 워크플로우\n- **GitHub Pages** - 정적 사이트 호스팅\n- **Bun** - 패키지 매니저 및 런타임\n\n### AI 통합\n- **OpenAI API 호환** - LLM을 통한 문서 자동 생성\n\n## 참고 링크\n\n- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)\n",
-      "lastModified": "2025-12-06T18:05:33Z",
+      "lastModified": "2025-12-06T18:07:08Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -46,11 +46,11 @@
       "menu": "SEPilot Wiki에 대해",
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 56,
           "deletions": 0
         }
@@ -60,8 +60,8 @@
       "title": "설정 파일 가이드",
       "slug": "guide/configuration",
       "content": "\n# 설정 파일 가이드\n\nSEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.\n\n## 설정 파일 목록\n\n| 파일 | 위치 | 용도 |\n|------|------|------|\n| `site.config.ts` | 루트 | 사이트 기본 정보 |\n| `theme.config.ts` | 루트 | 테마 (색상, 폰트, 레이아웃) |\n| `navigation.config.ts` | 루트 | 네비게이션 메뉴 |\n| `custom.css` | src/styles | 커스텀 CSS |\n| `config.ts` | src | GitHub 저장소 연결 설정 |\n\n## site.config.ts 상세\n\n```typescript\ninterface SiteConfig {\n  // 필수\n  title: string;          // 사이트 제목\n  description: string;    // SEO 설명\n  owner: string;          // GitHub 사용자명/조직명\n  repo: string;           // 저장소 이름\n  wikiPath: string;       // wiki 폴더 경로 (기본: 'wiki')\n\n  // 선택\n  logo?: {\n    type: 'text' | 'image' | 'icon';\n    value: string;\n    alt?: string;\n  };\n  favicon?: string;       // 파비콘 경로\n  social?: {\n    github?: string;\n    twitter?: string;\n    discord?: string;\n    website?: string;\n  };\n  footer?: {\n    enabled?: boolean;\n    copyright?: {\n      enabled?: boolean;\n      text?: string;\n      startYear?: number;\n    };\n    links?: { label: string; url: string }[];\n    showPoweredBy?: boolean;\n  };\n}\n```\n\n## theme.config.ts 상세\n\n### 색상 (colors)\n\n```typescript\ninterface ColorScheme {\n  primary: string;           // 메인 브랜드 색상\n  primaryHover?: string;     // hover 시 색상\n  background: string;        // 배경색\n  backgroundSecondary?: string;\n  backgroundTertiary?: string;\n  text: string;              // 기본 텍스트 색상\n  textSecondary?: string;\n  textMuted?: string;\n  border?: string;           // 테두리 색상\n  accent?: string;           // 강조 색상\n  success?: string;          // 성공 상태\n  warning?: string;          // 경고 상태\n  error?: string;            // 오류 상태\n  info?: string;             // 정보 상태\n}\n```\n\n### 폰트 (fonts)\n\n```typescript\ninterface ThemeFonts {\n  sans?: string;     // 본문 폰트\n  mono?: string;     // 코드 폰트\n  heading?: string;  // 제목 폰트 (미지정시 sans 사용)\n}\n```\n\n### 레이아웃 (layout)\n\n```typescript\ninterface ThemeLayout {\n  headerHeight?: string;      // 기본: 64px\n  sidebarWidth?: string;      // 기본: 280px\n  contentMaxWidth?: string;   // 기본: 900px\n  tocWidth?: string;          // 기본: 240px\n}\n```\n\n### 테두리 반경 (borderRadius)\n\n```typescript\ninterface ThemeBorderRadius {\n  sm?: string;   // 기본: 0.25rem\n  md?: string;   // 기본: 0.5rem\n  lg?: string;   // 기본: 0.75rem\n  xl?: string;   // 기본: 1rem\n}\n```\n\n## navigation.config.ts 상세\n\n```typescript\ninterface NavigationConfig {\n  sidebar?: SidebarSection[];\n}\n\ninterface SidebarSection {\n  title: string;              // 섹션 제목\n  icon?: string;              // lucide 아이콘 이름\n  collapsible?: boolean;      // 접을 수 있는지 (기본: true)\n  defaultOpen?: boolean;      // 기본 열림 상태 (기본: true)\n  items: SidebarNavItem[];\n}\n\ninterface SidebarNavItem {\n  label: string;              // 메뉴 텍스트\n  href: string;               // 링크 URL\n  icon?: string;              // lucide 아이콘 이름\n  external?: boolean;         // 외부 링크 여부\n  badge?: string;             // 배지 텍스트 (예: 'Beta', 'New')\n  children?: SidebarNavItem[]; // 하위 메뉴\n}\n```\n\n## GitHub 저장소 설정\n\n### Repository Secrets\n\nGitHub Repository Settings > Secrets에서 설정:\n\n| 변수 | 필수 | 설명 |\n|------|------|------|\n| `OPENAI_BASE_URL` | O | OpenAI 호환 API URL |\n| `OPENAI_API_KEY` | O | API 키 |\n| `OPENAI_MODEL` | O | 모델명 (예: gpt-4) |\n\n### GitHub Pages 설정\n\n1. Repository Settings > Pages\n2. Source: \"GitHub Actions\" 선택\n3. `main` 브랜치 push 시 자동 배포\n\n## 환경 변수\n\n### 빌드 시\n\n```bash\nGITHUB_TOKEN=...      # GitHub API 토큰 (선택)\n```\n\n### 개발 시\n\n`.env` 파일에 설정:\n\n```env\nVITE_GITHUB_TOKEN=...  # 개발용 토큰 (선택)\n```\n",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -72,11 +72,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 171,
           "deletions": 0
         }
@@ -86,8 +86,8 @@
       "title": "테마 커스터마이징",
       "slug": "guide/customization",
       "content": "\n# 테마 커스터마이징\n\nSEPilot Wiki는 Astro와 유사하게 설정 파일을 통해 다양한 커스터마이징을 지원합니다.\n\n## 설정 파일 구조\n\n```\nproject-root/\n├── site.config.ts      # 사이트 기본 설정\n├── theme.config.ts     # 테마 (색상, 폰트)\n├── navigation.config.ts # 네비게이션 메뉴\n└── src/styles/custom.css # 커스텀 CSS\n```\n\n## 사이트 설정 (site.config.ts)\n\n### 기본 정보\n\n```typescript\nexport const siteConfig: SiteConfig = {\n  title: 'My Wiki',\n  description: 'AI 기반 자동화 위키',\n\n  // GitHub 저장소\n  owner: 'jhl-labs',\n  repo: 'sepilot-wiki',\n  wikiPath: 'wiki',\n};\n```\n\n### 로고 설정\n\n```typescript\n// 텍스트 로고\nlogo: {\n  type: 'text',\n  value: 'My Wiki',\n}\n\n// 이미지 로고\nlogo: {\n  type: 'image',\n  value: '/logo.png',\n  alt: 'My Wiki Logo',\n}\n\n// 아이콘 로고 (lucide-react)\nlogo: {\n  type: 'icon',\n  value: 'BookOpen',\n}\n```\n\n### Footer 설정\n\n```typescript\nfooter: {\n  enabled: true,\n  copyright: {\n    enabled: true,\n    text: 'My Company. All rights reserved.',\n    startYear: 2024,  // © 2024-2025 형식\n  },\n  links: [\n    { label: 'GitHub', url: 'https://github.com/...' },\n  ],\n  showPoweredBy: true,\n}\n```\n\n## 테마 설정 (theme.config.ts)\n\n### 색상 커스터마이징\n\n```typescript\nexport const themeConfig: ThemeConfig = {\n  colors: {\n    light: {\n      primary: '#3b82f6',      // 메인 브랜드 색상\n      background: '#ffffff',\n      text: '#0f172a',\n      accent: '#8b5cf6',\n    },\n    dark: {\n      primary: '#60a5fa',\n      background: '#0f172a',\n      text: '#f8fafc',\n      accent: '#a78bfa',\n    },\n  },\n};\n```\n\n### 폰트 설정\n\n```typescript\nfonts: {\n  sans: \"'Pretendard', sans-serif\",\n  mono: \"'JetBrains Mono', monospace\",\n}\n```\n\n### 레이아웃 설정\n\n```typescript\nlayout: {\n  headerHeight: '64px',\n  sidebarWidth: '280px',\n  contentMaxWidth: '900px',\n}\n```\n\n## 커스텀 CSS\n\n`src/styles/custom.css`에서 추가 스타일을 정의할 수 있습니다:\n\n```css\n/* 헤더 그라데이션 */\n.header {\n  background: linear-gradient(90deg, #3b82f6, #8b5cf6);\n}\n\n/* 커스텀 마크다운 스타일 */\n.markdown-content h1 {\n  border-bottom: 3px solid var(--color-primary);\n}\n```\n\n## 네비게이션 설정 (navigation.config.ts)\n\n사이드바에 커스텀 메뉴를 추가합니다:\n\n```typescript\nexport const navigationConfig: NavigationConfig = {\n  sidebar: [\n    {\n      title: '리소스',\n      icon: 'ExternalLink',\n      collapsible: true,\n      defaultOpen: false,\n      items: [\n        {\n          label: 'GitHub',\n          href: 'https://github.com/...',\n          icon: 'Github',\n          external: true,\n        },\n        {\n          label: 'API 문서',\n          href: '/wiki/api',\n          icon: 'FileCode',\n          badge: 'Beta',\n        },\n      ],\n    },\n  ],\n};\n```\n\n## 지원하는 lucide 아이콘\n\n[lucide.dev/icons](https://lucide.dev/icons)에서 사용 가능한 아이콘 이름을 확인할 수 있습니다.\n\n예: `Home`, `FileText`, `BookOpen`, `Github`, `ExternalLink`, `Settings` 등\n",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -98,11 +98,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 171,
           "deletions": 0
         }
@@ -112,8 +112,8 @@
       "title": "시작하기",
       "slug": "guide/getting-started",
       "content": "\n# 시작하기\n\nSEPilot Wiki를 사용하여 나만의 위키를 만드는 방법을 안내합니다.\n\n## 설치 및 배포\n\n### 1. 템플릿 복제\n\n```bash\n# GitHub에서 템플릿 복제\ngh repo create my-wiki --template jhl-labs/sepilot-wiki --public\ncd my-wiki\n```\n\n### 2. 의존성 설치 및 개발 서버 실행\n\n```bash\nbun install\nbun dev\n```\n\n### 3. 설정 파일 수정\n\n루트 디렉토리의 설정 파일들을 수정합니다:\n\n- `site.config.ts` - 사이트 기본 정보 (타이틀, 로고, 소셜 링크)\n- `theme.config.ts` - 테마 설정 (색상, 폰트, 레이아웃)\n- `navigation.config.ts` - 사이드바 메뉴 설정\n\n### 4. GitHub Pages 배포\n\n```bash\ngit add -A && git commit -m \"Initial setup\"\ngit push origin main\n```\n\nGitHub Actions가 자동으로 빌드 후 GitHub Pages에 배포합니다.\n\n## 문서 작성 방식\n\n### 방법 1: 직접 작성\n`/wiki` 폴더에 마크다운 파일을 직접 추가합니다.\n\n### 방법 2: AI 자동 생성\nGitHub Issue에 `request` 라벨을 추가하면 AI가 문서 초안을 자동 생성합니다.\n\n## 다음 단계\n\n- [테마 커스터마이징](/wiki/_guide/customization) - 색상, 폰트, 로고 변경\n- [다이어그램 및 차트](/wiki/_guide/diagrams) - Mermaid 및 Plotly 사용법\n- [LLM 워크플로우](/wiki/_guide/llm-workflow) - AI 문서 생성 과정 이해\n- [설정 파일 가이드](/wiki/_guide/configuration) - 상세 설정 옵션\n",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -124,11 +124,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 59,
           "deletions": 0
         }
@@ -138,8 +138,8 @@
       "title": "FAQ",
       "slug": "guide/faq",
       "content": "\n# FAQ\n\nSEPilot Wiki 사용에 관한 자주 묻는 질문과 답변입니다.\n\n## 일반\n\n### SEPilot Wiki란 무엇인가요?\n\nSEPilot Wiki는 AI 에이전트 기반의 자동화된 위키 시스템입니다. GitHub 저장소의 `/wiki` 폴더를 데이터 저장소로 활용하고, GitHub Issues를 통해 사용자와 소통하며, AI가 문서를 자동으로 생성/수정/유지보수합니다.\n\n### 어떤 기술 스택을 사용하나요?\n\n- **Frontend**: React 18 + TypeScript + Vite\n- **State Management**: TanStack Query\n- **Routing**: React Router 7\n- **Hosting**: GitHub Pages\n- **CI/CD**: GitHub Actions\n\n## 문서 작성\n\n### AI에게 문서 작성을 요청하려면 어떻게 하나요?\n\n1. GitHub Issues에서 새 이슈를 생성합니다\n2. `request` 라벨을 추가합니다\n3. 이슈 본문에 원하는 문서의 내용을 설명합니다\n4. AI가 자동으로 문서 초안을 작성합니다\n\n### 직접 문서를 추가하려면 어떻게 하나요?\n\n`/wiki` 폴더에 마크다운 파일을 직접 추가할 수 있습니다:\n\n```markdown\n---\ntitle: \"문서 제목\"\ndescription: \"문서 설명\"\ncategory: \"카테고리\"\ntags: [\"태그1\", \"태그2\"]\nstatus: \"published\"\n---\n\n# 문서 내용\n```\n\n### 문서 수정을 요청하려면 어떻게 하나요?\n\n해당 문서와 관련된 이슈에 댓글로 수정 사항을 작성하면 AI가 피드백을 반영하여 문서를 업데이트합니다.\n\n## 기능\n\n### 검색은 어떻게 작동하나요?\n\nFuse.js 기반의 전문 검색(Full-text search)을 지원합니다. 문서 제목, 내용, 태그 등을 대상으로 검색하며, 2자 이상 입력 시 검색이 시작됩니다.\n\n### 다크 모드를 지원하나요?\n\n예, 라이트/다크/시스템 테마를 지원합니다. 우측 상단의 테마 토글 버튼으로 변경할 수 있습니다.\n\n### Mermaid 다이어그램을 사용할 수 있나요?\n\n예, 마크다운 코드 블록에서 `mermaid` 언어를 지정하면 다이어그램이 렌더링됩니다:\n\n~~~markdown\n```mermaid\ngraph TD\n    A[시작] --> B[처리]\n    B --> C[종료]\n```\n~~~\n\n### Plotly 차트도 지원하나요?\n\n예, `plotly` 코드 블록으로 인터랙티브 차트를 추가할 수 있습니다:\n\n~~~markdown\n```plotly\n{\n  \"data\": [{\"x\": [1, 2, 3], \"y\": [2, 6, 3], \"type\": \"scatter\"}],\n  \"layout\": {\"title\": \"샘플 차트\"}\n}\n```\n~~~\n\n## 문제 해결\n\n### 페이지가 404 오류를 표시합니다\n\nGitHub Pages의 SPA 라우팅 특성상, 직접 URL 접근 시 404가 발생할 수 있습니다. 새로고침하거나 홈페이지에서 네비게이션을 통해 접근해 보세요.\n\n### 문서가 목록에 표시되지 않습니다\n\n- 프론트매터의 `status`가 `published`인지 확인하세요\n- 파일 확장자가 `.md`인지 확인하세요\n- GitHub Actions 배포가 완료되었는지 확인하세요 (약 2-3분 소요)\n\n### AI가 문서를 생성하지 않습니다\n\n- 이슈에 `request` 라벨이 추가되었는지 확인하세요\n- GitHub Actions 워크플로우가 활성화되어 있는지 확인하세요\n- 워크플로우 실행 로그에서 오류를 확인하세요\n\n## 기여\n\n### 프로젝트에 기여하려면 어떻게 하나요?\n\n1. 이슈를 통해 기능 제안 또는 버그 리포트\n2. `request` 라벨로 문서 작성 요청\n3. PR을 통한 직접 코드 기여\n\n### 코드 스타일 가이드가 있나요?\n\n- ESLint + Prettier 설정을 준수합니다\n- TypeScript strict 모드를 사용합니다\n- 커밋 전 `bun run lint` 검사를 통과해야 합니다\n",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -150,11 +150,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 126,
           "deletions": 0
         }
@@ -164,8 +164,8 @@
       "title": "LLM 워크플로우",
       "slug": "guide/llm-workflow",
       "content": "\n# LLM 워크플로우\n\nSEPilot Wiki는 GitHub Actions와 LLM을 연동하여 자동으로 문서를 생성하고 관리합니다.\n\n## 워크플로우 개요\n\n```mermaid\nsequenceDiagram\n    participant User as 사용자\n    participant GHA as GitHub Actions\n    participant LLM as LLM\n\n    User->>GHA: Issue 생성 (request 라벨)\n    GHA->>LLM: 컨텍스트 수집 (Issue 본문+댓글)\n    LLM-->>GHA: 문서 생성\n    GHA-->>User: 댓글로 결과 알림\n    \n    User->>GHA: 피드백 댓글\n    GHA->>LLM: 피드백 분석\n    LLM-->>GHA: 문서 수정\n    GHA-->>User: 댓글로 결과 알림\n```\n\n## 지원하는 이벤트\n\n### 1. request 라벨 추가\n\nIssue에 `request` 라벨을 추가하면:\n\n1. AI가 Issue 제목과 본문을 분석\n2. 관련 문서 초안 자동 생성\n3. `wiki/` 폴더에 마크다운 파일 저장\n4. Issue에 결과 댓글 추가\n5. `draft`, `ai-generated` 라벨 자동 추가\n\n### 2. invalid 라벨 추가\n\n문서에 오류가 있을 때 `invalid` 라벨을 추가하면:\n\n1. AI가 Issue 댓글에서 오류 내용 파악\n2. 해당 문서 자동 수정\n3. 수정 결과 댓글로 알림\n\n### 3. Maintainer 댓글\n\nMaintainer가 댓글을 달면:\n\n1. AI가 댓글 내용 분석\n2. 문서 수정, 삭제, 복구 등 작업 수행\n3. 작업 결과 댓글로 알림\n\n### 4. Issue 종료\n\nIssue를 close하면:\n\n1. `draft` 라벨 제거\n2. 문서가 정식 게시 상태로 전환\n\n## LLM 설정\n\n### 환경 변수\n\nGitHub Repository Secrets에 다음 값을 설정합니다:\n\n```\nOPENAI_BASE_URL=https://api.openai.com/v1\nOPENAI_API_KEY=your-api-key\nOPENAI_MODEL=gpt-4\n```\n\n### 지원하는 LLM 제공자\n\nOpenAI 호환 API를 사용하는 모든 제공자를 지원합니다:\n\n- OpenAI (GPT-4, GPT-3.5)\n- Azure OpenAI\n- Anthropic Claude (OpenAI 호환 API 사용 시)\n- Local LLM (Ollama, LM Studio 등)\n\n## 컨텍스트 수집\n\nAI는 다음 정보를 수집하여 작업을 수행합니다:\n\n- **Issue 본문**: 사용자의 초기 요청\n- **모든 댓글**: 대화 히스토리 및 피드백\n- **기존 문서**: 관련 문서가 있으면 해당 내용\n- **이전 작업 결과**: 이전에 생성된 문서 경로\n\n이를 통해 AI는 전체 맥락을 이해하고 적절한 작업을 수행합니다.\n\n## 문서 생성 규칙\n\nAI가 생성하는 문서는 다음 규칙을 따릅니다:\n\n- YAML frontmatter 포함 (title, author, tags)\n- 한국어로 작성\n- 마크다운 형식\n- 코드 예시 포함 (해당되는 경우)\n\n### frontmatter 예시\n\n```markdown\n---\ntitle: 문서 제목\nauthor: SEPilot AI\ntags: [태그1, 태그2]\n---\n\n# 문서 제목\n\n본문 내용...\n```\n\n## 워크플로우 파일\n\n`.github/workflows/issue-handler.yml`에서 워크플로우를 확인하고 수정할 수 있습니다.\n\n주요 스크립트:\n\n- `scripts/generate-document.js` - 새 문서 생성\n- `scripts/process-feedback.js` - 피드백 처리\n- `scripts/mark-invalid.js` - 오류 표시 처리\n- `scripts/publish-document.js` - 문서 발행\n",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -177,11 +177,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 130,
           "deletions": 0
         }
@@ -191,8 +191,8 @@
       "title": "다이어그램 및 차트 사용 가이드",
       "slug": "guide/diagrams",
       "content": "\n# 다이어그램 및 차트 사용 가이드\n\nSEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 **Mermaid**와 **Plotly**를 지원합니다.\n마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.\n\n## Mermaid 다이어그램\n\n`mermaid` 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.\n\n### 플로우차트 (Flowchart)\n\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n\n````markdown\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n````\n\n### 시퀀스 다이어그램 (Sequence Diagram)\n\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n\n````markdown\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n````\n\n### 클래스 다이어그램 (Class Diagram)\n\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n\n````markdown\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n````\n\n더 많은 문법은 [Mermaid 공식 문서](https://mermaid.js.org/intro/)를 참고하세요.\n\n## Plotly 차트\n\n`plotly` 언어로 코드 블록을 작성하고 JSON 데이터를 입력하면 인터랙티브 차트가 생성됩니다.\n데이터 구조는 [Plotly.js](https://plotly.com/javascript/) 스펙을 따릅니다.\n\n### 기본 라인 차트\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n````\n\n### 바 차트 (Bar Chart)\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n````\n\n## 문법 강조 (Syntax Highlighting)\n\n다양한 프로그래밍 언어의 문법 강조를 지원합니다.\n\n```typescript\nfunction hello(name: string) {\n  console.log(`Hello, ${name}!`);\n}\n```\n\n```python\ndef fib(n):\n    a, b = 0, 1\n    while a < n:\n        print(a, end=' ')\n        a, b = b, a+b\n```\n\n```css\n.container {\n  display: flex;\n  justify-content: center;\n}\n```\n",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -205,11 +205,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 215,
           "deletions": 0
         }
@@ -219,8 +219,8 @@
       "title": "bun과 pnpm, npm의 차이",
       "slug": "bun/comparison-pnpm-npm",
       "content": "\n# bun과 pnpm, npm의 차이\n\n## 개요\n`bun`은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 **통합 툴**입니다. 반면에 `npm`과 `pnpm`은 **패키지 매니저**에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.\n\n이 가이드에서는 **설치 방식**, **성능**, **디스크 사용량**, **호환성**, **생태계** 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤 도구를 선택하면 좋은지 살펴봅니다.\n\n---\n\n## 1. 설치 및 초기 설정\n\n| 항목 | bun | npm (Node.js 기본) | pnpm |\n|------|-----|-------------------|------|\n| 설치 명령 | `curl -fsSL https://bun.sh/install | bash` (스크립트) 또는 `brew install bun` (macOS) | Node.js 설치 시 자동 포함 (`node -v` 확인) | `npm i -g pnpm` |\n| 기본 제공 기능 | 런타임, 패키지 매니저, 번들러, 테스트 러너 등 | 런타임 + npm (패키지 매니저) | npm 호환 CLI + 효율적인 저장소 관리 |\n| 설정 파일 | `bunfig.toml` (선택) | `package.json` | `pnpm-workspace.yaml` (멀티패키지) |\n\n## 2. 성능 비교\n\n| 항목 | bun | npm | pnpm |\n|------|-----|-----|------|\n| 패키지 설치 속도 | **매우 빠름** (C++ 로 구현, 병렬 다운로드) | 보통 (JavaScript 기반) | npm보다 빠름, 하지만 bun보다는 느림 |\n| 실행 속도 (런타임) | **Node.js 대비 2~4배 빠름** (V8 엔진 최적화) | Node.js 표준 | Node.js 표준 (pnpm은 런타임이 아님) |\n| 번들링 속도 | `bun build` 로 **초단위** 번들링 | `webpack`, `esbuild` 등 별도 도구 필요 | 별도 번들러 필요 |\n\n> **벤치마크**: `bun install` 은 10,000개의 의존성을 30초 이내에 설치할 수 있는 반면, npm은 2~3분, pnpm은 약 1분 정도 소요됩니다(환경에 따라 차이 존재).\n\n## 3. 디스크 사용량\n\n- **npm**: 각 프로젝트마다 `node_modules`에 전체 복사본을 저장 → 중복 파일이 많이 발생.\n- **pnpm**: **내용 주소 기반 저장소**(content‑addressable store)를 전역에 두고, 프로젝트마다 심볼릭 링크를 사용 → 중복 최소화, 디스크 사용량 30~50% 절감.\n- **bun**: `bun install` 역시 전역 캐시를 사용하지만, 현재는 pnpm만큼 세밀한 deduplication을 제공하지 않음. 그래도 npm 대비 20~30% 정도 절감.\n\n## 4. 호환성 및 생태계\n\n| 항목 | bun | npm | pnpm |\n|------|-----|-----|------|\n| Node.js API 호환 | 대부분 호환, 일부 네이티브 모듈(특히 C/C++ 애드온)에서 빌드 오류 가능 | 완전 호환 | 완전 호환 (npm 스크립트 그대로 사용) |\n| 패키지 레지스트리 | 기본적으로 npm 레지스트리 사용 | npm 레지스트리 | npm 레지스트리 |\n| 스크립트 실행 | `bun run <script>` (npm script와 동일) | `npm run <script>` | `pnpm run <script>` |\n| 커뮤니티·플러그인 | 아직 초기 단계, 공식 플러그인 제한적 | 가장 큰 생태계, 수많은 플러그인·툴 | npm 호환 플러그인 대부분 사용 가능 |\n\n## 5. 주요 사용 사례\n\n- **bun**: 빠른 프로토타이핑, 작은 프로젝트, 번들링이 필요 없는 서버리스 함수, 성능이 중요한 CLI 툴.\n- **npm**: 대부분의 Node.js 프로젝트, 레거시 코드베이스, 광범위한 CI/CD 파이프라인.\n- **pnpm**: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하고 설치 속도를 개선하고 싶을 때.\n\n## 6. 선택 가이드\n\n| 상황 | 추천 도구 |\n|------|-----------|\n| 프로젝트가 작고 빠른 설치·실행이 필요 | **bun** |\n| 기존 Node.js 생태계와 완전 호환이 필요 | **npm** |\n| 멀티패키지(모노레포) 혹은 디스크 절감이 중요한 대규모 프로젝트 | **pnpm** |\n\n## 7. 결론\n\n- `bun`은 **속도와 통합성**을 중시하는 최신 개발자에게 매력적인 선택입니다.\n- `npm`은 **보편성**과 **광범위한 호환성**을 제공하므로 여전히 기본 선택지입니다.\n- `pnpm`은 **효율적인 저장소 관리**와 **모노레포 지원**이 강점이며, npm과 100% 호환됩니다.\n\n프로젝트 요구사항(성능, 디스크 사용량, 생태계 지원)을 고려해 적절한 도구를 선택하면 됩니다.\n\n---\n\n*이 문서는 2025년 기준 정보를 바탕으로 작성되었습니다. 각 툴의 최신 버전 및 업데이트 내용은 공식 문서를 참고하세요.*\n",
-      "lastModified": "2025-12-06T18:05:33Z",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-06T18:07:08Z",
+      "author": "GitHub Action",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -233,11 +233,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 80,
           "deletions": 0
         }
@@ -247,7 +247,7 @@
       "title": "bun 이란?",
       "slug": "bun/overview",
       "content": "\n## 개요\n\n**bun**은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저를 하나로 통합한 도구입니다.\n- **런타임**: Node.js와 호환되는 API를 제공하면서 V8 엔진 대신 **JavaScriptCore**(Apple의 엔진)를 사용합니다.\n- **번들러**: `bun build` 명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.\n- **패키지 매니저**: `bun install` 로 npm 레지스트리의 패키지를 설치하며, `package.json`과 `node_modules` 구조를 그대로 사용합니다.\n\n공식 웹사이트: https://bun.sh\nGitHub 레포지터리: https://github.com/oven-sh/bun\n\n## bun을 선택한 이유\n\n| 항목 | 설명 |\n|------|------|\n| **성능** | Zig 언어와 JavaScriptCore를 활용해 파일 I/O, 네트워크, 패키지 설치, 번들링 속도가 기존 Node.js 기반 도구보다 현저히 빠릅니다. 공식 벤치마크에서는 `npm install` 대비 2~3배, `webpack` 대비 5~10배 빠른 결과가 보고되었습니다. |\n| **통합 도구** | 런타임, 번들러, 패키지 매니저가 하나의 바이너리(`bun`)에 포함돼 별도 설치가 필요 없습니다. 개발 환경 설정이 간단해집니다. |\n| **Zero‑Config 지원** | `bun run` 명령만으로 TypeScript 파일을 바로 실행할 수 있어 별도 `ts-node` 설정이 불필요합니다. |\n| **호환성** | 대부분의 npm 패키지를 그대로 사용할 수 있으며, `package.json` 스크립트도 그대로 동작합니다. |\n| **경량 설치 파일** | 단일 실행 파일(≈ 30 MB)로 배포되어 CI/CD 파이프라인에 쉽게 통합할 수 있습니다. |\n\n## 장점\n\n- **빠른 설치 및 실행**\n  - `bun install` 은 병렬 I/O와 캐시 최적화를 통해 npm/yarn 대비 수 초 내에 의존성을 설치합니다.\n- **내장 번들러**\n  - `bun build` 로 ESBuild와 유사한 속도로 번들을 생성하며, 자동 트리쉐이킹과 코드 스플리팅을 지원합니다.\n- **TypeScript 지원**\n  - 별도 트랜스파일러 없이 `bun run src/index.ts` 로 바로 실행 가능.\n- **단일 바이너리**\n  - 런타임, 번들러, 패키지 매니저가 하나의 실행 파일에 포함돼 환경 관리가 단순합니다.\n- **POSIX 호환**\n  - macOS, Linux, Windows(WSL 포함)에서 동일한 바이너리를 사용합니다.\n\n## 단점\n\n- **생태계 성숙도**\n  - npm/yarn에 비해 아직 사용자가 적고, 일부 복잡한 네이티브 모듈(예: `node-gyp` 기반)에서 호환성 문제가 발생할 수 있습니다.\n- **플러그인 및 툴링**\n  - Webpack, Rollup 등 기존 번들러용 플러그인 생태계와 직접 호환되지 않으며, bun 전용 플러그인도 아직 제한적입니다.\n- **문서 및 커뮤니티**\n  - 공식 문서는 꾸준히 업데이트되고 있지만, Stack Overflow 등 커뮤니티 기반 Q&A가 상대적으로 적습니다.\n- **버전 관리**\n  - 현재는 `bun` 자체가 버전 관리 도구 역할을 하지 않으며, 프로젝트별 Node.js 버전 관리와는 별개로 다루어야 합니다.\n\n## 라이선스 및 역사\n\n- **라이선스**: MIT License (오픈 소스, 자유롭게 사용·수정·배포 가능)\n- **주요 연혁**\n  - **2021년 5월**: 프로젝트 초기 설계 및 공개 발표 (Jarred Sumner, Oven.sh 팀)\n  - **2022년 1월**: 첫 베타 버전(`bun v0.1.0`) 공개, GitHub 스타 수 급증\n  - **2022년 8월**: `bun v0.2.0` 에서 패키지 매니저 기능 정식 추가\n  - **2023년 3월**: `bun v0.3.0` 에서 TypeScript 실행 지원 및 `bun build` 도입\n  - **2024년 11월**: `bun v0.5.0` 에서 Windows 지원 및 안정화 버전 출시\n\n자세한 릴리즈 노트는 GitHub Releases 페이지(https://github.com/oven-sh/bun/releases)를 참고하세요.\n\n## 결론\n\nbun은 **속도와 통합성을 중시하는 프로젝트**에 적합한 최신 JavaScript 도구입니다.\n- **성능**이 중요한 CI/CD 파이프라인, 대규모 모노레포, 혹은 빠른 개발 피드백 루프가 필요한 경우 bun을 고려해볼 만합니다.\n- 반면, **특정 네이티브 모듈**이나 **풍부한 플러그인 생태계**가 필수인 경우에는 기존 npm/yarn + Webpack/Rollup 조합이 더 안정적일 수 있습니다.\n\n프로젝트에 적용하기 전, 핵심 의존성이 bun과 호환되는지 확인하고, 작은 파일럿 프로젝트에서 성능 및 호환성을 검증하는 것을 권장합니다.\n\n> **추가 조사 필요**: 복잡한 네이티브 모듈(예: `node-gyp` 기반)과 bun의 호환성 여부는 프로젝트별 테스트가 필요합니다. 공식 문서와 GitHub 이슈 트래커를 지속적으로 확인하세요.\n",
-      "lastModified": "2025-12-06T18:05:33Z",
+      "lastModified": "2025-12-06T18:07:08Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -261,11 +261,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 74,
           "deletions": 0
         }
@@ -275,7 +275,7 @@
       "title": "GitHub Actions로 bun을 쓰는 방법",
       "slug": "bun/github-actions-setup",
       "content": "\n## 개요\nGitHub Actions 워크플로우에서 **bun**(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.\n\n## 사전 요구 사항\n- 저장소에 `bun`을 사용하도록 설정된 `package.json` 혹은 `bunfig.toml` 파일이 존재해야 합니다.\n- 워크플로우는 Linux(`ubuntu-latest`) 환경을 기준으로 설명합니다. Windows/macOS에서도 동일한 단계가 적용되지만, OS별 경로 차이에 유의하세요.\n\n## 워크플로우 파일 구조\n`.github/workflows/` 디렉터리에 `bun-ci.yml` 과 같은 파일을 생성합니다.\n\n### 1. 워크플로우 트리거\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n```\n\n### 2. Job 정의\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n```\n\n### 3. 단계별 설정\n#### 3-1. 레포지토리 체크아웃\n```yaml\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n```\n\n#### 3-2. bun 설치\nbun은 공식 설치 스크립트를 통해 간단히 설치할 수 있습니다.\n공식 설치 스크립트는 <https://bun.sh> 에서 확인할 수 있습니다.\n```yaml\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n```\n\n#### 3-3. 의존성 캐시\nbun은 `node_modules` 대신 `bun.lockb`와 `~/.bun` 디렉터리를 사용합니다.\n`actions/cache` 액션을 이용해 이 디렉터리를 캐시하면 설치 속도가 크게 향상됩니다.\n```yaml\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n```\n\n#### 3-4. 의존성 설치\n```yaml\n      - name: Install dependencies\n        run: bun install\n```\n\n#### 3-5. 테스트 실행 (예시)\n```yaml\n      - name: Run tests\n        run: bun test\n```\n\n#### 3-6. 빌드 및 배포 (필요 시)\n```yaml\n      - name: Build project\n        run: bun run build\n```\n\n## 전체 예시 워크플로우\n아래는 위 단계들을 하나의 파일에 통합한 최종 예시입니다.\n\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n\n      - name: Install dependencies\n        run: bun install\n\n      - name: Run tests\n        run: bun test\n\n      - name: Build project\n        run: bun run build\n```\n\n> **주의**: 위 예시에서는 `bun test`와 `bun run build` 스크립트가 `package.json` 혹은 `bunfig.toml`에 정의되어 있다고 가정합니다. 실제 프로젝트에 맞게 스크립트 명령을 조정하세요.\n\n## macOS / Windows 환경에서 사용하기\n- **macOS**: `runs-on: macos-latest` 로 변경하고, `curl` 설치가 기본 제공됩니다.\n- **Windows**: `runs-on: windows-latest` 로 변경하고, PowerShell 스크립트(`Invoke-WebRequest`)를 사용해 bun을 설치합니다. 예시:\n```yaml\n      - name: Install bun on Windows\n        shell: pwsh\n        run: |\n          iwr https://bun.sh/install -UseBasicParsing | iex\n          Add-Content $env:GITHUB_PATH \"$env:USERPROFILE\\.bun\\bin\"\n```\n> Windows에서는 경로 구분자(`\\`)와 환경 변수 사용법에 유의하세요.\n\n## 베스트 프랙티스\n1. **캐시 키 관리**: `bun.lockb` 파일이 변경될 때마다 캐시가 무효화되도록 `hashFiles('bun.lockb')` 를 사용합니다.\n2. **CI 속도 최적화**: `actions/setup-node` 대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.\n3. **보안**: 공식 설치 스크립트는 HTTPS를 통해 전달되며, `curl -fsSL` 옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.\n4. **버전 고정**: 특정 bun 버전을 사용하려면 `BUN_VERSION` 환경 변수를 설정하고 설치 스크립트에 전달합니다.\n```yaml\n        env:\n          BUN_VERSION: 1.1.12\n```\n\n## 참고 자료\n- Bun 공식 홈페이지 및 설치 가이드: <https://bun.sh>\n- GitHub Actions 공식 문서: <https://docs.github.com/en/actions>\n- actions/cache 액션: <https://github.com/actions/cache>\n\n## 결론\nGitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.\n",
-      "lastModified": "2025-12-06T18:05:33Z",
+      "lastModified": "2025-12-06T18:07:08Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -289,11 +289,11 @@
       ],
       "history": [
         {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33Z",
+          "sha": "25ba4c7",
+          "message": "chore: 자동 상태 수집 - 2025-12-06 18:07",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2025-12-06T18:07:08Z",
           "additions": 165,
           "deletions": 0
         }
