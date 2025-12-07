@@ -1,44 +1,49 @@
 {
-  "timestamp": "2025-12-07T12:06:14.737Z",
+  "timestamp": "2025-12-07T18:05:30.197Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "10개의 위키 문서가 3개의 상위 디렉터리(guide, projects, bun) 아래에 고르게 배치돼 있으나 파일명·구조·태그 표기 방식에 일관성이 부족합니다. 대부분 파일명은 영문 slug 형태이지만, 일부는 과도하게 길거나 프로젝트·툴명을 중복 포함하고 있습니다. 또한 ‘visualization’과 같은 하위 주제별 폴더가 없어 관련 문서가 한곳에 모여 있지 않아 탐색성이 떨어집니다.",
-    "totalDocuments": 10,
+    "summary": "The wiki is currently split into three top‑level categories – **projects**, **guide**, and **bun** – with most files already using English slug filenames. Content is generally well‑organized, but there are a few naming inconsistencies, duplicate coverage of the technology stack, and several documents that lack a defined status (\"unknown\").",
+    "totalDocuments": 11,
     "categories": [
-      "guide",
       "projects",
+      "guide",
       "bun"
     ],
     "issues": [
-      "파일명이 과도하게 길거나 중복된 프로젝트/툴명 포함",
-      "태그 표기 방식이 혼용([tag] vs [\"tag\"])",
-      "시각화 관련 문서가 별도 하위 폴더 없이 guide 루트에 섞여 있음",
-      "파일명 변경 시 기존 URL이 깨질 수 있어 리다이렉트 필요"
+      "Mixed language in titles (Korean titles with English slugs) – not a functional problem but may affect discoverability.",
+      "Duplicate coverage of the technology stack in `projects/technology-stack.md` and `guide/faq.md`.",
+      "Several guide files have status \"unknown\" – they should be marked as either `draft` or `published`.",
+      "File `guide/introduction.md` uses a generic Korean name; a more conventional English slug improves consistency.",
+      "Potentially large category \"bun\" could be nested under a broader \"tools\" or \"package-managers\" directory."
     ]
   },
   "suggestedStructure": {
+    "projects": [
+      "technology-stack.md",
+      "sepilot-desktop.md"
+    ],
     "guide": [
-      "introduction.md",
-      "llm-workflow.md",
+      "getting-started.md",
       "configuration.md",
+      "diagrams-and-charts.md",
       "theme-customization.md",
       "faq.md",
-      "visualization/diagrams-and-charts.md"
+      "llm-workflow.md"
     ],
-    "projects": [
-      "sepilot-desktop.md",
-      "technology-stack.md"
-    ],
-    "bun": [
-      "overview.md",
-      "comparison-pnpm-npm.md",
-      "github-actions-setup.md"
-    ]
+    "tools": {
+      "package-managers": {
+        "bun": [
+          "overview.md",
+          "comparison-pnpm-npm.md",
+          "github-actions-setup.md"
+        ]
+      }
+    }
   },
   "results": {
-    "appliedActions": 7,
-    "skippedActions": 2,
+    "appliedActions": 1,
+    "skippedActions": 11,
     "dryRunPreviewedActions": 0,
     "createdIssues": 3
   },
@@ -47,57 +52,9 @@
       {
         "type": "rename",
         "priority": "high",
-        "source": "guide/getting-started.md",
-        "target": "guide/introduction.md",
-        "reason": "‘시작하기’ 문서가 프로젝트 소개 역할을 하므로 더 직관적인 slug 로 변경",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "guide/configuration-guide.md",
-        "target": "guide/configuration.md",
-        "reason": "파일명이 이미 ‘configuration’이라는 핵심 키워드를 포함하고 있어 간결하게 정리",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "guide/diagrams-guide.md",
-        "target": "guide/diagrams-and-charts.md",
-        "reason": "내용이 다이어그램·차트 사용법을 다루므로 slug 를 명확히 반영",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "projects/sepilot-desktop-introduction.md",
-        "target": "projects/sepilot-desktop.md",
-        "reason": "파일명이 과도하게 길고 ‘introduction’이 중복되므로 간결하게 정리",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "bun/bun-overview.md",
-        "target": "bun/overview.md",
-        "reason": "‘bun’이 이미 폴더명에 포함돼 있으므로 파일명에서 중복 제거",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "bun/bun-comparison-pnpm-npm.md",
-        "target": "bun/comparison-pnpm-npm.md",
-        "reason": "파일명에서 중복된 ‘bun’ 제거",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "bun/bun-github-actions-setup.md",
-        "target": "bun/github-actions-setup.md",
-        "reason": "파일명에서 중복된 ‘bun’ 제거",
+        "source": "guide/introduction.md",
+        "target": "guide/getting-started.md",
+        "reason": "Use an English, SEO‑friendly slug that matches the common \"Getting Started\" convention.",
         "autoApply": true
       }
     ],
@@ -105,17 +62,89 @@
       {
         "type": "move",
         "priority": "medium",
-        "source": "guide/diagrams-and-charts.md",
-        "target": "guide/visualization/diagrams-and-charts.md",
-        "reason": "시각화 관련 문서를 별도 하위 폴더에 모아 탐색성을 향상",
+        "source": "bun",
+        "target": "tools/package-managers/bun",
+        "reason": "Group all package‑manager / runtime tooling under a common \"tools\" hierarchy for better discoverability.",
+        "autoApply": false
+      },
+      {
+        "type": "merge",
+        "priority": "high",
+        "source": "projects/technology-stack.md",
+        "target": "guide/faq.md",
+        "reason": "Both documents contain overlapping information about the tech stack. Keep the detailed stack in the FAQ and remove the duplicate page, adding a cross‑reference if needed.",
         "autoApply": false
       },
       {
         "type": "create_category",
-        "priority": "medium",
+        "priority": "low",
         "source": "",
-        "target": "guide/visualization",
-        "reason": "시각화(다이어그램·차트) 전용 폴더 생성",
+        "target": "tools",
+        "reason": "New top‑level category to host sub‑folders like `package-managers`.",
+        "autoApply": false
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "bun/overview.md",
+        "target": "tools/package-managers/bun/overview.md",
+        "reason": "Reflect the new directory structure after moving the whole `bun` folder.",
+        "autoApply": false
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "bun/comparison-pnpm-npm.md",
+        "target": "tools/package-managers/bun/comparison-pnpm-npm.md",
+        "reason": "Reflect the new directory structure after moving the whole `bun` folder.",
+        "autoApply": false
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "bun/github-actions-setup.md",
+        "target": "tools/package-managers/bun/github-actions-setup.md",
+        "reason": "Reflect the new directory structure after moving the whole `bun` folder.",
+        "autoApply": false
+      },
+      {
+        "type": "update_status",
+        "priority": "medium",
+        "source": "guide/configuration.md",
+        "target": "",
+        "reason": "Current status is \"unknown\" – decide if it should be `published` or `draft`.",
+        "autoApply": false
+      },
+      {
+        "type": "update_status",
+        "priority": "medium",
+        "source": "guide/diagrams-and-charts.md",
+        "target": "",
+        "reason": "Current status is \"unknown\" – decide if it should be `published` or `draft`.",
+        "autoApply": false
+      },
+      {
+        "type": "update_status",
+        "priority": "medium",
+        "source": "guide/introduction.md",
+        "target": "",
+        "reason": "Current status is \"unknown\" – decide if it should be `published` or `draft`.",
+        "autoApply": false
+      },
+      {
+        "type": "update_status",
+        "priority": "medium",
+        "source": "guide/theme-customization.md",
+        "target": "",
+        "reason": "Current status is \"unknown\" – decide if it should be `published` or `draft`.",
+        "autoApply": false
+      },
+      {
+        "type": "update_status",
+        "priority": "medium",
+        "source": "guide/llm-workflow.md",
+        "target": "",
+        "reason": "Current status is \"unknown\" – decide if it should be `published` or `draft`.",
         "autoApply": false
       }
     ],
@@ -123,19 +152,19 @@
   },
   "createdIssues": [
     {
-      "number": 38,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/38",
-      "title": "Redirects for renamed files"
+      "number": 41,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/41",
+      "title": "Resolve duplicate tech‑stack documentation"
     },
     {
-      "number": 39,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/39",
-      "title": "Normalize tag format across all documents"
+      "number": 42,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/42",
+      "title": "Set proper status for guide documents with \"unknown\" status"
     },
     {
-      "number": 40,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/40",
-      "title": "Update internal links after restructuring"
+      "number": 43,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/43",
+      "title": "Create new top‑level `tools` category and relocate bun docs"
     }
   ]
 }
