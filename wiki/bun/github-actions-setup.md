@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [github-actions, bun, CI, CI/CD, node-alternative]
 redirect_from:
+  - bun-bun-github-actions-setup
   - bun-github-actions-setup
   - bun-github-actions
   - 요청-github-actions로-bun을-쓰는-방법

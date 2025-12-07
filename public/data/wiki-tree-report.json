@@ -1,91 +1,121 @@
 {
-  "timestamp": "2025-12-07T06:05:44.392Z",
+  "timestamp": "2025-12-07T12:06:14.737Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "The wiki consists of 12 markdown files organized in three top‑level directories (projects, guide, bun). All filenames already follow the required slug convention. The main issues are a draft document, several files with unknown status, and two overlapping guides in the `guide` folder that should be merged. No exact duplicate content was found.",
-    "totalDocuments": 12,
+    "summary": "10개의 위키 문서가 3개의 상위 디렉터리(guide, projects, bun) 아래에 고르게 배치돼 있으나 파일명·구조·태그 표기 방식에 일관성이 부족합니다. 대부분 파일명은 영문 slug 형태이지만, 일부는 과도하게 길거나 프로젝트·툴명을 중복 포함하고 있습니다. 또한 ‘visualization’과 같은 하위 주제별 폴더가 없어 관련 문서가 한곳에 모여 있지 않아 탐색성이 떨어집니다.",
+    "totalDocuments": 10,
     "categories": [
-      "projects",
       "guide",
+      "projects",
       "bun"
     ],
     "issues": [
-      "One draft document (desktop‑introduction.md) needs review before publishing.",
-      "Several files have status \"unknown\" – clarification required.",
-      "Two guides (theme‑customization.md, configuration‑guide.md) cover overlapping configuration topics and can be merged.",
-      "No redirects are needed because all filenames already match the slug format."
+      "파일명이 과도하게 길거나 중복된 프로젝트/툴명 포함",
+      "태그 표기 방식이 혼용([tag] vs [\"tag\"])",
+      "시각화 관련 문서가 별도 하위 폴더 없이 guide 루트에 섞여 있음",
+      "파일명 변경 시 기존 URL이 깨질 수 있어 리다이렉트 필요"
     ]
   },
   "suggestedStructure": {
-    "projects": [
-      "technology-stack.md",
-      "sepilot-desktop-introduction.md"
-    ],
     "guide": [
-      "getting-started.md",
-      "diagrams-guide.md",
+      "introduction.md",
       "llm-workflow.md",
-      "configuration-and-theme.md"
+      "configuration.md",
+      "theme-customization.md",
+      "faq.md",
+      "visualization/diagrams-and-charts.md"
+    ],
+    "projects": [
+      "sepilot-desktop.md",
+      "technology-stack.md"
     ],
     "bun": [
-      "bun-overview.md",
-      "bun-comparison-pnpm-npm.md",
-      "bun-github-actions-setup.md"
-    ],
-    "reference": [
-      "faq.md"
-    ],
-    "home.md": []
+      "overview.md",
+      "comparison-pnpm-npm.md",
+      "github-actions-setup.md"
+    ]
   },
   "results": {
-    "appliedActions": 1,
-    "skippedActions": 4,
+    "appliedActions": 7,
+    "skippedActions": 2,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 4
+    "createdIssues": 3
   },
   "actions": {
     "applied": [
       {
         "type": "rename",
+        "priority": "high",
+        "source": "guide/getting-started.md",
+        "target": "guide/introduction.md",
+        "reason": "‘시작하기’ 문서가 프로젝트 소개 역할을 하므로 더 직관적인 slug 로 변경",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "medium",
+        "source": "guide/configuration-guide.md",
+        "target": "guide/configuration.md",
+        "reason": "파일명이 이미 ‘configuration’이라는 핵심 키워드를 포함하고 있어 간결하게 정리",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "medium",
+        "source": "guide/diagrams-guide.md",
+        "target": "guide/diagrams-and-charts.md",
+        "reason": "내용이 다이어그램·차트 사용법을 다루므로 slug 를 명확히 반영",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
         "priority": "low",
-        "source": "projects/desktop-introduction.md",
-        "target": "projects/sepilot-desktop-introduction.md",
-        "reason": "Add project prefix for consistency with other project docs.",
+        "source": "projects/sepilot-desktop-introduction.md",
+        "target": "projects/sepilot-desktop.md",
+        "reason": "파일명이 과도하게 길고 ‘introduction’이 중복되므로 간결하게 정리",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "bun/bun-overview.md",
+        "target": "bun/overview.md",
+        "reason": "‘bun’이 이미 폴더명에 포함돼 있으므로 파일명에서 중복 제거",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "bun/bun-comparison-pnpm-npm.md",
+        "target": "bun/comparison-pnpm-npm.md",
+        "reason": "파일명에서 중복된 ‘bun’ 제거",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "bun/bun-github-actions-setup.md",
+        "target": "bun/github-actions-setup.md",
+        "reason": "파일명에서 중복된 ‘bun’ 제거",
         "autoApply": true
       }
     ],
     "skipped": [
       {
         "type": "move",
-        "priority": "low",
-        "source": "guide/theme-customization.md",
-        "target": "guide/configuration-and-theme.md",
-        "reason": "Will be merged with configuration‑guide.md into a single comprehensive guide.",
-        "autoApply": false
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "guide/theme-customization.md & guide/configuration-guide.md",
-        "target": "guide/configuration-and-theme.md",
-        "reason": "Both files describe site configuration and theming; merging reduces redundancy and improves discoverability.",
+        "priority": "medium",
+        "source": "guide/diagrams-and-charts.md",
+        "target": "guide/visualization/diagrams-and-charts.md",
+        "reason": "시각화 관련 문서를 별도 하위 폴더에 모아 탐색성을 향상",
         "autoApply": false
       },
       {
         "type": "create_category",
         "priority": "medium",
         "source": "",
-        "target": "reference",
-        "reason": "FAQ is a reference document; moving it to a dedicated `reference` folder clarifies its purpose.",
-        "autoApply": false
-      },
-      {
-        "type": "move",
-        "priority": "medium",
-        "source": "guide/faq.md",
-        "target": "reference/faq.md",
-        "reason": "Place FAQ under the new `reference` category.",
+        "target": "guide/visualization",
+        "reason": "시각화(다이어그램·차트) 전용 폴더 생성",
         "autoApply": false
       }
     ],
@@ -93,24 +123,19 @@
   },
   "createdIssues": [
     {
-      "number": 34,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/34",
-      "title": "Review and publish draft document"
+      "number": 38,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/38",
+      "title": "Redirects for renamed files"
     },
     {
-      "number": 35,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/35",
-      "title": "Clarify status of documents with \"unknown\""
+      "number": 39,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/39",
+      "title": "Normalize tag format across all documents"
     },
     {
-      "number": 36,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/36",
-      "title": "Merge Theme Customization and Configuration Guides"
-    },
-    {
-      "number": 37,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/37",
-      "title": "Create a `reference` category and relocate FAQ"
+      "number": 40,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/40",
+      "title": "Update internal links after restructuring"
     }
   ]
 }
