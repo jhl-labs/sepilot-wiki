@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [github-actions, bun, CI, CI/CD, node-alternative]
 redirect_from:
+  - bun-github-actions-setup
   - bun-bun-github-actions-setup
   - bun-github-actions-setup
   - bun-github-actions

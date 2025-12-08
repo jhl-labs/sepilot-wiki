@@ -7,6 +7,8 @@ status: "published"
 issueNumber: 0
 createdAt: "2025-12-07T10:00:00Z"
 updatedAt: "2025-12-07T10:00:00Z"
+redirect_from:
+  - guide-getting-started
 ---
 
 # Getting Started
