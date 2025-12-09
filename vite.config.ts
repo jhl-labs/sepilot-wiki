@@ -3,14 +3,26 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 // GitHub Pages base path 설정
-// - GitHub.com: /repo-name/
-// - GHES: /org/repo/ 또는 커스텀 경로
+// - 로컬 개발 (npm run dev): '/'
+// - GitHub.com Pages: '/repo-name/'
+// - GHES: '/org/repo/' 또는 커스텀 경로
 // 환경변수 VITE_BASE_PATH로 오버라이드 가능
-const basePath = process.env.VITE_BASE_PATH || '/sepilot-wiki/';
+const getBasePath = () => {
+  // 명시적으로 설정된 경우 우선
+  if (process.env.VITE_BASE_PATH) {
+    return process.env.VITE_BASE_PATH;
+  }
+  // 개발 모드에서는 루트 경로 사용
+  if (process.env.NODE_ENV !== 'production') {
+    return '/';
+  }
+  // 프로덕션 빌드 시 GitHub Pages 경로
+  return '/sepilot-wiki/';
+};
 
 export default defineConfig({
   plugins: [react()],
-  base: basePath,
+  base: getBasePath(),
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
