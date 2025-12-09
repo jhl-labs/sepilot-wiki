@@ -51,6 +51,11 @@ jobs:
           mkdir -p ~/.kube
           echo "$KUBECONFIG_DATA" > ~/.kube/config
           chmod 600 ~/.kube/config
+          # 디버깅: kubeconfig 유효성 검사 (민감정보 제외)
+          echo "📋 Kubeconfig 검증:"
+          echo "   - 파일 크기: $(wc -c < ~/.kube/config) bytes"
+          echo "   - 클러스터 수: $(kubectl config get-contexts -o name 2>/dev/null | wc -l || echo 'N/A')"
+          kubectl config get-contexts 2>&1 || echo "⚠️ context 조회 실패"
         env:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
 
@@ -58,6 +63,7 @@ jobs:
         run: bun run collect
         env:
           KUBECONFIG: ~/.kube/config
+          DEBUG: "true"
 
       - name: Build
         run: bun run build
