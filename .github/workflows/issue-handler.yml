@@ -61,7 +61,7 @@ jobs:
         id: generate
         run: |
           echo "🤖 AI 문서 생성 시작..."
-          bun run scripts/generate-document.js \
+          bun run scripts/document/generate-document.js \
             --issue-number "${{ github.event.issue.number }}" \
             --issue-title "${{ github.event.issue.title }}" \
             --issue-body "${{ github.event.issue.body }}"
@@ -79,7 +79,7 @@ jobs:
           bun run build:search
 
       - name: Collect workflow status
-        run: bun run scripts/collect-actions-status.js
+        run: bun run scripts/collectors/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -179,7 +179,7 @@ jobs:
         id: process
         run: |
           echo "🤖 Invalid 처리 시작..."
-          bun run scripts/mark-invalid.js \
+          bun run scripts/issue/mark-invalid.js \
             --issue-number "${{ github.event.issue.number }}" \
             --issue-title "${{ github.event.issue.title }}" \
             --issue-body "${{ github.event.issue.body }}"
@@ -197,7 +197,7 @@ jobs:
           bun run build:search
 
       - name: Collect workflow status
-        run: bun run scripts/collect-actions-status.js
+        run: bun run scripts/collectors/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -262,7 +262,7 @@ jobs:
         id: publish
         run: |
           echo "📤 문서 발행 시작..."
-          bun run scripts/publish-document.js \
+          bun run scripts/document/publish-document.js \
             --issue-number "${{ github.event.issue.number }}" \
             --issue-title "${{ github.event.issue.title }}"
         env:
@@ -275,7 +275,7 @@ jobs:
           bun run build:search
 
       - name: Collect workflow status
-        run: bun run scripts/collect-actions-status.js
+        run: bun run scripts/collectors/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -389,7 +389,7 @@ jobs:
         id: unpublish
         run: |
           echo "📥 문서 발행 취소 시작..."
-          bun run scripts/unpublish-document.js \
+          bun run scripts/document/unpublish-document.js \
             --issue-number "${{ github.event.issue.number }}" \
             --issue-title "${{ github.event.issue.title }}"
         env:
@@ -402,7 +402,7 @@ jobs:
           bun run build:search
 
       - name: Collect workflow status
-        run: bun run scripts/collect-actions-status.js
+        run: bun run scripts/collectors/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -536,7 +536,7 @@ jobs:
         id: process
         run: |
           echo "🤖 피드백 처리 시작..."
-          bun run scripts/process-feedback.js \
+          bun run scripts/document/process-feedback.js \
             --issue-number "${{ github.event.issue.number }}" \
             --issue-title "${{ github.event.issue.title }}" \
             --comment-body "${{ github.event.comment.body }}"
@@ -556,7 +556,7 @@ jobs:
 
       - name: Collect workflow status
         if: steps.check-maintainer.outputs.result == 'true'
-        run: bun run scripts/collect-actions-status.js
+        run: bun run scripts/collectors/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}

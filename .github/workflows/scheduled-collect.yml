@@ -39,7 +39,7 @@ jobs:
       - name: Collect GitHub Actions status
         run: |
           echo "🚀 GitHub Actions 상태 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
-          bun run scripts/collect-actions-status.js
+          bun run scripts/collectors/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}

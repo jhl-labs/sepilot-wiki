@@ -34,4 +34,4 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
         run: |
-          bun run scripts/review-pr.js --pull-number "${{ github.event.pull_request.number }}"
+          bun run scripts/maintenance/review-pr.js --pull-number "${{ github.event.pull_request.number }}"
