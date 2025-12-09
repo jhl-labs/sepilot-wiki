@@ -12,8 +12,10 @@ import { existsSync } from 'fs';
 import { execSync } from 'child_process';
 
 const WIKI_DIR = join(process.cwd(), 'wiki');
+const GUIDE_DIR = join(process.cwd(), 'guide');
 const OUTPUT_DIR = join(process.cwd(), 'public');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'wiki-data.json');
+const GUIDE_OUTPUT_FILE = join(OUTPUT_DIR, 'guide-data.json');
 const DATA_DIR = join(OUTPUT_DIR, 'data');
 const AI_HISTORY_FILE = join(DATA_DIR, 'ai-history.json');
 
@@ -305,7 +307,56 @@ async function buildWikiData() {
   }
 }
 
-buildWikiData().catch((err) => {
-  console.error('❌ Wiki 데이터 빌드 실패:', err);
+// Guide 데이터 빌드 (정적 가이드 페이지)
+async function buildGuideData() {
+  console.log('📖 Guide 데이터 빌드 시작...');
+
+  // guide 폴더가 없으면 빈 데이터 생성
+  if (!existsSync(GUIDE_DIR)) {
+    console.log('⚠️ guide 폴더가 없습니다. 빈 데이터를 생성합니다.');
+    await mkdir(OUTPUT_DIR, { recursive: true });
+    await writeFile(GUIDE_OUTPUT_FILE, JSON.stringify({ pages: [] }, null, 2));
+    console.log('✅ 빈 guide-data.json 생성 완료');
+    return;
+  }
+
+  // guide 폴더의 모든 마크다운 파일 찾기
+  const mdFiles = await findMarkdownFiles(GUIDE_DIR);
+  console.log(`   발견된 가이드 파일: ${mdFiles.length}개`);
+
+  const pages = [];
+
+  for (const { fullPath, relativePath } of mdFiles) {
+    const content = await readFile(fullPath, 'utf-8');
+    // 슬러그는 상대 경로에서 .md 제거
+    const slug = relativePath.replace('.md', '');
+    const { metadata, body } = parseMarkdownWithFrontmatter(content);
+
+    const page = {
+      title: metadata.title || formatTitle(slug),
+      slug,
+      content: body,
+      tags: metadata.tags || [],
+      menu: metadata.menu,
+    };
+
+    pages.push(page);
+  }
+
+  // JSON 파일 저장
+  await mkdir(OUTPUT_DIR, { recursive: true });
+  await writeFile(GUIDE_OUTPUT_FILE, JSON.stringify({ pages }, null, 2));
+
+  console.log(`✅ Guide 데이터 빌드 완료: ${pages.length}개 문서`);
+  console.log(`   출력: ${GUIDE_OUTPUT_FILE}`);
+}
+
+async function main() {
+  await buildWikiData();
+  await buildGuideData();
+}
+
+main().catch((err) => {
+  console.error('❌ 데이터 빌드 실패:', err);
   process.exit(1);
 });

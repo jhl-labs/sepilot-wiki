@@ -24,6 +24,29 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
     }
 }
 
+// 빌드 시점에 생성된 정적 guide 데이터 캐시
+let guideDataCache: { pages: WikiPage[] } | null = null;
+
+// 정적 guide 데이터 로드
+async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
+    if (guideDataCache) {
+        return guideDataCache;
+    }
+
+    try {
+        const cacheBuster = `?v=${Date.now()}`;
+        const response = await fetch(`${import.meta.env.BASE_URL}guide-data.json${cacheBuster}`);
+        if (!response.ok) {
+            return { pages: [] };
+        }
+        guideDataCache = await response.json();
+        return guideDataCache!;
+    } catch (error) {
+        console.error('Error loading guide data:', error);
+        return { pages: [] };
+    }
+}
+
 // Wiki 페이지 목록 가져오기 (정적 데이터에서)
 export async function fetchWikiPages(): Promise<WikiTree[]> {
     const data = await loadWikiData();
@@ -71,24 +94,35 @@ export async function fetchWikiTags(): Promise<TagStats[]> {
         .sort((a, b) => b.count - a.count);
 }
 
-// 기본 가이드 페이지 목록 (정적)
-export function getGuidePages(): WikiTree[] {
-    return [
-        { title: '시작하기', slug: 'guide/getting-started' },
-        { title: '테마 커스터마이징', slug: 'guide/theme-customization' },
-        { title: 'LLM 워크플로우', slug: 'guide/llm-workflow' },
-        { title: '설정 파일 가이드', slug: 'guide/configuration' },
-        { title: 'FAQ', slug: 'guide/faq' },
-    ];
+// 가이드 페이지 목록 가져오기 (정적 guide-data.json에서)
+export async function fetchGuidePages(): Promise<WikiTree[]> {
+    const data = await loadGuideData();
+    return data.pages.map(page => ({
+        title: page.title,
+        slug: page.slug,
+        menu: page.menu,
+    }));
 }
 
 // Wiki 페이지 내용 가져오기 (정적 데이터에서)
 export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
-    // 정적 데이터에서 페이지 찾기
-    // 이제 가이드 페이지도 wiki-data.json에 포함되므로 별도 로직 불필요
-    const data = await loadWikiData();
-    const page = data.pages.find((p) => p.slug === slug);
-    return page || null;
+    // wiki-data.json에서 먼저 찾기
+    const wikiData = await loadWikiData();
+    const wikiPage = wikiData.pages.find((p) => p.slug === slug);
+    if (wikiPage) {
+        return wikiPage;
+    }
+
+    // guide-data.json에서 찾기 (guide/ 접두사 없이 저장되어 있음)
+    const guideData = await loadGuideData();
+    const guideSlug = slug.startsWith('guide/') ? slug.slice(6) : slug;
+    const guidePage = guideData.pages.find((p) => p.slug === guideSlug);
+    if (guidePage) {
+        // slug에 guide/ 접두사 추가하여 반환
+        return { ...guidePage, slug: `guide/${guidePage.slug}` };
+    }
+
+    return null;
 }
 
 // Issues 데이터 캐시

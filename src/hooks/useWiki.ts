@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, getGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus } from '../services/github';
+import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, fetchGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus } from '../services/github';
 
 export function useWikiPages() {
   return useQuery({
@@ -35,12 +35,13 @@ export function useSearch(query: string) {
   });
 }
 
-// 정적 가이드 페이지 hook
+// 가이드 페이지 hook (guide-data.json에서 로드)
 export function useGuidePages() {
-  return {
-    data: getGuidePages(),
-    isLoading: false,
-  };
+  return useQuery({
+    queryKey: ['guide-pages'],
+    queryFn: fetchGuidePages,
+    staleTime: 5 * 60 * 1000, // 5분
+  });
 }
 
 // AI History 전체 조회

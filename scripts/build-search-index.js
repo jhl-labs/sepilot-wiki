@@ -11,6 +11,7 @@ import { join } from 'path';
 
 const PUBLIC_DIR = join(process.cwd(), 'public');
 const WIKI_DATA_FILE = join(PUBLIC_DIR, 'wiki-data.json');
+const GUIDE_DATA_FILE = join(PUBLIC_DIR, 'guide-data.json');
 const OUTPUT_FILE = join(PUBLIC_DIR, 'search-index.xml');
 const JSON_OUTPUT_FILE = join(PUBLIC_DIR, 'search-index.json');
 
@@ -76,7 +77,21 @@ async function buildSearchIndex() {
 
   // wiki 데이터 로드
   const wikiData = JSON.parse(await readFile(WIKI_DATA_FILE, 'utf-8'));
-  const pages = wikiData.pages || [];
+  const wikiPages = wikiData.pages || [];
+
+  // guide 데이터 로드 (있으면)
+  let guidePages = [];
+  if (existsSync(GUIDE_DATA_FILE)) {
+    const guideData = JSON.parse(await readFile(GUIDE_DATA_FILE, 'utf-8'));
+    // guide 페이지는 slug에 guide/ 접두사 추가
+    guidePages = (guideData.pages || []).map(page => ({
+      ...page,
+      slug: `guide/${page.slug}`,
+    }));
+  }
+
+  // 모든 페이지 합치기
+  const pages = [...wikiPages, ...guidePages];
 
   if (pages.length === 0) {
     console.log('⚠️ 검색할 페이지가 없습니다.');

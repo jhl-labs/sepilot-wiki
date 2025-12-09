@@ -305,7 +305,7 @@ export function Sidebar() {
                 {guidePages?.map((page) => (
                   <NavLink
                     key={page.slug}
-                    to={`/wiki/${page.slug}`}
+                    to={`/wiki/guide/${page.slug}`}
                     className={({ isActive }) =>
                       clsx('nav-item nav-item-child', isActive && 'active')
                     }
