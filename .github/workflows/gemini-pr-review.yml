@@ -1,14 +1,18 @@
-name: Gemini PR Reviewer
+name: OpenAI PR Reviewer
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [synchronize]  # opened는 gemini-dispatch에서 처리
     paths-ignore:
-      - 'wiki/**' # 위키 데이터 변경은 제외
+      - 'wiki/**'
       - 'docs/**'
+      - 'public/**'
+      - '*.md'
 
 jobs:
   review:
+    # Fork PR이 아니고 Gemini dispatch에서 처리하지 않는 경우에만 실행
+    if: github.event.pull_request.head.repo.fork == false
     runs-on: jhl-space
     permissions:
       contents: read

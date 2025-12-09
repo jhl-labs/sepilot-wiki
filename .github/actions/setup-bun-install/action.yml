@@ -1,0 +1,20 @@
+name: 'Setup Bun and Install'
+description: 'Bun 설치 및 의존성 설치를 수행하는 공통 액션'
+
+inputs:
+  bun-version:
+    description: 'Bun 버전'
+    required: false
+    default: 'latest'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: ${{ inputs.bun-version }}
+
+    - name: Install dependencies
+      shell: bash
+      run: bun install

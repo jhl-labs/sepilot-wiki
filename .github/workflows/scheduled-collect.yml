@@ -28,13 +28,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
+      - name: Setup Bun and Install
+        uses: ./.github/actions/setup-bun-install
 
       - name: Collect GitHub Actions status
         run: |
@@ -44,27 +39,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
 
-      - name: Rebuild wiki data and search index
-        run: |
-          echo "📚 Wiki 데이터 및 검색 인덱스 재빌드..."
-          bun run build:wiki
-          bun run build:search
+      - name: Build wiki data
+        uses: ./.github/actions/build-wiki
 
-      - name: Commit changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-          else
-            git commit -m "chore: 자동 상태 수집 - $(date '+%Y-%m-%d %H:%M')"
-            git pull --rebase
-            git push
-          fi
+      - name: Commit and push
+        uses: ./.github/actions/git-commit-push
+        with:
+          message: "chore: 자동 상태 수집 - $(date '+%Y-%m-%d %H:%M')"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
 
       - name: Summary
         run: |
@@ -72,10 +55,3 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- 수집 시간: $(date '+%Y-%m-%d %H:%M:%S KST')" >> $GITHUB_STEP_SUMMARY
           echo "- 대상: ${{ github.event.inputs.target || 'all' }}" >> $GITHUB_STEP_SUMMARY
-          if [ -f public/actions-status.json ]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### GitHub Actions 상태" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
-            cat public/actions-status.json | head -30 >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          fi
