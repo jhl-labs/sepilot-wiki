@@ -1,3 +1,5 @@
+'use client';
+
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -5,7 +7,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from '../../context/ThemeContext';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Copy, Check, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 import { LazyMermaidDiagram } from './LazyMermaidDiagram';
@@ -91,11 +93,11 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
             const isWikiLink = href?.startsWith('/wiki/') || href?.startsWith('./');
 
             if (isWikiLink || !isExternal) {
-              const to = href?.startsWith('./')
+              const linkHref = href?.startsWith('./')
                 ? `/wiki/${href.slice(2).replace('.md', '')}`
                 : href || '/';
               return (
-                <Link to={to} className="wiki-link">
+                <Link href={linkHref} className="wiki-link">
                   {children}
                 </Link>
               );

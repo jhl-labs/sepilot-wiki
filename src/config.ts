@@ -1,6 +1,19 @@
 import { siteConfig } from '../site.config';
 import type { WikiConfig } from './types';
 
+// Base URL 결정 (Next.js / Vite 호환)
+function getBaseUrl(): string {
+  // Next.js 환경
+  if (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_BASE_PATH) {
+    return process.env.NEXT_PUBLIC_BASE_PATH;
+  }
+  // Vite 환경
+  if (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) {
+    return import.meta.env.BASE_URL;
+  }
+  return '/';
+}
+
 // site.config.ts에서 설정을 가져와 WikiConfig 생성
 export const config: WikiConfig = {
   owner: siteConfig.owner,
@@ -8,7 +21,7 @@ export const config: WikiConfig = {
   wikiRepo: `${siteConfig.repo}.wiki`,
   title: siteConfig.title,
   description: siteConfig.description,
-  baseUrl: import.meta.env.BASE_URL || '/',
+  baseUrl: getBaseUrl(),
 };
 
 // GitHub URL 설정 (GHES 지원)

@@ -1,3 +1,5 @@
+'use client';
+
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { Calendar, User, Tag } from 'lucide-react';

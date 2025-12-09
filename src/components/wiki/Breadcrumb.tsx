@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import { ChevronRight, Home } from 'lucide-react';
 import type { Breadcrumb as BreadcrumbType } from '../../types';
 
@@ -28,7 +30,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
     <nav className="breadcrumb" aria-label="Breadcrumb">
       <ol className="breadcrumb-list">
         <li className="breadcrumb-item">
-          <Link to="/" className="breadcrumb-link">
+          <Link href="/" className="breadcrumb-link">
             <Home size={14} />
             <span>홈</span>
           </Link>
@@ -37,7 +39,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           <li key={index} className="breadcrumb-item">
             <ChevronRight size={14} className="breadcrumb-separator" />
             {item.slug ? (
-              <Link to={`/wiki/${item.slug}`} className="breadcrumb-link">
+              <Link href={`/wiki/${item.slug}`} className="breadcrumb-link">
                 {item.title}
               </Link>
             ) : (

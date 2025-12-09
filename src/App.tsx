@@ -5,7 +5,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { SidebarProvider } from './context/SidebarContext';
 import { ConfigProvider } from './context/ConfigContext';
 import { Layout } from './components/layout';
-import { HomePage, WikiPage, SearchPage, IssuesPage, NotFoundPage, AIHistoryPage, TagsPage } from './pages';
+import { HomePage, WikiPage, SearchPage, IssuesPage, NotFoundPage, AIHistoryPage, TagsPage } from './page-components';
 import { config } from './config';
 import './styles/index.css';
 import './styles/custom.css';

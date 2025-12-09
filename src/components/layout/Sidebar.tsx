@@ -1,4 +1,7 @@
-import { NavLink, useLocation } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import {
   Home,
@@ -24,7 +27,8 @@ import type { SidebarSection, SidebarNavItem, WikiTree } from '../../types';
 
 export function Sidebar() {
   const { isOpen, close } = useSidebar();
-  const location = useLocation();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const navigationConfig = useNavigationConfig();
   const { data: wikiPages, isLoading: pagesLoading } = useWikiPages();
   const { data: guidePages } = useGuidePages();
@@ -111,20 +115,19 @@ export function Sidebar() {
       );
     }
 
+    const isActive = pathname === item.href;
     return (
-      <NavLink
+      <Link
         key={item.href}
-        to={item.href}
-        className={({ isActive }) =>
-          clsx('nav-item nav-item-child', isActive && 'active')
-        }
+        href={item.href}
+        className={clsx('nav-item nav-item-child', isActive && 'active')}
         style={{ paddingLeft }}
         onClick={handleLinkClick}
       >
         {item.icon && <DynamicIcon name={item.icon} size={14} />}
         <span>{item.label}</span>
         {item.badge && <span className="nav-badge-text">{item.badge}</span>}
-      </NavLink>
+      </Link>
     );
   };
 
@@ -157,19 +160,18 @@ export function Sidebar() {
 
     // 페이지인 경우 - menu 필드가 있으면 menu 사용, 없으면 title 사용
     const displayName = item.menu || item.title || item.slug;
+    const isActive = pathname === `/wiki/${item.slug}`;
 
     return (
       <div key={item.slug}>
-        <NavLink
-          to={`/wiki/${item.slug}`}
-          className={({ isActive }) =>
-            clsx('nav-item nav-item-child', isActive && 'active')
-          }
+        <Link
+          href={`/wiki/${item.slug}`}
+          className={clsx('nav-item nav-item-child', isActive && 'active')}
           style={{ paddingLeft }}
           onClick={handleLinkClick}
         >
           <span>{displayName}</span>
-        </NavLink>
+        </Link>
         {/* depth 2까지만 children 렌더링 */}
         {hasChildren && depth < 2 && (
           <>
@@ -246,16 +248,14 @@ export function Sidebar() {
 
         <nav className="sidebar-nav" aria-labelledby="sidebar-title">
           {/* 홈 링크 - wiki/home.md가 있으면 해당 페이지로, 없으면 기본 홈으로 */}
-          <NavLink
-            to={hasWikiHome ? '/wiki/home' : '/'}
-            className={({ isActive }) =>
-              clsx('nav-item nav-item-home', isActive && 'active')
-            }
+          <Link
+            href={hasWikiHome ? '/wiki/home' : '/'}
+            className={clsx('nav-item nav-item-home', (pathname === '/' || pathname === '/wiki/home') && 'active')}
             onClick={handleLinkClick}
           >
             <Home size={18} />
             <span>홈</span>
-          </NavLink>
+          </Link>
 
           {/* 커스텀 섹션 (navigation.config.ts에서 정의) */}
           {navigationConfig.sidebar?.map((section, index) =>
@@ -312,16 +312,14 @@ export function Sidebar() {
             {expandedSections.has('guide') && (
               <div className="nav-section-content">
                 {guidePages?.map((page) => (
-                  <NavLink
+                  <Link
                     key={page.slug}
-                    to={`/wiki/guide/${page.slug}`}
-                    className={({ isActive }) =>
-                      clsx('nav-item nav-item-child', isActive && 'active')
-                    }
+                    href={`/wiki/guide/${page.slug}`}
+                    className={clsx('nav-item nav-item-child', pathname === `/wiki/guide/${page.slug}` && 'active')}
                     onClick={handleLinkClick}
                   >
                     <span>{page.title}</span>
-                  </NavLink>
+                  </Link>
                 ))}
               </div>
             )}
@@ -346,21 +344,17 @@ export function Sidebar() {
             </button>
             {expandedSections.has('issues') && (
               <div className="nav-section-content">
-                <NavLink
-                  to="/issues"
-                  className={({ isActive }) =>
-                    clsx('nav-item nav-item-child', isActive && location.pathname === '/issues' && 'active')
-                  }
+                <Link
+                  href="/issues"
+                  className={clsx('nav-item nav-item-child', pathname === '/issues' && !searchParams.toString() && 'active')}
                   onClick={handleLinkClick}
                 >
                   <Tag size={14} />
                   <span>모든 요청</span>
-                </NavLink>
-                <NavLink
-                  to="/issues?label=request&state=open"
-                  className={() =>
-                    clsx('nav-item nav-item-child', location.search.includes('state=open') && 'active')
-                  }
+                </Link>
+                <Link
+                  href="/issues?label=request&state=open"
+                  className={clsx('nav-item nav-item-child', searchParams.get('state') === 'open' && 'active')}
                   onClick={handleLinkClick}
                 >
                   <AlertCircle size={14} />
@@ -368,22 +362,20 @@ export function Sidebar() {
                   {openIssuesCount > 0 && (
                     <span className="nav-count">{openIssuesCount}</span>
                   )}
-                </NavLink>
+                </Link>
               </div>
             )}
           </div>
 
           {/* 전체 태그 링크 */}
-          <NavLink
-            to="/tags"
-            className={({ isActive }) =>
-              clsx('nav-item nav-item-home', isActive && 'active')
-            }
+          <Link
+            href="/tags"
+            className={clsx('nav-item nav-item-home', pathname === '/tags' && 'active')}
             onClick={handleLinkClick}
           >
             <Tags size={18} />
             <span>전체 태그</span>
-          </NavLink>
+          </Link>
         </nav>
 
         <div className="sidebar-footer">

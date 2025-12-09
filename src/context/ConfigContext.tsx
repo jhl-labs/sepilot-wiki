@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react';
 import { siteConfig } from '../../site.config';
 import { themeConfig } from '../../theme.config';

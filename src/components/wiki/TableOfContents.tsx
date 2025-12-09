@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { List } from 'lucide-react';
 import clsx from 'clsx';

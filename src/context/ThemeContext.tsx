@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Theme } from '../types';
@@ -10,13 +12,24 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme');
-    return (stored as Theme) || 'system';
-  });
+// localStorage에서 초기 테마 값 가져오기 (SSR 호환)
+function getInitialTheme(): Theme {
+  if (typeof window === 'undefined') return 'system';
+  const stored = localStorage.getItem('theme');
+  return (stored as Theme) || 'system';
+}
 
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
   const [actualTheme, setActualTheme] = useState<'light' | 'dark'>('light');
+
+  // 테마 설정 함수 (localStorage에도 저장)
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', newTheme);
+    }
+  };
 
   useEffect(() => {
     const updateActualTheme = () => {
@@ -38,8 +51,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', actualTheme);
-    localStorage.setItem('theme', theme);
-  }, [theme, actualTheme]);
+  }, [actualTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, actualTheme, setTheme }}>

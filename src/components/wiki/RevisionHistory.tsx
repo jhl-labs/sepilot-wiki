@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { History, ChevronDown, ChevronUp, GitCommit, Plus, Minus, User, Calendar } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';

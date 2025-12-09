@@ -1,3 +1,4 @@
+'use client';
 
 import { useActionsStatus } from '../hooks/useWiki';
 import { Activity, CheckCircle, XCircle, Clock, RotateCw, GitBranch } from 'lucide-react';

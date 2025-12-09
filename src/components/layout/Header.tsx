@@ -1,4 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import {
   Menu,
@@ -21,7 +24,7 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const { toggle } = useSidebar();
   const siteConfig = useSiteConfig();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
@@ -47,7 +50,7 @@ export function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setShowSearch(false);
       setSearchQuery('');
     }
@@ -108,7 +111,7 @@ export function Header() {
         >
           <Menu size={20} aria-hidden="true" />
         </button>
-        <Link to="/" className="header-logo" aria-label={`${siteConfig.title} 홈으로 이동`}>
+        <Link href="/" className="header-logo" aria-label={`${siteConfig.title} 홈으로 이동`}>
           {renderLogo()}
         </Link>
       </div>
