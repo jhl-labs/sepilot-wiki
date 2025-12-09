@@ -36,7 +36,7 @@ jobs:
       has_changes: ${{ steps.commit.outputs.has_changes }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -154,7 +154,7 @@ jobs:
     runs-on: jhl-space
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -237,7 +237,7 @@ jobs:
     runs-on: jhl-space
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -364,7 +364,7 @@ jobs:
     runs-on: jhl-space
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -507,7 +507,7 @@ jobs:
 
       - name: Checkout
         if: steps.check-maintainer.outputs.result == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         if: steps.check-maintainer.outputs.result == 'true'
