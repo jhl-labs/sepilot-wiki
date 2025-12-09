@@ -176,8 +176,18 @@ async function analyzeWikiStructure(documents) {
 - 파일명은 영문 소문자, 하이픈만 사용 (예: getting-started.md)
 - home.md는 루트에 유지
 - 자동 적용(autoApply: true)은 단순 rename만 허용
-- 구조 변경이 큰 경우 issuesForHuman에 추가
-- 기존 URL이 깨지지 않도록 주의 (리다이렉트 필요 시 명시)`;
+- 기존 URL이 깨지지 않도록 주의 (리다이렉트 필요 시 명시)
+
+## Issue 생성 규칙 (매우 중요!)
+
+- issuesForHuman은 **정말 중요한 문제만** 추가 (예: 보안 문제, 심각한 구조 문제)
+- 다음은 Issue로 만들지 마세요:
+  - 단순 파일명 변경 제안
+  - 카테고리 재분류 제안
+  - 사소한 개선 사항
+- Issue는 **전체 분석에서 최대 1-2개**만 생성
+- 이미 자동 적용(autoApply)으로 처리할 수 있는 것은 Issue로 만들지 마세요
+- 구조가 이미 양호하면 issuesForHuman을 빈 배열로 반환`;
 
   const userPrompt = `다음 Wiki 문서들을 분석하고 구조 개선안을 JSON 형식으로 제시해주세요:
 
@@ -336,7 +346,36 @@ function addRedirectInfo(content, oldPath) {
 }
 
 /**
- * GitHub Issue 생성
+ * 기존 열린 Issue 목록 조회 (중복 방지용)
+ */
+async function getExistingIssues() {
+  const repo = process.env.GITHUB_REPOSITORY;
+  const token = process.env.GITHUB_TOKEN;
+
+  if (!repo || !token) return [];
+
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${repo}/issues?state=open&labels=wiki-maintenance&per_page=100`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    );
+
+    if (!response.ok) return [];
+
+    const issues = await response.json();
+    return issues.map((i) => i.title.toLowerCase());
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * GitHub Issue 생성 (중복 검사 포함)
  */
 async function createGitHubIssues(issues) {
   const repo = process.env.GITHUB_REPOSITORY;
@@ -352,9 +391,29 @@ async function createGitHubIssues(issues) {
     return [];
   }
 
+  // 기존 열린 Issue 제목들 조회
+  const existingTitles = await getExistingIssues();
+  console.log(`📋 기존 열린 wiki-maintenance Issue: ${existingTitles.length}개`);
+
   const createdIssues = [];
+  let skippedCount = 0;
 
   for (const issue of issues) {
+    const fullTitle = `[Wiki Maintainer] ${issue.title}`;
+
+    // 중복 검사: 비슷한 제목의 Issue가 이미 있는지 확인
+    const isDuplicate = existingTitles.some((existing) => {
+      const newTitle = fullTitle.toLowerCase();
+      // 정확히 같거나 80% 이상 유사하면 중복으로 판단
+      return existing === newTitle || isSimilarTitle(existing, newTitle);
+    });
+
+    if (isDuplicate) {
+      console.log(`⏭️ 중복 Issue 건너뜀: ${issue.title}`);
+      skippedCount++;
+      continue;
+    }
+
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}/issues`, {
         method: 'POST',
@@ -364,7 +423,7 @@ async function createGitHubIssues(issues) {
           Accept: 'application/vnd.github.v3+json',
         },
         body: JSON.stringify({
-          title: `[Wiki Maintainer] ${issue.title}`,
+          title: fullTitle,
           body:
             issue.body +
             '\n\n---\n*🤖 이 Issue는 Wiki Tree Maintainer에 의해 자동 생성되었습니다.*',
@@ -379,12 +438,43 @@ async function createGitHubIssues(issues) {
       const data = await response.json();
       createdIssues.push({ number: data.number, url: data.html_url, title: issue.title });
       console.log(`📌 Issue 생성: #${data.number} - ${issue.title}`);
+
+      // 새로 생성한 Issue도 기존 목록에 추가 (연속 중복 방지)
+      existingTitles.push(fullTitle.toLowerCase());
     } catch (error) {
       console.error(`❌ Issue 생성 실패: ${issue.title} - ${error.message}`);
     }
   }
 
+  if (skippedCount > 0) {
+    console.log(`ℹ️ 중복으로 ${skippedCount}개 Issue 건너뜀`);
+  }
+
   return createdIssues;
+}
+
+/**
+ * 두 제목이 유사한지 확인 (간단한 유사도 검사)
+ */
+function isSimilarTitle(title1, title2) {
+  // 공백, 특수문자 제거 후 비교
+  const normalize = (str) => str.replace(/[^a-z0-9가-힣]/g, '');
+  const t1 = normalize(title1);
+  const t2 = normalize(title2);
+
+  // 한쪽이 다른 쪽을 포함하면 유사
+  if (t1.includes(t2) || t2.includes(t1)) return true;
+
+  // 공통 단어 비율 확인
+  const words1 = title1.split(/\s+/).filter((w) => w.length > 2);
+  const words2 = title2.split(/\s+/).filter((w) => w.length > 2);
+
+  if (words1.length === 0 || words2.length === 0) return false;
+
+  const commonWords = words1.filter((w) => words2.some((w2) => w2.includes(w) || w.includes(w2)));
+  const similarity = commonWords.length / Math.max(words1.length, words2.length);
+
+  return similarity >= 0.7; // 70% 이상 유사하면 중복
 }
 
 /**

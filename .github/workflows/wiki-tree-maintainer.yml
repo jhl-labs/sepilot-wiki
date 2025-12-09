@@ -1,15 +1,23 @@
 name: Wiki Tree Maintainer
 
 on:
-  # 6시간마다 실행 (UTC 0, 6, 12, 18시 = KST 9, 15, 21, 3시)
+  # 주 1회 실행 (매주 월요일 UTC 0시 = KST 9시)
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 0 * * 1'
 
   # 수동 실행 지원
   workflow_dispatch:
     inputs:
       dry_run:
         description: '테스트 모드 (변경 적용 안함)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      force_run:
+        description: '변경 없어도 강제 실행'
         required: false
         default: 'false'
         type: choice
