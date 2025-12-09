@@ -143,7 +143,8 @@ export function execCommand(command, options = {}) {
   try {
     return execSync(command, {
       encoding: 'utf-8',
-      timeout: options.timeout || 30000,
+      timeout: options.timeout || 60000,
+      maxBuffer: options.maxBuffer || 50 * 1024 * 1024, // 50MB
       ...options,
     }).trim();
   } catch (error) {

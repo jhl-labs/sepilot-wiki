@@ -34,6 +34,7 @@ const COLORS = {
   pink: '#ec4899',
   cyan: '#06b6d4',
   orange: '#f97316',
+  gray: '#6b7280',
 };
 
 export class K8sNodesCollector extends BaseCollector {
@@ -129,7 +130,7 @@ export class K8sNodesCollector extends BaseCollector {
       const podSummary = await this.collectPodSummary();
 
       // 4. Warning 이벤트 수집
-      const events = await this.collectEvents();
+      const events = await this.collectEvents(context);
 
       // 5. 클러스터 버전
       const version = execCommand('kubectl version -o json 2>/dev/null', { throwOnError: false });
@@ -144,7 +145,7 @@ export class K8sNodesCollector extends BaseCollector {
       // 노드와 메트릭 병합
       const mergedNodes = this.mergeNodeMetrics(nodes, nodeMetrics);
 
-      console.log(`   ✅ ${context}: ${nodes.length}개 노드, ${events.length}개 이벤트`);
+      console.log(`   ✅ ${context}: ${nodes.length}개 노드, ${podSummary.total}개 Pod, ${events.length}개 이벤트`);
 
       return {
         name: context,
@@ -164,61 +165,62 @@ export class K8sNodesCollector extends BaseCollector {
     const nodesJson = execCommand('kubectl get nodes -o json 2>&1', { throwOnError: false });
     if (!nodesJson || nodesJson.includes('error')) return [];
 
-    const nodes = JSON.parse(nodesJson);
-    return nodes.items.map(node => {
-      const name = node.metadata.name;
-      const labels = node.metadata.labels || {};
-      const status = node.status;
-      const conditions = status.conditions || [];
+    try {
+      const nodes = JSON.parse(nodesJson);
+      return nodes.items.map(node => {
+        const name = node.metadata.name;
+        const labels = node.metadata.labels || {};
+        const status = node.status;
+        const conditions = status.conditions || [];
 
-      const readyCondition = conditions.find(c => c.type === 'Ready');
-      const isReady = readyCondition?.status === 'True';
+        const readyCondition = conditions.find(c => c.type === 'Ready');
+        const isReady = readyCondition?.status === 'True';
 
-      // 다른 condition 확인 (문제 감지)
-      const issues = conditions
-        .filter(c => c.type !== 'Ready' && c.status === 'True')
-        .map(c => c.type);
+        const issues = conditions
+          .filter(c => c.type !== 'Ready' && c.status === 'True')
+          .map(c => c.type);
 
-      const capacity = status.capacity || {};
-      const allocatable = status.allocatable || {};
-      const nodeInfo = status.nodeInfo || {};
+        const capacity = status.capacity || {};
+        const allocatable = status.allocatable || {};
+        const nodeInfo = status.nodeInfo || {};
 
-      return {
-        name,
-        status: isReady ? 'Ready' : 'NotReady',
-        issues,
-        roles: Object.keys(labels)
-          .filter(k => k.startsWith('node-role.kubernetes.io/'))
-          .map(k => k.replace('node-role.kubernetes.io/', ''))
-          .join(', ') || 'worker',
-        version: nodeInfo.kubeletVersion || 'unknown',
-        os: nodeInfo.osImage || 'unknown',
-        arch: nodeInfo.architecture || 'unknown',
-        cpuCapacity: parseInt(capacity.cpu || '0'),
-        cpuAllocatable: parseInt(allocatable.cpu || '0'),
-        memoryCapacity: this.parseMemoryToGi(capacity.memory),
-        memoryAllocatable: this.parseMemoryToGi(allocatable.memory),
-        podsCapacity: parseInt(capacity.pods || '110'),
-        containerRuntime: nodeInfo.containerRuntimeVersion || 'unknown',
-        internalIP: (status.addresses || []).find(a => a.type === 'InternalIP')?.address || 'unknown',
-        createdAt: node.metadata.creationTimestamp,
-        // 사용량은 나중에 병합
-        cpuUsage: null,
-        memoryUsage: null,
-        cpuPercent: null,
-        memoryPercent: null,
-      };
-    });
+        return {
+          name,
+          status: isReady ? 'Ready' : 'NotReady',
+          issues,
+          roles: Object.keys(labels)
+            .filter(k => k.startsWith('node-role.kubernetes.io/'))
+            .map(k => k.replace('node-role.kubernetes.io/', ''))
+            .join(', ') || 'worker',
+          version: nodeInfo.kubeletVersion || 'unknown',
+          os: nodeInfo.osImage || 'unknown',
+          arch: nodeInfo.architecture || 'unknown',
+          cpuCapacity: parseInt(capacity.cpu || '0'),
+          cpuAllocatable: parseInt(allocatable.cpu || '0'),
+          memoryCapacity: this.parseMemoryToGi(capacity.memory),
+          memoryAllocatable: this.parseMemoryToGi(allocatable.memory),
+          podsCapacity: parseInt(capacity.pods || '110'),
+          containerRuntime: nodeInfo.containerRuntimeVersion || 'unknown',
+          internalIP: (status.addresses || []).find(a => a.type === 'InternalIP')?.address || 'unknown',
+          createdAt: node.metadata.creationTimestamp,
+          cpuUsage: null,
+          memoryUsage: null,
+          cpuPercent: null,
+          memoryPercent: null,
+        };
+      });
+    } catch (e) {
+      debug(`노드 파싱 실패: ${e.message}`);
+      return [];
+    }
   }
 
   async collectNodeMetrics() {
-    // kubectl top nodes --no-headers
     const topOutput = execCommand('kubectl top nodes --no-headers 2>/dev/null', { throwOnError: false });
     if (!topOutput) return [];
 
     return topOutput.split('\n').filter(l => l.trim()).map(line => {
       const parts = line.trim().split(/\s+/);
-      // NAME   CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
       const [name, cpuCores, cpuPercent, memBytes, memPercent] = parts;
       return {
         name,
@@ -249,72 +251,88 @@ export class K8sNodesCollector extends BaseCollector {
 
   async collectPodSummary() {
     const podsJson = execCommand('kubectl get pods -A -o json 2>/dev/null', { throwOnError: false });
-    if (!podsJson) return { total: 0, running: 0, pending: 0, failed: 0, succeeded: 0, unknown: 0, byNamespace: {} };
+    const defaultSummary = { total: 0, running: 0, pending: 0, failed: 0, succeeded: 0, unknown: 0, byNamespace: {} };
 
-    const pods = JSON.parse(podsJson);
-    const summary = { total: 0, running: 0, pending: 0, failed: 0, succeeded: 0, unknown: 0, byNamespace: {} };
-
-    for (const pod of pods.items) {
-      summary.total++;
-      const phase = pod.status?.phase || 'Unknown';
-      const ns = pod.metadata?.namespace || 'default';
-
-      if (!summary.byNamespace[ns]) {
-        summary.byNamespace[ns] = { total: 0, running: 0, pending: 0, failed: 0 };
-      }
-      summary.byNamespace[ns].total++;
-
-      switch (phase) {
-        case 'Running':
-          summary.running++;
-          summary.byNamespace[ns].running++;
-          break;
-        case 'Pending':
-          summary.pending++;
-          summary.byNamespace[ns].pending++;
-          break;
-        case 'Failed':
-          summary.failed++;
-          summary.byNamespace[ns].failed++;
-          break;
-        case 'Succeeded':
-          summary.succeeded++;
-          break;
-        default:
-          summary.unknown++;
-      }
+    if (!podsJson) {
+      debug('Pod 조회 실패: 출력 없음');
+      return defaultSummary;
     }
 
-    return summary;
+    try {
+      const pods = JSON.parse(podsJson);
+      const summary = { ...defaultSummary };
+
+      for (const pod of (pods.items || [])) {
+        summary.total++;
+        const phase = pod.status?.phase || 'Unknown';
+        const ns = pod.metadata?.namespace || 'default';
+
+        if (!summary.byNamespace[ns]) {
+          summary.byNamespace[ns] = { total: 0, running: 0, pending: 0, failed: 0 };
+        }
+        summary.byNamespace[ns].total++;
+
+        switch (phase) {
+          case 'Running':
+            summary.running++;
+            summary.byNamespace[ns].running++;
+            break;
+          case 'Pending':
+            summary.pending++;
+            summary.byNamespace[ns].pending++;
+            break;
+          case 'Failed':
+            summary.failed++;
+            summary.byNamespace[ns].failed++;
+            break;
+          case 'Succeeded':
+            summary.succeeded++;
+            break;
+          default:
+            summary.unknown++;
+        }
+      }
+
+      debug(`Pod 수집 완료: ${summary.total}개`);
+      return summary;
+    } catch (e) {
+      debug(`Pod 파싱 실패: ${e.message}`);
+      return defaultSummary;
+    }
   }
 
-  async collectEvents() {
-    // Warning 이벤트만 수집 (최근 1시간)
+  async collectEvents(clusterName) {
     const eventsJson = execCommand(
       'kubectl get events -A --field-selector type=Warning -o json 2>/dev/null',
       { throwOnError: false }
     );
     if (!eventsJson) return [];
 
-    const events = JSON.parse(eventsJson);
-    const oneHourAgo = Date.now() - 60 * 60 * 1000;
+    try {
+      const events = JSON.parse(eventsJson);
+      const oneHourAgo = Date.now() - 60 * 60 * 1000;
 
-    return events.items
-      .filter(e => {
-        const eventTime = new Date(e.lastTimestamp || e.eventTime || e.metadata.creationTimestamp).getTime();
-        return eventTime > oneHourAgo;
-      })
-      .map(e => ({
-        namespace: e.metadata.namespace,
-        name: e.involvedObject?.name || 'unknown',
-        kind: e.involvedObject?.kind || 'unknown',
-        reason: e.reason,
-        message: e.message,
-        count: e.count || 1,
-        lastSeen: e.lastTimestamp || e.eventTime || e.metadata.creationTimestamp,
-      }))
-      .sort((a, b) => new Date(b.lastSeen).getTime() - new Date(a.lastSeen).getTime())
-      .slice(0, 20); // 최대 20개
+      return (events.items || [])
+        .filter(e => {
+          const eventTime = new Date(e.lastTimestamp || e.eventTime || e.metadata.creationTimestamp).getTime();
+          return eventTime > oneHourAgo;
+        })
+        .map(e => ({
+          cluster: clusterName,
+          namespace: e.metadata.namespace,
+          name: e.involvedObject?.name || 'unknown',
+          kind: e.involvedObject?.kind || 'unknown',
+          reason: e.reason,
+          message: e.message,
+          count: e.count || 1,
+          lastSeen: e.lastTimestamp || e.eventTime || e.metadata.creationTimestamp,
+        }))
+        .sort((a, b) => new Date(b.lastSeen).getTime() - new Date(a.lastSeen).getTime())
+        .slice(0, 20);
+    } catch (e) {
+      debug(`이벤트 파싱 실패: ${e.message}`);
+      return [];
+    }
   }
 
   parseCpuCores(cpu) {
@@ -348,6 +366,8 @@ export class K8sNodesCollector extends BaseCollector {
 
     // 전체 리소스 사용량 계산
     const nodesWithMetrics = allNodes.filter(n => n.cpuUsage !== null);
+    const totalCpuUsage = nodesWithMetrics.reduce((sum, n) => sum + n.cpuUsage, 0);
+    const totalMemUsage = nodesWithMetrics.reduce((sum, n) => sum + n.memoryUsage, 0);
     const avgCpuPercent = nodesWithMetrics.length > 0
       ? Math.round(nodesWithMetrics.reduce((sum, n) => sum + n.cpuPercent, 0) / nodesWithMetrics.length)
       : null;
@@ -361,39 +381,33 @@ export class K8sNodesCollector extends BaseCollector {
 
 `;
 
-    // 상단 KPI 카드 (HTML 그리드)
-    md += this.generateKPICards({
-      clusters: connectedClusters.length,
-      nodes: allNodes.length,
-      readyNodes: readyNodes.length,
-      totalCpu,
-      totalMemory,
-      avgCpuPercent,
-      avgMemPercent,
-      totalPods,
-      runningPods,
-      warningEvents: allEvents.length,
+    // 클러스터 Summary 표
+    md += this.generateClusterSummaryTable(connectedClusters, {
+      totalCpu, totalMemory, totalCpuUsage, totalMemUsage, avgCpuPercent, avgMemPercent,
+      totalPods, runningPods, warningEvents: allEvents.length, readyNodes: readyNodes.length, totalNodes: allNodes.length
     });
 
-    // Warning 이벤트가 있으면 최상단에 표시
+    // Warning 이벤트 (클러스터명 포함)
     if (allEvents.length > 0) {
       md += this.generateEventAlerts(allEvents);
     }
 
-    // 리소스 사용량 섹션 (2단 그리드)
+    // 리소스 사용량 섹션 - 클러스터별 히트맵
     if (nodesWithMetrics.length > 0) {
       md += this.generateResourceUsageSection(connectedClusters);
     }
 
-    // 클러스터 개요 (2단 그리드)
+    // 클러스터 개요 - 사용량/총량 비율
     if (connectedClusters.length > 0) {
       md += this.generateClusterOverview(connectedClusters);
     }
 
     // Pod 상태 섹션
-    md += this.generatePodStatusSection(connectedClusters);
+    if (totalPods > 0) {
+      md += this.generatePodStatusSection(connectedClusters);
+    }
 
-    // 클러스터별 상세 정보
+    // 클러스터별 상세 정보 (폴딩)
     md += `## 📋 클러스터별 상세 정보\n\n`;
     for (const cluster of clusters) {
       md += this.generateClusterDetail(cluster);
@@ -402,48 +416,36 @@ export class K8sNodesCollector extends BaseCollector {
     return md;
   }
 
-  generateKPICards(stats) {
-    const cpuStatus = stats.avgCpuPercent === null ? 'N/A' :
+  generateClusterSummaryTable(clusters, stats) {
+    const cpuStatus = stats.avgCpuPercent === null ? '⚪' :
       stats.avgCpuPercent > 80 ? '🔴' : stats.avgCpuPercent > 60 ? '🟡' : '🟢';
-    const memStatus = stats.avgMemPercent === null ? 'N/A' :
+    const memStatus = stats.avgMemPercent === null ? '⚪' :
       stats.avgMemPercent > 80 ? '🔴' : stats.avgMemPercent > 60 ? '🟡' : '🟢';
-    const nodeHealth = stats.readyNodes === stats.nodes ? '🟢' : '🔴';
+    const nodeHealth = stats.readyNodes === stats.totalNodes ? '🟢' : '🔴';
     const eventStatus = stats.warningEvents === 0 ? '🟢' : stats.warningEvents > 5 ? '🔴' : '🟡';
 
-    return `<div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+    return `## 📊 클러스터 요약
 
-<div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px; border-left: 4px solid ${COLORS.blue};">
-<div style="font-size: 0.875rem; color: var(--text-secondary);">클러스터</div>
-<div style="font-size: 1.5rem; font-weight: bold;">${stats.clusters}개</div>
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px;">
+
+<div style="background: var(--bg-secondary); border-radius: 12px; padding: 20px;">
+
+| 구분 | 현황 | 상태 |
+|:-----|-----:|:----:|
+| **클러스터** | ${clusters.length}개 | 🟢 |
+| **노드** | ${stats.readyNodes} / ${stats.totalNodes} | ${nodeHealth} |
+| **Pods** | ${stats.runningPods.toLocaleString()} / ${stats.totalPods.toLocaleString()} | ${stats.runningPods === stats.totalPods ? '🟢' : '🟡'} |
+| **Warning Events** | ${stats.warningEvents}개 | ${eventStatus} |
+
 </div>
 
-<div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px; border-left: 4px solid ${nodeHealth === '🟢' ? COLORS.green : COLORS.red};">
-<div style="font-size: 0.875rem; color: var(--text-secondary);">노드 ${nodeHealth}</div>
-<div style="font-size: 1.5rem; font-weight: bold;">${stats.readyNodes}/${stats.nodes}</div>
-</div>
+<div style="background: var(--bg-secondary); border-radius: 12px; padding: 20px;">
 
-<div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px; border-left: 4px solid ${cpuStatus === '🟢' ? COLORS.green : cpuStatus === '🟡' ? COLORS.yellow : COLORS.red};">
-<div style="font-size: 0.875rem; color: var(--text-secondary);">CPU 사용률 ${cpuStatus}</div>
-<div style="font-size: 1.5rem; font-weight: bold;">${stats.avgCpuPercent !== null ? stats.avgCpuPercent + '%' : 'N/A'}</div>
-<div style="font-size: 0.75rem; color: var(--text-secondary);">${stats.totalCpu} cores 총량</div>
-</div>
+| 리소스 | 사용량 | 총량 | 사용률 |
+|:-------|-------:|-----:|-------:|
+| **CPU** | ${stats.totalCpuUsage?.toFixed(1) || 'N/A'} cores | ${stats.totalCpu} cores | ${cpuStatus} ${stats.avgCpuPercent !== null ? stats.avgCpuPercent + '%' : 'N/A'} |
+| **Memory** | ${stats.totalMemUsage?.toFixed(1) || 'N/A'} Gi | ${stats.totalMemory.toFixed(0)} Gi | ${memStatus} ${stats.avgMemPercent !== null ? stats.avgMemPercent + '%' : 'N/A'} |
 
-<div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px; border-left: 4px solid ${memStatus === '🟢' ? COLORS.green : memStatus === '🟡' ? COLORS.yellow : COLORS.red};">
-<div style="font-size: 0.875rem; color: var(--text-secondary);">Memory 사용률 ${memStatus}</div>
-<div style="font-size: 1.5rem; font-weight: bold;">${stats.avgMemPercent !== null ? stats.avgMemPercent + '%' : 'N/A'}</div>
-<div style="font-size: 0.75rem; color: var(--text-secondary);">${stats.totalMemory.toFixed(0)} Gi 총량</div>
-</div>
-
-<div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px; border-left: 4px solid ${COLORS.purple};">
-<div style="font-size: 0.875rem; color: var(--text-secondary);">Pods</div>
-<div style="font-size: 1.5rem; font-weight: bold;">${stats.runningPods}/${stats.totalPods}</div>
-<div style="font-size: 0.75rem; color: var(--text-secondary);">Running</div>
-</div>
-
-<div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px; border-left: 4px solid ${eventStatus === '🟢' ? COLORS.green : eventStatus === '🟡' ? COLORS.yellow : COLORS.red};">
-<div style="font-size: 0.875rem; color: var(--text-secondary);">Warning Events ${eventStatus}</div>
-<div style="font-size: 1.5rem; font-weight: bold;">${stats.warningEvents}개</div>
-<div style="font-size: 0.75rem; color: var(--text-secondary);">최근 1시간</div>
 </div>
 
 </div>
@@ -454,14 +456,17 @@ export class K8sNodesCollector extends BaseCollector {
   generateEventAlerts(events) {
     if (events.length === 0) return '';
 
-    let md = `## ⚠️ 주의 이벤트 (최근 1시간)\n\n`;
-    md += `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid ${COLORS.red}; border-radius: 8px; padding: 16px; margin-bottom: 24px;">\n\n`;
-    md += `| 시간 | 네임스페이스 | 종류 | 대상 | 원인 | 횟수 |\n`;
-    md += `|------|-------------|------|------|------|------|\n`;
+    let md = `## ⚠️ 주의 이벤트 (최근 1시간)
+
+<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid ${COLORS.red}; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+
+| 클러스터 | 시간 | 네임스페이스 | 종류 | 대상 | 원인 | 횟수 |
+|:---------|:-----|:-------------|:-----|:-----|:-----|-----:|
+`;
 
     for (const e of events.slice(0, 10)) {
       const time = new Date(e.lastSeen).toLocaleTimeString('ko-KR', { timeZone: 'Asia/Seoul' });
-      md += `| ${time} | ${e.namespace} | ${e.kind} | ${e.name} | ${e.reason} | ${e.count} |\n`;
+      md += `| **${e.cluster}** | ${time} | ${e.namespace} | ${e.kind} | ${e.name} | ${e.reason} | ${e.count} |\n`;
     }
 
     md += `\n</div>\n\n`;
@@ -469,10 +474,9 @@ export class K8sNodesCollector extends BaseCollector {
   }
 
   generateResourceUsageSection(clusters) {
-    const allNodes = clusters.flatMap(c => c.nodes || []).filter(n => n.cpuUsage !== null);
-    if (allNodes.length === 0) return '';
+    let md = `## 📈 리소스 사용량\n\n`;
 
-    // CPU 사용률 Gauge 차트 (클러스터별)
+    // 클러스터별 Gauge 차트 (2단)
     const cpuGauges = {
       data: clusters.map((cluster, idx) => {
         const nodes = (cluster.nodes || []).filter(n => n.cpuPercent !== null);
@@ -506,7 +510,6 @@ export class K8sNodesCollector extends BaseCollector {
       },
     };
 
-    // Memory 사용률 Gauge 차트
     const memGauges = {
       data: clusters.map((cluster, idx) => {
         const nodes = (cluster.nodes || []).filter(n => n.memoryPercent !== null);
@@ -540,31 +543,7 @@ export class K8sNodesCollector extends BaseCollector {
       },
     };
 
-    // 노드별 리소스 사용률 히트맵
-    const heatmapData = {
-      data: [{
-        type: 'heatmap',
-        z: [allNodes.map(n => n.cpuPercent || 0), allNodes.map(n => n.memoryPercent || 0)],
-        x: allNodes.map(n => n.name),
-        y: ['CPU %', 'Memory %'],
-        colorscale: [
-          [0, COLORS.green],
-          [0.6, COLORS.yellow],
-          [1, COLORS.red],
-        ],
-        hovertemplate: '%{x}<br>%{y}: %{z}%<extra></extra>',
-      }],
-      layout: {
-        title: { text: '노드별 리소스 사용률 히트맵', font: { size: 14 } },
-        height: 150,
-        margin: { t: 40, b: 40, l: 80, r: 20 },
-        xaxis: { tickangle: -45 },
-      },
-    };
-
-    return `## 📊 리소스 사용량
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    md += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
 
 \`\`\`plotly
 ${JSON.stringify(cpuGauges)}
@@ -576,78 +555,148 @@ ${JSON.stringify(memGauges)}
 
 </div>
 
-\`\`\`plotly
+### 노드별 리소스 사용률
+
+`;
+
+    // 클러스터별 히트맵 (분리)
+    for (const cluster of clusters) {
+      const nodes = (cluster.nodes || []).filter(n => n.cpuPercent !== null);
+      if (nodes.length === 0) continue;
+
+      const heatmapData = {
+        data: [{
+          type: 'heatmap',
+          z: [nodes.map(n => n.cpuPercent || 0), nodes.map(n => n.memoryPercent || 0)],
+          x: nodes.map(n => n.name),
+          y: ['CPU %', 'Memory %'],
+          colorscale: [
+            [0, COLORS.green],
+            [0.6, COLORS.yellow],
+            [1, COLORS.red],
+          ],
+          zmin: 0,
+          zmax: 100,
+          hovertemplate: '%{x}<br>%{y}: %{z}%<extra></extra>',
+          showscale: true,
+          colorbar: { title: '%', len: 0.8 },
+        }],
+        layout: {
+          title: { text: `${cluster.name}`, font: { size: 14 } },
+          height: 160,
+          margin: { t: 40, b: 50, l: 80, r: 60 },
+          xaxis: { tickangle: -45, tickfont: { size: 10 } },
+        },
+      };
+
+      md += `\`\`\`plotly
 ${JSON.stringify(heatmapData)}
 \`\`\`
 
 `;
+    }
+
+    return md;
   }
 
   generateClusterOverview(clusters) {
-    // 클러스터별 노드 수 + 리소스
-    const nodeBar = {
-      data: [{
-        type: 'bar',
-        x: clusters.map(c => c.name),
-        y: clusters.map(c => (c.nodes || []).length),
-        marker: {
-          color: clusters.map(c => {
-            const ready = (c.nodes || []).filter(n => n.status === 'Ready').length;
-            const total = (c.nodes || []).length;
-            return ready === total ? COLORS.green : COLORS.yellow;
-          }),
-        },
-        text: clusters.map(c => {
-          const ready = (c.nodes || []).filter(n => n.status === 'Ready').length;
-          return `Ready: ${ready}`;
-        }),
-        textposition: 'auto',
-        hovertemplate: '%{x}<br>노드: %{y}개<br>%{text}<extra></extra>',
-      }],
-      layout: {
-        title: { text: '클러스터별 노드', font: { size: 14 } },
-        height: 280,
-        margin: { t: 40, b: 40, l: 40, r: 20 },
-      },
-    };
-
-    // 클러스터별 리소스 총량 (Stacked Bar)
-    const resourceBar = {
+    // 클러스터별 리소스 사용량 vs 총량 Stacked Bar
+    const cpuData = {
       data: [
         {
           type: 'bar',
-          name: 'CPU (cores)',
+          name: 'CPU 사용량',
           x: clusters.map(c => c.name),
-          y: clusters.map(c => (c.nodes || []).reduce((sum, n) => sum + n.cpuCapacity, 0)),
+          y: clusters.map(c => {
+            const nodes = (c.nodes || []).filter(n => n.cpuUsage !== null);
+            return nodes.reduce((sum, n) => sum + n.cpuUsage, 0);
+          }),
           marker: { color: COLORS.blue },
+          text: clusters.map(c => {
+            const nodes = (c.nodes || []).filter(n => n.cpuUsage !== null);
+            const used = nodes.reduce((sum, n) => sum + n.cpuUsage, 0);
+            return `${used.toFixed(1)} cores`;
+          }),
+          textposition: 'inside',
+          hovertemplate: '%{x}<br>사용: %{y:.1f} cores<extra></extra>',
         },
         {
           type: 'bar',
-          name: 'Memory (Gi)',
+          name: 'CPU 여유',
           x: clusters.map(c => c.name),
-          y: clusters.map(c => (c.nodes || []).reduce((sum, n) => sum + n.memoryCapacity, 0)),
-          marker: { color: COLORS.cyan },
+          y: clusters.map(c => {
+            const total = (c.nodes || []).reduce((sum, n) => sum + n.cpuCapacity, 0);
+            const nodes = (c.nodes || []).filter(n => n.cpuUsage !== null);
+            const used = nodes.reduce((sum, n) => sum + n.cpuUsage, 0);
+            return Math.max(0, total - used);
+          }),
+          marker: { color: 'rgba(59, 130, 246, 0.2)' },
+          hovertemplate: '%{x}<br>여유: %{y:.1f} cores<extra></extra>',
         },
       ],
       layout: {
-        title: { text: '클러스터별 리소스', font: { size: 14 } },
-        barmode: 'group',
+        title: { text: 'CPU 사용량 / 총량', font: { size: 14 } },
+        barmode: 'stack',
         height: 280,
-        margin: { t: 40, b: 40, l: 40, r: 20 },
+        margin: { t: 40, b: 40, l: 50, r: 20 },
         legend: { orientation: 'h', y: -0.15 },
+        yaxis: { title: 'cores' },
       },
     };
 
-    return `## 🏗️ 클러스터 개요
+    const memData = {
+      data: [
+        {
+          type: 'bar',
+          name: 'Memory 사용량',
+          x: clusters.map(c => c.name),
+          y: clusters.map(c => {
+            const nodes = (c.nodes || []).filter(n => n.memoryUsage !== null);
+            return nodes.reduce((sum, n) => sum + n.memoryUsage, 0);
+          }),
+          marker: { color: COLORS.cyan },
+          text: clusters.map(c => {
+            const nodes = (c.nodes || []).filter(n => n.memoryUsage !== null);
+            const used = nodes.reduce((sum, n) => sum + n.memoryUsage, 0);
+            return `${used.toFixed(0)} Gi`;
+          }),
+          textposition: 'inside',
+          hovertemplate: '%{x}<br>사용: %{y:.1f} Gi<extra></extra>',
+        },
+        {
+          type: 'bar',
+          name: 'Memory 여유',
+          x: clusters.map(c => c.name),
+          y: clusters.map(c => {
+            const total = (c.nodes || []).reduce((sum, n) => sum + n.memoryCapacity, 0);
+            const nodes = (c.nodes || []).filter(n => n.memoryUsage !== null);
+            const used = nodes.reduce((sum, n) => sum + n.memoryUsage, 0);
+            return Math.max(0, total - used);
+          }),
+          marker: { color: 'rgba(6, 182, 212, 0.2)' },
+          hovertemplate: '%{x}<br>여유: %{y:.1f} Gi<extra></extra>',
+        },
+      ],
+      layout: {
+        title: { text: 'Memory 사용량 / 총량', font: { size: 14 } },
+        barmode: 'stack',
+        height: 280,
+        margin: { t: 40, b: 40, l: 50, r: 20 },
+        legend: { orientation: 'h', y: -0.15 },
+        yaxis: { title: 'Gi' },
+      },
+    };
+
+    return `## 🏗️ 클러스터 리소스 현황
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
 
 \`\`\`plotly
-${JSON.stringify(nodeBar)}
+${JSON.stringify(cpuData)}
 \`\`\`
 
 \`\`\`plotly
-${JSON.stringify(resourceBar)}
+${JSON.stringify(memData)}
 \`\`\`
 
 </div>
@@ -667,16 +716,15 @@ ${JSON.stringify(resourceBar)}
       }
     });
 
-    // Pod 상태 Pie 차트
+    if (totalPods.total === 0) return '';
+
     const podPie = {
       data: [{
         type: 'pie',
         labels: ['Running', 'Pending', 'Failed', 'Succeeded'],
         values: [totalPods.running, totalPods.pending, totalPods.failed, totalPods.succeeded],
         hole: 0.5,
-        marker: {
-          colors: [COLORS.green, COLORS.yellow, COLORS.red, COLORS.blue],
-        },
+        marker: { colors: [COLORS.green, COLORS.yellow, COLORS.red, COLORS.gray] },
         textinfo: 'label+value',
         hovertemplate: '%{label}: %{value}개 (%{percent})<extra></extra>',
       }],
@@ -684,15 +732,10 @@ ${JSON.stringify(resourceBar)}
         title: { text: 'Pod 상태 분포', font: { size: 14 } },
         height: 280,
         margin: { t: 40, b: 20, l: 20, r: 20 },
-        annotations: [{
-          text: `${totalPods.total}`,
-          showarrow: false,
-          font: { size: 20, weight: 'bold' },
-        }],
+        annotations: [{ text: `${totalPods.total}`, showarrow: false, font: { size: 20 } }],
       },
     };
 
-    // 클러스터별 Pod 상태 Stacked Bar
     const podBar = {
       data: [
         {
@@ -721,8 +764,9 @@ ${JSON.stringify(resourceBar)}
         title: { text: '클러스터별 Pod 상태', font: { size: 14 } },
         barmode: 'stack',
         height: 280,
-        margin: { t: 40, b: 40, l: 40, r: 20 },
+        margin: { t: 40, b: 40, l: 50, r: 20 },
         legend: { orientation: 'h', y: -0.15 },
+        yaxis: { title: 'Pods' },
       },
     };
 
@@ -755,19 +799,32 @@ ${JSON.stringify(podBar)}
     const readyCount = nodes.filter(n => n.status === 'Ready').length;
     const totalCpu = nodes.reduce((sum, n) => sum + n.cpuCapacity, 0);
     const totalMemory = nodes.reduce((sum, n) => sum + n.memoryCapacity, 0);
+    const usedCpu = nodes.filter(n => n.cpuUsage !== null).reduce((sum, n) => sum + n.cpuUsage, 0);
+    const usedMem = nodes.filter(n => n.memoryUsage !== null).reduce((sum, n) => sum + n.memoryUsage, 0);
 
-    md += `| 항목 | 값 |\n|------|------|\n`;
-    md += `| 버전 | ${cluster.serverVersion} |\n`;
-    md += `| 노드 | ${nodes.length}개 (Ready: ${readyCount}개) |\n`;
-    md += `| CPU | ${totalCpu} cores |\n`;
-    md += `| Memory | ${totalMemory.toFixed(1)} Gi |\n`;
-    md += `| Pods | ${cluster.podSummary?.running || 0} running / ${cluster.podSummary?.total || 0} total |\n\n`;
+    // 폴딩(collapsible) 처리
+    md += `<details>
+<summary><strong>클러스터 상세 정보 보기</strong></summary>
 
-    // 노드 테이블 (사용량 포함)
+| 항목 | 값 |
+|:-----|---:|
+| 버전 | ${cluster.serverVersion} |
+| 노드 | ${nodes.length}개 (Ready: ${readyCount}개) |
+| CPU | ${usedCpu.toFixed(1)} / ${totalCpu} cores |
+| Memory | ${usedMem.toFixed(1)} / ${totalMemory.toFixed(1)} Gi |
+| Pods | ${cluster.podSummary?.running || 0} running / ${cluster.podSummary?.total || 0} total |
+
+</details>
+
+`;
+
+    // 노드 테이블
     if (nodes.length > 0) {
-      md += `#### 노드 목록\n\n`;
-      md += `| 노드 | 상태 | 역할 | CPU | Memory | CPU% | Mem% |\n`;
-      md += `|------|------|------|-----|--------|------|------|\n`;
+      md += `#### 노드 목록
+
+| 노드 | 상태 | 역할 | CPU | Memory | CPU% | Mem% |
+|:-----|:----:|:-----|----:|-------:|-----:|-----:|
+`;
 
       for (const node of nodes) {
         const statusIcon = node.status === 'Ready' ? '🟢' : '🔴';
