@@ -31,7 +31,7 @@ export default function EditWikiPage() {
   // 비인증 사용자 리다이렉트
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.push(`/auth/signin?callbackUrl=/wiki/${slug}/edit`);
+      router.push(`/auth/signin?callbackUrl=/edit/${slug}`);
     }
   }, [status, slug, router]);
 

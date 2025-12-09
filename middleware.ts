@@ -19,7 +19,7 @@ export default auth((req) => {
     /^\/issues/, // Issues 페이지
     /^\/ai-history/, // AI 히스토리
     /^\/admin/, // 관리자 페이지
-    /^\/wiki\/.*\/edit/, // 문서 편집
+    /^\/edit\//, // 문서 편집
   ];
 
   const isProtectedRoute = protectedRoutes.some((pattern) => pattern.test(pathname));

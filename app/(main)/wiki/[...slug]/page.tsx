@@ -110,7 +110,7 @@ export default function WikiPage({ params }: WikiPageProps) {
           <div className="wiki-title-row">
             <h1 className="wiki-title">{page.title}</h1>
             {hasEditPermission && (
-              <Link href={`/wiki/${slug}/edit`} className="btn btn-secondary btn-sm edit-btn">
+              <Link href={`/edit/${slug}`} className="btn btn-secondary btn-sm edit-btn">
                 <Edit size={16} />
                 <span>편집</span>
               </Link>
