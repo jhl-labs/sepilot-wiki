@@ -132,6 +132,21 @@ export interface SiteConfig {
   wikiPath: string;
   social?: SocialLinks;
   footer?: FooterConfig;
+  // GitHub Enterprise Server (GHES) 지원
+  github?: GitHubConfig;
+}
+
+// GitHub 설정 (GHES 지원)
+export interface GitHubConfig {
+  // GitHub Enterprise Server URL (예: 'https://github.mycompany.com')
+  // 기본값: 'https://github.com' (GitHub.com)
+  baseUrl?: string;
+  // GitHub API URL (예: 'https://github.mycompany.com/api/v3')
+  // 기본값: 'https://api.github.com'
+  apiUrl?: string;
+  // Raw content URL (예: 'https://raw.github.mycompany.com')
+  // 기본값: 'https://raw.githubusercontent.com'
+  rawUrl?: string;
 }
 
 export interface LogoConfig {

@@ -1,17 +1,21 @@
+import { siteConfig } from '../site.config';
 import type { WikiConfig } from './types';
 
+// site.config.ts에서 설정을 가져와 WikiConfig 생성
 export const config: WikiConfig = {
-  owner: 'jhl-labs',
-  repo: 'sepilot-wiki',
-  wikiRepo: 'sepilot-wiki.wiki',
-  title: 'SEPilot Wiki',
-  description: 'AI 에이전트 기반 자동화 위키 시스템',
+  owner: siteConfig.owner,
+  repo: siteConfig.repo,
+  wikiRepo: `${siteConfig.repo}.wiki`,
+  title: siteConfig.title,
+  description: siteConfig.description,
   baseUrl: import.meta.env.BASE_URL || '/',
 };
 
-// GitHub API 기본 URL
-export const GITHUB_API_URL = 'https://api.github.com';
-export const GITHUB_RAW_URL = 'https://raw.githubusercontent.com';
+// GitHub URL 설정 (GHES 지원)
+const githubConfig = siteConfig.github || {};
+export const GITHUB_BASE_URL = githubConfig.baseUrl || 'https://github.com';
+export const GITHUB_API_URL = githubConfig.apiUrl || 'https://api.github.com';
+export const GITHUB_RAW_URL = githubConfig.rawUrl || 'https://raw.githubusercontent.com';
 
 // 라벨 정의
 export const LABELS = {
@@ -26,7 +30,7 @@ export const LABELS = {
 // GitHub URL 헬퍼 함수들
 export const urls = {
   // 저장소 URL
-  repo: () => `https://github.com/${config.owner}/${config.repo}`,
+  repo: () => `${GITHUB_BASE_URL}/${config.owner}/${config.repo}`,
 
   // Issues URL
   issues: () => `${urls.repo()}/issues`,
@@ -52,6 +56,16 @@ export const urls = {
   fileHistory: (path: string, branch = 'main') =>
     `${urls.repo()}/commits/${branch}/${path}`,
 
-  // GitHub Pages URL
-  pages: () => `https://${config.owner}.github.io/${config.repo}`,
+  // GitHub Pages URL (GHES의 경우 다를 수 있음)
+  pages: () => {
+    // GHES인 경우 baseUrl에서 Pages URL 생성
+    if (githubConfig.baseUrl) {
+      // https://github.mycompany.com -> https://pages.github.mycompany.com/owner/repo
+      // 또는 GHES 설정에 따라 다를 수 있음
+      const url = new URL(githubConfig.baseUrl);
+      return `${url.protocol}//pages.${url.host}/${config.owner}/${config.repo}`;
+    }
+    // GitHub.com
+    return `https://${config.owner}.github.io/${config.repo}`;
+  },
 };

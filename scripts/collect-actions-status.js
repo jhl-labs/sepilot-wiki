@@ -7,24 +7,25 @@
 
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
+import { getGitHubConfig } from './lib/config.js';
 
 const OUTPUT_DIR = join(process.cwd(), 'public');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'actions-status.json');
 
+// GitHub 설정 로드
+const githubConfig = getGitHubConfig();
+
 // GitHub API 호출
 async function fetchGitHubAPI(endpoint) {
-  const token = process.env.GITHUB_TOKEN;
-  const repo = process.env.GITHUB_REPOSITORY || 'jhl-labs/sepilot-wiki';
-
-  const url = `https://api.github.com/repos/${repo}${endpoint}`;
+  const url = `${githubConfig.apiUrl}/repos/${githubConfig.repository}${endpoint}`;
 
   const headers = {
     Accept: 'application/vnd.github.v3+json',
     'User-Agent': 'sepilot-wiki-collector',
   };
 
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
+  if (githubConfig.token) {
+    headers.Authorization = `Bearer ${githubConfig.token}`;
   }
 
   const response = await fetch(url, { headers });
@@ -138,7 +139,8 @@ async function collectFailedRuns() {
 
 async function main() {
   console.log('🚀 Actions 상태 수집 시작...');
-  console.log(`   저장소: ${process.env.GITHUB_REPOSITORY || 'jhl-labs/sepilot-wiki'}`);
+  console.log(`   저장소: ${githubConfig.repository}`);
+  console.log(`   API URL: ${githubConfig.apiUrl}`);
 
   const [workflows, inProgress, failed] = await Promise.all([
     collectWorkflowRuns(),
@@ -148,7 +150,7 @@ async function main() {
 
   const status = {
     collectedAt: new Date().toISOString(),
-    repository: process.env.GITHUB_REPOSITORY || 'jhl-labs/sepilot-wiki',
+    repository: githubConfig.repository,
     summary: {
       totalWorkflows: workflows.length,
       inProgressCount: inProgress.length,
