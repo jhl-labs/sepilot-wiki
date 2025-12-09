@@ -12,6 +12,8 @@ export interface WikiPage {
   isInvalid?: boolean;
   tags?: string[];
   history?: WikiRevision[];
+  /** 사이드바에 표시될 메뉴 이름 (title과 다를 수 있음) */
+  menu?: string;
 }
 
 // Wiki 문서 버전(리비전) 타입

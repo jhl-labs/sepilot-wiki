@@ -68,8 +68,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **E2E 테스트 환경**: Playwright 기반 E2E 테스트 구축
+  - `navigation.spec.ts`: 페이지 네비게이션 테스트
+  - `search.spec.ts`: 검색 기능 테스트
+  - `theme.spec.ts`: 테마 전환 테스트
+  - `responsive.spec.ts`: 반응형 디자인 테스트
+  - `accessibility.spec.ts`: 접근성 테스트
+- **CI E2E 단계**: GitHub Actions에 E2E 테스트 자동화 추가
+- **환경 변수 예시**: `.env.example` 파일 추가
+- **구조화된 에러 타입**: `ApiError`, `ApiErrorCode` 타입 및 헬퍼 함수
+- **Lazy Loading**: Mermaid/Plotly 컴포넌트 동적 로딩으로 번들 최적화
+- **접근성 개선**:
+  - Skip link (본문으로 바로 가기)
+  - ARIA 속성 대폭 추가 (role, aria-label, aria-expanded 등)
+  - 아이콘에 aria-hidden 적용
+- **JSDoc 문서화**: 주요 컴포넌트에 JSDoc 주석 추가
+
+### Changed
+- **pre-commit 훅 강화**: lint 실패 시 커밋 차단
+- **WikiPage 타입**: `menu` 속성 추가
+
+### Fixed
+- TypeScript strict 모드 테스트 파일 타입 오류 수정
+
+---
+
 ### Planned for 0.2.0
-- 번들 크기 최적화 (코드 스플리팅)
-- E2E 테스트 추가 (Playwright)
 - 테스트 커버리지 80% 목표
 - 의존성 업데이트 (React 19, date-fns 4)
