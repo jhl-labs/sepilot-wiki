@@ -46,10 +46,10 @@ jobs:
           version: 'latest'
 
       - name: Setup kubeconfig
-        if: ${{ env.KUBECONFIG_DATA != '' }}
+        if: ${{ secrets.KUBECONFIG != '' }}
         run: |
           mkdir -p ~/.kube
-          echo "$KUBECONFIG_DATA" | base64 -d > ~/.kube/config
+          echo "$KUBECONFIG_DATA" > ~/.kube/config
           chmod 600 ~/.kube/config
         env:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
