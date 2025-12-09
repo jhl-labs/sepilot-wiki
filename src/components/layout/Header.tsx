@@ -19,6 +19,7 @@ import { useSiteConfig } from '../../context/ConfigContext';
 import { urls } from '../../config';
 import { Input } from '../ui/Input';
 import { DynamicIcon } from '../../utils/icons';
+import { AuthButton } from '../auth/AuthButton';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -192,6 +193,9 @@ export function Header() {
         >
           <Github size={20} aria-hidden="true" />
         </a>
+
+        {/* 인증 버튼 (AUTH_MODE=private일 때만 표시) */}
+        {process.env.NEXT_PUBLIC_AUTH_MODE === 'private' && <AuthButton />}
       </div>
 
       {showSearch && (

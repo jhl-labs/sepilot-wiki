@@ -1,0 +1,74 @@
+# SEPilot Wiki - 프로덕션 환경 설정
+# 사용법: helm install sepilot-wiki ./helm/sepilot-wiki -f ./helm/sepilot-wiki/values-prod.yaml
+
+# 레플리카 수 (프로덕션용 고가용성)
+replicaCount: 2
+
+# 이미지 설정 (프로덕션 레지스트리로 변경)
+image:
+  repository: your-registry.io/sepilot-wiki
+  pullPolicy: Always
+  tag: "latest"
+
+# Ingress 설정 (활성화)
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - host: wiki.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: wiki-tls
+      hosts:
+        - wiki.example.com
+
+# 리소스 설정 (프로덕션용)
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 200m
+    memory: 512Mi
+
+# 오토스케일링 활성화
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# 인증 설정
+auth:
+  mode: "private"
+  keycloak:
+    clientId: "sepilot-wiki"
+    clientSecretKey: "keycloak-client-secret"
+    issuer: "https://auth.example.com/realms/sepilot"
+
+# NextAuth 설정
+nextauth:
+  url: "https://wiki.example.com"
+  secretKey: "nextauth-secret"
+
+# Pod 분산 배치 (affinity)
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - sepilot-wiki
+          topologyKey: kubernetes.io/hostname

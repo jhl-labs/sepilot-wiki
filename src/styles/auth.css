@@ -1,0 +1,324 @@
+/* ========================================
+   인증 관련 스타일
+   ======================================== */
+
+/* 인증 버튼 기본 스타일 */
+.auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.auth-btn-text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .auth-btn-text {
+    display: inline;
+  }
+}
+
+/* 로그인 버튼 */
+.login-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.login-btn:hover {
+  background: var(--primary-color-hover);
+}
+
+/* 사용자 버튼 */
+.user-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.user-btn:hover {
+  background: var(--bg-secondary);
+}
+
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .user-name {
+    display: inline;
+  }
+}
+
+.user-btn .rotated {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+/* 인증 메뉴 */
+.auth-menu-wrapper {
+  position: relative;
+}
+
+.auth-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 240px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.auth-menu-header {
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.auth-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.auth-user-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.auth-user-email {
+  font-size: 0.813rem;
+  color: var(--text-secondary);
+}
+
+.auth-user-roles {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.role-badge.admin {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.role-badge.editor {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+}
+
+.auth-menu-divider {
+  height: 1px;
+  background: var(--border-color);
+}
+
+.auth-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.auth-menu-item:hover {
+  background: var(--bg-secondary);
+}
+
+.logout-item {
+  color: var(--color-danger);
+}
+
+/* 인증 로딩 스켈레톤 */
+.auth-loading {
+  width: 80px;
+  height: 36px;
+}
+
+.auth-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--border-radius);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ========================================
+   인증 페이지 스타일
+   ======================================== */
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+}
+
+.auth-page {
+  width: 100%;
+  padding: 2rem;
+}
+
+.auth-container {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.auth-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-icon {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.auth-icon.error-icon {
+  color: var(--color-danger);
+}
+
+.auth-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.auth-header p {
+  color: var(--text-secondary);
+  font-size: 0.938rem;
+}
+
+/* 인증 에러 메시지 */
+.auth-error {
+  padding: 1rem;
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+}
+
+.auth-error p {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.auth-error-code {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-error-code span {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  font-size: 0.813rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* 인증 액션 버튼 */
+.auth-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-signin-btn {
+  width: 100%;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+}
+
+.btn-lg {
+  font-size: 1rem;
+  padding: 0.875rem 1.5rem;
+}
+
+/* 인증 푸터 */
+.auth-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.auth-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.auth-back-link:hover {
+  color: var(--primary-color);
+}
+
+/* 에러 카드 */
+.auth-error-card .auth-icon {
+  color: var(--color-danger);
+}

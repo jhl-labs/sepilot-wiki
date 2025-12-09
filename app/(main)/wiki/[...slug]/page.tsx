@@ -2,12 +2,14 @@
 
 import { use } from 'react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { useWikiPage, useDocumentAIHistory } from '@/src/hooks/useWiki';
 import { MarkdownRenderer, TableOfContents, Breadcrumb, PageMeta } from '@/src/components/wiki';
 import { RevisionHistory } from '@/src/components/wiki/RevisionHistory';
 import { Skeleton } from '@/src/components/ui/Skeleton';
-import { AlertTriangle, FileQuestion, MessageSquare, Bot } from 'lucide-react';
+import { AlertTriangle, FileQuestion, MessageSquare, Bot, Edit } from 'lucide-react';
 import { urls, LABELS } from '@/src/config';
+import { canEdit } from '@/lib/auth';
 
 interface WikiPageProps {
   params: Promise<{ slug: string[] }>;
@@ -16,8 +18,13 @@ interface WikiPageProps {
 export default function WikiPage({ params }: WikiPageProps) {
   const resolvedParams = use(params);
   const slug = resolvedParams.slug?.join('/') || 'home';
+  const { data: session } = useSession();
   const { data: page, isLoading, error } = useWikiPage(slug);
   const { data: aiHistory } = useDocumentAIHistory(slug);
+
+  // 편집 권한 확인 (private 모드에서만)
+  const isPrivateMode = process.env.NEXT_PUBLIC_AUTH_MODE === 'private';
+  const hasEditPermission = isPrivateMode && canEdit(session as { user?: { roles?: string[]; clientRoles?: string[] } } | null);
 
   if (isLoading) {
     return (
@@ -100,7 +107,15 @@ export default function WikiPage({ params }: WikiPageProps) {
         )}
 
         <header className="wiki-header">
-          <h1 className="wiki-title">{page.title}</h1>
+          <div className="wiki-title-row">
+            <h1 className="wiki-title">{page.title}</h1>
+            {hasEditPermission && (
+              <Link href={`/wiki/${slug}/edit`} className="btn btn-secondary btn-sm edit-btn">
+                <Edit size={16} />
+                <span>편집</span>
+              </Link>
+            )}
+          </div>
           <PageMeta page={page} />
         </header>
 

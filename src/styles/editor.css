@@ -1,0 +1,288 @@
+/* ========================================
+   마크다운 편집기 스타일
+   ======================================== */
+
+/* 편집 페이지 */
+.edit-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.edit-header {
+  margin-bottom: 1.5rem;
+}
+
+.edit-header .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s ease;
+}
+
+.edit-header .back-link:hover {
+  color: var(--primary-color);
+}
+
+.edit-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.edit-header .edit-title {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* 에러 배너 */
+.edit-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--border-radius);
+  color: var(--color-danger);
+  margin-bottom: 1.5rem;
+}
+
+/* 에러 상태 */
+.edit-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+}
+
+.edit-error .error-icon {
+  color: var(--text-secondary);
+}
+
+.edit-error h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.edit-error p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 편집기 본체 */
+.markdown-editor {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+/* 도구 모음 */
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-color);
+  margin: 0 0.5rem;
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toolbar-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.toolbar-btn.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* 편집기 본문 */
+.editor-body {
+  display: flex;
+  min-height: 500px;
+}
+
+.editor-body.split-view .editor-pane {
+  width: 50%;
+  border-right: 1px solid var(--border-color);
+}
+
+.editor-body.split-view .preview-pane {
+  width: 50%;
+}
+
+.editor-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-textarea {
+  flex: 1;
+  width: 100%;
+  padding: 1rem;
+  background: var(--bg-primary);
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+}
+
+.editor-textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* 미리보기 패널 */
+.preview-pane {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary);
+}
+
+.preview-header {
+  padding: 0.5rem 1rem;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.preview-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* 편집기 푸터 */
+.editor-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+.commit-message-wrapper {
+  flex: 1;
+}
+
+.commit-message-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.commit-message-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.commit-message-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.editor-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.editor-actions .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .edit-page {
+    padding: 1rem;
+  }
+
+  .editor-body.split-view {
+    flex-direction: column;
+  }
+
+  .editor-body.split-view .editor-pane,
+  .editor-body.split-view .preview-pane {
+    width: 100%;
+  }
+
+  .editor-body.split-view .editor-pane {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    min-height: 300px;
+  }
+
+  .editor-body.split-view .preview-pane {
+    min-height: 300px;
+  }
+
+  .editor-footer {
+    flex-direction: column;
+  }
+
+  .commit-message-wrapper {
+    width: 100%;
+  }
+
+  .editor-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
