@@ -2,9 +2,15 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
+// GitHub Pages base path 설정
+// - GitHub.com: /repo-name/
+// - GHES: /org/repo/ 또는 커스텀 경로
+// 환경변수 VITE_BASE_PATH로 오버라이드 가능
+const basePath = process.env.VITE_BASE_PATH || '/sepilot-wiki/';
+
 export default defineConfig({
   plugins: [react()],
-  base: '/sepilot-wiki/',
+  base: basePath,
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),

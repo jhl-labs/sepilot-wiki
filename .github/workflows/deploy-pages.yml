@@ -44,6 +44,10 @@ jobs:
         run: bun run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GitHub Pages base path 설정
+          # GitHub.com: /{repo-name}/
+          # GHES: /{org}/{repo}/ 형태가 필요하면 secrets.VITE_BASE_PATH로 오버라이드
+          VITE_BASE_PATH: ${{ secrets.VITE_BASE_PATH || format('/{0}/', github.event.repository.name) }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
