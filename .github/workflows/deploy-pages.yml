@@ -50,7 +50,7 @@ jobs:
           VITE_BASE_PATH: ${{ secrets.VITE_BASE_PATH || format('/{0}/', github.event.repository.name) }}
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
