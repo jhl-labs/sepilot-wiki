@@ -8,7 +8,7 @@
     "build:wiki": "node scripts/build-wiki-data.js",
     "build:search": "node scripts/build-search-index.js",
     "sync:issues": "node scripts/sync-issues.js",
-    "collect:k8s": "node scripts/collect-k8s-nodes.js",
+    "collect": "node scripts/collect-dynamic-pages.js",
     "build:404": "node scripts/build-404.js",
     "build": "npm run build:wiki && npm run build:search && vite build && npm run build:404",
     "preview": "vite preview",

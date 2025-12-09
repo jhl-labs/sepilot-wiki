@@ -40,28 +40,24 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
 
-      - name: Setup kubectl
+      - name: Setup kubectl (for k8s collectors)
         uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
 
-      - name: Collect Kubernetes Node Info
+      - name: Setup kubeconfig
+        if: ${{ env.KUBECONFIG_DATA != '' }}
         run: |
-          if [ -n "$KUBECONFIG_DATA" ]; then
-            echo "📊 Kubernetes 노드 정보 수집..."
-            # kubeconfig 파일 생성
-            mkdir -p ~/.kube
-            echo "$KUBECONFIG_DATA" | base64 -d > ~/.kube/config
-            chmod 600 ~/.kube/config
-            export KUBECONFIG=~/.kube/config
-
-            # 노드 정보 수집
-            node scripts/collect-k8s-nodes.js
-          else
-            echo "⚠️ KUBECONFIG secret이 설정되지 않음. 스킵합니다."
-          fi
+          mkdir -p ~/.kube
+          echo "$KUBECONFIG_DATA" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
         env:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
+
+      - name: Collect dynamic pages
+        run: bun run collect
+        env:
+          KUBECONFIG: ~/.kube/config
 
       - name: Build
         run: bun run build
