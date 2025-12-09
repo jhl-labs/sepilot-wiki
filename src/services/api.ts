@@ -74,11 +74,11 @@ export async function fetchWikiTags(): Promise<TagStats[]> {
 // 기본 가이드 페이지 목록 (정적)
 export function getGuidePages(): WikiTree[] {
     return [
-        { title: '시작하기', slug: '_guide/getting-started' },
-        { title: '테마 커스터마이징', slug: '_guide/customization' },
-        { title: 'LLM 워크플로우', slug: '_guide/llm-workflow' },
-        { title: '설정 파일 가이드', slug: '_guide/configuration' },
-        { title: 'FAQ', slug: '_guide/faq' },
+        { title: '시작하기', slug: 'guide/getting-started' },
+        { title: '테마 커스터마이징', slug: 'guide/theme-customization' },
+        { title: 'LLM 워크플로우', slug: 'guide/llm-workflow' },
+        { title: '설정 파일 가이드', slug: 'guide/configuration' },
+        { title: 'FAQ', slug: 'guide/faq' },
     ];
 }
 
