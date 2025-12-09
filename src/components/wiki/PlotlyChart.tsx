@@ -38,26 +38,32 @@ export function PlotlyChart({ data }: PlotlyChartProps) {
 
     if (!chartData) return null;
 
+    // 높이 계산: layout에서 height가 지정되어 있으면 사용, 아니면 기본값 400
+    const chartHeight = chartData.layout?.height || 400;
+
     // 기본 테마 설정 적용
-    const layout = {
+    const layout: Partial<Layout> = {
         paper_bgcolor: 'transparent',
         plot_bgcolor: 'transparent',
         font: {
             color: actualTheme === 'dark' ? '#e5e7eb' : '#374151',
         },
-        margin: { t: 30, r: 20, l: 40, b: 40 },
+        margin: { t: 40, r: 20, l: 50, b: 40 },
         autosize: true,
         ...chartData.layout,
     };
 
-    const config = {
+    const config: Partial<Config> = {
         responsive: true,
-        displayModeBar: false, // 깔끔하게 보이기 위해 기본적으로 숨김 (필요시 true)
+        displayModeBar: false,
         ...chartData.config,
     };
 
     return (
-        <div className="plotly-wrapper w-full h-[400px] my-6 border rounded-lg border-[var(--border-color)] overflow-hidden">
+        <div
+            className="plotly-wrapper w-full my-4 border rounded-lg border-[var(--border-color)] overflow-hidden"
+            style={{ height: `${chartHeight}px`, minHeight: '150px' }}
+        >
             <Plot
                 data={chartData.data || []}
                 layout={layout}
