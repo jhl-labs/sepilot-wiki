@@ -104,10 +104,50 @@ export interface Breadcrumb {
   slug?: string;
 }
 
+// API 에러 코드 타입
+export type ApiErrorCode =
+  | 'NETWORK_ERROR'
+  | 'NOT_FOUND'
+  | 'UNAUTHORIZED'
+  | 'FORBIDDEN'
+  | 'RATE_LIMITED'
+  | 'SERVER_ERROR'
+  | 'PARSE_ERROR'
+  | 'TIMEOUT'
+  | 'UNKNOWN';
+
+/**
+ * 구조화된 API 에러 타입
+ * 에러 코드, 메시지, 복구 가능 여부 등 상세 정보 포함
+ */
+export interface ApiError {
+  /** 에러 코드 */
+  code: ApiErrorCode;
+  /** 사용자 표시용 메시지 */
+  message: string;
+  /** 상세 에러 정보 (개발자용) */
+  details?: string;
+  /** 복구 가능 여부 (재시도 등) */
+  recoverable: boolean;
+  /** HTTP 상태 코드 (있는 경우) */
+  statusCode?: number;
+  /** 원본 에러 객체 */
+  originalError?: unknown;
+}
+
+/**
+ * API 에러 생성 헬퍼 함수 타입
+ */
+export type CreateApiError = (
+  code: ApiErrorCode,
+  message: string,
+  options?: Partial<Omit<ApiError, 'code' | 'message'>>
+) => ApiError;
+
 // API 응답 타입
 export interface ApiResponse<T> {
-  data: T;
-  error?: string;
+  data: T | null;
+  error?: ApiError;
   loading: boolean;
 }
 

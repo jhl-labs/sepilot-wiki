@@ -8,14 +8,44 @@ import { useTheme } from '../../context/ThemeContext';
 import { Link } from 'react-router-dom';
 import { Copy, Check, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
-import { MermaidDiagram } from './MermaidDiagram';
-import { PlotlyChart } from './PlotlyChart';
+import { LazyMermaidDiagram } from './LazyMermaidDiagram';
+import { LazyPlotlyChart } from './LazyPlotlyChart';
 
+/**
+ * MarkdownRenderer 컴포넌트 Props
+ */
 interface MarkdownRendererProps {
+  /** 렌더링할 마크다운 문자열 */
   content: string;
+  /** 추가 CSS 클래스 */
   className?: string;
 }
 
+/**
+ * 마크다운 콘텐츠를 HTML로 렌더링하는 컴포넌트
+ *
+ * 지원 기능:
+ * - GitHub Flavored Markdown (GFM)
+ * - 코드 블록 구문 강조 (Prism)
+ * - Mermaid 다이어그램 (`mermaid` 코드 블록)
+ * - Plotly 차트 (`plotly` 코드 블록)
+ * - 이미지, 테이블, 인용문 스타일링
+ * - 내부/외부 링크 자동 처리
+ *
+ * @example
+ * // 기본 사용법
+ * <MarkdownRenderer content="# 제목\n본문 내용" />
+ *
+ * @example
+ * // Mermaid 다이어그램 포함
+ * const md = `
+ * \`\`\`mermaid
+ * graph TD
+ *   A --> B
+ * \`\`\`
+ * `;
+ * <MarkdownRenderer content={md} />
+ */
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
   const { actualTheme } = useTheme();
 
@@ -40,11 +70,11 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
             const language = match?.[1] || 'text';
 
             if (language === 'mermaid') {
-              return <MermaidDiagram chart={String(children)} />;
+              return <LazyMermaidDiagram chart={String(children)} />;
             }
 
             if (language === 'plotly') {
-              return <PlotlyChart data={String(children)} />;
+              return <LazyPlotlyChart data={String(children)} />;
             }
 
             return (

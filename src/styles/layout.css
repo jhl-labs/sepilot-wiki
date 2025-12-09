@@ -1,3 +1,24 @@
+/* Skip Link (접근성) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-2) var(--spacing-4);
+  z-index: calc(var(--z-modal) + 1);
+  transition: top 0.2s ease;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 0 0 var(--radius-md) 0;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* App Layout */
 .app-layout {
   min-height: 100vh;

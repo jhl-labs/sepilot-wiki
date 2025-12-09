@@ -2,17 +2,40 @@ import { useState, useEffect } from 'react';
 import { List } from 'lucide-react';
 import clsx from 'clsx';
 
+/**
+ * 목차 항목 타입
+ */
 interface TocItem {
+  /** 헤딩 요소의 ID (앵커 링크용) */
   id: string;
+  /** 헤딩 텍스트 */
   text: string;
+  /** 헤딩 레벨 (1-4) */
   level: number;
 }
 
+/**
+ * TableOfContents 컴포넌트 Props
+ */
 interface TableOfContentsProps {
+  /** 마크다운 콘텐츠 (헤딩 추출용) */
   content: string;
+  /** 추가 CSS 클래스 */
   className?: string;
 }
 
+/**
+ * 마크다운 콘텐츠에서 목차(Table of Contents)를 생성하는 컴포넌트
+ *
+ * 기능:
+ * - 마크다운에서 h1-h4 헤딩 자동 추출
+ * - IntersectionObserver로 현재 읽고 있는 섹션 강조
+ * - 부드러운 스크롤 네비게이션
+ * - 접기/펼치기 토글
+ *
+ * @example
+ * <TableOfContents content={markdownContent} />
+ */
 export function TableOfContents({ content, className }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('');
   const [isCollapsed, setIsCollapsed] = useState(false);

@@ -226,16 +226,25 @@ export function Sidebar() {
       <div
         className={clsx('sidebar-overlay', isOpen && 'visible')}
         onClick={close}
+        aria-hidden="true"
       />
-      <aside className={clsx('sidebar', isOpen && 'open')}>
+      <aside
+        className={clsx('sidebar', isOpen && 'open')}
+        role="complementary"
+        aria-label="사이드바 네비게이션"
+      >
         <div className="sidebar-header">
-          <span className="sidebar-title">탐색</span>
-          <button className="sidebar-close" onClick={close}>
-            <X size={20} />
+          <span className="sidebar-title" id="sidebar-title">탐색</span>
+          <button
+            className="sidebar-close"
+            onClick={close}
+            aria-label="사이드바 닫기"
+          >
+            <X size={20} aria-hidden="true" />
           </button>
         </div>
 
-        <nav className="sidebar-nav">
+        <nav className="sidebar-nav" aria-labelledby="sidebar-title">
           {/* 홈 링크 - wiki/home.md가 있으면 해당 페이지로, 없으면 기본 홈으로 */}
           <NavLink
             to={hasWikiHome ? '/wiki/home' : '/'}
@@ -383,8 +392,9 @@ export function Sidebar() {
             target="_blank"
             rel="noopener noreferrer"
             className="request-btn"
+            aria-label="새 문서 요청하기 (새 창에서 열림)"
           >
-            <MessageSquare size={16} />
+            <MessageSquare size={16} aria-hidden="true" />
             <span>문서 요청</span>
           </a>
         </div>

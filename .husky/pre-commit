@@ -23,9 +23,17 @@ echo "✅ 민감 정보 검사 통과"
 if [ -f "package.json" ]; then
     echo "🔍 린트 검사 중..."
     if command -v bun &> /dev/null; then
-        bun run lint --quiet 2>/dev/null || true
+        if ! bun run lint --quiet; then
+            echo "❌ 린트 검사 실패!"
+            echo "커밋이 중단됩니다. 'bun run lint:fix'로 자동 수정하거나 수동으로 오류를 수정하세요."
+            exit 1
+        fi
     elif command -v npm &> /dev/null; then
-        npm run lint --quiet 2>/dev/null || true
+        if ! npm run lint --quiet; then
+            echo "❌ 린트 검사 실패!"
+            echo "커밋이 중단됩니다. 'npm run lint:fix'로 자동 수정하거나 수동으로 오류를 수정하세요."
+            exit 1
+        fi
     fi
 fi
 
