@@ -25,6 +25,23 @@ import { DynamicIcon } from '../../utils/icons';
 import clsx from 'clsx';
 import type { SidebarSection, SidebarNavItem, WikiTree } from '../../types';
 
+// localStorage 키 상수
+const EXPANDED_FOLDERS_KEY = 'sepilot-wiki-expanded-folders';
+
+// localStorage에서 확장된 폴더 목록 가져오기
+const getInitialExpandedFolders = (): Set<string> => {
+  if (typeof window === 'undefined') return new Set();
+  try {
+    const saved = localStorage.getItem(EXPANDED_FOLDERS_KEY);
+    if (saved) {
+      return new Set(JSON.parse(saved));
+    }
+  } catch {
+    // localStorage 접근 실패 시 빈 Set 반환
+  }
+  return new Set();
+};
+
 export function Sidebar() {
   const { isOpen, close, width, setWidth, isResizing, setIsResizing, minWidth, maxWidth } =
     useSidebar();
@@ -39,6 +56,32 @@ export function Sidebar() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // 확장된 폴더 상태 (localStorage에 저장)
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(getInitialExpandedFolders);
+
+  // expandedFolders 변경 시 localStorage에 저장
+  useEffect(() => {
+    if (!isMounted) return;
+    try {
+      localStorage.setItem(EXPANDED_FOLDERS_KEY, JSON.stringify([...expandedFolders]));
+    } catch {
+      // localStorage 저장 실패 시 무시
+    }
+  }, [expandedFolders, isMounted]);
+
+  // 폴더 토글 함수
+  const toggleFolder = (folderPath: string) => {
+    setExpandedFolders((prev) => {
+      const next = new Set(prev);
+      if (next.has(folderPath)) {
+        next.delete(folderPath);
+      } else {
+        next.add(folderPath);
+      }
+      return next;
+    });
+  };
 
   // 기본 열린 섹션과 커스텀 섹션의 defaultOpen 상태를 합침
   const getInitialExpandedSections = () => {
@@ -175,23 +218,40 @@ export function Sidebar() {
     const hasChildren = item.children && item.children.length > 0;
     const paddingLeft = depth > 1 ? `${1 + (depth - 1) * 0.75}rem` : undefined;
 
-    // 카테고리(폴더)인 경우 - 클릭하면 카테고리 페이지로 이동
+    // 카테고리(폴더)인 경우 - 토글 버튼 + 클릭 시 카테고리 페이지로 이동
     if (item.isCategory) {
       const categoryName = item.name || item.path || '';
       const categoryPath = item.path || '';
       const isActive = pathname === `/wiki/category/${categoryPath}`;
+      const isExpanded = expandedFolders.has(categoryPath);
+
       return (
         <div key={item.path}>
-          <Link
-            href={`/wiki/category/${categoryPath}`}
-            className={clsx('nav-item nav-item-child nav-category-link', isActive && 'active')}
-            style={{ paddingLeft }}
-            onClick={handleLinkClick}
-          >
-            <span>{categoryName}</span>
-          </Link>
-          {/* depth 2까지만 children 렌더링 */}
-          {hasChildren && depth < 2 && (
+          <div className="nav-folder-row" style={{ paddingLeft }}>
+            {hasChildren && (
+              <button
+                className="nav-folder-toggle"
+                onClick={() => toggleFolder(categoryPath)}
+                aria-label={isExpanded ? '폴더 접기' : '폴더 펼치기'}
+                aria-expanded={isExpanded}
+              >
+                {isExpanded ? (
+                  <ChevronDown size={14} />
+                ) : (
+                  <ChevronRight size={14} />
+                )}
+              </button>
+            )}
+            <Link
+              href={`/wiki/category/${categoryPath}`}
+              className={clsx('nav-folder-link', isActive && 'active')}
+              onClick={handleLinkClick}
+            >
+              <span>{categoryName}</span>
+            </Link>
+          </div>
+          {/* depth 2까지만 children 렌더링, 폴더가 확장된 경우에만 */}
+          {hasChildren && isExpanded && depth < 2 && (
             <>
               {item.children!.map((child) => renderWikiTreeItem(child, depth + 1))}
             </>

@@ -573,6 +573,57 @@
   background-color: transparent;
 }
 
+/* 폴더(카테고리) 행 스타일 */
+.nav-folder-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.nav-folder-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.nav-folder-toggle:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-hover);
+}
+
+.nav-folder-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: 1;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.nav-folder-link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-hover);
+}
+
+.nav-folder-link.active {
+  color: var(--color-accent-primary);
+  background-color: var(--color-accent-primary-light);
+}
+
 .sidebar-footer {
   display: flex;
   align-items: center;
