@@ -1,5 +1,18 @@
 import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus } from '../types';
 
+// Base URL 결정 (Next.js / Vite 호환)
+function getBaseUrl(): string {
+    // Next.js 환경
+    if (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_BASE_PATH) {
+        return process.env.NEXT_PUBLIC_BASE_PATH;
+    }
+    // Vite 환경
+    if (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) {
+        return import.meta.env.BASE_URL;
+    }
+    return '/';
+}
+
 // 빌드 시점에 생성된 정적 wiki 데이터 캐시
 let wikiDataCache: { pages: WikiPage[]; tree: WikiTree[] } | null = null;
 
@@ -12,7 +25,8 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
     try {
         // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
         const cacheBuster = `?v=${Date.now()}`;
-        const response = await fetch(`${import.meta.env.BASE_URL}wiki-data.json${cacheBuster}`);
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}wiki-data.json${cacheBuster}`);
         if (!response.ok) {
             return { pages: [], tree: [] };
         }
@@ -35,7 +49,8 @@ async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
 
     try {
         const cacheBuster = `?v=${Date.now()}`;
-        const response = await fetch(`${import.meta.env.BASE_URL}guide-data.json${cacheBuster}`);
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}guide-data.json${cacheBuster}`);
         if (!response.ok) {
             return { pages: [] };
         }
@@ -137,7 +152,8 @@ async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: s
     try {
         // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
         const cacheBuster = `?v=${Date.now()}`;
-        const response = await fetch(`${import.meta.env.BASE_URL}data/issues.json${cacheBuster}`);
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}data/issues.json${cacheBuster}`);
         if (!response.ok) {
             return { issues: [], lastUpdated: new Date().toISOString() };
         }
@@ -194,7 +210,8 @@ export async function fetchAIHistory(): Promise<AIHistory> {
     try {
         // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
         const cacheBuster = `?v=${Date.now()}`;
-        const response = await fetch(`${import.meta.env.BASE_URL}data/ai-history.json${cacheBuster}`);
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}data/ai-history.json${cacheBuster}`);
         if (!response.ok) {
             return { entries: [], lastUpdated: new Date().toISOString() };
         }
@@ -223,7 +240,8 @@ export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
 
     try {
         const cacheBuster = `?v=${Date.now()}`;
-        const response = await fetch(`${import.meta.env.BASE_URL}actions-status.json${cacheBuster}`);
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}actions-status.json${cacheBuster}`);
         if (!response.ok) {
             return null;
         }

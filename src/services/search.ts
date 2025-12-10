@@ -1,6 +1,19 @@
 import Fuse from 'fuse.js';
 import type { WikiPage } from '../types';
 
+// Base URL 결정 (Next.js / Vite 호환)
+function getBaseUrl(): string {
+    // Next.js 환경
+    if (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_BASE_PATH) {
+        return process.env.NEXT_PUBLIC_BASE_PATH;
+    }
+    // Vite 환경
+    if (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) {
+        return import.meta.env.BASE_URL;
+    }
+    return '/';
+}
+
 // 검색 인덱스 타입
 interface SearchIndexItem {
     title: string;
@@ -25,7 +38,8 @@ async function loadSearchIndex(): Promise<{ items: SearchIndexItem[]; fuse: Fuse
     try {
         // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
         const cacheBuster = `?v=${Date.now()}`;
-        const response = await fetch(`${import.meta.env.BASE_URL}search-index.json${cacheBuster}`);
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}search-index.json${cacheBuster}`);
         if (!response.ok) {
             throw new Error('Failed to load search index');
         }
