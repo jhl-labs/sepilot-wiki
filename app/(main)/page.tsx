@@ -10,6 +10,8 @@ import {
   Github,
   Bot,
   RefreshCw,
+  Search,
+  Tag,
 } from 'lucide-react';
 import { useWikiPages, useIssues } from '@/src/hooks/useWiki';
 import { LABELS, config, urls } from '@/src/config';
@@ -70,34 +72,26 @@ export default function HomePage() {
         </div>
         <div className="hero-visual">
           <div className="hero-cards-grid">
-            <div className="hero-card">
-              <div className="card-icon">
-                <FileText size={28} />
-              </div>
-              <div className="card-content">
-                <h3>스마트 문서화</h3>
-                <p>AI가 자동으로 문서를 생성하고 유지보수합니다</p>
-              </div>
-            </div>
-            <div className="hero-card">
-              <div className="card-icon">
-                <Github size={28} />
-              </div>
-              <div className="card-content">
-                <h3>GitHub 연동</h3>
-                <p>Issue로 요청하면 자동으로 문서가 생성됩니다</p>
-              </div>
-            </div>
             <div className="hero-card hero-card-accent">
               <div className="card-stats">
                 <span className="stat-number">{allPages.length}</span>
-                <span className="stat-label">문서</span>
+                <span className="stat-label">전체 문서</span>
               </div>
               <div className="card-stats">
                 <span className="stat-number">{recentIssues.filter(i => i.state === 'open').length}</span>
-                <span className="stat-label">진행 중</span>
+                <span className="stat-label">진행 중 요청</span>
               </div>
             </div>
+            <Link href="/search" className="hero-card hero-card-link">
+              <Search size={20} />
+              <span>문서 검색</span>
+              <ArrowRight size={16} />
+            </Link>
+            <Link href="/tags" className="hero-card hero-card-link">
+              <Tag size={20} />
+              <span>태그 탐색</span>
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
