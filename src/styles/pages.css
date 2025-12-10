@@ -415,10 +415,16 @@
 }
 
 .cta-content code {
-  padding: var(--spacing-1) var(--spacing-2);
-  background-color: var(--color-bg-tertiary);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-sm);
+  padding: 0.2em 0.4em;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  font-size: 85%;
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .cta-content code {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Wiki Page */
