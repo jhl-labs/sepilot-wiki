@@ -72,14 +72,16 @@
   opacity: 0.7;
 }
 
-/* Inline Code */
+/* Inline Code - GitHub style */
 .markdown-content .inline-code {
-  padding: var(--spacing-1) var(--spacing-2);
-  background-color: var(--color-bg-tertiary);
-  border-radius: var(--radius-sm);
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
   font-family: var(--font-mono);
-  font-size: 0.875em;
-  color: var(--color-accent-secondary);
+  white-space: break-spaces;
+  background-color: var(--color-code-bg);
+  color: var(--color-code-text);
+  border-radius: 6px;
 }
 
 /* Code Block */

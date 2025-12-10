@@ -58,8 +58,26 @@ textarea {
   font-size: inherit;
 }
 
+/* Inline code - GitHub style */
 code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
   font-family: var(--font-mono);
+  white-space: break-spaces;
+  background-color: var(--color-code-bg);
+  color: var(--color-code-text);
+  border-radius: 6px;
+}
+
+/* Reset code inside pre (code blocks handled separately) */
+pre code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  white-space: pre;
+  background-color: transparent;
+  border-radius: 0;
 }
 
 ::selection {
