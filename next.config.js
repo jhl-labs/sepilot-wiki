@@ -1,8 +1,15 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// package.json에서 버전 정보 읽기
+const packageJson = JSON.parse(
+  readFileSync(join(__dirname, 'package.json'), 'utf-8')
+);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -25,6 +32,8 @@ const nextConfig = {
   // 환경 변수 노출
   env: {
     AUTH_MODE: process.env.AUTH_MODE || 'public',
+    NEXT_PUBLIC_APP_VERSION: packageJson.version,
+    NEXT_PUBLIC_BUILD_TIME: new Date().toISOString(),
   },
 
   // TypeScript 및 ESLint 설정

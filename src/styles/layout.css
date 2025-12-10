@@ -808,3 +808,23 @@
   color: var(--color-accent-primary-hover);
   text-decoration: underline;
 }
+
+.footer-build-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.footer-version {
+  padding: var(--spacing-1) var(--spacing-2);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.footer-build-time {
+  opacity: 0.7;
+}

@@ -3,6 +3,28 @@
 import { useSiteConfig } from '../../context/ConfigContext';
 import { ExternalLink } from 'lucide-react';
 
+// 빌드 정보
+const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION || 'dev';
+const BUILD_TIME = process.env.NEXT_PUBLIC_BUILD_TIME || '';
+
+// 빌드 시간 포맷팅
+function formatBuildTime(isoString: string): string {
+  if (!isoString) return '';
+  try {
+    const date = new Date(isoString);
+    return date.toLocaleString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Asia/Seoul',
+    });
+  } catch {
+    return '';
+  }
+}
+
 export function Footer() {
   const siteConfig = useSiteConfig();
   const footer = siteConfig.footer;
@@ -73,6 +95,16 @@ export function Footer() {
             </a>
           </div>
         )}
+
+        {/* 버전 및 빌드 정보 */}
+        <div className="footer-build-info">
+          <span className="footer-version">v{APP_VERSION}</span>
+          {BUILD_TIME && (
+            <span className="footer-build-time">
+              빌드: {formatBuildTime(BUILD_TIME)}
+            </span>
+          )}
+        </div>
       </div>
     </footer>
   );
