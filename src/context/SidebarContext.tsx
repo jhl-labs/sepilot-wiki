@@ -29,41 +29,35 @@ const getInitialSidebarState = () => {
   return window.innerWidth >= 1024;
 };
 
-// LocalStorage에서 저장된 너비 불러오기
-const getInitialWidth = () => {
-  if (typeof window === 'undefined') return DEFAULT_SIDEBAR_WIDTH;
-  const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
-  if (saved) {
-    const parsed = parseInt(saved, 10);
-    if (!isNaN(parsed) && parsed >= MIN_SIDEBAR_WIDTH) {
-      return parsed;
-    }
-  }
-  return DEFAULT_SIDEBAR_WIDTH;
-};
-
 // 최대 너비 계산 (화면의 50%)
 const getMaxWidth = () => {
   if (typeof window === 'undefined') return 500;
   return Math.floor(window.innerWidth * (MAX_SIDEBAR_WIDTH_PERCENT / 100));
 };
 
-// 클라이언트에서 초기값 가져오기 위한 lazy initializer
-const getInitialWidthLazy = () => {
+// localStorage에서 저장된 너비 가져오기 (클라이언트 전용, lazy initializer용)
+const getInitialWidth = (): number => {
   if (typeof window === 'undefined') return DEFAULT_SIDEBAR_WIDTH;
-  return getInitialWidth();
-};
-
-const getInitialMaxWidthLazy = () => {
-  if (typeof window === 'undefined') return 500;
-  return getMaxWidth();
+  try {
+    const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
+    if (saved) {
+      const parsed = parseInt(saved, 10);
+      if (!isNaN(parsed) && parsed >= MIN_SIDEBAR_WIDTH) {
+        return Math.min(parsed, getMaxWidth());
+      }
+    }
+  } catch {
+    // localStorage 접근 실패 시 기본값 반환
+  }
+  return DEFAULT_SIDEBAR_WIDTH;
 };
 
 export function SidebarProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(getInitialSidebarState);
-  const [width, setWidthState] = useState(getInitialWidthLazy);
   const [isResizing, setIsResizing] = useState(false);
-  const [maxWidth, setMaxWidth] = useState(getInitialMaxWidthLazy);
+  const [maxWidth, setMaxWidth] = useState(() => getMaxWidth());
+  // useState lazy initializer는 클라이언트에서만 실행됨
+  const [width, setWidthState] = useState(() => getInitialWidth());
 
   // 윈도우 리사이즈 시 최대 너비 업데이트
   useEffect(() => {

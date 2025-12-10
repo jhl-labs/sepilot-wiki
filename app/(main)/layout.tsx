@@ -21,9 +21,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   const { isOpen, width, isResizing } = useSidebar();
 
   return (
+    // suppressHydrationWarning: width는 localStorage에서 로드되어 SSR/CSR 값이 다를 수 있음
     <div
       className={clsx('app-layout', isOpen && 'sidebar-open', isResizing && 'sidebar-resizing')}
       style={{ '--sidebar-dynamic-width': `${width}px` } as React.CSSProperties}
+      suppressHydrationWarning
     >
       {/* 접근성: 본문으로 바로 가기 링크 */}
       <a href="#main-content" className="skip-link">
