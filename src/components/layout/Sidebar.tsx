@@ -172,18 +172,21 @@ export function Sidebar() {
     const hasChildren = item.children && item.children.length > 0;
     const paddingLeft = depth > 1 ? `${1 + (depth - 1) * 0.75}rem` : undefined;
 
-    // 카테고리(폴더)인 경우
+    // 카테고리(폴더)인 경우 - 클릭하면 카테고리 페이지로 이동
     if (item.isCategory) {
       const categoryName = item.name || item.path || '';
-      // 카테고리는 클릭 불가 헤더로 렌더링하고 children만 표시
+      const categoryPath = item.path || '';
+      const isActive = pathname === `/wiki/category/${categoryPath}`;
       return (
         <div key={item.path}>
-          <div
-            className="nav-item nav-item-child nav-category-header"
+          <Link
+            href={`/wiki/category/${categoryPath}`}
+            className={clsx('nav-item nav-item-child nav-category-link', isActive && 'active')}
             style={{ paddingLeft }}
+            onClick={handleLinkClick}
           >
             <span>{categoryName}</span>
-          </div>
+          </Link>
           {/* depth 2까지만 children 렌더링 */}
           {hasChildren && depth < 2 && (
             <>

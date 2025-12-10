@@ -500,6 +500,28 @@
   color: var(--color-text-muted);
 }
 
+/* 클릭 가능한 카테고리 링크 스타일 */
+.nav-category-link {
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--spacing-2);
+  transition: all var(--transition-fast);
+}
+
+.nav-category-link:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.nav-category-link.active {
+  background-color: var(--color-accent-primary-light);
+  color: var(--color-accent-primary);
+}
+
 .nav-count {
   margin-left: auto;
   font-size: var(--font-size-xs);
