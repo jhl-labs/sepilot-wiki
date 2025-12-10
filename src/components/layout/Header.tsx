@@ -57,7 +57,6 @@ export function Header() {
     }
   };
 
-  const ThemeIcon = theme === 'dark' ? Moon : theme === 'light' ? Sun : Monitor;
 
   // 로고 렌더링
   const renderLogo = () => {
@@ -141,8 +140,7 @@ export function Header() {
           <Search size={20} aria-hidden="true" />
         </button>
 
-        {/* suppressHydrationWarning: theme은 localStorage에서 로드되어 SSR/CSR 값이 다를 수 있음 */}
-        <div className="theme-menu-wrapper" ref={themeMenuRef} suppressHydrationWarning>
+        <div className="theme-menu-wrapper" ref={themeMenuRef}>
           <button
             className="header-btn theme-btn"
             onClick={() => setShowThemeMenu(!showThemeMenu)}
@@ -150,7 +148,10 @@ export function Header() {
             aria-expanded={showThemeMenu}
             aria-haspopup="menu"
           >
-            <ThemeIcon size={20} aria-hidden="true" />
+            {/* 모든 아이콘을 렌더링하고 CSS로 현재 테마만 표시 (Hydration 에러 방지) */}
+            <Sun size={20} aria-hidden="true" className={`theme-icon ${theme === 'light' ? 'active' : ''}`} />
+            <Moon size={20} aria-hidden="true" className={`theme-icon ${theme === 'dark' ? 'active' : ''}`} />
+            <Monitor size={20} aria-hidden="true" className={`theme-icon ${theme === 'system' ? 'active' : ''}`} />
           </button>
           {showThemeMenu && (
             <div className="theme-menu" role="menu" aria-label="테마 선택">

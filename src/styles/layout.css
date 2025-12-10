@@ -196,6 +196,15 @@
   position: relative;
 }
 
+/* 테마 아이콘 - 기본 숨김, active만 표시 */
+.theme-icon {
+  display: none;
+}
+
+.theme-icon.active {
+  display: block;
+}
+
 .theme-menu {
   position: absolute;
   top: calc(100% + var(--spacing-2));
