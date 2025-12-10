@@ -149,9 +149,9 @@ export function Header() {
             aria-haspopup="menu"
           >
             {/* 모든 아이콘을 렌더링하고 CSS로 현재 테마만 표시 (Hydration 에러 방지) */}
-            <Sun size={20} aria-hidden="true" className={`theme-icon ${theme === 'light' ? 'active' : ''}`} />
-            <Moon size={20} aria-hidden="true" className={`theme-icon ${theme === 'dark' ? 'active' : ''}`} />
-            <Monitor size={20} aria-hidden="true" className={`theme-icon ${theme === 'system' ? 'active' : ''}`} />
+            <Sun size={20} aria-hidden="true" className="theme-icon theme-icon-light" />
+            <Moon size={20} aria-hidden="true" className="theme-icon theme-icon-dark" />
+            <Monitor size={20} aria-hidden="true" className="theme-icon theme-icon-system" />
           </button>
           {showThemeMenu && (
             <div className="theme-menu" role="menu" aria-label="테마 선택">

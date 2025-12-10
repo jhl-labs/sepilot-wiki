@@ -51,7 +51,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', actualTheme);
-  }, [actualTheme]);
+    // 테마 설정값도 속성으로 추가 (Header 아이콘 표시용)
+    document.documentElement.setAttribute('data-theme-setting', theme);
+  }, [actualTheme, theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, actualTheme, setTheme }}>

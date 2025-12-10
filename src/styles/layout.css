@@ -196,12 +196,28 @@
   position: relative;
 }
 
-/* 테마 아이콘 - 기본 숨김, active만 표시 */
+/* 테마 아이콘 - 기본 숨김, data-theme-setting에 따라 표시 */
 .theme-icon {
   display: none;
 }
 
-.theme-icon.active {
+/* SSR 기본값: system 아이콘 표시 */
+.theme-icon-system {
+  display: block;
+}
+
+/* 클라이언트에서 data-theme-setting에 따라 아이콘 전환 */
+[data-theme-setting="light"] .theme-icon-system {
+  display: none;
+}
+[data-theme-setting="light"] .theme-icon-light {
+  display: block;
+}
+
+[data-theme-setting="dark"] .theme-icon-system {
+  display: none;
+}
+[data-theme-setting="dark"] .theme-icon-dark {
   display: block;
 }
 
