@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Home,
@@ -10,14 +10,13 @@ import {
   ChevronDown,
   AlertCircle,
   MessageSquare,
-  Tag,
   Tags,
   X,
   BookOpen,
   ExternalLink,
   GripVertical,
 } from 'lucide-react';
-import { useWikiPages, useIssues, useGuidePages } from '../../hooks/useWiki';
+import { useWikiPages, useIssues } from '../../hooks/useWiki';
 import { useSidebar } from '../../context/SidebarContext';
 import { useNavigationConfig } from '../../context/ConfigContext';
 import { Skeleton } from '../ui/Skeleton';
@@ -30,11 +29,9 @@ export function Sidebar() {
   const { isOpen, close, width, setWidth, isResizing, setIsResizing, minWidth, maxWidth } =
     useSidebar();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const navigationConfig = useNavigationConfig();
   const sidebarRef = useRef<HTMLElement>(null);
   const { data: wikiPages, isLoading: pagesLoading } = useWikiPages();
-  const { data: guidePages } = useGuidePages();
   const { data: requestIssues } = useIssues(LABELS.REQUEST);
 
   // 클라이언트 마운트 상태 (Hydration 에러 방지)
@@ -342,85 +339,6 @@ export function Sidebar() {
             )}
           </div>
 
-          {/* 가이드 섹션 - 정적 가이드 페이지 */}
-          <div className="nav-section">
-            <button
-              className="nav-section-header"
-              onClick={() => toggleSection('guide')}
-            >
-              <BookOpen size={18} />
-              <span>가이드</span>
-              {expandedSections.has('guide') ? (
-                <ChevronDown size={16} className="chevron" />
-              ) : (
-                <ChevronRight size={16} className="chevron" />
-              )}
-            </button>
-            {expandedSections.has('guide') && (
-              <div className="nav-section-content">
-                {!isMounted ? (
-                  <>
-                    <Skeleton className="nav-skeleton" />
-                    <Skeleton className="nav-skeleton" />
-                  </>
-                ) : (
-                  guidePages?.map((page) => (
-                    <Link
-                      key={page.slug}
-                      href={`/wiki/guide/${page.slug}`}
-                      className={clsx('nav-item nav-item-child', pathname === `/wiki/guide/${page.slug}` && 'active')}
-                      onClick={handleLinkClick}
-                    >
-                      <span>{page.title}</span>
-                    </Link>
-                  ))
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Issues 섹션 */}
-          <div className="nav-section">
-            <button
-              className="nav-section-header"
-              onClick={() => toggleSection('issues')}
-            >
-              <MessageSquare size={18} />
-              <span>요청</span>
-              {isMounted && openIssuesCount > 0 && (
-                <span className="nav-badge">{openIssuesCount}</span>
-              )}
-              {expandedSections.has('issues') ? (
-                <ChevronDown size={16} className="chevron" />
-              ) : (
-                <ChevronRight size={16} className="chevron" />
-              )}
-            </button>
-            {expandedSections.has('issues') && (
-              <div className="nav-section-content">
-                <Link
-                  href="/issues"
-                  className={clsx('nav-item nav-item-child', pathname === '/issues' && !searchParams.toString() && 'active')}
-                  onClick={handleLinkClick}
-                >
-                  <Tag size={14} />
-                  <span>모든 요청</span>
-                </Link>
-                <Link
-                  href="/issues?label=request&state=open"
-                  className={clsx('nav-item nav-item-child', searchParams.get('state') === 'open' && 'active')}
-                  onClick={handleLinkClick}
-                >
-                  <AlertCircle size={14} />
-                  <span>진행 중</span>
-                  {isMounted && openIssuesCount > 0 && (
-                    <span className="nav-count">{openIssuesCount}</span>
-                  )}
-                </Link>
-              </div>
-            )}
-          </div>
-
           {/* 전체 태그 링크 */}
           <Link
             href="/tags"
@@ -443,6 +361,29 @@ export function Sidebar() {
             <MessageSquare size={16} aria-hidden="true" />
             <span>문서 요청</span>
           </a>
+          <div className="sidebar-footer-icons">
+            <Link
+              href="/wiki/guide/intro"
+              className={clsx('footer-icon-btn', pathname.startsWith('/wiki/guide') && 'active')}
+              onClick={handleLinkClick}
+              aria-label="가이드"
+              title="가이드"
+            >
+              <BookOpen size={18} />
+            </Link>
+            <Link
+              href="/issues"
+              className={clsx('footer-icon-btn', pathname === '/issues' && 'active')}
+              onClick={handleLinkClick}
+              aria-label="요청 목록"
+              title="요청 목록"
+            >
+              <AlertCircle size={18} />
+              {isMounted && openIssuesCount > 0 && (
+                <span className="footer-icon-badge">{openIssuesCount}</span>
+              )}
+            </Link>
+          </div>
         </div>
 
         {/* 리사이즈 핸들 - 데스크톱에서만 표시 */}
