@@ -141,15 +141,14 @@ export function Header() {
           <Search size={20} aria-hidden="true" />
         </button>
 
-        <div className="theme-menu-wrapper" ref={themeMenuRef}>
-          {/* suppressHydrationWarning: theme은 localStorage에서 로드되어 SSR/CSR 값이 다를 수 있음 */}
+        {/* suppressHydrationWarning: theme은 localStorage에서 로드되어 SSR/CSR 값이 다를 수 있음 */}
+        <div className="theme-menu-wrapper" ref={themeMenuRef} suppressHydrationWarning>
           <button
             className="header-btn theme-btn"
             onClick={() => setShowThemeMenu(!showThemeMenu)}
             aria-label="테마 변경 메뉴"
             aria-expanded={showThemeMenu}
             aria-haspopup="menu"
-            suppressHydrationWarning
           >
             <ThemeIcon size={20} aria-hidden="true" />
           </button>
