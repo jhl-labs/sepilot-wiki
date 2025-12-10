@@ -53,7 +53,7 @@ export default function HomePage() {
           <h1 className="hero-title">{config.title}</h1>
           <p className="hero-description">{config.description}</p>
           <div className="hero-actions">
-            <Link href="/search" className="btn btn-primary btn-lg">
+            <Link href="/wiki" className="btn btn-primary btn-lg">
               <BookOpen size={20} />
               <span>문서 보기</span>
             </Link>
@@ -69,13 +69,34 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-visual">
-          <div className="hero-card">
-            <div className="card-icon">
-              <FileText size={32} />
+          <div className="hero-cards-grid">
+            <div className="hero-card">
+              <div className="card-icon">
+                <FileText size={28} />
+              </div>
+              <div className="card-content">
+                <h3>스마트 문서화</h3>
+                <p>AI가 자동으로 문서를 생성하고 유지보수합니다</p>
+              </div>
             </div>
-            <div className="card-content">
-              <h3>스마트 문서화</h3>
-              <p>AI가 자동으로 문서를 생성하고 유지보수합니다</p>
+            <div className="hero-card">
+              <div className="card-icon">
+                <Github size={28} />
+              </div>
+              <div className="card-content">
+                <h3>GitHub 연동</h3>
+                <p>Issue로 요청하면 자동으로 문서가 생성됩니다</p>
+              </div>
+            </div>
+            <div className="hero-card hero-card-accent">
+              <div className="card-stats">
+                <span className="stat-number">{allPages.length}</span>
+                <span className="stat-label">문서</span>
+              </div>
+              <div className="card-stats">
+                <span className="stat-number">{recentIssues.filter(i => i.state === 'open').length}</span>
+                <span className="stat-label">진행 중</span>
+              </div>
             </div>
           </div>
         </div>
@@ -137,7 +158,7 @@ export default function HomePage() {
               <FileText size={20} />
               <span>문서</span>
             </h2>
-            <Link href="/search" className="see-all-link">
+            <Link href="/wiki" className="see-all-link">
               전체 보기
               <ArrowRight size={16} />
             </Link>
