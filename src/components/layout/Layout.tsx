@@ -16,10 +16,13 @@ import clsx from 'clsx';
  * - Footer (role="contentinfo")
  */
 export function Layout() {
-  const { isOpen } = useSidebar();
+  const { isOpen, width, isResizing } = useSidebar();
 
   return (
-    <div className={clsx('app-layout', isOpen && 'sidebar-open')}>
+    <div
+      className={clsx('app-layout', isOpen && 'sidebar-open', isResizing && 'sidebar-resizing')}
+      style={{ '--sidebar-dynamic-width': `${width}px` } as React.CSSProperties}
+    >
       {/* 접근성: 본문으로 바로 가기 링크 */}
       <a href="#main-content" className="skip-link">
         본문으로 바로 가기

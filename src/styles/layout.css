@@ -42,7 +42,12 @@
 
 @media (min-width: 1024px) {
   .sidebar-open .main-content {
-    margin-left: var(--sidebar-width);
+    margin-left: var(--sidebar-dynamic-width, var(--sidebar-width));
+    transition: margin-left var(--transition-normal);
+  }
+
+  .sidebar-resizing .main-content {
+    transition: none;
   }
 }
 
@@ -258,7 +263,7 @@
   background-color: var(--color-bg-secondary);
   border-right: 1px solid var(--color-border-primary);
   transform: translateX(-100%);
-  transition: transform var(--transition-normal);
+  transition: transform var(--transition-normal), width var(--transition-normal);
   z-index: var(--z-overlay);
   overflow: hidden;
 }
@@ -267,14 +272,69 @@
   transform: translateX(0);
 }
 
+/* 리사이즈 중에는 transition 제거 */
+.sidebar.resizing {
+  transition: none;
+}
+
 @media (min-width: 1024px) {
   .sidebar {
     transform: translateX(-100%);
+    width: var(--sidebar-dynamic-width, var(--sidebar-width));
+    max-width: 50vw;
   }
 
   .sidebar-open .sidebar {
     transform: translateX(0);
   }
+}
+
+/* 사이드바 리사이즈 핸들 */
+.sidebar-resize-handle {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+  background: transparent;
+  border-left: 1px solid transparent;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-resize-handle:hover,
+.sidebar-resize-handle:active {
+  border-left-color: var(--color-accent-primary);
+  background-color: var(--color-accent-primary-light);
+}
+
+.sidebar-resize-handle .resize-handle-icon {
+  opacity: 0;
+  color: var(--color-text-muted);
+  transition: opacity var(--transition-fast);
+}
+
+.sidebar-resize-handle:hover .resize-handle-icon,
+.sidebar-resize-handle:active .resize-handle-icon {
+  opacity: 1;
+  color: var(--color-accent-primary);
+}
+
+@media (min-width: 1024px) {
+  .sidebar-resize-handle {
+    display: flex;
+  }
+}
+
+/* 리사이즈 중 오버레이 스타일 */
+.sidebar-overlay.resizing {
+  display: block;
+  background-color: transparent;
+  cursor: col-resize;
 }
 
 .sidebar-header {
@@ -527,7 +587,12 @@
 
 @media (min-width: 1024px) {
   .sidebar-open .footer {
-    margin-left: var(--sidebar-width);
+    margin-left: var(--sidebar-dynamic-width, var(--sidebar-width));
+    transition: margin-left var(--transition-normal);
+  }
+
+  .sidebar-resizing .footer {
+    transition: none;
   }
 }
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Home,
   FileText,
@@ -15,6 +15,7 @@ import {
   X,
   BookOpen,
   ExternalLink,
+  GripVertical,
 } from 'lucide-react';
 import { useWikiPages, useIssues, useGuidePages } from '../../hooks/useWiki';
 import { useSidebar } from '../../context/SidebarContext';
@@ -26,10 +27,12 @@ import clsx from 'clsx';
 import type { SidebarSection, SidebarNavItem, WikiTree } from '../../types';
 
 export function Sidebar() {
-  const { isOpen, close } = useSidebar();
+  const { isOpen, close, width, setWidth, isResizing, setIsResizing, minWidth, maxWidth } =
+    useSidebar();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const navigationConfig = useNavigationConfig();
+  const sidebarRef = useRef<HTMLElement>(null);
   const { data: wikiPages, isLoading: pagesLoading } = useWikiPages();
   const { data: guidePages } = useGuidePages();
   const { data: requestIssues } = useIssues(LABELS.REQUEST);
@@ -91,6 +94,39 @@ export function Sidebar() {
       close();
     }
   };
+
+  // 리사이즈 핸들 드래그 시작
+  const handleResizeStart = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      setIsResizing(true);
+    },
+    [setIsResizing]
+  );
+
+  // 리사이즈 드래그 중
+  useEffect(() => {
+    if (!isResizing) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const newWidth = e.clientX;
+      if (newWidth >= minWidth && newWidth <= maxWidth) {
+        setWidth(newWidth);
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isResizing, setWidth, setIsResizing, minWidth, maxWidth]);
 
   // 커스텀 네비게이션 아이템 렌더링
   const renderNavItem = (item: SidebarNavItem, depth = 0) => {
@@ -226,14 +262,16 @@ export function Sidebar() {
   return (
     <>
       <div
-        className={clsx('sidebar-overlay', isOpen && 'visible')}
+        className={clsx('sidebar-overlay', isOpen && 'visible', isResizing && 'resizing')}
         onClick={close}
         aria-hidden="true"
       />
       <aside
-        className={clsx('sidebar', isOpen && 'open')}
+        ref={sidebarRef}
+        className={clsx('sidebar', isOpen && 'open', isResizing && 'resizing')}
         role="complementary"
         aria-label="사이드바 네비게이션"
+        style={{ '--sidebar-dynamic-width': `${width}px` } as React.CSSProperties}
       >
         <div className="sidebar-header">
           <span className="sidebar-title" id="sidebar-title">탐색</span>
@@ -389,6 +427,18 @@ export function Sidebar() {
             <MessageSquare size={16} aria-hidden="true" />
             <span>문서 요청</span>
           </a>
+        </div>
+
+        {/* 리사이즈 핸들 - 데스크톱에서만 표시 */}
+        <div
+          className="sidebar-resize-handle"
+          onMouseDown={handleResizeStart}
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="사이드바 너비 조절"
+          tabIndex={0}
+        >
+          <GripVertical size={12} className="resize-handle-icon" />
         </div>
       </aside>
     </>
