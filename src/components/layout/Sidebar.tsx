@@ -37,6 +37,12 @@ export function Sidebar() {
   const { data: guidePages } = useGuidePages();
   const { data: requestIssues } = useIssues(LABELS.REQUEST);
 
+  // 클라이언트 마운트 상태 (Hydration 에러 방지)
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // 기본 열린 섹션과 커스텀 섹션의 defaultOpen 상태를 합침
   const getInitialExpandedSections = () => {
     const sections = new Set(['wiki']);
@@ -319,7 +325,7 @@ export function Sidebar() {
             </button>
             {expandedSections.has('wiki') && (
               <div className="nav-section-content">
-                {pagesLoading ? (
+                {!isMounted || pagesLoading ? (
                   <>
                     <Skeleton className="nav-skeleton" />
                     <Skeleton className="nav-skeleton" />
@@ -352,16 +358,23 @@ export function Sidebar() {
             </button>
             {expandedSections.has('guide') && (
               <div className="nav-section-content">
-                {guidePages?.map((page) => (
-                  <Link
-                    key={page.slug}
-                    href={`/wiki/guide/${page.slug}`}
-                    className={clsx('nav-item nav-item-child', pathname === `/wiki/guide/${page.slug}` && 'active')}
-                    onClick={handleLinkClick}
-                  >
-                    <span>{page.title}</span>
-                  </Link>
-                ))}
+                {!isMounted ? (
+                  <>
+                    <Skeleton className="nav-skeleton" />
+                    <Skeleton className="nav-skeleton" />
+                  </>
+                ) : (
+                  guidePages?.map((page) => (
+                    <Link
+                      key={page.slug}
+                      href={`/wiki/guide/${page.slug}`}
+                      className={clsx('nav-item nav-item-child', pathname === `/wiki/guide/${page.slug}` && 'active')}
+                      onClick={handleLinkClick}
+                    >
+                      <span>{page.title}</span>
+                    </Link>
+                  ))
+                )}
               </div>
             )}
           </div>
@@ -374,7 +387,7 @@ export function Sidebar() {
             >
               <MessageSquare size={18} />
               <span>요청</span>
-              {openIssuesCount > 0 && (
+              {isMounted && openIssuesCount > 0 && (
                 <span className="nav-badge">{openIssuesCount}</span>
               )}
               {expandedSections.has('issues') ? (
@@ -400,7 +413,7 @@ export function Sidebar() {
                 >
                   <AlertCircle size={14} />
                   <span>진행 중</span>
-                  {openIssuesCount > 0 && (
+                  {isMounted && openIssuesCount > 0 && (
                     <span className="nav-count">{openIssuesCount}</span>
                   )}
                 </Link>
