@@ -132,17 +132,20 @@ export default function HomePage() {
                 <Skeleton className="document-skeleton" height={60} />
               </>
             ) : (
-              pages?.slice(0, 5).map((page) => (
-                <Link
-                  key={page.slug}
-                  href={`/wiki/${page.slug}`}
-                  className="document-item"
-                >
-                  <FileText size={18} className="document-icon" />
-                  <span className="document-title">{page.title}</span>
-                  <ArrowRight size={16} className="document-arrow" />
-                </Link>
-              ))
+              pages
+                ?.filter((page) => page.slug)
+                .slice(0, 5)
+                .map((page) => (
+                  <Link
+                    key={page.slug}
+                    href={`/wiki/${page.slug}`}
+                    className="document-item"
+                  >
+                    <FileText size={18} className="document-icon" />
+                    <span className="document-title">{page.title}</span>
+                    <ArrowRight size={16} className="document-arrow" />
+                  </Link>
+                ))
             )}
           </div>
         </section>
