@@ -100,7 +100,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   // 브레드크럼 생성
   const breadcrumbItems = useMemo(() => {
     const pathParts = categoryPath.split('/').filter(Boolean);
-    const items = [{ title: '문서', slug: undefined }];
+    const items: { title: string; slug?: string }[] = [{ title: '문서' }];
 
     let accumulatedPath = '';
     for (const part of pathParts) {
