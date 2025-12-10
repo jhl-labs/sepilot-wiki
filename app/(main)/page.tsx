@@ -16,12 +16,30 @@ import { LABELS, config, urls } from '@/src/config';
 import { Skeleton } from '@/src/components/ui/Skeleton';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import type { WikiTree } from '@/src/types';
+
+// 트리 구조에서 모든 페이지 추출 (재귀)
+function flattenPages(tree: WikiTree[]): WikiTree[] {
+  const result: WikiTree[] = [];
+  for (const item of tree) {
+    if (item.slug) {
+      result.push(item);
+    }
+    if (item.children && item.children.length > 0) {
+      result.push(...flattenPages(item.children));
+    }
+  }
+  return result;
+}
 
 export default function HomePage() {
   const { data: pages, isLoading: pagesLoading } = useWikiPages();
   const { data: issues, isLoading: issuesLoading } = useIssues(LABELS.REQUEST);
 
   const recentIssues = issues?.slice(0, 5) || [];
+
+  // 트리에서 모든 페이지 추출
+  const allPages = pages ? flattenPages(pages) : [];
 
   return (
     <div className="home-page">
@@ -35,7 +53,7 @@ export default function HomePage() {
           <h1 className="hero-title">{config.title}</h1>
           <p className="hero-description">{config.description}</p>
           <div className="hero-actions">
-            <Link href="/wiki/home" className="btn btn-primary btn-lg">
+            <Link href="/search" className="btn btn-primary btn-lg">
               <BookOpen size={20} />
               <span>문서 보기</span>
             </Link>
@@ -119,7 +137,7 @@ export default function HomePage() {
               <FileText size={20} />
               <span>문서</span>
             </h2>
-            <Link href="/wiki/home" className="see-all-link">
+            <Link href="/search" className="see-all-link">
               전체 보기
               <ArrowRight size={16} />
             </Link>
@@ -131,21 +149,23 @@ export default function HomePage() {
                 <Skeleton className="document-skeleton" height={60} />
                 <Skeleton className="document-skeleton" height={60} />
               </>
+            ) : allPages.length > 0 ? (
+              allPages.slice(0, 5).map((page) => (
+                <Link
+                  key={page.slug}
+                  href={`/wiki/${page.slug}`}
+                  className="document-item"
+                >
+                  <FileText size={18} className="document-icon" />
+                  <span className="document-title">{page.title}</span>
+                  <ArrowRight size={16} className="document-arrow" />
+                </Link>
+              ))
             ) : (
-              pages
-                ?.filter((page) => page.slug)
-                .slice(0, 5)
-                .map((page) => (
-                  <Link
-                    key={page.slug}
-                    href={`/wiki/${page.slug}`}
-                    className="document-item"
-                  >
-                    <FileText size={18} className="document-icon" />
-                    <span className="document-title">{page.title}</span>
-                    <ArrowRight size={16} className="document-arrow" />
-                  </Link>
-                ))
+              <div className="empty-state">
+                <FileText size={32} />
+                <p>아직 작성된 문서가 없습니다</p>
+              </div>
             )}
           </div>
         </section>
