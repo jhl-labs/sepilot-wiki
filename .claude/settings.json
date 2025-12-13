@@ -1,0 +1,25 @@
+{
+  "project": {
+    "name": "sepilot-wiki",
+    "description": "AI 에이전트 기반 GitHub Wiki 자동화 시스템"
+  },
+  "preferences": {
+    "language": "ko",
+    "commitOnChange": true,
+    "securityChecks": true
+  },
+  "agents": {
+    "wiki-writer": {
+      "description": "Wiki 문서 작성 전문 에이전트",
+      "capabilities": ["document-creation", "markdown-formatting"]
+    },
+    "issue-processor": {
+      "description": "GitHub Issue 처리 에이전트",
+      "capabilities": ["issue-analysis", "label-handling"]
+    },
+    "status-collector": {
+      "description": "시스템 상태 수집 에이전트",
+      "capabilities": ["api-calls", "data-aggregation"]
+    }
+  }
+}

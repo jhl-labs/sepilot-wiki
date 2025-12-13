@@ -1,0 +1,331 @@
+/* 로그인 버튼 */
+.loginBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+.loginBtn:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+}
+
+/* 사용자 버튼 */
+.wrapper {
+  position: relative;
+}
+
+.userBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  font-size: 13px;
+  color: #374151;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.userBtn:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+:global([data-theme="dark"]) .userBtn {
+  color: #e5e7eb;
+  background: #374151;
+  border-color: #4b5563;
+}
+
+:global([data-theme="dark"]) .userBtn:hover {
+  background: #4b5563;
+  border-color: #6b7280;
+}
+
+/* 아바타 */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userName {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .userName {
+    display: none;
+  }
+}
+
+.chevron {
+  color: #9ca3af;
+  transition: transform 0.2s;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* 드롭다운 메뉴 */
+.menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  z-index: 9999;
+  overflow: hidden;
+  animation: slideIn 0.15s ease-out;
+}
+
+:global([data-theme="dark"]) .menu {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 메뉴 헤더 */
+.menuHeader {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+:global([data-theme="dark"]) .menuHeader {
+  background: #111827;
+  border-bottom-color: #374151;
+}
+
+.avatarLarge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatarLarge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.userNameLarge {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global([data-theme="dark"]) .userNameLarge {
+  color: #f3f4f6;
+}
+
+.userEmail {
+  font-size: 12px;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 역할 배지 */
+.roles {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.roleAdmin,
+.roleEditor {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 10px;
+}
+
+.roleAdmin {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.roleEditor {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+/* 메뉴 본문 */
+.menuBody {
+  padding: 6px;
+}
+
+/* 메뉴 아이템 */
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.1s;
+}
+
+.menuItem:hover {
+  background: #f3f4f6;
+}
+
+.menuItem svg {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.menuItem:hover svg {
+  color: #3b82f6;
+}
+
+:global([data-theme="dark"]) .menuItem {
+  color: #e5e7eb;
+}
+
+:global([data-theme="dark"]) .menuItem:hover {
+  background: #374151;
+}
+
+/* 메뉴 푸터 */
+.menuFooter {
+  padding: 6px;
+  border-top: 1px solid #e5e7eb;
+}
+
+:global([data-theme="dark"]) .menuFooter {
+  border-top-color: #374151;
+}
+
+/* 로그아웃 버튼 */
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #dc2626;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.logoutBtn:hover {
+  background: #fef2f2;
+}
+
+.logoutBtn svg {
+  flex-shrink: 0;
+}
+
+:global([data-theme="dark"]) .logoutBtn:hover {
+  background: rgba(220, 38, 38, 0.15);
+}
+
+/* 스켈레톤 로딩 */
+.skeleton {
+  width: 80px;
+  height: 34px;
+}
+
+@media (max-width: 640px) {
+  .skeleton {
+    width: 34px;
+  }
+}
+
+.skeletonInner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  border-radius: 17px;
+  animation: shimmer 1.5s infinite;
+}
+
+:global([data-theme="dark"]) .skeletonInner {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

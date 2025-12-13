@@ -1,0 +1,11 @@
+name: 'Build Wiki Data'
+description: 'Wiki 데이터 및 검색 인덱스 빌드'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Build wiki data and search index
+      shell: bash
+      run: |
+        bun run build:wiki
+        bun run build:search

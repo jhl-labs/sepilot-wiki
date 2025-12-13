@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' https://api.github.com https://raw.githubusercontent.com;
+      frame-ancestors 'none';
+    " />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEPilot Wiki</title>
+    <meta name="description" content="AI 에이전트 기반 GitHub Wiki 자동화 시스템" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta property="og:title" content="SEPilot Wiki" />
+    <meta property="og:description" content="AI 에이전트 기반 GitHub Wiki 자동화 시스템" />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

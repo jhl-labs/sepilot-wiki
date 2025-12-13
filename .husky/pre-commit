@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# 민감 정보 노출 검사
+echo "🔍 민감 정보 검사 중..."
+
+# 스테이지된 파일 목록
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx|js|jsx|json|yml|yaml|md)$' || true)
+
+if [ -n "$STAGED_FILES" ]; then
+
+
+    # API 키/비밀번호 패턴 검사
+    if echo "$STAGED_FILES" | xargs grep -lE '(password|api[_-]?key|secret)\s*[:=]\s*["\x27][^"\x27]+' 2>/dev/null; then
+        echo "❌ API 키 또는 비밀번호가 감지되었습니다!"
+        echo "커밋이 중단됩니다. 민감 정보를 제거한 후 다시 시도하세요."
+        exit 1
+    fi
+fi
+
+echo "✅ 민감 정보 검사 통과"
+
+# lint 검사 (package.json이 있는 경우)
+if [ -f "package.json" ]; then
+    echo "🔍 린트 검사 중..."
+    if command -v bun &> /dev/null; then
+        if ! bun run lint --quiet; then
+            echo "❌ 린트 검사 실패!"
+            echo "커밋이 중단됩니다. 'bun run lint:fix'로 자동 수정하거나 수동으로 오류를 수정하세요."
+            exit 1
+        fi
+    elif command -v npm &> /dev/null; then
+        if ! npm run lint --quiet; then
+            echo "❌ 린트 검사 실패!"
+            echo "커밋이 중단됩니다. 'npm run lint:fix'로 자동 수정하거나 수동으로 오류를 수정하세요."
+            exit 1
+        fi
+    fi
+fi
+
+echo "✅ pre-commit 검사 완료"

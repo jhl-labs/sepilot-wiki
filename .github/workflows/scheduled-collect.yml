@@ -1,0 +1,57 @@
+name: Scheduled Status Collection
+
+on:
+  schedule:
+    # 매일 오전 9시 (KST) = UTC 0시
+    - cron: '0 0 * * *'
+    # 매 6시간마다
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: '수집 대상'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - actions
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  collect-actions-status:
+    runs-on: jhl-space
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun and Install
+        uses: ./.github/actions/setup-bun-install
+
+      - name: Collect GitHub Actions status
+        run: |
+          echo "🚀 GitHub Actions 상태 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
+          bun run scripts/collectors/collect-actions-status.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Build wiki data
+        uses: ./.github/actions/build-wiki
+
+      - name: Commit and push
+        uses: ./.github/actions/git-commit-push
+        with:
+          message: "chore: 자동 상태 수집 - $(date '+%Y-%m-%d %H:%M')"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          echo "## 상태 수집 완료 ✅" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- 수집 시간: $(date '+%Y-%m-%d %H:%M:%S KST')" >> $GITHUB_STEP_SUMMARY
+          echo "- 대상: ${{ github.event.inputs.target || 'all' }}" >> $GITHUB_STEP_SUMMARY

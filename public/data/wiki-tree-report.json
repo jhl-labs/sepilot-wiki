@@ -1,0 +1,148 @@
+{
+  "timestamp": "2025-12-08T12:07:33.487Z",
+  "model": "gpt-oss:120b-cloud",
+  "isDryRun": false,
+  "analysis": {
+    "summary": "The wiki consists of 13 markdown files organized into three top‑level directories (projects, guide, bun). Most files follow the naming convention, but there are several duplicate/overlapping documents and many placeholder pages that need attention. Tag syntax and status values are inconsistent, and a few documents are drafts or have an unknown status.",
+    "totalDocuments": 13,
+    "categories": [
+      "projects",
+      "guide",
+      "bun"
+    ],
+    "issues": [
+      "Duplicate content: `guide/diagrams-and-charts.md` and `guide/diagrams-guide.md` cover the same topic.",
+      "Duplicate content: `guide/configuration.md` and `guide/configuration‑guide.md` overlap.",
+      "Many placeholder pages (theme‑customization, getting‑started, diagrams‑guide, llm‑workflow, configuration‑guide) contain only a short stub.",
+      "Inconsistent status values (published, draft, unknown).",
+      "Tag fields are not uniform – some are JSON arrays, others are plain strings.",
+      "No `home.md` at the repository root (required by the guidelines)."
+    ]
+  },
+  "suggestedStructure": {
+    "projects": [
+      "technology-stack.md",
+      "desktop/sepilot-desktop.md"
+    ],
+    "guide": [
+      "getting-started.md",
+      "theme-customization.md",
+      "faq.md",
+      "configuration.md",
+      "diagrams.md",
+      "llm-workflow.md"
+    ],
+    "bun": [
+      "overview.md",
+      "comparison-pnpm-npm.md",
+      "github-actions-setup.md"
+    ]
+  },
+  "results": {
+    "appliedActions": 5,
+    "skippedActions": 4,
+    "dryRunPreviewedActions": 0,
+    "createdIssues": 4
+  },
+  "actions": {
+    "applied": [
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "guide/diagrams-and-charts.md",
+        "target": "guide/diagrams.md",
+        "reason": "Standardise the filename and prepare for merging the duplicate diagram guide.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "guide/theme-customization.md",
+        "target": "guide/theme-customization.md",
+        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "guide/getting-started.md",
+        "target": "guide/getting-started.md",
+        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "guide/llm-workflow.md",
+        "target": "guide/llm-workflow.md",
+        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "bun/github-actions-setup.md",
+        "target": "bun/github-actions-setup.md",
+        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "autoApply": true
+      }
+    ],
+    "skipped": [
+      {
+        "type": "delete",
+        "priority": "high",
+        "source": "guide/diagrams-guide.md",
+        "target": "",
+        "reason": "Duplicate of the diagram guide – will be merged into `guide/diagrams.md`.",
+        "autoApply": true
+      },
+      {
+        "type": "delete",
+        "priority": "high",
+        "source": "guide/configuration-guide.md",
+        "target": "",
+        "reason": "Duplicate of the detailed configuration guide already present as `guide/configuration.md`.",
+        "autoApply": true
+      },
+      {
+        "type": "create_category",
+        "priority": "medium",
+        "source": "",
+        "target": "guide/diagrams",
+        "reason": "If future detailed sub‑pages for diagrams are added, a dedicated sub‑directory keeps the guide tidy.",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "low",
+        "source": "projects/sepilot-desktop.md",
+        "target": "projects/desktop/sepilot-desktop.md",
+        "reason": "Separate desktop‑related docs into their own sub‑folder for better scalability.",
+        "autoApply": false
+      }
+    ],
+    "dryRunPreviewed": []
+  },
+  "createdIssues": [
+    {
+      "number": 49,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/49",
+      "title": "Add a root `home.md` page"
+    },
+    {
+      "number": 50,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/50",
+      "title": "Standardise tag format across all documents"
+    },
+    {
+      "number": 51,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/51",
+      "title": "Review and publish draft/unknown status documents"
+    },
+    {
+      "number": 52,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/52",
+      "title": "Merge duplicate diagram and configuration guides"
+    }
+  ]
+}

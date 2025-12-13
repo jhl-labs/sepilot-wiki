@@ -1,0 +1,39 @@
+====================================================================
+  SEPilot Wiki가 성공적으로 배포되었습니다!
+====================================================================
+
+1. 애플리케이션 URL 확인:
+{{- if .Values.ingress.enabled }}
+{{- range $host := .Values.ingress.hosts }}
+  - http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ (index $host.paths 0).path }}
+{{- end }}
+{{- else if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "sepilot-wiki.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo http://$NODE_IP:$NODE_PORT
+{{- else if contains "LoadBalancer" .Values.service.type }}
+  NOTE: 외부 IP가 할당되는 데 몇 분이 소요될 수 있습니다.
+  kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "sepilot-wiki.fullname" . }}
+{{- else if contains "ClusterIP" .Values.service.type }}
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "sepilot-wiki.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "http://127.0.0.1:8080 에서 접근 가능합니다"
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
+{{- end }}
+
+2. 인증 모드: {{ .Values.auth.mode }}
+{{- if eq .Values.auth.mode "private" }}
+   - Keycloak 클라이언트 ID: {{ .Values.auth.keycloak.clientId }}
+   - Keycloak Issuer: {{ .Values.auth.keycloak.issuer }}
+   - NextAuth URL: {{ .Values.nextauth.url }}
+{{- else }}
+   - 공개 모드: 인증 없이 모든 문서에 접근 가능합니다.
+{{- end }}
+
+3. 헬스 체크:
+   kubectl --namespace {{ .Release.Namespace }} exec -it $POD_NAME -- wget -qO- http://localhost:{{ .Values.service.targetPort }}/api/health
+
+4. 로그 확인:
+   kubectl --namespace {{ .Release.Namespace }} logs -f $POD_NAME
+
+====================================================================

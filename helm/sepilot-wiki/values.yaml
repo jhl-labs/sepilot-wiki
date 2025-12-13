@@ -1,0 +1,161 @@
+# SEPilot Wiki Helm Chart Values
+# 기본 설정값
+
+# 레플리카 수
+replicaCount: 1
+
+# 이미지 설정
+image:
+  repository: sepilot-wiki
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# 서비스 계정 설정
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+# Pod 어노테이션 및 레이블
+podAnnotations: {}
+podLabels: {}
+
+# Pod 보안 컨텍스트
+podSecurityContext:
+  fsGroup: 1001
+
+# 컨테이너 보안 컨텍스트
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+
+# 서비스 설정
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+# Ingress 설정
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+    # kubernetes.io/tls-acme: "true"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: wiki.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+  #  - secretName: wiki-tls
+  #    hosts:
+  #      - wiki.example.com
+
+# 리소스 제한
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+# Liveness 및 Readiness 프로브
+livenessProbe:
+  httpGet:
+    path: /api/health
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 30
+  timeoutSeconds: 10
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /api/health
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# 오토스케일링 설정
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+# 노드 선택자
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity
+affinity: {}
+
+# ========================================
+# 인증 설정
+# ========================================
+auth:
+  # 인증 모드: public (GitHub Pages 호환) 또는 private (Keycloak)
+  mode: "private"
+
+  # Keycloak 설정 (auth.mode가 private일 때 사용)
+  keycloak:
+    # Keycloak 클라이언트 ID
+    clientId: "sepilot-wiki"
+    # Keycloak 클라이언트 시크릿 (Secret에서 가져옴)
+    clientSecretKey: "keycloak-client-secret"
+    # Keycloak Issuer URL
+    issuer: ""
+    # 예: https://auth.example.com/realms/sepilot
+
+# NextAuth 설정
+nextauth:
+  # 앱의 공개 URL
+  url: "https://wiki.example.com"
+  # 시크릿 키 (Secret에서 가져옴)
+  secretKey: "nextauth-secret"
+
+# ========================================
+# 외부 시크릿 (기존 Secret 사용 시)
+# ========================================
+externalSecrets:
+  enabled: false
+  # 기존 Secret 이름
+  secretName: ""
+
+# ========================================
+# GitHub API 설정 (관리자 기능용)
+# ========================================
+github:
+  # GitHub 저장소 (owner/repo 형식)
+  repo: ""
+  # GitHub 토큰 (Secret에서 가져옴)
+  tokenKey: "github-token"
+  # 토큰 값 (배포 시 제공)
+  token: ""
+
+# ========================================
+# ConfigMap 설정
+# ========================================
+config:
+  # 로깅 레벨
+  logLevel: "info"
