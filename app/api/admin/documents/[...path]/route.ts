@@ -28,7 +28,7 @@ function getRepoInfo() {
   return { owner, repo: repoName };
 }
 
-// 문서 저장 경로 (jhl-space-docs의 data/ 폴더)
+// 문서 저장 경로
 const DOCS_PATH = 'data';
 
 // 관리자 권한 확인

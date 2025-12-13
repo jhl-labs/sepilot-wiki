@@ -39,7 +39,7 @@ async function checkAdminAuth() {
   return { session };
 }
 
-// 문서 저장 경로 (jhl-space-docs의 data/ 폴더)
+// 문서 저장 경로
 const DOCS_PATH = 'data';
 
 // 재귀적으로 data 폴더의 모든 파일 조회

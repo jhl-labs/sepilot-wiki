@@ -12,6 +12,7 @@ permissions:
 env:
   REGISTRY: ${{ secrets.HARBOR_REGISTRY }}
   IMAGE_NAME: devops/sepilot-wiki
+  GITOPS_VALUES_FILE: ${{ secrets.GITOPS_VALUES_FILE || 'values.yaml' }}
 
 jobs:
   docker:
@@ -56,13 +57,13 @@ jobs:
           token: ${{ secrets.GITOPS_TOKEN || secrets.GH_TOKEN || secrets.PAT || github.token }}
           path: gitops
 
-      - name: Update values-euno.yaml
+      - name: Update GitOps values file
         run: |
           cd gitops
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          sed -i 's/tag: "sha-.*"/tag: "sha-${{ steps.sha.outputs.short_sha }}"/' values-euno.yaml
-          git add values-euno.yaml
+          sed -i 's/tag: "sha-.*"/tag: "sha-${{ steps.sha.outputs.short_sha }}"/' ${{ env.GITOPS_VALUES_FILE }}
+          git add ${{ env.GITOPS_VALUES_FILE }}
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
