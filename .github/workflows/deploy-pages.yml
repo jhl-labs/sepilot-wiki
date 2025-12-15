@@ -41,7 +41,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Setup kubectl (for k8s collectors)
-        uses: azure/setup-kubectl@v3
+        uses: azure/setup-kubectl@v4
         with:
           version: 'latest'
 
