@@ -47,6 +47,8 @@ const nextConfig = {
   // 번들 분석 및 최적화
   experimental: {
     // optimizePackageImports: ['lucide-react', '@tanstack/react-query'],
+    // 스케줄러 초기화를 위한 instrumentation 활성화
+    instrumentationHook: process.env.BUILD_MODE === 'standalone',
   },
 
   // 정적 빌드 시 trailing slash 추가 (GitHub Pages 호환성)
