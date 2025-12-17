@@ -24,19 +24,26 @@ export default async function AdminLayout({
     redirect('/');
   }
 
-  // 인증 및 권한 확인
-  const session = await auth();
-  if (!session) {
-    redirect('/auth/signin?callbackUrl=/admin');
-  }
+  // Public 모드에서는 인증 없이 관리자 기능 허용
+  const isPublicMode = process.env.AUTH_MODE === 'public';
 
-  if (!isAdmin(session as { user?: { roles?: string[]; clientRoles?: string[] } } | null)) {
-    redirect('/?error=unauthorized');
+  let user = null;
+  if (!isPublicMode) {
+    // 인증 및 권한 확인 (private 모드에서만)
+    const session = await auth();
+    if (!session) {
+      redirect('/auth/signin?callbackUrl=/admin');
+    }
+
+    if (!isAdmin(session as { user?: { roles?: string[]; clientRoles?: string[] } } | null)) {
+      redirect('/?error=unauthorized');
+    }
+    user = session.user;
   }
 
   return (
     <div className="admin-layout">
-      <AdminSidebar user={session.user} />
+      <AdminSidebar user={user} />
       <main className="admin-main">
         {children}
       </main>

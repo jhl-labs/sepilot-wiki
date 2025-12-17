@@ -29,6 +29,11 @@ function getRepoInfo() {
 
 // 관리자 권한 확인 미들웨어
 async function checkAdminAuth() {
+  // Public 모드에서는 인증 건너뛰기
+  if (process.env.AUTH_MODE === 'public') {
+    return { session: { user: { name: 'Anonymous', email: 'anonymous@example.com' } } };
+  }
+
   const session = await auth();
   if (!session) {
     return { error: '인증이 필요합니다.', status: 401 };
