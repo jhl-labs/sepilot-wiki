@@ -96,7 +96,9 @@ interface Contributor {
 }
 
 interface SyncData {
-  repository: Repository;
+  configured?: boolean;
+  message?: string;
+  repository: Repository | null;
   commits: Commit[];
   pullRequests: PullRequest[];
   workflowRuns: WorkflowRun[];
@@ -238,7 +240,25 @@ export default function SyncPage() {
           <RefreshCw size={32} className="spin" />
           <p>저장소 정보를 불러오는 중...</p>
         </div>
-      ) : data ? (
+      ) : data?.configured === false ? (
+        <div className="admin-card">
+          <div className="admin-card-body">
+            <div className="empty-state">
+              <AlertCircle size={48} />
+              <h3>GitHub 저장소 연결 필요</h3>
+              <p>{data.message || 'GitHub 저장소가 연결되지 않았습니다.'}</p>
+              <p style={{ fontSize: '13px', color: 'var(--admin-text-dim)', marginTop: '8px' }}>
+                환경변수를 설정하세요:<br />
+                <code style={{ background: 'var(--admin-bg-tertiary)', padding: '2px 6px', borderRadius: '4px' }}>GITHUB_REPO</code> - owner/repo 형식<br />
+                <code style={{ background: 'var(--admin-bg-tertiary)', padding: '2px 6px', borderRadius: '4px' }}>GITHUB_TOKEN</code> - GitHub Personal Access Token
+              </p>
+              <Link href="/admin" className="btn btn-secondary" style={{ marginTop: '16px' }}>
+                대시보드로 돌아가기
+              </Link>
+            </div>
+          </div>
+        </div>
+      ) : data && data.repository ? (
         <>
           {/* 저장소 개요 */}
           <div className="admin-stats-grid">
