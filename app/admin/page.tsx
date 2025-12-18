@@ -26,7 +26,9 @@ import {
 import Link from 'next/link';
 
 interface GitStatus {
-  branch: string;
+  configured?: boolean;
+  message?: string;
+  branch: string | null;
   lastCommit: {
     hash: string;
     message: string;
@@ -34,10 +36,12 @@ interface GitStatus {
     date: string;
   } | null;
   openPRs: number;
-  repoUrl: string;
+  repoUrl: string | null;
 }
 
 interface DocumentStats {
+  configured?: boolean;
+  message?: string;
   total: number;
   files: Array<{ path: string; type: string; name: string }>;
 }
@@ -263,7 +267,20 @@ export default function AdminDashboard() {
               )}
             </div>
             <div className="admin-card-body">
-              {gitStatus ? (
+              {loading ? (
+                <div className="admin-loading">
+                  <RefreshCw size={16} className="spin" />
+                  로딩 중...
+                </div>
+              ) : gitStatus?.configured === false ? (
+                <div className="empty-state-small">
+                  <AlertCircle size={24} />
+                  <p>{gitStatus.message || 'GitHub 저장소가 연결되지 않았습니다.'}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--admin-text-dim)' }}>
+                    GITHUB_REPO, GITHUB_TOKEN 환경변수를 설정하세요.
+                  </p>
+                </div>
+              ) : gitStatus ? (
                 <>
                   <div className="admin-git-info">
                     <div className="admin-git-branch">
@@ -288,9 +305,9 @@ export default function AdminDashboard() {
                   </div>
                 </>
               ) : (
-                <div className="admin-loading">
-                  <RefreshCw size={16} className="spin" />
-                  로딩 중...
+                <div className="empty-state-small">
+                  <AlertCircle size={24} />
+                  <p>저장소 정보를 불러올 수 없습니다.</p>
                 </div>
               )}
             </div>

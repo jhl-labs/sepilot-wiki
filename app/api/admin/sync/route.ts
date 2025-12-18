@@ -16,11 +16,11 @@ function getOctokit() {
   return new Octokit({ auth: token });
 }
 
-// 저장소 정보 파싱
-function getRepoInfo() {
+// 저장소 정보 파싱 (없으면 null 반환)
+function getRepoInfo(): { owner: string; repo: string } | null {
   const repo = process.env.GITHUB_REPO;
   if (!repo) {
-    throw new Error('GITHUB_REPO가 설정되지 않았습니다.');
+    return null;
   }
   const [owner, repoName] = repo.split('/');
   return { owner, repo: repoName };
@@ -54,7 +54,46 @@ export async function GET() {
   }
 
   try {
-    const { owner, repo } = getRepoInfo();
+    const repoInfo = getRepoInfo();
+
+    // GITHUB_REPO가 설정되지 않은 경우 기본 응답 반환
+    if (!repoInfo) {
+      return NextResponse.json({
+        configured: false,
+        message: 'GITHUB_REPO가 설정되지 않았습니다. 환경변수를 설정하세요.',
+        repository: null,
+        commits: [],
+        pullRequests: [],
+        workflowRuns: [],
+        branchProtection: null,
+        contributors: [],
+        branch: null,
+        lastCommit: null,
+        openPRs: 0,
+        repoUrl: null,
+      });
+    }
+
+    const { owner, repo } = repoInfo;
+
+    // GITHUB_TOKEN 확인
+    if (!process.env.GITHUB_TOKEN) {
+      return NextResponse.json({
+        configured: false,
+        message: 'GITHUB_TOKEN이 설정되지 않았습니다. 환경변수를 설정하세요.',
+        repository: null,
+        commits: [],
+        pullRequests: [],
+        workflowRuns: [],
+        branchProtection: null,
+        contributors: [],
+        branch: null,
+        lastCommit: null,
+        openPRs: 0,
+        repoUrl: `https://github.com/${owner}/${repo}`,
+      });
+    }
+
     const octokit = getOctokit();
 
     // 저장소 기본 정보
@@ -223,7 +262,21 @@ export async function POST() {
   }
 
   try {
-    const { owner, repo } = getRepoInfo();
+    const repoInfo = getRepoInfo();
+    if (!repoInfo) {
+      return NextResponse.json(
+        { error: 'GITHUB_REPO가 설정되지 않았습니다.' },
+        { status: 400 }
+      );
+    }
+    if (!process.env.GITHUB_TOKEN) {
+      return NextResponse.json(
+        { error: 'GITHUB_TOKEN이 설정되지 않았습니다.' },
+        { status: 400 }
+      );
+    }
+
+    const { owner, repo } = repoInfo;
     const octokit = getOctokit();
 
     // workflow_dispatch 이벤트 트리거 (있는 경우)

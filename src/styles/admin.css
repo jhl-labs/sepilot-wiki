@@ -1,88 +1,87 @@
 /**
- * 엔터프라이즈 관리자 패널 스타일
- * Industrial/Professional 다크 테마
+ * 관리자 패널 스타일
+ * Wiki 디자인 시스템과 통일된 테마
  */
 
 /* ========================================
-   CSS Variables - Enterprise Theme
+   CSS Variables - Wiki 디자인 시스템 기반
    ======================================== */
 :root {
-  /* Slate 기반 다크 팔레트 */
-  --admin-bg-deep: #0c0f14;
-  --admin-bg-primary: #111419;
-  --admin-bg-secondary: #181c24;
-  --admin-bg-tertiary: #1f242e;
-  --admin-bg-elevated: #262c38;
-  --admin-bg-hover: #2d3544;
+  /* 배경색 - Wiki variables.css 참조 */
+  --admin-bg-deep: var(--color-bg-primary);
+  --admin-bg-primary: var(--color-bg-primary);
+  --admin-bg-secondary: var(--color-bg-secondary);
+  --admin-bg-tertiary: var(--color-bg-tertiary);
+  --admin-bg-elevated: var(--color-bg-elevated);
+  --admin-bg-hover: var(--color-bg-hover);
 
   /* 텍스트 색상 */
-  --admin-text-primary: #f1f5f9;
-  --admin-text-secondary: #94a3b8;
-  --admin-text-muted: #64748b;
-  --admin-text-dim: #475569;
+  --admin-text-primary: var(--color-text-primary);
+  --admin-text-secondary: var(--color-text-secondary);
+  --admin-text-muted: var(--color-text-tertiary);
+  --admin-text-dim: var(--color-text-muted);
 
-  /* 액센트 색상 - Emerald */
-  --admin-accent: #10b981;
-  --admin-accent-hover: #059669;
-  --admin-accent-light: rgba(16, 185, 129, 0.15);
-  --admin-accent-glow: rgba(16, 185, 129, 0.4);
+  /* 액센트 색상 - Wiki 블루 기반 */
+  --admin-accent: var(--color-accent-primary);
+  --admin-accent-hover: var(--color-accent-primary-hover);
+  --admin-accent-light: var(--color-accent-primary-light);
+  --admin-accent-glow: rgba(59, 130, 246, 0.4);
 
   /* 상태 색상 */
-  --admin-success: #22c55e;
-  --admin-success-light: rgba(34, 197, 94, 0.15);
-  --admin-warning: #f59e0b;
-  --admin-warning-light: rgba(245, 158, 11, 0.15);
-  --admin-error: #ef4444;
-  --admin-error-light: rgba(239, 68, 68, 0.15);
-  --admin-info: #3b82f6;
-  --admin-info-light: rgba(59, 130, 246, 0.15);
+  --admin-success: var(--color-success);
+  --admin-success-light: var(--color-success-light);
+  --admin-warning: var(--color-warning);
+  --admin-warning-light: var(--color-warning-light);
+  --admin-error: var(--color-error);
+  --admin-error-light: var(--color-error-light);
+  --admin-info: var(--color-info);
+  --admin-info-light: var(--color-info-light);
 
   /* 보더 */
-  --admin-border: #1e293b;
-  --admin-border-light: #334155;
-  --admin-border-focus: #10b981;
+  --admin-border: var(--color-border-primary);
+  --admin-border-light: var(--color-border-secondary);
+  --admin-border-focus: var(--color-border-focus);
 
   /* 그라디언트 */
-  --admin-gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --admin-gradient-surface: linear-gradient(180deg, #1f242e 0%, #181c24 100%);
-  --admin-gradient-glow: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+  --admin-gradient-accent: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-primary-hover) 100%);
+  --admin-gradient-surface: linear-gradient(180deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+  --admin-gradient-glow: none;
 
   /* 쉐도우 */
-  --admin-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --admin-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --admin-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --admin-shadow-glow: 0 0 20px rgba(16, 185, 129, 0.2);
+  --admin-shadow-sm: var(--shadow-sm);
+  --admin-shadow-md: var(--shadow-md);
+  --admin-shadow-lg: var(--shadow-lg);
+  --admin-shadow-glow: 0 0 20px rgba(59, 130, 246, 0.2);
 
   /* 간격 */
-  --admin-space-1: 4px;
-  --admin-space-2: 8px;
-  --admin-space-3: 12px;
-  --admin-space-4: 16px;
-  --admin-space-5: 20px;
-  --admin-space-6: 24px;
-  --admin-space-8: 32px;
-  --admin-space-10: 40px;
+  --admin-space-1: var(--spacing-1);
+  --admin-space-2: var(--spacing-2);
+  --admin-space-3: var(--spacing-3);
+  --admin-space-4: var(--spacing-4);
+  --admin-space-5: var(--spacing-5);
+  --admin-space-6: var(--spacing-6);
+  --admin-space-8: var(--spacing-8);
+  --admin-space-10: var(--spacing-10);
 
   /* 라운드 */
-  --admin-radius-sm: 4px;
-  --admin-radius-md: 8px;
-  --admin-radius-lg: 12px;
-  --admin-radius-xl: 16px;
+  --admin-radius-sm: var(--radius-sm);
+  --admin-radius-md: var(--radius-md);
+  --admin-radius-lg: var(--radius-lg);
+  --admin-radius-xl: var(--radius-xl);
 
   /* 트랜지션 */
-  --admin-transition-fast: 150ms ease;
-  --admin-transition-normal: 250ms ease;
-  --admin-transition-slow: 400ms ease;
+  --admin-transition-fast: var(--transition-fast);
+  --admin-transition-normal: var(--transition-normal);
+  --admin-transition-slow: var(--transition-slow);
 
-  /* 타이포그래피 */
-  --admin-font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --admin-font-mono: 'IBM Plex Mono', 'SF Mono', Monaco, monospace;
+  /* 타이포그래피 - Wiki와 동일 */
+  --admin-font-sans: var(--font-sans);
+  --admin-font-mono: var(--font-mono);
 }
 
 /* ========================================
    Base Styles
    ======================================== */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
 /* ========================================
    Layout

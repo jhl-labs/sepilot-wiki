@@ -17,11 +17,11 @@ function getOctokit() {
   return new Octokit({ auth: token });
 }
 
-// 저장소 정보 파싱
-function getRepoInfo() {
+// 저장소 정보 파싱 (없으면 null 반환)
+function getRepoInfo(): { owner: string; repo: string } | null {
   const repo = process.env.GITHUB_REPO;
   if (!repo) {
-    throw new Error('GITHUB_REPO가 설정되지 않았습니다.');
+    return null;
   }
   const [owner, repoName] = repo.split('/');
   return { owner, repo: repoName };
@@ -104,7 +104,31 @@ export async function GET() {
   }
 
   try {
-    const { owner, repo } = getRepoInfo();
+    const repoInfo = getRepoInfo();
+
+    // GITHUB_REPO가 설정되지 않은 경우 빈 응답 반환
+    if (!repoInfo) {
+      return NextResponse.json({
+        configured: false,
+        message: 'GITHUB_REPO가 설정되지 않았습니다.',
+        files: [],
+        tree: { name: 'data', path: 'data', type: 'directory', children: [] },
+        total: 0,
+      });
+    }
+
+    // GITHUB_TOKEN 확인
+    if (!process.env.GITHUB_TOKEN) {
+      return NextResponse.json({
+        configured: false,
+        message: 'GITHUB_TOKEN이 설정되지 않았습니다.',
+        files: [],
+        tree: { name: 'data', path: 'data', type: 'directory', children: [] },
+        total: 0,
+      });
+    }
+
+    const { owner, repo } = repoInfo;
     const octokit = getOctokit();
 
     const files = await getAllWikiFiles(octokit, owner, repo);
@@ -188,14 +212,15 @@ export async function POST(request: NextRequest) {
     }
 
     // 환경변수 확인
-    if (!process.env.GITHUB_TOKEN) {
-      return NextResponse.json({ error: 'GITHUB_TOKEN이 설정되지 않았습니다.' }, { status: 500 });
+    const repoInfo = getRepoInfo();
+    if (!repoInfo) {
+      return NextResponse.json({ error: 'GITHUB_REPO가 설정되지 않았습니다.' }, { status: 400 });
     }
-    if (!process.env.GITHUB_REPO) {
-      return NextResponse.json({ error: 'GITHUB_REPO가 설정되지 않았습니다.' }, { status: 500 });
+    if (!process.env.GITHUB_TOKEN) {
+      return NextResponse.json({ error: 'GITHUB_TOKEN이 설정되지 않았습니다.' }, { status: 400 });
     }
 
-    const { owner, repo } = getRepoInfo();
+    const { owner, repo } = repoInfo;
     const octokit = getOctokit();
 
     // 파일 경로 정규화 (data/ 폴더에 저장)
