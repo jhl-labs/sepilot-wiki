@@ -1,0 +1,73 @@
+# SEPilot Wiki - 개발용 Docker Compose
+# 인증 없이 바로 실행 가능한 간단한 구성
+#
+# 실행 방법:
+#   docker-compose -f docker/docker-compose.dev.yml up --build
+#
+# 또는 스크립트 사용:
+#   ./docker/run-dev.sh
+
+services:
+  wiki:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        - BUILD_MODE=standalone
+        - AUTH_MODE=public
+    container_name: sepilot-wiki
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - BUILD_MODE=standalone
+      # 인증 없이 공개 모드로 실행
+      - AUTH_MODE=public
+      - NEXT_PUBLIC_AUTH_MODE=public
+      # NextAuth 설정 (public 모드에서도 필요)
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=dev-secret-key-for-local-testing-only
+      # 스케줄러 설정
+      - SCHEDULER_ENABLED=true
+      - REDIS_URL=redis://redis:6379
+      # GitHub 설정 (선택사항 - 없어도 기본 기능 동작)
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - GITHUB_REPO=${GITHUB_REPO:-}
+      - GITHUB_WEBHOOK_SECRET=${GITHUB_WEBHOOK_SECRET:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - sepilot-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: sepilot-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - sepilot-net
+
+volumes:
+  redis-data:
+    name: sepilot-redis-data
+
+networks:
+  sepilot-net:
+    name: sepilot-network

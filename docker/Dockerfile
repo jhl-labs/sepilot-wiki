@@ -20,6 +20,10 @@ RUN npm ci --legacy-peer-deps
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# 빌드 인자
+ARG BUILD_MODE=standalone
+ARG AUTH_MODE=public
+
 # 의존성 복사
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -27,9 +31,9 @@ COPY . .
 # 환경 변수 설정
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-ENV BUILD_MODE=standalone
-ENV AUTH_MODE=private
-ENV NEXT_PUBLIC_AUTH_MODE=private
+ENV BUILD_MODE=${BUILD_MODE}
+ENV AUTH_MODE=${AUTH_MODE}
+ENV NEXT_PUBLIC_AUTH_MODE=${AUTH_MODE}
 
 # 추가 문서 소스 설정 (data-external 폴더가 있는 경우)
 # CI에서 ./data를 ./wiki/data-external로 복사
