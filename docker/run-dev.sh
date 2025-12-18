@@ -37,49 +37,49 @@ echo ""
 case "${1:-up}" in
     up|start)
         echo -e "${GREEN}▶ Wiki 서비스 시작 중...${NC}"
-        docker-compose -f docker/docker-compose.dev.yml up --build -d
+        docker compose -f docker/docker-compose.dev.yml up --build -d
 
         echo ""
         echo -e "${GREEN}✓ 서비스 시작 완료!${NC}"
         echo ""
-        echo -e "  ${BLUE}Wiki:${NC}  http://localhost:3000"
-        echo -e "  ${BLUE}API:${NC}   http://localhost:3000/api/health"
+        echo -e "  ${BLUE}Wiki:${NC}  http://localhost:3001"
+        echo -e "  ${BLUE}API:${NC}   http://localhost:3001/api/health"
         echo ""
-        echo -e "  로그 보기: ${YELLOW}docker-compose -f docker/docker-compose.dev.yml logs -f${NC}"
+        echo -e "  로그 보기: ${YELLOW}docker compose -f docker/docker-compose.dev.yml logs -f${NC}"
         echo -e "  중지하기:  ${YELLOW}./docker/run-dev.sh down${NC}"
         ;;
 
     down|stop)
         echo -e "${YELLOW}▶ 서비스 중지 중...${NC}"
-        docker-compose -f docker/docker-compose.dev.yml down
+        docker compose -f docker/docker-compose.dev.yml down
         echo -e "${GREEN}✓ 서비스 중지 완료${NC}"
         ;;
 
     restart)
         echo -e "${YELLOW}▶ 서비스 재시작 중...${NC}"
-        docker-compose -f docker/docker-compose.dev.yml restart
+        docker compose -f docker/docker-compose.dev.yml restart
         echo -e "${GREEN}✓ 서비스 재시작 완료${NC}"
         ;;
 
     rebuild)
         echo -e "${YELLOW}▶ 이미지 재빌드 중...${NC}"
-        docker-compose -f docker/docker-compose.dev.yml build --no-cache
-        docker-compose -f docker/docker-compose.dev.yml up -d
+        docker compose -f docker/docker-compose.dev.yml build --no-cache
+        docker compose -f docker/docker-compose.dev.yml up -d
         echo -e "${GREEN}✓ 재빌드 완료${NC}"
         ;;
 
     logs)
-        docker-compose -f docker/docker-compose.dev.yml logs -f
+        docker compose -f docker/docker-compose.dev.yml logs -f
         ;;
 
     status)
         echo -e "${BLUE}▶ 서비스 상태:${NC}"
-        docker-compose -f docker/docker-compose.dev.yml ps
+        docker compose -f docker/docker-compose.dev.yml ps
         ;;
 
     clean)
         echo -e "${RED}▶ 모든 데이터 삭제 중...${NC}"
-        docker-compose -f docker/docker-compose.dev.yml down -v
+        docker compose -f docker/docker-compose.dev.yml down -v
         echo -e "${GREEN}✓ 정리 완료${NC}"
         ;;
 

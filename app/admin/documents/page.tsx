@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   FileText,
@@ -164,8 +164,20 @@ const TEMPLATES: Template[] = [
   },
 ];
 
-export default function DocumentsPage() {
+// searchParams를 사용하는 컴포넌트를 분리
+function DocumentsContent({ onOpenNewModal }: { onOpenNewModal: () => void }) {
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get('action') === 'new') {
+      onOpenNewModal();
+    }
+  }, [searchParams, onOpenNewModal]);
+
+  return null;
+}
+
+export default function DocumentsPage() {
   const [tree, setTree] = useState<TreeNode | null>(null);
   const [folders, setFolders] = useState<string[]>([]);
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['wiki']));
@@ -203,12 +215,10 @@ export default function DocumentsPage() {
   const [showDeleteFolderModal, setShowDeleteFolderModal] = useState(false);
   const [deleteFolderPath, setDeleteFolderPath] = useState('');
 
-  // URL 파라미터로 모달 열기
-  useEffect(() => {
-    if (searchParams.get('action') === 'new') {
-      setShowNewModal(true);
-    }
-  }, [searchParams]);
+  // URL 파라미터로 모달 열기 (DocumentsContent 컴포넌트에서 처리)
+  const handleOpenNewModal = useCallback(() => {
+    setShowNewModal(true);
+  }, []);
 
   const fetchDocuments = useCallback(async () => {
     setLoading(true);
@@ -593,6 +603,11 @@ export default function DocumentsPage() {
 
   return (
     <div className="admin-documents">
+      {/* URL 파라미터 처리 (Suspense 필요) */}
+      <Suspense fallback={null}>
+        <DocumentsContent onOpenNewModal={handleOpenNewModal} />
+      </Suspense>
+
       <div className="admin-header">
         <div>
           <h1>문서 관리</h1>

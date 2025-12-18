@@ -58,7 +58,7 @@ export function registerJob(job: BaseJob): void {
     return;
   }
 
-  // cron 태스크 생성 (아직 시작하지 않음)
+  // cron 태스크 생성
   const task = cron.schedule(
     job.schedule,
     async () => {
@@ -69,9 +69,11 @@ export function registerJob(job: BaseJob): void {
       }
 
       await executeJob(job);
-    },
-    { scheduled: false }
+    }
   );
+
+  // 태스크 생성 후 즉시 중지 (startScheduler에서 명시적으로 시작)
+  task.stop();
 
   registeredJobs.set(job.name, { job, task, enabled: true });
   console.log(`[Scheduler] 작업 등록: ${job.name} (${job.schedule})`);

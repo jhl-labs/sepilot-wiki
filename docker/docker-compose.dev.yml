@@ -17,7 +17,7 @@ services:
         - AUTH_MODE=public
     container_name: sepilot-wiki
     ports:
-      - "3000:3000"
+      - "3001:3000"  # 호스트 포트 충돌 방지를 위해 3001 사용
     environment:
       - NODE_ENV=production
       - BUILD_MODE=standalone
@@ -51,7 +51,7 @@ services:
     image: redis:7-alpine
     container_name: sepilot-redis
     ports:
-      - "6379:6379"
+      - "16380:6379"  # 호스트 포트 충돌 방지를 위해 16380 사용
     volumes:
       - redis-data:/data
     command: redis-server --appendonly yes
