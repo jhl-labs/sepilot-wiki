@@ -14,6 +14,14 @@ function getBaseUrl(): string {
     return '/';
 }
 
+// 검색 필터 타입
+export interface SearchFilter {
+    tags?: string[];
+    dateFrom?: string;
+    dateTo?: string;
+    author?: string;
+}
+
 // 검색 인덱스 타입
 interface SearchIndexItem {
     title: string;
@@ -65,13 +73,64 @@ async function loadSearchIndex(): Promise<{ items: SearchIndexItem[]; fuse: Fuse
     }
 }
 
-// 검색 기능 (Fuse.js 기반)
-export async function searchWiki(query: string): Promise<WikiPage[]> {
-    try {
-        const { fuse } = await loadSearchIndex();
-        const results = fuse.search(query);
+// 필터 적용 함수
+function applyFilters(items: SearchIndexItem[], filter: SearchFilter): SearchIndexItem[] {
+    return items.filter(item => {
+        // 태그 필터
+        if (filter.tags && filter.tags.length > 0) {
+            const hasMatchingTag = filter.tags.some(tag =>
+                item.tags?.includes(tag)
+            );
+            if (!hasMatchingTag) return false;
+        }
 
-        return results.map(({ item }) => ({
+        // 날짜 범위 필터
+        if (filter.dateFrom) {
+            const itemDate = new Date(item.lastModified);
+            const fromDate = new Date(filter.dateFrom);
+            if (itemDate < fromDate) return false;
+        }
+
+        if (filter.dateTo) {
+            const itemDate = new Date(item.lastModified);
+            const toDate = new Date(filter.dateTo);
+            toDate.setHours(23, 59, 59, 999); // 해당 날짜 끝까지 포함
+            if (itemDate > toDate) return false;
+        }
+
+        // 저자 필터
+        if (filter.author) {
+            if (!item.author?.toLowerCase().includes(filter.author.toLowerCase())) {
+                return false;
+            }
+        }
+
+        return true;
+    });
+}
+
+// 검색 기능 (Fuse.js 기반 + 필터)
+export async function searchWiki(query: string, filter?: SearchFilter): Promise<WikiPage[]> {
+    try {
+        const { items, fuse } = await loadSearchIndex();
+
+        let results: SearchIndexItem[];
+
+        // 검색어가 있으면 Fuse.js로 검색
+        if (query.trim()) {
+            const searchResults = fuse.search(query);
+            results = searchResults.map(({ item }) => item);
+        } else {
+            // 검색어 없으면 전체 아이템
+            results = [...items];
+        }
+
+        // 필터 적용
+        if (filter) {
+            results = applyFilters(results, filter);
+        }
+
+        return results.map((item) => ({
             title: item.title,
             slug: item.slug,
             content: item.excerpt, // 검색 결과에는 요약본 표시
@@ -81,6 +140,23 @@ export async function searchWiki(query: string): Promise<WikiPage[]> {
         }));
     } catch (error) {
         console.error('Error searching wiki:', error);
+        return [];
+    }
+}
+
+// 사용 가능한 모든 태그 목록 조회
+export async function getAvailableTags(): Promise<string[]> {
+    try {
+        const { items } = await loadSearchIndex();
+        const tagSet = new Set<string>();
+
+        items.forEach(item => {
+            item.tags?.forEach(tag => tagSet.add(tag));
+        });
+
+        return Array.from(tagSet).sort();
+    } catch (error) {
+        console.error('Error getting tags:', error);
         return [];
     }
 }

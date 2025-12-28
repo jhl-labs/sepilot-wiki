@@ -10,6 +10,12 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from '@/src/context/ThemeContext';
 import { SidebarProvider } from '@/src/context/SidebarContext';
 import { ConfigProvider } from '@/src/context/ConfigContext';
+import { ErrorProvider } from '@/src/context/ErrorContext';
+import { ShortcutsProvider } from '@/src/context/ShortcutsContext';
+import { RecentPagesProvider } from '@/src/context/RecentPagesContext';
+import { BookmarksProvider } from '@/src/context/BookmarksContext';
+import { ToastContainer } from '@/src/components/error/ErrorToast';
+import { CommandPalette } from '@/src/components/ui/CommandPalette';
 import { useState } from 'react';
 
 interface ProvidersProps {
@@ -34,11 +40,23 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <ConfigProvider>
-            <SidebarProvider>{children}</SidebarProvider>
-          </ConfigProvider>
-        </ThemeProvider>
+        <ErrorProvider>
+          <ThemeProvider>
+            <ConfigProvider>
+              <SidebarProvider>
+                <ShortcutsProvider>
+                  <RecentPagesProvider>
+                    <BookmarksProvider>
+                      {children}
+                      <CommandPalette />
+                      <ToastContainer />
+                    </BookmarksProvider>
+                  </RecentPagesProvider>
+                </ShortcutsProvider>
+              </SidebarProvider>
+            </ConfigProvider>
+          </ThemeProvider>
+        </ErrorProvider>
       </QueryClientProvider>
     </SessionProvider>
   );

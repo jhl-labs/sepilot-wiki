@@ -11,8 +11,8 @@
       "비교",
       "가이드"
     ],
-    "lastModified": "2025-12-07T12:06:15+00:00",
-    "author": "github-actions[bot]"
+    "lastModified": "2025-12-13T12:38:17+09:00",
+    "author": "JHL"
   },
   {
     "title": "GitHub Actions로 bun을 쓰는 방법",
@@ -26,7 +26,7 @@
       "CI/CD",
       "node-alternative"
     ],
-    "lastModified": "2025-12-08T12:07:33+00:00",
+    "lastModified": "2025-12-13T12:38:17+09:00",
     "author": "SEPilot AI"
   },
   {
@@ -41,8 +41,35 @@
       "패키지 매니저",
       "가이드"
     ],
-    "lastModified": "2025-12-07T12:06:15+00:00",
+    "lastModified": "2025-12-13T12:38:17+09:00",
     "author": "SEPilot AI"
+  },
+  {
+    "title": "Kubernetes 클러스터 대시보드",
+    "slug": "dashboard/k8s-overview",
+    "content": "Kubernetes 클러스터 대시보드\n마지막 업데이트: 2025. 12. 9. 오후 7:05:25\n📊 클러스터 요약\n  구분   현황   상태  \n :----- -----: :----: \n  클러스터   1개   🟢  \n  노드   4 / 4   🟢  \n  Pods   232 / 264   🟡  \n  Warning Events   20개   🔴  \n  리소스   사용량   총량   사용률  \n :------- -------: -----: -------: \n  CPU   6.4 cores   90 cores   🟢 6%  \n  Memory   80.7 Gi   313 Gi   🟢 36%  \n⚠️ 주의 이벤트 (최근 1시간)\n  클러스터   시간   네임스페이스   종류   대상   원인   횟수  \n :--------- :----- :------------- :----- :----- :----- -----: \n  default   오후 7:05:23   gallery-prod   Pod   gallery-vote-6fc75cb6df-746xt   Failed   3829  \n  default   오후 7:05:18   opensearch   Pod   opensearch-data-0   FailedToRetrieveImagePullSecret   79191  \n  default   오후 7:05:05   supabase   ExternalSecret   supabase-s3   UpdateFailed   7032  \n  default   오후 7:05:02   gpu-operator   Pod   nvidia-device-plugin-daemonset-4vgtv   FailedCreatePodSandBox   2  \n  default   오후 7:05:01   jhl-labs   Pod   jhl-space-sncrf-runner-8r55s   FailedCreatePodSandBox   2  \n  default   오후 7:04:58   gpu-operator   Pod   nvidia-container-toolkit-daemonset-hfvqt   FailedCreatePodSandBox   2  \n  default   오후 7:04:58   gpu-operator   Pod   nvidia-operator-validator-rsbtr   FailedCreatePodSandBox   2  \n  default   오후 7:04:55   jhl-labs   Pod   jhl-space-sncrf-runner-vb8pk   FailedCreatePodSandBox   2  \n  default   오후 7:04:55   jhl-labs   Pod   jhl-space-sncrf-runner-vvc7p   FailedCreatePodSandBox   2  \n  default   오후 7:04:54   jhl-labs   Pod   jhl-space-sncrf-runner-kmtw4   FailedCreatePodSandBox   2  \n📈 리소스 사용량\n노드별 리소스 사용률\n🏗️ 클러스터 리소스 현황\n🚀 Pod 상태\n📋 클러스터별 상세 정보\ndefault\n클러스터 상세 정보 보기\n  항목   값  \n :----- ---: \n  버전   v1.32.8+rke2r1  \n  노드   4개 (Ready: 4개)  \n  CPU   6.4 / 90 cores  \n  Memory   80.7 / 313.3 Gi  \n  Pods   232 running / 264 total  \n노드 목록\n  노드   상태   역할   CPU   Memory   CPU%   Mem%  \n :----- :----: :----- ----: -------: -----: -----: \n  7960x   🟢   worker   48   125.3Gi   🟢 8%   🟢 19%  \n  vtopia-cp1   🟢   control-plane, etcd, master   14   115.1Gi   🟢 1%   🟢 12%  \n  vtopia-cp2   🟢   control-plane, etcd, master   14   23.1Gi   🟢 4%   🟢 52%  \n  vtopia-cp3   🟢   control-plane, etcd, master   14   49.8Gi   🟢 11%   🟢 59%",
+    "excerpt": "Kubernetes 클러스터 대시보드\n마지막 업데이트: 2025. 12. 9. 오후 7:05:25\n📊 클러스터 요약\n  구분   현황   상태  \n :----- -----: :----: \n  클러스터   1개   🟢  \n  노드   4 / 4   🟢  \n  Pods   232 / 264   🟡  \n  Warning Events   20개   🔴...",
+    "tags": [
+      "kubernetes",
+      "o11y",
+      "monitoring",
+      "infrastructure"
+    ],
+    "lastModified": "2025-12-28T11:46:44.083Z"
+  },
+  {
+    "title": "Kubernetes 클러스터 대시보드",
+    "slug": "dashboard/nodes",
+    "content": "Kubernetes 클러스터 대시보드\n마지막 업데이트: 2025. 12. 9. 오후 6:45:52\n전체 요약\n  항목   값  \n ------ ------ \n  클러스터   1개 연결 / 1개 등록  \n  전체 노드   4개 (Ready: 4개)  \n  전체 CPU   90 cores  \n  전체 메모리   313.3 Gi  \n클러스터 개요\n노드 상태 분포\n리소스 분석\n클러스터별 상세 정보\ndefault\n  항목   값  \n ------ ------ \n  버전   v1.32.8+rke2r1  \n  노드   4개 (Ready: 4개)  \n  CPU   90 cores  \n  Memory   313.3 Gi  \n노드 목록\n  노드명   상태   역할   CPU   Memory   IP  \n -------- ------ ------ ----- -------- ----- \n  7960x   🟢 Ready   worker   48   125.3Gi   202.202.202.117  \n  vtopia-cp1   🟢 Ready   control-plane, etcd, master   14   115.1Gi   202.202.202.104  \n  vtopia-cp2   🟢 Ready   control-plane, etcd, master   14   23.1Gi   202.202.202.113  \n  vtopia-cp3   🟢 Ready   control-plane, etcd, master   14   49.8Gi   202.202.202.167",
+    "excerpt": "Kubernetes 클러스터 대시보드\n마지막 업데이트: 2025. 12. 9. 오후 6:45:52\n전체 요약\n  항목   값  \n ------ ------ \n  클러스터   1개 연결 / 1개 등록  \n  전체 노드   4개 (Ready: 4개)  \n  전체 CPU   90 cores  \n  전체 메모리   313.3 Gi  \n클러스터 개요\n노드 상태 분포...",
+    "tags": [
+      "kubernetes",
+      "cluster",
+      "nodes",
+      "infrastructure",
+      "monitoring"
+    ],
+    "lastModified": "2025-12-28T11:46:44.088Z"
   },
   {
     "title": "SEPilot Desktop 소개",
@@ -55,8 +82,8 @@
       "LLM",
       "Project"
     ],
-    "lastModified": "2025-12-07T12:06:15+00:00",
-    "author": "github-actions[bot]"
+    "lastModified": "2025-12-13T12:38:17+09:00",
+    "author": "JHL"
   },
   {
     "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
@@ -70,7 +97,7 @@
       "TypeScript",
       "Vite"
     ],
-    "lastModified": "2025-12-07T00:18:51+00:00",
+    "lastModified": "2025-12-13T12:38:17+09:00",
     "author": "SEPilot AI"
   },
   {

@@ -1,20 +1,42 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useMemo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Search, FileText, ArrowRight } from 'lucide-react';
-import { useSearch } from '@/src/hooks/useWiki';
+import { Search, FileText, ArrowRight, Filter, X, Tag, Calendar } from 'lucide-react';
+import { useSearchWithFilter, useAvailableTags } from '@/src/hooks/useWiki';
 import { Skeleton } from '@/src/components/ui/Skeleton';
 import { Input } from '@/src/components/ui/Input';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import type { SearchFilter } from '@/src/services/search';
 
 function SearchContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const searchQuery = searchParams.get('q') || '';
   const [inputValue, setInputValue] = useState(searchQuery);
-  const { data: results, isLoading } = useSearch(searchQuery);
+  const [showFilters, setShowFilters] = useState(false);
+
+  // 필터 상태
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
+
+  // 사용 가능한 태그 목록
+  const { data: availableTags = [] } = useAvailableTags();
+
+  // 현재 필터 객체
+  const filter: SearchFilter = useMemo(() => ({
+    tags: selectedTags.length > 0 ? selectedTags : undefined,
+    dateFrom: dateFrom || undefined,
+    dateTo: dateTo || undefined,
+  }), [selectedTags, dateFrom, dateTo]);
+
+  // 필터가 적용되었는지 확인
+  const hasActiveFilters = selectedTags.length > 0 || dateFrom || dateTo;
+
+  // 필터 지원 검색
+  const { data: results, isLoading } = useSearchWithFilter(searchQuery, filter);
 
   // URL 쿼리가 변경되면 input도 업데이트
   useEffect(() => {
@@ -23,10 +45,26 @@ function SearchContent() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputValue.trim()) {
+    if (inputValue.trim() || hasActiveFilters) {
       router.push(`/search?q=${encodeURIComponent(inputValue.trim())}`);
     }
   };
+
+  // 태그 토글
+  const toggleTag = useCallback((tag: string) => {
+    setSelectedTags(prev =>
+      prev.includes(tag)
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
+  }, []);
+
+  // 필터 초기화
+  const clearFilters = useCallback(() => {
+    setSelectedTags([]);
+    setDateFrom('');
+    setDateTo('');
+  }, []);
 
   return (
     <div className="search-page">
@@ -44,7 +82,106 @@ function SearchContent() {
           <button type="submit" className="btn btn-primary">
             검색
           </button>
+          <button
+            type="button"
+            className={`btn btn-filter ${showFilters ? 'active' : ''} ${hasActiveFilters ? 'has-filters' : ''}`}
+            onClick={() => setShowFilters(!showFilters)}
+            aria-label="필터 토글"
+          >
+            <Filter size={18} />
+            {hasActiveFilters && <span className="filter-badge">{selectedTags.length + (dateFrom ? 1 : 0) + (dateTo ? 1 : 0)}</span>}
+          </button>
         </form>
+
+        {/* 필터 패널 */}
+        {showFilters && (
+          <div className="search-filters">
+            <div className="filter-header">
+              <h3>필터</h3>
+              {hasActiveFilters && (
+                <button onClick={clearFilters} className="clear-filters-btn">
+                  <X size={14} />
+                  초기화
+                </button>
+              )}
+            </div>
+
+            {/* 태그 필터 */}
+            <div className="filter-section">
+              <label className="filter-label">
+                <Tag size={14} />
+                태그
+              </label>
+              <div className="tag-filter-list">
+                {availableTags.slice(0, 20).map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    className={`tag-filter-item ${selectedTags.includes(tag) ? 'selected' : ''}`}
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 날짜 필터 */}
+            <div className="filter-section">
+              <label className="filter-label">
+                <Calendar size={14} />
+                수정일
+              </label>
+              <div className="date-filter-row">
+                <input
+                  type="date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="date-input"
+                  placeholder="시작일"
+                />
+                <span className="date-separator">~</span>
+                <input
+                  type="date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="date-input"
+                  placeholder="종료일"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 활성 필터 표시 */}
+        {hasActiveFilters && (
+          <div className="active-filters">
+            {selectedTags.map((tag) => (
+              <span key={tag} className="active-filter-tag">
+                {tag}
+                <button onClick={() => toggleTag(tag)} aria-label={`${tag} 필터 제거`}>
+                  <X size={12} />
+                </button>
+              </span>
+            ))}
+            {dateFrom && (
+              <span className="active-filter-tag">
+                시작: {dateFrom}
+                <button onClick={() => setDateFrom('')} aria-label="시작일 필터 제거">
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+            {dateTo && (
+              <span className="active-filter-tag">
+                종료: {dateTo}
+                <button onClick={() => setDateTo('')} aria-label="종료일 필터 제거">
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+          </div>
+        )}
       </header>
 
       <div className="search-results">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2025-12-12T20:00:19.553Z</generated>
-  <count>13</count>
+  <generated>2025-12-28T11:46:44.147Z</generated>
+  <count>15</count>
   <items>
   <item>
     <title>bun과 pnpm, npm의 차이</title>
@@ -55,8 +55,8 @@ pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하�
 은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
 이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
     <tags>bun, pnpm, npm, 비교, 가이드</tags>
-    <lastModified>2025-12-07T12:06:15+00:00</lastModified>
-    <author>github-actions[bot]</author>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>GitHub Actions로 bun을 쓰는 방법</title>
@@ -105,7 +105,7 @@ GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매�
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
 워크플로우...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative</tags>
-    <lastModified>2025-12-08T12:07:33+00:00</lastModified>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -167,8 +167,116 @@ bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저
 번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
 패키지...</excerpt>
     <tags>bun, npm, yarn, 패키지 매니저, 가이드</tags>
-    <lastModified>2025-12-07T12:06:15+00:00</lastModified>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
     <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Kubernetes 클러스터 대시보드</title>
+    <slug>dashboard/k8s-overview</slug>
+    <content>Kubernetes 클러스터 대시보드
+마지막 업데이트: 2025. 12. 9. 오후 7:05:25
+📊 클러스터 요약
+  구분   현황   상태  
+ :----- -----: :----: 
+  클러스터   1개   🟢  
+  노드   4 / 4   🟢  
+  Pods   232 / 264   🟡  
+  Warning Events   20개   🔴  
+  리소스   사용량   총량   사용률  
+ :------- -------: -----: -------: 
+  CPU   6.4 cores   90 cores   🟢 6%  
+  Memory   80.7 Gi   313 Gi   🟢 36%  
+⚠️ 주의 이벤트 (최근 1시간)
+  클러스터   시간   네임스페이스   종류   대상   원인   횟수  
+ :--------- :----- :------------- :----- :----- :----- -----: 
+  default   오후 7:05:23   gallery-prod   Pod   gallery-vote-6fc75cb6df-746xt   Failed   3829  
+  default   오후 7:05:18   opensearch   Pod   opensearch-data-0   FailedToRetrieveImagePullSecret   79191  
+  default   오후 7:05:05   supabase   ExternalSecret   supabase-s3   UpdateFailed   7032  
+  default   오후 7:05:02   gpu-operator   Pod   nvidia-device-plugin-daemonset-4vgtv   FailedCreatePodSandBox   2  
+  default   오후 7:05:01   jhl-labs   Pod   jhl-space-sncrf-runner-8r55s   FailedCreatePodSandBox   2  
+  default   오후 7:04:58   gpu-operator   Pod   nvidia-container-toolkit-daemonset-hfvqt   FailedCreatePodSandBox   2  
+  default   오후 7:04:58   gpu-operator   Pod   nvidia-operator-validator-rsbtr   FailedCreatePodSandBox   2  
+  default   오후 7:04:55   jhl-labs   Pod   jhl-space-sncrf-runner-vb8pk   FailedCreatePodSandBox   2  
+  default   오후 7:04:55   jhl-labs   Pod   jhl-space-sncrf-runner-vvc7p   FailedCreatePodSandBox   2  
+  default   오후 7:04:54   jhl-labs   Pod   jhl-space-sncrf-runner-kmtw4   FailedCreatePodSandBox   2  
+📈 리소스 사용량
+노드별 리소스 사용률
+🏗️ 클러스터 리소스 현황
+🚀 Pod 상태
+📋 클러스터별 상세 정보
+default
+클러스터 상세 정보 보기
+  항목   값  
+ :----- ---: 
+  버전   v1.32.8+rke2r1  
+  노드   4개 (Ready: 4개)  
+  CPU   6.4 / 90 cores  
+  Memory   80.7 / 313.3 Gi  
+  Pods   232 running / 264 total  
+노드 목록
+  노드   상태   역할   CPU   Memory   CPU%   Mem%  
+ :----- :----: :----- ----: -------: -----: -----: 
+  7960x   🟢   worker   48   125.3Gi   🟢 8%   🟢 19%  
+  vtopia-cp1   🟢   control-plane, etcd, master   14   115.1Gi   🟢 1%   🟢 12%  
+  vtopia-cp2   🟢   control-plane, etcd, master   14   23.1Gi   🟢 4%   🟢 52%  
+  vtopia-cp3   🟢   control-plane, etcd, master   14   49.8Gi   🟢 11%   🟢 59%</content>
+    <excerpt>Kubernetes 클러스터 대시보드
+마지막 업데이트: 2025. 12. 9. 오후 7:05:25
+📊 클러스터 요약
+  구분   현황   상태  
+ :----- -----: :----: 
+  클러스터   1개   🟢  
+  노드   4 / 4   🟢  
+  Pods   232 / 264   🟡  
+  Warning Events   20개   🔴...</excerpt>
+    <tags>kubernetes, o11y, monitoring, infrastructure</tags>
+    <lastModified>2025-12-28T11:46:44.083Z</lastModified>
+    <author></author>
+  </item>
+  <item>
+    <title>Kubernetes 클러스터 대시보드</title>
+    <slug>dashboard/nodes</slug>
+    <content>Kubernetes 클러스터 대시보드
+마지막 업데이트: 2025. 12. 9. 오후 6:45:52
+전체 요약
+  항목   값  
+ ------ ------ 
+  클러스터   1개 연결 / 1개 등록  
+  전체 노드   4개 (Ready: 4개)  
+  전체 CPU   90 cores  
+  전체 메모리   313.3 Gi  
+클러스터 개요
+노드 상태 분포
+리소스 분석
+클러스터별 상세 정보
+default
+  항목   값  
+ ------ ------ 
+  버전   v1.32.8+rke2r1  
+  노드   4개 (Ready: 4개)  
+  CPU   90 cores  
+  Memory   313.3 Gi  
+노드 목록
+  노드명   상태   역할   CPU   Memory   IP  
+ -------- ------ ------ ----- -------- ----- 
+  7960x   🟢 Ready   worker   48   125.3Gi   202.202.202.117  
+  vtopia-cp1   🟢 Ready   control-plane, etcd, master   14   115.1Gi   202.202.202.104  
+  vtopia-cp2   🟢 Ready   control-plane, etcd, master   14   23.1Gi   202.202.202.113  
+  vtopia-cp3   🟢 Ready   control-plane, etcd, master   14   49.8Gi   202.202.202.167</content>
+    <excerpt>Kubernetes 클러스터 대시보드
+마지막 업데이트: 2025. 12. 9. 오후 6:45:52
+전체 요약
+  항목   값  
+ ------ ------ 
+  클러스터   1개 연결 / 1개 등록  
+  전체 노드   4개 (Ready: 4개)  
+  전체 CPU   90 cores  
+  전체 메모리   313.3 Gi  
+클러스터 개요
+노드 상태 분포...</excerpt>
+    <tags>kubernetes, cluster, nodes, infrastructure, monitoring</tags>
+    <lastModified>2025-12-28T11:46:44.088Z</lastModified>
+    <author></author>
   </item>
   <item>
     <title>SEPilot Desktop 소개</title>
@@ -272,8 +380,8 @@ LLM 설정
     <excerpt>SEPilot Desktop 소개
 SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
     <tags>SEPilot, Desktop, LLM, Project</tags>
-    <lastModified>2025-12-07T12:06:15+00:00</lastModified>
-    <author>github-actions[bot]</author>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
@@ -322,7 +430,7 @@ React Router DOM - SPA 라우팅
 TanStack Query (React Query) - 서버 상태 관리
 Next.js...</excerpt>
     <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite</tags>
-    <lastModified>2025-12-07T00:18:51+00:00</lastModified>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>

@@ -4,8 +4,8 @@
       "title": "bun과 pnpm, npm의 차이",
       "slug": "bun/comparison-pnpm-npm",
       "content": "\n# bun과 pnpm, npm의 차이\n\n## 개요\n`bun`은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 **통합 툴**입니다. 반면에 `npm`과 `pnpm`은 **패키지 매니저**에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.\n\n이 가이드에서는 **설치 방식**, **성능**, **디스크 사용량**, **호환성**, **생태계** 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤 도구를 선택하면 좋은지 살펴봅니다.\n\n---\n\n## 1. 설치 및 초기 설정\n\n| 항목 | bun | npm (Node.js 기본) | pnpm |\n|------|-----|-------------------|------|\n| 설치 명령 | `curl -fsSL https://bun.sh/install | bash` (스크립트) 또는 `brew install bun` (macOS) | Node.js 설치 시 자동 포함 (`node -v` 확인) | `npm i -g pnpm` |\n| 기본 제공 기능 | 런타임, 패키지 매니저, 번들러, 테스트 러너 등 | 런타임 + npm (패키지 매니저) | npm 호환 CLI + 효율적인 저장소 관리 |\n| 설정 파일 | `bunfig.toml` (선택) | `package.json` | `pnpm-workspace.yaml` (멀티패키지) |\n\n## 2. 성능 비교\n\n| 항목 | bun | npm | pnpm |\n|------|-----|-----|------|\n| 패키지 설치 속도 | **매우 빠름** (C++ 로 구현, 병렬 다운로드) | 보통 (JavaScript 기반) | npm보다 빠름, 하지만 bun보다는 느림 |\n| 실행 속도 (런타임) | **Node.js 대비 2~4배 빠름** (V8 엔진 최적화) | Node.js 표준 | Node.js 표준 (pnpm은 런타임이 아님) |\n| 번들링 속도 | `bun build` 로 **초단위** 번들링 | `webpack`, `esbuild` 등 별도 도구 필요 | 별도 번들러 필요 |\n\n> **벤치마크**: `bun install` 은 10,000개의 의존성을 30초 이내에 설치할 수 있는 반면, npm은 2~3분, pnpm은 약 1분 정도 소요됩니다(환경에 따라 차이 존재).\n\n## 3. 디스크 사용량\n\n- **npm**: 각 프로젝트마다 `node_modules`에 전체 복사본을 저장 → 중복 파일이 많이 발생.\n- **pnpm**: **내용 주소 기반 저장소**(content‑addressable store)를 전역에 두고, 프로젝트마다 심볼릭 링크를 사용 → 중복 최소화, 디스크 사용량 30~50% 절감.\n- **bun**: `bun install` 역시 전역 캐시를 사용하지만, 현재는 pnpm만큼 세밀한 deduplication을 제공하지 않음. 그래도 npm 대비 20~30% 정도 절감.\n\n## 4. 호환성 및 생태계\n\n| 항목 | bun | npm | pnpm |\n|------|-----|-----|------|\n| Node.js API 호환 | 대부분 호환, 일부 네이티브 모듈(특히 C/C++ 애드온)에서 빌드 오류 가능 | 완전 호환 | 완전 호환 (npm 스크립트 그대로 사용) |\n| 패키지 레지스트리 | 기본적으로 npm 레지스트리 사용 | npm 레지스트리 | npm 레지스트리 |\n| 스크립트 실행 | `bun run <script>` (npm script와 동일) | `npm run <script>` | `pnpm run <script>` |\n| 커뮤니티·플러그인 | 아직 초기 단계, 공식 플러그인 제한적 | 가장 큰 생태계, 수많은 플러그인·툴 | npm 호환 플러그인 대부분 사용 가능 |\n\n## 5. 주요 사용 사례\n\n- **bun**: 빠른 프로토타이핑, 작은 프로젝트, 번들링이 필요 없는 서버리스 함수, 성능이 중요한 CLI 툴.\n- **npm**: 대부분의 Node.js 프로젝트, 레거시 코드베이스, 광범위한 CI/CD 파이프라인.\n- **pnpm**: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하고 설치 속도를 개선하고 싶을 때.\n\n## 6. 선택 가이드\n\n| 상황 | 추천 도구 |\n|------|-----------|\n| 프로젝트가 작고 빠른 설치·실행이 필요 | **bun** |\n| 기존 Node.js 생태계와 완전 호환이 필요 | **npm** |\n| 멀티패키지(모노레포) 혹은 디스크 절감이 중요한 대규모 프로젝트 | **pnpm** |\n\n## 7. 결론\n\n- `bun`은 **속도와 통합성**을 중시하는 최신 개발자에게 매력적인 선택입니다.\n- `npm`은 **보편성**과 **광범위한 호환성**을 제공하므로 여전히 기본 선택지입니다.\n- `pnpm`은 **효율적인 저장소 관리**와 **모노레포 지원**이 강점이며, npm과 100% 호환됩니다.\n\n프로젝트 요구사항(성능, 디스크 사용량, 생태계 지원)을 고려해 적절한 도구를 선택하면 됩니다.\n\n---\n\n*이 문서는 2025년 기준 정보를 바탕으로 작성되었습니다. 각 툴의 최신 버전 및 업데이트 내용은 공식 문서를 참고하세요.*\n",
-      "lastModified": "2025-12-07T12:06:15+00:00",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-13T12:38:17+09:00",
+      "author": "JHL",
       "status": "published",
       "isDraft": false,
       "isInvalid": false,
@@ -18,48 +18,12 @@
       ],
       "history": [
         {
-          "sha": "b19d85e",
-          "message": "🌳 Wiki Tree Maintenance: 10개의 위키 문서가 3개의 상위 디렉터리(guide, projects, bun) 아래에 고르게 배치돼 있으나 파일명·구조·태그 표기 방식에 일관성이 부족합니다. 대부분 파일명은 영문 slug 형태이지만, 일부는 과도하게 길거나 프로젝트·툴명을 중복 포함하고 있습니다. 또한 ‘visualization’과 같은 하위 주제별 폴더가 없어 관련 문서가 한곳에 모여 있지 않아 탐색성이 떨어집니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T12:06:15+00:00",
-          "additions": 82,
-          "deletions": 0
-        },
-        {
-          "sha": "c62ac0b",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three top‑level directories (projects, guide, bun). All filenames are already English but many do not follow the strict slug convention (lower‑case, hyphen‑separated) and several could be renamed for clarity. The guide section mixes introductory, configuration and advanced topics, making navigation harder. No home.md exists at the root, and many documents have an unknown status that should be clarified. No duplicate content was found, but there is overlapping information about the technology stack between tech‑stack.md and faq.md.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T00:18:51+00:00",
-          "additions": 0,
-          "deletions": 80
-        },
-        {
-          "sha": "3f92baf",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three logical groups: project‑related docs, bun‑tooling docs, and internal guide docs. Directory names use mixed case (e.g., Projects, _guide) and some file names could be more descriptive. Several guide files have an undefined status. No exact duplicate content was found, but the guide folder is hidden by a leading underscore which makes it harder to navigate.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T12:06:03+00:00",
-          "additions": 80,
-          "deletions": 0
-        },
-        {
-          "sha": "cfac152",
-          "message": "Update pnpm-npm-comparison.md",
+          "sha": "82a08e6",
+          "message": "chore: 초기 커밋 - SEPilot Wiki 프로젝트",
           "author": "JHL",
           "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-06T09:33:06+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "ea80c55",
-          "message": "docs: Issue #18 - 피드백 반영",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T21:09:24+00:00",
-          "additions": 0,
+          "date": "2025-12-13T12:38:17+09:00",
+          "additions": 82,
           "deletions": 0
         }
       ]
@@ -68,7 +32,7 @@
       "title": "GitHub Actions로 bun을 쓰는 방법",
       "slug": "bun/github-actions-setup",
       "content": "\n## 개요\nGitHub Actions 워크플로우에서 **bun**(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.\n\n## 사전 요구 사항\n- 저장소에 `bun`을 사용하도록 설정된 `package.json` 혹은 `bunfig.toml` 파일이 존재해야 합니다.\n- 워크플로우는 Linux(`ubuntu-latest`) 환경을 기준으로 설명합니다. Windows/macOS에서도 동일한 단계가 적용되지만, OS별 경로 차이에 유의하세요.\n\n## 워크플로우 파일 구조\n`.github/workflows/` 디렉터리에 `bun-ci.yml` 과 같은 파일을 생성합니다.\n\n### 1. 워크플로우 트리거\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n```\n\n### 2. Job 정의\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n```\n\n### 3. 단계별 설정\n#### 3-1. 레포지토리 체크아웃\n```yaml\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n```\n\n#### 3-2. bun 설치\nbun은 공식 설치 스크립트를 통해 간단히 설치할 수 있습니다.\n공식 설치 스크립트는 <https://bun.sh> 에서 확인할 수 있습니다.\n```yaml\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n```\n\n#### 3-3. 의존성 캐시\nbun은 `node_modules` 대신 `bun.lockb`와 `~/.bun` 디렉터리를 사용합니다.\n`actions/cache` 액션을 이용해 이 디렉터리를 캐시하면 설치 속도가 크게 향상됩니다.\n```yaml\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n```\n\n#### 3-4. 의존성 설치\n```yaml\n      - name: Install dependencies\n        run: bun install\n```\n\n#### 3-5. 테스트 실행 (예시)\n```yaml\n      - name: Run tests\n        run: bun test\n```\n\n#### 3-6. 빌드 및 배포 (필요 시)\n```yaml\n      - name: Build project\n        run: bun run build\n```\n\n## 전체 예시 워크플로우\n아래는 위 단계들을 하나의 파일에 통합한 최종 예시입니다.\n\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n\n      - name: Install dependencies\n        run: bun install\n\n      - name: Run tests\n        run: bun test\n\n      - name: Build project\n        run: bun run build\n```\n\n> **주의**: 위 예시에서는 `bun test`와 `bun run build` 스크립트가 `package.json` 혹은 `bunfig.toml`에 정의되어 있다고 가정합니다. 실제 프로젝트에 맞게 스크립트 명령을 조정하세요.\n\n## macOS / Windows 환경에서 사용하기\n- **macOS**: `runs-on: macos-latest` 로 변경하고, `curl` 설치가 기본 제공됩니다.\n- **Windows**: `runs-on: windows-latest` 로 변경하고, PowerShell 스크립트(`Invoke-WebRequest`)를 사용해 bun을 설치합니다. 예시:\n```yaml\n      - name: Install bun on Windows\n        shell: pwsh\n        run: |\n          iwr https://bun.sh/install -UseBasicParsing | iex\n          Add-Content $env:GITHUB_PATH \"$env:USERPROFILE\\.bun\\bin\"\n```\n> Windows에서는 경로 구분자(`\\`)와 환경 변수 사용법에 유의하세요.\n\n## 베스트 프랙티스\n1. **캐시 키 관리**: `bun.lockb` 파일이 변경될 때마다 캐시가 무효화되도록 `hashFiles('bun.lockb')` 를 사용합니다.\n2. **CI 속도 최적화**: `actions/setup-node` 대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.\n3. **보안**: 공식 설치 스크립트는 HTTPS를 통해 전달되며, `curl -fsSL` 옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.\n4. **버전 고정**: 특정 bun 버전을 사용하려면 `BUN_VERSION` 환경 변수를 설정하고 설치 스크립트에 전달합니다.\n```yaml\n        env:\n          BUN_VERSION: 1.1.12\n```\n\n## 참고 자료\n- Bun 공식 홈페이지 및 설치 가이드: <https://bun.sh>\n- GitHub Actions 공식 문서: <https://docs.github.com/en/actions>\n- actions/cache 액션: <https://github.com/actions/cache>\n\n## 결론\nGitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.\n",
-      "lastModified": "2025-12-08T12:07:33+00:00",
+      "lastModified": "2025-12-13T12:38:17+09:00",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -82,84 +46,12 @@
       ],
       "history": [
         {
-          "sha": "923b13f",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 13 markdown files organized into three top‑level directories (projects, guide, bun). Most files follow the naming convention, but there are several duplicate/overlapping documents and many placeholder pages that need attention. Tag syntax and status values are inconsistent, and a few documents are drafts or have an unknown status.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-08T12:07:33+00:00",
-          "additions": 1,
-          "deletions": 0
-        },
-        {
-          "sha": "b19d85e",
-          "message": "🌳 Wiki Tree Maintenance: 10개의 위키 문서가 3개의 상위 디렉터리(guide, projects, bun) 아래에 고르게 배치돼 있으나 파일명·구조·태그 표기 방식에 일관성이 부족합니다. 대부분 파일명은 영문 slug 형태이지만, 일부는 과도하게 길거나 프로젝트·툴명을 중복 포함하고 있습니다. 또한 ‘visualization’과 같은 하위 주제별 폴더가 없어 관련 문서가 한곳에 모여 있지 않아 탐색성이 떨어집니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T12:06:15+00:00",
-          "additions": 167,
-          "deletions": 0
-        },
-        {
-          "sha": "c62ac0b",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three top‑level directories (projects, guide, bun). All filenames are already English but many do not follow the strict slug convention (lower‑case, hyphen‑separated) and several could be renamed for clarity. The guide section mixes introductory, configuration and advanced topics, making navigation harder. No home.md exists at the root, and many documents have an unknown status that should be clarified. No duplicate content was found, but there is overlapping information about the technology stack between tech‑stack.md and faq.md.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T00:18:51+00:00",
-          "additions": 0,
-          "deletions": 165
-        },
-        {
-          "sha": "3f92baf",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three logical groups: project‑related docs, bun‑tooling docs, and internal guide docs. Directory names use mixed case (e.g., Projects, _guide) and some file names could be more descriptive. Several guide files have an undefined status. No exact duplicate content was found, but the guide folder is hidden by a leading underscore which makes it harder to navigate.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T12:06:03+00:00",
-          "additions": 165,
-          "deletions": 0
-        },
-        {
-          "sha": "15e4689",
-          "message": "Rename wiki/bun/ci/github-actions.md to wiki/bun/github-actions.md",
+          "sha": "82a08e6",
+          "message": "chore: 초기 커밋 - SEPilot Wiki 프로젝트",
           "author": "JHL",
           "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-06T09:32:40+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "a65e71f",
-          "message": "fix: workflow가 덮어쓴 문서 내용 복구",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T21:49:42+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "8f3b809",
-          "message": "docs: Issue #14 - 피드백 반영",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T12:46:09+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "7fc7a86",
-          "message": "fix: Wiki 문서 구조 정리 및 엉터리 파일 삭제",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T21:43:40+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "12e31ac",
-          "message": "docs: Issue #13 - [요청] github-actions로 bun을 쓰는 방법",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T11:49:54+00:00",
-          "additions": 0,
+          "date": "2025-12-13T12:38:17+09:00",
+          "additions": 168,
           "deletions": 0
         }
       ]
@@ -168,7 +60,7 @@
       "title": "bun 이란?",
       "slug": "bun/overview",
       "content": "\n## 개요\n\n**bun**은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저를 하나로 통합한 도구입니다.\n- **런타임**: Node.js와 호환되는 API를 제공하면서 V8 엔진 대신 **JavaScriptCore**(Apple의 엔진)를 사용합니다.\n- **번들러**: `bun build` 명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.\n- **패키지 매니저**: `bun install` 로 npm 레지스트리의 패키지를 설치하며, `package.json`과 `node_modules` 구조를 그대로 사용합니다.\n\n공식 웹사이트: https://bun.sh\nGitHub 레포지터리: https://github.com/oven-sh/bun\n\n## bun을 선택한 이유\n\n| 항목 | 설명 |\n|------|------|\n| **성능** | Zig 언어와 JavaScriptCore를 활용해 파일 I/O, 네트워크, 패키지 설치, 번들링 속도가 기존 Node.js 기반 도구보다 현저히 빠릅니다. 공식 벤치마크에서는 `npm install` 대비 2~3배, `webpack` 대비 5~10배 빠른 결과가 보고되었습니다. |\n| **통합 도구** | 런타임, 번들러, 패키지 매니저가 하나의 바이너리(`bun`)에 포함돼 별도 설치가 필요 없습니다. 개발 환경 설정이 간단해집니다. |\n| **Zero‑Config 지원** | `bun run` 명령만으로 TypeScript 파일을 바로 실행할 수 있어 별도 `ts-node` 설정이 불필요합니다. |\n| **호환성** | 대부분의 npm 패키지를 그대로 사용할 수 있으며, `package.json` 스크립트도 그대로 동작합니다. |\n| **경량 설치 파일** | 단일 실행 파일(≈ 30 MB)로 배포되어 CI/CD 파이프라인에 쉽게 통합할 수 있습니다. |\n\n## 장점\n\n- **빠른 설치 및 실행**\n  - `bun install` 은 병렬 I/O와 캐시 최적화를 통해 npm/yarn 대비 수 초 내에 의존성을 설치합니다.\n- **내장 번들러**\n  - `bun build` 로 ESBuild와 유사한 속도로 번들을 생성하며, 자동 트리쉐이킹과 코드 스플리팅을 지원합니다.\n- **TypeScript 지원**\n  - 별도 트랜스파일러 없이 `bun run src/index.ts` 로 바로 실행 가능.\n- **단일 바이너리**\n  - 런타임, 번들러, 패키지 매니저가 하나의 실행 파일에 포함돼 환경 관리가 단순합니다.\n- **POSIX 호환**\n  - macOS, Linux, Windows(WSL 포함)에서 동일한 바이너리를 사용합니다.\n\n## 단점\n\n- **생태계 성숙도**\n  - npm/yarn에 비해 아직 사용자가 적고, 일부 복잡한 네이티브 모듈(예: `node-gyp` 기반)에서 호환성 문제가 발생할 수 있습니다.\n- **플러그인 및 툴링**\n  - Webpack, Rollup 등 기존 번들러용 플러그인 생태계와 직접 호환되지 않으며, bun 전용 플러그인도 아직 제한적입니다.\n- **문서 및 커뮤니티**\n  - 공식 문서는 꾸준히 업데이트되고 있지만, Stack Overflow 등 커뮤니티 기반 Q&A가 상대적으로 적습니다.\n- **버전 관리**\n  - 현재는 `bun` 자체가 버전 관리 도구 역할을 하지 않으며, 프로젝트별 Node.js 버전 관리와는 별개로 다루어야 합니다.\n\n## 라이선스 및 역사\n\n- **라이선스**: MIT License (오픈 소스, 자유롭게 사용·수정·배포 가능)\n- **주요 연혁**\n  - **2021년 5월**: 프로젝트 초기 설계 및 공개 발표 (Jarred Sumner, Oven.sh 팀)\n  - **2022년 1월**: 첫 베타 버전(`bun v0.1.0`) 공개, GitHub 스타 수 급증\n  - **2022년 8월**: `bun v0.2.0` 에서 패키지 매니저 기능 정식 추가\n  - **2023년 3월**: `bun v0.3.0` 에서 TypeScript 실행 지원 및 `bun build` 도입\n  - **2024년 11월**: `bun v0.5.0` 에서 Windows 지원 및 안정화 버전 출시\n\n자세한 릴리즈 노트는 GitHub Releases 페이지(https://github.com/oven-sh/bun/releases)를 참고하세요.\n\n## 결론\n\nbun은 **속도와 통합성을 중시하는 프로젝트**에 적합한 최신 JavaScript 도구입니다.\n- **성능**이 중요한 CI/CD 파이프라인, 대규모 모노레포, 혹은 빠른 개발 피드백 루프가 필요한 경우 bun을 고려해볼 만합니다.\n- 반면, **특정 네이티브 모듈**이나 **풍부한 플러그인 생태계**가 필수인 경우에는 기존 npm/yarn + Webpack/Rollup 조합이 더 안정적일 수 있습니다.\n\n프로젝트에 적용하기 전, 핵심 의존성이 bun과 호환되는지 확인하고, 작은 파일럿 프로젝트에서 성능 및 호환성을 검증하는 것을 권장합니다.\n\n> **추가 조사 필요**: 복잡한 네이티브 모듈(예: `node-gyp` 기반)과 bun의 호환성 여부는 프로젝트별 테스트가 필요합니다. 공식 문서와 GitHub 이슈 트래커를 지속적으로 확인하세요.\n",
-      "lastModified": "2025-12-07T12:06:15+00:00",
+      "lastModified": "2025-12-13T12:38:17+09:00",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -182,76 +74,55 @@
       ],
       "history": [
         {
-          "sha": "b19d85e",
-          "message": "🌳 Wiki Tree Maintenance: 10개의 위키 문서가 3개의 상위 디렉터리(guide, projects, bun) 아래에 고르게 배치돼 있으나 파일명·구조·태그 표기 방식에 일관성이 부족합니다. 대부분 파일명은 영문 slug 형태이지만, 일부는 과도하게 길거나 프로젝트·툴명을 중복 포함하고 있습니다. 또한 ‘visualization’과 같은 하위 주제별 폴더가 없어 관련 문서가 한곳에 모여 있지 않아 탐색성이 떨어집니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T12:06:15+00:00",
+          "sha": "82a08e6",
+          "message": "chore: 초기 커밋 - SEPilot Wiki 프로젝트",
+          "author": "JHL",
+          "authorEmail": "bkperio@gmail.com",
+          "date": "2025-12-13T12:38:17+09:00",
           "additions": 76,
-          "deletions": 0
-        },
-        {
-          "sha": "c62ac0b",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three top‑level directories (projects, guide, bun). All filenames are already English but many do not follow the strict slug convention (lower‑case, hyphen‑separated) and several could be renamed for clarity. The guide section mixes introductory, configuration and advanced topics, making navigation harder. No home.md exists at the root, and many documents have an unknown status that should be clarified. No duplicate content was found, but there is overlapping information about the technology stack between tech‑stack.md and faq.md.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T00:18:51+00:00",
-          "additions": 0,
-          "deletions": 74
-        },
-        {
-          "sha": "a65e71f",
-          "message": "fix: workflow가 덮어쓴 문서 내용 복구",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T21:49:42+09:00",
-          "additions": 69,
-          "deletions": 4
-        },
-        {
-          "sha": "8f3b809",
-          "message": "docs: Issue #14 - 피드백 반영",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T12:46:09+00:00",
-          "additions": 4,
-          "deletions": 69
-        },
-        {
-          "sha": "7fc7a86",
-          "message": "fix: Wiki 문서 구조 정리 및 엉터리 파일 삭제",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T21:43:40+09:00",
-          "additions": 1,
-          "deletions": 1
-        },
-        {
-          "sha": "f600366",
-          "message": "🌳 Wiki Tree Maintenance: 3개의 문서가 모두 루트에 존재하고 파일명이 한글 슬러그 형태이며, 내용에 따라 ‘bun’, ‘CI’, ‘기술 스택’ 등 서로 다른 주제로 구분될 수 있습니다. 현재 구조는 카테고리·디렉터리 구분이 없고, 한글 파일명 때문에 URL 가독성이 낮으며, draft 상태 문서가 공개되지 않은 점이 문제입니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-05T12:19:13+00:00",
-          "additions": 74,
-          "deletions": 0
-        },
-        {
-          "sha": "9f159f3",
-          "message": "docs: Issue #12 - [요청] bun이란?",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T11:43:56+00:00",
-          "additions": 0,
           "deletions": 0
         }
       ]
     },
     {
+      "title": "Kubernetes 클러스터 대시보드",
+      "slug": "dashboard/k8s-overview",
+      "content": "\n# Kubernetes 클러스터 대시보드\n\n> 마지막 업데이트: 2025. 12. 9. 오후 7:05:25\n\n## 📊 클러스터 요약\n\n<div style=\"display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px;\">\n\n<div style=\"background: var(--bg-secondary); border-radius: 12px; padding: 20px;\">\n\n| 구분 | 현황 | 상태 |\n|:-----|-----:|:----:|\n| **클러스터** | 1개 | 🟢 |\n| **노드** | 4 / 4 | 🟢 |\n| **Pods** | 232 / 264 | 🟡 |\n| **Warning Events** | 20개 | 🔴 |\n\n</div>\n\n<div style=\"background: var(--bg-secondary); border-radius: 12px; padding: 20px;\">\n\n| 리소스 | 사용량 | 총량 | 사용률 |\n|:-------|-------:|-----:|-------:|\n| **CPU** | 6.4 cores | 90 cores | 🟢 6% |\n| **Memory** | 80.7 Gi | 313 Gi | 🟢 36% |\n\n</div>\n\n</div>\n\n## ⚠️ 주의 이벤트 (최근 1시간)\n\n<div style=\"background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; padding: 16px; margin-bottom: 24px;\">\n\n| 클러스터 | 시간 | 네임스페이스 | 종류 | 대상 | 원인 | 횟수 |\n|:---------|:-----|:-------------|:-----|:-----|:-----|-----:|\n| **default** | 오후 7:05:23 | gallery-prod | Pod | gallery-vote-6fc75cb6df-746xt | Failed | 3829 |\n| **default** | 오후 7:05:18 | opensearch | Pod | opensearch-data-0 | FailedToRetrieveImagePullSecret | 79191 |\n| **default** | 오후 7:05:05 | supabase | ExternalSecret | supabase-s3 | UpdateFailed | 7032 |\n| **default** | 오후 7:05:02 | gpu-operator | Pod | nvidia-device-plugin-daemonset-4vgtv | FailedCreatePodSandBox | 2 |\n| **default** | 오후 7:05:01 | jhl-labs | Pod | jhl-space-sncrf-runner-8r55s | FailedCreatePodSandBox | 2 |\n| **default** | 오후 7:04:58 | gpu-operator | Pod | nvidia-container-toolkit-daemonset-hfvqt | FailedCreatePodSandBox | 2 |\n| **default** | 오후 7:04:58 | gpu-operator | Pod | nvidia-operator-validator-rsbtr | FailedCreatePodSandBox | 2 |\n| **default** | 오후 7:04:55 | jhl-labs | Pod | jhl-space-sncrf-runner-vb8pk | FailedCreatePodSandBox | 2 |\n| **default** | 오후 7:04:55 | jhl-labs | Pod | jhl-space-sncrf-runner-vvc7p | FailedCreatePodSandBox | 2 |\n| **default** | 오후 7:04:54 | jhl-labs | Pod | jhl-space-sncrf-runner-kmtw4 | FailedCreatePodSandBox | 2 |\n\n</div>\n\n## 📈 리소스 사용량\n\n<div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 16px;\">\n\n```plotly\n{\"data\":[{\"type\":\"indicator\",\"mode\":\"gauge+number\",\"value\":6,\"title\":{\"text\":\"default\",\"font\":{\"size\":12}},\"domain\":{\"row\":0,\"column\":0},\"gauge\":{\"axis\":{\"range\":[0,100],\"tickwidth\":1},\"bar\":{\"color\":\"#10b981\"},\"bgcolor\":\"transparent\",\"borderwidth\":0,\"steps\":[{\"range\":[0,60],\"color\":\"rgba(16, 185, 129, 0.1)\"},{\"range\":[60,80],\"color\":\"rgba(245, 158, 11, 0.1)\"},{\"range\":[80,100],\"color\":\"rgba(239, 68, 68, 0.1)\"}]}}],\"layout\":{\"title\":{\"text\":\"CPU 사용률 (%)\",\"font\":{\"size\":14}},\"height\":200,\"grid\":{\"rows\":1,\"columns\":1,\"pattern\":\"independent\"},\"margin\":{\"t\":40,\"b\":20,\"l\":30,\"r\":30}}}\n```\n\n```plotly\n{\"data\":[{\"type\":\"indicator\",\"mode\":\"gauge+number\",\"value\":36,\"title\":{\"text\":\"default\",\"font\":{\"size\":12}},\"domain\":{\"row\":0,\"column\":0},\"gauge\":{\"axis\":{\"range\":[0,100],\"tickwidth\":1},\"bar\":{\"color\":\"#10b981\"},\"bgcolor\":\"transparent\",\"borderwidth\":0,\"steps\":[{\"range\":[0,60],\"color\":\"rgba(16, 185, 129, 0.1)\"},{\"range\":[60,80],\"color\":\"rgba(245, 158, 11, 0.1)\"},{\"range\":[80,100],\"color\":\"rgba(239, 68, 68, 0.1)\"}]}}],\"layout\":{\"title\":{\"text\":\"Memory 사용률 (%)\",\"font\":{\"size\":14}},\"height\":200,\"grid\":{\"rows\":1,\"columns\":1,\"pattern\":\"independent\"},\"margin\":{\"t\":40,\"b\":20,\"l\":30,\"r\":30}}}\n```\n\n</div>\n\n### 노드별 리소스 사용률\n\n```plotly\n{\"data\":[{\"type\":\"heatmap\",\"z\":[[8,1,4,11],[19,12,52,59]],\"x\":[\"7960x\",\"vtopia-cp1\",\"vtopia-cp2\",\"vtopia-cp3\"],\"y\":[\"CPU %\",\"Memory %\"],\"colorscale\":[[0,\"#10b981\"],[0.6,\"#f59e0b\"],[1,\"#ef4444\"]],\"zmin\":0,\"zmax\":100,\"hovertemplate\":\"%{x}<br>%{y}: %{z}%<extra></extra>\",\"showscale\":true,\"colorbar\":{\"title\":\"%\",\"len\":0.8}}],\"layout\":{\"title\":{\"text\":\"default\",\"font\":{\"size\":14}},\"height\":160,\"margin\":{\"t\":40,\"b\":50,\"l\":80,\"r\":60},\"xaxis\":{\"tickangle\":-45,\"tickfont\":{\"size\":10}}}}\n```\n\n## 🏗️ 클러스터 리소스 현황\n\n<div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 16px;\">\n\n```plotly\n{\"data\":[{\"type\":\"bar\",\"name\":\"CPU 사용량\",\"x\":[\"default\"],\"y\":[6.42],\"marker\":{\"color\":\"#3b82f6\"},\"text\":[\"6.4 cores\"],\"textposition\":\"inside\",\"hovertemplate\":\"%{x}<br>사용: %{y:.1f} cores<extra></extra>\"},{\"type\":\"bar\",\"name\":\"CPU 여유\",\"x\":[\"default\"],\"y\":[83.58],\"marker\":{\"color\":\"rgba(59, 130, 246, 0.2)\"},\"hovertemplate\":\"%{x}<br>여유: %{y:.1f} cores<extra></extra>\"}],\"layout\":{\"title\":{\"text\":\"CPU 사용량 / 총량\",\"font\":{\"size\":14}},\"barmode\":\"stack\",\"height\":280,\"margin\":{\"t\":40,\"b\":40,\"l\":50,\"r\":20},\"legend\":{\"orientation\":\"h\",\"y\":-0.15},\"yaxis\":{\"title\":\"cores\"}}}\n```\n\n```plotly\n{\"data\":[{\"type\":\"bar\",\"name\":\"Memory 사용량\",\"x\":[\"default\"],\"y\":[80.7],\"marker\":{\"color\":\"#06b6d4\"},\"text\":[\"81 Gi\"],\"textposition\":\"inside\",\"hovertemplate\":\"%{x}<br>사용: %{y:.1f} Gi<extra></extra>\"},{\"type\":\"bar\",\"name\":\"Memory 여유\",\"x\":[\"default\"],\"y\":[232.60000000000002],\"marker\":{\"color\":\"rgba(6, 182, 212, 0.2)\"},\"hovertemplate\":\"%{x}<br>여유: %{y:.1f} Gi<extra></extra>\"}],\"layout\":{\"title\":{\"text\":\"Memory 사용량 / 총량\",\"font\":{\"size\":14}},\"barmode\":\"stack\",\"height\":280,\"margin\":{\"t\":40,\"b\":40,\"l\":50,\"r\":20},\"legend\":{\"orientation\":\"h\",\"y\":-0.15},\"yaxis\":{\"title\":\"Gi\"}}}\n```\n\n</div>\n\n## 🚀 Pod 상태\n\n<div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 16px;\">\n\n```plotly\n{\"data\":[{\"type\":\"pie\",\"labels\":[\"Running\",\"Pending\",\"Failed\",\"Succeeded\"],\"values\":[232,27,0,5],\"hole\":0.5,\"marker\":{\"colors\":[\"#10b981\",\"#f59e0b\",\"#ef4444\",\"#6b7280\"]},\"textinfo\":\"label+value\",\"hovertemplate\":\"%{label}: %{value}개 (%{percent})<extra></extra>\"}],\"layout\":{\"title\":{\"text\":\"Pod 상태 분포\",\"font\":{\"size\":14}},\"height\":280,\"margin\":{\"t\":40,\"b\":20,\"l\":20,\"r\":20},\"annotations\":[{\"text\":\"264\",\"showarrow\":false,\"font\":{\"size\":20}}]}}\n```\n\n```plotly\n{\"data\":[{\"type\":\"bar\",\"name\":\"Running\",\"x\":[\"default\"],\"y\":[232],\"marker\":{\"color\":\"#10b981\"}},{\"type\":\"bar\",\"name\":\"Pending\",\"x\":[\"default\"],\"y\":[27],\"marker\":{\"color\":\"#f59e0b\"}},{\"type\":\"bar\",\"name\":\"Failed\",\"x\":[\"default\"],\"y\":[0],\"marker\":{\"color\":\"#ef4444\"}}],\"layout\":{\"title\":{\"text\":\"클러스터별 Pod 상태\",\"font\":{\"size\":14}},\"barmode\":\"stack\",\"height\":280,\"margin\":{\"t\":40,\"b\":40,\"l\":50,\"r\":20},\"legend\":{\"orientation\":\"h\",\"y\":-0.15},\"yaxis\":{\"title\":\"Pods\"}}}\n```\n\n</div>\n\n## 📋 클러스터별 상세 정보\n\n### default\n\n<details>\n<summary><strong>클러스터 상세 정보 보기</strong></summary>\n\n| 항목 | 값 |\n|:-----|---:|\n| 버전 | v1.32.8+rke2r1 |\n| 노드 | 4개 (Ready: 4개) |\n| CPU | 6.4 / 90 cores |\n| Memory | 80.7 / 313.3 Gi |\n| Pods | 232 running / 264 total |\n\n</details>\n\n#### 노드 목록\n\n| 노드 | 상태 | 역할 | CPU | Memory | CPU% | Mem% |\n|:-----|:----:|:-----|----:|-------:|-----:|-----:|\n| 7960x | 🟢 | worker | 48 | 125.3Gi | 🟢 8% | 🟢 19% |\n| vtopia-cp1 | 🟢 | control-plane, etcd, master | 14 | 115.1Gi | 🟢 1% | 🟢 12% |\n| vtopia-cp2 | 🟢 | control-plane, etcd, master | 14 | 23.1Gi | 🟢 4% | 🟢 52% |\n| vtopia-cp3 | 🟢 | control-plane, etcd, master | 14 | 49.8Gi | 🟢 11% | 🟢 59% |\n\n",
+      "lastModified": "2025-12-28T11:46:44.083Z",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "kubernetes",
+        "o11y",
+        "monitoring",
+        "infrastructure"
+      ],
+      "history": []
+    },
+    {
+      "title": "Kubernetes 클러스터 대시보드",
+      "slug": "dashboard/nodes",
+      "content": "\n# Kubernetes 클러스터 대시보드\n\n> 마지막 업데이트: 2025. 12. 9. 오후 6:45:52\n\n## 전체 요약\n\n| 항목 | 값 |\n|------|------|\n| 클러스터 | 1개 연결 / 1개 등록 |\n| 전체 노드 | 4개 (Ready: 4개) |\n| 전체 CPU | 90 cores |\n| 전체 메모리 | 313.3 Gi |\n\n## 클러스터 개요\n\n```plotly\n{\"data\":[{\"type\":\"pie\",\"labels\":[\"default\"],\"values\":[4],\"hole\":0.4,\"textinfo\":\"label+value\",\"marker\":{\"colors\":[\"#3b82f6\",\"#10b981\",\"#f59e0b\",\"#ef4444\",\"#8b5cf6\",\"#ec4899\"]}}],\"layout\":{\"title\":{\"text\":\"클러스터별 노드 수\",\"font\":{\"size\":14}},\"showlegend\":true,\"legend\":{\"orientation\":\"h\",\"y\":-0.1},\"height\":350}}\n```\n\n```plotly\n{\"data\":[{\"type\":\"bar\",\"name\":\"CPU (cores)\",\"x\":[\"default\"],\"y\":[90],\"marker\":{\"color\":\"#3b82f6\"}},{\"type\":\"bar\",\"name\":\"Memory (Gi)\",\"x\":[\"default\"],\"y\":[313.3],\"marker\":{\"color\":\"#10b981\"}}],\"layout\":{\"title\":{\"text\":\"클러스터별 리소스 총량\",\"font\":{\"size\":14}},\"barmode\":\"group\",\"height\":350,\"xaxis\":{\"title\":\"\"},\"yaxis\":{\"title\":\"\"}}}\n```\n\n## 노드 상태 분포\n\n```plotly\n{\"data\":[{\"type\":\"bar\",\"name\":\"Ready\",\"x\":[\"default\"],\"y\":[4],\"marker\":{\"color\":\"#10b981\"}},{\"type\":\"bar\",\"name\":\"NotReady\",\"x\":[\"default\"],\"y\":[0],\"marker\":{\"color\":\"#ef4444\"}}],\"layout\":{\"title\":{\"text\":\"클러스터별 노드 상태\",\"font\":{\"size\":14}},\"barmode\":\"stack\",\"height\":300,\"xaxis\":{\"title\":\"\"},\"yaxis\":{\"title\":\"노드 수\"}}}\n```\n\n## 리소스 분석\n\n```plotly\n{\"data\":[{\"type\":\"scatter\",\"mode\":\"markers\",\"name\":\"default\",\"x\":[48,14,14,14],\"y\":[125.3,115.1,23.1,49.8],\"text\":[\"7960x\",\"vtopia-cp1\",\"vtopia-cp2\",\"vtopia-cp3\"],\"marker\":{\"size\":12,\"color\":\"#3b82f6\"},\"hovertemplate\":\"<b>%{text}</b><br>CPU: %{x} cores<br>Memory: %{y} Gi<extra></extra>\"}],\"layout\":{\"title\":{\"text\":\"노드별 리소스 분포\",\"font\":{\"size\":14}},\"height\":400,\"xaxis\":{\"title\":\"CPU (cores)\"},\"yaxis\":{\"title\":\"Memory (Gi)\"},\"showlegend\":true}}\n```\n\n<div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 16px;\">\n\n```plotly\n{\"data\":[{\"type\":\"histogram\",\"x\":[48,14,14,14],\"marker\":{\"color\":\"#3b82f6\"},\"nbinsx\":10}],\"layout\":{\"title\":{\"text\":\"CPU 분포 (cores)\",\"font\":{\"size\":14}},\"height\":300,\"xaxis\":{\"title\":\"CPU (cores)\"},\"yaxis\":{\"title\":\"노드 수\"},\"bargap\":0.1}}\n```\n\n```plotly\n{\"data\":[{\"type\":\"histogram\",\"x\":[125.3,115.1,23.1,49.8],\"marker\":{\"color\":\"#10b981\"},\"nbinsx\":10}],\"layout\":{\"title\":{\"text\":\"Memory 분포 (Gi)\",\"font\":{\"size\":14}},\"height\":300,\"xaxis\":{\"title\":\"Memory (Gi)\"},\"yaxis\":{\"title\":\"노드 수\"},\"bargap\":0.1}}\n```\n\n</div>\n\n## 클러스터별 상세 정보\n\n### default\n\n| 항목 | 값 |\n|------|------|\n| 버전 | v1.32.8+rke2r1 |\n| 노드 | 4개 (Ready: 4개) |\n| CPU | 90 cores |\n| Memory | 313.3 Gi |\n\n#### 노드 목록\n\n| 노드명 | 상태 | 역할 | CPU | Memory | IP |\n|--------|------|------|-----|--------|-----|\n| 7960x | 🟢 Ready | worker | 48 | 125.3Gi | 202.202.202.117 |\n| vtopia-cp1 | 🟢 Ready | control-plane, etcd, master | 14 | 115.1Gi | 202.202.202.104 |\n| vtopia-cp2 | 🟢 Ready | control-plane, etcd, master | 14 | 23.1Gi | 202.202.202.113 |\n| vtopia-cp3 | 🟢 Ready | control-plane, etcd, master | 14 | 49.8Gi | 202.202.202.167 |\n\n",
+      "lastModified": "2025-12-28T11:46:44.088Z",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "kubernetes",
+        "cluster",
+        "nodes",
+        "infrastructure",
+        "monitoring"
+      ],
+      "history": []
+    },
+    {
       "title": "SEPilot Desktop 소개",
       "slug": "projects/sepilot-desktop",
       "content": "\n# SEPilot Desktop 소개\n\nSEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, **Chat**, **Editor**, **Browser** 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통합했습니다.\n\n---\n\n## 📦 다운로드 & 소스\n- **다운로드**: [SEPilot Desktop 다운로드](https://jhl-labs.github.io/sepilot_desktop/#download)\n- **GitHub**: [GitHub 저장소](https://github.com/jhl-labs/sepilot_desktop)\n- **데모 영상**: assets/videos/demo-main.mp4\n\n---\n\n## 🧭 3가지 애플리케이션 모드\n\n### 1. Chat 모드\nAI와 대화하고 질문할 수 있습니다.\n- LangGraph 워크플로우 (Instant, Sequential, Deep, Coding, RAG, Browser 등 6가지)\n- RAG 문서 검색 & 편집, 폴더 관리, Export/Import\n- MCP 도구 통합 (GitHub, Brave Search, Filesystem 등)\n- 이미지 생성 & 해석 (ComfyUI, Vision API)\n- Persona 시스템 (AI 역할 정의, SQLite 영구 저장)\n- Quick Question (최대 5개 단축키)\n- GitHub Sync (AES‑256‑GCM 암호화)\n\n> **데모**: assets/videos/chat-mode-demo.mp4\n\n### 2. Editor 모드\n코드 작성 및 파일 관리에 최적화된 환경입니다.\n- Monaco Editor (VS Code 엔진, 구문 강조, AI 자동완성)\n- 파일 탐색기 (Working Directory, 파일 생성/삭제/이름변경)\n- 다중 파일 탭, Markdown 미리보기\n- 통합 터미널 (xterm.js, PowerShell/bash/zsh, 탭 관리)\n- 전체 파일 검색 (ripgrep 기반, Ctrl+Shift+F)\n- Advanced Editor Agent (50회 반복, 9개 Built‑in Tools)\n- 10가지 Notion 스타일 Writing Tools\n\n> **데모**: assets/videos/editor-mode-demo.mp4\n\n### 3. Browser 모드\nAI와 함께 웹을 탐색하고 자동화합니다.\n- Chromium 기반 브라우저 (BrowserView, Chrome 스타일 탭)\n- 18개 자동화 도구 (Navigate, DOM Inspection, Vision Tools 등)\n- Google Search Tools (검색, 뉴스, Scholar, 이미지, 고급 필터)\n- Vision 기반 UI 제어 (Set‑of‑Mark, 좌표 클릭)\n- Bot 감지 우회 (Stealth Fingerprint, 자연스러운 타이밍)\n- 페이지 캡처 (MHTML + 스크린샷, 오프라인 뷰어)\n- 북마크 관리 (폴더별 정리)\n\n> **데모**: assets/videos/browser-mode-demo.mp4\n\n---\n\n## 🌟 주요 기능\n\n### LangGraph 워크플로우\n다양한 사고(Thinking) 모드 지원: Instant, Sequential, Tree‑of‑Thought, Deep 등. 실시간 스트리밍으로 사고 과정 시각화 및 conversationId 기반 격리.\n\n### AI Persona 시스템 (v0.6.0)\n- 기본 페르소나: 일반 어시스턴트, 번역가, 영어 선생님, 시니어 개발자\n- 사용자 정의 페르소나 추가/수정/삭제\n- 슬래시 커맨드 자동완성 (/persona)\n- SQLite 기반 영구 저장\n\n### RAG (검색 증강 생성)\n- 텍스트, URL, 파일(PDF, DOCX, TXT, MD) 업로드 지원\n- SQLite‑vec, OpenSearch, Elasticsearch, pgvector 지원\n- 문서 편집 AI (정제, 확장, 축약, 검증, 커스텀 프롬프트)\n- 폴더 구조 관리 (드래그 앤 드롭, Tree/List/Grid 뷰)\n- Export/Import (JSON 형식, 백업/복원)\n\n> **데모**: assets/videos/rag-demo.gif\n\n### 브라우저 자동화 (v0.6.0)\n- Electron BrowserView 기반 Chromium 통합\n- Vision 기반 UI 제어 및 Google Search Tools\n- DOM Inspection, Vision Tools, Bot 감지 우회 등 27개 도구\n\n> **데모**: assets/videos/browser-automation.gif\n\n### MCP 프로토콜\n- Model Context Protocol을 통한 도구 및 컨텍스트 표준화\n- GitHub, Brave Search, Git, Filesystem 등 템플릿 제공\n- 환경 변수 UI 설정, 실행 전 사용자 승인 (5분 타임아웃)\n\n> **데모**: assets/videos/mcp-tools.gif\n\n### GitHub Sync (v0.6.0)\n- Personal Access Token 기반 안전한 데이터 동기화\n- AES‑256‑GCM 암호화로 민감 정보 보호\n- 설정, 문서, 페르소나, 이미지, 대화 내역 동기화\n\n> **데모**: assets/videos/github-sync.gif\n\n### 이미지 기능\n- ComfyUI 통합 이미지 생성\n- Vision API 기반 이미지 해석 및 질의응답\n\n> **데모**: assets/videos/image-generation.gif\n\n---\n\n## 🛠️ 기술 스택\n- **프론트엔드**: Next.js 15.3, React 19, TypeScript 5.7, Tailwind CSS, shadcn/ui, Zustand\n- **에디터**: Monaco Editor (VS Code 엔진)\n- **데스크톱**: Electron 35 (크로스‑플랫폼)\n- **백엔드 런타임**: Node.js 20+\n- **데이터베이스**: better‑sqlite3, SQLite‑vec (벡터 검색)\n- **IPC**: Context Bridge (안전한 통신)\n- **LLM & AI**: LangGraph, LangChain, OpenAI, Anthropic, Google, Groq, MCP Protocol, ComfyUI\n\n---\n\n## 🚀 빠른 시작 (5분 안에 시작)\n1. **다운로드 및 설치**\n   - Windows: `SEPilot-Setup-0.6.0.exe`\n   - macOS: `SEPilot-0.6.0.dmg`\n   - Linux: `SEPilot-0.6.0.AppImage`\n2. **LLM 설정**\n   - 좌측 하단 설정 아이콘 → LLM 제공자 및 API 키 입력\n   - 지원: OpenAI, Anthropic, Google, Custom (OpenAI‑compatible)\n3. **모드 및 그래프 선택**\n   - Chat, Editor, Browser 중 선택\n   - 필요 시 LangGraph 워크플로우 타입 선택 (Instant, RAG, Agent 등)\n4. **대화 시작**\n   - 준비가 완료되면 AI와 대화를 시작하세요!\n\n---\n\n## 📋 시스템 요구사항\n- **최소**: Node.js 20.9+, 4 GB RAM, 500 MB 디스크\n- **권장**: Node.js 22+, 8 GB RAM, 1 GB 디스크\n\n---\n\n*이 문서는 초안(draft) 상태이며, 검토 후 `published` 로 전환될 예정입니다.*",
-      "lastModified": "2025-12-07T12:06:15+00:00",
-      "author": "github-actions[bot]",
+      "lastModified": "2025-12-13T12:38:17+09:00",
+      "author": "JHL",
       "status": "draft",
       "isDraft": true,
       "isInvalid": false,
@@ -263,48 +134,12 @@
       ],
       "history": [
         {
-          "sha": "b19d85e",
-          "message": "🌳 Wiki Tree Maintenance: 10개의 위키 문서가 3개의 상위 디렉터리(guide, projects, bun) 아래에 고르게 배치돼 있으나 파일명·구조·태그 표기 방식에 일관성이 부족합니다. 대부분 파일명은 영문 slug 형태이지만, 일부는 과도하게 길거나 프로젝트·툴명을 중복 포함하고 있습니다. 또한 ‘visualization’과 같은 하위 주제별 폴더가 없어 관련 문서가 한곳에 모여 있지 않아 탐색성이 떨어집니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T12:06:15+00:00",
+          "sha": "82a08e6",
+          "message": "chore: 초기 커밋 - SEPilot Wiki 프로젝트",
+          "author": "JHL",
+          "authorEmail": "bkperio@gmail.com",
+          "date": "2025-12-13T12:38:17+09:00",
           "additions": 152,
-          "deletions": 0
-        },
-        {
-          "sha": "740ad63",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 12 markdown files organized in three top‑level directories (projects, guide, bun). All filenames already follow the required slug convention. The main issues are a draft document, several files with unknown status, and two overlapping guides in the  folder that should be merged. No exact duplicate content was found.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T06:05:44+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "c62ac0b",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three top‑level directories (projects, guide, bun). All filenames are already English but many do not follow the strict slug convention (lower‑case, hyphen‑separated) and several could be renamed for clarity. The guide section mixes introductory, configuration and advanced topics, making navigation harder. No home.md exists at the root, and many documents have an unknown status that should be clarified. No duplicate content was found, but there is overlapping information about the technology stack between tech‑stack.md and faq.md.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T00:18:51+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "fcb7d9d",
-          "message": "docs: Issue #24 - 피드백 반영",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-06T05:43:56+00:00",
-          "additions": 0,
           "deletions": 0
         }
       ]
@@ -313,7 +148,7 @@
       "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
       "slug": "projects/technology-stack",
       "content": "\n## 기술 스택\n\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n\n### 프론트엔드\n- **React 18** - UI 라이브러리\n- **TypeScript** - 타입 안전성을 위한 정적 타입 언어\n- **Vite** - 빌드 도구 및 개발 서버\n- **React Router DOM** - SPA 라우팅\n- **TanStack Query (React Query)** - 서버 상태 관리\n\n### Next.js 사용 여부\n- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.\n- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\n- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n\n### 마크다운 렌더링\n- **react-markdown** - 마크다운 파싱 및 렌더링\n- **remark-gfm** - GitHub Flavored Markdown 지원\n- **rehype-raw** - HTML 태그 지원\n- **rehype-sanitize** - XSS 방지를 위한 HTML 살균\n- **react-syntax-highlighter** - 코드 구문 강조\n\n### 스타일링\n- **CSS Variables** - 테마 시스템\n- **Lucide React** - 아이콘 라이브러리\n\n### 개발 도구\n- **ESLint** - 코드 린팅\n- **Vitest** - 테스트 프레임워크\n- **Husky** - Git hooks\n\n### CI/CD\n- **GitHub Actions** - 자동화 워크플로우\n- **GitHub Pages** - 정적 사이트 호스팅\n- **Bun** - 패키지 매니저 및 런타임\n\n### AI 통합\n- **OpenAI API 호환** - LLM을 통한 문서 자동 생성\n\n## 참고 링크\n\n- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)\n",
-      "lastModified": "2025-12-07T00:18:51+00:00",
+      "lastModified": "2025-12-13T12:38:17+09:00",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -328,138 +163,12 @@
       "menu": "SEPilot Wiki에 대해",
       "history": [
         {
-          "sha": "c62ac0b",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three top‑level directories (projects, guide, bun). All filenames are already English but many do not follow the strict slug convention (lower‑case, hyphen‑separated) and several could be renamed for clarity. The guide section mixes introductory, configuration and advanced topics, making navigation harder. No home.md exists at the root, and many documents have an unknown status that should be clarified. No duplicate content was found, but there is overlapping information about the technology stack between tech‑stack.md and faq.md.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-07T00:18:51+00:00",
+          "sha": "82a08e6",
+          "message": "chore: 초기 커밋 - SEPilot Wiki 프로젝트",
+          "author": "JHL",
+          "authorEmail": "bkperio@gmail.com",
+          "date": "2025-12-13T12:38:17+09:00",
           "additions": 57,
-          "deletions": 0
-        },
-        {
-          "sha": "c589b81",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of three logical groups: project‑specific docs, bun‑related docs, and general guide docs. File names are all Korean titles with mixed‑case paths (e.g., _guide). No outright duplicate pages were found, but the tech‑stack information appears both in the project page and the FAQ, which could be consolidated. The current hierarchy mixes upper‑case folder names and leading underscores, which is not ideal for URL stability.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T18:05:33+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "3f92baf",
-          "message": "🌳 Wiki Tree Maintenance: The wiki consists of 11 markdown files spread across three logical groups: project‑related docs, bun‑tooling docs, and internal guide docs. Directory names use mixed case (e.g., Projects, _guide) and some file names could be more descriptive. Several guide files have an undefined status. No exact duplicate content was found, but the guide folder is hidden by a leading underscore which makes it harder to navigate.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-06T12:06:03+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "afbd25c",
-          "message": "rename",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-06T16:11:47+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "e9293e0",
-          "message": "fix: Wiki 빌드 스크립트 개선 및 데이터 재생성",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T22:01:40+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "8f3b809",
-          "message": "docs: Issue #14 - 피드백 반영",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T12:46:09+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "f600366",
-          "message": "🌳 Wiki Tree Maintenance: 3개의 문서가 모두 루트에 존재하고 파일명이 한글 슬러그 형태이며, 내용에 따라 ‘bun’, ‘CI’, ‘기술 스택’ 등 서로 다른 주제로 구분될 수 있습니다. 현재 구조는 카테고리·디렉터리 구분이 없고, 한글 파일명 때문에 URL 가독성이 낮으며, draft 상태 문서가 공개되지 않은 점이 문제입니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2025-12-05T12:19:13+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "9b2b3e0",
-          "message": "feat: 사이드바에서 frontmatter menu 필드 지원",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T20:42:39+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "634110d",
-          "message": "docs: Issue #1 - 문서 발행",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T10:16:49+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "5513dcf",
-          "message": "docs: Issue #1 - 피드백 반영",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T09:30:28+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "fc4bdaa",
-          "message": "fix: GitHub Pages SPA 라우팅 404 오류 해결 및 wiki 문서 개선",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T16:24:20+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "ad2e1ff",
-          "message": "docs: Issue #1 - 피드백 반영",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T07:13:56+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "3858834",
-          "message": "fix: SearchPage useEffect setState 린트 오류 수정",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2025-12-05T15:19:20+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "8167875",
-          "message": "docs: Issue #1 - sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T06:09:53+00:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "a9ce53b",
-          "message": "docs: Issue #1 - sepilot-wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2025-12-05T06:04:18+00:00",
-          "additions": 0,
           "deletions": 0
         }
       ]
@@ -482,6 +191,21 @@
         {
           "title": "GitHub Actions로 bun을 쓰는 방법",
           "slug": "bun/github-actions-setup"
+        }
+      ]
+    },
+    {
+      "name": "dashboard",
+      "path": "dashboard",
+      "isCategory": true,
+      "children": [
+        {
+          "title": "Kubernetes 클러스터 대시보드",
+          "slug": "dashboard/k8s-overview"
+        },
+        {
+          "title": "Kubernetes 클러스터 대시보드",
+          "slug": "dashboard/nodes"
         }
       ]
     },

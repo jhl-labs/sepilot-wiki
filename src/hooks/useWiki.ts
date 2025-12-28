@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchWikiPages, fetchWikiPage, fetchIssues, searchWiki, fetchGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus } from '../services/github';
+import { fetchWikiPages, fetchWikiPage, fetchIssues, fetchGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus } from '../services/github';
+import { searchWiki, getAvailableTags, type SearchFilter } from '../services/search';
 
 export function useWikiPages() {
   return useQuery({
@@ -32,6 +33,33 @@ export function useSearch(query: string) {
     queryFn: () => searchWiki(query),
     enabled: query.length >= 2,
     staleTime: 1 * 60 * 1000, // 1분
+  });
+}
+
+// 필터 지원 검색 훅
+export function useSearchWithFilter(query: string, filter?: SearchFilter) {
+  const hasFilter = filter && (
+    (filter.tags && filter.tags.length > 0) ||
+    filter.dateFrom ||
+    filter.dateTo ||
+    filter.author
+  );
+
+  return useQuery({
+    queryKey: ['search', query, filter],
+    queryFn: () => searchWiki(query, filter),
+    // 검색어가 있거나 필터가 있으면 활성화
+    enabled: query.length >= 2 || !!hasFilter,
+    staleTime: 1 * 60 * 1000,
+  });
+}
+
+// 사용 가능한 태그 목록 훅
+export function useAvailableTags() {
+  return useQuery({
+    queryKey: ['available-tags'],
+    queryFn: getAvailableTags,
+    staleTime: 5 * 60 * 1000,
   });
 }
 

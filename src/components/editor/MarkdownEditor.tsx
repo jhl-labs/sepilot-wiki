@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, lazy, Suspense } from 'react';
 import {
   Bold,
   Italic,
@@ -18,8 +18,14 @@ import {
   EyeOff,
   Save,
   X,
+  Clock,
+  RotateCcw,
 } from 'lucide-react';
 import { MarkdownRenderer } from '../wiki/MarkdownRenderer';
+import { useAutoSave } from '@/src/hooks/useAutoSave';
+
+// Monaco Editor 지연 로딩
+const MonacoEditor = lazy(() => import('./MonacoEditor'));
 
 interface MarkdownEditorProps {
   initialContent: string;
@@ -27,6 +33,8 @@ interface MarkdownEditorProps {
   onSave: (content: string, message: string) => Promise<void>;
   onCancel: () => void;
   isSaving?: boolean;
+  // Monaco Editor 사용 여부 (기본: true)
+  useMonaco?: boolean;
 }
 
 /**
@@ -39,11 +47,38 @@ export function MarkdownEditor({
   onSave,
   onCancel,
   isSaving = false,
+  useMonaco = true,
 }: MarkdownEditorProps) {
   const [content, setContent] = useState(initialContent);
   const [showPreview, setShowPreview] = useState(false);
   const [commitMessage, setCommitMessage] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // 자동 저장 훅
+  const {
+    restoreDraft,
+    clearDraft,
+    lastSavedAt,
+    showRestoreDialog,
+  } = useAutoSave({
+    slug,
+    content,
+    originalContent: initialContent,
+    enabled: true,
+  });
+
+  // 드래프트 복원
+  const handleRestoreDraft = useCallback(() => {
+    const draftContent = restoreDraft();
+    if (draftContent) {
+      setContent(draftContent);
+    }
+  }, [restoreDraft]);
+
+  // 드래프트 무시
+  const handleDiscardDraft = useCallback(() => {
+    clearDraft();
+  }, [clearDraft]);
 
   // 텍스트 삽입 헬퍼
   const insertText = useCallback(
@@ -98,12 +133,42 @@ export function MarkdownEditor({
   const handleSave = async () => {
     const message = commitMessage.trim() || `docs: ${slug} 문서 수정`;
     await onSave(content, message);
+    // 저장 성공 시 드래프트 삭제
+    clearDraft();
   };
 
   const hasChanges = content !== initialContent;
 
+  // 마지막 저장 시간 포맷
+  const formatLastSaved = (isoString: string | null) => {
+    if (!isoString) return null;
+    const date = new Date(isoString);
+    return date.toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
   return (
     <div className="markdown-editor">
+      {/* 드래프트 복원 다이얼로그 */}
+      {showRestoreDialog && (
+        <div className="draft-dialog">
+          <div className="draft-dialog-content">
+            <RotateCcw size={20} />
+            <span>이전에 저장되지 않은 변경사항이 있습니다. 복원하시겠습니까?</span>
+            <div className="draft-dialog-actions">
+              <button onClick={handleDiscardDraft} className="btn-discard">
+                무시
+              </button>
+              <button onClick={handleRestoreDraft} className="btn-restore">
+                복원
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 도구 모음 */}
       <div className="editor-toolbar">
         <div className="toolbar-group">
@@ -222,6 +287,14 @@ export function MarkdownEditor({
 
         <div className="toolbar-spacer" />
 
+        {/* 자동 저장 상태 */}
+        {lastSavedAt && (
+          <div className="auto-save-status">
+            <Clock size={14} />
+            <span>{formatLastSaved(lastSavedAt)} 자동 저장됨</span>
+          </div>
+        )}
+
         <div className="toolbar-group">
           <button
             type="button"
@@ -237,14 +310,29 @@ export function MarkdownEditor({
       {/* 편집기 본문 */}
       <div className={`editor-body ${showPreview ? 'split-view' : ''}`}>
         <div className="editor-pane">
-          <textarea
-            ref={textareaRef}
-            className="editor-textarea"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="마크다운으로 문서를 작성하세요..."
-            spellCheck={false}
-          />
+          {useMonaco ? (
+            <Suspense
+              fallback={
+                <div className="editor-loading">에디터 로딩 중...</div>
+              }
+            >
+              <MonacoEditor
+                value={content}
+                onChange={setContent}
+                onSave={handleSave}
+                height="100%"
+              />
+            </Suspense>
+          ) : (
+            <textarea
+              ref={textareaRef}
+              className="editor-textarea"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="마크다운으로 문서를 작성하세요..."
+              spellCheck={false}
+            />
+          )}
         </div>
 
         {showPreview && (
