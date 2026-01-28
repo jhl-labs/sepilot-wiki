@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * 에러 상태 관리 Context
  * 전역 에러 상태 및 토스트 알림 관리
@@ -12,8 +10,48 @@ import {
   useCallback,
   type ReactNode,
 } from 'react';
-import type { ApiError, ApiErrorCode } from '@/src/types';
-import { createApiError, getDefaultErrorMessage, isRecoverable } from '@/lib/errors';
+import type { ApiError, ApiErrorCode } from '../types';
+
+// 에러 유틸리티 함수들 (lib/errors.ts에서 인라인화)
+function createApiError(
+  code: ApiErrorCode,
+  message: string,
+  options?: Partial<Omit<ApiError, 'code' | 'message'>>
+): ApiError {
+  return {
+    code,
+    message,
+    recoverable: options?.recoverable ?? false,
+    statusCode: options?.statusCode,
+    details: options?.details,
+    originalError: options?.originalError,
+  };
+}
+
+function getDefaultErrorMessage(code: ApiErrorCode): string {
+  const messages: Record<ApiErrorCode, string> = {
+    NETWORK_ERROR: '네트워크 연결에 실패했습니다. 인터넷 연결을 확인해주세요.',
+    NOT_FOUND: '요청한 리소스를 찾을 수 없습니다.',
+    UNAUTHORIZED: '로그인이 필요합니다.',
+    FORBIDDEN: '접근 권한이 없습니다.',
+    RATE_LIMITED: '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.',
+    SERVER_ERROR: '서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
+    PARSE_ERROR: '데이터 처리 중 오류가 발생했습니다.',
+    TIMEOUT: '요청 시간이 초과되었습니다.',
+    UNKNOWN: '알 수 없는 오류가 발생했습니다.',
+  };
+  return messages[code];
+}
+
+function isRecoverable(code: ApiErrorCode): boolean {
+  const recoverableCodes: ApiErrorCode[] = [
+    'NETWORK_ERROR',
+    'RATE_LIMITED',
+    'SERVER_ERROR',
+    'TIMEOUT',
+  ];
+  return recoverableCodes.includes(code);
+}
 
 export type ToastType = 'error' | 'success' | 'warning' | 'info';
 

@@ -8,6 +8,7 @@ import {
   Github,
   Bot,
   RefreshCw,
+  AlertCircle,
 } from 'lucide-react';
 import { useWikiPages, useIssues } from '../hooks/useWiki';
 import { LABELS, config, urls } from '../config';
@@ -16,8 +17,8 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
 export function HomePage() {
-  const { data: pages, isLoading: pagesLoading } = useWikiPages();
-  const { data: issues, isLoading: issuesLoading } = useIssues(LABELS.REQUEST);
+  const { data: pages, isLoading: pagesLoading, error: pagesError, refetch: refetchPages } = useWikiPages();
+  const { data: issues, isLoading: issuesLoading, error: issuesError, refetch: refetchIssues } = useIssues(LABELS.REQUEST);
 
   const recentIssues = issues?.slice(0, 5) || [];
 
@@ -129,8 +130,17 @@ export function HomePage() {
                 <Skeleton className="document-skeleton" height={60} />
                 <Skeleton className="document-skeleton" height={60} />
               </>
-            ) : (
-              pages?.slice(0, 5).map((page) => (
+            ) : pagesError ? (
+              <div className="inline-error">
+                <AlertCircle size={20} />
+                <span>문서를 불러올 수 없습니다</span>
+                <button onClick={() => refetchPages()} className="btn btn-ghost btn-sm">
+                  <RefreshCw size={14} />
+                  다시 시도
+                </button>
+              </div>
+            ) : pages && pages.length > 0 ? (
+              pages.slice(0, 5).map((page) => (
                 <Link
                   key={page.slug}
                   to={`/wiki/${page.slug}`}
@@ -141,6 +151,10 @@ export function HomePage() {
                   <ArrowRight size={16} className="document-arrow" />
                 </Link>
               ))
+            ) : (
+              <div className="empty-state small">
+                <p>아직 문서가 없습니다.</p>
+              </div>
             )}
           </div>
         </section>
@@ -164,6 +178,15 @@ export function HomePage() {
                 <Skeleton className="request-skeleton" height={80} />
                 <Skeleton className="request-skeleton" height={80} />
               </>
+            ) : issuesError ? (
+              <div className="inline-error">
+                <AlertCircle size={20} />
+                <span>요청 목록을 불러올 수 없습니다</span>
+                <button onClick={() => refetchIssues()} className="btn btn-ghost btn-sm">
+                  <RefreshCw size={14} />
+                  다시 시도
+                </button>
+              </div>
             ) : recentIssues.length > 0 ? (
               recentIssues.map((issue) => (
                 <a

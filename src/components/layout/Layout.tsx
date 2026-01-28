@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
 import { useSidebar } from '../../context/SidebarContext';
+import { ErrorBoundary } from '../error/ErrorBoundary';
 import clsx from 'clsx';
 
 /**
@@ -31,7 +32,9 @@ export function Layout() {
       <div className="app-container">
         <Sidebar />
         <main id="main-content" className="main-content" role="main" aria-label="주요 콘텐츠">
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </main>
       </div>
       <Footer />

@@ -2,7 +2,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { useIssues } from '../hooks/useWiki';
 import { Skeleton } from '../components/ui/Skeleton';
 import { Badge } from '../components/ui/Badge';
-import { MessageSquare, ExternalLink, Filter, FileText } from 'lucide-react';
+import { MessageSquare, ExternalLink, Filter, FileText, RefreshCw, AlertCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { LABELS, urls } from '../config';
@@ -14,7 +14,7 @@ export function IssuesPage() {
   const labelFilter = searchParams.get('label') || '';
   const stateFilter = searchParams.get('state') || '';
 
-  const { data: issues, isLoading } = useIssues(labelFilter || undefined);
+  const { data: issues, isLoading, error, refetch } = useIssues(labelFilter || undefined);
 
   const filteredIssues = issues?.filter((issue) => {
     if (stateFilter && issue.state !== stateFilter) return false;
@@ -88,7 +88,19 @@ export function IssuesPage() {
       </div>
 
       <div className="issues-list">
-        {isLoading ? (
+        {error ? (
+          <div className="error-state">
+            <AlertCircle size={48} />
+            <h2>요청 목록을 불러올 수 없습니다</h2>
+            <p>네트워크 연결을 확인하고 다시 시도해주세요.</p>
+            <div className="error-actions">
+              <button onClick={() => refetch()} className="btn btn-primary">
+                <RefreshCw size={16} />
+                <span>다시 시도</span>
+              </button>
+            </div>
+          </div>
+        ) : isLoading ? (
           <>
             <Skeleton height={100} />
             <Skeleton height={100} />

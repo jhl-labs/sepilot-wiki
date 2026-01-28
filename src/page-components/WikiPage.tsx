@@ -3,15 +3,19 @@ import { useWikiPage, useDocumentAIHistory } from '../hooks/useWiki';
 import { MarkdownRenderer, TableOfContents, Breadcrumb, PageMeta } from '../components/wiki';
 import { RevisionHistory } from '../components/wiki/RevisionHistory';
 import { Skeleton } from '../components/ui/Skeleton';
-import { AlertTriangle, FileQuestion, MessageSquare, Bot } from 'lucide-react';
+import { AlertTriangle, FileQuestion, MessageSquare, Bot, RefreshCw, AlertCircle } from 'lucide-react';
 import { urls, LABELS } from '../config';
+import { ApiServiceError } from '../services/api';
 
 export function WikiPage() {
   // 와일드카드(*) 라우트에서 전체 경로를 가져옴
   const { '*': wildcardPath } = useParams();
   const slug = wildcardPath || 'home';
-  const { data: page, isLoading, error } = useWikiPage(slug);
+  const { data: page, isLoading, error, refetch } = useWikiPage(slug);
   const { data: aiHistory } = useDocumentAIHistory(slug);
+
+  // 네트워크 에러 여부 확인
+  const isNetworkError = error instanceof ApiServiceError && error.recoverable;
 
   if (isLoading) {
     return (
@@ -33,6 +37,29 @@ export function WikiPage() {
     );
   }
 
+  // 네트워크 에러 (재시도 가능)
+  if (isNetworkError) {
+    return (
+      <div className="wiki-page">
+        <div className="error-state">
+          <AlertCircle size={48} />
+          <h2>페이지를 불러올 수 없습니다</h2>
+          <p>네트워크 연결에 문제가 있거나 서버에서 응답하지 않습니다.</p>
+          <div className="error-actions">
+            <button onClick={() => refetch()} className="btn btn-primary">
+              <RefreshCw size={16} />
+              <span>다시 시도</span>
+            </button>
+            <Link to="/" className="btn btn-secondary">
+              홈으로 이동
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 문서 없음
   if (error || !page) {
     return (
       <div className="wiki-page">
@@ -40,15 +67,20 @@ export function WikiPage() {
           <FileQuestion size={48} />
           <h2>페이지를 찾을 수 없습니다</h2>
           <p>요청하신 문서가 존재하지 않거나 삭제되었습니다.</p>
-          <a
-            href={urls.newIssue({ title: `문서 요청: ${slug}`, labels: LABELS.REQUEST })}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            <MessageSquare size={18} />
-            <span>이 문서 요청하기</span>
-          </a>
+          <div className="error-actions">
+            <a
+              href={urls.newIssue({ title: `문서 요청: ${slug}`, labels: LABELS.REQUEST })}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              <MessageSquare size={18} />
+              <span>이 문서 요청하기</span>
+            </a>
+            <Link to="/" className="btn btn-secondary">
+              홈으로 이동
+            </Link>
+          </div>
         </div>
       </div>
     );

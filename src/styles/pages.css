@@ -608,9 +608,11 @@
 .result-excerpt {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.5;
 }
 
 .result-arrow {
@@ -651,6 +653,36 @@
   list-style: disc inside;
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
+}
+
+/* 검색 결과 하이라이팅 */
+.search-highlight {
+  background-color: var(--color-warning-light, #fef3c7);
+  color: var(--color-text-primary);
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .search-highlight {
+  background-color: rgba(251, 191, 36, 0.3);
+}
+
+/* 검색 결과 태그 */
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+  margin-top: var(--spacing-2);
+}
+
+.result-tag {
+  display: inline-flex;
+  padding: 2px 8px;
+  font-size: var(--font-size-xs);
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-full);
 }
 
 /* Issues Page */

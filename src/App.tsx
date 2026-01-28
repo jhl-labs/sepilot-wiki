@@ -4,7 +4,9 @@ import { useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { SidebarProvider } from './context/SidebarContext';
 import { ConfigProvider } from './context/ConfigContext';
+import { ErrorProvider } from './context/ErrorContext';
 import { Layout } from './components/layout';
+import { ToastContainer } from './components/error/ErrorToast';
 import { HomePage, WikiPage, SearchPage, IssuesPage, NotFoundPage, AIHistoryPage, TagsPage } from './page-components';
 import { config } from './config';
 import './styles/index.css';
@@ -47,26 +49,29 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <ConfigProvider>
-          <SidebarProvider>
-            <BrowserRouter basename={config.baseUrl}>
-              <SpaRedirectHandler>
-                <Routes>
-                  <Route path="/" element={<Layout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path="wiki/*" element={<WikiPage />} />
-                    <Route path="search" element={<SearchPage />} />
-                    <Route path="issues" element={<IssuesPage />} />
-                    <Route path="tags" element={<TagsPage />} />
-                    <Route path="ai-history" element={<AIHistoryPage />} />
-                    <Route path="ai-history/*" element={<AIHistoryPage />} />
-                    <Route path="*" element={<NotFoundPage />} />
-                  </Route>
-                </Routes>
-              </SpaRedirectHandler>
-            </BrowserRouter>
-          </SidebarProvider>
-        </ConfigProvider>
+        <ErrorProvider>
+          <ConfigProvider>
+            <SidebarProvider>
+              <BrowserRouter basename={config.baseUrl}>
+                <SpaRedirectHandler>
+                  <Routes>
+                    <Route path="/" element={<Layout />}>
+                      <Route index element={<HomePage />} />
+                      <Route path="wiki/*" element={<WikiPage />} />
+                      <Route path="search" element={<SearchPage />} />
+                      <Route path="issues" element={<IssuesPage />} />
+                      <Route path="tags" element={<TagsPage />} />
+                      <Route path="ai-history" element={<AIHistoryPage />} />
+                      <Route path="ai-history/*" element={<AIHistoryPage />} />
+                      <Route path="*" element={<NotFoundPage />} />
+                    </Route>
+                  </Routes>
+                </SpaRedirectHandler>
+              </BrowserRouter>
+              <ToastContainer />
+            </SidebarProvider>
+          </ConfigProvider>
+        </ErrorProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

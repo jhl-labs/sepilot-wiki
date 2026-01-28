@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useWikiTags } from '../hooks/useWiki';
 import { Skeleton } from '../components/ui/Skeleton';
-import { Tag, FileText, ChevronRight, Hash, TrendingUp, Cloud } from 'lucide-react';
+import { Tag, FileText, ChevronRight, Hash, TrendingUp, Cloud, RefreshCw, AlertCircle } from 'lucide-react';
 import ReactWordcloud from '@cp949/react-wordcloud';
 import clsx from 'clsx';
 
@@ -23,7 +23,7 @@ interface WordCloudCallbacks {
 }
 
 export function TagsPage() {
-  const { data: tags, isLoading } = useWikiTags();
+  const { data: tags, isLoading, error, refetch } = useWikiTags();
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   const totalTags = tags?.length || 0;
@@ -98,38 +98,55 @@ export function TagsPage() {
         </div>
       </header>
 
-      {/* 통계 카드 */}
-      <div className="tags-stats">
-        <div className="stat-card">
-          <div className="stat-icon">
-            <Hash size={24} />
-          </div>
-          <div className="stat-content">
-            <span className="stat-value">{totalTags}</span>
-            <span className="stat-label">전체 태그</span>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon">
-            <FileText size={24} />
-          </div>
-          <div className="stat-content">
-            <span className="stat-value">{totalDocuments}</span>
-            <span className="stat-label">태그 사용</span>
+      {/* 에러 상태 */}
+      {error && (
+        <div className="error-state">
+          <AlertCircle size={48} />
+          <h2>태그를 불러올 수 없습니다</h2>
+          <p>데이터를 불러오는 중 문제가 발생했습니다.</p>
+          <div className="error-actions">
+            <button onClick={() => refetch()} className="btn btn-primary">
+              <RefreshCw size={16} />
+              <span>다시 시도</span>
+            </button>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">
-            <TrendingUp size={24} />
-          </div>
-          <div className="stat-content">
-            <span className="stat-value">{tags?.[0]?.tag || '-'}</span>
-            <span className="stat-label">인기 태그</span>
-          </div>
-        </div>
-      </div>
+      )}
 
-      <div className="tags-content">
+      {/* 통계 카드 */}
+      {!error && (
+        <div className="tags-stats">
+          <div className="stat-card">
+            <div className="stat-icon">
+              <Hash size={24} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-value">{totalTags}</span>
+              <span className="stat-label">전체 태그</span>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon">
+              <FileText size={24} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-value">{totalDocuments}</span>
+              <span className="stat-label">태그 사용</span>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon">
+              <TrendingUp size={24} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-value">{tags?.[0]?.tag || '-'}</span>
+              <span className="stat-label">인기 태그</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!error && <div className="tags-content">
         {/* WordCloud 섹션 */}
         <section className="wordcloud-section">
           <h2 className="section-title">
@@ -287,7 +304,7 @@ export function TagsPage() {
             )}
           </div>
         </section>
-      </div>
+      </div>}
     </div>
   );
 }

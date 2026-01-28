@@ -1,15 +1,72 @@
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, FileText, ArrowRight } from 'lucide-react';
+import { Search, FileText, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
 import { useSearch } from '../hooks/useWiki';
 import { Skeleton } from '../components/ui/Skeleton';
 import { Input } from '../components/ui/Input';
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
+
+// 검색어 하이라이팅 컴포넌트
+function HighlightText({ text, query }: { text: string; query: string }) {
+  const parts = useMemo(() => {
+    if (!query || query.length < 2) return [{ text, highlight: false }];
+
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedQuery})`, 'gi');
+    const splitParts = text.split(regex);
+
+    return splitParts.map((part, index) => ({
+      text: part,
+      highlight: index % 2 === 1, // 매치된 부분은 홀수 인덱스
+    }));
+  }, [text, query]);
+
+  return (
+    <>
+      {parts.map((part, index) =>
+        part.highlight ? (
+          <mark key={index} className="search-highlight">
+            {part.text}
+          </mark>
+        ) : (
+          <span key={index}>{part.text}</span>
+        )
+      )}
+    </>
+  );
+}
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
   const [inputValue, setInputValue] = useState(searchQuery);
-  const { data: results, isLoading } = useSearch(searchQuery);
+  const { data: results, isLoading, error, refetch } = useSearch(searchQuery);
+
+  // 검색 결과에서 검색어 주변 텍스트 추출
+  const getExcerptWithContext = useCallback((content: string, query: string, maxLength = 150) => {
+    if (!content || !query || query.length < 2) {
+      return content?.slice(0, maxLength) || '';
+    }
+
+    const lowerContent = content.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const matchIndex = lowerContent.indexOf(lowerQuery);
+
+    if (matchIndex === -1) {
+      return content.slice(0, maxLength);
+    }
+
+    // 검색어 주변 텍스트 추출
+    const contextStart = Math.max(0, matchIndex - 40);
+    const contextEnd = Math.min(content.length, matchIndex + query.length + 100);
+
+    let excerpt = content.slice(contextStart, contextEnd);
+
+    // 시작/끝에 ... 추가
+    if (contextStart > 0) excerpt = '...' + excerpt;
+    if (contextEnd < content.length) excerpt = excerpt + '...';
+
+    return excerpt;
+  }, []);
 
   // URL 쿼리가 변경되면 input도 업데이트 (key prop 사용으로 리렌더링)
   const handleSearch = (e: React.FormEvent) => {
@@ -39,7 +96,20 @@ export function SearchPage() {
       </header>
 
       <div className="search-results">
-        {isLoading ? (
+        {/* 에러 상태 */}
+        {error ? (
+          <div className="error-state">
+            <AlertCircle size={48} />
+            <h2>검색 중 오류가 발생했습니다</h2>
+            <p>잠시 후 다시 시도해주세요.</p>
+            <div className="error-actions">
+              <button onClick={() => refetch()} className="btn btn-primary">
+                <RefreshCw size={16} />
+                <span>다시 시도</span>
+              </button>
+            </div>
+          </div>
+        ) : isLoading ? (
           <div className="results-loading">
             <Skeleton height={80} />
             <Skeleton height={80} />
@@ -49,7 +119,7 @@ export function SearchPage() {
           results.length > 0 ? (
             <>
               <p className="results-count">
-                "{searchQuery}"에 대한 검색 결과 {results.length}건
+                "<HighlightText text={searchQuery} query={searchQuery} />"에 대한 검색 결과 {results.length}건
               </p>
               <div className="results-list">
                 {results.map((result) => (
@@ -60,10 +130,28 @@ export function SearchPage() {
                   >
                     <FileText size={20} className="result-icon" />
                     <div className="result-content">
-                      <h3 className="result-title">{result.title}</h3>
+                      <h3 className="result-title">
+                        <HighlightText text={result.title} query={searchQuery} />
+                      </h3>
                       <p className="result-excerpt">
-                        {result.content || '문서를 클릭하여 내용을 확인하세요'}
+                        {result.content ? (
+                          <HighlightText
+                            text={getExcerptWithContext(result.content, searchQuery)}
+                            query={searchQuery}
+                          />
+                        ) : (
+                          '문서를 클릭하여 내용을 확인하세요'
+                        )}
                       </p>
+                      {result.tags && result.tags.length > 0 && (
+                        <div className="result-tags">
+                          {result.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} className="result-tag">
+                              <HighlightText text={tag} query={searchQuery} />
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <ArrowRight size={18} className="result-arrow" />
                   </Link>

@@ -1,4 +1,28 @@
-import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus } from '../types';
+import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus, ApiError } from '../types';
+
+// API 에러 클래스
+export class ApiServiceError extends Error {
+  code: string;
+  statusCode?: number;
+  recoverable: boolean;
+
+  constructor(message: string, code: string = 'UNKNOWN', statusCode?: number, recoverable = false) {
+    super(message);
+    this.name = 'ApiServiceError';
+    this.code = code;
+    this.statusCode = statusCode;
+    this.recoverable = recoverable;
+  }
+
+  toApiError(): ApiError {
+    return {
+      code: this.code as ApiError['code'],
+      message: this.message,
+      statusCode: this.statusCode,
+      recoverable: this.recoverable,
+    };
+  }
+}
 
 // Base URL 결정 (Next.js / Vite 호환)
 function getBaseUrl(): string {
@@ -28,13 +52,28 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}wiki-data.json${cacheBuster}`);
         if (!response.ok) {
-            return { pages: [], tree: [] };
+            if (response.status === 404) {
+                // 데이터 파일이 없는 경우 빈 데이터 반환 (초기 상태)
+                return { pages: [], tree: [] };
+            }
+            throw new ApiServiceError(
+                '위키 데이터를 불러오는데 실패했습니다.',
+                response.status >= 500 ? 'SERVER_ERROR' : 'NETWORK_ERROR',
+                response.status,
+                true
+            );
         }
         wikiDataCache = await response.json();
         return wikiDataCache!;
     } catch (error) {
+        if (error instanceof ApiServiceError) throw error;
         console.error('Error loading wiki data:', error);
-        return { pages: [], tree: [] };
+        throw new ApiServiceError(
+            '위키 데이터를 불러오는 중 오류가 발생했습니다.',
+            'NETWORK_ERROR',
+            undefined,
+            true
+        );
     }
 }
 
@@ -52,13 +91,27 @@ async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}guide-data.json${cacheBuster}`);
         if (!response.ok) {
-            return { pages: [] };
+            if (response.status === 404) {
+                return { pages: [] };
+            }
+            throw new ApiServiceError(
+                '가이드 데이터를 불러오는데 실패했습니다.',
+                response.status >= 500 ? 'SERVER_ERROR' : 'NETWORK_ERROR',
+                response.status,
+                true
+            );
         }
         guideDataCache = await response.json();
         return guideDataCache!;
     } catch (error) {
+        if (error instanceof ApiServiceError) throw error;
         console.error('Error loading guide data:', error);
-        return { pages: [] };
+        throw new ApiServiceError(
+            '가이드 데이터를 불러오는 중 오류가 발생했습니다.',
+            'NETWORK_ERROR',
+            undefined,
+            true
+        );
     }
 }
 
@@ -155,47 +208,55 @@ async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: s
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}data/issues.json${cacheBuster}`);
         if (!response.ok) {
-            return { issues: [], lastUpdated: new Date().toISOString() };
+            if (response.status === 404) {
+                return { issues: [], lastUpdated: new Date().toISOString() };
+            }
+            throw new ApiServiceError(
+                'Issue 데이터를 불러오는데 실패했습니다.',
+                response.status >= 500 ? 'SERVER_ERROR' : 'NETWORK_ERROR',
+                response.status,
+                true
+            );
         }
         issuesDataCache = await response.json();
         return issuesDataCache!;
     } catch (error) {
+        if (error instanceof ApiServiceError) throw error;
         console.error('Error loading issues data:', error);
-        return { issues: [], lastUpdated: new Date().toISOString() };
+        throw new ApiServiceError(
+            'Issue 데이터를 불러오는 중 오류가 발생했습니다.',
+            'NETWORK_ERROR',
+            undefined,
+            true
+        );
     }
 }
 
 // GitHub Issues 가져오기 (정적 JSON에서)
 export async function fetchIssues(label?: string): Promise<GitHubIssue[]> {
-    try {
-        const data = await loadIssuesData();
+    const data = await loadIssuesData();
 
-        if (!label) {
-            return data.issues;
-        }
-
-        // 라벨 필터링
-        return data.issues.filter((issue) =>
-            issue.labels.some((l) => {
-                const labelName = typeof l === 'string' ? l : l.name;
-                return labelName === label;
-            })
-        );
-    } catch (error) {
-        console.error('Error fetching issues:', error);
-        return [];
+    if (!label) {
+        return data.issues;
     }
+
+    // 라벨 필터링
+    return data.issues.filter((issue) =>
+        issue.labels.some((l) => {
+            const labelName = typeof l === 'string' ? l : l.name;
+            return labelName === label;
+        })
+    );
 }
 
 // 특정 Issue 가져오기 (정적 JSON에서)
 export async function fetchIssue(issueNumber: number): Promise<GitHubIssue | null> {
-    try {
-        const data = await loadIssuesData();
-        return data.issues.find((issue) => issue.number === issueNumber) || null;
-    } catch (error) {
-        console.error('Error fetching issue:', error);
+    const data = await loadIssuesData();
+    const issue = data.issues.find((issue) => issue.number === issueNumber);
+    if (!issue) {
         return null;
     }
+    return issue;
 }
 
 // AI History 데이터 캐시
@@ -213,13 +274,27 @@ export async function fetchAIHistory(): Promise<AIHistory> {
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}data/ai-history.json${cacheBuster}`);
         if (!response.ok) {
-            return { entries: [], lastUpdated: new Date().toISOString() };
+            if (response.status === 404) {
+                return { entries: [], lastUpdated: new Date().toISOString() };
+            }
+            throw new ApiServiceError(
+                'AI 히스토리 데이터를 불러오는데 실패했습니다.',
+                response.status >= 500 ? 'SERVER_ERROR' : 'NETWORK_ERROR',
+                response.status,
+                true
+            );
         }
         aiHistoryCache = await response.json();
         return aiHistoryCache!;
     } catch (error) {
+        if (error instanceof ApiServiceError) throw error;
         console.error('Error loading AI history:', error);
-        return { entries: [], lastUpdated: new Date().toISOString() };
+        throw new ApiServiceError(
+            'AI 히스토리 데이터를 불러오는 중 오류가 발생했습니다.',
+            'NETWORK_ERROR',
+            undefined,
+            true
+        );
     }
 }
 
@@ -243,12 +318,18 @@ export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}actions-status.json${cacheBuster}`);
         if (!response.ok) {
+            // Actions 상태는 선택적이므로 404는 null 반환
+            if (response.status === 404) {
+                return null;
+            }
+            // 다른 에러는 로깅만 하고 null 반환 (중요하지 않은 데이터)
+            console.warn('Actions status fetch failed:', response.status);
             return null;
         }
         actionsStatusCache = await response.json();
         return actionsStatusCache;
     } catch (error) {
-        console.error('Error loading actions status:', error);
+        console.warn('Error loading actions status:', error);
         return null;
     }
 }
