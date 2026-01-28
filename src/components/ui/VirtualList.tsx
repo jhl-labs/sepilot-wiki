@@ -27,6 +27,8 @@ interface VirtualListProps<T> {
   itemClassName?: string;
   // 아이템 키 추출 함수
   getItemKey?: (item: T, index: number) => string | number;
+  // 접근성: 리스트 라벨
+  ariaLabel?: string;
 }
 
 export function VirtualList<T>({
@@ -39,6 +41,7 @@ export function VirtualList<T>({
   className = '',
   itemClassName = '',
   getItemKey,
+  ariaLabel,
 }: VirtualListProps<T>) {
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -54,13 +57,23 @@ export function VirtualList<T>({
 
   const virtualItems = virtualizer.getVirtualItems();
 
+  // 현재 표시 범위 계산 (스크린리더용)
+  const firstVisibleIndex = virtualItems.length > 0 ? virtualItems[0].index + 1 : 0;
+  const lastVisibleIndex = virtualItems.length > 0 ? virtualItems[virtualItems.length - 1].index + 1 : 0;
+
   if (items.length === 0) {
     return (
-      <div className={`virtual-list-empty ${className}`}>
+      <div className={`virtual-list-empty ${className}`} role="status">
         {emptyMessage}
       </div>
     );
   }
+
+  // 기본 라벨 생성
+  const defaultLabel = `목록: ${items.length}개 항목`;
+  const rangeInfo = virtualItems.length > 0
+    ? `(현재 ${firstVisibleIndex}-${lastVisibleIndex}번째 표시 중)`
+    : '';
 
   return (
     <div
@@ -70,6 +83,9 @@ export function VirtualList<T>({
         height: typeof height === 'number' ? `${height}px` : height,
         overflow: 'auto',
       }}
+      role="list"
+      aria-label={ariaLabel ? `${ariaLabel} ${rangeInfo}` : `${defaultLabel} ${rangeInfo}`}
+      tabIndex={0}
     >
       <div
         style={{
@@ -91,6 +107,9 @@ export function VirtualList<T>({
                 width: '100%',
                 transform: `translateY(${virtualItem.start}px)`,
               }}
+              role="listitem"
+              aria-posinset={virtualItem.index + 1}
+              aria-setsize={items.length}
               data-index={virtualItem.index}
             >
               {renderItem(item, virtualItem.index)}
@@ -115,6 +134,7 @@ export function WindowVirtualList<T>({
   className = '',
   itemClassName = '',
   getItemKey,
+  ariaLabel,
 }: Omit<VirtualListProps<T>, 'height'>) {
   const virtualizer = useVirtualizer({
     count: items.length,
@@ -131,11 +151,14 @@ export function WindowVirtualList<T>({
 
   if (items.length === 0) {
     return (
-      <div className={`virtual-list-empty ${className}`}>
+      <div className={`virtual-list-empty ${className}`} role="status">
         {emptyMessage}
       </div>
     );
   }
+
+  // 기본 라벨 생성
+  const defaultLabel = `목록: ${items.length}개 항목`;
 
   return (
     <div
@@ -145,6 +168,8 @@ export function WindowVirtualList<T>({
         width: '100%',
         position: 'relative',
       }}
+      role="list"
+      aria-label={ariaLabel || defaultLabel}
     >
       {virtualItems.map((virtualItem) => {
         const item = items[virtualItem.index];
@@ -159,6 +184,9 @@ export function WindowVirtualList<T>({
               width: '100%',
               transform: `translateY(${virtualItem.start}px)`,
             }}
+            role="listitem"
+            aria-posinset={virtualItem.index + 1}
+            aria-setsize={items.length}
             data-index={virtualItem.index}
           >
             {renderItem(item, virtualItem.index)}

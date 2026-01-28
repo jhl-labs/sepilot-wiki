@@ -59,15 +59,31 @@ export function Sidebar() {
 
   // 확장된 폴더 상태 (localStorage에 저장)
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(getInitialExpandedFolders);
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // expandedFolders 변경 시 localStorage에 저장
+  // expandedFolders 변경 시 localStorage에 저장 (debounce 적용)
   useEffect(() => {
     if (!isMounted) return;
-    try {
-      localStorage.setItem(EXPANDED_FOLDERS_KEY, JSON.stringify([...expandedFolders]));
-    } catch {
-      // localStorage 저장 실패 시 무시
+
+    // 이전 타임아웃 취소
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
     }
+
+    // 300ms 후에 저장 (빠른 토글 시 여러 번 저장 방지)
+    saveTimeoutRef.current = setTimeout(() => {
+      try {
+        localStorage.setItem(EXPANDED_FOLDERS_KEY, JSON.stringify([...expandedFolders]));
+      } catch {
+        // localStorage 저장 실패 시 무시
+      }
+    }, 300);
+
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+    };
   }, [expandedFolders, isMounted]);
 
   // 폴더 토글 함수

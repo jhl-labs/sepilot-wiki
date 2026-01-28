@@ -1,6 +1,6 @@
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, FileText, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
-import { useSearch } from '../hooks/useWiki';
+import { Search, FileText, ArrowRight, RefreshCw, AlertCircle, Tag, TrendingUp } from 'lucide-react';
+import { useSearch, useWikiTags, useWikiPages } from '../hooks/useWiki';
 import { Skeleton } from '../components/ui/Skeleton';
 import { Input } from '../components/ui/Input';
 import { useState, useMemo, useCallback } from 'react';
@@ -40,6 +40,27 @@ export function SearchPage() {
   const searchQuery = searchParams.get('q') || '';
   const [inputValue, setInputValue] = useState(searchQuery);
   const { data: results, isLoading, error, refetch } = useSearch(searchQuery);
+  const { data: tags } = useWikiTags();
+  const { data: pages } = useWikiPages();
+
+  // 인기 태그 (상위 8개)
+  const popularTags = useMemo(() => tags?.slice(0, 8) || [], [tags]);
+
+  // 추천 문서 (최근 5개, 카테고리 제외)
+  const recentPages = useMemo(() => {
+    if (!pages) return [];
+    const flatPages: { title: string; slug: string }[] = [];
+    const traverse = (items: typeof pages) => {
+      for (const item of items) {
+        if (!item.isCategory && item.slug) {
+          flatPages.push({ title: item.title || item.slug, slug: item.slug });
+        }
+        if (item.children) traverse(item.children);
+      }
+    };
+    traverse(pages);
+    return flatPages.slice(0, 5);
+  }, [pages]);
 
   // 검색 결과에서 검색어 주변 텍스트 추출
   const getExcerptWithContext = useCallback((content: string, query: string, maxLength = 150) => {
@@ -171,6 +192,54 @@ export function SearchPage() {
                   <li>맞춤법 확인</li>
                 </ul>
               </div>
+
+              {/* 인기 태그 추천 */}
+              {popularTags.length > 0 && (
+                <div className="search-suggestions-section">
+                  <h3>
+                    <TrendingUp size={16} />
+                    <span>인기 태그로 검색</span>
+                  </h3>
+                  <div className="search-tags">
+                    {popularTags.map((tag) => (
+                      <button
+                        key={tag.tag}
+                        className="search-tag-btn"
+                        onClick={() => {
+                          setInputValue(tag.tag);
+                          setSearchParams({ q: tag.tag });
+                        }}
+                      >
+                        <Tag size={12} />
+                        {tag.tag}
+                        <span className="tag-count">{tag.count}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 추천 문서 */}
+              {recentPages.length > 0 && (
+                <div className="search-suggestions-section">
+                  <h3>
+                    <FileText size={16} />
+                    <span>문서 둘러보기</span>
+                  </h3>
+                  <div className="search-recommended-pages">
+                    {recentPages.map((page) => (
+                      <Link
+                        key={page.slug}
+                        to={`/wiki/${page.slug}`}
+                        className="search-page-link"
+                      >
+                        {page.title}
+                        <ArrowRight size={14} />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )
         ) : (

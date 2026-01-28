@@ -14,6 +14,8 @@ import {
   ArrowRight,
   Home,
   X,
+  Loader2,
+  AlertCircle,
 } from 'lucide-react';
 import { useFocusTrap } from '@/src/hooks/useFocusTrap';
 import { useShortcuts } from '@/src/context/ShortcutsContext';
@@ -35,7 +37,7 @@ export function CommandPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { isCommandPaletteOpen, closeCommandPalette } = useShortcuts();
   const router = useRouter();
-  const { data: wikiPages = [] } = useWikiPages();
+  const { data: wikiPages = [], isLoading: isPagesLoading, error: pagesError } = useWikiPages();
 
   const containerRef = useFocusTrap<HTMLDivElement>({
     enabled: isCommandPaletteOpen,
@@ -226,7 +228,17 @@ export function CommandPalette() {
 
         {/* 결과 목록 */}
         <div className="command-palette-results" role="listbox">
-          {filteredItems.length === 0 ? (
+          {isPagesLoading && query.length > 0 ? (
+            <div className="command-palette-loading">
+              <Loader2 size={20} className="spin" />
+              <p>문서 검색 중...</p>
+            </div>
+          ) : pagesError && query.length > 0 ? (
+            <div className="command-palette-error">
+              <AlertCircle size={20} />
+              <p>문서를 불러올 수 없습니다</p>
+            </div>
+          ) : filteredItems.length === 0 ? (
             <div className="command-palette-empty">
               <p>검색 결과가 없습니다</p>
             </div>
@@ -376,10 +388,29 @@ export function CommandPalette() {
             padding: 0.5rem;
           }
 
-          .command-palette-empty {
+          .command-palette-empty,
+          .command-palette-loading,
+          .command-palette-error {
             padding: 2rem;
             text-align: center;
             color: var(--color-text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+          }
+
+          .command-palette-error {
+            color: var(--color-error);
+          }
+
+          .spin {
+            animation: spin 1s linear infinite;
+          }
+
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
           }
 
           .command-palette-item {

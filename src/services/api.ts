@@ -1,5 +1,58 @@
 import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus, ApiError } from '../types';
 
+// TTL 기반 캐시 클래스
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+}
+
+class TTLCache<T> {
+  private cache: CacheEntry<T> | null = null;
+  private ttl: number;
+
+  constructor(ttlMs: number) {
+    this.ttl = ttlMs;
+  }
+
+  get(): T | null {
+    if (!this.cache) return null;
+
+    const now = Date.now();
+    if (now - this.cache.timestamp > this.ttl) {
+      // 캐시 만료
+      this.cache = null;
+      return null;
+    }
+
+    return this.cache.data;
+  }
+
+  set(data: T): void {
+    this.cache = {
+      data,
+      timestamp: Date.now(),
+    };
+  }
+
+  invalidate(): void {
+    this.cache = null;
+  }
+
+  isValid(): boolean {
+    if (!this.cache) return false;
+    return Date.now() - this.cache.timestamp <= this.ttl;
+  }
+}
+
+// 캐시 TTL 설정 (밀리초)
+const CACHE_TTL = {
+  WIKI_DATA: 5 * 60 * 1000,     // 5분 - 정적 데이터
+  GUIDE_DATA: 5 * 60 * 1000,    // 5분 - 정적 데이터
+  ISSUES: 2 * 60 * 1000,        // 2분 - 자주 변경될 수 있음
+  AI_HISTORY: 3 * 60 * 1000,    // 3분
+  ACTIONS_STATUS: 1 * 60 * 1000, // 1분 - 실시간성 필요
+};
+
 // API 에러 클래스
 export class ApiServiceError extends Error {
   code: string;
@@ -37,13 +90,18 @@ function getBaseUrl(): string {
     return '/';
 }
 
-// 빌드 시점에 생성된 정적 wiki 데이터 캐시
-let wikiDataCache: { pages: WikiPage[]; tree: WikiTree[] } | null = null;
+// TTL 기반 캐시 인스턴스들
+const wikiDataCache = new TTLCache<{ pages: WikiPage[]; tree: WikiTree[] }>(CACHE_TTL.WIKI_DATA);
+const guideDataCache = new TTLCache<{ pages: WikiPage[] }>(CACHE_TTL.GUIDE_DATA);
+const issuesDataCache = new TTLCache<{ issues: GitHubIssue[]; lastUpdated: string }>(CACHE_TTL.ISSUES);
+const aiHistoryCache = new TTLCache<AIHistory>(CACHE_TTL.AI_HISTORY);
+const actionsStatusCache = new TTLCache<ActionsStatus>(CACHE_TTL.ACTIONS_STATUS);
 
 // 정적 wiki 데이터 로드
 async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> {
-    if (wikiDataCache) {
-        return wikiDataCache;
+    const cached = wikiDataCache.get();
+    if (cached) {
+        return cached;
     }
 
     try {
@@ -63,8 +121,9 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
                 true
             );
         }
-        wikiDataCache = await response.json();
-        return wikiDataCache!;
+        const data = await response.json();
+        wikiDataCache.set(data);
+        return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
         console.error('Error loading wiki data:', error);
@@ -77,13 +136,11 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
     }
 }
 
-// 빌드 시점에 생성된 정적 guide 데이터 캐시
-let guideDataCache: { pages: WikiPage[] } | null = null;
-
 // 정적 guide 데이터 로드
 async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
-    if (guideDataCache) {
-        return guideDataCache;
+    const cached = guideDataCache.get();
+    if (cached) {
+        return cached;
     }
 
     try {
@@ -101,8 +158,9 @@ async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
                 true
             );
         }
-        guideDataCache = await response.json();
-        return guideDataCache!;
+        const data = await response.json();
+        guideDataCache.set(data);
+        return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
         console.error('Error loading guide data:', error);
@@ -193,13 +251,11 @@ export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
     return null;
 }
 
-// Issues 데이터 캐시
-let issuesDataCache: { issues: GitHubIssue[]; lastUpdated: string } | null = null;
-
 // 정적 Issues 데이터 로드 (JSON 파일에서)
 async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: string }> {
-    if (issuesDataCache) {
-        return issuesDataCache;
+    const cached = issuesDataCache.get();
+    if (cached) {
+        return cached;
     }
 
     try {
@@ -218,8 +274,9 @@ async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: s
                 true
             );
         }
-        issuesDataCache = await response.json();
-        return issuesDataCache!;
+        const data = await response.json();
+        issuesDataCache.set(data);
+        return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
         console.error('Error loading issues data:', error);
@@ -259,13 +316,11 @@ export async function fetchIssue(issueNumber: number): Promise<GitHubIssue | nul
     return issue;
 }
 
-// AI History 데이터 캐시
-let aiHistoryCache: AIHistory | null = null;
-
 // AI History 데이터 로드
 export async function fetchAIHistory(): Promise<AIHistory> {
-    if (aiHistoryCache) {
-        return aiHistoryCache;
+    const cached = aiHistoryCache.get();
+    if (cached) {
+        return cached;
     }
 
     try {
@@ -284,8 +339,9 @@ export async function fetchAIHistory(): Promise<AIHistory> {
                 true
             );
         }
-        aiHistoryCache = await response.json();
-        return aiHistoryCache!;
+        const data = await response.json();
+        aiHistoryCache.set(data);
+        return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
         console.error('Error loading AI history:', error);
@@ -304,13 +360,11 @@ export async function fetchDocumentAIHistory(slug: string): Promise<AIHistoryEnt
     return history.entries.filter(entry => entry.documentSlug === slug);
 }
 
-// Actions Status 데이터 캐시
-let actionsStatusCache: ActionsStatus | null = null;
-
 // Actions Status 데이터 로드
 export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
-    if (actionsStatusCache) {
-        return actionsStatusCache;
+    const cached = actionsStatusCache.get();
+    if (cached) {
+        return cached;
     }
 
     try {
@@ -326,8 +380,9 @@ export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
             console.warn('Actions status fetch failed:', response.status);
             return null;
         }
-        actionsStatusCache = await response.json();
-        return actionsStatusCache;
+        const data = await response.json();
+        actionsStatusCache.set(data);
+        return data;
     } catch (error) {
         console.warn('Error loading actions status:', error);
         return null;

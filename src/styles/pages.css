@@ -655,6 +655,92 @@
   font-size: var(--font-size-sm);
 }
 
+/* 검색 추천 섹션 */
+.search-suggestions-section {
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-border-primary);
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-suggestions-section h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-3);
+}
+
+.search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  justify-content: center;
+}
+
+.search-tag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.search-tag-btn:hover {
+  background: var(--color-accent-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-accent-primary);
+}
+
+.search-tag-btn .tag-count {
+  font-size: var(--font-size-xs);
+  opacity: 0.7;
+}
+
+.search-recommended-pages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.search-page-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.search-page-link:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-accent-primary);
+}
+
+.search-page-link svg {
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.search-page-link:hover svg {
+  opacity: 1;
+}
+
 /* 검색 결과 하이라이팅 */
 .search-highlight {
   background-color: var(--color-warning-light, #fef3c7);
