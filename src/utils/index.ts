@@ -193,3 +193,61 @@ export function getErrorMessage(code: ApiErrorCode): string {
 
   return messages[code];
 }
+
+/**
+ * 텍스트에서 앵커 링크용 ID 생성
+ * 중복 방지를 위해 usedIds Set을 전달할 수 있음
+ * @param text - 원본 텍스트
+ * @param usedIds - 이미 사용된 ID 목록 (중복 방지용)
+ * @param counter - 폴백 카운터 (빈 ID 방지용)
+ * @returns 생성된 ID
+ *
+ * @example
+ * generateHeadingId('Hello World') => 'hello-world'
+ * generateHeadingId('API 문서') => 'api-문서'
+ */
+export function generateHeadingId(
+  text: string,
+  usedIds?: Set<string>,
+  counter = 0
+): string {
+  let id = text
+    .toLowerCase()
+    .replace(/[^a-z0-9가-힣\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+
+  // 빈 ID 방지
+  if (!id) {
+    id = `heading-${counter || Date.now()}`;
+  }
+
+  // 중복 방지
+  if (usedIds) {
+    if (usedIds.has(id)) {
+      let suffix = 1;
+      while (usedIds.has(`${id}-${suffix}`)) {
+        suffix++;
+      }
+      id = `${id}-${suffix}`;
+    }
+    usedIds.add(id);
+  }
+
+  return id;
+}
+
+/**
+ * 정규식 특수문자 이스케이프
+ * 사용자 입력을 정규식 패턴에 안전하게 사용할 수 있게 함
+ * @param str - 이스케이프할 문자열
+ * @returns 이스케이프된 문자열
+ *
+ * @example
+ * escapeRegExp('hello.world') => 'hello\\.world'
+ * escapeRegExp('test[1]') => 'test\\[1\\]'
+ */
+export function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}

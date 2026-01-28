@@ -1,6 +1,8 @@
 import { useSearchParams, Link } from 'react-router-dom';
 import { Search, FileText, ArrowRight, RefreshCw, AlertCircle, Tag, TrendingUp } from 'lucide-react';
 import { useSearch, useWikiTags, useWikiPages } from '../hooks/useWiki';
+import { useDebounce } from '../hooks/useDebounce';
+import { escapeRegExp } from '../utils';
 import { Skeleton } from '../components/ui/Skeleton';
 import { Input } from '../components/ui/Input';
 import { useState, useMemo, useCallback } from 'react';
@@ -10,7 +12,7 @@ function HighlightText({ text, query }: { text: string; query: string }) {
   const parts = useMemo(() => {
     if (!query || query.length < 2) return [{ text, highlight: false }];
 
-    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const escapedQuery = escapeRegExp(query);
     const regex = new RegExp(`(${escapedQuery})`, 'gi');
     const splitParts = text.split(regex);
 
@@ -39,7 +41,10 @@ export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
   const [inputValue, setInputValue] = useState(searchQuery);
-  const { data: results, isLoading, error, refetch } = useSearch(searchQuery);
+
+  // 검색 요청 debounce (300ms) - 매 글자마다 요청 방지
+  const debouncedQuery = useDebounce(searchQuery, 300);
+  const { data: results, isLoading, error, refetch } = useSearch(debouncedQuery);
   const { data: tags } = useWikiTags();
   const { data: pages } = useWikiPages();
 

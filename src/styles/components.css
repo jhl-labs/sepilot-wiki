@@ -1146,3 +1146,49 @@
 .inline-error .btn {
   flex-shrink: 0;
 }
+
+/* 모바일 터치 타겟 최적화 (WCAG 2.5.5 - 최소 44x44px) */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .btn-sm {
+    min-height: 36px;
+    min-width: 36px;
+  }
+
+  .input {
+    min-height: 44px;
+  }
+
+  /* 아이콘 버튼 터치 영역 확장 */
+  .footer-icon-btn,
+  .sidebar-close,
+  .refresh-btn,
+  .nav-folder-toggle {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 네비게이션 아이템 터치 영역 */
+  .nav-item {
+    min-height: 44px;
+  }
+
+  /* 검색 입력 필드 */
+  .search-input-large input {
+    min-height: 48px;
+    font-size: 16px; /* iOS 자동 확대 방지 */
+  }
+
+  /* 필터 셀렉트 박스 */
+  .filter-select {
+    min-height: 44px;
+    font-size: 16px;
+  }
+}

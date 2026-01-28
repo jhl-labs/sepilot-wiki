@@ -12,6 +12,7 @@ import { Copy, Check, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 import { LazyMermaidDiagram } from './LazyMermaidDiagram';
 import { LazyPlotlyChart } from './LazyPlotlyChart';
+import { generateHeadingId } from '../../utils';
 
 /**
  * MarkdownRenderer 컴포넌트 Props
@@ -139,15 +140,18 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
             return null;
           },
           h2({ children }) {
-            const id = generateId(children);
+            const text = extractTextFromChildren(children);
+            const id = generateHeadingId(text);
             return <h2 id={id} className="heading heading-2">{children}</h2>;
           },
           h3({ children }) {
-            const id = generateId(children);
+            const text = extractTextFromChildren(children);
+            const id = generateHeadingId(text);
             return <h3 id={id} className="heading heading-3">{children}</h3>;
           },
           h4({ children }) {
-            const id = generateId(children);
+            const text = extractTextFromChildren(children);
+            const id = generateHeadingId(text);
             return <h4 id={id} className="heading heading-4">{children}</h4>;
           },
           ul({ children }) {
@@ -234,28 +238,11 @@ function CodeBlock({
   );
 }
 
-// ID 중복 방지를 위한 카운터
-let headingCounter = 0;
-
-function generateId(children: React.ReactNode): string {
-  const text = typeof children === 'string'
-    ? children
-    : Array.isArray(children)
-      ? children.map(c => typeof c === 'string' ? c : '').join('')
-      : '';
-
-  const id = text
-    .toLowerCase()
-    .replace(/[^a-z0-9가-힣\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim();
-
-  // 빈 ID 방지: 기본값 생성
-  if (!id) {
-    headingCounter++;
-    return `heading-${headingCounter}`;
+// 헤딩 ID 생성 헬퍼 (React children에서 텍스트 추출)
+function extractTextFromChildren(children: React.ReactNode): string {
+  if (typeof children === 'string') return children;
+  if (Array.isArray(children)) {
+    return children.map(c => typeof c === 'string' ? c : '').join('');
   }
-
-  return id;
+  return '';
 }

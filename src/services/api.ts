@@ -97,6 +97,23 @@ const issuesDataCache = new TTLCache<{ issues: GitHubIssue[]; lastUpdated: strin
 const aiHistoryCache = new TTLCache<AIHistory>(CACHE_TTL.AI_HISTORY);
 const actionsStatusCache = new TTLCache<ActionsStatus>(CACHE_TTL.ACTIONS_STATUS);
 
+/**
+ * 캐시 버스팅용 버전 문자열 생성
+ * 정적 데이터: 빌드 시간 기반 (배포마다 갱신)
+ * 동적 데이터: 시간 기반 (지정된 간격으로 갱신)
+ */
+function getCacheBuster(type: 'static' | 'dynamic', intervalMs = 60000): string {
+  if (type === 'static') {
+    // 빌드 시간 사용 - 같은 빌드 내에서는 CDN 캐시 활용 가능
+    const buildTime = typeof process !== 'undefined'
+      ? process.env.NEXT_PUBLIC_BUILD_TIME
+      : undefined;
+    return buildTime || new Date().toISOString().slice(0, 10); // fallback: 날짜
+  }
+  // 동적 데이터는 지정된 간격으로 캐시 키 변경
+  return String(Math.floor(Date.now() / intervalMs));
+}
+
 // 정적 wiki 데이터 로드
 async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> {
     const cached = wikiDataCache.get();
@@ -105,8 +122,8 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
     }
 
     try {
-        // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
-        const cacheBuster = `?v=${Date.now()}`;
+        // cache-busting: 빌드 버전 기반 (CDN 캐시 활용 가능)
+        const cacheBuster = `?v=${getCacheBuster('static')}`;
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}wiki-data.json${cacheBuster}`);
         if (!response.ok) {
@@ -144,7 +161,8 @@ async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
     }
 
     try {
-        const cacheBuster = `?v=${Date.now()}`;
+        // cache-busting: 빌드 버전 기반 (CDN 캐시 활용 가능)
+        const cacheBuster = `?v=${getCacheBuster('static')}`;
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}guide-data.json${cacheBuster}`);
         if (!response.ok) {
@@ -259,8 +277,8 @@ async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: s
     }
 
     try {
-        // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
-        const cacheBuster = `?v=${Date.now()}`;
+        // cache-busting: 2분 간격으로 캐시 키 변경 (동적 데이터)
+        const cacheBuster = `?v=${getCacheBuster('dynamic', 2 * 60 * 1000)}`;
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}data/issues.json${cacheBuster}`);
         if (!response.ok) {
@@ -324,8 +342,8 @@ export async function fetchAIHistory(): Promise<AIHistory> {
     }
 
     try {
-        // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
-        const cacheBuster = `?v=${Date.now()}`;
+        // cache-busting: 3분 간격으로 캐시 키 변경 (동적 데이터)
+        const cacheBuster = `?v=${getCacheBuster('dynamic', 3 * 60 * 1000)}`;
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}data/ai-history.json${cacheBuster}`);
         if (!response.ok) {
@@ -368,7 +386,8 @@ export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
     }
 
     try {
-        const cacheBuster = `?v=${Date.now()}`;
+        // cache-busting: 1분 간격으로 캐시 키 변경 (실시간성 필요)
+        const cacheBuster = `?v=${getCacheBuster('dynamic', 1 * 60 * 1000)}`;
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}actions-status.json${cacheBuster}`);
         if (!response.ok) {

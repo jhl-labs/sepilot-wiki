@@ -16,7 +16,7 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
         mermaid.initialize({
             startOnLoad: false,
             theme: actualTheme === 'dark' ? 'dark' : 'default',
-            securityLevel: 'loose',
+            securityLevel: 'strict', // 보안 강화: strict 모드 사용
             fontFamily: 'inherit',
         });
     }, [actualTheme]);
@@ -29,10 +29,12 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
                 // parse로 먼저 유효성 검사 후 render
                 if (await mermaid.parse(chart)) {
                     const { svg } = await mermaid.render(id, chart);
-                    // XSS 방지: DOMPurify로 SVG 정제
+                    // XSS 방지: DOMPurify로 SVG 정제 (엄격한 화이트리스트)
                     const sanitizedSvg = DOMPurify.sanitize(svg, {
                         USE_PROFILES: { svg: true, svgFilters: true },
-                        ADD_TAGS: ['foreignObject'],
+                        // foreignObject는 스크립트 실행 가능하므로 제외
+                        FORBID_TAGS: ['foreignObject', 'script', 'iframe', 'object', 'embed'],
+                        FORBID_ATTR: ['onclick', 'onload', 'onerror', 'onmouseover', 'onfocus'],
                     });
                     setSvg(sanitizedSvg);
                 }
