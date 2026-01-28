@@ -14,6 +14,8 @@ import {
   ExternalLink,
   ChevronLeft,
   Filter,
+  RefreshCw,
+  AlertCircle,
 } from 'lucide-react';
 import { formatDistanceToNow, format } from 'date-fns';
 import { ko } from 'date-fns/locale';
@@ -111,16 +113,40 @@ export function AIHistoryPage() {
   const [filter, setFilter] = useState<AIActionType | 'all'>('all');
 
   // 문서별 히스토리 또는 전체 히스토리
-  const { data: allHistory, isLoading: isLoadingAll } = useAIHistory();
-  const { data: docHistory, isLoading: isLoadingDoc } = useDocumentAIHistory(slug || '');
+  const { data: allHistory, isLoading: isLoadingAll, error: errorAll, refetch: refetchAll } = useAIHistory();
+  const { data: docHistory, isLoading: isLoadingDoc, error: errorDoc, refetch: refetchDoc } = useDocumentAIHistory(slug || '');
 
   const isDocumentMode = !!slug;
   const isLoading = isDocumentMode ? isLoadingDoc : isLoadingAll;
+  const error = isDocumentMode ? errorDoc : errorAll;
+  const refetch = isDocumentMode ? refetchDoc : refetchAll;
   const entries = isDocumentMode ? docHistory : allHistory?.entries;
 
   // 필터링
   const filteredEntries =
     filter === 'all' ? entries : entries?.filter((e) => e.actionType === filter);
+
+  // 에러 상태
+  if (error) {
+    return (
+      <div className="ai-history-page">
+        <div className="error-state">
+          <AlertCircle size={48} />
+          <h2>AI 히스토리를 불러올 수 없습니다</h2>
+          <p>데이터를 불러오는 중 문제가 발생했습니다.</p>
+          <div className="error-actions">
+            <button onClick={() => refetch()} className="btn btn-primary">
+              <RefreshCw size={16} />
+              <span>다시 시도</span>
+            </button>
+            <Link to="/" className="btn btn-secondary">
+              홈으로 이동
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (

@@ -566,6 +566,18 @@
   font-style: italic;
 }
 
+.nav-error {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  background-color: var(--color-error-light, #fef2f2);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-2);
+}
+
 .nav-item-external {
   position: relative;
 }

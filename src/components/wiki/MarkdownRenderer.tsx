@@ -182,9 +182,27 @@ function CodeBlock({
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(children);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(children);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard API 실패 시 폴백 (구형 브라우저 또는 권한 거부)
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = children;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        console.error('클립보드 복사 실패');
+      }
+    }
   };
 
   return (
@@ -216,16 +234,28 @@ function CodeBlock({
   );
 }
 
+// ID 중복 방지를 위한 카운터
+let headingCounter = 0;
+
 function generateId(children: React.ReactNode): string {
   const text = typeof children === 'string'
     ? children
     : Array.isArray(children)
       ? children.map(c => typeof c === 'string' ? c : '').join('')
       : '';
-  return text
+
+  const id = text
     .toLowerCase()
     .replace(/[^a-z0-9가-힣\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .trim();
+
+  // 빈 ID 방지: 기본값 생성
+  if (!id) {
+    headingCounter++;
+    return `heading-${headingCounter}`;
+  }
+
+  return id;
 }

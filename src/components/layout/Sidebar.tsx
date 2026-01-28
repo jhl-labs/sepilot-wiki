@@ -48,7 +48,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const navigationConfig = useNavigationConfig();
   const sidebarRef = useRef<HTMLElement>(null);
-  const { data: wikiPages, isLoading: pagesLoading } = useWikiPages();
+  const { data: wikiPages, isLoading: pagesLoading, error: pagesError } = useWikiPages();
   const { data: requestIssues } = useIssues(LABELS.REQUEST);
 
   // 클라이언트 마운트 상태 (Hydration 에러 방지)
@@ -150,18 +150,31 @@ export function Sidebar() {
     [setIsResizing]
   );
 
-  // 리사이즈 드래그 중
+  // 리사이즈 드래그 중 (throttle 적용 - 60fps)
   useEffect(() => {
     if (!isResizing) return;
 
+    let lastUpdateTime = 0;
+    let rafId: number | null = null;
+
     const handleMouseMove = (e: MouseEvent) => {
-      const newWidth = e.clientX;
-      if (newWidth >= minWidth && newWidth <= maxWidth) {
-        setWidth(newWidth);
-      }
+      const now = Date.now();
+      // 약 60fps (16ms 간격)로 업데이트 제한
+      if (now - lastUpdateTime < 16) return;
+      lastUpdateTime = now;
+
+      // requestAnimationFrame으로 부드러운 업데이트
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const newWidth = e.clientX;
+        if (newWidth >= minWidth && newWidth <= maxWidth) {
+          setWidth(newWidth);
+        }
+      });
     };
 
     const handleMouseUp = () => {
+      if (rafId) cancelAnimationFrame(rafId);
       setIsResizing(false);
     };
 
@@ -169,6 +182,7 @@ export function Sidebar() {
     document.addEventListener('mouseup', handleMouseUp);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
@@ -382,7 +396,12 @@ export function Sidebar() {
             </button>
             {expandedSections.has('wiki') && (
               <div className="nav-section-content">
-                {!isMounted || pagesLoading ? (
+                {pagesError ? (
+                  <span className="nav-error">
+                    <AlertCircle size={14} />
+                    문서를 불러올 수 없습니다
+                  </span>
+                ) : !isMounted || pagesLoading ? (
                   <>
                     <Skeleton className="nav-skeleton" />
                     <Skeleton className="nav-skeleton" />
