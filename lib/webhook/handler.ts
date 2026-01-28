@@ -219,6 +219,24 @@ function runIssueScript(
 
     let stdout = '';
     let stderr = '';
+    let resolved = false;
+    let timeoutId: NodeJS.Timeout | null = null;
+    let killTimeoutId: NodeJS.Timeout | null = null;
+
+    const cleanup = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (killTimeoutId) clearTimeout(killTimeoutId);
+      child.stdout.removeAllListeners();
+      child.stderr.removeAllListeners();
+      child.removeAllListeners();
+    };
+
+    const safeResolve = (result: HandlerResult) => {
+      if (resolved) return;
+      resolved = true;
+      cleanup();
+      resolve(result);
+    };
 
     child.stdout.on('data', (data) => {
       stdout += data.toString();
@@ -231,14 +249,14 @@ function runIssueScript(
     child.on('close', (code) => {
       if (code === 0) {
         console.log(`[Webhook] 스크립트 완료: ${scriptName}`);
-        resolve({
+        safeResolve({
           success: true,
           message: `스크립트 실행 완료: ${scriptName}`,
           data: { issueNumber, output: stdout.slice(0, 500) },
         });
       } else {
         console.error(`[Webhook] 스크립트 실패: ${scriptName}`, stderr);
-        resolve({
+        safeResolve({
           success: false,
           message: `스크립트 실행 실패: ${scriptName}`,
           data: { issueNumber, error: stderr || stdout },
@@ -248,7 +266,7 @@ function runIssueScript(
 
     child.on('error', (error) => {
       console.error(`[Webhook] 스크립트 오류: ${scriptName}`, error);
-      resolve({
+      safeResolve({
         success: false,
         message: `스크립트 실행 오류: ${scriptName}`,
         data: { issueNumber, error: error.message },
@@ -256,9 +274,20 @@ function runIssueScript(
     });
 
     // 5분 타임아웃
-    setTimeout(() => {
+    timeoutId = setTimeout(() => {
+      console.warn(`[Webhook] 스크립트 타임아웃, SIGTERM 전송: ${scriptName}`);
       child.kill('SIGTERM');
-      resolve({
+
+      // SIGTERM 후 10초 대기, 여전히 실행 중이면 SIGKILL
+      killTimeoutId = setTimeout(() => {
+        if (!resolved) {
+          console.warn(`[Webhook] SIGTERM 무응답, SIGKILL 전송: ${scriptName}`);
+          child.kill('SIGKILL');
+        }
+      }, 10000);
+
+      // 타임아웃 결과 반환 (프로세스 종료와 별개로)
+      safeResolve({
         success: false,
         message: `스크립트 타임아웃: ${scriptName}`,
       });

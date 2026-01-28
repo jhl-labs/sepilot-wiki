@@ -6,10 +6,9 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
+  // 보안: 민감한 정보 노출하지 않음
   return NextResponse.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
-    version: process.env.npm_package_version || '0.2.0',
-    authMode: process.env.AUTH_MODE || 'public',
   });
 }

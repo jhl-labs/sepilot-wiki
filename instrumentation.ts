@@ -8,6 +8,10 @@
 export async function register() {
   // 서버 사이드에서만 실행
   if (process.env.NEXT_RUNTIME === 'nodejs') {
+    // 환경변수 검증
+    const { validateAndLogEnv } = await import('@/lib/env-validation');
+    validateAndLogEnv();
+
     // 동적 임포트로 서버 전용 모듈 로드
     const { initializeScheduler, shouldEnableScheduler } = await import(
       '@/lib/scheduler'

@@ -9,6 +9,8 @@ import { REDIS_KEYS, DEFAULT_SCHEDULER_CONFIG } from './types';
 let isCurrentLeader = false;
 let currentLeaderId: string | null = null;
 let heartbeatTimer: NodeJS.Timeout | null = null;
+let retryAttempt = 0;
+const MAX_RETRY_DELAY = 60000; // 최대 60초
 
 // Pod/프로세스 ID 생성
 const POD_ID = process.env.HOSTNAME || process.env.POD_NAME || `local-${process.pid}`;
@@ -69,6 +71,7 @@ export async function acquireLeadership(): Promise<boolean> {
     if (result === 'OK') {
       isCurrentLeader = true;
       currentLeaderId = POD_ID;
+      retryAttempt = 0; // 성공 시 재시도 카운터 리셋
       startHeartbeat();
       console.log(`[Leader] ${POD_ID} 리더로 선출됨 (TTL: ${ttl}s)`);
       return true;
@@ -83,6 +86,11 @@ export async function acquireLeadership(): Promise<boolean> {
     return false;
   } catch (error) {
     console.error('[Leader] 리더십 획득 실패:', error);
+    // 에러 시에도 지수 백오프 적용
+    retryAttempt++;
+    const delay = Math.min(1000 * Math.pow(2, retryAttempt - 1), MAX_RETRY_DELAY);
+    console.log(`[Leader] Redis 에러, ${delay}ms 후 재시도 (시도 #${retryAttempt})`);
+    setTimeout(() => acquireLeadership(), delay);
     return false;
   }
 }
@@ -157,8 +165,11 @@ function startHeartbeat(): void {
         currentLeaderId = null;
         stopHeartbeat();
 
-        // 리더십 재획득 시도
-        setTimeout(() => acquireLeadership(), 1000);
+        // 지수 백오프로 리더십 재획득 시도
+        retryAttempt++;
+        const delay = Math.min(1000 * Math.pow(2, retryAttempt - 1), MAX_RETRY_DELAY);
+        console.log(`[Leader] ${delay}ms 후 리더십 재획득 시도 (시도 #${retryAttempt})`);
+        setTimeout(() => acquireLeadership(), delay);
       }
     } catch (error) {
       console.error('[Leader] Heartbeat 오류:', error);

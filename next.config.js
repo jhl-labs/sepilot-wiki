@@ -30,8 +30,9 @@ const nextConfig = {
   },
 
   // 환경 변수 노출
+  // 주의: AUTH_MODE는 서버에서 process.env로 직접 읽어야 함 (런타임 값)
+  // NEXT_PUBLIC_* 변수만 클라이언트에 노출 (빌드 타임 고정)
   env: {
-    AUTH_MODE: process.env.AUTH_MODE || 'public',
     NEXT_PUBLIC_APP_VERSION: packageJson.version,
     NEXT_PUBLIC_BUILD_TIME: new Date().toISOString(),
   },

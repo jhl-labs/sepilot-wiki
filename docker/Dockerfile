@@ -4,20 +4,21 @@
 # ===================================
 # Stage 1: Dependencies
 # ===================================
-FROM node:20-alpine AS deps
+FROM oven/bun:1-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # 패키지 파일 복사
-COPY package.json package-lock.json* ./
+COPY package.json bun.lock ./
 
 # 의존성 설치
-RUN npm ci --legacy-peer-deps
+RUN bun install --frozen-lockfile
 
 # ===================================
 # Stage 2: Builder
 # ===================================
-FROM node:20-alpine AS builder
+FROM oven/bun:1-alpine AS builder
+RUN apk add --no-cache nodejs
 WORKDIR /app
 
 # 빌드 인자
@@ -40,10 +41,10 @@ ENV NEXT_PUBLIC_AUTH_MODE=${AUTH_MODE}
 ENV EXTRA_WIKI_DIRS=/app/data-external
 
 # Wiki 데이터 및 검색 인덱스 빌드
-RUN npm run build:wiki && npm run build:search
+RUN bun run build:wiki && bun run build:search
 
 # Next.js 빌드
-RUN npm run build
+RUN bun run build
 
 # ===================================
 # Stage 3: Runner

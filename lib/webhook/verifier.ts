@@ -20,12 +20,8 @@ export function verifyGitHubSignature(
 
   const secret = process.env.GITHUB_WEBHOOK_SECRET;
   if (!secret) {
-    console.warn('[Webhook] GITHUB_WEBHOOK_SECRET 환경변수 미설정');
-    // 개발 환경에서는 서명 검증 건너뛰기 (선택적)
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('[Webhook] 개발 모드 - 서명 검증 건너뜀');
-      return true;
-    }
+    // 보안: 환경에 관계없이 시크릿 필수
+    console.error('[Webhook] GITHUB_WEBHOOK_SECRET 환경변수 미설정 - Webhook 비활성화');
     return false;
   }
 
