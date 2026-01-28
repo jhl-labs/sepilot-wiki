@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Menu,
   Search,
@@ -29,8 +29,47 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
+  const [themeMenuIndex, setThemeMenuIndex] = useState(0);
   const themeMenuRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const themeOptions: readonly ['light', 'dark', 'system'] = ['light', 'dark', 'system'];
+
+  // 테마 메뉴 키보드 핸들러
+  const handleThemeMenuKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (!showThemeMenu) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setThemeMenuIndex((prev) => (prev + 1) % 3);
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setThemeMenuIndex((prev) => (prev - 1 + 3) % 3);
+        break;
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        setTheme(themeOptions[themeMenuIndex]);
+        setShowThemeMenu(false);
+        break;
+      case 'Escape':
+        e.preventDefault();
+        setShowThemeMenu(false);
+        break;
+      case 'Tab':
+        setShowThemeMenu(false);
+        break;
+    }
+  }, [showThemeMenu, themeMenuIndex, setTheme, themeOptions]);
+
+  // 메뉴가 열릴 때 현재 테마 인덱스로 초기화 (이벤트 핸들러에서 처리)
+  const handleThemeMenuOpen = useCallback(() => {
+    const currentIndex = themeOptions.indexOf(theme);
+    setThemeMenuIndex(currentIndex >= 0 ? currentIndex : 0);
+    setShowThemeMenu(true);
+  }, [theme, themeOptions]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -140,10 +179,16 @@ export function Header() {
           <Search size={20} aria-hidden="true" />
         </button>
 
-        <div className="theme-menu-wrapper" ref={themeMenuRef}>
+        <div className="theme-menu-wrapper" ref={themeMenuRef} onKeyDown={handleThemeMenuKeyDown}>
           <button
             className="header-btn theme-btn"
-            onClick={() => setShowThemeMenu(!showThemeMenu)}
+            onClick={() => showThemeMenu ? setShowThemeMenu(false) : handleThemeMenuOpen()}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                handleThemeMenuOpen();
+              }
+            }}
             aria-label="테마 변경 메뉴"
             aria-expanded={showThemeMenu}
             aria-haspopup="menu"
@@ -156,28 +201,31 @@ export function Header() {
           {showThemeMenu && (
             <div className="theme-menu" role="menu" aria-label="테마 선택">
               <button
-                className={`theme-option ${theme === 'light' ? 'active' : ''}`}
+                className={`theme-option ${theme === 'light' ? 'active' : ''} ${themeMenuIndex === 0 ? 'focused' : ''}`}
                 onClick={() => { setTheme('light'); setShowThemeMenu(false); }}
                 role="menuitem"
                 aria-pressed={theme === 'light'}
+                tabIndex={themeMenuIndex === 0 ? 0 : -1}
               >
                 <Sun size={16} aria-hidden="true" />
                 <span>라이트</span>
               </button>
               <button
-                className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
+                className={`theme-option ${theme === 'dark' ? 'active' : ''} ${themeMenuIndex === 1 ? 'focused' : ''}`}
                 onClick={() => { setTheme('dark'); setShowThemeMenu(false); }}
                 role="menuitem"
                 aria-pressed={theme === 'dark'}
+                tabIndex={themeMenuIndex === 1 ? 0 : -1}
               >
                 <Moon size={16} aria-hidden="true" />
                 <span>다크</span>
               </button>
               <button
-                className={`theme-option ${theme === 'system' ? 'active' : ''}`}
+                className={`theme-option ${theme === 'system' ? 'active' : ''} ${themeMenuIndex === 2 ? 'focused' : ''}`}
                 onClick={() => { setTheme('system'); setShowThemeMenu(false); }}
                 role="menuitem"
                 aria-pressed={theme === 'system'}
+                tabIndex={themeMenuIndex === 2 ? 0 : -1}
               >
                 <Monitor size={16} aria-hidden="true" />
                 <span>시스템</span>

@@ -122,7 +122,31 @@ export async function withRetry<T>(
 }
 
 /**
+ * Retry-After 헤더에서 대기 시간 추출 (초 단위 → 밀리초)
+ */
+function getRetryAfterMs(response: Response): number | null {
+  const retryAfter = response.headers.get('Retry-After');
+  if (!retryAfter) return null;
+
+  // 숫자인 경우 (초 단위)
+  const seconds = parseInt(retryAfter, 10);
+  if (!isNaN(seconds)) {
+    return seconds * 1000;
+  }
+
+  // HTTP-date 형식인 경우
+  const date = new Date(retryAfter);
+  if (!isNaN(date.getTime())) {
+    const delayMs = date.getTime() - Date.now();
+    return delayMs > 0 ? delayMs : null;
+  }
+
+  return null;
+}
+
+/**
  * fetch 함수를 재시도 가능하게 래핑
+ * Rate Limiting (429) 응답 시 Retry-After 헤더를 확인하여 대기
  *
  * @example
  * const response = await fetchWithRetry('/api/data', {
@@ -134,11 +158,28 @@ export async function fetchWithRetry(
   init?: RequestInit,
   retryOptions?: RetryOptions
 ): Promise<Response> {
+  let rateLimitDelay = 0;
+
   return withRetry(async () => {
+    // Rate limit 대기 시간이 있으면 먼저 대기
+    if (rateLimitDelay > 0) {
+      await sleep(rateLimitDelay);
+      rateLimitDelay = 0;
+    }
+
     const response = await fetch(input, init);
 
     // 성공 응답이 아니면 재시도 판단을 위해 에러 throw
     if (!response.ok) {
+      // Rate Limiting 응답 시 Retry-After 헤더 확인
+      if (response.status === 429) {
+        const retryAfterMs = getRetryAfterMs(response);
+        if (retryAfterMs) {
+          // 다음 재시도 전에 대기할 시간 저장 (최대 60초)
+          rateLimitDelay = Math.min(retryAfterMs, 60000);
+        }
+      }
+
       const retryable = response.status >= 500 || response.status === 429;
       if (retryable) {
         throw response;

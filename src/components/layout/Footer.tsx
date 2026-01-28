@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { useSiteConfig } from '../../context/ConfigContext';
 import { ExternalLink } from 'lucide-react';
 
@@ -25,7 +26,7 @@ function formatBuildTime(isoString: string): string {
   }
 }
 
-export function Footer() {
+export const Footer = memo(function Footer() {
   const siteConfig = useSiteConfig();
   const footer = siteConfig.footer;
 
@@ -108,4 +109,6 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+Footer.displayName = 'Footer';

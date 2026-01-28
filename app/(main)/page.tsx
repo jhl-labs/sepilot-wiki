@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import Link from 'next/link';
 import {
   BookOpen,
@@ -38,10 +39,15 @@ export default function HomePage() {
   const { data: pages, isLoading: pagesLoading } = useWikiPages();
   const { data: issues, isLoading: issuesLoading } = useIssues(LABELS.REQUEST);
 
-  const recentIssues = issues?.slice(0, 5) || [];
+  // 메모이제이션: 트리에서 모든 페이지 추출
+  const allPages = useMemo(() => {
+    return pages ? flattenPages(pages) : [];
+  }, [pages]);
 
-  // 트리에서 모든 페이지 추출
-  const allPages = pages ? flattenPages(pages) : [];
+  // 메모이제이션: 최근 이슈 5개
+  const recentIssues = useMemo(() => {
+    return issues?.slice(0, 5) || [];
+  }, [issues]);
 
   return (
     <div className="home-page">

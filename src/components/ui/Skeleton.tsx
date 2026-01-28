@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import clsx from 'clsx';
 
 /**
@@ -44,7 +45,7 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
  * // 접근성 라벨과 함께
  * <Skeleton label="프로필 이미지 로딩 중" variant="circular" />
  */
-export function Skeleton({
+export const Skeleton = memo(function Skeleton({
   className,
   variant = 'text',
   width,
@@ -65,4 +66,80 @@ export function Skeleton({
       {...props}
     />
   );
+});
+
+Skeleton.displayName = 'Skeleton';
+
+/**
+ * 스켈레톤 표준 높이 (일관성 유지)
+ */
+export const SKELETON_HEIGHTS = {
+  /** 텍스트 한 줄 (16px) */
+  text: 16,
+  /** 제목 (24px) */
+  title: 24,
+  /** 카드/아이템 (60px) */
+  card: 60,
+  /** 검색 결과 아이템 (80px) */
+  searchResult: 80,
+  /** 이미지/차트 (150px) */
+  media: 150,
+} as const;
+
+/**
+ * SkeletonList Props
+ */
+interface SkeletonListProps {
+  /** 스켈레톤 개수 */
+  count?: number;
+  /** 스켈레톤 높이 (preset 또는 숫자) */
+  height?: keyof typeof SKELETON_HEIGHTS | number;
+  /** 스켈레톤 간격 */
+  gap?: number;
+  /** 컨테이너 클래스 */
+  className?: string;
+  /** 접근성 라벨 */
+  label?: string;
 }
+
+/**
+ * 일관된 스켈레톤 리스트 컴포넌트
+ *
+ * @example
+ * // 검색 결과 스켈레톤 (3개)
+ * <SkeletonList count={3} height="searchResult" />
+ *
+ * @example
+ * // 카드 스켈레톤 (5개, 커스텀 높이)
+ * <SkeletonList count={5} height={100} gap={12} />
+ */
+export const SkeletonList = memo(function SkeletonList({
+  count = 3,
+  height = 'card',
+  gap = 8,
+  className = '',
+  label = '목록 로딩 중',
+}: SkeletonListProps) {
+  const heightValue = typeof height === 'number'
+    ? height
+    : SKELETON_HEIGHTS[height];
+
+  return (
+    <div
+      className={`skeleton-list ${className}`}
+      style={{ display: 'flex', flexDirection: 'column', gap }}
+      role="status"
+      aria-label={label}
+    >
+      {Array.from({ length: count }, (_, index) => (
+        <Skeleton
+          key={index}
+          height={heightValue}
+          label={`${label} ${index + 1}/${count}`}
+        />
+      ))}
+    </div>
+  );
+});
+
+SkeletonList.displayName = 'SkeletonList';

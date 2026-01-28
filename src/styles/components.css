@@ -1283,3 +1283,10 @@
 .image-figure img[src=""] {
   display: none;
 }
+
+/* Theme Menu Keyboard Focus */
+.theme-option.focused {
+  background-color: var(--color-bg-hover);
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: -2px;
+}

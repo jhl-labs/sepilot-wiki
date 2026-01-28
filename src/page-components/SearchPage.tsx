@@ -3,9 +3,13 @@ import { Search, FileText, ArrowRight, RefreshCw, AlertCircle, Tag, TrendingUp }
 import { useSearch, useWikiTags, useWikiPages } from '../hooks/useWiki';
 import { useDebounce } from '../hooks/useDebounce';
 import { escapeRegExp } from '../utils';
-import { Skeleton } from '../components/ui/Skeleton';
+import { SkeletonList } from '../components/ui/Skeleton';
 import { Input } from '../components/ui/Input';
+import { VirtualList } from '../components/ui/VirtualList';
 import { useState, useMemo, useCallback } from 'react';
+
+// VirtualList 사용 임계값 (이 이상이면 가상화 적용)
+const VIRTUALIZE_THRESHOLD = 20;
 
 // 검색어 하이라이팅 컴포넌트
 function HighlightText({ text, query }: { text: string; query: string }) {
@@ -137,9 +141,7 @@ export function SearchPage() {
           </div>
         ) : isLoading ? (
           <div className="results-loading">
-            <Skeleton height={80} />
-            <Skeleton height={80} />
-            <Skeleton height={80} />
+            <SkeletonList count={3} height="searchResult" label="검색 결과 로딩 중" />
           </div>
         ) : searchQuery && results ? (
           results.length > 0 ? (
@@ -147,42 +149,86 @@ export function SearchPage() {
               <p className="results-count">
                 "<HighlightText text={searchQuery} query={searchQuery} />"에 대한 검색 결과 {results.length}건
               </p>
-              <div className="results-list">
-                {results.map((result) => (
-                  <Link
-                    key={result.slug}
-                    to={`/wiki/${result.slug}`}
-                    className="result-item"
-                  >
-                    <FileText size={20} className="result-icon" />
-                    <div className="result-content">
-                      <h3 className="result-title">
-                        <HighlightText text={result.title} query={searchQuery} />
-                      </h3>
-                      <p className="result-excerpt">
-                        {result.content ? (
-                          <HighlightText
-                            text={getExcerptWithContext(result.content, searchQuery)}
-                            query={searchQuery}
-                          />
-                        ) : (
-                          '문서를 클릭하여 내용을 확인하세요'
+              {results.length >= VIRTUALIZE_THRESHOLD ? (
+                <VirtualList
+                  items={results}
+                  estimateSize={100}
+                  height={600}
+                  className="results-list"
+                  ariaLabel={`검색 결과 ${results.length}건`}
+                  getItemKey={(item) => item.slug}
+                  renderItem={(result) => (
+                    <Link
+                      to={`/wiki/${result.slug}`}
+                      className="result-item"
+                    >
+                      <FileText size={20} className="result-icon" />
+                      <div className="result-content">
+                        <h3 className="result-title">
+                          <HighlightText text={result.title} query={searchQuery} />
+                        </h3>
+                        <p className="result-excerpt">
+                          {result.content ? (
+                            <HighlightText
+                              text={getExcerptWithContext(result.content, searchQuery)}
+                              query={searchQuery}
+                            />
+                          ) : (
+                            '문서를 클릭하여 내용을 확인하세요'
+                          )}
+                        </p>
+                        {result.tags && result.tags.length > 0 && (
+                          <div className="result-tags">
+                            {result.tags.slice(0, 3).map((tag) => (
+                              <span key={tag} className="result-tag">
+                                <HighlightText text={tag} query={searchQuery} />
+                              </span>
+                            ))}
+                          </div>
                         )}
-                      </p>
-                      {result.tags && result.tags.length > 0 && (
-                        <div className="result-tags">
-                          {result.tags.slice(0, 3).map((tag) => (
-                            <span key={tag} className="result-tag">
-                              <HighlightText text={tag} query={searchQuery} />
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <ArrowRight size={18} className="result-arrow" />
-                  </Link>
-                ))}
-              </div>
+                      </div>
+                      <ArrowRight size={18} className="result-arrow" />
+                    </Link>
+                  )}
+                />
+              ) : (
+                <div className="results-list">
+                  {results.map((result) => (
+                    <Link
+                      key={result.slug}
+                      to={`/wiki/${result.slug}`}
+                      className="result-item"
+                    >
+                      <FileText size={20} className="result-icon" />
+                      <div className="result-content">
+                        <h3 className="result-title">
+                          <HighlightText text={result.title} query={searchQuery} />
+                        </h3>
+                        <p className="result-excerpt">
+                          {result.content ? (
+                            <HighlightText
+                              text={getExcerptWithContext(result.content, searchQuery)}
+                              query={searchQuery}
+                            />
+                          ) : (
+                            '문서를 클릭하여 내용을 확인하세요'
+                          )}
+                        </p>
+                        {result.tags && result.tags.length > 0 && (
+                          <div className="result-tags">
+                            {result.tags.slice(0, 3).map((tag) => (
+                              <span key={tag} className="result-tag">
+                                <HighlightText text={tag} query={searchQuery} />
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <ArrowRight size={18} className="result-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <div className="no-results">

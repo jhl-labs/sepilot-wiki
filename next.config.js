@@ -46,7 +46,12 @@ const nextConfig = {
 
   // 번들 분석 및 최적화
   experimental: {
-    // optimizePackageImports: ['lucide-react', '@tanstack/react-query'],
+    // 대용량 라이브러리 트리 쉐이킹 최적화
+    optimizePackageImports: [
+      'lucide-react',
+      '@tanstack/react-query',
+      'react-syntax-highlighter',
+    ],
     // 스케줄러 초기화를 위한 instrumentation 활성화
     instrumentationHook: process.env.BUILD_MODE === 'standalone',
   },
@@ -61,6 +66,42 @@ const nextConfig = {
       config.externals.push('mermaid', 'plotly.js');
     }
     return config;
+  },
+
+  // 보안 헤더 설정 (standalone 빌드에서만 적용)
+  async headers() {
+    // 정적 빌드에서는 헤더 설정 불필요 (웹 서버에서 설정)
+    if (process.env.BUILD_MODE === 'static') {
+      return [];
+    }
+
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+    ];
   },
 };
 
