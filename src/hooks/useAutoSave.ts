@@ -6,15 +6,19 @@
  */
 
 import { useEffect, useRef, useCallback, useState } from 'react';
+import { validateMarkdownContent, validateFrontmatter, mergeValidationResults, type ValidationResult } from '../utils/validation';
+import { APP_CONFIG } from '../config';
 
-const DRAFT_KEY_PREFIX = 'wiki-draft-';
-const AUTO_SAVE_DELAY = 2000; // 2초
+const DRAFT_KEY_PREFIX = APP_CONFIG.autoSave.draftKeyPrefix;
+const AUTO_SAVE_DELAY = APP_CONFIG.autoSave.delay;
 
 export interface Draft {
   content: string;
   savedAt: string;
   originalContent: string;
 }
+
+export type { ValidationResult } from '../utils/validation';
 
 interface UseAutoSaveOptions {
   // 문서 식별자
@@ -46,6 +50,10 @@ interface UseAutoSaveReturn {
   showRestoreDialog: boolean;
   // 복원 다이얼로그 닫기
   dismissRestoreDialog: () => void;
+  // 콘텐츠 검증 결과
+  validation: ValidationResult;
+  // 콘텐츠 검증 실행
+  validate: () => ValidationResult;
 }
 
 function getDraftKey(slug: string): string {
@@ -122,6 +130,24 @@ export function useAutoSave(options: UseAutoSaveOptions): UseAutoSaveReturn {
 
   // 드래프트 존재 여부
   const hasDraft = draft !== null && draft.content !== originalContent;
+
+  // 콘텐츠 검증
+  const validate = useCallback((): ValidationResult => {
+    const contentValidation = validateMarkdownContent(content);
+    const frontmatterValidation = validateFrontmatter(content);
+    return mergeValidationResults(contentValidation, frontmatterValidation);
+  }, [content]);
+
+  // 검증 결과 (메모이제이션)
+  const [validation, setValidation] = useState<ValidationResult>(() => validate());
+
+  // 콘텐츠가 변경되면 검증 업데이트 (디바운스)
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setValidation(validate());
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [content, validate]);
 
   // 복원 다이얼로그 닫기
   const dismissRestoreDialog = useCallback(() => {
@@ -206,6 +232,8 @@ export function useAutoSave(options: UseAutoSaveOptions): UseAutoSaveReturn {
     isSaving,
     showRestoreDialog,
     dismissRestoreDialog,
+    validation,
+    validate,
   };
 }
 

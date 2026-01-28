@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { LazyMermaidDiagram } from './LazyMermaidDiagram';
 import { LazyPlotlyChart } from './LazyPlotlyChart';
 import { generateHeadingId } from '../../utils';
+import { SectionErrorBoundary } from '../error/ErrorBoundary';
 
 /**
  * MarkdownRenderer 컴포넌트 Props
@@ -73,20 +74,39 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
             const language = match?.[1] || 'text';
 
             if (language === 'mermaid') {
-              return <LazyMermaidDiagram chart={String(children)} />;
+              return (
+                <SectionErrorBoundary
+                  sectionName="다이어그램"
+                  errorMessage="다이어그램을 렌더링할 수 없습니다"
+                >
+                  <LazyMermaidDiagram chart={String(children)} />
+                </SectionErrorBoundary>
+              );
             }
 
             if (language === 'plotly') {
-              return <LazyPlotlyChart data={String(children)} />;
+              return (
+                <SectionErrorBoundary
+                  sectionName="차트"
+                  errorMessage="차트를 렌더링할 수 없습니다"
+                >
+                  <LazyPlotlyChart data={String(children)} />
+                </SectionErrorBoundary>
+              );
             }
 
             return (
-              <CodeBlock
-                language={language}
-                theme={actualTheme}
+              <SectionErrorBoundary
+                sectionName="코드 블록"
+                errorMessage="코드를 표시할 수 없습니다"
               >
-                {String(children).replace(/\n$/, '')}
-              </CodeBlock>
+                <CodeBlock
+                  language={language}
+                  theme={actualTheme}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </CodeBlock>
+              </SectionErrorBoundary>
             );
           },
           a({ href, children, ...props }) {
@@ -124,10 +144,34 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
               </div>
             );
           },
-          img({ src, alt, ...props }) {
+          img({ src, alt, width, height, ...props }) {
             return (
               <figure className="image-figure">
-                <img src={src} alt={alt} loading="lazy" {...props} />
+                <img
+                  src={src}
+                  alt={alt || ''}
+                  loading="lazy"
+                  decoding="async"
+                  // CLS 방지를 위한 기본 크기 설정
+                  width={width || 'auto'}
+                  height={height || 'auto'}
+                  style={{
+                    // 이미지 크기가 지정되지 않은 경우 aspect-ratio 힌트 제공
+                    aspectRatio: !width && !height ? '16 / 9' : undefined,
+                    maxWidth: '100%',
+                    height: 'auto',
+                  }}
+                  onError={(e) => {
+                    // 이미지 로드 실패 시 대체 UI
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'image-error';
+                    placeholder.textContent = '이미지를 불러올 수 없습니다';
+                    target.parentNode?.insertBefore(placeholder, target);
+                  }}
+                  {...props}
+                />
                 {alt && <figcaption>{alt}</figcaption>}
               </figure>
             );

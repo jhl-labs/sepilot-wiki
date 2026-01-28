@@ -40,6 +40,78 @@ export const LABELS = {
   PUBLISHED: 'published',
 } as const;
 
+/**
+ * 애플리케이션 설정 상수
+ * 하드코딩된 값들을 중앙에서 관리
+ */
+export const APP_CONFIG = {
+  // 자동 저장 설정
+  autoSave: {
+    /** 자동 저장 지연 시간 (ms) */
+    delay: 2000,
+    /** 드래프트 키 접두사 */
+    draftKeyPrefix: 'wiki-draft-',
+  },
+
+  // 토스트/알림 설정
+  toast: {
+    /** 최대 토스트 표시 개수 */
+    maxToasts: 5,
+    /** 기본 토스트 표시 시간 (ms) */
+    defaultDuration: 5000,
+  },
+
+  // 사이드바 설정
+  sidebar: {
+    /** 폴더 확장 상태 저장 키 */
+    expandedFoldersKey: 'sepilot-wiki-expanded-folders',
+    /** localStorage 저장 디바운스 (ms) */
+    saveDebounce: 300,
+  },
+
+  // 검색 설정
+  search: {
+    /** 검색 디바운스 (ms) */
+    debounce: 300,
+    /** 최소 검색어 길이 */
+    minQueryLength: 2,
+  },
+
+  // API 설정
+  api: {
+    /** 기본 재시도 횟수 */
+    maxRetries: 2,
+    /** 재시도 초기 지연 (ms) */
+    retryInitialDelay: 500,
+  },
+
+  // 캐시 TTL 설정 (ms)
+  cache: {
+    /** Wiki 데이터 TTL (5분) */
+    wikiData: 5 * 60 * 1000,
+    /** 가이드 데이터 TTL (5분) */
+    guideData: 5 * 60 * 1000,
+    /** Issues TTL (2분) */
+    issues: 2 * 60 * 1000,
+    /** AI 히스토리 TTL (3분) */
+    aiHistory: 3 * 60 * 1000,
+    /** Actions 상태 TTL (1분) */
+    actionsStatus: 1 * 60 * 1000,
+  },
+
+  // 콘텐츠 검증 설정
+  validation: {
+    /** 최소 콘텐츠 길이 */
+    minContentLength: 10,
+    /** 최대 콘텐츠 크기 (KB) */
+    maxContentSizeKB: 100,
+    /** 최소 제목 길이 */
+    minTitleLength: 2,
+    /** 최대 제목 길이 */
+    maxTitleLength: 100,
+  },
+} as const;
+
 // GitHub URL 헬퍼 함수들
 export const urls = {
   // 저장소 URL

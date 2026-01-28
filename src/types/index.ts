@@ -27,6 +27,38 @@ export interface WikiRevision {
   deletions?: number;
 }
 
+/**
+ * Wiki 페이지 트리 아이템 (페이지)
+ */
+export interface WikiTreePage {
+  title: string;
+  slug: string;
+  menu?: string;
+  isCategory?: false;
+  children?: never;
+}
+
+/**
+ * Wiki 페이지 트리 아이템 (카테고리/폴더)
+ */
+export interface WikiTreeCategory {
+  name: string;
+  path: string;
+  isCategory: true;
+  children: WikiTreeItem[];
+  title?: never;
+  slug?: never;
+}
+
+/**
+ * Wiki 트리 아이템 (페이지 또는 카테고리)
+ */
+export type WikiTreeItem = WikiTreePage | WikiTreeCategory;
+
+/**
+ * Wiki 트리 타입 (하위 호환성을 위해 유지)
+ * @deprecated WikiTreeItem 사용을 권장
+ */
 export interface WikiTree {
   // 페이지인 경우
   title?: string;
@@ -38,6 +70,20 @@ export interface WikiTree {
   isCategory?: boolean;
   // 공통
   children?: WikiTree[];
+}
+
+/**
+ * WikiTreeItem 타입 가드: 카테고리인지 확인
+ */
+export function isWikiCategory(item: WikiTree | WikiTreeItem): item is WikiTreeCategory {
+  return item.isCategory === true && typeof item.name === 'string' && typeof item.path === 'string';
+}
+
+/**
+ * WikiTreeItem 타입 가드: 페이지인지 확인
+ */
+export function isWikiPage(item: WikiTree | WikiTreeItem): item is WikiTreePage {
+  return !item.isCategory && typeof item.slug === 'string';
 }
 
 // GitHub Issue 관련 타입
@@ -62,6 +108,25 @@ export interface GitHubLabel {
   name: string;
   color: string;
   description?: string;
+}
+
+/**
+ * GitHub API 라벨 (문자열 또는 객체)
+ */
+export type GitHubLabelInput = string | GitHubLabel;
+
+/**
+ * GitHub 라벨에서 이름 추출
+ */
+export function getLabelName(label: GitHubLabelInput): string {
+  return typeof label === 'string' ? label : label.name;
+}
+
+/**
+ * GitHubLabel 타입 가드
+ */
+export function isGitHubLabelObject(label: GitHubLabelInput): label is GitHubLabel {
+  return typeof label === 'object' && label !== null && 'name' in label;
 }
 
 export interface GitHubUser {

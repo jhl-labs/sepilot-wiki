@@ -1,4 +1,9 @@
 import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus, ApiError } from '../types';
+import { getLabelName } from '../types';
+import { fetchWithRetry } from '../utils/retry';
+import { createLogger } from '../utils/logger';
+
+const logger = createLogger('api');
 
 // TTL 기반 캐시 클래스
 interface CacheEntry<T> {
@@ -125,7 +130,10 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
         // cache-busting: 빌드 버전 기반 (CDN 캐시 활용 가능)
         const cacheBuster = `?v=${getCacheBuster('static')}`;
         const baseUrl = getBaseUrl();
-        const response = await fetch(`${baseUrl}wiki-data.json${cacheBuster}`);
+        const response = await fetchWithRetry(`${baseUrl}wiki-data.json${cacheBuster}`, undefined, {
+            maxRetries: 2,
+            initialDelay: 500,
+        });
         if (!response.ok) {
             if (response.status === 404) {
                 // 데이터 파일이 없는 경우 빈 데이터 반환 (초기 상태)
@@ -143,7 +151,7 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
         return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
-        console.error('Error loading wiki data:', error);
+        logger.error('위키 데이터 로드 실패', error);
         throw new ApiServiceError(
             '위키 데이터를 불러오는 중 오류가 발생했습니다.',
             'NETWORK_ERROR',
@@ -164,7 +172,10 @@ async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
         // cache-busting: 빌드 버전 기반 (CDN 캐시 활용 가능)
         const cacheBuster = `?v=${getCacheBuster('static')}`;
         const baseUrl = getBaseUrl();
-        const response = await fetch(`${baseUrl}guide-data.json${cacheBuster}`);
+        const response = await fetchWithRetry(`${baseUrl}guide-data.json${cacheBuster}`, undefined, {
+            maxRetries: 2,
+            initialDelay: 500,
+        });
         if (!response.ok) {
             if (response.status === 404) {
                 return { pages: [] };
@@ -181,7 +192,7 @@ async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
         return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
-        console.error('Error loading guide data:', error);
+        logger.error('가이드 데이터 로드 실패', error);
         throw new ApiServiceError(
             '가이드 데이터를 불러오는 중 오류가 발생했습니다.',
             'NETWORK_ERROR',
@@ -280,7 +291,10 @@ async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: s
         // cache-busting: 2분 간격으로 캐시 키 변경 (동적 데이터)
         const cacheBuster = `?v=${getCacheBuster('dynamic', 2 * 60 * 1000)}`;
         const baseUrl = getBaseUrl();
-        const response = await fetch(`${baseUrl}data/issues.json${cacheBuster}`);
+        const response = await fetchWithRetry(`${baseUrl}data/issues.json${cacheBuster}`, undefined, {
+            maxRetries: 2,
+            initialDelay: 500,
+        });
         if (!response.ok) {
             if (response.status === 404) {
                 return { issues: [], lastUpdated: new Date().toISOString() };
@@ -297,7 +311,7 @@ async function loadIssuesData(): Promise<{ issues: GitHubIssue[]; lastUpdated: s
         return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
-        console.error('Error loading issues data:', error);
+        logger.error('이슈 데이터 로드 실패', error);
         throw new ApiServiceError(
             'Issue 데이터를 불러오는 중 오류가 발생했습니다.',
             'NETWORK_ERROR',
@@ -315,12 +329,9 @@ export async function fetchIssues(label?: string): Promise<GitHubIssue[]> {
         return data.issues;
     }
 
-    // 라벨 필터링
+    // 라벨 필터링 (타입 가드 사용)
     return data.issues.filter((issue) =>
-        issue.labels.some((l) => {
-            const labelName = typeof l === 'string' ? l : l.name;
-            return labelName === label;
-        })
+        issue.labels.some((l) => getLabelName(l) === label)
     );
 }
 
@@ -345,7 +356,10 @@ export async function fetchAIHistory(): Promise<AIHistory> {
         // cache-busting: 3분 간격으로 캐시 키 변경 (동적 데이터)
         const cacheBuster = `?v=${getCacheBuster('dynamic', 3 * 60 * 1000)}`;
         const baseUrl = getBaseUrl();
-        const response = await fetch(`${baseUrl}data/ai-history.json${cacheBuster}`);
+        const response = await fetchWithRetry(`${baseUrl}data/ai-history.json${cacheBuster}`, undefined, {
+            maxRetries: 2,
+            initialDelay: 500,
+        });
         if (!response.ok) {
             if (response.status === 404) {
                 return { entries: [], lastUpdated: new Date().toISOString() };
@@ -362,7 +376,7 @@ export async function fetchAIHistory(): Promise<AIHistory> {
         return data;
     } catch (error) {
         if (error instanceof ApiServiceError) throw error;
-        console.error('Error loading AI history:', error);
+        logger.error('AI 히스토리 로드 실패', error);
         throw new ApiServiceError(
             'AI 히스토리 데이터를 불러오는 중 오류가 발생했습니다.',
             'NETWORK_ERROR',
@@ -396,14 +410,14 @@ export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
                 return null;
             }
             // 다른 에러는 로깅만 하고 null 반환 (중요하지 않은 데이터)
-            console.warn('Actions status fetch failed:', response.status);
+            logger.warn('Actions 상태 가져오기 실패', { status: response.status });
             return null;
         }
         const data = await response.json();
         actionsStatusCache.set(data);
         return data;
     } catch (error) {
-        console.warn('Error loading actions status:', error);
+        logger.warn('Actions 상태 로드 실패', { error });
         return null;
     }
 }

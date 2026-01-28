@@ -18,6 +18,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { useFocusTrap } from '@/src/hooks/useFocusTrap';
+import { useFocusReturn } from '@/src/hooks/useFocusReturn';
 import { useShortcuts } from '@/src/context/ShortcutsContext';
 import { formatShortcut } from '@/src/hooks/useKeyboardShortcuts';
 import { useWikiPages } from '@/src/hooks/useWiki';
@@ -37,6 +38,9 @@ export function CommandPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { isCommandPaletteOpen, closeCommandPalette } = useShortcuts();
   const router = useRouter();
+
+  // 닫힐 때 이전 포커스 복원
+  useFocusReturn(isCommandPaletteOpen);
   const { data: wikiPages = [], isLoading: isPagesLoading, error: pagesError } = useWikiPages();
 
   const containerRef = useFocusTrap<HTMLDivElement>({
