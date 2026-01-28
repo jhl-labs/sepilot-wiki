@@ -62,6 +62,36 @@
   background-color: var(--color-error-hover);
 }
 
+/* Button Focus Styles */
+.btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-loading {
+  position: relative;
+}
+
+.btn-spinner {
+  animation: spin 1s linear infinite;
+}
+
+.btn-text-loading {
+  opacity: 0.8;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Input */
 .input-wrapper {
   position: relative;
@@ -99,6 +129,43 @@
   left: var(--spacing-3);
   color: var(--color-text-muted);
   pointer-events: none;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.input-label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.input-required {
+  color: var(--color-error);
+  margin-left: var(--spacing-1);
+}
+
+.input-wrapper-error .input,
+.input-error {
+  border-color: var(--color-error);
+}
+
+.input-error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.input-error-message {
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+}
+
+.input-helper-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
 }
 
 /* Badge */
@@ -176,6 +243,19 @@
   }
   100% {
     background-position: -200% 0;
+  }
+}
+
+/* reduced-motion 지원 - 애니메이션 민감 사용자를 위한 대체 스타일 */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--color-bg-tertiary);
+  }
+
+  .btn-spinner {
+    animation: none;
+    opacity: 0.7;
   }
 }
 

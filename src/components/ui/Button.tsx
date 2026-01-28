@@ -1,5 +1,6 @@
 import { type ButtonHTMLAttributes, forwardRef } from 'react';
 import clsx from 'clsx';
+import { Loader2 } from 'lucide-react';
 
 /**
  * Button 컴포넌트 Props
@@ -21,6 +22,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * - `lg`: 큰 크기 (패딩 확대)
    */
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * 로딩 상태 표시
+   * true일 때 스피너가 표시되고 버튼이 비활성화됨
+   */
+  loading?: boolean;
+  /**
+   * 로딩 중 표시할 텍스트
+   */
+  loadingText?: string;
 }
 
 /**
@@ -37,21 +47,40 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * @example
  * // 위험 액션
  * <Button variant="danger" onClick={handleDelete}>삭제</Button>
+ *
+ * @example
+ * // 로딩 상태
+ * <Button loading loadingText="저장 중...">저장</Button>
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', children, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', loading, loadingText, disabled, children, ...props }, ref) => {
+    const isDisabled = disabled || loading;
+
     return (
       <button
         ref={ref}
         className={clsx(
           'btn',
           `btn-${variant}`,
-          `btn-${size}`,
+          size !== 'md' && `btn-${size}`,
+          loading && 'btn-loading',
           className
         )}
+        disabled={isDisabled}
+        aria-disabled={isDisabled || undefined}
+        aria-busy={loading || undefined}
         {...props}
       >
-        {children}
+        {loading && (
+          <Loader2
+            size={size === 'sm' ? 14 : size === 'lg' ? 18 : 16}
+            className="btn-spinner"
+            aria-hidden="true"
+          />
+        )}
+        <span className={loading ? 'btn-text-loading' : undefined}>
+          {loading && loadingText ? loadingText : children}
+        </span>
       </button>
     );
   }

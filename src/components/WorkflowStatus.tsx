@@ -1,20 +1,39 @@
 'use client';
 
 import { useActionsStatus } from '../hooks/useWiki';
-import { Activity, CheckCircle, XCircle, Clock, RotateCw, GitBranch } from 'lucide-react';
+import { Activity, CheckCircle, XCircle, Clock, RotateCw, GitBranch, AlertTriangle, RefreshCw } from 'lucide-react';
 import type { WorkflowRun } from '../types';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import '../styles/workflow.css';
 
 export function WorkflowStatus() {
-    const { data: status, isLoading, refetch } = useActionsStatus();
+    const { data: status, isLoading, error, refetch, isRefetching } = useActionsStatus();
 
     if (isLoading) {
         return (
-            <div className="workflow-status-card loading">
+            <div className="workflow-status-card loading" role="status" aria-label="워크플로우 상태 로딩 중">
                 <div className="skeleton-header" />
                 <div className="skeleton-body" />
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="workflow-status-card error" role="alert">
+                <div className="workflow-error">
+                    <AlertTriangle size={24} aria-hidden="true" />
+                    <p>워크플로우 상태를 불러올 수 없습니다</p>
+                    <button
+                        onClick={() => refetch()}
+                        className="btn btn-secondary btn-sm"
+                        disabled={isRefetching}
+                    >
+                        <RefreshCw size={14} className={isRefetching ? 'spin' : ''} />
+                        다시 시도
+                    </button>
+                </div>
             </div>
         );
     }
@@ -25,18 +44,24 @@ export function WorkflowStatus() {
     const hasFailures = status.summary.recentFailuresCount > 0;
 
     return (
-        <div className="workflow-status-container">
+        <div className="workflow-status-container" role="region" aria-labelledby="workflow-status-title">
             <div className="workflow-status-header">
-                <h2 className="section-title">
-                    <Activity className="icon" size={20} />
+                <h2 id="workflow-status-title" className="section-title">
+                    <Activity className="icon" size={20} aria-hidden="true" />
                     시스템 상태
                 </h2>
                 <div className="status-meta">
                     <span className="last-updated">
                         업데이트: {format(new Date(status.collectedAt), 'a h:mm:ss', { locale: ko })}
                     </span>
-                    <button onClick={() => refetch()} className="refresh-btn" title="새로고침">
-                        <RotateCw size={14} />
+                    <button
+                        onClick={() => refetch()}
+                        className="refresh-btn"
+                        title="새로고침"
+                        aria-label={isRefetching ? '새로고침 중' : '상태 새로고침'}
+                        disabled={isRefetching}
+                    >
+                        <RotateCw size={14} className={isRefetching ? 'spin' : ''} aria-hidden="true" />
                     </button>
                 </div>
             </div>

@@ -8,6 +8,8 @@ import {
   useContext,
   useState,
   useCallback,
+  useRef,
+  useEffect,
   type ReactNode,
 } from 'react';
 import type { ApiError, ApiErrorCode } from '../types';
@@ -97,9 +99,24 @@ interface ErrorProviderProps {
   children: ReactNode;
 }
 
+// 최대 토스트 개수
+const MAX_TOASTS = 5;
+
 export function ErrorProvider({ children }: ErrorProviderProps) {
   const [errors, setErrors] = useState<ApiError[]>([]);
   const [toasts, setToasts] = useState<Toast[]>([]);
+
+  // 토스트 타임아웃 관리 (메모리 누수 방지)
+  const toastTimeoutsRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
+
+  // 컴포넌트 언마운트 시 모든 타임아웃 정리
+  useEffect(() => {
+    const timeouts = toastTimeoutsRef.current;
+    return () => {
+      timeouts.forEach((timeout) => clearTimeout(timeout));
+      timeouts.clear();
+    };
+  }, []);
 
   // 토스트 ID 생성
   const generateToastId = useCallback(() => {
@@ -136,14 +153,32 @@ export function ErrorProvider({ children }: ErrorProviderProps) {
     (toast: Omit<Toast, 'id'>) => {
       const id = generateToastId();
       const newToast: Toast = { ...toast, id };
-      setToasts((prev) => [...prev, newToast]);
+
+      setToasts((prev) => {
+        // 최대 개수 초과 시 가장 오래된 토스트 제거
+        const updated = [...prev, newToast];
+        if (updated.length > MAX_TOASTS) {
+          const removedToast = updated.shift();
+          if (removedToast) {
+            // 제거된 토스트의 타임아웃도 정리
+            const timeout = toastTimeoutsRef.current.get(removedToast.id);
+            if (timeout) {
+              clearTimeout(timeout);
+              toastTimeoutsRef.current.delete(removedToast.id);
+            }
+          }
+        }
+        return updated;
+      });
 
       // 자동 제거 (기본 5초)
       const duration = toast.duration ?? 5000;
       if (duration > 0) {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
           setToasts((prev) => prev.filter((t) => t.id !== id));
+          toastTimeoutsRef.current.delete(id);
         }, duration);
+        toastTimeoutsRef.current.set(id, timeout);
       }
     },
     [generateToastId]
@@ -151,6 +186,12 @@ export function ErrorProvider({ children }: ErrorProviderProps) {
 
   // 토스트 제거
   const removeToast = useCallback((id: string) => {
+    // 타임아웃 정리
+    const timeout = toastTimeoutsRef.current.get(id);
+    if (timeout) {
+      clearTimeout(timeout);
+      toastTimeoutsRef.current.delete(id);
+    }
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
