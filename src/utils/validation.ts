@@ -70,7 +70,7 @@ export function validateFrontmatter(content: string): ValidationResult {
   }
 
   // title 필드 확인
-  if (frontmatter.title !== undefined && !frontmatter.title.trim()) {
+  if (frontmatter.title !== undefined && frontmatter.title !== null && typeof frontmatter.title === 'string' && !frontmatter.title.trim()) {
     errors.push({
       field: 'frontmatter.title',
       code: 'EMPTY_TITLE',

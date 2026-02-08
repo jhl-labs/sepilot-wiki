@@ -4,6 +4,7 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { runJobManually, getSchedulerStatus } from '@/lib/scheduler';
+import { checkAdminApiAuth } from '@/lib/admin-auth';
 
 interface RouteParams {
   params: Promise<{ name: string }>;
@@ -13,17 +14,8 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const { name } = await params;
 
-    // AUTH_MODE가 public이면 인증 없이 허용
-    if (process.env.AUTH_MODE !== 'public') {
-      const authHeader = request.headers.get('authorization');
-      const apiKey = process.env.SCHEDULER_API_KEY;
-
-      if (apiKey && authHeader !== `Bearer ${apiKey}`) {
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 401 }
-        );
-      }
+    if (!checkAdminApiAuth(request)) {
+      return NextResponse.json({ error: '인증 필요' }, { status: 401 });
     }
 
     const status = await getSchedulerStatus();
@@ -31,7 +23,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
     if (!job) {
       return NextResponse.json(
-        { error: `Job '${name}' not found` },
+        { error: `작업 '${name}'을 찾을 수 없음` },
         { status: 404 }
       );
     }
@@ -40,7 +32,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   } catch (error) {
     console.error('[Scheduler API] 작업 조회 오류:', error);
     return NextResponse.json(
-      { error: 'Failed to get job' },
+      { error: '작업 조회 실패' },
       { status: 500 }
     );
   }
@@ -50,22 +42,24 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
   try {
     const { name } = await params;
 
-    // 인증 확인
-    if (process.env.AUTH_MODE !== 'public') {
-      const authHeader = request.headers.get('authorization');
-      const apiKey = process.env.SCHEDULER_API_KEY;
-
-      if (apiKey && authHeader !== `Bearer ${apiKey}`) {
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 401 }
-        );
-      }
+    if (!checkAdminApiAuth(request)) {
+      return NextResponse.json({ error: '인증 필요' }, { status: 401 });
     }
 
-    console.log(`[Scheduler API] 수동 실행 요청: ${name}`);
+    // body에서 dryRun 옵션 파싱
+    let dryRun: boolean | undefined;
+    try {
+      const body = await request.json();
+      if (typeof body.dryRun === 'boolean') {
+        dryRun = body.dryRun;
+      }
+    } catch {
+      // body가 없거나 파싱 실패 시 무시
+    }
 
-    const result = await runJobManually(name);
+    console.log(`[Scheduler API] 수동 실행 요청: ${name}${dryRun ? ' (DRY_RUN)' : ''}`);
+
+    const result = await runJobManually(name, { dryRun });
 
     return NextResponse.json({
       jobName: name,
@@ -74,7 +68,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
   } catch (error) {
     console.error('[Scheduler API] 작업 실행 오류:', error);
     return NextResponse.json(
-      { error: 'Failed to run job' },
+      { error: '작업 실행 실패' },
       { status: 500 }
     );
   }

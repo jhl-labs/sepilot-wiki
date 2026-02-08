@@ -6,9 +6,14 @@
 export interface JobResult {
   success: boolean;
   message: string;
-  data?: Record<string, unknown>;
+  data?: { output?: string } & Record<string, unknown>;
   error?: string;
   duration?: number;
+}
+
+/** 작업 실행 옵션 */
+export interface JobRunOptions {
+  dryRun?: boolean;
 }
 
 /** 작업 실행 이력 */

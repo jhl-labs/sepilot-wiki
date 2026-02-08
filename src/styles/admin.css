@@ -2442,3 +2442,324 @@
 .new-folder-modal .current-path svg {
   color: var(--admin-accent);
 }
+
+/* ========================================
+   Automation Page
+   ======================================== */
+
+/* DRY_RUN 토글 */
+.automation-dry-run-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-2);
+  padding: var(--admin-space-2) var(--admin-space-3);
+  background: var(--admin-bg-tertiary);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--admin-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.automation-dry-run-toggle input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--admin-accent);
+  cursor: pointer;
+}
+
+/* Job 그리드 */
+.automation-job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--admin-space-4);
+}
+
+/* Job 카드 */
+.automation-job-card {
+  padding: var(--admin-space-4);
+  background: var(--admin-bg-tertiary);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-md);
+  transition: border-color var(--admin-transition-fast);
+}
+
+.automation-job-card:hover {
+  border-color: var(--admin-border-light);
+}
+
+.automation-job-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--admin-space-3);
+  margin-bottom: var(--admin-space-3);
+}
+
+.automation-job-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  font-family: var(--admin-font-mono);
+  margin-bottom: var(--admin-space-1);
+}
+
+.automation-job-info p {
+  font-size: 13px;
+  color: var(--admin-text-muted);
+  margin: 0;
+}
+
+/* Job 메타 정보 */
+.automation-job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--admin-space-2);
+}
+
+.automation-schedule-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--admin-space-1);
+  padding: 2px 8px;
+  background: var(--admin-bg-elevated);
+  border-radius: var(--admin-radius-sm);
+  font-size: 11px;
+  color: var(--admin-text-muted);
+}
+
+.automation-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--admin-space-1);
+  padding: 2px 8px;
+  border-radius: var(--admin-radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.automation-status-badge.success {
+  background: var(--admin-success-light);
+  color: var(--admin-success);
+}
+
+.automation-status-badge.error {
+  background: var(--admin-error-light);
+  color: var(--admin-error);
+}
+
+.automation-dry-run-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--admin-radius-sm);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--admin-warning-light);
+  color: var(--admin-warning);
+  border: 1px solid var(--admin-warning);
+}
+
+/* 스크립트 파라미터 입력 */
+.automation-script-params {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--admin-space-3);
+  margin-bottom: var(--admin-space-3);
+}
+
+.automation-env-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-space-1);
+  flex: 1;
+  min-width: 120px;
+}
+
+.automation-env-input label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+  font-family: var(--admin-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.automation-env-input input {
+  padding: var(--admin-space-2) var(--admin-space-3);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+  font-size: 13px;
+  font-family: var(--admin-font-mono);
+  transition: border-color var(--admin-transition-fast);
+}
+
+.automation-env-input input:focus {
+  outline: none;
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 2px var(--admin-accent-light);
+}
+
+.automation-env-input input::placeholder {
+  color: var(--admin-text-dim);
+}
+
+.automation-env-input.invalid input {
+  border-color: var(--admin-error);
+}
+
+.automation-env-error {
+  font-size: 11px;
+  color: var(--admin-error);
+  margin-top: 2px;
+}
+
+/* 경고 */
+.automation-warning {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-1);
+  padding: var(--admin-space-2) var(--admin-space-3);
+  background: var(--admin-warning-light);
+  color: var(--admin-warning);
+  border-radius: var(--admin-radius-sm);
+  font-size: 12px;
+  margin-top: var(--admin-space-2);
+}
+
+/* 실행 결과 */
+.automation-result {
+  margin-top: var(--admin-space-3);
+  border-radius: var(--admin-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--admin-border);
+}
+
+.automation-result.success {
+  border-color: var(--admin-success);
+}
+
+.automation-result.error {
+  border-color: var(--admin-error);
+}
+
+.automation-result-header {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-2);
+  padding: var(--admin-space-2) var(--admin-space-3);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.automation-result.success .automation-result-header {
+  background: var(--admin-success-light);
+  color: var(--admin-success);
+}
+
+.automation-result.error .automation-result-header {
+  background: var(--admin-error-light);
+  color: var(--admin-error);
+}
+
+.automation-result-duration {
+  margin-left: auto;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.automation-result-log {
+  padding: var(--admin-space-3);
+  margin: 0;
+  font-family: var(--admin-font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  background: var(--admin-bg-primary);
+  color: var(--admin-text-secondary);
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* 히스토리 테이블 */
+.automation-history-table {
+  overflow-x: auto;
+}
+
+.automation-history-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.automation-history-table thead th {
+  text-align: left;
+  padding: var(--admin-space-3) var(--admin-space-4);
+  border-bottom: 1px solid var(--admin-border);
+  color: var(--admin-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.automation-history-table tbody tr {
+  border-bottom: 1px solid var(--admin-border);
+  transition: background var(--admin-transition-fast);
+}
+
+.automation-history-table tbody tr:hover {
+  background: var(--admin-bg-tertiary);
+}
+
+.automation-history-table tbody td {
+  padding: var(--admin-space-3) var(--admin-space-4);
+  color: var(--admin-text-secondary);
+}
+
+.automation-history-table code {
+  padding: 2px 6px;
+  background: var(--admin-bg-elevated);
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font-mono);
+  font-size: 12px;
+  color: var(--admin-accent);
+}
+
+.automation-history-time {
+  font-family: var(--admin-font-mono);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.automation-history-message {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.automation-history-error {
+  display: block;
+  font-size: 11px;
+  color: var(--admin-error);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .automation-job-grid {
+    grid-template-columns: 1fr;
+  }
+}

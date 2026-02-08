@@ -57,6 +57,22 @@ jobs:
               body: '📝 요청을 확인했습니다. AI가 문서 초안을 작성 중입니다...'
             })
 
+      - name: Recommend related documents
+        id: recommend
+        run: |
+          echo "🔍 관련 문서 검색 중..."
+          bun run scripts/document/recommend-documents.js \
+            --issue-number "${{ github.event.issue.number }}" \
+            --issue-title "${{ github.event.issue.title }}" \
+            --issue-body "${{ github.event.issue.body }}"
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
       - name: Generate document with AI
         id: generate
         run: |
@@ -593,9 +609,136 @@ jobs:
               body: '✅ 피드백이 반영되었습니다. 변경 사항을 확인해주세요.'
             })
 
+  handle-question-label:
+    if: github.event.action == 'labeled' && github.event.label.name == 'question'
+    runs-on: jhl-space
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Notify start
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🤔 질문을 확인했습니다. AI가 Wiki 문서를 기반으로 답변을 준비 중입니다...'
+            })
+
+      - name: Answer question with AI
+        id: answer
+        run: |
+          echo "🤖 AI 질문 응답 시작..."
+          bun run scripts/document/answer-question.js \
+            --issue-number "${{ github.event.issue.number }}" \
+            --issue-title "${{ github.event.issue.title }}" \
+            --issue-body "${{ github.event.issue.body }}"
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Commit AI history
+        env:
+          HUSKY: 0
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "변경 사항 없음"
+          else
+            git commit -m "docs: Issue #${{ github.event.issue.number }} - AI 질문 응답"
+            git pull --rebase
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  handle-update-request-label:
+    if: github.event.action == 'labeled' && github.event.label.name == 'update-request'
+    runs-on: jhl-space
+    outputs:
+      has_changes: ${{ steps.commit.outputs.has_changes }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Notify start
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '📝 수정 요청을 확인했습니다. AI가 문서를 분석하고 수정 중입니다...'
+            })
+
+      - name: Update document with AI
+        id: update
+        run: |
+          echo "🤖 문서 수정 시작..."
+          bun run scripts/document/update-document.js \
+            --issue-number "${{ github.event.issue.number }}" \
+            --issue-title "${{ github.event.issue.title }}" \
+            --issue-body "${{ github.event.issue.body }}"
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Build wiki data
+        run: |
+          bun run build:wiki
+          bun run build:search
+
+      - name: Commit and push
+        id: commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "변경 사항 없음"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 수정 요청 처리"
+            git pull --rebase
+            git push
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
+
   # 모든 handle job이 완료된 후 배포 (하나라도 성공하면 실행)
   deploy:
-    needs: [handle-request-label, handle-invalid-label, handle-issue-close, handle-issue-reopen, handle-maintainer-comment]
+    needs: [handle-request-label, handle-invalid-label, handle-issue-close, handle-issue-reopen, handle-maintainer-comment, handle-question-label, handle-update-request-label]
     if: |
       always() &&
       !cancelled() &&
@@ -604,7 +747,8 @@ jobs:
         needs.handle-invalid-label.result == 'success' ||
         needs.handle-issue-close.result == 'success' ||
         needs.handle-issue-reopen.result == 'success' ||
-        needs.handle-maintainer-comment.result == 'success'
+        needs.handle-maintainer-comment.result == 'success' ||
+        needs.handle-update-request-label.result == 'success'
       )
     runs-on: jhl-space
     steps:

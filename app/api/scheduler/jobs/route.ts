@@ -4,20 +4,12 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { getSchedulerStatus } from '@/lib/scheduler';
+import { checkAdminApiAuth } from '@/lib/admin-auth';
 
 export async function GET(request: NextRequest) {
   try {
-    // AUTH_MODE가 public이면 인증 없이 허용
-    if (process.env.AUTH_MODE !== 'public') {
-      const authHeader = request.headers.get('authorization');
-      const apiKey = process.env.SCHEDULER_API_KEY;
-
-      if (apiKey && authHeader !== `Bearer ${apiKey}`) {
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 401 }
-        );
-      }
+    if (!checkAdminApiAuth(request)) {
+      return NextResponse.json({ error: '인증 필요' }, { status: 401 });
     }
 
     const status = await getSchedulerStatus();
@@ -29,7 +21,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('[Scheduler API] 작업 목록 조회 오류:', error);
     return NextResponse.json(
-      { error: 'Failed to get jobs' },
+      { error: '작업 목록 조회 실패' },
       { status: 500 }
     );
   }

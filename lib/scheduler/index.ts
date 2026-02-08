@@ -10,6 +10,7 @@ export {
   registerJob,
   shouldEnableScheduler,
   getRegisteredJobs,
+  recordScriptExecution,
 } from './scheduler-manager';
 
 export {

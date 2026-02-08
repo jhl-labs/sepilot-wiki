@@ -2,7 +2,7 @@
  * 스케줄 작업 베이스 클래스
  * 모든 스케줄 작업은 이 클래스를 상속받아 구현
  */
-import { JobResult } from '../types';
+import { JobResult, JobRunOptions } from '../types';
 
 export abstract class BaseJob {
   /** 작업 이름 (고유 식별자) */
@@ -25,24 +25,24 @@ export abstract class BaseJob {
   /**
    * 실제 작업 로직 구현 (하위 클래스에서 구현)
    */
-  protected abstract execute(): Promise<JobResult>;
+  protected abstract execute(options?: JobRunOptions): Promise<JobResult>;
 
   /**
    * 작업 실행 (래퍼 메서드)
    * 로깅, 에러 처리 등 공통 로직 포함
    */
-  async run(): Promise<JobResult> {
+  async run(options?: JobRunOptions): Promise<JobResult> {
     // 실행 가능 여부 확인
     const enabled = await this.isEnabled();
     if (!enabled) {
       return {
-        success: true,
-        message: '작업 비활성화됨 (건너뜀)',
+        success: false,
+        message: '작업 비활성화됨 (스크립트 누락 또는 설정 오류)',
       };
     }
 
     try {
-      return await this.execute();
+      return await this.execute(options);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
       console.error(`[Job:${this.name}] 실행 오류:`, error);

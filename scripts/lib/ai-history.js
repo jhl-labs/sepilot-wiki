@@ -111,6 +111,15 @@ export function getActionTypeLabel(actionType) {
     delete: '문서 삭제',
     recover: '문서 복구',
     maintain: '구조 정비',
+    answer: '질문 응답',
+    freshness_check: '최신성 점검',
+    quality_score: '품질 평가',
+    coverage_analysis: '커버리지 분석',
+    status_report: '상태 보고서',
+    cross_reference: '교차 참조',
+    tag_normalize: '태그 정규화',
+    release_doc: '릴리스 문서화',
+    summary_generate: '요약 생성',
   };
   return labels[actionType] || actionType;
 }
@@ -127,6 +136,12 @@ export function getTriggerLabel(trigger) {
     maintainer_comment: 'Maintainer 피드백',
     issue_close: 'Issue 종료',
     scheduled: '정기 스케줄',
+    question_label: 'question 라벨',
+    update_request_label: 'update-request 라벨',
+    weekly_schedule: '주간 스케줄',
+    monthly_schedule: '월간 스케줄',
+    code_change: '코드 변경',
+    release: '릴리스',
   };
   return labels[trigger] || trigger;
 }

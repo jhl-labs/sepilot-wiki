@@ -10,33 +10,14 @@ import {
   stopScheduler,
   shouldEnableScheduler,
 } from '@/lib/scheduler';
-
-// 관리자 인증 확인 (간단한 버전)
-async function checkAdminAuth(request: NextRequest): Promise<boolean> {
-  // AUTH_MODE가 public이면 인증 없이 허용
-  if (process.env.AUTH_MODE === 'public') {
-    return true;
-  }
-
-  // 실제 환경에서는 세션/토큰 확인 필요
-  // 현재는 API 키 방식으로 간단 구현
-  const authHeader = request.headers.get('authorization');
-  const apiKey = process.env.SCHEDULER_API_KEY;
-
-  if (apiKey && authHeader === `Bearer ${apiKey}`) {
-    return true;
-  }
-
-  // 추가: NextAuth 세션 확인 로직 가능
-  return false;
-}
+import { checkAdminApiAuth } from '@/lib/admin-auth';
 
 export async function GET(request: NextRequest) {
   try {
     // 인증 확인
-    if (!(await checkAdminAuth(request))) {
+    if (!checkAdminApiAuth(request)) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: '인증 필요' },
         { status: 401 }
       );
     }
@@ -54,7 +35,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('[Scheduler API] 상태 조회 오류:', error);
     return NextResponse.json(
-      { error: 'Failed to get scheduler status' },
+      { error: '스케줄러 상태 조회 실패' },
       { status: 500 }
     );
   }
@@ -63,9 +44,9 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // 인증 확인
-    if (!(await checkAdminAuth(request))) {
+    if (!checkAdminApiAuth(request)) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: '인증 필요' },
         { status: 401 }
       );
     }
@@ -90,13 +71,13 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: 'Invalid action. Use "start" or "stop"' },
+      { error: '유효하지 않은 작업. "start" 또는 "stop"을 사용하세요' },
       { status: 400 }
     );
   } catch (error) {
     console.error('[Scheduler API] 제어 오류:', error);
     return NextResponse.json(
-      { error: 'Failed to control scheduler' },
+      { error: '스케줄러 제어 실패' },
       { status: 500 }
     );
   }

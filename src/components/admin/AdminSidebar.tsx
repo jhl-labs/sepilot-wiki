@@ -13,6 +13,7 @@ import {
   LogOut,
   Home,
   User,
+  Zap,
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 
@@ -27,6 +28,7 @@ interface AdminSidebarProps {
 const menuItems = [
   { href: '/admin', label: '대시보드', icon: LayoutDashboard },
   { href: '/admin/documents', label: '문서 관리', icon: FileText },
+  { href: '/admin/automation', label: '자동화', icon: Zap },
   { href: '/admin/sync', label: 'Git 동기화', icon: GitBranch },
 ];
 

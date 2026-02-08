@@ -14,6 +14,12 @@ export interface WikiPage {
   history?: WikiRevision[];
   /** 사이드바에 표시될 메뉴 이름 (title과 다를 수 있음) */
   menu?: string;
+  /** 문서 설명 (SEO 메타 등에 사용) */
+  description?: string;
+  /** 문서 생성 시간 */
+  createdAt?: string;
+  /** 문서 수정 시간 */
+  updatedAt?: string;
 }
 
 // Wiki 문서 버전(리비전) 타입
@@ -367,7 +373,23 @@ export interface SidebarNavItem {
 }
 
 // AI History 관련 타입
-export type AIActionType = 'generate' | 'modify' | 'publish' | 'invalid' | 'delete' | 'recover';
+export type AIActionType =
+  | 'generate'
+  | 'modify'
+  | 'publish'
+  | 'invalid'
+  | 'delete'
+  | 'recover'
+  | 'maintain'
+  | 'answer'
+  | 'freshness_check'
+  | 'quality_score'
+  | 'coverage_analysis'
+  | 'status_report'
+  | 'cross_reference'
+  | 'tag_normalize'
+  | 'release_doc'
+  | 'summary_generate';
 
 export interface AIHistoryEntry {
   id: string;
@@ -378,7 +400,19 @@ export interface AIHistoryEntry {
   documentSlug: string;
   documentTitle: string;
   summary: string;
-  trigger: 'request_label' | 'invalid_label' | 'maintainer_comment' | 'issue_close' | 'issue_reopen';
+  trigger:
+    | 'request_label'
+    | 'invalid_label'
+    | 'maintainer_comment'
+    | 'issue_close'
+    | 'issue_reopen'
+    | 'scheduled'
+    | 'question_label'
+    | 'update_request_label'
+    | 'weekly_schedule'
+    | 'monthly_schedule'
+    | 'code_change'
+    | 'release';
   triggerUser?: string;
   model?: string;
   changes?: {

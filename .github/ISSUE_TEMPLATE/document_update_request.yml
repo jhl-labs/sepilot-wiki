@@ -1,0 +1,50 @@
+name: "\U0001F4DD 문서 수정 요청"
+description: 기존 문서의 수정을 요청합니다. AI가 자동으로 수정합니다.
+title: "[수정 요청] "
+labels: ["update-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        기존 문서의 수정을 요청합니다. AI가 문서를 분석하고 자동으로 수정합니다.
+
+  - type: input
+    id: doc_path
+    attributes:
+      label: 대상 문서
+      description: 수정할 문서의 경로 또는 제목
+      placeholder: "예) wiki/kubernetes-deploy-guide.md 또는 'Kubernetes 배포 가이드'"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: update_type
+    attributes:
+      label: 수정 유형
+      description: 어떤 종류의 수정이 필요한가요?
+      options:
+        - 내용 오류 수정
+        - 최신 정보 반영
+        - 내용 추가/보완
+        - 구조 개선
+        - 기타
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 수정 내용 설명
+      description: 어떤 부분을 어떻게 수정해야 하는지 설명해주세요
+      placeholder: |
+        예) "Kubernetes 1.30 버전 변경사항을 반영해주세요"
+        예) "Docker Compose v2 문법으로 업데이트해주세요"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: 참고 자료
+      description: 수정에 참고할 자료나 링크
+      placeholder: 선택 사항입니다

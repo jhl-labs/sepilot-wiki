@@ -58,8 +58,19 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run || 'false' }}
         run: bun scripts/maintenance/maintain-wiki-tree.js
 
+      - name: Normalize tags
+        id: tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+        run: bun scripts/maintenance/normalize-tags.js
+
       - name: Build wiki data
-        if: steps.maintain.outputs.has_changes == 'true'
+        if: steps.maintain.outputs.has_changes == 'true' || steps.tags.outputs.has_changes == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -67,7 +78,7 @@ jobs:
           bun run build:search
 
       - name: Commit and push changes
-        if: steps.maintain.outputs.has_changes == 'true'
+        if: steps.maintain.outputs.has_changes == 'true' || steps.tags.outputs.has_changes == 'true'
         env:
           HUSKY: 0
         run: |
@@ -92,7 +103,7 @@ jobs:
           fi
 
       - name: Trigger deploy
-        if: steps.maintain.outputs.has_changes == 'true'
+        if: steps.maintain.outputs.has_changes == 'true' || steps.tags.outputs.has_changes == 'true'
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

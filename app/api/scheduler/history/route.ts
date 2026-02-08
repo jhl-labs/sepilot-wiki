@@ -4,20 +4,15 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { getExecutionHistory } from '@/lib/scheduler';
+import { checkAdminApiAuth } from '@/lib/admin-auth';
 
 export async function GET(request: NextRequest) {
   try {
-    // AUTH_MODE가 public이면 인증 없이 허용
-    if (process.env.AUTH_MODE !== 'public') {
-      const authHeader = request.headers.get('authorization');
-      const apiKey = process.env.SCHEDULER_API_KEY;
-
-      if (apiKey && authHeader !== `Bearer ${apiKey}`) {
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 401 }
-        );
-      }
+    if (!checkAdminApiAuth(request)) {
+      return NextResponse.json(
+        { error: '인증 필요' },
+        { status: 401 }
+      );
     }
 
     // 쿼리 파라미터로 limit 지정 가능
@@ -25,7 +20,8 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '50', 10);
     const jobName = searchParams.get('job');
 
-    let history = await getExecutionHistory(Math.min(limit, 100));
+    const safeLimit = Math.max(1, Math.min(Number.isNaN(limit) ? 50 : limit, 100));
+    let history = await getExecutionHistory(safeLimit);
 
     // 특정 작업으로 필터링
     if (jobName) {
@@ -40,7 +36,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('[Scheduler API] 이력 조회 오류:', error);
     return NextResponse.json(
-      { error: 'Failed to get history' },
+      { error: '실행 이력 조회 실패' },
       { status: 500 }
     );
   }

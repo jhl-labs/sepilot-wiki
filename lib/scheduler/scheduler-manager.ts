@@ -12,6 +12,7 @@ import {
 } from './leader-election';
 import {
   JobResult,
+  JobRunOptions,
   JobExecution,
   JobInfo,
   SchedulerStatus,
@@ -24,11 +25,19 @@ import type { BaseJob } from './jobs/base-job';
 let schedulerStatus: 'stopped' | 'starting' | 'running' | 'error' = 'stopped';
 let startedAt: string | null = null;
 
+// 인메모리 이력 (Redis 미사용 시 폴백)
+const inMemoryHistory: JobExecution[] = [];
+const inMemoryLastRun: Map<string, JobExecution> = new Map();
+const IN_MEMORY_HISTORY_LIMIT = 100;
+
 // 등록된 작업 목록
 const registeredJobs: Map<
   string,
   { job: BaseJob; task: ScheduledTask; enabled: boolean }
 > = new Map();
+
+// 실행 중인 작업 추적 (동시 실행 방지)
+const runningJobs = new Set<string>();
 
 /**
  * 스케줄러가 활성화되어야 하는지 확인
@@ -68,7 +77,18 @@ export function registerJob(job: BaseJob): void {
         return;
       }
 
-      await executeJob(job);
+      // 이미 실행 중이면 건너뜀 (수동 실행과 동시 실행 방지)
+      if (runningJobs.has(job.name)) {
+        console.log(`[Scheduler] ${job.name} 건너뜀 (이미 실행 중)`);
+        return;
+      }
+
+      runningJobs.add(job.name);
+      try {
+        await executeJob(job);
+      } finally {
+        runningJobs.delete(job.name);
+      }
     }
   );
 
@@ -82,14 +102,14 @@ export function registerJob(job: BaseJob): void {
 /**
  * 작업 실행
  */
-async function executeJob(job: BaseJob): Promise<JobResult> {
+async function executeJob(job: BaseJob, options?: JobRunOptions): Promise<JobResult> {
   const startTime = Date.now();
   const executionId = `${job.name}-${startTime}`;
 
-  console.log(`[Job:${job.name}] 실행 시작`);
+  console.log(`[Job:${job.name}] 실행 시작${options?.dryRun ? ' (DRY_RUN)' : ''}`);
 
   try {
-    const result = await job.run();
+    const result = await job.run(options);
     const duration = Date.now() - startTime;
 
     // 실행 이력 저장
@@ -155,6 +175,13 @@ async function recordExecution(execution: JobExecution): Promise<void> {
         'EX',
         86400 * 7 // 7일 보관
       );
+    } else {
+      // 인메모리 폴백
+      inMemoryHistory.unshift(execution);
+      if (inMemoryHistory.length > IN_MEMORY_HISTORY_LIMIT) {
+        inMemoryHistory.pop();
+      }
+      inMemoryLastRun.set(execution.jobName, execution);
     }
   } catch (error) {
     console.error('[Scheduler] 실행 이력 저장 실패:', error);
@@ -162,11 +189,19 @@ async function recordExecution(execution: JobExecution): Promise<void> {
 }
 
 /**
+ * 스크립트 실행 이력 기록 (외부 API에서 호출)
+ */
+export async function recordScriptExecution(execution: JobExecution): Promise<void> {
+  return recordExecution(execution);
+}
+
+/**
  * 실행 이력 조회
  */
 export async function getExecutionHistory(limit = 50): Promise<JobExecution[]> {
   if (!isRedisEnabled()) {
-    return [];
+    // 인메모리 폴백
+    return inMemoryHistory.slice(0, limit);
   }
 
   try {
@@ -175,7 +210,7 @@ export async function getExecutionHistory(limit = 50): Promise<JobExecution[]> {
     return history.map((item) => JSON.parse(item) as JobExecution);
   } catch (error) {
     console.error('[Scheduler] 실행 이력 조회 실패:', error);
-    return [];
+    return inMemoryHistory.slice(0, limit);
   }
 }
 
@@ -184,7 +219,8 @@ export async function getExecutionHistory(limit = 50): Promise<JobExecution[]> {
  */
 async function getLastExecution(jobName: string): Promise<JobExecution | undefined> {
   if (!isRedisEnabled()) {
-    return undefined;
+    // 인메모리 폴백
+    return inMemoryLastRun.get(jobName);
   }
 
   try {
@@ -192,7 +228,7 @@ async function getLastExecution(jobName: string): Promise<JobExecution | undefin
     const data = await redis.get(REDIS_KEYS.JOB_LAST_RUN(jobName));
     return data ? (JSON.parse(data) as JobExecution) : undefined;
   } catch {
-    return undefined;
+    return inMemoryLastRun.get(jobName);
   }
 }
 
@@ -292,7 +328,10 @@ export async function stopScheduler(): Promise<void> {
 /**
  * 작업 수동 실행
  */
-export async function runJobManually(jobName: string): Promise<JobResult> {
+export async function runJobManually(
+  jobName: string,
+  options?: { dryRun?: boolean }
+): Promise<JobResult> {
   const entry = registeredJobs.get(jobName);
 
   if (!entry) {
@@ -302,8 +341,23 @@ export async function runJobManually(jobName: string): Promise<JobResult> {
     };
   }
 
-  console.log(`[Scheduler] 수동 실행: ${jobName}`);
-  return executeJob(entry.job);
+  // 동시 실행 방지
+  if (runningJobs.has(jobName)) {
+    return {
+      success: false,
+      message: `작업 '${jobName}'이(가) 이미 실행 중입니다`,
+    };
+  }
+
+  runningJobs.add(jobName);
+
+  console.log(`[Scheduler] 수동 실행: ${jobName}${options?.dryRun ? ' (DRY_RUN)' : ''}`);
+
+  try {
+    return await executeJob(entry.job, options);
+  } finally {
+    runningJobs.delete(jobName);
+  }
 }
 
 /**

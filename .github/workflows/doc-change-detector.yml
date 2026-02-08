@@ -1,0 +1,60 @@
+name: Document Change Detector
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'lib/**'
+      - 'app/**'
+      - 'scripts/**'
+
+concurrency:
+  group: doc-change-detector
+  cancel-in-progress: true
+
+jobs:
+  detect-updates:
+    runs-on: jhl-space
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Get changed files
+        id: changes
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | tr '\n' ',')
+          echo "files=$CHANGED" >> $GITHUB_OUTPUT
+
+      - name: Detect document updates needed
+        id: detect
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: bun scripts/maintenance/detect-doc-updates.js --changed-files "${{ steps.changes.outputs.files }}"
+
+      - name: Job summary
+        run: |
+          echo "## 🔍 코드 변경 → 문서 업데이트 감지" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 항목 | 결과 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 업데이트 필요 | ${{ steps.detect.outputs.has_updates || 'false' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 영향받는 문서 | ${{ steps.detect.outputs.affected_docs || '0' }}개 |" >> $GITHUB_STEP_SUMMARY
+          echo "| 생성된 Issue | ${{ steps.detect.outputs.issues_created || '0' }}개 |" >> $GITHUB_STEP_SUMMARY

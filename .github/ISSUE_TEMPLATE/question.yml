@@ -1,0 +1,42 @@
+name: "\U00002753 질문하기"
+description: Wiki 내용에 대한 질문을 합니다. AI가 관련 문서를 기반으로 답변합니다.
+title: "[질문] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Wiki 내용에 대해 질문하면 AI가 기존 문서를 기반으로 답변합니다.
+
+        > **참고**: 답변은 Wiki에 작성된 문서를 기반으로 합니다. Wiki에 없는 내용은 답변이 제한될 수 있습니다.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: 질문 내용
+      description: 궁금한 내용을 자세히 작성해주세요
+      placeholder: |
+        예) "Kubernetes에서 Pod가 Pending 상태에 머물 때 어떻게 해결하나요?"
+        예) "SEPilot의 AI 문서 생성 프로세스가 어떻게 동작하나요?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 관련 분야
+      description: 질문과 관련된 분야를 선택해주세요
+      options:
+        - 인프라/DevOps
+        - 개발/프로그래밍
+        - SEPilot 사용법
+        - 기타
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 추가 컨텍스트
+      description: 질문에 대한 배경 정보나 추가 설명
+      placeholder: 선택 사항입니다

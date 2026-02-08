@@ -22,6 +22,7 @@ import {
   Edit3,
   Trash2,
   ExternalLink,
+  Zap,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -338,6 +339,10 @@ export default function AdminDashboard() {
                 <Link href="/admin/sync" className="quick-action-btn">
                   <RefreshCw size={18} />
                   저장소 동기화
+                </Link>
+                <Link href="/admin/automation" className="quick-action-btn">
+                  <Zap size={18} />
+                  자동화 관리
                 </Link>
               </div>
             </div>

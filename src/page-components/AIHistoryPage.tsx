@@ -16,6 +16,16 @@ import {
   Filter,
   RefreshCw,
   AlertCircle,
+  Wrench,
+  MessageCircle,
+  Clock,
+  Star,
+  BarChart3,
+  FileBarChart,
+  Link2,
+  Tags,
+  Package,
+  FileDigit,
 } from 'lucide-react';
 import { formatDistanceToNow, format } from 'date-fns';
 import { ko } from 'date-fns/locale';
@@ -31,6 +41,16 @@ const actionConfig: Record<AIActionType, { icon: typeof FileText; label: string;
   invalid: { icon: FileWarning, label: '오류 수정', color: 'var(--color-warning)' },
   delete: { icon: Trash2, label: '문서 삭제', color: 'var(--color-error)' },
   recover: { icon: RotateCcw, label: '문서 복구', color: 'var(--color-success)' },
+  maintain: { icon: Wrench, label: 'Wiki 유지보수', color: 'var(--color-info)' },
+  answer: { icon: MessageCircle, label: 'AI 질문 응답', color: 'var(--color-accent-primary)' },
+  freshness_check: { icon: Clock, label: '최신성 점검', color: 'var(--color-warning)' },
+  quality_score: { icon: Star, label: '품질 스코어링', color: 'var(--color-success)' },
+  coverage_analysis: { icon: BarChart3, label: '커버리지 분석', color: 'var(--color-info)' },
+  status_report: { icon: FileBarChart, label: '상태 보고서', color: 'var(--color-accent-primary)' },
+  cross_reference: { icon: Link2, label: '교차 참조', color: 'var(--color-info)' },
+  tag_normalize: { icon: Tags, label: '태그 정규화', color: 'var(--color-warning)' },
+  release_doc: { icon: Package, label: '릴리스 문서', color: 'var(--color-success)' },
+  summary_generate: { icon: FileDigit, label: '요약 생성', color: 'var(--color-accent-primary)' },
 };
 
 // 트리거 라벨

@@ -1,0 +1,40 @@
+name: "\U0001F310 번역 요청"
+description: 기존 문서의 번역을 요청합니다
+title: "[번역] "
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        기존 문서의 번역을 요청합니다. AI가 문서를 번역하여 새 문서로 생성합니다.
+
+  - type: input
+    id: doc_path
+    attributes:
+      label: 번역할 문서
+      description: 번역할 문서의 경로 또는 제목
+      placeholder: "예) wiki/kubernetes-deploy-guide.md 또는 'Kubernetes 배포 가이드'"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target_language
+    attributes:
+      label: 번역 대상 언어
+      description: 어떤 언어로 번역하나요?
+      options:
+        - 영어 (English)
+        - 일본어 (日本語)
+        - 중국어 (中文)
+        - 기타
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 번역 참고 사항
+      description: 번역 시 주의할 점이나 참고 사항
+      placeholder: |
+        예) "기술 용어는 원문 그대로 유지해주세요"
+        예) "코드 예제의 주석도 번역해주세요"

@@ -37,7 +37,6 @@ function getMinLogLevel(): LogLevel {
   }
   if (typeof window !== 'undefined') {
     // 브라우저 환경
-    // @ts-expect-error - import.meta는 빌드 환경에서만 사용 가능
     if (typeof import.meta !== 'undefined' && import.meta.env?.PROD) return 'warn';
   }
   return 'debug';
@@ -49,7 +48,6 @@ function isProduction(): boolean {
     return true;
   }
   if (typeof window !== 'undefined') {
-    // @ts-expect-error - import.meta는 빌드 환경에서만 사용 가능
     if (typeof import.meta !== 'undefined' && import.meta.env?.PROD) return true;
   }
   return false;

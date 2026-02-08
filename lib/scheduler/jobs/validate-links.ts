@@ -6,7 +6,7 @@ import { readdir, readFile } from 'fs/promises';
 import { join, resolve, dirname } from 'path';
 import { existsSync } from 'fs';
 import { BaseJob } from './base-job';
-import { JobResult } from '../types';
+import { JobResult, JobRunOptions } from '../types';
 
 interface LinkError {
   file: string;
@@ -26,7 +26,7 @@ export class ValidateLinksJob extends BaseJob {
     return existsSync(this.wikiDir);
   }
 
-  protected async execute(): Promise<JobResult> {
+  protected async execute(_options?: JobRunOptions): Promise<JobResult> {
     if (!existsSync(this.wikiDir)) {
       return {
         success: true,

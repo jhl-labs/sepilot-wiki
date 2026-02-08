@@ -5,7 +5,7 @@
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { join } from 'path';
 import { BaseJob } from './base-job';
-import { JobResult } from '../types';
+import { JobResult, JobRunOptions } from '../types';
 
 interface GitHubIssue {
   number: number;
@@ -46,7 +46,7 @@ export class SyncIssuesJob extends BaseJob {
     return !!repo;
   }
 
-  protected async execute(): Promise<JobResult> {
+  protected async execute(_options?: JobRunOptions): Promise<JobResult> {
     const repo = process.env.GITHUB_REPO || process.env.GITHUB_REPOSITORY;
     const token = process.env.GITHUB_TOKEN;
     const apiUrl = process.env.GITHUB_API_URL || 'https://api.github.com';
