@@ -2,6 +2,8 @@
  * 개별 작업 제어 API
  * POST /api/scheduler/jobs/[name] - 작업 수동 실행
  */
+export const runtime = 'nodejs';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { runJobManually, getSchedulerStatus } from '@/lib/scheduler';
 import { checkAdminApiAuth } from '@/lib/admin-auth';

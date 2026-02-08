@@ -2,6 +2,8 @@
  * 스케줄러 작업 목록 API
  * GET /api/scheduler/jobs - 작업 목록 조회
  */
+export const runtime = 'nodejs';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getSchedulerStatus } from '@/lib/scheduler';
 import { checkAdminApiAuth } from '@/lib/admin-auth';

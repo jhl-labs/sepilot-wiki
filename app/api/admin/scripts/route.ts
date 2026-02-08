@@ -2,6 +2,8 @@
  * 스크립트 목록 API
  * GET /api/admin/scripts - 실행 가능한 스크립트 목록
  */
+export const runtime = 'nodejs';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { existsSync } from 'fs';
 import { join } from 'path';

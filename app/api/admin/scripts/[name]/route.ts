@@ -2,6 +2,8 @@
  * 개별 스크립트 실행 API
  * POST /api/admin/scripts/[name] - 스크립트 실행
  */
+export const runtime = 'nodejs';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { spawn } from 'child_process';
 import { join } from 'path';
@@ -120,7 +122,9 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         message: result.message,
         duration: result.duration,
         error: result.error,
-      }).catch(() => {});
+      }).catch((err) => {
+        console.error(`[Scripts API] 실행 이력 저장 실패 (${name}):`, err);
+      });
 
       return NextResponse.json({
         scriptName: name,

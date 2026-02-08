@@ -13,7 +13,7 @@ import { JobResult, JobRunOptions } from '../types';
 export class UpdateCrossReferencesJob extends BaseJob {
   readonly name = 'update-cross-references';
   readonly description = '문서 교차 참조 업데이트';
-  readonly schedule = '0 3 * * 3'; // 매주 수요일 03시
+  readonly schedule = '0 0 * * 3'; // 매주 수요일 00시 (워크플로우와 동일)
 
   private readonly scriptPath = join(
     process.cwd(),

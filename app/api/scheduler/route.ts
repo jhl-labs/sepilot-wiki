@@ -3,6 +3,7 @@
  * GET /api/scheduler - 상태 조회
  * POST /api/scheduler - 시작/중지
  */
+export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import {
   getSchedulerStatus,

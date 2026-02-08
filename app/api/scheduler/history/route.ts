@@ -2,6 +2,8 @@
  * 스케줄러 실행 이력 API
  * GET /api/scheduler/history - 실행 이력 조회
  */
+export const runtime = 'nodejs';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getExecutionHistory } from '@/lib/scheduler';
 import { checkAdminApiAuth } from '@/lib/admin-auth';

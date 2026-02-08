@@ -142,6 +142,9 @@ export default function AutomationPage() {
   // 컴포넌트 마운트 상태 추적
   const mountedRef = useRef(true);
 
+  // 히스토리 갱신 AbortController
+  const historyAbortRef = useRef<AbortController | null>(null);
+
   // 컴포넌트 언마운트 시 모든 진행 중인 요청 중단
   useEffect(() => {
     const controllers = abortControllersRef.current;
@@ -149,6 +152,7 @@ export default function AutomationPage() {
       mountedRef.current = false;
       controllers.forEach((controller) => controller.abort());
       controllers.clear();
+      historyAbortRef.current?.abort();
     };
   }, []);
 
@@ -352,9 +356,13 @@ export default function AutomationPage() {
     }
   }
 
-  // 히스토리 백그라운드 갱신 (언마운트 후 setState 방지)
+  // 히스토리 백그라운드 갱신 (이전 요청 취소 + 언마운트 보호)
   function refreshHistory() {
-    fetch('/api/scheduler/history?limit=50')
+    historyAbortRef.current?.abort();
+    const controller = new AbortController();
+    historyAbortRef.current = controller;
+
+    fetch('/api/scheduler/history?limit=50', { signal: controller.signal })
       .then((r) => r.ok ? r.json() : null)
       .then((data) => { if (mountedRef.current && data?.history) setHistory(data.history); })
       .catch(() => {});
@@ -375,6 +383,14 @@ export default function AutomationPage() {
       [scriptName]: { ...(prev[scriptName] || {}), [key]: value },
     }));
   }
+
+  // 대용량 출력 표시 제한 (10KB)
+  const MAX_DISPLAY_LENGTH = 10 * 1024;
+  const truncateOutput = (text: string | undefined) => {
+    if (!text) return text;
+    if (text.length <= MAX_DISPLAY_LENGTH) return text;
+    return text.slice(0, MAX_DISPLAY_LENGTH) + `\n\n... (${Math.round(text.length / 1024)}KB 중 ${Math.round(MAX_DISPLAY_LENGTH / 1024)}KB만 표시)`;
+  };
 
   const formatDuration = (ms: number) => {
     if (ms < 1000) return `${ms}ms`;
@@ -474,7 +490,7 @@ export default function AutomationPage() {
       </div>
 
       {/* 스케줄 작업 섹션 */}
-      <div className="admin-card" style={{ marginTop: 'var(--admin-space-6)' }}>
+      <div className="admin-card admin-card-spaced">
         <div className="admin-card-header">
           <Zap size={18} />
           <h3>스케줄 작업</h3>
@@ -500,7 +516,7 @@ export default function AutomationPage() {
           ) : (
             <div className="automation-job-grid">
               {(schedulerStatus.jobs).map((job) => (
-                <div key={job.name} className="automation-job-card">
+                <article key={job.name} className="automation-job-card" aria-label={`작업: ${job.name}`}>
                   <div className="automation-job-header">
                     <div className="automation-job-info">
                       <h4>{job.name}</h4>
@@ -556,12 +572,12 @@ export default function AutomationPage() {
                       </div>
                       {(jobResults[job.name].output || jobResults[job.name].error) && (
                         <pre className="automation-result-log">
-                          {jobResults[job.name].output || jobResults[job.name].error}
+                          {truncateOutput(jobResults[job.name].output || jobResults[job.name].error)}
                         </pre>
                       )}
                     </div>
                   )}
-                </div>
+                </article>
               ))}
             </div>
           )}
@@ -569,7 +585,7 @@ export default function AutomationPage() {
       </div>
 
       {/* Issue 스크립트 섹션 */}
-      <div className="admin-card" style={{ marginTop: 'var(--admin-space-6)' }}>
+      <div className="admin-card admin-card-spaced">
         <div className="admin-card-header">
           <Terminal size={18} />
           <h3>Issue 스크립트</h3>
@@ -584,7 +600,7 @@ export default function AutomationPage() {
           ) : (
           <div className="automation-job-grid">
             {scripts.map((script) => (
-              <div key={script.name} className="automation-job-card">
+              <article key={script.name} className="automation-job-card" aria-label={`스크립트: ${script.name}`}>
                 <div className="automation-job-header">
                   <div className="automation-job-info">
                     <h4>{script.name}</h4>
@@ -658,12 +674,12 @@ export default function AutomationPage() {
                     </div>
                     {(scriptResults[script.name].output || scriptResults[script.name].error) && (
                       <pre className="automation-result-log">
-                        {scriptResults[script.name].output || scriptResults[script.name].error}
+                        {truncateOutput(scriptResults[script.name].output || scriptResults[script.name].error)}
                       </pre>
                     )}
                   </div>
                 )}
-              </div>
+              </article>
             ))}
           </div>
           )}
@@ -671,7 +687,7 @@ export default function AutomationPage() {
       </div>
 
       {/* 실행 히스토리 섹션 */}
-      <div className="admin-card" style={{ marginTop: 'var(--admin-space-6)' }}>
+      <div className="admin-card admin-card-spaced">
         <div className="admin-card-header">
           <History size={18} />
           <h3>실행 히스토리</h3>
