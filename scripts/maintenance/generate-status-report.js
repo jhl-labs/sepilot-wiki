@@ -11,7 +11,7 @@
 import { resolve, join } from 'path';
 import { mkdir, writeFile } from 'fs/promises';
 import { existsSync } from 'fs';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { loadAllDocuments } from '../lib/document-scanner.js';
 import { loadAIHistory } from '../lib/ai-history.js';
 import { loadIssuesData } from '../lib/issues-store.js';
@@ -41,8 +41,7 @@ function getISOWeek(date) {
  */
 function getRecentGitLog() {
   try {
-    const cmd = `git log --since="7 days ago" --pretty=format:"%h|%s|%an|%aI" -- wiki/`;
-    const output = execSync(cmd, { encoding: 'utf-8', cwd: process.cwd() });
+    const output = execFileSync('git', ['log', '--since=7 days ago', '--pretty=format:%h|%s|%an|%aI', '--', 'wiki/'], { encoding: 'utf-8', cwd: process.cwd() });
     if (!output.trim()) return [];
 
     return output

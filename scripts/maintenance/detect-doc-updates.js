@@ -9,7 +9,7 @@
  */
 
 import { resolve } from 'path';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { loadAllDocuments } from '../lib/document-scanner.js';
 import { setGitHubOutput } from '../lib/utils.js';
 import { createGitHubIssues, getExistingIssues } from '../lib/report-generator.js';
@@ -30,8 +30,7 @@ function getChangedFiles() {
 
   // 마지막 커밋의 변경 파일
   try {
-    const cmd = 'git diff --name-only HEAD~1 HEAD';
-    const output = execSync(cmd, { encoding: 'utf-8', cwd: process.cwd() });
+    const output = execFileSync('git', ['diff', '--name-only', 'HEAD~1', 'HEAD'], { encoding: 'utf-8', cwd: process.cwd() });
     return output
       .trim()
       .split('\n')

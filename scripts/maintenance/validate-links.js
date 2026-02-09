@@ -55,7 +55,7 @@ async function validateLinks() {
                 const slug = url.replace('/wiki/', '');
                 targetPath = resolve(WIKI_DIR, `${slug}.md`);
                 // Path traversal 방지: WIKI_DIR 내부인지 검증
-                if (!targetPath.startsWith(WIKI_DIR + '/')) {
+                if (!targetPath.startsWith(resolve(WIKI_DIR) + '/')) {
                     errors.push({ file: relativePath, text, url, reason: '경로 탐색 공격 의심' });
                     continue;
                 }
@@ -63,7 +63,7 @@ async function validateLinks() {
                 // 그 외 절대 경로 (이미지 등)
                 targetPath = resolve(process.cwd(), url.slice(1)); // 프로젝트 루트 기준
                 // 프로젝트 루트 밖으로 나가지 않는지 검증
-                if (!targetPath.startsWith(process.cwd() + '/')) {
+                if (!targetPath.startsWith(resolve(process.cwd()) + '/')) {
                     errors.push({ file: relativePath, text, url, reason: '경로 탐색 공격 의심' });
                     continue;
                 }
