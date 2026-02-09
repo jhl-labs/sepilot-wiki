@@ -208,48 +208,65 @@ function buildTimeline(issueTitle, issueBody, comments, referenceContents = []) 
 }
 
 /**
+ * Issue 제목에서 URL-safe 슬러그를 생성
+ * @param {string} title - Issue 제목
+ * @returns {string} 슬러그
+ */
+function generateSlugFromTitle(title) {
+  return (
+    title
+      // 공통 접두사 제거: [요청], [수정], [삭제], [질문] 등
+      .replace(/^\[.*?\]\s*/, '')
+      // 한국어 제거 (URL에 부적합)
+      .replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, ' ')
+      .toLowerCase()
+      // 특수문자를 공백으로 치환 (괄호 등이 단어를 붙이지 않도록)
+      .replace(/[^a-z0-9\s-]/g, ' ')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+      .slice(0, 50)
+  );
+}
+
+/**
  * 컨텍스트에서 관련 문서 경로를 찾음
  * 우선순위: documentInfo > issueTitle에서 슬러그 생성
+ * @param {Object} context - Issue 컨텍스트
+ * @param {string} wikiDir - Wiki 디렉토리 경로
+ * @param {Object} options - 옵션
+ * @param {boolean} options.forceFromTitle - true이면 항상 제목 기반 슬러그 생성 (기존 댓글 경로 무시)
  */
-export function resolveDocumentPath(context, wikiDir) {
-  // 1. 이전 댓글에서 문서 위치가 발견된 경우
-  if (context.documentInfo?.path) {
-    const path = context.documentInfo.path;
-    // wiki/ 접두사 제거 후 다시 추가 (정규화)
-    const filename = path.replace(/^wiki\//, '');
-    return {
-      filepath: `${wikiDir}/${filename}`,
-      filename,
-      slug: context.documentInfo.slug || filename.replace('.md', ''),
-      source: 'comment',
-    };
-  }
+export function resolveDocumentPath(context, wikiDir, options = {}) {
+  if (!options.forceFromTitle) {
+    // 1. 이전 댓글에서 문서 위치가 발견된 경우
+    if (context.documentInfo?.path) {
+      const path = context.documentInfo.path;
+      // wiki/ 접두사 제거 후 다시 추가 (정규화)
+      const filename = path.replace(/^wiki\//, '');
+      return {
+        filepath: `${wikiDir}/${filename}`,
+        filename,
+        slug: context.documentInfo.slug || filename.replace('.md', ''),
+        source: 'comment',
+      };
+    }
 
-  // 2. 슬러그만 있는 경우
-  if (context.documentInfo?.slug) {
-    const slug = context.documentInfo.slug;
-    const filename = `${slug}.md`;
-    return {
-      filepath: `${wikiDir}/${filename}`,
-      filename,
-      slug,
-      source: 'comment_slug',
-    };
+    // 2. 슬러그만 있는 경우
+    if (context.documentInfo?.slug) {
+      const slug = context.documentInfo.slug;
+      const filename = `${slug}.md`;
+      return {
+        filepath: `${wikiDir}/${filename}`,
+        filename,
+        slug,
+        source: 'comment_slug',
+      };
+    }
   }
 
   // 3. Issue 제목에서 슬러그 생성
-  const slug = context.issueTitle
-    // 공통 접두사 제거: [요청], [수정], [삭제], [질문] 등
-    .replace(/^\[.*?\]\s*/, '')
-    // 한국어 제거 (URL에 부적합)
-    .replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, ' ')
-    .toLowerCase()
-    // 영문+숫자+공백+하이픈만 유지
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 50);
+  const slug = generateSlugFromTitle(context.issueTitle);
 
   const filename = `${slug}.md`;
   return {

@@ -103,8 +103,8 @@ ${context.timeline}
     maxTokens: 8000,
   });
 
-  // 문서 경로 결정
-  const docPath = resolveDocumentPath(context, WIKI_DIR);
+  // 문서 경로 결정 (새 문서 생성이므로 항상 제목 기반 슬러그 사용)
+  const docPath = resolveDocumentPath(context, WIKI_DIR, { forceFromTitle: true });
 
   // wiki 폴더 생성
   await mkdir(WIKI_DIR, { recursive: true });
