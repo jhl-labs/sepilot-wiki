@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-09T10:07:42.208Z</generated>
-  <count>14</count>
+  <generated>2026-02-09T10:27:30.823Z</generated>
+  <count>15</count>
   <items>
   <item>
     <title>MAS (Multi Agent System)</title>
@@ -45,8 +45,8 @@ Multi Agent System(MAS)은 여러 개의 자율적인 에이전트가 상호작�
 핵심 개념
 에이전트(Agen...</excerpt>
     <tags>MAS, Multi Agent System, AI, Agent</tags>
-    <lastModified>2026-02-09T10:05:18Z</lastModified>
-    <author>github-actions[bot]</author>
+    <lastModified>2026-02-09T19:22:52+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
@@ -95,7 +95,7 @@ React Router DOM - SPA 라우팅
 TanStack Query (React Query) - 서버 상태 관리
 Next.js...</excerpt>
     <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite</tags>
-    <lastModified>2026-02-09T10:05:18Z</lastModified>
+    <lastModified>2026-02-09T19:22:52+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -200,8 +200,8 @@ LLM 설정
     <excerpt>SEPilot Desktop 소개
 SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
     <tags>SEPilot, Desktop, LLM, Project</tags>
-    <lastModified>2026-02-09T10:05:18Z</lastModified>
-    <author>github-actions[bot]</author>
+    <lastModified>2026-02-09T19:22:52+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>bun과 pnpm, npm의 차이</title>
@@ -255,8 +255,8 @@ pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하�
 은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
 이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
     <tags>bun, pnpm, npm, 비교, 가이드</tags>
-    <lastModified>2026-02-09T10:05:18Z</lastModified>
-    <author>github-actions[bot]</author>
+    <lastModified>2026-02-09T19:22:52+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>bun 이란?</title>
@@ -317,7 +317,7 @@ bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저
 번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
 패키지...</excerpt>
     <tags>bun, npm, yarn, 패키지 매니저, 가이드</tags>
-    <lastModified>2026-02-09T10:05:18Z</lastModified>
+    <lastModified>2026-02-09T19:22:52+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -367,7 +367,94 @@ GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매�
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
 워크플로우...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative</tags>
-    <lastModified>2026-02-09T10:05:18Z</lastModified>
+    <lastModified>2026-02-09T19:22:52+09:00</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>MAS (Multi Agent System)</title>
+    <slug>요청-masmulti-agent-system에-대해-자세히-조사해줘</slug>
+    <content>개요
+다중 에이전트 시스템(Multi‑Agent System, MAS)은 여러 인공지능(AI) 에이전트가 협력·조정하여 사용자나 다른 시스템을 대신해 복합적인 작업을 수행하도록 설계된 시스템이다. 각 에이전트는 자체적인 속성과 자율성을 가지며, 전체 시스템은 공통 목표를 달성하기 위해 에이전트 간의 커뮤니케이션·협업을 활용한다.
+핵심 구성 요소
+  요소   설명  
+ ------ ------ 
+  에이전트   LLM 기반 AI 에이전트로, 자연어 이해·생성, 도구 호출, 계획 수립 등을 수행한다. (출처: IBM)  
+  지식·메모리   에이전트는 외부 데이터, API, 웹 검색 등 도구를 활용해 정보를 획득하고, 메모리를 업데이트한다.  
+  통신 프로토콜   에이전트 간에 메시지를 주고받으며 목표·계획·결과를 공유한다. (Claude Code의 “agent teams” 참고)  
+  조정 메커니즘   중앙 집중식·분산식·계층형·홀로닉·연합·팀 등 다양한 아키텍처가 존재한다. (IBM)  
+아키텍처 유형
+중앙 집중식 네트워크  
+   - 중앙 서버가 전역 지식 베이스와 에이전트 연결을 관리한다.  
+   - 장점: 통신이 쉽고 지식이 일관됨.  
+   - 단점: 중앙 서버 장애 시 전체 시스템이 중단될 위험이 있다. (IBM)
+분산형 네트워크  
+   - 에이전트가 인접 에이전트와 직접 정보를 교환한다.  
+   - 장점: 견고하고 모듈성이 높으며 단일 장애점이 없음.  
+   - 단점: 협업을 위한 행동 조정이 복잡할 수 있다. (IBM)
+계층형 구조  
+   - 트리 형태로 상위·하위 에이전트가 존재한다.  
+   - 상위 에이전트가 의사결정 권한을 갖고, 하위 에이전트는 구체 작업을 수행한다. (IBM)
+홀로닉 구조  
+   - 에이전트가 “홀론” 단위로 그룹화되어, 하나의 전체와 여러 하위 에이전트가 동시에 존재한다. (IBM)
+연합·팀 구조  
+   - 에이전트가 일시적으로 연합하거나 팀을 이루어 특정 목표를 달성한다. (IBM)
+에이전트 협업 방식
+Agent Teams (Claude Code)
+팀 리드가 작업을 분배하고 결과를 종합한다.  
+팀원은 독립적인 컨텍스트 창에서 작업하며 서로 직접 메시지를 주고받을 수 있다.  
+사용 사례: 연구·리뷰, 새로운 모듈 설계, 경쟁 가설 디버깅, 프론트·백엔드·테스트 동시 변경. (Claude Docs)  
+비용: 각 팀원이 별도 Claude 인스턴스를 사용하므로 토큰 사용량이 증가한다. (Claude Docs)
+Subagents
+메인 세션 내부에서 실행되는 보조 에이전트.  
+결과는 메인 에이전트에만 보고되며, 팀원 간 직접 통신은 불가능하다. (Claude Docs)
+  구분   Context   Communication   Coordination  
+ ------ --------- --------------- -------------- 
+  Agent Teams   각 팀원 별도 컨텍스트   팀원 ↔ 팀원 직접   공유 작업 리스트, 자체 조정  
+  Subagents   메인 세션 내   결과 → 메인만   메인 에이전트가 전체 관리  
+주요 행동 패턴
+  행동   설명  
+ ------ ------ 
+  플로킹 (Flocking)   에이전트가 목표를 공유하고, 충돌 회피·속도 정렬·집합성을 유지한다. (IBM)  
+  스워밍 (Swarming)   분산 제어를 통한 자기 조직화·집계가 발생한다. 대규모 에이전트가 협업해 복잡 문제를 해결한다. (IBM)  
+활용 사례
+  분야   구체 예시  
+ ------ ---------- 
+  운송   철도 스케줄링, 트럭 배정, 항구 선박 흐름 관리  
+  의료·공중보건   유전자 분석 기반 질병 예측, 전염병 확산 시뮬레이션  
+  공급망 관리   가상 에이전트 간 협상·재고 최적화  
+  방위·보안   해상 공격 시뮬레이션, DDoS 탐지·대응  
+  소프트웨어 개발   병렬 코드 리뷰, 기능 설계·구현 협업 (Claude Code “agent teams”)  
+장점
+유연성: 에이전트를 추가·제거·조정하여 다양한 환경에 대응 가능.
+확장성: 다수 에이전트가 협력해 복잡 문제를 처리, 단일 에이전트보다 높은 성능 기대.
+도메인 전문화: 각 에이전트가 특정 분야에 특화되어 전체 시스템의 전문성을 향상.
+성능 향상: 다중 계획·학습·피드백을 통해 더 빠른 문제 해결이 가능.
+과제 및 한계
+  과제   설명  
+ ------ ------ 
+  에이전트 오작동   동일 기반 모델 사용 시 공유된 취약점이 전체 시스템에 영향을 미칠 수 있다.  
+  조정 복잡성   협업·협상이 필요한 에이전트를 설계·관리하는 것이 어려움.  
+  예측 불가능한 행동   자율적인 분산 에이전트가 충돌하거나 비정상적인 행동을 보일 수 있다.  
+  토큰·리소스 비용   특히 Agent Teams는 각 인스턴스당 토큰 사용량이 크게 증가한다. (Claude Docs)  
+베스트 프랙티스
+작업을 독립적으로 나누기 – 팀원 간 최소한의 의존성을 유지하도록 설계한다. (Claude Docs)
+적절한 규모 선택 – 작은 순차 작업은 단일 세션이나 Subagents가 효율적이며, 복잡·병렬 작업에만 Agent Teams 사용. (Claude Docs)
+플랜 승인 활용 – 위험하거나 복잡한 변경은 “plan approval” 모드로 검증 후 실행한다. (Claude Docs)
+모니터링 및 스톱워치 – 팀 리드가 진행 상황을 지속적으로 확인하고 필요 시 팀원을 종료한다. (Claude Docs)
+환경에 맞는 아키텍처 선택 – 중앙 집중식이 필요한 경우는 관리 편의성을, 분산형이 필요한 경우는 견고성을 우선한다. (IBM)
+설정 예시 (Claude Code – Agent Teams)
+위 설정은 Agent Teams 기능을 활성화하고, 모든 팀원을 현재 터미널 프로세스 내에서 실행하도록 지정한다. (Claude Docs)
+참고 자료
+Claude Code Documentation – Agent Teams: https://code.claude.com/docs/en/agent-teams  
+IBM – 다중 에이전트 시스템이란?: https://www.ibm.com/kr-ko/think/topics/multiagent-system  
+SelectStar – MAS (Multi‑Agent System) Overview: https://selectstar.ai/blog/insight/mas-multi-agent-system-marl/  
+본 문서는 2026‑02‑09 현재 공개된 공식 자료를 기반으로 작성되었습니다. 최신 기능이나 업데이트가 있을 경우 공식 문서를 확인하시기 바랍니다.</content>
+    <excerpt>개요
+다중 에이전트 시스템(Multi‑Agent System, MAS)은 여러 인공지능(AI) 에이전트가 협력·조정하여 사용자나 다른 시스템을 대신해 복합적인 작업을 수행하도록 설계된 시스템이다. 각 에이전트는 자체적인 속성과 자율성을 가지며, 전체 시스템은 공통 목표를 달성하기 위해 에이전트 간의 커뮤니케이션·협업을 활용한다.
+핵심 구성 요소
+  요소...</excerpt>
+    <tags>Multi-Agent, AI, 시스템, 가이드</tags>
+    <lastModified>2026-02-09T10:27:30.797Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
