@@ -6,6 +6,8 @@ on:
       - main
   schedule:
     - cron: '0 */1 * * *'  # 매시간 (IssuesPage 동기화)
+  repository_dispatch:
+    types: [wiki-tree-updated]
   workflow_dispatch:
 
 permissions:

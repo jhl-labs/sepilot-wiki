@@ -138,7 +138,12 @@ ${content.slice(0, 6000)}`;
     return parsed.checks || [];
   } catch {
     console.warn('⚠️ AI 품질 체크 파싱 실패');
-    return [];
+    return [{
+      name: 'ai_check_unavailable',
+      passed: false,
+      severity: 'warning',
+      detail: 'AI 품질 체크를 수행할 수 없음 (파싱 실패)',
+    }];
   }
 }
 

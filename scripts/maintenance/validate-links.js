@@ -53,10 +53,20 @@ async function validateLinks() {
                 // 절대 경로 (/wiki/...) -> 로컬 파일 시스템 경로로 변환
                 // url: /wiki/some-slug -> wiki/some-slug.md
                 const slug = url.replace('/wiki/', '');
-                targetPath = join(WIKI_DIR, `${slug}.md`);
+                targetPath = resolve(WIKI_DIR, `${slug}.md`);
+                // Path traversal 방지: WIKI_DIR 내부인지 검증
+                if (!targetPath.startsWith(WIKI_DIR + '/')) {
+                    errors.push({ file: relativePath, text, url, reason: '경로 탐색 공격 의심' });
+                    continue;
+                }
             } else if (url.startsWith('/')) {
                 // 그 외 절대 경로 (이미지 등)
-                targetPath = join(process.cwd(), url); // 프로젝트 루트 기준
+                targetPath = resolve(process.cwd(), url.slice(1)); // 프로젝트 루트 기준
+                // 프로젝트 루트 밖으로 나가지 않는지 검증
+                if (!targetPath.startsWith(process.cwd() + '/')) {
+                    errors.push({ file: relativePath, text, url, reason: '경로 탐색 공격 의심' });
+                    continue;
+                }
             } else {
                 // 상대 경로
                 targetPath = resolve(dirname(file), url);

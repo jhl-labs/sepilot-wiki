@@ -29,6 +29,7 @@ concurrency:
 jobs:
   update-cross-references:
     runs-on: jhl-space
+    timeout-minutes: 15
     permissions:
       contents: write
 

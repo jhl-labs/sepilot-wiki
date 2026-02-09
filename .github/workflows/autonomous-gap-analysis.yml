@@ -22,6 +22,7 @@ concurrency:
 jobs:
   gap-analysis:
     runs-on: jhl-space
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4

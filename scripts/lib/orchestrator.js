@@ -347,9 +347,9 @@ function combineResults(results, plan) {
     .map((r) => r.output);
 
   if (writeResults.length === 0) {
-    // write 태스크가 없으면 가장 긴 문자열 결과 반환
+    // write 태스크가 없으면 research/review 제외 후 가장 긴 문자열 결과 반환
     const stringResults = results
-      .filter((r) => r.success && typeof r.output === 'string')
+      .filter((r) => r.success && typeof r.output === 'string' && r.task?.type !== 'research' && r.task?.type !== 'review')
       .sort((a, b) => (b.output?.length || 0) - (a.output?.length || 0));
 
     return stringResults[0]?.output || '';

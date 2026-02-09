@@ -77,6 +77,7 @@ export async function createTask(taskData) {
     output: null,
     assignedAgent: taskData.assignedAgent || null,
     createdAt: new Date().toISOString(),
+    startedAt: null,
     completedAt: null,
     error: null,
     retryCount: 0,
@@ -105,7 +106,27 @@ export async function updateTask(taskId, updates) {
     return null;
   }
 
+  // 상태 전이 검증
+  if (updates.status) {
+    const validTransitions = {
+      pending: ['in_progress', 'cancelled'],
+      in_progress: ['completed', 'failed', 'cancelled'],
+      failed: ['pending'],  // 재시도를 위해 pending으로만 전이 가능
+      completed: [],
+      cancelled: [],
+    };
+    const allowed = validTransitions[task.status] || [];
+    if (!allowed.includes(updates.status)) {
+      console.warn(`잘못된 상태 전이: ${task.status} → ${updates.status} (태스크: ${taskId.slice(0, 8)})`);
+      return null;
+    }
+  }
+
   Object.assign(task, updates);
+
+  if (updates.status === 'in_progress') {
+    task.startedAt = new Date().toISOString();
+  }
 
   if (updates.status === 'completed') {
     task.completedAt = new Date().toISOString();
@@ -242,7 +263,8 @@ export async function cleanupStaleTasks(timeoutMin = DEFAULT_TIMEOUT_MIN) {
 
   for (const task of queue.tasks) {
     if (task.status === 'in_progress') {
-      const elapsed = now - new Date(task.createdAt).getTime();
+      const baseTime = task.startedAt || task.createdAt;
+      const elapsed = now - new Date(baseTime).getTime();
       if (elapsed > timeoutMs) {
         task.status = 'failed';
         task.error = `타임아웃 (${timeoutMin}분 초과)`;

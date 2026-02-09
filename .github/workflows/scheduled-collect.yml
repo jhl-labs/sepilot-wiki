@@ -26,6 +26,7 @@ concurrency:
 jobs:
   collect-actions-status:
     runs-on: jhl-space
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4

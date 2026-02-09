@@ -23,6 +23,7 @@ concurrency:
 jobs:
   analyze-coverage:
     runs-on: jhl-space
+    timeout-minutes: 15
     permissions:
       contents: write
       issues: write
