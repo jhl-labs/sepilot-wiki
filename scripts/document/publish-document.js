@@ -122,7 +122,8 @@ async function main() {
     console.log(JSON.stringify(result, null, 2));
 
     // GitHub Actions 출력 설정
-    await setGitHubOutput({ has_changes: result.hasChanges });
+    const slug = result.filename ? result.filename.replace('.md', '') : '';
+    await setGitHubOutput({ has_changes: result.hasChanges, slug });
   } catch (error) {
     console.error('❌ 문서 발행 실패:', error.message);
     process.exit(1);

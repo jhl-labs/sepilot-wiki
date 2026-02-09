@@ -207,11 +207,16 @@ export function resolveDocumentPath(context, wikiDir) {
 
   // 3. Issue 제목에서 슬러그 생성
   const slug = context.issueTitle
+    // 공통 접두사 제거: [요청], [수정], [삭제], [질문] 등
+    .replace(/^\[.*?\]\s*/, '')
+    // 한국어 제거 (URL에 부적합)
+    .replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, ' ')
     .toLowerCase()
-    .replace(/[^a-z0-9가-힣\s-]/g, '')
+    // 영문+숫자+공백+하이픈만 유지
+    .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
-    .trim()
+    .replace(/^-|-$/g, '')
     .slice(0, 50);
 
   const filename = `${slug}.md`;

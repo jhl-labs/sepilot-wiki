@@ -132,16 +132,11 @@ jobs:
 
       - name: Comment with result
         uses: actions/github-script@v7
+        env:
+          DOCUMENT_SLUG: ${{ steps.generate.outputs.slug }}
         with:
           script: |
-            const issueTitle = context.payload.issue.title;
-            const slug = issueTitle
-              .toLowerCase()
-              .replace(/[^a-z0-9가-힣\s-]/g, '')
-              .replace(/\s+/g, '-')
-              .replace(/-+/g, '-')
-              .trim()
-              .slice(0, 50);
+            const slug = process.env.DOCUMENT_SLUG || '';
 
             const body = [
               '✅ 문서 초안이 생성되었습니다!',
@@ -345,16 +340,11 @@ jobs:
 
       - name: Comment with result
         uses: actions/github-script@v7
+        env:
+          DOCUMENT_SLUG: ${{ steps.publish.outputs.slug }}
         with:
           script: |
-            const issueTitle = context.payload.issue.title;
-            const slug = issueTitle
-              .toLowerCase()
-              .replace(/[^a-z0-9가-힣\s-]/g, '')
-              .replace(/\s+/g, '-')
-              .replace(/-+/g, '-')
-              .trim()
-              .slice(0, 50);
+            const slug = process.env.DOCUMENT_SLUG || '';
 
             const body = [
               '✅ 문서가 발행되었습니다!',
