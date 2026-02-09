@@ -1,14 +1,18 @@
 name: Document Change Detector
 
+# 비활성화: 단순 텍스트 매칭으로 인한 거짓 양성(false positive) 다수 발생
+# 매칭 로직 개선 후 재활성화 필요 (source_files frontmatter 기반 등)
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'src/**'
+#       - 'lib/**'
+#       - 'app/**'
+#       - 'scripts/**'
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'src/**'
-      - 'lib/**'
-      - 'app/**'
-      - 'scripts/**'
+  workflow_dispatch:
 
 concurrency:
   group: doc-change-detector
