@@ -1,282 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2025-12-28T11:46:44.147Z</generated>
-  <count>15</count>
+  <generated>2026-02-09T09:42:37.906Z</generated>
+  <count>14</count>
   <items>
   <item>
-    <title>bun과 pnpm, npm의 차이</title>
-    <slug>bun/comparison-pnpm-npm</slug>
-    <content>bun과 pnpm, npm의 차이
-개요
-은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
-이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤 도구를 선택하면 좋은지 살펴봅니다.
-설치 및 초기 설정
-  항목   bun   npm (Node.js 기본)   pnpm  
- ------ ----- ------------------- ------ 
-  설치 명령    (스크립트) 또는  (macOS)   Node.js 설치 시 자동 포함 ( 확인)     
-  기본 제공 기능   런타임, 패키지 매니저, 번들러, 테스트 러너 등   런타임 + npm (패키지 매니저)   npm 호환 CLI + 효율적인 저장소 관리  
-  설정 파일    (선택)       (멀티패키지)  
-성능 비교
-  항목   bun   npm   pnpm  
- ------ ----- ----- ------ 
-  패키지 설치 속도   매우 빠름 (C++ 로 구현, 병렬 다운로드)   보통 (JavaScript 기반)   npm보다 빠름, 하지만 bun보다는 느림  
-  실행 속도 (런타임)   Node.js 대비 24배 빠름 (V8 엔진 최적화)   Node.js 표준   Node.js 표준 (pnpm은 런타임이 아님)  
-  번들링 속도    로 초단위 번들링   ,  등 별도 도구 필요   별도 번들러 필요  
-벤치마크:  은 10,000개의 의존성을 30초 이내에 설치할 수 있는 반면, npm은 23분, pnpm은 약 1분 정도 소요됩니다(환경에 따라 차이 존재).
-디스크 사용량
-npm: 각 프로젝트마다 에 전체 복사본을 저장 → 중복 파일이 많이 발생.
-pnpm: 내용 주소 기반 저장소(content‑addressable store)를 전역에 두고, 프로젝트마다 심볼릭 링크를 사용 → 중복 최소화, 디스크 사용량 3050% 절감.
-bun:  역시 전역 캐시를 사용하지만, 현재는 pnpm만큼 세밀한 deduplication을 제공하지 않음. 그래도 npm 대비 2030% 정도 절감.
-호환성 및 생태계
-  항목   bun   npm   pnpm  
- ------ ----- ----- ------ 
-  Node.js API 호환   대부분 호환, 일부 네이티브 모듈(특히 C/C++ 애드온)에서 빌드 오류 가능   완전 호환   완전 호환 (npm 스크립트 그대로 사용)  
-  패키지 레지스트리   기본적으로 npm 레지스트리 사용   npm 레지스트리   npm 레지스트리  
-  스크립트 실행    (npm script와 동일)        
-  커뮤니티·플러그인   아직 초기 단계, 공식 플러그인 제한적   가장 큰 생태계, 수많은 플러그인·툴   npm 호환 플러그인 대부분 사용 가능  
-주요 사용 사례
-bun: 빠른 프로토타이핑, 작은 프로젝트, 번들링이 필요 없는 서버리스 함수, 성능이 중요한 CLI 툴.
-npm: 대부분의 Node.js 프로젝트, 레거시 코드베이스, 광범위한 CI/CD 파이프라인.
-pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하고 설치 속도를 개선하고 싶을 때.
-선택 가이드
-  상황   추천 도구  
- ------ ----------- 
-  프로젝트가 작고 빠른 설치·실행이 필요   bun  
-  기존 Node.js 생태계와 완전 호환이 필요   npm  
-  멀티패키지(모노레포) 혹은 디스크 절감이 중요한 대규모 프로젝트   pnpm  
-결론
-은 속도와 통합성을 중시하는 최신 개발자에게 매력적인 선택입니다.
-은 보편성과 광범위한 호환성을 제공하므로 여전히 기본 선택지입니다.
-은 효율적인 저장소 관리와 모노레포 지원이 강점이며, npm과 100% 호환됩니다.
-프로젝트 요구사항(성능, 디스크 사용량, 생태계 지원)을 고려해 적절한 도구를 선택하면 됩니다.
-이 문서는 2025년 기준 정보를 바탕으로 작성되었습니다. 각 툴의 최신 버전 및 업데이트 내용은 공식 문서를 참고하세요.</content>
-    <excerpt>bun과 pnpm, npm의 차이
-개요
-은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
-이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
-    <tags>bun, pnpm, npm, 비교, 가이드</tags>
-    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
-    <author>JHL</author>
-  </item>
-  <item>
-    <title>GitHub Actions로 bun을 쓰는 방법</title>
-    <slug>bun/github-actions-setup</slug>
-    <content>개요
-GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.
-사전 요구 사항
-저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
-워크플로우는 Linux() 환경을 기준으로 설명합니다. Windows/macOS에서도 동일한 단계가 적용되지만, OS별 경로 차이에 유의하세요.
-워크플로우 파일 구조
- 디렉터리에  과 같은 파일을 생성합니다.
-워크플로우 트리거
-Job 정의
-단계별 설정
-3-1. 레포지토리 체크아웃
-3-2. bun 설치
-bun은 공식 설치 스크립트를 통해 간단히 설치할 수 있습니다.
-공식 설치 스크립트는  에서 확인할 수 있습니다.
-3-3. 의존성 캐시
-bun은  대신 와  디렉터리를 사용합니다.
- 액션을 이용해 이 디렉터리를 캐시하면 설치 속도가 크게 향상됩니다.
-3-4. 의존성 설치
-3-5. 테스트 실행 (예시)
-3-6. 빌드 및 배포 (필요 시)
-전체 예시 워크플로우
-아래는 위 단계들을 하나의 파일에 통합한 최종 예시입니다.
-주의: 위 예시에서는 와  스크립트가  혹은 에 정의되어 있다고 가정합니다. 실제 프로젝트에 맞게 스크립트 명령을 조정하세요.
-macOS / Windows 환경에서 사용하기
-macOS:  로 변경하고,  설치가 기본 제공됩니다.
-Windows:  로 변경하고, PowerShell 스크립트()를 사용해 bun을 설치합니다. 예시:
-Windows에서는 경로 구분자()와 환경 변수 사용법에 유의하세요.
-베스트 프랙티스
-캐시 키 관리:  파일이 변경될 때마다 캐시가 무효화되도록  를 사용합니다.
-CI 속도 최적화:  대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.
-보안: 공식 설치 스크립트는 HTTPS를 통해 전달되며,  옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.
-버전 고정: 특정 bun 버전을 사용하려면  환경 변수를 설정하고 설치 스크립트에 전달합니다.
-참고 자료
-Bun 공식 홈페이지 및 설치 가이드: 
-GitHub Actions 공식 문서: 
-actions/cache 액션: 
-결론
-GitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.</content>
-    <excerpt>개요
-GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.
-사전 요구 사항
-저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
-워크플로우...</excerpt>
-    <tags>github-actions, bun, CI, CI/CD, node-alternative</tags>
-    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
+    <title>Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
+    <slug>projects/technology-stack</slug>
+    <content>기술 스택
+SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
+프론트엔드
+React 18 - UI 라이브러리
+TypeScript - 타입 안전성을 위한 정적 타입 언어
+Vite - 빌드 도구 및 개발 서버
+React Router DOM - SPA 라우팅
+TanStack Query (React Query) - 서버 상태 관리
+Next.js 사용 여부
+SEPilot Wiki는 Next.js를 사용하지 않습니다.
+대신 Vite와 React를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.
+Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.
+필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.
+마크다운 렌더링
+react-markdown - 마크다운 파싱 및 렌더링
+remark-gfm - GitHub Flavored Markdown 지원
+rehype-raw - HTML 태그 지원
+rehype-sanitize - XSS 방지를 위한 HTML 살균
+react-syntax-highlighter - 코드 구문 강조
+스타일링
+CSS Variables - 테마 시스템
+Lucide React - 아이콘 라이브러리
+개발 도구
+ESLint - 코드 린팅
+Vitest - 테스트 프레임워크
+Husky - Git hooks
+CI/CD
+GitHub Actions - 자동화 워크플로우
+GitHub Pages - 정적 사이트 호스팅
+Bun - 패키지 매니저 및 런타임
+AI 통합
+OpenAI API 호환 - LLM을 통한 문서 자동 생성
+참고 링크
+SEPilot Wiki GitHub Repository</content>
+    <excerpt>기술 스택
+SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
+프론트엔드
+React 18 - UI 라이브러리
+TypeScript - 타입 안전성을 위한 정적 타입 언어
+Vite - 빌드 도구 및 개발 서버
+React Router DOM - SPA 라우팅
+TanStack Query (React Query) - 서버 상태 관리
+Next.js...</excerpt>
+    <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite</tags>
+    <lastModified>2026-02-09T18:40:34+09:00</lastModified>
     <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>bun 이란?</title>
-    <slug>bun/overview</slug>
-    <content>개요
-bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저를 하나로 통합한 도구입니다.
-런타임: Node.js와 호환되는 API를 제공하면서 V8 엔진 대신 JavaScriptCore(Apple의 엔진)를 사용합니다.
-번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
-패키지 매니저:  로 npm 레지스트리의 패키지를 설치하며, 과  구조를 그대로 사용합니다.
-공식 웹사이트: https://bun.sh
-GitHub 레포지터리: https://github.com/oven-sh/bun
-bun을 선택한 이유
-  항목   설명  
- ------ ------ 
-  성능   Zig 언어와 JavaScriptCore를 활용해 파일 I/O, 네트워크, 패키지 설치, 번들링 속도가 기존 Node.js 기반 도구보다 현저히 빠릅니다. 공식 벤치마크에서는  대비 23배,  대비 510배 빠른 결과가 보고되었습니다.  
-  통합 도구   런타임, 번들러, 패키지 매니저가 하나의 바이너리()에 포함돼 별도 설치가 필요 없습니다. 개발 환경 설정이 간단해집니다.  
-  Zero‑Config 지원    명령만으로 TypeScript 파일을 바로 실행할 수 있어 별도  설정이 불필요합니다.  
-  호환성   대부분의 npm 패키지를 그대로 사용할 수 있으며,  스크립트도 그대로 동작합니다.  
-  경량 설치 파일   단일 실행 파일(≈ 30 MB)로 배포되어 CI/CD 파이프라인에 쉽게 통합할 수 있습니다.  
-장점
-빠른 설치 및 실행
-  -  은 병렬 I/O와 캐시 최적화를 통해 npm/yarn 대비 수 초 내에 의존성을 설치합니다.
-내장 번들러
-  -  로 ESBuild와 유사한 속도로 번들을 생성하며, 자동 트리쉐이킹과 코드 스플리팅을 지원합니다.
-TypeScript 지원
-  - 별도 트랜스파일러 없이  로 바로 실행 가능.
-단일 바이너리
-  - 런타임, 번들러, 패키지 매니저가 하나의 실행 파일에 포함돼 환경 관리가 단순합니다.
-POSIX 호환
-  - macOS, Linux, Windows(WSL 포함)에서 동일한 바이너리를 사용합니다.
-단점
-생태계 성숙도
-  - npm/yarn에 비해 아직 사용자가 적고, 일부 복잡한 네이티브 모듈(예:  기반)에서 호환성 문제가 발생할 수 있습니다.
-플러그인 및 툴링
-  - Webpack, Rollup 등 기존 번들러용 플러그인 생태계와 직접 호환되지 않으며, bun 전용 플러그인도 아직 제한적입니다.
-문서 및 커뮤니티
-  - 공식 문서는 꾸준히 업데이트되고 있지만, Stack Overflow 등 커뮤니티 기반 Q&amp;A가 상대적으로 적습니다.
-버전 관리
-  - 현재는  자체가 버전 관리 도구 역할을 하지 않으며, 프로젝트별 Node.js 버전 관리와는 별개로 다루어야 합니다.
-라이선스 및 역사
-라이선스: MIT License (오픈 소스, 자유롭게 사용·수정·배포 가능)
-주요 연혁
-  - 2021년 5월: 프로젝트 초기 설계 및 공개 발표 (Jarred Sumner, Oven.sh 팀)
-  - 2022년 1월: 첫 베타 버전() 공개, GitHub 스타 수 급증
-  - 2022년 8월:  에서 패키지 매니저 기능 정식 추가
-  - 2023년 3월:  에서 TypeScript 실행 지원 및  도입
-  - 2024년 11월:  에서 Windows 지원 및 안정화 버전 출시
-자세한 릴리즈 노트는 GitHub Releases 페이지(https://github.com/oven-sh/bun/releases)를 참고하세요.
-결론
-bun은 속도와 통합성을 중시하는 프로젝트에 적합한 최신 JavaScript 도구입니다.
-성능이 중요한 CI/CD 파이프라인, 대규모 모노레포, 혹은 빠른 개발 피드백 루프가 필요한 경우 bun을 고려해볼 만합니다.
-반면, 특정 네이티브 모듈이나 풍부한 플러그인 생태계가 필수인 경우에는 기존 npm/yarn + Webpack/Rollup 조합이 더 안정적일 수 있습니다.
-프로젝트에 적용하기 전, 핵심 의존성이 bun과 호환되는지 확인하고, 작은 파일럿 프로젝트에서 성능 및 호환성을 검증하는 것을 권장합니다.
-추가 조사 필요: 복잡한 네이티브 모듈(예:  기반)과 bun의 호환성 여부는 프로젝트별 테스트가 필요합니다. 공식 문서와 GitHub 이슈 트래커를 지속적으로 확인하세요.</content>
-    <excerpt>개요
-bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저를 하나로 통합한 도구입니다.
-런타임: Node.js와 호환되는 API를 제공하면서 V8 엔진 대신 JavaScriptCore(Apple의 엔진)를 사용합니다.
-번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
-패키지...</excerpt>
-    <tags>bun, npm, yarn, 패키지 매니저, 가이드</tags>
-    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Kubernetes 클러스터 대시보드</title>
-    <slug>dashboard/k8s-overview</slug>
-    <content>Kubernetes 클러스터 대시보드
-마지막 업데이트: 2025. 12. 9. 오후 7:05:25
-📊 클러스터 요약
-  구분   현황   상태  
- :----- -----: :----: 
-  클러스터   1개   🟢  
-  노드   4 / 4   🟢  
-  Pods   232 / 264   🟡  
-  Warning Events   20개   🔴  
-  리소스   사용량   총량   사용률  
- :------- -------: -----: -------: 
-  CPU   6.4 cores   90 cores   🟢 6%  
-  Memory   80.7 Gi   313 Gi   🟢 36%  
-⚠️ 주의 이벤트 (최근 1시간)
-  클러스터   시간   네임스페이스   종류   대상   원인   횟수  
- :--------- :----- :------------- :----- :----- :----- -----: 
-  default   오후 7:05:23   gallery-prod   Pod   gallery-vote-6fc75cb6df-746xt   Failed   3829  
-  default   오후 7:05:18   opensearch   Pod   opensearch-data-0   FailedToRetrieveImagePullSecret   79191  
-  default   오후 7:05:05   supabase   ExternalSecret   supabase-s3   UpdateFailed   7032  
-  default   오후 7:05:02   gpu-operator   Pod   nvidia-device-plugin-daemonset-4vgtv   FailedCreatePodSandBox   2  
-  default   오후 7:05:01   jhl-labs   Pod   jhl-space-sncrf-runner-8r55s   FailedCreatePodSandBox   2  
-  default   오후 7:04:58   gpu-operator   Pod   nvidia-container-toolkit-daemonset-hfvqt   FailedCreatePodSandBox   2  
-  default   오후 7:04:58   gpu-operator   Pod   nvidia-operator-validator-rsbtr   FailedCreatePodSandBox   2  
-  default   오후 7:04:55   jhl-labs   Pod   jhl-space-sncrf-runner-vb8pk   FailedCreatePodSandBox   2  
-  default   오후 7:04:55   jhl-labs   Pod   jhl-space-sncrf-runner-vvc7p   FailedCreatePodSandBox   2  
-  default   오후 7:04:54   jhl-labs   Pod   jhl-space-sncrf-runner-kmtw4   FailedCreatePodSandBox   2  
-📈 리소스 사용량
-노드별 리소스 사용률
-🏗️ 클러스터 리소스 현황
-🚀 Pod 상태
-📋 클러스터별 상세 정보
-default
-클러스터 상세 정보 보기
-  항목   값  
- :----- ---: 
-  버전   v1.32.8+rke2r1  
-  노드   4개 (Ready: 4개)  
-  CPU   6.4 / 90 cores  
-  Memory   80.7 / 313.3 Gi  
-  Pods   232 running / 264 total  
-노드 목록
-  노드   상태   역할   CPU   Memory   CPU%   Mem%  
- :----- :----: :----- ----: -------: -----: -----: 
-  7960x   🟢   worker   48   125.3Gi   🟢 8%   🟢 19%  
-  vtopia-cp1   🟢   control-plane, etcd, master   14   115.1Gi   🟢 1%   🟢 12%  
-  vtopia-cp2   🟢   control-plane, etcd, master   14   23.1Gi   🟢 4%   🟢 52%  
-  vtopia-cp3   🟢   control-plane, etcd, master   14   49.8Gi   🟢 11%   🟢 59%</content>
-    <excerpt>Kubernetes 클러스터 대시보드
-마지막 업데이트: 2025. 12. 9. 오후 7:05:25
-📊 클러스터 요약
-  구분   현황   상태  
- :----- -----: :----: 
-  클러스터   1개   🟢  
-  노드   4 / 4   🟢  
-  Pods   232 / 264   🟡  
-  Warning Events   20개   🔴...</excerpt>
-    <tags>kubernetes, o11y, monitoring, infrastructure</tags>
-    <lastModified>2025-12-28T11:46:44.083Z</lastModified>
-    <author></author>
-  </item>
-  <item>
-    <title>Kubernetes 클러스터 대시보드</title>
-    <slug>dashboard/nodes</slug>
-    <content>Kubernetes 클러스터 대시보드
-마지막 업데이트: 2025. 12. 9. 오후 6:45:52
-전체 요약
-  항목   값  
- ------ ------ 
-  클러스터   1개 연결 / 1개 등록  
-  전체 노드   4개 (Ready: 4개)  
-  전체 CPU   90 cores  
-  전체 메모리   313.3 Gi  
-클러스터 개요
-노드 상태 분포
-리소스 분석
-클러스터별 상세 정보
-default
-  항목   값  
- ------ ------ 
-  버전   v1.32.8+rke2r1  
-  노드   4개 (Ready: 4개)  
-  CPU   90 cores  
-  Memory   313.3 Gi  
-노드 목록
-  노드명   상태   역할   CPU   Memory   IP  
- -------- ------ ------ ----- -------- ----- 
-  7960x   🟢 Ready   worker   48   125.3Gi   202.202.202.117  
-  vtopia-cp1   🟢 Ready   control-plane, etcd, master   14   115.1Gi   202.202.202.104  
-  vtopia-cp2   🟢 Ready   control-plane, etcd, master   14   23.1Gi   202.202.202.113  
-  vtopia-cp3   🟢 Ready   control-plane, etcd, master   14   49.8Gi   202.202.202.167</content>
-    <excerpt>Kubernetes 클러스터 대시보드
-마지막 업데이트: 2025. 12. 9. 오후 6:45:52
-전체 요약
-  항목   값  
- ------ ------ 
-  클러스터   1개 연결 / 1개 등록  
-  전체 노드   4개 (Ready: 4개)  
-  전체 CPU   90 cores  
-  전체 메모리   313.3 Gi  
-클러스터 개요
-노드 상태 분포...</excerpt>
-    <tags>kubernetes, cluster, nodes, infrastructure, monitoring</tags>
-    <lastModified>2025-12-28T11:46:44.088Z</lastModified>
-    <author></author>
   </item>
   <item>
     <title>SEPilot Desktop 소개</title>
@@ -380,69 +155,251 @@ LLM 설정
     <excerpt>SEPilot Desktop 소개
 SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
     <tags>SEPilot, Desktop, LLM, Project</tags>
-    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
+    <lastModified>2026-02-09T18:40:34+09:00</lastModified>
     <author>JHL</author>
   </item>
   <item>
-    <title>Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
-    <slug>projects/technology-stack</slug>
-    <content>기술 스택
-SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
-프론트엔드
-React 18 - UI 라이브러리
-TypeScript - 타입 안전성을 위한 정적 타입 언어
-Vite - 빌드 도구 및 개발 서버
-React Router DOM - SPA 라우팅
-TanStack Query (React Query) - 서버 상태 관리
-Next.js 사용 여부
-SEPilot Wiki는 Next.js를 사용하지 않습니다.
-대신 Vite와 React를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.
-Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.
-필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.
-마크다운 렌더링
-react-markdown - 마크다운 파싱 및 렌더링
-remark-gfm - GitHub Flavored Markdown 지원
-rehype-raw - HTML 태그 지원
-rehype-sanitize - XSS 방지를 위한 HTML 살균
-react-syntax-highlighter - 코드 구문 강조
-스타일링
-CSS Variables - 테마 시스템
-Lucide React - 아이콘 라이브러리
-개발 도구
-ESLint - 코드 린팅
-Vitest - 테스트 프레임워크
-Husky - Git hooks
-CI/CD
-GitHub Actions - 자동화 워크플로우
-GitHub Pages - 정적 사이트 호스팅
-Bun - 패키지 매니저 및 런타임
-AI 통합
-OpenAI API 호환 - LLM을 통한 문서 자동 생성
-참고 링크
-SEPilot Wiki GitHub Repository</content>
-    <excerpt>기술 스택
-SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
-프론트엔드
-React 18 - UI 라이브러리
-TypeScript - 타입 안전성을 위한 정적 타입 언어
-Vite - 빌드 도구 및 개발 서버
-React Router DOM - SPA 라우팅
-TanStack Query (React Query) - 서버 상태 관리
-Next.js...</excerpt>
-    <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite</tags>
-    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
+    <title>bun과 pnpm, npm의 차이</title>
+    <slug>bun/comparison-pnpm-npm</slug>
+    <content>bun과 pnpm, npm의 차이
+개요
+은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
+이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤 도구를 선택하면 좋은지 살펴봅니다.
+설치 및 초기 설정
+  항목   bun   npm (Node.js 기본)   pnpm  
+ ------ ----- ------------------- ------ 
+  설치 명령    (스크립트) 또는  (macOS)   Node.js 설치 시 자동 포함 ( 확인)     
+  기본 제공 기능   런타임, 패키지 매니저, 번들러, 테스트 러너 등   런타임 + npm (패키지 매니저)   npm 호환 CLI + 효율적인 저장소 관리  
+  설정 파일    (선택)       (멀티패키지)  
+성능 비교
+  항목   bun   npm   pnpm  
+ ------ ----- ----- ------ 
+  패키지 설치 속도   매우 빠름 (C++ 로 구현, 병렬 다운로드)   보통 (JavaScript 기반)   npm보다 빠름, 하지만 bun보다는 느림  
+  실행 속도 (런타임)   Node.js 대비 24배 빠름 (V8 엔진 최적화)   Node.js 표준   Node.js 표준 (pnpm은 런타임이 아님)  
+  번들링 속도    로 초단위 번들링   ,  등 별도 도구 필요   별도 번들러 필요  
+벤치마크:  은 10,000개의 의존성을 30초 이내에 설치할 수 있는 반면, npm은 23분, pnpm은 약 1분 정도 소요됩니다(환경에 따라 차이 존재).
+디스크 사용량
+npm: 각 프로젝트마다 에 전체 복사본을 저장 → 중복 파일이 많이 발생.
+pnpm: 내용 주소 기반 저장소(content‑addressable store)를 전역에 두고, 프로젝트마다 심볼릭 링크를 사용 → 중복 최소화, 디스크 사용량 3050% 절감.
+bun:  역시 전역 캐시를 사용하지만, 현재는 pnpm만큼 세밀한 deduplication을 제공하지 않음. 그래도 npm 대비 2030% 정도 절감.
+호환성 및 생태계
+  항목   bun   npm   pnpm  
+ ------ ----- ----- ------ 
+  Node.js API 호환   대부분 호환, 일부 네이티브 모듈(특히 C/C++ 애드온)에서 빌드 오류 가능   완전 호환   완전 호환 (npm 스크립트 그대로 사용)  
+  패키지 레지스트리   기본적으로 npm 레지스트리 사용   npm 레지스트리   npm 레지스트리  
+  스크립트 실행    (npm script와 동일)        
+  커뮤니티·플러그인   아직 초기 단계, 공식 플러그인 제한적   가장 큰 생태계, 수많은 플러그인·툴   npm 호환 플러그인 대부분 사용 가능  
+주요 사용 사례
+bun: 빠른 프로토타이핑, 작은 프로젝트, 번들링이 필요 없는 서버리스 함수, 성능이 중요한 CLI 툴.
+npm: 대부분의 Node.js 프로젝트, 레거시 코드베이스, 광범위한 CI/CD 파이프라인.
+pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하고 설치 속도를 개선하고 싶을 때.
+선택 가이드
+  상황   추천 도구  
+ ------ ----------- 
+  프로젝트가 작고 빠른 설치·실행이 필요   bun  
+  기존 Node.js 생태계와 완전 호환이 필요   npm  
+  멀티패키지(모노레포) 혹은 디스크 절감이 중요한 대규모 프로젝트   pnpm  
+결론
+은 속도와 통합성을 중시하는 최신 개발자에게 매력적인 선택입니다.
+은 보편성과 광범위한 호환성을 제공하므로 여전히 기본 선택지입니다.
+은 효율적인 저장소 관리와 모노레포 지원이 강점이며, npm과 100% 호환됩니다.
+프로젝트 요구사항(성능, 디스크 사용량, 생태계 지원)을 고려해 적절한 도구를 선택하면 됩니다.
+이 문서는 2025년 기준 정보를 바탕으로 작성되었습니다. 각 툴의 최신 버전 및 업데이트 내용은 공식 문서를 참고하세요.</content>
+    <excerpt>bun과 pnpm, npm의 차이
+개요
+은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
+이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
+    <tags>bun, pnpm, npm, 비교, 가이드</tags>
+    <lastModified>2026-02-09T18:40:34+09:00</lastModified>
+    <author>JHL</author>
+  </item>
+  <item>
+    <title>bun 이란?</title>
+    <slug>bun/overview</slug>
+    <content>개요
+bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저를 하나로 통합한 도구입니다.
+런타임: Node.js와 호환되는 API를 제공하면서 V8 엔진 대신 JavaScriptCore(Apple의 엔진)를 사용합니다.
+번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
+패키지 매니저:  로 npm 레지스트리의 패키지를 설치하며, 과  구조를 그대로 사용합니다.
+공식 웹사이트: https://bun.sh
+GitHub 레포지터리: https://github.com/oven-sh/bun
+bun을 선택한 이유
+  항목   설명  
+ ------ ------ 
+  성능   Zig 언어와 JavaScriptCore를 활용해 파일 I/O, 네트워크, 패키지 설치, 번들링 속도가 기존 Node.js 기반 도구보다 현저히 빠릅니다. 공식 벤치마크에서는  대비 23배,  대비 510배 빠른 결과가 보고되었습니다.  
+  통합 도구   런타임, 번들러, 패키지 매니저가 하나의 바이너리()에 포함돼 별도 설치가 필요 없습니다. 개발 환경 설정이 간단해집니다.  
+  Zero‑Config 지원    명령만으로 TypeScript 파일을 바로 실행할 수 있어 별도  설정이 불필요합니다.  
+  호환성   대부분의 npm 패키지를 그대로 사용할 수 있으며,  스크립트도 그대로 동작합니다.  
+  경량 설치 파일   단일 실행 파일(≈ 30 MB)로 배포되어 CI/CD 파이프라인에 쉽게 통합할 수 있습니다.  
+장점
+빠른 설치 및 실행
+  -  은 병렬 I/O와 캐시 최적화를 통해 npm/yarn 대비 수 초 내에 의존성을 설치합니다.
+내장 번들러
+  -  로 ESBuild와 유사한 속도로 번들을 생성하며, 자동 트리쉐이킹과 코드 스플리팅을 지원합니다.
+TypeScript 지원
+  - 별도 트랜스파일러 없이  로 바로 실행 가능.
+단일 바이너리
+  - 런타임, 번들러, 패키지 매니저가 하나의 실행 파일에 포함돼 환경 관리가 단순합니다.
+POSIX 호환
+  - macOS, Linux, Windows(WSL 포함)에서 동일한 바이너리를 사용합니다.
+단점
+생태계 성숙도
+  - npm/yarn에 비해 아직 사용자가 적고, 일부 복잡한 네이티브 모듈(예:  기반)에서 호환성 문제가 발생할 수 있습니다.
+플러그인 및 툴링
+  - Webpack, Rollup 등 기존 번들러용 플러그인 생태계와 직접 호환되지 않으며, bun 전용 플러그인도 아직 제한적입니다.
+문서 및 커뮤니티
+  - 공식 문서는 꾸준히 업데이트되고 있지만, Stack Overflow 등 커뮤니티 기반 Q&amp;A가 상대적으로 적습니다.
+버전 관리
+  - 현재는  자체가 버전 관리 도구 역할을 하지 않으며, 프로젝트별 Node.js 버전 관리와는 별개로 다루어야 합니다.
+라이선스 및 역사
+라이선스: MIT License (오픈 소스, 자유롭게 사용·수정·배포 가능)
+주요 연혁
+  - 2021년 5월: 프로젝트 초기 설계 및 공개 발표 (Jarred Sumner, Oven.sh 팀)
+  - 2022년 1월: 첫 베타 버전() 공개, GitHub 스타 수 급증
+  - 2022년 8월:  에서 패키지 매니저 기능 정식 추가
+  - 2023년 3월:  에서 TypeScript 실행 지원 및  도입
+  - 2024년 11월:  에서 Windows 지원 및 안정화 버전 출시
+자세한 릴리즈 노트는 GitHub Releases 페이지(https://github.com/oven-sh/bun/releases)를 참고하세요.
+결론
+bun은 속도와 통합성을 중시하는 프로젝트에 적합한 최신 JavaScript 도구입니다.
+성능이 중요한 CI/CD 파이프라인, 대규모 모노레포, 혹은 빠른 개발 피드백 루프가 필요한 경우 bun을 고려해볼 만합니다.
+반면, 특정 네이티브 모듈이나 풍부한 플러그인 생태계가 필수인 경우에는 기존 npm/yarn + Webpack/Rollup 조합이 더 안정적일 수 있습니다.
+프로젝트에 적용하기 전, 핵심 의존성이 bun과 호환되는지 확인하고, 작은 파일럿 프로젝트에서 성능 및 호환성을 검증하는 것을 권장합니다.
+추가 조사 필요: 복잡한 네이티브 모듈(예:  기반)과 bun의 호환성 여부는 프로젝트별 테스트가 필요합니다. 공식 문서와 GitHub 이슈 트래커를 지속적으로 확인하세요.</content>
+    <excerpt>개요
+bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저를 하나로 통합한 도구입니다.
+런타임: Node.js와 호환되는 API를 제공하면서 V8 엔진 대신 JavaScriptCore(Apple의 엔진)를 사용합니다.
+번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
+패키지...</excerpt>
+    <tags>bun, npm, yarn, 패키지 매니저, 가이드</tags>
+    <lastModified>2026-02-09T18:40:34+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
-    <title>Configuration Guide</title>
-    <slug>guide/configuration-guide</slug>
-    <content>Configuration Guide
-This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.</content>
-    <excerpt>Configuration Guide
-This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.</excerpt>
-    <tags>configuration, settings, customization</tags>
-    <lastModified>undefined</lastModified>
-    <author></author>
+    <title>GitHub Actions로 bun을 쓰는 방법</title>
+    <slug>bun/github-actions-setup</slug>
+    <content>개요
+GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.
+사전 요구 사항
+저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
+워크플로우는 Linux() 환경을 기준으로 설명합니다. Windows/macOS에서도 동일한 단계가 적용되지만, OS별 경로 차이에 유의하세요.
+워크플로우 파일 구조
+ 디렉터리에  과 같은 파일을 생성합니다.
+워크플로우 트리거
+Job 정의
+단계별 설정
+3-1. 레포지토리 체크아웃
+3-2. bun 설치
+bun은 공식 설치 스크립트를 통해 간단히 설치할 수 있습니다.
+공식 설치 스크립트는  에서 확인할 수 있습니다.
+3-3. 의존성 캐시
+bun은  대신 와  디렉터리를 사용합니다.
+ 액션을 이용해 이 디렉터리를 캐시하면 설치 속도가 크게 향상됩니다.
+3-4. 의존성 설치
+3-5. 테스트 실행 (예시)
+3-6. 빌드 및 배포 (필요 시)
+전체 예시 워크플로우
+아래는 위 단계들을 하나의 파일에 통합한 최종 예시입니다.
+주의: 위 예시에서는 와  스크립트가  혹은 에 정의되어 있다고 가정합니다. 실제 프로젝트에 맞게 스크립트 명령을 조정하세요.
+macOS / Windows 환경에서 사용하기
+macOS:  로 변경하고,  설치가 기본 제공됩니다.
+Windows:  로 변경하고, PowerShell 스크립트()를 사용해 bun을 설치합니다. 예시:
+Windows에서는 경로 구분자()와 환경 변수 사용법에 유의하세요.
+베스트 프랙티스
+캐시 키 관리:  파일이 변경될 때마다 캐시가 무효화되도록  를 사용합니다.
+CI 속도 최적화:  대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.
+보안: 공식 설치 스크립트는 HTTPS를 통해 전달되며,  옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.
+버전 고정: 특정 bun 버전을 사용하려면  환경 변수를 설정하고 설치 스크립트에 전달합니다.
+참고 자료
+Bun 공식 홈페이지 및 설치 가이드: 
+GitHub Actions 공식 문서: 
+actions/cache 액션: 
+결론
+GitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.</content>
+    <excerpt>개요
+GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.
+사전 요구 사항
+저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
+워크플로우...</excerpt>
+    <tags>github-actions, bun, CI, CI/CD, node-alternative</tags>
+    <lastModified>2026-02-09T18:40:34+09:00</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>MAS (Multi Agent System)</title>
+    <slug>요청-masmulti-agent-system에-대해-자세히-조사해줘</slug>
+    <content>개요
+Multi Agent System(다중 에이전트 시스템, 이하 MAS)은 여러 개의 자율적인 에이전트가 상호작용하면서 공동의 목표를 달성하거나 복잡한 문제를 해결하는 컴퓨팅 패러다임입니다. 각 에이전트는 독립적인 인지·행동 능력을 가지고 있으며, 환경에 대한 감지, 의사결정, 행동 수행을 수행합니다. MAS는 분산형 구조, 확장성, 견고성 등을 제공해 복잡계 시뮬레이션, 로보틱스, 스마트 제조, 교통 관리, 금융 등 다양한 도메인에 적용됩니다.
+핵심 개념
+  용어   정의  
+ ------ ------ 
+  에이전트   목표와 행동 규칙을 가진 자율적인 소프트웨어/하드웨어 단위. 감지(Perception), 추론(Reasoning), 행동(Action) 기능을 포함.  
+  환경(Environment)   에이전트가 상호작용하는 외부 세계. 물리적·가상적일 수 있으며, 상태(state)와 이벤트(event)로 표현.  
+  상호작용(Interaction)   에이전트 간 혹은 에이전트와 환경 간의 정보 교환·협력·경쟁 메커니즘. 메시징, 계약, 협상 등이 포함.  
+  협력(Cooperation)   공동 목표 달성을 위해 에이전트가 역할을 분담하고 자원을 공유하는 방식.  
+  경쟁(Competition)   제한된 자원을 두고 에이전트가 서로 이득을 추구하는 상황. 게임 이론·강화학습 등으로 모델링.  
+  조정(Coordination)   충돌을 방지하고 효율성을 높이기 위한 스케줄링·자원 할당 메커니즘.  
+MAS의 주요 구성 요소
+에이전트 아키텍처  
+   - 반응형(reactive): 환경 자극에 즉시 반응, 내부 모델 최소.  
+   - 인지형(cognitive): 목표·계획·학습 기능 포함, 내부 상태 모델링.  
+   - 하이브리드: 반응형과 인지형을 결합.
+통신 프로토콜  
+   - FIPA-ACL(Agent Communication Language) – 국제 표준 메시지 형식.  
+   - JADE(Java Agent DEvelopment Framework) – FIPA 준수 구현체.  
+   - ROS 2(Robot Operating System) – 로봇 분야에서 사용되는 DDS 기반 통신.
+조정 메커니즘  
+   - 계약 기반(Contract Net Protocol)  
+   - 시장 기반(Market Mechanism)  
+   - 협상(Negotiation) 및 합의(Consensus) 알고리즘
+학습·적응  
+   - 강화학습(MARL, Multi-Agent Reinforcement Learning)  
+   - 진화 알고리즘, 베이지안 학습 등
+MAS 설계 및 구현 흐름
+문제 정의 – 목표, 제약, 환경 모델링.  
+에이전트 설계 – 역할, 능력, 의사결정 로직 정의.  
+통신·조정 설계 – 메시지 형식, 프로토콜, 협력/경쟁 메커니즘 선택.  
+시뮬레이션·검증 – 시뮬레이터(예: MATLAB Simulink, Gazebo, NetLogo)를 활용해 동작 검증.  
+배포·운용 – 클라우드(예: AWS RoboMaker), 엣지 디바이스, 로봇 등에 배포.
+주요 적용 사례
+  분야   구체적 사례  
+ ------ ------------- 
+  스마트 제조   생산 라인에서 로봇 에이전트가 작업 순서를 협상·조정하여 생산 효율 극대화.  
+  교통 관리   자율주행 차량 에이전트가 교차로에서 협상하여 충돌을 방지하고 흐름을 최적화.  
+  에너지 그리드   분산형 에너지 자원(태양광, 배터리) 에이전트가 전력 거래·부하 조절을 수행.  
+  재난 대응   드론·로봇 에이전트 팀이 실시간 상황 인식을 기반으로 구조 경로를 협업.  
+  게임·시뮬레이션   다중 플레이어 AI가 협력·경쟁 전략을 학습해 인간 플레이어와 대등한 경기 제공.  
+MAS와 관련된 연구 분야
+Multi-Agent Reinforcement Learning (MARL) – 에이전트들이 공동 혹은 경쟁 환경에서 강화학습을 수행.  
+Distributed Constraint Optimization (DCOP) – 에이전트 간 제약을 만족시키는 최적화 문제 해결.  
+Swarm Intelligence – 개별 에이전트가 단순 규칙을 따를 때 전체 시스템이 복잡한 행동을 나타내는 현상 연구.  
+장점 및 한계
+장점
+확장성: 에이전트를 추가·제거해 시스템 규모를 유연하게 조정 가능.  
+견고성: 일부 에이전트가 실패해도 전체 시스템이 지속적으로 동작.  
+분산 처리: 중앙 집중식 병목을 피하고 병렬 연산 활용.
+한계
+복잡한 설계·검증: 에이전트 간 상호작용이 비선형적이라 예측·검증이 어려움.  
+통신 오버헤드: 대규모 시스템에서 메시지 교환 비용이 급증.  
+보안·프라이버시: 분산된 의사결정 구조는 악의적 에이전트 침투 위험을 내포.
+향후 전망
+표준화 확대 – FIPA, IEEE 등에서 MAS 인터페이스·프로토콜 표준을 지속적으로 업데이트.  
+클라우드·엣지 통합 – 서버리스 컴퓨팅·엣지 AI와 결합해 실시간 협업이 가능한 하이브리드 아키텍처가 등장.  
+인간-에이전트 협업(Human‑Agent Collaboration) – 자연어 인터페이스·설명 가능한 AI(XAI)와 결합해 비전문가도 에이전트 팀을 제어·조정 가능.  
+규제·윤리 프레임워크 – 자율 에이전트의 책임·투명성 확보를 위한 정책·법제 연구가 활발히 진행 중.
+참고 자료
+Claude AI – Agent Teams  
+    
+IBM – Multi‑Agent System (한국어)  
+    
+SelectStar – MAS &amp; MARL Overview  
+    
+추가적인 최신 연구 동향이나 구현 사례는 해당 공식 문서·학술 데이터베이스를 참고하시기 바랍니다.</content>
+    <excerpt>개요
+Multi Agent System(다중 에이전트 시스템, 이하 MAS)은 여러 개의 자율적인 에이전트가 상호작용하면서 공동의 목표를 달성하거나 복잡한 문제를 해결하는 컴퓨팅 패러다임입니다. 각 에이전트는 독립적인 인지·행동 능력을 가지고 있으며, 환경에 대한 감지, 의사결정, 행동 수행을 수행합니다. MAS는 분산형 구조, 확장성, 견고성 등을 제공해...</excerpt>
+    <tags>Multi-Agent, 시스템, 가이드</tags>
+    <lastModified>2026-02-09T09:42:37.878Z</lastModified>
+    <author>SEPilot AI</author>
   </item>
   <item>
     <title>설정 파일 가이드</title>
@@ -494,65 +451,24 @@ SEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.
     <author></author>
   </item>
   <item>
-    <title>Diagrams Guide</title>
-    <slug>guide/diagrams-guide</slug>
-    <content>Diagrams Guide
-This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</content>
-    <excerpt>Diagrams Guide
-This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</excerpt>
-    <tags>diagrams, visuals, documentation</tags>
+    <title>Theme Customization</title>
+    <slug>guide/theme-customization</slug>
+    <content>Theme Customization
+This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.</content>
+    <excerpt>Theme Customization
+This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.</excerpt>
+    <tags>theme, customization, appearance</tags>
     <lastModified>undefined</lastModified>
     <author></author>
   </item>
   <item>
-    <title>다이어그램 및 차트 사용 가이드</title>
-    <slug>guide/diagrams</slug>
-    <content>다이어그램 및 차트 사용 가이드
-SEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 Mermaid와 Plotly를 지원합니다.
-마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.
-Mermaid 다이어그램
- 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.
-플로우차트 (Flowchart)
-mermaid
-graph TD;
-    Start--&gt;Stop;
-    Start--&gt;Progress;
-    Progress--&gt;Stop;
-클래스 다이어그램 (Class Diagram)
-mermaid
-classDiagram
-    Animal &lt; -- Duck
-    Animal &lt; -- Fish
-    Animal &lt; -- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-        +String beakColor
-        +swim()
-        +quack()
-    }
-    class Fish{
-        -int sizeInFeet
-        -canEat()
-    }
-    class Zebra{
-        +bool is_wild
-        +run()
-    }
-plotlymarkdown
-`
-문법 강조 (Syntax Highlighting)
-다양한 프로그래밍 언어의 문법 강조를 지원합니다.</content>
-    <excerpt>다이어그램 및 차트 사용 가이드
-SEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 Mermaid와 Plotly를 지원합니다.
-마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.
-Mermaid 다이어그램
- 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.
-플로우차트 (Flowchart)
-mermai...</excerpt>
-    <tags>mermaid, plotly, 차트, 다이어그램, 사용법</tags>
+    <title>Getting Started</title>
+    <slug>guide/getting-started</slug>
+    <content>Getting Started
+This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.</content>
+    <excerpt>Getting Started
+This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.</excerpt>
+    <tags>getting-started, introduction, setup</tags>
     <lastModified>undefined</lastModified>
     <author></author>
   </item>
@@ -622,13 +538,13 @@ SEPilot Wiki는 AI 에이전트 기반의 자동화된 위키 시스템입니다
     <author></author>
   </item>
   <item>
-    <title>Getting Started</title>
-    <slug>guide/getting-started</slug>
-    <content>Getting Started
-This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.</content>
-    <excerpt>Getting Started
-This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.</excerpt>
-    <tags>getting-started, introduction, setup</tags>
+    <title>Diagrams Guide</title>
+    <slug>guide/diagrams-guide</slug>
+    <content>Diagrams Guide
+This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</content>
+    <excerpt>Diagrams Guide
+This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</excerpt>
+    <tags>diagrams, visuals, documentation</tags>
     <lastModified>undefined</lastModified>
     <author></author>
   </item>
@@ -644,13 +560,65 @@ This document is a placeholder for the LLM Workflow guide. Provide step‑by‑s
     <author></author>
   </item>
   <item>
-    <title>Theme Customization</title>
-    <slug>guide/theme-customization</slug>
-    <content>Theme Customization
-This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.</content>
-    <excerpt>Theme Customization
-This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.</excerpt>
-    <tags>theme, customization, appearance</tags>
+    <title>다이어그램 및 차트 사용 가이드</title>
+    <slug>guide/diagrams</slug>
+    <content>다이어그램 및 차트 사용 가이드
+SEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 Mermaid와 Plotly를 지원합니다.
+마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.
+Mermaid 다이어그램
+ 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.
+플로우차트 (Flowchart)
+mermaid
+graph TD;
+    Start--&gt;Stop;
+    Start--&gt;Progress;
+    Progress--&gt;Stop;
+클래스 다이어그램 (Class Diagram)
+mermaid
+classDiagram
+    Animal &lt; -- Duck
+    Animal &lt; -- Fish
+    Animal &lt; -- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+plotlymarkdown
+`
+문법 강조 (Syntax Highlighting)
+다양한 프로그래밍 언어의 문법 강조를 지원합니다.</content>
+    <excerpt>다이어그램 및 차트 사용 가이드
+SEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 Mermaid와 Plotly를 지원합니다.
+마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.
+Mermaid 다이어그램
+ 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.
+플로우차트 (Flowchart)
+mermai...</excerpt>
+    <tags>mermaid, plotly, 차트, 다이어그램, 사용법</tags>
+    <lastModified>undefined</lastModified>
+    <author></author>
+  </item>
+  <item>
+    <title>Configuration Guide</title>
+    <slug>guide/configuration-guide</slug>
+    <content>Configuration Guide
+This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.</content>
+    <excerpt>Configuration Guide
+This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.</excerpt>
+    <tags>configuration, settings, customization</tags>
     <lastModified>undefined</lastModified>
     <author></author>
   </item>
