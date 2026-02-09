@@ -652,8 +652,6 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Commit AI history
-        env:
-          HUSKY: 0
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -667,6 +665,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
 
   handle-update-request-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'update-request'

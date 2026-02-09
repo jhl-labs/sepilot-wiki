@@ -22,6 +22,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,7 +48,7 @@ jobs:
           version: 'latest'
 
       - name: Setup kubeconfig
-        if: ${{ secrets.KUBECONFIG != '' }}
+        if: env.KUBECONFIG_DATA != ''
         run: |
           mkdir -p ~/.kube
           echo "$KUBECONFIG_DATA" > ~/.kube/config
@@ -56,8 +58,6 @@ jobs:
           echo "   - 파일 크기: $(wc -c < ~/.kube/config) bytes"
           echo "   - 클러스터 수: $(kubectl config get-contexts -o name 2>/dev/null | wc -l || echo 'N/A')"
           kubectl config get-contexts 2>&1 || echo "⚠️ context 조회 실패"
-        env:
-          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
 
       - name: Collect dynamic pages
         run: bun run collect
