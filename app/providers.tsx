@@ -18,8 +18,16 @@ import { ToastContainer } from '@/src/components/error/ErrorToast';
 import { CommandPalette } from '@/src/components/ui/CommandPalette';
 import { useState } from 'react';
 
+// public 모드에서는 인증 불필요 (정적 빌드 시 API 라우트 미지원)
+const isAuthEnabled = process.env.NEXT_PUBLIC_AUTH_MODE === 'private';
+
 interface ProvidersProps {
   children: React.ReactNode;
+}
+
+function AuthWrapper({ children }: { children: React.ReactNode }) {
+  if (!isAuthEnabled) return <>{children}</>;
+  return <SessionProvider>{children}</SessionProvider>;
 }
 
 export function Providers({ children }: ProvidersProps) {
@@ -38,7 +46,7 @@ export function Providers({ children }: ProvidersProps) {
   );
 
   return (
-    <SessionProvider>
+    <AuthWrapper>
       <QueryClientProvider client={queryClient}>
         <ErrorProvider>
           <ThemeProvider>
@@ -58,6 +66,6 @@ export function Providers({ children }: ProvidersProps) {
           </ThemeProvider>
         </ErrorProvider>
       </QueryClientProvider>
-    </SessionProvider>
+    </AuthWrapper>
   );
 }

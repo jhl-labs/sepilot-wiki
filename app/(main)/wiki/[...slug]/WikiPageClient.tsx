@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useAuthSession } from '@/src/hooks/useAuthSession';
 import { useWikiPage, useDocumentAIHistory } from '@/src/hooks/useWiki';
 import { MarkdownRenderer, TableOfContents, Breadcrumb, PageMeta } from '@/src/components/wiki';
 import { RevisionHistory } from '@/src/components/wiki/RevisionHistory';
@@ -15,7 +15,7 @@ interface WikiPageClientProps {
 }
 
 export function WikiPageClient({ slug }: WikiPageClientProps) {
-  const { data: session } = useSession();
+  const { data: session } = useAuthSession();
   const { data: page, isLoading, error } = useWikiPage(slug);
   const { data: aiHistory } = useDocumentAIHistory(slug);
 
