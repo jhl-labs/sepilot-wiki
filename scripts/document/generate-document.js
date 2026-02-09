@@ -31,13 +31,14 @@ import {
 } from '../lib/utils.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 import { runDocumentPipeline } from '../lib/agent-pipeline.js';
+import { isSimpleRequest, decomposeRequest, executeOrchestration } from '../lib/orchestrator.js';
 import { upsertIssue, linkDocument, addLabels } from '../lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
 
 // 문서 생성
-async function generateDocument(context) {
+async function generateDocument(context, options = {}) {
   const openaiConfig = getOpenAIConfig();
 
   console.log('🤖 AI 문서 생성 시작...');
@@ -57,11 +58,34 @@ async function generateDocument(context) {
   let pipelineResult = null;
 
   try {
-    pipelineResult = await runDocumentPipeline(context, {
-      enableTavilySearch: !!process.env.TAVILY_API_KEY,
-      existingDocsContext,
-    });
-    content = pipelineResult.finalDocument;
+    // 오케스트레이터 모드
+    if (options.useOrchestrator) {
+      console.log('🎯 오케스트레이터 모드 활성화');
+      const simple = await isSimpleRequest(context);
+
+      if (simple) {
+        pipelineResult = await runDocumentPipeline(context, {
+          enableTavilySearch: !!process.env.TAVILY_API_KEY,
+          existingDocsContext,
+        });
+        content = pipelineResult.finalDocument;
+      } else {
+        const plan = await decomposeRequest(context);
+        const orchResult = await executeOrchestration(plan, context, {
+          enableTavilySearch: !!process.env.TAVILY_API_KEY,
+          existingDocsContext,
+        });
+        pipelineResult = orchResult;
+        content = orchResult.finalDocument;
+      }
+    } else {
+      // 기본: 파이프라인 모드
+      pipelineResult = await runDocumentPipeline(context, {
+        enableTavilySearch: !!process.env.TAVILY_API_KEY,
+        existingDocsContext,
+      });
+      content = pipelineResult.finalDocument;
+    }
   } catch (pipelineError) {
     // 파이프라인 실패 시 기존 단일 호출로 폴백
     console.warn('⚠️ 파이프라인 실패, 단일 호출로 폴백:', pipelineError.message);
@@ -162,7 +186,9 @@ async function main() {
       token: githubInfo.token,
     });
 
-    const result = await generateDocument(context);
+    const result = await generateDocument(context, {
+      useOrchestrator: !!args['use-orchestrator'],
+    });
 
     // 문서 제목 추출 (frontmatter에서)
     const titleMatch = result.content.match(/title:\s*["']?(.+?)["']?\s*$/m);

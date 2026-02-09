@@ -1,0 +1,49 @@
+name: Learning Loop
+
+on:
+  schedule:
+    # 주 1회: 일요일 09:00 UTC (한국시간 18:00)
+    - cron: '0 9 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  learning-loop:
+    runs-on: jhl-space
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run learning loop
+        run: bun run scripts/lib/learning-loop.js
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+
+      - name: Commit results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "변경 사항 없음"
+          else
+            git commit -m "chore: 학습 루프 결과 업데이트"
+            git pull --rebase
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
