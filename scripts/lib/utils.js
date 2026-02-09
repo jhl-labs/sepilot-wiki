@@ -4,7 +4,7 @@
  */
 
 import { readFile, readdir } from 'fs/promises';
-import { join } from 'path';
+import { join, relative } from 'path';
 import { existsSync } from 'fs';
 import { resolveDocumentPath } from './issue-context.js';
 
@@ -52,20 +52,21 @@ export async function findDocument(context, wikiDir) {
     return { ...docPath, content, found: true };
   }
 
-  // 2. wiki 폴더의 모든 문서 검색
+  // 2. wiki 폴더의 모든 마크다운 파일을 재귀적으로 검색
   if (existsSync(wikiDir)) {
-    const files = await readdir(wikiDir);
-    for (const file of files.filter((f) => f.endsWith('.md'))) {
-      const filepath = join(wikiDir, file);
+    const allFiles = await findAllMarkdownFiles(wikiDir);
+    for (const filepath of allFiles) {
       const content = await readFile(filepath, 'utf-8');
 
-      // 제목으로 매칭
-      const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m);
+      // 제목으로 매칭 (frontmatter title 또는 첫 번째 h1)
+      const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m)
+        || content.match(/^#\s+(.+)$/m);
       if (titleMatch && titleMatch[1].trim() === context.issueTitle) {
+        const relPath = relative(wikiDir, filepath);
         return {
           filepath,
-          filename: file,
-          slug: file.replace('.md', ''),
+          filename: relPath,
+          slug: relPath.replace('.md', ''),
           content,
           found: true,
           source: 'title_match',
@@ -75,6 +76,25 @@ export async function findDocument(context, wikiDir) {
   }
 
   return { ...docPath, content: null, found: false };
+}
+
+/**
+ * 디렉토리 내 모든 마크다운 파일을 재귀적으로 탐색
+ * @param {string} dir - 탐색할 디렉토리
+ * @returns {Promise<string[]>} 마크다운 파일 경로 배열
+ */
+async function findAllMarkdownFiles(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await findAllMarkdownFiles(fullPath)));
+    } else if (entry.name.endsWith('.md')) {
+      files.push(fullPath);
+    }
+  }
+  return files;
 }
 
 /**

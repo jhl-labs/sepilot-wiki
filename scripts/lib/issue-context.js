@@ -230,8 +230,20 @@ function generateSlugFromTitle(title) {
 }
 
 /**
+ * 슬러그가 유효한지 검증 (한국어, 특수문자 등 URL에 부적합한 문자 포함 여부)
+ * @param {string} slug - 검증할 슬러그
+ * @returns {boolean} 유효하면 true
+ */
+function isValidSlug(slug) {
+  if (!slug) return false;
+  // 한국어 또는 기타 비ASCII 문자가 포함되면 유효하지 않음
+  return !/[가-힣ㄱ-ㅎㅏ-ㅣ\u3000-\u303F\u4E00-\u9FFF]/.test(slug);
+}
+
+/**
  * 컨텍스트에서 관련 문서 경로를 찾음
  * 우선순위: documentInfo > issueTitle에서 슬러그 생성
+ * 단, 댓글에서 가져온 슬러그가 유효하지 않으면 (한국어 등 포함) 제목 기반으로 재생성
  * @param {Object} context - Issue 컨텍스트
  * @param {string} wikiDir - Wiki 디렉토리 경로
  * @param {Object} options - 옵션
@@ -242,18 +254,23 @@ export function resolveDocumentPath(context, wikiDir, options = {}) {
     // 1. 이전 댓글에서 문서 위치가 발견된 경우
     if (context.documentInfo?.path) {
       const path = context.documentInfo.path;
-      // wiki/ 접두사 제거 후 다시 추가 (정규화)
       const filename = path.replace(/^wiki\//, '');
-      return {
-        filepath: `${wikiDir}/${filename}`,
-        filename,
-        slug: context.documentInfo.slug || filename.replace('.md', ''),
-        source: 'comment',
-      };
+      const slug = context.documentInfo.slug || filename.replace('.md', '');
+
+      // 슬러그 유효성 검증: 한국어 등 비정상 문자가 포함되면 제목 기반으로 재생성
+      if (isValidSlug(slug)) {
+        return {
+          filepath: `${wikiDir}/${filename}`,
+          filename,
+          slug,
+          source: 'comment',
+        };
+      }
+      console.warn(`⚠️ 댓글의 슬러그가 유효하지 않아 제목 기반으로 재생성: ${slug}`);
     }
 
     // 2. 슬러그만 있는 경우
-    if (context.documentInfo?.slug) {
+    if (context.documentInfo?.slug && isValidSlug(context.documentInfo.slug)) {
       const slug = context.documentInfo.slug;
       const filename = `${slug}.md`;
       return {
