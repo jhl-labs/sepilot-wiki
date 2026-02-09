@@ -18,6 +18,15 @@ const FETCH_TIMEOUT = 10000;
 const SKIP_PATTERNS = [
   /^https?:\/\/api\.github\.com/i,
   /\.(png|jpg|jpeg|gif|svg|webp|ico|bmp|mp4|mp3|wav|avi|mov|pdf|zip|tar|gz)(\?|$)/i,
+  // SSRF 방지: 내부/프라이빗 IP 대역 차단
+  /^https?:\/\/localhost/i,
+  /^https?:\/\/127\./i,
+  /^https?:\/\/10\./i,
+  /^https?:\/\/172\.(1[6-9]|2\d|3[01])\./i,
+  /^https?:\/\/192\.168\./i,
+  /^https?:\/\/169\.254\./i,  // 클라우드 메타데이터
+  /^https?:\/\/0\./i,
+  /^https?:\/\/\[::1\]/i,     // IPv6 루프백
 ];
 
 /**

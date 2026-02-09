@@ -9,7 +9,7 @@
 import { readdir, readFile, writeFile, mkdir } from 'fs/promises';
 import { join, basename } from 'path';
 import { existsSync } from 'fs';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 const WIKI_DIR = join(process.cwd(), 'wiki');
 const GUIDE_DIR = join(process.cwd(), 'guide');
@@ -71,8 +71,11 @@ function getGitHistory(filePath, maxEntries = 20) {
   try {
     // git log로 파일의 커밋 히스토리 가져오기
     const format = '%H|%s|%an|%ae|%aI';
-    const cmd = `git log --follow --format="${format}" -n ${maxEntries} -- "${filePath}"`;
-    const output = execSync(cmd, { encoding: 'utf-8', cwd: process.cwd() });
+    const output = execFileSync(
+      'git',
+      ['log', '--follow', `--format=${format}`, '-n', String(maxEntries), '--', filePath],
+      { encoding: 'utf-8', cwd: process.cwd() }
+    );
 
     if (!output.trim()) {
       return [];
@@ -95,8 +98,11 @@ function getGitHistory(filePath, maxEntries = 20) {
     // 각 커밋의 변경 통계 가져오기 (선택적)
     for (const revision of history) {
       try {
-        const statCmd = `git show --stat --format="" ${revision.sha} -- "${filePath}"`;
-        const statOutput = execSync(statCmd, { encoding: 'utf-8', cwd: process.cwd() });
+        const statOutput = execFileSync(
+          'git',
+          ['show', '--stat', '--format=', revision.sha, '--', filePath],
+          { encoding: 'utf-8', cwd: process.cwd() }
+        );
 
         // 예: "1 file changed, 10 insertions(+), 5 deletions(-)"
         const insertMatch = statOutput.match(/(\d+) insertion/);
@@ -120,8 +126,11 @@ function getGitHistory(filePath, maxEntries = 20) {
 function getFileAtCommit(filePath, sha) {
   try {
     const relativePath = filePath.replace(process.cwd() + '/', '');
-    const cmd = `git show ${sha}:${relativePath}`;
-    return execSync(cmd, { encoding: 'utf-8', cwd: process.cwd() });
+    return execFileSync(
+      'git',
+      ['show', `${sha}:${relativePath}`],
+      { encoding: 'utf-8', cwd: process.cwd() }
+    );
   } catch {
     return null;
   }

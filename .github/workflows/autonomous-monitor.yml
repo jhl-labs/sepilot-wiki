@@ -15,6 +15,10 @@ permissions:
   contents: write
   issues: write
 
+concurrency:
+  group: autonomous-monitor
+  cancel-in-progress: false
+
 jobs:
   trend-monitor:
     runs-on: jhl-space

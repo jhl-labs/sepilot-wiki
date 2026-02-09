@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: docker-build
+  cancel-in-progress: false
+
 env:
   REGISTRY: ${{ secrets.HARBOR_REGISTRY }}
   IMAGE_NAME: devops/sepilot-wiki

@@ -6,7 +6,7 @@
 import { readFile, readdir } from 'fs/promises';
 import { join, resolve } from 'path';
 import { existsSync } from 'fs';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { parseFrontmatter } from './frontmatter.js';
 
 // 기본 Wiki 디렉토리
@@ -118,8 +118,11 @@ export async function loadAllDocuments(options = {}) {
 export function getGitHistory(filePath, maxEntries = 20) {
   try {
     const format = '%H|%s|%an|%ae|%aI';
-    const cmd = `git log --follow --format="${format}" -n ${maxEntries} -- "${filePath}"`;
-    const output = execSync(cmd, { encoding: 'utf-8', cwd: process.cwd() });
+    const output = execFileSync(
+      'git',
+      ['log', '--follow', `--format=${format}`, '-n', String(maxEntries), '--', filePath],
+      { encoding: 'utf-8', cwd: process.cwd() }
+    );
 
     if (!output.trim()) {
       return [];

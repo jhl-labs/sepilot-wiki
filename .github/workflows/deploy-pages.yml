@@ -5,8 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '*/10 * * * *'  # 10분마다 (IssuesPage 동기화)
-  gollum:  # Wiki 변경 시 트리거
+    - cron: '0 */1 * * *'  # 매시간 (IssuesPage 동기화)
   workflow_dispatch:
 
 permissions:

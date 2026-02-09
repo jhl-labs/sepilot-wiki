@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: learning-loop
+  cancel-in-progress: false
+
 jobs:
   learning-loop:
     runs-on: jhl-space

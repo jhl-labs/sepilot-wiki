@@ -25,6 +25,10 @@ on:
           - 'true'
           - 'false'
 
+concurrency:
+  group: wiki-tree-maintainer
+  cancel-in-progress: false
+
 jobs:
   maintain-wiki-tree:
     runs-on: jhl-space
