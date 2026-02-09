@@ -121,6 +121,7 @@ export async function callOpenAI(messages, options = {}) {
       messages,
       temperature: options.temperature ?? 0.1,
       max_tokens: options.maxTokens ?? 8000,
+      ...(options.responseFormat ? { response_format: { type: options.responseFormat } } : {}),
     }),
   });
 
