@@ -120,7 +120,7 @@ async function checkUrl(url) {
       .trim()
       .slice(0, 10000);
 
-    const contentHash = createHash('md5').update(cleaned).digest('hex');
+    const contentHash = createHash('sha256').update(cleaned).digest('hex');
 
     return { contentHash, status: 'ok' };
   } catch (error) {

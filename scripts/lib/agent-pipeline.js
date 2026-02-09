@@ -230,8 +230,8 @@ ${document}`;
     const cleaned = response.replace(/```json\n?|\n?```/g, '').trim();
     return JSON.parse(cleaned);
   } catch {
-    console.warn('⚠️ 리뷰 JSON 파싱 실패, 기본값 사용');
-    return { score: 85, feedback: ['리뷰 파싱 실패'], suggestions: [] };
+    console.warn('⚠️ 리뷰 JSON 파싱 실패, 기본값 사용 (개선 단계 강제 실행)');
+    return { score: 50, feedback: ['리뷰 파싱 실패 — 안전을 위해 개선 단계 실행'], suggestions: [] };
   }
 }
 
@@ -467,7 +467,7 @@ export async function runAgentPipeline(context, config = {}) {
   );
   steps.push({ step: 'review', output: reviewResult.output, durationMs: reviewResult.durationMs });
 
-  const score = reviewResult.output?.score ?? 85;
+  const score = reviewResult.output?.score ?? 50;
   console.log(`   📊 에이전트 리뷰 점수: ${score}/100`);
 
   // Step 5: Editor 에이전트 - 개선 (필요 시)

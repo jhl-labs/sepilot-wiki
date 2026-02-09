@@ -6,11 +6,29 @@
  */
 
 import { readFile, writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { join, basename } from 'path';
 import { existsSync } from 'fs';
 import { randomUUID } from 'crypto';
 
 const CONTEXT_DIR = join(process.cwd(), 'public', 'data', 'shared-context');
+
+/** 세션 메시지 최대 수 */
+const MAX_MESSAGES = 100;
+
+/** UUID v4 형식 검증 */
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+/**
+ * 세션 ID 검증 (경로 주입 방지)
+ * @param {string} sessionId
+ * @returns {string} 검증된 세션 ID
+ */
+function validateSessionId(sessionId) {
+  if (!sessionId || !UUID_REGEX.test(sessionId)) {
+    throw new Error(`유효하지 않은 세션 ID: ${sessionId}`);
+  }
+  return basename(sessionId);
+}
 
 /**
  * 새 세션 생성
@@ -41,7 +59,8 @@ export async function createSession(metadata = {}) {
  * @returns {Promise<Object|null>}
  */
 export async function loadSession(sessionId) {
-  const filepath = join(CONTEXT_DIR, `${sessionId}.json`);
+  const safeId = validateSessionId(sessionId);
+  const filepath = join(CONTEXT_DIR, `${safeId}.json`);
   if (!existsSync(filepath)) return null;
 
   try {
@@ -56,8 +75,9 @@ export async function loadSession(sessionId) {
  * @param {Object} session
  */
 export async function saveSession(session) {
+  const safeId = validateSessionId(session.sessionId);
   await mkdir(CONTEXT_DIR, { recursive: true });
-  const filepath = join(CONTEXT_DIR, `${session.sessionId}.json`);
+  const filepath = join(CONTEXT_DIR, `${safeId}.json`);
   await writeFile(filepath, JSON.stringify(session, null, 2));
 }
 
@@ -68,8 +88,14 @@ export async function saveSession(session) {
  * @returns {Promise<Object>} 업데이트된 세션
  */
 export async function addMessage(sessionId, message) {
+  validateSessionId(sessionId);
   const session = await loadSession(sessionId);
   if (!session) throw new Error(`세션 없음: ${sessionId}`);
+
+  // 메시지 수 제한
+  if (session.messages.length >= MAX_MESSAGES) {
+    session.messages = session.messages.slice(-Math.floor(MAX_MESSAGES / 2));
+  }
 
   session.messages.push({
     id: randomUUID(),
@@ -89,6 +115,7 @@ export async function addMessage(sessionId, message) {
  * @returns {Promise<Object>}
  */
 export async function updateSharedKnowledge(sessionId, key, value) {
+  validateSessionId(sessionId);
   const session = await loadSession(sessionId);
   if (!session) throw new Error(`세션 없음: ${sessionId}`);
 
@@ -113,6 +140,7 @@ export async function updateSharedKnowledge(sessionId, key, value) {
  * @returns {Promise<string>}
  */
 export async function getContextSummary(sessionId) {
+  validateSessionId(sessionId);
   const session = await loadSession(sessionId);
   if (!session) return '';
 

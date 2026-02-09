@@ -161,14 +161,19 @@ export async function executeOrchestration(plan, context, config = {}) {
   for (const batch of taskOrder) {
     console.log(`\n📦 배치 실행: ${batch.map((t) => t.id).join(', ')}`);
 
-    // 배치 내 태스크 병렬 실행
-    const batchResults = await Promise.all(
+    // 배치 내 태스크 병렬 실행 (개별 실패가 전체를 중단하지 않도록)
+    const batchSettled = await Promise.allSettled(
       batch.map((task) => executeSubtask(task, context, session, completedTasks, config))
     );
 
-    for (const result of batchResults) {
+    for (const settled of batchSettled) {
+      const result = settled.status === 'fulfilled'
+        ? settled.value
+        : { taskId: 'unknown', success: false, error: settled.reason?.message || '알 수 없는 오류', durationMs: 0 };
       results.push(result);
-      completedTasks.set(result.taskId, result);
+      if (result.taskId) {
+        completedTasks.set(result.taskId, result);
+      }
     }
   }
 
@@ -218,7 +223,9 @@ function resolveExecutionOrder(subtasks, strategy) {
     );
 
     if (batch.length === 0) {
-      // 순환 의존성 방지: 남은 것 모두 한 배치로
+      // 순환 의존성 감지: 경고 로그 출력 후 남은 것 모두 한 배치로
+      const remainingIds = remaining.map((t) => t.id).join(', ');
+      console.warn(`⚠️ 순환 의존성 감지: [${remainingIds}] — 강제 배치 실행`);
       batches.push(remaining.splice(0));
       break;
     }
