@@ -19,15 +19,15 @@ import { join } from 'path';
 import {
   collectIssueContext,
   getGitHubInfoFromEnv,
-} from './lib/issue-context.js';
+} from '../lib/issue-context.js';
 import {
   parseArgs,
   findDocument,
   updateFrontmatterStatus,
   setGitHubOutput,
-} from './lib/utils.js';
-import { addAIHistoryEntry } from './lib/ai-history.js';
-import { setIssueState, removeLabel, addLabels } from './lib/issues-store.js';
+} from '../lib/utils.js';
+import { addAIHistoryEntry } from '../lib/ai-history.js';
+import { setIssueState, removeLabel, addLabels } from '../lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');

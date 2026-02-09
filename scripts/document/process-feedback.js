@@ -23,7 +23,7 @@ import { join, resolve } from 'path';
 import {
   collectIssueContext,
   getGitHubInfoFromEnv,
-} from './lib/issue-context.js';
+} from '../lib/issue-context.js';
 import {
   parseArgs,
   findDocument,
@@ -31,9 +31,9 @@ import {
   getExistingDocuments,
   setGitHubOutput,
   updateFrontmatterStatus,
-} from './lib/utils.js';
-import { addAIHistoryEntry } from './lib/ai-history.js';
-import { updateIssue } from './lib/issues-store.js';
+} from '../lib/utils.js';
+import { addAIHistoryEntry } from '../lib/ai-history.js';
+import { updateIssue } from '../lib/issues-store.js';
 import { readFile, readdir } from 'fs/promises';
 import { existsSync } from 'fs';
 

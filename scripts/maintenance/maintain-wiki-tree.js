@@ -15,8 +15,8 @@
 import { readFile, readdir, writeFile, rename, mkdir, unlink } from 'fs/promises';
 import { join, dirname, resolve } from 'path';
 import { existsSync } from 'fs';
-import { callOpenAI, getOpenAIConfig, setGitHubOutput } from './lib/utils.js';
-import { addAIHistoryEntry } from './lib/ai-history.js';
+import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
+import { addAIHistoryEntry } from '../lib/ai-history.js';
 
 // 경로 설정
 const WIKI_DIR = resolve(process.cwd(), 'wiki');

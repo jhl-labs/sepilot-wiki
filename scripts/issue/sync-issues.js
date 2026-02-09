@@ -12,7 +12,7 @@
  * - GITHUB_REPOSITORY: owner/repo 형식
  */
 
-import { syncFromGitHub } from './lib/issues-store.js';
+import { syncFromGitHub } from '../lib/issues-store.js';
 
 async function main() {
   console.log('🔄 GitHub Issue 동기화 시작...');

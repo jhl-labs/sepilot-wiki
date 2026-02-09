@@ -5,8 +5,8 @@
  * .github/workflows/gemini-pr-review.yml에서 호출됨
  */
 
-import { fetchPullRequestFiles, getGitHubInfoFromEnv } from './lib/issue-context.js';
-import { callOpenAI, parseArgs, getOpenAIConfig } from './lib/utils.js';
+import { fetchPullRequestFiles, getGitHubInfoFromEnv } from '../lib/issue-context.js';
+import { callOpenAI, parseArgs, getOpenAIConfig } from '../lib/utils.js';
 
 async function main() {
     const args = parseArgs();

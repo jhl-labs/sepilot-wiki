@@ -7,7 +7,7 @@
 
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
-import { getGitHubConfig } from './lib/config.js';
+import { getGitHubConfig } from '../lib/config.js';
 
 const OUTPUT_DIR = join(process.cwd(), 'public');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'actions-status.json');

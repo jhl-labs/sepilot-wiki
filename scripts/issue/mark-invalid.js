@@ -23,16 +23,16 @@ import { join } from 'path';
 import {
   collectIssueContext,
   getGitHubInfoFromEnv,
-} from './lib/issue-context.js';
+} from '../lib/issue-context.js';
 import {
   parseArgs,
   findDocument,
   callOpenAI,
   updateFrontmatterStatus,
   setGitHubOutput,
-} from './lib/utils.js';
-import { addAIHistoryEntry } from './lib/ai-history.js';
-import { addLabels } from './lib/issues-store.js';
+} from '../lib/utils.js';
+import { addAIHistoryEntry } from '../lib/ai-history.js';
+import { addLabels } from '../lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');

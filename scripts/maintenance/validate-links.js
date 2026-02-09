@@ -8,7 +8,7 @@
 import { readdir, readFile } from 'fs/promises';
 import { join, resolve, dirname } from 'path';
 import { existsSync } from 'fs';
-import { getGitHubInfoFromEnv } from './lib/issue-context.js';
+import { getGitHubInfoFromEnv } from '../lib/issue-context.js';
 
 const WIKI_DIR = join(process.cwd(), 'wiki');
 
