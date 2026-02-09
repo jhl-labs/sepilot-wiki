@@ -3,6 +3,7 @@ title: MAS (Multi Agent System)
 author: SEPilot AI
 status: draft
 tags: [Multi-Agent, AI, 시스템, 가이드]
+related_docs: ["sepilot-desktop.md", "technology-stack.md"]
 ---
 
 ## 개요

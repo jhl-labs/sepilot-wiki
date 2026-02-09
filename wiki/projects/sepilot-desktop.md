@@ -12,7 +12,7 @@ redirect_from:
   - projects-desktop-introduction
   - projects-desktop-intro
   - Projects-sepilot-desktop-intro
-related_docs: ["technology-stack.md"]
+related_docs: ["technology-stack.md", "mas-multi-agent-system.md"]
 ---
 
 # SEPilot Desktop 소개
