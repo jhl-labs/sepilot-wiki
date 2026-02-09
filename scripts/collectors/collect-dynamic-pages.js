@@ -14,7 +14,7 @@
  *               예: COLLECTORS=k8s-nodes,k8s-pods
  */
 
-import { createCollectors, getCollectorByName } from './collectors/index.js';
+import { createCollectors, getCollectorByName } from './index.js';
 
 async function main() {
   console.log('🚀 동적 페이지 수집 시작...\n');
