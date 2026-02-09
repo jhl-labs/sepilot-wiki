@@ -9,6 +9,7 @@ redirect_from:
   - Projects-sepilot-wiki-tech-stack
   - Projects-sepilot-wiki
   - sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요
+related_docs: ["overview.md", "comparison-pnpm-npm.md", "github-actions-setup.md", "sepilot-desktop.md"]
 ---
 
 ## 기술 스택

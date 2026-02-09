@@ -11,6 +11,7 @@ redirect_from:
   - bun-bun-comparison-pnpm-npm
   - bun-comparison-pnpm-npm
   - bun-pnpm-npm-comparison
+related_docs: ["overview.md", "github-actions-setup.md", "technology-stack.md"]
 ---
 
 # bun과 pnpm, npm의 차이

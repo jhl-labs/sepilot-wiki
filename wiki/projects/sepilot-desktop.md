@@ -12,6 +12,7 @@ redirect_from:
   - projects-desktop-introduction
   - projects-desktop-intro
   - Projects-sepilot-desktop-intro
+related_docs: ["technology-stack.md"]
 ---
 
 # SEPilot Desktop 소개
