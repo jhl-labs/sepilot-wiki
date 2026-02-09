@@ -1,6 +1,7 @@
 'use client';
 
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
+import { useAuthSession } from '@/src/hooks/useAuthSession';
 import { LogIn, LogOut, ChevronDown, Settings, FileEdit, Shield } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
@@ -11,7 +12,7 @@ import styles from './AuthButton.module.css';
  * 로그인/로그아웃 및 사용자 메뉴를 표시
  */
 export function AuthButton() {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useAuthSession();
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 

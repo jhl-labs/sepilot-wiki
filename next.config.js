@@ -14,9 +14,12 @@ const packageJson = JSON.parse(
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // 빌드 모드에 따른 출력 설정
-  // static: GitHub Pages용 정적 빌드
+  // static: GitHub Pages용 정적 빌드 (프로덕션 빌드에서만 적용)
   // standalone: Kubernetes 배포용 서버 빌드
-  output: process.env.BUILD_MODE === 'static' ? 'export' : 'standalone',
+  // dev 서버에서는 output 설정을 적용하지 않음 (API 라우트, 동적 라우트 등 전체 기능 사용)
+  ...(process.env.NODE_ENV === 'production' && {
+    output: process.env.BUILD_MODE === 'static' ? 'export' : 'standalone',
+  }),
 
   // Output 파일 추적 루트 설정 (멀티 lockfile 경고 해결)
   outputFileTracingRoot: __dirname,
@@ -30,9 +33,8 @@ const nextConfig = {
   },
 
   // 환경 변수 노출
-  // 주의: AUTH_MODE는 서버에서 process.env로 직접 읽어야 함 (런타임 값)
-  // NEXT_PUBLIC_* 변수만 클라이언트에 노출 (빌드 타임 고정)
   env: {
+    AUTH_MODE: process.env.AUTH_MODE || 'public',
     NEXT_PUBLIC_APP_VERSION: packageJson.version,
     NEXT_PUBLIC_BUILD_TIME: new Date().toISOString(),
   },
@@ -47,12 +49,7 @@ const nextConfig = {
 
   // 번들 분석 및 최적화
   experimental: {
-    // 대용량 라이브러리 트리 쉐이킹 최적화
-    optimizePackageImports: [
-      'lucide-react',
-      '@tanstack/react-query',
-      'react-syntax-highlighter',
-    ],
+    // optimizePackageImports: ['lucide-react', '@tanstack/react-query'],
     // 스케줄러 초기화를 위한 instrumentation 활성화
     instrumentationHook: process.env.BUILD_MODE === 'standalone',
   },
@@ -67,42 +64,6 @@ const nextConfig = {
       config.externals.push('mermaid', 'plotly.js');
     }
     return config;
-  },
-
-  // 보안 헤더 설정 (standalone 빌드에서만 적용)
-  async headers() {
-    // 정적 빌드에서는 헤더 설정 불필요 (웹 서버에서 설정)
-    if (process.env.BUILD_MODE === 'static') {
-      return [];
-    }
-
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
-          },
-        ],
-      },
-    ];
   },
 };
 

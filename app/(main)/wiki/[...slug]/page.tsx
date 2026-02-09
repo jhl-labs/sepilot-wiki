@@ -1,10 +1,27 @@
 import type { Metadata } from 'next';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { getWikiPage } from '@/lib/wiki';
 import { WikiPageClient } from './WikiPageClient';
 import { extractPlainText, truncate } from '@/src/utils';
 
 interface WikiPageProps {
   params: Promise<{ slug: string[] }>;
+}
+
+// 정적 빌드 시 wiki-data.json에서 모든 페이지 경로를 읽어 정적 생성
+export const dynamicParams = false;
+export function generateStaticParams() {
+  try {
+    const data = JSON.parse(
+      readFileSync(join(process.cwd(), 'public/wiki-data.json'), 'utf-8')
+    );
+    return data.pages.map((page: { slug: string }) => ({
+      slug: page.slug.split('/'),
+    }));
+  } catch {
+    return [{ slug: ['home'] }];
+  }
 }
 
 // 동적 메타데이터 생성
