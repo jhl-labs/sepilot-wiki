@@ -195,7 +195,7 @@ async function main() {
   console.log(`   패키지: ${techKeywords.imports.length}개, 설정: ${techKeywords.configs.length}개`);
 
   // 3. 기존 문서 로드
-  const existingDocs = await loadAllDocuments(WIKI_DIR);
+  const existingDocs = await loadAllDocuments({ wikiDir: WIKI_DIR });
   console.log(`   기존 문서: ${existingDocs.length}개`);
 
   // 4. AI 갭 분석

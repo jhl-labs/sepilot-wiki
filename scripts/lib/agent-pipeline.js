@@ -8,7 +8,6 @@
 
 import { callOpenAI } from './utils.js';
 import { researchTopic, isTavilyAvailable } from './tavily-search.js';
-import { fetchReferenceContents } from './web-fetcher.js';
 import { getAgent } from './agents/index.js';
 
 /** 리뷰 통과 최소 점수 */
@@ -450,6 +449,10 @@ export async function runAgentPipeline(context, config = {}) {
     context
   );
   steps.push({ step: 'write', output: writeResult.output, durationMs: writeResult.durationMs });
+
+  if (!writeResult.success || !writeResult.output) {
+    throw new Error('Writer 에이전트 실행 실패: 문서 생성 결과 없음');
+  }
 
   let finalDocument = writeResult.output;
 

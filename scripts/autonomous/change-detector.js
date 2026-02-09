@@ -58,7 +58,7 @@ async function loadSnapshots() {
  * @returns {Array<{url: string, documentSlug: string}>}
  */
 async function collectDocumentUrls() {
-  const docs = await loadAllDocuments(WIKI_DIR);
+  const docs = await loadAllDocuments({ wikiDir: WIKI_DIR });
   const urlMap = [];
 
   for (const doc of docs) {

@@ -116,6 +116,13 @@ export async function addMessage(sessionId, message) {
  */
 export async function updateSharedKnowledge(sessionId, key, value) {
   validateSessionId(sessionId);
+
+  // 허용된 키만 업데이트 (prototype pollution 방지)
+  const ALLOWED_KEYS = ['researchFindings', 'documentOutline', 'reviewFeedback'];
+  if (!ALLOWED_KEYS.includes(key)) {
+    throw new Error(`허용되지 않은 지식 키: ${key}`);
+  }
+
   const session = await loadSession(sessionId);
   if (!session) throw new Error(`세션 없음: ${sessionId}`);
 
@@ -146,19 +153,22 @@ export async function getContextSummary(sessionId) {
 
   const parts = [];
 
-  if (session.sharedKnowledge.researchFindings) {
+  const knowledge = session.sharedKnowledge || {};
+
+  if (knowledge.researchFindings) {
     parts.push('## 리서치 결과');
-    parts.push(session.sharedKnowledge.researchFindings);
+    parts.push(knowledge.researchFindings);
   }
 
-  if (session.sharedKnowledge.documentOutline) {
+  if (knowledge.documentOutline) {
     parts.push('\n## 문서 아웃라인');
-    parts.push(session.sharedKnowledge.documentOutline);
+    parts.push(knowledge.documentOutline);
   }
 
-  if (session.sharedKnowledge.reviewFeedback.length > 0) {
+  const feedback = Array.isArray(knowledge.reviewFeedback) ? knowledge.reviewFeedback : [];
+  if (feedback.length > 0) {
     parts.push('\n## 리뷰 피드백');
-    session.sharedKnowledge.reviewFeedback.forEach((fb, i) => {
+    feedback.forEach((fb, i) => {
       parts.push(`${i + 1}. ${typeof fb === 'string' ? fb : JSON.stringify(fb)}`);
     });
   }

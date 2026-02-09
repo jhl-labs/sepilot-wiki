@@ -213,9 +213,20 @@ export async function setGitHubOutput(outputs) {
   }
 
   const { writeFile } = await import('fs/promises');
-  const output = Object.entries(outputs)
-    .map(([key, value]) => `${key}=${value}`)
-    .join('\n');
+  // 줄바꿈이 포함된 값은 delimiter 방식 사용, 단순 값은 key=value 방식
+  const lines = [];
+  for (const [key, value] of Object.entries(outputs)) {
+    const strValue = String(value);
+    if (strValue.includes('\n')) {
+      // 멀티라인 값: delimiter 방식으로 안전하게 출력
+      const delimiter = `ghadelimiter_${Date.now()}`;
+      lines.push(`${key}<<${delimiter}`);
+      lines.push(strValue);
+      lines.push(delimiter);
+    } else {
+      lines.push(`${key}=${strValue}`);
+    }
+  }
 
-  await writeFile(process.env.GITHUB_OUTPUT, output, { flag: 'a' });
+  await writeFile(process.env.GITHUB_OUTPUT, lines.join('\n') + '\n', { flag: 'a' });
 }

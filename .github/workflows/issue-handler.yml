@@ -62,10 +62,13 @@ jobs:
         run: |
           echo "🔍 관련 문서 검색 중..."
           bun run scripts/document/recommend-documents.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}" \
-            --issue-body "${{ github.event.issue.body }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE" \
+            --issue-body "$ISSUE_BODY"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
@@ -78,10 +81,13 @@ jobs:
         run: |
           echo "🤖 AI 문서 생성 시작..."
           bun run scripts/document/generate-document.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}" \
-            --issue-body "${{ github.event.issue.body }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE" \
+            --issue-body "$ISSUE_BODY"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
@@ -192,10 +198,13 @@ jobs:
         run: |
           echo "🤖 Invalid 처리 시작..."
           bun run scripts/issue/mark-invalid.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}" \
-            --issue-body "${{ github.event.issue.body }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE" \
+            --issue-body "$ISSUE_BODY"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
@@ -275,9 +284,11 @@ jobs:
         run: |
           echo "📤 문서 발행 시작..."
           bun run scripts/document/publish-document.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
 
@@ -397,9 +408,11 @@ jobs:
         run: |
           echo "📥 문서 발행 취소 시작..."
           bun run scripts/document/unpublish-document.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
 
@@ -544,10 +557,13 @@ jobs:
         run: |
           echo "🤖 피드백 처리 시작..."
           bun run scripts/document/process-feedback.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}" \
-            --comment-body "${{ github.event.comment.body }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE" \
+            --comment-body "$COMMENT_BODY"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
@@ -631,10 +647,13 @@ jobs:
         run: |
           echo "🤖 AI 질문 응답 시작..."
           bun run scripts/document/answer-question.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}" \
-            --issue-body "${{ github.event.issue.body }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE" \
+            --issue-body "$ISSUE_BODY"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
@@ -691,10 +710,13 @@ jobs:
         run: |
           echo "🤖 문서 수정 시작..."
           bun run scripts/document/update-document.js \
-            --issue-number "${{ github.event.issue.number }}" \
-            --issue-title "${{ github.event.issue.title }}" \
-            --issue-body "${{ github.event.issue.body }}"
+            --issue-number "$ISSUE_NUMBER" \
+            --issue-title "$ISSUE_TITLE" \
+            --issue-body "$ISSUE_BODY"
         env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
@@ -738,6 +760,7 @@ jobs:
         needs.handle-issue-close.result == 'success' ||
         needs.handle-issue-reopen.result == 'success' ||
         needs.handle-maintainer-comment.result == 'success' ||
+        needs.handle-question-label.result == 'success' ||
         needs.handle-update-request-label.result == 'success'
       )
     runs-on: jhl-space

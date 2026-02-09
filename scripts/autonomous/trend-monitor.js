@@ -23,7 +23,6 @@ import {
   TREND_LOOKBACK_DAYS,
 } from './config.js';
 
-const WIKI_DIR = resolve(process.cwd(), 'wiki');
 const IS_DRY_RUN = process.env.DRY_RUN === 'true';
 
 /** RSS XML에서 최근 항목 추출 (간단한 정규식 기반) */

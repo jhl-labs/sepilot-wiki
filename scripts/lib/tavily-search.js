@@ -91,10 +91,11 @@ export async function researchTopic(topic, maxQueries = 3) {
   }
 
   // 다각도 쿼리 생성
+  const currentYear = new Date().getFullYear();
   const queries = [
     `${topic} 개요 설명`,
     `${topic} 실무 활용 사례 best practices`,
-    `${topic} 최신 동향 2024 2025`,
+    `${topic} 최신 동향 ${currentYear - 1} ${currentYear}`,
   ].slice(0, maxQueries);
 
   console.log(`🔍 Tavily 리서치: "${topic}" (${queries.length}개 쿼리)`);
@@ -111,7 +112,7 @@ export async function researchTopic(topic, maxQueries = 3) {
         allResults.push({
           url: result.url,
           title: result.title,
-          snippet: result.content.slice(0, 500),
+          snippet: (result.content || '').slice(0, 500),
         });
       }
     }

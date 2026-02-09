@@ -7,7 +7,6 @@
 
 import { BaseAgent } from './base-agent.js';
 import { researchTopic, isTavilyAvailable } from '../tavily-search.js';
-import { fetchReferenceContents } from '../web-fetcher.js';
 
 export class ResearcherAgent extends BaseAgent {
   constructor() {
@@ -46,11 +45,11 @@ export class ResearcherAgent extends BaseAgent {
    * @returns {Promise<Object>} 리서치 결과
    */
   async run(task, context) {
-    const { topic, issueBody, referenceContents } = task.input;
+    const { topic, issueBody, referenceContents, enableTavilySearch } = task.input;
 
-    // 1. Tavily 검색 (가능한 경우)
+    // 1. Tavily 검색 (설정이 활성화되고 API 키가 있는 경우)
     let tavilyResults = [];
-    if (this.canUseTool('tavily') && isTavilyAvailable()) {
+    if (enableTavilySearch !== false && this.canUseTool('tavily') && isTavilyAvailable()) {
       tavilyResults = await researchTopic(topic);
     }
 

@@ -65,11 +65,11 @@ ${document}`;
       const cleaned = response.replace(/```json\n?|\n?```/g, '').trim();
       return JSON.parse(cleaned);
     } catch {
-      console.warn('⚠️ Reviewer: JSON 파싱 실패, 기본값 사용');
+      console.warn('⚠️ Reviewer: JSON 파싱 실패, 기본값 사용 (개선 단계 강제 실행)');
       return {
-        score: 85,
-        breakdown: { accuracy: 25, completeness: 25, readability: 18, formatting: 17 },
-        feedback: ['리뷰 응답 파싱 실패'],
+        score: 50,
+        breakdown: { accuracy: 15, completeness: 15, readability: 10, formatting: 10 },
+        feedback: ['리뷰 응답 파싱 실패 — 안전을 위해 개선 단계 실행'],
         suggestions: [],
         criticalIssues: [],
       };

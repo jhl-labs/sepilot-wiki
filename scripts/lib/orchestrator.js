@@ -11,6 +11,7 @@ import { callOpenAI } from './utils.js';
 import { getAgent } from './agents/index.js';
 import {
   createSession,
+  loadSession,
   addMessage,
   updateSharedKnowledge,
 } from './agents/shared-context.js';
@@ -270,6 +271,9 @@ async function executeSubtask(task, context, session, completedTasks, config) {
       // 공유 컨텍스트에 리서치 결과 저장
       await updateSharedKnowledge(session.sessionId, 'researchFindings', output?.summary || '');
     } else if (task.type === 'write') {
+      // 최신 공유 컨텍스트를 파일에서 로드 (stale 방지)
+      const latestSession = await loadSession(session.sessionId);
+      const knowledge = latestSession?.sharedKnowledge || {};
       const writer = getAgent('writer');
       const result = await writer.execute(
         {
@@ -277,8 +281,8 @@ async function executeSubtask(task, context, session, completedTasks, config) {
           input: {
             topic: task.title,
             issueBody: task.description,
-            outline: session.sharedKnowledge?.documentOutline || '',
-            researchSummary: session.sharedKnowledge?.researchFindings || '',
+            outline: knowledge.documentOutline || '',
+            researchSummary: knowledge.researchFindings || '',
             existingDocsContext: config.existingDocsContext || '',
           },
         },
