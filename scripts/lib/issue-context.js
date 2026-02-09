@@ -6,7 +6,10 @@
  * - 이전 피드백 및 수정 사항
  * - 문서 위치 정보
  * - 관련 토론 내용
+ * - 참고 URL 웹 콘텐츠 자동 수집
  */
+
+import { fetchReferenceContents } from './web-fetcher.js';
 
 /**
  * GitHub API를 통해 Issue의 모든 댓글을 가져옴
@@ -89,6 +92,11 @@ export async function collectIssueContext(options) {
   // 댓글 가져오기
   const comments = await fetchIssueComments(owner, repo, issueNumber, token);
 
+  // 참고 URL 웹 콘텐츠 수집
+  // Issue body와 댓글에서 URL 추출 후 실제 내용 가져오기
+  const allText = [issueBody, ...comments.map((c) => c.body)].filter(Boolean).join('\n');
+  const referenceContents = await fetchReferenceContents(allText);
+
   // 컨텍스트 구조화
   const context = {
     issueNumber,
@@ -101,14 +109,17 @@ export async function collectIssueContext(options) {
       createdAt: c.created_at,
       isBot: c.user.type === 'Bot',
     })),
+    // 참고 URL에서 가져온 웹 콘텐츠
+    referenceContents,
     // 문서 위치 정보 추출 (이전 댓글에서)
     documentInfo: extractDocumentInfo(comments),
     // 전체 타임라인 (LLM 프롬프트용)
-    timeline: buildTimeline(issueTitle, issueBody, comments),
+    timeline: buildTimeline(issueTitle, issueBody, comments, referenceContents),
   };
 
   console.log(`   - 제목: ${context.issueTitle}`);
   console.log(`   - 댓글 수: ${context.comments.length}`);
+  console.log(`   - 참고 자료: ${referenceContents.length}개 수집됨`);
   console.log(`   - 문서 정보: ${context.documentInfo ? '발견됨' : '없음'}`);
 
   return context;
@@ -142,8 +153,12 @@ function extractDocumentInfo(comments) {
 
 /**
  * Issue의 전체 타임라인을 LLM이 이해하기 쉬운 형태로 구성
+ * @param {string} issueTitle - Issue 제목
+ * @param {string} issueBody - Issue 본문
+ * @param {Array} comments - 댓글 배열
+ * @param {Array} referenceContents - 참고 URL 콘텐츠 배열
  */
-function buildTimeline(issueTitle, issueBody, comments) {
+function buildTimeline(issueTitle, issueBody, comments, referenceContents = []) {
   const lines = [];
 
   lines.push('=== Issue 컨텍스트 ===');
@@ -153,6 +168,23 @@ function buildTimeline(issueTitle, issueBody, comments) {
   lines.push('## 원본 요청:');
   lines.push(issueBody || '(내용 없음)');
   lines.push('');
+
+  if (referenceContents.length > 0) {
+    lines.push('## 참고 자료 내용:');
+    lines.push('');
+    lines.push('아래는 요청에 포함된 참고 URL에서 가져온 실제 내용입니다. 문서 작성 시 이 내용을 반영해주세요.');
+    lines.push('');
+
+    for (const ref of referenceContents) {
+      lines.push(`### 📄 ${ref.title}`);
+      lines.push(`URL: ${ref.url}`);
+      lines.push('');
+      lines.push(ref.content);
+      lines.push('');
+      lines.push('---');
+      lines.push('');
+    }
+  }
 
   if (comments.length > 0) {
     lines.push('## 이후 진행 상황:');
