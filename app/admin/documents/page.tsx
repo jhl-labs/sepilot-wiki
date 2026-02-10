@@ -27,6 +27,7 @@ import {
   Eye,
   Copy,
 } from 'lucide-react';
+import DOMPurify from 'dompurify';
 
 // 문서 저장 루트 경로
 const DOCS_ROOT = 'data';
@@ -747,14 +748,16 @@ export default function DocumentsPage() {
                     <div
                       className="markdown-body"
                       dangerouslySetInnerHTML={{
-                        __html: editContent
-                          .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-                          .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-                          .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-                          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                          .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                          .replace(/`(.*?)`/g, '<code>$1</code>')
-                          .replace(/\n/g, '<br>')
+                        __html: DOMPurify.sanitize(
+                          editContent
+                            .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                            .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                            .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                            .replace(/`(.*?)`/g, '<code>$1</code>')
+                            .replace(/\n/g, '<br>')
+                        )
                       }}
                     />
                   </div>

@@ -11,7 +11,7 @@ import { Octokit } from '@octokit/rest';
 function getOctokit() {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
-    throw new Error('GITHUB_TOKEN이 설정되지 않았습니다.');
+    throw new Error('서버 설정 오류');
   }
   return new Octokit({ auth: token });
 }
@@ -27,9 +27,12 @@ function getRepoInfo(): { owner: string; repo: string } | null {
 }
 
 // 관리자 권한 확인
-async function checkAdminAuth() {
-  // Public 모드에서는 인증 건너뛰기
+async function checkAdminAuth(requireWrite = false) {
+  // Public 모드: 읽기만 허용, 쓰기 작업은 차단
   if (process.env.AUTH_MODE === 'public') {
+    if (requireWrite) {
+      return { error: 'PUBLIC 모드에서는 쓰기 작업이 허용되지 않습니다.', status: 403 };
+    }
     return { session: { user: { name: 'Anonymous', email: 'anonymous@example.com' } } };
   }
 
@@ -243,9 +246,8 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Git status error:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Git 상태를 확인할 수 없습니다.';
     return NextResponse.json(
-      { error: errorMessage },
+      { error: 'Git 상태를 확인할 수 없습니다.' },
       { status: 500 }
     );
   }
@@ -253,7 +255,7 @@ export async function GET() {
 
 // POST: 동기화 트리거 (GitHub Actions workflow dispatch)
 export async function POST() {
-  const authResult = await checkAdminAuth();
+  const authResult = await checkAdminAuth(true);
   if ('error' in authResult) {
     return NextResponse.json(
       { error: authResult.error },
@@ -301,9 +303,8 @@ export async function POST() {
     }
   } catch (error) {
     console.error('Sync trigger error:', error);
-    const errorMessage = error instanceof Error ? error.message : '동기화 트리거 실패';
     return NextResponse.json(
-      { error: errorMessage },
+      { error: '동기화 트리거에 실패했습니다.' },
       { status: 500 }
     );
   }

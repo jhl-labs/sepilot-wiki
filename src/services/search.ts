@@ -1,18 +1,9 @@
 import Fuse from 'fuse.js';
 import type { WikiPage } from '../types';
+import { getBaseUrl } from '../utils/url';
+import { createLogger } from '../utils/logger';
 
-// Base URL 결정 (Next.js / Vite 호환)
-function getBaseUrl(): string {
-    // Next.js 환경
-    if (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_BASE_PATH) {
-        return process.env.NEXT_PUBLIC_BASE_PATH;
-    }
-    // Vite 환경
-    if (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) {
-        return import.meta.env.BASE_URL;
-    }
-    return '/';
-}
+const logger = createLogger('search');
 
 // 검색 필터 타입
 export interface SearchFilter {
@@ -44,8 +35,8 @@ async function loadSearchIndex(): Promise<{ items: SearchIndexItem[]; fuse: Fuse
     }
 
     try {
-        // cache-busting: 브라우저 캐시 우회를 위해 타임스탬프 추가
-        const cacheBuster = `?v=${Date.now()}`;
+        // cache-busting: 5분 간격으로 캐시 키 변경 (정적 데이터)
+        const cacheBuster = `?v=${Math.floor(Date.now() / (5 * 60 * 1000))}`;
         const baseUrl = getBaseUrl();
         const response = await fetch(`${baseUrl}search-index.json${cacheBuster}`);
         if (!response.ok) {
@@ -68,7 +59,7 @@ async function loadSearchIndex(): Promise<{ items: SearchIndexItem[]; fuse: Fuse
 
         return { items: searchIndexCache!, fuse: fuseInstance };
     } catch (error) {
-        console.error('Error loading search index:', error);
+        logger.error('검색 인덱스 로드 실패', error);
         return { items: [], fuse: new Fuse([], {}) };
     }
 }
@@ -139,7 +130,7 @@ export async function searchWiki(query: string, filter?: SearchFilter): Promise<
             tags: item.tags,
         }));
     } catch (error) {
-        console.error('Error searching wiki:', error);
+        logger.error('위키 검색 실패', error);
         return [];
     }
 }
@@ -156,7 +147,7 @@ export async function getAvailableTags(): Promise<string[]> {
 
         return Array.from(tagSet).sort();
     } catch (error) {
-        console.error('Error getting tags:', error);
+        logger.error('태그 목록 조회 실패', error);
         return [];
     }
 }

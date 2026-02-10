@@ -32,6 +32,18 @@ function SpaRedirectHandler({ children }: { children: React.ReactNode }) {
       sessionStorage.removeItem('spa-redirect');
       try {
         const { path, search, hash } = JSON.parse(redirectData);
+        // 경로 유효성 검증: 상대 경로만 허용, 프로토콜/외부 URL 차단
+        if (
+          typeof path !== 'string' ||
+          typeof search !== 'string' ||
+          typeof hash !== 'string' ||
+          !path.startsWith('/') ||
+          path.startsWith('//') ||
+          path.includes('://') ||
+          path.includes('\\')
+        ) {
+          return;
+        }
         const fullPath = path + search + hash;
         if (fullPath && fullPath !== '/') {
           navigate(fullPath, { replace: true });

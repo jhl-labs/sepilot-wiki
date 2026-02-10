@@ -13,7 +13,7 @@ import { Octokit } from '@octokit/rest';
 function getOctokit() {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
-    throw new Error('GITHUB_TOKEN이 설정되지 않았습니다.');
+    throw new Error('서버 설정 오류');
   }
   return new Octokit({ auth: token });
 }
@@ -22,7 +22,7 @@ function getOctokit() {
 function getRepoInfo() {
   const repo = process.env.GITHUB_REPO;
   if (!repo) {
-    throw new Error('GITHUB_REPO가 설정되지 않았습니다.');
+    throw new Error('서버 설정 오류');
   }
   const [owner, repoName] = repo.split('/');
   return { owner, repo: repoName };
@@ -32,9 +32,12 @@ function getRepoInfo() {
 const DOCS_PATH = 'data';
 
 // 관리자 권한 확인
-async function checkAdminAuth() {
-  // Public 모드에서는 인증 건너뛰기
+async function checkAdminAuth(requireWrite = false) {
+  // Public 모드: 읽기만 허용, 쓰기 작업은 차단
   if (process.env.AUTH_MODE === 'public') {
+    if (requireWrite) {
+      return { error: 'PUBLIC 모드에서는 쓰기 작업이 허용되지 않습니다.', status: 403 };
+    }
     return { session: { user: { name: 'Anonymous', email: 'anonymous@example.com' } } };
   }
 
@@ -127,7 +130,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }
 ) {
-  const authResult = await checkAdminAuth();
+  const authResult = await checkAdminAuth(true);
   if ('error' in authResult) {
     return NextResponse.json(
       { error: authResult.error },
@@ -202,7 +205,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }
 ) {
-  const authResult = await checkAdminAuth();
+  const authResult = await checkAdminAuth(true);
   if ('error' in authResult) {
     return NextResponse.json(
       { error: authResult.error },

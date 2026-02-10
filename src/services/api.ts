@@ -2,6 +2,7 @@ import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagSta
 import { getLabelName } from '../types';
 import { fetchWithRetry } from '../utils/retry';
 import { createLogger } from '../utils/logger';
+import { getBaseUrl } from '../utils/url';
 
 const logger = createLogger('api');
 
@@ -80,21 +81,6 @@ export class ApiServiceError extends Error {
       recoverable: this.recoverable,
     };
   }
-}
-
-// Base URL 결정 (Next.js / Vite 호환)
-function getBaseUrl(): string {
-    let base = '/';
-    // Next.js 환경
-    if (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_BASE_PATH) {
-        base = process.env.NEXT_PUBLIC_BASE_PATH;
-    }
-    // Vite 환경
-    else if (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) {
-        base = import.meta.env.BASE_URL;
-    }
-    // trailing slash 보장
-    return base.endsWith('/') ? base : base + '/';
 }
 
 // TTL 기반 캐시 인스턴스들

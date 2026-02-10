@@ -1,18 +1,6 @@
 import { siteConfig } from '../site.config';
 import type { WikiConfig } from './types';
-
-// Base URL 결정 (Next.js / Vite 호환)
-function getBaseUrl(): string {
-  // Next.js 환경
-  if (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_BASE_PATH) {
-    return process.env.NEXT_PUBLIC_BASE_PATH;
-  }
-  // Vite 환경
-  if (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) {
-    return import.meta.env.BASE_URL;
-  }
-  return '/';
-}
+import { getBaseUrl } from './utils/url';
 
 // site.config.ts에서 설정을 가져와 WikiConfig 생성
 export const config: WikiConfig = {

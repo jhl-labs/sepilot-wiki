@@ -12,7 +12,7 @@ import { Octokit } from '@octokit/rest';
 function getOctokit() {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
-    throw new Error('GITHUB_TOKEN이 설정되지 않았습니다.');
+    throw new Error('서버 설정 오류');
   }
   return new Octokit({ auth: token });
 }
@@ -28,9 +28,12 @@ function getRepoInfo(): { owner: string; repo: string } | null {
 }
 
 // 관리자 권한 확인 미들웨어
-async function checkAdminAuth() {
-  // Public 모드에서는 인증 건너뛰기
+async function checkAdminAuth(requireWrite = false) {
+  // Public 모드: 읽기만 허용, 쓰기 작업은 차단
   if (process.env.AUTH_MODE === 'public') {
+    if (requireWrite) {
+      return { error: 'PUBLIC 모드에서는 쓰기 작업이 허용되지 않습니다.', status: 403 };
+    }
     return { session: { user: { name: 'Anonymous', email: 'anonymous@example.com' } } };
   }
 
@@ -195,7 +198,7 @@ function buildTree(
 }
 
 export async function POST(request: NextRequest) {
-  const authResult = await checkAdminAuth();
+  const authResult = await checkAdminAuth(true);
   if ('error' in authResult) {
     return NextResponse.json(
       { error: authResult.error },
@@ -284,9 +287,8 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Admin documents POST error:', error);
-    const errorMessage = error instanceof Error ? error.message : '문서를 생성할 수 없습니다.';
     return NextResponse.json(
-      { error: errorMessage },
+      { error: '문서를 생성할 수 없습니다.' },
       { status: 500 }
     );
   }

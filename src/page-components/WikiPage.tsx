@@ -1,13 +1,15 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useWikiPage, useDocumentAIHistory } from '../hooks/useWiki';
 import { MarkdownRenderer, TableOfContents, Breadcrumb, PageMeta } from '../components/wiki';
 import { RevisionHistory } from '../components/wiki/RevisionHistory';
 import { Skeleton } from '../components/ui/Skeleton';
-import { AlertTriangle, FileQuestion, MessageSquare, Bot, RefreshCw, AlertCircle } from 'lucide-react';
+import { AlertTriangle, FileQuestion, MessageSquare, Bot, RefreshCw, AlertCircle, List, X } from 'lucide-react';
 import { urls, LABELS } from '../config';
 import { ApiServiceError } from '../services/api';
 
 export function WikiPage() {
+  const [mobileTocOpen, setMobileTocOpen] = useState(false);
   // 와일드카드(*) 라우트에서 전체 경로를 가져옴
   const { '*': wildcardPath } = useParams();
   const slug = wildcardPath || 'home';
@@ -164,6 +166,26 @@ export function WikiPage() {
       <aside className="wiki-sidebar">
         <TableOfContents content={page.content} />
       </aside>
+
+      {/* 모바일 TOC 플로팅 버튼 */}
+      <button
+        className="mobile-toc-toggle"
+        onClick={() => setMobileTocOpen(!mobileTocOpen)}
+        aria-label={mobileTocOpen ? '목차 닫기' : '목차 열기'}
+        aria-expanded={mobileTocOpen}
+      >
+        {mobileTocOpen ? <X size={20} /> : <List size={20} />}
+      </button>
+
+      {/* 모바일 TOC 오버레이 */}
+      {mobileTocOpen && (
+        <>
+          <div className="mobile-toc-overlay" onClick={() => setMobileTocOpen(false)} />
+          <div className="mobile-toc-panel">
+            <TableOfContents content={page.content} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

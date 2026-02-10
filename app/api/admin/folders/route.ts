@@ -15,7 +15,7 @@ const DOCS_PATH = 'data';
 function getOctokit() {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
-    throw new Error('GITHUB_TOKEN이 설정되지 않았습니다.');
+    throw new Error('서버 설정 오류');
   }
   return new Octokit({ auth: token });
 }
@@ -24,7 +24,7 @@ function getOctokit() {
 function getRepoInfo() {
   const repo = process.env.GITHUB_REPO;
   if (!repo) {
-    throw new Error('GITHUB_REPO가 설정되지 않았습니다.');
+    throw new Error('서버 설정 오류');
   }
   const [owner, repoName] = repo.split('/');
   return { owner, repo: repoName };
@@ -119,9 +119,8 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Folder creation error:', error);
-    const errorMessage = error instanceof Error ? error.message : '폴더를 생성할 수 없습니다.';
     return NextResponse.json(
-      { error: errorMessage },
+      { error: '폴더를 생성할 수 없습니다.' },
       { status: 500 }
     );
   }
@@ -196,9 +195,8 @@ export async function DELETE(request: NextRequest) {
     });
   } catch (error) {
     console.error('Folder deletion error:', error);
-    const errorMessage = error instanceof Error ? error.message : '폴더를 삭제할 수 없습니다.';
     return NextResponse.json(
-      { error: errorMessage },
+      { error: '폴더를 삭제할 수 없습니다.' },
       { status: 500 }
     );
   }

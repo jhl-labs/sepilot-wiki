@@ -451,6 +451,73 @@
   .wiki-sidebar {
     display: block;
   }
+
+  .mobile-toc-toggle,
+  .mobile-toc-overlay,
+  .mobile-toc-panel {
+    display: none;
+  }
+}
+
+/* 모바일 TOC 플로팅 버튼 */
+.mobile-toc-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: calc(var(--spacing-6) + env(safe-area-inset-bottom, 0px));
+  right: var(--spacing-4);
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-overlay);
+  transition: all var(--transition-fast);
+}
+
+.mobile-toc-toggle:hover {
+  background-color: var(--color-accent-primary-hover);
+  transform: scale(1.05);
+}
+
+@media (min-width: 1280px) {
+  .mobile-toc-toggle {
+    display: none;
+  }
+}
+
+/* 모바일 TOC 오버레이 */
+.mobile-toc-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-overlay);
+}
+
+/* 모바일 TOC 패널 (바텀 시트) */
+.mobile-toc-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 60vh;
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: var(--spacing-4);
+  padding-bottom: calc(var(--spacing-4) + env(safe-area-inset-bottom, 0px));
+  z-index: var(--z-modal);
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+}
+
+.mobile-toc-panel .toc {
+  position: static;
+  max-height: none;
+  border: none;
+  background: transparent;
+  padding: 0;
 }
 
 .wiki-header {
