@@ -1,6 +1,47 @@
 {
   "entries": [
     {
+      "id": "211e6de0-786a-44f5-bfd9-15226235c340",
+      "timestamp": "2026-02-10T12:48:04.303Z",
+      "actionType": "generate",
+      "issueNumber": 147,
+      "issueTitle": "OpenClaw 완벽 가이드",
+      "documentSlug": "openclaw",
+      "documentTitle": "OpenClaw 완벽 가이드",
+      "summary": "새 문서 \"OpenClaw 완벽 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4206
+            },
+            {
+              "step": "outline",
+              "durationMs": 9028
+            },
+            {
+              "step": "write",
+              "durationMs": 34232
+            },
+            {
+              "step": "review",
+              "durationMs": 6877
+            },
+            {
+              "step": "refine",
+              "durationMs": 33249
+            }
+          ],
+          "totalDurationMs": 87592,
+          "researchSources": 9
+        }
+      }
+    },
+    {
       "id": "5234e0bd-0bce-493f-ac4c-bfcb5e71c03a",
       "timestamp": "2026-02-10T12:41:41.931Z",
       "actionType": "generate",
@@ -890,5 +931,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-10T12:41:41.931Z"
+  "lastUpdated": "2026-02-10T12:48:04.303Z"
 }
