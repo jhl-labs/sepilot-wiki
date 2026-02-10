@@ -3,6 +3,12 @@
  */
 import { exec } from 'child_process';
 
+/** 로그 인젝션 방지: 개행/제어 문자 제거 */
+function sanitizeLog(value: unknown): string {
+  // eslint-disable-next-line no-control-regex
+  return String(value).replace(/[\n\r\t\x00-\x1f\x7f]/g, '');
+}
+
 // 이벤트 페이로드 타입
 interface IssuePayload {
   action: string;
@@ -64,7 +70,7 @@ export async function processIssueEvent(
   const { action, issue, label } = payload;
 
   console.log(
-    `[Webhook] Issue 이벤트: #${issue.number} ${action}${label ? ` (${label.name})` : ''}`
+    `[Webhook] Issue 이벤트: #${sanitizeLog(issue.number)} ${sanitizeLog(action)}${label ? ` (${sanitizeLog(label.name)})` : ''}`
   );
 
   switch (action) {
@@ -94,7 +100,7 @@ export async function processCommentEvent(
   const { action, comment, issue } = payload;
 
   console.log(
-    `[Webhook] Comment 이벤트: #${issue.number} by ${comment.user.login}`
+    `[Webhook] Comment 이벤트: #${sanitizeLog(issue.number)} by ${sanitizeLog(comment.user.login)}`
   );
 
   if (action !== 'created') {
@@ -211,7 +217,7 @@ function runIssueScript(
   }
 
   return new Promise((resolve) => {
-    console.log(`[Webhook] 스크립트 실행: ${scriptName} #${issueNumber}`);
+    console.log(`[Webhook] 스크립트 실행: ${sanitizeLog(scriptName)} #${sanitizeLog(issueNumber)}`);
 
     // exec로 shell 명령어 실행 (Turbopack이 파일 경로를 모듈로 해석하는 문제 우회)
     const child = exec(
@@ -293,7 +299,7 @@ export function processPingEvent(payload: {
   zen: string;
   hook_id: number;
 }): HandlerResult {
-  console.log(`[Webhook] Ping 수신: ${payload.zen}`);
+  console.log(`[Webhook] Ping 수신: ${sanitizeLog(payload.zen)}`);
   return {
     success: true,
     message: 'Pong!',

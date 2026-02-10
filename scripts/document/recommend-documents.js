@@ -10,8 +10,8 @@
 
 import { resolve } from 'path';
 import { runIssueWorkflow } from '../lib/workflow.js';
-import { callOpenAI, getExistingDocuments } from '../lib/utils.js';
-import { loadAllDocuments, getDocumentSummaries } from '../lib/document-scanner.js';
+import { callOpenAI } from '../lib/utils.js';
+import { loadAllDocuments } from '../lib/document-scanner.js';
 import { addIssueComment } from '../lib/report-generator.js';
 
 const WIKI_DIR = resolve(process.cwd(), 'wiki');

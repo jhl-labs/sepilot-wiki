@@ -9,8 +9,7 @@
  */
 
 import { resolve } from 'path';
-import { readFile, writeFile } from 'fs/promises';
-import { existsSync } from 'fs';
+import { writeFile } from 'fs/promises';
 import { runIssueWorkflow } from '../lib/workflow.js';
 import { callOpenAI, getOpenAIConfig, findDocument } from '../lib/utils.js';
 import { mergeFrontmatter, parseFrontmatter } from '../lib/frontmatter.js';
@@ -112,7 +111,7 @@ runIssueWorkflow(
 
     // 3. AI에게 수정 요청
     const originalContent = document.content;
-    const { frontmatter: originalFm, body: originalBody } = parseFrontmatter(originalContent);
+    const { frontmatter: originalFm } = parseFrontmatter(originalContent);
 
     const systemPrompt = `당신은 기술 문서 편집 AI입니다.
 사용자의 수정 요청에 따라 기존 문서를 개선합니다.

@@ -4,9 +4,22 @@
  */
 
 import { writeFile, mkdir } from 'fs/promises';
-import { join, dirname } from 'path';
+import { join, dirname, resolve } from 'path';
 
 const DATA_DIR = join(process.cwd(), 'public', 'data');
+
+/**
+ * 경로 탐색 방지 검증
+ * @param {string} filepath - 검증할 파일 경로
+ * @param {string} allowedBase - 허용된 기본 디렉토리
+ */
+function validatePath(filepath, allowedBase) {
+  const resolved = resolve(filepath);
+  const base = resolve(allowedBase);
+  if (!resolved.startsWith(base + '/') && resolved !== base) {
+    throw new Error(`경로 탐색 방지: ${filepath}가 허용된 디렉토리 밖입니다.`);
+  }
+}
 const IS_DRY_RUN = process.env.DRY_RUN === 'true';
 
 /**
@@ -17,6 +30,7 @@ const IS_DRY_RUN = process.env.DRY_RUN === 'true';
  */
 export async function saveReport(filename, data) {
   const filepath = join(DATA_DIR, filename);
+  validatePath(filepath, DATA_DIR);
 
   if (IS_DRY_RUN) {
     console.log(`[DRY RUN] 리포트 저장 건너뜀: ${filepath}`);
@@ -38,6 +52,8 @@ export async function saveReport(filename, data) {
  * @returns {Promise<string>} 저장된 파일 경로
  */
 export async function saveMarkdownReport(filepath, content) {
+  validatePath(filepath, process.cwd());
+
   if (IS_DRY_RUN) {
     console.log(`[DRY RUN] 마크다운 보고서 저장 건너뜀: ${filepath}`);
     return filepath;

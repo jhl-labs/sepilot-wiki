@@ -107,8 +107,8 @@ async function main() {
       const doc = documents.find((d) => d.path === summary.path);
       if (!doc || !doc.rawContent) continue;
 
-      // description에 따옴표가 포함될 수 있으므로 escape
-      const safeDescription = summary.description.replace(/"/g, '\\"');
+      // description에 백슬래시/따옴표가 포함될 수 있으므로 escape (백슬래시 먼저)
+      const safeDescription = summary.description.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
       const updatedContent = updateFrontmatterField(
         doc.rawContent,
         'description',

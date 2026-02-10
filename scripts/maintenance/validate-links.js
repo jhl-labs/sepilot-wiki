@@ -34,7 +34,7 @@ async function validateLinks() {
         let match;
 
         while ((match = linkRegex.exec(content)) !== null) {
-            const [fullMatch, text, url] = match;
+            const [, text, url] = match;
 
             // 1. 외부 링크 (http/https) - 체크 생략 (너무 느릴 수 있음)
             if (url.startsWith('http')) {

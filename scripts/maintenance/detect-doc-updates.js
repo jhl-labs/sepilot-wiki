@@ -12,7 +12,7 @@ import { resolve } from 'path';
 import { execFileSync } from 'child_process';
 import { loadAllDocuments } from '../lib/document-scanner.js';
 import { setGitHubOutput } from '../lib/utils.js';
-import { createGitHubIssues, getExistingIssues } from '../lib/report-generator.js';
+import { createGitHubIssues } from '../lib/report-generator.js';
 import { parseArgs } from '../lib/utils.js';
 
 const WIKI_DIR = resolve(process.cwd(), 'wiki');
@@ -81,10 +81,6 @@ function findRelatedDocuments(changedFiles, documents) {
       // 파일명 (확장자 포함/제외)
       const filename = changedFile.split('/').pop();
       const filenameNoExt = filename.replace(/\.[^.]+$/, '');
-
-      // 디렉토리/모듈명
-      const pathParts = changedFile.split('/');
-      const moduleName = pathParts.length > 1 ? pathParts[pathParts.length - 2] : '';
 
       // 문서 내용에서 참조 검색
       const content = doc.content.toLowerCase();

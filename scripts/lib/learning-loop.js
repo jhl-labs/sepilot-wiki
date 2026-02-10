@@ -12,7 +12,7 @@
  */
 
 import { readFile, writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { existsSync } from 'fs';
 import { callOpenAI } from './utils.js';
 import { addAIHistoryEntry } from './ai-history.js';
@@ -24,18 +24,12 @@ const TEMPLATES_FILE = join(DATA_DIR, 'prompt-templates.json');
 /** 패턴 감지 최소 빈도 */
 const MIN_PATTERN_FREQUENCY = 3;
 
-/**
- * 피드백 패턴 파일 로드
- * @returns {Promise<Object>}
- */
-async function loadFeedbackPatterns() {
-  if (!existsSync(FEEDBACK_FILE)) {
-    return { patterns: [], lastAnalyzed: null };
-  }
-  try {
-    return JSON.parse(await readFile(FEEDBACK_FILE, 'utf-8'));
-  } catch {
-    return { patterns: [], lastAnalyzed: null };
+/** 경로 탐색 방지 검증 */
+function validatePath(filepath) {
+  const resolved = resolve(filepath);
+  const base = resolve(DATA_DIR);
+  if (!resolved.startsWith(base + '/') && resolved !== base) {
+    throw new Error(`경로 탐색 방지: ${filepath}가 허용된 디렉토리 밖입니다.`);
   }
 }
 
@@ -188,7 +182,8 @@ export async function runLearningLoop() {
   // 2. 프롬프트 개선 제안
   const improvements = await suggestPromptImprovements(patterns);
 
-  // 3. 패턴 저장
+  // 3. 패턴 저장 (경로 검증)
+  validatePath(FEEDBACK_FILE);
   await mkdir(DATA_DIR, { recursive: true });
   await writeFile(
     FEEDBACK_FILE,
@@ -225,6 +220,7 @@ export async function runLearningLoop() {
   }
 
   existingTemplates.lastUpdated = new Date().toISOString();
+  validatePath(TEMPLATES_FILE);
   await writeFile(TEMPLATES_FILE, JSON.stringify(existingTemplates, null, 2));
 
   // 5. AI History 기록

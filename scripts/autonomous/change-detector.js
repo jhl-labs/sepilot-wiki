@@ -32,7 +32,7 @@ const MAX_URLS_TO_CHECK = 30;
 
 /** 건너뛸 URL 패턴 */
 const SKIP_PATTERNS = [
-  /^https?:\/\/api\.github\.com/i,
+  /^https?:\/\/api\.github\.com(\/|$)/i,
   /\.(png|jpg|jpeg|gif|svg|webp|ico|bmp|mp4|pdf|zip)(\?|$)/i,
   // SSRF 방지: 내부/프라이빗 IP 대역 차단
   /^https?:\/\/localhost/i,
@@ -116,9 +116,15 @@ async function checkUrl(url) {
 
     const text = await response.text();
     // 본문 핵심 부분만 해시 (날짜/시간 등의 동적 요소 제외)
-    const cleaned = text
-      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    // 루프 기반 HTML 태그 제거 (중첩/변형 태그 방지)
+    let cleaned = text;
+    let prevCleaned;
+    do {
+      prevCleaned = cleaned;
+      cleaned = cleaned.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
+      cleaned = cleaned.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+    } while (cleaned !== prevCleaned);
+    cleaned = cleaned
       .replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '')
       .replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '')
       .replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '')

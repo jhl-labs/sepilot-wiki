@@ -7,7 +7,7 @@
  */
 
 import { readdir, readFile, writeFile, mkdir } from 'fs/promises';
-import { join, basename } from 'path';
+import { join } from 'path';
 import { existsSync } from 'fs';
 import { execFileSync } from 'child_process';
 
@@ -121,20 +121,6 @@ function getGitHistory(filePath, maxEntries = 20) {
   } catch (error) {
     console.warn(`⚠️ Git 히스토리 가져오기 실패: ${filePath}`, error.message);
     return [];
-  }
-}
-
-// 특정 커밋 시점의 파일 내용 가져오기
-function getFileAtCommit(filePath, sha) {
-  try {
-    const relativePath = filePath.replace(process.cwd() + '/', '');
-    return execFileSync(
-      'git',
-      ['show', `${sha}:${relativePath}`],
-      { encoding: 'utf-8', cwd: process.cwd() }
-    );
-  } catch {
-    return null;
   }
 }
 
@@ -339,14 +325,18 @@ async function buildWikiData() {
   console.log(`   메타: ${META_OUTPUT_FILE} (${JSON.stringify(metaData).length} bytes)`);
   console.log(`   페이지: ${PAGES_OUTPUT_DIR}/ (${pages.length}개 파일)`);
 
-  // AI History 파일이 없으면 빈 파일 생성
+  // AI History 파일이 없으면 빈 파일 생성 (wx 플래그로 경합 조건 방지)
   await mkdir(DATA_DIR, { recursive: true });
-  if (!existsSync(AI_HISTORY_FILE)) {
+  try {
     const emptyHistory = { entries: [], lastUpdated: new Date().toISOString() };
-    await writeFile(AI_HISTORY_FILE, JSON.stringify(emptyHistory, null, 2));
+    await writeFile(AI_HISTORY_FILE, JSON.stringify(emptyHistory, null, 2), { flag: 'wx' });
     console.log(`✅ 빈 AI History 파일 생성: ${AI_HISTORY_FILE}`);
-  } else {
-    console.log(`ℹ️ AI History 파일 존재: ${AI_HISTORY_FILE}`);
+  } catch (err) {
+    if (err.code === 'EEXIST') {
+      console.log(`ℹ️ AI History 파일 존재: ${AI_HISTORY_FILE}`);
+    } else {
+      throw err;
+    }
   }
 }
 

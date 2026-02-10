@@ -10,8 +10,8 @@
 
 import { resolve } from 'path';
 import { runIssueWorkflow } from '../lib/workflow.js';
-import { callOpenAI, getExistingDocuments, getOpenAIConfig } from '../lib/utils.js';
-import { loadAllDocuments, getDocumentSummaries } from '../lib/document-scanner.js';
+import { callOpenAI, getOpenAIConfig } from '../lib/utils.js';
+import { loadAllDocuments } from '../lib/document-scanner.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 import { addIssueComment } from '../lib/report-generator.js';
 import { searchTavily, isTavilyAvailable } from '../lib/tavily-search.js';

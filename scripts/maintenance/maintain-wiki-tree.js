@@ -12,7 +12,7 @@
  * - 디렉토리 구조 재배치 제안/적용
  */
 
-import { readFile, readdir, writeFile, rename, mkdir, unlink } from 'fs/promises';
+import { readFile, readdir, writeFile, rename, mkdir } from 'fs/promises';
 import { join, dirname, resolve } from 'path';
 import { existsSync } from 'fs';
 import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';

@@ -9,8 +9,6 @@
  */
 
 import { resolve, join } from 'path';
-import { mkdir, writeFile } from 'fs/promises';
-import { existsSync } from 'fs';
 import { execFileSync } from 'child_process';
 import { loadAllDocuments } from '../lib/document-scanner.js';
 import { loadAIHistory } from '../lib/ai-history.js';

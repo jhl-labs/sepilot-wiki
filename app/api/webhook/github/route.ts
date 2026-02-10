@@ -3,6 +3,12 @@
  * POST /api/webhook/github
  */
 import { NextRequest, NextResponse } from 'next/server';
+
+/** 로그 인젝션 방지: 개행/제어 문자 제거 */
+function sanitizeLog(value: unknown): string {
+  // eslint-disable-next-line no-control-regex
+  return String(value).replace(/[\n\r\t\x00-\x1f\x7f]/g, '');
+}
 import { validateWebhookRequest } from '@/lib/webhook/verifier';
 import {
   processIssueEvent,
@@ -36,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     console.log(
-      `[Webhook] 수신: ${validation.event}${validation.action ? `/${validation.action}` : ''} (${validation.delivery})`
+      `[Webhook] 수신: ${sanitizeLog(validation.event)}${validation.action ? `/${sanitizeLog(validation.action)}` : ''} (${sanitizeLog(validation.delivery)})`
     );
 
     // 페이로드 파싱

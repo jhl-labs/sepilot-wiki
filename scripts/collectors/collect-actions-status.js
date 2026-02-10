@@ -15,9 +15,15 @@ const OUTPUT_FILE = join(OUTPUT_DIR, 'actions-status.json');
 // GitHub 설정 로드
 const githubConfig = getGitHubConfig();
 
-// GitHub API 호출
+// GitHub API 호출 (URL 검증 포함)
 async function fetchGitHubAPI(endpoint) {
   const url = `${githubConfig.apiUrl}/repos/${githubConfig.repository}${endpoint}`;
+
+  // API URL 검증: github.com 도메인만 허용
+  const parsedUrl = new URL(url);
+  if (!parsedUrl.hostname.endsWith('github.com') && !parsedUrl.hostname.endsWith('githubusercontent.com')) {
+    throw new Error(`허용되지 않은 API 호스트: ${parsedUrl.hostname}`);
+  }
 
   const headers = {
     Accept: 'application/vnd.github.v3+json',

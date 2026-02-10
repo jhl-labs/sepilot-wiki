@@ -53,12 +53,20 @@ export function formatRelativeTime(date: Date | string): string {
  * 마크다운에서 순수 텍스트만 추출
  */
 export function extractPlainText(markdown: string): string {
-  return markdown
+  let text = markdown
     .replace(/```[\s\S]*?```/g, '') // 코드 블록 제거
     .replace(/`[^`]+`/g, '') // 인라인 코드 제거
     .replace(/!\[.*?\]\(.*?\)/g, '') // 이미지 제거
-    .replace(/\[([^\]]+)\]\(.*?\)/g, '$1') // 링크에서 텍스트만
-    .replace(/<[^>]+>/g, '') // HTML 태그 제거
+    .replace(/\[([^\]]+)\]\(.*?\)/g, '$1'); // 링크에서 텍스트만
+  // 루프 기반 HTML 태그 제거 (중첩/변형 태그 방지)
+  let prev: string;
+  do {
+    prev = text;
+    text = text.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
+    text = text.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+  } while (text !== prev);
+  return text
+    .replace(/<[^>]+>/g, '') // 나머지 HTML 태그 제거
     .replace(/^#+\s*/gm, '') // 헤더 기호 제거
     .replace(/[*_~]{1,3}([^*_~]+)[*_~]{1,3}/g, '$1') // 굵게/기울임 제거
     .replace(/^>\s*/gm, '') // 인용문 기호 제거

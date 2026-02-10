@@ -17,7 +17,7 @@ const JSON_OUTPUT_FILE = join(PUBLIC_DIR, 'search-index.json');
 
 // 마크다운에서 텍스트만 추출 (검색용)
 function extractPlainText(markdown) {
-  return markdown
+  let text = markdown
     // 코드 블록 제거
     .replace(/```[\s\S]*?```/g, '')
     // 인라인 코드 제거
@@ -25,8 +25,16 @@ function extractPlainText(markdown) {
     // 이미지 제거
     .replace(/!\[.*?\]\(.*?\)/g, '')
     // 링크에서 텍스트만 추출
-    .replace(/\[([^\]]+)\]\(.*?\)/g, '$1')
-    // HTML 태그 제거
+    .replace(/\[([^\]]+)\]\(.*?\)/g, '$1');
+  // 루프 기반 HTML 태그 제거 (중첩/변형 태그 방지)
+  let prev;
+  do {
+    prev = text;
+    text = text.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
+    text = text.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+  } while (text !== prev);
+  return text
+    // 나머지 HTML 태그 제거
     .replace(/<[^>]+>/g, '')
     // 헤더 기호 제거
     .replace(/^#+\s*/gm, '')

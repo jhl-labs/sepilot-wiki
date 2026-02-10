@@ -10,7 +10,7 @@
  */
 
 import { resolve, extname } from 'path';
-import { readFile, readdir, stat } from 'fs/promises';
+import { readFile, readdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { callOpenAI } from '../lib/utils.js';
 import { saveReport, createGitHubIssues, getExistingIssues } from '../lib/report-generator.js';

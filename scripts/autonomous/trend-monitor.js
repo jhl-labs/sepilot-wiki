@@ -36,7 +36,15 @@ function parseRSSItems(xml, maxItems = 10) {
     const title = itemXml.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').trim() || '';
     const link = itemXml.match(/<link[^>]*>([\s\S]*?)<\/link>/i)?.[1]?.trim() || '';
     const pubDate = itemXml.match(/<pubDate[^>]*>([\s\S]*?)<\/pubDate>/i)?.[1]?.trim() || '';
-    const description = itemXml.match(/<description[^>]*>([\s\S]*?)<\/description>/i)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '').replace(/<[^>]+>/g, '').trim().slice(0, 300) || '';
+    let description = itemXml.match(/<description[^>]*>([\s\S]*?)<\/description>/i)?.[1]?.replace(/<!\[CDATA\[|\]\]>/g, '') || '';
+    // 루프 기반 HTML 태그 제거 (중첩/변형 태그 방지)
+    let prevDesc;
+    do {
+      prevDesc = description;
+      description = description.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
+      description = description.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+    } while (description !== prevDesc);
+    description = description.replace(/<[^>]+>/g, '').trim().slice(0, 300);
 
     if (title) {
       items.push({ title, link, pubDate, description });

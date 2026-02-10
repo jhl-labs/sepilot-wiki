@@ -12,7 +12,7 @@ import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import { loadAllDocuments } from '../lib/document-scanner.js';
 import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
-import { updateFrontmatterField, parseFrontmatter } from '../lib/frontmatter.js';
+import { updateFrontmatterField } from '../lib/frontmatter.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 
 const WIKI_DIR = resolve(process.cwd(), 'wiki');
