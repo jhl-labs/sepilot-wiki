@@ -42,13 +42,15 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Setup kubectl (for k8s collectors)
-        if: ${{ secrets.KUBECONFIG != '' }}
+        if: ${{ env.KUBECONFIG_DATA != '' }}
         uses: azure/setup-kubectl@v4
         with:
           version: 'latest'
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
 
       - name: Setup kubeconfig
-        if: ${{ secrets.KUBECONFIG != '' }}
+        if: ${{ env.KUBECONFIG_DATA != '' }}
         run: |
           mkdir -p ~/.kube
           echo "$KUBECONFIG_DATA" > ~/.kube/config
