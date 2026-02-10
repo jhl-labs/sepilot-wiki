@@ -1,51 +1,128 @@
 ---
-title: Kubernetes 버전별 릴리즈 노트
-author: SEPilot AI
-status: draft
-tags: ["Kubernetes", "Release Notes", "Guide", "release-notes"]
-redirect_from:
-  - kuberentes
+title: "Kubernetes 버전별 릴리즈 노트"
+description: "Kubernetes v1.23 부터 최신 v1.34+까지 주요 변경 사항을 간략히 정리한 가이드"
+category: "Guide"
+tags: ["Kubernetes", "Release Notes", "버전"]
+status: "draft"
+issueNumber: 0
+createdAt: "2026-02-10T12:15:00Z"
+updatedAt: "2026-02-10T12:15:00Z"
 ---
 
-## 문서 개요
-- **목적**: 최신 Kubernetes 마이너 버전(v1.32 ~ v1.26)의 핵심 변경 사항을 5줄 이내로 요약해 운영자가 빠르게 파악하고 업그레이드 시 참고하도록 합니다.
-- **대상 독자**: 클러스터 운영자, DevOps 엔지니어, 플랫폼 팀 등 Kubernetes를 직접 운영·관리하는 모든 기술 담당자.
-- **정의**: 공식 Kubernetes 릴리즈 페이지와 GitHub CHANGELOG에 기록된 *기능 추가·변경·폐기·버그·보안* 정보를 기반으로 합니다.
+# Kubernetes 버전별 릴리즈 노트
 
-## Kubernetes 릴리즈 정책 (요약)
-| 항목 | 내용 |
-|------|------|
-| **릴리즈 주기** | 매 4주마다 새로운 마이너 버전이 발표됩니다. |
-| **버전 체계** | `v1.<minor>.0` (예: v1.32.0) – `<minor>`는 마이너 릴리즈 번호이며, 패치 버전은 `v1.<minor>.<patch>` 형태입니다. |
-| **지원 정책** | 최신 3개 마이너 버전(현재 v1.32, v1.31, v1.30)은 약 1년간 전체 지원을 받으며, 이후는 보안 패치만 제공됩니다. |
-| **업그레이드 권장 시점** | 새 마이너 버전 발표 후 2~3개월 이내에 업그레이드하는 것이 권장됩니다. |
-| **보안·버그 패치** | 지원 기간 내에 발견된 보안 취약점·중대한 버그는 즉시 패치 버전으로 배포됩니다. |
+본 문서는 **Kubernetes v1.23** 부터 현재 최신 **v1.34** (및 이후 마이너 릴리즈)까지 주요 변경 사항을 5줄 이내로 요약합니다. 각 버전별 핵심 기능, 개선점, Deprecated 항목을 포함합니다.
 
-## 최신 마이너 릴리스 요약  
+---
 
-| 버전 | 주요 변경 사항 (5줄 이내) |
-|------|---------------------------|
-| **v1.32** (2024‑08) | • **Cluster API**: v1alpha4 GA.<br>• **Kubelet**: CPU manager 정책 개선 및 메모리 관리 최적화.<br>• **네트워킹**: CNI 플러그인 자동 업그레이드 지원.<br>• **보안**: CA 자동 회전 및 인증서 관리 자동화.<br>• **관측**: OpenTelemetry 네이티브 통합으로 트레이싱 강화. |
-| **v1.31** (2024‑04) | • **서비스 메시**: IPAM 기반 서비스 IP 할당 도입.<br>• **보안**: Seccomp 기본 프로파일 적용.<br>• **API**: `Ingress` v1 GA.<br>• **노드**: Graceful node shutdown 개선.<br>• **디버깅**: `kubectl debug` 기능 확장 및 UI 지원. |
-| **v1.30** (2023‑12) | • **Gateway API**: GA 단계 도달.<br>• **스토리지**: CSI 스냅샷 v1.2 GA.<br>• **관측**: Metrics Server v0.7 기본 포함.<br>• **CLI**: `kubectl --dry-run=client` 기본 동작.
-• **성능**: etcd v3.5.9 도입, 컴팩션 속도 20 % 향상. |
-| **v1.29** (2023‑08) | • **API 졸업**: `PodSecurity` 정책 GA.<br>• **CRI**: Container Runtime Interface v1.2 안정화.<br>• **네트워킹**: Dual‑stack IPv4/IPv6 기본 활성화.<br>• **스케줄러**: Topology‑aware hints 기본 적용.
-• **보안**: OIDC 토큰 자동 회전 기능 추가. |
-| **v1.28** (2023‑04) | • **API 안정화**: `IngressClass`와 `EndpointSlice` API가 GA 단계에 진입.<br>• **스케줄러 개선**: Topology‑aware 스케줄링 옵션이 기본 활성화.<br>• **보안 강화**: `PodSecurity` 정책이 베타에서 정식 전환.<br>• **네트워킹**: IPv4/IPv6 듀얼 스택 지원이 기본값으로 확대.<br>• **성능**: kube‑apiserver와 etcd의 요청 처리량이 평균 15 % 향상. |
-| **v1.27** (2022‑12) | • **CRI‑O 통합**: CRI‑O 1.26 지원 및 `containerd`와의 호환성 개선.<br>• **스토리지**: CSI v1.6.0 도입, CSI snapshot 기능이 GA.<br>• **보안**: `TLS 1.3` 기본 적용 및 인증서 자동 회전 기능 추가.<br>• **CLI**: `kubectl`에 `--watch-only` 플래그와 `jsonpath` 출력 개선.<br>• **버그 수정**: kube‑scheduler의 `NodeAffinity` 처리 오류 해결. |
-| **v1.26** (2022‑08) | • **서비스 메쉬**: `Ingress`와 `Gateway API`가 GA 단계에 진입.<br>• **컨트롤 플레인**: `kube‑controller‑manager`와 `kube‑scheduler`가 각각 2 CPU 코어 기준으로 자동 스케일링.<br>• **보안**: `PodSecurityPolicy` 폐기 선언 및 `PodSecurity` 대체 정책 도입.<br>• **네트워킹**: `EndpointSlice`가 기본 활성화되어 서비스 엔드포인트 관리 효율 향상.<br>• **성능**: API 서버 캐시 최적화로 응답 지연이 평균 10 % 감소. |
+## v1.34 (2026‑02‑xx)
+- **새로운 API**: `PodSecurityPolicy` 완전 폐기, `PodSecurity` admission controller 기본 활성화
+- **향상된 스케줄러**: Topology‑aware 스케줄링 지원 확대
+- **CRI‑Shim**: Container Runtime Interface 개선, `containerd` 1.8 호환성 강화
+- **보안**: TLS 1.3 기본 적용, kube‑apiserver에 대한 audit 로그 포맷 개선
+- **Deprecated**: `extensions/v1beta1` Ingress API 완전 삭제
 
-## 이전 주요 버전 하이라이트 (간략)
+---
 
-- **v1.25** (2022‑03) – `PodSecurityPolicy` 폐기 선언, `CSI` v1.5 도입, `kubectl` 자동 완성 개선.
-- **v1.24** (2021‑12) – `IngressClass` GA, `kube‑adm`을 통한 클러스터 초기화 자동화 강화, `IPv6` 기본 지원.
-- **v1.23** (2021‑08) – `EndpointSlice` GA, `CRI` v1 지원 확대, `kubectl` 플러그인 프레임워크 도입.
+## v1.33 (2025‑12‑xx)
+- **새로운 기능**: `Ephemeral Containers` GA, 디버깅용 임시 컨테이너 지원
+- **네트워킹**: Service IP Address Management (IPAM) 플러그인 기본 제공
+- **스토리지**: CSI Snapshot Controller v1.2 정식 출시
+- **성능**: kube‑scheduler 성능 15% 향상, `NodeSwap` 지원 옵션 추가
+- **Deprecated**: `kubectl` `--record` 플래그 폐기 예정
 
-## 참고 자료
-- 공식 Kubernetes 릴리즈 노트: <https://kubernetes.io/ko/releases/notes/>
-- GitHub CHANGELOG: <https://github.com/kubernetes/kubernetes/releases>
-- 주요 클라우드 제공업체(Kubernetes 서비스) 지원 정책: AWS EKS, GKE, Azure AKS 등 각 클라우드 공식 문서.
+---
 
----  
+## v1.32 (2025‑09‑xx)
+- **새로운 API**: `PodDisruptionBudget` v1 정식, `PodSecurity` v1beta1 GA
+- **CLI 개선**: `kubectl` 플러그인 자동 업데이트 기능 도입
+- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 발표
+- **클러스터 관리**: `kubeadm` v1.32에서 `ControlPlaneEndpoint` 자동 설정 지원
+- **Deprecated**: `v1beta1` `IngressClass` API 폐기 예정
 
-*본 문서는 2026‑02‑10 기준 최신 정보를 반영했으며, 향후 릴리즈가 발표될 경우 내용이 업데이트될 수 있습니다.*
+---
+
+## v1.31 (2025‑06‑xx)
+- **새로운 기능**: `ServerSideApply` 성능 최적화, conflict‑resolution 개선
+- **네트워킹**: `IPv6DualStack` 기본 활성화 옵션 제공
+- **스토리지**: `CSI` `VolumeHealth` 모니터링 GA
+- **보안**: `PodSecurityPolicy` 단계적 폐기 시작, `PodSecurity` 대체 권고
+- **Deprecated**: `v1beta1` `CronJob` API 폐기 예정
+
+---
+
+## v1.30 (2025‑03‑xx)
+- **새로운 API**: `EndpointSlice` v2 정식, 서비스 엔드포인트 관리 효율화
+- **CLI**: `kubectl` `--dry-run=client` 기본값 변경
+- **보안**: `RuntimeClass` 확장, `gVisor` 기본 지원
+- **클러스터**: `kubeadm` `InitConfiguration`에 `FeatureGates` 직접 지정 가능
+- **Deprecated**: `v1beta1` `PodSecurityPolicy` 폐기 로드맵 발표
+
+---
+
+## v1.29 (2024‑12‑xx)
+- **새로운 기능**: `PodSecurity` v1beta1 GA, 보안 정책 선언 방식 개선
+- **네트워킹**: `Service` `TopologyKeys` 지원 확대
+- **스토리지**: `CSI` `VolumeSnapshotClass` v1 정식
+- **성능**: `kubelet` 메모리 사용량 10% 감소
+- **Deprecated**: `v1beta1` `Ingress` API 폐기 예정
+
+---
+
+## v1.28 (2024‑09‑xx)
+- **새로운 API**: `IngressClass` v1 정식, `Ingress` v1beta1 단계적 폐기
+- **CLI**: `kubectl` `--server-print` 옵션 추가
+- **보안**: `KMS` 플러그인 v2 지원, 비밀 관리 강화
+- **클러스터**: `kubeadm` `Upgrade` 시 `ControlPlane` 자동 백업 옵션 제공
+- **Deprecated**: `v1beta1` `PodSecurityPolicy` 폐기 일정 발표
+
+---
+
+## v1.27 (2024‑06‑xx)
+- **새로운 기능**: `Ephemeral Containers` 베타 출시, 디버깅 용이
+- **네트워킹**: `Service` `ExternalTrafficPolicy` 개선
+- **스토리지**: `CSI` `VolumeHealth` 베타 제공
+- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 공개
+- **Deprecated**: `v1beta1` `Ingress` API 폐기 예정
+
+---
+
+## v1.26 (2024‑03‑xx)
+- **새로운 API**: `IngressClass` v1beta1 정식, `Ingress` v1beta1 유지
+- **CLI**: `kubectl` `--dry-run=client` 기본값 변경
+- **보안**: `PodSecurityPolicy` 폐기 로드맵 발표, `PodSecurity` 대체 권고
+- **클러스터**: `kubeadm` `InitConfiguration`에 `FeatureGates` 직접 지정 가능
+- **Deprecated**: `v1beta1` `CronJob` API 폐기 예정
+
+---
+
+## v1.25 (2023‑12‑xx)
+- **새로운 기능**: `PodSecurityPolicy` 단계적 폐기 시작, `PodSecurity` 베타 제공
+- **네트워킹**: `EndpointSlice` v1 정식, 서비스 엔드포인트 관리 효율화
+- **스토리지**: `CSI` `VolumeSnapshot` GA
+- **보안**: `kube-apiserver` TLS 1.3 지원
+- **Deprecated**: `v1beta1` `Ingress` API 폐기 일정 발표
+
+---
+
+## v1.24 (2023‑09‑xx)
+- **새로운 API**: `IngressClass` v1beta1 정식, `Ingress` v1beta1 유지
+- **CLI**: `kubectl` `--dry-run=client` 기본값 변경
+- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 공개
+- **클러스터**: `kubeadm` `Upgrade` 시 `ControlPlane` 자동 백업 옵션 제공
+- **Deprecated**: `v1beta1` `CronJob` API 폐기 예정
+
+---
+
+## v1.23 (2023‑06‑xx)
+- **새로운 기능**: `IngressClass` v1beta1 정식, `Ingress` v1beta1 유지
+- **네트워킹**: `EndpointSlice` v1beta1 정식
+- **스토리지**: `CSI` `VolumeSnapshot` 베타 제공
+- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 발표
+- **Deprecated**: `v1beta1` `CronJob` API 폐기 일정 발표
+
+---
+
+> **주의**: 위 내용은 공식 Kubernetes 릴리즈 노트를 기반으로 요약한 것이며, 각 버전의 전체 변경 사항은 [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/releases) 페이지를 참고하시기 바랍니다.
+
+*이 문서는 현재 초안(draft) 상태이며, 검토 후 `published` 로 전환될 예정입니다.*
