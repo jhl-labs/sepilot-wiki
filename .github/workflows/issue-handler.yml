@@ -17,7 +17,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: issue-handler
+  group: issue-handler-${{ github.event.issue.number }}
   cancel-in-progress: false
 
 jobs:
