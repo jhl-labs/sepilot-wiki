@@ -31,20 +31,16 @@ test.describe('Responsive Design', () => {
 
     test('모바일 메뉴 토글이 작동해야 함', async ({ page }) => {
       await page.goto('/');
+      await page.waitForLoadState('networkidle');
 
-      // 오버레이가 있으면 먼저 닫기
-      const overlay = page.locator('.sidebar-overlay.visible');
-      if (await overlay.isVisible().catch(() => false)) {
-        await overlay.click();
-        await page.waitForTimeout(300);
-      }
-
-      // 메뉴 버튼 클릭
+      // 메뉴 버튼 클릭 (force: true로 오버레이 무시)
       const menuButton = page.locator('button[aria-label*="menu"], button[aria-label*="사이드바"], .menu-toggle').first();
       await menuButton.click({ force: true });
 
-      // 사이드바가 열려야 함
-      await page.waitForTimeout(300);
+      // 사이드바 상태 변경 대기
+      await page.waitForTimeout(500);
+
+      // 사이드바가 열렸거나 상태가 변경되었는지 확인
       const sidebar = page.locator('.sidebar');
       const isVisible = await sidebar.isVisible().catch(() => false);
 
