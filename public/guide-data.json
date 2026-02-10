@@ -1,6 +1,36 @@
 {
   "pages": [
     {
+      "title": "Getting Started",
+      "slug": "getting-started",
+      "content": "\n# Getting Started\n\n*This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.*\n",
+      "tags": [
+        "getting-started",
+        "introduction",
+        "setup"
+      ]
+    },
+    {
+      "title": "LLM Workflow",
+      "slug": "llm-workflow",
+      "content": "\n# LLM Workflow\n\n*This document is a placeholder for the LLM Workflow guide. Provide step‑by‑step instructions, architecture diagrams, and usage examples here.*\n",
+      "tags": [
+        "LLM",
+        "workflow",
+        "integration"
+      ]
+    },
+    {
+      "title": "Configuration Guide",
+      "slug": "configuration-guide",
+      "content": "\n# Configuration Guide\n\n*This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.*\n",
+      "tags": [
+        "configuration",
+        "settings",
+        "customization"
+      ]
+    },
+    {
       "title": "설정 파일 가이드",
       "slug": "configuration",
       "content": "\n# 설정 파일 가이드\n\nSEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.\n\n## 설정 파일 목록\n\n| 파일 | 위치 | 용도 |\n|------|------|------|\n| `site.config.ts` | 루트 | 사이트 기본 정보 |\n| `theme.config.ts` | 루트 | 테마 (색상, 폰트, 레이아웃) |\n| `navigation.config.ts` | 루트 | 네비게이션 메뉴 |\n| `custom.css` | src/styles | 커스텀 CSS |\n| `config.ts` | src | GitHub 저장소 연결 설정 |\n\n## site.config.ts 상세\n\n```typescript\ninterface SiteConfig {\n  // 필수\n  title: string;          // 사이트 제목\n  description: string;    // SEO 설명\n  owner: string;          // GitHub 사용자명/조직명\n  repo: string;           // 저장소 이름\n  wikiPath: string;       // wiki 폴더 경로 (기본: 'wiki')\n\n  // 선택\n  logo?: {\n    type: 'text' | 'image' | 'icon';\n    value: string;\n    alt?: string;\n  };\n  favicon?: string;       // 파비콘 경로\n  social?: {\n    github?: string;\n    twitter?: string;\n    discord?: string;\n    website?: string;\n  };\n  footer?: {\n    enabled?: boolean;\n    copyright?: {\n      enabled?: boolean;\n      text?: string;\n      startYear?: number;\n    };\n    links?: { label: string; url: string }[];\n    showPoweredBy?: boolean;\n  };\n}\n```\n\n## theme.config.ts 상세\n\n### 색상 (colors)\n\n```typescript\ninterface ColorScheme {\n  primary: string;           // 메인 브랜드 색상\n  primaryHover?: string;     // hover 시 색상\n  background: string;        // 배경색\n  backgroundSecondary?: string;\n  backgroundTertiary?: string;\n  text: string;              // 기본 텍스트 색상\n  textSecondary?: string;\n  textMuted?: string;\n  border?: string;           // 테두리 색상\n  accent?: string;           // 강조 색상\n  success?: string;          // 성공 상태\n  warning?: string;          // 경고 상태\n  error?: string;            // 오류 상태\n  info?: string;             // 정보 상태\n}\n```\n\n### 폰트 (fonts)\n\n```typescript\ninterface ThemeFonts {\n  sans?: string;     // 본문 폰트\n  mono?: string;     // 코드 폰트\n  heading?: string;  // 제목 폰트 (미지정시 sans 사용)\n}\n```\n\n### 레이아웃 (layout)\n\n```typescript\ninterface ThemeLayout {\n  headerHeight?: string;      // 기본: 64px\n  sidebarWidth?: string;      // 기본: 280px\n  contentMaxWidth?: string;   // 기본: 900px\n  tocWidth?: string;          // 기본: 240px\n}\n```\n\n### 테두리 반경 (borderRadius)\n\n```typescript\ninterface ThemeBorderRadius {\n  sm?: string;   // 기본: 0.25rem\n  md?: string;   // 기본: 0.5rem\n  lg?: string;   // 기본: 0.75rem\n  xl?: string;   // 기본: 1rem\n}\n```\n\n## navigation.config.ts 상세\n\n```typescript\ninterface NavigationConfig {\n  sidebar?: SidebarSection[];\n}\n\ninterface SidebarSection {\n  title: string;              // 섹션 제목\n  icon?: string;              // lucide 아이콘 이름\n  collapsible?: boolean;      // 접을 수 있는지 (기본: true)\n  defaultOpen?: boolean;      // 기본 열림 상태 (기본: true)\n  items: SidebarNavItem[];\n}\n\ninterface SidebarNavItem {\n  label: string;              // 메뉴 텍스트\n  href: string;               // 링크 URL\n  icon?: string;              // lucide 아이콘 이름\n  external?: boolean;         // 외부 링크 여부\n  badge?: string;             // 배지 텍스트 (예: 'Beta', 'New')\n  children?: SidebarNavItem[]; // 하위 메뉴\n}\n```\n\n## GitHub 저장소 설정\n\n### Repository Secrets\n\nGitHub Repository Settings > Secrets에서 설정:\n\n| 변수 | 필수 | 설명 |\n|------|------|------|\n| `OPENAI_BASE_URL` | O | OpenAI 호환 API URL |\n| `OPENAI_API_KEY` | O | API 키 |\n| `OPENAI_MODEL` | O | 모델명 (예: gpt-4) |\n\n### GitHub Pages 설정\n\n1. Repository Settings > Pages\n2. Source: \"GitHub Actions\" 선택\n3. `main` 브랜치 push 시 자동 배포\n\n## 환경 변수\n\n### 빌드 시\n\n```bash\nGITHUB_TOKEN=...      # GitHub API 토큰 (선택)\n```\n\n### 개발 시\n\n`.env` 파일에 설정:\n\n```env\nVITE_GITHUB_TOKEN=...  # 개발용 토큰 (선택)\n```\n",
@@ -11,6 +41,18 @@
       ]
     },
     {
+      "title": "다이어그램 및 차트 사용 가이드",
+      "slug": "diagrams",
+      "content": "\n# 다이어그램 및 차트 사용 가이드\n\nSEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 **Mermaid**와 **Plotly**를 지원합니다.\n마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.\n\n## Mermaid 다이어그램\n\n`mermaid` 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.\n\n### 플로우차트 (Flowchart)\n\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n\n````markdown\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n````\n\n### 시퀀스 다이어그램 (Sequence Diagram)\n\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n\n````markdown\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n````\n\n### 클래스 다이어그램 (Class Diagram)\n\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n\n````markdown\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n````\n\n더 많은 문법은 [Mermaid 공식 문서](https://mermaid.js.org/intro/)를 참고하세요.\n\n## Plotly 차트\n\n`plotly` 언어로 코드 블록을 작성하고 JSON 데이터를 입력하면 인터랙티브 차트가 생성됩니다.\n데이터 구조는 [Plotly.js](https://plotly.com/javascript/) 스펙을 따릅니다.\n\n### 기본 라인 차트\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n````\n\n### 바 차트 (Bar Chart)\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n````\n\n## 문법 강조 (Syntax Highlighting)\n\n다양한 프로그래밍 언어의 문법 강조를 지원합니다.\n\n```typescript\nfunction hello(name: string) {\n  console.log(`Hello, ${name}!`);\n}\n```\n\n```python\ndef fib(n):\n    a, b = 0, 1\n    while a < n:\n        print(a, end=' ')\n        a, b = b, a+b\n```\n\n```css\n.container {\n  display: flex;\n  justify-content: center;\n}\n```\n",
+      "tags": [
+        "mermaid",
+        "plotly",
+        "차트",
+        "다이어그램",
+        "사용법"
+      ]
+    },
+    {
       "title": "Theme Customization",
       "slug": "theme-customization",
       "content": "\n# Theme Customization\n\n*This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.*\n",
@@ -18,16 +60,6 @@
         "theme",
         "customization",
         "appearance"
-      ]
-    },
-    {
-      "title": "Getting Started",
-      "slug": "getting-started",
-      "content": "\n# Getting Started\n\n*This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.*\n",
-      "tags": [
-        "getting-started",
-        "introduction",
-        "setup"
       ]
     },
     {
@@ -48,38 +80,6 @@
         "diagrams",
         "visuals",
         "documentation"
-      ]
-    },
-    {
-      "title": "LLM Workflow",
-      "slug": "llm-workflow",
-      "content": "\n# LLM Workflow\n\n*This document is a placeholder for the LLM Workflow guide. Provide step‑by‑step instructions, architecture diagrams, and usage examples here.*\n",
-      "tags": [
-        "LLM",
-        "workflow",
-        "integration"
-      ]
-    },
-    {
-      "title": "다이어그램 및 차트 사용 가이드",
-      "slug": "diagrams",
-      "content": "\n# 다이어그램 및 차트 사용 가이드\n\nSEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 **Mermaid**와 **Plotly**를 지원합니다.\n마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.\n\n## Mermaid 다이어그램\n\n`mermaid` 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.\n\n### 플로우차트 (Flowchart)\n\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n\n````markdown\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n````\n\n### 시퀀스 다이어그램 (Sequence Diagram)\n\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n\n````markdown\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n````\n\n### 클래스 다이어그램 (Class Diagram)\n\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n\n````markdown\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n````\n\n더 많은 문법은 [Mermaid 공식 문서](https://mermaid.js.org/intro/)를 참고하세요.\n\n## Plotly 차트\n\n`plotly` 언어로 코드 블록을 작성하고 JSON 데이터를 입력하면 인터랙티브 차트가 생성됩니다.\n데이터 구조는 [Plotly.js](https://plotly.com/javascript/) 스펙을 따릅니다.\n\n### 기본 라인 차트\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n````\n\n### 바 차트 (Bar Chart)\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n````\n\n## 문법 강조 (Syntax Highlighting)\n\n다양한 프로그래밍 언어의 문법 강조를 지원합니다.\n\n```typescript\nfunction hello(name: string) {\n  console.log(`Hello, ${name}!`);\n}\n```\n\n```python\ndef fib(n):\n    a, b = 0, 1\n    while a < n:\n        print(a, end=' ')\n        a, b = b, a+b\n```\n\n```css\n.container {\n  display: flex;\n  justify-content: center;\n}\n```\n",
-      "tags": [
-        "mermaid",
-        "plotly",
-        "차트",
-        "다이어그램",
-        "사용법"
-      ]
-    },
-    {
-      "title": "Configuration Guide",
-      "slug": "configuration-guide",
-      "content": "\n# Configuration Guide\n\n*This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.*\n",
-      "tags": [
-        "configuration",
-        "settings",
-        "customization"
       ]
     }
   ]
