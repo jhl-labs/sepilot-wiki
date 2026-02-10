@@ -1,12 +1,12 @@
 {
-  "collectedAt": "2026-02-10T22:17:34.144Z",
+  "collectedAt": "2026-02-10T23:48:10.359Z",
   "overview": {
-    "totalDocuments": 12,
-    "publishedDocuments": 5,
+    "totalDocuments": 13,
+    "publishedDocuments": 6,
     "draftDocuments": 7,
-    "openRequests": 7,
-    "closedRequests": 11,
-    "totalAIActions": 49
+    "openRequests": 5,
+    "closedRequests": 13,
+    "totalAIActions": 53
   },
   "activity": {
     "last1h": {
@@ -19,18 +19,18 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 17,
+      "aiActions": 21,
       "documentsCreated": 8,
-      "documentsModified": 3,
+      "documentsModified": 6,
       "tavilyApiCalls": 22,
       "tavilyResults": 62,
       "estimatedTokens": 27091,
       "totalPipelineDurationMs": 572947
     },
     "last7d": {
-      "aiActions": 23,
+      "aiActions": 27,
       "documentsCreated": 10,
-      "documentsModified": 4,
+      "documentsModified": 7,
       "tavilyApiCalls": 22,
       "tavilyResults": 62,
       "estimatedTokens": 27091,
@@ -38,6 +38,46 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-10T22:43:41.786Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-10T22:42:46.422Z",
+      "actionType": "recover",
+      "issueNumber": 149,
+      "documentTitle": "[Wiki Maintainer] 🔗 URL 리다이렉트 계획 수립",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-10T22:31:30.590Z",
+      "actionType": "recover",
+      "issueNumber": 138,
+      "documentTitle": "[Wiki Maintenance] [요청] Continuous AI in practice: What developers can automate today with agentic CI",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-10T14:40:59.055Z",
+      "actionType": "publish",
+      "issueNumber": 143,
+      "documentTitle": "Antigravity 완벽 가이드",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-10T12:48:04.303Z",
       "actionType": "generate",
@@ -197,56 +237,16 @@
       "durationMs": 73133,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3517
-    },
-    {
-      "timestamp": "2026-02-10T08:22:25.382Z",
-      "actionType": "generate",
-      "issueNumber": 134,
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 99111,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 4905
-    },
-    {
-      "timestamp": "2026-02-09T11:06:38.312Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "documentTitle": "교차 참조 업데이트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-09T10:32:23.080Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "documentTitle": "교차 참조 업데이트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-09T10:27:30.731Z",
-      "actionType": "generate",
-      "issueNumber": 120,
-      "documentTitle": "MAS (Multi Agent System)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 46,
+      "totalActions": 49,
       "totalEstimatedTokens": 27091,
       "avgDurationMs": 71618
     },
     "unknown": {
-      "totalActions": 3,
+      "totalActions": 4,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
     }
