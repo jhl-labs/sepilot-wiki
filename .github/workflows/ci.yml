@@ -105,6 +105,8 @@ jobs:
         run: npx playwright test --project=chromium
         env:
           GITHUB_REPO: ${{ github.repository }}
+          AUTH_MODE: public
+          AUTH_SECRET: e2e-test-secret-key-not-for-production
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v6
