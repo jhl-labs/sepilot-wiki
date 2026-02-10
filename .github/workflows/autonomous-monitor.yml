@@ -44,7 +44,6 @@ jobs:
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
 
       - name: Run change detector

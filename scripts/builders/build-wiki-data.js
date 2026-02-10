@@ -15,6 +15,8 @@ const WIKI_DIR = join(process.cwd(), 'wiki');
 const GUIDE_DIR = join(process.cwd(), 'guide');
 const OUTPUT_DIR = join(process.cwd(), 'public');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'wiki-data.json');
+const META_OUTPUT_FILE = join(OUTPUT_DIR, 'wiki-meta.json');
+const PAGES_OUTPUT_DIR = join(OUTPUT_DIR, 'wiki-pages');
 const GUIDE_OUTPUT_FILE = join(OUTPUT_DIR, 'guide-data.json');
 const DATA_DIR = join(OUTPUT_DIR, 'data');
 const AI_HISTORY_FILE = join(DATA_DIR, 'ai-history.json');
@@ -310,13 +312,32 @@ async function buildWikiData() {
   // public 폴더 생성
   await mkdir(OUTPUT_DIR, { recursive: true });
 
-  // JSON 파일 저장
+  // JSON 파일 저장 (기존 wiki-data.json — 하위 호환 + search-index 빌더 의존)
   const data = { pages, tree };
   await writeFile(OUTPUT_FILE, JSON.stringify(data, null, 2));
+
+  // wiki-meta.json 생성 (경량 메타데이터 — 목록/트리 표시 전용)
+  const metaPages = pages.map(({ title, slug, status, tags, lastModified, author, isDraft, isInvalid, menu }) => ({
+    title, slug, status, tags, lastModified, author, isDraft, isInvalid, menu,
+  }));
+  const metaData = { pages: metaPages, tree };
+  await writeFile(META_OUTPUT_FILE, JSON.stringify(metaData, null, 2));
+
+  // wiki-pages/{slug}.json 생성 (개별 페이지 전문)
+  await mkdir(PAGES_OUTPUT_DIR, { recursive: true });
+  for (const page of pages) {
+    // 슬래시 포함 slug는 디렉토리 구조로 생성 (예: bun/overview → wiki-pages/bun/overview.json)
+    const pageJsonPath = join(PAGES_OUTPUT_DIR, `${page.slug}.json`);
+    const pageDir = join(pageJsonPath, '..');
+    await mkdir(pageDir, { recursive: true });
+    await writeFile(pageJsonPath, JSON.stringify(page, null, 2));
+  }
 
   const totalRevisions = pages.reduce((sum, p) => sum + (p.history?.length || 0), 0);
   console.log(`✅ Wiki 데이터 빌드 완료: ${pages.length}개 문서, ${totalRevisions}개 리비전`);
   console.log(`   출력: ${OUTPUT_FILE}`);
+  console.log(`   메타: ${META_OUTPUT_FILE} (${JSON.stringify(metaData).length} bytes)`);
+  console.log(`   페이지: ${PAGES_OUTPUT_DIR}/ (${pages.length}개 파일)`);
 
   // AI History 파일이 없으면 빈 파일 생성
   await mkdir(DATA_DIR, { recursive: true });

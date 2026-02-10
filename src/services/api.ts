@@ -53,6 +53,8 @@ class TTLCache<T> {
 // 캐시 TTL 설정 (밀리초)
 const CACHE_TTL = {
   WIKI_DATA: 5 * 60 * 1000,     // 5분 - 정적 데이터
+  WIKI_META: 5 * 60 * 1000,     // 5분 - 경량 메타데이터
+  WIKI_PAGE: 5 * 60 * 1000,     // 5분 - 개별 페이지
   GUIDE_DATA: 5 * 60 * 1000,    // 5분 - 정적 데이터
   ISSUES: 2 * 60 * 1000,        // 2분 - 자주 변경될 수 있음
   AI_HISTORY: 3 * 60 * 1000,    // 3분
@@ -83,8 +85,23 @@ export class ApiServiceError extends Error {
   }
 }
 
+// wiki-meta.json의 경량 페이지 타입 (content, history 제외)
+interface WikiPageMeta {
+  title: string;
+  slug: string;
+  status?: string;
+  tags?: string[];
+  lastModified: string;
+  author?: string;
+  isDraft?: boolean;
+  isInvalid?: boolean;
+  menu?: string;
+}
+
 // TTL 기반 캐시 인스턴스들
 const wikiDataCache = new TTLCache<{ pages: WikiPage[]; tree: WikiTree[] }>(CACHE_TTL.WIKI_DATA);
+const wikiMetaCache = new TTLCache<{ pages: WikiPageMeta[]; tree: WikiTree[] }>(CACHE_TTL.WIKI_META);
+const wikiPageCaches = new Map<string, TTLCache<WikiPage>>();
 const guideDataCache = new TTLCache<{ pages: WikiPage[] }>(CACHE_TTL.GUIDE_DATA);
 const issuesDataCache = new TTLCache<{ issues: GitHubIssue[]; lastUpdated: string }>(CACHE_TTL.ISSUES);
 const aiHistoryCache = new TTLCache<AIHistory>(CACHE_TTL.AI_HISTORY);
@@ -149,6 +166,104 @@ async function loadWikiData(): Promise<{ pages: WikiPage[]; tree: WikiTree[] }> 
     }
 }
 
+// 경량 wiki 메타데이터 로드 (목록/트리 전용, content·history 제외)
+async function loadWikiMeta(): Promise<{ pages: WikiPageMeta[]; tree: WikiTree[] }> {
+    const cached = wikiMetaCache.get();
+    if (cached) {
+        return cached;
+    }
+
+    try {
+        const cacheBuster = `?v=${getCacheBuster('static')}`;
+        const baseUrl = getBaseUrl();
+        const response = await fetchWithRetry(`${baseUrl}wiki-meta.json${cacheBuster}`, undefined, {
+            maxRetries: 2,
+            initialDelay: 500,
+        });
+        if (!response.ok) {
+            if (response.status === 404) {
+                // wiki-meta.json이 없으면 기존 wiki-data.json으로 폴백
+                logger.info('wiki-meta.json 없음, wiki-data.json으로 폴백');
+                const fullData = await loadWikiData();
+                const meta = {
+                    pages: fullData.pages.map(({ title, slug, status, tags, lastModified, author, isDraft, isInvalid, menu }) => ({
+                        title, slug, status, tags, lastModified, author, isDraft, isInvalid, menu,
+                    })),
+                    tree: fullData.tree,
+                };
+                wikiMetaCache.set(meta);
+                return meta;
+            }
+            throw new ApiServiceError(
+                '위키 메타데이터를 불러오는데 실패했습니다.',
+                response.status >= 500 ? 'SERVER_ERROR' : 'NETWORK_ERROR',
+                response.status,
+                true
+            );
+        }
+        const data = await response.json();
+        wikiMetaCache.set(data);
+        return data;
+    } catch (error) {
+        if (error instanceof ApiServiceError) throw error;
+        // 네트워크 실패 시 wiki-data.json으로 폴백
+        logger.warn('wiki-meta.json 로드 실패, wiki-data.json으로 폴백', { error });
+        try {
+            const fullData = await loadWikiData();
+            const meta = {
+                pages: fullData.pages.map(({ title, slug, status, tags, lastModified, author, isDraft, isInvalid, menu }) => ({
+                    title, slug, status, tags, lastModified, author, isDraft, isInvalid, menu,
+                })),
+                tree: fullData.tree,
+            };
+            wikiMetaCache.set(meta);
+            return meta;
+        } catch {
+            throw new ApiServiceError(
+                '위키 메타데이터를 불러오는 중 오류가 발생했습니다.',
+                'NETWORK_ERROR',
+                undefined,
+                true
+            );
+        }
+    }
+}
+
+// 개별 wiki 페이지 로드 (wiki-pages/{slug}.json)
+async function loadWikiPage(slug: string): Promise<WikiPage | null> {
+    // 개별 페이지 캐시 확인
+    const pageCache = wikiPageCaches.get(slug);
+    if (pageCache) {
+        const cached = pageCache.get();
+        if (cached) return cached;
+    }
+
+    try {
+        const cacheBuster = `?v=${getCacheBuster('static')}`;
+        const baseUrl = getBaseUrl();
+        const response = await fetchWithRetry(`${baseUrl}wiki-pages/${slug}.json${cacheBuster}`, undefined, {
+            maxRetries: 1,
+            initialDelay: 300,
+        });
+        if (!response.ok) {
+            return null;
+        }
+        const page: WikiPage = await response.json();
+
+        // 캐시에 저장
+        let cache = wikiPageCaches.get(slug);
+        if (!cache) {
+            cache = new TTLCache<WikiPage>(CACHE_TTL.WIKI_PAGE);
+            wikiPageCaches.set(slug, cache);
+        }
+        cache.set(page);
+
+        return page;
+    } catch {
+        return null;
+    }
+}
+
 // 정적 guide 데이터 로드
 async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
     const cached = guideDataCache.get();
@@ -190,31 +305,19 @@ async function loadGuideData(): Promise<{ pages: WikiPage[] }> {
     }
 }
 
-// Wiki 페이지 목록 가져오기 (정적 데이터에서)
+// Wiki 페이지 목록 가져오기 (경량 메타데이터에서)
 export async function fetchWikiPages(): Promise<WikiTree[]> {
-    const data = await loadWikiData();
-    // _guide 폴더는 메인 트리에서 제외 (사이드바 별도 표시 위함)
-    // 단, build-wiki-data.js는 _guide를 포함시킬 수 있으므로 필터링 필요
-    // slug가 _guide/ 로 시작하거나 path가 _guide인 것 필터링
-    // data.tree 구조: WikiTree[]
-    // 최상위 레벨에서 _guide 폴더를 찾아 제거하거나 필터링
-
-    // _guide 폴더의 이름이 'Guide' 또는 '_guide'로 되어 있을 것.
-    // build-wiki-data.js는 폴더명을 그대로 씀 (slug relative path parts)
-    // _guide 폴더는 tree의 최상위 노드로 존재할 가능성 높음.
-    // 안전하게 필터링:
+    const data = await loadWikiMeta();
     return data.tree.filter(item => {
-        // 카테고리인 경우 path 확인
         if (item.isCategory && (item.path === '_guide' || item.name === '_guide')) return false;
-        // 페이지인 경우 slug 확인
         if (item.slug && item.slug.startsWith('_guide/')) return false;
         return true;
     });
 }
 
-// Wiki 페이지의 모든 태그와 통계 가져오기
+// Wiki 페이지의 모든 태그와 통계 가져오기 (경량 메타데이터에서)
 export async function fetchWikiTags(): Promise<TagStats[]> {
-    const data = await loadWikiData();
+    const data = await loadWikiMeta();
     const tagMap = new Map<string, { count: number; pages: { title: string; slug: string }[] }>();
 
     for (const page of data.pages) {
@@ -231,7 +334,6 @@ export async function fetchWikiTags(): Promise<TagStats[]> {
         }
     }
 
-    // 배열로 변환하고 개수 기준으로 정렬
     return Array.from(tagMap.entries())
         .map(([tag, stats]) => ({ tag, ...stats }))
         .sort((a, b) => b.count - a.count);
@@ -247,21 +349,26 @@ export async function fetchGuidePages(): Promise<WikiTree[]> {
     }));
 }
 
-// Wiki 페이지 내용 가져오기 (정적 데이터에서)
+// Wiki 페이지 내용 가져오기 (개별 JSON 우선, 폴백으로 wiki-data.json)
 export async function fetchWikiPage(slug: string): Promise<WikiPage | null> {
-    // wiki-data.json에서 먼저 찾기
+    // 1단계: 개별 페이지 JSON 시도 (wiki-pages/{slug}.json)
+    const individualPage = await loadWikiPage(slug);
+    if (individualPage) {
+        return individualPage;
+    }
+
+    // 2단계: 기존 wiki-data.json에서 폴백
     const wikiData = await loadWikiData();
     const wikiPage = wikiData.pages.find((p) => p.slug === slug);
     if (wikiPage) {
         return wikiPage;
     }
 
-    // guide-data.json에서 찾기 (guide/ 접두사 없이 저장되어 있음)
+    // 3단계: guide-data.json에서 찾기
     const guideData = await loadGuideData();
     const guideSlug = slug.startsWith('guide/') ? slug.slice(6) : slug;
     const guidePage = guideData.pages.find((p) => p.slug === guideSlug);
     if (guidePage) {
-        // slug에 guide/ 접두사 추가하여 반환
         return { ...guidePage, slug: `guide/${guidePage.slug}` };
     }
 

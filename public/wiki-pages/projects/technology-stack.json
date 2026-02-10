@@ -1,0 +1,56 @@
+{
+  "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
+  "slug": "projects/technology-stack",
+  "content": "\n## 기술 스택\n\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n\n### 프론트엔드\n- **React 18** - UI 라이브러리\n- **TypeScript** - 타입 안전성을 위한 정적 타입 언어\n- **Vite** - 빌드 도구 및 개발 서버\n- **React Router DOM** - SPA 라우팅\n- **TanStack Query (React Query)** - 서버 상태 관리\n\n### Next.js 사용 여부\n- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.\n- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\n- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n\n### 마크다운 렌더링\n- **react-markdown** - 마크다운 파싱 및 렌더링\n- **remark-gfm** - GitHub Flavored Markdown 지원\n- **rehype-raw** - HTML 태그 지원\n- **rehype-sanitize** - XSS 방지를 위한 HTML 살균\n- **react-syntax-highlighter** - 코드 구문 강조\n\n### 스타일링\n- **CSS Variables** - 테마 시스템\n- **Lucide React** - 아이콘 라이브러리\n\n### 개발 도구\n- **ESLint** - 코드 린팅\n- **Vitest** - 테스트 프레임워크\n- **Husky** - Git hooks\n\n### CI/CD\n- **GitHub Actions** - 자동화 워크플로우\n- **GitHub Pages** - 정적 사이트 호스팅\n- **Bun** - 패키지 매니저 및 런타임\n\n### AI 통합\n- **OpenAI API 호환** - LLM을 통한 문서 자동 생성\n\n## 참고 링크\n\n- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)\n",
+  "lastModified": "2026-02-09T11:06:38+00:00",
+  "author": "SEPilot AI",
+  "status": "published",
+  "isDraft": false,
+  "isInvalid": false,
+  "tags": [
+    "sepilot-wiki",
+    "기술스택",
+    "React",
+    "TypeScript",
+    "Vite"
+  ],
+  "menu": "SEPilot Wiki에 대해",
+  "history": [
+    {
+      "sha": "bfa6711",
+      "message": "🔗 교차 참조 업데이트: 2개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-09T11:06:38+00:00",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "sha": "cdc1e0b",
+      "message": "🔗 교차 참조 업데이트: 6개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-09T10:32:24+00:00",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "sha": "face820",
+      "message": "🔗 교차 참조 업데이트: 5개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-09T10:05:18+00:00",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "sha": "82a08e6",
+      "message": "chore: 초기 커밋 - SEPilot Wiki 프로젝트",
+      "author": "JHL",
+      "authorEmail": "bkperio@gmail.com",
+      "date": "2025-12-13T12:38:17+09:00",
+      "additions": 57,
+      "deletions": 0
+    }
+  ]
+}
