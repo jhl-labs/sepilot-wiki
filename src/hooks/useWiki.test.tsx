@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { useWikiPages, useWikiPage, useIssues, useSearch, useGuidePages, useAIHistory, useWikiTags } from './useWiki';
 import * as githubService from '../services/github';
+import * as searchService from '../services/search';
 import type { WikiPage, GitHubIssue, AIHistory, TagStats, WikiTree } from '../types';
 
 // Mock the github service
@@ -11,12 +12,17 @@ vi.mock('../services/github', () => ({
   fetchWikiPages: vi.fn(),
   fetchWikiPage: vi.fn(),
   fetchIssues: vi.fn(),
-  searchWiki: vi.fn(),
   fetchGuidePages: vi.fn(),
   fetchAIHistory: vi.fn(),
   fetchDocumentAIHistory: vi.fn(),
   fetchWikiTags: vi.fn(),
   fetchActionsStatus: vi.fn(),
+}));
+
+// Mock the search service
+vi.mock('../services/search', () => ({
+  searchWiki: vi.fn(),
+  getAvailableTags: vi.fn(),
 }));
 
 // 테스트용 mock 데이터 생성 헬퍼
@@ -191,7 +197,7 @@ describe('useSearch', () => {
     const mockResults: WikiPage[] = [
       createMockWikiPage({ slug: 'page1', title: '검색 결과', content: '...' }),
     ];
-    vi.mocked(githubService.searchWiki).mockResolvedValue(mockResults);
+    vi.mocked(searchService.searchWiki).mockResolvedValue(mockResults);
 
     const { result } = renderHook(() => useSearch('테스트'), {
       wrapper: createWrapper(),
@@ -202,7 +208,7 @@ describe('useSearch', () => {
     });
 
     expect(result.current.data).toEqual(mockResults);
-    expect(githubService.searchWiki).toHaveBeenCalledWith('테스트');
+    expect(searchService.searchWiki).toHaveBeenCalledWith('테스트');
   });
 
   it('검색 쿼리가 2자 미만이면 검색을 수행하지 않는다', () => {
@@ -211,7 +217,7 @@ describe('useSearch', () => {
     });
 
     expect(result.current.fetchStatus).toBe('idle');
-    expect(githubService.searchWiki).not.toHaveBeenCalled();
+    expect(searchService.searchWiki).not.toHaveBeenCalled();
   });
 
   it('빈 쿼리는 검색을 수행하지 않는다', () => {
@@ -220,7 +226,7 @@ describe('useSearch', () => {
     });
 
     expect(result.current.fetchStatus).toBe('idle');
-    expect(githubService.searchWiki).not.toHaveBeenCalled();
+    expect(searchService.searchWiki).not.toHaveBeenCalled();
   });
 });
 

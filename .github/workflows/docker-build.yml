@@ -22,6 +22,8 @@ jobs:
   docker:
     name: Build and Push Docker Image
     runs-on: jhl-space
+    # Harbor 시크릿이 설정된 경우에만 실행
+    if: ${{ secrets.HARBOR_REGISTRY != '' && secrets.HARBOR_USERNAME != '' && secrets.HARBOR_PASSWORD != '' }}
     timeout-minutes: 15
     steps:
       - name: Checkout

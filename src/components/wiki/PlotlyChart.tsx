@@ -2,6 +2,7 @@
 import { useMemo, useState } from 'react';
 import Plot from 'react-plotly.js';
 import type { Data, Layout, Config } from 'plotly.js';
+import type { PlotParams } from 'react-plotly.js';
 import { useTheme } from '../../context/ThemeContext';
 import { AlertTriangle, BarChart3 } from 'lucide-react';
 
@@ -81,11 +82,11 @@ export function PlotlyChart({ data }: PlotlyChartProps) {
         ...chartData.layout,
     };
 
-    const config: Partial<Config> = {
+    const config = {
         responsive: true,
         displayModeBar: false,
         ...chartData.config,
-    };
+    } satisfies Partial<Config> as PlotParams['config'];
 
     return (
         <div
