@@ -1,8 +1,7 @@
 /**
  * GitHub Webhook 이벤트 핸들러
  */
-import { spawn } from 'child_process';
-import { join } from 'path';
+import { exec } from 'child_process';
 
 // 이벤트 페이로드 타입
 interface IssuePayload {
@@ -203,66 +202,67 @@ function runIssueScript(
   scriptName: string,
   issueNumber: number
 ): Promise<HandlerResult> {
-  return new Promise((resolve) => {
-    const scriptPath = join(process.cwd(), 'scripts', 'issue', scriptName);
+  // 스크립트명 검증 (command injection 방지)
+  if (!/^[\w-]+\.js$/.test(scriptName)) {
+    return Promise.resolve({
+      success: false,
+      message: `잘못된 스크립트 이름: ${scriptName}`,
+    });
+  }
 
+  return new Promise((resolve) => {
     console.log(`[Webhook] 스크립트 실행: ${scriptName} #${issueNumber}`);
 
-    const child = spawn('node', [scriptPath], {
-      env: {
-        ...process.env,
-        ISSUE_NUMBER: String(issueNumber),
+    // exec로 shell 명령어 실행 (Turbopack이 파일 경로를 모듈로 해석하는 문제 우회)
+    const child = exec(
+      `node scripts/issue/${scriptName}`,
+      {
+        env: {
+          ...process.env,
+          ISSUE_NUMBER: String(issueNumber),
+        },
+        cwd: process.cwd(),
+        timeout: 5 * 60 * 1000,
+        maxBuffer: 1024 * 1024,
       },
-      cwd: process.cwd(),
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
+      (error, stdout, stderr) => {
+        if (timeoutId) clearTimeout(timeoutId);
 
-    let stdout = '';
-    let stderr = '';
-    let resolved = false;
-    let timeoutId: NodeJS.Timeout | null = null;
-    let killTimeoutId: NodeJS.Timeout | null = null;
+        if (error) {
+          if (error.killed) {
+            console.warn(`[Webhook] 스크립트 타임아웃: ${scriptName}`);
+            safeResolve({
+              success: false,
+              message: `스크립트 타임아웃: ${scriptName}`,
+            });
+          } else {
+            console.error(`[Webhook] 스크립트 실패: ${scriptName}`, stderr);
+            safeResolve({
+              success: false,
+              message: `스크립트 실행 실패: ${scriptName}`,
+              data: { issueNumber, error: stderr || stdout },
+            });
+          }
+          return;
+        }
 
-    const cleanup = () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      if (killTimeoutId) clearTimeout(killTimeoutId);
-      child.stdout.removeAllListeners();
-      child.stderr.removeAllListeners();
-      child.removeAllListeners();
-    };
-
-    const safeResolve = (result: HandlerResult) => {
-      if (resolved) return;
-      resolved = true;
-      cleanup();
-      resolve(result);
-    };
-
-    child.stdout.on('data', (data) => {
-      stdout += data.toString();
-    });
-
-    child.stderr.on('data', (data) => {
-      stderr += data.toString();
-    });
-
-    child.on('close', (code) => {
-      if (code === 0) {
         console.log(`[Webhook] 스크립트 완료: ${scriptName}`);
         safeResolve({
           success: true,
           message: `스크립트 실행 완료: ${scriptName}`,
           data: { issueNumber, output: stdout.slice(0, 500) },
         });
-      } else {
-        console.error(`[Webhook] 스크립트 실패: ${scriptName}`, stderr);
-        safeResolve({
-          success: false,
-          message: `스크립트 실행 실패: ${scriptName}`,
-          data: { issueNumber, error: stderr || stdout },
-        });
       }
-    });
+    );
+
+    let resolved = false;
+    let timeoutId: NodeJS.Timeout | null = null;
+
+    const safeResolve = (result: HandlerResult) => {
+      if (resolved) return;
+      resolved = true;
+      resolve(result);
+    };
 
     child.on('error', (error) => {
       console.error(`[Webhook] 스크립트 오류: ${scriptName}`, error);
@@ -273,25 +273,16 @@ function runIssueScript(
       });
     });
 
-    // 5분 타임아웃
+    // 안전장치: exec timeout 외 추가 5분 타임아웃
     timeoutId = setTimeout(() => {
-      console.warn(`[Webhook] 스크립트 타임아웃, SIGTERM 전송: ${scriptName}`);
-      child.kill('SIGTERM');
-
-      // SIGTERM 후 10초 대기, 여전히 실행 중이면 SIGKILL
-      killTimeoutId = setTimeout(() => {
-        if (!resolved) {
-          console.warn(`[Webhook] SIGTERM 무응답, SIGKILL 전송: ${scriptName}`);
-          child.kill('SIGKILL');
-        }
-      }, 10000);
-
-      // 타임아웃 결과 반환 (프로세스 종료와 별개로)
-      safeResolve({
-        success: false,
-        message: `스크립트 타임아웃: ${scriptName}`,
-      });
-    }, 5 * 60 * 1000);
+      if (!resolved) {
+        child.kill('SIGKILL');
+        safeResolve({
+          success: false,
+          message: `스크립트 타임아웃: ${scriptName}`,
+        });
+      }
+    }, 5.5 * 60 * 1000);
   });
 }
 

@@ -5,8 +5,7 @@
 export const runtime = 'nodejs';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { spawn } from 'child_process';
-import { join } from 'path';
+import { exec } from 'child_process';
 import { existsSync } from 'fs';
 import { checkAdminApiAuth } from '@/lib/admin-auth';
 import { SCRIPT_DEFINITIONS } from '@/lib/scripts-config';
@@ -44,7 +43,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    const scriptPath = join(process.cwd(), scriptDef.path);
+    const scriptPath = `${process.cwd()}/${scriptDef.path}`;
     if (!existsSync(scriptPath)) {
       return NextResponse.json(
         { error: `스크립트 파일이 존재하지 않음: ${scriptDef.path}` },
@@ -172,61 +171,49 @@ function runScript(
     const startTime = Date.now();
     let resolved = false;
     let timeoutId: NodeJS.Timeout | null = null;
-    let killTimeoutId: NodeJS.Timeout | null = null;
-
-    const child = spawn('node', [scriptPath], {
-      env: { ...process.env, ...envVars },
-      cwd: process.cwd(),
-      stdio: ['ignore', 'pipe', 'pipe'],
-      detached: true,
-    });
-
-    let stdout = '';
-    let stderr = '';
-
-    const cleanup = () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      if (killTimeoutId) clearTimeout(killTimeoutId);
-      child.stdout.removeAllListeners();
-      child.stderr.removeAllListeners();
-      child.removeAllListeners();
-    };
 
     const safeResolve = (result: { success: boolean; message: string; output?: string; error?: string }) => {
       if (resolved) return;
       resolved = true;
-      cleanup();
+      if (timeoutId) clearTimeout(timeoutId);
       resolve({ ...result, duration: Date.now() - startTime });
     };
 
-    child.stdout.on('data', (data) => {
-      if (stdout.length < MAX_OUTPUT_SIZE) {
-        stdout += data.toString();
-      }
-    });
+    // exec로 실행 (Turbopack spawn 경로 분석 우회)
+    const child = exec(
+      `node "${scriptPath}"`,
+      {
+        env: { ...process.env, ...envVars },
+        cwd: process.cwd(),
+        timeout: 5 * 60 * 1000,
+        maxBuffer: MAX_OUTPUT_SIZE,
+      },
+      (error, stdout, stderr) => {
+        if (error) {
+          if (error.killed) {
+            safeResolve({
+              success: false,
+              message: '스크립트 실행 타임아웃 (5분)',
+              output: maskSensitiveInfo(stdout),
+            });
+          } else {
+            safeResolve({
+              success: false,
+              message: `스크립트 실행 실패 (exit code: ${error.code})`,
+              output: maskSensitiveInfo(stdout),
+              error: maskSensitiveInfo(stderr || stdout),
+            });
+          }
+          return;
+        }
 
-    child.stderr.on('data', (data) => {
-      if (stderr.length < MAX_OUTPUT_SIZE) {
-        stderr += data.toString();
-      }
-    });
-
-    child.on('close', (code) => {
-      if (code === 0) {
         safeResolve({
           success: true,
           message: '스크립트 실행 완료',
           output: maskSensitiveInfo(stdout),
         });
-      } else {
-        safeResolve({
-          success: false,
-          message: `스크립트 실행 실패 (exit code: ${code})`,
-          output: maskSensitiveInfo(stdout),
-          error: maskSensitiveInfo(stderr || stdout),
-        });
       }
-    });
+    );
 
     child.on('error', (err) => {
       safeResolve({
@@ -236,35 +223,15 @@ function runScript(
       });
     });
 
-    // 프로세스 그룹 kill 헬퍼 (detached 모드에서 자식 프로세스 포함 종료)
-    const killProcessGroup = (signal: NodeJS.Signals) => {
-      try {
-        if (child.pid) {
-          process.kill(-child.pid, signal);
-        }
-      } catch {
-        // 이미 종료된 프로세스 무시
-        child.kill(signal);
-      }
-    };
-
-    // 5분 타임아웃
+    // 안전장치: exec timeout 외 추가 타임아웃
     timeoutId = setTimeout(() => {
-      // 파이프 명시적 정리
-      child.stdout.destroy();
-      child.stderr.destroy();
-      killProcessGroup('SIGTERM');
-      killTimeoutId = setTimeout(() => {
-        if (!resolved) {
-          killProcessGroup('SIGKILL');
-        }
-      }, 10000);
-
-      safeResolve({
-        success: false,
-        message: '스크립트 실행 타임아웃 (5분)',
-        output: maskSensitiveInfo(stdout),
-      });
-    }, 5 * 60 * 1000);
+      if (!resolved) {
+        child.kill('SIGKILL');
+        safeResolve({
+          success: false,
+          message: '스크립트 실행 타임아웃 (5분)',
+        });
+      }
+    }, 5.5 * 60 * 1000);
   });
 }
