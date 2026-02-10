@@ -1,0 +1,19 @@
+---
+# redirects.yml
+# 301 리다이렉트 매핑 파일
+# 아래 예시는 이전에 이동된 문서들의 기존 URL과 새로운 URL을 매핑합니다.
+# 실제 이동된 문서 경로에 맞게 수정해 주세요.
+
+redirects:
+  # 예시 매핑
+  - from: "/openclaw.md"
+    to:   "/guides/openclaw.md"
+  - from: "/mcp-model-context-protocol.md"
+    to:   "/reference/mcp-model-context-protocol.md"
+  - from: "/claude-code.md"
+    to:   "/guides/claude-code.md"
+  - from: "/ingress-nginx-deprecation-guide.md"
+    to:   "/troubleshooting/ingress-nginx-deprecation-guide.md"
+
+# CI 파이프라인에서 이 파일을 읽어 301 리다이렉트가 올바르게 설정되었는지 검증합니다.
+---
