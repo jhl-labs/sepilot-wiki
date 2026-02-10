@@ -2,14 +2,15 @@
   "pages": [
     {
       "title": "Kubernetes 버전별 릴리즈 노트",
-      "slug": "kuberentes",
+      "slug": "kubernetes-release-notes",
       "status": "draft",
       "tags": [
         "Kubernetes",
         "Release Notes",
-        "Guide"
+        "Guide",
+        "release-notes"
       ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
+      "lastModified": "2026-02-10T12:09:41.935Z",
       "author": "SEPilot AI",
       "isDraft": true,
       "isInvalid": false
@@ -26,9 +27,26 @@
         "A2A",
         "LLM"
       ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
+      "lastModified": "2026-02-10T10:12:59Z",
       "author": "SEPilot AI",
       "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+      "slug": "ingress-nginx-deprecation-guide",
+      "status": "draft",
+      "tags": [
+        "Ingress",
+        "NGINX",
+        "Kubernetes",
+        "Migration",
+        "Security",
+        "guide"
+      ],
+      "lastModified": "2026-02-10T12:09:41.967Z",
+      "author": "SEPilot AI",
+      "isDraft": true,
       "isInvalid": false
     },
     {
@@ -41,45 +59,13 @@
         "Anthropic",
         "AI Integration",
         "JSON-RPC",
-        "SDK"
+        "SDK",
+        "llm"
       ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
+      "lastModified": "2026-02-10T08:33:07Z",
       "author": "SEPilot AI",
       "isDraft": true,
       "isInvalid": false
-    },
-    {
-      "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
-      "slug": "ingress-nginx-statement-from-the-kubernetes-steeri",
-      "status": "draft",
-      "tags": [
-        "Ingress",
-        "NGINX",
-        "Kubernetes",
-        "Migration",
-        "Security"
-      ],
-      "lastModified": "2026-02-10T12:08:22.662Z",
-      "author": "SEPilot AI",
-      "isDraft": true,
-      "isInvalid": false
-    },
-    {
-      "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-      "slug": "projects/technology-stack",
-      "status": "published",
-      "tags": [
-        "sepilot-wiki",
-        "기술스택",
-        "React",
-        "TypeScript",
-        "Vite"
-      ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false,
-      "menu": "SEPilot Wiki에 대해"
     },
     {
       "title": "SEPilot Desktop 소개",
@@ -89,28 +75,31 @@
         "SEPilot",
         "Desktop",
         "LLM",
-        "Project"
+        "Project",
+        "ai"
       ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
-      "author": "JHL",
+      "lastModified": "2026-02-09T10:32:24Z",
+      "author": "github-actions[bot]",
       "isDraft": true,
       "isInvalid": false
     },
     {
-      "title": "bun과 pnpm, npm의 차이",
-      "slug": "bun/comparison-pnpm-npm",
+      "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
+      "slug": "projects/sepilot-wiki-technology-stack",
       "status": "published",
       "tags": [
-        "bun",
-        "pnpm",
-        "npm",
-        "비교",
-        "가이드"
+        "sepilot-wiki",
+        "기술스택",
+        "React",
+        "TypeScript",
+        "Vite",
+        "frontend"
       ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
-      "author": "JHL",
+      "lastModified": "2026-02-10T12:09:41.994Z",
+      "author": "SEPilot AI",
       "isDraft": false,
-      "isInvalid": false
+      "isInvalid": false,
+      "menu": "SEPilot Wiki에 대해"
     },
     {
       "title": "bun 이란?",
@@ -121,26 +110,44 @@
         "npm",
         "yarn",
         "패키지 매니저",
-        "가이드"
+        "가이드",
+        "runtime"
       ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
+      "lastModified": "2026-02-09T10:32:24Z",
       "author": "SEPilot AI",
       "isDraft": false,
       "isInvalid": false
     },
     {
       "title": "GitHub Actions로 bun을 쓰는 방법",
-      "slug": "bun/github-actions-setup",
+      "slug": "bun/bun-github-actions-setup",
       "status": "published",
       "tags": [
         "github-actions",
         "bun",
         "CI",
         "CI/CD",
-        "node-alternative"
+        "node-alternative",
+        "automation"
       ],
-      "lastModified": "2026-02-10T20:55:40+09:00",
+      "lastModified": "2026-02-10T12:09:42.008Z",
       "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "bun과 pnpm, npm의 차이",
+      "slug": "bun/bun-pnpm-npm-comparison",
+      "status": "published",
+      "tags": [
+        "bun",
+        "pnpm",
+        "npm",
+        "비교",
+        "가이드",
+        "comparison"
+      ],
+      "lastModified": "2026-02-10T12:09:42.013Z",
       "isDraft": false,
       "isInvalid": false
     }
@@ -157,11 +164,11 @@
         },
         {
           "title": "bun과 pnpm, npm의 차이",
-          "slug": "bun/comparison-pnpm-npm"
+          "slug": "bun/bun-pnpm-npm-comparison"
         },
         {
           "title": "GitHub Actions로 bun을 쓰는 방법",
-          "slug": "bun/github-actions-setup"
+          "slug": "bun/bun-github-actions-setup"
         }
       ]
     },
@@ -176,18 +183,18 @@
         },
         {
           "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-          "slug": "projects/technology-stack",
+          "slug": "projects/sepilot-wiki-technology-stack",
           "menu": "SEPilot Wiki에 대해"
         }
       ]
     },
     {
       "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
-      "slug": "ingress-nginx-statement-from-the-kubernetes-steeri"
+      "slug": "ingress-nginx-deprecation-guide"
     },
     {
       "title": "Kubernetes 버전별 릴리즈 노트",
-      "slug": "kuberentes"
+      "slug": "kubernetes-release-notes"
     },
     {
       "title": "MAS (Multi Agent System)",

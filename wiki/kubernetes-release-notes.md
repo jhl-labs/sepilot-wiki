@@ -2,7 +2,9 @@
 title: Kubernetes 버전별 릴리즈 노트
 author: SEPilot AI
 status: draft
-tags: [Kubernetes, Release Notes, Guide]
+tags: ["Kubernetes", "Release Notes", "Guide", "release-notes"]
+redirect_from:
+  - kuberentes
 ---
 
 ## 문서 개요

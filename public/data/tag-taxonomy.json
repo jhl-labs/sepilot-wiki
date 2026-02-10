@@ -1,0 +1,465 @@
+{
+  "generatedAt": "2026-02-10T12:09:41.896Z",
+  "model": "gpt-oss:120b-cloud",
+  "totalTags": 37,
+  "merges": [
+    {
+      "target": "guide",
+      "sources": [
+        "가이드"
+      ],
+      "reason": "Same concept in different language; unify to English lowercase tag."
+    },
+    {
+      "target": "package-manager",
+      "sources": [
+        "패키지 매니저"
+      ],
+      "reason": "Korean tag for package manager; consolidate under an English, lowercase tag."
+    },
+    {
+      "target": "comparison",
+      "sources": [
+        "비교"
+      ],
+      "reason": "Korean tag meaning “comparison”; merge into the English, lowercase tag."
+    }
+  ],
+  "suggestions": [
+    {
+      "document": "kubernetes-release-notes.md",
+      "currentTags": [
+        "kubernetes",
+        "release notes",
+        "guide"
+      ],
+      "suggestedTags": [
+        "release-notes"
+      ],
+      "reason": "Normalize the release‑notes tag to a hyphenated form for consistency with other tags."
+    },
+    {
+      "document": "ingress-nginx-deprecation-guide.md",
+      "currentTags": [
+        "ingress",
+        "nginx",
+        "kubernetes",
+        "migration",
+        "security"
+      ],
+      "suggestedTags": [
+        "guide"
+      ],
+      "reason": "The file is a migration guide; adding the generic guide tag improves discoverability."
+    },
+    {
+      "document": "mcp-model-context-protocol.md",
+      "currentTags": [
+        "mcp",
+        "model context protocol",
+        "anthropic",
+        "ai integration",
+        "json-rpc",
+        "sdk"
+      ],
+      "suggestedTags": [
+        "llm"
+      ],
+      "reason": "The protocol is designed for LLMs; adding the LLM tag helps users interested in language‑model integrations."
+    },
+    {
+      "document": "projects/sepilot-desktop.md",
+      "currentTags": [
+        "sepilot",
+        "desktop",
+        "llm",
+        "project"
+      ],
+      "suggestedTags": [
+        "ai"
+      ],
+      "reason": "SEPilot Desktop is an AI‑powered application; the AI tag captures that core characteristic."
+    },
+    {
+      "document": "projects/sepilot-wiki-technology-stack.md",
+      "currentTags": [
+        "sepilot-wiki",
+        "기술스택",
+        "react",
+        "typescript",
+        "vite"
+      ],
+      "suggestedTags": [
+        "frontend"
+      ],
+      "reason": "All listed technologies belong to the frontend stack; a generic frontend tag aids broader searches."
+    },
+    {
+      "document": "bun/overview.md",
+      "currentTags": [
+        "bun",
+        "npm",
+        "yarn",
+        "package-manager",
+        "guide"
+      ],
+      "suggestedTags": [
+        "runtime"
+      ],
+      "reason": "The overview discusses bun as a JavaScript runtime; adding a runtime tag clarifies its role."
+    },
+    {
+      "document": "bun/bun-github-actions-setup.md",
+      "currentTags": [
+        "github-actions",
+        "bun",
+        "ci",
+        "ci/cd",
+        "node-alternative"
+      ],
+      "suggestedTags": [
+        "automation"
+      ],
+      "reason": "The article describes CI automation with GitHub Actions; an automation tag captures this theme."
+    },
+    {
+      "document": "bun/bun-pnpm-npm-comparison.md",
+      "currentTags": [
+        "bun",
+        "pnpm",
+        "npm",
+        "comparison",
+        "guide"
+      ],
+      "suggestedTags": [
+        "comparison"
+      ],
+      "reason": "Normalize the Korean ‘비교’ tag to the English ‘comparison’ for consistency."
+    }
+  ],
+  "taxonomy": {
+    "kubernetes": [
+      "kubernetes",
+      "ingress",
+      "nginx",
+      "migration",
+      "security"
+    ],
+    "ai": [
+      "ai",
+      "llm",
+      "multi-agent",
+      "agentic-ai",
+      "mcp",
+      "anthropic",
+      "ai integration",
+      "json-rpc",
+      "sdk",
+      "sepilot"
+    ],
+    "tool": [
+      "bun",
+      "npm",
+      "yarn",
+      "pnpm",
+      "github-actions",
+      "ci",
+      "ci/cd",
+      "node-alternative",
+      "package-manager",
+      "runtime",
+      "automation",
+      "comparison"
+    ],
+    "project": [
+      "sepilot",
+      "desktop",
+      "project",
+      "sepilot-wiki",
+      "기술스택"
+    ],
+    "frontend": [
+      "react",
+      "typescript",
+      "vite",
+      "frontend"
+    ],
+    "guide": [
+      "guide",
+      "release notes",
+      "release-notes"
+    ],
+    "documentation": [
+      "release notes",
+      "release-notes"
+    ]
+  },
+  "tagStats": [
+    {
+      "tag": "Kubernetes",
+      "count": 2,
+      "documents": [
+        "kubernetes-release-notes.md",
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "Release Notes",
+      "count": 1,
+      "documents": [
+        "kubernetes-release-notes.md"
+      ]
+    },
+    {
+      "tag": "Guide",
+      "count": 1,
+      "documents": [
+        "kubernetes-release-notes.md"
+      ]
+    },
+    {
+      "tag": "Multi-Agent",
+      "count": 1,
+      "documents": [
+        "mas-multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "AI",
+      "count": 1,
+      "documents": [
+        "mas-multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "Agentic-AI",
+      "count": 1,
+      "documents": [
+        "mas-multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "MCP",
+      "count": 2,
+      "documents": [
+        "mas-multi-agent-system.md",
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "A2A",
+      "count": 1,
+      "documents": [
+        "mas-multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "LLM",
+      "count": 2,
+      "documents": [
+        "mas-multi-agent-system.md",
+        "projects/sepilot-desktop.md"
+      ]
+    },
+    {
+      "tag": "Ingress",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "NGINX",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "Migration",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "Security",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "Model Context Protocol",
+      "count": 1,
+      "documents": [
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "Anthropic",
+      "count": 1,
+      "documents": [
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "AI Integration",
+      "count": 1,
+      "documents": [
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "JSON-RPC",
+      "count": 1,
+      "documents": [
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "SDK",
+      "count": 1,
+      "documents": [
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "SEPilot",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-desktop.md"
+      ]
+    },
+    {
+      "tag": "Desktop",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-desktop.md"
+      ]
+    },
+    {
+      "tag": "Project",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-desktop.md"
+      ]
+    },
+    {
+      "tag": "sepilot-wiki",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-wiki-technology-stack.md"
+      ]
+    },
+    {
+      "tag": "기술스택",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-wiki-technology-stack.md"
+      ]
+    },
+    {
+      "tag": "React",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-wiki-technology-stack.md"
+      ]
+    },
+    {
+      "tag": "TypeScript",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-wiki-technology-stack.md"
+      ]
+    },
+    {
+      "tag": "Vite",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-wiki-technology-stack.md"
+      ]
+    },
+    {
+      "tag": "bun",
+      "count": 3,
+      "documents": [
+        "bun/overview.md",
+        "bun/bun-github-actions-setup.md",
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "npm",
+      "count": 2,
+      "documents": [
+        "bun/overview.md",
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "yarn",
+      "count": 1,
+      "documents": [
+        "bun/overview.md"
+      ]
+    },
+    {
+      "tag": "패키지 매니저",
+      "count": 1,
+      "documents": [
+        "bun/overview.md"
+      ]
+    },
+    {
+      "tag": "가이드",
+      "count": 2,
+      "documents": [
+        "bun/overview.md",
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "github-actions",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "CI",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "CI/CD",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "node-alternative",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "pnpm",
+      "count": 1,
+      "documents": [
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "비교",
+      "count": 1,
+      "documents": [
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    }
+  ]
+}

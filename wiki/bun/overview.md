@@ -2,7 +2,7 @@
 title: bun 이란?
 author: SEPilot AI
 status: published
-tags: [bun, npm, yarn, 패키지 매니저, 가이드]
+tags: ["bun", "npm", "yarn", "패키지 매니저", "가이드", "runtime"]
 redirect_from:
   - bun-bun-overview
   - bun-overview

@@ -2,12 +2,13 @@
 title: "bun과 pnpm, npm의 차이"
 description: "bun을 중심으로 pnpm과 npm의 차이점을 비교하는 가이드입니다. Node.js(TypeScript) 개발자를 위한 내용입니다."
 category: "Guide"
-tags: ["bun", "pnpm", "npm", "비교", "가이드"]
+tags: ["bun", "pnpm", "npm", "비교", "가이드", "comparison"]
 status: "published"
 issueNumber: 0
 createdAt: "2025-12-05T09:30:00Z"
 updatedAt: "2025-12-05T09:30:00Z"
 redirect_from:
+  - bun-comparison-pnpm-npm
   - bun-bun-comparison-pnpm-npm
   - bun-comparison-pnpm-npm
   - bun-pnpm-npm-comparison

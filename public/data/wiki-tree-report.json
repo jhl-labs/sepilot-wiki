@@ -1,123 +1,120 @@
 {
-  "timestamp": "2025-12-08T12:07:33.487Z",
+  "timestamp": "2026-02-10T12:09:10.603Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "The wiki consists of 13 markdown files organized into three top‑level directories (projects, guide, bun). Most files follow the naming convention, but there are several duplicate/overlapping documents and many placeholder pages that need attention. Tag syntax and status values are inconsistent, and a few documents are drafts or have an unknown status.",
-    "totalDocuments": 13,
+    "summary": "9개의 문서가 3개의 상위 카테고리(root, projects, bun)로 흩어져 있습니다. Kubernetes·AI 관련 문서는 루트에 그대로 놓여 있어 주제별 폴더가 부족합니다. 파일명은 영문 슬러그 규칙을 따르지 않아 URL 일관성이 떨어집니다. 중복 문서는 없으며, 대부분의 파일은 올바른 디렉터리에 위치하고 있습니다.",
+    "totalDocuments": 9,
     "categories": [
+      "kubernetes",
+      "ai",
       "projects",
-      "guide",
       "bun"
     ],
     "issues": [
-      "Duplicate content: `guide/diagrams-and-charts.md` and `guide/diagrams-guide.md` cover the same topic.",
-      "Duplicate content: `guide/configuration.md` and `guide/configuration‑guide.md` overlap.",
-      "Many placeholder pages (theme‑customization, getting‑started, diagrams‑guide, llm‑workflow, configuration‑guide) contain only a short stub.",
-      "Inconsistent status values (published, draft, unknown).",
-      "Tag fields are not uniform – some are JSON arrays, others are plain strings.",
-      "No `home.md` at the repository root (required by the guidelines)."
+      "루트에 Kubernetes·AI 문서가 혼재해 주제별 탐색이 어려움",
+      "파일명에 오탈자·비표준 슬러그 사용"
     ]
   },
   "suggestedStructure": {
-    "projects": [
-      "technology-stack.md",
-      "desktop/sepilot-desktop.md"
+    "kubernetes": [
+      "kubernetes-release-notes.md",
+      "ingress-nginx-deprecation-guide.md"
     ],
-    "guide": [
-      "getting-started.md",
-      "theme-customization.md",
-      "faq.md",
-      "configuration.md",
-      "diagrams.md",
-      "llm-workflow.md"
+    "ai": [
+      "multi-agent-system.md",
+      "mcp-model-context-protocol.md"
+    ],
+    "projects": [
+      "sepilot-wiki-technology-stack.md",
+      "sepilot-desktop.md"
     ],
     "bun": [
-      "overview.md",
-      "comparison-pnpm-npm.md",
-      "github-actions-setup.md"
+      "bun-overview.md",
+      "bun-pnpm-npm-comparison.md",
+      "bun-github-actions-setup.md"
     ]
   },
   "results": {
     "appliedActions": 5,
     "skippedActions": 4,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 4
+    "createdIssues": 1
   },
   "actions": {
     "applied": [
       {
         "type": "rename",
         "priority": "high",
-        "source": "guide/diagrams-and-charts.md",
-        "target": "guide/diagrams.md",
-        "reason": "Standardise the filename and prepare for merging the duplicate diagram guide.",
+        "source": "kuberentes.md",
+        "target": "kubernetes-release-notes.md",
+        "reason": "파일명 오탈자 및 슬러그 규칙 위반",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "low",
-        "source": "guide/theme-customization.md",
-        "target": "guide/theme-customization.md",
-        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "source": "ingress-nginx-statement-from-the-kubernetes-steeri.md",
+        "target": "ingress-nginx-deprecation-guide.md",
+        "reason": "파일명이 지나치게 길고 오타 포함, 슬러그 규칙에 맞게 간결화",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "low",
-        "source": "guide/getting-started.md",
-        "target": "guide/getting-started.md",
-        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "source": "projects/technology-stack.md",
+        "target": "projects/sepilot-wiki-technology-stack.md",
+        "reason": "프로젝트 기술 스택 문서가 SEPilot Wiki와 연관됨을 명확히",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "low",
-        "source": "guide/llm-workflow.md",
-        "target": "guide/llm-workflow.md",
-        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "source": "bun/comparison-pnpm-npm.md",
+        "target": "bun/bun-pnpm-npm-comparison.md",
+        "reason": "bun 폴더 내 파일명을 일관된 \"bun-...\" 형태로 통일",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "low",
         "source": "bun/github-actions-setup.md",
-        "target": "bun/github-actions-setup.md",
-        "reason": "File already follows slug rules – keep but mark for content expansion.",
+        "target": "bun/bun-github-actions-setup.md",
+        "reason": "bun 폴더 내 파일명을 일관된 \"bun-...\" 형태로 통일",
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "delete",
-        "priority": "high",
-        "source": "guide/diagrams-guide.md",
-        "target": "",
-        "reason": "Duplicate of the diagram guide – will be merged into `guide/diagrams.md`.",
-        "autoApply": true
-      },
-      {
-        "type": "delete",
-        "priority": "high",
-        "source": "guide/configuration-guide.md",
-        "target": "",
-        "reason": "Duplicate of the detailed configuration guide already present as `guide/configuration.md`.",
-        "autoApply": true
-      },
-      {
-        "type": "create_category",
+        "type": "move",
         "priority": "medium",
-        "source": "",
-        "target": "guide/diagrams",
-        "reason": "If future detailed sub‑pages for diagrams are added, a dedicated sub‑directory keeps the guide tidy.",
+        "source": "kubernetes-release-notes.md",
+        "target": "kubernetes/kubernetes-release-notes.md",
+        "reason": "Kubernetes 관련 문서를 전용 폴더로 이동해 주제별 구조화",
         "autoApply": false
       },
       {
         "type": "move",
+        "priority": "medium",
+        "source": "ingress-nginx-deprecation-guide.md",
+        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
+        "reason": "Ingress NGINX 은퇴 가이드를 Kubernetes 폴더에 배치",
+        "autoApply": false
+      },
+      {
+        "type": "rename",
         "priority": "low",
-        "source": "projects/sepilot-desktop.md",
-        "target": "projects/desktop/sepilot-desktop.md",
-        "reason": "Separate desktop‑related docs into their own sub‑folder for better scalability.",
+        "source": "mas-multi-agent-system.md",
+        "target": "ai/multi-agent-system.md",
+        "reason": "AI 주제 폴더에 맞게 경로와 슬러그 정리",
+        "autoApply": false
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "mcp-model-context-protocol.md",
+        "target": "ai/mcp-model-context-protocol.md",
+        "reason": "AI·LLM 프로토콜 문서를 AI 폴더로 이동 및 슬러그 정리",
         "autoApply": false
       }
     ],
@@ -125,24 +122,9 @@
   },
   "createdIssues": [
     {
-      "number": 49,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/49",
-      "title": "Add a root `home.md` page"
-    },
-    {
-      "number": 50,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/50",
-      "title": "Standardise tag format across all documents"
-    },
-    {
-      "number": 51,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/51",
-      "title": "Review and publish draft/unknown status documents"
-    },
-    {
-      "number": 52,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/52",
-      "title": "Merge duplicate diagram and configuration guides"
+      "number": 139,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/139",
+      "title": "루트 디렉터리 정리 및 주제별 폴더 생성 필요"
     }
   ]
 }

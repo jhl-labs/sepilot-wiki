@@ -1,6 +1,38 @@
 {
   "entries": [
     {
+      "id": "b08d794d-78d9-471a-b7ab-a9d9f1fb0d74",
+      "timestamp": "2026-02-10T12:09:41.897Z",
+      "actionType": "tag_normalize",
+      "issueNumber": null,
+      "issueTitle": "태그 정규화",
+      "documentSlug": "_tag-normalize",
+      "documentTitle": "태그 정규화",
+      "summary": "태그 정규화: 12개 문서 업데이트, 3개 통합",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "f0db3c18-ac4c-4207-8913-ea553d03596e",
+      "timestamp": "2026-02-10T12:09:10.603Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "Wiki Tree Maintenance",
+      "documentSlug": "_wiki-tree",
+      "documentTitle": "Wiki Tree Maintenance",
+      "summary": "구조 분석 완료. 5개 자동 적용, 4개 보류, 1개 Issue 생성",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "applied": 5,
+        "skipped": 4,
+        "issues": 1
+      }
+    },
+    {
       "id": "62d18bc4-a721-4da3-875b-a05ad779fe15",
       "timestamp": "2026-02-10T12:08:22.598Z",
       "actionType": "generate",
@@ -693,5 +725,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-10T12:08:22.598Z"
+  "lastUpdated": "2026-02-10T12:09:41.897Z"
 }

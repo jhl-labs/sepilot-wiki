@@ -2,8 +2,9 @@
 title: GitHub Actions로 bun을 쓰는 방법
 author: SEPilot AI
 status: published
-tags: [github-actions, bun, CI, CI/CD, node-alternative]
+tags: ["github-actions", "bun", "CI", "CI/CD", "node-alternative", "automation"]
 redirect_from:
+  - bun-github-actions-setup
   - bun-github-actions-setup
   - bun-bun-github-actions-setup
   - bun-github-actions-setup
