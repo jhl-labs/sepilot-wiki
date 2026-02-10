@@ -22,8 +22,8 @@ export default defineConfig({
 
   // 전역 설정
   use: {
-    // 기본 URL (로컬 개발 서버)
-    baseURL: 'http://localhost:5173',
+    // 기본 URL (Next.js 개발 서버)
+    baseURL: 'http://localhost:3000',
 
     // 트레이스 수집 (실패 시에만)
     trace: 'on-first-retry',
@@ -59,8 +59,8 @@ export default defineConfig({
 
   // 로컬 개발 서버 자동 시작
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
+    command: 'bun run dev',
+    url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },

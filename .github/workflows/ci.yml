@@ -103,6 +103,8 @@ jobs:
 
       - name: Run E2E tests
         run: npx playwright test --project=chromium
+        env:
+          GITHUB_REPO: ${{ github.repository }}
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v6
