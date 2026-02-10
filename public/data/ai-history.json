@@ -1,6 +1,43 @@
 {
   "entries": [
     {
+      "id": "33d24595-8289-4f29-87d4-d64cd6aaa99d",
+      "timestamp": "2026-02-10T12:25:37.283Z",
+      "actionType": "generate",
+      "issueNumber": 141,
+      "issueTitle": "Claude Code 릴리즈 히스토리 상세 가이드",
+      "documentSlug": "claude-code",
+      "documentTitle": "Claude Code 릴리즈 히스토리 상세 가이드",
+      "summary": "새 문서 \"Claude Code 릴리즈 히스토리 상세 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3094
+            },
+            {
+              "step": "outline",
+              "durationMs": 5771
+            },
+            {
+              "step": "write",
+              "durationMs": 27685
+            },
+            {
+              "step": "review",
+              "durationMs": 5177
+            }
+          ],
+          "totalDurationMs": 41728,
+          "researchSources": 10
+        }
+      }
+    },
+    {
       "id": "5a7f8737-c492-4753-b538-043a12511173",
       "timestamp": "2026-02-10T12:15:56.053Z",
       "actionType": "tag_normalize",
@@ -771,5 +808,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-10T12:15:56.053Z"
+  "lastUpdated": "2026-02-10T12:25:37.283Z"
 }
