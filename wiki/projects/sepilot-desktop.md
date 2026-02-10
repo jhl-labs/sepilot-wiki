@@ -2,12 +2,13 @@
 title: "SEPilot Desktop 소개"
 description: "오픈소스 LLM 데스크톱 애플리케이션 SEPilot Desktop의 주요 기능과 사용 방법을 안내합니다."
 category: "Guide"
-tags: ["SEPilot", "Desktop", "LLM", "Project", "ai"]
+tags: ["SEPilot", "Desktop", "LLM", "Project", "ai", "desktop-app", "application", "ai-assistant"]
 status: "draft"
 issueNumber: 0
 createdAt: "2025-12-06T05:45:00Z"
 updatedAt: "2025-12-06T05:45:00Z"
 redirect_from:
+  - projects-sepilot-desktop
   - projects-sepilot-desktop-introduction
   - projects-desktop-introduction
   - projects-desktop-intro

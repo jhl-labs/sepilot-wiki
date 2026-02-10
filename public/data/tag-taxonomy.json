@@ -1,28 +1,21 @@
 {
-  "generatedAt": "2026-02-10T12:09:41.896Z",
+  "generatedAt": "2026-02-10T12:15:56.052Z",
   "model": "gpt-oss:120b-cloud",
-  "totalTags": 37,
+  "totalTags": 42,
   "merges": [
     {
       "target": "guide",
       "sources": [
         "가이드"
       ],
-      "reason": "Same concept in different language; unify to English lowercase tag."
-    },
-    {
-      "target": "package-manager",
-      "sources": [
-        "패키지 매니저"
-      ],
-      "reason": "Korean tag for package manager; consolidate under an English, lowercase tag."
+      "reason": "Korean duplicate of the English tag “guide”."
     },
     {
       "target": "comparison",
       "sources": [
         "비교"
       ],
-      "reason": "Korean tag meaning “comparison”; merge into the English, lowercase tag."
+      "reason": "Korean duplicate of the English tag “comparison”."
     }
   ],
   "suggestions": [
@@ -31,12 +24,13 @@
       "currentTags": [
         "kubernetes",
         "release notes",
-        "guide"
+        "버전"
       ],
       "suggestedTags": [
-        "release-notes"
+        "version",
+        "changelog"
       ],
-      "reason": "Normalize the release‑notes tag to a hyphenated form for consistency with other tags."
+      "reason": "Add the English equivalent of “버전” for consistency and a generic “changelog” tag that describes release‑note documents."
     },
     {
       "document": "ingress-nginx-deprecation-guide.md",
@@ -45,12 +39,16 @@
         "nginx",
         "kubernetes",
         "migration",
-        "security"
-      ],
-      "suggestedTags": [
+        "security",
         "guide"
       ],
-      "reason": "The file is a migration guide; adding the generic guide tag improves discoverability."
+      "suggestedTags": [
+        "deprecation",
+        "k8s",
+        "networking",
+        "load-balancer"
+      ],
+      "reason": "The guide is about deprecating Ingress‑NGINX; add explicit deprecation, the common abbreviation “k8s”, and broader networking tags."
     },
     {
       "document": "mcp-model-context-protocol.md",
@@ -60,12 +58,15 @@
         "anthropic",
         "ai integration",
         "json-rpc",
-        "sdk"
-      ],
-      "suggestedTags": [
+        "sdk",
         "llm"
       ],
-      "reason": "The protocol is designed for LLMs; adding the LLM tag helps users interested in language‑model integrations."
+      "suggestedTags": [
+        "protocol",
+        "open-standard",
+        "ai"
+      ],
+      "reason": "Highlight that MCP is a protocol and an open standard, and add the generic AI tag for broader discoverability."
     },
     {
       "document": "projects/sepilot-desktop.md",
@@ -73,12 +74,15 @@
         "sepilot",
         "desktop",
         "llm",
-        "project"
-      ],
-      "suggestedTags": [
+        "project",
         "ai"
       ],
-      "reason": "SEPilot Desktop is an AI‑powered application; the AI tag captures that core characteristic."
+      "suggestedTags": [
+        "desktop-app",
+        "application",
+        "ai-assistant"
+      ],
+      "reason": "Clarify that the artifact is a desktop application and that it functions as an AI‑assistant."
     },
     {
       "document": "projects/sepilot-wiki-technology-stack.md",
@@ -87,26 +91,15 @@
         "기술스택",
         "react",
         "typescript",
-        "vite"
-      ],
-      "suggestedTags": [
+        "vite",
         "frontend"
       ],
-      "reason": "All listed technologies belong to the frontend stack; a generic frontend tag aids broader searches."
-    },
-    {
-      "document": "bun/overview.md",
-      "currentTags": [
-        "bun",
-        "npm",
-        "yarn",
-        "package-manager",
-        "guide"
-      ],
       "suggestedTags": [
-        "runtime"
+        "javascript",
+        "web",
+        "technology-stack"
       ],
-      "reason": "The overview discusses bun as a JavaScript runtime; adding a runtime tag clarifies its role."
+      "reason": "Add generic technology‑stack, language, and domain tags to improve cross‑project search."
     },
     {
       "document": "bun/bun-github-actions-setup.md",
@@ -115,12 +108,31 @@
         "bun",
         "ci",
         "ci/cd",
-        "node-alternative"
-      ],
-      "suggestedTags": [
+        "node-alternative",
         "automation"
       ],
-      "reason": "The article describes CI automation with GitHub Actions; an automation tag captures this theme."
+      "suggestedTags": [
+        "devops",
+        "workflow",
+        "javascript-runtime"
+      ],
+      "reason": "The article is part of DevOps tooling and describes a workflow; also note that bun is a JavaScript runtime."
+    },
+    {
+      "document": "bun/bun-overview.md",
+      "currentTags": [
+        "bun",
+        "npm",
+        "yarn",
+        "패키지 매니저",
+        "guide",
+        "runtime"
+      ],
+      "suggestedTags": [
+        "javascript-runtime",
+        "package-manager"
+      ],
+      "reason": "Provide explicit tags for the runtime nature of bun and its role as a package manager."
     },
     {
       "document": "bun/bun-pnpm-npm-comparison.md",
@@ -128,70 +140,107 @@
         "bun",
         "pnpm",
         "npm",
-        "comparison",
-        "guide"
-      ],
-      "suggestedTags": [
+        "비교",
+        "guide",
         "comparison"
       ],
-      "reason": "Normalize the Korean ‘비교’ tag to the English ‘comparison’ for consistency."
+      "suggestedTags": [
+        "benchmark",
+        "performance"
+      ],
+      "reason": "The article compares tools; benchmark and performance tags describe the nature of the comparison."
+    },
+    {
+      "document": "multi-agent-system.md",
+      "currentTags": [
+        "multi-agent",
+        "ai",
+        "agentic-ai",
+        "mcp",
+        "a2a",
+        "llm"
+      ],
+      "suggestedTags": [
+        "distributed-systems",
+        "collaboration"
+      ],
+      "reason": "MAS is a distributed, collaborative AI system; these tags capture that broader context."
     }
   ],
   "taxonomy": {
-    "kubernetes": [
+    "cloud/kubernetes": [
       "kubernetes",
       "ingress",
       "nginx",
       "migration",
-      "security"
+      "security",
+      "deprecation",
+      "k8s",
+      "networking",
+      "load-balancer"
     ],
     "ai": [
       "ai",
       "llm",
-      "multi-agent",
-      "agentic-ai",
-      "mcp",
       "anthropic",
       "ai integration",
+      "agentic-ai",
+      "multi-agent",
+      "distributed-systems",
+      "collaboration",
+      "ai-assistant",
+      "machine-learning",
+      "open-standard",
+      "protocol"
+    ],
+    "mcp": [
+      "mcp",
+      "model context protocol",
       "json-rpc",
       "sdk",
-      "sepilot"
+      "protocol",
+      "open-standard"
     ],
-    "tool": [
+    "project": [
+      "sepilot",
+      "sepilot-wiki",
+      "desktop",
+      "application",
+      "desktop-app",
+      "project",
+      "technology-stack",
+      "frontend",
+      "react",
+      "typescript",
+      "vite",
+      "javascript",
+      "web"
+    ],
+    "tooling": [
       "bun",
       "npm",
       "yarn",
       "pnpm",
-      "github-actions",
+      "package-manager",
+      "javascript-runtime",
+      "runtime",
+      "devops",
+      "workflow",
       "ci",
       "ci/cd",
-      "node-alternative",
-      "package-manager",
-      "runtime",
+      "github-actions",
       "automation",
-      "comparison"
-    ],
-    "project": [
-      "sepilot",
-      "desktop",
-      "project",
-      "sepilot-wiki",
-      "기술스택"
-    ],
-    "frontend": [
-      "react",
-      "typescript",
-      "vite",
-      "frontend"
-    ],
-    "guide": [
-      "guide",
-      "release notes",
-      "release-notes"
+      "node-alternative"
     ],
     "documentation": [
+      "guide",
+      "comparison",
+      "benchmark",
+      "performance",
+      "changelog",
       "release notes",
-      "release-notes"
+      "version",
+      "deprecation"
     ]
   },
   "tagStats": [
@@ -211,54 +260,10 @@
       ]
     },
     {
-      "tag": "Guide",
+      "tag": "버전",
       "count": 1,
       "documents": [
         "kubernetes-release-notes.md"
-      ]
-    },
-    {
-      "tag": "Multi-Agent",
-      "count": 1,
-      "documents": [
-        "mas-multi-agent-system.md"
-      ]
-    },
-    {
-      "tag": "AI",
-      "count": 1,
-      "documents": [
-        "mas-multi-agent-system.md"
-      ]
-    },
-    {
-      "tag": "Agentic-AI",
-      "count": 1,
-      "documents": [
-        "mas-multi-agent-system.md"
-      ]
-    },
-    {
-      "tag": "MCP",
-      "count": 2,
-      "documents": [
-        "mas-multi-agent-system.md",
-        "mcp-model-context-protocol.md"
-      ]
-    },
-    {
-      "tag": "A2A",
-      "count": 1,
-      "documents": [
-        "mas-multi-agent-system.md"
-      ]
-    },
-    {
-      "tag": "LLM",
-      "count": 2,
-      "documents": [
-        "mas-multi-agent-system.md",
-        "projects/sepilot-desktop.md"
       ]
     },
     {
@@ -287,6 +292,21 @@
       "count": 1,
       "documents": [
         "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "guide",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "MCP",
+      "count": 2,
+      "documents": [
+        "mcp-model-context-protocol.md",
+        "multi-agent-system.md"
       ]
     },
     {
@@ -325,6 +345,15 @@
       ]
     },
     {
+      "tag": "llm",
+      "count": 3,
+      "documents": [
+        "mcp-model-context-protocol.md",
+        "projects/sepilot-desktop.md",
+        "multi-agent-system.md"
+      ]
+    },
+    {
       "tag": "SEPilot",
       "count": 1,
       "documents": [
@@ -343,6 +372,14 @@
       "count": 1,
       "documents": [
         "projects/sepilot-desktop.md"
+      ]
+    },
+    {
+      "tag": "ai",
+      "count": 2,
+      "documents": [
+        "projects/sepilot-desktop.md",
+        "multi-agent-system.md"
       ]
     },
     {
@@ -381,42 +418,10 @@
       ]
     },
     {
-      "tag": "bun",
-      "count": 3,
-      "documents": [
-        "bun/overview.md",
-        "bun/bun-github-actions-setup.md",
-        "bun/bun-pnpm-npm-comparison.md"
-      ]
-    },
-    {
-      "tag": "npm",
-      "count": 2,
-      "documents": [
-        "bun/overview.md",
-        "bun/bun-pnpm-npm-comparison.md"
-      ]
-    },
-    {
-      "tag": "yarn",
+      "tag": "frontend",
       "count": 1,
       "documents": [
-        "bun/overview.md"
-      ]
-    },
-    {
-      "tag": "패키지 매니저",
-      "count": 1,
-      "documents": [
-        "bun/overview.md"
-      ]
-    },
-    {
-      "tag": "가이드",
-      "count": 2,
-      "documents": [
-        "bun/overview.md",
-        "bun/bun-pnpm-npm-comparison.md"
+        "projects/sepilot-wiki-technology-stack.md"
       ]
     },
     {
@@ -424,6 +429,15 @@
       "count": 1,
       "documents": [
         "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "bun",
+      "count": 3,
+      "documents": [
+        "bun/bun-github-actions-setup.md",
+        "bun/bun-overview.md",
+        "bun/bun-pnpm-npm-comparison.md"
       ]
     },
     {
@@ -448,6 +462,50 @@
       ]
     },
     {
+      "tag": "automation",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "npm",
+      "count": 2,
+      "documents": [
+        "bun/bun-overview.md",
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "yarn",
+      "count": 1,
+      "documents": [
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "패키지 매니저",
+      "count": 1,
+      "documents": [
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "가이드",
+      "count": 2,
+      "documents": [
+        "bun/bun-overview.md",
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "runtime",
+      "count": 1,
+      "documents": [
+        "bun/bun-overview.md"
+      ]
+    },
+    {
       "tag": "pnpm",
       "count": 1,
       "documents": [
@@ -459,6 +517,34 @@
       "count": 1,
       "documents": [
         "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "comparison",
+      "count": 1,
+      "documents": [
+        "bun/bun-pnpm-npm-comparison.md"
+      ]
+    },
+    {
+      "tag": "Multi-Agent",
+      "count": 1,
+      "documents": [
+        "multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "Agentic-AI",
+      "count": 1,
+      "documents": [
+        "multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "A2A",
+      "count": 1,
+      "documents": [
+        "multi-agent-system.md"
       ]
     }
   ]

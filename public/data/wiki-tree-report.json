@@ -1,42 +1,48 @@
 {
-  "timestamp": "2026-02-10T12:09:10.603Z",
+  "timestamp": "2026-02-10T12:15:32.970Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "9개의 문서가 3개의 상위 카테고리(root, projects, bun)로 흩어져 있습니다. Kubernetes·AI 관련 문서는 루트에 그대로 놓여 있어 주제별 폴더가 부족합니다. 파일명은 영문 슬러그 규칙을 따르지 않아 URL 일관성이 떨어집니다. 중복 문서는 없으며, 대부분의 파일은 올바른 디렉터리에 위치하고 있습니다.",
+    "summary": "The wiki contains 9 documents covering Kubernetes, AI/Multi‑Agent systems, the Model Context Protocol, the SEPilot projects and the Bun runtime. Files are currently placed in a flat root with a few sub‑folders (projects, bun). Several filenames are not slug‑ified, drafts are mixed with published content, and there is no clear top‑level categorisation.",
     "totalDocuments": 9,
     "categories": [
       "kubernetes",
       "ai",
       "projects",
-      "bun"
+      "bun",
+      "drafts"
     ],
     "issues": [
-      "루트에 Kubernetes·AI 문서가 혼재해 주제별 탐색이 어려움",
-      "파일명에 오탈자·비표준 슬러그 사용"
+      "Non‑slugified Korean filenames (e.g., overview.md, sepilot‑desktop.md).",
+      "Draft documents are stored together with published ones, risking accidental publication.",
+      "Inconsistent placement of project‑related docs (both under /projects but with different naming conventions)."
     ]
   },
   "suggestedStructure": {
     "kubernetes": [
-      "kubernetes-release-notes.md",
-      "ingress-nginx-deprecation-guide.md"
+      "kubernetes-release-notes.md"
     ],
     "ai": [
       "multi-agent-system.md",
       "mcp-model-context-protocol.md"
     ],
     "projects": [
-      "sepilot-wiki-technology-stack.md",
-      "sepilot-desktop.md"
+      "sepilot-wiki-technology-stack.md"
     ],
     "bun": [
       "bun-overview.md",
-      "bun-pnpm-npm-comparison.md",
-      "bun-github-actions-setup.md"
+      "bun-github-actions-setup.md",
+      "bun-pnpm-npm-comparison.md"
+    ],
+    "drafts": [
+      "kubernetes-release-notes.md",
+      "ingress-nginx-deprecation-guide.md",
+      "mcp-model-context-protocol.md",
+      "sepilot-desktop.md"
     ]
   },
   "results": {
-    "appliedActions": 5,
+    "appliedActions": 4,
     "skippedActions": 4,
     "dryRunPreviewedActions": 0,
     "createdIssues": 1
@@ -45,76 +51,68 @@
     "applied": [
       {
         "type": "rename",
-        "priority": "high",
-        "source": "kuberentes.md",
-        "target": "kubernetes-release-notes.md",
-        "reason": "파일명 오탈자 및 슬러그 규칙 위반",
+        "priority": "medium",
+        "source": "mas-multi-agent-system.md",
+        "target": "multi-agent-system.md",
+        "reason": "Slug‑ify filename and remove redundant \"mas\" prefix.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "medium",
+        "source": "projects/sepilot-desktop.md",
+        "target": "projects/sepilot-desktop.md",
+        "reason": "Use lower‑case, hyphenated slug for consistency with other project files.",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "low",
-        "source": "ingress-nginx-statement-from-the-kubernetes-steeri.md",
-        "target": "ingress-nginx-deprecation-guide.md",
-        "reason": "파일명이 지나치게 길고 오타 포함, 슬러그 규칙에 맞게 간결화",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "projects/technology-stack.md",
+        "source": "projects/sepilot-wiki-technology-stack.md",
         "target": "projects/sepilot-wiki-technology-stack.md",
-        "reason": "프로젝트 기술 스택 문서가 SEPilot Wiki와 연관됨을 명확히",
+        "reason": "Standardise case and hyphen usage.",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "low",
-        "source": "bun/comparison-pnpm-npm.md",
-        "target": "bun/bun-pnpm-npm-comparison.md",
-        "reason": "bun 폴더 내 파일명을 일관된 \"bun-...\" 형태로 통일",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "bun/github-actions-setup.md",
-        "target": "bun/bun-github-actions-setup.md",
-        "reason": "bun 폴더 내 파일명을 일관된 \"bun-...\" 형태로 통일",
+        "source": "bun/overview.md",
+        "target": "bun/bun-overview.md",
+        "reason": "Make the filename self‑describing and slug‑compliant.",
         "autoApply": true
       }
     ],
     "skipped": [
       {
         "type": "move",
-        "priority": "medium",
+        "priority": "high",
         "source": "kubernetes-release-notes.md",
-        "target": "kubernetes/kubernetes-release-notes.md",
-        "reason": "Kubernetes 관련 문서를 전용 폴더로 이동해 주제별 구조화",
+        "target": "drafts/kubernetes-release-notes.md",
+        "reason": "Separate draft content from published material to avoid accidental exposure.",
         "autoApply": false
       },
       {
         "type": "move",
-        "priority": "medium",
+        "priority": "high",
         "source": "ingress-nginx-deprecation-guide.md",
-        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
-        "reason": "Ingress NGINX 은퇴 가이드를 Kubernetes 폴더에 배치",
+        "target": "drafts/ingress-nginx-deprecation-guide.md",
+        "reason": "Draft status – keep isolated from live docs.",
         "autoApply": false
       },
       {
-        "type": "rename",
-        "priority": "low",
-        "source": "mas-multi-agent-system.md",
-        "target": "ai/multi-agent-system.md",
-        "reason": "AI 주제 폴더에 맞게 경로와 슬러그 정리",
-        "autoApply": false
-      },
-      {
-        "type": "rename",
-        "priority": "low",
+        "type": "move",
+        "priority": "high",
         "source": "mcp-model-context-protocol.md",
-        "target": "ai/mcp-model-context-protocol.md",
-        "reason": "AI·LLM 프로토콜 문서를 AI 폴더로 이동 및 슬러그 정리",
+        "target": "drafts/mcp-model-context-protocol.md",
+        "reason": "Draft status – keep isolated from live docs.",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "projects/sepilot-desktop.md",
+        "target": "drafts/sepilot-desktop.md",
+        "reason": "Draft status – keep isolated from live docs.",
         "autoApply": false
       }
     ],
@@ -122,9 +120,9 @@
   },
   "createdIssues": [
     {
-      "number": 139,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/139",
-      "title": "루트 디렉터리 정리 및 주제별 폴더 생성 필요"
+      "number": 140,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/140",
+      "title": "Separate draft documents into a dedicated `/drafts` folder"
     }
   ]
 }

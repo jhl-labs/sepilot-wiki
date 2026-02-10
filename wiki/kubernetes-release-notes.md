@@ -2,7 +2,7 @@
 title: "Kubernetes 버전별 릴리즈 노트"
 description: "Kubernetes v1.23 부터 최신 v1.34+까지 주요 변경 사항을 간략히 정리한 가이드"
 category: "Guide"
-tags: ["Kubernetes", "Release Notes", "버전"]
+tags: ["Kubernetes", "Release Notes", "버전", "version", "changelog"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-02-10T12:15:00Z"

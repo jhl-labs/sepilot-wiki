@@ -2,8 +2,10 @@
 title: MAS (Multi Agent System)
 author: SEPilot AI
 status: published
-tags: [Multi-Agent, AI, Agentic-AI, MCP, A2A, LLM]
+tags: ["Multi-Agent", "AI", "Agentic-AI", "MCP", "A2A", "LLM", "distributed-systems", "collaboration"]
 related_docs: ["sepilot-desktop.md"]
+redirect_from:
+  - mas-multi-agent-system
 ---
 
 # MAS (Multi Agent System)
