@@ -159,6 +159,7 @@ ${doc.found ? `- 문서 경로: ${doc.filepath}\n- 문서 상태: ${doc.content.
 3. **modify**: 기존 문서의 내용 변경
 4. **create**: 새 문서 생성
 5. **delete**: 문서 삭제 (status를 deleted로 변경)
+6. **move**: 문서를 다른 경로로 이동 (카테고리 변경). sourcePath와 targetPath를 모두 지정해야 합니다.
 
 ## 응답 형식
 반드시 다음 JSON 형식으로 응답하세요. 여러 문서를 처리할 경우 actions 배열에 여러 항목을 포함하세요:
@@ -166,9 +167,10 @@ ${doc.found ? `- 문서 경로: ${doc.filepath}\n- 문서 상태: ${doc.content.
 {
   "actions": [
     {
-      "action": "publish" | "unpublish" | "modify" | "create" | "delete",
+      "action": "publish" | "unpublish" | "modify" | "create" | "delete" | "move",
       "targetPath": "wiki/경로/파일명.md",
-      "content": "수정된 전체 마크다운 내용 (publish/unpublish/delete 시 null)",
+      "sourcePath": "wiki/원래경로/파일명.md (move 액션 시 필수)",
+      "content": "수정된 전체 마크다운 내용 (publish/unpublish/delete/move 시 null)",
       "reason": "이 작업을 수행하는 이유"
     }
   ],
@@ -222,6 +224,7 @@ ${doc.found ? `## 현재 문서 내용\n\`\`\`markdown\n${doc.content}\n\`\`\`` 
       {
         action: result.action,
         targetPath: result.targetPath,
+        sourcePath: result.sourcePath,
         content: result.content,
         reason: result.summary || result.reason,
       },
@@ -270,6 +273,55 @@ ${doc.found ? `## 현재 문서 내용\n\`\`\`markdown\n${doc.content}\n\`\`\`` 
           console.log(`   ✅ 삭제 완료: ${targetDoc.path}`);
           processedActions.push({ action, path: targetDoc.path, success: true });
         }
+      } else if (action === 'move') {
+        // 문서 이동 (카테고리 변경)
+        const { sourcePath } = actionItem;
+        if (!sourcePath || !targetPath) {
+          console.log(`   ⚠️ move 액션에는 sourcePath와 targetPath가 모두 필요합니다.`);
+          processedActions.push({ action, path: targetPath, success: false, error: 'missing_paths' });
+          continue;
+        }
+
+        const sourceFullPath = sourcePath.startsWith('/')
+          ? sourcePath
+          : join(process.cwd(), sourcePath);
+        const targetFullPath = targetPath.startsWith('/')
+          ? targetPath
+          : join(process.cwd(), targetPath);
+
+        // Path Traversal 방지 - 소스와 타겟 모두 wiki 내부인지 검증
+        try {
+          validatePath(sourceFullPath);
+          validatePath(targetFullPath);
+        } catch (pathError) {
+          console.log(`   ⚠️ ${pathError.message}`);
+          processedActions.push({ action, path: targetPath, success: false, error: 'path_traversal_blocked' });
+          continue;
+        }
+
+        // 소스 파일 존재 확인
+        if (!existsSync(sourceFullPath)) {
+          console.log(`   ⚠️ 소스 파일이 존재하지 않음: ${sourcePath}`);
+          processedActions.push({ action, path: sourcePath, success: false, error: 'source_not_found' });
+          continue;
+        }
+
+        // 소스 파일 읽기
+        const sourceContent = await readFile(sourceFullPath, 'utf-8');
+
+        // 타겟 디렉토리 생성
+        const { dirname } = await import('path');
+        await mkdir(dirname(targetFullPath), { recursive: true });
+
+        // 타겟에 저장
+        await writeFile(targetFullPath, sourceContent);
+
+        // 소스 파일 삭제
+        const { unlink } = await import('fs/promises');
+        await unlink(sourceFullPath);
+
+        console.log(`   ✅ 이동 완료: ${sourcePath} → ${targetPath}`);
+        processedActions.push({ action, path: targetPath, sourcePath, success: true });
       } else if (action === 'create' || action === 'modify') {
         if (!content) {
           console.log(`   ⚠️ 내용이 없어서 건너뜀`);
@@ -382,6 +434,7 @@ async function main() {
         delete: 'delete',
         publish: 'publish',
         unpublish: 'unpublish',
+        move: 'modify',
       };
 
       // 성공한 액션들에 대해 AI History 기록
@@ -397,6 +450,7 @@ async function main() {
           delete: '삭제',
           publish: '발행',
           unpublish: '발행 취소',
+          move: '이동',
         };
 
         await addAIHistoryEntry({

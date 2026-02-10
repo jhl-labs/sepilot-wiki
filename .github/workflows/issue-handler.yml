@@ -128,6 +128,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUSKY: 0
 
+      - name: Trigger wiki tree maintenance
+        if: steps.commit.outputs.has_changes == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: wiki-document-changed
+
       - name: Add labels
         uses: actions/github-script@v7
         with:
@@ -522,8 +529,8 @@ jobs:
               const permission = permissionData.permission;
               console.log(`${commentUser}의 권한 레벨: ${permission}`);
 
-              // admin 또는 maintain 권한이면 true
-              const hasPermission = permission === 'admin' || permission === 'maintain';
+              // admin, maintain, write 권한이면 true
+              const hasPermission = ['admin', 'maintain', 'write'].includes(permission);
               console.log(`maintainer 권한 여부: ${hasPermission}`);
               return hasPermission;
             } catch (error) {
@@ -609,6 +616,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUSKY: 0
+
+      - name: Trigger wiki tree maintenance
+        if: steps.check-maintainer.outputs.result == 'true' && steps.commit.outputs.has_changes == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: wiki-document-changed
 
       - name: Comment with result
         if: steps.check-maintainer.outputs.result == 'true'

@@ -15,8 +15,9 @@
  * node scripts/generate-document.js --issue-number 123 --issue-title "문서 제목" --issue-body "요청 내용"
  */
 
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, readdir } from 'fs/promises';
 import { join } from 'path';
+import { existsSync } from 'fs';
 import {
   collectIssueContext,
   resolveDocumentPath,
@@ -36,6 +37,84 @@ import { upsertIssue, linkDocument, addLabels } from '../lib/issues-store.js';
 
 // 출력 경로
 const WIKI_DIR = join(process.cwd(), 'wiki');
+
+/**
+ * wiki 디렉토리의 카테고리(하위 폴더) 구조를 스캔
+ * @returns {Promise<string[]>} 카테고리 경로 배열 (예: ["bun", "bun/ci", "kubernetes"])
+ */
+async function scanWikiCategories(dir = WIKI_DIR, prefix = '') {
+  const categories = [];
+  if (!existsSync(dir)) return categories;
+
+  const entries = await readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      const categoryPath = prefix ? `${prefix}/${entry.name}` : entry.name;
+      categories.push(categoryPath);
+      categories.push(...(await scanWikiCategories(join(dir, entry.name), categoryPath)));
+    }
+  }
+  return categories;
+}
+
+/**
+ * AI를 사용하여 새 문서에 적합한 카테고리를 결정
+ * @param {Object} context - Issue 컨텍스트
+ * @param {string[]} existingCategories - 기존 카테고리 목록
+ * @returns {Promise<string|null>} 카테고리 경로 또는 null (루트에 생성)
+ */
+async function suggestDocumentCategory(context, existingCategories) {
+  if (existingCategories.length === 0) return null;
+
+  try {
+    const messages = [
+      {
+        role: 'system',
+        content: `당신은 Wiki 문서 분류 전문가입니다.
+주어진 문서 제목과 내용을 분석하여 가장 적합한 카테고리를 결정합니다.
+
+기존 카테고리 목록:
+${existingCategories.map((c) => `- ${c}`).join('\n')}
+
+## 규칙
+- 기존 카테고리 중 가장 적합한 것을 선택하세요.
+- 적합한 카테고리가 없으면 새 카테고리를 제안할 수 있습니다 (영문 소문자, 하이픈 사용).
+- 문서가 범용적이고 특정 카테고리에 속하지 않으면 null을 반환하세요.
+
+## 응답 형식
+JSON으로만 응답하세요:
+{"category": "카테고리경로" 또는 null, "reason": "이유"}`,
+      },
+      {
+        role: 'user',
+        content: `다음 문서를 분류해주세요:\n\n제목: ${context.issueTitle}\n\n내용 요약:\n${(context.issueBody || '').slice(0, 500)}`,
+      },
+    ];
+
+    const response = await callOpenAI(messages, {
+      temperature: 0.1,
+      maxTokens: 200,
+      responseFormat: { type: 'json_object' },
+    });
+
+    const jsonMatch = response.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      const result = JSON.parse(jsonMatch[0]);
+      if (result.category) {
+        // 카테고리 경로 검증 (영문, 숫자, 하이픈, 슬래시만 허용)
+        if (/^[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(result.category)) {
+          console.log(`📂 AI 카테고리 결정: ${result.category} (이유: ${result.reason})`);
+          return result.category;
+        }
+      }
+      console.log(`📂 AI 판단: 루트에 생성 (이유: ${result.reason || '카테고리 해당 없음'})`);
+    }
+  } catch (error) {
+    console.warn(`⚠️ 카테고리 자동 결정 실패, 루트에 생성합니다: ${error.message}`);
+  }
+
+  return null;
+}
 
 // 문서 생성
 async function generateDocument(context, options = {}) {
@@ -133,11 +212,19 @@ ${context.timeline}
     );
   }
 
-  // 문서 경로 결정 (새 문서 생성이므로 항상 제목 기반 슬러그 사용)
-  const docPath = resolveDocumentPath(context, WIKI_DIR, { forceFromTitle: true });
+  // 기존 wiki 카테고리 구조 분석 → AI에게 최적 카테고리 제안 요청
+  const existingCategories = await scanWikiCategories();
+  const suggestedCategory = await suggestDocumentCategory(context, existingCategories);
 
-  // wiki 폴더 생성
-  await mkdir(WIKI_DIR, { recursive: true });
+  // 문서 경로 결정 (카테고리가 결정되면 해당 경로에, 아니면 루트에 생성)
+  const docPath = resolveDocumentPath(context, WIKI_DIR, {
+    forceFromTitle: true,
+    category: suggestedCategory,
+  });
+
+  // wiki 폴더 및 하위 카테고리 디렉토리 생성
+  const { dirname } = await import('path');
+  await mkdir(dirname(docPath.filepath), { recursive: true });
 
   // 파일 저장
   await writeFile(docPath.filepath, content);

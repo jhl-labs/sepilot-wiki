@@ -248,8 +248,22 @@ function isValidSlug(slug) {
  * @param {string} wikiDir - Wiki 디렉토리 경로
  * @param {Object} options - 옵션
  * @param {boolean} options.forceFromTitle - true이면 항상 제목 기반 슬러그 생성 (기존 댓글 경로 무시)
+ * @param {string} options.category - AI가 결정한 카테고리 경로 (예: "bun/ci")
  */
 export function resolveDocumentPath(context, wikiDir, options = {}) {
+  // 0. AI가 결정한 카테고리가 있으면 해당 경로에 문서 생성
+  if (options.category) {
+    const slug = generateSlugFromTitle(context.issueTitle);
+    const categorySlug = `${options.category}/${slug}`;
+    const filename = `${categorySlug}.md`;
+    return {
+      filepath: `${wikiDir}/${filename}`,
+      filename,
+      slug: categorySlug,
+      source: 'auto_category',
+    };
+  }
+
   if (!options.forceFromTitle) {
     // 1. 이전 댓글에서 문서 위치가 발견된 경우
     if (context.documentInfo?.path) {

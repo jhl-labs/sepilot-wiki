@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: '0 0 * * 1'
 
+  # 문서 생성/수정 후 자동 트리거
+  repository_dispatch:
+    types: [wiki-document-changed]
+
   # 수동 실행 지원
   workflow_dispatch:
     inputs:
