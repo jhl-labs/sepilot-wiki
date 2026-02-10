@@ -3,6 +3,8 @@ title: Antigravity 릴리즈 노트 정리
 author: SEPilot AI
 status: published
 tags: [Antigravity, 릴리즈노트, 버전히스토리, 마이그레이션]
+redirect_from:
+  - antigravity
 ---
 
 ## 1. 개요

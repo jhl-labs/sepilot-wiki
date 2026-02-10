@@ -7,6 +7,8 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-10T14:00:00Z"
 updatedAt: "2026-02-10T14:00:00Z"
+redirect_from:
+  - ci-continuous-ai-kr
 ---
 
 # Continuous AI 실천: 에이전트형 CI로 오늘 자동화할 수 있는 작업

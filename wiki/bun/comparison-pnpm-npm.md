@@ -8,6 +8,7 @@ issueNumber: 0
 createdAt: "2025-12-05T09:30:00Z"
 updatedAt: "2025-12-05T09:30:00Z"
 redirect_from:
+  - bun-bun-pnpm-npm-comparison
   - bun-comparison-pnpm-npm
   - bun-bun-comparison-pnpm-npm
   - bun-comparison-pnpm-npm

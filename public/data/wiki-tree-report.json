@@ -1,84 +1,111 @@
 {
-  "timestamp": "2026-02-10T12:15:32.970Z",
+  "timestamp": "2026-02-10T22:43:41.785Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "The wiki contains 9 documents covering Kubernetes, AI/Multi‑Agent systems, the Model Context Protocol, the SEPilot projects and the Bun runtime. Files are currently placed in a flat root with a few sub‑folders (projects, bun). Several filenames are not slug‑ified, drafts are mixed with published content, and there is no clear top‑level categorisation.",
-    "totalDocuments": 9,
+    "summary": "15개의 문서가 현재 루트와 몇 개의 하위 폴더에 흩어져 있습니다. 대부분이 제품 릴리즈 노트, 프로토콜 가이드, 프로젝트 소개, 도구 가이드, CI/AI 개념 등으로 구분될 수 있습니다. 파일명은 영문 슬러그 형태가 대부분이지만, 일부는 보다 명확한 이름이 필요하고, 릴리즈 노트와 같은 공통 카테고리는 별도 디렉터리로 재배치하는 것이 바람직합니다.",
+    "totalDocuments": 15,
     "categories": [
+      "release-notes",
       "kubernetes",
-      "ai",
+      "protocols",
+      "tools",
       "projects",
       "bun",
-      "drafts"
+      "ci",
+      "ai-concepts"
     ],
     "issues": [
-      "Non‑slugified Korean filenames (e.g., overview.md, sepilot‑desktop.md).",
-      "Draft documents are stored together with published ones, risking accidental publication.",
-      "Inconsistent placement of project‑related docs (both under /projects but with different naming conventions)."
+      "중복된 릴리즈 노트 문서가 여러 제품에 흩어져 있어 공통 release‑notes 폴더가 없음",
+      "다수 문서가 draft 상태이며 검토·출판이 필요",
+      "파일명을 보다 명확히 표현하고, 이동 후 기존 URL이 깨지지 않도록 리다이렉트가 필요"
     ]
   },
   "suggestedStructure": {
-    "kubernetes": [
-      "kubernetes-release-notes.md"
+    "release-notes": [
+      "kubernetes-release-notes.md",
+      "claude-code-release-notes.md",
+      "antigravity-release-notes.md"
     ],
-    "ai": [
-      "multi-agent-system.md",
-      "mcp-model-context-protocol.md"
+    "kubernetes/migration": [
+      "ingress-nginx-deprecation-guide.md"
+    ],
+    "protocols": [
+      "mcp.md"
+    ],
+    "tools": [
+      "openclaw.md"
     ],
     "projects": [
+      "sepilot-desktop.md",
       "sepilot-wiki-technology-stack.md"
     ],
     "bun": [
-      "bun-overview.md",
-      "bun-github-actions-setup.md",
-      "bun-pnpm-npm-comparison.md"
+      "overview.md",
+      "github-actions-setup.md",
+      "comparison-pnpm-npm.md"
     ],
-    "drafts": [
-      "kubernetes-release-notes.md",
-      "ingress-nginx-deprecation-guide.md",
-      "mcp-model-context-protocol.md",
-      "sepilot-desktop.md"
+    "ci": [
+      "continuous-ai.md"
+    ],
+    "ai-concepts": [
+      "multi-agent-system.md"
     ]
   },
   "results": {
-    "appliedActions": 4,
-    "skippedActions": 4,
+    "appliedActions": 6,
+    "skippedActions": 12,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 1
+    "createdIssues": 2
   },
   "actions": {
     "applied": [
       {
         "type": "rename",
-        "priority": "medium",
-        "source": "mas-multi-agent-system.md",
-        "target": "multi-agent-system.md",
-        "reason": "Slug‑ify filename and remove redundant \"mas\" prefix.",
+        "priority": "high",
+        "source": "antigravity.md",
+        "target": "antigravity-release-notes.md",
+        "reason": "파일명이 내용(릴리즈 노트)을 명시하지 않음",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "openclaw.md",
+        "target": "openclaw-guide.md",
+        "reason": "가이드 문서임을 명시",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "medium",
-        "source": "projects/sepilot-desktop.md",
-        "target": "projects/sepilot-desktop.md",
-        "reason": "Use lower‑case, hyphenated slug for consistency with other project files.",
+        "source": "bun/bun-github-actions-setup.md",
+        "target": "bun/github-actions-setup.md",
+        "reason": "불필요한 접두어 제거",
         "autoApply": true
       },
       {
         "type": "rename",
-        "priority": "low",
-        "source": "projects/sepilot-wiki-technology-stack.md",
-        "target": "projects/sepilot-wiki-technology-stack.md",
-        "reason": "Standardise case and hyphen usage.",
+        "priority": "medium",
+        "source": "bun/bun-overview.md",
+        "target": "bun/overview.md",
+        "reason": "파일명이 중복된 접두어를 포함",
         "autoApply": true
       },
       {
         "type": "rename",
-        "priority": "low",
-        "source": "bun/overview.md",
-        "target": "bun/bun-overview.md",
-        "reason": "Make the filename self‑describing and slug‑compliant.",
+        "priority": "medium",
+        "source": "bun/bun-pnpm-npm-comparison.md",
+        "target": "bun/comparison-pnpm-npm.md",
+        "reason": "간결하고 일관된 네이밍",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "medium",
+        "source": "ci/continuous-ai-kr.md",
+        "target": "ci/continuous-ai.md",
+        "reason": "언어 코드가 불필요함",
         "autoApply": true
       }
     ],
@@ -87,32 +114,96 @@
         "type": "move",
         "priority": "high",
         "source": "kubernetes-release-notes.md",
-        "target": "drafts/kubernetes-release-notes.md",
-        "reason": "Separate draft content from published material to avoid accidental exposure.",
+        "target": "release-notes/kubernetes-release-notes.md",
+        "reason": "릴리즈 노트는 공통 release‑notes 카테고리로 이동",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "claude-code.md",
+        "target": "release-notes/claude-code-release-notes.md",
+        "reason": "다른 제품 릴리즈 노트와 통합",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "antigravity-release-notes.md",
+        "target": "release-notes/antigravity-release-notes.md",
+        "reason": "릴리즈 노트 카테고리 통합",
         "autoApply": false
       },
       {
         "type": "move",
         "priority": "high",
         "source": "ingress-nginx-deprecation-guide.md",
-        "target": "drafts/ingress-nginx-deprecation-guide.md",
-        "reason": "Draft status – keep isolated from live docs.",
+        "target": "kubernetes/migration/ingress-nginx-deprecation-guide.md",
+        "reason": "Kubernetes 마이그레이션 가이드 전용 폴더",
         "autoApply": false
       },
       {
         "type": "move",
         "priority": "high",
         "source": "mcp-model-context-protocol.md",
-        "target": "drafts/mcp-model-context-protocol.md",
-        "reason": "Draft status – keep isolated from live docs.",
+        "target": "protocols/mcp.md",
+        "reason": "프로토콜 문서는 protocols 폴더에 집중",
         "autoApply": false
       },
       {
         "type": "move",
         "priority": "high",
-        "source": "projects/sepilot-desktop.md",
-        "target": "drafts/sepilot-desktop.md",
-        "reason": "Draft status – keep isolated from live docs.",
+        "source": "openclaw-guide.md",
+        "target": "tools/openclaw.md",
+        "reason": "도구 가이드는 tools 폴더에 배치",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "multi-agent-system.md",
+        "target": "ai-concepts/multi-agent-system.md",
+        "reason": "AI 개념 문서 전용 폴더",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
+        "priority": "high",
+        "source": "",
+        "target": "release-notes/",
+        "reason": "릴리즈 노트 전용 디렉터리 생성",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
+        "priority": "high",
+        "source": "",
+        "target": "kubernetes/migration/",
+        "reason": "Kubernetes 마이그레이션 가이드 전용 서브 폴더",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
+        "priority": "high",
+        "source": "",
+        "target": "protocols/",
+        "reason": "프로토콜 문서 전용 폴더",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
+        "priority": "high",
+        "source": "",
+        "target": "tools/",
+        "reason": "도구 가이드 전용 폴더",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
+        "priority": "high",
+        "source": "",
+        "target": "ai-concepts/",
+        "reason": "AI 개념·용어 문서 전용 폴더",
         "autoApply": false
       }
     ],
@@ -120,9 +211,14 @@
   },
   "createdIssues": [
     {
-      "number": 140,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/140",
-      "title": "Separate draft documents into a dedicated `/drafts` folder"
+      "number": 151,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/151",
+      "title": "Draft documents need review before publishing"
+    },
+    {
+      "number": 152,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/152",
+      "title": "Create redirects for renamed/moved files"
     }
   ]
 }

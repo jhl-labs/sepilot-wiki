@@ -2,8 +2,8 @@
   "title": "Kubernetes 버전별 릴리즈 노트",
   "slug": "kubernetes-release-notes",
   "content": "\n# Kubernetes 버전별 릴리즈 노트\n\n본 문서는 **Kubernetes v1.23** 부터 현재 최신 **v1.34** (및 이후 마이너 릴리즈)까지 주요 변경 사항을 5줄 이내로 요약합니다. 각 버전별 핵심 기능, 개선점, Deprecated 항목을 포함합니다.\n\n---\n\n## v1.34 (2026‑02‑xx)\n- **새로운 API**: `PodSecurityPolicy` 완전 폐기, `PodSecurity` admission controller 기본 활성화\n- **향상된 스케줄러**: Topology‑aware 스케줄링 지원 확대\n- **CRI‑Shim**: Container Runtime Interface 개선, `containerd` 1.8 호환성 강화\n- **보안**: TLS 1.3 기본 적용, kube‑apiserver에 대한 audit 로그 포맷 개선\n- **Deprecated**: `extensions/v1beta1` Ingress API 완전 삭제\n\n---\n\n## v1.33 (2025‑12‑xx)\n- **새로운 기능**: `Ephemeral Containers` GA, 디버깅용 임시 컨테이너 지원\n- **네트워킹**: Service IP Address Management (IPAM) 플러그인 기본 제공\n- **스토리지**: CSI Snapshot Controller v1.2 정식 출시\n- **성능**: kube‑scheduler 성능 15% 향상, `NodeSwap` 지원 옵션 추가\n- **Deprecated**: `kubectl` `--record` 플래그 폐기 예정\n\n---\n\n## v1.32 (2025‑09‑xx)\n- **새로운 API**: `PodDisruptionBudget` v1 정식, `PodSecurity` v1beta1 GA\n- **CLI 개선**: `kubectl` 플러그인 자동 업데이트 기능 도입\n- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 발표\n- **클러스터 관리**: `kubeadm` v1.32에서 `ControlPlaneEndpoint` 자동 설정 지원\n- **Deprecated**: `v1beta1` `IngressClass` API 폐기 예정\n\n---\n\n## v1.31 (2025‑06‑xx)\n- **새로운 기능**: `ServerSideApply` 성능 최적화, conflict‑resolution 개선\n- **네트워킹**: `IPv6DualStack` 기본 활성화 옵션 제공\n- **스토리지**: `CSI` `VolumeHealth` 모니터링 GA\n- **보안**: `PodSecurityPolicy` 단계적 폐기 시작, `PodSecurity` 대체 권고\n- **Deprecated**: `v1beta1` `CronJob` API 폐기 예정\n\n---\n\n## v1.30 (2025‑03‑xx)\n- **새로운 API**: `EndpointSlice` v2 정식, 서비스 엔드포인트 관리 효율화\n- **CLI**: `kubectl` `--dry-run=client` 기본값 변경\n- **보안**: `RuntimeClass` 확장, `gVisor` 기본 지원\n- **클러스터**: `kubeadm` `InitConfiguration`에 `FeatureGates` 직접 지정 가능\n- **Deprecated**: `v1beta1` `PodSecurityPolicy` 폐기 로드맵 발표\n\n---\n\n## v1.29 (2024‑12‑xx)\n- **새로운 기능**: `PodSecurity` v1beta1 GA, 보안 정책 선언 방식 개선\n- **네트워킹**: `Service` `TopologyKeys` 지원 확대\n- **스토리지**: `CSI` `VolumeSnapshotClass` v1 정식\n- **성능**: `kubelet` 메모리 사용량 10% 감소\n- **Deprecated**: `v1beta1` `Ingress` API 폐기 예정\n\n---\n\n## v1.28 (2024‑09‑xx)\n- **새로운 API**: `IngressClass` v1 정식, `Ingress` v1beta1 단계적 폐기\n- **CLI**: `kubectl` `--server-print` 옵션 추가\n- **보안**: `KMS` 플러그인 v2 지원, 비밀 관리 강화\n- **클러스터**: `kubeadm` `Upgrade` 시 `ControlPlane` 자동 백업 옵션 제공\n- **Deprecated**: `v1beta1` `PodSecurityPolicy` 폐기 일정 발표\n\n---\n\n## v1.27 (2024‑06‑xx)\n- **새로운 기능**: `Ephemeral Containers` 베타 출시, 디버깅 용이\n- **네트워킹**: `Service` `ExternalTrafficPolicy` 개선\n- **스토리지**: `CSI` `VolumeHealth` 베타 제공\n- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 공개\n- **Deprecated**: `v1beta1` `Ingress` API 폐기 예정\n\n---\n\n## v1.26 (2024‑03‑xx)\n- **새로운 API**: `IngressClass` v1beta1 정식, `Ingress` v1beta1 유지\n- **CLI**: `kubectl` `--dry-run=client` 기본값 변경\n- **보안**: `PodSecurityPolicy` 폐기 로드맵 발표, `PodSecurity` 대체 권고\n- **클러스터**: `kubeadm` `InitConfiguration`에 `FeatureGates` 직접 지정 가능\n- **Deprecated**: `v1beta1` `CronJob` API 폐기 예정\n\n---\n\n## v1.25 (2023‑12‑xx)\n- **새로운 기능**: `PodSecurityPolicy` 단계적 폐기 시작, `PodSecurity` 베타 제공\n- **네트워킹**: `EndpointSlice` v1 정식, 서비스 엔드포인트 관리 효율화\n- **스토리지**: `CSI` `VolumeSnapshot` GA\n- **보안**: `kube-apiserver` TLS 1.3 지원\n- **Deprecated**: `v1beta1` `Ingress` API 폐기 일정 발표\n\n---\n\n## v1.24 (2023‑09‑xx)\n- **새로운 API**: `IngressClass` v1beta1 정식, `Ingress` v1beta1 유지\n- **CLI**: `kubectl` `--dry-run=client` 기본값 변경\n- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 공개\n- **클러스터**: `kubeadm` `Upgrade` 시 `ControlPlane` 자동 백업 옵션 제공\n- **Deprecated**: `v1beta1` `CronJob` API 폐기 예정\n\n---\n\n## v1.23 (2023‑06‑xx)\n- **새로운 기능**: `IngressClass` v1beta1 정식, `Ingress` v1beta1 유지\n- **네트워킹**: `EndpointSlice` v1beta1 정식\n- **스토리지**: `CSI` `VolumeSnapshot` 베타 제공\n- **보안**: `PodSecurityPolicy` 단계적 폐기 로드맵 발표\n- **Deprecated**: `v1beta1` `CronJob` API 폐기 일정 발표\n\n---\n\n> **주의**: 위 내용은 공식 Kubernetes 릴리즈 노트를 기반으로 요약한 것이며, 각 버전의 전체 변경 사항은 [Kubernetes Release Notes](https://github.com/kubernetes/kubernetes/releases) 페이지를 참고하시기 바랍니다.\n\n*이 문서는 현재 초안(draft) 상태이며, 검토 후 `published` 로 전환될 예정입니다.*",
-  "lastModified": "2026-02-10T22:31:38Z",
-  "author": "GitHub Action",
+  "lastModified": "2026-02-10T12:15:56Z",
+  "author": "github-actions[bot]",
   "status": "draft",
   "isDraft": true,
   "isInvalid": false,
@@ -16,12 +16,48 @@
   ],
   "history": [
     {
-      "sha": "c9a7ae9",
-      "message": "docs: Issue #138 - 피드백 반영",
+      "sha": "c60662c",
+      "message": "🌳 Wiki Tree Maintenance: The wiki contains 9 documents covering Kubernetes, AI/Multi‑Agent systems, the Model Context Protocol, the SEPilot projects and the Bun runtime. Files are currently placed in a flat root with a few sub‑folders (projects, bun). Several filenames are not slug‑ified, drafts are mixed with published content, and there is no clear top‑level categorisation.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-10T12:15:56Z",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "sha": "7f35679",
+      "message": "docs: Issue #135 - 피드백 반영",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-10T22:31:38Z",
-      "additions": 128,
+      "date": "2026-02-10T12:14:48Z",
+      "additions": 127,
+      "deletions": 50
+    },
+    {
+      "sha": "b59f781",
+      "message": "🌳 Wiki Tree Maintenance: 9개의 문서가 3개의 상위 카테고리(root, projects, bun)로 흩어져 있습니다. Kubernetes·AI 관련 문서는 루트에 그대로 놓여 있어 주제별 폴더가 부족합니다. 파일명은 영문 슬러그 규칙을 따르지 않아 URL 일관성이 떨어집니다. 중복 문서는 없으며, 대부분의 파일은 올바른 디렉터리에 위치하고 있습니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-10T12:09:42Z",
+      "additions": 51,
+      "deletions": 0
+    },
+    {
+      "sha": "6d64055",
+      "message": "docs: Issue #135 - 피드백 반영",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-10T08:49:25Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "3f43802",
+      "message": "docs: Issue #135 - [요청] Kuberentes에 대한 최근 버전별 릴리즈 노트를 작성해줘",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-10T08:40:35Z",
+      "additions": 0,
       "deletions": 0
     }
   ]
