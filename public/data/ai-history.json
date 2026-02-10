@@ -1,6 +1,47 @@
 {
   "entries": [
     {
+      "id": "e9eabf1f-c3a1-4a82-aa32-49a0a0284031",
+      "timestamp": "2026-02-10T08:40:27.672Z",
+      "actionType": "generate",
+      "issueNumber": 135,
+      "issueTitle": "[요청] Kuberentes에 대한 최근 버전별 릴리즈 노트를 작성해줘",
+      "documentSlug": "kuberentes",
+      "documentTitle": "Kubernetes 버전별 릴리즈 노트",
+      "summary": "새 문서 \"Kubernetes 버전별 릴리즈 노트\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3194
+            },
+            {
+              "step": "outline",
+              "durationMs": 6018
+            },
+            {
+              "step": "write",
+              "durationMs": 17315
+            },
+            {
+              "step": "review",
+              "durationMs": 5536
+            },
+            {
+              "step": "refine",
+              "durationMs": 11395
+            }
+          ],
+          "totalDurationMs": 43458,
+          "researchSources": 8
+        }
+      }
+    },
+    {
       "id": "d837c59b-654c-4085-bb0c-c25ecc34503f",
       "timestamp": "2026-02-10T08:32:59.555Z",
       "actionType": "generate",
@@ -559,5 +600,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-10T08:32:59.556Z"
+  "lastUpdated": "2026-02-10T08:40:27.672Z"
 }
