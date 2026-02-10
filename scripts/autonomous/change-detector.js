@@ -121,13 +121,13 @@ async function checkUrl(url) {
     let prevCleaned;
     do {
       prevCleaned = cleaned;
-      cleaned = cleaned.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
-      cleaned = cleaned.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+      cleaned = cleaned.replace(/<script\b[^>]*>[\s\S]*?<\/script[^>]*>/gi, '');
+      cleaned = cleaned.replace(/<style\b[^>]*>[\s\S]*?<\/style[^>]*>/gi, '');
+      cleaned = cleaned.replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '');
+      cleaned = cleaned.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '');
+      cleaned = cleaned.replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '');
     } while (cleaned !== prevCleaned);
     cleaned = cleaned
-      .replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '')
-      .replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '')
-      .replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '')
       .replace(/<[^>]+>/g, ' ')
       .replace(/\s+/g, ' ')
       .trim()

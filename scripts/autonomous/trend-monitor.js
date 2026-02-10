@@ -41,10 +41,11 @@ function parseRSSItems(xml, maxItems = 10) {
     let prevDesc;
     do {
       prevDesc = description;
-      description = description.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
-      description = description.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+      description = description.replace(/<script\b[^>]*>[\s\S]*?<\/script[^>]*>/gi, '');
+      description = description.replace(/<style\b[^>]*>[\s\S]*?<\/style[^>]*>/gi, '');
+      description = description.replace(/<[^>]+>/g, '');
     } while (description !== prevDesc);
-    description = description.replace(/<[^>]+>/g, '').trim().slice(0, 300);
+    description = description.trim().slice(0, 300);
 
     if (title) {
       items.push({ title, link, pubDate, description });

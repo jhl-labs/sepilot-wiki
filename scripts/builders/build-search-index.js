@@ -30,12 +30,11 @@ function extractPlainText(markdown) {
   let prev;
   do {
     prev = text;
-    text = text.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
-    text = text.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+    text = text.replace(/<script\b[^>]*>[\s\S]*?<\/script[^>]*>/gi, '');
+    text = text.replace(/<style\b[^>]*>[\s\S]*?<\/style[^>]*>/gi, '');
+    text = text.replace(/<[^>]+>/g, '');
   } while (text !== prev);
   return text
-    // 나머지 HTML 태그 제거
-    .replace(/<[^>]+>/g, '')
     // 헤더 기호 제거
     .replace(/^#+\s*/gm, '')
     // 굵게/기울임 마크다운 제거

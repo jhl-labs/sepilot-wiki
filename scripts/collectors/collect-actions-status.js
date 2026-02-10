@@ -19,10 +19,15 @@ const githubConfig = getGitHubConfig();
 async function fetchGitHubAPI(endpoint) {
   const url = `${githubConfig.apiUrl}/repos/${githubConfig.repository}${endpoint}`;
 
-  // API URL 검증: github.com 도메인만 허용
+  // API URL 검증: github.com 도메인만 허용 (서브도메인 포함, 유사 도메인 차단)
   const parsedUrl = new URL(url);
-  if (!parsedUrl.hostname.endsWith('github.com') && !parsedUrl.hostname.endsWith('githubusercontent.com')) {
-    throw new Error(`허용되지 않은 API 호스트: ${parsedUrl.hostname}`);
+  const hostname = parsedUrl.hostname;
+  const isGitHub = hostname === 'github.com' || hostname === 'api.github.com' ||
+    (hostname.endsWith('.github.com') && hostname.indexOf('.') !== hostname.lastIndexOf('.'));
+  const isGHContent = hostname === 'githubusercontent.com' ||
+    (hostname.endsWith('.githubusercontent.com') && hostname.indexOf('.') !== hostname.lastIndexOf('.'));
+  if (!isGitHub && !isGHContent) {
+    throw new Error(`허용되지 않은 API 호스트: ${hostname}`);
   }
 
   const headers = {

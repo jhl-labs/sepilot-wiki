@@ -69,24 +69,23 @@ function htmlToText(html) {
     content = mainMatch[1];
   }
 
-  // script, style 태그 제거 (루프 기반 - 중첩/변형 태그 방지)
+  // HTML 태그 제거 (루프 기반 - 중첩/변형 태그 방지)
   let prevContent;
   do {
     prevContent = content;
-    content = content.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
-    content = content.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+    content = content.replace(/<script\b[^>]*>[\s\S]*?<\/script[^>]*>/gi, '');
+    content = content.replace(/<style\b[^>]*>[\s\S]*?<\/style[^>]*>/gi, '');
+    content = content.replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '');
+    content = content.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '');
+    content = content.replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '');
+    content = content.replace(/<aside[^>]*>[\s\S]*?<\/aside>/gi, '');
   } while (content !== prevContent);
-  // nav, footer, header, aside 태그 제거
-  content = content.replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '');
-  content = content.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '');
-  content = content.replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '');
-  content = content.replace(/<aside[^>]*>[\s\S]*?<\/aside>/gi, '');
 
   // 블록 요소를 줄바꿈으로 변환
   content = content.replace(/<\/(?:p|div|h[1-6]|li|tr|br|blockquote|pre)[^>]*>/gi, '\n');
   content = content.replace(/<br\s*\/?>/gi, '\n');
 
-  // 나머지 HTML 태그 제거
+  // 나머지 HTML 태그 제거 (위 루프에서 위험 태그 모두 제거된 후)
   content = content.replace(/<[^>]+>/g, '');
 
   // HTML 엔티티 디코딩 (&amp;를 마지막에 처리하여 이중 디코딩 방지)
@@ -118,7 +117,16 @@ function htmlToText(html) {
  */
 function extractTitle(html) {
   const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-  return match ? match[1].replace(/<[^>]+>/g, '').trim() : '';
+  if (!match) return '';
+  // 루프 기반 태그 제거 (중첩 방지)
+  let title = match[1];
+  let prev;
+  do {
+    prev = title;
+    title = title.replace(/<script\b[^>]*>[\s\S]*?<\/script[^>]*>/gi, '');
+    title = title.replace(/<style\b[^>]*>[\s\S]*?<\/style[^>]*>/gi, '');
+  } while (title !== prev);
+  return title.replace(/<[^>]+>/g, '').trim();
 }
 
 /**

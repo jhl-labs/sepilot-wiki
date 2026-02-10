@@ -62,11 +62,11 @@ export function extractPlainText(markdown: string): string {
   let prev: string;
   do {
     prev = text;
-    text = text.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '');
-    text = text.replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, '');
+    text = text.replace(/<script\b[^>]*>[\s\S]*?<\/script[^>]*>/gi, '');
+    text = text.replace(/<style\b[^>]*>[\s\S]*?<\/style[^>]*>/gi, '');
+    text = text.replace(/<[^>]+>/g, '');
   } while (text !== prev);
   return text
-    .replace(/<[^>]+>/g, '') // 나머지 HTML 태그 제거
     .replace(/^#+\s*/gm, '') // 헤더 기호 제거
     .replace(/[*_~]{1,3}([^*_~]+)[*_~]{1,3}/g, '$1') // 굵게/기울임 제거
     .replace(/^>\s*/gm, '') // 인용문 기호 제거
