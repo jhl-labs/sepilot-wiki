@@ -157,6 +157,30 @@ export function Sidebar() {
     }
   };
 
+  // 모바일 스와이프로 사이드바 닫기
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (!touchStartRef.current) return;
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - touchStartRef.current.x;
+      const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
+
+      // 왼쪽으로 80px 이상 스와이프하고, 수직 이동보다 수평 이동이 클 때 닫기
+      if (deltaX < -80 && deltaY < Math.abs(deltaX)) {
+        close();
+      }
+      touchStartRef.current = null;
+    },
+    [close]
+  );
+
   // 리사이즈 핸들 드래그 시작
   const handleResizeStart = useCallback(
     (e: React.MouseEvent) => {
@@ -368,6 +392,8 @@ export function Sidebar() {
         role="complementary"
         aria-label="사이드바 네비게이션"
         style={{ '--sidebar-dynamic-width': `${width}px` } as React.CSSProperties}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="sidebar-header">
           <span className="sidebar-title" id="sidebar-title">탐색</span>
