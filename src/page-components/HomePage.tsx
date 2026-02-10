@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   BookOpen,
@@ -9,18 +10,56 @@ import {
   Bot,
   RefreshCw,
   AlertCircle,
+  BarChart3,
+  Search,
+  Clock,
+  Activity,
 } from 'lucide-react';
-import { useWikiPages, useIssues } from '../hooks/useWiki';
+import { useWikiPages, useIssues, useDashboardStats } from '../hooks/useWiki';
 import { LABELS, config, urls } from '../config';
 import { Skeleton } from '../components/ui/Skeleton';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import type { ActivityPeriod } from '../types';
+
+type PeriodKey = 'last1h' | 'last24h' | 'last7d';
+
+const PERIOD_LABELS: Record<PeriodKey, string> = {
+  last1h: '1시간',
+  last24h: '24시간',
+  last7d: '7일',
+};
+
+/** 토큰 수를 K/M 단위로 변환 */
+function formatTokens(n: number | null | undefined): string {
+  if (n == null || n === 0) return '-';
+  if (n >= 1_000_000) return `~${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `~${(n / 1_000).toFixed(0)}K`;
+  return `~${n}`;
+}
+
+/** 밀리초를 사람이 읽기 쉬운 형식으로 변환 */
+function formatDuration(ms: number | null | undefined): string {
+  if (ms == null || ms === 0) return '-';
+  const seconds = ms / 1000;
+  if (seconds < 60) return `${seconds.toFixed(1)}초`;
+  const minutes = seconds / 60;
+  if (minutes < 60) return `~${minutes.toFixed(1)}분`;
+  const hours = minutes / 60;
+  return `~${hours.toFixed(1)}시간`;
+}
 
 export function HomePage() {
   const { data: pages, isLoading: pagesLoading, error: pagesError, refetch: refetchPages } = useWikiPages();
   const { data: issues, isLoading: issuesLoading, error: issuesError, refetch: refetchIssues } = useIssues(LABELS.REQUEST);
+  const { data: dashboardStats } = useDashboardStats();
+
+  const [selectedPeriod, setSelectedPeriod] = useState<PeriodKey>('last24h');
 
   const recentIssues = issues?.slice(0, 5) || [];
+
+  const overview = dashboardStats?.overview;
+  const activity: ActivityPeriod | null = dashboardStats?.activity?.[selectedPeriod] ?? null;
 
   return (
     <div className="home-page">
@@ -57,6 +96,117 @@ export function HomePage() {
             <div className="card-content">
               <h3>스마트 문서화</h3>
               <p>AI가 자동으로 문서를 생성하고 유지보수합니다</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Dashboard Section */}
+      <section className="dashboard-section">
+        <h2 className="section-title">
+          <BarChart3 size={22} />
+          <span>대시보드</span>
+        </h2>
+
+        {/* 개요 통계 카드 */}
+        <div className="dashboard-stats-grid">
+          <div className="dashboard-stat-card">
+            <div className="dashboard-stat-icon">
+              <FileText size={20} />
+            </div>
+            <div className="dashboard-stat-content">
+              <span className="dashboard-stat-value">
+                {overview?.totalDocuments ?? '-'}
+              </span>
+              <span className="dashboard-stat-label">전체 문서</span>
+            </div>
+          </div>
+          <div className="dashboard-stat-card">
+            <div className="dashboard-stat-icon open-requests">
+              <MessageSquare size={20} />
+            </div>
+            <div className="dashboard-stat-content">
+              <span className="dashboard-stat-value">
+                {overview?.openRequests ?? '-'}
+              </span>
+              <span className="dashboard-stat-label">진행 중 요청</span>
+            </div>
+          </div>
+          <div className="dashboard-stat-card">
+            <div className="dashboard-stat-icon ai-actions">
+              <Activity size={20} />
+            </div>
+            <div className="dashboard-stat-content">
+              <span className="dashboard-stat-value">
+                {activity?.aiActions ?? '-'}
+              </span>
+              <span className="dashboard-stat-label">AI 활동 ({PERIOD_LABELS[selectedPeriod]})</span>
+            </div>
+          </div>
+          <div className="dashboard-stat-card">
+            <div className="dashboard-stat-icon research">
+              <Search size={20} />
+            </div>
+            <div className="dashboard-stat-content">
+              <span className="dashboard-stat-value">
+                {activity?.tavilyResults ?? '-'}
+              </span>
+              <span className="dashboard-stat-label">연구 소스 ({PERIOD_LABELS[selectedPeriod]})</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 기간 선택 탭 */}
+        <div className="dashboard-period-tabs">
+          {(Object.keys(PERIOD_LABELS) as PeriodKey[]).map((key) => (
+            <button
+              key={key}
+              className={`dashboard-period-tab ${selectedPeriod === key ? 'active' : ''}`}
+              onClick={() => setSelectedPeriod(key)}
+            >
+              {PERIOD_LABELS[key]}
+            </button>
+          ))}
+        </div>
+
+        {/* 상세 인사이트 */}
+        <div className="dashboard-insights-grid">
+          <div className="insight-card">
+            <div className="insight-header">
+              <Search size={16} />
+              <span>Tavily API</span>
+            </div>
+            <div className="insight-value">
+              {activity?.tavilyApiCalls ?? '-'}
+              <span className="insight-unit">회 호출</span>
+            </div>
+            <div className="insight-detail">
+              {activity?.tavilyResults ?? '-'}개 결과
+            </div>
+          </div>
+          <div className="insight-card">
+            <div className="insight-header">
+              <Bot size={16} />
+              <span>AI 토큰</span>
+            </div>
+            <div className="insight-value">
+              {formatTokens(activity?.estimatedTokens)}
+              <span className="insight-unit"> 토큰</span>
+            </div>
+            <div className="insight-detail">
+              {activity?.documentsCreated ?? '-'}건 생성
+            </div>
+          </div>
+          <div className="insight-card">
+            <div className="insight-header">
+              <Clock size={16} />
+              <span>파이프라인</span>
+            </div>
+            <div className="insight-value">
+              {formatDuration(activity?.totalPipelineDurationMs)}
+            </div>
+            <div className="insight-detail">
+              {activity?.aiActions ?? '-'}건 작업
             </div>
           </div>
         </div>

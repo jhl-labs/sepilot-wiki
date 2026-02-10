@@ -418,6 +418,13 @@ export interface AIHistoryEntry {
   changes?: {
     additions?: number;
     deletions?: number;
+    pipeline?: {
+      steps: { step: string; durationMs: number }[];
+      totalDurationMs: number;
+      researchSources: number;
+      tavilyUsage?: { apiCalls: number; totalResults: number };
+      estimatedTokens?: { estimated: number; method: string };
+    };
   };
 }
 
@@ -475,4 +482,47 @@ export interface ActionsStatus {
   workflows: WorkflowStatus[];
   inProgress: WorkflowRun[];
   recentFailures: WorkflowRun[];
+}
+
+// 대시보드 통계 관련 타입
+export interface ActivityPeriod {
+  aiActions: number;
+  documentsCreated: number;
+  documentsModified: number;
+  tavilyApiCalls: number;
+  tavilyResults: number;
+  estimatedTokens: number;
+  totalPipelineDurationMs: number;
+}
+
+export interface DashboardStats {
+  collectedAt: string;
+  overview: {
+    totalDocuments: number;
+    publishedDocuments: number;
+    draftDocuments: number;
+    openRequests: number;
+    closedRequests: number;
+    totalAIActions: number;
+  };
+  activity: {
+    last1h: ActivityPeriod;
+    last24h: ActivityPeriod;
+    last7d: ActivityPeriod;
+  };
+  recentActivity: {
+    timestamp: string;
+    actionType: string;
+    issueNumber: number | null;
+    documentTitle: string;
+    model: string;
+    durationMs: number | null;
+    tavilyApiCalls: number;
+    estimatedTokens: number | null;
+  }[];
+  models: Record<string, {
+    totalActions: number;
+    totalEstimatedTokens: number;
+    avgDurationMs: number;
+  }>;
 }

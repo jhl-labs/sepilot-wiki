@@ -100,16 +100,21 @@ async function analyzeTagNormalization(tagStats, documents) {
         content: `현재 태그 통계:\n${JSON.stringify(tagStats, null, 2)}\n\n문서 목록:\n${JSON.stringify(docsForContext, null, 2)}`,
       },
     ],
-    { temperature: 0.1, maxTokens: 4000 }
+    { temperature: 0.1, maxTokens: 4000, responseFormat: 'json_object' }
   );
 
   const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
-    console.warn('⚠️ AI 응답 파싱 실패');
+    console.warn('⚠️ AI 응답에서 JSON을 추출할 수 없습니다');
     return { merges: [], suggestions: [], taxonomy: {} };
   }
 
-  return JSON.parse(jsonMatch[1] || jsonMatch[0]);
+  try {
+    return JSON.parse(jsonMatch[1] || jsonMatch[0]);
+  } catch (parseError) {
+    console.warn(`⚠️ AI 응답 JSON 파싱 실패: ${parseError.message}`);
+    return { merges: [], suggestions: [], taxonomy: {} };
+  }
 }
 
 /**

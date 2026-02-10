@@ -34,9 +34,64 @@ runs:
         if git diff --staged --quiet; then
           echo "변경 사항 없음"
           echo "has_changes=false" >> $GITHUB_OUTPUT
-        else
-          git commit -m "${{ inputs.message }}"
-          git pull --rebase
-          git push
-          echo "has_changes=true" >> $GITHUB_OUTPUT
+          exit 0
         fi
+
+        git commit -m "${{ inputs.message }}"
+
+        MAX_RETRIES=3
+        for attempt in $(seq 1 $MAX_RETRIES); do
+          echo "📤 Push 시도 ($attempt/$MAX_RETRIES)..."
+
+          if git pull --rebase 2>/dev/null; then
+            if git push; then
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          else
+            echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+            git rebase --abort 2>/dev/null || true
+
+            # 자동 생성 파일은 원격 버전 우선으로 merge
+            git pull --no-rebase -X theirs 2>/dev/null || {
+              # merge 충돌이 남은 경우: 자동 생성 파일은 theirs로 해결
+              CONFLICTED=$(git diff --name-only --diff-filter=U 2>/dev/null || true)
+              if [ -n "$CONFLICTED" ]; then
+                echo "충돌 파일: $CONFLICTED"
+                echo "$CONFLICTED" | while IFS= read -r file; do
+                  case "$file" in
+                    public/data/*|public/wiki-*|public/actions-*|public/guide-*)
+                      echo "  자동 해결 (theirs): $file"
+                      git checkout --theirs "$file" 2>/dev/null && git add "$file"
+                      ;;
+                    *)
+                      echo "  자동 해결 (ours 우선): $file"
+                      git checkout --ours "$file" 2>/dev/null && git add "$file"
+                      ;;
+                  esac
+                done
+                git -c core.editor=true merge --continue 2>/dev/null || git commit --no-edit 2>/dev/null || true
+              fi
+            }
+
+            # 변경사항 재적용: 원래 커밋 내용을 다시 stage
+            git add -A
+            if ! git diff --staged --quiet; then
+              git commit -m "${{ inputs.message }} (retry $attempt)" 2>/dev/null || true
+            fi
+
+            if git push; then
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          fi
+
+          if [ "$attempt" -lt "$MAX_RETRIES" ]; then
+            WAIT=$((attempt * 3))
+            echo "⏳ ${WAIT}초 대기 후 재시도..."
+            sleep $WAIT
+          fi
+        done
+
+        echo "❌ $MAX_RETRIES회 시도 후에도 push 실패"
+        exit 1

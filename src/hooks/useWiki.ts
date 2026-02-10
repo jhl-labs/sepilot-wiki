@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchWikiPages, fetchWikiPage, fetchIssues, fetchGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus } from '../services/github';
+import { fetchWikiPages, fetchWikiPage, fetchIssues, fetchGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus, fetchDashboardStats } from '../services/github';
 import { searchWiki, getAvailableTags, type SearchFilter } from '../services/search';
 
 export function useWikiPages() {
@@ -106,5 +106,15 @@ export function useActionsStatus() {
     queryFn: fetchActionsStatus,
     staleTime: 30 * 1000, // 30초 (갱신 주기 짧게)
     refetchInterval: 30 * 1000, // 30초마다 자동 갱신
+  });
+}
+
+// Dashboard Stats 조회
+export function useDashboardStats() {
+  return useQuery({
+    queryKey: ['dashboard-stats'],
+    queryFn: fetchDashboardStats,
+    staleTime: 2 * 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
   });
 }

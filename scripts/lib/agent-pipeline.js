@@ -7,7 +7,7 @@
  */
 
 import { callOpenAI } from './utils.js';
-import { researchTopic, isTavilyAvailable } from './tavily-search.js';
+import { researchTopic, isTavilyAvailable, getTavilyUsageStats, resetTavilyUsageStats } from './tavily-search.js';
 import { getAgent } from './agents/index.js';
 
 /** 리뷰 통과 최소 점수 */
@@ -306,6 +306,7 @@ export async function runDocumentPipeline(context, config = {}) {
     reviewThreshold = REVIEW_PASS_THRESHOLD,
   } = config;
 
+  resetTavilyUsageStats();
   const pipelineStart = Date.now();
   const steps = [];
 
@@ -374,6 +375,7 @@ export async function runDocumentPipeline(context, config = {}) {
     finalDocument,
     totalDurationMs,
     researchSources,
+    tavilyUsage: getTavilyUsageStats(),
   };
 }
 
@@ -392,6 +394,7 @@ export async function runAgentPipeline(context, config = {}) {
     reviewThreshold = REVIEW_PASS_THRESHOLD,
   } = config;
 
+  resetTavilyUsageStats();
   const pipelineStart = Date.now();
   const steps = [];
 
@@ -514,6 +517,7 @@ export async function runAgentPipeline(context, config = {}) {
     finalDocument,
     totalDurationMs,
     researchSources,
+    tavilyUsage: getTavilyUsageStats(),
     mode: 'agent',
   };
 }

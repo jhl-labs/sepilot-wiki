@@ -8,6 +8,10 @@
 const TAVILY_API_URL = 'https://api.tavily.com/search';
 const TAVILY_API_KEY = process.env.TAVILY_API_KEY || '';
 
+// Tavily API 호출 카운터
+let _tavilyCallCount = 0;
+let _tavilyResultCount = 0;
+
 /** 검색 타임아웃 (ms) */
 const SEARCH_TIMEOUT = 15000;
 
@@ -62,6 +66,9 @@ export async function searchTavily(options) {
     }
 
     const data = await response.json();
+
+    _tavilyCallCount++;
+    _tavilyResultCount += (data.results || []).length;
 
     return (data.results || []).map((r) => ({
       url: r.url,
@@ -120,6 +127,22 @@ export async function researchTopic(topic, maxQueries = 3) {
 
   console.log(`   ✅ ${allResults.length}개 고유 소스 수집 완료`);
   return allResults;
+}
+
+/**
+ * Tavily API 사용 통계 조회
+ * @returns {{ apiCalls: number, totalResults: number }}
+ */
+export function getTavilyUsageStats() {
+  return { apiCalls: _tavilyCallCount, totalResults: _tavilyResultCount };
+}
+
+/**
+ * Tavily API 사용 통계 초기화
+ */
+export function resetTavilyUsageStats() {
+  _tavilyCallCount = 0;
+  _tavilyResultCount = 0;
 }
 
 /**

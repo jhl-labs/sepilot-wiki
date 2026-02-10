@@ -116,6 +116,21 @@ JSON으로만 응답하세요:
   return null;
 }
 
+/**
+ * 파이프라인 결과에서 토큰 사용량 추정
+ * LLM 생성 단계만 계산 (~50 tokens/sec 기준)
+ */
+function estimateTokensFromPipeline(pipelineResult) {
+  const TOKEN_PER_MS = 0.05;
+  let estimated = 0;
+  for (const step of pipelineResult.steps) {
+    if (['outline', 'write', 'review', 'refine'].includes(step.step)) {
+      estimated += Math.round(step.durationMs * TOKEN_PER_MS);
+    }
+  }
+  return { estimated, method: 'duration_based' };
+}
+
 // 문서 생성
 async function generateDocument(context, options = {}) {
   const openaiConfig = getOpenAIConfig();
@@ -301,6 +316,8 @@ async function main() {
           })),
           totalDurationMs: result.pipelineResult.totalDurationMs,
           researchSources: result.pipelineResult.researchSources.length,
+          tavilyUsage: result.pipelineResult.tavilyUsage || { apiCalls: 0, totalResults: 0 },
+          estimatedTokens: estimateTokensFromPipeline(result.pipelineResult),
         },
       };
     }

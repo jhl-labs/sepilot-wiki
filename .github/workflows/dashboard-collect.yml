@@ -1,0 +1,37 @@
+name: Dashboard Stats Collection
+
+on:
+  schedule:
+    # 매시간 30분에 실행 (deploy-pages/scheduled-collect과 시간 분산)
+    - cron: '30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dashboard-collect
+  cancel-in-progress: false
+
+jobs:
+  collect-dashboard-stats:
+    runs-on: jhl-space
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun and Install
+        uses: ./.github/actions/setup-bun-install
+
+      - name: Collect dashboard stats
+        run: |
+          echo "📊 대시보드 통계 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
+          bun run scripts/collectors/collect-dashboard-stats.js
+
+      - name: Commit and push
+        uses: ./.github/actions/git-commit-push
+        with:
+          message: "chore: 대시보드 통계 수집 - $(date '+%Y-%m-%d %H:%M')"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

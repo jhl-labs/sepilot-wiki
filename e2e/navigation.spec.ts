@@ -19,8 +19,8 @@ test.describe('Navigation', () => {
   test('위키 페이지로 이동할 수 있어야 함', async ({ page }) => {
     await page.goto('/');
 
-    // 첫 번째 위키 링크 클릭
-    const wikiLink = page.locator('a[href^="/wiki/"]').first();
+    // 본문 영역의 위키 링크 선택 (footer 아이콘 버튼 제외)
+    const wikiLink = page.locator('.home-page a[href^="/wiki/"], .sidebar a[href^="/wiki/"]').first();
     if (await wikiLink.isVisible({ timeout: 10000 }).catch(() => false)) {
       await wikiLink.click();
 

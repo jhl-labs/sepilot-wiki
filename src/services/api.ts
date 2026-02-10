@@ -1,4 +1,4 @@
-import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus, ApiError } from '../types';
+import type { WikiPage, GitHubIssue, WikiTree, AIHistory, AIHistoryEntry, TagStats, ActionsStatus, DashboardStats, ApiError } from '../types';
 import { getLabelName } from '../types';
 import { fetchWithRetry } from '../utils/retry';
 import { createLogger } from '../utils/logger';
@@ -59,6 +59,7 @@ const CACHE_TTL = {
   ISSUES: 2 * 60 * 1000,        // 2분 - 자주 변경될 수 있음
   AI_HISTORY: 3 * 60 * 1000,    // 3분
   ACTIONS_STATUS: 1 * 60 * 1000, // 1분 - 실시간성 필요
+  DASHBOARD_STATS: 2 * 60 * 1000, // 2분
 };
 
 // API 에러 클래스
@@ -106,6 +107,7 @@ const guideDataCache = new TTLCache<{ pages: WikiPage[] }>(CACHE_TTL.GUIDE_DATA)
 const issuesDataCache = new TTLCache<{ issues: GitHubIssue[]; lastUpdated: string }>(CACHE_TTL.ISSUES);
 const aiHistoryCache = new TTLCache<AIHistory>(CACHE_TTL.AI_HISTORY);
 const actionsStatusCache = new TTLCache<ActionsStatus>(CACHE_TTL.ACTIONS_STATUS);
+const dashboardStatsCache = new TTLCache<DashboardStats>(CACHE_TTL.DASHBOARD_STATS);
 
 /**
  * 캐시 버스팅용 버전 문자열 생성
@@ -513,6 +515,33 @@ export async function fetchActionsStatus(): Promise<ActionsStatus | null> {
         return data;
     } catch (error) {
         logger.warn('Actions 상태 로드 실패', { error });
+        return null;
+    }
+}
+
+// Dashboard Stats 데이터 로드
+export async function fetchDashboardStats(): Promise<DashboardStats | null> {
+    const cached = dashboardStatsCache.get();
+    if (cached) {
+        return cached;
+    }
+
+    try {
+        const cacheBuster = `?v=${getCacheBuster('dynamic', 2 * 60 * 1000)}`;
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}data/dashboard-stats.json${cacheBuster}`);
+        if (!response.ok) {
+            if (response.status === 404) {
+                return null;
+            }
+            logger.warn('대시보드 통계 가져오기 실패', { status: response.status });
+            return null;
+        }
+        const data = await response.json();
+        dashboardStatsCache.set(data);
+        return data;
+    } catch (error) {
+        logger.warn('대시보드 통계 로드 실패', { error });
         return null;
     }
 }

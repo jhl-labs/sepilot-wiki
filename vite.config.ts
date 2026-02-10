@@ -24,9 +24,11 @@ export default defineConfig({
   plugins: [react()],
   base: getBasePath(),
   resolve: {
-    alias: {
-      '@': resolve(__dirname, './src'),
-    },
+    alias: [
+      // @/src/* → ./src/* (Next.js tsconfig 호환: @/* → [./src/*, ./*])
+      { find: '@/src', replacement: resolve(__dirname, './src') },
+      { find: '@', replacement: resolve(__dirname, './src') },
+    ],
   },
   build: {
     outDir: 'dist',
