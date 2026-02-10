@@ -151,10 +151,16 @@ export function Sidebar() {
   };
   const hasWikiHome = wikiPages ? findHomeInTree(wikiPages) : false;
 
+  // 모바일에서 페이지 이동 링크 클릭 시 사이드바 닫기
   const handleLinkClick = () => {
     if (window.innerWidth < 1024) {
       close();
     }
+  };
+
+  // 카테고리(폴더) 링크 클릭 시에는 사이드바를 닫지 않음 (탐색 중이므로)
+  const handleCategoryClick = () => {
+    // 모바일에서도 카테고리 페이지 이동 시 사이드바 유지
   };
 
   // 모바일 스와이프로 사이드바 닫기
@@ -299,7 +305,7 @@ export function Sidebar() {
             <Link
               href={`/wiki/category/${categoryPath}`}
               className={clsx('nav-folder-link', isActive && 'active')}
-              onClick={handleLinkClick}
+              onClick={handleCategoryClick}
             >
               <span>{categoryName}</span>
             </Link>

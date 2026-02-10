@@ -10,15 +10,15 @@ test.describe('Responsive Design', () => {
 
     test('모바일에서 사이드바가 기본적으로 숨겨져야 함', async ({ page }) => {
       await page.goto('/');
+      await page.waitForLoadState('networkidle');
 
-      // 사이드바가 보이지 않거나 접혀 있어야 함
+      // 사이드바가 열려있지 않아야 함 (open 클래스가 없어야 함)
       const sidebar = page.locator('.sidebar');
-      const isHidden = await sidebar.isHidden().catch(() => true);
-      const hasHiddenClass = await sidebar.evaluate((el) =>
-        el.classList.contains('hidden') || el.classList.contains('closed')
-      ).catch(() => true);
+      const hasOpenClass = await sidebar.evaluate((el) =>
+        el.classList.contains('open')
+      ).catch(() => false);
 
-      expect(isHidden || hasHiddenClass || true).toBeTruthy();
+      expect(hasOpenClass).toBe(false);
     });
 
     test('모바일에서 햄버거 메뉴가 표시되어야 함', async ({ page }) => {
@@ -33,18 +33,17 @@ test.describe('Responsive Design', () => {
       await page.goto('/');
       await page.waitForLoadState('networkidle');
 
-      // 메뉴 버튼 클릭 (force: true로 오버레이 무시)
+      // 메뉴 버튼 클릭
       const menuButton = page.locator('button[aria-label*="menu"], button[aria-label*="사이드바"], .menu-toggle').first();
       await menuButton.click({ force: true });
 
-      // 사이드바 상태 변경 대기
-      await page.waitForTimeout(500);
-
-      // 사이드바가 열렸거나 상태가 변경되었는지 확인
+      // 사이드바가 open 클래스를 가져야 함
       const sidebar = page.locator('.sidebar');
-      const isVisible = await sidebar.isVisible().catch(() => false);
+      await expect(sidebar).toHaveClass(/open/, { timeout: 1000 });
 
-      expect(isVisible || true).toBeTruthy();
+      // 오버레이도 visible이어야 함
+      const overlay = page.locator('.sidebar-overlay');
+      await expect(overlay).toHaveClass(/visible/, { timeout: 1000 });
     });
   });
 
@@ -82,12 +81,13 @@ test.describe('Responsive Design', () => {
     test('TOC(목차)가 넓은 화면에서 표시되어야 함', async ({ page }) => {
       await page.goto('/wiki/index');
 
-      // 목차가 있는 경우 표시되어야 함
+      // 목차가 있는 경우 표시되어야 함 (콘텐츠에 따라 없을 수도 있음)
       const toc = page.locator('.table-of-contents, .toc, [data-toc]');
-      const hasToc = await toc.isVisible().catch(() => false);
+      const tocCount = await toc.count();
 
-      // 목차가 있거나 없을 수 있음 (콘텐츠에 따라)
-      expect(hasToc || true).toBeTruthy();
+      if (tocCount > 0) {
+        await expect(toc.first()).toBeVisible();
+      }
     });
   });
 });

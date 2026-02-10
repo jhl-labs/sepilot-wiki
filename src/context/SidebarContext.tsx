@@ -23,9 +23,9 @@ interface SidebarContextType {
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
-// 모바일(1024px 미만)에서는 기본적으로 사이드바 닫힘
+// SSR에서는 항상 닫힘 → 클라이언트에서 effect로 데스크톱 초기 상태 결정 (Hydration 불일치 방지)
 const getInitialSidebarState = () => {
-  if (typeof window === 'undefined') return true;
+  if (typeof window === 'undefined') return false;
   return window.innerWidth >= 1024;
 };
 
@@ -71,6 +71,18 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // 모바일에서 사이드바 열릴 때 body 스크롤 잠금
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile && isOpen) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [isOpen]);
 
   const setWidth = useCallback((newWidth: number) => {
     const clampedWidth = Math.max(MIN_SIDEBAR_WIDTH, Math.min(newWidth, getMaxWidth()));

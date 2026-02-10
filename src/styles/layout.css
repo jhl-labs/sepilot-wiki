@@ -274,11 +274,18 @@
 @media (max-width: 1023px) {
   .sidebar-overlay.visible {
     display: block;
+    touch-action: none;
+    -webkit-overflow-scrolling: none;
+    overscroll-behavior: none;
   }
 
   .sidebar {
     max-width: calc(100vw - 56px);
     width: 85vw;
+  }
+
+  .sidebar.open {
+    box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1));
   }
 }
 
@@ -430,10 +437,12 @@
   background-color: var(--color-text-muted);
 }
 
-/* 모바일에서 스크롤바 항상 표시 */
+/* 모바일에서 스크롤바 항상 표시 + 터치 스크롤 안정화 */
 @media (max-width: 1023px) {
   .sidebar-nav {
     scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
   .sidebar-nav::-webkit-scrollbar {
@@ -626,8 +635,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
   padding: 0;
   color: var(--color-text-muted);
   background: transparent;
@@ -636,6 +647,15 @@
   cursor: pointer;
   flex-shrink: 0;
   transition: all var(--transition-fast);
+}
+
+@media (max-width: 1023px) {
+  .nav-folder-toggle {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
 }
 
 .nav-folder-toggle:hover {
