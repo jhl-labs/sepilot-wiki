@@ -1,6 +1,47 @@
 {
   "entries": [
     {
+      "id": "5234e0bd-0bce-493f-ac4c-bfcb5e71c03a",
+      "timestamp": "2026-02-10T12:41:41.931Z",
+      "actionType": "generate",
+      "issueNumber": 145,
+      "issueTitle": "Antigravity 릴리즈 노트 정리",
+      "documentSlug": "antigravity",
+      "documentTitle": "Antigravity 릴리즈 노트 정리",
+      "summary": "새 문서 \"Antigravity 릴리즈 노트 정리\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2748
+            },
+            {
+              "step": "outline",
+              "durationMs": 7044
+            },
+            {
+              "step": "write",
+              "durationMs": 34415
+            },
+            {
+              "step": "review",
+              "durationMs": 9905
+            },
+            {
+              "step": "refine",
+              "durationMs": 40226
+            }
+          ],
+          "totalDurationMs": 94338,
+          "researchSources": 8
+        }
+      }
+    },
+    {
       "id": "85b98eed-6643-4c1a-8fbb-057a72725e8c",
       "timestamp": "2026-02-10T12:36:19.614Z",
       "actionType": "generate",
@@ -849,5 +890,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-10T12:36:19.614Z"
+  "lastUpdated": "2026-02-10T12:41:41.931Z"
 }
