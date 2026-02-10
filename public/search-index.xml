@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-10T08:22:25.490Z</generated>
+  <generated>2026-02-10T08:32:59.669Z</generated>
   <count>15</count>
   <items>
   <item>
@@ -279,271 +279,129 @@ KPMG - AI at Scale 2026
 개요
 다중 에이전트 시스템(Multi-Agent System, MAS)은 여러 인공지능(AI) 에이전트가 협력·조정하여 사용자나 다른 시스템을 대신해 복합적인 작업을 수행하도록 설계된 시스템이다. 각 에이전트는 자체적인 속성과 자율성을 가지며, 전체 시스템은 공통 목표를 달성하기 위해 에이전트 간의 커뮤니케이션·...</excerpt>
     <tags>Multi-Agent, AI, Agentic-AI, MCP, A2A, LLM</tags>
-    <lastModified>2026-02-10T17:10:51+09:00</lastModified>
+    <lastModified>2026-02-10T08:22:33Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
     <title>MCP (Model Context Protocol) 완벽 가이드</title>
     <slug>mcp-model-context-protocol</slug>
     <content>MCP란 무엇인가  
-정의 및 핵심 개념  
-Model Context Protocol (MCP) 은 Anthropic이 2024년에 공개한, 대규모 언어 모델(LLM)과 외부 도구·데이터 간의 컨텍스트를 표준화된 방식으로 교환·관리하기 위한 프로토콜입니다.  
-Context : 모델이 이해하고 활용할 수 있는 구조화된 정보(프롬프트, 파일, 도구 정의 등)의 집합.  
-Root : 컨텍스트 트리의 최상위 노드로, 여러 서브‑컨텍스트(예: 파일, 대화 흐름)를 계층적으로 연결합니다.  
-탄생 배경  
-  배경   문제점   MCP가 제공하는 해결책  
- ------ -------- ------------------------ 
-  프롬프트 토큰 제한   토큰 수 초과 시 요약·청크 분할 필요   Roots‑based 트리 구조로 무한히 확장 가능한 컨텍스트 관리  
-  도구 연동 복잡성   프레임워크마다 서로 다른 API   JSON‑RPC 2.0 기반 Tools 정의·등록·실행 표준화  
-  멀티‑모델 협업 요구   모델 간 컨텍스트 공유가 어려움   Host‑Client‑Server 구조에서 중앙 서버가 컨텍스트를 관리, 모델 간 투명하게 공유  
-주요 용어 정리  
-  용어   설명  
+1.1 정의 및 핵심 개념  
+Model Context Protocol (MCP) 은 Anthropic이 2024년 11월에 공개한 오픈 표준 프로토콜이다.  
+LLM(대형 언어 모델)이 외부 시스템(데이터베이스, 파일, 웹 API 등)과 양방향으로 연결되어, 컨텍스트를 일관되게 전달·관리하고, 보안·신뢰성을 유지하도록 설계되었다.  
+Host – LLM을 실행하는 환경(예: Claude Desktop, 클라우드 서비스)  
+Client – Host가 MCP 서버에 요청을 보내는 역할, 일반적으로 SDK를 통해 구현  
+Server – Tools·Resources·Prompts 등을 제공하고, JSON‑RPC 2.0 메시지를 처리하는 중앙 엔티티  
+Tool – 외부 API, CLI, 함수 등 실행 가능한 작업 단위  
+Resource – 파일, DB, 웹 서비스 등 LLM이 읽고 쓸 수 있는 데이터 소스  
+Prompt – LLM에게 전달되는 컨텍스트 템플릿 및 동적 변수  
+Sampling – 토큰 샘플링 파라미터(temperature, top‑p 등)를 모델과 서버가 공유·조정하는 메커니즘  
+Root – 전체 컨텍스트 트리의 시작점(예: 사용자 세션 ID)  
+1.2 발표 배경  
+통합 병목: 기존 LLM‑외부 연동 방식은 각 서비스마다 비표준 API와 인증 로직을 구현해야 했다.  
+컨텍스트 파편화: 여러 도구를 연계할 때 모델이 이전 단계의 상태를 기억하지 못해 반복 호출이 발생했다.  
+보안·신뢰: 임의 코드 실행 위험과 데이터 유출 위험을 최소화하기 위한 통합 인증·권한 모델이 필요했다.  
+MCP는 이러한 문제를 표준화된 메시지 포맷과 역할 기반 보안으로 해결한다.  
+1.3 주요 용어 정리  
+  용어   정의  
  ------ ------ 
-  Host   최종 사용자 혹은 애플리케이션. MCP 서버에 Client SDK를 통해 요청을 보냅니다.  
-  Client   Host가 사용하는 SDK(예: TypeScript, Python). JSON‑RPC 메시지를 생성·전송합니다.  
-  Server   MCP 프로토콜을 구현한 서비스. Context, Tools, Resources 등을 관리합니다.  
-  Context   프롬프트, 파일, 도구 정의 등 모델이 필요로 하는 모든 데이터의 집합.  
-  Root   Context 트리의 최상위 노드. 여러 서브‑Context를 병합·전환할 때 사용됩니다.  
+  Host   LLM을 포함한 애플리케이션(예: Claude Desktop)  
+  Client   Host가 MCP 서버와 통신하기 위해 사용하는 SDK  
+  Server   Tools·Resources·Prompts를 제공하고 JSON‑RPC를 구현  
+  Tool   외부 API 호출, 쉘 명령, 함수 실행 등 작업 단위  
+  Resource   파일, 데이터베이스, 웹 서비스 등 데이터 제공원  
+  Prompt   모델에 전달되는 템플릿 + 변수 구조  
+  Sampling   모델 출력 샘플링 파라미터 전파·조정  
+  Root   컨텍스트 트리의 루트(세션·작업 ID)  
 MCP 아키텍처  
-전체 구조 개요  
-    Host  ←→  Client SDK  ←→  MCP Server  ←→  LLM (Claude, GPT, …) / 외부 리소스  
-Host : UI, IDE, 백엔드 서비스 등 다양한 형태가 가능합니다.  
-Client SDK : JSON‑RPC 메시지를 직렬화하고, 인증·재시도 로직을 담당합니다.  
-MCP Server : Context 저장소, Tool 실행 엔진, 샘플링 파라미터 관리 등을 제공하며 LLM 호출을 중계합니다.  
-역할 및 책임 분담  
-  구성 요소   주요 책임  
- ----------- ----------- 
-  Host   사용자 입력 수집, 결과 표시, 비즈니스 로직 구현  
-  Client SDK   RPC 호출 추상화, 오류 처리, 인증 토큰 삽입  
-  MCP Server   Context CRUD (create, read, update, delete)Tool/Resource 등록·실행Prompt 버전 관리·Root 전환샘플링 파라미터 전달  
-  LLM   실제 텍스트 생성, Tool 호출 시 반환값 수신  
-통신 프로토콜 상세  
-MCP는 JSON‑RPC 2.0을 기반으로 하며, 주요 메서드는 다음과 같습니다(공식 스펙은  ※ 가상 예시임을 유의).  
-  메서드   설명   주요 파라미터  
- ------- ------ ---------------- 
-     새로운 Context(또는 Root)를 생성   ,   
-     파일·데이터·URL 등을 Context에 추가   ,   
-     Tool 정의를 서버에 등록   , ,   
-     등록된 Tool을 실행   , ,   
-     Prompt(또는 Chain)를 실행   , ,   
-     두 개 이상의 Root를 병합     
-     현재 서버에 존재하는 Context 조회    (선택)  
-메시지 예시 (JSON‑RPC)  
-Request  
-    {
-        &quot;jsonrpc&quot;: &quot;2.0&quot;,
-        &quot;id&quot;: &quot;12345&quot;,
-        &quot;method&quot;: &quot;invokePrompt&quot;,
-        &quot;params&quot;: {
-            &quot;promptId&quot;: &quot;claude-v2&quot;,
-            &quot;contextId&quot;: &quot;root-abc&quot;,
-            &quot;samplingParams&quot;: {&quot;temperature&quot;:0.7,&quot;topp&quot;:0.9}
-        }
-    }
-Response  
-    {
-        &quot;jsonrpc&quot;: &quot;2.0&quot;,
-        &quot;id&quot;: &quot;12345&quot;,
-        &quot;result&quot;: {
-            &quot;completion&quot;:&quot;…&quot;,
-            &quot;usage&quot;:{&quot;tokens&quot;:123}
-        }
-    }
-Note: 실제 메서드·파라미터 명세는 공식 스펙을 반드시 확인하십시오.  
-보안·인증 메커니즘  
-API 키 :  헤더를 통해 인증합니다.  
-TLS : 모든 통신은 HTTPS(또는 WSS)로 암호화됩니다.  
-Scope 기반 권한 : API 키에 부여할 수 있는 대표적인 스코프 예시  
-  -  – Context 조회 전용  
-  -  – Context 생성·수정·삭제  
-  -  – Tool 메타데이터 조회  
-  -  – Tool 실행 권한  
-  -  – Prompt 호출 권한  
-확장 포인트  
-플러그인 – Server는 플러그인 인터페이스를 제공해 커스텀 Tool 실행 엔진을 추가할 수 있습니다.  
-커스텀 Resource Handler – 파일 시스템, 데이터베이스, 클라우드 스토리지 등 다양한 백엔드와 연동 가능합니다.  
-Event Hook – ,  등 이벤트를 구독해 로깅·감사 기능을 구현할 수 있습니다.  
+2.1 전체 구성도와 역할 구분  
+Host ↔ Client: TLS‑encrypted HTTP/HTTPS 연결, API‑Key 기반 인증.  
+Client ↔ Server: JSON‑RPC 2.0 요청/응답 흐름. 각 RPC 메서드는  형태(예: ).  
+Server ↔ Tools/Resources: 내부 플러그인 인터페이스(동기·비동기) 또는 외부 마이크로서비스 호출.  
+2.2 통신 레이어: JSON‑RPC 2.0  
+요청:   
+응답:  또는  객체.  
+알림(notification): 서버가 비동기 이벤트(예: 파일 변경) 를 Host에 푸시할 때 사용,  없이 전송.  
+공식 스펙:   
+2.3 보안·인증 메커니즘  
+  요소   설명  
+ ------ ------ 
+  API 키   Server‑side에 사전 등록, 요청 헤더   
+  TLS   모든 통신은 HTTPS(또는 wss) 로 암호화  
+  Scope   키당 허용된 Tool·Resource 목록을 정의(예: , )  
+  Auditing   요청·응답 로그를 JSON 형태로 저장, 선택적 서명 검증 제공  
+2.4 확장성 포인트  
+플러그인: Server는 Node.js, Python, Go 등 다양한 런타임에서 플러그인 형태로 Tool·Resource를 로드.  
+멀티‑Server 라우팅: 하나의 Host가 여러 Server에 동시에 연결 가능(예: 파일 서버 + 비즈니스 API 서버). 라우팅 정책은  메서드로 정의.  
+로드밸런싱·스케일링: Kubernetes Ingress + Horizontal Pod Autoscaler 로 수평 확장 가능.  
 MCP 핵심 기능  
-Tools  
-정의 : 입력 스키마(JSON Schema)와 실행 엔드포인트(URL)를 포함하는 선언형 객체.  
-등록 흐름 :  → Server에 저장 → Client가 Tool ID를 받아 사용.  
-실행 흐름 : Host가  호출 → Server가 지정된 핸들러(예: Lambda, Docker) 실행 → 결과를 Context에 삽입.  
-Resources  
-외부 파일·데이터를 Context에 연결하는 메커니즘.  
-로 파일 업로드·URL 지정·데이터베이스 레코드 연결이 가능합니다.  
-Resource 메타데이터(, , )는 자동 검증됩니다.  
-Prompts  
-버전·Root 개념 : Prompt는 특정 Root에 바인딩되며, Root가 교체되면 Prompt 버전도 전환됩니다.  
-관리 API : , , .  
-템플릿 엔진 : Jinja‑like 변수 치환이 기본 제공되며, Context 변수와 연동됩니다(구현 상세는 공식 스펙 참고).  
-Sampling  
-시  객체에 , , ,  등을 전달합니다.  
-Server는 파라미터를 LLM API 호출에 그대로 매핑하고, 사용량(토큰) 정보를 반환합니다.  
-Roots  
-트리 구조 : Root → Sub‑Context(파일, 대화, 도구 결과) → Leaf.  
-전환·병합 :  로 여러 작업 흐름을 하나의 컨텍스트로 통합하거나,  로 현재 작업 흐름을 교체합니다.  
-버전 관리 : 각 Root는 immutable ID와 mutable 메타데이터를 가집니다.  
+3.1 Tools  
+정의: , , ,  로 선언.  
+예시:  (REST API),  (CLI),  (Python 함수).  
+실행 흐름: Host → Client () → Server → Tool 구현체 → 결과 반환 → Host.  
+3.2 Resources  
+데이터 소스 유형: , , , .  
+읽기/쓰기 권한: , ,  로 세분화된 Scope 제공.  
+버전 관리: Resource에  혹은  메타데이터를 포함해 충돌 방지.  
+3.3 Prompts  
+템플릿: Jinja‑like 구문()을 사용해 동적 변수 삽입.  
+컨텍스트 트리: Prompt는 Root → Sub‑Prompt 형태로 계층화 가능, 각 단계마다 Sampling 파라미터를 재정의할 수 있다.  
+3.4 Sampling  
+전파 메커니즘:  메서드로 Host가 현재 temperature, top‑p 등을 Server에 전달.  
+조정 시점: Tool 실행 전후, 또는 사용자 피드백(예: “more creative”)에 따라 동적으로 변경.  
+3.5 Roots  
+역할: 세션·작업을 구분하는 고유 식별자.  
+관리: ,  로 생명주기 제어.  
+멀티‑Root: 복수 작업을 병렬 처리할 때 각각 독립된 컨텍스트 트리를 유지.  
 MCP Server 구축 방법  
-주의: 아래 예시는 공식 SDK(Version 1.2.x 기준) 기반이며, 실제 배포 전 공식 문서와 버전 호환성을 반드시 확인하십시오.  
-1) 환경 준비  
-  언어   최소 요구 버전   SDK 설치 명령  
- ------ ---------------- ---------------- 
-  TypeScript (Node.js)   Node 18+     
-  Python   3.9+     
-2) 기본 서버 구현 (TypeScript)  
-핸들러 흐름:  →  →   
-    import { MCPServer } from &apos;@anthropic/mcp-sdk&apos;;
-    
-    const server = new MCPServer({ apiKey: process.env.MCPAPIKEY });
-    
-    // Context (Root) 생성
-    const root = await server.createContext({ type: &apos;root&apos;, metadata: { name: &apos;my-app&apos; } });
-    
-    // Tool 등록
-    await server.registerTool({
-        toolId: &apos;search-web&apos;,
-        schema: { / JSON Schema / },
-        handlerUrl: &apos;https://myservice.example.com/websearch&apos;
-    });
-    
-    // Prompt 실행
-    const result = await server.invokePrompt({
-        promptId: &apos;claude-v1&apos;,
-        contextId: root.id,
-        samplingParams: { temperature: 0.6, maxtokens: 512 }
-    });
-    
-    console.log(&apos;Completion:&apos;, result.completion);
-    
-위 코드는 핸들러 등록 → Prompt 호출 흐름을 보여줍니다.  
-3) 기본 서버 구현 (Python)  
-    from anthropicmcpsdk import MCPServer
-    import os
-    
-    server = MCPServer(apikey=os.getenv(&apos;MCPAPIKEY&apos;))
-    
-    # Root 생성
-    root = server.createcontext(type=&apos;root&apos;, metadata={&apos;name&apos;: &apos;my-app&apos;})
-    
-    # Tool 등록
-    server.registertool(
-        toolid=&apos;search-web&apos;,
-        schema={...},               # JSON Schema
-        handlerurl=&apos;https://myservice.example.com/websearch&apos;
-    )
-    
-    # Prompt 호출
-    result = server.invokeprompt(
-        promptid=&apos;claude-v1&apos;,
-        contextid=root.id,
-        samplingparams={&apos;temperature&apos;: 0.7, &apos;maxtokens&apos;: 400}
-    )
-    
-    print(&apos;Completion:&apos;, result[&apos;completion&apos;])
-4) 주요 API 구현 가이드  
-  API   목적   핵심 파라미터  
- ----- ------ -------------- 
-     새로운 Root/Context 생성   ,   
-     파일·데이터 연결   ,  (파일 스트림·URL)  
-     Tool 정의 등록   , ,   
-     Tool 실행   , ,   
-     Prompt 실행   , ,   
-     다중 Root 병합    (배열)  
-5) 배포 옵션  
-Docker : 공식 Dockerfile( 혹은 )이 제공됩니다.  
-Serverless : AWS Lambda, Cloudflare Workers 등에서 만 지정하면 동작합니다.  
-Kubernetes : 커뮤니티가 유지하는 Helm chart()가 존재하지만, 최신 버전 여부는 공식 레포지토리에서 확인하십시오.  
-6) 모니터링 포인트  
-  항목   권장 도구  
+4.1 사전 준비  
+  항목   권장 버전  
  ------ ----------- 
-  요청/응답 지연   Prometheus + Grafana (HTTP latency metric)  
-  오류율   Sentry, Datadog  
-  토큰 사용량   Server 내부 로그 → CloudWatch Exporter  
-  Tool 실행 성공률   Custom metric   
-실제 활용 사례  
-1) Claude Desktop  
-시나리오 : 로컬 Claude 모델이 대용량 문서(수십 MB)를 다룰 때, MCP Server가 문서 파일을 Resource 로 관리하고 UI는 Host 로서 Prompt와 Tool(예: 파일 검색, 요약) 호출을 수행합니다.  
-성과  
-  - 평균 응답 시간 350 ms (기존 800 ms 대비 56 % 감소)  
-  - 토큰 사용량 30 % 절감 (Root 기반 컨텍스트 재사용)  
-2) IDE 플러그인 (VS Code, JetBrains)  
-구현 흐름  
-  1. 개발자가 코드 조각을 선택 → 플러그인이 MCP Client SDK를 통해  로 현재 파일을 Context에 추가.  
-  2.  로 “코드 설명” Prompt 실행 → LLM이 파일 전체 컨텍스트를 활용해 상세 설명 반환.  
-  3.  로 “테스트 자동 생성” Tool을 등록하고,  로 테스트 코드를 자동 생성.  
-효과  
-  - 전체 코드베이스 전송 없이 네트워크 비용 40 % 절감  
-  - 자동 테스트 생성 정확도 85 % (기존 60 % 대비)  
-3) 기업 통합 사례 (CRM·ERP)  
-배경 : 대기업이 고객 문의 자동 응답 시스템에 LLM을 도입하면서, 내부 DB와 실시간 연동이 필요했습니다.  
-MCP 적용  
-  - Resources 로 CRM 레코드(REST API)와 ERP 주문 데이터(데이터베이스 뷰)를 연결.  
-  - Tools 로 “주문 상태 조회”, “고객 이력 요약” 등을 정의하고, LLM이 필요 시 호출.  
-  - Roots 로 “고객 세션” 별 컨텍스트를 분리해 멀티‑테넌시 보장.  
-성과  
-  - 평균 응답 시간 420 ms, SLA 99.9 % 달성  
-  - 연간 LLM 호출 비용 22 % 절감 (컨텍스트 재사용 및 토큰 절감)  
-기존 방식과의 비교  
-  구분   Function Calling (OpenAI)   LangChain Tools   MCP  
- ------ --------------------------- ----------------- ----- 
-  프로토콜   HTTP JSON (custom)   Python 객체 기반   JSON‑RPC 2.0 (표준)  
-  컨텍스트 관리   Prompt에 직접 삽입   LangChain 메모리 객체   Roots‑based 트리 구조  
-  멀티‑모델 지원   제한적 (특정 모델에 종속)   프레임워크 레벨 구현   Server 중심, 모델 독립  
-  Tool 정의   JSON Schema (OpenAI)   Python 함수   JSON Schema +   
-  보안   API 키 + IAM   프레임워크 내부   API 키 + TLS + Scope  
-  확장성   제한적 (플러그인 미지원)   커스텀 체인 가능   플러그인·Hook·Event 지원  
-장단점  
-MCP 장점  
-  - 표준화된 RPC 덕분에 언어·플랫폼 간 호환성이 뛰어남.  
-  - Root 기반 트리 구조로 장기 대화·대용량 문서 처리에 강점.  
-  - 중앙 서버가 컨텍스트를 관리하므로 멀티‑모델·멀티‑클라이언트 환경에 적합.  
-MCP 단점  
-  - 초기 도입 시 Server 구축·운영 비용이 발생.  
-  - 기존 프로젝트가 Function Calling에 깊게 결합돼 있으면 마이그레이션 비용이 존재.  
-선택 가이드  
-  상황   권장 선택  
- ------ ----------- 
-  단일 모델, 간단한 함수 호출만 필요   Function Calling (OpenAI)  
-  Python 기반 워크플로우, LangChain 에코시스템 활용   LangChain Tools  
-  다중 모델·다중 클라이언트, 대규모 컨텍스트 필요   MCP (표준화·확장성)  
-MCP 생태계 현황  
-공식 MCP 서버 리스트  
-  서버 이름   제공자   엔드포인트   특징  
- ----------- -------- ------------ ------ 
-     Anthropic      최신 버전, SLA 99.95 %  
-     Anthropic EU      GDPR 준수, EU 데이터 센터  
-     Community      오픈소스, 커스텀 플러그인 지원 (※ 가상 예시)  
-주의: 위 엔드포인트는 현재 공개된 공식 정보가 없으므로 “가상 예시”임을 명시합니다. 실제 사용 전 공식 문서를 반드시 확인하십시오.  
-커뮤니티 운영 서버 및 오픈소스 프로젝트  
-GitHub :  (TypeScript, Python) – SDK와 샘플 서버 포함.  
-HuggingFace :  – Docker 이미지와 Helm chart 제공.  
-Discord / Forum :  채널에서 플러그인 아이디어·버그 리포트가 활발히 진행됩니다.  
-주요 SDK·플러그인  
-  언어   레포지토리   특징  
- ------ ----------- ------ 
-  TypeScript      Promise 기반, RxJS 연동 예제  
-  Python      AsyncIO 지원, FastAPI 예제  
-  Rust      고성능 서버 구현용, WASM 지원 (※ 가상 예시)  
-이벤트·컨트리뷰션 포인트  
-MCP Workshop 2024 (San Francisco) – 연례 워크숍, 최신 스펙 발표.  
-RFC Process – 새로운 메서드·스키마 제안은  에서 공개 토론.  
-Hackathon – 매년 2회, “MCP 기반 멀티‑모델 어플리케이션” 주제로 진행.  
-부록 (참고 자료)  
-  자료   URL   비고  
- ------ ----- ------ 
-  공식 스펙 문서      전체 메서드·스키마 정의 (※ 가상 예시)  
-  API 레퍼런스      SDK와 직접 매핑되는 엔드포인트  
-  최신 블로그 포스트 (2024‑05)      MCP 탄생 배경 및 로드맵  
-  발표 슬라이드 (2024 Re:Invent)      아키텍처 다이어그램  
-  FAQ      일반적인 질문·답변  
-  용어 사전      용어 정의와 예시  
-추가 조사 필요: 일부 메서드·파라미터 상세, 커뮤니티 서버 최신 리스트, Rust SDK 현황 등은 공식 업데이트를 확인하시기 바랍니다.</content>
+  Node.js   &gt;=18  
+  Python   &gt;=3.10  
+  Docker   &gt;=24  
+  데이터베이스 (옵션)   SQLite (개발), PostgreSQL (프로덕션)  
+4.2 공식 SDK 소개  
+TypeScript SDK:  (npm) – ,  클래스 제공.  
+  - 공식 레포:   
+Python SDK:  (PyPI) – ,  모듈 제공.  
+  - 공식 레포:   
+4.3 최소 구현 예제 (TypeScript)  
+패키지 설치  
+   
+핸들러 등록  
+   
+인증 및 스코프 설정  
+   
+주의: 위 코드는 실제 실행을 위한 최소 예시이며, 프로덕션에서는 입력 검증, 오류 처리, 로깅, 레이트 리밋 등을 추가해야 한다.  
+4.4 Python 예제 (핵심 흐름)  
+패키지 설치  
+   
+서버 구현  
+   
+4.5 설정 파일 구조  
+docker-compose.ymlDeploymentServiceIngressSecretfile.readread:filegit.clonerepo.searchprompt.codeContextrootIdsampling.updatecrm.fetchCustomerpayment.initiatesensor.readmaintenance.schedulecatalog.searchuser.profileread:fileinvoke:weatherapiAuthorization: Bearer params.argsvalidatemcp.routing.inspectscope mismatchdefineScopeParse error` 확인   JSON 직렬화 라이브러리 사용 검증  
+8.4 참고 문서·링크 모음  
+  종류   링크  
+ ------ ------ 
+  공식 스펙     
+  TypeScript SDK     
+  Python SDK     
+  MCP 레지스트리     
+  Claude Desktop 소개     
+  LangChain Tools 비교     
+  OpenAI Function Calling     
+  Thoughtworks MCP 분석     
+  Udemy 강좌     
+  IAM 보안 가이드     
+--- 
+본 문서는 2024‑12 기준 공개된 정보를 기반으로 작성되었습니다. 최신 버전이나 신규 기능에 대해서는 공식 사이트 및 레포지터리를 지속적으로 확인하시기 바랍니다.</content>
     <excerpt>MCP란 무엇인가  
-정의 및 핵심 개념  
-Model Context Protocol (MCP) 은 Anthropic이 2024년에 공개한, 대규모 언어 모델(LLM)과 외부 도구·데이터 간의 컨텍스트를 표준화된 방식으로 교환·관리하기 위한 프로토콜입니다.  
-Context : 모델이 이해하고 활용할 수 있는 구조화된 정보(프롬프트, 파일, 도구 정의 등)...</excerpt>
-    <tags>MCP, Model Context Protocol, Anthropic, LLM, JSON-RPC, SDK</tags>
-    <lastModified>2026-02-10T08:22:25.442Z</lastModified>
+1.1 정의 및 핵심 개념  
+Model Context Protocol (MCP) 은 Anthropic이 2024년 11월에 공개한 오픈 표준 프로토콜이다.  
+LLM(대형 언어 모델)이 외부 시스템(데이터베이스, 파일, 웹 API 등)과 양방향으로 연결되어, 컨텍스트를 일관되게 전달·관리하고, 보안·신뢰성을 유지하도록 설계되었다....</excerpt>
+    <tags>MCP, Model Context Protocol, Anthropic, AI Integration, JSON-RPC, SDK</tags>
+    <lastModified>2026-02-10T08:22:33Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -593,7 +451,7 @@ React Router DOM - SPA 라우팅
 TanStack Query (React Query) - 서버 상태 관리
 Next.js...</excerpt>
     <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite</tags>
-    <lastModified>2026-02-10T17:10:51+09:00</lastModified>
+    <lastModified>2026-02-10T08:22:33Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -698,8 +556,8 @@ LLM 설정
     <excerpt>SEPilot Desktop 소개
 SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
     <tags>SEPilot, Desktop, LLM, Project</tags>
-    <lastModified>2026-02-10T17:10:51+09:00</lastModified>
-    <author>JHL</author>
+    <lastModified>2026-02-10T08:22:33Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>bun과 pnpm, npm의 차이</title>
@@ -753,8 +611,8 @@ pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하�
 은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
 이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
     <tags>bun, pnpm, npm, 비교, 가이드</tags>
-    <lastModified>2026-02-10T17:10:51+09:00</lastModified>
-    <author>JHL</author>
+    <lastModified>2026-02-10T08:22:33Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>bun 이란?</title>
@@ -815,7 +673,7 @@ bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저
 번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
 패키지...</excerpt>
     <tags>bun, npm, yarn, 패키지 매니저, 가이드</tags>
-    <lastModified>2026-02-10T17:10:51+09:00</lastModified>
+    <lastModified>2026-02-10T08:22:33Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -865,7 +723,7 @@ GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매�
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
 워크플로우...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative</tags>
-    <lastModified>2026-02-10T17:10:51+09:00</lastModified>
+    <lastModified>2026-02-10T08:22:33Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
