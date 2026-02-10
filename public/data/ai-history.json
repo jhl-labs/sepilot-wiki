@@ -1,6 +1,47 @@
 {
   "entries": [
     {
+      "id": "85b98eed-6643-4c1a-8fbb-057a72725e8c",
+      "timestamp": "2026-02-10T12:36:19.614Z",
+      "actionType": "generate",
+      "issueNumber": 143,
+      "issueTitle": "Antigravity 완벽 가이드",
+      "documentSlug": "antigravity",
+      "documentTitle": "Antigravity 완벽 가이드",
+      "summary": "새 문서 \"Antigravity 완벽 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3055
+            },
+            {
+              "step": "outline",
+              "durationMs": 8531
+            },
+            {
+              "step": "write",
+              "durationMs": 30665
+            },
+            {
+              "step": "review",
+              "durationMs": 6939
+            },
+            {
+              "step": "refine",
+              "durationMs": 33717
+            }
+          ],
+          "totalDurationMs": 82907,
+          "researchSources": 9
+        }
+      }
+    },
+    {
       "id": "33d24595-8289-4f29-87d4-d64cd6aaa99d",
       "timestamp": "2026-02-10T12:25:37.283Z",
       "actionType": "generate",
@@ -808,5 +849,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-10T12:25:37.283Z"
+  "lastUpdated": "2026-02-10T12:36:19.614Z"
 }
