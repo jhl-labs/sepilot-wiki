@@ -7,6 +7,7 @@ tags: [Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 
 related_docs: ["claude-code.md", "mcp-model-context-protocol.md", "multi-agent-system.md"]
 redirect_from:
   - claude-code
+  - claude-code-release-history
 ---
 
 ## 1. 서문

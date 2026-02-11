@@ -5,6 +5,7 @@ status: draft
 tags: [AI, 소셜네트워크, 에이전트, Moltbook, OpenClaw]
 redirect_from:
   - moltbook
+  - moltbook-intro
 related_docs: ["openclaw-complete-guide.md", "openclaw.md", "multi-agent-system.md"]
 ---
 

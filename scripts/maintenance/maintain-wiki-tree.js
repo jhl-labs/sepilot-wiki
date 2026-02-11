@@ -207,6 +207,20 @@ async function analyzeWikiStructure(documents) {
   ]
 }
 
+## 카테고리 분류 규칙 (반드시 준수)
+
+### 카테고리 정의
+- **projects/**: 특정 제품·프로젝트·서비스 문서 (소개, 릴리즈 노트, 가이드 등). 예: Antigravity, Claude Code, OpenClaw, Moltbook, SEPilot
+- **ai/**: AI 기술·개념·프로토콜·아키텍처 문서. 제품 고유 문서가 아닌 범용 기술 가이드. 예: MCP, Multi-Agent System, Continuous AI
+- **기술 도구 카테고리** (bun/, kubernetes/ 등): 개발 도구·인프라 기술별 문서
+
+### 분류 판단 기준
+1. 문서가 **특정 제품/서비스 이름**을 title에 포함하면 → \`projects/\`
+2. 문서가 **범용 기술 개념/프로토콜**을 다루면 → 해당 기술 카테고리 (ai/, kubernetes/ 등)
+3. 릴리즈 노트·버전 히스토리·상세 가이드는 **메인 문서와 같은 카테고리**에 배치
+4. 루트 레벨에는 home.md 외 문서 금지 → 반드시 적절한 카테고리로 이동 (type: "move")
+5. 1개 문서만 있는 카테고리는 상위 또는 관련 카테고리에 통합 검토
+
 ## 중요 규칙
 
 - 파일명은 영문 소문자, 하이픈만 사용 (예: getting-started.md)
