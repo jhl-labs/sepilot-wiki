@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-11T05:12:33.711Z",
+  "collectedAt": "2026-02-11T05:58:23.851Z",
   "overview": {
     "totalDocuments": 17,
-    "publishedDocuments": 6,
-    "draftDocuments": 11,
+    "publishedDocuments": 7,
+    "draftDocuments": 10,
     "openRequests": 5,
     "closedRequests": 14,
-    "totalAIActions": 59
+    "totalAIActions": 61
   },
   "activity": {
     "last1h": {
-      "aiActions": 3,
+      "aiActions": 4,
       "documentsCreated": 0,
       "documentsModified": 2,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 27,
+      "aiActions": 29,
       "documentsCreated": 9,
       "documentsModified": 8,
       "tavilyApiCalls": 25,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 622576
     },
     "last7d": {
-      "aiActions": 33,
+      "aiActions": 35,
       "documentsCreated": 11,
       "documentsModified": 9,
       "tavilyApiCalls": 25,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-11T05:57:26.694Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-11T05:13:59.762Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-11T05:10:06.615Z",
       "actionType": "recover",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T12:09:10.603Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T12:08:22.598Z",
-      "actionType": "generate",
-      "issueNumber": 136,
-      "documentTitle": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 50680,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1982
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 55,
+      "totalActions": 57,
       "totalEstimatedTokens": 29104,
       "avgDurationMs": 69175
     },
