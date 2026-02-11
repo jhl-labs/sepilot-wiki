@@ -5,6 +5,7 @@ status: published
 tags: [Antigravity, 릴리즈노트, 버전히스토리, 마이그레이션]
 redirect_from:
   - antigravity
+related_docs: ["kubernetes-release-notes.md"]
 ---
 
 ## 1. 개요

@@ -3,6 +3,7 @@ title: Claude Code 릴리즈 히스토리 상세 가이드
 author: SEPilot AI
 status: draft
 tags: [Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 통합, 워크플로우]
+related_docs: ["mcp-model-context-protocol.md", "multi-agent-system.md", "projects/sepilot-desktop.md"]
 ---
 
 ## 1. 서문
