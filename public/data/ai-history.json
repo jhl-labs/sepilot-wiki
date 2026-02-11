@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "91b4929f-e028-4200-884e-fe696a9767c1",
+      "timestamp": "2026-02-11T07:42:21.405Z",
+      "actionType": "generate",
+      "issueNumber": 156,
+      "issueTitle": "[요청]",
+      "documentSlug": "",
+      "documentTitle": "Opencode에 대해",
+      "summary": "새 문서 \"Opencode에 대해\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4726
+            },
+            {
+              "step": "outline",
+              "durationMs": 5292
+            },
+            {
+              "step": "write",
+              "durationMs": 17677
+            },
+            {
+              "step": "review",
+              "durationMs": 5086
+            }
+          ],
+          "totalDurationMs": 32781,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1403,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "78f5e19f-bc0c-4faf-bfbf-5e62df8bc5be",
       "timestamp": "2026-02-11T06:10:23.362Z",
       "actionType": "cross_reference",
@@ -1156,5 +1201,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-11T06:10:23.363Z"
+  "lastUpdated": "2026-02-11T07:42:21.405Z"
 }

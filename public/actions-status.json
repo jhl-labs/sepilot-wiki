@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-02-11T06:28:26.247Z",
+  "collectedAt": "2026-02-11T07:42:29.147Z",
   "repository": "jhl-labs/sepilot-wiki",
   "summary": {
     "totalWorkflows": 19,
@@ -88,6 +88,18 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/deploy-pages.yml",
       "recentRuns": [
         {
+          "id": 21896205172,
+          "name": "Deploy to GitHub Pages",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "schedule",
+          "createdAt": "2026-02-11T07:21:15Z",
+          "updatedAt": "2026-02-11T07:22:34Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21896205172",
+          "actor": "declue"
+        },
+        {
           "id": 21894893224,
           "name": "Deploy to GitHub Pages",
           "status": "completed",
@@ -134,18 +146,6 @@
           "updatedAt": "2026-02-11T06:10:56Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21894665889",
           "actor": "declue"
-        },
-        {
-          "id": 21894414141,
-          "name": "Deploy to GitHub Pages",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "push",
-          "createdAt": "2026-02-11T05:56:49Z",
-          "updatedAt": "2026-02-11T05:58:04Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21894414141",
-          "actor": "declue"
         }
       ]
     },
@@ -154,10 +154,22 @@
       "name": "Issue Handler",
       "path": ".github/workflows/issue-handler.yml",
       "state": "active",
-      "overallStatus": "success",
+      "overallStatus": "in_progress",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/Issue%20Handler/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/issue-handler.yml",
       "recentRuns": [
+        {
+          "id": 21896675340,
+          "name": "Issue Handler",
+          "status": "in_progress",
+          "conclusion": null,
+          "branch": "main",
+          "event": "issues",
+          "createdAt": "2026-02-11T07:41:23Z",
+          "updatedAt": "2026-02-11T07:41:27Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21896675340",
+          "actor": "buizclue"
+        },
         {
           "id": 21893811457,
           "name": "Issue Handler",
@@ -205,18 +217,6 @@
           "updatedAt": "2026-02-11T05:11:13Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21893520420",
           "actor": "declue"
-        },
-        {
-          "id": 21893520413,
-          "name": "Issue Handler",
-          "status": "completed",
-          "conclusion": "cancelled",
-          "branch": "main",
-          "event": "issues",
-          "createdAt": "2026-02-11T05:10:08Z",
-          "updatedAt": "2026-02-11T05:10:09Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21893520413",
-          "actor": "declue"
         }
       ]
     },
@@ -225,19 +225,19 @@
       "name": "Scheduled Status Collection",
       "path": ".github/workflows/scheduled-collect.yml",
       "state": "active",
-      "overallStatus": "in_progress",
+      "overallStatus": "success",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/Scheduled%20Status%20Collection/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/scheduled-collect.yml",
       "recentRuns": [
         {
           "id": 21895058223,
           "name": "Scheduled Status Collection",
-          "status": "in_progress",
-          "conclusion": null,
+          "status": "completed",
+          "conclusion": "success",
           "branch": "main",
           "event": "schedule",
           "createdAt": "2026-02-11T06:28:00Z",
-          "updatedAt": "2026-02-11T06:28:04Z",
+          "updatedAt": "2026-02-11T06:28:39Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21895058223",
           "actor": "declue"
         },
@@ -820,6 +820,18 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/dashboard-collect.yml",
       "recentRuns": [
         {
+          "id": 21895541834,
+          "name": "Dashboard Stats Collection",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "schedule",
+          "createdAt": "2026-02-11T06:50:54Z",
+          "updatedAt": "2026-02-11T06:51:20Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21895541834",
+          "actor": "declue"
+        },
+        {
           "id": 21894440613,
           "name": "Dashboard Stats Collection",
           "status": "completed",
@@ -866,32 +878,20 @@
           "updatedAt": "2026-02-11T02:21:02Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21890270281",
           "actor": "declue"
-        },
-        {
-          "id": 21888592621,
-          "name": "Dashboard Stats Collection",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-02-11T01:01:16Z",
-          "updatedAt": "2026-02-11T01:01:43Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21888592621",
-          "actor": "declue"
         }
       ]
     }
   ],
   "inProgress": [
     {
-      "id": 21895058223,
-      "workflowName": "Scheduled Status Collection",
+      "id": 21896675340,
+      "workflowName": "Issue Handler",
       "status": "in_progress",
       "branch": "main",
-      "event": "schedule",
-      "createdAt": "2026-02-11T06:28:00Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21895058223",
-      "actor": "declue"
+      "event": "issues",
+      "createdAt": "2026-02-11T07:41:23Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/21896675340",
+      "actor": "buizclue"
     }
   ],
   "recentFailures": [
