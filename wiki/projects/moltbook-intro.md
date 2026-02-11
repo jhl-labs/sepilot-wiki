@@ -6,7 +6,7 @@ tags: [AI, 소셜네트워크, 에이전트, Moltbook, OpenClaw]
 redirect_from:
   - moltbook
   - moltbook-intro
-related_docs: ["openclaw.md", "openclaw-complete-guide.md", "multi-agent-system.md", "ci-continuous-ai.md", "sepilot-desktop-intro.md"]
+related_docs: ["openclaw-complete-guide.md", "multi-agent-system.md", "ci-continuous-ai.md", "sepilot-desktop-intro.md"]
 ---
 
 ## Executive Summary

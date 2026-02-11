@@ -8,7 +8,9 @@ redirect_from:
   - openclaw-guide
   - openclaw
   - openclaw-complete-guide
-related_docs: ["openclaw.md", "moltbook-intro.md", "sepilot-desktop-intro.md", "ci-continuous-ai.md", "multi-agent-system.md"]
+  - ai-openclaw
+  - projects-openclaw
+related_docs: ["moltbook-intro.md", "sepilot-desktop-intro.md", "ci-continuous-ai.md", "multi-agent-system.md"]
 ---
 
 ## OpenClaw 개요 및 핵심 개념

@@ -1,26 +1,6 @@
 {
   "pages": [
     {
-      "title": "Getting Started",
-      "slug": "getting-started",
-      "content": "\n# Getting Started\n\n*This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.*\n",
-      "tags": [
-        "getting-started",
-        "introduction",
-        "setup"
-      ]
-    },
-    {
-      "title": "LLM Workflow",
-      "slug": "llm-workflow",
-      "content": "\n# LLM Workflow\n\n*This document is a placeholder for the LLM Workflow guide. Provide step‑by‑step instructions, architecture diagrams, and usage examples here.*\n",
-      "tags": [
-        "LLM",
-        "workflow",
-        "integration"
-      ]
-    },
-    {
       "title": "Configuration Guide",
       "slug": "configuration-guide",
       "content": "\n# Configuration Guide\n\n*This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.*\n",
@@ -41,6 +21,16 @@
       ]
     },
     {
+      "title": "Diagrams Guide",
+      "slug": "diagrams-guide",
+      "content": "\n# Diagrams Guide\n\n*This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.*\n",
+      "tags": [
+        "diagrams",
+        "visuals",
+        "documentation"
+      ]
+    },
+    {
       "title": "다이어그램 및 차트 사용 가이드",
       "slug": "diagrams",
       "content": "\n# 다이어그램 및 차트 사용 가이드\n\nSEPilot Wiki는 복잡한 아이디어와 데이터를 시각화하기 위해 **Mermaid**와 **Plotly**를 지원합니다.\n마크다운 코드 블록을 사용하여 간편하게 다이어그램과 차트를 그릴 수 있습니다.\n\n## Mermaid 다이어그램\n\n`mermaid` 언어로 코드 블록을 작성하면 자동으로 다이어그램으로 렌더링됩니다.\n\n### 플로우차트 (Flowchart)\n\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n\n````markdown\n```mermaid\ngraph TD;\n    Start-->Stop;\n    Start-->Progress;\n    Progress-->Stop;\n```\n````\n\n### 시퀀스 다이어그램 (Sequence Diagram)\n\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n\n````markdown\n```mermaid\nsequenceDiagram\n    participant Alice\n    participant Bob\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts <br/>prevail!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!\n```\n````\n\n### 클래스 다이어그램 (Class Diagram)\n\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n\n````markdown\n```mermaid\nclassDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }\n```\n````\n\n더 많은 문법은 [Mermaid 공식 문서](https://mermaid.js.org/intro/)를 참고하세요.\n\n## Plotly 차트\n\n`plotly` 언어로 코드 블록을 작성하고 JSON 데이터를 입력하면 인터랙티브 차트가 생성됩니다.\n데이터 구조는 [Plotly.js](https://plotly.com/javascript/) 스펙을 따릅니다.\n\n### 기본 라인 차트\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [1, 2, 3, 4],\n      \"y\": [10, 15, 13, 17],\n      \"type\": \"scatter\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"기본 라인 차트\"\n  }\n}\n````\n\n### 바 차트 (Bar Chart)\n\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n```\n\n````markdown\n```plotly\n{\n  \"data\": [\n    {\n      \"x\": [\"지라프\", \"오랑우탄\", \"원숭이\"],\n      \"y\": [20, 14, 23],\n      \"type\": \"bar\"\n    }\n  ],\n  \"layout\": {\n    \"title\": \"동물원 통계\"\n  }\n}\n````\n\n## 문법 강조 (Syntax Highlighting)\n\n다양한 프로그래밍 언어의 문법 강조를 지원합니다.\n\n```typescript\nfunction hello(name: string) {\n  console.log(`Hello, ${name}!`);\n}\n```\n\n```python\ndef fib(n):\n    a, b = 0, 1\n    while a < n:\n        print(a, end=' ')\n        a, b = b, a+b\n```\n\n```css\n.container {\n  display: flex;\n  justify-content: center;\n}\n```\n",
@@ -50,16 +40,6 @@
         "차트",
         "다이어그램",
         "사용법"
-      ]
-    },
-    {
-      "title": "Theme Customization",
-      "slug": "theme-customization",
-      "content": "\n# Theme Customization\n\n*This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.*\n",
-      "tags": [
-        "theme",
-        "customization",
-        "appearance"
       ]
     },
     {
@@ -73,13 +53,33 @@
       ]
     },
     {
-      "title": "Diagrams Guide",
-      "slug": "diagrams-guide",
-      "content": "\n# Diagrams Guide\n\n*This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.*\n",
+      "title": "Getting Started",
+      "slug": "getting-started",
+      "content": "\n# Getting Started\n\n*This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.*\n",
       "tags": [
-        "diagrams",
-        "visuals",
-        "documentation"
+        "getting-started",
+        "introduction",
+        "setup"
+      ]
+    },
+    {
+      "title": "LLM Workflow",
+      "slug": "llm-workflow",
+      "content": "\n# LLM Workflow\n\n*This document is a placeholder for the LLM Workflow guide. Provide step‑by‑step instructions, architecture diagrams, and usage examples here.*\n",
+      "tags": [
+        "LLM",
+        "workflow",
+        "integration"
+      ]
+    },
+    {
+      "title": "Theme Customization",
+      "slug": "theme-customization",
+      "content": "\n# Theme Customization\n\n*This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.*\n",
+      "tags": [
+        "theme",
+        "customization",
+        "appearance"
       ]
     }
   ]

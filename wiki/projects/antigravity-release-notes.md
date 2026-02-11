@@ -7,7 +7,8 @@ tags: [Antigravity, 릴리즈노트, 버전히스토리, 마이그레이션]
 redirect_from:
   - antigravity
   - antigravity-release-notes
-related_docs: ["antigravity.md"]
+  - projects-antigravity
+related_docs: []
 ---
 
 ## 1. 개요
