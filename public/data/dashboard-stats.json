@@ -1,43 +1,73 @@
 {
-  "collectedAt": "2026-02-11T06:51:08.521Z",
+  "collectedAt": "2026-02-11T07:50:45.795Z",
   "overview": {
-    "totalDocuments": 14,
+    "totalDocuments": 15,
     "publishedDocuments": 6,
-    "draftDocuments": 8,
-    "openRequests": 5,
+    "draftDocuments": 9,
+    "openRequests": 6,
     "closedRequests": 14,
-    "totalAIActions": 62
+    "totalAIActions": 65
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 3,
+      "documentsCreated": 1,
+      "documentsModified": 1,
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 1403,
+      "totalPipelineDurationMs": 32781
     },
     "last24h": {
-      "aiActions": 30,
-      "documentsCreated": 9,
-      "documentsModified": 8,
-      "tavilyApiCalls": 25,
-      "tavilyResults": 67,
-      "estimatedTokens": 29104,
-      "totalPipelineDurationMs": 622576
+      "aiActions": 33,
+      "documentsCreated": 10,
+      "documentsModified": 9,
+      "tavilyApiCalls": 28,
+      "tavilyResults": 76,
+      "estimatedTokens": 30507,
+      "totalPipelineDurationMs": 655357
     },
     "last7d": {
-      "aiActions": 36,
-      "documentsCreated": 11,
-      "documentsModified": 9,
-      "tavilyApiCalls": 25,
-      "tavilyResults": 67,
-      "estimatedTokens": 29104,
-      "totalPipelineDurationMs": 622576
+      "aiActions": 39,
+      "documentsCreated": 12,
+      "documentsModified": 10,
+      "tavilyApiCalls": 28,
+      "tavilyResults": 76,
+      "estimatedTokens": 30507,
+      "totalPipelineDurationMs": 655357
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-11T07:47:59.613Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-11T07:47:03.819Z",
+      "actionType": "recover",
+      "issueNumber": 156,
+      "documentTitle": "[요청] opencode",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-11T07:42:21.405Z",
+      "actionType": "generate",
+      "issueNumber": 156,
+      "documentTitle": "Opencode에 대해",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 32781,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1403
+    },
     {
       "timestamp": "2026-02-11T06:10:23.362Z",
       "actionType": "cross_reference",
@@ -207,43 +237,13 @@
       "durationMs": 41728,
       "tavilyApiCalls": 4,
       "estimatedTokens": 1932
-    },
-    {
-      "timestamp": "2026-02-10T12:15:56.053Z",
-      "actionType": "tag_normalize",
-      "issueNumber": null,
-      "documentTitle": "태그 정규화",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T12:15:32.971Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T12:14:40.115Z",
-      "actionType": "recover",
-      "issueNumber": 135,
-      "documentTitle": "[요청] Kuberentes에 대한 최근 버전별 릴리즈 노트를 작성해줘",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 58,
-      "totalEstimatedTokens": 29104,
-      "avgDurationMs": 69175
+      "totalActions": 61,
+      "totalEstimatedTokens": 30507,
+      "avgDurationMs": 65536
     },
     "unknown": {
       "totalActions": 4,
