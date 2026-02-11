@@ -11,7 +11,7 @@ redirect_from:
   - Projects-sepilot-wiki-tech-stack
   - Projects-sepilot-wiki
   - sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요
-related_docs: ["projects/sepilot-desktop.md", "openclaw-guide.md"]
+related_docs: ["sepilot-desktop-intro.md"]
 ---
 
 ## 기술 스택

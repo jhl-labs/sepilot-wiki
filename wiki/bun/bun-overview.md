@@ -10,7 +10,7 @@ redirect_from:
   - bun-bun-overview
   - bun-overview
   - 요청-bun이란
-related_docs: ["bun/comparison-pnpm-npm.md", "bun/github-actions-setup.md"]
+related_docs: ["comparison-pnpm-npm.md", "bun-github-actions-setup.md"]
 ---
 
 ## 개요

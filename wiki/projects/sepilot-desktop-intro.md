@@ -14,7 +14,7 @@ redirect_from:
   - projects-desktop-introduction
   - projects-desktop-intro
   - Projects-sepilot-desktop-intro
-related_docs: ["projects/sepilot-wiki-technology-stack.md", "mcp-model-context-protocol.md", "multi-agent-system.md", "openclaw-guide.md"]
+related_docs: ["sepilot-wiki-technology-stack.md"]
 ---
 
 # SEPilot Desktop 소개

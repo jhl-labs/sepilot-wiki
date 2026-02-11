@@ -6,7 +6,7 @@ status: draft
 tags: ["Ingress", "NGINX", "Kubernetes", "Migration", "Security", "guide", "deprecation", "k8s", "networking", "load-balancer"]
 redirect_from:
   - ingress-nginx-statement-from-the-kubernetes-steeri
-related_docs: ["kubernetes-release-notes.md", "multi-agent-system.md"]
+related_docs: ["kubernetes-release-notes.md"]
 ---
 
 ## 개요

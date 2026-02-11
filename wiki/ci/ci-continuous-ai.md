@@ -10,7 +10,7 @@ updatedAt: "2026-02-10T14:00:00Z"
 redirect_from:
   - ci-continuous-ai
   - ci-continuous-ai-kr
-related_docs: ["multi-agent-system.md", "openclaw-guide.md"]
+related_docs: ["bun-github-actions-setup.md", "multi-agent-system.md"]
 ---
 
 # Continuous AI 실천: 에이전트형 CI로 오늘 자동화할 수 있는 작업
