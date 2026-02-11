@@ -1,6 +1,55 @@
 {
   "entries": [
     {
+      "id": "7b167d41-445c-4359-9ed1-3e15c7cf9bd6",
+      "timestamp": "2026-02-11T02:55:20.555Z",
+      "actionType": "generate",
+      "issueNumber": 153,
+      "issueTitle": "[요청] moltbook 이 뭐야?",
+      "documentSlug": "moltbook",
+      "documentTitle": "Moltbook 소개",
+      "summary": "새 문서 \"Moltbook 소개\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 9387
+            },
+            {
+              "step": "outline",
+              "durationMs": 6170
+            },
+            {
+              "step": "write",
+              "durationMs": 14292
+            },
+            {
+              "step": "review",
+              "durationMs": 4452
+            },
+            {
+              "step": "refine",
+              "durationMs": 15327
+            }
+          ],
+          "totalDurationMs": 49629,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2013,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "db6e8be0-ad2e-4bf8-9e21-61238f84c74c",
       "timestamp": "2026-02-11T00:39:05.597Z",
       "actionType": "cross_reference",
@@ -1005,5 +1054,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-11T00:39:05.597Z"
+  "lastUpdated": "2026-02-11T02:55:20.555Z"
 }
