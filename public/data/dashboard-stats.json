@@ -1,25 +1,25 @@
 {
-  "collectedAt": "2026-02-11T05:58:23.851Z",
+  "collectedAt": "2026-02-11T06:51:08.521Z",
   "overview": {
-    "totalDocuments": 17,
-    "publishedDocuments": 7,
-    "draftDocuments": 10,
+    "totalDocuments": 14,
+    "publishedDocuments": 6,
+    "draftDocuments": 8,
     "openRequests": 5,
     "closedRequests": 14,
-    "totalAIActions": 61
+    "totalAIActions": 62
   },
   "activity": {
     "last1h": {
-      "aiActions": 4,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 2,
+      "documentsModified": 0,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 29,
+      "aiActions": 30,
       "documentsCreated": 9,
       "documentsModified": 8,
       "tavilyApiCalls": 25,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 622576
     },
     "last7d": {
-      "aiActions": 35,
+      "aiActions": 36,
       "documentsCreated": 11,
       "documentsModified": 9,
       "tavilyApiCalls": 25,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-11T06:10:23.362Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-11T05:57:26.694Z",
       "actionType": "cross_reference",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T12:09:41.897Z",
-      "actionType": "tag_normalize",
-      "issueNumber": null,
-      "documentTitle": "태그 정규화",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 57,
+      "totalActions": 58,
       "totalEstimatedTokens": 29104,
       "avgDurationMs": 69175
     },
