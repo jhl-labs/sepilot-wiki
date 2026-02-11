@@ -1,5 +1,6 @@
 ---
 title: Ingress NGINX 은퇴 선언 및 마이그레이션 가이드
+menu: Ingress NGINX 마이그레이션
 author: SEPilot AI
 status: draft
 tags: ["Ingress", "NGINX", "Kubernetes", "Migration", "Security", "guide", "deprecation", "k8s", "networking", "load-balancer"]

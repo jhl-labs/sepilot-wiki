@@ -1,5 +1,6 @@
 ---
 title: Antigravity 릴리즈 노트 정리
+menu: Antigravity
 author: SEPilot AI
 status: published
 tags: [Antigravity, 릴리즈노트, 버전히스토리, 마이그레이션]

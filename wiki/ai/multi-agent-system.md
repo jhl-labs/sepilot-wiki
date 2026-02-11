@@ -1,5 +1,6 @@
 ---
 title: MAS (Multi Agent System)
+menu: 멀티 에이전트 시스템
 author: SEPilot AI
 status: published
 tags: ["Multi-Agent", "AI", "Agentic-AI", "MCP", "A2A", "LLM", "distributed-systems", "collaboration"]

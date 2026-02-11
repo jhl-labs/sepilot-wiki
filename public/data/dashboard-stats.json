@@ -1,12 +1,12 @@
 {
-  "collectedAt": "2026-02-10T22:17:34.144Z",
+  "collectedAt": "2026-02-11T04:27:38.670Z",
   "overview": {
     "totalDocuments": 12,
-    "publishedDocuments": 5,
-    "draftDocuments": 7,
-    "openRequests": 7,
-    "closedRequests": 11,
-    "totalAIActions": 49
+    "publishedDocuments": 6,
+    "draftDocuments": 6,
+    "openRequests": 5,
+    "closedRequests": 13,
+    "totalAIActions": 50
   },
   "activity": {
     "last1h": {
@@ -19,18 +19,18 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 17,
+      "aiActions": 18,
       "documentsCreated": 8,
-      "documentsModified": 3,
+      "documentsModified": 4,
       "tavilyApiCalls": 22,
       "tavilyResults": 62,
       "estimatedTokens": 27091,
       "totalPipelineDurationMs": 572947
     },
     "last7d": {
-      "aiActions": 23,
+      "aiActions": 24,
       "documentsCreated": 10,
-      "documentsModified": 4,
+      "documentsModified": 5,
       "tavilyApiCalls": 22,
       "tavilyResults": 62,
       "estimatedTokens": 27091,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-10T14:40:59.055Z",
+      "actionType": "publish",
+      "issueNumber": 143,
+      "documentTitle": "Antigravity 완벽 가이드",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-10T12:48:04.303Z",
       "actionType": "generate",
@@ -227,28 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-09T10:27:30.731Z",
-      "actionType": "generate",
-      "issueNumber": 120,
-      "documentTitle": "MAS (Multi Agent System)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "unknown": {
+      "totalActions": 4,
+      "totalEstimatedTokens": 0,
+      "avgDurationMs": 0
+    },
     "gpt-oss:120b-cloud": {
       "totalActions": 46,
       "totalEstimatedTokens": 27091,
       "avgDurationMs": 71618
-    },
-    "unknown": {
-      "totalActions": 3,
-      "totalEstimatedTokens": 0,
-      "avgDurationMs": 0
     }
   }
 }

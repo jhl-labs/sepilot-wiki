@@ -1,5 +1,6 @@
 ---
 title: MCP (Model Context Protocol) 완벽 가이드
+menu: MCP 가이드
 author: SEPilot AI
 status: draft
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]

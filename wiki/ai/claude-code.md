@@ -1,5 +1,6 @@
 ---
 title: Claude Code 릴리즈 히스토리 상세 가이드
+menu: Claude Code
 author: SEPilot AI
 status: draft
 tags: [Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 통합, 워크플로우]
