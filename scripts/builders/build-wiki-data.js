@@ -143,8 +143,30 @@ async function findMarkdownFiles(dir, baseDir = dir) {
   return files;
 }
 
+// 카테고리 메타데이터 로드 (_category.json)
+async function loadCategoryMeta(wikiDir) {
+  const meta = {};
+  async function scan(dir, prefix = '') {
+    if (!existsSync(dir)) return;
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        const categoryPath = prefix ? `${prefix}/${entry.name}` : entry.name;
+        const metaFile = join(dir, entry.name, '_category.json');
+        if (existsSync(metaFile)) {
+          const content = JSON.parse(await readFile(metaFile, 'utf-8'));
+          meta[categoryPath] = content;
+        }
+        await scan(join(dir, entry.name), categoryPath);
+      }
+    }
+  }
+  await scan(wikiDir);
+  return meta;
+}
+
 // 트리 구조 생성 (중첩 카테고리 지원)
-function buildTreeStructure(pages) {
+function buildTreeStructure(pages, categoryMeta = {}) {
   const tree = [];
   const categories = {}; // path -> category object
 
@@ -157,9 +179,10 @@ function buildTreeStructure(pages) {
         const categoryPath = parts.slice(0, i).join('/');
         if (!categories[categoryPath]) {
           categories[categoryPath] = {
-            name: parts[i - 1],
+            name: categoryMeta[categoryPath]?.displayName || parts[i - 1],
             path: categoryPath,
             isCategory: true,
+            order: categoryMeta[categoryPath]?.order ?? 999,
             children: [],
           };
         }
@@ -174,6 +197,7 @@ function buildTreeStructure(pages) {
       title: page.title,
       slug: page.slug,
       menu: page.menu,
+      order: page.order,
     };
 
     if (parts.length === 1) {
@@ -212,6 +236,11 @@ function buildTreeStructure(pages) {
       // 카테고리 우선
       if (a.isCategory && !b.isCategory) return -1;
       if (!a.isCategory && b.isCategory) return 1;
+      // order 필드 우선 (낮을수록 앞)
+      const orderA = a.order ?? 999;
+      const orderB = b.order ?? 999;
+      if (orderA !== orderB) return orderA - orderB;
+      // 같은 order면 한글 로캘 정렬
       return (a.title || a.name || '').localeCompare(b.title || b.name || '', 'ko');
     });
     for (const item of items) {
@@ -286,14 +315,16 @@ async function buildWikiData() {
       isInvalid,
       tags: metadata.tags || [],
       menu: metadata.menu,
+      order: metadata.order ? parseInt(metadata.order, 10) : undefined,
       history,
     };
 
     pages.push(page);
   }
 
-  // 트리 구조 생성
-  const tree = buildTreeStructure(pages);
+  // 카테고리 메타데이터 로드 및 트리 구조 생성
+  const categoryMeta = await loadCategoryMeta(WIKI_DIR);
+  const tree = buildTreeStructure(pages, categoryMeta);
 
   // public 폴더 생성
   await mkdir(OUTPUT_DIR, { recursive: true });

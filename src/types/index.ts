@@ -40,6 +40,7 @@ export interface WikiTreePage {
   title: string;
   slug: string;
   menu?: string;
+  order?: number;
   isCategory?: false;
   children?: never;
 }
@@ -51,6 +52,7 @@ export interface WikiTreeCategory {
   name: string;
   path: string;
   isCategory: true;
+  order?: number;
   children: WikiTreeItem[];
   title?: never;
   slug?: never;
@@ -75,6 +77,7 @@ export interface WikiTree {
   path?: string;
   isCategory?: boolean;
   // 공통
+  order?: number;
   children?: WikiTree[];
 }
 

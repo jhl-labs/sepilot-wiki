@@ -115,6 +115,19 @@ function extractTitle(content) {
 }
 
 /**
+ * 간단한 해시 함수 (중복 감지용)
+ */
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash |= 0;
+  }
+  return hash.toString(36);
+}
+
+/**
  * AI에게 Wiki 구조 분석 요청
  */
 async function analyzeWikiStructure(documents) {
@@ -129,6 +142,7 @@ async function analyzeWikiStructure(documents) {
     hasKoreanFilename: doc.hasKoreanFilename,
     wordCount: doc.wordCount,
     preview: doc.content.slice(0, 300),
+    contentHash: simpleHash(doc.content),
   }));
 
   const systemPrompt = `당신은 Wiki 구조 전문가입니다. 주어진 Wiki 문서들을 분석하여 체계적인 구조 개선안을 제시합니다.
@@ -137,8 +151,11 @@ async function analyzeWikiStructure(documents) {
 
 1. **카테고리 분류**: 문서 내용을 기반으로 적절한 카테고리/디렉토리 제안
 2. **파일명 정규화**: 한글 파일명을 영문 slug로 변환 제안
-3. **중복 감지**: 유사하거나 중복된 내용의 문서 감지
+3. **중복 감지**: 유사하거나 중복된 내용의 문서 감지 (contentHash가 같거나, title이 유사하고 같은 주제인 문서)
 4. **구조 최적화**: 계층 구조 개선, 관련 문서 그룹화
+5. **중복 문서 병합**: 동일/유사 내용의 문서가 여러 위치에 있으면 더 완성도 높은 쪽을 유지하고 나머지는 삭제(status: deleted)하거나 redirect_from 추가. merge 타입 액션은 autoApply: true 가능.
+6. **카테고리 메타데이터**: 카테고리에 적절한 한국어 표시명과 정렬 순서가 필요하면 _category.json 생성 제안. type: "update_category_meta" 액션 사용.
+7. **문서 정렬**: 카테고리 내 문서가 논리적 순서(개요→상세→참조)로 배치되도록 frontmatter에 order 필드를 설정. type: "set_order" 액션 사용.
 
 ## 출력 형식 (JSON)
 
@@ -151,12 +168,31 @@ async function analyzeWikiStructure(documents) {
   },
   "actions": [
     {
-      "type": "rename",  // rename, move, merge, delete, create_category
-      "priority": "high", // high, medium, low
+      "type": "rename",
+      "priority": "high",
       "source": "현재 경로",
       "target": "새 경로 (rename/move 시)",
       "reason": "변경 이유",
-      "autoApply": true  // 자동 적용 가능 여부 (간단한 변경만)
+      "autoApply": true
+    },
+    {
+      "type": "merge",
+      "source": "중복 문서 경로 (삭제할 쪽)",
+      "target": "유지할 문서 경로",
+      "reason": "병합 이유",
+      "autoApply": true
+    },
+    {
+      "type": "update_category_meta",
+      "target": "카테고리 경로 (예: ai)",
+      "metadata": { "displayName": "AI & LLM", "order": 1 },
+      "autoApply": true
+    },
+    {
+      "type": "set_order",
+      "target": "문서 경로",
+      "order": 1,
+      "autoApply": true
     }
   ],
   "suggestedStructure": {
@@ -175,7 +211,8 @@ async function analyzeWikiStructure(documents) {
 
 - 파일명은 영문 소문자, 하이픈만 사용 (예: getting-started.md)
 - home.md는 루트에 유지
-- 자동 적용(autoApply: true)은 단순 rename만 허용
+- autoApply: true는 rename, move, merge, update_category_meta, set_order에 허용
+- 문서 내용을 변경하는 것만 autoApply: false (삭제, 큰 구조 변경)
 - 기존 URL이 깨지지 않도록 주의 (리다이렉트 필요 시 명시)
 
 ## Issue 생성 규칙 (매우 중요!)
@@ -253,6 +290,33 @@ async function applyAutoActions(actions, documents) {
           console.log(`✅ 카테고리 생성: ${action.target}`);
           applied.push(action);
         }
+      } else if (action.type === 'merge') {
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 병합 예정: ${action.source} → ${action.target}`);
+          dryRunPreviewed.push(action);
+        } else {
+          await applyMerge(action, documents);
+          console.log(`✅ 병합: ${action.source} → ${action.target}`);
+          applied.push(action);
+        }
+      } else if (action.type === 'update_category_meta') {
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 카테고리 메타 업데이트 예정: ${action.target}`);
+          dryRunPreviewed.push(action);
+        } else {
+          await applyUpdateCategoryMeta(action);
+          console.log(`✅ 카테고리 메타 업데이트: ${action.target}`);
+          applied.push(action);
+        }
+      } else if (action.type === 'set_order') {
+        if (IS_DRY_RUN) {
+          console.log(`[DRY RUN] 정렬 순서 설정 예정: ${action.target} → order: ${action.order}`);
+          dryRunPreviewed.push(action);
+        } else {
+          await applySetOrder(action, documents);
+          console.log(`✅ 정렬 순서 설정: ${action.target} → order: ${action.order}`);
+          applied.push(action);
+        }
       } else {
         skipped.push(action);
       }
@@ -302,6 +366,70 @@ async function applyRename(action, documents) {
 async function applyMove(action, documents) {
   // rename과 동일한 로직
   await applyRename(action, documents);
+}
+
+/**
+ * 중복 문서 병합 (source를 deleted 상태로, target에 redirect_from 추가)
+ */
+async function applyMerge(action, documents) {
+  const sourceDoc = documents.find((d) => d.path === action.source);
+  if (!sourceDoc) {
+    throw new Error(`소스 문서를 찾을 수 없음: ${action.source}`);
+  }
+
+  // source의 status를 deleted로 변경
+  let content = await readFile(sourceDoc.fullPath, 'utf-8');
+  if (/^status:\s/m.test(content)) {
+    content = content.replace(/^status:\s.+$/m, 'status: deleted');
+  } else {
+    // frontmatter에 status 추가
+    content = content.replace(/^(---\n[\s\S]*?)(\n---)/m, '$1\nstatus: deleted$2');
+  }
+  await writeFile(sourceDoc.fullPath, content);
+
+  // target에 redirect_from 추가
+  const targetDoc = documents.find((d) => d.path === action.target);
+  if (targetDoc) {
+    let targetContent = await readFile(targetDoc.fullPath, 'utf-8');
+    targetContent = addRedirectInfo(targetContent, action.source);
+    await writeFile(targetDoc.fullPath, targetContent);
+  }
+}
+
+/**
+ * 카테고리 메타데이터(_category.json) 생성/수정
+ */
+async function applyUpdateCategoryMeta(action) {
+  const categoryDir = join(WIKI_DIR, action.target);
+  validatePath(categoryDir);
+  await mkdir(categoryDir, { recursive: true });
+
+  const metaFile = join(categoryDir, '_category.json');
+  let existing = {};
+  if (existsSync(metaFile)) {
+    existing = JSON.parse(await readFile(metaFile, 'utf-8'));
+  }
+  const merged = { ...existing, ...action.metadata };
+  await writeFile(metaFile, JSON.stringify(merged, null, 2));
+}
+
+/**
+ * frontmatter에 order 필드 설정
+ */
+async function applySetOrder(action, documents) {
+  const doc = documents.find((d) => d.path === action.target);
+  if (!doc) {
+    throw new Error(`문서를 찾을 수 없음: ${action.target}`);
+  }
+
+  let content = await readFile(doc.fullPath, 'utf-8');
+  if (/^order:\s/m.test(content)) {
+    content = content.replace(/^order:\s.+$/m, `order: ${action.order}`);
+  } else {
+    // frontmatter 끝에 order 추가
+    content = content.replace(/^(---\n[\s\S]*?)(\n---)/m, `$1\norder: ${action.order}$2`);
+  }
+  await writeFile(doc.fullPath, content);
 }
 
 /**
