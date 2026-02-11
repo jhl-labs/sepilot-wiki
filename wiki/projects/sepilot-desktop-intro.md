@@ -15,7 +15,7 @@ redirect_from:
   - projects-desktop-intro
   - Projects-sepilot-desktop-intro
 related_docs: ["sepilot-wiki-technology-stack.md", "claude-code-release-history.md", "opencode-guide.md"]
-order: 3
+order: 4
 ---
 
 # SEPilot Desktop 소개
