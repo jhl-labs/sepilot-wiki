@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-02-11T03:34:37.365Z",
+  "collectedAt": "2026-02-11T05:12:33.711Z",
   "overview": {
-    "totalDocuments": 14,
+    "totalDocuments": 17,
     "publishedDocuments": 6,
-    "draftDocuments": 8,
+    "draftDocuments": 11,
     "openRequests": 5,
     "closedRequests": 14,
-    "totalAIActions": 56
+    "totalAIActions": 59
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 1,
-      "documentsModified": 0,
-      "tavilyApiCalls": 3,
-      "tavilyResults": 5,
-      "estimatedTokens": 2013,
-      "totalPipelineDurationMs": 49629
+      "aiActions": 3,
+      "documentsCreated": 0,
+      "documentsModified": 2,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 24,
+      "aiActions": 27,
       "documentsCreated": 9,
-      "documentsModified": 6,
+      "documentsModified": 8,
       "tavilyApiCalls": 25,
       "tavilyResults": 67,
       "estimatedTokens": 29104,
       "totalPipelineDurationMs": 622576
     },
     "last7d": {
-      "aiActions": 30,
+      "aiActions": 33,
       "documentsCreated": 11,
-      "documentsModified": 7,
+      "documentsModified": 9,
       "tavilyApiCalls": 25,
       "tavilyResults": 67,
       "estimatedTokens": 29104,
@@ -38,6 +38,36 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-11T05:10:06.615Z",
+      "actionType": "recover",
+      "issueNumber": 139,
+      "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-11T05:10:06.614Z",
+      "actionType": "recover",
+      "issueNumber": 139,
+      "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-11T04:47:55.752Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-11T02:56:11.248Z",
       "actionType": "maintain",
@@ -207,48 +237,18 @@
       "durationMs": 50680,
       "tavilyApiCalls": 3,
       "estimatedTokens": 1982
-    },
-    {
-      "timestamp": "2026-02-10T10:12:50.910Z",
-      "actionType": "publish",
-      "issueNumber": 120,
-      "documentTitle": "[요청] MAS(Multi Agent System)에 대해 자세히 조사해줘",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T09:26:10.929Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T09:26:05.250Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 55,
+      "totalEstimatedTokens": 29104,
+      "avgDurationMs": 69175
+    },
     "unknown": {
       "totalActions": 4,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 52,
-      "totalEstimatedTokens": 29104,
-      "avgDurationMs": 69175
     }
   }
 }
