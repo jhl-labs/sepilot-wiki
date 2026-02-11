@@ -1,6 +1,133 @@
 {
   "entries": [
     {
+      "id": "10e6bec4-9ce9-4fef-9cde-152785d3a6a8",
+      "timestamp": "2026-02-11T02:56:11.248Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "Wiki Tree Maintenance",
+      "documentSlug": "_wiki-tree",
+      "documentTitle": "Wiki Tree Maintenance",
+      "summary": "구조 분석 완료. 7개 자동 적용, 10개 보류, 1개 Issue 생성",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "applied": 7,
+        "skipped": 10,
+        "issues": 1
+      }
+    },
+    {
+      "id": "7b167d41-445c-4359-9ed1-3e15c7cf9bd6",
+      "timestamp": "2026-02-11T02:55:20.555Z",
+      "actionType": "generate",
+      "issueNumber": 153,
+      "issueTitle": "[요청] moltbook 이 뭐야?",
+      "documentSlug": "moltbook",
+      "documentTitle": "Moltbook 소개",
+      "summary": "새 문서 \"Moltbook 소개\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 9387
+            },
+            {
+              "step": "outline",
+              "durationMs": 6170
+            },
+            {
+              "step": "write",
+              "durationMs": 14292
+            },
+            {
+              "step": "review",
+              "durationMs": 4452
+            },
+            {
+              "step": "refine",
+              "durationMs": 15327
+            }
+          ],
+          "totalDurationMs": 49629,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2013,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "db6e8be0-ad2e-4bf8-9e21-61238f84c74c",
+      "timestamp": "2026-02-11T00:39:05.597Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "issueTitle": "교차 참조 업데이트",
+      "documentSlug": "_cross-reference",
+      "documentTitle": "교차 참조 업데이트",
+      "summary": "13개 문서의 교차 참조 업데이트",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "89ec0edc-d4b3-4704-86d0-5d181b825ed8",
+      "timestamp": "2026-02-10T22:43:41.786Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "Wiki Tree Maintenance",
+      "documentSlug": "_wiki-tree",
+      "documentTitle": "Wiki Tree Maintenance",
+      "summary": "구조 분석 완료. 6개 자동 적용, 12개 보류, 2개 Issue 생성",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "applied": 6,
+        "skipped": 12,
+        "issues": 2
+      }
+    },
+    {
+      "id": "1a75fa9e-cf94-41fc-8e45-4cd599682052",
+      "timestamp": "2026-02-10T22:42:46.422Z",
+      "actionType": "recover",
+      "issueNumber": 149,
+      "issueTitle": "[Wiki Maintainer] 🔗 URL 리다이렉트 계획 수립",
+      "documentSlug": "redirects.yml",
+      "documentTitle": "[Wiki Maintainer] 🔗 URL 리다이렉트 계획 수립",
+      "summary": "피드백에 따라 문서 생성",
+      "trigger": "maintainer_comment",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "67b31077-72b7-448a-8396-6c918cf99467",
+      "timestamp": "2026-02-10T22:31:30.590Z",
+      "actionType": "recover",
+      "issueNumber": 138,
+      "issueTitle": "[Wiki Maintenance] [요청] Continuous AI in practice: What developers can automate today with agentic CI",
+      "documentSlug": "ci/continuous-ai-kr",
+      "documentTitle": "[Wiki Maintenance] [요청] Continuous AI in practice: What developers can automate today with agentic CI",
+      "summary": "피드백에 따라 문서 생성",
+      "trigger": "maintainer_comment",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "8b5fc3a1-f9c9-44d6-9ce6-c1505f994e65",
       "timestamp": "2026-02-10T14:40:59.055Z",
       "actionType": "publish",
@@ -945,5 +1072,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-10T14:40:59.055Z"
+  "lastUpdated": "2026-02-11T02:56:11.248Z"
 }

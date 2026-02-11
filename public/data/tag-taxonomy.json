@@ -1,249 +1,157 @@
 {
-  "generatedAt": "2026-02-10T12:15:56.052Z",
+  "generatedAt": "2026-02-11T02:56:32.258Z",
   "model": "gpt-oss:120b-cloud",
-  "totalTags": 42,
-  "merges": [
-    {
-      "target": "guide",
-      "sources": [
-        "가이드"
-      ],
-      "reason": "Korean duplicate of the English tag “guide”."
-    },
-    {
-      "target": "comparison",
-      "sources": [
-        "비교"
-      ],
-      "reason": "Korean duplicate of the English tag “comparison”."
-    }
-  ],
-  "suggestions": [
-    {
-      "document": "kubernetes-release-notes.md",
-      "currentTags": [
-        "kubernetes",
-        "release notes",
-        "버전"
-      ],
-      "suggestedTags": [
-        "version",
-        "changelog"
-      ],
-      "reason": "Add the English equivalent of “버전” for consistency and a generic “changelog” tag that describes release‑note documents."
-    },
-    {
-      "document": "ingress-nginx-deprecation-guide.md",
-      "currentTags": [
-        "ingress",
-        "nginx",
-        "kubernetes",
-        "migration",
-        "security",
-        "guide"
-      ],
-      "suggestedTags": [
-        "deprecation",
-        "k8s",
-        "networking",
-        "load-balancer"
-      ],
-      "reason": "The guide is about deprecating Ingress‑NGINX; add explicit deprecation, the common abbreviation “k8s”, and broader networking tags."
-    },
-    {
-      "document": "mcp-model-context-protocol.md",
-      "currentTags": [
-        "mcp",
-        "model context protocol",
-        "anthropic",
-        "ai integration",
-        "json-rpc",
-        "sdk",
-        "llm"
-      ],
-      "suggestedTags": [
-        "protocol",
-        "open-standard",
-        "ai"
-      ],
-      "reason": "Highlight that MCP is a protocol and an open standard, and add the generic AI tag for broader discoverability."
-    },
-    {
-      "document": "projects/sepilot-desktop.md",
-      "currentTags": [
-        "sepilot",
-        "desktop",
-        "llm",
-        "project",
-        "ai"
-      ],
-      "suggestedTags": [
-        "desktop-app",
-        "application",
-        "ai-assistant"
-      ],
-      "reason": "Clarify that the artifact is a desktop application and that it functions as an AI‑assistant."
-    },
-    {
-      "document": "projects/sepilot-wiki-technology-stack.md",
-      "currentTags": [
-        "sepilot-wiki",
-        "기술스택",
-        "react",
-        "typescript",
-        "vite",
-        "frontend"
-      ],
-      "suggestedTags": [
-        "javascript",
-        "web",
-        "technology-stack"
-      ],
-      "reason": "Add generic technology‑stack, language, and domain tags to improve cross‑project search."
-    },
-    {
-      "document": "bun/bun-github-actions-setup.md",
-      "currentTags": [
-        "github-actions",
-        "bun",
-        "ci",
-        "ci/cd",
-        "node-alternative",
-        "automation"
-      ],
-      "suggestedTags": [
-        "devops",
-        "workflow",
-        "javascript-runtime"
-      ],
-      "reason": "The article is part of DevOps tooling and describes a workflow; also note that bun is a JavaScript runtime."
-    },
-    {
-      "document": "bun/bun-overview.md",
-      "currentTags": [
-        "bun",
-        "npm",
-        "yarn",
-        "패키지 매니저",
-        "guide",
-        "runtime"
-      ],
-      "suggestedTags": [
-        "javascript-runtime",
-        "package-manager"
-      ],
-      "reason": "Provide explicit tags for the runtime nature of bun and its role as a package manager."
-    },
-    {
-      "document": "bun/bun-pnpm-npm-comparison.md",
-      "currentTags": [
-        "bun",
-        "pnpm",
-        "npm",
-        "비교",
-        "guide",
-        "comparison"
-      ],
-      "suggestedTags": [
-        "benchmark",
-        "performance"
-      ],
-      "reason": "The article compares tools; benchmark and performance tags describe the nature of the comparison."
-    },
-    {
-      "document": "multi-agent-system.md",
-      "currentTags": [
-        "multi-agent",
-        "ai",
-        "agentic-ai",
-        "mcp",
-        "a2a",
-        "llm"
-      ],
-      "suggestedTags": [
-        "distributed-systems",
-        "collaboration"
-      ],
-      "reason": "MAS is a distributed, collaborative AI system; these tags capture that broader context."
-    }
-  ],
-  "taxonomy": {
-    "cloud/kubernetes": [
-      "kubernetes",
-      "ingress",
-      "nginx",
-      "migration",
-      "security",
-      "deprecation",
-      "k8s",
-      "networking",
-      "load-balancer"
-    ],
-    "ai": [
-      "ai",
-      "llm",
-      "anthropic",
-      "ai integration",
-      "agentic-ai",
-      "multi-agent",
-      "distributed-systems",
-      "collaboration",
-      "ai-assistant",
-      "machine-learning",
-      "open-standard",
-      "protocol"
-    ],
-    "mcp": [
-      "mcp",
-      "model context protocol",
-      "json-rpc",
-      "sdk",
-      "protocol",
-      "open-standard"
-    ],
-    "project": [
-      "sepilot",
-      "sepilot-wiki",
-      "desktop",
-      "application",
-      "desktop-app",
-      "project",
-      "technology-stack",
-      "frontend",
-      "react",
-      "typescript",
-      "vite",
-      "javascript",
-      "web"
-    ],
-    "tooling": [
-      "bun",
-      "npm",
-      "yarn",
-      "pnpm",
-      "package-manager",
-      "javascript-runtime",
-      "runtime",
-      "devops",
-      "workflow",
-      "ci",
-      "ci/cd",
-      "github-actions",
-      "automation",
-      "node-alternative"
-    ],
-    "documentation": [
-      "guide",
-      "comparison",
-      "benchmark",
-      "performance",
-      "changelog",
-      "release notes",
-      "version",
-      "deprecation"
-    ]
-  },
+  "totalTags": 84,
+  "merges": [],
+  "suggestions": [],
+  "taxonomy": {},
   "tagStats": [
+    {
+      "tag": "bun",
+      "count": 3,
+      "documents": [
+        "bun/comparison-pnpm-npm.md",
+        "bun/bun-overview.md",
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "pnpm",
+      "count": 1,
+      "documents": [
+        "bun/comparison-pnpm-npm.md"
+      ]
+    },
+    {
+      "tag": "npm",
+      "count": 2,
+      "documents": [
+        "bun/comparison-pnpm-npm.md",
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "비교",
+      "count": 1,
+      "documents": [
+        "bun/comparison-pnpm-npm.md"
+      ]
+    },
+    {
+      "tag": "가이드",
+      "count": 2,
+      "documents": [
+        "bun/comparison-pnpm-npm.md",
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "comparison",
+      "count": 1,
+      "documents": [
+        "bun/comparison-pnpm-npm.md"
+      ]
+    },
+    {
+      "tag": "benchmark",
+      "count": 1,
+      "documents": [
+        "bun/comparison-pnpm-npm.md"
+      ]
+    },
+    {
+      "tag": "performance",
+      "count": 1,
+      "documents": [
+        "bun/comparison-pnpm-npm.md"
+      ]
+    },
+    {
+      "tag": "yarn",
+      "count": 1,
+      "documents": [
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "패키지 매니저",
+      "count": 1,
+      "documents": [
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "runtime",
+      "count": 1,
+      "documents": [
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "javascript-runtime",
+      "count": 2,
+      "documents": [
+        "bun/bun-overview.md",
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "package-manager",
+      "count": 1,
+      "documents": [
+        "bun/bun-overview.md"
+      ]
+    },
+    {
+      "tag": "github-actions",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "CI",
+      "count": 2,
+      "documents": [
+        "bun/bun-github-actions-setup.md",
+        "ci/ci-continuous-ai.md"
+      ]
+    },
+    {
+      "tag": "CI/CD",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "node-alternative",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "automation",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "devops",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
+    {
+      "tag": "workflow",
+      "count": 1,
+      "documents": [
+        "bun/bun-github-actions-setup.md"
+      ]
+    },
     {
       "tag": "Kubernetes",
       "count": 2,
@@ -267,46 +175,75 @@
       ]
     },
     {
-      "tag": "Ingress",
+      "tag": "version",
       "count": 1,
       "documents": [
-        "ingress-nginx-deprecation-guide.md"
+        "kubernetes-release-notes.md"
       ]
     },
     {
-      "tag": "NGINX",
+      "tag": "changelog",
       "count": 1,
       "documents": [
-        "ingress-nginx-deprecation-guide.md"
+        "kubernetes-release-notes.md"
       ]
     },
     {
-      "tag": "Migration",
+      "tag": "Claude Code",
       "count": 1,
       "documents": [
-        "ingress-nginx-deprecation-guide.md"
+        "claude-code-release-history.md"
       ]
     },
     {
-      "tag": "Security",
+      "tag": "릴리즈 히스토리",
       "count": 1,
       "documents": [
-        "ingress-nginx-deprecation-guide.md"
+        "claude-code-release-history.md"
       ]
     },
     {
-      "tag": "guide",
+      "tag": "CLI",
       "count": 1,
       "documents": [
-        "ingress-nginx-deprecation-guide.md"
+        "claude-code-release-history.md"
       ]
     },
     {
       "tag": "MCP",
-      "count": 2,
+      "count": 3,
       "documents": [
+        "claude-code-release-history.md",
         "mcp-model-context-protocol.md",
         "multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "멀티 모델",
+      "count": 1,
+      "documents": [
+        "claude-code-release-history.md"
+      ]
+    },
+    {
+      "tag": "Hooks",
+      "count": 1,
+      "documents": [
+        "claude-code-release-history.md"
+      ]
+    },
+    {
+      "tag": "IDE 통합",
+      "count": 1,
+      "documents": [
+        "claude-code-release-history.md"
+      ]
+    },
+    {
+      "tag": "워크플로우",
+      "count": 1,
+      "documents": [
+        "claude-code-release-history.md"
       ]
     },
     {
@@ -349,7 +286,66 @@
       "count": 3,
       "documents": [
         "mcp-model-context-protocol.md",
-        "projects/sepilot-desktop.md",
+        "multi-agent-system.md",
+        "projects/sepilot-desktop-intro.md"
+      ]
+    },
+    {
+      "tag": "protocol",
+      "count": 1,
+      "documents": [
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "open-standard",
+      "count": 1,
+      "documents": [
+        "mcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "ai",
+      "count": 4,
+      "documents": [
+        "mcp-model-context-protocol.md",
+        "multi-agent-system.md",
+        "projects/sepilot-desktop-intro.md",
+        "moltbook-intro.md"
+      ]
+    },
+    {
+      "tag": "Multi-Agent",
+      "count": 1,
+      "documents": [
+        "multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "Agentic-AI",
+      "count": 1,
+      "documents": [
+        "multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "A2A",
+      "count": 1,
+      "documents": [
+        "multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "distributed-systems",
+      "count": 1,
+      "documents": [
+        "multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "collaboration",
+      "count": 1,
+      "documents": [
         "multi-agent-system.md"
       ]
     },
@@ -357,29 +353,42 @@
       "tag": "SEPilot",
       "count": 1,
       "documents": [
-        "projects/sepilot-desktop.md"
+        "projects/sepilot-desktop-intro.md"
       ]
     },
     {
       "tag": "Desktop",
       "count": 1,
       "documents": [
-        "projects/sepilot-desktop.md"
+        "projects/sepilot-desktop-intro.md"
       ]
     },
     {
       "tag": "Project",
       "count": 1,
       "documents": [
-        "projects/sepilot-desktop.md"
+        "projects/sepilot-desktop-intro.md"
       ]
     },
     {
-      "tag": "ai",
-      "count": 2,
+      "tag": "desktop-app",
+      "count": 1,
       "documents": [
-        "projects/sepilot-desktop.md",
-        "multi-agent-system.md"
+        "projects/sepilot-desktop-intro.md"
+      ]
+    },
+    {
+      "tag": "application",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-desktop-intro.md"
+      ]
+    },
+    {
+      "tag": "ai-assistant",
+      "count": 1,
+      "documents": [
+        "projects/sepilot-desktop-intro.md"
       ]
     },
     {
@@ -425,126 +434,180 @@
       ]
     },
     {
-      "tag": "github-actions",
+      "tag": "javascript",
       "count": 1,
       "documents": [
-        "bun/bun-github-actions-setup.md"
+        "projects/sepilot-wiki-technology-stack.md"
       ]
     },
     {
-      "tag": "bun",
-      "count": 3,
-      "documents": [
-        "bun/bun-github-actions-setup.md",
-        "bun/bun-overview.md",
-        "bun/bun-pnpm-npm-comparison.md"
-      ]
-    },
-    {
-      "tag": "CI",
+      "tag": "web",
       "count": 1,
       "documents": [
-        "bun/bun-github-actions-setup.md"
+        "projects/sepilot-wiki-technology-stack.md"
       ]
     },
     {
-      "tag": "CI/CD",
+      "tag": "technology-stack",
       "count": 1,
       "documents": [
-        "bun/bun-github-actions-setup.md"
+        "projects/sepilot-wiki-technology-stack.md"
       ]
     },
     {
-      "tag": "node-alternative",
-      "count": 1,
-      "documents": [
-        "bun/bun-github-actions-setup.md"
-      ]
-    },
-    {
-      "tag": "automation",
-      "count": 1,
-      "documents": [
-        "bun/bun-github-actions-setup.md"
-      ]
-    },
-    {
-      "tag": "npm",
+      "tag": "OpenClaw",
       "count": 2,
       "documents": [
-        "bun/bun-overview.md",
-        "bun/bun-pnpm-npm-comparison.md"
+        "openclaw-complete-guide.md",
+        "moltbook-intro.md"
       ]
     },
     {
-      "tag": "yarn",
+      "tag": "AI 개인 비서",
       "count": 1,
       "documents": [
-        "bun/bun-overview.md"
+        "openclaw-complete-guide.md"
       ]
     },
     {
-      "tag": "패키지 매니저",
+      "tag": "멀티채널",
       "count": 1,
       "documents": [
-        "bun/bun-overview.md"
+        "openclaw-complete-guide.md"
       ]
     },
     {
-      "tag": "가이드",
+      "tag": "오픈소스",
+      "count": 1,
+      "documents": [
+        "openclaw-complete-guide.md"
+      ]
+    },
+    {
+      "tag": "소셜네트워크",
+      "count": 1,
+      "documents": [
+        "moltbook-intro.md"
+      ]
+    },
+    {
+      "tag": "에이전트",
       "count": 2,
       "documents": [
-        "bun/bun-overview.md",
-        "bun/bun-pnpm-npm-comparison.md"
+        "moltbook-intro.md",
+        "ci/ci-continuous-ai.md"
       ]
     },
     {
-      "tag": "runtime",
+      "tag": "Moltbook",
       "count": 1,
       "documents": [
-        "bun/bun-overview.md"
+        "moltbook-intro.md"
       ]
     },
     {
-      "tag": "pnpm",
+      "tag": "Ingress",
       "count": 1,
       "documents": [
-        "bun/bun-pnpm-npm-comparison.md"
+        "ingress-nginx-deprecation-guide.md"
       ]
     },
     {
-      "tag": "비교",
+      "tag": "NGINX",
       "count": 1,
       "documents": [
-        "bun/bun-pnpm-npm-comparison.md"
+        "ingress-nginx-deprecation-guide.md"
       ]
     },
     {
-      "tag": "comparison",
+      "tag": "Migration",
       "count": 1,
       "documents": [
-        "bun/bun-pnpm-npm-comparison.md"
+        "ingress-nginx-deprecation-guide.md"
       ]
     },
     {
-      "tag": "Multi-Agent",
+      "tag": "Security",
       "count": 1,
       "documents": [
-        "multi-agent-system.md"
+        "ingress-nginx-deprecation-guide.md"
       ]
     },
     {
-      "tag": "Agentic-AI",
+      "tag": "guide",
       "count": 1,
       "documents": [
-        "multi-agent-system.md"
+        "ingress-nginx-deprecation-guide.md"
       ]
     },
     {
-      "tag": "A2A",
+      "tag": "deprecation",
       "count": 1,
       "documents": [
-        "multi-agent-system.md"
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "k8s",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "networking",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "load-balancer",
+      "count": 1,
+      "documents": [
+        "ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "Antigravity",
+      "count": 1,
+      "documents": [
+        "antigravity-release-notes.md"
+      ]
+    },
+    {
+      "tag": "릴리즈노트",
+      "count": 1,
+      "documents": [
+        "antigravity-release-notes.md"
+      ]
+    },
+    {
+      "tag": "버전히스토리",
+      "count": 1,
+      "documents": [
+        "antigravity-release-notes.md"
+      ]
+    },
+    {
+      "tag": "마이그레이션",
+      "count": 1,
+      "documents": [
+        "antigravity-release-notes.md"
+      ]
+    },
+    {
+      "tag": "Continuous AI",
+      "count": 1,
+      "documents": [
+        "ci/ci-continuous-ai.md"
+      ]
+    },
+    {
+      "tag": "GitHub",
+      "count": 1,
+      "documents": [
+        "ci/ci-continuous-ai.md"
       ]
     }
   ]

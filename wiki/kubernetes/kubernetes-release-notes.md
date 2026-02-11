@@ -8,6 +8,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-10T12:15:00Z"
 updatedAt: "2026-02-10T12:15:00Z"
+related_docs: ["ingress-nginx-deprecation-guide.md", "antigravity-release-notes.md"]
 ---
 
 # Kubernetes 버전별 릴리즈 노트
