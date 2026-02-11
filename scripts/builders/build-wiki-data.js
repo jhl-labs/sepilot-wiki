@@ -6,7 +6,7 @@
  * Git 히스토리를 포함하여 버전 관리 지원
  */
 
-import { readdir, readFile, writeFile, mkdir } from 'fs/promises';
+import { readdir, readFile, writeFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { execFileSync } from 'child_process';
@@ -301,6 +301,13 @@ async function buildWikiData() {
 
     // status 필드 기반 상태 결정 (draft, published, needs_review, deleted 등)
     const status = metadata.status || 'published';
+
+    // status: deleted 문서는 빌드에서 제외
+    if (status === 'deleted') {
+      console.log(`   ⏭️ 삭제된 문서 건너뜀: ${slug}`);
+      continue;
+    }
+
     const isDraft = status === 'draft' || metadata.isDraft === 'true' || metadata.isDraft === true;
     const isInvalid = status === 'needs_review' || metadata.isInvalid === 'true' || metadata.isInvalid === true;
 
@@ -322,9 +329,27 @@ async function buildWikiData() {
     pages.push(page);
   }
 
+  // 중복 제목 감지
+  const titleMap = new Map();
+  for (const page of pages) {
+    const existing = titleMap.get(page.title);
+    if (existing) {
+      console.warn(`⚠️ 중복 제목 감지: "${page.title}"`);
+      console.warn(`   - ${existing.slug}`);
+      console.warn(`   - ${page.slug}`);
+    }
+    titleMap.set(page.title, page);
+  }
+
   // 카테고리 메타데이터 로드 및 트리 구조 생성
   const categoryMeta = await loadCategoryMeta(WIKI_DIR);
   const tree = buildTreeStructure(pages, categoryMeta);
+
+  // 스테일 파일 방지: wiki-pages/ 디렉토리 전체 삭제 후 재생성
+  if (existsSync(PAGES_OUTPUT_DIR)) {
+    await rm(PAGES_OUTPUT_DIR, { recursive: true });
+    console.log('🧹 기존 wiki-pages/ 정리 완료');
+  }
 
   // public 폴더 생성
   await mkdir(OUTPUT_DIR, { recursive: true });
