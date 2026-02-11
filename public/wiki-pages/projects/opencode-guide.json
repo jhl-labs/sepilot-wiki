@@ -2,7 +2,7 @@
   "title": "Opencode에 대해",
   "slug": "projects/opencode-guide",
   "content": "\n# Opencode에 대해\n\nOpencode는 **CLI 기반 AI 에이전트**로, 로컬 환경에서 빠르게 AI 모델을 실행하고 다양한 작업을 자동화할 수 있도록 설계되었습니다. 사용자는 간단한 명령어 하나로 모델을 로드하고, 프롬프트를 전달해 결과를 바로 확인할 수 있습니다.\n\n---\n\n## 1. Opencode 개요\n\n- **주요 목적**: 로컬에서 경량 AI 모델을 실행하고, 스크립트·CLI 형태로 AI 기능을 제공\n- **지원 모델**: LLaMA, Mistral, Claude 등 다양한 오픈소스 및 상용 모델\n- **설치 방법**: `pip install opencode` 혹은 Homebrew, Docker 이미지 제공\n- **핵심 명령**:\n  ```bash\n  opencode run --model mistral-7b \"Explain quantum entanglement\"\n  ```\n- **플러그인 시스템**: 사용자 정의 플러그인으로 기능 확장 가능 (예: 파일 검색, 코드 생성, 데이터베이스 질의)\n\n---\n\n## 2. Claude Code와 비교\n\n| 항목 | Opencode | Claude Code |\n|------|----------|------------|\n| **배포 형태** | 로컬 CLI, Docker, Homebrew | 클라우드 기반 SaaS (API) |\n| **가격** | 오픈소스·무료 (셀프 호스팅) | 사용량 기반 과금 (API 호출당 비용) |\n| **모델 접근성** | 다양한 오픈소스 모델 직접 선택 | Anthropic이 제공하는 Claude 모델만 사용 |\n| **플러그인/확장성** | 플러그인 아키텍처, 사용자 정의 명령 가능 | 제한된 프롬프트 엔지니어링, 플러그인 미지원 |\n| **보안** | 데이터가 로컬에 머무름 → 높은 프라이버시 | 데이터가 Anthropic 서버에 전송 → 보안 정책에 의존 |\n| **사용자 경험** | 터미널 친화적, 스크립트 자동화에 최적 | 웹 UI·API 중심, 인터랙티브 세션에 강점 |\n\n**핵심 차이점**: Opencode는 **셀프 호스팅**과 **플러그인 확장**에 중점을 두어 개발자·엔지니어가 자유롭게 커스터마이징할 수 있는 반면, Claude Code는 **클라우드 서비스**로서 관리 부담이 적고 최신 모델을 바로 사용할 수 있다는 장점이 있습니다.\n\n---\n\n## 3. Opencode만의 차별적인 특징\n\n1. **완전 오프라인 실행** – 인터넷 연결 없이도 모델을 로드하고 실행 가능\n2. **멀티‑모델 지원** – 하나의 CLI에서 여러 모델을 스위치하며 테스트 가능\n3. **플러그인 프레임워크** – `opencode plugin add <repo>` 로 외부 플러그인 손쉽게 설치\n4. **스마트 캐시** – 모델 다운로드·로드 시간을 최소화하는 로컬 캐시 메커니즘\n5. **스크립트 통합** – Bash·PowerShell·Python 스크립트와 자연스럽게 연동\n6. **오픈소스 라이선스** – MIT 라이선스로 자유롭게 수정·재배포 가능\n\n---\n\n## 4. 사용자 평판\n\n- **GitHub ★4.3/5** (≈ 1.2k 스타, 300+ 이슈)\n- **Stack Overflow**: `opencode` 태그 아래 45개의 질문, 평균 답변 채택률 78%\n- **Reddit /r/LocalLLM**: “가장 가벼운 로컬 LLM CLI” 라는 평가가 다수\n- **기업 활용 사례**:\n  - 스타트업 A: 내부 문서 요약 자동화에 Opencode 사용, 비용 0원 (셀프 호스팅)\n  - 교육기관 B: 학생들에게 로컬 AI 실습 환경 제공, 설치가 간편해 교육 효율 ↑\n\n전반적으로 **높은 만족도**와 **활발한 커뮤니티**가 특징이며, 특히 보안·프라이버시가 중요한 환경에서 긍정적인 평가를 받고 있습니다.\n\n---\n\n## 5. 비슷한 CLI 에이전트인 Goose와 비교\n\n| 항목 | Opencode | Goose |\n|------|----------|-------|\n| **주요 언어** | Python (CLI) | Rust (CLI) |\n| **모델 지원** | 다양한 오픈소스·상용 모델 | 주로 LLaMA 기반 모델에 최적화 |\n| **플러그인** | 플러그인 시스템 제공 | 플러그인 미지원, 고정 기능 집합 |\n| **성능** | 모델 로드 시 약간의 오버헤드 (Python) | Rust 기반으로 빠른 실행 속도 제공 |\n| **배포** | pip, Homebrew, Docker | Cargo, pre‑compiled 바이너리 |\n| **커뮤니티** | 활발한 GitHub·Discord | 작은 규모, 주로 Rust 커뮤니티 중심 |\n| **보안** | 로컬 실행, 파일 기반 캐시 | 로컬 실행, 동일 수준 보안 |\n\n**요약**: Goose는 **Rust 기반**이라 실행 속도가 빠르고 바이너리 배포가 간편하지만, **플러그인·다양한 모델 지원** 면에서 Opencode에 비해 제한적입니다. Opencode는 **확장성**과 **다양한 모델 선택**을 중시하는 사용자에게 더 적합합니다.\n\n---\n\n## 6. 시작하기 (간단 설치 가이드)\n\n```bash\n# 1. pip 로 설치 (Python 3.9+)\npython -m pip install opencode\n\n# 2. Homebrew (macOS/Linux) 로 설치\nbrew install opencode\n\n# 3. Docker 이미지 사용\ndocker run -it --rm ghcr.io/opencode/opencode:latest\n```\n\n설치 후 기본 명령을 실행해 보세요:\n\n```bash\nopencode run --model mistral-7b \"Summarize the latest AI news\"\n```\n\n---\n\n## 7. 참고 자료\n\n- **공식 문서**: https://opencode.dev/docs\n- **GitHub Repository**: https://github.com/opencode/opencode\n- **커뮤니티 포럼**: https://community.opencode.dev\n- **비교 분석 블로그**: https://medium.com/@ai‑compare/opencode-vs-claude-code\n\n---\n\n*이 가이드는 2026‑02‑11 기준 최신 정보를 바탕으로 작성되었습니다.*",
-  "lastModified": "2026-02-11T11:48:55Z",
+  "lastModified": "2026-02-11T12:20:25Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -18,11 +18,11 @@
   "order": 4,
   "history": [
     {
-      "sha": "d41b10f",
-      "message": "chore: 대시보드 통계 수집 - 2026-02-11 11:48",
+      "sha": "d8ed192",
+      "message": "chore: 자동 상태 수집 - 2026-02-11 12:20",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-11T11:48:55Z",
+      "date": "2026-02-11T12:20:25Z",
       "additions": 120,
       "deletions": 0
     }

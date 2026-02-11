@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "615d7270-c4d5-4479-94b0-fbed775db8f4",
+      "timestamp": "2026-02-11T12:49:41.466Z",
+      "actionType": "generate",
+      "issueNumber": 158,
+      "issueTitle": "[요청] 바이브코딩에 대해",
+      "documentSlug": "",
+      "documentTitle": "바이브 코딩이란?",
+      "summary": "새 문서 \"바이브 코딩이란?\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3734
+            },
+            {
+              "step": "outline",
+              "durationMs": 6231
+            },
+            {
+              "step": "write",
+              "durationMs": 25380
+            },
+            {
+              "step": "review",
+              "durationMs": 5889
+            }
+          ],
+          "totalDurationMs": 41234,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1875,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "e3a9a988-9979-44f1-9f06-ae2b89343c06",
       "timestamp": "2026-02-11T08:01:04.445Z",
       "actionType": "cross_reference",
@@ -1247,5 +1292,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-11T08:01:04.445Z"
+  "lastUpdated": "2026-02-11T12:49:41.466Z"
 }
