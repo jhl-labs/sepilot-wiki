@@ -97,6 +97,12 @@ async function main() {
       token: githubInfo.token,
     });
 
+    // wiki-maintenance 이슈는 발행 취소 처리 건너뛰기
+    if (context.labels?.includes('wiki-maintenance')) {
+      console.log('⏭️ wiki-maintenance 이슈는 문서 발행 취소를 건너뜁니다.');
+      return;
+    }
+
     const result = await unpublishDocument(context);
 
     // AI History 기록 (변경이 있을 때만)

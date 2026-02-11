@@ -99,7 +99,13 @@ async function processFeedback(context, currentCommentBody) {
   const publishedDocs = allDocs.filter((d) => d.status === 'published');
 
   // Wiki Maintainer Issue 여부 확인
-  const isWikiMaintainerIssue = context.issueTitle.includes('[Wiki Maintainer]');
+  const isWikiMaintainerIssue = context.issueTitle.includes('[Wiki Maintainer]') ||
+    context.labels?.includes('wiki-maintenance');
+
+  if (isWikiMaintainerIssue) {
+    console.log('⏭️ wiki-maintenance 이슈는 피드백 처리를 건너뜁니다.');
+    return { action: 'skip', reason: 'wiki_maintenance_issue' };
+  }
 
   // 시스템 프롬프트
   const systemPrompt = `당신은 SEPilot Wiki의 기술 문서 편집 AI입니다.

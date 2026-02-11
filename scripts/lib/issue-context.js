@@ -81,11 +81,19 @@ export async function collectIssueContext(options) {
   console.log(`📋 Issue #${issueNumber} 컨텍스트 수집 중...`);
 
   // Issue 정보가 없으면 API에서 가져옴
+  let issueLabels = [];
   if (!issueTitle || !issueBody) {
     const issueInfo = await fetchIssueInfo(owner, repo, issueNumber, token);
     if (issueInfo) {
       issueTitle = issueTitle || issueInfo.title;
       issueBody = issueBody || issueInfo.body || '';
+      issueLabels = (issueInfo.labels || []).map(l => l.name);
+    }
+  } else {
+    // issueTitle과 issueBody가 이미 있어도 라벨 정보는 API에서 가져옴
+    const issueInfo = await fetchIssueInfo(owner, repo, issueNumber, token);
+    if (issueInfo) {
+      issueLabels = (issueInfo.labels || []).map(l => l.name);
     }
   }
 
@@ -102,6 +110,7 @@ export async function collectIssueContext(options) {
     issueNumber,
     issueTitle,
     issueBody,
+    labels: issueLabels,
     comments: comments.map((c) => ({
       id: c.id,
       author: c.user.login,

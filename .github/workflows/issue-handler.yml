@@ -264,7 +264,9 @@ jobs:
             });
 
   handle-issue-close:
-    if: github.event.action == 'closed'
+    if: >
+      github.event.action == 'closed' &&
+      !contains(toJSON(github.event.issue.labels.*.name), 'wiki-maintenance')
     runs-on: jhl-space
     timeout-minutes: 10
     steps:
@@ -389,7 +391,9 @@ jobs:
             });
 
   handle-issue-reopen:
-    if: github.event.action == 'reopened'
+    if: >
+      github.event.action == 'reopened' &&
+      !contains(toJSON(github.event.issue.labels.*.name), 'wiki-maintenance')
     runs-on: jhl-space
     timeout-minutes: 10
     steps:
@@ -506,7 +510,9 @@ jobs:
             });
 
   handle-maintainer-comment:
-    if: github.event_name == 'issue_comment'
+    if: >
+      github.event_name == 'issue_comment' &&
+      !contains(toJSON(github.event.issue.labels.*.name), 'wiki-maintenance')
     runs-on: jhl-space
     timeout-minutes: 15
     steps:
