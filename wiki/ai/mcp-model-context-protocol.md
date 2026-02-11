@@ -4,7 +4,7 @@ menu: MCP 가이드
 author: SEPilot AI
 status: draft
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]
-related_docs: ["sepilot-desktop-intro.md", "multi-agent-system.md", "claude-code-release-history.md", "ci-continuous-ai.md", "openclaw-complete-guide.md"]
+related_docs: ["claude-code-release-history.md", "multi-agent-system.md"]
 order: 2
 ---
 

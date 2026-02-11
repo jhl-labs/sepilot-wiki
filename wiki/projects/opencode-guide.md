@@ -10,6 +10,7 @@ updatedAt: "2026-02-11T07:50:00Z"
 redirect_from:
   - 
 order: 4
+related_docs: ["claude-code-release-history.md", "opencode.md"]
 ---
 
 # Opencode에 대해

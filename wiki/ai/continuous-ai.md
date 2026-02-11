@@ -11,7 +11,7 @@ redirect_from:
   - ci-ci-continuous-ai
   - ci-continuous-ai
   - ci-continuous-ai-kr
-related_docs: ["multi-agent-system.md", "mcp-model-context-protocol.md", "moltbook-intro.md", "openclaw-complete-guide.md", "sepilot-desktop-intro.md"]
+related_docs: ["multi-agent-system.md", "bun-github-actions-setup.md"]
 ---
 
 # Continuous AI 실천: 에이전트형 CI로 오늘 자동화할 수 있는 작업

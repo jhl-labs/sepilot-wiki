@@ -10,7 +10,7 @@ redirect_from:
   - openclaw-complete-guide
   - ai-openclaw
   - projects-openclaw
-related_docs: ["moltbook-intro.md", "sepilot-desktop-intro.md", "multi-agent-system.md", "mcp-model-context-protocol.md", "ci-continuous-ai.md"]
+related_docs: ["moltbook-intro.md"]
 order: 5
 ---
 
