@@ -1,43 +1,53 @@
 {
-  "collectedAt": "2026-02-11T11:48:55.582Z",
+  "collectedAt": "2026-02-11T12:50:55.350Z",
   "overview": {
-    "totalDocuments": 15,
+    "totalDocuments": 16,
     "publishedDocuments": 6,
-    "draftDocuments": 9,
-    "openRequests": 6,
+    "draftDocuments": 10,
+    "openRequests": 7,
     "closedRequests": 14,
-    "totalAIActions": 66
+    "totalAIActions": 67
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 1,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 1875,
+      "totalPipelineDurationMs": 41234
     },
     "last24h": {
-      "aiActions": 27,
-      "documentsCreated": 7,
-      "documentsModified": 7,
-      "tavilyApiCalls": 22,
-      "tavilyResults": 59,
-      "estimatedTokens": 20071,
-      "totalPipelineDurationMs": 439655
+      "aiActions": 18,
+      "documentsCreated": 3,
+      "documentsModified": 6,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 23,
+      "estimatedTokens": 5291,
+      "totalPipelineDurationMs": 123644
     },
     "last7d": {
-      "aiActions": 40,
-      "documentsCreated": 12,
+      "aiActions": 41,
+      "documentsCreated": 13,
       "documentsModified": 10,
-      "tavilyApiCalls": 28,
-      "tavilyResults": 76,
-      "estimatedTokens": 30507,
-      "totalPipelineDurationMs": 655357
+      "tavilyApiCalls": 31,
+      "tavilyResults": 85,
+      "estimatedTokens": 32382,
+      "totalPipelineDurationMs": 696591
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-11T12:49:41.466Z",
+      "actionType": "generate",
+      "issueNumber": 158,
+      "documentTitle": "바이브 코딩이란?",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 41234,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1875
+    },
     {
       "timestamp": "2026-02-11T08:01:04.445Z",
       "actionType": "cross_reference",
@@ -227,23 +237,13 @@
       "durationMs": 94338,
       "tavilyApiCalls": 3,
       "estimatedTokens": 4579
-    },
-    {
-      "timestamp": "2026-02-10T12:36:19.614Z",
-      "actionType": "generate",
-      "issueNumber": 143,
-      "documentTitle": "Antigravity 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 82907,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3993
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 62,
-      "totalEstimatedTokens": 30507,
-      "avgDurationMs": 65536
+      "totalActions": 63,
+      "totalEstimatedTokens": 32382,
+      "avgDurationMs": 63326
     },
     "unknown": {
       "totalActions": 4,
