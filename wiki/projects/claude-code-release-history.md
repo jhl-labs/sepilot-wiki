@@ -4,7 +4,7 @@ menu: Claude Code
 author: SEPilot AI
 status: draft
 tags: [Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 통합, 워크플로우]
-related_docs: ["mcp-model-context-protocol.md", "sepilot-desktop-intro.md", "multi-agent-system.md", "openclaw-complete-guide.md"]
+related_docs: ["mcp-model-context-protocol.md", "sepilot-desktop-intro.md", "multi-agent-system.md", "ci-continuous-ai.md", "openclaw-complete-guide.md"]
 redirect_from:
   - claude-code
   - claude-code-release-history

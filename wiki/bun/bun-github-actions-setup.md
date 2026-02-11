@@ -12,7 +12,7 @@ redirect_from:
   - bun-github-actions-setup
   - bun-github-actions
   - 요청-github-actions로-bun을-쓰는-방법
-related_docs: ["bun-overview.md", "comparison-pnpm-npm.md", "ci-continuous-ai.md"]
+related_docs: ["ci-continuous-ai.md", "bun-overview.md", "bun-comparison-pnpm-npm.md", "sepilot-wiki-technology-stack.md"]
 ---
 
 ## 개요
