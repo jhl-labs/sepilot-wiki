@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-10T23:48:10.359Z",
+  "collectedAt": "2026-02-11T01:01:31.157Z",
   "overview": {
     "totalDocuments": 13,
     "publishedDocuments": 6,
     "draftDocuments": 7,
     "openRequests": 5,
     "closedRequests": 13,
-    "totalAIActions": 53
+    "totalAIActions": 54
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 21,
+      "aiActions": 22,
       "documentsCreated": 8,
       "documentsModified": 6,
       "tavilyApiCalls": 22,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 572947
     },
     "last7d": {
-      "aiActions": 27,
+      "aiActions": 28,
       "documentsCreated": 10,
       "documentsModified": 7,
       "tavilyApiCalls": 22,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-11T00:39:05.597Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-10T22:43:41.786Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": 43458,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2014
-    },
-    {
-      "timestamp": "2026-02-10T08:32:59.555Z",
-      "actionType": "generate",
-      "issueNumber": 134,
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 73133,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3517
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 49,
+      "totalActions": 50,
       "totalEstimatedTokens": 27091,
       "avgDurationMs": 71618
     },
