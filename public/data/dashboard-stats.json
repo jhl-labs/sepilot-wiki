@@ -1,25 +1,25 @@
 {
-  "collectedAt": "2026-02-11T12:50:55.350Z",
+  "collectedAt": "2026-02-11T14:00:19.129Z",
   "overview": {
     "totalDocuments": 16,
     "publishedDocuments": 6,
     "draftDocuments": 10,
     "openRequests": 7,
     "closedRequests": 14,
-    "totalAIActions": 67
+    "totalAIActions": 68
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
-      "documentsCreated": 1,
+      "aiActions": 0,
+      "documentsCreated": 0,
       "documentsModified": 0,
-      "tavilyApiCalls": 3,
-      "tavilyResults": 9,
-      "estimatedTokens": 1875,
-      "totalPipelineDurationMs": 41234
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 18,
+      "aiActions": 19,
       "documentsCreated": 3,
       "documentsModified": 6,
       "tavilyApiCalls": 9,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 123644
     },
     "last7d": {
-      "aiActions": 41,
+      "aiActions": 42,
       "documentsCreated": 13,
       "documentsModified": 10,
       "tavilyApiCalls": 31,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-11T12:50:33.733Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-11T12:49:41.466Z",
       "actionType": "generate",
@@ -227,21 +237,11 @@
       "durationMs": 87592,
       "tavilyApiCalls": 3,
       "estimatedTokens": 4169
-    },
-    {
-      "timestamp": "2026-02-10T12:41:41.931Z",
-      "actionType": "generate",
-      "issueNumber": 145,
-      "documentTitle": "Antigravity 릴리즈 노트 정리",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 94338,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4579
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 63,
+      "totalActions": 64,
       "totalEstimatedTokens": 32382,
       "avgDurationMs": 63326
     },
