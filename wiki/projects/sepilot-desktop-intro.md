@@ -9,6 +9,7 @@ createdAt: "2025-12-06T05:45:00Z"
 updatedAt: "2025-12-06T05:45:00Z"
 redirect_from:
   - projects-sepilot-desktop
+  - projects-sepilot-desktop
   - projects-sepilot-desktop-introduction
   - projects-desktop-introduction
   - projects-desktop-intro

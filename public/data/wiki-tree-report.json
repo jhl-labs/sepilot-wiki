@@ -1,129 +1,140 @@
 {
-  "timestamp": "2026-02-10T22:43:41.785Z",
+  "timestamp": "2026-02-11T02:56:11.247Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "15개의 문서가 현재 루트와 몇 개의 하위 폴더에 흩어져 있습니다. 대부분이 제품 릴리즈 노트, 프로토콜 가이드, 프로젝트 소개, 도구 가이드, CI/AI 개념 등으로 구분될 수 있습니다. 파일명은 영문 슬러그 형태가 대부분이지만, 일부는 보다 명확한 이름이 필요하고, 릴리즈 노트와 같은 공통 카테고리는 별도 디렉터리로 재배치하는 것이 바람직합니다.",
-    "totalDocuments": 15,
+    "summary": "14개의 위키 문서가 현재 루트와 몇 개의 하위 디렉터리(bun, projects, ci)만 사용하고 있습니다. 파일명에 일반적인 이름(overview.md, github-actions-setup.md 등)이 포함돼 있어 URL 가독성이 낮고, 릴리즈 노트와 가이드 문서가 같은 레벨에 섞여 있어 탐색이 비효율적입니다. 또한 다수 문서가 draft 상태이며, 파일명을 영문 slug 형태로 통일하지 않아 일관성이 부족합니다.",
+    "totalDocuments": 14,
     "categories": [
-      "release-notes",
-      "kubernetes",
-      "protocols",
-      "tools",
-      "projects",
+      "root",
       "bun",
-      "ci",
-      "ai-concepts"
+      "projects",
+      "ci"
     ],
     "issues": [
-      "중복된 릴리즈 노트 문서가 여러 제품에 흩어져 있어 공통 release‑notes 폴더가 없음",
-      "다수 문서가 draft 상태이며 검토·출판이 필요",
-      "파일명을 보다 명확히 표현하고, 이동 후 기존 URL이 깨지지 않도록 리다이렉트가 필요"
+      "파일명이 일반적이어서 SEO·링크 가독성이 낮음",
+      "릴리즈 노트와 가이드가 같은 디렉터리에 혼재",
+      "다수 문서가 draft 상태라 공개 전 검토 필요",
+      "대규모 파일명·디렉터리 변경 시 기존 URL 깨짐 위험"
     ]
   },
   "suggestedStructure": {
+    "root": [
+      "home.md"
+    ],
+    "tools/bun": [
+      "bun-overview.md",
+      "bun-comparison-pnpm-npm.md",
+      "bun-github-actions-setup.md"
+    ],
     "release-notes": [
       "kubernetes-release-notes.md",
-      "claude-code-release-notes.md",
       "antigravity-release-notes.md"
     ],
-    "kubernetes/migration": [
-      "ingress-nginx-deprecation-guide.md"
-    ],
-    "protocols": [
-      "mcp.md"
-    ],
-    "tools": [
-      "openclaw.md"
+    "guides": [
+      "claude-code-release-history.md",
+      "openclaw-complete-guide.md",
+      "ingress-nginx-deprecation-guide.md",
+      "continuous-ai.md",
+      "mcp-model-context-protocol.md",
+      "multi-agent-system.md"
     ],
     "projects": [
-      "sepilot-desktop.md",
+      "sepilot-desktop-intro.md",
       "sepilot-wiki-technology-stack.md"
     ],
-    "bun": [
-      "overview.md",
-      "github-actions-setup.md",
-      "comparison-pnpm-npm.md"
-    ],
-    "ci": [
-      "continuous-ai.md"
-    ],
-    "ai-concepts": [
-      "multi-agent-system.md"
+    "root (misc)": [
+      "moltbook-intro.md"
     ]
   },
   "results": {
-    "appliedActions": 6,
-    "skippedActions": 12,
+    "appliedActions": 7,
+    "skippedActions": 10,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 2
+    "createdIssues": 1
   },
   "actions": {
     "applied": [
       {
         "type": "rename",
         "priority": "high",
-        "source": "antigravity.md",
-        "target": "antigravity-release-notes.md",
-        "reason": "파일명이 내용(릴리즈 노트)을 명시하지 않음",
+        "source": "claude-code.md",
+        "target": "claude-code-release-history.md",
+        "reason": "버전 히스토리 가이드를 명확히 드러내는 slug 로 변경",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "openclaw.md",
-        "target": "openclaw-guide.md",
-        "reason": "가이드 문서임을 명시",
+        "source": "bun/overview.md",
+        "target": "bun/bun-overview.md",
+        "reason": "‘overview’는 모호하므로 bun‑overview 로 명확히",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "bun/github-actions-setup.md",
+        "target": "bun/bun-github-actions-setup.md",
+        "reason": "파일명이 bun 과 연관성을 드러내지 않음",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "medium",
-        "source": "bun/bun-github-actions-setup.md",
-        "target": "bun/github-actions-setup.md",
-        "reason": "불필요한 접두어 제거",
+        "source": "openclaw-guide.md",
+        "target": "openclaw-complete-guide.md",
+        "reason": "‘guide’보다 완전 가이드를 의미하는 slug 로 변경",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "medium",
-        "source": "bun/bun-overview.md",
-        "target": "bun/overview.md",
-        "reason": "파일명이 중복된 접두어를 포함",
+        "source": "moltbook.md",
+        "target": "moltbook-intro.md",
+        "reason": "문서가 소개형이므로 intro 를 명시",
         "autoApply": true
       },
       {
         "type": "rename",
-        "priority": "medium",
-        "source": "bun/bun-pnpm-npm-comparison.md",
-        "target": "bun/comparison-pnpm-npm.md",
-        "reason": "간결하고 일관된 네이밍",
+        "priority": "low",
+        "source": "projects/sepilot-desktop.md",
+        "target": "projects/sepilot-desktop-intro.md",
+        "reason": "내용이 소개이므로 intro 를 추가",
         "autoApply": true
       },
       {
         "type": "rename",
-        "priority": "medium",
-        "source": "ci/continuous-ai-kr.md",
-        "target": "ci/continuous-ai.md",
-        "reason": "언어 코드가 불필요함",
+        "priority": "low",
+        "source": "ci/continuous-ai.md",
+        "target": "ci/ci-continuous-ai.md",
+        "reason": "CI 폴더 내 파일임을 명시",
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "move",
+        "type": "create_category",
         "priority": "high",
-        "source": "kubernetes-release-notes.md",
-        "target": "release-notes/kubernetes-release-notes.md",
-        "reason": "릴리즈 노트는 공통 release‑notes 카테고리로 이동",
+        "source": "",
+        "target": "release-notes",
+        "reason": "Kubernetes·Antigravity 등 릴리즈 노트를 한 곳에 모아 탐색성 향상",
+        "autoApply": false
+      },
+      {
+        "type": "create_category",
+        "priority": "high",
+        "source": "",
+        "target": "guides",
+        "reason": "Claude‑Code, OpenClaw, Ingress‑NGINX 등 가이드 문서를 통합",
         "autoApply": false
       },
       {
         "type": "move",
         "priority": "high",
-        "source": "claude-code.md",
-        "target": "release-notes/claude-code-release-notes.md",
-        "reason": "다른 제품 릴리즈 노트와 통합",
+        "source": "kubernetes-release-notes.md",
+        "target": "release-notes/kubernetes-release-notes.md",
+        "reason": "릴리즈 노트 전용 카테고리로 이동",
         "autoApply": false
       },
       {
@@ -131,79 +142,55 @@
         "priority": "high",
         "source": "antigravity-release-notes.md",
         "target": "release-notes/antigravity-release-notes.md",
-        "reason": "릴리즈 노트 카테고리 통합",
+        "reason": "릴리즈 노트 전용 카테고리로 이동",
         "autoApply": false
       },
       {
         "type": "move",
-        "priority": "high",
+        "priority": "medium",
+        "source": "claude-code-release-history.md",
+        "target": "guides/claude-code-release-history.md",
+        "reason": "가이드 문서이므로 guides 로 이동",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
+        "source": "openclaw-complete-guide.md",
+        "target": "guides/openclaw-complete-guide.md",
+        "reason": "가이드 문서이므로 guides 로 이동",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
         "source": "ingress-nginx-deprecation-guide.md",
-        "target": "kubernetes/migration/ingress-nginx-deprecation-guide.md",
-        "reason": "Kubernetes 마이그레이션 가이드 전용 폴더",
+        "target": "guides/ingress-nginx-deprecation-guide.md",
+        "reason": "가이드 문서이므로 guides 로 이동",
         "autoApply": false
       },
       {
         "type": "move",
-        "priority": "high",
+        "priority": "medium",
+        "source": "ci/ci-continuous-ai.md",
+        "target": "guides/continuous-ai.md",
+        "reason": "CI 관련 가이드이므로 guides 로 이동",
+        "autoApply": false
+      },
+      {
+        "type": "move",
+        "priority": "medium",
         "source": "mcp-model-context-protocol.md",
-        "target": "protocols/mcp.md",
-        "reason": "프로토콜 문서는 protocols 폴더에 집중",
+        "target": "guides/mcp-model-context-protocol.md",
+        "reason": "프로토콜 가이드이므로 guides 로 이동",
         "autoApply": false
       },
       {
         "type": "move",
-        "priority": "high",
-        "source": "openclaw-guide.md",
-        "target": "tools/openclaw.md",
-        "reason": "도구 가이드는 tools 폴더에 배치",
-        "autoApply": false
-      },
-      {
-        "type": "move",
-        "priority": "high",
+        "priority": "medium",
         "source": "multi-agent-system.md",
-        "target": "ai-concepts/multi-agent-system.md",
-        "reason": "AI 개념 문서 전용 폴더",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "high",
-        "source": "",
-        "target": "release-notes/",
-        "reason": "릴리즈 노트 전용 디렉터리 생성",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "high",
-        "source": "",
-        "target": "kubernetes/migration/",
-        "reason": "Kubernetes 마이그레이션 가이드 전용 서브 폴더",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "high",
-        "source": "",
-        "target": "protocols/",
-        "reason": "프로토콜 문서 전용 폴더",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "high",
-        "source": "",
-        "target": "tools/",
-        "reason": "도구 가이드 전용 폴더",
-        "autoApply": false
-      },
-      {
-        "type": "create_category",
-        "priority": "high",
-        "source": "",
-        "target": "ai-concepts/",
-        "reason": "AI 개념·용어 문서 전용 폴더",
+        "target": "guides/multi-agent-system.md",
+        "reason": "MAS 가이드이므로 guides 로 이동",
         "autoApply": false
       }
     ],
@@ -211,14 +198,9 @@
   },
   "createdIssues": [
     {
-      "number": 151,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/151",
-      "title": "Draft documents need review before publishing"
-    },
-    {
-      "number": 152,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/152",
-      "title": "Create redirects for renamed/moved files"
+      "number": 154,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/154",
+      "title": "Bulk rename/move will break existing URLs – set up redirects"
     }
   ]
 }

@@ -8,6 +8,7 @@ issueNumber: 0
 createdAt: "2026-02-10T14:00:00Z"
 updatedAt: "2026-02-10T14:00:00Z"
 redirect_from:
+  - ci-continuous-ai
   - ci-continuous-ai-kr
 related_docs: ["multi-agent-system.md", "openclaw-guide.md"]
 ---
