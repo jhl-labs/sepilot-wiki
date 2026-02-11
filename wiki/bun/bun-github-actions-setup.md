@@ -13,6 +13,7 @@ redirect_from:
   - bun-github-actions
   - 요청-github-actions로-bun을-쓰는-방법
 related_docs: ["ci-continuous-ai.md", "bun-overview.md", "bun-comparison-pnpm-npm.md", "sepilot-wiki-technology-stack.md"]
+order: 3
 ---
 
 ## 개요

@@ -7,6 +7,7 @@ redirect_from:
   - moltbook
   - moltbook-intro
 related_docs: ["openclaw-complete-guide.md", "multi-agent-system.md", "sepilot-desktop-intro.md", "ci-continuous-ai.md"]
+order: 1
 ---
 
 ## Executive Summary

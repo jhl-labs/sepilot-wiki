@@ -7,6 +7,7 @@ tags: ["Ingress", "NGINX", "Kubernetes", "Migration", "Security", "guide", "depr
 redirect_from:
   - ingress-nginx-statement-from-the-kubernetes-steeri
 related_docs: ["kubernetes-release-notes.md", "antigravity-release-notes.md", "ci-continuous-ai.md"]
+order: 2
 ---
 
 ## 개요

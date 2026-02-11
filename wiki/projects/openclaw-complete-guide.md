@@ -11,6 +11,7 @@ redirect_from:
   - ai-openclaw
   - projects-openclaw
 related_docs: ["moltbook-intro.md", "sepilot-desktop-intro.md", "multi-agent-system.md", "mcp-model-context-protocol.md", "ci-continuous-ai.md"]
+order: 5
 ---
 
 ## OpenClaw 개요 및 핵심 개념

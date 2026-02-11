@@ -7,6 +7,9 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-11T07:50:00Z"
 updatedAt: "2026-02-11T07:50:00Z"
+redirect_from:
+  - 
+order: 4
 ---
 
 # Opencode에 대해

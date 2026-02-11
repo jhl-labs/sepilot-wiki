@@ -11,6 +11,7 @@ redirect_from:
   - bun-overview
   - 요청-bun이란
 related_docs: ["bun-comparison-pnpm-npm.md", "bun-github-actions-setup.md", "sepilot-wiki-technology-stack.md"]
+order: 1
 ---
 
 ## 개요

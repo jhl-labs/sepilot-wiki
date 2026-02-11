@@ -7,6 +7,7 @@ tags: ["Multi-Agent", "AI", "Agentic-AI", "MCP", "A2A", "LLM", "distributed-syst
 related_docs: ["mcp-model-context-protocol.md", "ci-continuous-ai.md", "sepilot-desktop-intro.md", "openclaw-complete-guide.md", "moltbook-intro.md"]
 redirect_from:
   - mas-multi-agent-system
+order: 3
 ---
 
 # MAS (Multi Agent System)

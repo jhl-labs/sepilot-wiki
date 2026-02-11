@@ -8,6 +8,7 @@ issueNumber: 0
 createdAt: "2026-02-10T14:00:00Z"
 updatedAt: "2026-02-10T14:00:00Z"
 redirect_from:
+  - ci-ci-continuous-ai
   - ci-continuous-ai
   - ci-continuous-ai-kr
 related_docs: ["multi-agent-system.md", "mcp-model-context-protocol.md", "moltbook-intro.md", "openclaw-complete-guide.md", "sepilot-desktop-intro.md"]

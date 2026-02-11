@@ -15,6 +15,7 @@ redirect_from:
   - projects-desktop-intro
   - Projects-sepilot-desktop-intro
 related_docs: ["mcp-model-context-protocol.md", "multi-agent-system.md", "claude-code-release-history.md", "openclaw-complete-guide.md", "ci-continuous-ai.md"]
+order: 3
 ---
 
 # SEPilot Desktop 소개
