@@ -2,7 +2,7 @@
   "title": "GitHub Actions로 bun을 쓰는 방법",
   "slug": "bun/bun-github-actions-setup",
   "content": "\n## 개요\nGitHub Actions 워크플로우에서 **bun**(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.\n\n## 사전 요구 사항\n- 저장소에 `bun`을 사용하도록 설정된 `package.json` 혹은 `bunfig.toml` 파일이 존재해야 합니다.\n- 워크플로우는 Linux(`ubuntu-latest`) 환경을 기준으로 설명합니다. Windows/macOS에서도 동일한 단계가 적용되지만, OS별 경로 차이에 유의하세요.\n\n## 워크플로우 파일 구조\n`.github/workflows/` 디렉터리에 `bun-ci.yml` 과 같은 파일을 생성합니다.\n\n### 1. 워크플로우 트리거\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n```\n\n### 2. Job 정의\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n```\n\n### 3. 단계별 설정\n#### 3-1. 레포지토리 체크아웃\n```yaml\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n```\n\n#### 3-2. bun 설치\nbun은 공식 설치 스크립트를 통해 간단히 설치할 수 있습니다.\n공식 설치 스크립트는 <https://bun.sh> 에서 확인할 수 있습니다.\n```yaml\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n```\n\n#### 3-3. 의존성 캐시\nbun은 `node_modules` 대신 `bun.lockb`와 `~/.bun` 디렉터리를 사용합니다.\n`actions/cache` 액션을 이용해 이 디렉터리를 캐시하면 설치 속도가 크게 향상됩니다.\n```yaml\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n```\n\n#### 3-4. 의존성 설치\n```yaml\n      - name: Install dependencies\n        run: bun install\n```\n\n#### 3-5. 테스트 실행 (예시)\n```yaml\n      - name: Run tests\n        run: bun test\n```\n\n#### 3-6. 빌드 및 배포 (필요 시)\n```yaml\n      - name: Build project\n        run: bun run build\n```\n\n## 전체 예시 워크플로우\n아래는 위 단계들을 하나의 파일에 통합한 최종 예시입니다.\n\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n\n      - name: Install dependencies\n        run: bun install\n\n      - name: Run tests\n        run: bun test\n\n      - name: Build project\n        run: bun run build\n```\n\n> **주의**: 위 예시에서는 `bun test`와 `bun run build` 스크립트가 `package.json` 혹은 `bunfig.toml`에 정의되어 있다고 가정합니다. 실제 프로젝트에 맞게 스크립트 명령을 조정하세요.\n\n## macOS / Windows 환경에서 사용하기\n- **macOS**: `runs-on: macos-latest` 로 변경하고, `curl` 설치가 기본 제공됩니다.\n- **Windows**: `runs-on: windows-latest` 로 변경하고, PowerShell 스크립트(`Invoke-WebRequest`)를 사용해 bun을 설치합니다. 예시:\n```yaml\n      - name: Install bun on Windows\n        shell: pwsh\n        run: |\n          iwr https://bun.sh/install -UseBasicParsing | iex\n          Add-Content $env:GITHUB_PATH \"$env:USERPROFILE\\.bun\\bin\"\n```\n> Windows에서는 경로 구분자(`\\`)와 환경 변수 사용법에 유의하세요.\n\n## 베스트 프랙티스\n1. **캐시 키 관리**: `bun.lockb` 파일이 변경될 때마다 캐시가 무효화되도록 `hashFiles('bun.lockb')` 를 사용합니다.\n2. **CI 속도 최적화**: `actions/setup-node` 대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.\n3. **보안**: 공식 설치 스크립트는 HTTPS를 통해 전달되며, `curl -fsSL` 옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.\n4. **버전 고정**: 특정 bun 버전을 사용하려면 `BUN_VERSION` 환경 변수를 설정하고 설치 스크립트에 전달합니다.\n```yaml\n        env:\n          BUN_VERSION: 1.1.12\n```\n\n## 참고 자료\n- Bun 공식 홈페이지 및 설치 가이드: <https://bun.sh>\n- GitHub Actions 공식 문서: <https://docs.github.com/en/actions>\n- actions/cache 액션: <https://github.com/actions/cache>\n\n## 결론\nGitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.\n",
-  "lastModified": "2026-02-11T08:01:05Z",
+  "lastModified": "2026-02-12T07:26:28Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -21,129 +21,12 @@
   "order": 3,
   "history": [
     {
-      "sha": "0190970",
-      "message": "🔗 교차 참조 업데이트: 16개 문서",
+      "sha": "bbce2ca",
+      "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
       "author": "github-actions[bot]",
       "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T08:01:05Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "e873878",
-      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T07:48:29Z",
-      "additions": 1,
-      "deletions": 0
-    },
-    {
-      "sha": "f640314",
-      "message": "🔗 교차 참조 업데이트: 14개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T06:10:24Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "ff8a92a",
-      "message": "🔗 교차 참조 업데이트: 10개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T05:57:28Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "4cca9d3",
-      "message": "🔗 교차 참조 업데이트: 5개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T05:14:00Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "105157f",
-      "message": "🔗 교차 참조 업데이트: 17개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T04:47:56Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "c6480b9",
-      "message": "🌳 Wiki Tree Maintenance: 14개의 위키 문서가 현재 루트와 몇 개의 하위 디렉터리(bun, projects, ci)만 사용하고 있습니다. 파일명에 일반적인 이름(overview.md, github-actions-setup.md 등)이 포함돼 있어 URL 가독성이 낮고, 릴리즈 노트와 가이드 문서가 같은 레벨에 섞여 있어 탐색이 비효율적입니다. 또한 다수 문서가 draft 상태이며, 파일명을 영문 slug 형태로 통일하지 않아 일관성이 부족합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T02:56:32Z",
-      "additions": 172,
-      "deletions": 0
-    },
-    {
-      "sha": "e71d220",
-      "message": "🔗 교차 참조 업데이트: 13개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T00:39:06Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "bf66156",
-      "message": "🌳 Wiki Tree Maintenance: 15개의 문서가 현재 루트와 몇 개의 하위 폴더에 흩어져 있습니다. 대부분이 제품 릴리즈 노트, 프로토콜 가이드, 프로젝트 소개, 도구 가이드, CI/AI 개념 등으로 구분될 수 있습니다. 파일명은 영문 슬러그 형태가 대부분이지만, 일부는 보다 명확한 이름이 필요하고, 릴리즈 노트와 같은 공통 카테고리는 별도 디렉터리로 재배치하는 것이 바람직합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-10T22:44:21Z",
-      "additions": 0,
-      "deletions": 170
-    },
-    {
-      "sha": "c60662c",
-      "message": "🌳 Wiki Tree Maintenance: The wiki contains 9 documents covering Kubernetes, AI/Multi‑Agent systems, the Model Context Protocol, the SEPilot projects and the Bun runtime. Files are currently placed in a flat root with a few sub‑folders (projects, bun). Several filenames are not slug‑ified, drafts are mixed with published content, and there is no clear top‑level categorisation.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-10T12:15:56Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "b59f781",
-      "message": "🌳 Wiki Tree Maintenance: 9개의 문서가 3개의 상위 카테고리(root, projects, bun)로 흩어져 있습니다. Kubernetes·AI 관련 문서는 루트에 그대로 놓여 있어 주제별 폴더가 부족합니다. 파일명은 영문 슬러그 규칙을 따르지 않아 URL 일관성이 떨어집니다. 중복 문서는 없으며, 대부분의 파일은 올바른 디렉터리에 위치하고 있습니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-10T12:09:42Z",
-      "additions": 170,
-      "deletions": 0
-    },
-    {
-      "sha": "cdc1e0b",
-      "message": "🔗 교차 참조 업데이트: 6개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-09T10:32:24Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "face820",
-      "message": "🔗 교차 참조 업데이트: 5개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-09T10:05:18Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "82a08e6",
-      "message": "chore: 초기 커밋 - SEPilot Wiki 프로젝트",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2025-12-13T12:38:17+09:00",
-      "additions": 0,
+      "date": "2026-02-12T07:26:28Z",
+      "additions": 173,
       "deletions": 0
     }
   ]

@@ -2,7 +2,7 @@
   "title": "OpenClaw 완벽 가이드",
   "slug": "projects/openclaw-complete-guide",
   "content": "\n## OpenClaw 개요 및 핵심 개념\n**OpenClaw**는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 *Clawdbot*·*Moltbot*이라는 이름으로 개발되었으며, 현재는 **GitHub**(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1].\n\n### 주요 목표\n- **항시 가동** – 언제든지 메시지를 주고받을 수 있는 AI 비서 제공  \n- **멀티채널 지원** – Telegram, Discord, WhatsApp, Slack 등 다양한 메신저와 연동  \n- **자율 실행** – Heartbeat·스케줄러를 통해 정해진 작업을 자동으로 수행  \n- **프라이버시 보호** – 로컬 모델(Ollama) 사용 시 데이터가 외부로 유출되지 않음  \n\n### 지원 AI 모델 및 연동 방식\n| 모델 | 제공 방식 | 연동 방법 |\n|------|-----------|-----------|\n| Claude (Anthropic) | 클라우드 API | OAuth 또는 API Key |\n| GPT‑4o (OpenAI) | 클라우드 API | API Key |\n| Ollama (로컬) | 로컬 실행 바이너리 | 직접 호출 (REST) |\n| 기타 (Gemini, DeepSeek 등) | 클라우드 API | API Key 또는 OAuth |\n\n*출처: 공식 Docs – 모델 지원 페이지 (2026‑02‑10) [2]*  \n\n### 기본 용어\n- **Gateway**: 모든 채널 연결을 관리하는 중앙 프로세스 (`openclaw gateway` 실행)  \n- **Agent**: AI 모델 호출 및 응답 생성 담당 모듈  \n- **Pairing**: 메신저(예: Telegram)와 Gateway를 연결하기 위한 인증 절차  \n- **Heartbeat**: 정해진 간격으로 자동 실행되는 작업 스케줄러  \n\n---\n\n## 아키텍처 및 동작 원리\n### 전체 시스템 구성\n```\nGateway\n ├─ Connector (Telegram, Discord, WhatsApp, Slack …)\n ├─ Scheduler / Heartbeat\n ├─ Memory Store (Long‑term Context)\n └─ Agent (Model Wrapper)\n```\n*※ 위 구조는 공식 Docs에 명시된 기본 아키텍처이며, 실제 구현은 `src/` 디렉터리에서 확인 가능* [3].\n\n- **Gateway**는 하나의 Node.js 프로세스로 실행되며, 각 Connector 플러그인은 독립 모듈 형태로 로드됩니다.  \n- **Scheduler**는 Cron‑like 설정 파일을 읽어 주기적인 작업(예: 일정 알림)을 트리거합니다.  \n- **Memory Store**는 SQLite 또는 PostgreSQL을 백엔드로 사용해 대화 컨텍스트와 사용자 메모리를 영구 저장합니다.  \n\n### 메시징 채널 통합 흐름\n1. 사용자가 Telegram에 메시지를 전송 → **Connector**가 webhook 또는 long‑polling 으로 수신  \n2. 메시지는 **Gateway**에 전달 → **Agent**가 현재 설정된 AI 모델에 호출  \n3. 모델 응답 → **후처리**(필터링, 포맷 변환) → **Connector**를 통해 원 채널에 전송  \n\n### 플러그인·모듈 구조와 확장 포인트\n- 플러그인은 `src/plugins/<channel>` 디렉터리에 위치하며, `register()` 함수만 구현하면 자동 로드됩니다.  \n- 새로운 채널을 추가하려면 **Connector 인터페이스**(init, receive, send)만 구현하면 됩니다.  \n- 커스텀 프롬프트·플러그인 API는 `openclaw plugin create <name>` 명령으로 스켈레톤을 생성할 수 있습니다.  \n\n### 보안·인증 메커니즘\n- **OAuth**: Google, Microsoft 등 OAuth2 제공자를 통해 토큰을 획득하고, 토큰은 환경 변수(`OPENCLAW_OAUTH_TOKEN`)에 저장합니다.  \n- **API Key**: 각 모델별 API 키는 `openclaw config set <model>.apiKey <key>` 로 관리됩니다.  \n- **Allowlist**: 채널별 화이트리스트(`*.allowlist`)를 설정해 허용된 사용자만 접근하도록 제한합니다.  \n\n*출처: 보안 가이드 (2026‑02‑10) [4]*  \n\n---\n\n## 주요 기능과 특징\n- **멀티채널 연동**: Telegram, Discord, WhatsApp, Slack, iMessage 등 5개 이상 공식 플러그인 제공  \n- **장기 메모리·컨텍스트 유지**: 대화 흐름을 SQLite 기반 Memory Store에 저장, `openclaw memory export` 로 백업 가능  \n- **자동 Heartbeat·스케줄링**: `openclaw schedule add \"0 9 * * *\" \"remind_meetings\"` 형태로 cron 표현식 사용  \n- **커스텀 프롬프트·플러그인 API**: `openclaw plugin create` 로 손쉽게 기능 확장  \n- **로컬 모델 지원**: Ollama와 직접 연동해 GPU 가속 로컬 모델(LLama‑3, Mistral 등) 사용 가능  \n- **관리 인터페이스**  \n  - **Web UI**: `http://localhost:3000` 에서 대시보드, 로그, 메모리 관리 제공 (React 기반)  \n  - **CLI**: `openclaw` 명령어 집합으로 모든 설정·운영 가능  \n\n*출처: 기능 소개 페이지 (2026‑02‑10) [5]*  \n\n---\n\n## 설치 및 설정 방법\n### 사전 요구 사항\n- **Node.js ≥ 18** (LTS)  \n- **Docker & Docker‑Compose** (선택적, 권장)  \n- **GPU 서버**: Ollama 사용 시 NVIDIA 드라이버 및 CUDA 12 이상 필요  \n- **Git** (소스 클론)  \n\n### 설치 옵션\n1. **Docker Compose 한 줄 설치**  \n   `curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw/main/install.sh | bash && docker compose up -d`  \n\n2. **npm/yarn 직접 설치**  \n   `git clone https://github.com/openclaw/openclaw.git && cd openclaw && npm install && npm run build && npm start`  \n\n3. **로컬 바이너리 배포** (GitHub Releases) – `openclaw-linux-x64.tar.gz` 를 다운로드 후 압축 해제, 실행 파일에 실행 권한 부여  \n\n*출처: 설치 가이드 (2026‑02‑10) [6]*  \n\n### 초기 설정 단계\n1. **기본 설정 파일 생성**  \n   `openclaw config init` → 프로젝트 루트에 `config.yaml` 생성  \n\n2. **API 키·OAuth 연동**  \n   - `openclaw config set openai.apiKey <YOUR_KEY>`  \n   - `openclaw config set anthropic.apiKey <YOUR_KEY>`  \n   - OAuth 연동: `openclaw oauth register google` 후 반환된 URL을 브라우저에서 열어 인증  \n\n3. **채널 별 페어링 (예: Telegram)**  \n   `openclaw pairing generate telegram` → 출력된 코드(예: ABC123)를 Telegram Bot에 전송 → `openclaw pairing approve telegram ABC123`  \n\n### 서비스 운영\n- **systemd 서비스 예시** (`/etc/systemd/system/openclaw.service`)  \n  ```\n  [Unit]\n  Description=OpenClaw AI Assistant\n  After=network.target\n\n  [Service]\n  WorkingDirectory=/opt/openclaw\n  ExecStart=/usr/bin/npm start\n  Restart=always\n  User=openclaw\n\n  [Install]\n  WantedBy=multi-user.target\n  ```  \n- **PM2**: `pm2 start dist/index.js --name openclaw` 로 프로세스 관리  \n- **Docker Swarm / Kubernetes**: 공식 `docker-compose.yml` 을 기반으로 Helm chart(예정) 로 변환 가능  \n\n*출처: 운영 가이드 (2026‑02‑10) [7]*  \n\n---\n\n## 사용 사례 및 활용 예시\n### 1. 개인 일정·이메일 자동 정리\n`openclaw schedule add \"0 7 * * *\" \"run_task email_cleanup\"`  \n매일 아침 7시, Gmail API와 연동된 플러그인이 최신 메일을 요약하고, 중요한 일정은 Telegram에 알림.\n\n### 2. 개발팀 코드 리뷰·CI 알림 봇\n`openclaw plugin create ci-notifier`  \n플러그인 내부에서 GitHub webhook을 수신하고, PR 요약을 Claude에 전달 → Discord 채널에 전송, CI 실패 시 Slack에 즉시 알림.\n\n### 3. 고객 지원 챗봇 (WhatsApp)\nWhatsApp Business API와 페어링 후, `openclaw agent set default ollama/llama3` 로 로컬 모델 사용 → 고객 문의를 실시간 처리하고, 민감 데이터는 로컬에만 저장.\n\n### 4. 교육·학습 보조 AI\n학생이 “다음 주 물리학 시험 요약해줘” 라고 Telegram에 입력 → Memory Store에 저장된 이전 학습 내용과 결합해 GPT‑4o 로 상세 요약 제공.\n\n### 실제 구현 예시 (CLI)\n- **프롬프트 커스텀**  \n  `openclaw config set prompt.default \"You are a helpful personal assistant. Keep responses concise.\"`  \n- **메모리 조회**  \n  `openclaw memory list --user @john` → 최근 10개의 대화 기록 출력  \n\n*출처: 공식 튜토리얼 영상 (2026‑02‑10) [8]*  \n\n---\n\n## 다른 유사 도구/기술과의 비교\n| 항목 | OpenClaw | LangChain | AutoGPT | Microsoft Copilot |\n|------|----------|-----------|---------|-------------------|\n| 지원 모델·플러그인 생태계 | Claude, GPT‑4o, Ollama 등 다중 모델 + 자체 채널 플러그인 | 다양한 LLM 래퍼, 외부 툴 연동은 코드 기반 | OpenAI API 중심, 플러그인 제한 | Microsoft Graph, Office 연동 전용 |\n| 셀프 호스팅 난이도 | Docker Compose / npm → 중급 | Python 패키지 → 낮음 (코드 작성 필요) | Python 스크립트 → 낮음 | SaaS (호스팅 불가) |\n| 멀티채널 통합 기능 | 기본 제공 (Telegram, Discord, WhatsApp, Slack 등) | 별도 구현 필요 | 없음 | Teams, Outlook 등 Microsoft 제품에 국한 |\n| 비용 구조 | 오픈소스(무료) + 모델 사용료(클라우드) | 오픈소스(무료) + 모델 사용료 | 클라우드 API 비용 | 구독 기반(Office 365) |\n| 커뮤니티·문서 수준 | 활발한 Discord, GitHub Issues, 공식 Docs | 활발한 커뮤니티, 풍부 튜토리얼 | 제한적, GitHub 중심 | Microsoft 공식 지원 |\n\n*출처: 각 프로젝트 공식 홈페이지 (2026‑02‑10) [9]*  \n\n---\n\n## 장단점 분석\n### 장점\n- **완전 오픈소스** → 자체 인프라에 배포 가능, 데이터 주권 보장  \n- **멀티채널 통합**이 기본 제공돼 별도 개발 없이 다양한 메신저 사용 가능  \n- **플러그인 기반** 확장성이 높아 새로운 기능·채널을 손쉽게 추가  \n- **로컬 모델(Ollama) 지원**으로 개인정보 유출 위험 최소화  \n\n### 단점\n- **초기 설정 복잡도**: 채널 인증·API 키 관리가 다소 번거로움  \n- **스케일링 한계**: 단일 Node.js 프로세스 기반이라 대규모 동시 사용자 처리 시 수평 확장 설계가 필요(추가 조사 필요)  \n- **공식 문서·예제 부족**: 최신 기능(예: Allowlist) 관련 예제가 제한적, 커뮤니티 의존도가 높음  \n\n*출처: 사용자 설문 및 Issue 분석 (2026‑02‑10) [10]*  \n\n---\n\n## 릴리즈 히스토리 및 주요 변경사항\n| 버전 | 출시일 | 주요 내용 |\n|------|--------|-----------|\n| v0.1 | 2024‑06‑15 | 최초 공개, 기본 챗봇 기능 구현 |\n| v0.5 | 2025‑01‑20 | 멀티채널 플러그인 추가, Heartbeat 구현 |\n| v1.0 | 2025‑09‑05 | 안정화 버전, Docker Compose 지원, 웹 UI 정식 출시 |\n| v1.3 | 2026‑02‑10 | Ollama 로컬 모델 연동, 보안 강화(Allowlist) |\n| v1.4 (예정) | 2026‑08‑** | Kubernetes 배포 차트, 고가용성 클러스터 지원 (예정) |\n\n### v1.3 주요 개선 (2026‑02‑10)\n- 메모리 동기화 레이스 컨디션 해결  \n- Telegram webhook 재시도 로직 강화  \n- Docker 이미지 경량화 (≈30 % 용량 감소)  \n\n*출처: 릴리즈 노트 (GitHub Releases) [11]*  \n\n---\n\n## 참고 자료 및 공식 문서 링크\n1. **GitHub Repository** – https://github.com/openclaw/openclaw (조회일: 2026‑02‑10)  \n2. **공식 Docs – 모델 지원** – https://docs.openclaw.ai/models (조회일: 2026‑02‑10)  \n3. **아키텍처 개요** – https://docs.openclaw.ai/architecture (조회일: 2026‑02‑10)  \n4. **보안 가이드** – https://docs.openclaw.ai/security (조회일: 2026‑02‑10)  \n5. **기능 소개** – https://docs.openclaw.ai/features (조회일: 2026‑02‑10)  \n6. **설치 가이드** – https://docs.openclaw.ai/installation (조회일: 2026‑02‑10)  \n7. **운영 가이드** – https://docs.openclaw.ai/operations (조회일: 2026‑02‑10)  \n8. **튜토리얼 영상**  \n   - “OpenClaw 전체 설정 튜토리얼” (Metics Media) – https://www.youtube.com/watch?v=W7Ns_FPZg5Q (조회일: 2026‑02‑10)  \n   - “Ollama와 OpenClaw로 구축하는 100 % 비공개 AI 비서” (Nova AI) – https://www.youtube.com/watch?v=2PdyYsqLUMM (조회일: 2026‑02‑10)  \n9. **비교 대상 프로젝트**  \n   - LangChain – https://python.langchain.com (조회일: 2026‑02‑10)  \n   - AutoGPT – https://github.com/Significant-Gravitas/AutoGPT (조회일: 2026‑02‑10)  \n   - Microsoft Copilot – https://www.microsoft.com/copilot (조회일: 2026‑02‑10)  \n10. **사용자 설문·Issue 분석** – https://github.com/openclaw/openclaw/issues?q=is%3Aissue+label%3Afeedback (조회일: 2026‑02‑10)  \n11. **릴리즈 노트** – https://github.com/openclaw/openclaw/releases (조회일: 2026‑02‑10)  \n\n*본 문서는 2026‑02‑10 기준 최신 정보를 기반으로 작성되었습니다. 최신 버전이나 새로운 플러그인에 대한 내용은 공식 리포지터리와 Docs를 지속적으로 확인하시기 바랍니다.*",
-  "lastModified": "2026-02-11T12:50:57Z",
+  "lastModified": "2026-02-12T07:26:28Z",
   "author": "SEPilot AI",
   "status": "draft",
   "isDraft": true,
@@ -17,120 +17,12 @@
   "order": 2,
   "history": [
     {
-      "sha": "a897516",
-      "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "sha": "bbce2ca",
+      "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
       "author": "github-actions[bot]",
       "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T12:50:57Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "0190970",
-      "message": "🔗 교차 참조 업데이트: 16개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T08:01:05Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "e873878",
-      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T07:48:29Z",
-      "additions": 1,
-      "deletions": 0
-    },
-    {
-      "sha": "f640314",
-      "message": "🔗 교차 참조 업데이트: 14개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T06:10:24Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "3b31ab0",
-      "message": "fix: 중복 위키 문서 제거 및 스테일 빌드 파일 정리",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-11T15:08:18+09:00",
-      "additions": 3,
-      "deletions": 1
-    },
-    {
-      "sha": "ff8a92a",
-      "message": "🔗 교차 참조 업데이트: 10개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T05:57:28Z",
-      "additions": 1,
-      "deletions": 1
-    },
-    {
-      "sha": "6d37c2e",
-      "message": "feat: 위키 카테고리 분류 규칙 정의 및 문서 구조 재배치",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-11T14:56:36+09:00",
-      "additions": 232,
-      "deletions": 0
-    },
-    {
-      "sha": "4cca9d3",
-      "message": "🔗 교차 참조 업데이트: 5개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T05:14:00Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "105157f",
-      "message": "🔗 교차 참조 업데이트: 17개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T04:47:56Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "c6480b9",
-      "message": "🌳 Wiki Tree Maintenance: 14개의 위키 문서가 현재 루트와 몇 개의 하위 디렉터리(bun, projects, ci)만 사용하고 있습니다. 파일명에 일반적인 이름(overview.md, github-actions-setup.md 등)이 포함돼 있어 URL 가독성이 낮고, 릴리즈 노트와 가이드 문서가 같은 레벨에 섞여 있어 탐색이 비효율적입니다. 또한 다수 문서가 draft 상태이며, 파일명을 영문 slug 형태로 통일하지 않아 일관성이 부족합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T02:56:32Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e71d220",
-      "message": "🔗 교차 참조 업데이트: 13개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T00:39:06Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "bf66156",
-      "message": "🌳 Wiki Tree Maintenance: 15개의 문서가 현재 루트와 몇 개의 하위 폴더에 흩어져 있습니다. 대부분이 제품 릴리즈 노트, 프로토콜 가이드, 프로젝트 소개, 도구 가이드, CI/AI 개념 등으로 구분될 수 있습니다. 파일명은 영문 슬러그 형태가 대부분이지만, 일부는 보다 명확한 이름이 필요하고, 릴리즈 노트와 같은 공통 카테고리는 별도 디렉터리로 재배치하는 것이 바람직합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-10T22:44:21Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "87090b8",
-      "message": "docs: Issue #147 - OpenClaw 완벽 가이드",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-10T12:48:13Z",
-      "additions": 0,
+      "date": "2026-02-12T07:26:28Z",
+      "additions": 235,
       "deletions": 0
     }
   ]
