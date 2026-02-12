@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "9149037b-7118-4403-9f99-c76a0f639d1a",
+      "timestamp": "2026-02-12T07:25:13.200Z",
+      "actionType": "generate",
+      "issueNumber": 160,
+      "issueTitle": "[요청] 어제 발표한 glm5 에 대해 조사해줘",
+      "documentSlug": "glm5",
+      "documentTitle": "glm 5",
+      "summary": "새 문서 \"glm 5\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 9464
+            },
+            {
+              "step": "outline",
+              "durationMs": 4149
+            },
+            {
+              "step": "write",
+              "durationMs": 16993
+            },
+            {
+              "step": "review",
+              "durationMs": 9365
+            }
+          ],
+          "totalDurationMs": 39971,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1525,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "bf470721-d300-45cb-93c0-fe495e7990d2",
       "timestamp": "2026-02-12T00:23:27.280Z",
       "actionType": "publish",
@@ -1324,5 +1369,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-12T00:23:27.280Z"
+  "lastUpdated": "2026-02-12T07:25:13.200Z"
 }
