@@ -11,7 +11,7 @@ redirect_from:
   - ai-openclaw
   - projects-openclaw
 related_docs: ["moltbook-intro.md"]
-order: 1
+order: 2
 ---
 
 ## OpenClaw 개요 및 핵심 개념

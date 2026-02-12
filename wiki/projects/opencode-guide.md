@@ -3,7 +3,7 @@ title: "Opencode에 대해"
 description: "Opencode CLI 에이전트의 개요, Claude Code 및 Goose와의 비교, 차별적인 특징 및 사용자 평판을 정리한 가이드"
 category: "Guide"
 tags: ["Opencode", "CLI", "Claude Code", "Goose", "비교", "사용자 평판"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-02-11T07:50:00Z"
 updatedAt: "2026-02-11T07:50:00Z"

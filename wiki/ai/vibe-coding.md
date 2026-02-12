@@ -5,6 +5,7 @@ status: draft
 tags: [바이브코딩, AI코딩, 프롬프트엔지니어링, 소프트웨어개발]
 redirect_from:
   - 
+order: 4
 ---
 
 ## 서론

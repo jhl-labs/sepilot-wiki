@@ -9,7 +9,7 @@ redirect_from:
   - antigravity-release-notes
   - projects-antigravity
 related_docs: ["kubernetes-release-notes.md", "claude-code-release-history.md"]
-order: 5
+order: 1
 ---
 
 ## 1. 개요
