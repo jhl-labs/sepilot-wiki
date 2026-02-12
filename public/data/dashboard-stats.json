@@ -1,18 +1,18 @@
 {
-  "collectedAt": "2026-02-11T23:44:47.614Z",
+  "collectedAt": "2026-02-12T00:56:08.755Z",
   "overview": {
-    "totalDocuments": 16,
-    "publishedDocuments": 6,
+    "totalDocuments": 17,
+    "publishedDocuments": 7,
     "draftDocuments": 10,
-    "openRequests": 7,
-    "closedRequests": 14,
-    "totalAIActions": 68
+    "openRequests": 6,
+    "closedRequests": 15,
+    "totalAIActions": 69
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
@@ -21,16 +21,16 @@
     "last24h": {
       "aiActions": 15,
       "documentsCreated": 3,
-      "documentsModified": 3,
+      "documentsModified": 4,
       "tavilyApiCalls": 9,
       "tavilyResults": 23,
       "estimatedTokens": 5291,
       "totalPipelineDurationMs": 123644
     },
     "last7d": {
-      "aiActions": 42,
+      "aiActions": 43,
       "documentsCreated": 13,
-      "documentsModified": 10,
+      "documentsModified": 11,
       "tavilyApiCalls": 31,
       "tavilyResults": 85,
       "estimatedTokens": 32382,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-12T00:23:27.280Z",
+      "actionType": "publish",
+      "issueNumber": 156,
+      "documentTitle": "[요청] opencode",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-11T12:50:33.733Z",
       "actionType": "maintain",
@@ -227,28 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T12:48:04.303Z",
-      "actionType": "generate",
-      "issueNumber": 147,
-      "documentTitle": "OpenClaw 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 87592,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4169
     }
   ],
   "models": {
+    "unknown": {
+      "totalActions": 5,
+      "totalEstimatedTokens": 0,
+      "avgDurationMs": 0
+    },
     "gpt-oss:120b-cloud": {
       "totalActions": 64,
       "totalEstimatedTokens": 32382,
       "avgDurationMs": 63326
-    },
-    "unknown": {
-      "totalActions": 4,
-      "totalEstimatedTokens": 0,
-      "avgDurationMs": 0
     }
   }
 }
