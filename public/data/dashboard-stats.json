@@ -1,43 +1,63 @@
 {
-  "collectedAt": "2026-02-12T06:51:24.181Z",
+  "collectedAt": "2026-02-12T07:49:52.847Z",
   "overview": {
     "totalDocuments": 17,
     "publishedDocuments": 7,
     "draftDocuments": 10,
     "openRequests": 6,
-    "closedRequests": 15,
-    "totalAIActions": 69
+    "closedRequests": 16,
+    "totalAIActions": 71
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 2,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 1525,
+      "totalPipelineDurationMs": 39971
     },
     "last24h": {
-      "aiActions": 7,
+      "aiActions": 6,
       "documentsCreated": 2,
-      "documentsModified": 2,
+      "documentsModified": 1,
       "tavilyApiCalls": 6,
       "tavilyResults": 18,
-      "estimatedTokens": 3278,
-      "totalPipelineDurationMs": 74015
+      "estimatedTokens": 3400,
+      "totalPipelineDurationMs": 81205
     },
     "last7d": {
-      "aiActions": 43,
-      "documentsCreated": 13,
+      "aiActions": 45,
+      "documentsCreated": 14,
       "documentsModified": 11,
-      "tavilyApiCalls": 31,
-      "tavilyResults": 85,
-      "estimatedTokens": 32382,
-      "totalPipelineDurationMs": 696591
+      "tavilyApiCalls": 34,
+      "tavilyResults": 94,
+      "estimatedTokens": 33907,
+      "totalPipelineDurationMs": 736562
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-12T07:26:00.715Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-12T07:25:13.200Z",
+      "actionType": "generate",
+      "issueNumber": 160,
+      "documentTitle": "glm 5",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 39971,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1525
+    },
     {
       "timestamp": "2026-02-12T00:23:27.280Z",
       "actionType": "publish",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T22:31:30.590Z",
-      "actionType": "recover",
-      "issueNumber": 138,
-      "documentTitle": "[Wiki Maintenance] [요청] Continuous AI in practice: What developers can automate today with agentic CI",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-10T14:40:59.055Z",
-      "actionType": "publish",
-      "issueNumber": 143,
-      "documentTitle": "Antigravity 완벽 가이드",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 66,
+      "totalEstimatedTokens": 33907,
+      "avgDurationMs": 61380
+    },
     "unknown": {
       "totalActions": 5,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 64,
-      "totalEstimatedTokens": 32382,
-      "avgDurationMs": 63326
     }
   }
 }
