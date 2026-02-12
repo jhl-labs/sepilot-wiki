@@ -120,7 +120,16 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
-            git pull --rebase
+            if ! git pull --rebase; then
+              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+              git checkout --theirs public/ || true
+              git add public/
+              GIT_EDITOR=true git rebase --continue || true
+              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+                git rebase --abort
+                git pull --no-rebase -X ours
+              fi
+            fi
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -174,6 +183,19 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
+            });
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
             });
 
   handle-invalid-label:
@@ -244,7 +266,16 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "fix: Issue #${{ github.event.issue.number }} - 오류 수정"
-            git pull --rebase
+            if ! git pull --rebase; then
+              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+              git checkout --theirs public/ || true
+              git add public/
+              GIT_EDITOR=true git rebase --continue || true
+              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+                git rebase --abort
+                git pull --no-rebase -X ours
+              fi
+            fi
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -261,6 +292,19 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '✅ 문서가 수정되었습니다. 검토 후 문제가 해결되었다면 invalid 라벨을 제거해주세요.'
+            });
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
             });
 
   handle-issue-close:
@@ -327,7 +371,16 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 발행"
-            git pull --rebase
+            if ! git pull --rebase; then
+              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+              git checkout --theirs public/ || true
+              git add public/
+              GIT_EDITOR=true git rebase --continue || true
+              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+                git rebase --abort
+                git pull --no-rebase -X ours
+              fi
+            fi
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -388,6 +441,19 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
+            });
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
             });
 
   handle-issue-reopen:
@@ -454,7 +520,16 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 발행 취소"
-            git pull --rebase
+            if ! git pull --rebase; then
+              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+              git checkout --theirs public/ || true
+              git add public/
+              GIT_EDITOR=true git rebase --continue || true
+              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+                git rebase --abort
+                git pull --no-rebase -X ours
+              fi
+            fi
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -507,6 +582,19 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: body
+            });
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
             });
 
   handle-maintainer-comment:
@@ -615,7 +703,16 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - 피드백 반영"
-            git pull --rebase
+            if ! git pull --rebase; then
+              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+              git checkout --theirs public/ || true
+              git add public/
+              GIT_EDITOR=true git rebase --continue || true
+              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+                git rebase --abort
+                git pull --no-rebase -X ours
+              fi
+            fi
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
@@ -641,6 +738,19 @@ jobs:
               repo: context.repo.repo,
               body: '✅ 피드백이 반영되었습니다. 변경 사항을 확인해주세요.'
             })
+
+      - name: Comment on failure
+        if: failure() && steps.check-maintainer.outputs.result == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
+            });
 
   handle-question-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'question'
@@ -698,12 +808,34 @@ jobs:
             echo "변경 사항 없음"
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - AI 질문 응답"
-            git pull --rebase
+            if ! git pull --rebase; then
+              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+              git checkout --theirs public/ || true
+              git add public/
+              GIT_EDITOR=true git rebase --continue || true
+              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+                git rebase --abort
+                git pull --no-rebase -X ours
+              fi
+            fi
             git push
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUSKY: 0
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
+            });
 
   handle-update-request-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'update-request'
@@ -770,13 +902,35 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 수정 요청 처리"
-            git pull --rebase
+            if ! git pull --rebase; then
+              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
+              git checkout --theirs public/ || true
+              git add public/
+              GIT_EDITOR=true git rebase --continue || true
+              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+                git rebase --abort
+                git pull --no-rebase -X ours
+              fi
+            fi
             git push
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUSKY: 0
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
+            });
 
   # 모든 handle job이 완료된 후 배포 (하나라도 성공하면 실행)
   deploy:
