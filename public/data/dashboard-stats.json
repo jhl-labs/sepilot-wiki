@@ -1,24 +1,15 @@
 {
-  "collectedAt": "2026-02-15T08:46:49.231Z",
+  "collectedAt": "2026-02-15T09:44:57.156Z",
   "overview": {
     "totalDocuments": 17,
     "publishedDocuments": 7,
     "draftDocuments": 10,
     "openRequests": 6,
     "closedRequests": 16,
-    "totalAIActions": 74
+    "totalAIActions": 75
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last24h": {
       "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
@@ -27,8 +18,17 @@
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
+    "last24h": {
+      "aiActions": 2,
+      "documentsCreated": 0,
+      "documentsModified": 0,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
+    },
     "last7d": {
-      "aiActions": 48,
+      "aiActions": 49,
       "documentsCreated": 14,
       "documentsModified": 11,
       "tavilyApiCalls": 34,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-15T09:06:12.916Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-15T03:00:00.965Z",
       "actionType": "coverage_analysis",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-11T02:55:20.555Z",
-      "actionType": "generate",
-      "issueNumber": 153,
-      "documentTitle": "Moltbook 소개",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 49629,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2013
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 68,
+      "totalActions": 69,
       "totalEstimatedTokens": 33907,
       "avgDurationMs": 61380
     },
