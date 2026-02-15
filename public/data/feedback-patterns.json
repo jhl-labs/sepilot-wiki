@@ -1,0 +1,23 @@
+{
+  "lastAnalyzed": "2026-02-15T09:06:12.915Z",
+  "totalFeedbackEntries": 7,
+  "patterns": [
+    {
+      "pattern": "\"피드백에 따라 문서 수정\"이라는 동일한 수정 사유가 여러 문서에 반복적으로 사용됨",
+      "frequency": 5,
+      "affectedAgents": [
+        "writer",
+        "wiki maintainer"
+      ],
+      "suggestedPromptFix": "프롬프트에 ‘수정 사유’를 구체적으로 기술하도록 지시합니다. 예시: “피드백에 따라 문서 수정 → 내용 A를 최신 버전 B로 교체” 혹은 “피드백에 따라 문서 수정 → 오탈자 수정 및 표준 용어 적용”. 이렇게 하면 동일 문구가 남용되는 것을 방지하고, 수정 내역을 추적하기 쉬워집니다."
+    },
+    {
+      "pattern": "\"Redirects for renamed Korean files\" 작업이 동일한 항목으로 3회 이상 중복 기록됨",
+      "frequency": 3,
+      "affectedAgents": [
+        "wiki maintainer"
+      ],
+      "suggestedPromptFix": "프롬프트에 ‘중복 작업 방지를 위한 사전 확인 절차’를 포함하도록 요청합니다. 예시: “작업을 시작하기 전에 기존 로그에서 동일한 리다이렉트 항목이 있는지 검색하고, 이미 존재하면 ‘이미 처리됨’이라고 기록한다.” 이렇게 하면 같은 리다이렉트 작업이 여러 번 기록되는 것을 예방할 수 있습니다."
+    }
+  ]
+}
