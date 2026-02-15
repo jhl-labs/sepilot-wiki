@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-15T02:20:04.489Z",
+  "collectedAt": "2026-02-15T03:32:06.168Z",
   "overview": {
     "totalDocuments": 17,
     "publishedDocuments": 7,
     "draftDocuments": 10,
     "openRequests": 6,
     "closedRequests": 16,
-    "totalAIActions": 73
+    "totalAIActions": 74
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 47,
+      "aiActions": 48,
       "documentsCreated": 14,
       "documentsModified": 11,
       "tavilyApiCalls": 34,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-15T03:00:00.965Z",
+      "actionType": "coverage_analysis",
+      "issueNumber": null,
+      "documentTitle": "문서 커버리지 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-13T09:21:17.224Z",
       "actionType": "maintain",
@@ -227,28 +237,18 @@
       "durationMs": 49629,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2013
-    },
-    {
-      "timestamp": "2026-02-11T00:39:05.597Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "documentTitle": "교차 참조 업데이트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 68,
+      "totalEstimatedTokens": 33907,
+      "avgDurationMs": 61380
+    },
     "unknown": {
       "totalActions": 6,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 67,
-      "totalEstimatedTokens": 33907,
-      "avgDurationMs": 61380
     }
   }
 }
