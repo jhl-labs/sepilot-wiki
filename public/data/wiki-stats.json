@@ -1,0 +1,493 @@
+{
+  "generatedAt": "2026-02-16T01:35:01.406Z",
+  "weekNumber": 8,
+  "year": 2026,
+  "period": {
+    "start": "2026-02-09T01:34:49.584Z",
+    "end": "2026-02-16T01:34:49.584Z"
+  },
+  "documents": {
+    "total": 18,
+    "statusDistribution": {
+      "draft": 10,
+      "published": 7,
+      "deleted": 1
+    },
+    "newCount": 14,
+    "modifiedCount": 2,
+    "publishedCount": 3
+  },
+  "aiActivity": {
+    "totalActions": 50,
+    "byType": {
+      "maintain": 13,
+      "coverage_analysis": 1,
+      "generate": 14,
+      "publish": 3,
+      "cross_reference": 9,
+      "recover": 6,
+      "tag_normalize": 2,
+      "modify": 2
+    },
+    "entries": [
+      {
+        "id": "7836e4cc-123c-416a-b200-d7d9a11880d7",
+        "timestamp": "2026-02-16T00:46:44.271Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 22개 자동 적용, 0개 보류, 0개 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "applied": 22,
+          "skipped": 0,
+          "issues": 0
+        }
+      },
+      {
+        "id": "c1c02fbb-4dde-496b-8f06-b1753bc4a3a3",
+        "timestamp": "2026-02-15T09:06:12.916Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "학습 루프",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "학습 루프: 2개 패턴 감지, 2개 에이전트 개선",
+        "trigger": "weekly_schedule",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "2ceed49d-42be-4367-a836-57690a129f0d",
+        "timestamp": "2026-02-15T03:00:00.965Z",
+        "actionType": "coverage_analysis",
+        "issueNumber": null,
+        "issueTitle": "문서 커버리지 분석",
+        "documentSlug": "_coverage-analysis",
+        "documentTitle": "문서 커버리지 분석",
+        "summary": "커버리지 12점, 10개 미문서화 모듈 발견",
+        "trigger": "monthly_schedule",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "3207d0dc-2c4f-4546-b531-5deaba9c5e39",
+        "timestamp": "2026-02-13T09:21:17.224Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "URL 변경 감지",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "URL 변경 감지: 30개 체크, 1개 변경, 4개 깨짐, 3건 Issue",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "unknown",
+        "changes": null
+      },
+      {
+        "id": "aea9d0c9-7e6a-47cf-a1dc-d59de540d9ef",
+        "timestamp": "2026-02-13T09:21:07.513Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "트렌드 모니터링",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "트렌드 모니터링: 23건 수집, 3건 감지, 3건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "7fd38403-3cda-4c51-b93f-e978b7eed5f5",
+        "timestamp": "2026-02-12T07:26:00.715Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 22개 자동 적용, 1개 보류, 0개 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "applied": 22,
+          "skipped": 1,
+          "issues": 0
+        }
+      },
+      {
+        "id": "9149037b-7118-4403-9f99-c76a0f639d1a",
+        "timestamp": "2026-02-12T07:25:13.200Z",
+        "actionType": "generate",
+        "issueNumber": 160,
+        "issueTitle": "[요청] 어제 발표한 glm5 에 대해 조사해줘",
+        "documentSlug": "glm5",
+        "documentTitle": "glm 5",
+        "summary": "새 문서 \"glm 5\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 9464
+              },
+              {
+                "step": "outline",
+                "durationMs": 4149
+              },
+              {
+                "step": "write",
+                "durationMs": 16993
+              },
+              {
+                "step": "review",
+                "durationMs": 9365
+              }
+            ],
+            "totalDurationMs": 39971,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 1525,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "bf470721-d300-45cb-93c0-fe495e7990d2",
+        "timestamp": "2026-02-12T00:23:27.280Z",
+        "actionType": "publish",
+        "issueNumber": 156,
+        "issueTitle": "[요청] opencode",
+        "documentSlug": "opencode",
+        "documentTitle": "[요청] opencode",
+        "summary": "문서 발행: draft → published 상태 전환",
+        "trigger": "issue_close",
+        "triggerUser": null,
+        "model": "unknown",
+        "changes": null
+      },
+      {
+        "id": "55b7874d-8144-4d1e-8e26-0f803bbe9f75",
+        "timestamp": "2026-02-11T12:50:33.733Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 20개 자동 적용, 1개 보류, 1개 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "applied": 20,
+          "skipped": 1,
+          "issues": 1
+        }
+      },
+      {
+        "id": "615d7270-c4d5-4479-94b0-fbed775db8f4",
+        "timestamp": "2026-02-11T12:49:41.466Z",
+        "actionType": "generate",
+        "issueNumber": 158,
+        "issueTitle": "[요청] 바이브코딩에 대해",
+        "documentSlug": "",
+        "documentTitle": "바이브 코딩이란?",
+        "summary": "새 문서 \"바이브 코딩이란?\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 3734
+              },
+              {
+                "step": "outline",
+                "durationMs": 6231
+              },
+              {
+                "step": "write",
+                "durationMs": 25380
+              },
+              {
+                "step": "review",
+                "durationMs": 5889
+              }
+            ],
+            "totalDurationMs": 41234,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 1875,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "e3a9a988-9979-44f1-9f06-ae2b89343c06",
+        "timestamp": "2026-02-11T08:01:04.445Z",
+        "actionType": "cross_reference",
+        "issueNumber": null,
+        "issueTitle": "교차 참조 업데이트",
+        "documentSlug": "_cross-reference",
+        "documentTitle": "교차 참조 업데이트",
+        "summary": "16개 문서의 교차 참조 업데이트",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "b3872208-d0a5-4eb3-859c-da64806380df",
+        "timestamp": "2026-02-11T07:47:59.613Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 20개 자동 적용, 1개 보류, 1개 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "applied": 20,
+          "skipped": 1,
+          "issues": 1
+        }
+      },
+      {
+        "id": "9dfab0cd-7f35-402c-b0b5-f33ac33fb63c",
+        "timestamp": "2026-02-11T07:47:03.819Z",
+        "actionType": "recover",
+        "issueNumber": 156,
+        "issueTitle": "[요청] opencode",
+        "documentSlug": "projects/opencode-guide",
+        "documentTitle": "[요청] opencode",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "91b4929f-e028-4200-884e-fe696a9767c1",
+        "timestamp": "2026-02-11T07:42:21.405Z",
+        "actionType": "generate",
+        "issueNumber": 156,
+        "issueTitle": "[요청]",
+        "documentSlug": "",
+        "documentTitle": "Opencode에 대해",
+        "summary": "새 문서 \"Opencode에 대해\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 4726
+              },
+              {
+                "step": "outline",
+                "durationMs": 5292
+              },
+              {
+                "step": "write",
+                "durationMs": 17677
+              },
+              {
+                "step": "review",
+                "durationMs": 5086
+              }
+            ],
+            "totalDurationMs": 32781,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 1403,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "78f5e19f-bc0c-4faf-bfbf-5e62df8bc5be",
+        "timestamp": "2026-02-11T06:10:23.362Z",
+        "actionType": "cross_reference",
+        "issueNumber": null,
+        "issueTitle": "교차 참조 업데이트",
+        "documentSlug": "_cross-reference",
+        "documentTitle": "교차 참조 업데이트",
+        "summary": "14개 문서의 교차 참조 업데이트",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "e0f55314-3917-495f-95d1-b2cc07d31693",
+        "timestamp": "2026-02-11T05:57:26.694Z",
+        "actionType": "cross_reference",
+        "issueNumber": null,
+        "issueTitle": "교차 참조 업데이트",
+        "documentSlug": "_cross-reference",
+        "documentTitle": "교차 참조 업데이트",
+        "summary": "10개 문서의 교차 참조 업데이트",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "1f0b704d-01de-4387-ab5d-b69b330d40ee",
+        "timestamp": "2026-02-11T05:13:59.762Z",
+        "actionType": "cross_reference",
+        "issueNumber": null,
+        "issueTitle": "교차 참조 업데이트",
+        "documentSlug": "_cross-reference",
+        "documentTitle": "교차 참조 업데이트",
+        "summary": "5개 문서의 교차 참조 업데이트",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "01d38e08-24bc-4427-9356-643b4dda1793",
+        "timestamp": "2026-02-11T05:10:06.615Z",
+        "actionType": "recover",
+        "issueNumber": 139,
+        "issueTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+        "documentSlug": "ai/multi-agent-system",
+        "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "9327a6bf-4773-49ca-9245-c11e294bd7e8",
+        "timestamp": "2026-02-11T05:10:06.614Z",
+        "actionType": "recover",
+        "issueNumber": 139,
+        "issueTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+        "documentSlug": "kubernetes/kubernetes-release-notes",
+        "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "7f5159c2-eb04-4288-a3ea-e3ff5647dfa4",
+        "timestamp": "2026-02-11T04:47:55.752Z",
+        "actionType": "cross_reference",
+        "issueNumber": null,
+        "issueTitle": "교차 참조 업데이트",
+        "documentSlug": "_cross-reference",
+        "documentTitle": "교차 참조 업데이트",
+        "summary": "17개 문서의 교차 참조 업데이트",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      }
+    ]
+  },
+  "issues": {
+    "totalOpen": 6,
+    "recentActivity": 12
+  },
+  "commits": {
+    "total": 50,
+    "entries": [
+      {
+        "sha": "5132464",
+        "message": "🌳 Wiki Tree Maintenance: 전체 위키는 4개의 주요 카테고리(kubernetes, projects, bun, ai)로 구성되어 있습니다. 대부분의 문서는 올바른 디렉터리에 위치하고 있으나,  카테고리 내에 중복된 Opencode 문서가 존재합니다(삭제된 파일과 동일한 내용의 파일). 파일명은 이미 영문 slug 형태이며, 추가적인 rename은 필요하지 않습니다. 각 카테고리별 문서 순서를 논리적인 흐름(개요 → 상세 가이드 → 릴리즈 노트)으로 정렬하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
+        "author": "github-actions[bot]",
+        "date": "2026-02-16T00:47:07Z"
+      },
+      {
+        "sha": "bbce2ca",
+        "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
+        "author": "github-actions[bot]",
+        "date": "2026-02-12T07:26:28Z"
+      },
+      {
+        "sha": "f2989d2",
+        "message": "docs: Issue #160 - [요청] 어제 발표한 glm5 에 대해 조사해줘",
+        "author": "GitHub Action",
+        "date": "2026-02-12T07:25:21Z"
+      },
+      {
+        "sha": "af0cfb6",
+        "message": "docs: Issue #156 - 문서 발행",
+        "author": "GitHub Action",
+        "date": "2026-02-12T00:23:35Z"
+      },
+      {
+        "sha": "a897516",
+        "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+        "author": "github-actions[bot]",
+        "date": "2026-02-11T12:50:57Z"
+      },
+      {
+        "sha": "ca25fed",
+        "message": "docs: Issue #158 - [요청] 바이브코딩에 대해",
+        "author": "GitHub Action",
+        "date": "2026-02-11T12:49:49Z"
+      },
+      {
+        "sha": "0190970",
+        "message": "🔗 교차 참조 업데이트: 16개 문서",
+        "author": "github-actions[bot]",
+        "date": "2026-02-11T08:01:05Z"
+      },
+      {
+        "sha": "08e2761",
+        "message": "Rename .md to opencode.md",
+        "author": "buizclue",
+        "date": "2026-02-11T17:00:23+09:00"
+      },
+      {
+        "sha": "e873878",
+        "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
+        "author": "github-actions[bot]",
+        "date": "2026-02-11T07:48:29Z"
+      },
+      {
+        "sha": "605d980",
+        "message": "docs: Issue #156 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-02-11T07:47:11Z"
+      }
+    ]
+  }
+}
