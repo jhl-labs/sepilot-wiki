@@ -5,7 +5,9 @@ status: published
 tags: [AI 코드 어시스턴트, Opencode, Claude Code, Goose CLI, 비교]
 related_docs: ["opencode-guide.md", "claude-code-release-history.md"]
 redirect_from:
+  - projects-opencode-guide
   - opencode
+order: 6
 ---
 
 ## Opencode 소개

@@ -1,88 +1,61 @@
 {
-  "timestamp": "2026-02-12T07:26:00.714Z",
+  "timestamp": "2026-02-16T00:46:44.270Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
-    "totalDocuments": 27,
+    "summary": "전체 위키는 4개의 주요 카테고리(kubernetes, projects, bun, ai)로 구성되어 있습니다. 대부분의 문서는 올바른 디렉터리에 위치하고 있으나, `projects` 카테고리 내에 중복된 Opencode 문서가 존재합니다(삭제된 파일과 동일한 내용의 파일). 파일명은 이미 영문 slug 형태이며, 추가적인 rename은 필요하지 않습니다. 각 카테고리별 문서 순서를 논리적인 흐름(개요 → 상세 가이드 → 릴리즈 노트)으로 정렬하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
+    "totalDocuments": 20,
     "categories": [
-      "ai",
       "kubernetes",
       "projects",
-      "bun"
+      "bun",
+      "ai"
     ],
     "issues": [
-      "루트 디렉터리에 home.md 외 문서가 존재함 (glm5.md, opencode.md)",
-      "Opencode 가이드가 두 번 존재 (root opencode.md, projects/opencode‑guide.md)"
+      "중복된 Opencode 문서(`projects/opencode-guide.md`와 `projects/opencode.md`)가 존재합니다."
     ]
   },
   "suggestedStructure": {
-    "ai": [
-      "glm-5.md",
-      "mcp-model-context-protocol.md",
-      "multi-agent-system.md",
-      "continuous-ai.md",
-      "vibe-coding.md"
-    ],
     "kubernetes": [
-      "kubernetes-release-notes.md",
-      "ingress-nginx-deprecation-guide.md"
+      "kubernetes-release-notes",
+      "ingress-nginx-deprecation-guide"
     ],
     "projects": [
-      "antigravity-release-notes.md",
-      "openclaw-complete-guide.md",
-      "claude-code-release-history.md",
-      "sepilot-wiki-technology-stack.md",
-      "sepilot-desktop-intro.md",
-      "moltbook-intro.md",
-      "opencode.md"
+      "antigravity-release-notes",
+      "openclaw-complete-guide",
+      "claude-code-release-history",
+      "sepilot-wiki-technology-stack",
+      "sepilot-desktop-intro",
+      "opencode",
+      "moltbook-intro"
     ],
     "bun": [
-      "bun-overview.md",
-      "comparison-pnpm-npm.md",
-      "bun-github-actions-setup.md"
+      "bun-overview",
+      "comparison-pnpm-npm",
+      "bun-github-actions-setup"
+    ],
+    "ai": [
+      "mcp-model-context-protocol",
+      "multi-agent-system",
+      "continuous-ai",
+      "glm-5",
+      "vibe-coding"
     ]
   },
   "results": {
     "appliedActions": 22,
-    "skippedActions": 1,
+    "skippedActions": 0,
     "dryRunPreviewedActions": 0,
     "createdIssues": 0
   },
   "actions": {
     "applied": [
       {
-        "type": "rename",
-        "priority": "high",
-        "source": "glm5.md",
-        "target": "ai/glm-5.md",
-        "reason": "루트에 문서가 있으면 안 되며, GLM‑5는 AI 기술 문서이므로 ai/ 카테고리로 이동하고 파일명을 slug 형태로 정규화",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "opencode.md",
-        "target": "projects/opencode.md",
-        "reason": "루트에 문서가 있으면 안 되며, Opencode은 제품·프로젝트 문서이므로 projects/ 로 이동",
-        "autoApply": true
-      },
-      {
         "type": "merge",
         "priority": "high",
         "source": "projects/opencode-guide.md",
         "target": "projects/opencode.md",
-        "reason": "두 파일이 동일 주제(Opencode)이며, 유지·삭제할 문서를 통합해 중복 제거",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "medium",
-        "target": "ai",
-        "metadata": {
-          "displayName": "AI 기술",
-          "order": 1
-        },
+        "reason": "동일한 내용·제목을 가진 중복 문서. 유지할 문서는 `projects/opencode.md`이며, 삭제된 문서는 리다이렉트 처리합니다.",
         "autoApply": true
       },
       {
@@ -91,8 +64,9 @@
         "target": "kubernetes",
         "metadata": {
           "displayName": "Kubernetes",
-          "order": 2
+          "order": 1
         },
+        "reason": "카테고리 표시명 및 정렬 순서 지정",
         "autoApply": true
       },
       {
@@ -100,9 +74,10 @@
         "priority": "medium",
         "target": "projects",
         "metadata": {
-          "displayName": "프로젝트",
-          "order": 3
+          "displayName": "Projects",
+          "order": 2
         },
+        "reason": "카테고리 표시명 및 정렬 순서 지정",
         "autoApply": true
       },
       {
@@ -111,36 +86,20 @@
         "target": "bun",
         "metadata": {
           "displayName": "Bun",
+          "order": 3
+        },
+        "reason": "카테고리 표시명 및 정렬 순서 지정",
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "ai",
+        "metadata": {
+          "displayName": "AI",
           "order": 4
         },
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/mcp-model-context-protocol.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/multi-agent-system.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/continuous-ai.md",
-        "order": 3,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/vibe-coding.md",
-        "order": 4,
+        "reason": "카테고리 표시명 및 정렬 순서 지정",
         "autoApply": true
       },
       {
@@ -148,6 +107,7 @@
         "priority": "low",
         "target": "kubernetes/kubernetes-release-notes.md",
         "order": 1,
+        "reason": "릴리즈 노트가 개요 역할을 하므로 첫 번째에 배치",
         "autoApply": true
       },
       {
@@ -155,6 +115,7 @@
         "priority": "low",
         "target": "kubernetes/ingress-nginx-deprecation-guide.md",
         "order": 2,
+        "reason": "구체적인 가이드이므로 두 번째에 배치",
         "autoApply": true
       },
       {
@@ -162,6 +123,7 @@
         "priority": "low",
         "target": "projects/antigravity-release-notes.md",
         "order": 1,
+        "reason": "릴리즈 히스토리 문서이므로 첫 번째에 배치",
         "autoApply": true
       },
       {
@@ -169,6 +131,7 @@
         "priority": "low",
         "target": "projects/openclaw-complete-guide.md",
         "order": 2,
+        "reason": "프로젝트 전체 가이드이므로 두 번째에 배치",
         "autoApply": true
       },
       {
@@ -176,6 +139,7 @@
         "priority": "low",
         "target": "projects/claude-code-release-history.md",
         "order": 3,
+        "reason": "릴리즈 히스토리 문서이므로 세 번째에 배치",
         "autoApply": true
       },
       {
@@ -183,6 +147,7 @@
         "priority": "low",
         "target": "projects/sepilot-wiki-technology-stack.md",
         "order": 4,
+        "reason": "기술 스택 문서가 네 번째에 배치",
         "autoApply": true
       },
       {
@@ -190,13 +155,23 @@
         "priority": "low",
         "target": "projects/sepilot-desktop-intro.md",
         "order": 5,
+        "reason": "데스크톱 소개 문서가 다섯 번째에 배치",
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/opencode.md",
+        "order": 6,
+        "reason": "Opencode 개요 문서가 마지막에 배치",
         "autoApply": true
       },
       {
         "type": "set_order",
         "priority": "low",
         "target": "projects/moltbook-intro.md",
-        "order": 6,
+        "order": 7,
+        "reason": "Moltbook 소개 문서가 마지막에 배치",
         "autoApply": true
       },
       {
@@ -204,6 +179,7 @@
         "priority": "low",
         "target": "bun/bun-overview.md",
         "order": 1,
+        "reason": "bun 개요가 가장 먼저 와야 함",
         "autoApply": true
       },
       {
@@ -211,6 +187,7 @@
         "priority": "low",
         "target": "bun/comparison-pnpm-npm.md",
         "order": 2,
+        "reason": "비교 가이드가 두 번째에 배치",
         "autoApply": true
       },
       {
@@ -218,19 +195,51 @@
         "priority": "low",
         "target": "bun/bun-github-actions-setup.md",
         "order": 3,
+        "reason": "GitHub Actions 가이드가 세 번째에 배치",
         "autoApply": true
-      }
-    ],
-    "skipped": [
+      },
       {
         "type": "set_order",
         "priority": "low",
-        "target": "projects/opencode.md",
-        "order": 7,
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/opencode.md"
+        "target": "ai/mcp-model-context-protocol.md",
+        "order": 1,
+        "reason": "핵심 프로토콜 가이드가 첫 번째에 배치",
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "ai/multi-agent-system.md",
+        "order": 2,
+        "reason": "MAS 가이드가 두 번째에 배치",
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "ai/continuous-ai.md",
+        "order": 3,
+        "reason": "Continuous AI 가이드가 세 번째에 배치",
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "ai/glm-5.md",
+        "order": 4,
+        "reason": "GLM‑5 문서가 네 번째에 배치",
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "ai/vibe-coding.md",
+        "order": 5,
+        "reason": "바이브 코딩 문서가 마지막에 배치",
+        "autoApply": true
       }
     ],
+    "skipped": [],
     "dryRunPreviewed": []
   },
   "createdIssues": []

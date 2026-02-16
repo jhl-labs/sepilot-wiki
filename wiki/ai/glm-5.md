@@ -5,6 +5,7 @@ status: draft
 tags: [GLM-5, 대형 언어 모델, AI 서비스, 벤치마크]
 redirect_from:
   - glm5
+order: 4
 ---
 
 ## 1. 소개
