@@ -2,7 +2,7 @@
   "title": "GitHub Actions로 bun을 쓰는 방법",
   "slug": "bun/bun-github-actions-setup",
   "content": "\n## 개요\nGitHub Actions 워크플로우에서 **bun**(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.\n\n## 사전 요구 사항\n- 저장소에 `bun`을 사용하도록 설정된 `package.json` 혹은 `bunfig.toml` 파일이 존재해야 합니다.\n- 워크플로우는 Linux(`ubuntu-latest`) 환경을 기준으로 설명합니다. Windows/macOS에서도 동일한 단계가 적용되지만, OS별 경로 차이에 유의하세요.\n\n## 워크플로우 파일 구조\n`.github/workflows/` 디렉터리에 `bun-ci.yml` 과 같은 파일을 생성합니다.\n\n### 1. 워크플로우 트리거\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n```\n\n### 2. Job 정의\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n```\n\n### 3. 단계별 설정\n#### 3-1. 레포지토리 체크아웃\n```yaml\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n```\n\n#### 3-2. bun 설치\nbun은 공식 설치 스크립트를 통해 간단히 설치할 수 있습니다.\n공식 설치 스크립트는 <https://bun.sh> 에서 확인할 수 있습니다.\n```yaml\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n```\n\n#### 3-3. 의존성 캐시\nbun은 `node_modules` 대신 `bun.lockb`와 `~/.bun` 디렉터리를 사용합니다.\n`actions/cache` 액션을 이용해 이 디렉터리를 캐시하면 설치 속도가 크게 향상됩니다.\n```yaml\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n```\n\n#### 3-4. 의존성 설치\n```yaml\n      - name: Install dependencies\n        run: bun install\n```\n\n#### 3-5. 테스트 실행 (예시)\n```yaml\n      - name: Run tests\n        run: bun test\n```\n\n#### 3-6. 빌드 및 배포 (필요 시)\n```yaml\n      - name: Build project\n        run: bun run build\n```\n\n## 전체 예시 워크플로우\n아래는 위 단계들을 하나의 파일에 통합한 최종 예시입니다.\n\n```yaml\nname: Bun CI\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Checkout repository\n        uses: actions/checkout@v4\n\n      - name: Install bun\n        run: |\n          curl -fsSL https://bun.sh/install | bash\n          echo \"$HOME/.bun/bin\" >> $GITHUB_PATH\n\n      - name: Cache bun dependencies\n        uses: actions/cache@v4\n        with:\n          path: |\n            ~/.bun\n            bun.lockb\n          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}\n          restore-keys: |\n            ${{ runner.os }}-bun-\n\n      - name: Install dependencies\n        run: bun install\n\n      - name: Run tests\n        run: bun test\n\n      - name: Build project\n        run: bun run build\n```\n\n> **주의**: 위 예시에서는 `bun test`와 `bun run build` 스크립트가 `package.json` 혹은 `bunfig.toml`에 정의되어 있다고 가정합니다. 실제 프로젝트에 맞게 스크립트 명령을 조정하세요.\n\n## macOS / Windows 환경에서 사용하기\n- **macOS**: `runs-on: macos-latest` 로 변경하고, `curl` 설치가 기본 제공됩니다.\n- **Windows**: `runs-on: windows-latest` 로 변경하고, PowerShell 스크립트(`Invoke-WebRequest`)를 사용해 bun을 설치합니다. 예시:\n```yaml\n      - name: Install bun on Windows\n        shell: pwsh\n        run: |\n          iwr https://bun.sh/install -UseBasicParsing | iex\n          Add-Content $env:GITHUB_PATH \"$env:USERPROFILE\\.bun\\bin\"\n```\n> Windows에서는 경로 구분자(`\\`)와 환경 변수 사용법에 유의하세요.\n\n## 베스트 프랙티스\n1. **캐시 키 관리**: `bun.lockb` 파일이 변경될 때마다 캐시가 무효화되도록 `hashFiles('bun.lockb')` 를 사용합니다.\n2. **CI 속도 최적화**: `actions/setup-node` 대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.\n3. **보안**: 공식 설치 스크립트는 HTTPS를 통해 전달되며, `curl -fsSL` 옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.\n4. **버전 고정**: 특정 bun 버전을 사용하려면 `BUN_VERSION` 환경 변수를 설정하고 설치 스크립트에 전달합니다.\n```yaml\n        env:\n          BUN_VERSION: 1.1.12\n```\n\n## 참고 자료\n- Bun 공식 홈페이지 및 설치 가이드: <https://bun.sh>\n- GitHub Actions 공식 문서: <https://docs.github.com/en/actions>\n- actions/cache 액션: <https://github.com/actions/cache>\n\n## 결론\nGitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.\n",
-  "lastModified": "2026-02-16T17:47:21Z",
+  "lastModified": "2026-02-16T23:43:19Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -21,11 +21,11 @@
   "order": 3,
   "history": [
     {
-      "sha": "387d2be",
-      "message": "chore: 대시보드 통계 수집 - 2026-02-16 17:47",
+      "sha": "1bfa180",
+      "message": "chore: 대시보드 통계 수집 - 2026-02-16 23:43",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-16T17:47:21Z",
+      "date": "2026-02-16T23:43:19Z",
       "additions": 173,
       "deletions": 0
     }
