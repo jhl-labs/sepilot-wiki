@@ -14,7 +14,7 @@ redirect_from:
   - projects-desktop-introduction
   - projects-desktop-intro
   - Projects-sepilot-desktop-intro
-related_docs: ["sepilot-wiki-technology-stack.md", "claude-code-release-history.md", "opencode-guide.md"]
+related_docs: ["sepilot-wiki-technology-stack.md"]
 order: 5
 ---
 

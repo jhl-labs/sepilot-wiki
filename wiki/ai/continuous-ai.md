@@ -11,7 +11,7 @@ redirect_from:
   - ci-ci-continuous-ai
   - ci-continuous-ai
   - ci-continuous-ai-kr
-related_docs: ["multi-agent-system.md", "bun-github-actions-setup.md"]
+related_docs: ["multi-agent-system.md"]
 order: 3
 ---
 

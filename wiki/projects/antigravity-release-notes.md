@@ -8,7 +8,7 @@ redirect_from:
   - antigravity
   - antigravity-release-notes
   - projects-antigravity
-related_docs: ["kubernetes-release-notes.md", "claude-code-release-history.md"]
+related_docs: ["kubernetes-release-notes.md"]
 order: 1
 ---
 
