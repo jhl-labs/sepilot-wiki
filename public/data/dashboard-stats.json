@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-17T23:43:27.241Z",
+  "collectedAt": "2026-02-18T00:56:32.202Z",
   "overview": {
     "totalDocuments": 18,
     "publishedDocuments": 8,
     "draftDocuments": 10,
     "openRequests": 6,
     "closedRequests": 16,
-    "totalAIActions": 79
+    "totalAIActions": 80
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-18T00:34:59.214Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-17T09:22:13.658Z",
       "actionType": "maintain",
@@ -227,28 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-11T05:13:59.762Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "documentTitle": "교차 참조 업데이트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 73,
+      "totalEstimatedTokens": 33907,
+      "avgDurationMs": 61380
+    },
     "unknown": {
       "totalActions": 7,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 72,
-      "totalEstimatedTokens": 33907,
-      "avgDurationMs": 61380
     }
   }
 }
