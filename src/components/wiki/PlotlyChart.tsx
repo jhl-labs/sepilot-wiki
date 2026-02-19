@@ -94,8 +94,8 @@ export function PlotlyChart({ data }: PlotlyChartProps) {
             style={{ height: `${chartHeight}px`, minHeight: '150px' }}
         >
             <Plot
-                data={chartData.data}
-                layout={layout}
+                data={chartData.data as PlotParams['data']}
+                layout={layout as PlotParams['layout']}
                 config={config}
                 useResizeHandler={true}
                 style={{ width: '100%', height: '100%' }}

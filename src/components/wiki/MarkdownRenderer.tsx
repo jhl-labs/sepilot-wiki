@@ -59,7 +59,7 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeSanitize]}
         components={{
-          code({ className, children, ...props }) {
+          code({ className, children, ref: _ref, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             const isInline = !match && !className;
 
@@ -109,7 +109,7 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
               </SectionErrorBoundary>
             );
           },
-          a({ href, children, ...props }) {
+          a({ href, children, ref: _ref, ...props }) {
             const isExternal = href?.startsWith('http');
             const isWikiLink = href?.startsWith('/wiki/') || href?.startsWith('./');
 
@@ -144,7 +144,7 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
               </div>
             );
           },
-          img({ src, alt, width, height, ...props }) {
+          img({ src, alt, width, height, ref: _ref, ...props }) {
             return (
               <figure className="image-figure">
                 <img
