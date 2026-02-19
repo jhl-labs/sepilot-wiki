@@ -9,21 +9,8 @@
       "주간",
       "통계"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-16T01:35:02Z",
     "author": "SEPilot AI"
-  },
-  {
-    "title": "Qwen3.5",
-    "slug": "qwen3-5",
-    "content": "Qwen3.5\nQwen3.5는 Qwen 시리즈의 최신 대형 언어 모델(Large Language Model, LLM)이며, 397B 파라미터 규모와 A17B 아키텍처를 기반으로 합니다. 이 모델은 Hugging Face에 공개된  저장소를 통해 접근할 수 있습니다.\n📌 주요 특징\n  특징   설명  \n ------ ------ \n  초대형 파라미터   397 billion 파라미터를 보유해 복잡한 언어 이해와 생성 능력이 뛰어납니다.  \n  혼합 정밀도(Adaptive Mixed‑Precision)   학습 및 추론 시 16‑bit와 32‑bit 연산을 자동으로 전환해 메모리 사용량을 절감하면서도 정확도를 유지합니다.  \n  멀티‑모달 확장 가능성   텍스트 외에도 이미지·오디오 입력을 처리하도록 설계된 확장 모듈을 지원합니다(향후 업데이트 예정).  \n  효율적인 토크나이저   기존 Qwen 토크나이저와 호환되며, 32 k 토큰 길이까지 한 번에 처리할 수 있어 긴 문서 요약에 강합니다.  \n  오픈소스 라이선스   Apache‑2.0 라이선스로 제공돼 기업·연구기관 모두 자유롭게 사용·수정·재배포가 가능합니다.  \n쉽게 말해: Qwen3.5는 “똑똑하고, 기억력이 좋으며, 다양한 형태의 데이터를 다룰 수 있는 최신 AI 엔진”이라고 생각하면 됩니다.\n🚀 사용 방법 (간단히)\nTip: 로컬 GPU 메모리가 부족하면  옵션을 사용해 메모리 사용량을 더 낮출 수 있습니다.\n📊 벤치마크 성능\nQwen3.5는 여러 공개 벤치마크에서 최고 수준의 성능을 기록했습니다. 아래 표는 주요 벤치마크에서의 점수와 비교 모델을 보여줍니다.\n  벤치마크   Qwen3.5 점수   비교 모델 (점수)   비고  \n ---------- ------------- ------------------ ------ \n  MMLU (5‑shot)   78.4%   GPT‑4 (77.9%), LLaMA‑2‑70B (71.2%)   다양한 분야(인문·과학·기술)에서 평균 정확도\n  HumanEval   71.2%   GPT‑4 (70.5%), Claude‑3 (68.9%)   파이썬 함수 생성 정확도\n  BIG-bench Hard   62.1%   GPT‑4 (61.8%), Gemini‑1.5 (60.3%)   고난이도 추론·창의성 테스트\n  OpenAI‑Evals (Code)   84.7%   GPT‑4 (84.2%), Claude‑3 (82.5%)   코드 완성·디버깅 능력\n  ARC‑Challenge   86.9%   GPT‑4 (86.5%), LLaMA‑2‑70B (80.1%)   고난이도 객관식 문제\n📈 성능 해석\n대규모 파라미터와 효율적인 혼합 정밀도 덕분에 복잡한 추론에서도 높은 정확도를 유지합니다.\n멀티‑모달 확장이 아직 정식 지원되지 않지만, 텍스트‑중심 작업에서는 기존 최고 수준 모델들을 앞섭니다.\n메모리 효율이 개선돼 8‑GPU 환경에서도 비교적 원활히 동작합니다(GPU당 약 30 GB VRAM 필요).\n📚 참고 자료\nHugging Face 모델 카드: https://huggingface.co/Qwen/Qwen3.5-397B-A17B\nQwen 공식 블로그: https://qwen.ai/blog/qwen3.5-release\n논문: Qwen3.5: Scaling Large Language Models with Adaptive Mixed‑Precision (2024)\n🛠️ 알려진 제한 사항\n현재 멀티‑모달 입력은 베타 버전으로 제공되지 않으며, 텍스트 전용 API만 안정적입니다.\n추론 지연: 397B 모델은 대규모 GPU 클러스터가 필요하므로, 개인 PC에서는  혹은  파생 모델을 사용하는 것이 현실적입니다.\n라이선스: Apache‑2.0이지만, 일부 사전 학습 데이터에 대한 상업적 사용 제한이 있을 수 있으니 사용 전 라이선스 조항을 확인하세요.\n이 문서는 2026‑02‑19 기준으로 최신 정보를 반영하고 있습니다. 모델 업데이트가 있을 경우 내용이 변경될 수 있습니다.",
-    "excerpt": "Qwen3.5\nQwen3.5는 Qwen 시리즈의 최신 대형 언어 모델(Large Language Model, LLM)이며, 397B 파라미터 규모와 A17B 아키텍처를 기반으로 합니다. 이 모델은 Hugging Face에 공개된  저장소를 통해 접근할 수 있습니다.\n📌 주요 특징\n  특징   설명  \n ------ ------ \n  초대형 파라미터   3...",
-    "tags": [
-      "Qwen3.5",
-      "AI",
-      "Large Language Model",
-      "Benchmark"
-    ],
-    "lastModified": "2026-02-19T01:40:41.991Z"
   },
   {
     "title": "Kubernetes 버전별 릴리즈 노트",
@@ -37,7 +24,7 @@
       "version",
       "changelog"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "github-actions[bot]"
   },
   {
@@ -57,7 +44,7 @@
       "networking",
       "load-balancer"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -188,7 +175,7 @@
       "benchmark",
       "performance"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "github-actions[bot]"
   },
   {
@@ -207,7 +194,7 @@
       "workflow",
       "javascript-runtime"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -225,7 +212,7 @@
       "javascript-runtime",
       "package-manager"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -245,7 +232,7 @@
       "open-standard",
       "ai"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-18T00:35:00Z",
     "author": "SEPilot AI"
   },
   {
@@ -274,7 +261,7 @@
       "에이전트",
       "GitHub"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-18T00:35:00Z",
     "author": "github-actions[bot]"
   },
   {
@@ -288,7 +275,7 @@
       "AI 서비스",
       "벤치마크"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-16T00:47:07Z",
     "author": "SEPilot AI"
   },
   {
@@ -302,7 +289,7 @@
       "프롬프트엔지니어링",
       "소프트웨어개발"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-16T00:47:07Z",
     "author": "SEPilot AI"
   },
   {
@@ -320,7 +307,7 @@
       "distributed-systems",
       "collaboration"
     ],
-    "lastModified": "2026-02-19T01:25:27Z",
+    "lastModified": "2026-02-18T00:35:00Z",
     "author": "SEPilot AI"
   },
   {

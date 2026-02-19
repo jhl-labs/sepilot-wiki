@@ -3,7 +3,7 @@ title: "Qwen3.5"
 description: "Qwen3.5 모델의 주요 특징, 사용 방법, 그리고 벤치마크 성능을 쉽게 정리한 가이드"
 category: "Guide"
 tags: ["Qwen3.5", "AI", "Large Language Model", "Benchmark"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-02-19T01:40:00Z"
 updatedAt: "2026-02-19T01:40:00Z"

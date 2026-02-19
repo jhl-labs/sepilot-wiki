@@ -9,23 +9,9 @@
         "주간",
         "통계"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-16T01:35:02Z",
       "author": "SEPilot AI",
       "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "Qwen3.5",
-      "slug": "qwen3-5",
-      "status": "draft",
-      "tags": [
-        "Qwen3.5",
-        "AI",
-        "Large Language Model",
-        "Benchmark"
-      ],
-      "lastModified": "2026-02-19T01:40:41.991Z",
-      "isDraft": true,
       "isInvalid": false
     },
     {
@@ -39,7 +25,7 @@
         "version",
         "changelog"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-11T08:01:05Z",
       "author": "github-actions[bot]",
       "isDraft": true,
       "isInvalid": false,
@@ -61,7 +47,7 @@
         "networking",
         "load-balancer"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-11T08:01:05Z",
       "author": "SEPilot AI",
       "isDraft": true,
       "isInvalid": false,
@@ -205,7 +191,7 @@
         "benchmark",
         "performance"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-11T08:01:05Z",
       "author": "github-actions[bot]",
       "isDraft": false,
       "isInvalid": false
@@ -225,7 +211,7 @@
         "workflow",
         "javascript-runtime"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-11T08:01:05Z",
       "author": "SEPilot AI",
       "isDraft": false,
       "isInvalid": false
@@ -244,7 +230,7 @@
         "javascript-runtime",
         "package-manager"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-11T08:01:05Z",
       "author": "SEPilot AI",
       "isDraft": false,
       "isInvalid": false
@@ -265,7 +251,7 @@
         "open-standard",
         "ai"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-18T00:35:00Z",
       "author": "SEPilot AI",
       "isDraft": true,
       "isInvalid": false,
@@ -297,7 +283,7 @@
         "에이전트",
         "GitHub"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-18T00:35:00Z",
       "author": "github-actions[bot]",
       "isDraft": true,
       "isInvalid": false
@@ -312,7 +298,7 @@
         "AI 서비스",
         "벤치마크"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-16T00:47:07Z",
       "author": "SEPilot AI",
       "isDraft": true,
       "isInvalid": false
@@ -327,7 +313,7 @@
         "프롬프트엔지니어링",
         "소프트웨어개발"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-16T00:47:07Z",
       "author": "SEPilot AI",
       "isDraft": true,
       "isInvalid": false
@@ -346,7 +332,7 @@
         "distributed-systems",
         "collaboration"
       ],
-      "lastModified": "2026-02-19T01:25:27Z",
+      "lastModified": "2026-02-18T00:35:00Z",
       "author": "SEPilot AI",
       "isDraft": false,
       "isInvalid": false,
@@ -355,10 +341,57 @@
   ],
   "tree": [
     {
-      "name": "AI 기술·프로토콜",
-      "path": "ai",
+      "name": "프로젝트",
+      "path": "projects",
       "isCategory": true,
       "order": 1,
+      "children": [
+        {
+          "title": "OpenClaw 완벽 가이드",
+          "slug": "projects/openclaw-complete-guide",
+          "menu": "OpenClaw",
+          "order": 1
+        },
+        {
+          "title": "Claude Code 릴리즈 히스토리 상세 가이드",
+          "slug": "projects/claude-code-release-history",
+          "menu": "Claude Code",
+          "order": 2
+        },
+        {
+          "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
+          "slug": "projects/sepilot-wiki-technology-stack",
+          "menu": "SEPilot Wiki에 대해",
+          "order": 3
+        },
+        {
+          "title": "Opencode에 대해",
+          "slug": "projects/opencode",
+          "order": 4
+        },
+        {
+          "title": "SEPilot Desktop 소개",
+          "slug": "projects/sepilot-desktop-intro",
+          "order": 5
+        },
+        {
+          "title": "Antigravity 릴리즈 노트 정리",
+          "slug": "projects/antigravity-release-notes",
+          "menu": "Antigravity",
+          "order": 6
+        },
+        {
+          "title": "Moltbook 소개",
+          "slug": "projects/moltbook-intro",
+          "order": 7
+        }
+      ]
+    },
+    {
+      "name": "AI 기술·개념",
+      "path": "ai",
+      "isCategory": true,
+      "order": 2,
       "children": [
         {
           "title": "MCP (Model Context Protocol) 완벽 가이드",
@@ -367,9 +400,8 @@
           "order": 1
         },
         {
-          "title": "MAS (Multi Agent System)",
-          "slug": "ai/multi-agent-system",
-          "menu": "멀티 에이전트 시스템",
+          "title": "Qwen 3.5",
+          "slug": "ai/qwen3-5",
           "order": 2
         },
         {
@@ -388,8 +420,10 @@
           "order": 5
         },
         {
-          "title": "Qwen 3.5",
-          "slug": "ai/qwen3-5"
+          "title": "MAS (Multi Agent System)",
+          "slug": "ai/multi-agent-system",
+          "menu": "멀티 에이전트 시스템",
+          "order": 6
         }
       ]
     },
@@ -397,7 +431,7 @@
       "name": "Kubernetes",
       "path": "kubernetes",
       "isCategory": true,
-      "order": 2,
+      "order": 3,
       "children": [
         {
           "title": "Kubernetes 버전별 릴리즈 노트",
@@ -414,10 +448,10 @@
       ]
     },
     {
-      "name": "Bun (JS 런타임·패키지 매니저)",
+      "name": "Bun (JavaScript 런타임·패키지 매니저)",
       "path": "bun",
       "isCategory": true,
-      "order": 3,
+      "order": 4,
       "children": [
         {
           "title": "bun 이란?",
@@ -437,67 +471,17 @@
       ]
     },
     {
-      "name": "프로젝트·제품",
-      "path": "projects",
-      "isCategory": true,
-      "order": 4,
-      "children": [
-        {
-          "title": "OpenClaw 완벽 가이드",
-          "slug": "projects/openclaw-complete-guide",
-          "menu": "OpenClaw",
-          "order": 1
-        },
-        {
-          "title": "Moltbook 소개",
-          "slug": "projects/moltbook-intro",
-          "order": 2
-        },
-        {
-          "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-          "slug": "projects/sepilot-wiki-technology-stack",
-          "menu": "SEPilot Wiki에 대해",
-          "order": 3
-        },
-        {
-          "title": "SEPilot Desktop 소개",
-          "slug": "projects/sepilot-desktop-intro",
-          "order": 4
-        },
-        {
-          "title": "Antigravity 릴리즈 노트 정리",
-          "slug": "projects/antigravity-release-notes",
-          "menu": "Antigravity",
-          "order": 5
-        },
-        {
-          "title": "Claude Code 릴리즈 히스토리 상세 가이드",
-          "slug": "projects/claude-code-release-history",
-          "menu": "Claude Code",
-          "order": 6
-        },
-        {
-          "title": "Opencode에 대해",
-          "slug": "projects/opencode",
-          "order": 7
-        }
-      ]
-    },
-    {
-      "name": "보고서·통계",
+      "name": "보고서",
       "path": "reports",
       "isCategory": true,
       "order": 5,
       "children": [
         {
           "title": "주간 위키 보고서 - 2026년 08주차",
-          "slug": "reports/weekly-2026-08"
+          "slug": "reports/weekly-2026-08",
+          "order": 1
         }
       ]
-    },
-    {
-      "title": "Qwen3.5",
-      "slug": "qwen3-5"
     }
   ]
 }

@@ -8,7 +8,7 @@ redirect_from:
   - projects-opencode-guide
   - projects-opencode-guide
   - opencode
-order: 7
+order: 4
 ---
 
 ## Opencode 소개
