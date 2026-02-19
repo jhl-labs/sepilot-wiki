@@ -1,0 +1,233 @@
+name: Reusable Document Handler
+
+on:
+  workflow_call:
+    inputs:
+      script_command:
+        description: '실행할 스크립트 명령어'
+        required: true
+        type: string
+      commit_message:
+        description: '커밋 메시지'
+        required: true
+        type: string
+      issue_number:
+        description: 'Issue 번호'
+        required: true
+        type: string
+      issue_title:
+        description: 'Issue 제목'
+        required: true
+        type: string
+      issue_body:
+        description: 'Issue 본문'
+        required: false
+        type: string
+        default: ''
+      comment_body:
+        description: '댓글 본문 (피드백 처리 시)'
+        required: false
+        type: string
+        default: ''
+      start_message:
+        description: '시작 알림 메시지'
+        required: false
+        type: string
+        default: ''
+      success_message:
+        description: '성공 알림 메시지'
+        required: false
+        type: string
+        default: ''
+      labels_to_add:
+        description: '추가할 라벨 (콤마 구분)'
+        required: false
+        type: string
+        default: ''
+      labels_to_remove:
+        description: '제거할 라벨 (콤마 구분)'
+        required: false
+        type: string
+        default: ''
+      build_wiki:
+        description: 'Wiki 빌드 실행 여부'
+        required: false
+        type: boolean
+        default: true
+      collect_actions:
+        description: 'Actions 상태 수집 여부'
+        required: false
+        type: boolean
+        default: true
+      trigger_deploy:
+        description: '배포 트리거 여부'
+        required: false
+        type: boolean
+        default: false
+      trigger_tree_maintenance:
+        description: '트리 유지보수 트리거 여부'
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      OPENAI_BASE_URL:
+        required: false
+      OPENAI_API_KEY:
+        required: false
+      OPENAI_TOKEN:
+        required: false
+      OPENAI_MODEL:
+        required: false
+      TAVILY_API_KEY:
+        required: false
+
+jobs:
+  handle-document:
+    runs-on: jhl-space
+    timeout-minutes: 15
+    outputs:
+      has_changes: ${{ steps.commit.outputs.has_changes }}
+      slug: ${{ steps.script.outputs.slug }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun and Install
+        uses: ./.github/actions/setup-bun-install
+
+      - name: Notify start
+        if: inputs.start_message != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: ${{ inputs.issue_number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '${{ inputs.start_message }}'
+            })
+
+      - name: Run script
+        id: script
+        run: ${{ inputs.script_command }}
+        continue-on-error: true
+        env:
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          ISSUE_TITLE: ${{ inputs.issue_title }}
+          ISSUE_BODY: ${{ inputs.issue_body }}
+          COMMENT_BODY: ${{ inputs.comment_body }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+
+      - name: Track error on script failure
+        if: steps.script.outcome == 'failure'
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          bun run scripts/lib/error-tracker.js \
+            --workflow "${{ github.workflow }}" \
+            --step "script_execution" \
+            --message "Script failed: ${{ inputs.script_command }}" \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Fail if script failed
+        if: steps.script.outcome == 'failure'
+        run: exit 1
+
+      - name: Build wiki data
+        if: inputs.build_wiki
+        uses: ./.github/actions/build-wiki
+
+      - name: Collect workflow status
+        if: inputs.collect_actions
+        run: bun run scripts/collectors/collect-actions-status.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Commit and push
+        id: commit
+        uses: ./.github/actions/git-commit-push
+        with:
+          message: ${{ inputs.commit_message }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove labels
+        if: inputs.labels_to_remove != ''
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const labels = '${{ inputs.labels_to_remove }}'.split(',').map(l => l.trim()).filter(Boolean);
+            for (const label of labels) {
+              try {
+                await github.rest.issues.removeLabel({
+                  issue_number: ${{ inputs.issue_number }},
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label
+                });
+              } catch (e) {
+                console.log(`라벨 '${label}' 제거 실패:`, e.message);
+              }
+            }
+
+      - name: Add labels
+        if: inputs.labels_to_add != ''
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const labels = '${{ inputs.labels_to_add }}'.split(',').map(l => l.trim()).filter(Boolean);
+            await github.rest.issues.addLabels({
+              issue_number: ${{ inputs.issue_number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: labels
+            });
+
+      - name: Trigger wiki tree maintenance
+        if: inputs.trigger_tree_maintenance && steps.commit.outputs.has_changes == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: wiki-document-changed
+
+      - name: Comment with result
+        if: inputs.success_message != ''
+        uses: actions/github-script@v7
+        env:
+          DOCUMENT_SLUG: ${{ steps.script.outputs.slug }}
+        with:
+          script: |
+            const slug = process.env.DOCUMENT_SLUG || '';
+            let body = '${{ inputs.success_message }}'.replace(/\{slug\}/g, slug);
+            body = body.replace(/\{owner\}/g, context.repo.owner);
+            body = body.replace(/\{repo\}/g, context.repo.repo);
+            github.rest.issues.createComment({
+              issue_number: ${{ inputs.issue_number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+      - name: Comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            github.rest.issues.createComment({
+              issue_number: ${{ inputs.issue_number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
+            });
