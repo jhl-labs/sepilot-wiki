@@ -21,7 +21,7 @@ permissions:
 
 concurrency:
   group: scheduled-collect
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   collect-actions-status:
@@ -35,12 +35,31 @@ jobs:
         uses: ./.github/actions/setup-bun-install
 
       - name: Collect GitHub Actions status
+        id: collect
+        continue-on-error: true
         run: |
           echo "🚀 GitHub Actions 상태 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
           bun run scripts/collectors/collect-actions-status.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Track error on failure
+        if: steps.collect.outcome == 'failure'
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          bun run scripts/lib/error-tracker.js \
+            --workflow "scheduled-collect" \
+            --step "collect_actions_status" \
+            --message "Actions 상태 수집 실패" \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Fail if collect failed
+        if: steps.collect.outcome == 'failure'
+        run: exit 1
 
       - name: Build wiki data
         uses: ./.github/actions/build-wiki

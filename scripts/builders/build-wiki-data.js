@@ -10,6 +10,8 @@ import { readdir, readFile, writeFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { execFileSync } from 'child_process';
+import matter from 'gray-matter';
+import { validateFrontmatter } from '../lib/frontmatter-schema.js';
 
 const WIKI_DIR = join(process.cwd(), 'wiki');
 const GUIDE_DIR = join(process.cwd(), 'guide');
@@ -27,51 +29,101 @@ const EXTRA_WIKI_DIRS = process.env.EXTRA_WIKI_DIRS
   ? process.env.EXTRA_WIKI_DIRS.split(',').map(p => p.trim()).filter(Boolean)
   : [];
 
-// 마크다운 프론트매터 파싱
-function parseMarkdownWithFrontmatter(content) {
-  const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
-  const match = content.match(frontmatterRegex);
-
-  if (!match) {
+// 마크다운 프론트매터 파싱 (gray-matter 사용)
+export function parseMarkdownWithFrontmatter(content) {
+  try {
+    const { data: metadata, content: body } = matter(content);
+    return { metadata, body };
+  } catch (err) {
+    console.warn(`⚠️ 프론트매터 파싱 실패, 원본 반환: ${err.message}`);
     return { metadata: {}, body: content };
   }
-
-  const [, frontmatter, body] = match;
-  const metadata = {};
-
-  frontmatter.split('\n').forEach((line) => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.slice(0, colonIndex).trim();
-      const value = line.slice(colonIndex + 1).trim();
-
-      // YAML 배열 파싱
-      if (value.startsWith('[') && value.endsWith(']')) {
-        metadata[key] = value
-          .slice(1, -1)
-          .split(',')
-          .map((v) => v.trim().replace(/['\"]/g, ''));
-      } else {
-        metadata[key] = value.replace(/['\"]/g, '');
-      }
-    }
-  });
-
-  return { metadata, body };
 }
 
 // 슬러그를 제목으로 변환
-function formatTitle(slug) {
+export function formatTitle(slug) {
   return slug
     .replace(/-/g, ' ')
     .replace(/_/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-// Git 히스토리 가져오기
-function getGitHistory(filePath, maxEntries = 20) {
+// Git 히스토리 배치 캐시 (한 번의 git log로 전체 이력 수집)
+let _gitHistoryBatchCache = null;
+
+/**
+ * 배치 방식: wiki/ 폴더 전체에 대해 한 번의 git log로 이력 수집
+ * @param {string} wikiDir - wiki 디렉토리 경로
+ * @returns {Map<string, Array>} 파일별 이력 맵
+ */
+function getGitHistoryBatch(wikiDir) {
+  if (_gitHistoryBatchCache) return _gitHistoryBatchCache;
+
+  const historyMap = new Map();
   try {
-    // git log로 파일의 커밋 히스토리 가져오기
+    const format = '%H|%s|%an|%ae|%aI';
+    const raw = execFileSync(
+      'git',
+      ['log', `--pretty=format:${format}`, '--name-only', '-n', '200', '--', wikiDir],
+      { encoding: 'utf-8', cwd: process.cwd(), maxBuffer: 10 * 1024 * 1024 }
+    );
+
+    if (!raw.trim()) {
+      _gitHistoryBatchCache = historyMap;
+      return historyMap;
+    }
+
+    // 파싱: 커밋 정보와 파일명이 번갈아 나옴
+    const blocks = raw.trim().split('\n\n');
+    for (const block of blocks) {
+      const lines = block.split('\n').filter(Boolean);
+      if (lines.length === 0) continue;
+
+      // 첫 줄이 커밋 정보
+      const [sha, message, author, authorEmail, date] = lines[0].split('|');
+      const commit = {
+        sha: sha?.substring(0, 7),
+        message,
+        author,
+        authorEmail,
+        date,
+        additions: 0,
+        deletions: 0,
+      };
+
+      // 나머지 줄은 파일명
+      for (let i = 1; i < lines.length; i++) {
+        const filepath = lines[i].trim();
+        if (!filepath || filepath.includes('|')) continue;
+
+        if (!historyMap.has(filepath)) {
+          historyMap.set(filepath, []);
+        }
+        historyMap.get(filepath).push({ ...commit });
+      }
+    }
+  } catch (error) {
+    console.warn(`⚠️ Git 히스토리 배치 수집 실패: ${error.message}`);
+  }
+
+  _gitHistoryBatchCache = historyMap;
+  return historyMap;
+}
+
+// Git 히스토리 가져오기 (배치 캐시 우선, 폴백으로 개별 조회)
+export function getGitHistory(filePath, maxEntries = 20) {
+  // 배치 캐시에서 조회 시도
+  if (_gitHistoryBatchCache) {
+    // filePath에서 상대 경로 추출
+    const relativePath = filePath.replace(process.cwd() + '/', '');
+    const cached = _gitHistoryBatchCache.get(relativePath);
+    if (cached) {
+      return cached.slice(0, maxEntries);
+    }
+  }
+
+  // 폴백: 개별 git log 호출
+  try {
     const format = '%H|%s|%an|%ae|%aI';
     const output = execFileSync(
       'git',
@@ -83,41 +135,21 @@ function getGitHistory(filePath, maxEntries = 20) {
       return [];
     }
 
-    const history = output
+    return output
       .trim()
       .split('\n')
       .map((line) => {
         const [sha, message, author, authorEmail, date] = line.split('|');
         return {
-          sha: sha.substring(0, 7), // 짧은 SHA
+          sha: sha.substring(0, 7),
           message,
           author,
           authorEmail,
           date,
+          additions: 0,
+          deletions: 0,
         };
       });
-
-    // 각 커밋의 변경 통계 가져오기 (선택적)
-    for (const revision of history) {
-      try {
-        const statOutput = execFileSync(
-          'git',
-          ['show', '--stat', '--format=', revision.sha, '--', filePath],
-          { encoding: 'utf-8', cwd: process.cwd() }
-        );
-
-        // 예: "1 file changed, 10 insertions(+), 5 deletions(-)"
-        const insertMatch = statOutput.match(/(\d+) insertion/);
-        const deleteMatch = statOutput.match(/(\d+) deletion/);
-
-        revision.additions = insertMatch ? parseInt(insertMatch[1], 10) : 0;
-        revision.deletions = deleteMatch ? parseInt(deleteMatch[1], 10) : 0;
-      } catch {
-        // 통계 가져오기 실패해도 계속 진행
-      }
-    }
-
-    return history;
   } catch (error) {
     console.warn(`⚠️ Git 히스토리 가져오기 실패: ${filePath}`, error.message);
     return [];
@@ -125,7 +157,7 @@ function getGitHistory(filePath, maxEntries = 20) {
 }
 
 // 재귀적으로 모든 마크다운 파일 찾기
-async function findMarkdownFiles(dir, baseDir = dir) {
+export async function findMarkdownFiles(dir, baseDir = dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
 
@@ -144,7 +176,7 @@ async function findMarkdownFiles(dir, baseDir = dir) {
 }
 
 // 카테고리 메타데이터 로드 (_category.json)
-async function loadCategoryMeta(wikiDir) {
+export async function loadCategoryMeta(wikiDir) {
   const meta = {};
   async function scan(dir, prefix = '') {
     if (!existsSync(dir)) return;
@@ -166,7 +198,7 @@ async function loadCategoryMeta(wikiDir) {
 }
 
 // 트리 구조 생성 (중첩 카테고리 지원)
-function buildTreeStructure(pages, categoryMeta = {}) {
+export function buildTreeStructure(pages, categoryMeta = {}) {
   const tree = [];
   const categories = {}; // path -> category object
 
@@ -254,7 +286,7 @@ function buildTreeStructure(pages, categoryMeta = {}) {
   return tree;
 }
 
-async function buildWikiData() {
+export async function buildWikiData() {
   console.log('📚 Wiki 데이터 빌드 시작...');
 
   // 모든 문서 소스 디렉토리 수집
@@ -277,13 +309,21 @@ async function buildWikiData() {
   }
   console.log(`   총 마크다운 파일: ${mdFiles.length}개`);
 
+  // Git 히스토리 배치 캐시 워밍업 (1회 호출로 전체 이력 수집)
+  console.log('   📜 Git 히스토리 배치 수집...');
+  getGitHistoryBatch(WIKI_DIR);
+
   const pages = [];
 
   for (const { fullPath, relativePath } of mdFiles) {
     const content = await readFile(fullPath, 'utf-8');
     // 슬러그는 상대 경로에서 .md 제거
     const slug = relativePath.replace('.md', '');
-    const { metadata, body } = parseMarkdownWithFrontmatter(content);
+    const { metadata: rawMetadata, body } = parseMarkdownWithFrontmatter(content);
+
+    // 프론트매터 스키마 검증 및 자동 보정
+    const validation = validateFrontmatter(rawMetadata, slug);
+    const metadata = validation.corrected;
 
     // Git 히스토리 가져오기
     const history = getGitHistory(fullPath);
@@ -397,7 +437,7 @@ async function buildWikiData() {
 }
 
 // Guide 데이터 빌드 (정적 가이드 페이지)
-async function buildGuideData() {
+export async function buildGuideData() {
   console.log('📖 Guide 데이터 빌드 시작...');
 
   // guide 폴더가 없으면 빈 데이터 생성
@@ -445,7 +485,11 @@ async function main() {
   await buildGuideData();
 }
 
-main().catch((err) => {
-  console.error('❌ 데이터 빌드 실패:', err);
-  process.exit(1);
-});
+// CLI 직접 실행 지원
+const isDirectRun = process.argv[1]?.includes('build-wiki-data');
+if (isDirectRun) {
+  main().catch((err) => {
+    console.error('❌ 데이터 빌드 실패:', err);
+    process.exit(1);
+  });
+}

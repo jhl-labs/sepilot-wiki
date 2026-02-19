@@ -1,7 +1,7 @@
 /**
  * 다단계 문서 생성 파이프라인
  *
- * 5단계: Research → Outline → Write → Review → Refine
+ * 7단계: Research → Outline → Write → FactCheck → Review → Validate → Refine
  * 각 단계는 독립적인 LLM 호출로 구성되며,
  * 이전 단계의 출력이 다음 단계의 입력이 됨
  */
@@ -226,11 +226,28 @@ ${document}`;
 
   try {
     // JSON 파싱 시도 (코드 블록 래핑 제거)
-    const cleaned = response.replace(/```json\n?|\n?```/g, '').trim();
+    const cleaned = String(response).replace(/```json\n?|\n?```/g, '').trim();
     return JSON.parse(cleaned);
-  } catch {
-    console.warn('⚠️ 리뷰 JSON 파싱 실패, 기본값 사용 (개선 단계 강제 실행)');
-    return { score: 50, feedback: ['리뷰 파싱 실패 — 안전을 위해 개선 단계 실행'], suggestions: [] };
+  } catch (firstError) {
+    console.warn(`⚠️ 리뷰 JSON 파싱 실패 (1차): ${firstError.message}, 재시도 중...`);
+
+    // 1회 재시도: LLM에게 순수 JSON만 반환 요청
+    try {
+      const retryResponse = await callOpenAI(
+        [
+          { role: 'system', content: '이전 응답이 올바른 JSON이 아닙니다. 반드시 순수 JSON만 반환하세요. 코드 블록이나 설명 없이 JSON 객체만 반환하세요. 형식: {"score": 0-100, "feedback": ["..."], "suggestions": ["..."]}' },
+          { role: 'user', content: `이전 응답을 올바른 JSON으로 다시 반환해주세요:\n\n${String(response).slice(0, 2000)}` },
+        ],
+        { temperature: 0, maxTokens: 1000, responseFormat: 'json_object' }
+      );
+      const retryCleaned = String(retryResponse).replace(/```json\n?|\n?```/g, '').trim();
+      const parsed = JSON.parse(retryCleaned);
+      console.log('   ✅ JSON 파싱 재시도 성공');
+      return parsed;
+    } catch (retryError) {
+      console.warn(`⚠️ 리뷰 JSON 파싱 재시도도 실패: ${retryError.message}, 기본값 사용 (개선 단계 강제 실행)`);
+      return { score: 50, feedback: ['리뷰 파싱 실패 — 안전을 위해 개선 단계 실행'], suggestions: [] };
+    }
   }
 }
 
@@ -392,13 +409,36 @@ export async function runAgentPipeline(context, config = {}) {
     enableTavilySearch = false,
     existingDocsContext = '',
     reviewThreshold = REVIEW_PASS_THRESHOLD,
+    pipelineTimeoutMs = 5 * 60 * 1000, // 기본 5분
   } = config;
 
   resetTavilyUsageStats();
   const pipelineStart = Date.now();
   const steps = [];
+  const totalSteps = 7;
+  let completedSteps = 0;
 
-  console.log('\n🤖 에이전트 기반 파이프라인 시작');
+  // AbortController 기반 타임아웃
+  const abortController = new AbortController();
+  const timeoutId = setTimeout(() => {
+    abortController.abort();
+  }, pipelineTimeoutMs);
+
+  /** 진행률 로그 출력 */
+  function logProgress(stepName) {
+    completedSteps++;
+    const percent = Math.round((completedSteps / totalSteps) * 100);
+    console.log(`   [${completedSteps}/${totalSteps}] ${stepName} 완료 (${percent}%)`);
+  }
+
+  /** 타임아웃 체크 */
+  function checkAborted() {
+    if (abortController.signal.aborted) {
+      throw new Error(`파이프라인 타임아웃 (${pipelineTimeoutMs / 1000}초 초과)`);
+    }
+  }
+
+  console.log('\n🤖 에이전트 기반 파이프라인 시작 (7단계)');
 
   // 에이전트 인스턴스 획득
   const researcher = getAgent('researcher');
@@ -406,7 +446,17 @@ export async function runAgentPipeline(context, config = {}) {
   const reviewer = getAgent('reviewer');
   const editor = getAgent('editor');
 
+  let factChecker, validator;
+  try {
+    factChecker = getAgent('fact-checker');
+    validator = getAgent('validator');
+  } catch {
+    console.warn('⚠️ fact-checker/validator 에이전트 로드 실패, 해당 단계 건너뜀');
+  }
+
+  try {
   // Step 1: Researcher 에이전트 - 리서치
+  checkAborted();
   const researchResult = await researcher.execute(
     {
       type: 'research',
@@ -420,10 +470,12 @@ export async function runAgentPipeline(context, config = {}) {
     context
   );
   steps.push({ step: 'research', output: researchResult.output, durationMs: researchResult.durationMs });
+  logProgress('Research');
 
   const researchSummary = researchResult.output?.summary || '';
 
   // Step 2: Writer 에이전트 - 아웃라인
+  checkAborted();
   const outlineResult = await writer.execute(
     {
       type: 'outline',
@@ -436,8 +488,10 @@ export async function runAgentPipeline(context, config = {}) {
     context
   );
   steps.push({ step: 'outline', output: outlineResult.output, durationMs: outlineResult.durationMs });
+  logProgress('Outline');
 
   // Step 3: Writer 에이전트 - 문서 작성
+  checkAborted();
   const writeResult = await writer.execute(
     {
       type: 'write',
@@ -452,6 +506,7 @@ export async function runAgentPipeline(context, config = {}) {
     context
   );
   steps.push({ step: 'write', output: writeResult.output, durationMs: writeResult.durationMs });
+  logProgress('Write');
 
   if (!writeResult.success || !writeResult.output) {
     throw new Error('Writer 에이전트 실행 실패: 문서 생성 결과 없음');
@@ -459,7 +514,28 @@ export async function runAgentPipeline(context, config = {}) {
 
   let finalDocument = writeResult.output;
 
-  // Step 4: Reviewer 에이전트 - 리뷰
+  // Step 4: FactChecker 에이전트 - 사실검증
+  checkAborted();
+  if (factChecker) {
+    const factCheckResult = await factChecker.execute(
+      {
+        type: 'fact-check',
+        input: {
+          document: finalDocument,
+          topic: context.issueTitle,
+        },
+      },
+      context
+    );
+    steps.push({ step: 'fact-check', output: factCheckResult.output, durationMs: factCheckResult.durationMs });
+
+    const trust = factCheckResult.output?.overallTrust ?? 100;
+    console.log(`   🔍 사실검증 신뢰도: ${trust}/100`);
+  }
+  logProgress('FactCheck');
+
+  // Step 5: Reviewer 에이전트 - 리뷰
+  checkAborted();
   const reviewResult = await reviewer.execute(
     {
       type: 'review',
@@ -472,11 +548,33 @@ export async function runAgentPipeline(context, config = {}) {
     context
   );
   steps.push({ step: 'review', output: reviewResult.output, durationMs: reviewResult.durationMs });
+  logProgress('Review');
 
   const score = reviewResult.output?.score ?? 50;
   console.log(`   📊 에이전트 리뷰 점수: ${score}/100`);
 
-  // Step 5: Editor 에이전트 - 개선 (필요 시)
+  // Step 6: Validator 에이전트 - 규칙 기반 검증
+  checkAborted();
+  if (validator) {
+    const validateResult = await validator.execute(
+      {
+        type: 'validate',
+        input: {
+          document: finalDocument,
+          slug: context.issueTitle?.replace(/\s+/g, '-').toLowerCase() || 'unknown',
+        },
+      },
+      context
+    );
+    steps.push({ step: 'validate', output: validateResult.output, durationMs: validateResult.durationMs });
+
+    const validationPassed = validateResult.output?.passed ?? true;
+    console.log(`   ✔️ 검증 결과: ${validationPassed ? '통과' : '미통과'}`);
+  }
+  logProgress('Validate');
+
+  // Step 7: Editor 에이전트 - 개선 (필요 시)
+  checkAborted();
   if (score < reviewThreshold) {
     const refineResult = await editor.execute(
       {
@@ -492,6 +590,7 @@ export async function runAgentPipeline(context, config = {}) {
     steps.push({ step: 'refine', output: refineResult.output, durationMs: refineResult.durationMs });
     finalDocument = refineResult.output;
   }
+  logProgress('Refine');
 
   const totalDurationMs = Date.now() - pipelineStart;
 
@@ -520,4 +619,24 @@ export async function runAgentPipeline(context, config = {}) {
     tavilyUsage: getTavilyUsageStats(),
     mode: 'agent',
   };
+  } catch (error) {
+    // 타임아웃 또는 기타 에러 시 부분 결과 반환
+    const totalDurationMs = Date.now() - pipelineStart;
+    const isTimeout = abortController.signal.aborted;
+    console.error(`\n${isTimeout ? '⏰' : '❌'} 파이프라인 ${isTimeout ? '타임아웃' : '실패'}: ${error.message}`);
+    console.log(`   완료된 단계: ${steps.map((s) => s.step).join(' → ')}`);
+
+    return {
+      steps,
+      finalDocument: steps.find((s) => s.step === 'write')?.output || null,
+      totalDurationMs,
+      researchSources: [],
+      tavilyUsage: getTavilyUsageStats(),
+      mode: 'agent',
+      error: error.message,
+      partial: true,
+    };
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }

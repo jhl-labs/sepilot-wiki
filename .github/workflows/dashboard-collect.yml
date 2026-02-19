@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: dashboard-collect
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   collect-dashboard-stats:
@@ -25,9 +25,28 @@ jobs:
         uses: ./.github/actions/setup-bun-install
 
       - name: Collect dashboard stats
+        id: collect
+        continue-on-error: true
         run: |
           echo "📊 대시보드 통계 수집 시작: $(date '+%Y-%m-%d %H:%M:%S KST')"
           bun run scripts/collectors/collect-dashboard-stats.js
+
+      - name: Track error on failure
+        if: steps.collect.outcome == 'failure'
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          bun run scripts/lib/error-tracker.js \
+            --workflow "dashboard-collect" \
+            --step "collect_dashboard_stats" \
+            --message "대시보드 통계 수집 실패" \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Fail if collect failed
+        if: steps.collect.outcome == 'failure'
+        run: exit 1
 
       - name: Commit and push
         uses: ./.github/actions/git-commit-push

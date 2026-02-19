@@ -87,6 +87,38 @@ async function collectWorkflowRuns() {
         }
       }
 
+      // 평균 실행 시간 및 실패율 계산
+      const completedRuns = recentRuns.filter((r) => r.status === 'completed');
+      const durations = [];
+      for (const run of completedRuns) {
+        if (run.createdAt && run.updatedAt) {
+          const duration = new Date(run.updatedAt) - new Date(run.createdAt);
+          if (duration > 0) durations.push(duration);
+        }
+      }
+      const avgDurationMs = durations.length > 0
+        ? Math.round(durations.reduce((a, b) => a + b, 0) / durations.length)
+        : null;
+      const failureRate = completedRuns.length > 0
+        ? Math.round((completedRuns.filter((r) => r.conclusion === 'failure').length / completedRuns.length) * 100)
+        : null;
+
+      // 가장 자주 실패하는 step 추적 (최근 실패 실행에서)
+      let mostFailedStep = null;
+      const failedRun = recentRuns.find((r) => r.conclusion === 'failure');
+      if (failedRun) {
+        try {
+          const jobs = await fetchGitHubAPI(`/actions/runs/${failedRun.id}/jobs`);
+          const failedJob = (jobs.jobs || []).find((j) => j.conclusion === 'failure');
+          if (failedJob) {
+            const failedStep = (failedJob.steps || []).find((s) => s.conclusion === 'failure');
+            mostFailedStep = failedStep?.name || failedJob.name;
+          }
+        } catch {
+          // step 정보 가져오기 실패 시 무시
+        }
+      }
+
       workflowStatuses.push({
         id: workflow.id,
         name: workflow.name,
@@ -96,6 +128,9 @@ async function collectWorkflowRuns() {
         badgeUrl: workflow.badge_url,
         url: workflow.html_url,
         recentRuns,
+        avgDurationMs,
+        failureRate,
+        mostFailedStep,
       });
     }
 

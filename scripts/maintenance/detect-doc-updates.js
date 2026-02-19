@@ -68,6 +68,7 @@ function filterSourceFiles(files) {
 
 /**
  * 문서에서 소스 파일/모듈 참조 검색
+ * frontmatter related_code 필드 기반 매칭 (거짓 양성 최소화)
  */
 function findRelatedDocuments(changedFiles, documents) {
   const related = [];
@@ -77,23 +78,25 @@ function findRelatedDocuments(changedFiles, documents) {
 
     const matchedFiles = [];
 
+    // frontmatter related_code 배열 추출 (source_files도 호환)
+    const relatedCode = doc.frontmatter?.related_code || doc.frontmatter?.source_files || [];
+
+    if (!Array.isArray(relatedCode) || relatedCode.length === 0) {
+      // related_code가 없으면 이 문서는 건너뜀 (거짓 양성 방지)
+      continue;
+    }
+
     for (const changedFile of changedFiles) {
-      // 파일명 (확장자 포함/제외)
-      const filename = changedFile.split('/').pop();
-      const filenameNoExt = filename.replace(/\.[^.]+$/, '');
-
-      // 문서 내용에서 참조 검색
-      const content = doc.content.toLowerCase();
-      const rawContent = doc.rawContent || '';
-
-      const isReferenced =
-        content.includes(filename.toLowerCase()) ||
-        content.includes(filenameNoExt.toLowerCase()) ||
-        content.includes(changedFile.toLowerCase()) ||
-        rawContent.includes(changedFile) ||
-        // source_files frontmatter 확인
-        (doc.frontmatter.source_files &&
-          doc.frontmatter.source_files.includes(changedFile));
+      // related_code 배열에 명시된 파일만 매칭
+      const isReferenced = relatedCode.some((pattern) => {
+        // 글로브 패턴 지원: src/** → src/로 시작하는 모든 파일
+        if (pattern.endsWith('/**')) {
+          const prefix = pattern.slice(0, -3);
+          return changedFile.startsWith(prefix);
+        }
+        // 정확한 경로 매칭
+        return changedFile === pattern;
+      });
 
       if (isReferenced) {
         matchedFiles.push(changedFile);

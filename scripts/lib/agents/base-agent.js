@@ -6,6 +6,9 @@
  */
 
 import { callOpenAI } from '../utils.js';
+import { getEnhancedPrompt } from '../learning-loop.js';
+import { recordAgentMetric } from '../agent-metrics.js';
+import { trackError, createErrorIssue } from '../error-tracker.js';
 
 export class BaseAgent {
   /**
@@ -36,31 +39,83 @@ export class BaseAgent {
    */
   async execute(task, context) {
     const start = Date.now();
+    const maxRetries = 2;
     console.log(`🤖 [${this.name}] 태스크 실행: ${task.type}`);
 
-    try {
-      const result = await this.run(task, context);
-      const durationMs = Date.now() - start;
+    let lastError;
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        const result = await this.run(task, context);
+        const durationMs = Date.now() - start;
 
-      console.log(`   ✅ [${this.name}] 완료 (${(durationMs / 1000).toFixed(1)}초)`);
+        console.log(`   ✅ [${this.name}] 완료 (${(durationMs / 1000).toFixed(1)}초)`);
 
-      return {
-        success: true,
-        output: result,
-        agent: this.role,
-        durationMs,
-      };
-    } catch (error) {
-      const durationMs = Date.now() - start;
-      console.error(`   ❌ [${this.name}] 실패: ${error.message}`);
+        // 메트릭 기록 (비동기, 실패 무시)
+        recordAgentMetric({
+          agent: this.role,
+          taskType: task.type,
+          durationMs,
+          success: true,
+          usage: this._lastUsage || null,
+          reviewScore: result?.score ?? null,
+          promptVersion: this._lastPromptVersion || null,
+          retryCount: attempt - 1,
+        }).catch(() => {});
 
-      return {
-        success: false,
-        error: error.message,
-        agent: this.role,
-        durationMs,
-      };
+        return {
+          success: true,
+          output: result,
+          agent: this.role,
+          durationMs,
+          usage: this._lastUsage || null,
+        };
+      } catch (error) {
+        lastError = error;
+        if (attempt < maxRetries) {
+          console.warn(`   ⚠️ [${this.name}] 재시도 (${attempt}/${maxRetries}): ${error.message}`);
+          await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
+        }
+      }
     }
+
+    // 모든 재시도 실패
+    const durationMs = Date.now() - start;
+    console.error(`   ❌ [${this.name}] 실패 (${maxRetries}회 시도): ${lastError.message}`);
+
+    // error-tracker 자동 기록
+    try {
+      const tracking = await trackError({
+        workflow: `agent:${this.role}`,
+        step: task.type,
+        message: lastError.message,
+      });
+      if (tracking.shouldCreateIssue) {
+        await createErrorIssue({
+          workflow: `agent:${this.role}`,
+          step: task.type,
+          message: lastError.message,
+          consecutiveCount: tracking.consecutiveCount,
+        });
+      }
+    } catch {
+      // error-tracker 실패는 무시
+    }
+
+    // 실패 메트릭 기록
+    recordAgentMetric({
+      agent: this.role,
+      taskType: task.type,
+      durationMs,
+      success: false,
+      retryCount: maxRetries - 1,
+    }).catch(() => {});
+
+    return {
+      success: false,
+      error: lastError.message,
+      agent: this.role,
+      durationMs,
+    };
   }
 
   /**
@@ -80,8 +135,25 @@ export class BaseAgent {
    * @returns {Promise<string>} LLM 응답
    */
   async callLLM(userPrompt, opts = {}) {
+    // 학습 루프에서 역할별 추가 지시사항 로드
+    let enhancedSystemPrompt = this.systemPrompt;
+    this._lastPromptVersion = null;
+    try {
+      const enhancement = await getEnhancedPrompt(this.role);
+      if (enhancement) {
+        if (typeof enhancement === 'object' && enhancement.text) {
+          enhancedSystemPrompt += enhancement.text;
+          this._lastPromptVersion = enhancement.version || null;
+        } else {
+          enhancedSystemPrompt += enhancement;
+        }
+      }
+    } catch {
+      // 학습 루프 로드 실패 시 무시
+    }
+
     const messages = [
-      { role: 'system', content: this.systemPrompt },
+      { role: 'system', content: enhancedSystemPrompt },
       { role: 'user', content: userPrompt },
     ];
 
@@ -95,7 +167,15 @@ export class BaseAgent {
       options.responseFormat = 'json_object';
     }
 
-    return callOpenAI(messages, options);
+    const result = await callOpenAI(messages, options);
+
+    // 토큰 사용량 저장 (callOpenAI가 usage를 반환하는 경우)
+    if (result && typeof result === 'object' && result.usage) {
+      this._lastUsage = result.usage;
+      return result.content;
+    }
+
+    return result;
   }
 
   /**

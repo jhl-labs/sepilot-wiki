@@ -102,6 +102,7 @@ interface WikiPageMeta {
 // TTL 기반 캐시 인스턴스들
 const wikiDataCache = new TTLCache<{ pages: WikiPage[]; tree: WikiTree[] }>(CACHE_TTL.WIKI_DATA);
 const wikiMetaCache = new TTLCache<{ pages: WikiPageMeta[]; tree: WikiTree[] }>(CACHE_TTL.WIKI_META);
+const MAX_PAGE_CACHE_SIZE = 50;
 const wikiPageCaches = new Map<string, TTLCache<WikiPage>>();
 const guideDataCache = new TTLCache<{ pages: WikiPage[] }>(CACHE_TTL.GUIDE_DATA);
 const issuesDataCache = new TTLCache<{ issues: GitHubIssue[]; lastUpdated: string }>(CACHE_TTL.ISSUES);
@@ -252,9 +253,14 @@ async function loadWikiPage(slug: string): Promise<WikiPage | null> {
         }
         const page: WikiPage = await response.json();
 
-        // 캐시에 저장
+        // 캐시에 저장 (LRU 제한)
         let cache = wikiPageCaches.get(slug);
         if (!cache) {
+            // LRU 제한: 최대 크기 초과 시 가장 오래된 항목 삭제
+            if (wikiPageCaches.size >= MAX_PAGE_CACHE_SIZE) {
+                const oldestKey = wikiPageCaches.keys().next().value;
+                if (oldestKey) wikiPageCaches.delete(oldestKey);
+            }
             cache = new TTLCache<WikiPage>(CACHE_TTL.WIKI_PAGE);
             wikiPageCaches.set(slug, cache);
         }
@@ -544,4 +550,87 @@ export async function fetchDashboardStats(): Promise<DashboardStats | null> {
         logger.warn('대시보드 통계 로드 실패', { error });
         return null;
     }
+}
+
+/**
+ * 에이전트 메트릭 데이터 가져오기
+ */
+export async function fetchAgentMetrics(): Promise<AgentMetrics | null> {
+    try {
+        const cacheBuster = `?v=${getCacheBuster('dynamic', 5 * 60 * 1000)}`;
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}data/agent-metrics.json${cacheBuster}`);
+        if (!response.ok) {
+            return null;
+        }
+        return await response.json();
+    } catch {
+        return null;
+    }
+}
+
+// Health Status 타입
+export interface HealthCheck {
+    lastSuccess: string;
+    status: 'ok' | 'warning' | 'error';
+    avgScore?: number;
+}
+
+export interface HealthStatus {
+    overall: 'healthy' | 'degraded' | 'unhealthy';
+    checks: Record<string, HealthCheck>;
+    recentErrors: number;
+    updatedAt: string;
+}
+
+// Health Status 데이터 로드
+export async function fetchHealthStatus(): Promise<HealthStatus | null> {
+    try {
+        const cacheBuster = `?v=${getCacheBuster('dynamic', 2 * 60 * 1000)}`;
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}data/health-status.json${cacheBuster}`);
+        if (!response.ok) {
+            return null;
+        }
+        return await response.json();
+    } catch {
+        return null;
+    }
+}
+
+// Workflow Status 타입 (Actions Status 확장)
+export interface WorkflowStatusEntry {
+    name: string;
+    status: 'success' | 'failure' | 'cancelled' | 'unknown';
+    avgDurationMs?: number;
+    failureRate?: number;
+    mostFailedStep?: string;
+    lastRun?: string;
+}
+
+export interface AgentMetricEntry {
+    agent: string;
+    taskType: string;
+    durationMs: number;
+    success: boolean;
+    usage?: { promptTokens: number; completionTokens: number; totalTokens: number };
+    reviewScore?: number;
+    timestamp: string;
+}
+
+export interface AgentMetricsSummary {
+    totalRuns: number;
+    successCount: number;
+    failCount: number;
+    totalDurationMs: number;
+    totalTokens: number;
+    avgDurationMs: number;
+    avgTokens: number;
+    avgReviewScore: number | null;
+}
+
+export interface AgentMetrics {
+    entries: AgentMetricEntry[];
+    summary: Record<string, AgentMetricsSummary>;
+    lastUpdated: string | null;
 }

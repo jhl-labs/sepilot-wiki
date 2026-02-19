@@ -73,28 +73,79 @@ function createExcerpt(content, maxLength = 200) {
   return plainText.substring(0, maxLength).trim() + '...';
 }
 
-async function buildSearchIndex() {
+/**
+ * 검색 인덱스 빌드
+ * @param {Object} [options] - 옵션
+ * @param {Array} [options.wikiPages] - 미리 파싱된 wiki 페이지 배열 (파이프라인에서 전달)
+ * @param {Array} [options.guidePages] - 미리 파싱된 guide 페이지 배열 (파이프라인에서 전달)
+ * @param {boolean} [options.incremental=false] - 증분 업데이트 모드
+ * @param {string[]} [options.changedSlugs] - 변경된 페이지 slug 목록 (증분 모드 시)
+ * @param {string[]} [options.removedSlugs] - 삭제된 페이지 slug 목록 (증분 모드 시)
+ */
+export async function buildSearchIndex(options = {}) {
   console.log('🔍 검색 인덱스 빌드 시작...');
 
-  // wiki-data.json이 없으면 종료
-  if (!existsSync(WIKI_DATA_FILE)) {
-    console.log('⚠️ wiki-data.json이 없습니다. 먼저 build-wiki-data.js를 실행하세요.');
-    return;
+  let wikiPages;
+  let guidePages;
+
+  if (options.wikiPages) {
+    // 파이프라인에서 이미 파싱된 데이터를 받은 경우 디스크 I/O 없이 진행
+    wikiPages = options.wikiPages;
+    guidePages = options.guidePages || [];
+  } else {
+    // 기존 방식: JSON 파일에서 로드
+    if (!existsSync(WIKI_DATA_FILE)) {
+      console.log('⚠️ wiki-data.json이 없습니다. 먼저 build-wiki-data.js를 실행하세요.');
+      return;
+    }
+
+    const wikiData = JSON.parse(await readFile(WIKI_DATA_FILE, 'utf-8'));
+    wikiPages = wikiData.pages || [];
+
+    guidePages = [];
+    if (existsSync(GUIDE_DATA_FILE)) {
+      const guideData = JSON.parse(await readFile(GUIDE_DATA_FILE, 'utf-8'));
+      guidePages = (guideData.pages || []).map(page => ({
+        ...page,
+        slug: `guide/${page.slug}`,
+      }));
+    }
   }
 
-  // wiki 데이터 로드
-  const wikiData = JSON.parse(await readFile(WIKI_DATA_FILE, 'utf-8'));
-  const wikiPages = wikiData.pages || [];
+  // 증분 업데이트 모드: 기존 인덱스에서 변경된 부분만 교체
+  if (options.incremental && existsSync(JSON_OUTPUT_FILE)) {
+    try {
+      const existingIndex = JSON.parse(await readFile(JSON_OUTPUT_FILE, 'utf-8'));
+      const changedSlugs = new Set(options.changedSlugs || []);
+      const removedSlugs = new Set(options.removedSlugs || []);
 
-  // guide 데이터 로드 (있으면)
-  let guidePages = [];
-  if (existsSync(GUIDE_DATA_FILE)) {
-    const guideData = JSON.parse(await readFile(GUIDE_DATA_FILE, 'utf-8'));
-    // guide 페이지는 slug에 guide/ 접두사 추가
-    guidePages = (guideData.pages || []).map(page => ({
-      ...page,
-      slug: `guide/${page.slug}`,
-    }));
+      // 삭제된 페이지 제거, 변경된 페이지 제거
+      const filtered = existingIndex.filter(
+        (item) => !changedSlugs.has(item.slug) && !removedSlugs.has(item.slug)
+      );
+
+      // 변경/추가된 페이지 새로 추가
+      const allPages = [...wikiPages, ...guidePages];
+      const updatedPages = allPages.filter((p) => changedSlugs.has(p.slug));
+
+      for (const page of updatedPages) {
+        filtered.push({
+          title: page.title,
+          slug: page.slug,
+          content: extractPlainText(page.content),
+          excerpt: createExcerpt(page.content),
+          tags: page.tags || [],
+          lastModified: page.lastModified,
+          author: page.author,
+        });
+      }
+
+      await writeFile(JSON_OUTPUT_FILE, JSON.stringify(filtered, null, 2));
+      console.log(`✅ 검색 인덱스 증분 업데이트: ${updatedPages.length}개 갱신, ${removedSlugs.size}개 삭제`);
+      return;
+    } catch (err) {
+      console.warn(`⚠️ 증분 업데이트 실패, 전체 재생성으로 폴백: ${err.message}`);
+    }
   }
 
   // 모든 페이지 합치기
@@ -152,7 +203,14 @@ ${xmlItems.join('\n')}
   console.log(`   JSON: ${JSON_OUTPUT_FILE}`);
 }
 
-buildSearchIndex().catch((err) => {
-  console.error('❌ 검색 인덱스 빌드 실패:', err);
-  process.exit(1);
-});
+// extractPlainText와 createExcerpt도 export (외부 사용 가능)
+export { extractPlainText, createExcerpt };
+
+// CLI 직접 실행 지원
+const isDirectRun = process.argv[1]?.includes('build-search-index');
+if (isDirectRun) {
+  buildSearchIndex().catch((err) => {
+    console.error('❌ 검색 인덱스 빌드 실패:', err);
+    process.exit(1);
+  });
+}

@@ -8,6 +8,8 @@ import { ResearcherAgent } from './researcher.js';
 import { WriterAgent } from './writer.js';
 import { ReviewerAgent } from './reviewer.js';
 import { EditorAgent } from './editor.js';
+import { FactCheckerAgent } from './fact-checker.js';
+import { ValidatorAgent } from './validator.js';
 
 /** 에이전트 인스턴스 캐시 (싱글턴) */
 const agentInstances = {};
@@ -20,6 +22,8 @@ const AGENT_CLASSES = {
   writer: WriterAgent,
   reviewer: ReviewerAgent,
   editor: EditorAgent,
+  'fact-checker': FactCheckerAgent,
+  validator: ValidatorAgent,
 };
 
 /**
@@ -60,3 +64,5 @@ export { ResearcherAgent } from './researcher.js';
 export { WriterAgent } from './writer.js';
 export { ReviewerAgent } from './reviewer.js';
 export { EditorAgent } from './editor.js';
+export { FactCheckerAgent } from './fact-checker.js';
+export { ValidatorAgent } from './validator.js';

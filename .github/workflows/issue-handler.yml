@@ -5,7 +5,6 @@ on:
     types: [labeled, unlabeled, closed, reopened]
   issue_comment:
     types: [created]
-  # push 이벤트는 워크플로우 검증용으로만 사용 (실제 동작 없음)
   push:
     paths:
       - '.github/workflows/issue-handler.yml'
@@ -21,7 +20,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # push 이벤트일 때 워크플로우 검증용 (실제 동작 없음)
   validate-workflow:
     if: github.event_name == 'push'
     runs-on: jhl-space
@@ -32,570 +30,95 @@ jobs:
 
   handle-request-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'request'
-    runs-on: jhl-space
-    timeout-minutes: 15
-    outputs:
-      has_changes: ${{ steps.commit.outputs.has_changes }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Notify start
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '📝 요청을 확인했습니다. AI가 문서 초안을 작성 중입니다...'
-            })
-
-      - name: Recommend related documents
-        id: recommend
-        run: |
-          echo "🔍 관련 문서 검색 중..."
-          bun run scripts/document/recommend-documents.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE" \
-            --issue-body "$ISSUE_BODY"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Generate document with AI
-        id: generate
-        run: |
-          echo "🤖 AI 문서 생성 시작..."
-          bun run scripts/document/generate-document.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE" \
-            --issue-body "$ISSUE_BODY"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-
-      - name: Build wiki data
-        run: |
-          bun run build:wiki
-          bun run build:search
-
-      - name: Collect workflow status
-        run: bun run scripts/collectors/collect-actions-status.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Commit and push
-        id: commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "docs: Issue #${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
-            if ! git pull --rebase; then
-              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
-              git checkout --theirs public/ || true
-              git add public/
-              GIT_EDITOR=true git rebase --continue || true
-              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
-                git rebase --abort
-                git pull --no-rebase -X ours
-              fi
-            fi
-            git push
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
-
-      - name: Trigger wiki tree maintenance
-        if: steps.commit.outputs.has_changes == 'true'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: wiki-document-changed
-
-      - name: Add labels
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['draft', 'ai-generated']
-            });
-
-      - name: Comment with result
-        uses: actions/github-script@v7
-        env:
-          DOCUMENT_SLUG: ${{ steps.generate.outputs.slug }}
-        with:
-          script: |
-            const slug = process.env.DOCUMENT_SLUG || '';
-
-            const body = [
-              '✅ 문서 초안이 생성되었습니다!',
-              '',
-              '📄 **문서 위치**: `wiki/' + slug + '.md`',
-              '🔗 **미리보기**: [문서 보기](https://' + context.repo.owner + '.github.io/' + context.repo.repo + '/wiki/' + slug + ')',
-              '',
-              '> ⏳ **참고**: 배포가 진행 중입니다. 링크가 활성화되기까지 1~2분 정도 소요될 수 있습니다.',
-              '',
-              '---',
-              '',
-              '이 문서는 AI가 자동으로 생성한 초안입니다.',
-              '- 검토가 필요한 부분이 있다면 댓글로 피드백을 남겨주세요.',
-              '- 문서가 완성되면 이 Issue를 닫아주세요.'
-            ].join('\n');
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            });
-
-      - name: Comment on failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
-            });
+    uses: ./.github/workflows/reusable-document-handler.yml
+    with:
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+      issue_body: ${{ github.event.issue.body }}
+      start_message: '📝 요청을 확인했습니다. AI가 문서 초안을 작성 중입니다...'
+      script_command: |
+        echo "🔍 관련 문서 검색 중..."
+        bun run scripts/document/recommend-documents.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE" \
+          --issue-body "$ISSUE_BODY"
+        echo "🤖 AI 문서 생성 시작..."
+        bun run scripts/document/generate-document.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE" \
+          --issue-body "$ISSUE_BODY"
+      commit_message: "docs: Issue #${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
+      labels_to_add: 'draft,ai-generated'
+      trigger_tree_maintenance: true
+      success_message: '✅ 문서 초안이 생성되었습니다!'
+    secrets:
+      OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+      OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
 
   handle-invalid-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'invalid'
-    runs-on: jhl-space
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Notify start
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '⚠️ 오류가 보고되었습니다. AI가 문서를 검토하고 수정 중입니다...'
-            })
-
-      - name: Process invalid label with AI
-        id: process
-        run: |
-          echo "🤖 Invalid 처리 시작..."
-          bun run scripts/issue/mark-invalid.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE" \
-            --issue-body "$ISSUE_BODY"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Build wiki data
-        run: |
-          bun run build:wiki
-          bun run build:search
-
-      - name: Collect workflow status
-        run: bun run scripts/collectors/collect-actions-status.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Commit and push
-        id: commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "fix: Issue #${{ github.event.issue.number }} - 오류 수정"
-            if ! git pull --rebase; then
-              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
-              git checkout --theirs public/ || true
-              git add public/
-              GIT_EDITOR=true git rebase --continue || true
-              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
-                git rebase --abort
-                git pull --no-rebase -X ours
-              fi
-            fi
-            git push
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
-
-      - name: Comment with result
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '✅ 문서가 수정되었습니다. 검토 후 문제가 해결되었다면 invalid 라벨을 제거해주세요.'
-            });
-
-      - name: Comment on failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
-            });
+    uses: ./.github/workflows/reusable-document-handler.yml
+    with:
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+      issue_body: ${{ github.event.issue.body }}
+      start_message: '⚠️ 오류가 보고되었습니다. AI가 문서를 검토하고 수정 중입니다...'
+      script_command: |
+        echo "🤖 Invalid 처리 시작..."
+        bun run scripts/issue/mark-invalid.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE" \
+          --issue-body "$ISSUE_BODY"
+      commit_message: "fix: Issue #${{ github.event.issue.number }} - 오류 수정"
+      success_message: '✅ 문서가 수정되었습니다. 검토 후 문제가 해결되었다면 invalid 라벨을 제거해주세요.'
+    secrets:
+      OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+      OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
 
   handle-issue-close:
     if: >
       github.event.action == 'closed' &&
       !contains(toJSON(github.event.issue.labels.*.name), 'wiki-maintenance')
-    runs-on: jhl-space
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Notify start
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '📤 Issue가 종료되었습니다. 문서를 발행 상태로 전환 중입니다...'
-            })
-
-      - name: Publish document
-        id: publish
-        run: |
-          echo "📤 문서 발행 시작..."
-          bun run scripts/document/publish-document.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Build wiki data
-        run: |
-          bun run build:wiki
-          bun run build:search
-
-      - name: Collect workflow status
-        run: bun run scripts/collectors/collect-actions-status.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Commit and push
-        id: commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 발행"
-            if ! git pull --rebase; then
-              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
-              git checkout --theirs public/ || true
-              git add public/
-              GIT_EDITOR=true git rebase --continue || true
-              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
-                git rebase --abort
-                git pull --no-rebase -X ours
-              fi
-            fi
-            git push
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
-
-      - name: Remove draft label
-        uses: actions/github-script@v7
-        continue-on-error: true
-        with:
-          script: |
-            try {
-              await github.rest.issues.removeLabel({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: 'draft'
-              });
-            } catch (e) {
-              console.log('draft 라벨이 없거나 제거 실패:', e.message);
-            }
-
-      - name: Add published label
-        uses: actions/github-script@v7
-        continue-on-error: true
-        with:
-          script: |
-            await github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['published']
-            });
-
-      - name: Comment with result
-        uses: actions/github-script@v7
-        env:
-          DOCUMENT_SLUG: ${{ steps.publish.outputs.slug }}
-        with:
-          script: |
-            const slug = process.env.DOCUMENT_SLUG || '';
-
-            const body = [
-              '✅ 문서가 발행되었습니다!',
-              '',
-              '🔗 **발행된 문서**: [문서 보기](https://' + context.repo.owner + '.github.io/' + context.repo.repo + '/wiki/' + slug + ')',
-              '',
-              '> ⏳ **참고**: 배포가 진행 중입니다. 변경 사항이 반영되기까지 1~2분 정도 소요될 수 있습니다.',
-              '',
-              '---',
-              '',
-              '이 문서는 이제 정식 발행 상태입니다. 감사합니다! 🎉'
-            ].join('\n');
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            });
-
-      - name: Comment on failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
-            });
+    uses: ./.github/workflows/reusable-document-handler.yml
+    with:
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+      start_message: '📤 Issue가 종료되었습니다. 문서를 발행 상태로 전환 중입니다...'
+      script_command: |
+        echo "📤 문서 발행 시작..."
+        bun run scripts/document/publish-document.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE"
+      commit_message: "docs: Issue #${{ github.event.issue.number }} - 문서 발행"
+      labels_to_add: 'published'
+      labels_to_remove: 'draft'
+      success_message: '✅ 문서가 발행되었습니다! 🎉'
+    secrets: {}
 
   handle-issue-reopen:
     if: >
       github.event.action == 'reopened' &&
       !contains(toJSON(github.event.issue.labels.*.name), 'wiki-maintenance')
-    runs-on: jhl-space
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Notify start
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '🔄 Issue가 다시 열렸습니다. 문서를 초안 상태로 전환 중입니다...'
-            })
-
-      - name: Unpublish document
-        id: unpublish
-        run: |
-          echo "📥 문서 발행 취소 시작..."
-          bun run scripts/document/unpublish-document.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Build wiki data
-        run: |
-          bun run build:wiki
-          bun run build:search
-
-      - name: Collect workflow status
-        run: bun run scripts/collectors/collect-actions-status.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Commit and push
-        id: commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 발행 취소"
-            if ! git pull --rebase; then
-              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
-              git checkout --theirs public/ || true
-              git add public/
-              GIT_EDITOR=true git rebase --continue || true
-              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
-                git rebase --abort
-                git pull --no-rebase -X ours
-              fi
-            fi
-            git push
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
-
-      - name: Remove published label
-        uses: actions/github-script@v7
-        continue-on-error: true
-        with:
-          script: |
-            try {
-              await github.rest.issues.removeLabel({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: 'published'
-              });
-            } catch (e) {
-              console.log('published 라벨이 없거나 제거 실패:', e.message);
-            }
-
-      - name: Add draft label
-        uses: actions/github-script@v7
-        continue-on-error: true
-        with:
-          script: |
-            await github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['draft']
-            });
-
-      - name: Comment with result
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const body = [
-              '📝 문서가 초안 상태로 전환되었습니다.',
-              '',
-              '- `published` 라벨이 제거되고 `draft` 라벨이 추가되었습니다.',
-              '- 문서 수정이 필요하면 댓글로 피드백을 남겨주세요.',
-              '- 수정이 완료되면 Issue를 다시 닫아주세요.'
-            ].join('\n');
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            });
-
-      - name: Comment on failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
-            });
+    uses: ./.github/workflows/reusable-document-handler.yml
+    with:
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+      start_message: '🔄 Issue가 다시 열렸습니다. 문서를 초안 상태로 전환 중입니다...'
+      script_command: |
+        echo "📥 문서 발행 취소 시작..."
+        bun run scripts/document/unpublish-document.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE"
+      commit_message: "docs: Issue #${{ github.event.issue.number }} - 문서 발행 취소"
+      labels_to_add: 'draft'
+      labels_to_remove: 'published'
+      success_message: '📝 문서가 초안 상태로 전환되었습니다.'
+    secrets: {}
 
   handle-maintainer-comment:
     if: >
@@ -613,7 +136,6 @@ jobs:
             console.log(`댓글 작성자: ${commentUser}`);
 
             try {
-              // 사용자의 repo 권한 레벨 직접 확인
               const { data: permissionData } = await github.rest.repos.getCollaboratorPermissionLevel({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -623,7 +145,6 @@ jobs:
               const permission = permissionData.permission;
               console.log(`${commentUser}의 권한 레벨: ${permission}`);
 
-              // admin, maintain, write 권한이면 true
               const hasPermission = ['admin', 'maintain', 'write'].includes(permission);
               console.log(`maintainer 권한 여부: ${hasPermission}`);
               return hasPermission;
@@ -632,309 +153,86 @@ jobs:
               return false;
             }
 
-      - name: Checkout
-        if: steps.check-maintainer.outputs.result == 'true'
-        uses: actions/checkout@v4
+      - name: Skip if not maintainer
+        if: steps.check-maintainer.outputs.result != 'true'
+        run: echo "권한 없는 사용자, 건너뜀"
 
-      - name: Setup Bun
-        if: steps.check-maintainer.outputs.result == 'true'
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        if: steps.check-maintainer.outputs.result == 'true'
-        run: bun install
-
-      - name: Notify start
-        if: steps.check-maintainer.outputs.result == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '🔄 피드백을 확인했습니다. AI가 문서를 수정 중입니다...'
-            })
-
-      - name: Process maintainer feedback with AI
-        if: steps.check-maintainer.outputs.result == 'true'
-        id: process
-        run: |
-          echo "🤖 피드백 처리 시작..."
-          bun run scripts/document/process-feedback.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE" \
-            --comment-body "$COMMENT_BODY"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          COMMENT_BODY: ${{ github.event.comment.body }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Build wiki data
-        if: steps.check-maintainer.outputs.result == 'true'
-        run: |
-          bun run build:wiki
-          bun run build:search
-
-      - name: Collect workflow status
-        if: steps.check-maintainer.outputs.result == 'true'
-        run: bun run scripts/collectors/collect-actions-status.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Commit and push
-        if: steps.check-maintainer.outputs.result == 'true'
-        id: commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "docs: Issue #${{ github.event.issue.number }} - 피드백 반영"
-            if ! git pull --rebase; then
-              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
-              git checkout --theirs public/ || true
-              git add public/
-              GIT_EDITOR=true git rebase --continue || true
-              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
-                git rebase --abort
-                git pull --no-rebase -X ours
-              fi
-            fi
-            git push
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
-
-      - name: Trigger wiki tree maintenance
-        if: steps.check-maintainer.outputs.result == 'true' && steps.commit.outputs.has_changes == 'true'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: wiki-document-changed
-
-      - name: Comment with result
-        if: steps.check-maintainer.outputs.result == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '✅ 피드백이 반영되었습니다. 변경 사항을 확인해주세요.'
-            })
-
-      - name: Comment on failure
-        if: failure() && steps.check-maintainer.outputs.result == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
-            });
+  handle-maintainer-comment-action:
+    needs: handle-maintainer-comment
+    if: >
+      github.event_name == 'issue_comment' &&
+      !contains(toJSON(github.event.issue.labels.*.name), 'wiki-maintenance') &&
+      needs.handle-maintainer-comment.result == 'success'
+    uses: ./.github/workflows/reusable-document-handler.yml
+    with:
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+      comment_body: ${{ github.event.comment.body }}
+      start_message: '🔄 피드백을 확인했습니다. AI가 문서를 수정 중입니다...'
+      script_command: |
+        echo "🤖 피드백 처리 시작..."
+        bun run scripts/document/process-feedback.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE" \
+          --comment-body "$COMMENT_BODY"
+      commit_message: "docs: Issue #${{ github.event.issue.number }} - 피드백 반영"
+      trigger_tree_maintenance: true
+      success_message: '✅ 피드백이 반영되었습니다. 변경 사항을 확인해주세요.'
+    secrets:
+      OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+      OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
 
   handle-question-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'question'
-    runs-on: jhl-space
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Notify start
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '🤔 질문을 확인했습니다. AI가 Wiki 문서를 기반으로 답변을 준비 중입니다...'
-            })
-
-      - name: Answer question with AI
-        id: answer
-        run: |
-          echo "🤖 AI 질문 응답 시작..."
-          bun run scripts/document/answer-question.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE" \
-            --issue-body "$ISSUE_BODY"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-
-      - name: Commit AI history
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-          else
-            git commit -m "docs: Issue #${{ github.event.issue.number }} - AI 질문 응답"
-            if ! git pull --rebase; then
-              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
-              git checkout --theirs public/ || true
-              git add public/
-              GIT_EDITOR=true git rebase --continue || true
-              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
-                git rebase --abort
-                git pull --no-rebase -X ours
-              fi
-            fi
-            git push
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
-
-      - name: Comment on failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
-            });
+    uses: ./.github/workflows/reusable-document-handler.yml
+    with:
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+      issue_body: ${{ github.event.issue.body }}
+      start_message: '🤔 질문을 확인했습니다. AI가 Wiki 문서를 기반으로 답변을 준비 중입니다...'
+      script_command: |
+        echo "🤖 AI 질문 응답 시작..."
+        bun run scripts/document/answer-question.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE" \
+          --issue-body "$ISSUE_BODY"
+      commit_message: "docs: Issue #${{ github.event.issue.number }} - AI 질문 응답"
+      build_wiki: false
+      collect_actions: false
+    secrets:
+      OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+      OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
 
   handle-update-request-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'update-request'
-    runs-on: jhl-space
-    timeout-minutes: 15
-    outputs:
-      has_changes: ${{ steps.commit.outputs.has_changes }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    uses: ./.github/workflows/reusable-document-handler.yml
+    with:
+      issue_number: ${{ github.event.issue.number }}
+      issue_title: ${{ github.event.issue.title }}
+      issue_body: ${{ github.event.issue.body }}
+      start_message: '📝 수정 요청을 확인했습니다. AI가 문서를 분석하고 수정 중입니다...'
+      script_command: |
+        echo "🤖 문서 수정 시작..."
+        bun run scripts/document/update-document.js \
+          --issue-number "$ISSUE_NUMBER" \
+          --issue-title "$ISSUE_TITLE" \
+          --issue-body "$ISSUE_BODY"
+      commit_message: "docs: Issue #${{ github.event.issue.number }} - 문서 수정 요청 처리"
+      collect_actions: false
+    secrets:
+      OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+      OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Notify start
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '📝 수정 요청을 확인했습니다. AI가 문서를 분석하고 수정 중입니다...'
-            })
-
-      - name: Update document with AI
-        id: update
-        run: |
-          echo "🤖 문서 수정 시작..."
-          bun run scripts/document/update-document.js \
-            --issue-number "$ISSUE_NUMBER" \
-            --issue-title "$ISSUE_TITLE" \
-            --issue-body "$ISSUE_BODY"
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-
-      - name: Build wiki data
-        run: |
-          bun run build:wiki
-          bun run build:search
-
-      - name: Commit and push
-        id: commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          if git diff --staged --quiet; then
-            echo "변경 사항 없음"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "docs: Issue #${{ github.event.issue.number }} - 문서 수정 요청 처리"
-            if ! git pull --rebase; then
-              echo "⚠️ Rebase 충돌 발생, 자동 해결 시도..."
-              git checkout --theirs public/ || true
-              git add public/
-              GIT_EDITOR=true git rebase --continue || true
-              if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
-                git rebase --abort
-                git pull --no-rebase -X ours
-              fi
-            fi
-            git push
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
-
-      - name: Comment on failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ 워크플로우 실행 중 오류가 발생했습니다.\n\n🔗 [실행 로그 확인](${runUrl})\n\n> 자동 재시도하거나, 라벨을 제거 후 다시 추가해주세요.`
-            });
-
-  # 모든 handle job이 완료된 후 배포 (하나라도 성공하면 실행)
   deploy:
-    needs: [handle-request-label, handle-invalid-label, handle-issue-close, handle-issue-reopen, handle-maintainer-comment, handle-question-label, handle-update-request-label]
+    needs: [handle-request-label, handle-invalid-label, handle-issue-close, handle-issue-reopen, handle-maintainer-comment-action, handle-question-label, handle-update-request-label]
     if: |
       always() &&
       !cancelled() &&
@@ -943,7 +241,7 @@ jobs:
         needs.handle-invalid-label.result == 'success' ||
         needs.handle-issue-close.result == 'success' ||
         needs.handle-issue-reopen.result == 'success' ||
-        needs.handle-maintainer-comment.result == 'success' ||
+        needs.handle-maintainer-comment-action.result == 'success' ||
         needs.handle-question-label.result == 'success' ||
         needs.handle-update-request-label.result == 'success'
       )

@@ -4,8 +4,14 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 */1 * * *'  # 매시간 (IssuesPage 동기화)
+    paths:
+      - 'wiki/**'
+      - 'public/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'vite.config.ts'
+      - 'next.config.*'
   repository_dispatch:
     types: [wiki-tree-updated]
   workflow_dispatch:
@@ -17,7 +23,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:

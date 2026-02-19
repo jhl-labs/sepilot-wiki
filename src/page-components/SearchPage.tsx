@@ -41,13 +41,56 @@ function HighlightText({ text, query }: { text: string; query: string }) {
   );
 }
 
+// 검색 결과 항목 컴포넌트 (중복 렌더링 제거)
+function SearchResultItem({
+  result,
+  searchQuery,
+  getExcerptWithContext,
+}: {
+  result: { slug: string; title: string; content?: string; tags?: string[] };
+  searchQuery: string;
+  getExcerptWithContext: (content: string, query: string, maxLength?: number) => string;
+}) {
+  return (
+    <Link to={`/wiki/${result.slug}`} className="result-item">
+      <FileText size={20} className="result-icon" />
+      <div className="result-content">
+        <h3 className="result-title">
+          <HighlightText text={result.title} query={searchQuery} />
+        </h3>
+        <p className="result-excerpt">
+          {result.content ? (
+            <HighlightText
+              text={getExcerptWithContext(result.content, searchQuery)}
+              query={searchQuery}
+            />
+          ) : (
+            '문서를 클릭하여 내용을 확인하세요'
+          )}
+        </p>
+        {result.tags && result.tags.length > 0 && (
+          <div className="result-tags">
+            {result.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="result-tag">
+                <HighlightText text={tag} query={searchQuery} />
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+      <ArrowRight size={18} className="result-arrow" />
+    </Link>
+  );
+}
+
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
   const [inputValue, setInputValue] = useState(searchQuery);
 
-  // 검색 요청 debounce (300ms) - 매 글자마다 요청 방지
-  const debouncedQuery = useDebounce(searchQuery, 300);
+  // 동적 debounce: 짧은 검색어는 느리게, 긴 검색어는 빠르게
+  const debounceMs = searchQuery.length <= 3 ? 500 : 200;
+  const debouncedQuery = useDebounce(searchQuery, debounceMs);
   const { data: results, isLoading, error, refetch } = useSearch(debouncedQuery);
   const { data: tags } = useWikiTags();
   const { data: pages } = useWikiPages();
@@ -158,74 +201,22 @@ export function SearchPage() {
                   ariaLabel={`검색 결과 ${results.length}건`}
                   getItemKey={(item) => item.slug}
                   renderItem={(result) => (
-                    <Link
-                      to={`/wiki/${result.slug}`}
-                      className="result-item"
-                    >
-                      <FileText size={20} className="result-icon" />
-                      <div className="result-content">
-                        <h3 className="result-title">
-                          <HighlightText text={result.title} query={searchQuery} />
-                        </h3>
-                        <p className="result-excerpt">
-                          {result.content ? (
-                            <HighlightText
-                              text={getExcerptWithContext(result.content, searchQuery)}
-                              query={searchQuery}
-                            />
-                          ) : (
-                            '문서를 클릭하여 내용을 확인하세요'
-                          )}
-                        </p>
-                        {result.tags && result.tags.length > 0 && (
-                          <div className="result-tags">
-                            {result.tags.slice(0, 3).map((tag) => (
-                              <span key={tag} className="result-tag">
-                                <HighlightText text={tag} query={searchQuery} />
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <ArrowRight size={18} className="result-arrow" />
-                    </Link>
+                    <SearchResultItem
+                      result={result}
+                      searchQuery={searchQuery}
+                      getExcerptWithContext={getExcerptWithContext}
+                    />
                   )}
                 />
               ) : (
                 <div className="results-list">
                   {results.map((result) => (
-                    <Link
+                    <SearchResultItem
                       key={result.slug}
-                      to={`/wiki/${result.slug}`}
-                      className="result-item"
-                    >
-                      <FileText size={20} className="result-icon" />
-                      <div className="result-content">
-                        <h3 className="result-title">
-                          <HighlightText text={result.title} query={searchQuery} />
-                        </h3>
-                        <p className="result-excerpt">
-                          {result.content ? (
-                            <HighlightText
-                              text={getExcerptWithContext(result.content, searchQuery)}
-                              query={searchQuery}
-                            />
-                          ) : (
-                            '문서를 클릭하여 내용을 확인하세요'
-                          )}
-                        </p>
-                        {result.tags && result.tags.length > 0 && (
-                          <div className="result-tags">
-                            {result.tags.slice(0, 3).map((tag) => (
-                              <span key={tag} className="result-tag">
-                                <HighlightText text={tag} query={searchQuery} />
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <ArrowRight size={18} className="result-arrow" />
-                    </Link>
+                      result={result}
+                      searchQuery={searchQuery}
+                      getExcerptWithContext={getExcerptWithContext}
+                    />
                   ))}
                 </div>
               )}

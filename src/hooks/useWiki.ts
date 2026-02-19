@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchWikiPages, fetchWikiPage, fetchIssues, fetchGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus, fetchDashboardStats } from '../services/github';
+import { fetchWikiPages, fetchWikiPage, fetchIssues, fetchGuidePages, fetchAIHistory, fetchDocumentAIHistory, fetchWikiTags, fetchActionsStatus, fetchDashboardStats, fetchAgentMetrics, fetchHealthStatus } from '../services/github';
 import { searchWiki, getAvailableTags, type SearchFilter } from '../services/search';
 
 export function useWikiPages() {
@@ -114,6 +114,25 @@ export function useDashboardStats() {
   return useQuery({
     queryKey: ['dashboard-stats'],
     queryFn: fetchDashboardStats,
+    staleTime: 2 * 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
+  });
+}
+
+// Agent Metrics 조회
+export function useAgentMetrics() {
+  return useQuery({
+    queryKey: ['agent-metrics'],
+    queryFn: fetchAgentMetrics,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+// Health Status 조회
+export function useHealthStatus() {
+  return useQuery({
+    queryKey: ['health-status'],
+    queryFn: fetchHealthStatus,
     staleTime: 2 * 60 * 1000,
     refetchInterval: 5 * 60 * 1000,
   });

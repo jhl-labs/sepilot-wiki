@@ -15,7 +15,7 @@ import {
   Clock,
   Activity,
 } from 'lucide-react';
-import { useWikiPages, useIssues, useDashboardStats } from '../hooks/useWiki';
+import { useWikiPages, useIssues, useDashboardStats, useAgentMetrics, useActionsStatus, useHealthStatus } from '../hooks/useWiki';
 import { LABELS, config, urls } from '../config';
 import { Skeleton } from '../components/ui/Skeleton';
 import { format } from 'date-fns';
@@ -53,6 +53,9 @@ export function HomePage() {
   const { data: pages, isLoading: pagesLoading, error: pagesError, refetch: refetchPages } = useWikiPages();
   const { data: issues, isLoading: issuesLoading, error: issuesError, refetch: refetchIssues } = useIssues(LABELS.REQUEST);
   const { data: dashboardStats } = useDashboardStats();
+  const { data: agentMetrics } = useAgentMetrics();
+  const { data: actionsStatus } = useActionsStatus();
+  const { data: healthStatus } = useHealthStatus();
 
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodKey>('last24h');
 
@@ -100,6 +103,21 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* System Health Banner */}
+      {healthStatus && (
+        <section className={`health-banner health-${healthStatus.overall}`}>
+          <div className="health-banner-content">
+            <span className="health-indicator" />
+            <span className="health-label">
+              시스템 상태: {healthStatus.overall === 'healthy' ? '정상' : healthStatus.overall === 'degraded' ? '저하' : '비정상'}
+            </span>
+            {healthStatus.recentErrors > 0 && (
+              <span className="health-errors">최근 에러 {healthStatus.recentErrors}건</span>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Dashboard Section */}
       <section className="dashboard-section">
@@ -210,7 +228,86 @@ export function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* 에이전트 메트릭 */}
+        {agentMetrics?.summary && Object.keys(agentMetrics.summary).length > 0 && (
+          <div className="dashboard-agents-section">
+            <h3 className="subsection-title">
+              <Bot size={18} />
+              <span>에이전트 성능</span>
+            </h3>
+            <div className="dashboard-agents-grid">
+              {Object.entries(agentMetrics.summary).map(([role, stats]) => (
+                <div key={role} className="agent-metric-card">
+                  <div className="agent-metric-header">
+                    <span className="agent-role">{role}</span>
+                    <span className={`agent-success-rate ${stats.successCount / Math.max(stats.totalRuns, 1) >= 0.9 ? 'good' : 'warn'}`}>
+                      {Math.round((stats.successCount / Math.max(stats.totalRuns, 1)) * 100)}%
+                    </span>
+                  </div>
+                  <div className="agent-metric-stats">
+                    <div className="agent-stat">
+                      <span className="agent-stat-value">{stats.totalRuns}</span>
+                      <span className="agent-stat-label">실행</span>
+                    </div>
+                    <div className="agent-stat">
+                      <span className="agent-stat-value">{formatDuration(stats.avgDurationMs)}</span>
+                      <span className="agent-stat-label">평균 시간</span>
+                    </div>
+                    <div className="agent-stat">
+                      <span className="agent-stat-value">{formatTokens(stats.avgTokens)}</span>
+                      <span className="agent-stat-label">평균 토큰</span>
+                    </div>
+                    {stats.avgReviewScore != null && (
+                      <div className="agent-stat">
+                        <span className="agent-stat-value">{stats.avgReviewScore}</span>
+                        <span className="agent-stat-label">리뷰 점수</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
+
+      {/* Workflow Status Section */}
+      {actionsStatus && Array.isArray(actionsStatus.workflows) && actionsStatus.workflows.length > 0 && (
+        <section className="dashboard-section">
+          <h3 className="subsection-title">
+            <Activity size={18} />
+            <span>워크플로우 상태</span>
+          </h3>
+          <div className="workflow-status-grid">
+            {actionsStatus.workflows.map((wf) => {
+              const status = wf.overallStatus || 'unknown';
+              const failureCount = wf.recentRuns?.filter((r) => r.conclusion === 'failure').length ?? 0;
+              const totalRuns = wf.recentRuns?.length ?? 0;
+              const failureRate = totalRuns > 0 ? failureCount / totalRuns : 0;
+              return (
+                <div
+                  key={wf.name}
+                  className={`workflow-status-card ${status === 'failure' ? 'workflow-failure' : ''}`}
+                >
+                  <div className="workflow-status-header">
+                    <span className="workflow-name">{wf.name}</span>
+                    <span className={`workflow-badge workflow-${status}`}>
+                      {status === 'success' ? '성공' : status === 'failure' ? '실패' : status}
+                    </span>
+                  </div>
+                  <div className="workflow-status-stats">
+                    <span className="workflow-stat">최근 {totalRuns}건</span>
+                    {failureRate > 0 && (
+                      <span className="workflow-stat">실패율 {Math.round(failureRate * 100)}%</span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Features Section */}
       <section className="features-section">

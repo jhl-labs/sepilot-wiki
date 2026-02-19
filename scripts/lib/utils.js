@@ -49,7 +49,13 @@ export async function findDocument(context, wikiDir) {
 
   if (existsSync(docPath.filepath)) {
     const content = await readFile(docPath.filepath, 'utf-8');
-    return { ...docPath, content, found: true };
+    // status: deleted 문서는 건너뛰고 활성 문서를 재검색
+    const statusMatch = content.match(/status:\s*(\w+)/);
+    if (statusMatch && statusMatch[1] === 'deleted') {
+      console.log(`   ⚠️ ${docPath.filepath}는 삭제 상태, 활성 문서를 재검색합니다.`);
+    } else {
+      return { ...docPath, content, found: true };
+    }
   }
 
   // 2. wiki 폴더의 모든 마크다운 파일을 재귀적으로 검색
@@ -57,6 +63,10 @@ export async function findDocument(context, wikiDir) {
     const allFiles = await findAllMarkdownFiles(wikiDir);
     for (const filepath of allFiles) {
       const content = await readFile(filepath, 'utf-8');
+
+      // status: deleted 문서는 건너뛰기
+      const statusMatch = content.match(/status:\s*(\w+)/);
+      if (statusMatch && statusMatch[1] === 'deleted') continue;
 
       // 제목으로 매칭 (frontmatter title 또는 첫 번째 h1)
       const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m)
@@ -70,6 +80,21 @@ export async function findDocument(context, wikiDir) {
           content,
           found: true,
           source: 'title_match',
+        };
+      }
+
+      // slug로 매칭 (파일명 기반)
+      const docSlug = docPath.slug?.split('/').pop();
+      const fileSlug = filepath.split('/').pop()?.replace('.md', '');
+      if (docSlug && fileSlug === docSlug) {
+        const relPath = relative(wikiDir, filepath);
+        return {
+          filepath,
+          filename: relPath,
+          slug: relPath.replace('.md', ''),
+          content,
+          found: true,
+          source: 'slug_match',
         };
       }
     }
@@ -98,7 +123,7 @@ async function findAllMarkdownFiles(dir) {
 }
 
 /**
- * OpenAI API 호출
+ * OpenAI API 호출 (재시도 + 지수 백오프 지원)
  * @param {Array} messages - 메시지 배열
  * @param {Object} options - 옵션 (temperature, maxTokens)
  * @returns {Promise<string>} AI 응답 내용
@@ -109,29 +134,70 @@ export async function callOpenAI(messages, options = {}) {
   }
 
   const url = `${OPENAI_BASE_URL.replace(/\/$/, '')}/chat/completions`;
+  const maxRetries = options.maxRetries ?? 3;
+  const baseDelay = 1000; // 1초
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: OPENAI_MODEL,
-      messages,
-      temperature: options.temperature ?? 0.1,
-      max_tokens: options.maxTokens ?? 8000,
-      ...(options.responseFormat ? { response_format: { type: options.responseFormat } } : {}),
-    }),
-  });
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        messages,
+        temperature: options.temperature ?? 0.1,
+        max_tokens: options.maxTokens ?? 8000,
+        ...(options.responseFormat ? { response_format: { type: options.responseFormat } } : {}),
+      }),
+    });
 
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`OpenAI API 오류: ${response.status} - ${error}`);
+    if (response.ok) {
+      const data = await response.json();
+      const content = data.choices[0].message.content;
+
+      // usage 정보가 있으면 함께 반환
+      if (data.usage) {
+        return {
+          content,
+          usage: {
+            promptTokens: data.usage.prompt_tokens,
+            completionTokens: data.usage.completion_tokens,
+            totalTokens: data.usage.total_tokens,
+          },
+          toString() { return content; },
+        };
+      }
+
+      return content;
+    }
+
+    // 4xx 클라이언트 에러는 즉시 실패 (429 Rate Limit 제외)
+    if (response.status >= 400 && response.status < 500 && response.status !== 429) {
+      const error = await response.text();
+      throw new Error(`OpenAI API 오류: ${response.status} - ${error}`);
+    }
+
+    // 마지막 시도면 에러 throw
+    if (attempt === maxRetries) {
+      const error = await response.text();
+      throw new Error(`OpenAI API 오류: ${response.status} - ${error} (${maxRetries}회 재시도 실패)`);
+    }
+
+    // 429 Rate Limit: Retry-After 헤더 존중
+    let delay;
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After');
+      delay = retryAfter ? parseInt(retryAfter, 10) * 1000 : baseDelay * Math.pow(2, attempt - 1);
+    } else {
+      // 5xx 서버 에러: 지수 백오프
+      delay = baseDelay * Math.pow(2, attempt - 1);
+    }
+
+    console.warn(`⚠️ OpenAI API 재시도 (${attempt}/${maxRetries}) - ${response.status}, ${delay}ms 후 재시도`);
+    await new Promise((resolve) => setTimeout(resolve, delay));
   }
-
-  const data = await response.json();
-  return data.choices[0].message.content;
 }
 
 /**

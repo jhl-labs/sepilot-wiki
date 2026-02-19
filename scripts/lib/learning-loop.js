@@ -153,19 +153,93 @@ export async function suggestPromptImprovements(patterns) {
 /**
  * 학습된 프롬프트 로드 (에이전트 역할별)
  * 기본 프롬프트에 학습된 추가 지시사항을 병합
+ * 현재 활성 버전 ID도 함께 반환
  *
  * @param {string} role - 에이전트 역할
- * @returns {Promise<string>} 추가할 프롬프트 텍스트 (없으면 빈 문자열)
+ * @returns {Promise<{text: string, version: string|null}|string>} 추가할 프롬프트 텍스트와 버전 ID
  */
 export async function getEnhancedPrompt(role) {
   const templates = await loadPromptTemplates();
   const roleTemplate = templates.templates?.[role];
 
   if (!roleTemplate || !roleTemplate.additions || roleTemplate.additions.length === 0) {
-    return '';
+    return { text: '', version: roleTemplate?.version || null };
   }
 
-  return '\n\n## 학습된 추가 지시사항\n' + roleTemplate.additions.map((a) => `- ${a}`).join('\n');
+  const text = '\n\n## 학습된 추가 지시사항\n' + roleTemplate.additions.map((a) => `- ${a}`).join('\n');
+  return { text, version: roleTemplate.version || null };
+}
+
+/**
+ * 프롬프트 버전의 성과 기록
+ * 리뷰 점수를 해당 프롬프트 버전과 연결하여 추적
+ *
+ * @param {string} role - 에이전트 역할
+ * @param {string} version - 프롬프트 버전 ID
+ * @param {number} score - 리뷰 점수
+ */
+export async function recordPromptPerformance(role, version, score) {
+  if (!role || !version || score == null) return;
+
+  const templates = await loadPromptTemplates();
+  const roleTemplate = templates.templates?.[role];
+  if (!roleTemplate) return;
+
+  if (!roleTemplate.performance) {
+    roleTemplate.performance = {};
+  }
+  if (!roleTemplate.performance[version]) {
+    roleTemplate.performance[version] = { scores: [], avgScore: 0 };
+  }
+
+  const perf = roleTemplate.performance[version];
+  perf.scores.push(score);
+  // 최근 20개만 유지
+  if (perf.scores.length > 20) {
+    perf.scores = perf.scores.slice(-20);
+  }
+  perf.avgScore = Math.round(perf.scores.reduce((a, b) => a + b, 0) / perf.scores.length);
+
+  validatePath(TEMPLATES_FILE);
+  await writeFile(TEMPLATES_FILE, JSON.stringify(templates, null, 2));
+}
+
+/**
+ * 프롬프트 자동 롤백 검사
+ * 새 프롬프트 적용 후 평균 점수가 5점 이상 하락하면 이전 버전으로 롤백
+ *
+ * @param {string} role - 에이전트 역할
+ * @returns {Promise<boolean>} 롤백 수행 여부
+ */
+export async function checkAndRollbackPrompt(role) {
+  const templates = await loadPromptTemplates();
+  const roleTemplate = templates.templates?.[role];
+  if (!roleTemplate || !roleTemplate.performance || !roleTemplate.previousVersion) return false;
+
+  const currentVersion = roleTemplate.version;
+  const previousVersion = roleTemplate.previousVersion;
+
+  const currentPerf = roleTemplate.performance[currentVersion];
+  const previousPerf = roleTemplate.performance[previousVersion];
+
+  if (!currentPerf || !previousPerf || currentPerf.scores.length < 3) return false;
+
+  const scoreDrop = previousPerf.avgScore - currentPerf.avgScore;
+  if (scoreDrop >= 5) {
+    console.warn(`⚠️ [${role}] 프롬프트 롤백: v${currentVersion} (avg ${currentPerf.avgScore}) → v${previousVersion} (avg ${previousPerf.avgScore}), 차이: ${scoreDrop}점`);
+
+    // 이전 버전으로 롤백
+    roleTemplate.additions = roleTemplate.previousAdditions || [];
+    roleTemplate.version = previousVersion;
+    roleTemplate.rolledBackFrom = currentVersion;
+    roleTemplate.rollbackAt = new Date().toISOString();
+
+    validatePath(TEMPLATES_FILE);
+    await writeFile(TEMPLATES_FILE, JSON.stringify(templates, null, 2));
+    return true;
+  }
+
+  return false;
 }
 
 /**
@@ -198,25 +272,33 @@ export async function runLearningLoop() {
     )
   );
 
-  // 4. 프롬프트 템플릿 업데이트
+  // 4. 프롬프트 템플릿 업데이트 (버전 관리 포함)
   const existingTemplates = await loadPromptTemplates();
 
   for (const [role, fixes] of Object.entries(improvements)) {
     if (!existingTemplates.templates[role]) {
-      existingTemplates.templates[role] = { additions: [] };
+      existingTemplates.templates[role] = { additions: [], version: null };
     }
 
+    const roleTemplate = existingTemplates.templates[role];
+
+    // 이전 버전 백업 (롤백용)
+    roleTemplate.previousAdditions = [...(roleTemplate.additions || [])];
+    roleTemplate.previousVersion = roleTemplate.version || null;
+
     // 새 개선사항 추가 (중복 제거)
-    const existingSet = new Set(existingTemplates.templates[role].additions);
+    const existingSet = new Set(roleTemplate.additions);
     for (const fix of fixes) {
       if (!existingSet.has(fix.fix)) {
-        existingTemplates.templates[role].additions.push(fix.fix);
+        roleTemplate.additions.push(fix.fix);
       }
     }
 
     // 최대 10개까지만 유지
-    existingTemplates.templates[role].additions =
-      existingTemplates.templates[role].additions.slice(-10);
+    roleTemplate.additions = roleTemplate.additions.slice(-10);
+
+    // 새 버전 ID 생성
+    roleTemplate.version = `v${Date.now()}`;
   }
 
   existingTemplates.lastUpdated = new Date().toISOString();
