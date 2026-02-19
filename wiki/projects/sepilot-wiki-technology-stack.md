@@ -12,7 +12,7 @@ redirect_from:
   - Projects-sepilot-wiki
   - sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요
 related_docs: ["sepilot-desktop-intro.md"]
-order: 3
+order: 5
 ---
 
 ## 기술 스택

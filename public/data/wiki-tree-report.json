@@ -1,59 +1,58 @@
 {
-  "timestamp": "2026-02-19T01:41:28.910Z",
+  "timestamp": "2026-02-19T02:01:28.391Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "전체 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 루트에 위치한 Qwen3.5 문서가 ai 카테고드와 중복되어 있으며, Opencode 관련 중복 문서가 존재합니다. 파일명은 대부분 slug 형태이지만, 루트에 남아 있는 문서는 이동이 필요합니다. 각 카테고리 내 문서 순서를 정의하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
-    "totalDocuments": 23,
+    "summary": "전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
+    "totalDocuments": 22,
     "categories": [
-      "projects",
+      "reports",
       "ai",
       "kubernetes",
-      "bun",
-      "reports"
+      "projects",
+      "bun"
     ],
     "issues": [
-      "루트에 존재하는 Qwen3.5 문서가 ai/ 디렉터리와 중복",
-      "Opencode 가이드 문서가 중복(삭제된 버전 존재)",
-      "reports 카테고리 문서가 1개뿐이라 통합 검토 필요(하지만 루트에 문서 두는 규칙 위반 방지를 위해 유지)"
+      "루트 레벨에 중복된 Qwen3.5 문서 존재 (root/qwen3-5.md, ai/qwen3-5.md) – 하나를 유지하고 다른 파일을 삭제·리다이렉트 필요",
+      "reports 카테고리가 단일 문서만 포함하고 있어 별도 통합 검토 필요 (하지만 구조상 큰 문제는 아님)"
     ]
   },
   "suggestedStructure": {
-    "projects": [
-      "openclaw-complete-guide.md",
-      "claude-code-release-history.md",
-      "sepilot-wiki-technology-stack.md",
-      "opencode.md",
-      "sepilot-desktop-intro.md",
-      "antigravity-release-notes.md",
-      "moltbook-intro.md"
+    "reports": [
+      "weekly-2026-08"
     ],
     "ai": [
-      "mcp-model-context-protocol.md",
-      "qwen3-5.md",
-      "continuous-ai.md",
-      "glm-5.md",
-      "vibe-coding.md",
-      "multi-agent-system.md"
+      "mcp-model-context-protocol",
+      "multi-agent-system",
+      "continuous-ai",
+      "qwen3-5",
+      "glm-5",
+      "vibe-coding"
     ],
     "kubernetes": [
-      "kubernetes-release-notes.md",
-      "ingress-nginx-deprecation-guide.md"
+      "kubernetes-release-notes",
+      "ingress-nginx-deprecation-guide"
+    ],
+    "projects": [
+      "opencode",
+      "antigravity-release-notes",
+      "openclaw-complete-guide",
+      "claude-code-release-history",
+      "sepilot-wiki-technology-stack",
+      "sepilot-desktop-intro",
+      "moltbook-intro"
     ],
     "bun": [
-      "bun-overview.md",
-      "comparison-pnpm-npm.md",
-      "bun-github-actions-setup.md"
-    ],
-    "reports": [
-      "weekly-2026-08.md"
+      "bun-overview",
+      "comparison-pnpm-npm",
+      "bun-github-actions-setup"
     ]
   },
   "results": {
     "appliedActions": 25,
     "skippedActions": 0,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 0
+    "createdIssues": 1
   },
   "actions": {
     "applied": [
@@ -62,49 +61,52 @@
         "priority": "high",
         "source": "qwen3-5.md",
         "target": "ai/qwen3-5.md",
-        "reason": "루트에 있는 Qwen3.5 문서와 ai/ 디렉터리의 Qwen3.5 문서가 동일 주제이며 중복됩니다. ai/ 문서를 유지하고 루트 문서를 삭제합니다.",
+        "reason": "루트에 존재하는 Qwen3.5 문서가 중복이며, ai/ 경로에 더 완전한 내용(1593 words) 존재함. 루트 파일을 삭제하고 리다이렉트를 추가.",
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "target": "projects/openclaw-complete-guide.md",
-        "order": 1,
+        "type": "update_category_meta",
+        "target": "reports",
+        "metadata": {
+          "displayName": "보고서",
+          "order": 5
+        },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "target": "projects/claude-code-release-history.md",
-        "order": 2,
+        "type": "update_category_meta",
+        "target": "ai",
+        "metadata": {
+          "displayName": "AI 기술",
+          "order": 1
+        },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "target": "projects/sepilot-wiki-technology-stack.md",
-        "order": 3,
+        "type": "update_category_meta",
+        "target": "kubernetes",
+        "metadata": {
+          "displayName": "Kubernetes",
+          "order": 2
+        },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "target": "projects/opencode.md",
-        "order": 4,
+        "type": "update_category_meta",
+        "target": "projects",
+        "metadata": {
+          "displayName": "프로젝트",
+          "order": 3
+        },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "target": "projects/sepilot-desktop-intro.md",
-        "order": 5,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/antigravity-release-notes.md",
-        "order": 6,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/moltbook-intro.md",
-        "order": 7,
+        "type": "update_category_meta",
+        "target": "bun",
+        "metadata": {
+          "displayName": "Bun (JavaScript 런타임)",
+          "order": 4
+        },
         "autoApply": true
       },
       {
@@ -115,7 +117,7 @@
       },
       {
         "type": "set_order",
-        "target": "ai/qwen3-5.md",
+        "target": "ai/multi-agent-system.md",
         "order": 2,
         "autoApply": true
       },
@@ -127,19 +129,19 @@
       },
       {
         "type": "set_order",
-        "target": "ai/glm-5.md",
+        "target": "ai/qwen3-5.md",
         "order": 4,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "target": "ai/vibe-coding.md",
+        "target": "ai/glm-5.md",
         "order": 5,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "target": "ai/multi-agent-system.md",
+        "target": "ai/vibe-coding.md",
         "order": 6,
         "autoApply": true
       },
@@ -175,58 +177,61 @@
       },
       {
         "type": "set_order",
-        "target": "reports/weekly-2026-08.md",
+        "target": "projects/opencode.md",
         "order": 1,
         "autoApply": true
       },
       {
-        "type": "update_category_meta",
-        "target": "projects",
-        "metadata": {
-          "displayName": "프로젝트",
-          "order": 1
-        },
+        "type": "set_order",
+        "target": "projects/antigravity-release-notes.md",
+        "order": 2,
         "autoApply": true
       },
       {
-        "type": "update_category_meta",
-        "target": "ai",
-        "metadata": {
-          "displayName": "AI 기술·개념",
-          "order": 2
-        },
+        "type": "set_order",
+        "target": "projects/openclaw-complete-guide.md",
+        "order": 3,
         "autoApply": true
       },
       {
-        "type": "update_category_meta",
-        "target": "kubernetes",
-        "metadata": {
-          "displayName": "Kubernetes",
-          "order": 3
-        },
+        "type": "set_order",
+        "target": "projects/claude-code-release-history.md",
+        "order": 4,
         "autoApply": true
       },
       {
-        "type": "update_category_meta",
-        "target": "bun",
-        "metadata": {
-          "displayName": "Bun (JavaScript 런타임·패키지 매니저)",
-          "order": 4
-        },
+        "type": "set_order",
+        "target": "projects/sepilot-wiki-technology-stack.md",
+        "order": 5,
         "autoApply": true
       },
       {
-        "type": "update_category_meta",
-        "target": "reports",
-        "metadata": {
-          "displayName": "보고서",
-          "order": 5
-        },
+        "type": "set_order",
+        "target": "projects/sepilot-desktop-intro.md",
+        "order": 6,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/moltbook-intro.md",
+        "order": 7,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "reports/weekly-2026-08.md",
+        "order": 1,
         "autoApply": true
       }
     ],
     "skipped": [],
     "dryRunPreviewed": []
   },
-  "createdIssues": []
+  "createdIssues": [
+    {
+      "number": 185,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/185",
+      "title": "Root‑level duplicate Qwen3.5 document and missing redirect"
+    }
+  ]
 }

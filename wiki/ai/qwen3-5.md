@@ -6,7 +6,8 @@ tags: [Qwen, LLM, 멀티모달, 코딩 에이전트, 벤치마크]
 redirect_from:
   - qwen3-5
   - qwen3-5
-order: 2
+  - qwen3-5
+order: 4
 ---
 
 ## 1. 개요
