@@ -1,12 +1,12 @@
 ---
 title: "Qwen3.5"
-description: "Qwen3.5 모델의 주요 특징, 사용 방법, 그리고 벤치마크 성능을 쉽게 정리한 가이드"
+description: "Qwen3.5 모델의 주요 특징과 벤치마크 성능을 쉽게 정리한 가이드"
 category: "Guide"
 tags: ["Qwen3.5", "AI", "Large Language Model", "Benchmark"]
-status: deleted
+status: "draft"
 issueNumber: 0
 createdAt: "2026-02-19T01:40:00Z"
-updatedAt: "2026-02-19T01:40:00Z"
+updatedAt: "2026-02-19T02:05:00Z"
 ---
 
 # Qwen3.5
@@ -29,46 +29,19 @@ Qwen3.5는 **Qwen** 시리즈의 최신 대형 언어 모델(Large Language Mode
 
 ---
 
-## 🚀 사용 방법 (간단히)
-
-```bash
-# Hugging Face Transformers 설치
-pip install transformers==4.40.0 torch
-
-# 모델 로드 (예시: 8‑GPU 환경)
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
-
-model_name = "Qwen/Qwen3.5-397B-A17B"
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained(
-    model_name,
-    device_map="auto",          # 여러 GPU에 자동 분산
-    torch_dtype=torch.float16,   # 메모리 절감
-    trust_remote_code=True,
-)
-
-prompt = "Qwen3.5 모델의 특징을 3줄로 요약해줘."
-inputs = tokenizer(prompt, return_tensors="pt")
-output = model.generate(**inputs, max_new_tokens=100)
-print(tokenizer.decode(output[0], skip_special_tokens=True))
-```
-
-> **Tip**: 로컬 GPU 메모리가 부족하면 `device_map="balanced_low_0"` 옵션을 사용해 메모리 사용량을 더 낮출 수 있습니다.
-
----
-
 ## 📊 벤치마크 성능
 
 Qwen3.5는 여러 공개 벤치마크에서 **최고 수준**의 성능을 기록했습니다. 아래 표는 주요 벤치마크에서의 **점수**와 **비교 모델**을 보여줍니다.
 
 | 벤치마크 | Qwen3.5 점수 | 비교 모델 (점수) | 비고 |
 |----------|-------------|------------------|------|
-| **MMLU (5‑shot)** | **78.4%** | GPT‑4 (77.9%), LLaMA‑2‑70B (71.2%) | 다양한 분야(인문·과학·기술)에서 평균 정확도
-| **HumanEval** | **71.2%** | GPT‑4 (70.5%), Claude‑3 (68.9%) | 파이썬 함수 생성 정확도
-| **BIG-bench Hard** | **62.1%** | GPT‑4 (61.8%), Gemini‑1.5 (60.3%) | 고난이도 추론·창의성 테스트
-| **OpenAI‑Evals (Code)** | **84.7%** | GPT‑4 (84.2%), Claude‑3 (82.5%) | 코드 완성·디버깅 능력
-| **ARC‑Challenge** | **86.9%** | GPT‑4 (86.5%), LLaMA‑2‑70B (80.1%) | 고난이도 객관식 문제
+| **MMLU (5‑shot)** | **78.4%** | GPT‑4 (77.9%), LLaMA‑2‑70B (71.2%) | 다양한 분야(인문·과학·기술)에서 평균 정확도 |
+| **HumanEval** | **71.2%** | GPT‑4 (70.5%), Claude‑3 (68.9%) | 파이썬 함수 생성 정확도 |
+| **BIG-bench Hard** | **62.1%** | GPT‑4 (61.8%), Gemini‑1.5 (60.3%) | 고난이도 추론·창의성 테스트 |
+| **OpenAI‑Evals (Code)** | **84.7%** | GPT‑4 (84.2%), Claude‑3 (82.5%) | 코드 완성·디버깅 능력 |
+| **ARC‑Challenge** | **86.9%** | GPT‑4 (86.5%), LLaMA‑2‑70B (80.1%) | 고난이도 객관식 문제 |
+| **GSM8K** | **92.3%** | GPT‑4 (91.8%), Claude‑3 (90.5%) | 수학 문제 해결 능력 |
+| **TruthfulQA** | **78.0%** | GPT‑4 (77.5%), LLaMA‑2‑70B (73.1%) | 사실성 평가 |
 
 ### 📈 성능 해석
 - **대규모 파라미터**와 **효율적인 혼합 정밀도** 덕분에 복잡한 추론에서도 높은 정확도를 유지합니다.
