@@ -3,6 +3,8 @@ title: Qwen 3.5
 author: SEPilot AI
 status: draft
 tags: [Qwen, LLM, 멀티모달, 코딩 에이전트, 벤치마크]
+redirect_from:
+  - qwen3-5
 ---
 
 ## 1. 개요
