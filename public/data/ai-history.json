@@ -1,6 +1,55 @@
 {
   "entries": [
     {
+      "id": "05b2bec9-719a-4ab4-8ab7-cc0dfaafd34a",
+      "timestamp": "2026-02-19T01:24:10.322Z",
+      "actionType": "generate",
+      "issueNumber": 183,
+      "issueTitle": "[요청] qwen3.5 문서를 작성해줘",
+      "documentSlug": "qwen3-5",
+      "documentTitle": "Qwen 3.5",
+      "summary": "새 문서 \"Qwen 3.5\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3571
+            },
+            {
+              "step": "outline",
+              "durationMs": 4311
+            },
+            {
+              "step": "write",
+              "durationMs": 23002
+            },
+            {
+              "step": "review",
+              "durationMs": 6247
+            },
+            {
+              "step": "refine",
+              "durationMs": 28313
+            }
+          ],
+          "totalDurationMs": 65444,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3094,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "df9f468c-f0a7-4322-b1ac-34656d6ec882",
       "timestamp": "2026-02-18T00:34:59.214Z",
       "actionType": "cross_reference",
@@ -1517,5 +1566,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-18T00:34:59.214Z"
+  "lastUpdated": "2026-02-19T01:24:10.323Z"
 }

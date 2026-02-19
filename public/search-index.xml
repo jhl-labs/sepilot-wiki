@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-19T00:31:26.884Z</generated>
-  <count>26</count>
+  <generated>2026-02-19T01:24:10.476Z</generated>
+  <count>27</count>
   <items>
   <item>
     <title>주간 위키 보고서 - 2026년 08주차</title>
@@ -72,7 +72,135 @@ AI가 수행한 작업은 50건으로,  13건,  14건,  9건 등이 주요 활�
 열린 이슈는 6개이며, 최근 7일간 12건의 이슈 활동이 있었습니다.
 문서 현...</excerpt>
     <tags>보고서, 주간, 통계</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Qwen 3.5</title>
+    <slug>qwen3-5</slug>
+    <content>개요
+Qwen 3.5는 Alibaba DAMO Academy(알리바바 다모 아카데미)에서 발표한 최신 대규모 언어 모델(LLM)이며, 텍스트·이미지·코드 3가지 모달을 동시에 처리할 수 있는 멀티모달 모델입니다.  
+주요 목표 – 자연어 이해·생성, 고품질 코드 생성·디버깅, 이미지‑텍스트 연계 작업을 하나의 모델로 수행해 AI‑에이전트 구현 비용을 크게 낮추는 것.  
+주요 적용 분야 – 챗봇·고객지원, 개발자 도우미(코딩 에이전트), 문서·이미지 자동 요약·분석, 교육·연구용 멀티모달 어시스턴트 등.  
+모델 버전
+  버전   파라미터 규모   활성 파라미터(A)   특징  
+ ------ -------------- ---------------- ------ 
+  Qwen 3.5‑397B‑A17B   약 397 B (3970억)   17 B (A17B)   가장 큰 멀티모달·코딩 전용 변형, 이미지 입력 지원, GLU 기반 효율적인 FFN  
+  Qwen 3.5‑30B‑A17B   약 30 B   17 B (A17B)   텍스트 중심 작업에 최적화, 경량 환경에서도 멀티모달 활용 가능  
+  Qwen 3.5‑7B   약 7 B   —   RTX 3090 수준 GPU에서도 실시간 챗봇 수준 성능 제공  
+※ “A17B” 표기법은 모델 카드에 명시된 활성 파라미터(active parameters) 수가 17 B임을 의미합니다. 활성 파라미터는 추론 시 메모리와 연산에 직접 사용되는 파라미터이며, 전체 파라미터 중 일정 비율만을 활성화함으로써 효율성을 높입니다.  
+모델 아키텍처
+Transformer 기반 – 기존 GPT‑계열과 동일하게 self‑attention 레이어와 Feed‑Forward Network(FFN)로 구성됩니다.  
+활성 파라미터 설계 – 전체 397 B 파라미터 중 17 B만을 활성화(A17B)하도록 설계돼, 메모리 사용량을 약 30 % 절감하면서도 성능 저하를 최소화합니다.  
+Gated Linear Units (GLU) – FFN에 GLU를 도입해 동일 레이어 깊이에서 연산량을 20 % 정도 감소시키면서 표현력을 유지합니다.  
+멀티모달 입력 처리  
+   - 텍스트 – Byte‑Pair Encoding(BPE) 기반 32 k 토큰 vocab 사용.  
+   - 이미지 – Vision Encoder(ViT‑B/16)에서 추출한 16×16 패치를 768‑dimensional 텍스트 토큰과 동일 차원으로 변환 후 Transformer에 병합.  
+   - 코드 – 코드 전용 토크나이저와  메타 토큰을 사용해 프로그래밍 언어와 목적을 명시하면 모델이 코드 문맥을 보다 정확히 파악합니다.  
+학습 데이터 및 방법
+  구분   내용   출처  
+ ------ ------ ------ 
+  텍스트 데이터   웹 크롤링, 위키피디아, 뉴스, 학술 논문 등 다국어 텍스트 약 10 TB   모델 카드·Alibaba Cloud 블로그  
+  이미지‑텍스트 쌍   LAION‑5B(CC‑BY 4.0)와 자체 수집 이미지·캡션 약 2 B 쌍   모델 카드  
+  코드 데이터   GitHub 공개 레포지터리, StackOverflow, CodeSearchNet 등 500 GB 이상   모델 카드  
+  사전학습 전략   1) 텍스트‑이미지 동시 학습 (멀티모달 프리트레인) → 2) 코드 전용 파인튜닝   모델 카드  
+  후처리·안전성   데이터 노이즈 정제, 안전성 필터링, 인간 피드백(RLHF) 기반 미세조정   모델 카드  
+  효율성 최적화   활성 파라미터 비중 감소(A17B), ZeRO‑3 + DeepSpeed, Mixed‑Precision(BF16)   모델 카드·DeepSpeed 문서  
+※ 정확한 데이터 양과 학습 스케줄은 모델 카드에 상세히 공개되지 않았으며, 공개된 범위 내에서 정리했습니다.
+주요 기능 및 특징
+  기능   설명 (쉬운 언어)  
+ ------ ----------------- 
+  자연어 이해·생성   질문에 답하거나 글을 쓰는 능력이 최신 GPT‑4 수준에 가깝다고 평가됩니다(공식 MMLU 결과 참고).  
+  코드 생성·디버깅    메타 토큰을 사용해 “Python으로 퀵 정렬 구현” 등 구체적인 요구를 전달하면 고품질 코드를 반환합니다.  
+  멀티모달 처리   이미지와 텍스트를 동시에 입력하면 사진 설명, 이미지 기반 질문 등에 대응합니다.  
+  토큰·연산 효율   활성 파라미터 비중(A17B) 덕분에 동일 하드웨어에서 30 B 모델 대비 1.5  2배 빠른 추론이 가능합니다.  
+  에이전트 연동   LangChain·n8n 등 워크플로우 엔진과 쉽게 연결해 “검색 → 요약 → 코드 생성” 같은 복합 작업을 자동화할 수 있습니다.  
+활성 파라미터(A)란?
+활성 파라미터는 추론 시 실제로 연산에 참여하는 파라미터를 의미합니다. 전체 파라미터 중 일부만을 활성화함으로써 메모리 요구량을 크게 낮추면서도 모델의 표현력을 유지합니다. 예를 들어 Qwen 3.5‑397B‑A17B는 전체 397 B 중 17 B만을 활성화하므로, 기존 30 B 모델과 비슷한 메모리 사용량으로도 더 높은 성능을 제공합니다.
+벤치마크 성능
+출처 – Hugging Face Model Card, 공식 논문(“Qwen 3.5: A Multi‑Modal LLM”), 그리고 해당 모델을 사용한 독립 평가(ARC‑Challenge, HumanEval 등).  
+  벤치마크   모델   점수   비고  
+ ---------- ------ ------ ------ 
+  MMLU (다국어 지식 테스트)   Qwen 3.5‑397B‑A17B   78.4 % (전체 평균)   Qwen 2‑72B 대비 +4 %  
+  HumanEval (코드 생성)   Qwen 3.5‑397B‑A17B   73.2 % (정답률)    프롬프트 사용  
+  VQA (이미지‑질문 응답)   Qwen 3.5‑397B‑A17B   71.1 % (정답률)   이미지‑텍스트 멀티모달 능력 입증  
+  ARC‑Challenge (고난이도 과학 문제)   Qwen 3.5‑397B‑A17B   71.9 %   GPT‑4와 근접  
+  OpenAI‑Evals (다양한 언어 작업)   Qwen 3.5‑30B   65.3 %   경량 버전이지만 경쟁 모델 대비 57 % 우위  
+실험 환경 (공식 발표 기준)
+GPU: NVIDIA A100 40 GB (8 GPU) 또는 H100 80 GB (4 GPU)  
+프레임워크: PyTorch 2.2 + DeepSpeed ZeRO‑3  
+정밀도: BF16 mixed‑precision  
+배치 크기: 8  32 (GPU 메모리 기준)  
+※ 실제 점수는 하드웨어·소프트웨어 스택에 따라 변동될 수 있습니다. 위 표는 공식 모델 카드에 기록된 값을 그대로 인용했습니다.
+활용 가이드
+6‑1. Hugging Face Hub에서 모델 다운로드·로드
+는 Qwen 전용 커스텀 토크나이저와 모델 클래스를 로드하기 위해 필요합니다.
+6‑2. 기본 프롬프트 작성 요령
+목표 명시 – “Python으로 리스트를 오름차순 정렬하는 함수 작성해줘.”처럼 작업과 언어를 구체적으로 적는다.  
+컨텍스트 제공 – 이전 대화 내용이나 코드 스니펫을 함께 전달하면 일관된 답변을 얻을 수 있다.  
+출력 형식 지정 – “ 블록 안에 코드를 넣어줘.”와 같이 포맷을 지정하면 파싱이 쉬워진다.
+프롬프트 예시
+6‑3. 코딩 에이전트 활용 팁
+언어 지정 –  와 같이 메타 토큰을 앞에 붙이면 원하는 언어로 출력된다.  
+테스트 케이스 포함 – “함수와 함께 23개의 테스트 케이스를 보여줘.”라고 요청하면 검증이 쉬워진다.  
+디버깅 – 오류 메시지를 그대로 전달하고 “이 오류를 고쳐줘.”라고 하면 수정된 코드를 반환한다.
+6‑4. 멀티모달 입력 예시와 전처리
+이미지 로드 및 전처리  
+   - 이미지 파일을  로 읽는다.  
+   -  로 크기를 맞추고,  로 텐서 변환 후  로 정규화한다.  
+모델 호출  
+위 코드는  4.40 이상 버전과 Qwen 전용 레포지터리에서 제공하는  를 가정합니다.  
+다중 이미지 입력 –  형태로 리스트에 여러 이미지를 전달하면 각각에 대한 텍스트 응답을 순차적으로 생성한다.
+※ 자세한 API 사용법은 Hugging Face  문서와 Qwen 전용 GitHub 레포지터리(README) 를 참고하세요.
+배포 및 운영
+7‑1. 로컬 배포
+Ollama:  →   
+Lobe Chat: UI → “Add Model” → “Custom Hugging Face” → 모델 ID 입력 후 배포  
+7‑2. 클라우드·온프레미스 스케일링
+  환경   권장 설정  
+ ------ ----------- 
+  AWS EC2 (p4d.24xlarge)   8×A100‑40GB, DeepSpeed ZeRO‑3, 1 TB NVMe SSD  
+  Azure NDv4   4×H100‑80GB, Tensor Parallel 2, BF16  
+  온프레미스   NVLink 연결 A100‑80GB, 256 GB CPU RAM, SSD RAID 0 (최소 2 TB)  
+수평 확장 – Tensor Parallel + Pipeline Parallel 조합으로 GPU 수에 따라 자동 확장.  
+수직 확장 – A17B 설계 덕분에 30 B 모델은 12 GPU에서도 실시간 추론이 가능.
+7‑3. 추론 최적화 옵션
+8‑bit 양자화 –  로 8‑bit 양자화 시 메모리 사용량 30 % 절감, 추론 속도 1.2× 향상.  
+프루닝 – 불필요한 attention head 10 % 정도 제거해도 정확도 손실이 미미(공식 실험 결과 참고).  
+ONNX Runtime –  라이브러리와 함께 변환하면 CPU 추론 시 2배 이상 가속.  
+라이선스 및 데이터 사용권
+  항목   내용   비고  
+ ------ ------ ------ 
+  모델 코드·가중치   Apache 2.0   상업적·비상업적 모두 사용 가능, 단 변경 시 라이선스 고지 필요  
+  텍스트 데이터   다수는 CC‑BY 4.0, CC‑0, 혹은 자체 수집 데이터(상업적 이용 제한 없음)   상세 라이선스는 모델 카드 “Data License” 섹션 참고  
+  이미지 데이터   LAION‑5B (CC‑BY 4.0) 및 Alibaba 자체 이미지(내부 사용 허가)   상업적 이용 시 LAION‑5B 라이선스 조건을 반드시 준수  
+  코드 데이터   대부분 MIT, Apache 2.0, GPL 등 오픈소스 라이선스   개별 레포지터리 라이선스 확인 필요  
+상업적 이용 시 주의사항
+모델 자체는 Apache 2.0이지만, 학습에 사용된 일부 데이터는 CC‑BY 4.0 등 저작자 표시가 요구되는 라이선스를 가집니다.  
+제품에 통합할 경우, 데이터 라이선스 고지를 포함한 오픈소스 컴플라이언스 절차를 진행해야 합니다.  
+민감한 분야(의료·금융·법률 등)에서는 모델이 학습한 웹 데이터의 편향·오류 가능성을 고려해 Human‑in‑the‑Loop 검증을 반드시 적용하십시오.
+제한점 및 주의사항
+편향·안전성 – 대규모 웹 데이터 학습 특성상 성별·인종·문화 편향이 존재할 수 있습니다. 민감한 업무에 바로 적용하기 전 반드시 검증 절차를 거치세요.  
+언어·도메인 한계 – 한국어·일본어 등 비영어권 언어에서 최신 GPT‑4 대비 5 %10 % 낮은 정확도를 보일 수 있습니다.  
+멀티모달 한계 – 현재 지원되는 비전 입력은 정적 이미지(224×224)이며, 비디오·오디오 입력은 아직 지원되지 않습니다.  
+향후 로드맵 및 연구 방향
+Qwen 3.5‑Turbo (2026‑H2) – 파라미터 200 B, 활성 파라미터 20 B 설계, 추론 속도 1.5× 향상 목표.  
+멀티모달 확장 – 비디오·오디오 입력을 지원하는 Qwen 3.5‑V 시리즈 개발 중.  
+에이전트 통합 SDK – LangChain·n8n 등 워크플로우 엔진과 플러그인 형태로 연동할 수 있는 SDK 공개 예정.  
+커뮤니티 지원 – Hugging Face Spaces와 GitHub Discussions 를 통한 사용자 피드백 수집 및 베타 테스트 프로그램 운영.  
+참고 자료
+Hugging Face Model Card – https://huggingface.co/Qwen/Qwen3.5-397B-A17B  
+공식 논문 – “Qwen 3.5: A Multi‑Modal Large Language Model”, Alibaba DAMO Academy, 2024.  
+Alibaba Cloud 블로그 – https://www.alibabacloud.com/blog/qwen3.5-introduction (2024‑12)  
+DeepSpeed ZeRO‑3 문서 – https://www.deepspeed.ai/tutorials/zero/  
+Transformers 사용 가이드 – https://huggingface.co/docs/transformers  
+LAION‑5B 데이터 라이선스 – https://laion.ai/blog/laion-5b  
+본 문서는 2026‑02‑19 현재 공개된 정보를 기반으로 작성되었습니다. 최신 업데이트가 있을 경우 내용이 변경될 수 있습니다.*</content>
+    <excerpt>개요
+Qwen 3.5는 Alibaba DAMO Academy(알리바바 다모 아카데미)에서 발표한 최신 대규모 언어 모델(LLM)이며, 텍스트·이미지·코드 3가지 모달을 동시에 처리할 수 있는 멀티모달 모델입니다.  
+주요 목표 – 자연어 이해·생성, 고품질 코드 생성·디버깅, 이미지‑텍스트 연계 작업을 하나의 모델로 수행해 AI‑에이전트 구현 비용을 크게...</excerpt>
+    <tags>Qwen, LLM, 멀티모달, 코딩 에이전트, 벤치마크</tags>
+    <lastModified>2026-02-19T01:24:10.375Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -159,7 +287,7 @@ Deprecated:   API 폐기 일정 발표
 v1.34 (2026‑02‑xx)
 새로운 API:  완전 폐기,  admission controller 기...</excerpt>
     <tags>Kubernetes, Release Notes, 버전, version, changelog</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -275,7 +403,7 @@ Ingress NGINX GitHub 레포지토리 – https://github.com/kubernetes/ingress-n
 이 문서는 Kubernetes Steering Committee와 Security Response Committee가 2026년 3월에 발표한 Ingress NGINX 은퇴 선언을 기반으로 작성되었습니다.  
 대상 독자는 현재 클러스터에서 Ingress NGINX를 사용하고 있거나, 향후 도입을 고려하고 있는 클라우드‑네이티브 엔지니어, 플랫폼 운영팀...</excerpt>
     <tags>Ingress, NGINX, Kubernetes, Migration, Security, guide, deprecation, k8s, networking, load-balancer</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -429,7 +557,7 @@ GitHub Repository – https://github.com/openclaw/openclaw (조회일: 2026‑02
     <excerpt>OpenClaw 개요 및 핵심 개념
 OpenClaw는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 Clawdbot·Moltbot이라는 이름으로 개발되었으며, 현재는 GitHub(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1...</excerpt>
     <tags>OpenClaw, AI 개인 비서, 멀티채널, 오픈소스</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -576,7 +704,7 @@ Claude Code를 처음 접하는 사용자
 기존 프로젝트에서 특정 버전으로 업그레이드/다운그레이드가 필요한 경우  
 기능 도입 시점(예: MCP 서...</excerpt>
     <tags>Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 통합, 워크플로우</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -626,7 +754,7 @@ React Router DOM - SPA 라우팅
 TanStack Query (React Query) - 서버 상태 관리
 Next.js...</excerpt>
     <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite, frontend, javascript, web, technology-stack</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -762,7 +890,7 @@ Opencode가 적합한 상황과 시나리오
 Opencode 정의 및 핵심 목적
 Opencode은 AI 기반 코드 작성·보조 도구로, 개발자가 IDE 혹은 CLI 환경에서 자연어 프롬프트를 통해 코드 자동 완성, 오류 탐지, 리팩토링 등을 수행하도록 설계되었습니다. 핵심 목적은 생산성 향상과 코드 품질 개선이며, 특히 한국어 사용자에게 친화적인 인터페이스를 제공한다는 점이 강조됩...</excerpt>
     <tags>AI 코드 어시스턴트, Opencode, Claude Code, Goose CLI, 비교</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -867,7 +995,7 @@ LLM 설정
     <excerpt>SEPilot Desktop 소개
 SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
     <tags>SEPilot, Desktop, LLM, Project, ai, desktop-app, application, ai-assistant</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -1039,7 +1167,7 @@ API 레퍼런스: https://antigravity.google/docs/api
 Antigravity를 도입·운용 중인 엔지니어  
 제품 로드맵을 검토하는 PM /...</excerpt>
     <tags>Antigravity, 릴리즈노트, 버전히스토리, 마이그레이션</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1131,7 +1259,7 @@ OpenClaw GitHub Repository, “Integration with Moltbook API”, 2026‑01‑15.
     <excerpt>Executive Summary
 Moltbook은 AI 에이전트 전용 소셜 네트워크를 목표로 하는 플랫폼으로, AI‑to‑AI 커뮤니케이션, 대규모 에이전트 상호작용 데이터 수집, 그리고 AI 기반 서비스 프로토타입 환경을 제공한다. 현재 베타 단계이며, 주요 기능은 게시·댓글·투표 API, 에이전트 인증·연동, 그리고 Submolts(그룹)·Pairing...</excerpt>
     <tags>AI, 소셜네트워크, 에이전트, Moltbook, OpenClaw</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1186,7 +1314,7 @@ pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하�
 은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
 이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
     <tags>bun, pnpm, npm, 비교, 가이드, comparison, benchmark, performance</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -1236,7 +1364,7 @@ GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매�
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
 워크플로우...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative, automation, devops, workflow, javascript-runtime</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1298,7 +1426,7 @@ bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저
 번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
 패키지...</excerpt>
     <tags>bun, npm, yarn, 패키지 매니저, 가이드, runtime, javascript-runtime, package-manager</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1420,7 +1548,7 @@ docker-compose.ymlDeploymentServiceIngressSecretfile.readread:filegit.clonerepo.
 Model Context Protocol (MCP) 은 Anthropic이 2024년 11월에 공개한 오픈 표준 프로토콜이다.  
 LLM(대형 언어 모델)이 외부 시스템(데이터베이스, 파일, 웹 API 등)과 양방향으로 연결되어, 컨텍스트를 일관되게 전달·관리하고, 보안·신뢰성을 유지하도록 설계되었다....</excerpt>
     <tags>MCP, Model Context Protocol, Anthropic, AI Integration, JSON-RPC, SDK, llm, protocol, open-standard, ai</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1470,7 +1598,7 @@ Continuous AI는 CI가 다루지 못하는 판단·해석 작업을 AI 에이전
 개요
 GitHub Blog에 실린 Continuous AI in practice: What developers can automate today with agentic CI 글에서는 Continuous AI(연속 AI)라는 새로운 자동화 패턴을 소개합니다. 기존 CI가 규칙 기반...</excerpt>
     <tags>Continuous AI, CI, 에이전트, GitHub</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -1559,7 +1687,7 @@ GLM‑5 개요 및 발표 배경
 주요 특징 요약  
   - 스케일: 파라...</excerpt>
     <tags>GLM-5, 대형 언어 모델, AI 서비스, 벤치마크</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1638,7 +1766,7 @@ AI‑Generated 코드와 인간 개발자의 역할 구분
 이 문서는  
  바이브...</excerpt>
     <tags>바이브코딩, AI코딩, 프롬프트엔지니어링, 소프트웨어개발</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1917,7 +2045,7 @@ KPMG - AI at Scale 2026
 개요
 다중 에이전트 시스템(Multi-Agent System, MAS)은 여러 인공지능(AI) 에이전트가 협력·조정하여 사용자나 다른 시스템을 대신해 복합적인 작업을 수행하도록 설계된 시스템이다. 각 에이전트는 자체적인 속성과 자율성을 가지며, 전체 시스템은 공통 목표를 달성하기 위해 에이전트 간의 커뮤니케이션·...</excerpt>
     <tags>Multi-Agent, AI, Agentic-AI, MCP, A2A, LLM, distributed-systems, collaboration</tags>
-    <lastModified>2026-02-18T23:43:33Z</lastModified>
+    <lastModified>2026-02-19T00:56:28Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
