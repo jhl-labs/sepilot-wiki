@@ -144,6 +144,7 @@ jobs:
               '[issue-processor:stale-close]',
               '[issue-processor:orphan-draft]',
               '[issue-processor:duplicate]',
+              '[issue-processor:retrigger]',
             ];
             if (processorMarkers.some(marker => commentBody.includes(marker))) {
               console.log('Issue Processor 마커 댓글 → process-feedback 트리거 방지');

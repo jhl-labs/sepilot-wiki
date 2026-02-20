@@ -17,7 +17,7 @@ on:
       enabled_agents:
         description: '활성화할 에이전트 (쉼표 구분)'
         required: false
-        default: 'quality_review,maintenance,staleness'
+        default: 'quality_review,maintenance,staleness,deduplication,retrigger'
 
 permissions:
   contents: write
@@ -30,7 +30,7 @@ concurrency:
 jobs:
   process-issues:
     runs-on: jhl-space
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,15 +45,16 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
           MAX_ACTIONS_PER_RUN: ${{ github.event.inputs.max_actions || '5' }}
-          ENABLED_AGENTS: ${{ github.event.inputs.enabled_agents || 'quality_review,maintenance,staleness' }}
+          ENABLED_AGENTS: ${{ github.event.inputs.enabled_agents || 'quality_review,maintenance,staleness,deduplication,retrigger' }}
 
-      - name: Commit reports
+      - name: Commit changes
         uses: ./.github/actions/git-commit-push
         with:
-          message: "chore: Issue Processor 보고서 업데이트"
+          message: "chore: Issue Processor 실행 결과"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

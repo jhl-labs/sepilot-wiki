@@ -15,6 +15,7 @@
 
 import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
+import { spawn } from 'child_process';
 import { callOpenAI, parseJsonResponse, findDocument, updateFrontmatterStatus } from '../lib/utils.js';
 import { addIssueComment, saveReport } from '../lib/report-generator.js';
 import { fetchIssueComments, getGitHubInfoFromEnv } from '../lib/issue-context.js';
@@ -225,6 +226,36 @@ async function safeAddComment(issueNumber, body) {
   return addIssueComment(issueNumber, body);
 }
 
+/**
+ * 스크립트를 자식 프로세스로 실행
+ * @param {string} scriptPath - 스크립트 경로 (프로젝트 루트 기준 상대 경로)
+ * @param {Record<string, string>} args - CLI 인자 맵 (--key value 형태로 변환)
+ * @returns {Promise<void>}
+ */
+function runScript(scriptPath, args = {}) {
+  return new Promise((resolvePromise, reject) => {
+    const cliArgs = [];
+    for (const [key, value] of Object.entries(args)) {
+      cliArgs.push(`--${key}`, value);
+    }
+
+    console.log(`   🔧 실행: bun run ${scriptPath} ${cliArgs.join(' ').slice(0, 100)}...`);
+
+    const child = spawn('bun', ['run', scriptPath, ...cliArgs], {
+      stdio: ['pipe', 'inherit', 'inherit'],
+      cwd: process.cwd(),
+      env: process.env,
+    });
+
+    child.on('close', (code) => {
+      if (code === 0) resolvePromise();
+      else reject(new Error(`스크립트 실행 실패 (exit code: ${code}): ${scriptPath}`));
+    });
+
+    child.on('error', (err) => reject(err));
+  });
+}
+
 /* ═══════════════════════════════════════════
    Triage Agent
    ═══════════════════════════════════════════ */
@@ -268,13 +299,13 @@ function triageAgent(issues) {
       continue;
     }
 
-    // update-request → 기존 워크플로우 대기 (스킵)
+    // update-request → Retrigger Agent가 처리 (워크플로우 미실행 시)
     if (labels.includes('update-request')) {
       categories.get('update_request').push({ ...issue, daysSinceUpdate });
       continue;
     }
 
-    // request 라벨만 있고 draft 없음 → 처리 대기 중 (스킵)
+    // request 라벨만 있고 draft 없음 → Retrigger Agent가 처리 (워크플로우 미실행 시)
     if (labels.includes('request') && !labels.includes('draft')) {
       categories.get('pending_request').push({ ...issue, daysSinceUpdate });
       continue;
@@ -894,6 +925,166 @@ async function deduplicationAgent(issues) {
 }
 
 /* ═══════════════════════════════════════════
+   Retrigger Agent
+   ═══════════════════════════════════════════ */
+
+/**
+ * request/update-request 라벨이 붙었지만 워크플로우가 실행되지 않은 Issue를
+ * 감지하여 문서 생성/수정 스크립트를 직접 실행한다.
+ *
+ * GITHUB_TOKEN 보안 정책으로 라벨 변경이 다른 워크플로우를 트리거할 수 없으므로,
+ * 스크립트를 직접 실행하는 방식으로 우회한다.
+ *
+ * @param {Array} requestItems - pending_request 카테고리 Issue들
+ * @param {Array} updateItems - update_request 카테고리 Issue들
+ * @returns {Promise<Array>} 수행한 액션 목록
+ */
+async function retriggerAgent(requestItems, updateItems) {
+  console.log('\n🔁 === Retrigger Agent ===');
+  const actions = [];
+  const marker = '[issue-processor:retrigger]';
+  const { owner, repo, token } = getGitHubInfoFromEnv();
+
+  // ── request Issue 처리 (문서 생성) ──
+  for (const issue of requestItems) {
+    if (!canAct()) {
+      console.log('⚠️ 액션 한도 도달 — Retrigger 중단');
+      break;
+    }
+
+    // 댓글 0개 = 워크플로우 미실행 징표
+    const comments = await fetchIssueComments(owner, repo, issue.number, token);
+    if (comments.length > 0) {
+      console.log(`   ⏭️ #${issue.number} — 댓글 있음 (워크플로우 이미 실행됨), 건너뜀`);
+      continue;
+    }
+
+    // 중복 방지: 48시간 이내 마커 체크
+    const hasRecent = await hasRecentBotComment(issue.number, marker, 48);
+    if (hasRecent) {
+      console.log(`   ⏭️ #${issue.number} — 최근 재트리거 처리됨, 건너뜀`);
+      continue;
+    }
+
+    console.log(`   🔁 #${issue.number} — ${issue.title} 문서 생성 재트리거...`);
+
+    // 시작 댓글
+    await safeAddComment(issue.number, [
+      `📝 요청을 확인했습니다. AI가 문서 초안을 작성 중입니다...`,
+      '',
+      `(Issue Processor 자동 재트리거)`,
+      '',
+      `<!-- ${marker} -->`,
+    ].join('\n'));
+
+    if (IS_DRY_RUN) {
+      console.log(`[DRY RUN] 문서 생성 스크립트 실행 건너뜀: #${issue.number}`);
+      recordAction();
+      actions.push({ type: 'retrigger_request', issueNumber: issue.number, title: issue.title, dryRun: true });
+      continue;
+    }
+
+    try {
+      // recommend-documents.js → generate-document.js 순서 실행
+      await runScript('scripts/document/recommend-documents.js', {
+        'issue-number': String(issue.number),
+        'issue-title': issue.title,
+        'issue-body': issue.body || '',
+      });
+
+      await runScript('scripts/document/generate-document.js', {
+        'issue-number': String(issue.number),
+        'issue-title': issue.title,
+        'issue-body': issue.body || '',
+      });
+
+      // 라벨 추가 (draft + ai-generated)
+      await addGitHubLabels(issue.number, ['draft', 'ai-generated']);
+      recordAction();
+      actions.push({ type: 'retrigger_request', issueNumber: issue.number, title: issue.title });
+      console.log(`   ✅ #${issue.number} — 문서 생성 완료`);
+    } catch (error) {
+      console.error(`   ❌ #${issue.number} — 문서 생성 실패: ${error.message}`);
+      await safeAddComment(issue.number, [
+        `⚠️ 자동 문서 생성 중 오류가 발생했습니다.`,
+        '',
+        '```',
+        error.message.slice(0, 500),
+        '```',
+        '',
+        `수동으로 \`request\` 라벨을 제거 후 다시 추가해주세요.`,
+      ].join('\n'));
+      recordAction();
+      actions.push({ type: 'retrigger_request_failed', issueNumber: issue.number, title: issue.title, error: error.message });
+    }
+  }
+
+  // ── update-request Issue 처리 (문서 수정) ──
+  for (const issue of updateItems) {
+    if (!canAct()) {
+      console.log('⚠️ 액션 한도 도달 — Retrigger 중단');
+      break;
+    }
+
+    const comments = await fetchIssueComments(owner, repo, issue.number, token);
+    if (comments.length > 0) {
+      console.log(`   ⏭️ #${issue.number} — 댓글 있음, 건너뜀`);
+      continue;
+    }
+
+    const hasRecent = await hasRecentBotComment(issue.number, marker, 48);
+    if (hasRecent) {
+      console.log(`   ⏭️ #${issue.number} — 최근 재트리거 처리됨, 건너뜀`);
+      continue;
+    }
+
+    console.log(`   🔁 #${issue.number} — ${issue.title} 문서 수정 재트리거...`);
+
+    await safeAddComment(issue.number, [
+      `📝 수정 요청을 확인했습니다. AI가 문서를 분석하고 수정 중입니다...`,
+      '',
+      `(Issue Processor 자동 재트리거)`,
+      '',
+      `<!-- ${marker} -->`,
+    ].join('\n'));
+
+    if (IS_DRY_RUN) {
+      console.log(`[DRY RUN] 문서 수정 스크립트 실행 건너뜀: #${issue.number}`);
+      recordAction();
+      actions.push({ type: 'retrigger_update', issueNumber: issue.number, title: issue.title, dryRun: true });
+      continue;
+    }
+
+    try {
+      await runScript('scripts/document/update-document.js', {
+        'issue-number': String(issue.number),
+        'issue-title': issue.title,
+        'issue-body': issue.body || '',
+      });
+
+      recordAction();
+      actions.push({ type: 'retrigger_update', issueNumber: issue.number, title: issue.title });
+      console.log(`   ✅ #${issue.number} — 문서 수정 완료`);
+    } catch (error) {
+      console.error(`   ❌ #${issue.number} — 문서 수정 실패: ${error.message}`);
+      await safeAddComment(issue.number, [
+        `⚠️ 자동 문서 수정 중 오류가 발생했습니다.`,
+        '',
+        '```',
+        error.message.slice(0, 500),
+        '```',
+        '',
+        `수동으로 \`update-request\` 라벨을 제거 후 다시 추가해주세요.`,
+      ].join('\n'));
+      recordAction();
+      actions.push({ type: 'retrigger_update_failed', issueNumber: issue.number, title: issue.title, error: error.message });
+    }
+  }
+
+  return actions;
+}
+
+/* ═══════════════════════════════════════════
    메인 오케스트레이터
    ═══════════════════════════════════════════ */
 
@@ -949,6 +1140,15 @@ async function main() {
   if (ISSUE_PROCESSOR_ENABLED_AGENTS.includes('deduplication')) {
     const actions = await deduplicationAgent(issues);
     allActions.push(...actions);
+  }
+
+  if (ISSUE_PROCESSOR_ENABLED_AGENTS.includes('retrigger')) {
+    const requestItems = categories.get('pending_request') || [];
+    const updateItems = categories.get('update_request') || [];
+    if (requestItems.length > 0 || updateItems.length > 0) {
+      const actions = await retriggerAgent(requestItems, updateItems);
+      allActions.push(...actions);
+    }
   }
 
   // 5. 결과 보고서
