@@ -581,12 +581,14 @@ async function maintenanceAgent(items, allDocuments) {
 
     const marker = '[issue-processor:maintenance]';
 
-    // 중복 방지: DEDUP_HOURS 환경변수로 조정 가능 (기본 48시간)
-    const dedupHours = parseInt(process.env.DEDUP_HOURS, 10) || 48;
-    const hasRecent = await hasRecentBotComment(issue.number, marker, dedupHours);
-    if (hasRecent) {
-      console.log(`   ⏭️ #${issue.number} — 최근 분석 댓글 있음, 건너뜀`);
-      continue;
+    // 중복 방지: DEDUP_HOURS 환경변수로 조정 가능 (기본 48시간, 0=비활성)
+    const dedupHours = process.env.DEDUP_HOURS !== undefined ? parseInt(process.env.DEDUP_HOURS, 10) : 48;
+    if (dedupHours > 0) {
+      const hasRecent = await hasRecentBotComment(issue.number, marker, dedupHours);
+      if (hasRecent) {
+        console.log(`   ⏭️ #${issue.number} — 최근 분석 댓글 있음, 건너뜀`);
+        continue;
+      }
     }
 
     console.log(`   🔍 #${issue.number} — ${issue.title} 분석 중...`);
