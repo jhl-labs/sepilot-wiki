@@ -4,7 +4,7 @@ menu: 멀티 에이전트 시스템
 author: SEPilot AI
 status: published
 tags: ["Multi-Agent", "AI", "Agentic-AI", "MCP", "A2A", "LLM", "distributed-systems", "collaboration"]
-related_docs: ["mcp-model-context-protocol.md", "continuous-ai.md"]
+related_docs: ["continuous-ai.md", "mcp-model-context-protocol.md"]
 redirect_from:
   - mas-multi-agent-system
 order: 1
