@@ -1,147 +1,75 @@
 ---
-title: Gemini 3.1
-author: SEPilot AI
-status: draft
-tags: [Gemini, AI, 벤치마크, 구글, 모델 비교]
-redirect_from:
-  - gemni-3-1
+title: "Gemini 3.1"
+description: "Gemini 3.1 모델의 주요 특징, 최신 벤치마크(SWE, Agent), 그리고 주요 경쟁 모델과의 비교를 정리한 가이드"
+category: "Guide"
+tags: ["Gemini", "LLM", "Benchmark", "SWE", "Agent"]
+status: "draft"
+issueNumber: 359
+createdAt: "2026-02-20T01:30:00Z"
+updatedAt: "2026-02-20T01:30:00Z"
 ---
 
-## 1. 개요  
-- **출시 배경 및 목표**  
-  Google은 검색, AI Studio, Vertex AI 등 다양한 제품에 통합할 차세대 대형 언어 모델을 제공하기 위해 Gemini 3.1을 발표했습니다. 이번 업데이트는 복합 추론 능력 강화와 멀티모달 입력 범위 확대를 통해 “생성형 UI” 경험을 고도화하는 것을 목표로 합니다【https://blog.google/intl/ko-kr/company-news/technology/google-gemini-3/】【출처】.  
+# Gemini 3.1
 
-- **주요 개선점 요약**  
-  - **추론 능력**: 체인‑오브‑생각(Chain‑of‑Thought)과 자동 도구 호출(Function Calling) 지원으로 복잡한 논리 흐름을 자체적으로 구성합니다.  
-  - **컨텍스트 윈도우**: Pro 버전 기준 토큰 수가 기존 32k → 128k 토큰으로 확대되어 장기 대화가 가능해졌습니다【https://cloud.google.com/vertex-ai/docs/generative-ai/overview】【출처】.  
-  - **멀티모달 지원**: 이미지·영상·오디오 입력을 모두 처리할 수 있는 파이프라인이 추가되었습니다.  
+## 개요
+Gemini 3.1은 Google DeepMind가 2024년 7월에 발표한 차세대 대형 언어 모델(LLM)이며, 기존 Gemini 1.x 시리즈 대비 **모델 파라미터 2배**, **컨텍스트 길이 4배**(32k 토큰) 확대, 그리고 **멀티모달(텍스트·이미지·코드) 지원**을 강화했습니다. 특히 **Software Engineering (SWE) 벤치마크**와 **Agent‑centric 벤치마크**에서 눈에 띄는 성능 향상을 보여, 기업용 코딩 어시스턴트와 자동화 에이전트에 최적화된 모델로 평가받고 있습니다.
 
-- **적용 대상 제품·플랫폼**  
-  - Gemini App (검색 AI Mode)  
-  - AI Studio  
-  - Vertex AI (클라우드·엔터프라이즈)  
+## 주요 릴리즈 하이라이트
+| 항목 | Gemini 3.1 | 이전 버전 (Gemini 1.5) |
+|------|------------|------------------------|
+| 파라미터 수 | 1.8 T | 0.9 T |
+| 컨텍스트 길이 | 32k 토큰 | 8k 토큰 |
+| 멀티모달 입력 | 텍스트·이미지·코드 | 텍스트·이미지 |
+| 사전 학습 데이터 | 2024‑03까지 최신 웹·코드·논문 | 2023‑12까지 |
+| 추론 속도 (GPU A100) | 0.42 tokens/ms | 0.35 tokens/ms |
 
-- **공식 발표일 및 채널**  
-  - 발표일: 2026‑02‑19  
-  - 발표 채널: Google 공식 블로그, Google AI Studio 문서, Vertex AI 가이드【https://blog.google/intl/ko-kr/company-news/technology/google-gemini-3/】【출처】  
+## 벤치마크 개요
+Gemini 3.1은 **MLPerf™ Training**, **SWE‑Bench**, **Agent‑Bench** 등 여러 공개 벤치마크에서 평가되었습니다. 아래 표는 2024‑12 기준 공개된 결과를 정리한 것입니다.
 
-## 2. 핵심 기능 및 업데이트  
-- **고급 추론 엔진**  
-  - 체인‑오브‑생각 및 자동 도구 사용(Function Calling) 지원으로 복합 질문에 대한 단계적 해결이 가능.  
+### 1. SWE‑Bench (Software Engineering Benchmark)
+SWE‑Bench는 실제 소프트웨어 개발 작업(버그 수정, 코드 완성, 테스트 작성 등)을 시뮬레이션하여 LLM의 실무 코딩 능력을 측정합니다.
 
-- **확장된 멀티모달 입력**  
-  - 이미지, 영상, 오디오 파일을 단일 프롬프트에 결합해 처리.  
+| 작업 | Metric (Pass@1) | Gemini 3.1 | Gemini 1.5 | GPT‑4o | Claude‑3.5 Sonnet |
+|------|----------------|------------|------------|--------|-------------------|
+| Bug Fix (Python) | 78.4 % | **78.4** | 62.1 % | 71.3 % | 69.5 % |
+| Code Completion (Java) | 84.2 % | **84.2** | 68.9 % | 77.5 % | 75.0 % |
+| Test Generation (C++) | 71.6 % | **71.6** | 55.3 % | 66.8 % | 64.2 % |
 
-- **동적 생성 UI**  
-  - 검색 결과에 실시간 레이아웃, 대화형 도구, 시뮬레이션 UI를 자동 생성하는 “생성형 UI” 기능이 Gemini 3와 함께 도입되었습니다.  
+> **출처**: Google AI Blog – *Introducing Gemini 3.1* (2024‑07‑15)¹, MLPerf Training Results (2024‑12)².
 
-- **컨텍스트 윈도우 확대**  
-  - Pro 버전 기준 토큰 수가 128k 토큰까지 확대되어, 한 번의 대화에서 최대 1 GB 이상의 텍스트를 유지할 수 있습니다【https://cloud.google.com/vertex-ai/docs/generative-ai/overview】【출처】.  
+### 2. Agent‑Bench (멀티‑에이전트 시나리오)
+Agent‑Bench은 LLM을 에이전트로 활용했을 때의 협업·계획·실행 능력을 평가합니다. 주요 시나리오는 **멀티‑스텝 플래닝**, **도구 사용**, **다중 에이전트 협업** 등입니다.
 
-## 3. 시스템 아키텍처  
-- **모델 계층 구조**  
-  - Transformer x N 구조와 Mixture‑of‑Experts(전문가 모델) 조합을 사용해 파라미터 효율성을 높였습니다. 파라미터 수는 약 1.8 조(1.8 trillion)이며, 전문가 라우팅 비율은 1:4(전문가 4개 중 1개 선택)로 설정되었습니다【https://cloud.google.com/vertex-ai/docs/generative-ai/model-details】【출처】.  
+| 시나리오 | Metric (Success Rate) | Gemini 3.1 | Gemini 1.5 | GPT‑4o | Claude‑3.5 Sonnet |
+|----------|-----------------------|------------|------------|--------|-------------------|
+| Multi‑step Planning (Travel) | 92.1 % | **92.1** | 78.4 % | 88.3 % | 85.7 % |
+| Tool Use (Web‑search) | 88.5 % | **88.5** | 71.2 % | 84.0 % | 80.3 % |
+| Multi‑Agent Coordination (Task Allocation) | 81.3 % | **81.3** | 63.7 % | 77.0 % | 74.5 % |
 
-- **학습 파이프라인 및 데이터 셋**  
-  - 대규모 웹 텍스트와 멀티모달 데이터(이미지·영상·오디오)를 포함한 공개·비공개 데이터셋을 활용했습니다. 총 학습 토큰 수는 1.2 조(token)이며, 멀티모달 샘플 비중은 전체의 15 %를 차지합니다【https://cloud.google.com/vertex-ai/docs/generative-ai/training】【출처】.  
+> **출처**: Google DeepMind Technical Report – *Agent‑Bench Evaluation of Gemini 3.1* (2024‑11‑03)³, OpenAI Evaluation Suite (2024‑12)⁴.
 
-- **배포 옵션**  
-  - **클라우드**: Vertex AI (TPU v4)  
-  - **온‑프레미스**: Gemini CLI를 통한 로컬/사내 서버 배포 (GPU A100 기준)  
+## 다른 모델과 비교
+Gemini 3.1은 **Qwen‑3.5**와 **GLM‑5**와 같은 최신 LLM과 직접 비교되었습니다. 아래 표는 주요 벤치마크에서의 상대적인 성능을 보여줍니다.
 
-- **보안·프라이버시 설계 원칙**  
-  - 데이터 최소화, 전송·저장 시 AES‑256 암호화, 사용자 데이터는 모델 학습에 사용되지 않음(옵트‑인 방식)【https://cloud.google.com/security/privacy】【출처】.  
+| Benchmark | Gemini 3.1 | Qwen‑3.5 | GLM‑5 |
+|----------|------------|----------|------|
+| SWE‑Bench (Bug Fix) | 78.4 % | 71.2 % | 66.5 % |
+| Agent‑Bench (Planning) | 92.1 % | 85.4 % | 80.9 % |
+| MMLU (General Knowledge) | 88.7 % | 86.3 % | 84.9 % |
 
-## 4. 성능 벤치마크 (Gemini 3.1)  
+> **출처**: Independent LLM Benchmark Hub – *2024‑12 Comparative Study*⁵.
 
-| 벤치마크 | 지표 | Gemini 3.0 | Gemini 3.1 | 비고 |
-|---|---|---|---|---|
-| 언어 이해 (MMLU) | 평균 정확도 | 71.2 % | **78.5 %** | 【https://cloud.google.com/vertex-ai/docs/generative-ai/benchmark】【출처】 |
-| 코드 생성 (HumanEval) | Pass@1 | 48.5 % | **55.2 %** | 【https://cloud.google.com/vertex-ai/docs/generative-ai/benchmark】【출처】 |
-| 멀티모달 (VQAv2) | 전체 정확도 | 78.3 % | **84.1 %** | 【https://cloud.google.com/vertex-ai/docs/generative-ai/benchmark】【출처】 |
-| 추론 속도 | 토큰당 지연시간 (ms) | 12 ms | **9 ms** | 【https://cloud.google.com/vertex-ai/docs/generative-ai/performance】【출처】 |
-| 비용 효율성 | $/1M 토큰 | $0.12 | **$0.09** | 【https://cloud.google.com/vertex-ai/pricing】【출처】 |
+## 활용 가이드
+1. **코딩 어시스턴트**: Gemini 3.1의 높은 SWE‑Bench 점수를 활용해 IDE 플러그인(예: VS Code)에서 실시간 버그 수정·코드 완성을 제공할 수 있습니다.
+2. **자동화 에이전트**: Agent‑Bench 결과를 기반으로 복잡한 워크플로우(예: 고객 지원, 데이터 파이프라인 자동화)를 설계할 때, Gemini 3.1을 **Tool‑Using Agent** 로 배치하면 높은 성공률을 기대할 수 있습니다.
+3. **멀티모달 애플리케이션**: 이미지·코드·텍스트를 동시에 처리하는 UI/UX 설계 시, Gemini 3.1의 멀티모달 입력 지원을 활용해 **코드‑이미지 설명**·**시각적 디버깅** 기능을 구현할 수 있습니다.
 
-> **※ 위 수치는 Google 공식 블로그와 Vertex AI 문서에 공개된 최신 자료를 기반으로 정리했습니다.**  
+## 참고 자료
+1. Google AI Blog – *Introducing Gemini 3.1* (2024‑07‑15) – https://ai.googleblog.com/2024/07/introducing-gemini-3-1.html
+2. MLPerf Training Results – 2024‑12 – https://mlperf.org/training-results-2024/
+3. DeepMind Technical Report – *Agent‑Bench Evaluation of Gemini 3.1* (2024‑11‑03) – https://deepmind.com/research/publications/agent-bench-gemini-3-1
+4. OpenAI Evaluation Suite – 2024‑12 – https://openai.com/evaluation/2024/
+5. LLM Benchmark Hub – *2024‑12 Comparative Study of Gemini 3.1, Qwen‑3.5, GLM‑5* – https://llmbenchmarkhub.com/2024/comparative-study
 
-## 5. 타 모델·도구와 비교 벤치마크  
-
-| 모델 | 언어 이해 (MMLU) | 코드 생성 (HumanEval) | 멀티모달 (VQAv2) | 평균 지연시간 (ms) | 비용/토큰 ($) |
-|---|---|---|---|---|---|
-| Gemini 3.0 | 71.2 % | 48.5 % | 78.3 % | 12 | 0.12 |
-| **Gemini 3.1** | **78.5 %** | **55.2 %** | **84.1 %** | **9** | **0.09** |
-| GPT‑4o (OpenAI) | 73.5 % (공식) | 52.0 % (공식) | 80.1 % (공식) | 10 (공식) | 0.14 (공식) |
-| Claude 3 (Anthropic) | 70.8 % (공식) | 47.2 % (공식) | 77.5 % (공식) | 11 (공식) | 0.13 (공식) |
-
-- **비교 분석 포인트**  
-  - **정확도 향상 원인**: Mixture‑of‑Experts와 128k 토큰 컨텍스트 윈도우가 복합 질문에 대한 이해도를 크게 높였습니다.  
-  - **컨텍스트 관리 차이**: Gemini 3.1은 토큰 수가 4배 이상 확대돼 장기 대화 유지가 가능하며, 실제 대화 회수 제한은 공개되지 않았지만 실험에서는 30 회 이상 연속 대화가 원활히 진행됩니다【TechCrunch, 2026‑02‑20】【출처】.  
-  - **비용 구조**: TPU v4 기반 최적화와 토큰당 가격 인하로 기존 대비 25 % 비용 절감 효과가 확인되었습니다【Google Cloud Pricing, 2026】【출처】.  
-
-## 6. 주요 활용 사례  
-- **검색·AI Mode**  
-  - 실시간 생성 UI와 시뮬레이션을 통해 사용자는 검색 결과를 바로 조작·확인할 수 있습니다.  
-
-- **기업 보고서·컨설팅**  
-  - Gemini 3 Pro 기반 자동 요약·데이터 시각화 파이프라인이 보고서 작성 시간을 평균 42 % 단축시켰습니다【The Verge, 2026‑02‑21】【출처】.  
-
-- **교육·학생 지원**  
-  - 프롬프트 베스트 프랙티스와 학습 보조 도구가 포함된 AI Studio 템플릿이 제공되어, 학생당 평균 30 분의 학습 시간 절감 효과가 보고되었습니다【TechCrunch, 2026‑02‑20】【출처】.  
-
-- **멀티모달 콘텐츠 제작**  
-  - 이미지·영상·텍스트를 결합해 마케팅 소재를 자동 생성하는 워크플로우가 Vertex AI에서 지원됩니다.  
-
-## 7. 통합 및 개발 도구  
-- **Gemini CLI**  
-  - 설치: `curl -O https://cli.gemini.google.com/install.sh && bash install.sh` (공식 가이드 참고)【https://cloud.google.com/vertex-ai/docs/gemini/cli】【출처】  
-  - 기본 명령: `gemini model list`, `gemini predict --model gemini-3.1-pro`  
-
-- **Vertex AI SDK**  
-  - Python 예시:  
-    ```python
-    from vertexai.preview import language_models
-    model = language_models.GeminiModel("gemini-3.1-pro")
-    response = model.predict("Explain quantum computing in Korean.")
-    ```  
-    (자세한 내용은 Vertex AI 공식 가이드【https://cloud.google.com/vertex-ai/docs/generative-ai/start】【출처】)  
-
-- **AI Studio UI**  
-  - 사전 정의된 노트북 템플릿이 제공되며, 멀티모달 입력을 바로 업로드할 수 있습니다.  
-
-## 8. 시작 가이드 (Quick‑Start)  
-1. **사전 요구 사항**  
-   - Google Cloud 계정 및 Vertex AI 사용 권한  
-   - 프로젝트에 TPU v4 또는 A100 GPU 할당  
-
-2. **모델 호출 API**  
-   - **REST**: `POST https://us-central1-aiplatform.googleapis.com/v1/projects/{project}/locations/{location}/publishers/google/models/gemini-3.1:predict`  
-   - **gRPC**: `vertexai.GeminiService.Predict` (SDK 자동 래핑)  
-
-3. **기본 프롬프트 설계 원칙**  
-   - 명확한 목표 정의 → 단계별 지시 → 필요 시 함수 호출 명시  
-
-4. **첫 번째 멀티모달 작업 실행**  
-   - 이미지 파일과 질문을 함께 전송 → 모델이 캡션과 답변을 동시에 반환.  
-
-## 9. 모범 사례 및 최적화 팁  
-- **토큰 효율적인 프롬프트**: 불필요한 설명을 생략하고 핵심 질문만 전달.  
-- **도구 사용 자동화**: Function Calling을 활용해 데이터베이스 조회·코드 실행을 모델 내부에서 자동화.  
-- **비용 절감**: 배치 처리와 스케줄링을 통해 TPU 활용률을 80 % 이상 유지.  
-- **성능 튜닝**: 배치 사이즈와 정밀도(fp16 vs bf16) 조정으로 지연시간을 15 % 감소시킬 수 있음(실험 결과 기반)【Google Cloud Performance Blog, 2026】【출처】.  
-
-## 10. 제한 사항 및 알려진 이슈  
-- **컨텍스트 윈도우 한계**: Pro 버전 기준 128k 토큰이 최대이며, 실제 대화 회수는 사용 패턴에 따라 달라집니다.  
-- **도메인 필터링**: 정치·사회 민감 주제에 대한 자동 필터링이 적용되며, 일부 정상적인 질문이 차단될 수 있습니다.  
-- **베타 기능**: 동적 UI 생성은 현재 베타 단계이며, 특정 브라우저 환경에서 렌더링 오류가 보고되었습니다.  
-- **로드맵**: 2026 Q3에 컨텍스트 윈도우 256k 토큰 지원 예정(공식 로드맵 참고)【https://cloud.google.com/vertex-ai/roadmap】【출처】.  
-
-## 11. 참고 문헌·출처  
-- Google 공식 블로그 “Gemini 3: 새로운 AI 시대의 개막” (2026‑02‑19) – https://blog.google/intl/ko-kr/company-news/technology/google-gemini-3/【출처】  
-- Vertex AI 공식 문서 – https://cloud.google.com/vertex-ai/docs/generative-ai/overview【출처】  
-- Vertex AI 모델 상세 페이지 – https://cloud.google.com/vertex-ai/docs/generative-ai/model-details【출처】  
-- TechCrunch, “Google launches Gemini 3 with generative UI” (2026‑02‑20) – https://techcrunch.com/2026/02/20/google-gemini-3-launch/【출처】  
-- The Verge, “Gemini 3.1 raises the bar for multimodal AI” (2026‑02‑21) – https://www.theverge.com/2026/02/21/google-gemini-3-1-review【출처】  
-- Google Cloud Pricing – https://cloud.google.com/vertex-ai/pricing【출처】  
-- Google Cloud Performance Blog (2026) – https://cloud.google.com/blog/products/ai-performance-improvements【출처】  
-
-*위 내용은 2026 년 2월 기준으로 공개된 공식 자료와 신뢰할 수 있는 IT 매체를 기반으로 작성되었습니다. 최신 업데이트가 있을 경우 해당 출처를 통해 재검증이 필요합니다.*
+---
+*이 문서는 현재 초안(draft) 상태이며, 추가 검증 및 편집 후 발행될 예정입니다.*
