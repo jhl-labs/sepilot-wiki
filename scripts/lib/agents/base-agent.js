@@ -167,7 +167,7 @@ export class BaseAgent {
       options.responseFormat = 'json_object';
     }
 
-    const result = await callOpenAI(messages, options);
+    const result = await callOpenAI(messages, { ...options, returnUsage: true });
 
     // 토큰 사용량 저장 (callOpenAI가 usage를 반환하는 경우)
     if (result && typeof result === 'object' && result.usage) {

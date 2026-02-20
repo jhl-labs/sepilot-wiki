@@ -157,8 +157,8 @@ export async function callOpenAI(messages, options = {}) {
       const data = await response.json();
       const content = data.choices[0].message.content;
 
-      // usage 정보가 있으면 함께 반환
-      if (data.usage) {
+      // returnUsage 옵션이 있을 때만 usage 정보를 포함한 객체 반환
+      if (options.returnUsage && data.usage) {
         return {
           content,
           usage: {
