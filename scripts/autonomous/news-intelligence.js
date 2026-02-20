@@ -219,22 +219,10 @@ function prefilterByKeywords(items, documents) {
  * Stage 3: AI 관련성 분석 (배치)
  * =================================================================== */
 
-/** Stage 3: AI로 관련성 분석 */
-async function analyzeRelevance(items, documents) {
-  console.log('\n🤖 [Stage 3] AI 관련성 분석...');
-
-  if (items.length === 0) {
-    console.log('   분석할 아이템 없음');
-    return [];
-  }
-
-  const docSummaries = getDocumentSummaries(documents);
-  const docList = docSummaries
-    .map(d => `- ${d.path}: "${d.title}" [태그: ${(d.tags || []).join(', ')}]`)
-    .join('\n');
-
-  const itemsList = items
-    .map((item, i) => `[${i}] "${item.title}" - ${item.description}`)
+/** 단일 서브배치 AI 관련성 분석 */
+async function analyzeRelevanceBatch(batchItems, batchOffset, docList) {
+  const itemsList = batchItems
+    .map((item, i) => `[${batchOffset + i}] "${item.title}" - ${item.description}`)
     .join('\n');
 
   const systemPrompt = `당신은 기술 Wiki 큐레이터입니다.
@@ -270,7 +258,39 @@ needsSourceFetch: euno 요약만으로 내용이 부족하면 true`;
   );
 
   const parsed = parseJsonResponse(response, { fallback: [], silent: false });
-  const results = Array.isArray(parsed) ? parsed : parsed.items || parsed.results || parsed.analyses || [];
+  return Array.isArray(parsed) ? parsed : parsed.items || parsed.results || parsed.analyses || [];
+}
+
+/** Stage 3: AI로 관련성 분석 (서브배치 분할) */
+async function analyzeRelevance(items, documents) {
+  console.log('\n🤖 [Stage 3] AI 관련성 분석...');
+
+  if (items.length === 0) {
+    console.log('   분석할 아이템 없음');
+    return [];
+  }
+
+  const SUB_BATCH_SIZE = 10;
+  const docSummaries = getDocumentSummaries(documents);
+  const docList = docSummaries
+    .map(d => `- ${d.path}: "${d.title}" [태그: ${(d.tags || []).join(', ')}]`)
+    .join('\n');
+
+  // 서브배치 분할 처리
+  const results = [];
+  for (let offset = 0; offset < items.length; offset += SUB_BATCH_SIZE) {
+    const batch = items.slice(offset, offset + SUB_BATCH_SIZE);
+    const batchNum = Math.floor(offset / SUB_BATCH_SIZE) + 1;
+    const totalBatches = Math.ceil(items.length / SUB_BATCH_SIZE);
+    console.log(`   배치 ${batchNum}/${totalBatches} (${batch.length}개)...`);
+
+    try {
+      const batchResults = await analyzeRelevanceBatch(batch, offset, docList);
+      results.push(...batchResults);
+    } catch (error) {
+      console.warn(`   ⚠️ 배치 ${batchNum} 분석 실패: ${error.message}`);
+    }
+  }
 
   // 임계값 필터 + 원본 아이템 병합
   const relevant = results
