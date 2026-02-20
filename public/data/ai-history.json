@@ -1,6 +1,55 @@
 {
   "entries": [
     {
+      "id": "1f233fb4-0f0c-4168-95c0-5ec293ba099f",
+      "timestamp": "2026-02-20T01:13:32.930Z",
+      "actionType": "generate",
+      "issueNumber": 186,
+      "issueTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
+      "documentSlug": "gemni-3-1",
+      "documentTitle": "Gemini 3.1",
+      "summary": "새 문서 \"Gemini 3.1\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3727
+            },
+            {
+              "step": "outline",
+              "durationMs": 11623
+            },
+            {
+              "step": "write",
+              "durationMs": 24656
+            },
+            {
+              "step": "review",
+              "durationMs": 5425
+            },
+            {
+              "step": "refine",
+              "durationMs": 23290
+            }
+          ],
+          "totalDurationMs": 68722,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3250,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "4baaa350-615d-49fa-b776-47d066d8d31c",
       "timestamp": "2026-02-19T02:01:28.392Z",
       "actionType": "maintain",
@@ -1648,5 +1697,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-19T02:01:28.392Z"
+  "lastUpdated": "2026-02-20T01:13:32.931Z"
 }
