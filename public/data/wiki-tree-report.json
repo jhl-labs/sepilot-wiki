@@ -1,92 +1,75 @@
 {
-  "timestamp": "2026-02-20T01:14:57.345Z",
+  "timestamp": "2026-02-20T01:31:49.863Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한 `gemni-3-1.md` 가 잘못된 위치·오타이며, `projects/opencode-guide.md` 가 `projects/opencode.md` 와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
-    "totalDocuments": 21,
+    "summary": "Wiki는 4개의 주요 카테고리(ai, projects, kubernetes, bun)와 보조 카테고리(reports)로 구성돼 있습니다. 파일명은 대부분 규칙에 맞지만, `projects` 카테고리에 동일 내용의 Opencode 문서가 두 개 존재합니다(하나는 published, 다른 하나는 deleted). 전체적으로 문서가 흩어져 있어 카테고리 내 정렬(order)과 카테고리 메타데이터가 필요합니다.",
+    "totalDocuments": 27,
     "categories": [
-      "reports",
-      "kubernetes",
+      "ai",
       "projects",
+      "kubernetes",
       "bun",
-      "ai"
+      "reports"
     ],
     "issues": [
-      "루트 디렉터리에 `gemni-3-1.md` 가 존재 (오타 및 잘못된 위치)",
-      "`projects/opencode-guide.md` 가 `projects/opencode.md` 와 내용 중복"
+      "중복 Opencode 문서(opencode.md / opencode-guide.md) 존재",
+      "다수의 draft 문서가 projects 카테고리에 섞여 있어 공개/비공개 상태 정리 필요"
     ]
   },
   "suggestedStructure": {
-    "reports": [
-      "weekly-2026-08"
+    "ai": [
+      "mcp-model-context-protocol",
+      "multi-agent-system",
+      "continuous-ai",
+      "vibe-coding",
+      "gemini-3-1",
+      "glm-5",
+      "qwen3-5"
+    ],
+    "projects": [
+      "opencode",
+      "claude-code-release-history",
+      "moltbook-intro",
+      "openclaw-complete-guide",
+      "sepilot-desktop-intro",
+      "sepilot-wiki-technology-stack",
+      "antigravity-release-notes"
     ],
     "kubernetes": [
       "kubernetes-release-notes",
       "ingress-nginx-deprecation-guide"
-    ],
-    "projects": [
-      "openclaw-complete-guide",
-      "claude-code-release-history",
-      "antigravity-release-notes",
-      "sepilot-wiki-technology-stack",
-      "sepilot-desktop-intro",
-      "opencode",
-      "moltbook-intro"
     ],
     "bun": [
       "bun-overview",
       "comparison-pnpm-npm",
       "bun-github-actions-setup"
     ],
-    "ai": [
-      "mcp-model-context-protocol",
-      "multi-agent-system",
-      "continuous-ai",
-      "qwen3-5",
-      "glm-5",
-      "vibe-coding",
-      "gemini-3-1"
+    "reports": [
+      "weekly-2026-08"
     ]
   },
   "results": {
     "appliedActions": 26,
-    "skippedActions": 1,
+    "skippedActions": 0,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 0
+    "createdIssues": 2
   },
   "actions": {
     "applied": [
       {
-        "type": "move",
-        "priority": "high",
-        "source": "gemni-3-1.md",
-        "target": "ai/gemini-3-1.md",
-        "reason": "루트 레벨에 문서가 있으면 안 되며 파일명 오타 수정",
-        "autoApply": true
-      },
-      {
         "type": "merge",
         "source": "projects/opencode-guide.md",
         "target": "projects/opencode.md",
-        "reason": "동일한 내용·제목을 가진 중복 문서. 삭제된 문서를 유지 문서에 병합",
+        "reason": "동일 내용의 Opencode 문서가 두 개 존재함. published 버전을 유지하고 deleted 버전을 삭제하면서 redirect_from을 추가합니다.",
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "target": "reports",
+        "target": "ai",
         "metadata": {
-          "displayName": "주간 보고서",
+          "displayName": "AI 기술·프로토콜",
           "order": 1
-        },
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "target": "kubernetes",
-        "metadata": {
-          "displayName": "Kubernetes",
-          "order": 2
         },
         "autoApply": true
       },
@@ -94,7 +77,16 @@
         "type": "update_category_meta",
         "target": "projects",
         "metadata": {
-          "displayName": "프로젝트",
+          "displayName": "프로젝트·제품",
+          "order": 2
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "target": "kubernetes",
+        "metadata": {
+          "displayName": "Kubernetes·인프라",
           "order": 3
         },
         "autoApply": true
@@ -103,96 +95,18 @@
         "type": "update_category_meta",
         "target": "bun",
         "metadata": {
-          "displayName": "Bun",
+          "displayName": "Bun·도구",
           "order": 4
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "target": "ai",
+        "target": "reports",
         "metadata": {
-          "displayName": "AI 기술",
+          "displayName": "보고서·통계",
           "order": 5
         },
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "reports/weekly-2026-08.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "kubernetes/kubernetes-release-notes.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/openclaw-complete-guide.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/claude-code-release-history.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/antigravity-release-notes.md",
-        "order": 3,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/sepilot-wiki-technology-stack.md",
-        "order": 4,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/sepilot-desktop-intro.md",
-        "order": 5,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/opencode.md",
-        "order": 6,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "projects/moltbook-intro.md",
-        "order": 7,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "bun/bun-overview.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "bun/comparison-pnpm-npm.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "bun/bun-github-actions-setup.md",
-        "order": 3,
         "autoApply": true
       },
       {
@@ -215,33 +129,120 @@
       },
       {
         "type": "set_order",
-        "target": "ai/qwen3-5.md",
+        "target": "ai/vibe-coding.md",
         "order": 4,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "target": "ai/glm-5.md",
+        "target": "ai/gemini-3-1.md",
         "order": 5,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "target": "ai/vibe-coding.md",
+        "target": "ai/glm-5.md",
         "order": 6,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/qwen3-5.md",
+        "order": 7,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/opencode.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/claude-code-release-history.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/moltbook-intro.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/openclaw-complete-guide.md",
+        "order": 4,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/sepilot-desktop-intro.md",
+        "order": 5,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/sepilot-wiki-technology-stack.md",
+        "order": 6,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/antigravity-release-notes.md",
+        "order": 7,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/kubernetes-release-notes.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/bun-overview.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/comparison-pnpm-npm.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/bun-github-actions-setup.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "reports/weekly-2026-08.md",
+        "order": 1,
         "autoApply": true
       }
     ],
-    "skipped": [
-      {
-        "type": "set_order",
-        "target": "ai/gemini-3-1.md",
-        "order": 7,
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: ai/gemini-3-1.md"
-      }
-    ],
+    "skipped": [],
     "dryRunPreviewed": []
   },
-  "createdIssues": []
+  "createdIssues": [
+    {
+      "number": 187,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/187",
+      "title": "Duplicate Opencode documentation"
+    },
+    {
+      "number": 188,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/188",
+      "title": "Projects category contains many draft documents"
+    }
+  ]
 }

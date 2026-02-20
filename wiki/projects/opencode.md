@@ -8,8 +8,9 @@ redirect_from:
   - projects-opencode-guide
   - projects-opencode-guide
   - projects-opencode-guide
+  - projects-opencode-guide
   - opencode
-order: 6
+order: 1
 ---
 
 ## Opencode 소개
