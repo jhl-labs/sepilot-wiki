@@ -581,8 +581,9 @@ async function maintenanceAgent(items, allDocuments) {
 
     const marker = '[issue-processor:maintenance]';
 
-    // 중복 방지: 48시간 이내 마커 댓글 체크
-    const hasRecent = await hasRecentBotComment(issue.number, marker, 48);
+    // 중복 방지: DEDUP_HOURS 환경변수로 조정 가능 (기본 48시간)
+    const dedupHours = parseInt(process.env.DEDUP_HOURS, 10) || 48;
+    const hasRecent = await hasRecentBotComment(issue.number, marker, dedupHours);
     if (hasRecent) {
       console.log(`   ⏭️ #${issue.number} — 최근 분석 댓글 있음, 건너뜀`);
       continue;
@@ -952,10 +953,10 @@ async function retriggerAgent(requestItems, updateItems) {
       break;
     }
 
-    // 댓글 0개 = 워크플로우 미실행 징표
-    const comments = await fetchIssueComments(owner, repo, issue.number, token);
-    if (comments.length > 0) {
-      console.log(`   ⏭️ #${issue.number} — 댓글 있음 (워크플로우 이미 실행됨), 건너뜀`);
+    // 라벨 기반 체크: draft + ai-generated가 있으면 이미 문서 생성됨
+    const issueLabels = (issue.labels || []).map(l => l.name);
+    if (issueLabels.includes('draft') && issueLabels.includes('ai-generated')) {
+      console.log(`   ⏭️ #${issue.number} — 문서 이미 생성됨 (draft+ai-generated), 건너뜀`);
       continue;
     }
 

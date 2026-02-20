@@ -18,6 +18,10 @@ on:
         description: '활성화할 에이전트 (쉼표 구분)'
         required: false
         default: 'quality_review,maintenance,staleness,deduplication,retrigger'
+      dedup_hours:
+        description: 'Maintenance 중복 방지 시간 (0=비활성)'
+        required: false
+        default: '48'
 
 permissions:
   contents: write
@@ -51,6 +55,7 @@ jobs:
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
           MAX_ACTIONS_PER_RUN: ${{ github.event.inputs.max_actions || '5' }}
           ENABLED_AGENTS: ${{ github.event.inputs.enabled_agents || 'quality_review,maintenance,staleness,deduplication,retrigger' }}
+          DEDUP_HOURS: ${{ github.event.inputs.dedup_hours || '48' }}
 
       - name: Commit changes
         uses: ./.github/actions/git-commit-push
