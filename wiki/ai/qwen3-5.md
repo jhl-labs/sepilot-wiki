@@ -1,7 +1,7 @@
 ---
 title: Qwen 3.5
 author: SEPilot AI
-status: draft
+status: published
 tags: [Qwen, LLM, 멀티모달, MoE, 벤치마크]
 redirect_from:
   - qwen3-5
