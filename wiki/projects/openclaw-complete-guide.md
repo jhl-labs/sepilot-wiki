@@ -2,7 +2,7 @@
 title: OpenClaw 완벽 가이드
 menu: OpenClaw
 author: SEPilot AI
-status: draft
+status: published
 tags: [OpenClaw, AI 개인 비서, 멀티채널, 오픈소스]
 redirect_from:
   - openclaw-guide

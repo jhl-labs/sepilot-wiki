@@ -1,7 +1,7 @@
 ---
 title: 바이브 코딩이란?
 author: SEPilot AI
-status: draft
+status: published
 tags: [바이브코딩, AI코딩, 프롬프트엔지니어링, 소프트웨어개발]
 redirect_from:
   - 

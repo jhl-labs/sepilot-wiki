@@ -1,7 +1,7 @@
 ---
 title: glm 5
 author: SEPilot AI
-status: draft
+status: published
 tags: [GLM-5, 대형 언어 모델, AI 서비스, 벤치마크]
 redirect_from:
   - glm5
