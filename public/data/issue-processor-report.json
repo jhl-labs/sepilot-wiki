@@ -1,9 +1,25 @@
 {
-  "timestamp": "2026-02-20T13:36:29.732Z",
+  "timestamp": "2026-02-20T13:42:40.358Z",
   "dryRun": false,
   "totalIssuesScanned": 10,
   "categories": {
-    "draft_review": [],
+    "draft_review": [
+      {
+        "number": 169,
+        "title": "[커버리지 분석] 문서 작성 필요: 크로스 레퍼런스 업데이트 잡 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 168,
+        "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 서비스 레이어 설명",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 167,
+        "title": "[커버리지 분석] 문서 작성 필요: Wiki 페이지 API 라우트 상세 가이드",
+        "daysSinceUpdate": 0
+      }
+    ],
     "maintenance": [
       {
         "number": 189,
@@ -42,42 +58,68 @@
       }
     ],
     "update_request": [],
-    "pending_request": [
-      {
-        "number": 169,
-        "title": "[커버리지 분석] 문서 작성 필요: 크로스 레퍼런스 업데이트 잡 가이드",
-        "daysSinceUpdate": 0
-      },
-      {
-        "number": 168,
-        "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 서비스 레이어 설명",
-        "daysSinceUpdate": 0
-      },
-      {
-        "number": 167,
-        "title": "[커버리지 분석] 문서 작성 필요: Wiki 페이지 API 라우트 상세 가이드",
-        "daysSinceUpdate": 0
-      }
-    ],
+    "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
     {
-      "type": "retrigger_request",
+      "type": "auto_publish",
       "issueNumber": 169,
-      "title": "[커버리지 분석] 문서 작성 필요: 크로스 레퍼런스 업데이트 잡 가이드"
+      "title": "[커버리지 분석] 문서 작성 필요: 크로스 레퍼런스 업데이트 잡 가이드",
+      "score": 86,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/.md"
     },
     {
-      "type": "retrigger_request",
+      "type": "auto_publish",
       "issueNumber": 168,
-      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 서비스 레이어 설명"
+      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 서비스 레이어 설명",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/api.md"
     },
     {
-      "type": "retrigger_request",
+      "type": "auto_publish",
       "issueNumber": 167,
-      "title": "[커버리지 분석] 문서 작성 필요: Wiki 페이지 API 라우트 상세 가이드"
+      "title": "[커버리지 분석] 문서 작성 필요: Wiki 페이지 API 라우트 상세 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/wiki-api.md"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 188,
+      "title": "[Wiki Maintainer] Projects category contains many draft documents",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 187,
+      "title": "[Wiki Maintainer] Duplicate Opencode documentation",
+      "verdict": "actionable"
+    },
+    {
+      "type": "resolved_close",
+      "issueNumber": 184,
+      "title": "[Wiki Maintainer] 루트 디렉터리에 home.md 가 없음",
+      "verdict": "resolved"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 155,
+      "title": "[Wiki Maintainer] Duplicate documentation – merge & redirect",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 152,
+      "title": "[Wiki Maintainer] Create redirects for renamed/moved files",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 150,
+      "title": "[Wiki Maintainer] 📝 Draft 문서 검토 및 공개 일정 설정",
+      "verdict": "actionable"
     }
   ],
-  "actionCount": 3,
+  "actionCount": 9,
   "maxActions": 15
 }
