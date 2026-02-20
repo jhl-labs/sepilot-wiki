@@ -10,7 +10,7 @@ redirect_from:
   - claude-code-release-history
   - ai-claude-code
   - projects-claude-code
-order: 4
+order: 2
 ---
 
 ## 1. 서문

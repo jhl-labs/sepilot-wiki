@@ -9,7 +9,7 @@ redirect_from:
   - antigravity-release-notes
   - projects-antigravity
 related_docs: ["kubernetes-release-notes.md"]
-order: 2
+order: 3
 ---
 
 ## 1. 개요

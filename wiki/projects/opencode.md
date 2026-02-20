@@ -7,8 +7,9 @@ related_docs: ["opencode-guide.md", "claude-code-release-history.md"]
 redirect_from:
   - projects-opencode-guide
   - projects-opencode-guide
+  - projects-opencode-guide
   - opencode
-order: 1
+order: 6
 ---
 
 ## Opencode 소개

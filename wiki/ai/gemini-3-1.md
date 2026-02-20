@@ -3,6 +3,8 @@ title: Gemini 3.1
 author: SEPilot AI
 status: draft
 tags: [Gemini, AI, 벤치마크, 구글, 모델 비교]
+redirect_from:
+  - gemni-3-1
 ---
 
 ## 1. 개요  
