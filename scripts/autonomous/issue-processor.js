@@ -746,6 +746,102 @@ async function stalenessAgent(items) {
 }
 
 /* ═══════════════════════════════════════════
+   Deduplication Agent
+   ═══════════════════════════════════════════ */
+
+/**
+ * Issue 제목에서 문서 슬러그를 추출 (중복 그룹핑용)
+ * 예: "[Wiki Maintenance] [URL 변경] kubernetes/release-notes 문서 참조 URL 확인 필요"
+ *   → "kubernetes/release-notes"
+ * @param {string} title
+ * @returns {string|null} 문서 슬러그 또는 null
+ */
+function extractDocSlug(title) {
+  // "[URL 변경|깨짐] {slug} 문서" 패턴
+  const urlMatch = title.match(/\[URL\s+(?:변경|깨짐)\]\s+(\S+)\s+문서/);
+  if (urlMatch) return urlMatch[1];
+
+  // "{category}/{slug}" 형태의 경로 패턴
+  const pathMatch = title.match(/([a-z][\w-]*\/[\w-]+(?:\/[\w-]+)*)/i);
+  if (pathMatch) return pathMatch[1];
+
+  return null;
+}
+
+/**
+ * 중복 Issue를 감지하고 오래된 것을 자동 닫기
+ * 같은 문서 슬러그를 참조하는 Issue 그룹에서 최신 1개만 남김
+ * @param {Array} issues - 전체 열린 Issue 배열
+ * @returns {Promise<Array>} 수행한 액션 목록
+ */
+async function deduplicationAgent(issues) {
+  console.log('\n🔄 === Deduplication Agent ===');
+  const actions = [];
+  const marker = '[issue-processor:duplicate]';
+
+  // 슬러그 기반 그룹핑
+  const groups = new Map();
+  for (const issue of issues) {
+    const slug = extractDocSlug(issue.title);
+    if (!slug) continue;
+
+    if (!groups.has(slug)) groups.set(slug, []);
+    groups.get(slug).push(issue);
+  }
+
+  // 2개 이상인 그룹만 처리
+  for (const [slug, group] of groups) {
+    if (group.length < 2) continue;
+
+    // 최신순 정렬 (created_at 기준)
+    group.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    const newest = group[0];
+    const duplicates = group.slice(1);
+
+    console.log(`   📋 "${slug}" — ${group.length}개 중복 (최신: #${newest.number})`);
+
+    for (const dup of duplicates) {
+      if (!canAct()) {
+        console.log('⚠️ 액션 한도 도달 — Deduplication 중단');
+        return actions;
+      }
+
+      // 이미 처리된 건 건너뜀
+      const hasRecent = await hasRecentBotComment(dup.number, marker, 24);
+      if (hasRecent) {
+        console.log(`   ⏭️ #${dup.number} — 이미 중복 처리됨, 건너뜀`);
+        continue;
+      }
+
+      const commentBody = [
+        `## 🔄 중복 Issue 감지`,
+        '',
+        `이 Issue는 **#${newest.number}**과 동일한 문서(\`${slug}\`)를 참조하는 중복 Issue입니다.`,
+        `최신 Issue(#${newest.number})를 유지하고 이 Issue를 닫습니다.`,
+        '',
+        `<!-- ${marker} -->`,
+      ].join('\n');
+
+      await safeAddComment(dup.number, commentBody);
+      await closeGitHubIssue(dup.number);
+      recordAction();
+
+      actions.push({
+        type: 'duplicate_close',
+        issueNumber: dup.number,
+        title: dup.title,
+        duplicateOf: newest.number,
+        slug,
+      });
+
+      console.log(`   🔒 #${dup.number} 닫기 (중복 → #${newest.number})`);
+    }
+  }
+
+  return actions;
+}
+
+/* ═══════════════════════════════════════════
    메인 오케스트레이터
    ═══════════════════════════════════════════ */
 
@@ -796,6 +892,11 @@ async function main() {
       const actions = await stalenessAgent(staleItems);
       allActions.push(...actions);
     }
+  }
+
+  if (ISSUE_PROCESSOR_ENABLED_AGENTS.includes('deduplication')) {
+    const actions = await deduplicationAgent(issues);
+    allActions.push(...actions);
   }
 
   // 5. 결과 보고서

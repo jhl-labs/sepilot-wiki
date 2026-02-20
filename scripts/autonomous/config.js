@@ -73,5 +73,5 @@ export const STALENESS_THRESHOLD_DAYS = parseInt(process.env.STALENESS_THRESHOLD
 export const QUALITY_AUTO_PUBLISH_THRESHOLD = parseInt(process.env.QUALITY_AUTO_PUBLISH_THRESHOLD, 10) || 80;
 
 /** Issue Processor: 활성화할 에이전트 목록 */
-export const ISSUE_PROCESSOR_ENABLED_AGENTS = (process.env.ENABLED_AGENTS || 'quality_review,maintenance,staleness')
+export const ISSUE_PROCESSOR_ENABLED_AGENTS = (process.env.ENABLED_AGENTS || 'quality_review,maintenance,staleness,deduplication')
   .split(',').map(s => s.trim());
