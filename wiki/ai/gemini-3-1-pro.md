@@ -45,9 +45,8 @@ Gemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어
 - **에이전트 워크플로우**: Gemini 3.1 Pro를 기반으로 한 자동화 에이전트가 복합 작업을 순차적으로 수행
 
 ## 참고 자료
-- **공식 블로그**: Gemini 3.1 Pro 발표 – https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/  
-- **모델 카드**: Gemini 3.1 Pro – https://deepmind.google/models/model-cards/gemini-3-1-pro/  
-- **ZDNet 기사** (벤치마크 언급) – https://www.zdnet.com/article/google-gemini-3-1-pro-release-ai-model/  
+- **공식 블로그**: Gemini 3.1 Pro 발표 – https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/
+- **모델 카드**: Gemini 3.1 Pro – https://deepmind.google/models/model-cards/gemini-3-1-pro/
 
 ---
 *이 문서는 유지보수자를 위해 초안(draft) 상태로 저장되었습니다. 필요에 따라 추가 검토 및 업데이트가 이루어질 수 있습니다.*
