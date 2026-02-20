@@ -14,7 +14,8 @@
  */
 
 import { resolve } from 'path';
-import { callOpenAI, parseJsonResponse, findDocument } from '../lib/utils.js';
+import { writeFile } from 'fs/promises';
+import { callOpenAI, parseJsonResponse, findDocument, updateFrontmatterStatus } from '../lib/utils.js';
 import { addIssueComment, saveReport } from '../lib/report-generator.js';
 import { fetchIssueComments, getGitHubInfoFromEnv } from '../lib/issue-context.js';
 import { runRuleBasedChecks } from '../lib/quality-gate.js';
@@ -141,6 +142,40 @@ async function addGitHubLabels(issueNumber, labels) {
     console.log(`🏷️ Issue #${issueNumber}에 라벨 추가: ${labels.join(', ')}`);
   } catch (error) {
     console.error(`❌ 라벨 추가 실패: Issue #${issueNumber} — ${error.message}`);
+  }
+}
+
+/**
+ * GitHub API로 Issue에서 라벨 제거
+ * @param {number} issueNumber
+ * @param {string} label
+ */
+async function removeGitHubLabel(issueNumber, label) {
+  const { owner, repo, token } = getGitHubInfoFromEnv();
+  if (!owner || !repo || !token) return;
+
+  if (IS_DRY_RUN) {
+    console.log(`[DRY RUN] Issue #${issueNumber}에서 라벨 제거: ${label}`);
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/issues/${issueNumber}/labels/${encodeURIComponent(label)}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    );
+
+    if (res.status === 404) return; // 이미 없는 라벨
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    console.log(`🏷️ Issue #${issueNumber}에서 라벨 제거: ${label}`);
+  } catch (error) {
+    console.error(`❌ 라벨 제거 실패: Issue #${issueNumber} — ${error.message}`);
   }
 }
 
@@ -403,8 +438,22 @@ async function qualityReviewAgent(items, allDocuments) {
 
     console.log(`   📊 점수: ${finalScore} (규칙: ${ruleScore}, AI: ${aiScore})`);
 
-    // 점수 >= 임계값 + 심각한 문제 없음 → 자동 발행 (Issue 닫기)
+    // 점수 >= 임계값 + 심각한 문제 없음 → 자동 발행
+    // GITHUB_TOKEN으로 Issue 닫으면 issue-handler의 publish 워크플로우가
+    // 트리거되지 않으므로 (GitHub 보안 정책), 여기서 직접 발행 처리한다.
     if (finalScore >= QUALITY_AUTO_PUBLISH_THRESHOLD && !hasError) {
+      // 1. 문서 status를 published로 직접 변경
+      if (!IS_DRY_RUN) {
+        const newContent = updateFrontmatterStatus(doc.content, 'published');
+        if (newContent !== doc.content) {
+          await writeFile(doc.filepath, newContent);
+          console.log(`   📤 문서 발행 완료: ${doc.filepath} (draft → published)`);
+        }
+      } else {
+        console.log(`[DRY RUN] 문서 발행: ${doc.filepath} (draft → published)`);
+      }
+
+      // 2. 댓글 + 닫기 + 라벨 변경
       const commentBody = [
         `## 🤖 자동 품질 검토 결과`,
         '',
@@ -418,6 +467,8 @@ async function qualityReviewAgent(items, allDocuments) {
 
       await safeAddComment(issue.number, commentBody);
       await closeGitHubIssue(issue.number);
+      await removeGitHubLabel(issue.number, 'draft');
+      await addGitHubLabels(issue.number, ['published']);
       recordAction();
 
       actions.push({
@@ -425,6 +476,7 @@ async function qualityReviewAgent(items, allDocuments) {
         issueNumber: issue.number,
         title: issue.title,
         score: finalScore,
+        filepath: doc.filepath,
       });
 
       await addAIHistoryEntry({
