@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-20T14:48:28.321Z",
+  "collectedAt": "2026-02-20T15:47:38.938Z",
   "overview": {
     "totalDocuments": 20,
     "publishedDocuments": 9,
     "draftDocuments": 11,
     "openRequests": 18,
     "closedRequests": 16,
-    "totalAIActions": 122
+    "totalAIActions": 124
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 36,
+      "aiActions": 38,
       "documentsCreated": 11,
       "documentsModified": 6,
       "tavilyApiCalls": 33,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 613652
     },
     "last7d": {
-      "aiActions": 49,
+      "aiActions": 51,
       "documentsCreated": 12,
       "documentsModified": 8,
       "tavilyApiCalls": 36,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-20T14:54:53.589Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "콘텐츠 리뷰",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T14:53:52.769Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "지식 확장 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-20T13:41:42.277Z",
       "actionType": "quality_score",
@@ -217,31 +237,11 @@
       "durationMs": 56002,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2350
-    },
-    {
-      "timestamp": "2026-02-20T12:47:09.542Z",
-      "actionType": "generate",
-      "issueNumber": 163,
-      "documentTitle": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 56758,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2477
-    },
-    {
-      "timestamp": "2026-02-20T12:46:02.556Z",
-      "actionType": "generate",
-      "issueNumber": 177,
-      "documentTitle": "Docker Hardened Images 무료 제공: 보안 실무 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 58552,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2715
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 114,
+      "totalActions": 116,
       "totalEstimatedTokens": 64180,
       "avgDurationMs": 58986
     },
