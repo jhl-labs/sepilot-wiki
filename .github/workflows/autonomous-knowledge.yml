@@ -1,0 +1,69 @@
+name: Autonomous Knowledge
+
+on:
+  schedule:
+    # 매주 수요일 09:00 UTC (한국시간 18:00)
+    - cron: '0 9 * * 3'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'DRY_RUN 모드 (Issue 생성 건너뜀)'
+        required: false
+        default: 'false'
+      target:
+        description: '실행 대상 (all|expander|reviewer)'
+        required: false
+        default: 'all'
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: autonomous-knowledge
+  cancel-in-progress: false
+
+jobs:
+  knowledge-management:
+    runs-on: jhl-space
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun and Install
+        uses: ./.github/actions/setup-bun-install
+
+      - name: Run knowledge expander
+        if: ${{ github.event.inputs.target == 'all' || github.event.inputs.target == 'expander' || github.event.inputs.target == '' }}
+        run: bun run scripts/autonomous/knowledge-expander.js
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+
+      - name: Run content reviewer
+        if: ${{ github.event.inputs.target == 'all' || github.event.inputs.target == 'reviewer' || github.event.inputs.target == '' }}
+        run: bun run scripts/autonomous/content-reviewer.js
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+
+      - name: Commit reports
+        uses: ./.github/actions/git-commit-push
+        with:
+          message: "chore: 자율 지식 관리 보고서 업데이트"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

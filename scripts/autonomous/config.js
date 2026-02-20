@@ -75,3 +75,17 @@ export const QUALITY_AUTO_PUBLISH_THRESHOLD = parseInt(process.env.QUALITY_AUTO_
 /** Issue Processor: 활성화할 에이전트 목록 */
 export const ISSUE_PROCESSOR_ENABLED_AGENTS = (process.env.ENABLED_AGENTS || 'quality_review,maintenance,staleness,deduplication,retrigger')
   .split(',').map(s => s.trim());
+
+/* ── Knowledge Expander / Content Reviewer 설정 ── */
+
+/** Knowledge Expander: AI 확장 제안 시 최대 제안 수 */
+export const MAX_EXPANSION_SUGGESTIONS = 10;
+
+/** Content Reviewer: AI 평가 대상 최대 문서 수 */
+export const MAX_REVIEW_BATCH = 10;
+
+/** Content Reviewer: 최신성 경고 기준 (일) */
+export const FRESHNESS_WARNING_DAYS = 90;
+
+/** Content Reviewer: 최소 문서 길이 (자) */
+export const MIN_DOCUMENT_LENGTH = 500;
