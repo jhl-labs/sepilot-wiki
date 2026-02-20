@@ -6,6 +6,7 @@ status: published
 tags: ["sepilot-wiki", "기술스택", "React", "TypeScript", "Vite", "frontend", "javascript", "web", "technology-stack"]
 redirect_from:
   - projects-sepilot-wiki-technology-stack
+  - projects-sepilot-wiki-technology-stack
   - projects-technology-stack
   - projects-tech-stack
   - Projects-sepilot-wiki-tech-stack

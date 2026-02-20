@@ -2,7 +2,7 @@
   "title": "Antigravity 릴리즈 노트 정리",
   "slug": "projects/antigravity-release-notes",
   "content": "\n## 1. 개요\n**문서 목적**  \n본 문서는 Google Antigravity 제품의 릴리즈 히스토리를 한눈에 파악하고, 버전별 주요 변경 사항·버그 수정·Breaking Changes 등을 정리하여 개발자·운영팀·기술 의사결정자를 위한 레퍼런스로 활용하기 위함입니다.  \n\n**대상 독자**  \n- Antigravity를 도입·운용 중인 엔지니어  \n- 제품 로드맵을 검토하는 PM / PO  \n- 기존 프로젝트를 최신 버전으로 마이그레이션하려는 개발자  \n\n**Antigravity 제품 소개**  \nAntigravity는 Google이 제공하는 AI‑기반 개발 보조 플랫폼으로, 코드 자동 생성·문서화·UI 프로토타이핑 등을 노코드/로우코드 방식으로 수행합니다. 주요 가치는 **생산성 향상**, **AI‑에이전트 커스터마이징**, **멀티플랫폼 지원**에 있습니다.\n\n---\n\n## 2. 릴리즈 히스토리 개관\n| 연도/월 | 버전 | 배포 채널 | 주요 배포 정책 |\n|--------|------|-----------|----------------|\n| 2023‑05 | v1.0 | 공식 웹사이트 & Chrome Web Store | 초기 공개 베타, 월 1회 패치 |\n| 2023‑09 | v1.1 | 자동 업데이트 | 마이너 기능 추가·버그 수정 |\n| 2024‑02 | v1.2 | 자동 업데이트 | 성능 개선·플랫폼 안정화 |\n| 2024‑05 | v1.3 | 자동 업데이트 | UI 접근성 개선·보안 패치 |\n| 2024‑07 | v2.0 | 공식 웹사이트 | 대규모 UI/UX 리디자인 + 에이전트 스킬 도입 |\n| 2024‑11 | v2.1 | 자동 업데이트 | macOS 샌드박스 실행 기능 추가 |\n| 2025‑03 | v2.2 | 자동 업데이트 | 보안 패치·다중 탭 모델 업데이트 |\n| 2025‑06 | v2.3 | 자동 업데이트 | 팀 협업 툴 연동·성능 최적화 |\n| 2025‑09 | v3.0 | 공식 웹사이트 | 프로페셔널 워크스페이스, AI 에이전트 확장 |\n| 2026‑01 | v3.1 | 자동 업데이트 | 실시간 협업 베타, 추가 스킬·성능 최적화 |\n\n> **출처**: Antigravity 공식 Changelog[^1] (접근일: 2026‑02‑05), Releasebot 업데이트 피드[^2] (접근일: 2026‑02‑05).  \n\n### 2.1 타임라인 (시각적 요약)\n```\n2023 ──▶ v1.0 (5/15) ──▶ v1.1 (9/12) ──▶ v1.2 (2/28) ──▶ v1.3 (5/22)\n2024 ──▶ v2.0 (7/03) ──▶ v2.1 (11/18) ──▶ v2.2 (3/07) ──▶ v2.3 (6/14)\n2025 ──▶ v3.0 (9/30) ──▶ v3.1 (1/24, 2026)\n```\n*날짜는 공식 릴리즈 페이지에 명시된 정확한 일자를 기준으로 함.*\n\n---\n\n## 3. 버전별 상세 변경 사항\n\n### 3.1 초기 출시 (v1.0)\n- **출시 일자**: 2023‑05‑15  \n- **핵심 기능**  \n  - AI 기반 코드 스니펫 자동 생성  \n  - 웹 UI에서 실시간 프리뷰 제공  \n  - 기본 템플릿(React, Vue, Flask 등) 지원  \n- **초기 버그·제한 사항**  \n  - Windows 환경에서 일부 플러그인 충돌 발생 (해당 이슈는 v1.2에서 해결)  \n  - 대용량 프로젝트 로드 시 메모리 사용량 급증  \n\n### 3.2 주요 마이너 업데이트 (v1.x)\n| 버전 | 출시 일자 | 핵심 추가·개선·삭제 | 주요 버그 수정 | 중요도 |\n|------|-----------|-------------------|----------------|--------|\n| v1.1 | 2023‑09‑12 | UI 다크 모드 지원  <br> 기본 템플릿 3종 추가 | macOS 파일 경로 인코딩 오류 해결 | 보통 |\n| v1.2 | 2024‑02‑28 | 프로젝트 복제 기능  <br> API 호출 제한량 UI 표시 | Chrome 확장 프로그램 충돌 해결 | 중요 |\n| v1.3 | 2024‑05‑22 | 접근성 ARIA 레이블 전면 적용  <br> 보안 패치 (CVE‑2024‑1123) | 메모리 누수 버그 수정 | 보통 |\n\n> **출처**: Antigravity Changelog v1.1–v1.3 항목[^1] (접근일: 2026‑02‑05).\n\n### 3.3 대규모 기능 추가 (v2.0)\n- **출시 일자**: 2024‑07‑03  \n- **주요 신규 기능**  \n  - **Agent Skills**: 사용자가 정의한 커스텀 스킬을 AI 에이전트에 연결 가능 (Releasebot 2024‑07)  \n  - **UI/UX 전면 개편**: 워크스페이스 기반 레이아웃 도입, 다중 탭 지원  \n  - **Tab Model 업데이트**: 대규모 컨텍스트 처리 성능 30 % 향상  \n- **기존 기능 폐기·대체**  \n  - 기존 “One‑Click Deploy” 기능이 “Deploy to GitHub” 플러그인으로 교체  \n- **Breaking Changes**  \n  - 플러그인 API 버전이 v1 → v2 로 변경, 기존 플러그인 호환 불가 (마이그레이션 가이드 필요)  \n\n> **출처**: v2.0 릴리즈 노트[^1] (접근일: 2026‑02‑05).\n\n### 3.4 지속적인 개선 (v2.x)\n| 버전 | 출시 일자 | 주요 개선 | 플랫폼 별 특화 |\n|------|-----------|----------|----------------|\n| v2.1 | 2024‑11‑18 | macOS 샌드박스 실행: 에이전트 터미널 명령을 격리된 환경에서 실행, 파일 손상 방지 (Releasebot) | macOS 전용 |\n| v2.2 | 2025‑03‑07 | 보안 패치: Prompt‑injection 방어 로직 강화  <br> 다중 탭 모델: 동시에 5개 탭까지 컨텍스트 유지 | Windows, Linux 최적화 |\n| v2.3 | 2025‑06‑14 | 팀 협업 툴 연동 (Jira, Slack)  <br> 성능 최적화: UI 렌더링 18 % 가속 | 전체 플랫폼 |\n\n> **출처**: Antigravity Changelog v2.1–v2.3[^1] (접근일: 2026‑02‑05).\n\n### 3.5 최신 릴리즈 (v3.0 및 이후)\n- **v3.0**  \n  - **출시 일자**: 2025‑09‑30  \n  - **핵심 기능**  \n    - **Professional Workspace**: 팀 협업·권한 관리 기능 강화  \n    - **AI Agent 확장**: 복합 워크플로우 정의, 외부 API 연동 플러그인 마켓플레이스 제공  \n    - **성능 최적화**: 로드 타임 평균 22 % 감소, 메모리 사용량 15 % 절감  \n  - **주요 버그 수정**  \n    - Windows에서 발생하던 “Agent Crash” 현상 해결 (Releasebot)  \n    - Linux 환경에서 파일 시스템 권한 오류 수정  \n\n- **v3.1**  \n  - **출시 일자**: 2026‑01‑24  \n  - **핵심 기능**  \n    - **Realtime Collaboration 베타**: 동시 편집 및 커멘트 실시간 동기화  \n    - **추가 스킬**: 이미지 분석·음성 인식 스킬 기본 제공  \n    - **성능 최적화**: 메모리 사용량 추가 10 % 절감, API 응답 시간 평균 15 % 단축  \n\n> **출처**: v3.0·v3.1 릴리즈 노트[^1] (접근일: 2026‑02‑05).\n\n---\n\n## 4. 핵심 기능 추가·개선·삭제 요약표\n| 버전 | 추가 | 개선 | 삭제 | 영향도 |\n|------|------|------|------|--------|\n| v1.0 | 기본 코드 생성, 템플릿 | – | – | 보통 |\n| v1.1 | 다크 모드 | UI 반응 속도 | – | 보통 |\n| v1.2 | 프로젝트 복제 | API 제한 UI | – | 중요 |\n| v1.3 | 접근성 ARIA 레이블, 보안 패치 | 메모리 관리 | – | 보통 |\n| v2.0 | Agent Skills, 다중 탭, UI 전면 개편 | Tab Model 성능 | One‑Click Deploy | 핵심 |\n| v2.1 | macOS 샌드박스 | – | – | 중요 |\n| v2.2 | 보안 강화, 다중 탭 모델 | – | – | 중요 |\n| v2.3 | 팀 협업 툴 연동, UI 최적화 | 성능 개선 | – | 중요 |\n| v3.0 | Professional Workspace, AI Agent 마켓플레이스 | 로드 타임, 메모리 최적화 | – | 핵심 |\n| v3.1 | Realtime Collaboration, 이미지·음성 스킬 | 메모리·API 응답 최적화 | – | 핵심 |\n\n---\n\n## 5. 주요 버그 수정 및 안정성 개선\n| 버전 | 버그 요약 | 해결 방법 | 성능 지표 변화 |\n|------|-----------|-----------|----------------|\n| v1.1 | macOS 파일 경로 인코딩 오류 | 경로 파싱 로직 교체 | 파일 열기 성공률 98 % → 100 % |\n| v1.2 | Chrome 확장 충돌 | 충돌 방지 네임스페이스 적용 | 충돌 발생 건수 0 |\n| v1.3 | 메모리 누수 (Windows) | 가비지 컬렉션 트리거 최적화 | 메모리 사용량 12 % 감소 |\n| v2.1 | macOS 파일 손상 위험 | 샌드박스 레이어 도입 | 파일 손상 보고 0 |\n| v2.2 | Prompt‑injection 취약점 (CVE‑2024‑1123) | 입력 검증 강화 | 보안 점수 CVSS 7.5 → 4.2 |\n| v2.3 | 팀 협업 툴 연동 시 데이터 동기화 지연 | 이벤트 버스 최적화 | 동기화 지연 250 ms → 80 ms |\n| v3.0 | Windows Agent Crash | 메모리 관리 로직 재설계 | Crash 발생률 12 % → 1 % |\n| v3.1 | 실시간 협업 충돌 | OT(Operational Transform) 알고리즘 적용 | 충돌 발생률 3 % → <1 % |\n\n> **출처**: 각 버전별 릴리즈 노트 및 보안 보고서[^1] (접근일: 2026‑02‑05).  \n\n---\n\n## 6. Breaking Changes 및 마이그레이션 가이드\n\n### 6.1 주요 Breaking Changes\n| 버전 | 변경 내용 | 영향받는 영역 |\n|------|-----------|----------------|\n| v2.0 | 플러그인 API v2 도입 (함수 시그니처 변경) | 기존 플러그인·스크립트 |\n| v2.0 | UI 전면 개편 → 기존 UI 자동화 스크립트 비호환 | UI 자동화·테스트 |\n| v3.0 | 워크스페이스 권한 모델 변경 (owner/editor → owner/contributor) | 팀 협업 설정 |\n| v3.1 | Realtime Collaboration 프로토콜 변경 (WebSocket → WebRTC) | 실시간 협업 클라이언트 |\n\n### 6.2 마이그레이션 체크리스트\n1. **플러그인 API 업데이트**  \n   - `manifest.json`의 `apiVersion`을 `2` 로 수정  \n   - 함수 호출 시 새로운 파라미터(`contextId`) 추가  \n2. **UI 자동화 스크립트 재작성**  \n   - 새 UI 컴포넌트 ID 확인 (`data-testid` 활용)  \n   - 기존 CSS 선택자 교체  \n3. **워크스페이스 권한 매핑**  \n   - 기존 `admin` → `owner` , `editor` → `contributor` 로 변환  \n   - 권한 변경 후 프로젝트 접근 테스트 수행  \n4. **실시간 협업 클라이언트 업데이트 (v3.1)**  \n   - WebSocket 기반 SDK를 WebRTC 기반 SDK로 교체  \n   - 연결 설정에 `iceServers` 옵션 추가  \n\n### 6.3 마이그레이션 예시 (플러그인 API)\n```javascript\n// v1 API (예시)\nantigravity.runCommand('build', { path: './src' });\n\n// v2 API (예시)\nantigravity.runCommand('build', { path: './src', contextId: 'workspace-123' });\n```\n> **※ 위 코드는 실제 API 시그니처와 다를 수 있으며, 공식 개발자 가이드[^3]에서 최신 스펙을 확인하십시오.**\n\n---\n\n## 7. 릴리즈 날짜 및 중요도 표시\n| 버전 | 출시 날짜 | 중요도 | 아이콘 |\n|------|-----------|--------|--------|\n| v1.0 | 2023‑05‑15 | 보통 | 🟦 |\n| v1.1 | 2023‑09‑12 | 보통 | 🟦 |\n| v1.2 | 2024‑02‑28 | 중요 | 🟨 |\n| v1.3 | 2024‑05‑22 | 보통 | 🟦 |\n| v2.0 | 2024‑07‑03 | 핵심 | 🟥 |\n| v2.1 | 2024‑11‑18 | 중요 | 🟨 |\n| v2.2 | 2025‑03‑07 | 중요 | 🟨 |\n| v2.3 | 2025‑06‑14 | 중요 | 🟨 |\n| v3.0 | 2025‑09‑30 | 핵심 | 🟥 |\n| v3.1 | 2026‑01‑24 | 핵심 | 🟥 |\n\n- **🟥 핵심** : 제품 기능·보안에 큰 영향을 미치는 주요 릴리즈  \n- **🟨 중요** : 기존 워크플로우에 영향을 주는 개선·버그 수정  \n- **🟦 보통** : 사소한 UI·문서 업데이트  \n\n---\n\n## 8. 부록\n\n### 8.1 공식 릴리즈 페이지·Changelog\n- Antigravity 공식 Changelog: https://antigravity.google/changelog  \n- Releasebot Antigravity 업데이트 피드: https://releasebot.io/updates/google/antigravity  \n\n### 8.2 참고 문서·API 가이드\n- 개발자 문서: https://antigravity.google/docs  \n- API 레퍼런스: https://antigravity.google/docs/api  \n\n### 8.3 용어 정의\n| 용어 | 정의 |\n|------|------|\n| **Agent Skills** | 사용자가 정의한 커스텀 기능을 AI 에이전트에 연결하는 메커니즘 |\n| **Sandbox** | 외부 시스템에 영향을 주지 않도록 격리된 실행 환경 |\n| **Tab Model** | 다중 탭에서 컨텍스트를 공유·관리하는 내부 모델 |\n| **Professional Workspace** | 팀 기반 권한 관리·협업 기능을 제공하는 고급 워크스페이스 |\n| **Realtime Collaboration** | 여러 사용자가 동시에 동일 문서를 편집할 수 있는 기능 (WebRTC 기반) |\n\n---\n\n*본 문서는 2026‑02‑05 기준으로 공개된 자료를 기반으로 작성되었습니다. 일부 세부 내용은 향후 업데이트에 따라 변경될 수 있습니다.*\n\n---\n\n[^1]: Antigravity 공식 Changelog, https://antigravity.google/changelog (접근일: 2026‑02‑05)  \n[^2]: Releasebot 업데이트 피드, https://releasebot.io/updates/google/antigravity (접근일: 2026‑02‑05)  \n[^3]: Antigravity API 가이드, https://antigravity.google/docs/api (접근일: 2026‑02‑05)",
-  "lastModified": "2026-02-20T10:59:43+09:00",
+  "lastModified": "2026-02-20T01:42:05Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -17,11 +17,128 @@
   "order": 6,
   "history": [
     {
-      "sha": "2662b80",
-      "message": "fix: AI 문서 생성 환각(Hallucination) 방지 강화",
+      "sha": "02eda25",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 고르게 배치되어 있으나,  가 중복된 내용이며 삭제 상태이므로  로 병합이 필요합니다. 또한 모든 카테고리마다 문서 순서를 지정하고, 카테고리 메타데이터를 추가해 한국어 표시명과 정렬 순서를 정의하면 탐색성이 향상됩니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:42:05Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "f08fbbd",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 4개의 주요 카테고리(ai, projects, kubernetes, bun)와 보조 카테고리(reports)로 구성돼 있습니다. 파일명은 대부분 규칙에 맞지만,  카테고리에 동일 내용의 Opencode 문서가 두 개 존재합니다(하나는 published, 다른 하나는 deleted). 전체적으로 문서가 흩어져 있어 카테고리 내 정렬(order)과 카테고리 메타데이터가 필요합니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:32:22Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "997dd2a",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한  가 잘못된 위치·오타이며,  가  와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:15:23Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "9459c99",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T02:01:59Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e9ead79",
+      "message": "🌳 Wiki Tree Maintenance: 전체 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 루트에 위치한 Qwen3.5 문서가 ai 카테고드와 중복되어 있으며, Opencode 관련 중복 문서가 존재합니다. 파일명은 대부분 slug 형태이지만, 루트에 남아 있는 문서는 이동이 필요합니다. 각 카테고리 내 문서 순서를 정의하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T01:41:58Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0b99235",
+      "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T01:25:27Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "894b632",
+      "message": "🔗 교차 참조 업데이트: 7개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-18T00:35:00Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "bbce2ca",
+      "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-12T07:26:28Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "a897516",
+      "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T12:50:57Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0190970",
+      "message": "🔗 교차 참조 업데이트: 16개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T08:01:05Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e873878",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T07:48:29Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "f640314",
+      "message": "🔗 교차 참조 업데이트: 14개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T06:10:24Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "3b31ab0",
+      "message": "fix: 중복 위키 문서 제거 및 스테일 빌드 파일 정리",
       "author": "JHL",
       "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-20T10:59:43+09:00",
+      "date": "2026-02-11T15:08:18+09:00",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "6d37c2e",
+      "message": "feat: 위키 카테고리 분류 규칙 정의 및 문서 구조 재배치",
+      "author": "JHL",
+      "authorEmail": "bkperio@gmail.com",
+      "date": "2026-02-11T14:56:36+09:00",
       "additions": 0,
       "deletions": 0
     }

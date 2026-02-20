@@ -7,7 +7,7 @@ status: "draft"
 issueNumber: 359
 createdAt: "2026-02-20T01:40:00Z"
 updatedAt: "2026-02-20T01:40:00Z"
-order: 1
+order: 3
 ---
 
 # Gemini 3.1

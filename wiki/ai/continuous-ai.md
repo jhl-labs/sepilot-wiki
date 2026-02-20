@@ -12,7 +12,7 @@ redirect_from:
   - ci-continuous-ai
   - ci-continuous-ai-kr
 related_docs: ["multi-agent-system.md"]
-order: 6
+order: 7
 ---
 
 # Continuous AI 실천: 에이전트형 CI로 오늘 자동화할 수 있는 작업

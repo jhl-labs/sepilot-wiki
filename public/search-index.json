@@ -9,7 +9,7 @@
       "주간",
       "통계"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-19T01:41:58Z",
     "author": "SEPilot AI"
   },
   {
@@ -24,8 +24,8 @@
       "version",
       "changelog"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
-    "author": "JHL"
+    "lastModified": "2026-02-11T08:01:05Z",
+    "author": "github-actions[bot]"
   },
   {
     "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
@@ -44,7 +44,7 @@
       "networking",
       "load-balancer"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -58,7 +58,7 @@
       "멀티채널",
       "오픈소스"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -76,26 +76,7 @@
       "IDE 통합",
       "워크플로우"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
-    "author": "SEPilot AI"
-  },
-  {
-    "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
-    "slug": "projects/sepilot-wiki-technology-stack",
-    "content": "기술 스택\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n프론트엔드\nReact 18 - UI 라이브러리\nTypeScript - 타입 안전성을 위한 정적 타입 언어\nVite - 빌드 도구 및 개발 서버\nReact Router DOM - SPA 라우팅\nTanStack Query (React Query) - 서버 상태 관리\nNext.js 사용 여부\nSEPilot Wiki는 Next.js를 사용하지 않습니다.\n대신 Vite와 React를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\nNext.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n마크다운 렌더링\nreact-markdown - 마크다운 파싱 및 렌더링\nremark-gfm - GitHub Flavored Markdown 지원\nrehype-raw - HTML 태그 지원\nrehype-sanitize - XSS 방지를 위한 HTML 살균\nreact-syntax-highlighter - 코드 구문 강조\n스타일링\nCSS Variables - 테마 시스템\nLucide React - 아이콘 라이브러리\n개발 도구\nESLint - 코드 린팅\nVitest - 테스트 프레임워크\nHusky - Git hooks\nCI/CD\nGitHub Actions - 자동화 워크플로우\nGitHub Pages - 정적 사이트 호스팅\nBun - 패키지 매니저 및 런타임\nAI 통합\nOpenAI API 호환 - LLM을 통한 문서 자동 생성\n참고 링크\nSEPilot Wiki GitHub Repository",
-    "excerpt": "기술 스택\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n프론트엔드\nReact 18 - UI 라이브러리\nTypeScript - 타입 안전성을 위한 정적 타입 언어\nVite - 빌드 도구 및 개발 서버\nReact Router DOM - SPA 라우팅\nTanStack Query (React Query) - 서버 상태 관리\nNext.js...",
-    "tags": [
-      "sepilot-wiki",
-      "기술스택",
-      "React",
-      "TypeScript",
-      "Vite",
-      "frontend",
-      "javascript",
-      "web",
-      "technology-stack"
-    ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:15:23Z",
     "author": "SEPilot AI"
   },
   {
@@ -110,7 +91,7 @@
       "Goose CLI",
       "비교"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -128,8 +109,27 @@
       "application",
       "ai-assistant"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
-    "author": "JHL"
+    "lastModified": "2026-02-20T01:15:23Z",
+    "author": "GitHub Action"
+  },
+  {
+    "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
+    "slug": "projects/sepilot-technology-stack",
+    "content": "기술 스택\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n프론트엔드\nReact 18 - UI 라이브러리\nTypeScript - 타입 안전성을 위한 정적 타입 언어\nVite - 빌드 도구 및 개발 서버\nReact Router DOM - SPA 라우팅\nTanStack Query (React Query) - 서버 상태 관리\nNext.js 사용 여부\nSEPilot Wiki는 Next.js를 사용하지 않습니다.\n대신 Vite와 React를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\nNext.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n마크다운 렌더링\nreact-markdown - 마크다운 파싱 및 렌더링\nremark-gfm - GitHub Flavored Markdown 지원\nrehype-raw - HTML 태그 지원\nrehype-sanitize - XSS 방지를 위한 HTML 살균\nreact-syntax-highlighter - 코드 구문 강조\n스타일링\nCSS Variables - 테마 시스템\nLucide React - 아이콘 라이브러리\n개발 도구\nESLint - 코드 린팅\nVitest - 테스트 프레임워크\nHusky - Git hooks\nCI/CD\nGitHub Actions - 자동화 워크플로우\nGitHub Pages - 정적 사이트 호스팅\nBun - 패키지 매니저 및 런타임\nAI 통합\nOpenAI API 호환 - LLM을 통한 문서 자동 생성\n참고 링크\nSEPilot Wiki GitHub Repository",
+    "excerpt": "기술 스택\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n프론트엔드\nReact 18 - UI 라이브러리\nTypeScript - 타입 안전성을 위한 정적 타입 언어\nVite - 빌드 도구 및 개발 서버\nReact Router DOM - SPA 라우팅\nTanStack Query (React Query) - 서버 상태 관리\nNext.js...",
+    "tags": [
+      "sepilot-wiki",
+      "기술스택",
+      "React",
+      "TypeScript",
+      "Vite",
+      "frontend",
+      "javascript",
+      "web",
+      "technology-stack"
+    ],
+    "lastModified": "2026-02-20T02:07:27.040Z",
+    "author": "SEPilot AI"
   },
   {
     "title": "Antigravity 릴리즈 노트 정리",
@@ -142,7 +142,7 @@
       "버전히스토리",
       "마이그레이션"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -157,7 +157,7 @@
       "Moltbook",
       "OpenClaw"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -175,8 +175,8 @@
       "benchmark",
       "performance"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
-    "author": "JHL"
+    "lastModified": "2026-02-11T08:01:05Z",
+    "author": "github-actions[bot]"
   },
   {
     "title": "GitHub Actions로 bun을 쓰는 방법",
@@ -194,7 +194,7 @@
       "workflow",
       "javascript-runtime"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -212,7 +212,7 @@
       "javascript-runtime",
       "package-manager"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-11T08:01:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -227,8 +227,8 @@
       "Pro",
       "Comparison"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
-    "author": "JHL"
+    "lastModified": "2026-02-20T01:42:05Z",
+    "author": "GitHub Action"
   },
   {
     "title": "MCP (Model Context Protocol) 완벽 가이드",
@@ -247,7 +247,7 @@
       "open-standard",
       "ai"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -262,7 +262,7 @@
       "MoE",
       "벤치마크"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -276,8 +276,8 @@
       "에이전트",
       "GitHub"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
-    "author": "JHL"
+    "lastModified": "2026-02-20T01:42:05Z",
+    "author": "GitHub Action"
   },
   {
     "title": "glm 5",
@@ -290,7 +290,7 @@
       "AI 서비스",
       "벤치마크"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -304,7 +304,7 @@
       "프롬프트엔지니어링",
       "소프트웨어개발"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -322,7 +322,7 @@
       "distributed-systems",
       "collaboration"
     ],
-    "lastModified": "2026-02-20T10:59:43+09:00",
+    "lastModified": "2026-02-20T01:42:05Z",
     "author": "SEPilot AI"
   },
   {
@@ -335,7 +335,8 @@
       "AI",
       "Benchmark"
     ],
-    "lastModified": "2026-02-20T02:05:42.167Z"
+    "lastModified": "2026-02-20T02:05:51Z",
+    "author": "GitHub Action"
   },
   {
     "title": "설정 파일 가이드",
