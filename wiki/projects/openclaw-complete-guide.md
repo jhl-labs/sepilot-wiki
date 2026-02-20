@@ -12,14 +12,16 @@ redirect_from:
   - projects-openclaw
 related_docs: ["moltbook-intro.md"]
 order: 1
+updatedAt: 2026-02-20
 ---
 
 ## OpenClaw 개요 및 핵심 개념
-**OpenClaw**는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 *Clawdbot*·*Moltbot*이라는 이름으로 개발되었으며, 현재는 **GitHub**(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1].
+**OpenClaw**는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 *Clawdbot*·*Moltbot*이라는 이름으로 개발되었으며, 현재는 **GitHub**(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1].  
+GitHub 레포지토리는 **213 k 스타**와 **39.7 k 포크**를 기록하고 있으며, 12 843개의 커밋이 누적되어 있습니다.
 
 ### 주요 목표
 - **항시 가동** – 언제든지 메시지를 주고받을 수 있는 AI 비서 제공  
-- **멀티채널 지원** – Telegram, Discord, WhatsApp, Slack 등 다양한 메신저와 연동  
+- **멀티채널 지원** – Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo·Zalo Personal, WebChat 등 다양한 메신저와 연동  
 - **자율 실행** – Heartbeat·스케줄러를 통해 정해진 작업을 자동으로 수행  
 - **프라이버시 보호** – 로컬 모델(Ollama) 사용 시 데이터가 외부로 유출되지 않음  
 
@@ -30,6 +32,8 @@ order: 1
 | GPT‑4o (OpenAI) | 클라우드 API | API Key |
 | Ollama (로컬) | 로컬 실행 바이너리 | 직접 호출 (REST) |
 | 기타 (Gemini, DeepSeek 등) | 클라우드 API | API Key 또는 OAuth |
+
+> **추천 모델**: Anthropic Claude Pro/Max + Opus 4.6 (장기 컨텍스트와 프롬프트‑인젝션 방어에 강점) [2]
 
 *출처: 공식 Docs – 모델 지원 페이지 (2026‑02‑10) [2]*  
 
@@ -45,7 +49,7 @@ order: 1
 ### 전체 시스템 구성
 ```
 Gateway
- ├─ Connector (Telegram, Discord, WhatsApp, Slack …)
+ ├─ Connector (Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo …)
  ├─ Scheduler / Heartbeat
  ├─ Memory Store (Long‑term Context)
  └─ Agent (Model Wrapper)
@@ -76,7 +80,7 @@ Gateway
 ---
 
 ## 주요 기능과 특징
-- **멀티채널 연동**: Telegram, Discord, WhatsApp, Slack, iMessage 등 5개 이상 공식 플러그인 제공  
+- **멀티채널 연동**: Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo·Zalo Personal, WebChat 등 10개 이상 공식 플러그인 제공  
 - **장기 메모리·컨텍스트 유지**: 대화 흐름을 SQLite 기반 Memory Store에 저장, `openclaw memory export` 로 백업 가능  
 - **자동 Heartbeat·스케줄링**: `openclaw schedule add "0 9 * * *" "remind_meetings"` 형태로 cron 표현식 사용  
 - **커스텀 프롬프트·플러그인 API**: `openclaw plugin create` 로 손쉽게 기능 확장  
@@ -91,19 +95,38 @@ Gateway
 
 ## 설치 및 설정 방법
 ### 사전 요구 사항
-- **Node.js ≥ 18** (LTS)  
+- **Node.js ≥ 22** (LTS) – 최신 릴리스에서는 Node 22 이상을 권장합니다.  
 - **Docker & Docker‑Compose** (선택적, 권장)  
 - **GPU 서버**: Ollama 사용 시 NVIDIA 드라이버 및 CUDA 12 이상 필요  
 - **Git** (소스 클론)  
 
 ### 설치 옵션
 1. **Docker Compose 한 줄 설치**  
-   `curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw/main/install.sh | bash && docker compose up -d`  
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw/main/install.sh | bash && docker compose up -d
+   ```  
 
-2. **npm/yarn 직접 설치**  
-   `git clone https://github.com/openclaw/openclaw.git && cd openclaw && npm install && npm run build && npm start`  
+2. **npm / pnpm / bun 직접 설치**  
+   ```bash
+   # npm (전역)
+   npm install -g openclaw@latest
+   # pnpm
+   pnpm add -g openclaw@latest
+   # bun (선택)
+   bun add -g openclaw@latest
+   ```  
 
-3. **로컬 바이너리 배포** (GitHub Releases) – `openclaw-linux-x64.tar.gz` 를 다운로드 후 압축 해제, 실행 파일에 실행 권한 부여  
+3. **소스 직접 빌드**  
+   ```bash
+   git clone https://github.com/openclaw/openclaw.git
+   cd openclaw
+   pnpm install
+   pnpm ui:build   # UI 의존성 자동 설치
+   pnpm build
+   pnpm openclaw onboard --install-daemon
+   ```  
+
+4. **로컬 바이너리 배포** (GitHub Releases) – `openclaw-linux-x64.tar.gz` 를 다운로드 후 압축 해제, 실행 파일에 실행 권한 부여  
 
 *출처: 설치 가이드 (2026‑02‑10) [6]*  
 
@@ -117,11 +140,15 @@ Gateway
    - OAuth 연동: `openclaw oauth register google` 후 반환된 URL을 브라우저에서 열어 인증  
 
 3. **채널 별 페어링 (예: Telegram)**  
-   `openclaw pairing generate telegram` → 출력된 코드(예: ABC123)를 Telegram Bot에 전송 → `openclaw pairing approve telegram ABC123`  
+   ```bash
+   openclaw pairing generate telegram
+   # 출력된 코드(예: ABC123)를 Telegram Bot에 전송
+   openclaw pairing approve telegram ABC123
+   ```  
 
 ### 서비스 운영
 - **systemd 서비스 예시** (`/etc/systemd/system/openclaw.service`)  
-  ```
+  ```ini
   [Unit]
   Description=OpenClaw AI Assistant
   After=network.target
@@ -148,7 +175,9 @@ Gateway
 매일 아침 7시, Gmail API와 연동된 플러그인이 최신 메일을 요약하고, 중요한 일정은 Telegram에 알림.
 
 ### 2. 개발팀 코드 리뷰·CI 알림 봇
-`openclaw plugin create ci-notifier`  
+```bash
+openclaw plugin create ci-notifier
+```  
 플러그인 내부에서 GitHub webhook을 수신하고, PR 요약을 Claude에 전달 → Discord 채널에 전송, CI 실패 시 Slack에 즉시 알림.
 
 ### 3. 고객 지원 챗봇 (WhatsApp)
@@ -171,8 +200,8 @@ WhatsApp Business API와 페어링 후, `openclaw agent set default ollama/llama
 | 항목 | OpenClaw | LangChain | AutoGPT | Microsoft Copilot |
 |------|----------|-----------|---------|-------------------|
 | 지원 모델·플러그인 생태계 | Claude, GPT‑4o, Ollama 등 다중 모델 + 자체 채널 플러그인 | 다양한 LLM 래퍼, 외부 툴 연동은 코드 기반 | OpenAI API 중심, 플러그인 제한 | Microsoft Graph, Office 연동 전용 |
-| 셀프 호스팅 난이도 | Docker Compose / npm → 중급 | Python 패키지 → 낮음 (코드 작성 필요) | Python 스크립트 → 낮음 | SaaS (호스팅 불가) |
-| 멀티채널 통합 기능 | 기본 제공 (Telegram, Discord, WhatsApp, Slack 등) | 별도 구현 필요 | 없음 | Teams, Outlook 등 Microsoft 제품에 국한 |
+| 셀프 호스팅 난이도 | Docker Compose / npm/pnpm/bun → 중급 | Python 패키지 → 낮음 (코드 작성 필요) | Python 스크립트 → 낮음 | SaaS (호스팅 불가) |
+| 멀티채널 통합 기능 | 기본 제공 (Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo·Zalo Personal, WebChat 등) | 별도 구현 필요 | 없음 | Teams, Outlook 등 Microsoft 제품에 국한 |
 | 비용 구조 | 오픈소스(무료) + 모델 사용료(클라우드) | 오픈소스(무료) + 모델 사용료 | 클라우드 API 비용 | 구독 기반(Office 365) |
 | 커뮤니티·문서 수준 | 활발한 Discord, GitHub Issues, 공식 Docs | 활발한 커뮤니티, 풍부 튜토리얼 | 제한적, GitHub 중심 | Microsoft 공식 지원 |
 

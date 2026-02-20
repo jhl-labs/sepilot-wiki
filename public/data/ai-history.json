@@ -1,6 +1,237 @@
 {
   "entries": [
     {
+      "id": "ef815dc7-eb97-4357-ad55-bc90ece0a3e3",
+      "timestamp": "2026-02-20T12:51:12.926Z",
+      "actionType": "modify",
+      "issueNumber": 182,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] projects/openclaw-complete-guide 문서 참조 URL 확인 필요",
+      "documentSlug": "projects/openclaw-complete-guide",
+      "documentTitle": "OpenClaw 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] projects/openclaw-complete-guide 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 29,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "933d8371-0462-4f16-8665-148f53a4b430",
+      "timestamp": "2026-02-20T12:50:23.745Z",
+      "actionType": "modify",
+      "issueNumber": 193,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes/kubernetes-release-notes 문서 참조 URL 확인 필요",
+      "documentSlug": "kubernetes/kubernetes-release-notes",
+      "documentTitle": "Kubernetes 버전별 릴리즈 노트",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes/kubernetes-release-notes 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 7,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "62577b6c-43ff-4621-b0a9-ebf0e42fb2c6",
+      "timestamp": "2026-02-20T12:49:44.051Z",
+      "actionType": "modify",
+      "issueNumber": 195,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes/ingress-nginx-deprecation-guide 문서 참조 URL 확인 필요",
+      "documentSlug": "kubernetes/ingress-nginx-deprecation-guide",
+      "documentTitle": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes/ingress-nginx-deprecation-guide 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 3,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "90f0d890-c262-4cc9-b3b1-6cb2cf686c15",
+      "timestamp": "2026-02-20T12:49:03.123Z",
+      "actionType": "generate",
+      "issueNumber": 161,
+      "issueTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Architecture: API Governance",
+      "documentSlug": "spotlight-on-sig-architecture-api-governance",
+      "documentTitle": "Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드",
+      "summary": "새 문서 \"Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3379
+            },
+            {
+              "step": "outline",
+              "durationMs": 6156
+            },
+            {
+              "step": "write",
+              "durationMs": 19100
+            },
+            {
+              "step": "review",
+              "durationMs": 8152
+            }
+          ],
+          "totalDurationMs": 36787,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1671,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5d134d2e-114a-4736-ba5c-d99c549628e4",
+      "timestamp": "2026-02-20T12:48:18.507Z",
+      "actionType": "generate",
+      "issueNumber": 162,
+      "issueTitle": "[Wiki Maintenance] [요청] Introducing Node Readiness Controller",
+      "documentSlug": "introducing-node-readiness-controller",
+      "documentTitle": "Introducing Node Readiness Controller",
+      "summary": "새 문서 \"Introducing Node Readiness Controller\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 9012
+            },
+            {
+              "step": "outline",
+              "durationMs": 9164
+            },
+            {
+              "step": "write",
+              "durationMs": 23691
+            },
+            {
+              "step": "review",
+              "durationMs": 14135
+            }
+          ],
+          "totalDurationMs": 56002,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2350,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "40b4ffbf-dabc-47aa-af39-2cbd51c16c7f",
+      "timestamp": "2026-02-20T12:47:09.542Z",
+      "actionType": "generate",
+      "issueNumber": 163,
+      "issueTitle": "[Wiki Maintenance] [요청] New Conversion from cgroup v1 CPU Shares to v2 CPU Weight",
+      "documentSlug": "new-conversion-from-cgroup-v1-cpu-shares-to-v2-cpu",
+      "documentTitle": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
+      "summary": "새 문서 \"cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 7227
+            },
+            {
+              "step": "outline",
+              "durationMs": 6593
+            },
+            {
+              "step": "write",
+              "durationMs": 36291
+            },
+            {
+              "step": "review",
+              "durationMs": 6647
+            }
+          ],
+          "totalDurationMs": 56758,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2477,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "aee7928e-8a63-489d-8b96-4ccf6c0cfd94",
+      "timestamp": "2026-02-20T12:46:02.556Z",
+      "actionType": "generate",
+      "issueNumber": 177,
+      "issueTitle": "[Wiki Maintenance] [요청] Hardened Images Are Free. Now What?",
+      "documentSlug": "hardened-images-are-free-now-what",
+      "documentTitle": "Docker Hardened Images 무료 제공: 보안 실무 가이드",
+      "summary": "새 문서 \"Docker Hardened Images 무료 제공: 보안 실무 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4255
+            },
+            {
+              "step": "outline",
+              "durationMs": 11208
+            },
+            {
+              "step": "write",
+              "durationMs": 36057
+            },
+            {
+              "step": "review",
+              "durationMs": 7032
+            }
+          ],
+          "totalDurationMs": 58552,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2715,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "905247e3-39c7-4691-abaa-f4b0a9b20fdc",
       "timestamp": "2026-02-20T12:40:26.272Z",
       "actionType": "generate",
@@ -2024,5 +2255,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-20T12:40:26.272Z"
+  "lastUpdated": "2026-02-20T12:51:12.926Z"
 }

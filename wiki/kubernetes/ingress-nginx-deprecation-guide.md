@@ -8,6 +8,7 @@ redirect_from:
   - ingress-nginx-statement-from-the-kubernetes-steeri
 related_docs: ["kubernetes-release-notes.md"]
 order: 2
+updatedAt: 2026-02-20
 ---
 
 ## 개요
@@ -102,6 +103,8 @@ kubectl get pods --all-namespaces --selector app.kubernetes.io/name=ingress-ngin
 - 현재 사용 중인 라우팅 기능(예: TLS Passthrough, Rewrite)과의 매핑 가능성  
 - 운영팀의 기술 스택 및 학습 비용  
 - 클라우드 제공자와의 호환성  
+
+> **참고**: Ingress NGINX 레포지토리(`https://github.com/kubernetes/ingress-nginx`)의 *Usage warnings* 섹션에서도 “이미 사용 중이 아닌 경우 배포하지 말고, 대신 Gateway API 구현을 찾아 사용하라”는 권고가 있습니다. 마이그레이션 계획 수립 시 이 권고를 반영해 사전 검토를 진행하십시오.
 
 ## 구현 가이드 개요
 ### Gateway API 도입 기본 흐름

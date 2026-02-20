@@ -1,6 +1,130 @@
 {
   "issues": [
     {
+      "id": 161,
+      "number": 161,
+      "title": "[Wiki Maintenance] [요청] Spotlight on SIG Architecture: API Governance",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/\n**관련도**: 80/100\n\n## 감지 내용\n&lt;p>&lt;em>This is the fifth interview of a SIG Architecture Spotlight series that covers the different\nsubprojects, and we will be covering &lt;a href=\"https://github.com/kubernetes/community/blob/master/sig-architecture/README.md#architecture-and-api-governance-1\">SIG Architecture: API\nGovernanc\n\n## 판단 근거\nKubernetes API governance is a core architectural topic not yet covered in the Wiki; high relevance for developers and cluster operators.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-02-20T12:49:03.123Z",
+      "updated_at": "2026-02-20T12:49:03.125Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/161",
+      "documentSlug": "spotlight-on-sig-architecture-api-governance",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/spotlight-on-sig-architecture-api-governance.md",
+      "comments": 0
+    },
+    {
+      "id": 162,
+      "number": 162,
+      "title": "[Wiki Maintenance] [요청] Introducing Node Readiness Controller",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/\n**관련도**: 78/100\n\n## 감지 내용\n&lt;img style=\"float: right; display: inline-block; margin-left: 2em; max-width: 15em;\" src=\"./node-readiness-controller-logo.svg\" alt=\"Logo for node readiness controller\" />\n&lt;p>In the standard Kubernetes model, a node’s suitability for workloads hinges on a single binary &amp;quot;Ready&amp;quot\n\n## 판단 근거\nNode Readiness Controller introduces a new control plane feature that impacts scheduling and reliability; worth a dedicated article.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-02-20T12:48:18.507Z",
+      "updated_at": "2026-02-20T12:48:18.508Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/162",
+      "documentSlug": "introducing-node-readiness-controller",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/introducing-node-readiness-controller.md",
+      "comments": 0
+    },
+    {
+      "id": 163,
+      "number": 163,
+      "title": "[Wiki Maintenance] [요청] New Conversion from cgroup v1 CPU Shares to v2 CPU Weight",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/\n**관련도**: 75/100\n\n## 감지 내용\n&lt;p>I'm excited to announce the implementation of an improved conversion formula\nfrom cgroup v1 CPU shares to cgroup v2 CPU weight. This enhancement addresses\ncritical issues with CPU priority allocation for Kubernetes workloads when\nrunning on systems with cgroup v2.&lt;/p>\n&lt;h2 id=\"background\"\n\n## 판단 근거\nThe cgroup v1→v2 CPU‑share conversion affects resource management on modern Linux kernels; a technical guide is valuable.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-02-20T12:47:09.543Z",
+      "updated_at": "2026-02-20T12:47:09.544Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/163",
+      "documentSlug": "new-conversion-from-cgroup-v1-cpu-shares-to-v2-cpu",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/new-conversion-from-cgroup-v1-cpu-shares-to-v2-cpu.md",
+      "comments": 0
+    },
+    {
+      "id": 177,
+      "number": 177,
+      "title": "[Wiki Maintenance] [요청] Hardened Images Are Free. Now What?",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Docker Blog\n**URL**: https://www.docker.com/blog/hardened-images-free-now-what/\n**관련도**: 85/100\n\n## 감지 내용\nDocker Hardened Images are now free, covering Alpine, Debian, and over 1,000 images including databases, runtimes, and message buses. For security teams, this changes the economics of container vulnerability management. DHI includes security fixes from Docker’s security team, which simplifies securi\n\n## 판단 근거\nDocker Hardened Images becoming free is a significant shift for container security and vulnerability management.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-02-20T12:46:02.556Z",
+      "updated_at": "2026-02-20T12:46:02.560Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/177",
+      "documentSlug": "hardened-images-are-free-now-what",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/hardened-images-are-free-now-what.md",
+      "comments": 0
+    },
+    {
       "id": 178,
       "number": 178,
       "title": "[Wiki Maintenance] [요청] Automate repository tasks with GitHub Agentic Workflows",
@@ -847,5 +971,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-02-20T12:40:26.274Z"
+  "lastUpdated": "2026-02-20T12:49:03.125Z"
 }
