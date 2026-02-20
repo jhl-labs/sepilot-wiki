@@ -183,6 +183,7 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
       OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
 
   handle-question-label:
     if: github.event.action == 'labeled' && github.event.label.name == 'question'

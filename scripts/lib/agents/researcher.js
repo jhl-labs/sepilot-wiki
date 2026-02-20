@@ -17,9 +17,15 @@ export class ResearcherAgent extends BaseAgent {
 주어진 주제에 대해 웹 검색 결과와 참고 자료를 분석하여
 핵심 정보를 구조화된 형태로 정리합니다.
 
+## 핵심 원칙 (Grounding - 반드시 준수)
+- 제공된 검색 결과와 참고 자료에만 기반하여 분석하세요.
+- 검색 결과에 없는 정보를 추가하거나 지어내지 마세요.
+- 구체적인 수치(벤치마크, 파라미터 수, 성능 지표 등)는 출처가 명확한 경우에만 포함하세요.
+- 자료가 부족하면 "자료 부족으로 충분한 분석 불가"라고 솔직하게 표기하세요.
+
 규칙:
 - 사실 기반의 정보만 포함
-- 출처를 명확히 표기
+- 출처를 명확히 표기 (URL 포함)
 - 한국어로 분석 결과 작성
 - JSON 형식으로 응답
 
@@ -59,10 +65,19 @@ export class ResearcherAgent extends BaseAgent {
     // 3. LLM으로 종합 분석
     const researchData = this.buildResearchData(tavilyResults, urlResults);
 
+    // 자료 부재 시 fallback 처리
+    const hasResearchData = tavilyResults.length > 0 || urlResults.length > 0;
+    const groundingNotice = hasResearchData
+      ? '수집된 자료에 없는 정보는 절대 추가하지 마세요. 모든 정보는 아래 자료에서만 추출하세요.'
+      : '⚠️ 수집된 자료가 없습니다. summary에 "자료 부족으로 충분한 분석 불가"라고 작성하고, keyConcepts와 sources는 빈 배열로 반환하세요.';
+
     const prompt = `다음 주제에 대한 리서치 자료를 분석하고 정리해주세요.
 
 ## 주제: ${topic}
 ## 요청 내용: ${issueBody || '(추가 설명 없음)'}
+
+## 중요 지시사항
+${groundingNotice}
 
 ## 수집된 자료
 ${researchData}

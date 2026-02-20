@@ -130,11 +130,27 @@ ${researchText || '(리서치 자료 없음)'}
  * @returns {Promise<string>}
  */
 async function stepWrite(context, outline, researchText, existingDocsContext) {
+  // 리서치 자료 유무에 따른 동적 주의문
+  const hasResearch = researchText && researchText.trim() && researchText !== '(리서치 자료 없음)';
+  const groundingNotice = hasResearch
+    ? `## Grounding 원칙 (가장 중요 - 반드시 준수)
+- 위의 리서치 자료에 있는 정보에만 기반하여 작성하세요.
+- 리서치 자료에 없는 구체적 수치(벤치마크, 파라미터 수, 성능 지표 등)를 절대 지어내지 마세요.
+- 리서치 자료에 없는 URL을 만들어내지 마세요.
+- 정보 출처를 인라인으로 표기하세요 (예: "~에 따르면", "[출처](URL)").`
+    : `## Grounding 원칙 (가장 중요 - 반드시 준수)
+- ⚠️ 리서치 자료가 없습니다. 일반적인 개념 설명만 작성하세요.
+- 구체적인 수치, 벤치마크 점수, 파라미터 수, 출시일 등을 절대 작성하지 마세요.
+- 존재 여부가 불확실한 URL을 절대 포함하지 마세요.
+- 확인되지 않은 정보는 "공식 문서를 참조해주세요"로 안내하세요.`;
+
   const systemPrompt = `당신은 SEPilot Wiki의 기술 문서 작성 AI입니다.
 주어진 아웃라인과 리서치 자료를 바탕으로 완전한 기술 문서를 작성합니다.
 
+${groundingNotice}
+
 ## 핵심 원칙
-- 확실하게 알고 있는 사실만 작성하세요.
+- 리서치 자료에 근거한 사실만 작성하세요.
 - 불확실한 정보나 추측은 절대 포함하지 마세요.
 - 모르는 내용은 "추가 조사가 필요합니다"라고 명시하세요.
 
@@ -178,7 +194,7 @@ ${researchText || '(리서치 자료 없음)'}
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
     ],
-    { temperature: 0.3, maxTokens: 8000 }
+    { temperature: 0.1, maxTokens: 8000 }
   );
 }
 
