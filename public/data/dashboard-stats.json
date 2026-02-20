@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-02-20T00:53:41.478Z",
+  "collectedAt": "2026-02-20T02:20:18.693Z",
   "overview": {
-    "totalDocuments": 19,
+    "totalDocuments": 20,
     "publishedDocuments": 8,
-    "draftDocuments": 11,
-    "openRequests": 7,
+    "draftDocuments": 12,
+    "openRequests": 8,
     "closedRequests": 16,
-    "totalAIActions": 86
+    "totalAIActions": 95
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 7,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 3,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 6,
+      "aiActions": 9,
       "documentsCreated": 1,
-      "documentsModified": 2,
+      "documentsModified": 3,
       "tavilyApiCalls": 3,
       "tavilyResults": 9,
-      "estimatedTokens": 3094,
-      "totalPipelineDurationMs": 65444
+      "estimatedTokens": 3250,
+      "totalPipelineDurationMs": 68722
     },
     "last7d": {
-      "aiActions": 15,
-      "documentsCreated": 1,
-      "documentsModified": 2,
-      "tavilyApiCalls": 3,
-      "tavilyResults": 9,
-      "estimatedTokens": 3094,
-      "totalPipelineDurationMs": 65444
+      "aiActions": 24,
+      "documentsCreated": 2,
+      "documentsModified": 5,
+      "tavilyApiCalls": 6,
+      "tavilyResults": 18,
+      "estimatedTokens": 6344,
+      "totalPipelineDurationMs": 134166
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-20T02:09:32.848Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T02:07:04.417Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T02:05:42.094Z",
+      "actionType": "recover",
+      "issueNumber": 186,
+      "documentTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T01:41:13.185Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T01:37:20.713Z",
+      "actionType": "recover",
+      "issueNumber": 186,
+      "documentTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T01:31:49.864Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T01:30:27.820Z",
+      "actionType": "recover",
+      "issueNumber": 186,
+      "documentTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T01:14:57.347Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-20T01:13:32.930Z",
+      "actionType": "generate",
+      "issueNumber": 186,
+      "documentTitle": "Gemini 3.1",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 68722,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3250
+    },
     {
       "timestamp": "2026-02-19T02:01:28.392Z",
       "actionType": "maintain",
@@ -147,103 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-15T09:06:12.916Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "학습 루프",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-15T03:00:00.965Z",
-      "actionType": "coverage_analysis",
-      "issueNumber": null,
-      "documentTitle": "문서 커버리지 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-13T09:21:17.224Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-13T09:21:07.513Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-12T07:26:00.715Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-12T07:25:13.200Z",
-      "actionType": "generate",
-      "issueNumber": 160,
-      "documentTitle": "glm 5",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 39971,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1525
-    },
-    {
-      "timestamp": "2026-02-12T00:23:27.280Z",
-      "actionType": "publish",
-      "issueNumber": 156,
-      "documentTitle": "[요청] opencode",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-11T12:50:33.733Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-11T12:49:41.466Z",
-      "actionType": "generate",
-      "issueNumber": 158,
-      "documentTitle": "바이브 코딩이란?",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 41234,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1875
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 79,
-      "totalEstimatedTokens": 37001,
-      "avgDurationMs": 61693
+      "totalActions": 88,
+      "totalEstimatedTokens": 40251,
+      "avgDurationMs": 62195
     },
     "unknown": {
       "totalActions": 7,
