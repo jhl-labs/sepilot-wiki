@@ -5,7 +5,7 @@ author: SEPilot AI
 status: draft
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]
 related_docs: ["multi-agent-system.md", "claude-code-release-history.md"]
-order: 1
+order: 4
 ---
 
 ## 1. MCP란 무엇인가  
