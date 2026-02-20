@@ -11,7 +11,7 @@
 import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import { loadAllDocuments } from '../lib/document-scanner.js';
-import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
+import { callOpenAI, parseJsonResponse, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
 import { updateFrontmatterField } from '../lib/frontmatter.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 import { saveReport } from '../lib/report-generator.js';
@@ -103,18 +103,9 @@ async function analyzeTagNormalization(tagStats, documents) {
     { temperature: 0.1, maxTokens: 4000, responseFormat: 'json_object' }
   );
 
-  const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
-    console.warn('⚠️ AI 응답에서 JSON을 추출할 수 없습니다');
-    return { merges: [], suggestions: [], taxonomy: {} };
-  }
-
-  try {
-    return JSON.parse(jsonMatch[1] || jsonMatch[0]);
-  } catch (parseError) {
-    console.warn(`⚠️ AI 응답 JSON 파싱 실패: ${parseError.message}`);
-    return { merges: [], suggestions: [], taxonomy: {} };
-  }
+  return parseJsonResponse(response, {
+    fallback: { merges: [], suggestions: [], taxonomy: {} },
+  });
 }
 
 /**

@@ -11,7 +11,7 @@
 import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import { loadAllDocuments } from '../lib/document-scanner.js';
-import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
+import { callOpenAI, parseJsonResponse, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
 import { mergeFrontmatter } from '../lib/frontmatter.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 import { saveReport, createGitHubIssues } from '../lib/report-generator.js';
@@ -135,9 +135,8 @@ async function aiBasedScore(documents) {
       { temperature: 0.1, maxTokens: 4000 }
     );
 
-    const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\[[\s\S]*\]/);
-    if (jsonMatch) {
-      const parsed = JSON.parse(jsonMatch[1] || jsonMatch[0]);
+    const parsed = parseJsonResponse(response, { fallback: [] });
+    if (Array.isArray(parsed)) {
       results.push(...parsed);
     }
   }

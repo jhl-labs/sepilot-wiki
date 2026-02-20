@@ -28,6 +28,7 @@ import {
   parseArgs,
   findDocument,
   callOpenAI,
+  parseJsonResponse,
   getExistingDocuments,
   setGitHubOutput,
   updateFrontmatterStatus,
@@ -211,17 +212,12 @@ ${doc.found ? `## 현재 문서 내용\n\`\`\`markdown\n${doc.content}\n\`\`\`` 
   });
 
   // JSON 파싱
-  let result;
-  try {
-    const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\{[\s\S]*\}/);
-    const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : response;
-    result = JSON.parse(jsonStr);
-  } catch (e) {
-    // JSON 파싱 실패 시 안전하게 처리 - 자동 수정하지 않음
-    console.error('❌ JSON 파싱 실패:', e.message);
-    console.error('   AI 응답을 파싱할 수 없습니다. 수동 처리가 필요합니다.');
-    console.log('   AI 응답 (처음 500자):', response.slice(0, 500));
-    return { hasChanges: false, reason: 'json_parse_failed', rawResponse: response.slice(0, 1000) };
+  const result = parseJsonResponse(response, {
+    fallback: null,
+  });
+  if (!result) {
+    console.error('❌ AI 응답을 파싱할 수 없습니다. 수동 처리가 필요합니다.');
+    return { hasChanges: false, reason: 'json_parse_failed', rawResponse: String(response).slice(0, 1000) };
   }
 
   // 이전 형식 호환성 처리 (단일 action → actions 배열)

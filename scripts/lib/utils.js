@@ -201,6 +201,67 @@ export async function callOpenAI(messages, options = {}) {
 }
 
 /**
+ * AI 응답에서 JSON을 안전하게 파싱
+ * callOpenAI() 반환값의 타입(문자열/객체)에 관계없이 안전하게 JSON 추출
+ *
+ * 파싱 순서:
+ *  1. ```json 코드블록 추출
+ *  2. 최외곽 {...} 또는 [...] 추출
+ *  3. 전체 문자열 직접 JSON.parse
+ *
+ * @param {string|Object} response - callOpenAI() 반환값
+ * @param {Object} [options] - 옵션
+ * @param {*} [options.fallback=null] - 파싱 실패 시 반환할 기본값
+ * @param {boolean} [options.silent=false] - true면 경고 로그 출력 안 함
+ * @returns {Object|Array|null} 파싱된 JSON 또는 fallback 값
+ */
+export function parseJsonResponse(response, options = {}) {
+  const { fallback = null, silent = false } = options;
+
+  // 1) 문자열로 안전하게 변환
+  let text;
+  if (typeof response === 'string') {
+    text = response;
+  } else if (response != null && typeof response.toString === 'function') {
+    text = response.toString();
+  } else if (response != null && typeof response === 'object' && response.content) {
+    text = String(response.content);
+  } else {
+    text = String(response ?? '');
+  }
+
+  // 2) 빈 응답 방어
+  if (!text || !text.trim()) {
+    if (!silent) console.warn('⚠️ parseJsonResponse: 빈 AI 응답');
+    return fallback;
+  }
+
+  // 3) 파싱 시도
+  try {
+    // 3-a) ```json 코드블록
+    const codeBlockMatch = text.match(/```json\n?([\s\S]*?)\n?```/);
+    if (codeBlockMatch) {
+      return JSON.parse(codeBlockMatch[1]);
+    }
+
+    // 3-b) 최외곽 { ... } 또는 [ ... ]
+    const rawJsonMatch = text.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+    if (rawJsonMatch) {
+      return JSON.parse(rawJsonMatch[0]);
+    }
+
+    // 3-c) 전체 직접 파싱
+    return JSON.parse(text);
+  } catch (e) {
+    if (!silent) {
+      console.warn(`⚠️ parseJsonResponse: JSON 파싱 실패 - ${e.message}`);
+      console.warn(`   응답 앞부분: ${text.slice(0, 200)}`);
+    }
+    return fallback;
+  }
+}
+
+/**
  * OpenAI 설정 정보 반환
  * @returns {Object} OpenAI 설정
  */

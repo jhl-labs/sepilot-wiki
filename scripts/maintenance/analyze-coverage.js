@@ -12,7 +12,7 @@ import { resolve, join } from 'path';
 import { readdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { loadAllDocuments } from '../lib/document-scanner.js';
-import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
+import { callOpenAI, parseJsonResponse, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 import { saveReport, createGitHubIssues } from '../lib/report-generator.js';
 
@@ -109,12 +109,11 @@ async function analyzeCoverage(sourceStructure, documents) {
     { temperature: 0.1, maxTokens: 4000 }
   );
 
-  const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
+  const result = parseJsonResponse(response, { fallback: null });
+  if (!result) {
     throw new Error('AI 응답에서 JSON을 찾을 수 없습니다.');
   }
-
-  return JSON.parse(jsonMatch[1] || jsonMatch[0]);
+  return result;
 }
 
 /**

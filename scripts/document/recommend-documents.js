@@ -10,7 +10,7 @@
 
 import { resolve } from 'path';
 import { runIssueWorkflow } from '../lib/workflow.js';
-import { callOpenAI } from '../lib/utils.js';
+import { callOpenAI, parseJsonResponse } from '../lib/utils.js';
 import { loadAllDocuments } from '../lib/document-scanner.js';
 import { addIssueComment } from '../lib/report-generator.js';
 
@@ -87,13 +87,9 @@ ${JSON.stringify(docSummaries, null, 2)}
     );
 
     // JSON 파싱
-    const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      console.log('⚠️ AI 응답 파싱 실패 - 추천 건너뜀');
-      return { has_recommendations: 'false' };
-    }
-
-    const result = JSON.parse(jsonMatch[1] || jsonMatch[0]);
+    const result = parseJsonResponse(response, {
+      fallback: { hasRelated: false, relatedDocuments: [] },
+    });
 
     if (!result.hasRelated || result.relatedDocuments.length === 0) {
       console.log('ℹ️ 관련 문서 없음');

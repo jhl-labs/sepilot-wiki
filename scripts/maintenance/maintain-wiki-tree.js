@@ -15,7 +15,7 @@
 import { readFile, readdir, writeFile, rename, mkdir } from 'fs/promises';
 import { join, dirname, resolve } from 'path';
 import { existsSync } from 'fs';
-import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
+import { callOpenAI, parseJsonResponse, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 
 // 경로 설정
@@ -253,13 +253,11 @@ ${JSON.stringify(docSummaries, null, 2)}`;
   );
 
   // JSON 추출
-  const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
+  const result = parseJsonResponse(response, { fallback: null });
+  if (!result) {
     throw new Error('AI 응답에서 JSON을 찾을 수 없습니다.');
   }
-
-  const jsonStr = jsonMatch[1] || jsonMatch[0];
-  return JSON.parse(jsonStr);
+  return result;
 }
 
 /**

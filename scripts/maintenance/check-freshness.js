@@ -10,7 +10,7 @@
 
 import { resolve } from 'path';
 import { loadAllDocuments, getDaysSinceLastModified } from '../lib/document-scanner.js';
-import { callOpenAI, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
+import { callOpenAI, parseJsonResponse, getOpenAIConfig, setGitHubOutput } from '../lib/utils.js';
 import { mergeFrontmatter } from '../lib/frontmatter.js';
 import { addAIHistoryEntry } from '../lib/ai-history.js';
 import { saveReport, createGitHubIssues } from '../lib/report-generator.js';
@@ -77,14 +77,7 @@ JSON 배열로만 응답해주세요.`;
   );
 
   // JSON 추출
-  const jsonMatch = response.match(/```json\n?([\s\S]*?)\n?```/) || response.match(/\[[\s\S]*\]/);
-  if (!jsonMatch) {
-    console.warn('⚠️ AI 응답에서 JSON을 파싱할 수 없습니다.');
-    return [];
-  }
-
-  const jsonStr = jsonMatch[1] || jsonMatch[0];
-  return JSON.parse(jsonStr);
+  return parseJsonResponse(response, { fallback: [] });
 }
 
 /**

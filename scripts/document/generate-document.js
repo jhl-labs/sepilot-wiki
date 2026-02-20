@@ -26,6 +26,7 @@ import {
 import {
   parseArgs,
   callOpenAI,
+  parseJsonResponse,
   getOpenAIConfig,
   getExistingDocuments,
   setGitHubOutput,
@@ -97,15 +98,12 @@ JSON으로만 응답하세요:
       responseFormat: { type: 'json_object' },
     });
 
-    const jsonMatch = response.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      const result = JSON.parse(jsonMatch[0]);
-      if (result.category) {
-        // 카테고리 경로 검증 (영문, 숫자, 하이픈, 슬래시만 허용)
-        if (/^[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(result.category)) {
-          console.log(`📂 AI 카테고리 결정: ${result.category} (이유: ${result.reason})`);
-          return result.category;
-        }
+    const result = parseJsonResponse(response, { fallback: null, silent: true });
+    if (result?.category) {
+      // 카테고리 경로 검증 (영문, 숫자, 하이픈, 슬래시만 허용)
+      if (/^[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(result.category)) {
+        console.log(`📂 AI 카테고리 결정: ${result.category} (이유: ${result.reason})`);
+        return result.category;
       }
       console.log(`📂 AI 판단: 루트에 생성 (이유: ${result.reason || '카테고리 해당 없음'})`);
     }
