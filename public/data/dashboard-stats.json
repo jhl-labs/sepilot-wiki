@@ -1,43 +1,83 @@
 {
-  "collectedAt": "2026-02-20T11:49:33.605Z",
+  "collectedAt": "2026-02-20T12:50:19.394Z",
   "overview": {
     "totalDocuments": 20,
-    "publishedDocuments": 8,
-    "draftDocuments": 12,
-    "openRequests": 8,
+    "publishedDocuments": 9,
+    "draftDocuments": 11,
+    "openRequests": 11,
     "closedRequests": 16,
-    "totalAIActions": 98
+    "totalAIActions": 102
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
-      "documentsCreated": 0,
+      "aiActions": 4,
+      "documentsCreated": 3,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 9,
+      "tavilyResults": 20,
+      "estimatedTokens": 7581,
+      "totalPipelineDurationMs": 182614
     },
     "last24h": {
-      "aiActions": 12,
-      "documentsCreated": 1,
+      "aiActions": 16,
+      "documentsCreated": 4,
       "documentsModified": 3,
-      "tavilyApiCalls": 3,
-      "tavilyResults": 9,
-      "estimatedTokens": 3250,
-      "totalPipelineDurationMs": 68722
+      "tavilyApiCalls": 12,
+      "tavilyResults": 29,
+      "estimatedTokens": 10831,
+      "totalPipelineDurationMs": 251336
     },
     "last7d": {
-      "aiActions": 25,
-      "documentsCreated": 2,
+      "aiActions": 29,
+      "documentsCreated": 5,
       "documentsModified": 5,
-      "tavilyApiCalls": 6,
-      "tavilyResults": 18,
-      "estimatedTokens": 6344,
-      "totalPipelineDurationMs": 134166
+      "tavilyApiCalls": 15,
+      "tavilyResults": 38,
+      "estimatedTokens": 13925,
+      "totalPipelineDurationMs": 316780
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-20T12:40:26.272Z",
+      "actionType": "generate",
+      "issueNumber": 178,
+      "documentTitle": "Automate Repository Tasks with GitHub Agentic Workflows",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 70538,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3145
+    },
+    {
+      "timestamp": "2026-02-20T12:39:04.073Z",
+      "actionType": "generate",
+      "issueNumber": 179,
+      "documentTitle": "Continuous AI와 Agentic CI 실무 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 50375,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1578
+    },
+    {
+      "timestamp": "2026-02-20T12:38:05.357Z",
+      "actionType": "generate",
+      "issueNumber": 192,
+      "documentTitle": "Kubernetes v1.28.0 릴리스 기록 및 위키 유지 관리 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 61701,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2858
+    },
+    {
+      "timestamp": "2026-02-20T12:20:58.820Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-20T11:38:34.116Z",
       "actionType": "quality_score",
@@ -197,53 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-19T01:25:01.083Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-19T01:24:10.322Z",
-      "actionType": "generate",
-      "issueNumber": 183,
-      "documentTitle": "Qwen 3.5",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 65444,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3094
-    },
-    {
-      "timestamp": "2026-02-18T00:34:59.214Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "documentTitle": "교차 참조 업데이트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-17T09:22:13.658Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 90,
-      "totalEstimatedTokens": 40251,
-      "avgDurationMs": 62195
+      "totalActions": 94,
+      "totalEstimatedTokens": 47832,
+      "avgDurationMs": 61961
     },
     "unknown": {
       "totalActions": 8,
