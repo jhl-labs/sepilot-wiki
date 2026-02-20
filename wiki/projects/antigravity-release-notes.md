@@ -8,7 +8,7 @@ redirect_from:
   - antigravity
   - antigravity-release-notes
   - projects-antigravity
-related_docs: ["kubernetes-release-notes.md"]
+related_docs: ["kubernetes-release-notes.md", "gemini-3-1.md"]
 order: 6
 ---
 

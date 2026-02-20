@@ -91,7 +91,7 @@
       "Goose CLI",
       "비교"
     ],
-    "lastModified": "2026-02-20T01:42:05Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "SEPilot AI"
   },
   {
@@ -128,7 +128,7 @@
       "web",
       "technology-stack"
     ],
-    "lastModified": "2026-02-20T02:07:27.040Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "SEPilot AI"
   },
   {
@@ -216,21 +216,6 @@
     "author": "SEPilot AI"
   },
   {
-    "title": "gemini 3.1",
-    "slug": "ai/gemini-3-1",
-    "content": "Gemini 3.1\nGemini 3.1은 Google DeepMind에서 발표한 최신 대형 언어 모델(LLM)이며, Gemini 3.1 Pro 라는 고성능 옵션을 별도로 제공한다. 2026년 2월 19일 공식 블로그와 주요 IT 매체(TechCrunch, The Verge, VentureBeat)에서 발표된 벤치마크 결과를 종합하여 아래와 같이 정리한다.\n공식 발표 및 주요 특징\n  항목   Gemini 3.1   Gemini 3.1 Pro  \n ------ ------------ ---------------- \n  파라미터 수   175B   340B  \n  토큰 컨텍스트 길이   8,192 토큰   16,384 토큰  \n  멀티모달 지원   텍스트·이미지·오디오   텍스트·이미지·오디오·비디오  \n  출시일   2026‑02‑19   2026‑02‑19  \n  주요 개선점   - 더 효율적인 샘플링 알고리즘- 향상된 코딩 능력 (Code‑LLM)   - 초대형 파라미터 스케일링- 실시간 멀티모달 인퍼런스   \n출처: Google DeepMind 공식 블로그 – Gemini 3.1 발표 (2026‑02‑19)\n전체 벤치마크 데이터\n아래 표는 공식 블로그와 TechCrunch, The Verge, VentureBeat 등에서 제공된 모든 벤치마크 결과를 하나로 모은 것이다. 각 벤치마크는 동일한 하드웨어(A100‑40GB 8개)와 동일한 프롬프트 세트를 사용하였다.\n  벤치마크   측정 지표   Gemini 3.1   Gemini 3.1 Pro   Gemini 3.0 (baseline)  \n ---------- ----------- ------------ ---------------- ---------------------- \n  MMLU (5‑shot)   평균 정확도   78.4%   82.1%   71.3%  \n  HELM (Zero‑shot)   평균 점수   71.2   75.6   64.8  \n  BIG‑Bench (Hard)   평균 정확도   65.9%   70.3%   58.2%  \n  SWE‑Bench (Software Engineering)   Pass@1 (k=100)   48.7%   53.2%   41.5%  \n  HumanEval (Code Generation)   Pass@1 (k=100)   44.5%   49.8%   37.9%  \n  MMLU‑Code   정확도   71.0%   75.4%   63.2%  \n  ARC‑Challenge   정확도   84.2%   87.5%   78.9%  \n  Winograd Schema   정확도   92.1%   94.3%   88.7%  \n  OpenAI‑Evals (Chat)   평균 점수   78.9   82.4   70.1  \n  GLUE (SuperGLUE)   평균 점수   89.3   91.7   84.5  \n  Image‑Text Retrieval (COCO)   Recall@1   71.5%   75.8%   64.2%  \n  Video‑Q&A (MSRVTT)   Accuracy   68.2%   72.0%   60.5%  \n출처: \nGoogle DeepMind 공식 블로그 – 전체 벤치마크 표 (2026‑02‑19) \nTechCrunch – “Gemini 3.1 vs. the competition” (2026‑02‑20) \nThe Verge – “Gemini 3.1 Pro pushes LLM limits” (2026‑02‑21) \nVentureBeat – “Benchmark roundup: Gemini 3.1, GPT‑4o, Claude‑3.5” (2026‑02‑22)\n경쟁 모델과 비교\n다음 표는 동일한 벤치마크 환경에서 Gemini 3.1, Gemini 3.1 Pro, OpenAI GPT‑4o, Anthropic Claude‑3.5, Meta LLaMA‑3‑70B, Mistral‑Large‑2 를 비교한 것이다.\n  모델   파라미터   MMLU (5‑shot)   SWE‑Bench Pass@1   HumanEval Pass@1   GLUE   이미지‑텍스트 Recall@1  \n ------ ---------- -------------- ------------------ ------------------- ------ -------------------------- \n  Gemini 3.1   175B   78.4%   48.7%   44.5%   89.3   71.5%  \n  Gemini 3.1 Pro   340B   82.1%   53.2%   49.8%   91.7   75.8%  \n  GPT‑4o (OpenAI)   170B   77.1%   46.3%   42.9%   88.5   70.2%  \n  Claude‑3.5 (Anthropic)   200B   76.5%   45.8%   41.7%   87.9   69.8%  \n  LLaMA‑3‑70B (Meta)   70B   71.2%   38.4%   33.5%   82.1   62.4%  \n  Mistral‑Large‑2   123B   73.8%   40.9%   35.2%   84.0   64.7%  \n출처: 각 모델 공식 블로그 및 Hugging Face Model Card 업데이트 (2026‑02‑202026‑02‑22).\n활용 시나리오 (Wiki 스타일 팁)\n소프트웨어 엔지니어링 자동화 – SWE‑Bench 결과가 높은 Gemini 3.1 Pro는 코드 리뷰, 버그 수정, 테스트 케이스 자동 생성에 최적.\n멀티모달 콘텐츠 제작 – 비디오·오디오 지원으로 멀티미디어 스크립트 작성 및 편집에 활용 가능.\n대규모 데이터 분석 – 16k 토큰 컨텍스트를 활용해 긴 문서 요약 및 복합 질의응답에 강점.\n비교 연구 – 위 표를 그대로 복사해 논문·보고서에 인용하면 최신 LLM 성능 비교에 유용.\n참고 문헌\nDeepMind. Gemini 3.1 발표. Google DeepMind Blog, 2026‑02‑19. https://deepmind.google/blog/gemini-3-1\nTechCrunch. Gemini 3.1 vs. the competition. 2026‑02‑20. https://techcrunch.com/2026/02/20/gemini-3-1-vs-competition\nThe Verge. Gemini 3.1 Pro pushes LLM limits. 2026‑02‑21. https://www.theverge.com/2026/02/21/gemini-3-1-pro\nVentureBeat. Benchmark roundup: Gemini 3.1, GPT‑4o, Claude‑3.5. 2026‑02‑22. https://venturebeat.com/2026/02/22/benchmark-roundup-gemini-3-1\nOpenAI. GPT‑4o Technical Report. 2026‑02‑20. https://openai.com/research/gpt-4o\nAnthropic. Claude‑3.5 Release Notes. 2026‑02‑19. https://www.anthropic.com/claude-3-5\nMeta AI. LLaMA‑3 Technical Overview. 2026‑02‑18. https://ai.facebook.com/blog/llama-3\nMistral AI. Mistral‑Large‑2 Model Card. 2026‑02‑17. https://mistral.ai/models/large-2\n이 문서는 현재 draft 상태이며, 검토 후  로 전환될 예정입니다.*",
-    "excerpt": "Gemini 3.1\nGemini 3.1은 Google DeepMind에서 발표한 최신 대형 언어 모델(LLM)이며, Gemini 3.1 Pro 라는 고성능 옵션을 별도로 제공한다. 2026년 2월 19일 공식 블로그와 주요 IT 매체(TechCrunch, The Verge, VentureBeat)에서 발표된 벤치마크 결과를 종합하여 아래와 같이 정리한다....",
-    "tags": [
-      "Gemini",
-      "LLM",
-      "Benchmark",
-      "Pro",
-      "Comparison"
-    ],
-    "lastModified": "2026-02-20T01:42:05Z",
-    "author": "GitHub Action"
-  },
-  {
     "title": "MCP (Model Context Protocol) 완벽 가이드",
     "slug": "ai/mcp-model-context-protocol",
     "content": "MCP란 무엇인가  \n1.1 정의 및 핵심 개념  \nModel Context Protocol (MCP) 은 Anthropic이 2024년 11월에 공개한 오픈 표준 프로토콜이다.  \nLLM(대형 언어 모델)이 외부 시스템(데이터베이스, 파일, 웹 API 등)과 양방향으로 연결되어, 컨텍스트를 일관되게 전달·관리하고, 보안·신뢰성을 유지하도록 설계되었다.  \nHost – LLM을 실행하는 환경(예: Claude Desktop, 클라우드 서비스)  \nClient – Host가 MCP 서버에 요청을 보내는 역할, 일반적으로 SDK를 통해 구현  \nServer – Tools·Resources·Prompts 등을 제공하고, JSON‑RPC 2.0 메시지를 처리하는 중앙 엔티티  \nTool – 외부 API, CLI, 함수 등 실행 가능한 작업 단위  \nResource – 파일, DB, 웹 서비스 등 LLM이 읽고 쓸 수 있는 데이터 소스  \nPrompt – LLM에게 전달되는 컨텍스트 템플릿 및 동적 변수  \nSampling – 토큰 샘플링 파라미터(temperature, top‑p 등)를 모델과 서버가 공유·조정하는 메커니즘  \nRoot – 전체 컨텍스트 트리의 시작점(예: 사용자 세션 ID)  \n1.2 발표 배경  \n통합 병목: 기존 LLM‑외부 연동 방식은 각 서비스마다 비표준 API와 인증 로직을 구현해야 했다.  \n컨텍스트 파편화: 여러 도구를 연계할 때 모델이 이전 단계의 상태를 기억하지 못해 반복 호출이 발생했다.  \n보안·신뢰: 임의 코드 실행 위험과 데이터 유출 위험을 최소화하기 위한 통합 인증·권한 모델이 필요했다.  \nMCP는 이러한 문제를 표준화된 메시지 포맷과 역할 기반 보안으로 해결한다.  \n1.3 주요 용어 정리  \n  용어   정의  \n ------ ------ \n  Host   LLM을 포함한 애플리케이션(예: Claude Desktop)  \n  Client   Host가 MCP 서버와 통신하기 위해 사용하는 SDK  \n  Server   Tools·Resources·Prompts를 제공하고 JSON‑RPC를 구현  \n  Tool   외부 API 호출, 쉘 명령, 함수 실행 등 작업 단위  \n  Resource   파일, 데이터베이스, 웹 서비스 등 데이터 제공원  \n  Prompt   모델에 전달되는 템플릿 + 변수 구조  \n  Sampling   모델 출력 샘플링 파라미터 전파·조정  \n  Root   컨텍스트 트리의 루트(세션·작업 ID)  \nMCP 아키텍처  \n2.1 전체 구성도와 역할 구분  \nHost ↔ Client: TLS‑encrypted HTTP/HTTPS 연결, API‑Key 기반 인증.  \nClient ↔ Server: JSON‑RPC 2.0 요청/응답 흐름. 각 RPC 메서드는  형태(예: ).  \nServer ↔ Tools/Resources: 내부 플러그인 인터페이스(동기·비동기) 또는 외부 마이크로서비스 호출.  \n2.2 통신 레이어: JSON‑RPC 2.0  \n요청:   \n응답:  또는  객체.  \n알림(notification): 서버가 비동기 이벤트(예: 파일 변경) 를 Host에 푸시할 때 사용,  없이 전송.  \n공식 스펙:   \n2.3 보안·인증 메커니즘  \n  요소   설명  \n ------ ------ \n  API 키   Server‑side에 사전 등록, 요청 헤더   \n  TLS   모든 통신은 HTTPS(또는 wss) 로 암호화  \n  Scope   키당 허용된 Tool·Resource 목록을 정의(예: , )  \n  Auditing   요청·응답 로그를 JSON 형태로 저장, 선택적 서명 검증 제공  \n2.4 확장성 포인트  \n플러그인: Server는 Node.js, Python, Go 등 다양한 런타임에서 플러그인 형태로 Tool·Resource를 로드.  \n멀티‑Server 라우팅: 하나의 Host가 여러 Server에 동시에 연결 가능(예: 파일 서버 + 비즈니스 API 서버). 라우팅 정책은  메서드로 정의.  \n로드밸런싱·스케일링: Kubernetes Ingress + Horizontal Pod Autoscaler 로 수평 확장 가능.  \nMCP 핵심 기능  \n3.1 Tools  \n정의: , , ,  로 선언.  \n예시:  (REST API),  (CLI),  (Python 함수).  \n실행 흐름: Host → Client () → Server → Tool 구현체 → 결과 반환 → Host.  \n3.2 Resources  \n데이터 소스 유형: , , , .  \n읽기/쓰기 권한: , ,  로 세분화된 Scope 제공.  \n버전 관리: Resource에  혹은  메타데이터를 포함해 충돌 방지.  \n3.3 Prompts  \n템플릿: Jinja‑like 구문()을 사용해 동적 변수 삽입.  \n컨텍스트 트리: Prompt는 Root → Sub‑Prompt 형태로 계층화 가능, 각 단계마다 Sampling 파라미터를 재정의할 수 있다.  \n3.4 Sampling  \n전파 메커니즘:  메서드로 Host가 현재 temperature, top‑p 등을 Server에 전달.  \n조정 시점: Tool 실행 전후, 또는 사용자 피드백(예: “more creative”)에 따라 동적으로 변경.  \n3.5 Roots  \n역할: 세션·작업을 구분하는 고유 식별자.  \n관리: ,  로 생명주기 제어.  \n멀티‑Root: 복수 작업을 병렬 처리할 때 각각 독립된 컨텍스트 트리를 유지.  \nMCP Server 구축 방법  \n4.1 사전 준비  \n  항목   권장 버전  \n ------ ----------- \n  Node.js   >=18  \n  Python   >=3.10  \n  Docker   >=24  \n  데이터베이스 (옵션)   SQLite (개발), PostgreSQL (프로덕션)  \n4.2 공식 SDK 소개  \nTypeScript SDK:  (npm) – ,  클래스 제공.  \n  - 공식 레포:   \nPython SDK:  (PyPI) – ,  모듈 제공.  \n  - 공식 레포:   \n4.3 최소 구현 예제 (TypeScript)  \n패키지 설치  \n   \n핸들러 등록  \n   \n인증 및 스코프 설정  \n   \n주의: 위 코드는 실제 실행을 위한 최소 예시이며, 프로덕션에서는 입력 검증, 오류 처리, 로깅, 레이트 리밋 등을 추가해야 한다.  \n4.4 Python 예제 (핵심 흐름)  \n패키지 설치  \n   \n서버 구현  \n   \n4.5 설정 파일 구조  \ndocker-compose.ymlDeploymentServiceIngressSecretfile.readread:filegit.clonerepo.searchprompt.codeContextrootIdsampling.updatecrm.fetchCustomerpayment.initiatesensor.readmaintenance.schedulecatalog.searchuser.profileread:fileinvoke:weatherapiAuthorization: Bearer params.argsvalidatemcp.routing.inspectscope mismatchdefineScopeParse error` 확인   JSON 직렬화 라이브러리 사용 검증  \n8.4 참고 문서·링크 모음  \n  종류   링크  \n ------ ------ \n  공식 스펙     \n  TypeScript SDK     \n  Python SDK     \n  MCP 레지스트리     \n  Claude Desktop 소개     \n  LangChain Tools 비교     \n  OpenAI Function Calling     \n  Thoughtworks MCP 분석     \n  Udemy 강좌     \n  IAM 보안 가이드     \n--- \n본 문서는 2024‑12 기준 공개된 정보를 기반으로 작성되었습니다. 최신 버전이나 신규 기능에 대해서는 공식 사이트 및 레포지터리를 지속적으로 확인하시기 바랍니다.",
@@ -247,7 +232,7 @@
       "open-standard",
       "ai"
     ],
-    "lastModified": "2026-02-20T01:42:05Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "SEPilot AI"
   },
   {
@@ -262,7 +247,7 @@
       "MoE",
       "벤치마크"
     ],
-    "lastModified": "2026-02-20T01:42:05Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "SEPilot AI"
   },
   {
@@ -276,7 +261,7 @@
       "에이전트",
       "GitHub"
     ],
-    "lastModified": "2026-02-20T01:42:05Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "GitHub Action"
   },
   {
@@ -290,7 +275,7 @@
       "AI 서비스",
       "벤치마크"
     ],
-    "lastModified": "2026-02-20T01:42:05Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "SEPilot AI"
   },
   {
@@ -304,7 +289,7 @@
       "프롬프트엔지니어링",
       "소프트웨어개발"
     ],
-    "lastModified": "2026-02-20T01:42:05Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "SEPilot AI"
   },
   {
@@ -322,21 +307,21 @@
       "distributed-systems",
       "collaboration"
     ],
-    "lastModified": "2026-02-20T01:42:05Z",
+    "lastModified": "2026-02-20T02:07:27Z",
     "author": "SEPilot AI"
   },
   {
     "title": "Gemini 3.1 Pro",
     "slug": "ai/gemini-3-1-pro",
-    "content": "Gemini 3.1 Pro\n개요\nGemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어 모델(Large Language Model)입니다. 기존 Gemini 3 시리즈를 기반으로 복잡한 추론과 멀티모달 작업에서 크게 향상된 성능을 제공합니다. 모델은 Gemini API, Vertex AI, Gemini 앱, NotebookLM 등을 통해 접근할 수 있습니다.\n출시일: 2026‑02‑19\n입력 컨텍스트: 최대 1 M 토큰\n출력 컨텍스트: 최대 64 K 토큰\n파라미터 수: 공개되지 않음 (삭제)\n자세한 내용은 공식 블로그와 모델 카드를 참고하세요.\n공식 블로그: Gemini 3.1 Pro 발표  \n모델 카드: Gemini 3.1 Pro Model Card\n주요 벤치마크 (공식 모델 카드 기준)\n  벤치마크   점수 / 성능   비고  \n --- --- --- \n  ARC‑AGI‑2   77.1 %   새로운 논리 패턴 해결 능력\n  GPQA Diamond   94.3 %   과학 지식 평가\n  SWE‑Bench Verified   80.6 %   에이전트 기반 코딩 과제 (단일 시도)\n  Humanity's Last Exam (with tools)   51.4 %   도구 사용 포함 평가\n  MMMU‑Pro   80.5 %   멀티모달 이해 및 추론\n  LiveCodeBench Pro   2887 Elo   경쟁 코딩 문제 (Codeforces, ICPC, IOI)\n  Terminal‑Bench 2.0   68.5 %   에이전트 기반 터미널 코딩\n  MRCR v2 (128 k context)   84.9 %   장기 컨텍스트 성능\n위 수치는 모두 Gemini 3.1 Pro 모델 카드에 명시된 공식 결과이며, 다른 모델과의 직접 비교 표는 현재 확인된 데이터가 없으므로 포함하지 않았습니다.\n활용 예시\n복잡한 시스템 합성: 대규모 API와 사용자 인터페이스를 연결하는 대시보드 자동 생성\n코드 기반 애니메이션: 텍스트 프롬프트에서 SVG 애니메이션을 생성하여 파일 크기 최소화\n멀티모달 데이터 분석: 텍스트·이미지·비디오·오디오를 동시에 처리하여 종합적인 인사이트 도출\n에이전트 워크플로우: Gemini 3.1 Pro를 기반으로 한 자동화 에이전트가 복합 작업을 순차적으로 수행\n참고 자료\n공식 블로그: Gemini 3.1 Pro 발표 – https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/  \n모델 카드: Gemini 3.1 Pro – https://deepmind.google/models/model-cards/gemini-3-1-pro/  \nZDNet 기사 (벤치마크 언급) – https://www.zdnet.com/article/google-gemini-3-1-pro-release-ai-model/  \n이 문서는 유지보수자를 위해 초안(draft) 상태로 저장되었습니다. 필요에 따라 추가 검토 및 업데이트가 이루어질 수 있습니다.",
+    "content": "Gemini 3.1 Pro\n개요\nGemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어 모델(Large Language Model)입니다. 기존 Gemini 3 시리즈를 기반으로 복잡한 추론과 멀티모달 작업에서 크게 향상된 성능을 제공합니다. 모델은 Gemini API, Vertex AI, Gemini 앱, NotebookLM 등을 통해 접근할 수 있습니다.\n출시일: 2026‑02‑19\n입력 컨텍스트: 최대 1 M 토큰\n출력 컨텍스트: 최대 64 K 토큰\n파라미터 수: 공개되지 않음 (삭제)\n자세한 내용은 공식 블로그와 모델 카드를 참고하세요.\n공식 블로그: Gemini 3.1 Pro 발표  \n모델 카드: Gemini 3.1 Pro Model Card\n주요 벤치마크 (공식 모델 카드 기준)\n  벤치마크   점수 / 성능   비고  \n --- --- --- \n  ARC‑AGI‑2   77.1 %   새로운 논리 패턴 해결 능력\n  GPQA Diamond   94.3 %   과학 지식 평가\n  SWE‑Bench Verified   80.6 %   에이전트 기반 코딩 과제 (단일 시도)\n  Humanity's Last Exam (with tools)   51.4 %   도구 사용 포함 평가\n  MMMU‑Pro   80.5 %   멀티모달 이해 및 추론\n  LiveCodeBench Pro   2887 Elo   경쟁 코딩 문제 (Codeforces, ICPC, IOI)\n  Terminal‑Bench 2.0   68.5 %   에이전트 기반 터미널 코딩\n  MRCR v2 (128 k context)   84.9 %   장기 컨텍스트 성능\n위 수치는 모두 Gemini 3.1 Pro 모델 카드에 명시된 공식 결과이며, 다른 모델과의 직접 비교 표는 현재 확인된 데이터가 없으므로 포함하지 않았습니다.\n활용 예시\n복잡한 시스템 합성: 대규모 API와 사용자 인터페이스를 연결하는 대시보드 자동 생성\n코드 기반 애니메이션: 텍스트 프롬프트에서 SVG 애니메이션을 생성하여 파일 크기 최소화\n멀티모달 데이터 분석: 텍스트·이미지·비디오·오디오를 동시에 처리하여 종합적인 인사이트 도출\n에이전트 워크플로우: Gemini 3.1 Pro를 기반으로 한 자동화 에이전트가 복합 작업을 순차적으로 수행\n참고 자료\n공식 블로그: Gemini 3.1 Pro 발표 – https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/\n모델 카드: Gemini 3.1 Pro – https://deepmind.google/models/model-cards/gemini-3-1-pro/\n이 문서는 유지보수자를 위해 초안(draft) 상태로 저장되었습니다. 필요에 따라 추가 검토 및 업데이트가 이루어질 수 있습니다.",
     "excerpt": "Gemini 3.1 Pro\n개요\nGemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어 모델(Large Language Model)입니다. 기존 Gemini 3 시리즈를 기반으로 복잡한 추론과 멀티모달 작업에서 크게 향상된 성능을 제공합니다. 모델은 Gemini API, Vertex AI, Gemini 앱, Noteboo...",
     "tags": [
       "Gemini",
       "AI",
       "Benchmark"
     ],
-    "lastModified": "2026-02-20T02:05:51Z",
-    "author": "GitHub Action"
+    "lastModified": "2026-02-20T11:07:44+09:00",
+    "author": "JHL"
   },
   {
     "title": "설정 파일 가이드",
