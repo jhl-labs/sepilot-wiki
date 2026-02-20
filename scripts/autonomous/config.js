@@ -89,3 +89,38 @@ export const FRESHNESS_WARNING_DAYS = 90;
 
 /** Content Reviewer: 최소 문서 길이 (자) */
 export const MIN_DOCUMENT_LENGTH = 500;
+
+/* ── News Intelligence 설정 ── */
+
+/** euno.news RSS 피드 URL */
+export const EUNO_RSS_URL = 'https://euno.news/rss.xml';
+
+/** euno.news 베이스 URL */
+export const EUNO_BASE_URL = 'https://euno.news';
+
+/** RSS 최대 파싱 아이템 수 */
+export const NEWS_RSS_MAX_ITEMS = 200;
+
+/** GUID 북마크 롤링 윈도우 크기 */
+export const NEWS_BOOKMARK_WINDOW = 500;
+
+/** AI 관련성 분석 최대 배치 크기 */
+export const NEWS_MAX_AI_BATCH = 30;
+
+/** 관련성 점수 임계값 (0-100) */
+export const NEWS_RELEVANCE_THRESHOLD = 65;
+
+/** 한 번 실행당 최대 생성 Issue 수 */
+export const NEWS_MAX_ISSUES = 3;
+
+/** 원본 출처 fetch 최대 건수 */
+export const NEWS_MAX_SOURCE_FETCH = 5;
+
+/** 뉴스 페이지 fetch 타임아웃 (ms) */
+export const NEWS_FETCH_TIMEOUT = 15000;
+
+/** 북마크 데이터 파일명 */
+export const NEWS_BOOKMARK_FILE = 'news-bookmark.json';
+
+/** 인텔리전스 보고서 파일명 */
+export const NEWS_REPORT_FILE = 'news-intelligence-report.json';
