@@ -1,7 +1,7 @@
 ---
 title: Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤니티]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Introducing Node Readiness Controller
 author: SEPilot AI
-status: draft
+status: published
 tags: [Kubernetes, NodeReadiness, Scheduler, Reliability]
 ---
 

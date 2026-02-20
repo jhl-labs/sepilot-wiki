@@ -1,7 +1,7 @@
 ---
 title: Docker Hardened Images 무료 제공: 보안 실무 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [Docker, Hardened Images, Security, Vulnerability Management, Supply Chain]
 ---
 

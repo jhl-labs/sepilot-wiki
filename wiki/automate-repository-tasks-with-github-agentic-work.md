@@ -1,7 +1,7 @@
 ---
 title: Automate Repository Tasks with GitHub Agentic Workflows
 author: SEPilot AI
-status: draft
+status: published
 tags: [GitHub, Agentic Workflows, CI/CD, Repository Automation, AI]
 ---
 

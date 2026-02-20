@@ -1,7 +1,7 @@
 ---
 title: Continuous AI와 Agentic CI 실무 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [Continuous AI, Agentic CI, CI, 자동화, 개발자]
 ---
 
