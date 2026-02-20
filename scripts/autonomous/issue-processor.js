@@ -320,7 +320,37 @@ async function qualityReviewAgent(items, allDocuments) {
 
     const doc = await findDocument(context, WIKI_DIR);
     if (!doc.found || !doc.content) {
-      console.log(`   ⚠️ #${issue.number} — 문서를 찾을 수 없음, 건너뜀`);
+      console.log(`   ⚠️ #${issue.number} — 문서를 찾을 수 없음, 자동 닫기 처리`);
+
+      const orphanMarker = '[issue-processor:orphan-draft]';
+      const hasOrphanComment = await hasRecentBotComment(issue.number, orphanMarker, 24);
+      if (hasOrphanComment) {
+        console.log(`   ⏭️ #${issue.number} — 이미 고아 draft 처리됨, 건너뜀`);
+        continue;
+      }
+
+      if (!canAct()) break;
+
+      const commentBody = [
+        `## 🤖 고아 Draft 감지`,
+        '',
+        `이 Issue에 연결된 draft 문서를 찾을 수 없습니다.`,
+        `문서가 삭제되었거나 생성에 실패한 것으로 판단됩니다.`,
+        '',
+        `필요하다면 Issue를 다시 열고 \`request\` 라벨을 추가하여 문서를 재생성해주세요.`,
+        '',
+        `<!-- ${orphanMarker} -->`,
+      ].join('\n');
+
+      await safeAddComment(issue.number, commentBody);
+      await closeGitHubIssue(issue.number);
+      recordAction();
+
+      actions.push({
+        type: 'orphan_draft_close',
+        issueNumber: issue.number,
+        title: issue.title,
+      });
       continue;
     }
 
