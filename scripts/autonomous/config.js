@@ -60,3 +60,18 @@ export const GAP_ANALYSIS_IGNORE = [
 
 /** 갭 분석에서 스캔할 소스 코드 확장자 */
 export const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.yml', '.yaml'];
+
+/* ── Issue Processor 설정 ── */
+
+/** Issue Processor: 한 번 실행당 최대 GitHub 액션 수 */
+export const MAX_ACTIONS_PER_RUN = parseInt(process.env.MAX_ACTIONS_PER_RUN, 10) || 5;
+
+/** Issue Processor: 미활동 판단 임계값 (일) */
+export const STALENESS_THRESHOLD_DAYS = parseInt(process.env.STALENESS_THRESHOLD_DAYS, 10) || 14;
+
+/** Issue Processor: 자동 발행 품질 점수 임계값 */
+export const QUALITY_AUTO_PUBLISH_THRESHOLD = parseInt(process.env.QUALITY_AUTO_PUBLISH_THRESHOLD, 10) || 80;
+
+/** Issue Processor: 활성화할 에이전트 목록 */
+export const ISSUE_PROCESSOR_ENABLED_AGENTS = (process.env.ENABLED_AGENTS || 'quality_review,maintenance,staleness')
+  .split(',').map(s => s.trim());

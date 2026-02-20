@@ -133,7 +133,26 @@ jobs:
         with:
           script: |
             const commentUser = context.payload.comment.user.login;
+            const commentBody = context.payload.comment.body || '';
             console.log(`댓글 작성자: ${commentUser}`);
+
+            // Issue Processor 마커가 포함된 댓글은 process-feedback 트리거 방지
+            const processorMarkers = [
+              '[issue-processor:quality-review]',
+              '[issue-processor:maintenance]',
+              '[issue-processor:stale-reminder]',
+              '[issue-processor:stale-close]',
+            ];
+            if (processorMarkers.some(marker => commentBody.includes(marker))) {
+              console.log('Issue Processor 마커 댓글 → process-feedback 트리거 방지');
+              return false;
+            }
+
+            // github-actions[bot]의 일반 피드백 댓글은 허용
+            if (commentUser === 'github-actions[bot]') {
+              console.log('github-actions[bot] 일반 댓글 → 허용');
+              return true;
+            }
 
             try {
               const { data: permissionData } = await github.rest.repos.getCollaboratorPermissionLevel({

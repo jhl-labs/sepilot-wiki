@@ -1,0 +1,59 @@
+name: Issue Processor
+
+on:
+  schedule:
+    # 매일 19:00 KST (10:00 UTC)
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'DRY_RUN 모드 (실제 액션 건너뜀)'
+        required: false
+        default: 'false'
+      max_actions:
+        description: '한 번 실행당 최대 액션 수'
+        required: false
+        default: '5'
+      enabled_agents:
+        description: '활성화할 에이전트 (쉼표 구분)'
+        required: false
+        default: 'quality_review,maintenance,staleness'
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: issue-processor
+  cancel-in-progress: false
+
+jobs:
+  process-issues:
+    runs-on: jhl-space
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun and Install
+        uses: ./.github/actions/setup-bun-install
+
+      - name: Run issue-processor
+        run: bun run scripts/autonomous/issue-processor.js
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          MAX_ACTIONS_PER_RUN: ${{ github.event.inputs.max_actions || '5' }}
+          ENABLED_AGENTS: ${{ github.event.inputs.enabled_agents || 'quality_review,maintenance,staleness' }}
+
+      - name: Commit reports
+        uses: ./.github/actions/git-commit-push
+        with:
+          message: "chore: Issue Processor 보고서 업데이트"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
