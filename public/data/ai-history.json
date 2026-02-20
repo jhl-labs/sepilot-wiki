@@ -1,6 +1,145 @@
 {
   "entries": [
     {
+      "id": "b87e30ac-2d81-41c0-995c-1a8d599abc52",
+      "timestamp": "2026-02-20T13:36:28.759Z",
+      "actionType": "generate",
+      "issueNumber": 167,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: Wiki 페이지 API 라우트 상세 가이드",
+      "documentSlug": "wiki-api",
+      "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
+      "summary": "새 문서 \"Wiki 페이지 API 라우트 상세 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3692
+            },
+            {
+              "step": "outline",
+              "durationMs": 6082
+            },
+            {
+              "step": "write",
+              "durationMs": 26202
+            },
+            {
+              "step": "review",
+              "durationMs": 8211
+            },
+            {
+              "step": "refine",
+              "durationMs": 26002
+            }
+          ],
+          "totalDurationMs": 70189,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3325,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "975b5312-df17-4d7e-9af1-097fa3ed594d",
+      "timestamp": "2026-02-20T13:35:10.207Z",
+      "actionType": "generate",
+      "issueNumber": 168,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 서비스 레이어 설명",
+      "documentSlug": "api",
+      "documentTitle": "프론트엔드 API 서비스 레이어 설명",
+      "summary": "새 문서 \"프론트엔드 API 서비스 레이어 설명\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4145
+            },
+            {
+              "step": "outline",
+              "durationMs": 10606
+            },
+            {
+              "step": "write",
+              "durationMs": 28284
+            },
+            {
+              "step": "review",
+              "durationMs": 7991
+            }
+          ],
+          "totalDurationMs": 51026,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2344,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "3da4662f-a89a-4050-ae7c-bb05d365ae45",
+      "timestamp": "2026-02-20T13:34:13.572Z",
+      "actionType": "generate",
+      "issueNumber": 169,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: 크로스 레퍼런스 업데이트 잡 가이드",
+      "documentSlug": "",
+      "documentTitle": "크로스 레퍼런스 업데이트 잡 가이드",
+      "summary": "새 문서 \"크로스 레퍼런스 업데이트 잡 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3676
+            },
+            {
+              "step": "outline",
+              "durationMs": 4961
+            },
+            {
+              "step": "write",
+              "durationMs": 19029
+            },
+            {
+              "step": "review",
+              "durationMs": 5336
+            }
+          ],
+          "totalDurationMs": 33002,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1466,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "24ae2c6f-6dad-4d63-b668-101c4d04a3aa",
       "timestamp": "2026-02-20T12:59:05.185Z",
       "actionType": "quality_score",
@@ -2353,5 +2492,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-20T12:59:05.185Z"
+  "lastUpdated": "2026-02-20T13:36:28.759Z"
 }

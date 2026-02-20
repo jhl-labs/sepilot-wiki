@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 167,
+      "number": 167,
+      "title": "[커버리지 분석] 문서 작성 필요: Wiki 페이지 API 라우트 상세 가이드",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: api/wiki/[...slug]/route.ts\n- **소스 경로**: `app/api/wiki/[...slug]/route.ts`\n- **중요도**: high\n\n### 문서 작성 사유\nWiki 페이지를 조회·생성·수정·삭제하는 핵심 API 엔드포인트이며, 라우트 파라미터와 인증 흐름, 응답 형식 등을 문서화해야 외부 개발자와 내부 팀이 올바르게 사용할 수 있습니다.\n\n> **제안 문서 제목**: Wiki 페이지 API 라우트 상세 가이드\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-02-20T13:36:28.760Z",
+      "updated_at": "2026-02-20T13:36:28.762Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/167",
+      "documentSlug": "wiki-api",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/wiki-api.md",
+      "comments": 0
+    },
+    {
+      "id": 168,
+      "number": 168,
+      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 서비스 레이어 설명",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: services/api.ts\n- **소스 경로**: `src/services/api.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n프론트엔드에서 백엔드와 통신하기 위해 사용하는 공통 API 클라이언트 로직으로, 요청/응답 처리, 에러 핸들링, 토큰 자동 갱신 방식 등을 문서화해야 합니다.\n\n> **제안 문서 제목**: 프론트엔드 API 서비스 레이어 설명\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-02-20T13:35:10.208Z",
+      "updated_at": "2026-02-20T13:35:10.210Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/168",
+      "documentSlug": "api",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/api.md",
+      "comments": 0
+    },
+    {
+      "id": 169,
+      "number": 169,
+      "title": "[커버리지 분석] 문서 작성 필요: 크로스 레퍼런스 업데이트 잡 가이드",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: scheduler/jobs/update-cross-references.ts\n- **소스 경로**: `lib/scheduler/jobs/update-cross-references.ts`\n- **중요도**: high\n\n### 문서 작성 사유\nWiki 문서 간 교차 참조를 자동으로 정리·업데이트하는 스케줄러 잡으로, 실행 시점, 입력/출력 데이터 구조, 오류 처리 방식을 문서화해야 운영 안정성을 확보할 수 있습니다.\n\n> **제안 문서 제목**: 크로스 레퍼런스 업데이트 잡 가이드\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-02-20T13:34:13.573Z",
+      "updated_at": "2026-02-20T13:34:13.575Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/169",
+      "documentSlug": "",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/.md",
+      "comments": 0
+    },
+    {
       "id": 161,
       "number": 161,
       "title": "[Wiki Maintenance] [요청] Spotlight on SIG Architecture: API Governance",
@@ -971,5 +1064,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-02-20T12:49:03.125Z"
+  "lastUpdated": "2026-02-20T13:36:28.762Z"
 }

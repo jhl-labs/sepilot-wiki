@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-02-20T13:23:59.888Z",
+  "timestamp": "2026-02-20T13:36:29.732Z",
   "dryRun": false,
-  "totalIssuesScanned": 13,
+  "totalIssuesScanned": 10,
   "categories": {
     "draft_review": [],
     "maintenance": [
@@ -41,23 +41,7 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [
-      {
-        "number": 195,
-        "title": "[Wiki Maintenance] [URL 변경] kubernetes/ingress-nginx-deprecation-guide 문서 참조 URL 확인 필요",
-        "daysSinceUpdate": 0
-      },
-      {
-        "number": 193,
-        "title": "[Wiki Maintenance] [URL 변경] kubernetes/kubernetes-release-notes 문서 참조 URL 확인 필요",
-        "daysSinceUpdate": 0
-      },
-      {
-        "number": 182,
-        "title": "[Wiki Maintenance] [URL 변경] projects/openclaw-complete-guide 문서 참조 URL 확인 필요",
-        "daysSinceUpdate": 0
-      }
-    ],
+    "update_request": [],
     "pending_request": [
       {
         "number": 169,
@@ -79,19 +63,19 @@
   },
   "actionsPerformed": [
     {
-      "type": "retrigger_update_close",
-      "issueNumber": 195,
-      "title": "[Wiki Maintenance] [URL 변경] kubernetes/ingress-nginx-deprecation-guide 문서 참조 URL 확인 필요"
+      "type": "retrigger_request",
+      "issueNumber": 169,
+      "title": "[커버리지 분석] 문서 작성 필요: 크로스 레퍼런스 업데이트 잡 가이드"
     },
     {
-      "type": "retrigger_update_close",
-      "issueNumber": 193,
-      "title": "[Wiki Maintenance] [URL 변경] kubernetes/kubernetes-release-notes 문서 참조 URL 확인 필요"
+      "type": "retrigger_request",
+      "issueNumber": 168,
+      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 서비스 레이어 설명"
     },
     {
-      "type": "retrigger_update_close",
-      "issueNumber": 182,
-      "title": "[Wiki Maintenance] [URL 변경] projects/openclaw-complete-guide 문서 참조 URL 확인 필요"
+      "type": "retrigger_request",
+      "issueNumber": 167,
+      "title": "[커버리지 분석] 문서 작성 필요: Wiki 페이지 API 라우트 상세 가이드"
     }
   ],
   "actionCount": 3,
