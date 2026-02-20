@@ -288,6 +288,18 @@ function triageAgent(issues) {
       continue;
     }
 
+    // update-request → Retrigger Agent가 처리 (워크플로우 미실행 시)
+    if (labels.includes('update-request')) {
+      categories.get('update_request').push({ ...issue, daysSinceUpdate });
+      continue;
+    }
+
+    // request 라벨 + draft 없음 → Retrigger Agent가 문서 생성 (wiki-maintenance보다 우선)
+    if (labels.includes('request') && !labels.includes('draft')) {
+      categories.get('pending_request').push({ ...issue, daysSinceUpdate });
+      continue;
+    }
+
     // wiki-maintenance → Maintenance Agent 대상
     if (labels.includes('wiki-maintenance')) {
       // wiki-maintenance는 28일 기준 stale
@@ -296,18 +308,6 @@ function triageAgent(issues) {
       } else {
         categories.get('maintenance').push({ ...issue, daysSinceUpdate });
       }
-      continue;
-    }
-
-    // update-request → Retrigger Agent가 처리 (워크플로우 미실행 시)
-    if (labels.includes('update-request')) {
-      categories.get('update_request').push({ ...issue, daysSinceUpdate });
-      continue;
-    }
-
-    // request 라벨만 있고 draft 없음 → Retrigger Agent가 처리 (워크플로우 미실행 시)
-    if (labels.includes('request') && !labels.includes('draft')) {
-      categories.get('pending_request').push({ ...issue, daysSinceUpdate });
       continue;
     }
 
@@ -1027,14 +1027,22 @@ async function retriggerAgent(requestItems, updateItems) {
     }
 
     const comments = await fetchIssueComments(owner, repo, issue.number, token);
-    if (comments.length > 0) {
-      console.log(`   ⏭️ #${issue.number} — 댓글 있음, 건너뜀`);
+
+    // 이미 수정 완료된 경우 (retrigger 마커 또는 성공 댓글 존재) → 닫기만 수행
+    const alreadyProcessed = comments.some(c =>
+      c.body.includes(marker) || c.body.includes('문서 수정 완료') || c.body.includes('✅')
+    );
+    if (alreadyProcessed) {
+      console.log(`   🔒 #${issue.number} — 이미 수정 완료, 닫기 처리`);
+      await closeGitHubIssue(issue.number);
+      recordAction();
+      actions.push({ type: 'retrigger_update_close', issueNumber: issue.number, title: issue.title });
       continue;
     }
 
-    const hasRecent = await hasRecentBotComment(issue.number, marker, 48);
-    if (hasRecent) {
-      console.log(`   ⏭️ #${issue.number} — 최근 재트리거 처리됨, 건너뜀`);
+    // 댓글이 있지만 retrigger 흔적 없음 → 건너뜀
+    if (comments.length > 0) {
+      console.log(`   ⏭️ #${issue.number} — 댓글 있음 (미처리), 건너뜀`);
       continue;
     }
 
@@ -1062,9 +1070,11 @@ async function retriggerAgent(requestItems, updateItems) {
         'issue-body': issue.body || '',
       });
 
+      // 문서 수정 완료 → Issue 닫기
+      await closeGitHubIssue(issue.number);
       recordAction();
       actions.push({ type: 'retrigger_update', issueNumber: issue.number, title: issue.title });
-      console.log(`   ✅ #${issue.number} — 문서 수정 완료`);
+      console.log(`   ✅ #${issue.number} — 문서 수정 완료 및 닫기`);
     } catch (error) {
       console.error(`   ❌ #${issue.number} — 문서 수정 실패: ${error.message}`);
       await safeAddComment(issue.number, [
