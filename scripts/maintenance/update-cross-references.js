@@ -84,6 +84,13 @@ async function main() {
     console.log(`✅ ${relationships.length}개 문서 분석 완료`);
 
     // 3. frontmatter 업데이트
+    // 실제 존재하는 문서 파일명 집합 생성 (깨진 참조 방지)
+    const allFilenames = new Set(documents.map(d => {
+      // path에서 파일명만 추출 (예: "bun/ci.md" → "ci.md", "docker-guide.md" → "docker-guide.md")
+      const parts = d.path.split('/');
+      return parts[parts.length - 1];
+    }));
+
     let updatedCount = 0;
     for (const rel of relationships) {
       if (!rel.related_docs || rel.related_docs.length === 0) continue;
@@ -91,13 +98,22 @@ async function main() {
       const doc = documents.find((d) => d.path === rel.path);
       if (!doc || !doc.rawContent) continue;
 
-      const relatedDocsStr = `[${rel.related_docs.map((d) => `"${d}"`).join(', ')}]`;
+      // AI 추천 결과에서 실제 존재하는 문서만 필터링
+      const validDocs = rel.related_docs.filter(ref => allFilenames.has(ref));
+      if (validDocs.length === 0) continue;
+
+      if (validDocs.length < rel.related_docs.length) {
+        const removed = rel.related_docs.filter(ref => !allFilenames.has(ref));
+        console.log(`   ⚠️ ${doc.path}: 존재하지 않는 참조 제거 [${removed.join(', ')}]`);
+      }
+
+      const relatedDocsStr = `[${validDocs.map((d) => `"${d}"`).join(', ')}]`;
       const updatedContent = updateFrontmatterField(doc.rawContent, 'related_docs', relatedDocsStr);
 
       if (updatedContent !== doc.rawContent && !IS_DRY_RUN) {
         await writeFile(doc.fullPath, updatedContent);
         updatedCount++;
-        console.log(`   ✅ ${doc.path}: ${rel.related_docs.length}개 참조 추가`);
+        console.log(`   ✅ ${doc.path}: ${validDocs.length}개 참조 추가`);
       }
     }
 

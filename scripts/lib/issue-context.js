@@ -222,20 +222,24 @@ function buildTimeline(issueTitle, issueBody, comments, referenceContents = []) 
  * @returns {string} 슬러그
  */
 function generateSlugFromTitle(title) {
-  return (
-    title
-      // 공통 접두사 제거: [요청], [수정], [삭제], [질문] 등
-      .replace(/^\[.*?\]\s*/, '')
-      // 한국어 제거 (URL에 부적합)
-      .replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, ' ')
-      .toLowerCase()
-      // 특수문자를 공백으로 치환 (괄호 등이 단어를 붙이지 않도록)
-      .replace(/[^a-z0-9\s-]/g, ' ')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '')
-      .slice(0, 50)
-  );
+  const slug = title
+    // 공통 접두사 제거: [요청], [수정], [삭제], [질문] 등
+    .replace(/^\[.*?\]\s*/, '')
+    // 한국어 제거 (URL에 부적합)
+    .replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, ' ')
+    .toLowerCase()
+    // 특수문자를 공백으로 치환 (괄호 등이 단어를 붙이지 않도록)
+    .replace(/[^a-z0-9\s-]/g, ' ')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 50);
+
+  // 한국어만으로 된 제목 등으로 slug가 빈 문자열이 되면 fallback
+  if (!slug) {
+    return `untitled-${Date.now()}`;
+  }
+  return slug;
 }
 
 /**
@@ -263,6 +267,9 @@ export function resolveDocumentPath(context, wikiDir, options = {}) {
   // 0. AI가 결정한 카테고리가 있으면 해당 경로에 문서 생성
   if (options.category) {
     const slug = generateSlugFromTitle(context.issueTitle);
+    if (!slug || slug.endsWith('.md') && slug.length <= 3) {
+      console.warn(`⚠️ 카테고리 모드에서 빈 slug 감지, fallback 사용`);
+    }
     const categorySlug = `${options.category}/${slug}`;
     const filename = `${categorySlug}.md`;
     return {
@@ -307,6 +314,10 @@ export function resolveDocumentPath(context, wikiDir, options = {}) {
 
   // 3. Issue 제목에서 슬러그 생성
   const slug = generateSlugFromTitle(context.issueTitle);
+
+  if (!slug) {
+    console.warn(`⚠️ 제목에서 slug 생성 실패, fallback 사용: "${context.issueTitle}"`);
+  }
 
   const filename = `${slug}.md`;
   return {

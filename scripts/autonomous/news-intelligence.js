@@ -246,6 +246,13 @@ ${docList || '(문서 없음)'}
 - 65-79: 유용한 정보, 기존 문서 보강 가능
 - 65 미만: Wiki와 관련성 낮음
 
+비기술 뉴스 필터링 (필수):
+- 엔터테인먼트, 영화, 게임 출시, 마케팅 캠페인, 제품 리뷰 → 30점 이하
+- 단순 키워드 일치가 아닌 실질적 기술 내용 관련성으로 판단
+  예: "Toy Story 5 AI 제작" → 기술 Wiki와 무관 (영화 뉴스)
+  예: "YouTube API 쿼터 변경" → 기술 Wiki와 관련 (API 변경)
+- 뉴스의 핵심 주제가 기술/개발이 아니면 관련성 낮음
+
 중요: "기존 문서 업데이트"가 "새 문서 생성"보다 항상 우선입니다.
 needsSourceFetch: euno 요약만으로 내용이 부족하면 true`;
 
@@ -258,7 +265,19 @@ needsSourceFetch: euno 요약만으로 내용이 부족하면 true`;
   );
 
   const parsed = parseJsonResponse(response, { fallback: [], silent: false });
-  return Array.isArray(parsed) ? parsed : parsed.items || parsed.results || parsed.analyses || [];
+  const rawResults = Array.isArray(parsed) ? parsed : parsed.items || parsed.results || parsed.analyses || [];
+
+  // AI 응답의 index를 절대 인덱스로 정규화
+  // AI가 서브배치 내 상대 인덱스(0~N)를 반환할 수 있으므로 batchOffset 기준으로 보정
+  return rawResults.map(r => {
+    const idx = r.index ?? 0;
+    // AI가 이미 절대 인덱스를 반환했는지 확인 (batchOffset 범위 내)
+    if (idx >= batchOffset && idx < batchOffset + batchItems.length) {
+      return r; // 이미 절대 인덱스
+    }
+    // 상대 인덱스 → 절대 인덱스로 변환
+    return { ...r, index: idx + batchOffset };
+  });
 }
 
 /** Stage 3: AI로 관련성 분석 (서브배치 분할) */
@@ -292,9 +311,18 @@ async function analyzeRelevance(items, documents) {
     }
   }
 
+  // 동일 index 중복 제거 (최고 점수 유지)
+  const deduped = new Map();
+  for (const r of results) {
+    const idx = r.index;
+    if (!deduped.has(idx) || r.relevanceScore > deduped.get(idx).relevanceScore) {
+      deduped.set(idx, r);
+    }
+  }
+
   // 임계값 필터 + 원본 아이템 병합
-  const relevant = results
-    .filter(r => r.relevanceScore >= NEWS_RELEVANCE_THRESHOLD)
+  const relevant = [...deduped.values()]
+    .filter(r => r.relevanceScore >= NEWS_RELEVANCE_THRESHOLD && items[r.index])
     .map(r => ({
       ...items[r.index],
       ...r,
@@ -449,6 +477,11 @@ ${docList || '(문서 없음)'}
 1. update_existing (최우선): 기존 문서에 새 정보 추가/보강
 2. new_document (보조): 기존 문서로 다룰 수 없는 완전히 새로운 주제만
 3. skip: 정보 가치 낮거나 이미 충분히 다뤄진 내용
+
+역검증 (필수):
+- 뉴스에서 대상 문서에 추가할 구체적 기술 정보가 없으면 skip
+- 비기술 뉴스(엔터테인먼트, 마케팅, 제품 리뷰 등)는 반드시 skip
+- "키워드가 겹친다"만으로는 update_existing 불가, 실질적 내용 보강이 가능해야 함
 
 JSON 배열로 응답하세요:
 [
