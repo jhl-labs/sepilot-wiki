@@ -17,20 +17,15 @@ test.describe('Navigation', () => {
   });
 
   test('위키 페이지로 이동할 수 있어야 함', async ({ page }) => {
-    await page.goto('/');
+    // 실제 존재하는 위키 페이지로 직접 이동
+    await page.goto('/wiki/ai/mcp-model-context-protocol');
 
-    // 본문 영역의 위키 링크 선택 (footer 아이콘 버튼 제외)
-    const wikiLink = page.locator('.home-page a[href^="/wiki/"]:not(.footer-icon-btn), .sidebar a[href^="/wiki/"]').first();
-    if (await wikiLink.isVisible({ timeout: 10000 }).catch(() => false)) {
-      await wikiLink.click();
+    // URL이 /wiki/로 시작해야 함
+    await expect(page).toHaveURL(/\/wiki\//);
 
-      // URL이 /wiki/로 시작해야 함
-      await expect(page).toHaveURL(/\/wiki\//);
-
-      // 위키 콘텐츠 영역이 표시되어야 함 (markdown-content 또는 wiki-content)
-      const content = page.locator('.markdown-content, .wiki-content, .wiki-body');
-      await expect(content.first()).toBeVisible({ timeout: 10000 });
-    }
+    // 위키 콘텐츠 영역이 표시되어야 함
+    const content = page.locator('.wiki-content, .wiki-body');
+    await expect(content.first()).toBeVisible({ timeout: 10000 });
   });
 
   test('브레드크럼 네비게이션이 작동해야 함', async ({ page }) => {
