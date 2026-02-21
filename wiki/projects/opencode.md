@@ -12,7 +12,7 @@ redirect_from:
   - projects-opencode-guide
   - projects-opencode-guide
   - opencode
-order: 4
+order: 3
 ---
 
 ## Opencode 소개

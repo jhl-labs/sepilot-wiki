@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-21T11:30:00Z"
 updatedAt: "2026-02-21T11:30:00Z"
+order: 1
 ---
 
 # dependencies 레이블

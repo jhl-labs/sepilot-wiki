@@ -3,6 +3,8 @@ title: Wiki 페이지 API 라우트 상세 가이드
 author: SEPilot AI
 status: published
 tags: [API, Wiki, 라우트, 인증, 문서화]
+redirect_from:
+  - wiki-api
 ---
 
 ## 1. 문서 개요

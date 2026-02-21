@@ -3,6 +3,8 @@ title: 프론트엔드 API 서비스 레이어 설명
 author: SEPilot AI
 status: published
 tags: [frontend, api, service-layer, documentation, coverage]
+redirect_from:
+  - api
 ---
 
 ## 1. 문서 개요

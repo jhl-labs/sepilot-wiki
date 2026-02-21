@@ -10,6 +10,8 @@ createdAt: "2026-02-10T12:15:00Z"
 updatedAt: 2026-02-20
 related_docs: ["ingress-nginx-deprecation-guide.md"]
 order: 1
+redirect_from:
+  - kubernetes-kubernetes-v1-33-8
 ---
 
 # Kubernetes 버전별 릴리즈 노트

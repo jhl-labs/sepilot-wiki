@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["bun", "npm", "yarn", "패키지 매니저", "가이드", "runtime", "javascript-runtime", "package-manager"]
 redirect_from:
+  - bun-bun-overview
   - bun-overview
   - bun-bun-overview
   - bun-overview
