@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-02-21T12:49:24.447Z",
+  "collectedAt": "2026-02-21T13:48:05.383Z",
   "overview": {
-    "totalDocuments": 29,
+    "totalDocuments": 30,
     "publishedDocuments": 22,
-    "draftDocuments": 7,
+    "draftDocuments": 9,
     "openRequests": 18,
     "closedRequests": 16,
-    "totalAIActions": 130
+    "totalAIActions": 132
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 24,
-      "documentsCreated": 3,
-      "documentsModified": 4,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 27,
-      "estimatedTokens": 7135,
-      "totalPipelineDurationMs": 154217
+      "aiActions": 10,
+      "documentsCreated": 0,
+      "documentsModified": 2,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 57,
+      "aiActions": 59,
       "documentsCreated": 12,
-      "documentsModified": 9,
+      "documentsModified": 10,
       "tavilyApiCalls": 36,
       "tavilyResults": 97,
       "estimatedTokens": 30273,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-21T13:03:48.965Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-21T13:02:09.979Z",
+      "actionType": "recover",
+      "issueNumber": 198,
+      "documentTitle": "[Wiki Maintenance] [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-21T12:09:07.404Z",
       "actionType": "maintain",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:58:17.765Z",
-      "actionType": "quality_score",
-      "issueNumber": 178,
-      "documentTitle": "[Wiki Maintenance] [요청] Automate repository tasks with GitHub Agentic Workflows",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:58:04.041Z",
-      "actionType": "quality_score",
-      "issueNumber": 179,
-      "documentTitle": "[Wiki Maintenance] [요청] Continuous AI in practice: What developers can automate today with agentic CI",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 122,
+      "totalActions": 124,
       "totalEstimatedTokens": 64180,
       "avgDurationMs": 58986
     },
