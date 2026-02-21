@@ -1,34 +1,34 @@
 {
-  "collectedAt": "2026-02-21T11:39:38.100Z",
+  "collectedAt": "2026-02-21T12:49:24.447Z",
   "overview": {
     "totalDocuments": 29,
     "publishedDocuments": 22,
     "draftDocuments": 7,
     "openRequests": 18,
     "closedRequests": 16,
-    "totalAIActions": 129
+    "totalAIActions": 130
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 1,
+      "documentsModified": 0,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 31,
-      "documentsCreated": 10,
+      "aiActions": 24,
+      "documentsCreated": 3,
       "documentsModified": 4,
-      "tavilyApiCalls": 30,
-      "tavilyResults": 79,
-      "estimatedTokens": 23929,
-      "totalPipelineDurationMs": 544930
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 7135,
+      "totalPipelineDurationMs": 154217
     },
     "last7d": {
-      "aiActions": 56,
+      "aiActions": 57,
       "documentsCreated": 12,
       "documentsModified": 9,
       "tavilyApiCalls": 36,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-21T12:09:07.404Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-21T11:20:15.887Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:57:48.517Z",
-      "actionType": "quality_score",
-      "issueNumber": 192,
-      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.33.8",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 121,
+      "totalActions": 122,
       "totalEstimatedTokens": 64180,
       "avgDurationMs": 58986
     },
