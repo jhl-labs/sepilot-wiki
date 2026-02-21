@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "4ddcf8de-8475-45bc-a88a-c5238327e630",
+      "timestamp": "2026-02-21T18:09:46.780Z",
+      "actionType": "generate",
+      "issueNumber": 207,
+      "issueTitle": "문서 요청 #207",
+      "documentSlug": "207",
+      "documentTitle": "클라우드 기반 영구 터미널 설계 및 구현 가이드",
+      "summary": "새 문서 \"클라우드 기반 영구 터미널 설계 및 구현 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3714
+            },
+            {
+              "step": "outline",
+              "durationMs": 10353
+            },
+            {
+              "step": "write",
+              "durationMs": 25428
+            },
+            {
+              "step": "review",
+              "durationMs": 5243
+            }
+          ],
+          "totalDurationMs": 44738,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 2051,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "9afdb899-eded-46a6-91b2-c79de90cd672",
       "timestamp": "2026-02-21T18:08:38.463Z",
       "actionType": "maintain",
@@ -2696,5 +2741,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-21T18:08:38.463Z"
+  "lastUpdated": "2026-02-21T18:09:46.780Z"
 }
