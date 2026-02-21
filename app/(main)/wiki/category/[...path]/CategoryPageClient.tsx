@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { useWikiPages } from '@/src/hooks/useWiki';
 import { Breadcrumb } from '@/src/components/wiki';
 import { Skeleton } from '@/src/components/ui/Skeleton';
-import { Search, FileText, Folder, ChevronRight } from 'lucide-react';
+import { Search, FileText, Folder, ChevronRight, Calendar } from 'lucide-react';
+import { format } from 'date-fns';
 import type { WikiTree } from '@/src/types';
 
 interface CategoryPageClientProps {
@@ -16,6 +17,7 @@ interface FlatPage {
   title: string;
   slug: string;
   menu?: string;
+  lastModified?: string;
   path: string[];
   depth: number;
 }
@@ -55,6 +57,7 @@ function flattenPages(
         title: item.title || item.slug,
         slug: item.slug,
         menu: item.menu,
+        lastModified: item.lastModified,
         path: currentPath,
         depth,
       });
@@ -194,12 +197,13 @@ export default function CategoryPageClient({ params }: CategoryPageClientProps) 
               <tr>
                 <th className="col-title">문서 제목</th>
                 <th className="col-path">경로</th>
+                <th className="col-date">수정일</th>
               </tr>
             </thead>
             <tbody>
               {filteredPages.length === 0 ? (
                 <tr>
-                  <td colSpan={2} className="empty-message">
+                  <td colSpan={3} className="empty-message">
                     {searchQuery
                       ? '검색 결과가 없습니다.'
                       : '이 카테고리에 문서가 없습니다.'}
@@ -234,6 +238,14 @@ export default function CategoryPageClient({ params }: CategoryPageClientProps) 
                           <span className="path-root">루트</span>
                         )}
                       </div>
+                    </td>
+                    <td className="col-date">
+                      {page.lastModified && (
+                        <span className="date-text">
+                          <Calendar size={14} />
+                          {format(new Date(page.lastModified), 'yyyy.MM.dd')}
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))

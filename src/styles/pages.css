@@ -1839,11 +1839,15 @@
 }
 
 .category-table .col-title {
-  width: 60%;
+  width: 50%;
 }
 
 .category-table .col-path {
-  width: 40%;
+  width: 25%;
+}
+
+.category-table .col-date {
+  width: 25%;
 }
 
 .category-table .page-link {
@@ -1891,6 +1895,15 @@
   opacity: 0.7;
 }
 
+.category-table .date-text {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
 .category-table .empty-message {
   text-align: center;
   padding: var(--spacing-8) var(--spacing-4);
@@ -1925,6 +1938,10 @@
   .category-table th:nth-child(2),
   .category-table td:nth-child(2) {
     display: none;
+  }
+
+  .category-table .col-date {
+    width: auto;
   }
 }
 

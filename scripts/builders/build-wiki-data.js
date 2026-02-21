@@ -230,6 +230,7 @@ export function buildTreeStructure(pages, categoryMeta = {}) {
       slug: page.slug,
       menu: page.menu,
       order: page.order,
+      lastModified: page.lastModified,
     };
 
     if (parts.length === 1) {
@@ -268,11 +269,16 @@ export function buildTreeStructure(pages, categoryMeta = {}) {
       // 카테고리 우선
       if (a.isCategory && !b.isCategory) return -1;
       if (!a.isCategory && b.isCategory) return 1;
-      // order 필드 우선 (낮을수록 앞)
+      // 페이지: lastModified 최신순
+      if (!a.isCategory && !b.isCategory) {
+        const dateA = a.lastModified || '';
+        const dateB = b.lastModified || '';
+        if (dateA !== dateB) return dateB.localeCompare(dateA);
+      }
+      // 카테고리: order 기반
       const orderA = a.order ?? 999;
       const orderB = b.order ?? 999;
       if (orderA !== orderB) return orderA - orderB;
-      // 같은 order면 한글 로캘 정렬
       return (a.title || a.name || '').localeCompare(b.title || b.name || '', 'ko');
     });
     for (const item of items) {

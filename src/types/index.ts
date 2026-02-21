@@ -41,6 +41,7 @@ export interface WikiTreePage {
   slug: string;
   menu?: string;
   order?: number;
+  lastModified?: string;
   isCategory?: false;
   children?: never;
 }
@@ -78,6 +79,7 @@ export interface WikiTree {
   isCategory?: boolean;
   // 공통
   order?: number;
+  lastModified?: string;
   children?: WikiTree[];
 }
 

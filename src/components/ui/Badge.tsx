@@ -3,7 +3,7 @@ import type { ReactNode, CSSProperties } from 'react';
 
 interface BadgeProps {
   children: ReactNode;
-  variant?: 'default' | 'draft' | 'invalid' | 'ai' | 'success' | 'warning' | 'maintenance' | 'published';
+  variant?: 'default' | 'draft' | 'invalid' | 'ai' | 'success' | 'warning' | 'maintenance' | 'published' | 'info';
   className?: string;
   style?: CSSProperties;
 }
