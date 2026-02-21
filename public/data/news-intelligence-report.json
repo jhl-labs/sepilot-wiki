@@ -1,273 +1,407 @@
 {
-  "generatedAt": "2026-02-21T06:14:13.970Z",
+  "generatedAt": "2026-02-21T12:09:07.402Z",
   "config": {
     "rssUrl": "https://euno.news/rss.xml",
     "maxAiBatch": 30,
-    "relevanceThreshold": 65,
-    "maxIssues": 3
+    "relevanceThreshold": 55,
+    "maxIssues": 5
   },
   "summary": {
-    "scannedAt": "2026-02-21T06:14:13.969Z",
+    "scannedAt": "2026-02-21T12:09:07.402Z",
     "totalScanned": 200,
-    "newItems": 73,
+    "newItems": 85,
     "prefiltered": 30,
-    "relevant": 14,
-    "issuesCreated": 3,
-    "durationMs": 50480
+    "relevant": 26,
+    "issuesCreated": 0,
+    "durationMs": 65886
   },
   "items": [
     {
-      "title": "위키피디아, Archive.today를 블랙리스트에 올리고 69만5천 개의 아카이브 링크 삭제 시작",
-      "link": "https://euno.news/posts/ko/wikipedia-blacklists-archivetoday-starts-removing-261618",
-      "guid": "https://euno.news/posts/ko/wikipedia-blacklists-archivetoday-starts-removing-261618",
-      "relevanceScore": 88,
+      "title": "AI 에이전트가 신뢰에 대해 고민해야 하는 이유: MoltBook 보안 사고에서 얻은 교훈",
+      "link": "https://euno.news/posts/ko/why-ai-agents-need-to-think-about-trust-lessons-fr-d3b5d8",
+      "guid": "https://euno.news/posts/ko/why-ai-agents-need-to-think-about-trust-lessons-fr-d3b5d8",
+      "relevanceScore": 86,
       "relatedDocuments": [
-        "wiki-api.md",
-        ".md",
-        "spotlight-on-sig-architecture-api-governance.md"
+        "projects/moltbook-intro.md",
+        "ai/multi-agent-system.md"
       ],
       "keyTopics": [
-        "Wikipedia",
-        "Archive.today blacklist",
-        "링크 삭제"
+        "AI 에이전트 신뢰",
+        "MoltBook 보안 사고"
       ],
       "sourceUrl": null
     },
     {
-      "title": "일은 코드를 작성하는 것이 아니다. AI가 틀렸을 때를 아는 것이다.",
-      "link": "https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5",
-      "guid": "https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5",
+      "title": "Vibe Coding이 소프트웨어 개발의 규칙을 다시 쓰고 있다",
+      "link": "https://euno.news/posts/ko/vibe-coding-is-rewriting-the-rules-of-software-dev-bf7c5b",
+      "guid": "https://euno.news/posts/ko/vibe-coding-is-rewriting-the-rules-of-software-dev-bf7c5b",
       "relevanceScore": 85,
       "relatedDocuments": [
-        "automate-repository-tasks-with-github-agentic-work.md",
-        "continuous-ai-in-practice-what-developers-can-auto.md",
-        "ai/continuous-ai.md"
+        "ai/vibe-coding.md"
       ],
       "keyTopics": [
-        "AI coding agent",
-        "CI pipelines",
-        "Agentic automation"
+        "Vibe Coding",
+        "AI development assistant",
+        "software engineering"
       ],
       "sourceUrl": null
     },
     {
-      "title": "나는 8 GB VRAM으로 4,882개의 Self‑Healing AI Agents를 구축했다 — 여기 아키텍처",
-      "link": "https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8",
-      "guid": "https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8",
-      "relevanceScore": 82,
+      "title": "AI 에이전트가 아무도 감사할 수 없는 결정을 내리고 있다",
+      "link": "https://euno.news/posts/ko/ai-agents-are-making-decisions-nobody-can-audit-522d6f",
+      "guid": "https://euno.news/posts/ko/ai-agents-are-making-decisions-nobody-can-audit-522d6f",
+      "relevanceScore": 80,
+      "relatedDocuments": [
+        "ai/continuous-ai.md",
+        "ai/github-agentic-workflows.md",
+        "ai/multi-agent-system.md"
+      ],
+      "keyTopics": [
+        "AI agent",
+        "API abuse",
+        "production outage"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "왜 LLM만으로는 에이전트가 될 수 없는가",
+      "link": "https://euno.news/posts/ko/why-llms-alone-are-not-agents-564076",
+      "guid": "https://euno.news/posts/ko/why-llms-alone-are-not-agents-564076",
+      "relevanceScore": 78,
+      "relatedDocuments": [
+        "ai/multi-agent-system.md",
+        "ai/continuous-ai.md"
+      ],
+      "keyTopics": [
+        "LLM 한계",
+        "Agentic AI 개념"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "LLM 앱에 Persistent Memory 추가하는 방법 (Fine-Tuning 없이) — 실용적인 아키텍처 가이드",
+      "link": "https://euno.news/posts/ko/how-to-add-persistent-memory-to-an-llm-app-without-ee1e9d",
+      "guid": "https://euno.news/posts/ko/how-to-add-persistent-memory-to-an-llm-app-without-ee1e9d",
+      "relevanceScore": 78,
+      "relatedDocuments": [
+        "ai/multi-agent-system.md",
+        "ai/continuous-ai.md"
+      ],
+      "keyTopics": [
+        "LLM Persistent Memory",
+        "Fine‑tuning 없이"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Claude Code가 내 4시간 세션을 잃어버렸어요. 실제로 작동하는 $0 해결책",
+      "link": "https://euno.news/posts/ko/claude-code-lost-my-4-hour-session-heres-the-0-fix-7e3c64",
+      "guid": "https://euno.news/posts/ko/claude-code-lost-my-4-hour-session-heres-the-0-fix-7e3c64",
+      "relevanceScore": 78,
       "relatedDocuments": [
         "projects/claude-code-release-history.md",
-        "projects/opencode.md"
+        "projects/opencode.md",
+        "projects/opencode-guide.md"
       ],
       "keyTopics": [
-        "Claude Code 보안",
-        "시장 반응",
-        "사이버 위협"
+        "Claude Code",
+        "session loss",
+        "zero‑cost fix"
       ],
       "sourceUrl": null
     },
     {
-      "title": "나는 8 GB VRAM으로 4,882개의 Self‑Healing AI Agents를 구축했다 — 여기 아키텍처",
-      "link": "https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8",
-      "guid": "https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8",
-      "relevanceScore": 78,
-      "relatedDocuments": [
-        "ai/multi-agent-system.md",
-        "continuous-ai.md"
-      ],
-      "keyTopics": [
-        "self‑healing AI agents",
-        "large‑scale architecture",
-        "resource‑efficient deployment"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "왜 당신의 Backend가 Agentic Loop을 필요로 하는가: Musfique Decision Loop (MDL)에 대한 나의 연구",
-      "link": "https://euno.news/posts/ko/why-your-backend-needs-an-agentic-loop-my-research-c2a34a",
-      "guid": "https://euno.news/posts/ko/why-your-backend-needs-an-agentic-loop-my-research-c2a34a",
-      "relevanceScore": 78,
-      "relatedDocuments": [
-        "automate-repository-tasks-with-github-agentic-work.md",
-        "continuous-ai-in-practice-what-developers-can-auto.md",
-        "ai/continuous-ai.md"
-      ],
-      "keyTopics": [
-        "Agentic Loop",
-        "Musfique Decision Loop",
-        "Backend architecture"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "11. Pod 배포 문제 해결",
-      "link": "https://euno.news/posts/ko/11resolve-pod-deployment-issue-711808",
-      "guid": "https://euno.news/posts/ko/11resolve-pod-deployment-issue-711808",
-      "relevanceScore": 77,
-      "relatedDocuments": [
-        "introducing-node-readiness-controller.md",
-        "new-conversion-from-cgroup-v1-cpu-shares-to-v2-cpu.md"
-      ],
-      "keyTopics": [
-        "Kubernetes pod startup errors",
-        "debugging",
-        "resource management"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Pinterest는 AI 슬롭과 자동 모더레이션의 바다에 빠져 허우적거린다",
-      "link": "https://euno.news/posts/ko/pinterest-is-drowning-in-a-sea-of-ai-slop-and-auto-436ba1",
-      "guid": "https://euno.news/posts/ko/pinterest-is-drowning-in-a-sea-of-ai-slop-and-auto-436ba1",
+      "title": "라우팅 및 컨트롤러: URL에서 동적 데이터 처리",
+      "link": "https://euno.news/posts/ko/routing-controllers-handling-dynamic-data-in-urls-7aa802",
+      "guid": "https://euno.news/posts/ko/routing-controllers-handling-dynamic-data-in-urls-7aa802",
       "relevanceScore": 75,
       "relatedDocuments": [
-        "automate-repository-tasks-with-github-agentic-work.md",
-        "continuous-ai-in-practice-what-developers-can-auto.md"
+        "backend/wiki-api.md",
+        "frontend/api-service-layer.md"
       ],
       "keyTopics": [
-        "GitLab CI/CD",
-        "Docker → AWS EC2 배포",
-        "CI 파이프라인 자동화"
+        "Dynamic routing",
+        "URL parameters",
+        "API 설계"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Cord: AI 에이전트 트리 조정",
-      "link": "https://euno.news/posts/ko/cord-coordinating-trees-of-ai-agents-9b07c6",
-      "guid": "https://euno.news/posts/ko/cord-coordinating-trees-of-ai-agents-9b07c6",
-      "relevanceScore": 73,
-      "relatedDocuments": [
-        "ai/multi-agent-system.md",
-        "automate-repository-tasks-with-github-agentic-work.md"
-      ],
+      "title": "CVE-2026-27206: Zumba 클래스 댄스: json-serializer에서 PHP Object Injection을 통한 RCE",
+      "link": "https://euno.news/posts/ko/cve-2026-27206-the-zumba-class-dance-rce-via-php-o-91055d",
+      "guid": "https://euno.news/posts/ko/cve-2026-27206-the-zumba-class-dance-rce-via-php-o-91055d",
+      "relevanceScore": 75,
+      "relatedDocuments": [],
       "keyTopics": [
-        "AI agent tree coordination",
-        "multi‑agent collaboration",
-        "Cord framework"
+        "PHP",
+        "Object Injection",
+        "RCE",
+        "CVE‑2026‑27206"
       ],
       "sourceUrl": null
     },
     {
-      "title": "AI가 프로그래밍을 더 어렵게 만들고 있나요? ‘Test Only, Zero Code Review’가 절대적인 재앙인 이유",
-      "link": "https://euno.news/posts/ko/is-ai-making-programming-harder-why-test-only-zero-4c223f",
-      "guid": "https://euno.news/posts/ko/is-ai-making-programming-harder-why-test-only-zero-4c223f",
-      "relevanceScore": 72,
+      "title": "당신의 AI SRE는 하나의 모델이 필요하지 않습니다 — 각 작업에 맞는 올바른 모델이 필요합니다",
+      "link": "https://euno.news/posts/ko/your-ai-sre-doesnt-need-one-model-it-needs-the-rig-69ee5e",
+      "guid": "https://euno.news/posts/ko/your-ai-sre-doesnt-need-one-model-it-needs-the-rig-69ee5e",
+      "relevanceScore": 71,
       "relatedDocuments": [
-        "continuous-ai.md",
-        "continuous-ai-in-practice-what-developers-can-auto.md",
-        "automate-repository-tasks-with-github-agentic-work.md"
+        "ai/continuous-ai.md",
+        "ai/multi-agent-system.md"
       ],
       "keyTopics": [
-        "AI fatigue",
-        "code review automation",
-        "developer productivity"
+        "AI SRE",
+        "모델 선택 전략"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Cord: AI 에이전트 트리 조정",
-      "link": "https://euno.news/posts/ko/cord-coordinating-trees-of-ai-agents-9b07c6",
-      "guid": "https://euno.news/posts/ko/cord-coordinating-trees-of-ai-agents-9b07c6",
-      "relevanceScore": 72,
+      "title": "GitHub에서 가장 인기 있는 AI 에이전트는 보안 재앙이다",
+      "link": "https://euno.news/posts/ko/the-most-popular-ai-agent-on-github-is-a-security-0430a5",
+      "guid": "https://euno.news/posts/ko/the-most-popular-ai-agent-on-github-is-a-security-0430a5",
+      "relevanceScore": 70,
       "relatedDocuments": [
-        "ai/multi-agent-system.md",
+        "ai/github-agentic-workflows.md",
         "ai/continuous-ai.md"
       ],
       "keyTopics": [
-        "교육용 챗봇",
-        "AI 백엔드 설계",
-        "메모리·컨텍스트"
+        "AI agents",
+        "GitHub security",
+        "Agentic CI"
       ],
       "sourceUrl": null
     },
     {
-      "title": "AI가 프로그래밍을 더 어렵게 만들고 있나요? ‘Test Only, Zero Code Review’가 절대적인 재앙인 이유",
-      "link": "https://euno.news/posts/ko/is-ai-making-programming-harder-why-test-only-zero-4c223f",
-      "guid": "https://euno.news/posts/ko/is-ai-making-programming-harder-why-test-only-zero-4c223f",
+      "title": "React 성능 최적화: 느림에서 번개처럼 빠르게",
+      "link": "https://euno.news/posts/ko/react-performance-optimization-from-slow-to-lightn-398488",
+      "guid": "https://euno.news/posts/ko/react-performance-optimization-from-slow-to-lightn-398488",
       "relevanceScore": 70,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "React performance",
+        "Rendering optimization",
+        "Profiling"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "CISA, 두 개의 활발히 악용되는 Roundcube 취약점을 KEV 카탈로그에 추가",
+      "link": "https://euno.news/posts/ko/cisa-adds-two-actively-exploited-roundcube-flaws-t-420665",
+      "guid": "https://euno.news/posts/ko/cisa-adds-two-actively-exploited-roundcube-flaws-t-420665",
+      "relevanceScore": 70,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Roundcube",
+        "CVE",
+        "KEV catalog"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "GitHub 프로젝트 복사·붙여넣기 그만: Dev 이력서 자동화",
+      "link": "https://euno.news/posts/ko/stop-copy-pasting-your-github-projects-automate-yo-159c3f",
+      "guid": "https://euno.news/posts/ko/stop-copy-pasting-your-github-projects-automate-yo-159c3f",
+      "relevanceScore": 68,
       "relatedDocuments": [
-        "hardened-images-are-free-now-what.md",
-        "continuous-ai-in-practice-what-developers-can-auto.md",
-        "automate-repository-tasks-with-github-agentic-work.md"
+        "ai/github-agentic-workflows.md",
+        "ai/continuous-ai.md"
       ],
       "keyTopics": [
-        "AI‑agent 보안",
-        "위협 인텔리전스",
-        "실무 가이드"
+        "Resume automation",
+        "GitHub project extraction",
+        "Agentic workflows"
       ],
       "sourceUrl": null
     },
     {
-      "title": "이 상위 30 AI 에이전트는 기능과 자율성을 혼합해 제공합니다",
-      "link": "https://euno.news/posts/ko/these-top-30-ai-agents-deliver-a-mix-of-functions-1affe1",
-      "guid": "https://euno.news/posts/ko/these-top-30-ai-agents-deliver-a-mix-of-functions-1affe1",
+      "title": "하나의 모델이 자신의 작업을 검토할 때: Adversarial Cross-Model Review 사례",
+      "link": "https://euno.news/posts/ko/when-one-model-reviews-its-own-work-the-case-for-a-34a73c",
+      "guid": "https://euno.news/posts/ko/when-one-model-reviews-its-own-work-the-case-for-a-34a73c",
       "relevanceScore": 68,
+      "relatedDocuments": [
+        "ai/multi-agent-system.md",
+        "ai/mcp-model-context-protocol.md"
+      ],
+      "keyTopics": [
+        "Adversarial review",
+        "cross‑model",
+        "LLM evaluation"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Supabase: 현대 AI 애플리케이션이 다시 Postgres를 선택하는 이유",
+      "link": "https://euno.news/posts/ko/supabase-why-modern-ai-applications-are-choosing-p-7ebfd0",
+      "guid": "https://euno.news/posts/ko/supabase-why-modern-ai-applications-are-choosing-p-7ebfd0",
+      "relevanceScore": 66,
+      "relatedDocuments": [
+        "backend/wiki-api.md"
+      ],
+      "keyTopics": [
+        "Supabase",
+        "PostgreSQL",
+        "AI 백엔드"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "당신 회사의 가장 큰 AI 위험은 아무도 승인하지 않은 AI",
+      "link": "https://euno.news/posts/ko/your-companys-biggest-ai-risk-is-the-ai-nobody-app-18a371",
+      "guid": "https://euno.news/posts/ko/your-companys-biggest-ai-risk-is-the-ai-nobody-app-18a371",
+      "relevanceScore": 65,
+      "relatedDocuments": [
+        "ai/continuous-ai.md",
+        "ai/multi-agent-system.md"
+      ],
+      "keyTopics": [
+        "AI governance",
+        "Unauthorized tool risk",
+        "Enterprise policy"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Astro, Svelte 5 및 Hono로 호스팅 비교 플랫폼을 만들었습니다",
+      "link": "https://euno.news/posts/ko/i-built-a-hosting-comparison-platform-with-astro-s-f2ce38",
+      "guid": "https://euno.news/posts/ko/i-built-a-hosting-comparison-platform-with-astro-s-f2ce38",
+      "relevanceScore": 65,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Astro",
+        "Svelte 5",
+        "Hono",
+        "Hosting comparison platform"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "전화로 나에게 전화를 거는 AI 에이전트를 만들었다",
+      "link": "https://euno.news/posts/ko/i-built-an-ai-agent-that-calls-me-on-the-phone-00efb2",
+      "guid": "https://euno.news/posts/ko/i-built-an-ai-agent-that-calls-me-on-the-phone-00efb2",
+      "relevanceScore": 65,
+      "relatedDocuments": [
+        "ai/continuous-ai.md",
+        "ai/multi-agent-system.md",
+        "ai/vibe-coding.md"
+      ],
+      "keyTopics": [
+        "AI agent",
+        "voice calling",
+        "telephony integration"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Agentic Attack Surface: 2005년 웹 보안이 다시 찾아오다",
+      "link": "https://euno.news/posts/ko/the-agentic-attack-surface-2005-web-security-all-o-44c0f3",
+      "guid": "https://euno.news/posts/ko/the-agentic-attack-surface-2005-web-security-all-o-44c0f3",
+      "relevanceScore": 62,
       "relatedDocuments": [
         "ai/multi-agent-system.md"
       ],
       "keyTopics": [
-        "AI agents",
-        "autonomy mix",
-        "capability comparison"
+        "Agentic Attack Surface",
+        "웹 보안"
       ],
       "sourceUrl": null
     },
     {
-      "title": "AI Network Monitor를 만들어 내 데이터가 실제로 어디로 가는지 추적했습니다 🚀",
-      "link": "https://euno.news/posts/ko/title-i-built-a-ai-network-monitor-to-track-where-0534ee",
-      "guid": "https://euno.news/posts/ko/title-i-built-a-ai-network-monitor-to-track-where-0534ee",
-      "relevanceScore": 68,
+      "title": "웹/모바일 개인 AI CFO",
+      "link": "https://euno.news/posts/ko/webmobile-personal-ai-cfo-ffffbe",
+      "guid": "https://euno.news/posts/ko/webmobile-personal-ai-cfo-ffffbe",
+      "relevanceScore": 60,
       "relatedDocuments": [
-        "ai/gemini-3-1.md",
-        "ai/gemini-3-1-pro.md",
-        "ai/qwen3-5.md"
+        "ai/continuous-ai.md"
       ],
       "keyTopics": [
-        "OpenAI 재정 전략",
-        "AI 시장 경쟁",
-        "클라우드 연계"
+        "AI CFO",
+        "Web/Mobile finance app",
+        "Scalable AI services"
       ],
       "sourceUrl": null
     },
     {
-      "title": "LLM 그라운딩이란? 개발자를 위한 가이드",
-      "link": "https://euno.news/posts/ko/what-is-llm-grounding-a-developers-guide-191159",
-      "guid": "https://euno.news/posts/ko/what-is-llm-grounding-a-developers-guide-191159",
-      "relevanceScore": 68,
+      "title": "자바스크립트의 비밀스러운 삶: 클론",
+      "link": "https://euno.news/posts/ko/the-secret-life-of-javascript-the-clone-3aeee8",
+      "guid": "https://euno.news/posts/ko/the-secret-life-of-javascript-the-clone-3aeee8",
+      "relevanceScore": 60,
       "relatedDocuments": [
-        "ai/multi-agent-system.md",
-        "ai/continuous-ai.md",
-        "ai/gemini-3-1.md"
+        "frontend/api-service-layer.md"
       ],
       "keyTopics": [
-        "LLM grounding",
-        "Developer guide",
-        "Model‑context integration"
+        "JavaScript",
+        "Web Workers",
+        "메인 스레드 보호"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Crawl4AI와 Moltbot에 대한 비용을 지불하지 마세요: 이미 필요한 모든 것이 있습니다",
+      "link": "https://euno.news/posts/ko/stop-paying-for-crawl4ai-and-moltbot-you-already-h-3bbd65",
+      "guid": "https://euno.news/posts/ko/stop-paying-for-crawl4ai-and-moltbot-you-already-h-3bbd65",
+      "relevanceScore": 60,
+      "relatedDocuments": [
+        "projects/moltbook-intro.md"
+      ],
+      "keyTopics": [
+        "Crawl4AI",
+        "Moltbot",
+        "cost‑free alternatives"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "markdown 파일이 새로운 dot 파일이 되고 있나요?",
+      "link": "https://euno.news/posts/ko/are-markdown-files-becoming-the-new-dot-files-7686c5",
+      "guid": "https://euno.news/posts/ko/are-markdown-files-becoming-the-new-dot-files-7686c5",
+      "relevanceScore": 55,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "dotfiles",
+        "markdown",
+        "AI‑assisted config"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Rust에서 문자열 이해하기: `String` vs 문자열 리터럴 (`&amp;str`)",
+      "link": "https://euno.news/posts/ko/understanding-strings-in-rust-string-vs-string-lit-415770",
+      "guid": "https://euno.news/posts/ko/understanding-strings-in-rust-string-vs-string-lit-415770",
+      "relevanceScore": 55,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Rust",
+        "String vs &str"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Ubuntu에 WKHTMLtoPDF 설치 방법 (단계별 가이드)",
+      "link": "https://euno.news/posts/ko/how-to-install-wkhtmltopdf-on-ubuntu-step-by-step-f74ea6",
+      "guid": "https://euno.news/posts/ko/how-to-install-wkhtmltopdf-on-ubuntu-step-by-step-f74ea6",
+      "relevanceScore": 55,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Ubuntu",
+        "wkhtmltopdf",
+        "HTML‑to‑PDF"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Prefect 워크플로우를 Cloud Run과 Cloud SQL에 배포하기 (프로덕션 준비된 GCP 설정)",
+      "link": "https://euno.news/posts/ko/deploying-prefect-workflows-on-cloud-run-with-clou-3b32c7",
+      "guid": "https://euno.news/posts/ko/deploying-prefect-workflows-on-cloud-run-with-clou-3b32c7",
+      "relevanceScore": 55,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Prefect",
+        "Cloud Run",
+        "Cloud SQL",
+        "GCP deployment"
       ],
       "sourceUrl": null
     }
   ],
-  "actions": [
-    {
-      "action": "update_existing",
-      "targetSlug": "wiki-api.md",
-      "suggestedTitle": "Wiki API – Handling Blacklisted External Archive Links",
-      "priority": "high",
-      "issueNumber": 197
-    },
-    {
-      "action": "update_existing",
-      "targetSlug": "ai/continuous-ai.md",
-      "suggestedTitle": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
-      "priority": "high",
-      "issueNumber": 198
-    },
-    {
-      "action": "update_existing",
-      "targetSlug": "ai/multi-agent-system.md",
-      "suggestedTitle": "Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처",
-      "priority": "medium",
-      "issueNumber": 199
-    }
-  ]
+  "actions": []
 }
