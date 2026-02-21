@@ -10,7 +10,9 @@ import {
   Search,
   LayoutGrid,
   List,
+  Calendar,
 } from 'lucide-react';
+import { format } from 'date-fns';
 import { useWikiPages } from '@/src/hooks/useWiki';
 import { Skeleton } from '@/src/components/ui/Skeleton';
 import { Input } from '@/src/components/ui/Input';
@@ -100,6 +102,11 @@ function TreeItem({
     >
       <FileText size={16} />
       <span>{item.menu || item.title || item.slug}</span>
+      {item.lastModified && (
+        <span className="wiki-tree-date">
+          {format(new Date(item.lastModified), 'yyyy.MM.dd')}
+        </span>
+      )}
     </Link>
   );
 }
@@ -199,6 +206,12 @@ export default function WikiIndexPage() {
                     <span className="wiki-list-title">{page.title}</span>
                     <span className="wiki-list-slug">{page.slug}</span>
                   </div>
+                  {page.lastModified && (
+                    <span className="wiki-list-date">
+                      <Calendar size={14} />
+                      {format(new Date(page.lastModified), 'yyyy.MM.dd')}
+                    </span>
+                  )}
                   <ChevronRight size={18} />
                 </Link>
               ))

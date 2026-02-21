@@ -2086,6 +2086,13 @@
   color: var(--color-text-primary);
 }
 
+.wiki-tree-date {
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
 /* List View */
 .wiki-list-view {
   display: flex;
@@ -2130,6 +2137,16 @@
   display: block;
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
+}
+
+.wiki-list-date {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .wiki-list-item svg:last-child {
