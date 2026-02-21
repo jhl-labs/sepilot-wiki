@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-02-21T10:44:32.357Z",
+  "collectedAt": "2026-02-21T11:39:38.100Z",
   "overview": {
-    "totalDocuments": 30,
-    "publishedDocuments": 24,
-    "draftDocuments": 6,
+    "totalDocuments": 29,
+    "publishedDocuments": 22,
+    "draftDocuments": 7,
     "openRequests": 18,
     "closedRequests": 16,
-    "totalAIActions": 127
+    "totalAIActions": 129
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 30,
+      "aiActions": 31,
       "documentsCreated": 10,
-      "documentsModified": 3,
+      "documentsModified": 4,
       "tavilyApiCalls": 30,
       "tavilyResults": 79,
       "estimatedTokens": 23929,
       "totalPipelineDurationMs": 544930
     },
     "last7d": {
-      "aiActions": 54,
+      "aiActions": 56,
       "documentsCreated": 12,
-      "documentsModified": 8,
+      "documentsModified": 9,
       "tavilyApiCalls": 36,
       "tavilyResults": 97,
       "estimatedTokens": 30273,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-21T11:20:15.887Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-21T11:18:32.708Z",
+      "actionType": "recover",
+      "issueNumber": 200,
+      "documentTitle": "chore(deps): bump ajv from 6.12.6 to 6.14.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-21T06:14:13.971Z",
       "actionType": "maintain",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:51:12.926Z",
-      "actionType": "modify",
-      "issueNumber": 182,
-      "documentTitle": "OpenClaw 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:50:23.745Z",
-      "actionType": "modify",
-      "issueNumber": 193,
-      "documentTitle": "Kubernetes 버전별 릴리즈 노트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 119,
+      "totalActions": 121,
       "totalEstimatedTokens": 64180,
       "avgDurationMs": 58986
     },
