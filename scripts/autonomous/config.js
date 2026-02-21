@@ -108,13 +108,13 @@ export const NEWS_BOOKMARK_WINDOW = 500;
 export const NEWS_MAX_AI_BATCH = 30;
 
 /** 관련성 점수 임계값 (0-100) */
-export const NEWS_RELEVANCE_THRESHOLD = 65;
+export const NEWS_RELEVANCE_THRESHOLD = 55;
 
 /** 한 번 실행당 최대 생성 Issue 수 */
-export const NEWS_MAX_ISSUES = 3;
+export const NEWS_MAX_ISSUES = 5;
 
 /** 원본 출처 fetch 최대 건수 */
-export const NEWS_MAX_SOURCE_FETCH = 5;
+export const NEWS_MAX_SOURCE_FETCH = 8;
 
 /** 뉴스 페이지 fetch 타임아웃 (ms) */
 export const NEWS_FETCH_TIMEOUT = 15000;

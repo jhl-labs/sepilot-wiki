@@ -22,7 +22,7 @@ concurrency:
 jobs:
   news-intelligence:
     runs-on: jhl-space
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,6 +33,7 @@ jobs:
         uses: ./.github/actions/setup-bun-install
 
       - name: Run news intelligence
+        id: news
         run: bun run scripts/autonomous/news-intelligence.js
         env:
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
@@ -47,5 +48,47 @@ jobs:
         uses: ./.github/actions/git-commit-push
         with:
           message: "chore: 뉴스 인텔리전스 보고서 업데이트"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Process created issues
+        if: steps.news.outputs.issues_created != '0' && steps.news.outputs.issues_created != ''
+        run: |
+          echo "📰 생성된 Issue 처리 시작: ${{ steps.news.outputs.issues_created }}건"
+          ISSUES='${{ steps.news.outputs.created_issues }}'
+
+          echo "$ISSUES" | jq -c '.[]' | while read -r issue; do
+            NUMBER=$(echo "$issue" | jq -r '.number')
+            ACTION=$(echo "$issue" | jq -r '.action')
+            TARGET=$(echo "$issue" | jq -r '.targetSlug // empty')
+            TITLE=$(echo "$issue" | jq -r '.suggestedTitle // empty')
+
+            echo "--- Issue #${NUMBER}: ${ACTION} ---"
+
+            if [ "$ACTION" = "update_existing" ] && [ -n "$TARGET" ]; then
+              echo "📝 문서 업데이트: ${TARGET}"
+              bun run scripts/document/update-document.js --issue-number "$NUMBER" || echo "⚠️ 업데이트 실패: Issue #${NUMBER}"
+            elif [ "$ACTION" = "new_document" ]; then
+              echo "📄 새 문서 생성: ${TITLE}"
+              bun run scripts/document/generate-document.js --issue-number "$NUMBER" || echo "⚠️ 생성 실패: Issue #${NUMBER}"
+            else
+              echo "⏭️ 건너뜀: ${ACTION}"
+            fi
+          done
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+
+      - name: Commit document changes
+        if: steps.news.outputs.issues_created != '0' && steps.news.outputs.issues_created != ''
+        uses: ./.github/actions/git-commit-push
+        with:
+          message: "docs: 뉴스 인텔리전스 기반 문서 자동 처리"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

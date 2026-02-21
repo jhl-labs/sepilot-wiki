@@ -18,7 +18,7 @@
 import { readFile, writeFile, mkdir } from 'fs/promises';
 import { resolve, join } from 'path';
 import { existsSync } from 'fs';
-import { callOpenAI, parseJsonResponse } from '../lib/utils.js';
+import { callOpenAI, parseJsonResponse, setGitHubOutput } from '../lib/utils.js';
 import { saveReport, createGitHubIssues, getExistingIssues } from '../lib/report-generator.js';
 import { loadAllDocuments, getDocumentSummaries } from '../lib/document-scanner.js';
 import { fetchPageContent } from '../lib/web-fetcher.js';
@@ -59,6 +59,10 @@ const FIXED_KEYWORDS = [
   'wasm', 'webassembly',
   'vite', 'webpack', 'esbuild',
   'git', 'open source', 'opensource',
+  'mcp', 'model context protocol', 'agent', 'agentic',
+  'rag', 'embedding', 'cursor', 'copilot', 'claude code',
+  'ollama', 'llama', 'mistral', 'qwen',
+  'supabase', 'vercel', 'astro', 'tailwind', 'shadcn',
 ];
 
 /* ===================================================================
@@ -243,8 +247,9 @@ ${docList || '(문서 없음)'}
 
 점수 기준:
 - 80+: 기존 문서에 직접 관련된 중요 업데이트
-- 65-79: 유용한 정보, 기존 문서 보강 가능
-- 65 미만: Wiki와 관련성 낮음
+- 55-79: 유용한 기술 정보, 문서 보강 또는 새 문서 생성 가능
+- 40-54: 간접적 관련, 참고 수준
+- 40 미만: Wiki와 관련성 낮음
 
 비기술 뉴스 필터링 (필수):
 - 엔터테인먼트, 영화, 게임 출시, 마케팅 캠페인, 제품 리뷰 → 30점 이하
@@ -253,7 +258,7 @@ ${docList || '(문서 없음)'}
   예: "YouTube API 쿼터 변경" → 기술 Wiki와 관련 (API 변경)
 - 뉴스의 핵심 주제가 기술/개발이 아니면 관련성 낮음
 
-중요: "기존 문서 업데이트"가 "새 문서 생성"보다 항상 우선입니다.
+기존 문서가 없더라도 유용한 기술 콘텐츠(새로운 도구, 프레임워크, 보안 취약점 등)는 높은 점수를 부여하세요.
 needsSourceFetch: euno 요약만으로 내용이 부족하면 true`;
 
   const response = await callOpenAI(
@@ -473,10 +478,14 @@ async function planActionsAndCreateIssues(enrichedItems, documents) {
 기존 Wiki 문서 목록:
 ${docList || '(문서 없음)'}
 
-액션 결정 원칙 (중요도 순서):
-1. update_existing (최우선): 기존 문서에 새 정보 추가/보강
-2. new_document (보조): 기존 문서로 다룰 수 없는 완전히 새로운 주제만
+액션 결정 원칙:
+1. update_existing: 기존 문서에 새 정보 추가/보강
+2. new_document: 새로운 기술/도구/프레임워크, 실용 가이드, 보안 취약점 등 기존 문서로 다루기 어려운 주제
 3. skip: 정보 가치 낮거나 이미 충분히 다뤄진 내용
+
+update_existing과 new_document는 동등한 옵션입니다. 상황에 맞게 적극적으로 선택하세요.
+- 기존 문서와 직접 관련 → update_existing
+- 새로운 기술/도구/트렌드 → new_document
 
 역검증 (필수):
 - 뉴스에서 대상 문서에 추가할 구체적 기술 정보가 없으면 skip
@@ -507,14 +516,10 @@ JSON 배열로 응답하세요:
   const parsed = parseJsonResponse(response, { fallback: [], silent: false });
   const actions = Array.isArray(parsed) ? parsed : parsed.items || parsed.actions || parsed.results || [];
 
-  // skip 제외, update_existing 우선 정렬
+  // skip 제외, priority 기반 정렬
   const actionable = actions
     .filter(a => a.action !== 'skip')
     .sort((a, b) => {
-      // update_existing을 new_document보다 우선
-      if (a.action === 'update_existing' && b.action !== 'update_existing') return -1;
-      if (a.action !== 'update_existing' && b.action === 'update_existing') return 1;
-      // 같은 타입이면 priority 순
       const pOrder = { high: 0, medium: 1, low: 2 };
       return (pOrder[a.priority] || 1) - (pOrder[b.priority] || 1);
     })
@@ -551,7 +556,11 @@ JSON 배열로 응답하세요:
       try {
         const issues = await createGitHubIssues([
           { title: issueTitle, body: issueBody, labels },
-        ]);
+        ], {
+          titlePrefix: '',
+          defaultLabels: labels,
+          footer: '\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*',
+        });
 
         if (issues.length > 0) {
           action.issueNumber = issues[0].number;
@@ -744,6 +753,22 @@ async function main() {
   console.log(`\n✅ 뉴스 인텔리전스 완료 (${duration}초)`);
   console.log(`   스캔: ${totalScanned}건, 신규: ${newItems.length}건, 필터: ${prefiltered.length}건`);
   console.log(`   관련: ${relevant.length}건, Issue 생성: ${issuesCreated}건`);
+
+  // GitHub Actions output 내보내기
+  const createdIssues = actions
+    .filter(a => a.issueNumber)
+    .map(a => ({
+      number: a.issueNumber,
+      url: a.issueUrl,
+      action: a.action,
+      targetSlug: a.targetSlug || null,
+      suggestedTitle: a.suggestedTitle || null,
+    }));
+
+  await setGitHubOutput({
+    created_issues: JSON.stringify(createdIssues),
+    issues_created: String(issuesCreated),
+  });
 }
 
 main().catch((error) => {
