@@ -126,6 +126,22 @@
       "isInvalid": false
     },
     {
+      "title": "Kubernetes 버전별 릴리즈 노트",
+      "slug": "kubernetes/release-notes",
+      "status": "draft",
+      "tags": [
+        "Kubernetes",
+        "Release Notes",
+        "버전",
+        "version",
+        "changelog"
+      ],
+      "lastModified": "2026-02-21T13:04:16.226Z",
+      "isDraft": true,
+      "isInvalid": false,
+      "menu": "K8s 릴리즈 노트"
+    },
+    {
       "title": "Docker/Hardened Images",
       "slug": "docker/hardened-images",
       "status": "draft",
@@ -356,14 +372,14 @@
       "isInvalid": false
     },
     {
-      "title": "Continuous AI 실천: 에이전트형 CI로 오늘 자동화할 수 있는 작업",
+      "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
       "slug": "ai/continuous-ai",
       "status": "draft",
       "tags": [
         "Continuous AI",
-        "CI",
-        "에이전트",
-        "GitHub"
+        "Human-in-the-Loop",
+        "Verification",
+        "AI Errors"
       ],
       "lastModified": "2026-02-21T13:00:39Z",
       "author": "GitHub Action",
@@ -417,18 +433,14 @@
       "isInvalid": false
     },
     {
-      "title": "MAS (Multi Agent System)",
+      "title": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
       "slug": "ai/multi-agent-system",
-      "status": "published",
+      "status": "draft",
       "tags": [
-        "Multi-Agent",
+        "멀티 에이전트",
+        "Self‑Healing",
         "AI",
-        "Agentic-AI",
-        "MCP",
-        "A2A",
-        "LLM",
-        "distributed-systems",
-        "collaboration"
+        "아키텍처"
       ],
       "lastModified": "2026-02-21T13:00:39Z",
       "author": "SEPilot AI",
@@ -485,80 +497,64 @@
   ],
   "tree": [
     {
-      "name": "라벨 가이드",
-      "path": "labels",
+      "name": "AI & LLM",
+      "path": "ai",
       "isCategory": true,
       "order": 1,
       "children": [
         {
-          "title": "Label: dependencies",
-          "slug": "labels/dependencies",
-          "order": 1
-        }
-      ]
-    },
-    {
-      "name": "주간 보고서",
-      "path": "reports",
-      "isCategory": true,
-      "order": 2,
-      "children": [
-        {
-          "title": "주간 위키 보고서 - 2026년 08주차",
-          "slug": "reports/weekly-2026-08",
-          "order": 1
-        }
-      ]
-    },
-    {
-      "name": "프론트엔드",
-      "path": "frontend",
-      "isCategory": true,
-      "order": 3,
-      "children": [
-        {
-          "title": "프론트엔드 API 서비스 레이어 설명",
-          "slug": "frontend/api-service-layer"
-        }
-      ]
-    },
-    {
-      "name": "Kubernetes",
-      "path": "kubernetes",
-      "isCategory": true,
-      "order": 4,
-      "children": [
-        {
-          "title": "Kubernetes 버전별 릴리즈 노트",
-          "slug": "kubernetes/kubernetes-release-notes",
-          "menu": "K8s 릴리즈 노트",
+          "title": "MCP (Model Context Protocol) 완벽 가이드",
+          "slug": "ai/mcp-model-context-protocol",
+          "menu": "MCP 가이드",
           "order": 1
         },
         {
-          "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
-          "slug": "kubernetes/ingress-nginx-deprecation-guide",
-          "menu": "Ingress NGINX 마이그레이션",
+          "title": "Qwen 3.5",
+          "slug": "ai/qwen3-5",
           "order": 2
         },
         {
-          "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
-          "slug": "kubernetes/cgroup-migration"
+          "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+          "slug": "ai/continuous-ai",
+          "order": 3
         },
         {
-          "title": "Introducing Node Readiness Controller",
-          "slug": "kubernetes/node-readiness-controller"
+          "title": "glm 5",
+          "slug": "ai/glm-5",
+          "order": 5
         },
         {
-          "title": "Kubernetes/Api Governance",
-          "slug": "kubernetes/api-governance"
+          "title": "Automate Repository Tasks with GitHub Agentic Workflows",
+          "slug": "ai/github-agentic-workflows",
+          "order": 6
+        },
+        {
+          "title": "바이브 코딩이란?",
+          "slug": "ai/vibe-coding",
+          "order": 7
+        },
+        {
+          "title": "MAS (Multi Agent System)",
+          "slug": "ai/multi-agent-system",
+          "menu": "멀티 에이전트 시스템",
+          "order": 8
+        },
+        {
+          "title": "Gemini 3.1 Pro",
+          "slug": "ai/gemini-3-1-pro",
+          "order": 9
+        },
+        {
+          "title": "Continuous AI와 Agentic CI 실무 가이드",
+          "slug": "ai/continuous-ai-agentic-ci"
         }
       ]
     },
     {
-      "name": "프로젝트",
+      "name": "Projects",
       "path": "projects",
       "isCategory": true,
-      "order": 5,
+      "order": 2,
       "children": [
         {
           "title": "OpenClaw 완벽 가이드",
@@ -602,10 +598,56 @@
       ]
     },
     {
+      "name": "Kubernetes",
+      "path": "kubernetes",
+      "isCategory": true,
+      "order": 3,
+      "children": [
+        {
+          "title": "Kubernetes 버전별 릴리즈 노트",
+          "slug": "kubernetes/release-notes",
+          "menu": "K8s 릴리즈 노트",
+          "order": 1
+        },
+        {
+          "title": "Introducing Node Readiness Controller",
+          "slug": "kubernetes/node-readiness-controller",
+          "order": 2
+        },
+        {
+          "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+          "slug": "kubernetes/ingress-nginx-deprecation-guide",
+          "menu": "Ingress NGINX 마이그레이션",
+          "order": 3
+        },
+        {
+          "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
+          "slug": "kubernetes/cgroup-migration",
+          "order": 5
+        },
+        {
+          "title": "Kubernetes/Api Governance",
+          "slug": "kubernetes/api-governance"
+        }
+      ]
+    },
+    {
+      "name": "Docker",
+      "path": "docker",
+      "isCategory": true,
+      "order": 4,
+      "children": [
+        {
+          "title": "Docker/Hardened Images",
+          "slug": "docker/hardened-images"
+        }
+      ]
+    },
+    {
       "name": "Bun",
       "path": "bun",
       "isCategory": true,
-      "order": 6,
+      "order": 5,
       "children": [
         {
           "title": "bun 이란?",
@@ -625,15 +667,27 @@
       ]
     },
     {
-      "name": "AI 기술·개념",
-      "path": "ai",
+      "name": "Frontend",
+      "path": "frontend",
+      "isCategory": true,
+      "order": 6,
+      "children": [
+        {
+          "title": "프론트엔드 API 서비스 레이어 설명",
+          "slug": "frontend/api-service-layer",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "name": "Backend",
+      "path": "backend",
       "isCategory": true,
       "order": 7,
       "children": [
         {
-          "title": "MCP (Model Context Protocol) 완벽 가이드",
-          "slug": "ai/mcp-model-context-protocol",
-          "menu": "MCP 가이드",
+          "title": "Wiki 페이지 API 라우트 상세 가이드",
+          "slug": "backend/wiki-api",
           "order": 1
         },
         {
@@ -658,48 +712,49 @@
           "order": 6
         },
         {
-          "title": "Continuous AI 실천: 에이전트형 CI로 오늘 자동화할 수 있는 작업",
-          "slug": "ai/continuous-ai",
-          "order": 7
-        },
-        {
           "title": "Gemini 3.1 Pro",
           "slug": "ai/gemini-3-1-pro",
           "order": 7
         },
         {
+          "title": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
+          "slug": "ai/multi-agent-system"
+        },
+        {
           "title": "Automate Repository Tasks with GitHub Agentic Workflows",
           "slug": "ai/github-agentic-workflows"
+        },
+        {
+          "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+          "slug": "ai/continuous-ai"
         }
       ]
     },
     {
-      "name": "Docker",
-      "path": "docker",
+      "name": "Labels",
+      "path": "labels",
       "isCategory": true,
       "order": 8,
       "children": [
         {
-          "title": "Docker/Hardened Images",
-          "slug": "docker/hardened-images"
+          "title": "Label: dependencies",
+          "slug": "labels/dependencies",
+          "order": 1
         }
       ]
     },
     {
-      "name": "백엔드·API",
-      "path": "backend",
+      "name": "Reports",
+      "path": "reports",
       "isCategory": true,
       "order": 9,
       "children": [
         {
-          "title": "Wiki 페이지 API 라우트 상세 가이드",
-          "slug": "backend/wiki-api"
+          "title": "주간 위키 보고서 - 2026년 08주차",
+          "slug": "reports/weekly-2026-08",
+          "order": 1
         }
       ]
-    },
-    {
-      "title": "Continuous AI와 Agentic CI 실무 가이드",
-      "slug": "continuous-ai-in-practice-what-developers-can-auto"
     }
   ]
 }

@@ -5,6 +5,7 @@ status: published
 tags: [API, Wiki, 라우트, 인증, 문서화]
 redirect_from:
   - wiki-api
+order: 1
 ---
 
 ## 1. 문서 개요

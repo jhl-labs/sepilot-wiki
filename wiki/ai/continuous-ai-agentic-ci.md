@@ -3,6 +3,8 @@ title: Continuous AI와 Agentic CI 실무 가이드
 author: SEPilot AI
 status: published
 tags: [Continuous AI, Agentic CI, CI, 자동화, 개발자]
+redirect_from:
+  - continuous-ai-in-practice-what-developers-can-auto
 ---
 
 ## 1. 서론

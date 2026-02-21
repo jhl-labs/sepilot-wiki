@@ -1,21 +1,36 @@
 {
   "entries": [
     {
-      "id": "c2aa43a6-0fa3-4add-91fa-89b1d8e88ef4",
-      "timestamp": "2026-02-21T13:05:01.074Z",
-      "actionType": "modify",
-      "issueNumber": 199,
-      "issueTitle": "[Wiki Maintenance] [업데이트] Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처",
-      "documentSlug": "ai/multi-agent-system",
-      "documentTitle": "MAS (Multi Agent System)",
-      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [업데이트] Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처\"",
-      "trigger": "update_request_label",
+      "id": "431dd8d2-194b-4142-99a8-668ead36cba2",
+      "timestamp": "2026-02-21T13:03:48.965Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "Wiki Tree Maintenance",
+      "documentSlug": "_wiki-tree",
+      "documentTitle": "Wiki Tree Maintenance",
+      "summary": "구조 분석 완료. 38개 자동 적용, 2개 보류, 1개 Issue 생성",
+      "trigger": "scheduled",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
-        "additions": 8,
-        "deletions": 0
+        "applied": 38,
+        "skipped": 2,
+        "issues": 1
       }
+    },
+    {
+      "id": "57a32765-ccd5-4ac0-bd98-9ae39251d789",
+      "timestamp": "2026-02-21T13:02:09.979Z",
+      "actionType": "recover",
+      "issueNumber": 198,
+      "issueTitle": "[Wiki Maintenance] [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "documentSlug": "ai/continuous-ai",
+      "documentTitle": "[Wiki Maintenance] [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "summary": "피드백에 따라 문서 생성",
+      "trigger": "maintainer_comment",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
     },
     {
       "id": "87a64493-0e31-44ef-a862-24fd511bed8a",
@@ -2667,5 +2682,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-21T13:05:01.074Z"
+  "lastUpdated": "2026-02-21T13:03:48.965Z"
 }

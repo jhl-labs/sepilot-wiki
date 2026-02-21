@@ -1,134 +1,86 @@
 ---
-title: MAS (Multi Agent System)
-menu: 멀티 에이전트 시스템
-author: SEPilot AI
-status: published
-tags: ["Multi-Agent", "AI", "Agentic-AI", "MCP", "A2A", "LLM", "distributed-systems", "collaboration"]
-related_docs: ["continuous-ai.md", "mcp-model-context-protocol.md"]
-redirect_from:
-  - mas-multi-agent-system
-order: 6
-updatedAt: 2026-02-21
+title: "멀티 에이전트 시스템 – Self‑Healing AI Agents"
+description: "대규모 자율 에이전트의 자체 복구 아키텍처와 8 GB VRAM 환경에서의 효율적 배포 방법"
+category: "Guide"
+tags: ["멀티 에이전트", "Self‑Healing", "AI", "아키텍처"]
+status: "draft"
+issueNumber: 0
+createdAt: "2026-02-21T10:00:00Z"
+updatedAt: "2026-02-21T10:00:00Z"
 ---
 
-# MAS (Multi Agent System)
+# 멀티 에이전트 시스템 – Self‑Healing AI Agents
 
-## 개요
-
-다중 에이전트 시스템(Multi-Agent System, **MAS**)은 **여러 인공지능(AI) 에이전트가 협력·조정하여** 사용자나 다른 시스템을 대신해 복합적인 작업을 수행하도록 설계된 시스템이다. 각 에이전트는 자체적인 속성과 자율성을 가지며, 전체 시스템은 **공통 목표**를 달성하기 위해 에이전트 간의 **커뮤니케이션·협업**을 활용한다.
-
-2025년이 "에이전트의 해"였다면, **2026년은 모든 멀티 에이전트 시스템이 프로덕션으로 이행하는 해**로 평가받고 있다. 단일 범용 에이전트에서 **전문화된 에이전트 팀의 오케스트레이션 아키텍처**로의 전환이 가속화되고 있으며, Gartner에 따르면 멀티 에이전트 시스템 관련 문의가 2024년 Q1 대비 2025년 Q2에 **1,445% 급증**했다. ([IBM](https://www.ibm.com/think/news/ai-tech-trends-predictions-2026), [Landbase](https://www.landbase.com/blog/agentic-ai-statistics))
-
-## 핵심 구성 요소
-
-| 요소 | 설명 |
-|------|------|
-| **에이전트** | LLM 기반 AI 에이전트로, 자연어 이해·생성, 도구 호출, 계획 수립 등을 수행한다 |
-| **지식·메모리** | 에이전트는 외부 데이터, API, 웹 검색 등 도구를 활용해 정보를 획득하고, 단기/장기/엔티티 메모리를 관리한다 |
-| **통신 프로토콜** | 에이전트 간 메시지를 주고받으며 목표·계획·결과를 공유한다 (A2A, MCP 등) |
-| **조정 메커니즘** | 중앙 집중식·분산식·계층형·홀로닉·연합·팀 등 다양한 아키텍처가 존재한다 |
-| **도구(Tools)** | 에이전트가 외부 시스템과 상호작용하기 위한 인터페이스 (DB 쿼리, API 호출, 파일 시스템 등) |
-| **오케스트레이터** | 에이전트 팀의 작업 분배, 진행 추적, 오류 복구를 위한 재계획을 담당하는 상위 에이전트 |
-
-## 아키텍처 유형
-
-### 1. 중앙 집중식 네트워크
-- 중앙 서버가 전역 지식 베이스와 에이전트 연결을 관리한다.
-- **장점**: 통신이 쉽고 지식이 일관됨.
-- **단점**: 중앙 서버 장애 시 전체 시스템이 중단될 위험이 있다.
-
-### 2. 분산형 네트워크
-- 에이전트가 인접 에이전트와 직접 정보를 교환한다.
-- **장점**: 견고하고 모듈성이 높으며 단일 장애점이 없음.
-- **단점**: 협업을 위한 행동 조정이 복잡할 수 있다.
-
-### 3. 계층형 구조
-- 트리 형태로 상위·하위 에이전트가 존재한다.
-- 상위 에이전트가 의사결정 권한을 갖고, 하위 에이전트는 구체 작업을 수행한다.
-- Microsoft의 **Magentic-One**이 대표적 예로, Orchestrator가 4개 전문 에이전트를 지휘한다.
-
-### 4. 홀로닉 구조
-- 에이전트가 "홀론" 단위로 그룹화되어, 하나의 전체와 여러 하위 에이전트가 동시에 존재한다.
-
-### 5. 연합·팀 구조
-- 에이전트가 일시적으로 연합하거나 팀을 이루어 특정 목표를 달성한다.
-- Claude Code의 **Agent Teams**, CrewAI의 **Crews** 등이 이 구조에 해당한다.
-
-> 출처: [IBM - 다중 에이전트 시스템이란?](https://www.ibm.com/kr-ko/think/topics/multiagent-system)
+> 이 문서는 **Self‑Healing AI Agents**(자체 복구 AI 에이전트) 구현 사례를 기반으로, 대규모 자율 에이전트 아키텍처와 8 GB VRAM 환경에서의 효율적인 배포 방법을 소개합니다. 원본 내용은 [euno.news](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8)에서 발췌했습니다.
 
 ---
 
-## Self‑Healing Architecture Overview
+## 1. Self‑Healing Architecture Overview
 
-2024‑2025년 사이에 다수의 LLM 기반 에이전트가 **오류(환각, 타임아웃, OOM 등) 발생 시 멈추는** 문제를 겪으며, 신뢰성에 대한 우려가 커졌다. [euno.news](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8)와 Dev.to에 공개된 사례에서는 **4,882개의 자율 AI 에이전트를 8 GB VRAM 단일 머신에서 실행**하면서 **실시간 오류 감지·자동 복구**를 구현한 아키텍처가 소개된다.
+대부분의 LLM‑기반 에이전트는 단순한 흐름을 따릅니다.
 
-### 핵심 아이디어
-1. **연속적인 Self‑Healing Loop** – 각 에이전트는 `EXECUTE → MONITOR → RECOVER → EXECUTE` 순환을 지속한다.  
-2. **상태 머신** – 에이전트는 `IDLE`, `RUNNING`, `DEGRADED`, `RECOVERING`, `FAILED` 다섯 가지 명시적 상태를 유지한다. `DEGRADED`는 출력 품질이 낮지만 여전히 사용 가능한 상태이며, `FAILED`는 외부 개입이 필요함을 의미한다.  
-3. **헬스 스코어링** – 실행 후 복합 점수를 산출한다. 주요 지표는 **Coherence, Completeness, Latency, Memory, Consistency**이며 가중치는 각각 0.25, 0.20, 0.15, 0.25, 0.15이다. 점수가 사전 정의된 임계값 이하이면 복구 전략이 선택된다.  
-4. **계층적 복구 전략** – 저비용(재시도, 파라미터 조정) → 중간 비용(컨텍스트 재로드) → 고비용(모델 재배치) 순으로 시도한다. 전체 에이전트 중 **2.3 %**만이 `FAILED` 상태에 도달한다.
+```
+receive task → call model → return result
+```
 
-#### 예시 코드 (Python)
+오류(환각, 타임아웃, OOM 등)가 발생하면 에이전트가 충돌하거나 쓰레기를 출력합니다. 기존의 `try‑catch` 방식은 임시 방편에 불과합니다. 여기서는 **자체 복구 루프**를 도입해 에이전트가 스스로 상태를 모니터링하고, 필요 시 복구 전략을 실행하도록 설계했습니다.
 
+```
+┌─────────────┐
+│   EXECUTE   │ ← 에이전트가 작업 수행
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│   MONITOR   │ ← 실시간 건강 점수 측정
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│   RECOVER   │ ← 계층적 복구 전략
+└──────┬──────┘
+       │
+       └──────→ EXECUTE 로 돌아감
+```
+
+### 1.1 에이전트 상태 머신
 ```python
 from enum import Enum
-
 class AgentState(Enum):
     IDLE = "idle"
     RUNNING = "running"
-    DEGRADED = "degraded"
-    RECOVERING = "recovering"
-    FAILED = "failed"
+    DEGRADED = "degraded"      # 기능은 있지만 성능 저하
+    RECOVERING = "recovering"  # 자체 복구 중
+    FAILED = "failed"          # 외부 개입 필요
+```
+*핵심 인사이트*: `DEGRADED`는 `FAILED`와 다르며, 대부분의 오류는 여기서 조기에 감지·복구됩니다.
 
-def compute_health(output, context):
+### 1.2 건강 점수
+```python
+def compute_health(agent_output, context):
     scores = {
-        "coherence":   check_coherence(output),
-        "completeness": check_completeness(output, context),
+        "coherence":   check_coherence(agent_output),
+        "completeness": check_completeness(agent_output, context),
         "latency":     check_latency(context.elapsed_time),
         "memory":      check_memory_usage(),
-        "consistency": check_cross_agent_consistency(output)
+        "consistency": check_cross_agent_consistency(agent_output)
     }
     weights = [0.25, 0.20, 0.15, 0.25, 0.15]
     return sum(s * w for s, w in zip(scores.values(), weights))
-
-THRESHOLD = 0.70
-health = compute_health(agent_output, ctx)
-if health < THRESHOLD:
-    strategy = select_strategy(health)
-    if strategy:
-        execute_strategy(strategy, agent)
-    else:
-        agent.transition(AgentState.FAILED)
 ```
+건강 점수가 임계값 이하이면 복구 전략을 선택하고 실행합니다. 대부분의 복구는 첫 두 단계에서 해결되며, **2.3 %**만이 `FAILED` 상태에 도달합니다.
 
-> 출처: euno.news, Dev.to (원문 코드 및 설명)
+---
 
-## Resource‑Efficient Deployment (8 GB VRAM)
+## 2. Resource‑Efficient Deployment (8 GB VRAM)
 
-8 GB VRAM을 가진 일반 소비자용 GPU에서 수천 개의 에이전트를 동시에 운영하려면 **동적 풀링**과 **양자화**가 필수다.
-
-| 기술 | 설명 |
-|------|------|
-| **동적 에이전트 풀링** | 한 번에 약 12개의 에이전트만 GPU에 상주하도록 제한하고, 나머지는 CPU/디스크에 직렬화한다. 우선순위 큐를 사용해 긴급 작업을 먼저 활성화한다. |
-| **4‑bit 양자화** | 모델 파라미터를 4‑bit으로 압축해 메모리 사용량을 75 % 이상 절감한다. |
-| **KV‑캐시 공유** | 동일한 컨텍스트 윈도우를 가진 에이전트 간에 키‑밸류 캐시를 공유해 재사용성을 높인다. |
-| **활성화 지연** | 위 기술을 결합하면 평균 활성화 지연이 **≈ 850 ms** 수준으로 감소한다. |
-
-#### 풀링 구현 예시
+8 GB VRAM을 가진 단일 머신에서 4,882개의 에이전트를 실행하기 위해 **동적 에이전트 풀링**을 사용합니다. 한 번에 GPU에 상주하는 에이전트 수는 약 12개이며, 나머지는 CPU/디스크에 직렬화됩니다.
 
 ```python
 from queue import PriorityQueue
-
 class AgentPool:
     def __init__(self, max_concurrent=12, vram_budget_mb=7168):
         self.active   = PriorityQueue()   # priority = urgency
         self.dormant  = {}                # serialized agents
         self.vram_budget = vram_budget_mb
-
-    def current_vram(self):
-        # GPU 메모리 사용량을 반환 (예시)
-        ...
-
     def activate(self, agent_id, priority):
         while self.current_vram() > self.vram_budget * 0.85:
             _, evicted = self.active.get()
@@ -138,312 +90,38 @@ class AgentPool:
         self.active.put((priority, agent))
         return agent
 ```
-
-> 출처: euno.news (풀링 설계 설명)
-
-## Failure Detection & Automatic Recovery
-
-Self‑Healing 시스템은 **실시간 헬스 점수**와 **상태 전이**를 통해 오류를 조기에 감지한다.
-
-| 단계 | 설명 |
-|------|------|
-| **모니터링** | 각 실행 사이클 후 `compute_health` 로 점수를 산출하고, `DEGRADED`·`FAILED` 여부를 판단한다. |
-| **복구 전략 선택** | 점수에 따라 `select_strategy` 가 저비용 → 중간 비용 → 고비용 순으로 복구 옵션을 반환한다. |
-| **복구 실행** | `execute_strategy` 가 선택된 전략을 적용한다. 성공 시 `RECOVERING → RUNNING` 로 전이, 실패 시 `FAILED` 로 전이한다. |
-| **알림·로그** | `FAILED` 상태가 감지되면 운영자에게 알림을 전송하고, 로그를 중앙 저장소에 기록한다. |
-
-### 복구 성공률
-- **96.5 %**의 토론 에이전트 승률 (208 시도 중 201 승) – 복구된 에이전트가 높은 품질을 유지함.  
-- 평균 심판 점수 **4.68 / 5.0** – 복구 후 출력 품질이 크게 저하되지 않음.  
-- 전체 시스템 가용성은 **> 99.5 %** 수준으로 보고됨.
-
-> 출처: euno.news (성능 지표)
+4‑bit 양자화와 KV‑캐시 공유를 결합하면 평균 활성화 지연 시간은 **≈ 850 ms** 수준입니다.
 
 ---
 
-## A2A, MCP, MAS의 관계
+## 3. Failure Detection & Automatic Recovery
 
-MAS 생태계를 이해하기 위해서는 세 가지 핵심 개념의 관계를 파악해야 한다.
+### 3.1 실시간 모니터링
+에이전트는 매 실행 사이클 후 **복합 건강 점수**를 계산하고, 점수가 임계값 이하이면 `RECOVER` 단계로 전이합니다.
 
-### 개념 비교표
+### 3.2 계층적 복구 전략
+1. **경미한 오류** – 재시도, 파라미터 재조정
+2. **자원 부족** – 다른 GPU 슬롯으로 이동, 메모리 압축
+3. **심각한 오류** – `FAILED` 상태로 전이 후 외부 개입 요청
 
-| 항목 | MAS | A2A | MCP |
-|------|-----|-----|-----|
-| **수준** | 개념/아키텍처 | 프로토콜 | 프로토콜 |
-| **발표** | 학술 개념 (1990년대~) | Google, 2025.04 | Anthropic, 2024.11 |
-| **목적** | 다중 에이전트 협업 시스템 | 에이전트 간 통신 | 에이전트와 도구/데이터 연결 |
-| **거버넌스** | N/A | Linux Foundation | AAIF (Linux Foundation) |
-| **기반 기술** | 프레임워크에 의존 | HTTP, SSE, JSON‑RPC, gRPC | JSON‑RPC 2.0 |
-| **방향성** | 전체 시스템 | 수평적 (에이전트↔에이전트) | 수직적 (에이전트↔도구) |
-
-> MAS는 **"무엇을 만들 것인가(what)"**이고, A2A와 MCP는 **"어떻게 만들 것인가(how)"**에 해당하는 구체적 프로토콜이다.
-
-### Google A2A (Agent-to-Agent) 프로토콜
-
-**서로 다른 프레임워크, 벤더, 서버에서 구축된 AI 에이전트들이 상호 통신하고 협업할 수 있도록 설계된 개방형 표준**이다. 2025년 4월 Google Cloud가 발표했다.
-
-- **Agent Card**: 각 에이전트가 자신의 정체성, 기능, 스킬, 인증 요구사항을 기술한 JSON 메타데이터를 `/.well-known/agent-card.json`으로 발행
-- **Task 관리**: 생명주기 상태를 통해 빠른 작업부터 장시간 심층 연구까지 관리
-- **지원 규모**: 2025년 7월 기준 **150개 이상의 조직**이 지원 (Atlassian, Salesforce, SAP, PayPal, AWS, Microsoft 등)
-- **최신 상태**: Linux Foundation 산하 프로젝트로 편입, v0.3에서 gRPC 지원 추가
-
-> 출처: [Google Developers Blog](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/), [A2A Protocol](https://a2a-protocol.org/latest/specification/), [Linux Foundation](https://www.linuxfoundation.org/press/linux-foundation-launches-the-agent2agent-protocol-project-to-enable-secure-intelligent-communication-between-ai-agents)
-
-### Anthropic MCP (Model Context Protocol)
-
-**AI 어시스턴트를 데이터 소스, 도구, 외부 서비스에 연결하기 위한 개방형 표준 프로토콜**이다. Language Server Protocol(LSP)에서 영감을 받았다.
-
-- **3계층 아키텍처**: Host(사용자 앱) → Client(연결 관리) → Server(도구/리소스 노출)
-- **핵심 기능**: Tools(도구 호출), Resources(데이터 소스), Prompts(템플릿)
-- **채택 현황**: OpenAI(2025.03), Google DeepMind(2025.04) 공식 채택. **10,000개 이상의 MCP 서버**가 프로덕션 운영 중
-- **거버넌스**: 2025년 12월 **Agentic AI Foundation(AAIF)**에 기증 (Anthropic, OpenAI, Block 공동 설립, Linux Foundation 산하)
-
-> 출처: [Anthropic - MCP 발표](https://www.anthropic.com/news/model-context-protocol), [MCP Spec](https://modelcontextprotocol.io/specification/2025-11-25), [Anthropic - AAIF](https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation)
-
-### A2A와 MCP는 보완적 관계
-
-두 프로토콜은 에이전틱 스택의 **서로 다른 계층**에서 작동한다:
-
-```
-[MAS 전체 시스템]
-    |
-    +-- [에이전트 A] ---MCP---> [도구/DB/API]
-    |       |
-    |       +---A2A---> [에이전트 B] ---MCP---> [도구/DB/API]
-    |                       |
-    |                       +---A2A---> [에이전트 C] ---MCP---> [도구/DB/API]
-    |
-    +-- 오케스트레이션 레이어 (작업 분배, 상태 관리)
-```
-
-| 시나리오 | 선택 |
-|----------|------|
-| 단일 에이전트가 여러 도구/DB에 접근 | **MCP** |
-| 서로 다른 벤더의 에이전트들이 협업 | **A2A** |
-| IDE에서 AI가 코드 분석 도구 호출 | **MCP** |
-| 구매 에이전트가 판매 에이전트와 협상 | **A2A** |
-| 복잡한 멀티 에이전트 기업 시스템 | **MCP + A2A 함께** |
-
-> 출처: [Auth0 - MCP vs A2A Guide](https://auth0.com/blog/mcp-vs-a2a/), [TrueFoundry](https://www.truefoundry.com/blog/mcp-vs-a2a), [Clarifai](https://www.clarifai.com/blog/mcp-vs-a2a-clearly-explained)
+이러한 접근 방식은 단순 재시도 루프보다 **오탐지 실패를 73 %** 감소시켰습니다.
 
 ---
 
-## 주요 AI Agent 개발 도구
+## 4. 실험 결과 (예시)
+- **승률**: 96.5 % (201/208)
+- **평균 심판 점수**: 4.68/5.0
+- **전체 품질**: 93.6 %
+- **접근성**: 5.0/5.0
+- **안전 점수**: 4.6/5.0
 
-### 상용 도구
-
-| 도구 | 개발사 | MAS 지원 수준 | 핵심 MAS 기능 |
-|------|--------|--------------|--------------|
-| **Claude Code** | Anthropic | 높음 | Subagents, Agent Teams (실험적) |
-| **Cursor** | Cursor Inc. | 높음 | 멀티 에이전트 병렬, Subagents, 자동 판정 |
-| **Google Antigravity** | Google | 높음 | Manager View 멀티 에이전트 오케스트레이션 |
-| **GitHub Copilot** | GitHub/MS | 중상 | Agent Mode, Agent Skills, Coding Agent |
-| **Devin** | Cognition Labs | 중상 | 멀티 에이전트 디스패치, 병렬 실행 |
-| **Windsurf** | Codeium | 중간 | Cascade 에이전트, Agent Skills |
-
-#### Claude Code (Anthropic)
-
-Anthropic의 공식 CLI 기반 AI 코딩 에이전트.
-
-- **Subagents**: 메인 에이전트 내에서 특정 작업을 수행하는 독립 에이전트. 자체 컨텍스트 윈도우, 커스텀 시스템 프롬프트, 독립적 도구 접근 권한 보유. 결과를 메인 에이전트에게만 보고.
-- **Agent Teams** (실험적): Opus 4.6과 함께 출시. 여러 Claude Code 인스턴스가 병렬로 자율 협력. 팀 리드가 팀원을 생성하고, 팀원들은 **서로 직접 메시지를 주고받으며** 공유 작업 목록에서 자체 조율.
-
-| 구분 | Context | Communication | Coordination |
-|------|---------|---------------|--------------|
-| **Subagents** | 메인 세션 내 | 결과 → 메인만 | 메인 에이전트가 전체 관리 |
-| **Agent Teams** | 각 팀원 별도 컨텍스트 | 팀원 ↔ 팀원 직접 | 공유 작업 리스트, 자체 조정 |
-
-> 출처: [Claude Code Subagents 문서](https://code.claude.com/docs/en/sub-agents), [Claude Code Agent Teams](https://claudefa.st/blog/guide/agents/agent-teams)
-
-#### Google Antigravity
-
-2025년 11월 Gemini 3 출시와 함께 발표된 에이전틱 개발 플랫폼.
-
-- VS Code 포크 기반의 완전한 독립 플랫폼
-- **Editor View**: 에이전트 사이드바가 있는 일반적인 IDE 인터페이스
-- **Manager View**: 여러 에이전트를 병렬로 오케스트레이션하는 제어 센터. 비동기 작업 실행 가능
-- Gemini 3 기반, Anthropic Claude 및 OpenAI 모델도 지원
-- 현재 Public Preview로 무료 제공
-
-> 출처: [Google Developers Blog - Antigravity](https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/), [Wikipedia](https://en.wikipedia.org/wiki/Google_Antigravity)
-
-#### Cursor
-
-VS Code 포크 기반 AI 코딩 IDE. 2026년 2월 기준 멀티 에이전트 기능 프리뷰 제공 중.
-
-- **Agent Mode (Composer)**: 다단계 코딩 작업을 자율적으로 처리
-- **Multi-Agent Interface**: Cursor 2.0에서 도입. 여러 AI 에이전트가 병렬 작업 가능
-- **자동 판정 시스템**: 여러 에이전트를 병렬 실행 후 최적 솔루션을 자동 평가·추천
-
-> 출처: [Cursor 2.0 - InfoQ](https://www.infoq.com/news/2025/11/cursor-composer-multiagent/), [Cursor 2.2 Changelog](https://cursor.com/changelog/2-2)
-
-#### VS Code 1.109 - 멀티 에이전트 개발의 허브
-
-2026년 2월 VS Code 1.109에서 Microsoft는 VS Code를 **"멀티 에이전트 개발의 홈"**으로 선언했다.
-
-- Claude, Codex, Copilot 에이전트를 동시에 실행
-- 여러 에이전트 세션을 로컬/백그라운드/클라우드에서 병렬 관리
-- Agent Skills가 GA(일반 제공)로 전환
-
-> 출처: [VS Code Blog](https://code.visualstudio.com/blogs/2026/02/05/multi-agent-development), [Visual Studio Magazine](https://visualstudiomagazine.com/articles/2026/02/05/vs-code-1-109-deemed-multi-agent-development-platform.aspx)
-
-### 오픈소스 MAS 프레임워크
-
-| 프레임워크 | 개발사 | 언어 | 아키텍처 | 특징 |
-|-----------|--------|------|---------|------|
-| **AutoGen / MS Agent Framework** | Microsoft | Python, .NET | 비동기 이벤트 기반 | Semantic Kernel과 통합, 2026 Q1 GA 목표 |
-| **CrewAI** | CrewAI Inc. | Python | 역할 기반, Crews + Flows | 직관적 역할 설계, 100+ 내장 도구 |
-| **LangGraph** | LangChain | Python, JS/TS | 상태 기반 그래프 | 영속 상태, 타임트래블 디버깅, 1.0 출시 |
-| **OpenAI Agents SDK** | OpenAI | Python, TS | 핸드오프 기반 | Swarm 후속, 가드레일, 트레이싱 내장 |
-| **Magentic-One** | MS Research | Python | Orchestrator + 4 전문 에이전트 | 범용 작업 해결, 벤치마크 SOTA급 |
-| **Google ADK** | Google | Python, TS, Go, Java | 계층적 멀티 에이전트 | 처음부터 MAS 설계, Vertex AI 통합 |
-
-#### AutoGen → Microsoft Agent Framework
-
-Microsoft Research에서 개발한 멀티 에이전트 프레임워크. v0.4에서 비동기 이벤트 기반 아키텍처로 개편된 후, **Semantic Kernel과 통합되어 Microsoft Agent Framework**으로 전환 중이다.
-
-- Python 및 .NET 지원, TypeScript 예정
-- 2026년 Q1 말까지 1.0 GA 출시 목표
-- AutoGen은 안정 API를 유지하며 보안 패치만 받고, 신규 기능은 Agent Framework으로
-
-> 출처: [Visual Studio Magazine](https://visualstudiomagazine.com/articles/2025/10/01/semantic-kernel-autogen--open-source-microsoft-agent-framework.aspx), [MS Agent Framework](https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview)
-
-#### CrewAI
-
-역할 기반 멀티 에이전트 협업에 특화된 Python 프레임워크. LangChain에 독립적으로 구축.
-
-- **역할 기반 아키텍처**: 에이전트에 역할(연구원, 작가, 분석가 등), 목표, 배경 이야기 부여
-- **협업 프로세스**: Sequential(순차), Hierarchical(관리자 조율), Consensus(합의 기반)
-- **Crews + Flows 이중 구조**: Crews(자율적 팀), Flows(이벤트 기반 워크플로우)
-- GitHub 스타 20,000+
-
-> 출처: [CrewAI 공식](https://www.crewai.com/), [CrewAI GitHub](https://github.com/crewAIInc/crewAI)
-
-#### LangGraph (LangChain)
-
-상태 기반 그래프 아키텍처의 에이전트 오케스트레이션 프레임워크.
-
-- **사이클을 포함하는 LLM 워크플로우** 생성 가능 (에이전트가 이전 단계를 재방문)
-- **Durable State**: 실행 상태 자동 저장, 서버 재시작이나 장기 워크플로우 중단 시에도 이어서 실행
-- **Time-Travel Debugging**: 과거 상태로 돌아가 디버깅 가능
-- 2025년 **LangGraph 1.0** 출시
-
-> 출처: [LangGraph 공식](https://www.langchain.com/langgraph), [LangGraph Multi-Agent Workflows](https://blog.langchain.com/langgraph-multi-agent-workflows/)
-
-#### OpenCode
-
-Go 언어로 작성된 오픈소스 터미널 기반 AI 코딩 에이전트. Claude Code의 오픈소스 대안으로 부상.
-
-- 75개 이상 모델 지원 (Claude, GPT, Gemini, 로컬 모델 등)
-- GitHub 스타 95,000+, 월 650,000명+ 개발자 사용
-- 전용 MAS 프레임워크라기보다 단일 에이전트 코딩 도구에 가까움
-
-> 출처: [OpenCode 공식](https://opencode.ai/), [OpenCode GitHub](https://github.com/opencode-ai/opencode)
-
-#### OpenClaw
-
-오스트리아 개발자 Peter Steinberger가 만든 오픈소스 AI 에이전트. Signal, Telegram, Discord, WhatsApp 등 **메시징 서비스를 통해 실세계 작업을 수행**한다.
-
-- 2025년 11월 "Clawdbot"으로 공개 → Anthropic 상표 항의 → "OpenClaw"로 이름 변경
-- 웹 브라우징, PDF 요약, 캘린더 관리, 에이전틱 쇼핑, 이메일 관리 등 수행
-- 독립적 MAS 프레임워크가 아닌, 에이전틱 인터페이스
-
-> 출처: [OpenClaw Wikipedia](https://en.wikipedia.org/wiki/OpenClaw), [CNBC](https://www.cnbc.com/2026/02/02/openclaw-open-source-ai-agent-rise-controversy-clawdbot-moltbot-moltbook.html)
+> 위 지표는 독립 LLM 심판이 구조화된 루브릭을 사용해 블라인드 평가한 결과이며, 자체 보고가 아닙니다.
 
 ---
 
-## 주요 기업의 MAS 전략 (2025-2026)
-
-### Google - A2A + ADK
-
-- **A2A 프로토콜**: 에이전트 간 통신 오픈 표준, 150+ 기업 지원
-- **Agent Development Kit (ADK)**: 오픈소스 멀티 에이전트 프레임워크 (Python, TS, Go, Java)
-- **Antigravity IDE**: Manager View를 통한 멀티 에이전트 오케스트레이션
-
-> 출처: [Google ADK](https://developers.googleblog.com/en/agent-development-kit-easy-to-build-multi-agent-applications/)
-
-### Microsoft - Copilot Studio + Agent Framework
-
-- **Copilot Studio**: 멀티 에이전트 시스템 구축 기능 (프리뷰), 에이전트 간 작업 위임
-- **Microsoft Agent Framework**: AutoGen + Semantic Kernel 통합, Python/.NET 지원
-- **2026년 전환**: 개별 명령 응답에서 **자율적 멀티스텝 프로세스 처리**로의 주요 아키텍처 전환
-
-> 출처: [Microsoft Copilot Blog](https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/multi-agent-orchestration-maker-controls-and-more-microsoft-copilot-studio-announcements-at-microsoft-build-2025/), [6 core capabilities for 2026](https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/6-core-capabilities-to-scale-agent-adoption-in-2026/)
-
-### OpenAI - Agents SDK + AGENTS.md
-
-- **Agents SDK**: Swarm의 프로덕션 후속. 핸드오프, 가드레일, 트레이싱, 음성 에이전트 내장
-- **AGENTS.md**: 코딩 에이전트 지침 규격. 60,000+ 오픈소스 프로젝트에서 채택
-- AAIF(Agentic AI Foundation) 공동 설립
-
-> 출처: [OpenAI - New tools for building agents](https://openai.com/index/new-tools-for-building-agents/), [OpenAI - AAIF](https://openai.com/index/agentic-ai-foundation/)
-
-### Amazon AWS - Bedrock AgentCore
-
-- **Amazon Bedrock**: 멀티 에이전트 협업 기능 2025년 3월 GA. Supervisor 기반 아키텍처
-- **AgentCore**: re:Invent 2025에서 발표. 에이전트 경계 관리, 메모리, 평가 기능
-
-> 출처: [AWS - Multi-agent collaboration](https://aws.amazon.com/blogs/aws/introducing-multi-agent-collaboration-capability-for-amazon-bedrock/)
-
-### NVIDIA - Nemotron 3
-
-- MAS 구축을 위한 **Nemotron 3** 오픈 모델 패밀리 (Nano, Super, Ultra) 발표
-- Hybrid Latent Mixture‑of‑Experts 아키텍처
-- Super와 Ultra는 2026년 상반기 출시 예정
-
-> 출처: [NVIDIA](https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models)
-
-### Agentic AI Foundation (AAIF)
-
-2025년 12월 Linux Foundation 산하에 설립. **OpenAI, Anthropic, Block**이 공동 창설하고, Google, Microsoft, AWS, Bloomberg, Cloudflare가 지원한다.
-
-- **주요 프로젝트**: MCP (Anthropic), Goose (Block), AGENTS.md (OpenAI)
-- AI 에이전트 표준화를 위한 업계 최대 협력체
-
-> 출처: [OpenAI - AAIF](https://openai.com/index/agentic-ai-foundation/), [TechCrunch](https://techcrunch.com/2025/12/09/openai-anthropic-and-block-join-new-linux-foundation-effort-to-standardize-the-ai-agent-era/)
+## 5. 참고 자료
+- 원본 기사: [euno.news – 8 GB VRAM으로 4,882개의 Self‑Healing AI Agents 구축](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8) (출처)
 
 ---
 
-## 시장 규모와 성장 전망
-
-### 시장 규모 예측
-
-| 연도 | 시장 규모 | 출처 |
-|------|----------|------|
-| 2025년 | USD 72.9억 | [Fortune Business Insights](https://www.fortunebusinessinsights.com/agentic-ai-market-114233) |
-| 2026년 | USD 91.4억 | Fortune Business Insights |
-| 2030년 | USD 520억+ | [MachineLearningMastery](https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/) |
-| 2032년 | USD 932억 (CAGR 44.6%) | [MarketsandMarkets](https://www.marketsandmarkets.com/Market-Reports/agentic-ai-market-208190735.html) |
-| 2034년 | USD 1,391.9억 (CAGR 40.5%) | Fortune Business Insights |
-
-### 핵심 예측 (Gartner, McKinsey 등)
-
-| 예측 | 출처 |
-|------|------|
-| 2026년 말까지 엔터프라이즈 앱의 **40%**에 태스크 전용 AI 에이전트 탑재 (2025년 5% 미만) | [Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025) |
-| 2028년까지 AI 에이전트가 B2B 구매에서 **USD 15조** 규모 주도 | [Gartner](https://www.digitalcommerce360.com/2025/11/28/gartner-ai-agents-15-trillion-in-b2b-purchases-by-2028/) |
-| 2028년까지 일상 업무 의사결정의 **15%**가 에이전틱 AI로 자율 수행 | Gartner |
-| 2030년까지 에이전틱 AI로 최대 **USD 2.9조**의 경제적 가치 창출 | [McKinsey](https://onereach.ai/blog/agentic-ai-adoption-rates-roi-market-trends/) |
-| 2035년까지 에이전틱 AI가 기업 앱 소프트웨어 매출의 **30%** (USD 4,500억+) 차지 | Gartner |
-
----
-
-## 산업별 영향
-
-### 소프트웨어 개발
-
-2026년은 소프트웨어 개발에서 **"위임(delegation)"**의 시대다. 2024년 자동완성→대화, 2025년 대화→협업에 이어, 2026년에는 AI 에이전트에게 작업을 **위임**하는 단계로 전환되고 있다.
-
-- 개발자의 **85%**가 정기적으로 AI 도구를 사용
-- Gartner 예측: 2026년까지 소프트웨어 엔지니어의 **90%**가 직접 코딩에서 AI 프로세스 오케스트레이션으로 전환
-- MCP를 통해 Claude Code가 Figma, Slack, Jira, 내부 문서와 연동
-
-> 출처: [Anthropic - 2026 Agentic Coding Trends Report](https://resources.anthropic.com/hubfs/2026%20Agentic%20Coding%20Trends%20Report.pdf), [senorit.de](https://senorit.de/en/blog/ai-agents-software-development-2026)
-
-### 고객 서비스
-
-- 2029년까지 에이전틱 AI가 일반 고객 서비스 이슈의 **80%**를 인간 개입 없이 자율 해결
-- 운영 비용 **30% 절감** 효과
-- 고객 서비스와 이커머스가 **채택 선두** (명확한 ROI)
-
-> 출처: [Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-03-05-gartner-predicts-agent
+*이 문서는 초안(draft) 상태이며, 검토 후 `published` 로 전환될 예정입니다.*
