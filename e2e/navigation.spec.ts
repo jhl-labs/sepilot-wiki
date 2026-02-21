@@ -20,7 +20,7 @@ test.describe('Navigation', () => {
     await page.goto('/');
 
     // 본문 영역의 위키 링크 선택 (footer 아이콘 버튼 제외)
-    const wikiLink = page.locator('.home-page a[href^="/wiki/"], .sidebar a[href^="/wiki/"]').first();
+    const wikiLink = page.locator('.home-page a[href^="/wiki/"]:not(.footer-icon-btn), .sidebar a[href^="/wiki/"]').first();
     if (await wikiLink.isVisible({ timeout: 10000 }).catch(() => false)) {
       await wikiLink.click();
 
@@ -34,8 +34,8 @@ test.describe('Navigation', () => {
   });
 
   test('브레드크럼 네비게이션이 작동해야 함', async ({ page }) => {
-    // 실제 존재하는 위키 페이지 사용
-    await page.goto('/wiki/mcp-model-context-protocol');
+    // 실제 존재하는 위키 페이지 사용 (ai 카테고리 하위)
+    await page.goto('/wiki/ai/mcp-model-context-protocol');
 
     // 브레드크럼이 표시되어야 함
     const breadcrumb = page.locator('nav[aria-label="Breadcrumb"], .breadcrumb');
