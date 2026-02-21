@@ -1,43 +1,63 @@
 {
-  "collectedAt": "2026-02-21T17:41:59.965Z",
+  "collectedAt": "2026-02-21T18:48:04.475Z",
   "overview": {
-    "totalDocuments": 30,
-    "publishedDocuments": 22,
-    "draftDocuments": 9,
-    "openRequests": 18,
+    "totalDocuments": 29,
+    "publishedDocuments": 21,
+    "draftDocuments": 8,
+    "openRequests": 19,
     "closedRequests": 16,
-    "totalAIActions": 132
+    "totalAIActions": 134
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 2,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 8,
+      "estimatedTokens": 2051,
+      "totalPipelineDurationMs": 44738
     },
     "last24h": {
-      "aiActions": 8,
-      "documentsCreated": 0,
+      "aiActions": 10,
+      "documentsCreated": 1,
       "documentsModified": 2,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 8,
+      "estimatedTokens": 2051,
+      "totalPipelineDurationMs": 44738
     },
     "last7d": {
-      "aiActions": 59,
-      "documentsCreated": 12,
+      "aiActions": 61,
+      "documentsCreated": 13,
       "documentsModified": 10,
-      "tavilyApiCalls": 36,
-      "tavilyResults": 97,
-      "estimatedTokens": 30273,
-      "totalPipelineDurationMs": 679096
+      "tavilyApiCalls": 39,
+      "tavilyResults": 105,
+      "estimatedTokens": 32324,
+      "totalPipelineDurationMs": 723834
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-21T18:09:46.780Z",
+      "actionType": "generate",
+      "issueNumber": 207,
+      "documentTitle": "클라우드 기반 영구 터미널 설계 및 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 44738,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2051
+    },
+    {
+      "timestamp": "2026-02-21T18:08:38.463Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-21T13:03:48.965Z",
       "actionType": "maintain",
@@ -217,33 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:58:41.187Z",
-      "actionType": "quality_score",
-      "issueNumber": 163,
-      "documentTitle": "[Wiki Maintenance] [요청] New Conversion from cgroup v1 CPU Shares to v2 CPU Weight",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:58:29.400Z",
-      "actionType": "quality_score",
-      "issueNumber": 177,
-      "documentTitle": "[Wiki Maintenance] [요청] Hardened Images Are Free. Now What?",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 124,
-      "totalEstimatedTokens": 64180,
-      "avgDurationMs": 58986
+      "totalActions": 126,
+      "totalEstimatedTokens": 66231,
+      "avgDurationMs": 58416
     },
     "unknown": {
       "totalActions": 8,
