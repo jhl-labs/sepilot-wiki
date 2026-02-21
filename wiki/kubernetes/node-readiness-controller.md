@@ -5,6 +5,7 @@ status: published
 tags: [Kubernetes, NodeReadiness, Scheduler, Reliability]
 redirect_from:
   - introducing-node-readiness-controller
+order: 2
 ---
 
 ## 1. 서론

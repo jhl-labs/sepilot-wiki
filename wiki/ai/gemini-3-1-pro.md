@@ -7,7 +7,7 @@ status: "draft"
 issueNumber: 359
 createdAt: "2026-02-20T02:10:00Z"
 updatedAt: "2026-02-20T02:10:00Z"
-order: 7
+order: 9
 related_docs: ["gemini-3-1.md", "qwen3-5.md"]
 ---
 

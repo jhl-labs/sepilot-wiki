@@ -11,6 +11,7 @@ updatedAt: 2026-02-20
 related_docs: ["ingress-nginx-deprecation-guide.md"]
 order: 1
 redirect_from:
+  - kubernetes-kubernetes-release-notes
   - kubernetes-kubernetes-v1-33-8
 ---
 
