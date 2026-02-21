@@ -8,6 +8,7 @@ related_docs: ["continuous-ai.md", "mcp-model-context-protocol.md"]
 redirect_from:
   - mas-multi-agent-system
 order: 6
+updatedAt: 2026-02-21
 ---
 
 # MAS (Multi Agent System)
@@ -57,6 +58,109 @@ order: 6
 
 ---
 
+## Self‑Healing Architecture Overview
+
+2024‑2025년 사이에 다수의 LLM 기반 에이전트가 **오류(환각, 타임아웃, OOM 등) 발생 시 멈추는** 문제를 겪으며, 신뢰성에 대한 우려가 커졌다. [euno.news](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8)와 Dev.to에 공개된 사례에서는 **4,882개의 자율 AI 에이전트를 8 GB VRAM 단일 머신에서 실행**하면서 **실시간 오류 감지·자동 복구**를 구현한 아키텍처가 소개된다.
+
+### 핵심 아이디어
+1. **연속적인 Self‑Healing Loop** – 각 에이전트는 `EXECUTE → MONITOR → RECOVER → EXECUTE` 순환을 지속한다.  
+2. **상태 머신** – 에이전트는 `IDLE`, `RUNNING`, `DEGRADED`, `RECOVERING`, `FAILED` 다섯 가지 명시적 상태를 유지한다. `DEGRADED`는 출력 품질이 낮지만 여전히 사용 가능한 상태이며, `FAILED`는 외부 개입이 필요함을 의미한다.  
+3. **헬스 스코어링** – 실행 후 복합 점수를 산출한다. 주요 지표는 **Coherence, Completeness, Latency, Memory, Consistency**이며 가중치는 각각 0.25, 0.20, 0.15, 0.25, 0.15이다. 점수가 사전 정의된 임계값 이하이면 복구 전략이 선택된다.  
+4. **계층적 복구 전략** – 저비용(재시도, 파라미터 조정) → 중간 비용(컨텍스트 재로드) → 고비용(모델 재배치) 순으로 시도한다. 전체 에이전트 중 **2.3 %**만이 `FAILED` 상태에 도달한다.
+
+#### 예시 코드 (Python)
+
+```python
+from enum import Enum
+
+class AgentState(Enum):
+    IDLE = "idle"
+    RUNNING = "running"
+    DEGRADED = "degraded"
+    RECOVERING = "recovering"
+    FAILED = "failed"
+
+def compute_health(output, context):
+    scores = {
+        "coherence":   check_coherence(output),
+        "completeness": check_completeness(output, context),
+        "latency":     check_latency(context.elapsed_time),
+        "memory":      check_memory_usage(),
+        "consistency": check_cross_agent_consistency(output)
+    }
+    weights = [0.25, 0.20, 0.15, 0.25, 0.15]
+    return sum(s * w for s, w in zip(scores.values(), weights))
+
+THRESHOLD = 0.70
+health = compute_health(agent_output, ctx)
+if health < THRESHOLD:
+    strategy = select_strategy(health)
+    if strategy:
+        execute_strategy(strategy, agent)
+    else:
+        agent.transition(AgentState.FAILED)
+```
+
+> 출처: euno.news, Dev.to (원문 코드 및 설명)
+
+## Resource‑Efficient Deployment (8 GB VRAM)
+
+8 GB VRAM을 가진 일반 소비자용 GPU에서 수천 개의 에이전트를 동시에 운영하려면 **동적 풀링**과 **양자화**가 필수다.
+
+| 기술 | 설명 |
+|------|------|
+| **동적 에이전트 풀링** | 한 번에 약 12개의 에이전트만 GPU에 상주하도록 제한하고, 나머지는 CPU/디스크에 직렬화한다. 우선순위 큐를 사용해 긴급 작업을 먼저 활성화한다. |
+| **4‑bit 양자화** | 모델 파라미터를 4‑bit으로 압축해 메모리 사용량을 75 % 이상 절감한다. |
+| **KV‑캐시 공유** | 동일한 컨텍스트 윈도우를 가진 에이전트 간에 키‑밸류 캐시를 공유해 재사용성을 높인다. |
+| **활성화 지연** | 위 기술을 결합하면 평균 활성화 지연이 **≈ 850 ms** 수준으로 감소한다. |
+
+#### 풀링 구현 예시
+
+```python
+from queue import PriorityQueue
+
+class AgentPool:
+    def __init__(self, max_concurrent=12, vram_budget_mb=7168):
+        self.active   = PriorityQueue()   # priority = urgency
+        self.dormant  = {}                # serialized agents
+        self.vram_budget = vram_budget_mb
+
+    def current_vram(self):
+        # GPU 메모리 사용량을 반환 (예시)
+        ...
+
+    def activate(self, agent_id, priority):
+        while self.current_vram() > self.vram_budget * 0.85:
+            _, evicted = self.active.get()
+            self.dormant[evicted.id] = evicted.serialize()
+            evicted.release_gpu()
+        agent = self.dormant.pop(agent_id).deserialize()
+        self.active.put((priority, agent))
+        return agent
+```
+
+> 출처: euno.news (풀링 설계 설명)
+
+## Failure Detection & Automatic Recovery
+
+Self‑Healing 시스템은 **실시간 헬스 점수**와 **상태 전이**를 통해 오류를 조기에 감지한다.
+
+| 단계 | 설명 |
+|------|------|
+| **모니터링** | 각 실행 사이클 후 `compute_health` 로 점수를 산출하고, `DEGRADED`·`FAILED` 여부를 판단한다. |
+| **복구 전략 선택** | 점수에 따라 `select_strategy` 가 저비용 → 중간 비용 → 고비용 순으로 복구 옵션을 반환한다. |
+| **복구 실행** | `execute_strategy` 가 선택된 전략을 적용한다. 성공 시 `RECOVERING → RUNNING` 로 전이, 실패 시 `FAILED` 로 전이한다. |
+| **알림·로그** | `FAILED` 상태가 감지되면 운영자에게 알림을 전송하고, 로그를 중앙 저장소에 기록한다. |
+
+### 복구 성공률
+- **96.5 %**의 토론 에이전트 승률 (208 시도 중 201 승) – 복구된 에이전트가 높은 품질을 유지함.  
+- 평균 심판 점수 **4.68 / 5.0** – 복구 후 출력 품질이 크게 저하되지 않음.  
+- 전체 시스템 가용성은 **> 99.5 %** 수준으로 보고됨.
+
+> 출처: euno.news (성능 지표)
+
+---
+
 ## A2A, MCP, MAS의 관계
 
 MAS 생태계를 이해하기 위해서는 세 가지 핵심 개념의 관계를 파악해야 한다.
@@ -69,7 +173,7 @@ MAS 생태계를 이해하기 위해서는 세 가지 핵심 개념의 관계를
 | **발표** | 학술 개념 (1990년대~) | Google, 2025.04 | Anthropic, 2024.11 |
 | **목적** | 다중 에이전트 협업 시스템 | 에이전트 간 통신 | 에이전트와 도구/데이터 연결 |
 | **거버넌스** | N/A | Linux Foundation | AAIF (Linux Foundation) |
-| **기반 기술** | 프레임워크에 의존 | HTTP, SSE, JSON-RPC, gRPC | JSON-RPC 2.0 |
+| **기반 기술** | 프레임워크에 의존 | HTTP, SSE, JSON‑RPC, gRPC | JSON‑RPC 2.0 |
 | **방향성** | 전체 시스템 | 수평적 (에이전트↔에이전트) | 수직적 (에이전트↔도구) |
 
 > MAS는 **"무엇을 만들 것인가(what)"**이고, A2A와 MCP는 **"어떻게 만들 것인가(how)"**에 해당하는 구체적 프로토콜이다.
@@ -284,7 +388,7 @@ Go 언어로 작성된 오픈소스 터미널 기반 AI 코딩 에이전트. Cla
 ### NVIDIA - Nemotron 3
 
 - MAS 구축을 위한 **Nemotron 3** 오픈 모델 패밀리 (Nano, Super, Ultra) 발표
-- Hybrid Latent Mixture-of-Experts 아키텍처
+- Hybrid Latent Mixture‑of‑Experts 아키텍처
 - Super와 Ultra는 2026년 상반기 출시 예정
 
 > 출처: [NVIDIA](https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models)
@@ -342,99 +446,4 @@ Go 언어로 작성된 오픈소스 터미널 기반 AI 코딩 에이전트. Cla
 - 운영 비용 **30% 절감** 효과
 - 고객 서비스와 이커머스가 **채택 선두** (명확한 ROI)
 
-> 출처: [Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-03-05-gartner-predicts-agentic-ai-will-autonomously-resolve-80-percent-of-common-customer-service-issues-without-human-intervention-by-20290), [BCG](https://www.bcg.com/publications/2025/new-frontier-customer-service-transformation)
-
-### 금융
-
-- 금융 서비스가 **"Frontier Firms"**(모든 워크플로우에 AI 에이전트를 내재화한 조직)의 최고 밀집 산업
-- Frontier Firms의 AI 투자 수익률이 저조한 채택 기업의 **약 3배**
-- 2026년 금융 팀의 **44%**가 에이전틱 AI 사용 예상 (**600%+ 증가**)
-- 미국 은행 사례: AI 에이전트로 신용 위험 메모 작성 시 생산성 **20-60% 향상**, 신용 처리 시간 **30% 단축**
-
-> 출처: [Microsoft](https://www.microsoft.com/en-us/industry/blog/financial-services/2025/12/18/ai-transformation-in-financial-services-5-predictors-for-success-in-2026/), [Neurons Lab](https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/)
-
-### 기업 전반
-
-- **57%의 기업**이 이미 AI 에이전트를 프로덕션에서 운영
-- **59%의 기업**이 3개 이상의 LLM을 프로덕션에서 운영 (2025년 후반)
-- 기업들은 평균 약 **USD 1.14억**의 관련 투자를 계획 중
-- 고위 임원의 **90%**가 2026년 중 관련 투자를 늘릴 계획
-
-> 출처: [Landbase](https://www.landbase.com/blog/agentic-ai-statistics), [OneReach.ai](https://onereach.ai/blog/agentic-ai-adoption-rates-roi-market-trends/)
-
----
-
-## 미래 전망 (2026-2030)
-
-### 기술적 방향
-
-1. **마이크로서비스 혁명과 유사한 전환**: 단일 범용 에이전트 → 전문화된 에이전트 팀 오케스트레이션. 소프트웨어의 모놀리식→마이크로서비스 전환과 동일한 패턴. ([Techzine](https://www.techzine.eu/blogs/applications/138502/multi-agent-systems-set-to-dominate-it-environments-in-2026/))
-
-2. **인간-AI 혼합 팀**: 2028년까지 **38%의 조직**에서 AI 에이전트가 인간 팀의 구성원으로 참여. ([G2](https://learn.g2.com/enterprise-ai-agents-report))
-
-3. **로봇·IoT 통합**: AI 에이전트가 자율 창고 로봇, 배달 드론, 가정 어시스턴트와 결합하여 물리적 환경에서 작동.
-
-4. **표준화 수렴**: A2A(에이전트 간), MCP(에이전트-도구), AGENTS.md(코딩 에이전트 지침)가 AAIF와 Linux Foundation 하에서 통합 거버넌스.
-
-5. **로우코드/노코드 민주화**: 시각적 빌더를 통해 **15~60분** 만에 에이전트 배포 가능. ([MachineLearningMastery](https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/))
-
-### 과제와 리스크
-
-| 과제 | 현황 |
-|------|------|
-| **신뢰도 하락** | 완전 자율 AI 에이전트에 대한 임원 신뢰도가 43%(2024) → **22%**(2025)로 하락 |
-| **프로젝트 취소** | 2027년까지 에이전틱 AI 프로젝트의 **40%+**가 비용, 불명확한 가치, 리스크 관리 부족으로 취소 예상 |
-| **시스템 복잡성** | 리더의 **65%**가 에이전틱 시스템 복잡성을 최대 장벽으로 지목 |
-| **보안·프라이버시** | 35%의 조직이 사이버보안, 30%가 데이터 프라이버시를 주요 우려로 지적 |
-| **통합 난이도** | **46%**가 기존 시스템과의 통합을 주요 과제로 인식 |
-| **조정 실패** | 부서별 독립 에이전트 구축으로 연결 단절, 중복 로직, "디지털 허드렛일" 발생 |
-
-> 출처: [Computer Weekly](https://www.computerweekly.com/opinion/Unlocking-the-value-of-multi-agent-systems-in-2026), [Salesmate](https://www.salesmate.io/blog/future-of-ai-agents/)
-
-### 거버넌스와 윤리
-
-- **EU AI Act**: 고위험 의무가 **2026년 8월** 전면 적용
-- **Guardian Agent**: Gartner 예측, 2030년까지 에이전틱 AI 시장의 **10-15%**를 차지. 다른 에이전트의 행동을 감시·감사하는 전문 에이전트 ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-06-11-gartner-predicts-that-guardian-agents-will-capture-10-15-percent-of-the-agentic-ai-market-by-2030))
-- **책임 소재**: 자율 에이전트의 리소스 할당, 환자 우선순위 결정, 금융 거래 실행 등에 대한 새로운 책임 매트릭스 필요
-- **인증 표준**: ISO 42001, NIST AI RMF 등의 제도화 가속
-
-> 출처: [KDnuggets](https://www.kdnuggets.com/emerging-trends-in-ai-ethics-and-governance-for-2026), [Dataversity](https://www.dataversity.net/articles/ai-governance-in-2026-is-your-organization-ready/), [Credo AI](https://www.credo.ai/blog/latest-ai-regulations-update-what-enterprises-need-to-know)
-
----
-
-## 벤치마크와 연구 동향
-
-| 벤치마크 | 설명 | 출처 |
-|---------|------|------|
-| **TheAgentCompany** | NeurIPS 2025. 실제 전문 업무 수행 능력 평가 | [OpenReview](https://openreview.net/forum?id=LZnKNApvhG) |
-| **AgentArch** | 오케스트레이션 전략, ReAct vs 함수 호출, 메모리 아키텍처 등 4차원 평가 | [arXiv](https://arxiv.org/html/2509.10769v1) |
-| **MedAgentBoard** | 의료 분야 멀티 에이전트 협업 벤치마크 | [MedAgentBoard](https://medagentboard.netlify.app/) |
-| **WMAC 2026** | AAAI 2026에서 개최된 LLM 기반 멀티 에이전트 협업 워크숍 | [WMAC 2026](https://multiagents.org/2026/) |
-
----
-
-## 참고 자료
-
-### 프로토콜 & 표준
-- [A2A Protocol Specification](https://a2a-protocol.org/latest/specification/)
-- [MCP Specification](https://modelcontextprotocol.io/specification/2025-11-25)
-- [Agentic AI Foundation (AAIF)](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation)
-
-### 프레임워크
-- [Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview)
-- [CrewAI](https://www.crewai.com/)
-- [LangGraph](https://www.langchain.com/langgraph)
-- [Google ADK](https://google.github.io/adk-docs/)
-- [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)
-
-### 시장 분석
-- [Gartner - Top Strategic Technology Trends 2025](https://www.gartner.com/en/newsroom/press-releases/2024-10-21-gartner-identifies-the-top-10-strategic-technology-trends-for-2025)
-- [Fortune Business Insights - Agentic AI Market](https://www.fortunebusinessinsights.com/agentic-ai-market-114233)
-- [MarketsandMarkets - Agentic AI Market](https://www.marketsandmarkets.com/Market-Reports/agentic-ai-market-208190735.html)
-
-### 기업 전략
-- [IBM - AI tech trends 2026](https://www.ibm.com/think/news/ai-tech-trends-predictions-2026)
-- [Google Cloud - 5 ways AI agents will transform work in 2026](https://blog.google/products/google-cloud/ai-business-trends-report-2026/)
-- [KPMG - AI at Scale 2026](https://kpmg.com/us/en/media/news/q4-ai-pulse.html)
-
-*본 문서는 2026년 2월 기준 공개된 공식 자료를 기반으로 작성되었습니다. 최신 기능이나 업데이트가 있을 경우 공식 문서를 확인하시기 바랍니다.*
+> 출처: [Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-03-05-gartner-predicts-agent
