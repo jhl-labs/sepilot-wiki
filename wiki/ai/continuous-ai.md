@@ -5,8 +5,9 @@ category: "Guide"
 tags: ["Continuous AI", "Human-in-the-Loop", "AI 검증", "CI"]
 status: "published"
 issueNumber: 198
-createdAt: "2026-02-22T01:20:00Z"
-updatedAt: "2026-02-22T01:20:00Z"
+createdAt: "2026-02-21T13:05:00Z"
+updatedAt: "2026-02-22T00:00:00Z"
+order: 2
 ---
 
 # Continuous AI – 인간이 AI 오류를 검증하는 방법

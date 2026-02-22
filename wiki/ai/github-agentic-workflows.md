@@ -5,7 +5,7 @@ status: published
 tags: [GitHub, Agentic Workflows, CI/CD, Repository Automation, AI]
 redirect_from:
   - automate-repository-tasks-with-github-agentic-work
-order: 6
+order: 7
 ---
 
 ## 1. 소개
