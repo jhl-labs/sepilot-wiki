@@ -23,6 +23,13 @@ const GUIDE_OUTPUT_FILE = join(OUTPUT_DIR, 'guide-data.json');
 const DATA_DIR = join(OUTPUT_DIR, 'data');
 const AI_HISTORY_FILE = join(DATA_DIR, 'ai-history.json');
 
+// 자동화 커밋 필터링 패턴 (교차 참조, 트리 유지보수, 머지 등)
+const AUTO_COMMIT_PREFIXES = [
+  '🔗 교차 참조',
+  '🌳 Wiki Tree Maintenance',
+  'Merge branch',
+];
+
 // 추가 문서 소스 디렉토리 (환경변수 또는 설정 파일에서 로드)
 // EXTRA_WIKI_DIRS 환경변수: 콤마로 구분된 경로 목록 (예: "/app/data,/app/docs")
 const EXTRA_WIKI_DIRS = process.env.EXTRA_WIKI_DIRS
@@ -81,12 +88,14 @@ function getGitHistoryBatch(wikiDir) {
 
       // 첫 줄이 커밋 정보
       const [sha, message, author, authorEmail, date] = lines[0].split('|');
+      const isAutoCommit = AUTO_COMMIT_PREFIXES.some(p => message?.startsWith(p));
       const commit = {
         sha: sha?.substring(0, 7),
         message,
         author,
         authorEmail,
         date,
+        isAutoCommit,
         additions: 0,
         deletions: 0,
       };
@@ -140,12 +149,14 @@ export function getGitHistory(filePath, maxEntries = 20) {
       .split('\n')
       .map((line) => {
         const [sha, message, author, authorEmail, date] = line.split('|');
+        const isAutoCommit = AUTO_COMMIT_PREFIXES.some(p => message?.startsWith(p));
         return {
           sha: sha.substring(0, 7),
           message,
           author,
           authorEmail,
           date,
+          isAutoCommit,
           additions: 0,
           deletions: 0,
         };
@@ -334,14 +345,24 @@ export async function buildWikiData() {
     // Git 히스토리 가져오기
     const history = getGitHistory(fullPath);
 
-    // 최신 커밋에서 lastModified와 author 추출 (프론트매터보다 우선)
+    // 자동화 커밋을 제외한 실제 수정 커밋에서 lastModified와 author 추출
     let lastModified = metadata.lastModified || new Date().toISOString();
     let author = metadata.author;
 
     if (history.length > 0) {
-      lastModified = history[0].date;
-      if (!author) {
-        author = history[0].author;
+      // 자동화 커밋을 건너뛰고 실제 내용 변경 커밋 찾기
+      const contentCommit = history.find(h => !h.isAutoCommit);
+      if (contentCommit) {
+        lastModified = contentCommit.date;
+        if (!author) {
+          author = contentCommit.author;
+        }
+      } else {
+        // 모든 커밋이 자동화인 경우 최신 커밋 사용 (폴백)
+        lastModified = history[0].date;
+        if (!author) {
+          author = history[0].author;
+        }
       }
     }
 
