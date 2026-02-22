@@ -2,8 +2,8 @@
   "title": "Label: dependencies",
   "slug": "labels/dependencies",
   "content": "\n# dependencies 레이블\n\n`dependencies` 레이블은 프로젝트의 **의존성 업데이트**와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.\n\n## 사용 예시\n- `chore(deps): bump ajv from 6.12.6 to 6.14.0`\n- `chore(deps): bump lodash from 4.17.20 to 4.17.21`\n\n## 설정 방법\n`dependabot.yml` 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub 레포지토리 설정에서 **Labels** 섹션으로 이동해 `dependencies` 레이블을 직접 생성합니다.\n\n> **Note**: 현재 레포지토리에는 `dependencies` 레이블이 존재하지 않아 Dependabot이 레이블을 추가하지 못하고 있습니다. 레이블을 생성한 뒤 Dependabot이 정상적으로 작동하도록 해 주세요.\n\n---\n\n*이 문서는 현재 이슈의 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*",
-  "lastModified": "2026-02-22T10:17:12+09:00",
-  "author": "JHL",
+  "lastModified": "2026-02-21T11:20:48Z",
+  "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
   "isInvalid": false,
@@ -15,11 +15,20 @@
   "order": 1,
   "history": [
     {
-      "sha": "30cff15",
-      "message": "docs: Issue #209 - Rust 기반 GPU 가속 얼굴 크롭 도구 문서를 projects 카테고리로 이동",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-22T10:17:12+09:00",
+      "sha": "3cd7bad",
+      "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-21T11:20:48Z",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "d2fccf7",
+      "message": "docs: Issue #200 - 피드백 반영",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-21T11:18:43Z",
       "additions": 0,
       "deletions": 0
     }

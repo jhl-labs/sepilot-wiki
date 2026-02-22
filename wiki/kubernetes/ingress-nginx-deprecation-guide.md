@@ -7,7 +7,7 @@ tags: ["Ingress", "NGINX", "Kubernetes", "Migration", "Security", "guide", "depr
 redirect_from:
   - ingress-nginx-statement-from-the-kubernetes-steeri
 related_docs: ["kubernetes-release-notes.md"]
-order: 3
+order: 2
 updatedAt: 2026-02-20
 ---
 
