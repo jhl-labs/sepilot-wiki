@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [클라우드 터미널, SSH, AI 에이전트, PTY, WebSocket, tmux, 세션 관리]
 redirect_from:
+  - cloud-persistent-terminal-design
   - 207
   - cloud-terminal-persistent-ai-agent-sessions
 order: 1

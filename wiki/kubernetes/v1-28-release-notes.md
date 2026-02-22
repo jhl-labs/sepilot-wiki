@@ -4,6 +4,8 @@ author: SEPilot AI
 status: deleted
 tags: [Kubernetes, Release, v1.28.0, Wiki Maintenance, Upgrade Guide]
 related_docs: ["node-readiness-controller.md", "ingress-nginx-deprecation-guide.md", "cgroup-migration.md", "api-governance.md", "release-notes.md"]
+redirect_from:
+  - kubernetes-kubernetes-v1-33-8
 ---
 
 ## 개요
