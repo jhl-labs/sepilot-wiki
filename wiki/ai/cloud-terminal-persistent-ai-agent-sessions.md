@@ -6,7 +6,7 @@ tags: [클라우드 터미널, SSH, AI 에이전트, PTY, WebSocket, tmux, 세�
 redirect_from:
   - 207
   - cloud-terminal-persistent-ai-agent-sessions
-order: 4
+order: 1
 ---
 
 ## 1. 서론

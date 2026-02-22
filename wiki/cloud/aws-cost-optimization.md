@@ -5,6 +5,7 @@ status: published
 tags: [AWS, NAT Gateway, Terraform, Cost Optimization, VPC Endpoint]
 redirect_from:
   - 212
+order: 1
 ---
 
 ## 1. 개요

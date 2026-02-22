@@ -5,7 +5,7 @@ status: published
 tags: [Qwen, LLM, 멀티모달, MoE, 벤치마크]
 redirect_from:
   - qwen3-5
-order: 5
+order: 3
 related_docs: ["gemini-3-1.md", "glm-5.md"]
 ---
 

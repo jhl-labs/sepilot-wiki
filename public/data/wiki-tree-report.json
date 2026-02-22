@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-02-22T01:20:59.843Z",
+  "timestamp": "2026-02-22T01:25:37.140Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "전체 위키는 31개의 활성 문서와 4개의 삭제된 문서(이미 status: deleted)로 구성되어 있습니다. 대부분은 적절한 카테고리(projects, ai, kubernetes, bun, docker, backend, frontend, labels, reports) 아래에 위치하고 있으나, 루트 레벨에 두 개의 일반 문서(212.md, 207.md)가 존재하고, Opencode 관련 중복 문서가 남아 있습니다. 또한 일부 카테고리에는 메타데이터(표시명·정렬 순서)가 없으며, 카테고리 내 문서 순서가 정의되지 않아 탐색성이 떨어집니다.",
-    "totalDocuments": 31,
+    "summary": "전체 48개의 위키 문서가 10개의 카테고리(루트 제외)로 분류됩니다. 대부분 파일명은 slug 규칙을 따르고 있으나, 중복·삭제된 파일이 몇 개 존재합니다. 특히 Opencode 문서가 두 개(하나는 삭제)로 중복되어 있어 병합이 필요합니다. 또한 ‘kubernetes‑kubernetes‑v1-33-8.md’와 같은 orphaned deleted 파일은 정리 대상입니다. 카테고리별 문서 순서가 일관되지 않아 front‑matter `order` 를 지정해 논리적 흐름을 만들면 가독성이 향상됩니다.",
+    "totalDocuments": 48,
     "categories": [
       "labels",
       "reports",
@@ -18,45 +18,39 @@
       "cloud"
     ],
     "issues": [
-      "루트 레벨에 일반 문서가 존재해 홈 페이지 외에 다른 파일이 위치하면 안 됩니다.",
-      "Opencode 가이드 문서가 중복되어 있어 하나만 유지해야 합니다.",
-      "Kubernetes 릴리즈 노트가 draft 상태이며, 별도 삭제된 파일과 중복될 가능성이 있어 정리 필요합니다."
+      "중복 Opencode 문서 병합",
+      "삭제된 orphan 파일 정리 및 리다이렉트 설정"
     ]
   },
   "suggestedStructure": {
     "labels": [
-      "dependencies.md"
+      "dependencies"
     ],
     "reports": [
-      "weekly-2026-08.md"
+      "weekly-2026-08"
     ],
     "backend": [
-      "wiki-api.md"
+      "wiki-api"
     ],
     "kubernetes": [
-      "node-readiness-controller.md",
-      "ingress-nginx-deprecation-guide.md",
-      "api-governance.md",
-      "cgroup-migration.md",
-      "release-notes.md"
+      "node-readiness-controller",
+      "ingress-nginx-deprecation-guide",
+      "api-governance",
+      "cgroup-migration",
+      "release-notes"
     ],
     "docker": [
-      "hardened-images.md"
+      "hardened-images"
     ],
     "projects": [
-      "openclaw-complete-guide.md",
-      "claude-code-release-history.md",
-      "opencode.md",
-      "sepilot-desktop-intro.md",
-      "sepilot-technology-stack.md",
-      "antigravity-release-notes.md",
-      "rust-gpu-face-crop-tool.md",
-      "moltbook-intro.md"
-    ],
-    "bun": [
-      "overview.md",
-      "comparison-pnpm-npm.md",
-      "github-actions-setup.md"
+      "openclaw-complete-guide",
+      "claude-code-release-history",
+      "opencode",
+      "sepilot-desktop-intro",
+      "sepilot-technology-stack",
+      "antigravity-release-notes",
+      "rust-gpu-face-crop-tool",
+      "moltbook-intro"
     ],
     "bun": [
       "overview",
@@ -64,27 +58,26 @@
       "github-actions-setup"
     ],
     "ai": [
-      "cloud-terminal-persistent-ai-agent-sessions.md",
-      "mcp-model-context-protocol.md",
-      "qwen3-5.md",
-      "continuous-ai.md",
-      "glm-5.md",
-      "continuous-ai-agentic-ci.md",
-      "github-agentic-workflows.md",
-      "vibe-coding.md",
-      "multi-agent-system.md",
-      "gemini-3-1-pro.md"
+      "cloud-terminal-persistent-ai-agent-sessions",
+      "mcp-model-context-protocol",
+      "qwen3-5",
+      "continuous-ai",
+      "glm-5",
+      "continuous-ai-agentic-ci",
+      "github-agentic-workflows",
+      "vibe-coding",
+      "multi-agent-system",
+      "gemini-3-1-pro"
     ],
     "frontend": [
-      "api-service-layer.md"
+      "api-service-layer"
     ],
     "cloud": [
-      "aws-cost-optimization.md",
-      "persistent-terminal-design.md"
+      "aws-cost-optimization"
     ]
   },
   "results": {
-    "appliedActions": 21,
+    "appliedActions": 44,
     "skippedActions": 0,
     "dryRunPreviewedActions": 0,
     "createdIssues": 1
@@ -92,42 +85,224 @@
   "actions": {
     "applied": [
       {
-        "type": "move",
-        "priority": "high",
-        "source": "212.md",
-        "target": "cloud/aws-cost-optimization.md",
-        "reason": "루트 레벨 문서를 cloud 카테고리로 이동하고 파일명을 영문 slug 형식으로 정규화",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "207.md",
-        "target": "cloud/persistent-terminal-design.md",
-        "reason": "루트 레벨 문서를 cloud 카테고리로 이동하고 파일명을 영문 slug 형식으로 정규화",
-        "autoApply": true
-      },
-      {
         "type": "merge",
         "priority": "high",
         "source": "projects/opencode-guide.md",
         "target": "projects/opencode.md",
-        "reason": "Opencode 가이드가 중복되어 있으므로 메인 문서(opencode.md)를 유지하고 삭제 문서에 리다이렉트 설정",
+        "reason": "두 파일 모두 ‘Opencode에 대해’ 라는 동일한 내용이며, 하나는 deleted 상태이므로 유지되는 문서에 리다이렉트를 추가하고 삭제된 파일을 정리합니다.",
+        "autoApply": true
+      },
+      {
+        "type": "merge",
+        "priority": "low",
+        "source": "kubernetes-kubernetes-v1-33-8.md",
+        "target": "kubernetes/release-notes.md",
+        "reason": "삭제된 파일이 기존 릴리즈 노트와 중복되는 내용이며, 별도 유지 필요가 없으므로 메인 릴리즈 노트에 통합하고 삭제된 파일을 정리합니다.",
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "labels/dependencies.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "reports/weekly-2026-08.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "backend/wiki-api.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/node-readiness-controller.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/api-governance.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/cgroup-migration.md",
+        "order": 4,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/release-notes.md",
+        "order": 5,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "docker/hardened-images.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/openclaw-complete-guide.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/claude-code-release-history.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/opencode.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/sepilot-desktop-intro.md",
+        "order": 4,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/sepilot-technology-stack.md",
+        "order": 5,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/antigravity-release-notes.md",
+        "order": 6,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/rust-gpu-face-crop-tool.md",
+        "order": 7,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "projects/moltbook-intro.md",
+        "order": 8,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/overview.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/comparison-pnpm-npm.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/github-actions-setup.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/cloud-terminal-persistent-ai-agent-sessions.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/mcp-model-context-protocol.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/qwen3-5.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/continuous-ai.md",
+        "order": 4,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/glm-5.md",
+        "order": 5,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/continuous-ai-agentic-ci.md",
+        "order": 6,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/github-agentic-workflows.md",
+        "order": 7,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/vibe-coding.md",
+        "order": 8,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/multi-agent-system.md",
+        "order": 9,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/gemini-3-1-pro.md",
+        "order": 10,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "frontend/api-service-layer.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "cloud/aws-cost-optimization.md",
+        "order": 1,
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "labels",
         "metadata": {
-          "displayName": "라벨 메타데이터",
+          "displayName": "라벨",
           "order": 1
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "reports",
         "metadata": {
           "displayName": "보고서",
@@ -137,7 +312,6 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "backend",
         "metadata": {
           "displayName": "백엔드",
@@ -147,7 +321,6 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "kubernetes",
         "metadata": {
           "displayName": "Kubernetes",
@@ -157,7 +330,6 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "docker",
         "metadata": {
           "displayName": "Docker",
@@ -167,7 +339,6 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "projects",
         "metadata": {
           "displayName": "프로젝트",
@@ -177,7 +348,6 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "bun",
         "metadata": {
           "displayName": "Bun",
@@ -187,17 +357,15 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "ai",
         "metadata": {
-          "displayName": "AI·LLM",
+          "displayName": "AI 기술·프로토콜",
           "order": 8
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "frontend",
         "metadata": {
           "displayName": "프론트엔드",
@@ -207,69 +375,11 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "cloud",
         "metadata": {
           "displayName": "클라우드·인프라",
           "order": 10
         },
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "projects/openclaw-complete-guide.md",
-        "order": 1,
-        "reason": "프로젝트 카테고리 내 핵심 문서 순서 지정",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "projects/claude-code-release-history.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "projects/opencode.md",
-        "order": 3,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/mcp-model-context-protocol.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/qwen3-5.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/glm-5.md",
-        "order": 3,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "kubernetes/node-readiness-controller.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
-        "order": 2,
         "autoApply": true
       }
     ],
@@ -278,9 +388,9 @@
   },
   "createdIssues": [
     {
-      "number": 213,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/213",
-      "title": "Kubernetes 릴리즈 노트 정리"
+      "number": 215,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/215",
+      "title": "중복·삭제된 파일 정리 및 리다이렉트 설정"
     }
   ]
 }
