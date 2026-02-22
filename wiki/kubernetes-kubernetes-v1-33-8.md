@@ -3,6 +3,7 @@ title: Kubernetes v1.28.0 릴리스 기록 및 위키 유지 관리 가이드
 author: SEPilot AI
 status: deleted
 tags: [Kubernetes, Release, v1.28.0, Wiki Maintenance, Upgrade Guide]
+related_docs: ["node-readiness-controller.md", "ingress-nginx-deprecation-guide.md", "cgroup-migration.md", "api-governance.md", "release-notes.md"]
 ---
 
 ## 개요

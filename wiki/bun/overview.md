@@ -11,7 +11,7 @@ redirect_from:
   - bun-bun-overview
   - bun-overview
   - 요청-bun이란
-related_docs: ["comparison-pnpm-npm.md", "bun-github-actions-setup.md"]
+related_docs: ["comparison-pnpm-npm.md", "github-actions-setup.md"]
 order: 1
 ---
 

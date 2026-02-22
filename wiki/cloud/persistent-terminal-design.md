@@ -5,6 +5,7 @@ status: deleted
 tags: [클라우드 터미널, PTY, WebSocket, 세션 관리, 보안]
 redirect_from:
   - 207
+related_docs: ["cloud-terminal-persistent-ai-agent-sessions.md"]
 ---
 
 ## 소개
