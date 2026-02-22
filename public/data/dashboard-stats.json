@@ -1,43 +1,73 @@
 {
-  "collectedAt": "2026-02-21T23:40:47.902Z",
+  "collectedAt": "2026-02-22T00:56:44.053Z",
   "overview": {
-    "totalDocuments": 29,
+    "totalDocuments": 32,
     "publishedDocuments": 21,
-    "draftDocuments": 8,
-    "openRequests": 19,
+    "draftDocuments": 11,
+    "openRequests": 21,
     "closedRequests": 16,
-    "totalAIActions": 134
+    "totalAIActions": 137
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 3,
+      "documentsCreated": 2,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 6,
+      "tavilyResults": 12,
+      "estimatedTokens": 2973,
+      "totalPipelineDurationMs": 68815
     },
     "last24h": {
-      "aiActions": 8,
-      "documentsCreated": 1,
+      "aiActions": 11,
+      "documentsCreated": 3,
       "documentsModified": 2,
-      "tavilyApiCalls": 3,
-      "tavilyResults": 8,
-      "estimatedTokens": 2051,
-      "totalPipelineDurationMs": 44738
+      "tavilyApiCalls": 9,
+      "tavilyResults": 20,
+      "estimatedTokens": 5024,
+      "totalPipelineDurationMs": 113553
     },
     "last7d": {
-      "aiActions": 61,
-      "documentsCreated": 13,
+      "aiActions": 64,
+      "documentsCreated": 15,
       "documentsModified": 10,
-      "tavilyApiCalls": 39,
-      "tavilyResults": 105,
-      "estimatedTokens": 32324,
-      "totalPipelineDurationMs": 723834
+      "tavilyApiCalls": 45,
+      "tavilyResults": 117,
+      "estimatedTokens": 35297,
+      "totalPipelineDurationMs": 792649
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-22T00:24:12.262Z",
+      "actionType": "generate",
+      "issueNumber": 212,
+      "documentTitle": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 32074,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1368
+    },
+    {
+      "timestamp": "2026-02-22T00:23:35.418Z",
+      "actionType": "generate",
+      "issueNumber": 209,
+      "documentTitle": "GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 36741,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1605
+    },
+    {
+      "timestamp": "2026-02-22T00:22:49.000Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-21T18:09:46.780Z",
       "actionType": "generate",
@@ -207,43 +237,13 @@
       "durationMs": 51026,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2344
-    },
-    {
-      "timestamp": "2026-02-20T13:34:13.572Z",
-      "actionType": "generate",
-      "issueNumber": 169,
-      "documentTitle": "크로스 레퍼런스 업데이트 잡 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 33002,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1466
-    },
-    {
-      "timestamp": "2026-02-20T12:59:05.185Z",
-      "actionType": "quality_score",
-      "issueNumber": 161,
-      "documentTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Architecture: API Governance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-20T12:58:54.485Z",
-      "actionType": "quality_score",
-      "issueNumber": 162,
-      "documentTitle": "[Wiki Maintenance] [요청] Introducing Node Readiness Controller",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 126,
-      "totalEstimatedTokens": 66231,
-      "avgDurationMs": 58416
+      "totalActions": 129,
+      "totalEstimatedTokens": 69204,
+      "avgDurationMs": 56637
     },
     "unknown": {
       "totalActions": 8,
