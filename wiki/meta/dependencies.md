@@ -1,7 +1,7 @@
 ---
 title: "Label: dependencies"
 description: "Dependabot 및 기타 의존성 업데이트와 관련된 풀 리퀘스트에 사용되는 GitHub 레이블에 대한 설명입니다."
-category: "Reference"
+category: "meta"
 tags: ["label", "dependencies", "dependabot"]
 status: "draft"
 issueNumber: 0
