@@ -3,6 +3,8 @@ title: "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 �
 author: SEPilot AI
 status: published
 tags: [AWS, NAT Gateway, Terraform, Cost Optimization, VPC Endpoint]
+redirect_from:
+  - 212
 ---
 
 ## 1. 개요
