@@ -5,7 +5,7 @@ status: published
 tags: [GLM-5, 대형 언어 모델, AI 서비스, 벤치마크]
 redirect_from:
   - glm5
-order: 6
+order: 3
 related_docs: ["gemini-3-1.md", "qwen3-5.md"]
 ---
 

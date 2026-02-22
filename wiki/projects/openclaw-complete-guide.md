@@ -12,7 +12,7 @@ redirect_from:
   - projects-openclaw
 related_docs: ["moltbook-intro.md"]
 order: 1
-updatedAt: 2026-02-20
+updatedAt: 2026-02-22
 ---
 
 ## OpenClaw 개요 및 핵심 개념
@@ -193,6 +193,62 @@ WhatsApp Business API와 페어링 후, `openclaw agent set default ollama/llama
   `openclaw memory list --user @john` → 최근 10개의 대화 기록 출력  
 
 *출처: 공식 튜토리얼 영상 (2026‑02‑10) [8]*  
+---
+
+## 하드웨어 호환성 및 Claw 변형별 권장 사양
+
+OpenClaw는 "Claw"라는 개념의 대표적 구현체입니다. Andrej Karpathy가 제안한 "Claw"는 LLM 에이전트 위에 존재하는 **지속적 AI 에이전트 시스템**으로, 오케스트레이션, 스케줄링, 컨텍스트 유지, 도구 호출 및 지속성을 다음 단계로 끌어올리는 새로운 레이어입니다 [12].
+
+### Claw와 에이전트의 차이
+일반적인 LLM 에이전트는 실행하고, 작업을 수행한 뒤 멈춥니다. 반면 Claw는 **지속적으로 실행**됩니다:
+
+- 하드웨어나 서버에서 **항시 가동**됩니다
+- 자체 스케줄링을 가지고 있어 요청 없이도 행동합니다
+- 세션 및 대화 전반에 걸쳐 **컨텍스트를 유지**합니다
+- MCP 등 메시징 프로토콜을 통해 통신합니다
+- 도구 접근 권한을 가진 다수의 에이전트를 **오케스트레이션**합니다
+
+> 스크립트를 실행하는 것과 서비스를 운영하는 것의 차이라고 생각하면 됩니다. Claw는 서비스와 같습니다: 항상 켜져 있고, 항상 감시하며, 언제든 행동할 준비가 되어 있습니다.
+
+### Claw 변형 및 권장 사양
+
+| Claw 변형 | 설명 | 최소 RAM | 권장 CPU | GPU | 비고 |
+|-----------|------|----------|----------|-----|------|
+| **OpenClaw** | 풀스택 AI 비서, 멀티채널 통합 | 16 GB | 8코어 이상 | 선택 (Ollama 사용 시 필수) | 프로덕션 환경 권장 |
+| **NanoClaw** | 경량 단일 에이전트 | 8 GB | 4코어 이상 | 불필요 | 개인 개발 환경 적합 |
+| **zeroclaw** | 최소 구성, 실험용 | 4 GB | 2코어 이상 | 불필요 | 프로토타이핑 용도 |
+| **ironclaw** | 고성능 멀티 에이전트 오케스트레이션 | 32 GB | 16코어 이상 | 권장 (CUDA 12+) | 엔터프라이즈 환경 |
+| **picoclaw** | 임베디드·IoT 경량 버전 | 2 GB | ARM 프로세서 호환 | 불필요 | 제한된 기능 |
+
+### Mac Mini에서의 제한 사항
+
+Andrej Karpathy가 Claw 실험을 위해 Mac Mini를 구입하면서 "핫케이크처럼 팔리고 있다"고 언급할 만큼 Mac Mini는 Claw 실행 환경으로 인기가 높습니다. 그러나 Mac Mini에서 OpenClaw를 실행할 때는 다음과 같은 **제한 사항**을 반드시 고려해야 합니다 [12]:
+
+#### 권장하지 않는 이유
+1. **통합 GPU 한계**: Mac Mini(M4/M4 Pro)는 통합 GPU만 탑재하며, Ollama 로컬 모델 실행 시 전용 GPU 대비 추론 속도가 크게 떨어집니다
+2. **메모리 공유 구조**: Apple Silicon의 통합 메모리(Unified Memory)는 CPU와 GPU가 공유하므로, 대형 모델(70B+ 파라미터) 로딩 시 시스템 전체 성능이 저하됩니다
+3. **열 관리**: 지속적 가동이 필수인 Claw 특성상, Mac Mini의 소형 팬 설계로 장시간 고부하 시 스로틀링이 발생할 수 있습니다
+4. **확장성 부족**: RAM·스토리지 업그레이드가 구매 시점에만 가능하며, 이후 확장이 불가능합니다
+5. **네트워크 안정성**: 가정용 네트워크에서 운영 시 IP 변경, 정전 등으로 인한 가동 중단 위험이 있습니다
+
+#### Mac Mini에서 실행 가능한 구성
+Mac Mini에서 OpenClaw를 운영하려면 다음 조건을 충족하는 것이 좋습니다:
+
+| 구성 | M4 (기본) | M4 Pro (권장) |
+|------|-----------|---------------|
+| RAM | 16 GB (최소) | 24~48 GB (권장) |
+| 로컬 모델 | 7B 이하 소형 모델만 | 13B~30B 모델까지 가능 |
+| 동시 채널 | 2~3개 | 5개 이상 |
+| Heartbeat 주기 | 5분 이상 간격 권장 | 1분 간격 가능 |
+
+#### 권장 대안 환경
+- **클라우드 서버**: AWS EC2 (g5.xlarge 이상), GCP (a2-highgpu), Azure (NC 시리즈) – GPU 인스턴스로 Ollama 로컬 모델을 최대 성능으로 활용
+- **전용 서버**: Linux 기반 GPU 서버 (NVIDIA RTX 4090 이상) – 가장 안정적인 24/7 운영 환경
+- **하이브리드 구성**: Mac Mini에서 Gateway만 실행하고, AI 모델 호출은 클라우드 API(Claude, GPT-4o)로 위임 – 로컬 모델이 불필요한 경우 현실적인 대안
+
+> **팁**: Mac Mini를 사용하더라도, AI 모델을 클라우드 API로 호출하고 Gateway·Scheduler만 로컬에서 실행하면 안정적으로 운영할 수 있습니다. 이 경우 Mac Mini의 저전력·저소음 특성이 오히려 장점이 됩니다.
+
+*출처: Andrej Karpathy "Claws" 개념 정의, euno.news (2026‑02‑22) [12]*
 
 ---
 
@@ -261,4 +317,6 @@ WhatsApp Business API와 페어링 후, `openclaw agent set default ollama/llama
 10. **사용자 설문·Issue 분석** – https://github.com/openclaw/openclaw/issues?q=is%3Aissue+label%3Afeedback (조회일: 2026‑02‑10)  
 11. **릴리즈 노트** – https://github.com/openclaw/openclaw/releases (조회일: 2026‑02‑10)  
 
-*본 문서는 2026‑02‑10 기준 최신 정보를 기반으로 작성되었습니다. 최신 버전이나 새로운 플러그인에 대한 내용은 공식 리포지터리와 Docs를 지속적으로 확인하시기 바랍니다.*
+12. **"Claws"란 무엇이며, 왜 Mac Mini에서 실행하면 안 되는가** – https://euno.news/posts/ko/what-are-claws-and-why-you-shouldnt-run-them-on-yo-c877cd (조회일: 2026‑02‑22)  
+
+*본 문서는 2026‑02‑22 기준 최신 정보를 기반으로 작성되었습니다. 최신 버전이나 새로운 플러그인에 대한 내용은 공식 리포지터리와 Docs를 지속적으로 확인하시기 바랍니다.*

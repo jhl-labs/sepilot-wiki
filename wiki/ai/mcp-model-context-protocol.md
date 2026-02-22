@@ -257,7 +257,94 @@ scopes:
 | **Manufacturing B** | 생산 라인 모니터링 | `sensor.read`, `maintenance.schedule` | 다운타임 20 % 감소, 로그 중앙화 |
 | **E‑commerce C** | 상품 추천 엔진 | `catalog.search`, `user.profile` | 전환율 12 % 상승, A/B 테스트 자동화 |
 
-### 5.4 성공 지표 및 베스트 프랙티스 요약  
+### 5.4 Claude MCP 기반 SonarCloud 자동화 파이프라인  
+
+#### 개요  
+Claude Code CLI와 MCP 생태계를 활용하면, 코드 커밋부터 SonarCloud 품질 보고서 수신까지 **완전 자동화된 CI 파이프라인**을 구축할 수 있다.  
+수동 조작 없이 단일 명령으로 코드 품질 분석 결과를 확인하는 워크플로우이며, 전체 소요 시간은 약 2.5분이다.  
+
+#### 파이프라인 흐름  
+```
+코드 작성
+→ Claude가 커밋 & 푸시
+→ GitHub MCP를 통해 PR 생성
+→ GitHub Actions가 sonar-scanner 실행
+→ Claude가 완료를 폴링
+→ SonarQube MCP로 보고서 수집
+→ 품질 게이트 + 이슈 테이블 출력
+```
+
+#### 사용 스택  
+
+| 구성 요소 | 역할 |
+|-----------|------|
+| **Claude Code CLI** | 전체 파이프라인 오케스트레이터 |
+| **mcp/sonarqube** | SonarCloud 데이터 읽기 (품질 게이트, 이슈, 메트릭) |
+| **ghcr.io/github/github-mcp-server** | 저장소·브랜치·PR 관리 |
+| **GitHub Actions** | sonar-scanner 실행 |
+| **SonarCloud (Free Tier)** | 분석 결과 호스팅 |
+
+#### 설정 단계  
+
+**1단계: SonarCloud 프로젝트 설정**  
+- "Analyze new project"를 통해 프로젝트를 가져온다 (수동 생성 불가).  
+- 자동 분석(Automatic Analysis)을 비활성화한다.  
+- 프로젝트 분석 토큰을 생성한다 (사용자 토큰이 아닌 프로젝트 분석 토큰 사용).  
+
+**2단계: GitHub PAT 설정**  
+- GitHub Personal Access Token에 `repo`, `read:org` 권한 부여.  
+- GitHub Actions 시크릿으로 `SONAR_TOKEN`과 함께 등록.  
+
+**3단계: MCP 서버 구성**  
+```json
+{
+  "mcpServers": {
+    "sonarqube": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-sonarqube"],
+      "env": {
+        "SONAR_TOKEN": "${SONAR_TOKEN}",
+        "SONAR_ORG": "your-org"
+      }
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PAT}"
+      }
+    }
+  }
+}
+```
+
+#### 실패 사례와 해결 방안  
+
+구현 과정에서 9개의 개별 실패, 3번의 PAT 권한 업데이트, GitHub CI 상태 보고 방식에 대한 중요한 발견이 있었다.  
+
+| 실패 유형 | 원인 | 해결 방안 |
+|-----------|------|-----------|
+| **PAT 권한 부족** | 초기 토큰에 `repo` 스코프 누락 | PAT 재생성 시 `repo`, `read:org` 스코프 명시 추가 |
+| **사용자 토큰 vs 프로젝트 토큰** | SonarCloud 사용자 토큰으로 분석 시도 | 프로젝트 분석 토큰(Project Analysis Token) 사용으로 전환 |
+| **자동 분석 충돌** | SonarCloud 자동 분석과 CI 분석 동시 실행 | 자동 분석을 비활성화하고 CI 전용으로 전환 |
+| **CI 상태 폴링 실패** | GitHub가 CI 상태를 `check_runs`가 아닌 `commit_status`로 보고 | 폴링 대상을 `commit_status` API로 변경 |
+| **MCP 서버 연결 타임아웃** | Docker 컨테이너 초기화 지연 | `--init` 플래그 추가, 헬스체크 설정 |
+
+#### 성과 지표  
+
+| 지표 | 값 |
+|------|-----|
+| **커밋~보고서 총 소요 시간** | ~2.5분 |
+| **설정 후 수동 단계** | 0 |
+| **일회성 설정 시간** | ~30분 |
+
+> **참고**: 본 사례는 Dev.to에 게시된 실제 구현 경험([출처](https://euno.news/posts/ko/building-a-fully-automated-sonarcloud-pipeline-usi-fe56ff))을 기반으로 정리하였다.  
+
+### 5.5 성공 지표 및 베스트 프랙티스 요약  
 - **보안**: 스코프 기반 최소 권한 원칙 적용 → 권한 오용 0%  
 - **성능**: 평균 RPC 레이턴시 45 ms (Docker), 120 ms (K8s)  
 - **유지보수**: 플러그인 기반 Tool 추가 시 재배포 없이 Hot‑Reload 지원  
