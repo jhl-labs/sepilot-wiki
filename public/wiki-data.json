@@ -253,7 +253,7 @@
     {
       "title": "OpenClaw Complete Guide",
       "slug": "projects/openclaw-complete-guide",
-      "content": "\n# OpenClaw Complete Guide\n\nOpenClaw는 오픈소스 AI 에이전트로, 다양한 LLM과 연동하여 개인 비서, 자동화 워크플로우 등을 구현할 수 있습니다. 본 가이드는 OpenClaw의 기본 사용법과 함께 최근 CrowdStrike 보고서에서 제시된 보안 위험 및 완화 방안을 다룹니다.\n\n---\n\n## 1. Overview\n\n- **프로젝트명**: OpenClaw (이전 명: Clawdbot, Moltbot)\n- **주요 기능**: 외부 콘텐츠(이메일, 웹 페이지, 문서) 처리, 플러그인 기반 확장, 로컬 및 클라우드 배포 지원\n- **라이선스**: MIT\n\n---\n\n## 2. Installation\n\n```bash\n# npm을 이용한 전역 설치\nnpm install -g openclaw\n```\n\n설치 후 초기 설정 파일을 생성합니다.\n\n```bash\nopenclaw init\n```\n\n---\n\n## 3. Basic Usage\n\n```bash\nopenclaw chat \"오늘 날씨 알려줘\"\n```\n\n---\n\n## 4. Security Risks (CrowdStrike 보고서 기반)\n\nCrowdStrike는 OpenClaw가 **실제 위험**을 가지고 있다고 경고했습니다. 주요 위험 요소는 다음과 같습니다.\n\n### 4.1 Prompt‑Injection Attack Vectors\n- **직접 프롬프트 인젝션**: 외부 콘텐츠에 악의적인 명령이 삽입되어 에이전트가 이를 실행합니다. 실제 사례로 지갑을 고갈시키는 페이로드가 보고되었습니다.\n- **간접 프롬프트 인젝션**: 공격자가 컨텍스트를 조작해 에이전트가 비밀 정보를 유출하도록 유도합니다.\n\n> “프롬프트 인젝션은 이론적인 문제가 아니라, 실제로 악용된 사례가 존재한다.” – CrowdStrike[출처](https://euno.news/posts/ko/crowdstrike-says-openclaw-is-dangerous-theyre-righ-5854d2)\n\n### 4.2 Credential Theft\n- OpenClaw는 파일 시스템에 접근할 수 있어 `~/.ssh/`, `~/.aws/`, `~/.gnupg/` 등 민감한 디렉터리를 읽을 수 있습니다.\n- 성공적인 프롬프트 인젝션은 채팅 컨텍스트뿐 아니라 **자격 증명**까지 탈취합니다.\n\n### 4.3 Agent‑Based Lateral Movement\n- 침해된 에이전트가 시스템 간에 이동하여 쉘 접근 권한, API 키 등을 획득할 수 있습니다.\n- 이는 단순 데이터 탈취를 넘어 **자동화된 악의적 행위**를 가능하게 합니다.\n\n### 4.4 Large‑Scale Exposure\n- 135 K+ 개의 OpenClaw 인스턴스가 공개적으로 노출되어 있으며, 다수가 암호화되지 않은 HTTP를 통해 제공됩니다.\n- 기업 내부에서 표준 IT 워크플로우를 우회해 배포되는 경우가 빈번합니다.\n\n---\n\n## 5. Mitigation Strategies\n\n### 5.1 Detection & Inventory\n- **Falcon Next‑Gen SIEM**: `openclaw.ai`에 대한 DNS 요청을 모니터링합니다.\n- **Falcon Exposure Management**: 엔드포인트 전반에 걸쳐 OpenClaw 패키지를 인벤토리화합니다.\n- **Falcon for IT**: OpenClaw 제거를 위한 “Search & Removal Content Pack”을 제공합니다.\n\n### 5.2 Runtime Protection with ClawMoat\nClawMoat은 MIT 라이선스 기반 오픈소스 보안 레이어로, 다음과 같은 기능을 제공합니다.\n\n- **다중 레이어 프롬프트 인젝션 스캔**\n  - 패턴 매칭, 구조 분석, 행동 점수화\n- **자격 증명 보호**\n  - 금지 구역(`~/.ssh/*`, `~/.aws/*` 등) 자동 차단\n- **권한 티어 & 정책 엔진**\n  - Observer → Worker → Standard → Full 단계별 권한 제한\n- **네트워크 제어**\n  - 허용/차단 도메인 리스트 관리\n\n```bash\nnpm install -g clawmoat\nclawmoat init   # 기본 정책 초기화\nclawmoat protect --config clawmoat.yml   # 실시간 보호 시작\n```\n\n> “ClawMoat은 무료이며 오픈소스, 몇 초 만에 설치 가능” – ClawMoat 공식 문서[출처](https://github.com/darfaz/clawmoat)\n\n### 5.3 Supply‑Chain Hardening Checklist\n1. **패키지 검증**: 공식 레포지토리에서만 배포된 바이너리 사용.\n2. **TLS 적용**: 모든 OpenClaw 인스턴스는 HTTPS(SSL/TLS)로 서비스.\n3. **버전 관리**: 최신 보안 패치를 적용한 버전 사용.\n4. **네트워크 제한**: 인바운드/아웃바운드 트래픽을 허용된 도메인으로 제한.\n5. **시크릿 스캐닝**: CI/CD 파이프라인에 시크릿 탐지 도구 통합.\n6. **모니터링**: Falcon, ClawMoat 등 EDR/SIEM 솔루션으로 실시간 감시.\n7. **접근 제어**: 최소 권한 원칙에 따라 에이전트 실행 권한 설정.\n8. **인벤토리**: 조직 내 모든 OpenClaw 인스턴스 목록화 및 정기 감사.\n\n---\n\n## 6. References\n- CrowdStrike 보고서 요약: “What Security Teams Need to Know About OpenClaw” – euno.news[출처](https://euno.news/posts/ko/crowdstrike-says-openclaw-is-dangerous-theyre-righ-5854d2)\n- ClawMoat 프로젝트: GitHub Repository[출처](https://github.com/darfaz/clawmoat)\n- 추가 기사: CIO.com 보안 리스크 분석[출처](https://www.cio.com/article/4131963/%EC%98%A4%ED%94%88%ED%81%B4%EB%A1%9C%EB%B0%9C-%EB%B3%B4%EC%95%88-%EB%A6%AC%EC%8A%A4%ED%81%AC-%ED%99%95%EC%82%B0)\n\n---\n\n*이 문서는 자동 생성된 초안이며, 검토 후 `published` 상태로 전환해 주세요.*",
+      "content": "\n# OpenClaw Complete Guide\n\n## Overview\nOpenClaw is a framework for building **persistent AI agents** (referred to as *Claws*) that run continuously, schedule their own work, maintain context across sessions, and orchestrate multiple tool‑enabled agents. While the platform is flexible, the choice of hardware has a direct impact on reliability, uptime, and scalability.\n\n---\n\n## Hardware Compatibility\n\nOpenClaw can be run on any modern server‑class machine that meets the following baseline requirements:\n\n- **CPU**: 4‑core x86_64 (or Apple Silicon M‑series with Rosetta 2 support) ≥ 2 GHz.\n- **Memory**: Minimum 8 GB RAM; 16 GB+ recommended for multiple concurrent Claws.\n- **Storage**: SSD with at least 50 GB free space for logs, container images, and persistent state.\n- **Network**: Stable broadband connection with inbound ports open for webhooks (typically 443/80) and outbound internet access for API calls.\n- **OS**: Linux (Ubuntu 22.04 LTS, Debian 12, etc.) or macOS 12+ for development environments.\n\nThese specifications are derived from the general guidance in the OpenClaw community and are corroborated by the accessory and workstation guides for the Mac Mini [OpenClaw Mac Mini Developer Workstation Specs](https://openclawn.com/openclaw-mac-mini-developer-workstation-specs/) and the hardware‑software integration article [Seamless Synergy: OpenClaw Mac Mini Hardware‑Software Integration](https://openclawn.com/openclaw-mac-mini-hardware-software-integration/).\n\n---\n\n## Mac Mini Limitations\n\nWhile a Mac Mini is an attractive, low‑cost form factor, several practical constraints make it a **sub‑optimal choice for production‑grade OpenClaw deployments**:\n\n1. **Uptime Risks** – Home‑grade power and macOS automatic updates can cause unexpected reboots, breaking the “always‑on” guarantee of a Claw.\n2. **Networking Complexity** – Residential routers often require manual port‑forwarding, dynamic DNS, and TLS certificate management to expose webhook endpoints.\n3. **Security Surface** – Running privileged agents on a personal workstation exposes the entire LAN to potential compromise if a Claw is mis‑configured.\n4. **Scalability Limits** – A single Mac Mini has limited CPU/Memory headroom; scaling to multiple Claws or heavier workloads quickly exhausts resources.\n5. **Process Supervision** – macOS lacks built‑in process supervisors comparable to Linux systemd or Elixir OTP, requiring custom scripts to auto‑restart crashed agents.\n\nThese points echo the observations from Andrej Karpathy’s Mac Mini experiment, which highlighted power‑outage susceptibility, networking hurdles, and the need for external supervision [OpenClaw Mac Mini as a Developer Workstation: Specs for …](https://openclawn.com/openclaw-mac-mini-developer-workstation-specs/).\n\n**Recommendation** – For production or long‑running Claw deployments, prefer a cloud‑hosted or dedicated server environment (e.g., Fly.io, VPS) that provides robust supervision, automatic restarts, and reliable networking.\n\n---\n\n## Claw Variant Recommendations\n\nOpenClaw offers several variants, each tuned for different trade‑offs:\n\n| Variant | Approx. Code Size | Typical Use‑Case | Key Trade‑offs |\n|---------|-------------------|------------------|---------------|\n| **OpenClaw** | Full feature set | General‑purpose, multi‑agent orchestration | Higher resource consumption |\n| **NanoClaw** | ~4 000 LOC | Lightweight, single‑agent workloads; easy to audit | Limited built‑in tools |\n| **zeroclaw** | Minimal core | Experimental, sandboxed environments | Minimal persistence |\n| **ironclaw** | Moderate | Security‑focused deployments with stricter sandboxing |\n| **picoclaw** | Very small | Edge devices or constrained hardware |\n\nChoosing the right variant depends on the hardware you plan to run on. For a Mac Mini, **NanoClaw** or **picoclaw** are the most feasible, but even these benefit from the robust supervision offered by cloud platforms.\n\n---\n\n## Further Reading & Resources\n- **Accessories & Upgrades for Your OpenClaw Mac Mini (2026)** – Practical hardware add‑ons such as locks, trackers, and external SSDs [OpenClaw Mac Mini Accessories & Upgrades](https://openclawn.com/openclaw-mac-mini-accessories-upgrades/)\n- **The Ultimate Guide to OpenClaw Mac Mini Docks & Hubs (2026)** – Recommendations for connectivity and peripheral expansion [OpenClaw Mac Mini Docks & Hubs Guide](https://openclawn.com/openclaw-mac-mini-docks-hubs-guide/)\n\n---\n\n*This section was added to address the recent feedback requesting explicit hardware compatibility information and a dedicated Mac Mini limitation overview.*",
       "lastModified": "2026-02-22T01:56:50Z",
       "author": "GitHub Action",
       "status": "draft",
@@ -938,6 +938,23 @@
           "deletions": 0
         }
       ]
+    },
+    {
+      "title": "AWS NAT Gateway 비용 함정 및 Terraform 해결법",
+      "slug": "cloud/aws-nat-gateway-cost-trap",
+      "content": "\n# AWS NAT Gateway 비용 함정 및 Terraform 해결법\n\n## 개요\nAWS에서 프라이빗 서브넷에 배치된 EC2 인스턴스가 인터넷에 접근할 때 일반적으로 **관리형 NAT Gateway** 를 사용합니다. NAT Gateway는 편리하지만, **S3와 같은 퍼블릭 서비스 엔드포인트** 로 트래픽이 나갈 경우 예상치 못한 비용이 발생할 수 있습니다. 이 문서는 해당 비용 함정을 설명하고, **VPC 엔드포인트** 를 활용한 비용 절감 방법을 Terraform 예제로 제공합니다.\n\n## 문제 상황\n- EC2 인스턴스는 퍼블릭 IP 없이 프라이빗 서브넷에 존재합니다.\n- 아웃바운드 트래픽은 NAT Gateway 를 통해 인터넷으로 라우팅됩니다.\n- 인스턴스가 **Amazon S3** 에서 데이터를 가져오면, 트래픽 흐름은:\n  1. 프라이빗 서브넷 → NAT Gateway → 인터넷 게이트웨이 → 퍼블릭 S3 엔드포인트\n  2. 다시 인터넷 게이트웨이 → NAT Gateway → 프라이빗 서브넷\n- S3는 퍼블릭 서비스이므로 데이터가 **AWS 백본을 떠나 두 번** 측정됩니다. 예를 들어 하루에 **10 TB** 를 다운로드하는 파이프라인이라면 실제 청구는 **20 TB** 의 아웃바운드 트래픽이 됩니다.\n\n## 비용 상세\n- **NAT Gateway 시간당 가동 비용** (정확한 금액은 AWS 요금표를 참고) \n- **NAT Gateway 처리 수수료** – **GB당 $0.045**\n- **표준 인터넷 아웃바운드 요금** (AWS 리전별 요금 적용)\n\n> 위 비용은 euno.news 기사에 명시된 내용이며, 실제 금액은 사용 중인 리전 및 요금제에 따라 달라질 수 있습니다. \n\n## 해결책: S3용 VPC 게이트웨이 엔드포인트\nVPC **Gateway Endpoint** 를 S3에 대해 생성하면 트래픽이 **완전히 AWS 백본 내**에 머무르게 됩니다. 이렇게 하면:\n- NAT Gateway 를 우회하므로 NAT 비용이 사라집니다.\n- 내부 전송 비용이 **$0.00** 으로 감소합니다.\n\n### Terraform 예시\n```hcl\nresource \"aws_vpc_endpoint\" \"s3\" {\n  vpc_id            = aws_vpc.main.id\n  service_name      = \"com.amazonaws.${var.region}.s3\"\n  vpc_endpoint_type = \"Gateway\"\n}\n```\n위 코드는 현재 VPC에 S3 전용 **Gateway Endpoint** 를 생성합니다. 적용 후, 프라이빗 서브넷의 라우팅 테이블에 자동으로 엔드포인트가 추가되어 S3 트래픽이 NAT Gateway 를 통과하지 않게 됩니다.\n\n## 왜 중요한가?\n- **데이터 중력**(Data Gravity) 은 비용을 결정하는 핵심 요소이며, 라우팅 경로가 비용에 직접적인 영향을 미칩니다.\n- 잘못된 라우팅 설계는 **수십만 달러** 규모의 불필요한 비용을 초래할 수 있습니다.\n- VPC 엔드포인트를 활용하면 비용을 크게 절감하면서도 보안 및 성능을 유지할 수 있습니다.\n\n## 참고 자료\n- 원본 기사: [$100k AWS 라우팅 함정: S3 + NAT 게이트웨이와 Terraform 해결법](https://euno.news/posts/ko/the-100k-aws-routing-trap-s3-nat-gateways-and-how-307ce6) (euno.news)\n- AWS 공식 문서: VPC 엔드포인트 – Gateway 타입 (AWS Documentation)\n\n---\n*이 문서는 자동 생성된 뉴스 인텔리전스 정보를 기반으로 작성되었습니다.*",
+      "lastModified": "2026-02-22T01:58:45.464Z",
+      "status": "draft",
+      "isDraft": true,
+      "isInvalid": false,
+      "tags": [
+        "AWS",
+        "NAT Gateway",
+        "Cost Optimization",
+        "Terraform",
+        "VPC Endpoint"
+      ],
+      "history": []
     }
   ],
   "tree": [
@@ -1042,6 +1059,12 @@
       "order": 6,
       "children": [
         {
+          "title": "OpenClaw Complete Guide",
+          "slug": "projects/openclaw-complete-guide",
+          "order": 1,
+          "lastModified": "2026-02-22T01:56:50Z"
+        },
+        {
           "title": "Claude Code 릴리즈 히스토리 상세 가이드",
           "slug": "projects/claude-code-release-history",
           "menu": "Claude Code",
@@ -1084,11 +1107,6 @@
           "title": "Moltbook 소개",
           "slug": "projects/moltbook-intro",
           "order": 8,
-          "lastModified": "2026-02-22T01:56:50Z"
-        },
-        {
-          "title": "OpenClaw Complete Guide",
-          "slug": "projects/openclaw-complete-guide",
           "lastModified": "2026-02-22T01:56:50Z"
         }
       ]
@@ -1208,6 +1226,11 @@
       "isCategory": true,
       "order": 10,
       "children": [
+        {
+          "title": "AWS NAT Gateway 비용 함정 및 Terraform 해결법",
+          "slug": "cloud/aws-nat-gateway-cost-trap",
+          "lastModified": "2026-02-22T01:58:45.464Z"
+        },
         {
           "title": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
           "slug": "cloud/aws-cost-optimization",
