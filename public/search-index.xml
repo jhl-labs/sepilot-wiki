@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-22T01:24:14.791Z</generated>
-  <count>41</count>
+  <generated>2026-02-22T01:23:44.380Z</generated>
+  <count>40</count>
   <items>
   <item>
     <title>Label: dependencies</title>
@@ -448,7 +448,7 @@ CRD 스키마 문서:
 이 문서는 Node Readiness Controller(NRC)를 처음 접하는 클러스터 운영자와 플랫폼 엔지니어를 대상으로 합니다.  
 NRC는 기존 “Ready” 조건만으로는 충분히 표현되지 않는 복합 인프라 의존성을 선언형으로 관리하도록 설계되었습니다. 이를 통해 스케줄링 정확성과 서비스 안정성을 크게 향상시킬 수 있습니다 Introducing...</excerpt>
     <tags>Kubernetes, NodeReadiness, Scheduler, Reliability</tags>
-    <lastModified>2026-02-22T01:21:37Z</lastModified>
+    <lastModified>2026-02-21T13:04:23Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -565,7 +565,7 @@ Ingress NGINX GitHub 레포지토리 – https://github.com/kubernetes/ingress-n
 이 문서는 Kubernetes Steering Committee와 Security Response Committee가 2026년 3월에 발표한 Ingress NGINX 은퇴 선언을 기반으로 작성되었습니다.  
 대상 독자는 현재 클러스터에서 Ingress NGINX를 사용하고 있거나, 향후 도입을 고려하고 있는 클라우드‑네이티브 엔지니어, 플랫폼 운영팀...</excerpt>
     <tags>Ingress, NGINX, Kubernetes, Migration, Security, guide, deprecation, k8s, networking, load-balancer</tags>
-    <lastModified>2026-02-22T01:21:37Z</lastModified>
+    <lastModified>2026-02-21T13:04:23Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -578,7 +578,6 @@ tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤
 redirectfrom:
   - spotlight-on-sig-architecture-api-governance
 order: 4
-relateddocs: [&quot;wiki-api.md&quot;, &quot;node-readiness-controller.md&quot;, &quot;release-notes.md&quot;, &quot;cgroup-migration.md&quot;, &quot;kubernetes-kubernetes-v1-33-8.md&quot;]
 개요
 이 문서는 SIG Architecture: API Governance 서브프로젝트에 대한 최신 정보를 위키에 반영하기 위해 작성되었습니다.  
 대상 독자: 클러스터 운영자, Kubernetes API 개발자, SIG Architecture 참여자, 위키 유지보수 담당자  
@@ -646,7 +645,7 @@ SIG Architecture README (GitHub) – 프로젝트 개요 및 정책 링크
 FAUN.dev 요약 – Governance 팀의 최신 목표 링크  
 DevOpsChat 기사 – 인터뷰 핵심 포인트 정리 링크  
 daily.dev 포스트 – Jordan Liggitt 인터뷰 요약 링크  
-위 내용은 현재 공개된 자료에 근거하며, 구체적인 수치·정책 세부사항은 추가 조사가 필요합니다.*</content>
+위 내용은 현재 공개된 자료에 근거하며, 구체적인 수치·정책 세부사항은 추가 조사가 필요합니다.</content>
     <excerpt>title: Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드
 author: SEPilot AI
 status: published
@@ -1063,46 +1062,6 @@ WhatsApp Business API와 페어링 후,  로 로컬 모델 사용 → 고객 문
 메모리 조회  
    → 최근 10개의 대화 기록 출력  
 출처: 공식 튜토리얼 영상 (2026‑02‑10) [8]  
-하드웨어 호환성 및 Claw 변형별 권장 사양
-OpenClaw는 &quot;Claw&quot;라는 개념의 대표적 구현체입니다. Andrej Karpathy가 제안한 &quot;Claw&quot;는 LLM 에이전트 위에 존재하는 지속적 AI 에이전트 시스템으로, 오케스트레이션, 스케줄링, 컨텍스트 유지, 도구 호출 및 지속성을 다음 단계로 끌어올리는 새로운 레이어입니다 [12].
-Claw와 에이전트의 차이
-일반적인 LLM 에이전트는 실행하고, 작업을 수행한 뒤 멈춥니다. 반면 Claw는 지속적으로 실행됩니다:
-하드웨어나 서버에서 항시 가동됩니다
-자체 스케줄링을 가지고 있어 요청 없이도 행동합니다
-세션 및 대화 전반에 걸쳐 컨텍스트를 유지합니다
-MCP 등 메시징 프로토콜을 통해 통신합니다
-도구 접근 권한을 가진 다수의 에이전트를 오케스트레이션합니다
-스크립트를 실행하는 것과 서비스를 운영하는 것의 차이라고 생각하면 됩니다. Claw는 서비스와 같습니다: 항상 켜져 있고, 항상 감시하며, 언제든 행동할 준비가 되어 있습니다.
-Claw 변형 및 권장 사양
-  Claw 변형   설명   최소 RAM   권장 CPU   GPU   비고  
- ----------- ------ ---------- ---------- ----- ------ 
-  OpenClaw   풀스택 AI 비서, 멀티채널 통합   16 GB   8코어 이상   선택 (Ollama 사용 시 필수)   프로덕션 환경 권장  
-  NanoClaw   경량 단일 에이전트   8 GB   4코어 이상   불필요   개인 개발 환경 적합  
-  zeroclaw   최소 구성, 실험용   4 GB   2코어 이상   불필요   프로토타이핑 용도  
-  ironclaw   고성능 멀티 에이전트 오케스트레이션   32 GB   16코어 이상   권장 (CUDA 12+)   엔터프라이즈 환경  
-  picoclaw   임베디드·IoT 경량 버전   2 GB   ARM 프로세서 호환   불필요   제한된 기능  
-Mac Mini에서의 제한 사항
-Andrej Karpathy가 Claw 실험을 위해 Mac Mini를 구입하면서 &quot;핫케이크처럼 팔리고 있다&quot;고 언급할 만큼 Mac Mini는 Claw 실행 환경으로 인기가 높습니다. 그러나 Mac Mini에서 OpenClaw를 실행할 때는 다음과 같은 제한 사항을 반드시 고려해야 합니다 [12]:
-권장하지 않는 이유
-통합 GPU 한계: Mac Mini(M4/M4 Pro)는 통합 GPU만 탑재하며, Ollama 로컬 모델 실행 시 전용 GPU 대비 추론 속도가 크게 떨어집니다
-메모리 공유 구조: Apple Silicon의 통합 메모리(Unified Memory)는 CPU와 GPU가 공유하므로, 대형 모델(70B+ 파라미터) 로딩 시 시스템 전체 성능이 저하됩니다
-열 관리: 지속적 가동이 필수인 Claw 특성상, Mac Mini의 소형 팬 설계로 장시간 고부하 시 스로틀링이 발생할 수 있습니다
-확장성 부족: RAM·스토리지 업그레이드가 구매 시점에만 가능하며, 이후 확장이 불가능합니다
-네트워크 안정성: 가정용 네트워크에서 운영 시 IP 변경, 정전 등으로 인한 가동 중단 위험이 있습니다
-Mac Mini에서 실행 가능한 구성
-Mac Mini에서 OpenClaw를 운영하려면 다음 조건을 충족하는 것이 좋습니다:
-  구성   M4 (기본)   M4 Pro (권장)  
- ------ ----------- --------------- 
-  RAM   16 GB (최소)   2448 GB (권장)  
-  로컬 모델   7B 이하 소형 모델만   13B30B 모델까지 가능  
-  동시 채널   23개   5개 이상  
-  Heartbeat 주기   5분 이상 간격 권장   1분 간격 가능  
-권장 대안 환경
-클라우드 서버: AWS EC2 (g5.xlarge 이상), GCP (a2-highgpu), Azure (NC 시리즈) – GPU 인스턴스로 Ollama 로컬 모델을 최대 성능으로 활용
-전용 서버: Linux 기반 GPU 서버 (NVIDIA RTX 4090 이상) – 가장 안정적인 24/7 운영 환경
-하이브리드 구성: Mac Mini에서 Gateway만 실행하고, AI 모델 호출은 클라우드 API(Claude, GPT-4o)로 위임 – 로컬 모델이 불필요한 경우 현실적인 대안
-팁: Mac Mini를 사용하더라도, AI 모델을 클라우드 API로 호출하고 Gateway·Scheduler만 로컬에서 실행하면 안정적으로 운영할 수 있습니다. 이 경우 Mac Mini의 저전력·저소음 특성이 오히려 장점이 됩니다.
-출처: Andrej Karpathy &quot;Claws&quot; 개념 정의, euno.news (2026‑02‑22) [12]
 다른 유사 도구/기술과의 비교
   항목   OpenClaw   LangChain   AutoGPT   Microsoft Copilot  
  ------ ---------- ----------- --------- ------------------- 
@@ -1153,12 +1112,11 @@ GitHub Repository – https://github.com/openclaw/openclaw (조회일: 2026‑02
    - Microsoft Copilot – https://www.microsoft.com/copilot (조회일: 2026‑02‑10)  
 사용자 설문·Issue 분석 – https://github.com/openclaw/openclaw/issues?q=is%3Aissue+label%3Afeedback (조회일: 2026‑02‑10)  
 릴리즈 노트 – https://github.com/openclaw/openclaw/releases (조회일: 2026‑02‑10)  
-&quot;Claws&quot;란 무엇이며, 왜 Mac Mini에서 실행하면 안 되는가 – https://euno.news/posts/ko/what-are-claws-and-why-you-shouldnt-run-them-on-yo-c877cd (조회일: 2026‑02‑22)  
-본 문서는 2026‑02‑22 기준 최신 정보를 기반으로 작성되었습니다. 최신 버전이나 새로운 플러그인에 대한 내용은 공식 리포지터리와 Docs를 지속적으로 확인하시기 바랍니다.*</content>
+본 문서는 2026‑02‑10 기준 최신 정보를 기반으로 작성되었습니다. 최신 버전이나 새로운 플러그인에 대한 내용은 공식 리포지터리와 Docs를 지속적으로 확인하시기 바랍니다.</content>
     <excerpt>OpenClaw 개요 및 핵심 개념
 OpenClaw는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 Clawdbot·Moltbot이라는 이름으로 개발되었으며, 현재는 GitHub(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1...</excerpt>
     <tags>OpenClaw, AI 개인 비서, 멀티채널, 오픈소스</tags>
-    <lastModified>2026-02-22T10:22:18+09:00</lastModified>
+    <lastModified>2026-02-20T22:52:00+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1441,7 +1399,7 @@ Opencode가 적합한 상황과 시나리오
 Opencode 정의 및 핵심 목적
 Opencode은 AI 기반 코드 작성·보조 도구로, 개발자가 IDE 혹은 CLI 환경에서 자연어 프롬프트를 통해 코드 자동 완성, 오류 탐지, 리팩토링 등을 수행하도록 설계되었습니다. 핵심 목적은 생산성 향상과 코드 품질 개선이며, 특히 한국어 사용자에게 친화적인 인터페이스를 제공한다는 점이 강조됩...</excerpt>
     <tags>AI 코드 어시스턴트, Opencode, Claude Code, Goose CLI, 비교</tags>
-    <lastModified>2026-02-22T01:21:37Z</lastModified>
+    <lastModified>2026-02-21T11:20:48Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2291,7 +2249,7 @@ Python SDK:  (PyPI) – ,  모듈 제공.
 서버 구현  
    
 4.5 설정 파일 구조  
-docker-compose.ymlDeploymentServiceIngressSecretfile.readread:filegit.clonerepo.searchprompt.codeContextrootIdsampling.updatecrm.fetchCustomerpayment.initiatesensor.readmaintenance.schedulecatalog.searchuser.profilereporead:orgSONARTOKENreporeporead:orgcheckrunscommitstatuscommitstatus--initread:fileinvoke:weatherapiAuthorization: Bearer params.argsvalidatemcp.routing.inspectscope mismatchdefineScopeParse error` 확인   JSON 직렬화 라이브러리 사용 검증  
+docker-compose.ymlDeploymentServiceIngressSecretfile.readread:filegit.clonerepo.searchprompt.codeContextrootIdsampling.updatecrm.fetchCustomerpayment.initiatesensor.readmaintenance.schedulecatalog.searchuser.profileread:fileinvoke:weatherapiAuthorization: Bearer params.argsvalidatemcp.routing.inspectscope mismatchdefineScopeParse error` 확인   JSON 직렬화 라이브러리 사용 검증  
 8.4 참고 문서·링크 모음  
   종류   링크  
  ------ ------ 
@@ -2312,7 +2270,7 @@ docker-compose.ymlDeploymentServiceIngressSecretfile.readread:filegit.clonerepo.
 Model Context Protocol (MCP) 은 Anthropic이 2024년 11월에 공개한 오픈 표준 프로토콜이다.  
 LLM(대형 언어 모델)이 외부 시스템(데이터베이스, 파일, 웹 API 등)과 양방향으로 연결되어, 컨텍스트를 일관되게 전달·관리하고, 보안·신뢰성을 유지하도록 설계되었다....</excerpt>
     <tags>MCP, Model Context Protocol, Anthropic, AI Integration, JSON-RPC, SDK, llm, protocol, open-standard, ai</tags>
-    <lastModified>2026-02-22T10:20:27+09:00</lastModified>
+    <lastModified>2026-02-21T11:20:48Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
