@@ -29,7 +29,18 @@ AI 모델을 이용해 모든 Pull Request 를 **구조화된 코드 리뷰**(�
 리뷰 루브릭(프롬프트/워크플로)은 모델 자체보다 중요한 역할을 합니다. 루브릭은 다음을 강제합니다:
 - **고위험 이슈**와 **사소한 지적** 구분
 - **구체적인 수정 방안** 및 **테스트 제안** 요구
-- “내가 살펴본 내용”과 “확신이 없는 부분” 명시
+- "내가 살펴본 내용"과 "확신이 없는 부분" 명시
+
+### 1.4 모델 선택 전략
+
+프로젝트 특성에 따라 적합한 모델을 선택합니다:
+
+| 모델 옵션 | 장점 | 적합한 상황 |
+|-----------|------|-------------|
+| **OpenAI (GPT-4o 등)** | 높은 정확도, 풍부한 컨텍스트 이해 | 핵심 프로젝트, 보안 민감 코드 |
+| **Anthropic (Claude)** | 긴 컨텍스트 윈도우, 안전한 출력 | 대규모 diff 리뷰 |
+| **OpenRouter** | 다양한 모델 라우팅, 비용 최적화 | 모델별 비교 및 A/B 테스트 |
+| **Ollama (로컬)** | 비용 무료, 데이터 외부 전송 없음 | 프라이버시 민감 프로젝트 |
 
 ---
 
@@ -44,13 +55,27 @@ AI 모델을 이용해 모든 Pull Request 를 **구조화된 코드 리뷰**(�
 - 모델 선택 (OpenAI, Anthropic 등)
 - 최대 토큰 수
 - 실행 시점 (PR opened, synchronize, reopened 등)
-- “검토할 가치가 있는” 기준 정의
+- "검토할 가치가 있는" 기준 정의
+
+### 2.3 리뷰 카테고리 구조화
+
+효과적인 AI 코드 리뷰를 위해 다음과 같이 카테고리를 구조화합니다:
+
+```text
+시스템 프롬프트 구조:
+├── 역할 정의 (시니어 리뷰어)
+├── 리뷰 카테고리 (정확성, 보안, 성능, 테스트)
+├── 출력 형식 (Markdown 구조)
+├── 확신도 표시 규칙 (높음/중간/낮음)
+├── "검토한 내용" vs "확신하지 못하는 부분" 구분
+└── 구체적 수정 코드 제안 요구
+```
 
 ---
 
 ## 3. 예제 워크플로우와 베스트 프랙티스
 
-### 3.1 GitHub Action 정의
+### 3.1 GitHub Action 정의 (도구 기반)
 `.github/workflows/ai-code-review.yml` 파일을 생성합니다:
 
 ```yaml
@@ -87,7 +112,72 @@ jobs:
 
 > **참고** `--output raw` 옵션은 CI 환경에서 출력 캡처와 리다이렉션을 쉽게 해줍니다. `--auto-approve` 로 완전 자동화를 구현합니다. 권한은 최소화되었습니다.
 
-### 3.2 리뷰 루브릭 (프롬프트) 정의
+### 3.2 GitHub Action 정의 (API 직접 호출)
+
+도구 없이 API를 직접 호출하는 방식도 가능합니다. 별도의 구독료 없이 사용량 기반으로 비용을 관리할 수 있습니다:
+
+```yaml
+name: AI Code Review (API Direct)
+on:
+  pull_request:
+    types: [opened, synchronize]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get PR Diff
+        id: diff
+        run: |
+          DIFF=$(git diff origin/${{ github.base_ref }}...HEAD | head -c 10000)
+          echo "diff<<EOF" >> $GITHUB_OUTPUT
+          echo "$DIFF" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: AI Review
+        id: review
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DIFF: ${{ steps.diff.outputs.diff }}
+        run: |
+          REVIEW=$(curl -s https://api.openai.com/v1/chat/completions \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "gpt-4o",
+              "temperature": 0.2,
+              "max_tokens": 2000,
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "코드 리뷰어로서 구조화된 리뷰를 작성하세요:\n1. High-risk issues (보안, 정확성)\n2. 개선 제안 (성능, 가독성)\n3. 테스트 제안\n각 항목에 확신도(높음/중간/낮음)를 표시하세요."
+                },
+                {
+                  "role": "user",
+                  "content": "다음 diff를 리뷰해주세요:\n'"$DIFF"'"
+                }
+              ]
+            }' | jq -r '.choices[0].message.content')
+          echo "review<<EOF" >> $GITHUB_OUTPUT
+          echo "$REVIEW" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: Post Review Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## AI 코드 리뷰\n\n${{ steps.review.outputs.review }}\n\n---\n*이 리뷰는 AI에 의해 자동 생성되었습니다. 참고용으로만 활용하세요.*`
+            });
+```
+
+### 3.3 리뷰 루브릭 (프롬프트) 정의
 `workflows/code-review/WORKFLOW.md` 파일을 생성하고 아래와 같이 정의합니다:
 
 ```markdown
@@ -108,23 +198,35 @@ Output GitHub‑flavored Markdown with:
 **Rules**
 - Be specific: reference files/functions.
 - Prefer minimal diffs / smallest safe fix.
-- If you’re unsure, say so and propose how to verify.
-- No generic advice (“add tests”) — propose exact test cases.
+- If you're unsure, say so and propose how to verify.
+- No generic advice ("add tests") — propose exact test cases.
 - Rank issues (High/Medium/Low).
 - List files reviewed, assumptions, and what was not checked.
 ```
 
-### 3.3 베스트 프랙티스 체크리스트
-- **읽기 전용 모드**: `autoApprove` 를 `read-only` 로 유지해 에이전트가 저장소를 수정하지 못하도록 합니다.
-- **이슈 순위 매기기**: 모든 이슈에 **High/Medium/Low** 라벨을 부여해 중요도를 명확히 합니다.
-- **오탐 예산**: 잡음이 많으면 무시되므로, 평가 기준을 조정해 오탐을 최소화합니다.
-- **모델 라우팅**: 작은 PR → 저비용 모델, 대규모 리팩터링 → 고성능 모델 사용.
-- **투명성**: 에이전트가 검토한 파일 목록, 가정, 검토하지 않은 항목을 명시하도록 요구합니다.
+### 3.4 베스트 프랙티스 체크리스트
 
-### 3.4 실제 사례
+| 항목 | 권고사항 |
+|------|----------|
+| **읽기 전용 모드** | `autoApprove` 를 `read-only` 로 유지해 에이전트가 저장소를 수정하지 못하도록 합니다 |
+| **이슈 순위 매기기** | 모든 이슈에 **High/Medium/Low** 라벨을 부여해 중요도를 명확히 합니다 |
+| **오탐 예산** | 잡음이 많으면 무시되므로, 평가 기준을 조정해 오탐을 최소화합니다 |
+| **모델 라우팅** | 작은 PR에는 저비용 모델, 대규모 리팩터링에는 고성능 모델 사용 |
+| **투명성** | 에이전트가 검토한 파일 목록, 가정, 검토하지 않은 항목을 명시하도록 요구합니다 |
+| **diff 크기 제한** | 토큰 한도 초과 방지를 위해 파일별로 분할하거나, 변경이 큰 파일은 요약만 전달 |
+| **비용 모니터링** | PR당 API 호출 비용을 추적하고, 월별 예산 알림을 설정 |
+| **리뷰 품질 피드백** | 리뷰 코멘트에 대한 반응을 수집하여 프롬프트를 지속적으로 개선 |
+| **점진적 도입** | 특정 디렉토리나 파일 패턴부터 시작하여, 팀의 신뢰도에 따라 범위를 확장 |
+
+### 3.5 실제 사례
 Jazz 저장소는 자체 코드 리뷰와 릴리즈 노트에 **Jazz** 를 사용합니다. 워크플로 파일은 다음에서 확인할 수 있습니다: https://github.com/lvndry/jazz/tree/main/.github
 
 ---
 
 ## 4. 마무리
-위 가이드를 따라 CI 파이프라인에 AI 코드 리뷰 에이전트를 구현하면, **자동화된 고품질 리뷰**를 제공하면서 리뷰 비용을 크게 절감할 수 있습니다. 질문이나 개선 사항이 있으면 언제든 이슈를 열어 주세요.
+위 가이드를 따라 CI 파이프라인에 AI 코드 리뷰 에이전트를 구현하면, **자동화된 고품질 리뷰**를 제공하면서 리뷰 비용을 크게 절감할 수 있습니다. 자체 파이프라인을 구축하면 모델 선택, 실행 시점, 비용 구조를 완전히 제어할 수 있다는 것이 가장 큰 장점입니다. 질문이나 개선 사항이 있으면 언제든 이슈를 열어 주세요.
+
+### 참고 자료
+- [CI에서 나만의 AI 코드 리뷰 에이전트 만들기 (euno.news)](https://euno.news/posts/ko/build-your-own-ai-code-review-agent-in-ci-738404)
+- [Jazz AI - GitHub](https://github.com/lvndry/jazz)
+- [GitHub Actions 공식 문서](https://docs.github.com/en/actions)
