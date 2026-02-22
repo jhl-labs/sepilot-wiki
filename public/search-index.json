@@ -14,7 +14,7 @@
       "benchmark",
       "performance"
     ],
-    "lastModified": "2026-02-22T01:24:22Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "GitHub Action"
   },
   {
@@ -32,7 +32,7 @@
       "javascript-runtime",
       "package-manager"
     ],
-    "lastModified": "2026-02-22T01:24:22Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -51,7 +51,7 @@
       "workflow",
       "javascript-runtime"
     ],
-    "lastModified": "2026-02-22T01:24:22Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -72,13 +72,15 @@
     "content": "문서 개요\n목적  \n 파일이 제공하는 Wiki 페이지 API 엔드포인트의 사용 방법을 외부 개발자와 내부 팀에게 명확히 안내합니다.  \n대상 독자  \n프론트엔드·백엔드 개발자  \nAPI 소비자(외부 파트너)  \n운영·보안 담당자  \n주요 기능 요약  \nWiki 페이지 조회, 생성, 수정, 삭제 지원  \n계층형 경로()를 통한 페이지 식별  \nJWT 기반 인증·인가 적용 및 표준화된 응답 포맷  \n버전 정보 및 적용 범위  \n현재 API 버전:  (프로젝트 루트 에 정의)  \n적용 범위: 에 매핑된 모든 HTTP 메서드  \n참고: 본 가이드는 로버트의 API 문서 작성 가이드라인을 참고하여 구성되었습니다[API 문서 작성을 위한 로버트의 가이드라인].\n인증·인가 흐름\n  항목   내용  \n ------ ------ \n  지원 인증 방식   JWT (JSON Web Token) 를  헤더에 담아 전달합니다. 토큰은  알고리즘으로 서명되며,  클레임을 통해 만료 시간이 관리됩니다.  \n  토큰 전달 방법   -  헤더 (권장)  - HTTP‑Only  쿠키 (옵션, SameSite=Lax)  \n  권한 레벨 별 접근 제한   - 읽기(GET): 인증된 모든 사용자 허용  - 작성·수정·삭제(POST, PUT/PATCH, DELETE):  또는  역할 필요  \n  인증 실패 시 응답    와 아래와 같은 JSON 바디 반환    \n요약  \nAPI는 JWT 기반 Bearer 토큰을 기본 인증 수단으로 사용합니다. 토큰이 없거나 유효하지 않을 경우 401 오류가 반환되며, 쓰기·삭제 작업은  이상 권한이 요구됩니다.\n라우트 구조 및 파라미터\n파일 위치:   \n라우트 매핑: Next.js App Router의 와일드카드  로  경로 전체를 처리합니다.  \n파라미터\n형식: 계층형 경로 문자열 배열 (). 예시:  → .  \n역할: Wiki 페이지의 고유 경로를 식별하며, 페이지 트리 구조를 그대로 반영합니다.  \n지원 HTTP 메서드\n  메서드   동작  \n ------- ------ \n  GET   페이지 조회  \n  POST   새 페이지 생성  \n  PUT / PATCH   기존 페이지 전체/부분 업데이트  \n  DELETE   페이지 삭제 (soft / hard)  \n지원 쿼리 파라미터\n  파라미터   타입   설명   기본값  \n ---------- ------ ------ -------- \n     boolean   미발행(초안) 페이지를 조회할 때  로 설정     \n     boolean   소프트 삭제된 페이지를 포함해 조회 ( 시)     \n     string ( \\  )   DELETE 요청 시 삭제 방식 지정. 지정하지 않으면  가 기본     \n요약  \n 로 페이지를 식별하고, , ,  같은 쿼리 파라미터로 조회·삭제 동작을 세밀하게 제어할 수 있습니다.\n엔드포인트 상세\n4‑1. Wiki 페이지 조회 (GET)\n요청 URL:   \n필수 파라미터:  (경로)  \n선택 파라미터: ,   \n성공 응답 ()  \n    {\n        \"title\": \"React 소개\",\n        \"content\": \"React는 ...\",\n        \"metadata\": {\n            \"authorId\": \"u123\",\n            \"createdAt\": \"2024-02-01T12:34:56Z\",\n            \"updatedAt\": \"2024-02-10T08:20:00Z\",\n            \"version\": 3,\n            \"deleted\": false\n        }\n    }\nETag 헤더가 포함되어 낙관적 잠금에 활용됩니다.  \n캐시:   \n요약  \nGET 은  로 페이지를 조회하고, · 로 초안·삭제된 페이지 접근을 제어합니다. 성공 시 페이지 데이터와 메타데이터를 반환합니다.\n4‑2. Wiki 페이지 생성 (POST)\n요청 URL:   \n요청 헤더:   \n요청 바디  \n    {\n        \"title\": \"새 페이지 제목\",\n        \"content\": \"본문 내용\",\n        \"metadata\": {\n            \"tags\": [\"frontend\", \"react\"]\n        }\n    }\n자동 메타데이터: 서버가 (토큰에서 추출), , , ,  를 삽입합니다.  \n성공 응답 ()  \n헤더에 새 페이지 URL () 제공  \n응답 본문에 생성된 리소스 전체 반환 (위 GET 응답과 동일 포맷)  \n요약  \nPOST 로 새 페이지를 만들 때 클라이언트는 , , 선택적  만 제공하면 됩니다. 서버는 인증 토큰에서 사용자 정보를 추출해 메타데이터를 자동 채웁니다.\n4‑3. Wiki 페이지 수정 (PUT / PATCH)\n요청 URL:  (전체 교체) 또는  (부분 업데이트)  \n필수 헤더:  (버전 충돌 방지)  \n요청 바디 (예시)  \n    {\n        \"title\": \"수정된 제목\",\n        \"content\": \"수정된 내용\",\n        \"metadata\": {\n            \"tags\": [\"updated\"]\n        }\n    }\n동시성 제어:  값이 현재  와 일치하지 않으면  반환.  \n성공 응답 ()  \n    {\n        \"title\": \"수정된 제목\",\n        \"content\": \"수정된 내용\",\n        \"metadata\": {\n            \"authorId\": \"u123\",\n            \"updatedAt\": \"2024-05-01T10:15:30Z\",\n            \"version\": 4,\n            \"deleted\": false\n        }\n    }\n요약  \nPUT/PATCH 는  헤더를 통해 낙관적 잠금을 구현합니다. 전체 교체는 PUT, 부분 업데이트는 PATCH 로 구분됩니다.\n4‑4. Wiki 페이지 삭제 (DELETE)\n요청 URL:   \n쿼리 파라미터:  (기본) 혹은   \n동작  \nsoft:  플래그를  로 설정하고  타임스탬프 기록.  \nhard: 데이터베이스에서 영구 삭제.  \n성공 응답  \nsoft delete:  (본문 없음)  \nhard delete:  와 작업 ID 반환 (비동기 처리 시)  \n    {\n        \"taskId\": \"del-20240501-abc123\",\n        \"status\": \"queued\"\n    }\n요약  \nDELETE 은 기본적으로 소프트 삭제를 수행합니다.  를 지정하면 즉시 영구 삭제가 진행되며, 비동기 처리 시 202 응답과 작업 ID가 반환됩니다.\n요청·응답 예시\ncURL 예시\nGET (preview 포함)  \n    curl -X GET \"https://api.example.com/api/wiki/technology/web/react?preview=true\" \\\n         -H \"Authorization: Bearer \"\nPOST  \n    curl -X POST \"https://api.example.com/api/wiki/technology/web/react\" \\\n         -H \"Content-Type: application/json\" \\\n         -H \"Authorization: Bearer \" \\\n         -d '{\"title\":\"React 소개\",\"content\":\"...\",\"metadata\":{\"tags\":[\"frontend\"]}}'\nPATCH (ETag 사용)  \n    curl -X PATCH \"https://api.example.com/api/wiki/technology/web/react\" \\\n         -H \"Content-Type: application/json\" \\\n         -H \"Authorization: Bearer \" \\\n         -H 'If-Match: \"W/\\\"3\\\"\"' \\\n         -d '{\"content\":\"업데이트된 내용\"}'\nDELETE (hard)  \n    curl -X DELETE \"https://api.example.com/api/wiki/technology/web/react?mode=hard\" \\\n         -H \"Authorization: Bearer \"\nJavaScript fetch 예시\n응답 JSON 샘플\n성공 (200)  \n    {\n        \"title\": \"React 소개\",\n        \"content\": \"React는 ...\",\n        \"metadata\": {\n            \"authorId\": \"u123\",\n            \"createdAt\": \"2024-02-01T12:34:56Z\",\n            \"updatedAt\": \"2024-05-01T10:15:30Z\",\n            \"version\": 4,\n            \"deleted\": false\n        }\n    }\n오류 (404)  \n    {\n        \"errorCode\": \"PAGENOTFOUND\",\n        \"message\": \"Requested wiki page does not exist.\",\n        \"details\": { \"slug\": [\"technology\",\"web\",\"react\"] }\n    }\n오류 처리 및 상태 코드\n  코드   의미   응답 예시  \n ------ ------ ----------- \n  400   잘못된 요청(파라미터 누락·형식 오류)     \n  401   인증 실패     \n  403   권한 부족     \n  404   페이지 미존재     \n  409   버전 충돌(If-Match 불일치)     \n  410   소프트 삭제된 페이지 접근     \n  500   서버 내부 오류     \n권장 대응 방안  \n→ 파라미터 검증 로직 강화 (스키마 검증)  \n→ 토큰 재발급·권한 재검토  \n→ 최신 버전 조회 후  재전송  \n→ 복구 API(soft delete 복원) 사용 검토  \n→ 로그 확인 후 운영팀에 보고  \n베스트 프랙티스\nRate Limiting: 1분당 60건 이하 요청 권장. 초과 시  반환.  \n재시도 전략: 5xx 오류 시 지수 백오프 적용 (예: 100 ms → 200 ms → 400 ms).  \n데이터 검증: 서버와 클라이언트 모두 Zod·Joi 등 스키마 검증 사용.  \n보안  \n  - 입력값에 대한 SQL/NoSQL 인젝션 방지 및 XSS sanitization 적용.  \n  - CSRF 방지를 위해  쿠키 또는  헤더 사용 권장.  \n요약  \n안정적인 서비스 운영을 위해 레이트 제한, 재시도 정책, 입력 검증, 그리고 CSRF·XSS 방어를 반드시 적용하십시오.\n테스트·샘플 코드\n로컬 개발 환경 설정\n≥ 18,  설치  \n레포지토리 클론 후  실행  \n에  등 환경 변수 설정  \n로 개발 서버 실행 ()  \n통합 테스트 시나리오 예시\n  시나리오   기대 결과  \n ---------- ----------- \n  GET 존재 페이지    + 페이지 데이터  \n  GET 비존재 페이지     \n  POST 인증된 사용자    +  헤더  \n  PUT 버전 충돌 ( 불일치)     \n  DELETE soft     \n  DELETE hard (비동기)    + 작업 ID  \nMock 서버 활용\n(Mock Service Worker) 로  등 핸들러를 등록해 프론트엔드 테스트에 활용합니다.\n요약  \n위 절차대로 로컬 환경을 구성하고, 표에 제시된 시나리오를 자동화 테스트에 포함하면 API 구현 검증이 용이합니다.\n변경 로그 & 버전 관리\n  날짜   버전   변경 내용   영향  \n ------ ------ ----------- ------ \n  2024-02-20   v1.0.0   최초 문서 초안 작성   전체 가이드 제공  \n  2024-03-05   v1.1.0   인증·인가 섹션에 JWT 상세 추가   보안 가이드 보강  \n  2024-04-12   v1.2.0   오류 코드 표에 409·410 추가   개발자 오류 처리 개선  \n  2024-05-08   v1.3.0   쿼리 파라미터(, , ) 및 soft/hard delete 설명 추가   사용성 향상  \n마이그레이션 가이드  \n기존  기반 경로는 그대로 유지됩니다.  \n삭제 옵션이 새롭게  파라미터로 노출되므로, 기존 클라이언트는 기본 soft delete 동작에 영향이 없습니다.  \n와  파라미터는 선택 사항이며, 기존 호출에 영향을 주지 않습니다.  \n참고 자료\nAPI 문서 작성 가이드라인 – 로버트의 가이드라인[API 문서 작성을 위한 로버트의 가이드라인]  \nNext.js App Router 문서 – 공식 문서(Next.js Docs)  \nOAuth 2.0 표준 – RFC 6749(IETF RFC 6749)  \nJWT (JSON Web Token) – RFC 7519(IETF RFC 7519)  \n주의: 본 문서는 현재 확인 가능한 구현을 기반으로 작성되었습니다. 향후 코드 변경 시 해당 섹션을 업데이트하십시오.",
     "excerpt": "문서 개요\n목적  \n 파일이 제공하는 Wiki 페이지 API 엔드포인트의 사용 방법을 외부 개발자와 내부 팀에게 명확히 안내합니다.  \n대상 독자  \n프론트엔드·백엔드 개발자  \nAPI 소비자(외부 파트너)  \n운영·보안 담당자  \n주요 기능 요약  \nWiki 페이지 조회, 생성, 수정, 삭제 지원  \n계층형 경로()를 통한 페이지 식별  \nJWT 기반 인...",
     "tags": [
-      "API",
-      "Wiki",
-      "라우트",
-      "인증",
-      "문서화"
+      "클라우드 터미널",
+      "SSH",
+      "AI 에이전트",
+      "PTY",
+      "WebSocket",
+      "tmux",
+      "세션 관리"
     ],
-    "lastModified": "2026-02-22T01:24:22Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -87,7 +89,7 @@
     "content": "title: Docker Hardened Images 무료 제공: 보안 실무 가이드\nauthor: SEPilot AI\nstatus: published\ntags: [Docker, Hardened Images, Security, Vulnerability Management, Supply Chain]\nredirectfrom:\n  - hardened-images-are-free-now-what\norder: 1\n서론\nDocker Hardened Images(DHI)가 무료로 제공되면서 조직의 컨테이너 보안 운영 방식에 큰 변화가 예상됩니다.  \n본 문서는 보안 팀, 플랫폼 팀, DevOps 담당자를 주요 독자로 하여, DHI 도입 시 고려해야 할 전략·프로세스를 정리합니다.  \nHardened Images 개요\n지원 이미지: Alpine, Debian 및 데이터베이스, 런타임, 메시지 버스 등을 포함한 1,000개 이상의 공식 이미지가 DHI에 포함됩니다【Docker Blog】.  \n보안 패치 제공 방식: Docker 보안 팀이 직접 취약점 수정을 적용하고, 패치된 이미지를 Docker가 관리하는 레지스트리에서 제공합니다. 이를 통해 사용자는 별도의 패치 적용 작업 없이 최신 보안 이미지만 Pull 하면 됩니다【Docker Blog】.  \n보안 경제성의 변화\n기존 비용 구조: 이전에는 프리미엄 이미지나 서드파티 보안 솔루션에 별도 비용을 지불해야 했습니다.  \n무료 DHI 도입 효과: 이미지 자체 비용이 사라짐에 따라 취약점 관리 예산을 스캔 도구, 운영 자동화, 인시던트 대응 등 다른 보안 활동에 재배분할 수 있습니다. 구체적인 비용 절감 규모는 조직별 사용량에 따라 다르므로 추가 조사가 필요합니다.  \n“보안 워터라인” 개념\nDocker는 DHI에 보안 “워터라인”(waterline) 을 정의합니다.  \n  영역   책임 주체   설명  \n ------ ---------- ------ \n  워터라인 이하   Docker   OS·런타임 레이어에 대한 취약점 관리·패치가 Docker에 의해 수행됩니다. 스캐너가 이 레이어에서 발견한 취약점은 사용자가 직접 조치할 필요가 없습니다.  \n  워터라인 이상   사용자   애플리케이션 코드, 직접 추가한 의존성, 커스텀 레이어 등에 대한 취약점은 기존과 동일하게 사용자가 관리합니다.  \n이미지 선택에 따른 워터라인 위치: 예를 들어, hardened python 이미지는 OS와 Python 런타임까지 포함하므로 워터라인이 높은 수준에 위치합니다. 반면, hardened base 이미지에 자체 런타임을 추가하면 워터라인이 낮아져 사용자가 관리해야 할 영역이 늘어납니다【Docker Blog】.  \n운영·배포 프로세스 변화\n자동 Pull: CI/CD 파이프라인에서  명령을 최신 DHI 태그(예: ) 로 교체합니다.  \n이미지 태그 정책:  접미사를 사용해 DHI와 일반 이미지 구분을 명확히 합니다.  \n재배포 절차: 패치된 DHI가 릴리스될 때마다 자동으로 최신 이미지를 Pull하고, 롤링 업데이트를 수행합니다.  \n고려사항: 기존 파이프라인에 이미지 스캐너가 포함된 경우, 스캐너가 워터라인 이하 레이어를 무시하도록 설정이 필요합니다.  \n공급망 격리와 신뢰 모델\n커뮤니티 이미지와 DHI 이미지의 차이:  같은 커뮤니티 이미지는 태그 변조, 유출된 PAT 등으로 공급망 공격에 노출될 위험이 있습니다. Shai Hulud 캠페인에서는 공격자가 도난당한 PAT와 태그 가변성을 이용해 악성 레이어를 삽입한 사례가 보고되었습니다【Docker Blog】.  \nDHI 공급망 방어: Docker는 소스 재빌드, 리뷰 프로세스, 쿨다운 기간을 적용해 이미지가 Docker 관리 네임스페이스에 안전하게 배포됩니다. 이러한 절차 덕분에 공급망 공격은 DHI 경계에서 차단됩니다【Docker Blog】.  \n제한점: DHI가 제공하는 워터라인 이하 레이어는 Docker가 관리하지만, 위 레이어에 대한 취약점은 여전히 사용자 책임이므로 지속적인 스캔·패치가 필요합니다.  \n마이그레이션 가이드\n7.1 현재 사용 중인 이미지 식별\n레지스트리에서  명령을 활용해 사용 중인 베이스 이미지와 태그를 목록화합니다.  \nCI/CD 파이프라인 정의 파일(, , )에서 직접 지정된 이미지명을 추출합니다.  \n7.2 전환 단계별 체크리스트\n  단계   작업 내용  \n ------ ----------- \n  1. 조사   사용 중인 이미지가 DHI에 포함되는지 확인(Alpine, Debian, 공식 DB/런타임 등).  \n  2. 테스트   스테이징 환경에 DHI 이미지()를 적용하고, 애플리케이션 정상 동작 여부를 검증합니다.  \n  3. CI/CD 업데이트   파이프라인에서 이미지 태그를 DHI 버전으로 교체하고, 스캐너 설정을 워터라인 이하 레이어 무시하도록 조정합니다.  \n  4. 롤아웃   프로덕션에 점진적 배포(블루‑그린, 카나리) 방식으로 적용합니다.  \n  5. 모니터링   배포 후 로그·메트릭을 확인하고, 필요 시 즉시 롤백합니다.  \n7.3 호환성 테스트 및 롤백 전략\n호환성 테스트: 기존 이미지와 DHI 이미지 간 라이브러리 버전 차이를 검증합니다.  \n롤백: 이미지 태그를 이전 버전으로 되돌리고, 배포 파이프라인을 재실행할 수 있도록 GitOps 정책을 마련합니다.  \n보안 베스트 프랙티스\n워터라인 위·아래 영역별 관리  \n  - 아래: Docker가 제공하는 최신 DHI 이미지를 정기적으로 Pull하고, 자동 재배포 파이프라인을 유지합니다.  \n  - 위: 애플리케이션 코드, 직접 추가한 의존성, 커스텀 레이어에 대해 정기적인 이미지 스캔·패치를 수행합니다.  \n이미지 레이어 최소화: 불필요한 레이어를 제거하고, 멀티‑스테이지 빌드를 활용해 최종 이미지 크기를 최소화합니다.  \n정기 스캔 주기: CI 단계에서 최소 일일 1회 이상 이미지 스캔을 실행하고, 새로운 CVE가 발표될 때마다 DHI 업데이트를 확인합니다.  \n모니터링·컴플라이언스\n보안 지표(KPI)  \n  - 워터라인 이하 이미지 최신 적용 비율 (예: 100% 최신 DHI 사용)  \n  - 워터라인 위 레이어 취약점 발견 건수  \n  - 패치 적용 평균 소요 시간  \n감사 로그: Docker 레지스트리 접근 로그와 CI/CD 배포 로그를 연계해 이미지 Pull·배포 이력을 추적합니다.  \n정책 준수 확인: 조직 내부 정책에 따라 DHI 사용 여부를 자동 검증하는 정책 엔진(OPA 등)을 도입할 수 있습니다.  \n자주 묻는 질문(FAQ)\nQ1. 무료 DHI가 제공하는 보안 수준은?  \nA: DHI는 OS·런타임 레이어에 대한 최신 보안 패치를 Docker 보안 팀이 직접 적용합니다. 따라서 워터라인 이하 레이어는 Docker가 책임지고 관리합니다【Docker Blog】.\nQ2. 이미 사용 중인 사내 커스텀 이미지와 어떻게 병합하나요?  \nA: 커스텀 이미지의 베이스를 DHI 이미지()로 교체하고, 기존 레이어를 그대로 위에 쌓는 방식으로 병합합니다. 이때 베이스 이미지 교체 후 애플리케이션 테스트를 반드시 수행해야 합니다.\nQ3. Docker가 제공하는 보안 패치 주기는?  \nA: Docker는 취약점이 확인되는 즉시 해당 레이어를 재빌드하고, 새로운 DHI 이미지를 릴리스합니다. 정확한 주기는 취약점 발생 시점에 따라 다르므로 추가 조사가 필요합니다.\n참고 자료 및 링크\nDocker 블로그 원문: Hardened Images Are Free. Now What?* (2026‑02‑10)【Docker Blog】  \nDocker 보안 팀 발표 자료: (추후 추가)  \nShai Hulud 공급망 공격 사례: (Docker 블로그 내 언급)【Docker Blog】  \nOCI 이미지 표준:  (공식 문서)",
     "excerpt": "title: Docker Hardened Images 무료 제공: 보안 실무 가이드\nauthor: SEPilot AI\nstatus: published\ntags: [Docker, Hardened Images, Security, Vulnerability Management, Supply Chain]\nredirectfrom:\n  - hardened-images-...",
     "tags": [],
-    "lastModified": "2026-02-21T13:04:23Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "GitHub Action"
   },
   {
@@ -138,7 +140,7 @@
       "IDE 통합",
       "워크플로우"
     ],
-    "lastModified": "2026-02-20T22:52:00+09:00",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -172,7 +174,7 @@
       "web",
       "technology-stack"
     ],
-    "lastModified": "2026-02-21T11:20:48Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -230,7 +232,7 @@
       "documentation",
       "coverage"
     ],
-    "lastModified": "2026-02-22T01:24:22Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -282,7 +284,7 @@
       "tmux",
       "세션 관리"
     ],
-    "lastModified": "2026-02-22T01:52:53Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -339,7 +341,7 @@
       "AI 서비스",
       "벤치마크"
     ],
-    "lastModified": "2026-02-22T01:26:11Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {
@@ -514,7 +516,7 @@
       "Cost Optimization",
       "VPC Endpoint"
     ],
-    "lastModified": "2026-02-22T01:26:11Z",
+    "lastModified": "2026-02-22T01:56:50Z",
     "author": "SEPilot AI"
   },
   {

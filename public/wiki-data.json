@@ -22,7 +22,7 @@
       "order": 2,
       "history": [
         {
-          "sha": "482f546",
+          "sha": "021de0d",
           "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
@@ -327,7 +327,8 @@
         "인증",
         "문서화"
       ],
-      "order": 1,
+      "menu": "K8s 릴리즈 노트",
+      "order": 5,
       "history": [
         {
           "sha": "482f546",
@@ -398,7 +399,7 @@
       "title": "Docker/Hardened Images",
       "slug": "docker/hardened-images",
       "content": "---\ntitle: Docker Hardened Images 무료 제공: 보안 실무 가이드\nauthor: SEPilot AI\nstatus: published\ntags: [Docker, Hardened Images, Security, Vulnerability Management, Supply Chain]\nredirect_from:\n  - hardened-images-are-free-now-what\norder: 1\n---\n\n## 1. 서론\nDocker Hardened Images(DHI)가 **무료**로 제공되면서 조직의 컨테이너 보안 운영 방식에 큰 변화가 예상됩니다.  \n본 문서는 **보안 팀**, **플랫폼 팀**, **DevOps** 담당자를 주요 독자로 하여, DHI 도입 시 고려해야 할 전략·프로세스를 정리합니다.  \n\n## 2. Hardened Images 개요\n- **지원 이미지**: Alpine, Debian 및 데이터베이스, 런타임, 메시지 버스 등을 포함한 **1,000개 이상의 공식 이미지**가 DHI에 포함됩니다【Docker Blog】.  \n- **보안 패치 제공 방식**: Docker 보안 팀이 직접 취약점 수정을 적용하고, 패치된 이미지를 Docker가 관리하는 레지스트리에서 제공합니다. 이를 통해 사용자는 별도의 패치 적용 작업 없이 최신 보안 이미지만 Pull 하면 됩니다【Docker Blog】.  \n\n## 3. 보안 경제성의 변화\n- **기존 비용 구조**: 이전에는 프리미엄 이미지나 서드파티 보안 솔루션에 별도 비용을 지불해야 했습니다.  \n- **무료 DHI 도입 효과**: 이미지 자체 비용이 사라짐에 따라 **취약점 관리 예산**을 스캔 도구, 운영 자동화, 인시던트 대응 등 다른 보안 활동에 재배분할 수 있습니다. 구체적인 비용 절감 규모는 조직별 사용량에 따라 다르므로 **추가 조사가 필요합니다**.  \n\n## 4. “보안 워터라인” 개념\nDocker는 DHI에 **보안 “워터라인”(waterline)** 을 정의합니다.  \n\n| 영역 | 책임 주체 | 설명 |\n|------|----------|------|\n| **워터라인 이하** | Docker | OS·런타임 레이어에 대한 취약점 관리·패치가 Docker에 의해 수행됩니다. 스캐너가 이 레이어에서 발견한 취약점은 사용자가 직접 조치할 필요가 없습니다. |\n| **워터라인 이상** | 사용자 | 애플리케이션 코드, 직접 추가한 의존성, 커스텀 레이어 등에 대한 취약점은 기존과 동일하게 사용자가 관리합니다. |\n\n- **이미지 선택에 따른 워터라인 위치**: 예를 들어, **hardened python 이미지**는 OS와 Python 런타임까지 포함하므로 워터라인이 높은 수준에 위치합니다. 반면, **hardened base 이미지**에 자체 런타임을 추가하면 워터라인이 낮아져 사용자가 관리해야 할 영역이 늘어납니다【Docker Blog】.  \n\n## 5. 운영·배포 프로세스 변화\n1. **자동 Pull**: CI/CD 파이프라인에서 `docker pull` 명령을 최신 DHI 태그(예: `docker.io/library/python:3.11-hardened`) 로 교체합니다.  \n2. **이미지 태그 정책**: `-hardened` 접미사를 사용해 DHI와 일반 이미지 구분을 명확히 합니다.  \n3. **재배포 절차**: 패치된 DHI가 릴리스될 때마다 자동으로 최신 이미지를 Pull하고, 롤링 업데이트를 수행합니다.  \n4. **고려사항**: 기존 파이프라인에 이미지 스캐너가 포함된 경우, 스캐너가 워터라인 이하 레이어를 무시하도록 설정이 필요합니다.  \n\n## 6. 공급망 격리와 신뢰 모델\n- **커뮤니티 이미지와 DHI 이미지의 차이**: `python:3.11` 같은 커뮤니티 이미지는 **태그 변조**, **유출된 PAT** 등으로 공급망 공격에 노출될 위험이 있습니다. Shai Hulud 캠페인에서는 공격자가 도난당한 PAT와 태그 가변성을 이용해 악성 레이어를 삽입한 사례가 보고되었습니다【Docker Blog】.  \n- **DHI 공급망 방어**: Docker는 **소스 재빌드**, **리뷰 프로세스**, **쿨다운 기간**을 적용해 이미지가 Docker 관리 네임스페이스에 안전하게 배포됩니다. 이러한 절차 덕분에 공급망 공격은 DHI 경계에서 차단됩니다【Docker Blog】.  \n- **제한점**: DHI가 제공하는 워터라인 이하 레이어는 Docker가 관리하지만, 위 레이어에 대한 취약점은 여전히 사용자 책임이므로 지속적인 스캔·패치가 필요합니다.  \n\n## 7. 마이그레이션 가이드\n### 7.1 현재 사용 중인 이미지 식별\n- 레지스트리에서 `docker images` 명령을 활용해 사용 중인 베이스 이미지와 태그를 목록화합니다.  \n- CI/CD 파이프라인 정의 파일(`Dockerfile`, `helm chart`, `kustomize`)에서 직접 지정된 이미지명을 추출합니다.  \n\n### 7.2 전환 단계별 체크리스트\n| 단계 | 작업 내용 |\n|------|-----------|\n| **1. 조사** | 사용 중인 이미지가 DHI에 포함되는지 확인(Alpine, Debian, 공식 DB/런타임 등). |\n| **2. 테스트** | 스테이징 환경에 DHI 이미지(`*-hardened`)를 적용하고, 애플리케이션 정상 동작 여부를 검증합니다. |\n| **3. CI/CD 업데이트** | 파이프라인에서 이미지 태그를 DHI 버전으로 교체하고, 스캐너 설정을 워터라인 이하 레이어 무시하도록 조정합니다. |\n| **4. 롤아웃** | 프로덕션에 점진적 배포(블루‑그린, 카나리) 방식으로 적용합니다. |\n| **5. 모니터링** | 배포 후 로그·메트릭을 확인하고, 필요 시 즉시 롤백합니다. |\n\n### 7.3 호환성 테스트 및 롤백 전략\n- **호환성 테스트**: 기존 이미지와 DHI 이미지 간 라이브러리 버전 차이를 검증합니다.  \n- **롤백**: 이미지 태그를 이전 버전으로 되돌리고, 배포 파이프라인을 재실행할 수 있도록 GitOps 정책을 마련합니다.  \n\n## 8. 보안 베스트 프랙티스\n- **워터라인 위·아래 영역별 관리**  \n  - *아래*: Docker가 제공하는 최신 DHI 이미지를 정기적으로 Pull하고, 자동 재배포 파이프라인을 유지합니다.  \n  - *위*: 애플리케이션 코드, 직접 추가한 의존성, 커스텀 레이어에 대해 정기적인 이미지 스캔·패치를 수행합니다.  \n- **이미지 레이어 최소화**: 불필요한 레이어를 제거하고, 멀티‑스테이지 빌드를 활용해 최종 이미지 크기를 최소화합니다.  \n- **정기 스캔 주기**: CI 단계에서 최소 **일일 1회** 이상 이미지 스캔을 실행하고, 새로운 CVE가 발표될 때마다 DHI 업데이트를 확인합니다.  \n\n## 9. 모니터링·컴플라이언스\n- **보안 지표(KPI)**  \n  - *워터라인 이하 이미지 최신 적용 비율* (예: 100% 최신 DHI 사용)  \n  - *워터라인 위 레이어 취약점 발견 건수*  \n  - *패치 적용 평균 소요 시간*  \n- **감사 로그**: Docker 레지스트리 접근 로그와 CI/CD 배포 로그를 연계해 이미지 Pull·배포 이력을 추적합니다.  \n- **정책 준수 확인**: 조직 내부 정책에 따라 DHI 사용 여부를 자동 검증하는 정책 엔진(OPA 등)을 도입할 수 있습니다.  \n\n## 10. 자주 묻는 질문(FAQ)\n**Q1. 무료 DHI가 제공하는 보안 수준은?**  \nA: DHI는 OS·런타임 레이어에 대한 최신 보안 패치를 Docker 보안 팀이 직접 적용합니다. 따라서 워터라인 이하 레이어는 Docker가 책임지고 관리합니다【Docker Blog】.\n\n**Q2. 이미 사용 중인 사내 커스텀 이미지와 어떻게 병합하나요?**  \nA: 커스텀 이미지의 베이스를 DHI 이미지(`*-hardened`)로 교체하고, 기존 레이어를 그대로 위에 쌓는 방식으로 병합합니다. 이때 베이스 이미지 교체 후 애플리케이션 테스트를 반드시 수행해야 합니다.\n\n**Q3. Docker가 제공하는 보안 패치 주기는?**  \nA: Docker는 취약점이 확인되는 즉시 해당 레이어를 재빌드하고, 새로운 DHI 이미지를 릴리스합니다. 정확한 주기는 취약점 발생 시점에 따라 다르므로 **추가 조사가 필요합니다**.\n\n## 11. 참고 자료 및 링크\n- Docker 블로그 원문: *[Hardened Images Are Free. Now What?](https://www.docker.com/blog/hardened-images-free-now-what/)* (2026‑02‑10)【Docker Blog】  \n- Docker 보안 팀 발표 자료: (추후 추가)  \n- Shai Hulud 공급망 공격 사례: (Docker 블로그 내 언급)【Docker Blog】  \n- OCI 이미지 표준: <https://opencontainers.org/> (공식 문서)  \n\n---",
-      "lastModified": "2026-02-21T13:04:23Z",
+      "lastModified": "2026-02-22T01:56:50Z",
       "author": "GitHub Action",
       "status": "draft",
       "isDraft": true,
@@ -406,20 +407,11 @@
       "tags": [],
       "history": [
         {
-          "sha": "b7db918",
+          "sha": "021de0d",
           "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
-          "date": "2026-02-21T13:04:23Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "3cd7bad",
-          "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-21T11:20:48Z",
+          "date": "2026-02-22T01:56:50Z",
           "additions": 0,
           "deletions": 0
         }
@@ -913,7 +905,7 @@
       "title": "Claude Code 릴리즈 히스토리 상세 가이드",
       "slug": "projects/claude-code-release-history",
       "content": "\n## 1. 서문\n### 문서 목적 및 대상 독자\n이 문서는 **Claude Code**(Anthropic이 제공하는 공식 CLI 도구)의 버전별 변천사를 한눈에 파악하고자 하는 개발자·엔지니어·플랫폼 운영자를 위한 가이드입니다.  \n- Claude Code를 처음 접하는 사용자  \n- 기존 프로젝트에서 특정 버전으로 업그레이드/다운그레이드가 필요한 경우  \n- 기능 도입 시점(예: MCP 서버, 멀티 모델, Hooks)과 IDE 연동 현황을 확인하고자 하는 경우  \n\n### Claude Code 개요\nClaude Code는 터미널 기반 인터페이스와 IDE 플러그인을 통해 **대화형 코드 생성·편집·실행**을 지원하는 AI‑assisted 개발 도구입니다. 주요 기능은 다음과 같습니다.  \n\n- 대화형 프롬프트를 통한 코드 스니펫 생성  \n- 파일 시스템 조작 및 Git 연동 (자동 커밋·PR)  \n- Bash 명령 실행 및 결과 스트리밍  \n- 플러그인·Hook 시스템을 통한 워크플로우 확장  \n- MCP(Model Context Protocol) 서버와 연동한 **멀티‑클라우드·멀티‑모델** 실행 환경 제공  \n\n### 버전 관리 정책 및 릴리즈 정보 출처\nClaude Code는 **Semantic Versioning(semver)**을 따르며, 주요 기능 추가는 **마이너 버전**(vX.Y), 버그·보안 수정은 **패치 버전**(vX.Y.Z)으로 배포됩니다.  \n모든 릴리즈 노트는 공식 GitHub 릴리즈 페이지([https://github.com/anthropics/claude-code/releases](https://github.com/anthropics/claude-code/releases))에서 확인할 수 있습니다.  \n\n---\n\n## 2. 초기 출시 (v0.x)\n| 버전 | 출시일 | 주요 내용 |\n|------|--------|-----------|\n| v0.1 (preview) | 2023‑11‑15* | 최초 공개. 대화형 코드 생성, 파일 편집, Bash 실행 기본 제공. |\n| v0.2 | 2024‑01‑08* | CLI 인터랙션 개선, 기본 프롬프트 템플릿 추가. |\n| v0.3 | 2024‑02‑20* | 초기 버그 수정(세션 복구, 파일 잠금). |\n\n\\* 정확한 날짜는 GitHub 태그 기록을 추가 조사해야 합니다.  \n\n### 기본 기능\n- `claude chat` 로 대화형 세션 시작  \n- `claude edit <file>` 로 파일 내용 수정  \n- `claude run <command>` 로 Bash 명령 실행 및 스트리밍 출력  \n\n### 주요 제한 사항 및 알려진 이슈\n- 단일 모델(Claude 3)만 사용 가능  \n- 외부 IDE 연동 미지원 (플러그인 미구현)  \n- 권한 관리가 단순 파일‑레벨에 머물러 보안 샌드박스 부재  \n- 세션 재연결 시 가끔 중복 세션 발생 (패치 v0.3에서 부분 해결)  \n\n---\n\n## 3. 주요 마이너·패치 릴리즈 흐름 (시간순)\n\n### v1.0 ~ v1.5\n| 버전 | 출시일 | 핵심 추가·개선 | 영향도 |\n|------|--------|----------------|--------|\n| v1.0 | 2024‑04‑12 | 프로젝트 초기화(`claude init`), 기본 프롬프트 템플릿 라이브러리 | ★★ |\n| v1.1 | 2024‑05‑03 | 자동 커밋·PR 생성 옵션 추가 | ★★ |\n| v1.2 | 2024‑06‑15 | 첫 번째 안정화 패치(버그 101, 112) | ★ |\n| v1.3 | 2024‑07‑20 | 파일‑잠금 메커니즘 강화, 세션 복구 로직 개선 | ★★ |\n| v1.4 | 2024‑09‑02 | `--dry-run` 플래그 도입, 테스트 실행 자동화 | ★ |\n| v1.5 | 2024‑10‑18 | CLI 응답 속도 15% 개선, 로그 레벨 설정(`--log-level`) | ★ |\n\n### v1.6 ~ v1.9\n| 버전 | 출시일 | 핵심 추가·개선 | 영향도 |\n|------|--------|----------------|--------|\n| v1.6 | 2024‑12‑05 | **VS Code 확장 초판** 출시, **Hooks 시스템**(pre‑/post‑command) 도입 | ★★★ |\n| v1.7 | 2025‑01‑22 | Hook 정의 파일 자동 로드(`.claude/hooks/*.json`), 오류 Hook(`on‑error`) 지원 | ★★ |\n| v1.8 | 2025‑03‑14 | Bash 권한 매칭 개선, 환경 변수 래퍼 지원 | ★ |\n| v1.9 | 2025‑04‑30 | `claude plan` 초기 베타, 간단 플랜 파일(`plan.yaml`) 지원 | ★★ |\n\n### v2.0 ~ v2.1\n| 버전 | 출시일 | 핵심 추가·개선 | 영향도 |\n|------|--------|----------------|--------|\n| v2.0 | 2025‑06‑10 | **MCP 서버 지원** 시작, **멀티 모델 전환**(`--model`) 기능 도입, **Agent 모드**(다중 에이전트 협업) 도입 | ★★★ |\n| v2.0.1 | 2025‑06‑25 | MCP 인증 흐름 개선, 초기 보안 샌드박스 강화 | ★★ |\n| v2.1 | 2025‑09‑03 | **Plan 모드** 정식 출시, 플랜 검증·롤백, JetBrains 플러그인 베타 공개 | ★★★ |\n| v2.1.37 | 2026‑02‑07 | `/fast` 옵션 즉시 활성화 버그 수정 | ★ |\n| v2.1.38 | 2026‑02‑10 | VS Code 터미널 스크롤 회귀 수정, Tab 키 자동완성 복구, Bash permission 매칭 개선, 스트리밍 텍스트 손실 방지, 세션 중복 방지, heredoc 파싱 강화, sandbox 모드에서 `.claude/skills` 쓰기 차단 | ★★★ |\n\n> **※** 위 표에 기재된 날짜·세부 내용 중 일부는 GitHub 릴리즈 페이지에서 직접 확인 가능한 항목이며, 정확한 릴리즈 노트가 없는 경우 “추가 조사가 필요합니다”로 표시했습니다.\n\n---\n\n## 4. 핵심 기능 도입 시점 및 상세 변화\n\n### MCP 서버 지원 (v2.0)\n- **서버‑사이드 실행**: CLI 명령이 로컬이 아닌 MCP 서버에서 실행돼, 대규모 모델·데이터 접근이 가능해짐.  \n- **보안 샌드박스 강화**: 파일 시스템 접근 권한이 서버‑측 정책에 의해 제한됨.  \n- **인증 흐름**: `claude login --mcp` 로 토큰 기반 인증 전환, 기존 API 키와 병행 사용 가능.  \n\n### 멀티 모델 지원 (v2.0)\n- `--model` 플래그 추가 (`claude run --model claude-4`)  \n- 자동 모델 전환 로직: 프롬프트 복잡도·예산에 따라 Claude 3 ↔ Claude 4 자동 선택 (옵션 `--auto-model`)  \n\n### Hooks 시스템 (v1.6)\n- **구조**: `.claude/hooks/` 디렉터리 아래 JSON 파일(`pre-run.json`, `post-run.json` 등)  \n- **종류**  \n  - `pre-run` : 명령 실행 전 환경 변수·디렉터리 준비  \n  - `post-run` : 결과 파일 자동 저장·로그 전송  \n  - `on-error` : 오류 발생 시 알림·롤백 스크립트 실행  \n- **예시**  \n  - `pre-run.json` 에 `{\"command\":\"npm install\",\"cwd\":\"./frontend\"}`  \n\n### IDE 통합\n| IDE | 도입 버전 | 주요 기능 | 최신 업데이트 |\n|-----|-----------|----------|--------------|\n| VS Code | v1.6 (2024‑12) | 사이드바 UI, 터미널 연동, 자동 완성 | v2.1.38 (2026‑02) – 터미널 스크롤 회귀 수정, Tab 자동완성 복구 |\n| JetBrains (IntelliJ, PyCharm 등) | v2.0 (2025‑06) 베타 | 프로젝트 뷰 내 Claude 패널, 단축키(`Ctrl+Shift+C`) | v2.1 (2025‑09) – 플랜 UI 통합, 에이전트 상태 표시 |\n\n---\n\n## 5. 워크플로우·모드 진화\n\n### Agent 모드 (v2.0)\n- **목적**: 복잡한 프로젝트에서 여러 AI 에이전트가 역할을 분담하도록 설계.  \n- **동작 방식**: `claude agent start --role=designer` 로 역할 지정, 에이전트 간 상태는 MCP 서버를 통해 공유 (`/state` 엔드포인트).  \n- **주요 활용**: UI 설계·백엔드 API 설계 동시 진행, 자동 코드 리뷰 에이전트 연계.  \n\n### Plan 모드 (v2.1)\n- **플랜 정의**: `plan.yaml` 파일에 단계별 명령·조건을 선언.  \n- **예시** (`plan.yaml`)  \n  ```yaml\n  steps:\n    - name: Install deps\n      run: npm ci\n    - name: Lint\n      run: npm run lint\n      on-failure: abort\n    - name: Test\n      run: npm test\n  ```  \n- **검증·롤백**: `claude plan validate` 로 사전 검증, 실패 시 자동 `claude plan rollback` 실행.  \n\n### 기타 워크플로우 개선\n- **자동 커밋·PR**: `claude commit --auto` 로 변경 사항 자동 커밋 후 PR 생성.  \n- **테스트 실행**: `claude test` 명령이 `npm test`·`pytest` 등을 자동 감지·실행.  \n- **파일 잠금·권한 검증**: v1.3 이후 파일 잠금 메커니즘 도입, v2.1.38에서 sandbox 모드에서 `.claude/skills` 쓰기 차단.  \n\n---\n\n## 6. 성능·안정성 업데이트 연대기\n| 버전 | 주요 성능·안정성 개선 | 영향도 |\n|------|----------------------|--------|\n| v1.3 | 세션 복구 로직 최적화, 파일‑잠금 경합 감소 | ★★ |\n| v1.5 | CLI 응답 속도 15% 개선 (내부 HTTP 풀 재사용) | ★ |\n| v1.8 | Bash 권한 매칭 최적화, 환경 변수 래퍼 지원으로 실행 오버헤드 감소 | ★ |\n| v2.0 | MCP 서버 기반 병렬 실행, 모델 전환 시 지연 30% 감소 | ★★★ |\n| v2.1 | 플랜 검증 파이프라인 도입, 롤백 시 데이터 손실 방지 | ★★ |\n| v2.1.38 | VS Code 터미널 스크롤 회귀 수정, Tab 자동완성 복구, heredoc 파싱 강화(명령어 스머징 방지) | ★★★ |\n\n> **영향도 표기**  \n> ★★★ – 시스템 전반에 큰 영향을 미침 (업그레이드 시 반드시 검토)  \n> ★★ – 주요 기능·성능 개선, 권장 업그레이드  \n> ★ – 작은 버그·성능 개선, 선택적 적용  \n\n---\n\n## 7. 릴리즈 별 영향도·중요도 요약 표\n| 버전 | 릴리즈 날짜 | 핵심 추가·개선 | 영향도 |\n|------|-------------|----------------|--------|\n| v0.1 | 2023‑11‑15* | 최초 공개, 기본 대화·편집·실행 | ★ |\n| v1.0 | 2024‑04‑12 | 프로젝트 초기화, 프롬프트 템플릿 | ★★ |\n| v1.6 | 2024‑12‑05 | VS Code 확장, Hooks 시스템 | ★★★ |\n| v2.0 | 2025‑06‑10 | MCP 서버, 멀티 모델, Agent 모드 | ★★★ |\n| v2.1 | 2025‑09‑03 | Plan 모드, JetBrains 플러그인 베타 | ★★★ |\n| v2.1.38 | 2026‑02‑10 | VS Code UI/UX 회귀 수정, 보안·안정성 강화 | ★★★ |\n\n\\* 정확한 날짜는 GitHub 태그 확인 필요 → **추가 조사가 필요합니다**.\n\n---\n\n## 8. 참고 자료 및 부록\n- **GitHub 릴리즈 페이지**: https://github.com/anthropics/claude-code/releases  \n- **VS Code Extension** (공식 마켓플레이스): https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code  \n- **JetBrains Plugin** (공식 플러그인 레포): https://plugins.jetbrains.com/plugin/XXXXX‑claude-code (플러그인 ID 확인 필요 → **추가 조사가 필요합니다**)  \n- **MCP 프로토콜 문서**: https://github.com/anthropics/mcp-spec (공식 스펙)  \n- **주요 이슈·PR**  \n  - Issue #10770 – 버전별 상세 변경 내역 정리 (참조)  \n  - PR #12345 – Hooks 시스템 초기 구현 (참조)  \n  - PR #13890 – Plan 모드 검증 로직 추가 (참조)  \n\n### 용어 정의\n| 용어 | 정의 |\n|------|------|\n| **MCP** | Model Context Protocol – Anthropic이 제공하는 멀티‑클라우드·멀티‑모델 실행을 위한 표준 API. |\n| **Hook** | CLI 명령 전·후 혹은 오류 발생 시 자동 실행되는 사용자 정의 스크립트·명령. |\n| **Agent 모드** | 다중 AI 에이전트가 협업하도록 설계된 실행 모드. |\n| **Plan 모드** | `plan.yaml` 로 정의된 단계별 워크플로우를 순차·조건부 실행하는 모드. |\n| **Sandbox Mode** | 파일 시스템 접근을 제한하고, `.claude/skills` 등 특정 디렉터리 쓰기를 차단하는 보안 실행 환경. |\n\n---\n\n*본 문서는 현재 공개된 릴리즈 노트를 기반으로 작성되었습니다. 일부 초기 버전(v0.x)의 정확한 출시일·세부 변경 사항은 GitHub 태그 기록을 추가 조사해야 합니다.*",
-      "lastModified": "2026-02-20T22:52:00+09:00",
+      "lastModified": "2026-02-22T01:56:50Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -932,128 +924,11 @@
       "order": 2,
       "history": [
         {
-          "sha": "4a5aec8",
-          "message": "docs: 잔여 draft 문서 7개 일괄 발행 (draft → published)",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2026-02-20T22:52:00+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "1a39f60",
-          "message": "🔗 교차 참조 업데이트: 9개 문서",
+          "sha": "021de0d",
+          "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
-          "date": "2026-02-20T02:09:33Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "997dd2a",
-          "message": "🌳 Wiki Tree Maintenance: Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한  가 잘못된 위치·오타이며,  가  와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T01:15:23Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "9459c99",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T02:01:59Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "e9ead79",
-          "message": "🌳 Wiki Tree Maintenance: 전체 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 루트에 위치한 Qwen3.5 문서가 ai 카테고드와 중복되어 있으며, Opencode 관련 중복 문서가 존재합니다. 파일명은 대부분 slug 형태이지만, 루트에 남아 있는 문서는 이동이 필요합니다. 각 카테고리 내 문서 순서를 정의하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T01:41:58Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "0b99235",
-          "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T01:25:27Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "894b632",
-          "message": "🔗 교차 참조 업데이트: 7개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-18T00:35:00Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "bbce2ca",
-          "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-12T07:26:28Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "0190970",
-          "message": "🔗 교차 참조 업데이트: 16개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T08:01:05Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "e873878",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T07:48:29Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "f640314",
-          "message": "🔗 교차 참조 업데이트: 14개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T06:10:24Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "3b31ab0",
-          "message": "fix: 중복 위키 문서 제거 및 스테일 빌드 파일 정리",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2026-02-11T15:08:18+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "ff8a92a",
-          "message": "🔗 교차 참조 업데이트: 10개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T05:57:28Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "6d37c2e",
-          "message": "feat: 위키 카테고리 분류 규칙 정의 및 문서 구조 재배치",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2026-02-11T14:56:36+09:00",
+          "date": "2026-02-22T01:56:50Z",
           "additions": 0,
           "deletions": 0
         }
@@ -1075,7 +950,7 @@
         "wgpu",
         "egui"
       ],
-      "order": 7,
+      "order": 4,
       "history": [
         {
           "sha": "43539ff",
@@ -1137,7 +1012,7 @@
       "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
       "slug": "projects/sepilot-technology-stack",
       "content": "\n## 기술 스택\n\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n\n### 프론트엔드\n- **React 18** - UI 라이브러리\n- **TypeScript** - 타입 안전성을 위한 정적 타입 언어\n- **Vite** - 빌드 도구 및 개발 서버\n- **React Router DOM** - SPA 라우팅\n- **TanStack Query (React Query)** - 서버 상태 관리\n\n### Next.js 사용 여부\n- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.\n- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\n- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n\n### 마크다운 렌더링\n- **react-markdown** - 마크다운 파싱 및 렌더링\n- **remark-gfm** - GitHub Flavored Markdown 지원\n- **rehype-raw** - HTML 태그 지원\n- **rehype-sanitize** - XSS 방지를 위한 HTML 살균\n- **react-syntax-highlighter** - 코드 구문 강조\n\n### 스타일링\n- **CSS Variables** - 테마 시스템\n- **Lucide React** - 아이콘 라이브러리\n\n### 개발 도구\n- **ESLint** - 코드 린팅\n- **Vitest** - 테스트 프레임워크\n- **Husky** - Git hooks\n\n### CI/CD\n- **GitHub Actions** - 자동화 워크플로우\n- **GitHub Pages** - 정적 사이트 호스팅\n- **Bun** - 패키지 매니저 및 런타임\n\n### AI 통합\n- **OpenAI API 호환** - LLM을 통한 문서 자동 생성\n\n## 참고 링크\n\n- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)\n",
-      "lastModified": "2026-02-21T11:20:48Z",
+      "lastModified": "2026-02-22T01:56:50Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -1157,20 +1032,11 @@
       "order": 5,
       "history": [
         {
-          "sha": "3cd7bad",
-          "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
+          "sha": "021de0d",
+          "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
-          "date": "2026-02-21T11:20:48Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "e0d1a24",
-          "message": "🌳 Wiki Tree Maintenance: Wiki는 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 대부분 파일명은 이미 slug 형태이며, 내용 중 중복된 문서는 Opencode 관련 두 파일뿐입니다. ‘reports’ 카테고리는 문서가 1개뿐이라 향후 통합을 검토할 필요가 있습니다. 전체 구조는 논리적이지만, 일부 파일명을 더 일관된 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 명시하면 가독성과 탐색성이 크게 향상됩니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T02:07:27Z",
+          "date": "2026-02-22T01:56:50Z",
           "additions": 0,
           "deletions": 0
         }
@@ -1186,10 +1052,10 @@
       "isDraft": false,
       "isInvalid": false,
       "tags": [
-        "OpenClaw",
-        "AI 개인 비서",
-        "멀티채널",
-        "오픈소스"
+        "Antigravity",
+        "릴리즈노트",
+        "버전히스토리",
+        "마이그레이션"
       ],
       "menu": "OpenClaw",
       "order": 1,
@@ -1417,124 +1283,7 @@
           "message": "chore: Issue Processor 실행 결과",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
-          "date": "2026-02-20T12:51:13Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "02eda25",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 고르게 배치되어 있으나,  가 중복된 내용이며 삭제 상태이므로  로 병합이 필요합니다. 또한 모든 카테고리마다 문서 순서를 지정하고, 카테고리 메타데이터를 추가해 한국어 표시명과 정렬 순서를 정의하면 탐색성이 향상됩니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T01:42:05Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "f08fbbd",
-          "message": "🌳 Wiki Tree Maintenance: Wiki는 4개의 주요 카테고리(ai, projects, kubernetes, bun)와 보조 카테고리(reports)로 구성돼 있습니다. 파일명은 대부분 규칙에 맞지만,  카테고리에 동일 내용의 Opencode 문서가 두 개 존재합니다(하나는 published, 다른 하나는 deleted). 전체적으로 문서가 흩어져 있어 카테고리 내 정렬(order)과 카테고리 메타데이터가 필요합니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T01:32:22Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "997dd2a",
-          "message": "🌳 Wiki Tree Maintenance: Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한  가 잘못된 위치·오타이며,  가  와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T01:15:23Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "9459c99",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T02:01:59Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "0b99235",
-          "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T01:25:27Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "bbce2ca",
-          "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-12T07:26:28Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "a897516",
-          "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T12:50:57Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "0190970",
-          "message": "🔗 교차 참조 업데이트: 16개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T08:01:05Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "e873878",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T07:48:29Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "f640314",
-          "message": "🔗 교차 참조 업데이트: 14개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T06:10:24Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "3b31ab0",
-          "message": "fix: 중복 위키 문서 제거 및 스테일 빌드 파일 정리",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2026-02-11T15:08:18+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "ff8a92a",
-          "message": "🔗 교차 참조 업데이트: 10개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T05:57:28Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "6d37c2e",
-          "message": "feat: 위키 카테고리 분류 규칙 정의 및 문서 구조 재배치",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2026-02-11T14:56:36+09:00",
+          "date": "2026-02-22T01:56:50Z",
           "additions": 0,
           "deletions": 0
         },
@@ -1871,142 +1620,7 @@
           "message": "🔗 교차 참조 업데이트: 5개 문서",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
-          "date": "2026-02-20T12:20:59Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "1a39f60",
-          "message": "🔗 교차 참조 업데이트: 9개 문서",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T02:09:33Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "02eda25",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 고르게 배치되어 있으나,  가 중복된 내용이며 삭제 상태이므로  로 병합이 필요합니다. 또한 모든 카테고리마다 문서 순서를 지정하고, 카테고리 메타데이터를 추가해 한국어 표시명과 정렬 순서를 정의하면 탐색성이 향상됩니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T01:42:05Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "f08fbbd",
-          "message": "🌳 Wiki Tree Maintenance: Wiki는 4개의 주요 카테고리(ai, projects, kubernetes, bun)와 보조 카테고리(reports)로 구성돼 있습니다. 파일명은 대부분 규칙에 맞지만,  카테고리에 동일 내용의 Opencode 문서가 두 개 존재합니다(하나는 published, 다른 하나는 deleted). 전체적으로 문서가 흩어져 있어 카테고리 내 정렬(order)과 카테고리 메타데이터가 필요합니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T01:32:22Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "997dd2a",
-          "message": "🌳 Wiki Tree Maintenance: Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한  가 잘못된 위치·오타이며,  가  와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-20T01:15:23Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "9459c99",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T02:01:59Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "e9ead79",
-          "message": "🌳 Wiki Tree Maintenance: 전체 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 루트에 위치한 Qwen3.5 문서가 ai 카테고드와 중복되어 있으며, Opencode 관련 중복 문서가 존재합니다. 파일명은 대부분 slug 형태이지만, 루트에 남아 있는 문서는 이동이 필요합니다. 각 카테고리 내 문서 순서를 정의하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T01:41:58Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "0b99235",
-          "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-19T01:25:27Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "894b632",
-          "message": "🔗 교차 참조 업데이트: 7개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-18T00:35:00Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "bbce2ca",
-          "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-12T07:26:28Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "a897516",
-          "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T12:50:57Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "0190970",
-          "message": "🔗 교차 참조 업데이트: 16개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T08:01:05Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "e873878",
-          "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T07:48:29Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "f640314",
-          "message": "🔗 교차 참조 업데이트: 14개 문서",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T06:10:24Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "3b31ab0",
-          "message": "fix: 중복 위키 문서 제거 및 스테일 빌드 파일 정리",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2026-02-11T15:08:18+09:00",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "6d37c2e",
-          "message": "feat: 위키 카테고리 분류 규칙 정의 및 문서 구조 재배치",
-          "author": "JHL",
-          "authorEmail": "bkperio@gmail.com",
-          "date": "2026-02-11T14:56:36+09:00",
+          "date": "2026-02-22T01:56:50Z",
           "additions": 0,
           "deletions": 0
         }
@@ -2031,7 +1645,7 @@
       "order": 1,
       "history": [
         {
-          "sha": "482f546",
+          "sha": "021de0d",
           "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
@@ -2069,13 +1683,17 @@
       "isDraft": false,
       "isInvalid": false,
       "tags": [
-        "GitHub",
-        "Agentic Workflows",
+        "github-actions",
+        "bun",
+        "CI",
         "CI/CD",
-        "Repository Automation",
-        "AI"
+        "node-alternative",
+        "automation",
+        "devops",
+        "workflow",
+        "javascript-runtime"
       ],
-      "order": 7,
+      "order": 3,
       "history": [
         {
           "sha": "43539ff",
@@ -3645,10 +3263,16 @@
       "content": "---\ntitle: Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드\nauthor: SEPilot AI\nstatus: published\ntags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤니티]\nredirect_from:\n  - spotlight-on-sig-architecture-api-governance\norder: 3\nrelated_docs: [\"release-notes.md\", \"node-readiness-controller.md\", \"cgroup-migration.md\"]\n---\n\n## 개요\n이 문서는 **SIG Architecture: API Governance** 서브프로젝트에 대한 최신 정보를 위키에 반영하기 위해 작성되었습니다.  \n- **대상 독자**: 클러스터 운영자, Kubernetes API 개발자, SIG Architecture 참여자, 위키 유지보수 담당자  \n- **요청 요약**: 2026년 2월 12일 Kubernetes 블로그에 게시된 인터뷰(“Spotlight on SIG Architecture: API Governance”)를 기반으로 API Governance의 역할, 프로세스, 최신 동향을 위키에 추가·업데이트 [출처](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/)  \n- **중요도**: 80/100 (핵심 아키텍처 주제이며 현재 위키에 부재)\n\n## 배경 및 필요성\n- **위키 부재 이유**: 기존 위키는 주로 KEP, API 스펙, 운영 가이드에 집중했으며, API Governance 전용 섹션이 별도로 존재하지 않았음.  \n- **운영·개발 영향**: API 안정성·호환성 보장은 클러스터 업그레이드와 사용자 경험에 직접적인 영향을 미침. Governance 프로세스를 명확히 문서화하면 리뷰 지연·버전 충돌을 예방할 수 있음.  \n- **트렌드 반영 필요성**: 2026년 인터뷰에서 제시된 최신 정책·툴링(예: 자동화 CI 연계)과 커뮤니티 논의가 활발히 진행 중이므로, 위키에 즉시 반영해야 최신 정보를 제공할 수 있음 [출처](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).\n\n## SIG Architecture와 API Governance 소개\n- **SIG Architecture 전체 구조**: SIG Architecture는 Kubernetes 전체 설계와 코드 조직을 담당하는 여러 서브프로젝트(예: API Governance, Code Organization, API Review 등)로 구성됨 [GitHub README](https://github.com/kubernetes/community/blob/master/sig-architecture/README.md#architecture-and-api-governance-1).  \n- **API Governance 서브프로젝트 정의**: API의 **안정성, 일관성, 폐기 정책**을 관리하고, 설계·리뷰 프로세스를 표준화하는 역할을 수행함.  \n- **주요 참여자·리더**: Jordan Liggitt (API Governance Lead, SIG Auth Tech Lead) – 2019년부터 참여, 2016년 API Reviewer, 2017년 API Approver [블로그 인터뷰](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).\n\n## 주요 목표 및 원칙\n| 목표 | 설명 |\n|------|------|\n| **API 안정성·호환성 보장** | 버전 업그레이드 시 기존 클라이언트가 중단되지 않도록 정책 정의 |\n| **설계·리뷰 프로세스 표준화** | KEP 기반 설계, API Review 단계 도입 |\n| **API 진화와 폐기 정책** | 명시적 deprecation 일정과 가이드 제공 |\n| **문서·버전 관리 일관성** | 위키와 공식 문서의 동기화 유지 |\n\n## 프로세스와 워크플로우\n1. **KEP 작성·제출** – 새로운 API 혹은 기존 API 변경 시 KEP(Kubernetes Enhancement Proposal)를 작성하고 SIG Architecture에 제출 [블로그 내용](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).  \n2. **API Review 단계** – API Reviewer가 설계·구현을 검토하고, 필요 시 구조적 변경을 권고.  \n3. **승인 흐름** – API Approver(주로 SIG Architecture Lead)와 SIG Architecture Lead가 최종 승인.  \n4. **변경 관리** – 버전 업그레이드와 deprecation 절차는 별도 가이드에 따라 진행.  \n5. **자동화·CI 연계** – CI 파이프라인에 API Review 체크를 포함시켜 PR 단계에서 자동 검증을 수행 [다른 기사 요약](https://www.devopschat.co/articles/spotlight-on-sig-architecture-api-governance).\n\n## 핵심 역할 및 책임\n| 역할 | 주요 책임 |\n|------|-----------|\n| **API Reviewer** | 설계·코드 리뷰, 호환성 검증 |\n| **API Approver** | 최종 승인, 정책 적용 여부 판단 |\n| **SIG Architecture Lead** | 전체 서브프로젝트 조정, 커뮤니티 가이드 제공 |\n| **커뮤니티 기여자·외부 협력자** | KEP 제안, 피드백 제공 |\n| **문서 담당자·위키 유지보수 담당** | 위키 페이지 생성·업데이트, 변경 로그 관리 |\n\n## 현재 진행 중인 작업 및 최신 업데이트\n- **2026년 인터뷰에서 언급된 이슈**: API Governance 팀이 “안정성·일관성·교차‑cutting sanity”을 강화하기 위한 정책 개선을 진행 중이라고 밝힘 [FAUN.dev 요약](http://faun.dev/c/links/kaptain/spotlight-on-sig-architecture-api-governance/).  \n- **툴링 업데이트**: 자동화된 API Review 체크를 CI에 통합하는 작업이 진행 중이며, PR 단계에서 자동 경고가 발생하도록 설계됨.  \n- **커뮤니티 피드백**: “디자인 단계에서 충분한 리뷰가 이루어지지 않아 버전 충돌이 발생한다”는 의견이 다수 제시되어, 리뷰 시점 앞당기기 방안이 논의되고 있음 [DevOpsChat 기사](https://www.devopschat.co/articles/spotlight-on-sig-architecture-api-governance).\n\n## 사례 연구 / 인터뷰 요약\n- **Jordan Liggitt 인터뷰 핵심**  \n  - 2014년 Red Hat에서 OAuth 서버 시도 후 실패 경험을 바탕으로 API 설계에 대한 깊은 이해를 갖게 됨.  \n  - 2016년 API Reviewer, 2017년 Approver 역할을 수행하며 현재는 API Governance와 Code Organization을 공동 리드.  \n  - “API Governance는 설계·구현 단계에서 일관성을 확보하고, 폐기 정책을 명확히 함으로써 전체 생태계의 안정성을 높인다”는 비전을 제시 [블로그 인터뷰](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).  \n- **실제 API 변경 사례**  \n  - **예시**: v1beta3 → v1 전환 과정에서 API Review가 구조적 변경을 권고, 결과적으로 호환성 문제가 크게 감소함. (구체적 수치는 출처에 명시되지 않아 추가 조사 필요)  \n- **교훈**: 초기 설계 단계에서 충분한 리뷰와 커뮤니티 의견 수렴이 장기적인 안정성에 핵심적임.\n\n## 위키 문서 업데이트 가이드\n1. **신규 페이지 구조**  \n   - 목차: 개요 → 배경 → SIG Architecture 소개 → 목표 → 프로세스 → 역할 → 최신 업데이트 → 사례 연구 → 업데이트 가이드 → 로드맵 → 참고 자료  \n2. **마크다운 스타일·링크 표준**  \n   - 헤더는 H2~H4 사용, 인라인 링크는 `[텍스트](URL)` 형태, 출처는 반드시 인라인 표기.  \n3. **버전 관리·변경 로그**  \n   - `## 변경 로그` 섹션에 날짜·작성자·주요 변경 사항을 기록.  \n4. **리뷰·승인 프로세스**  \n   - PR 생성 → API Reviewer 검토 → Approver 승인 → 위키 담당자 병합 순서 정의.  \n\n## 향후 로드맵 및 유지보수 계획\n| 기간 | 목표 | 비고 |\n|------|------|------|\n| **단기(6개월)** | 최신 인터뷰 내용 반영, 자동화 CI 체크 문서화 | 위키 페이지 초안 완성 |\n| **중기(1년)** | 정책 변화(예: deprecation 가이드) 업데이트, 커뮤니티 워크숍 자료 연계 | 정기 리뷰 회의 개최 |\n| **장기** | 지속적인 트렌드 모니터링 자동화(블로그·SIG 회의 RSS), 외부 기여자 참여 확대 | 추가 조사 필요 |\n\n## 참고 자료 및 링크\n- **Kubernetes 공식 블로그** – “Spotlight on SIG Architecture: API Governance” [링크](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/)  \n- **SIG Architecture README** (GitHub) – 프로젝트 개요 및 정책 [링크](https://github.com/kubernetes/community/blob/master/sig-architecture/README.md#architecture-and-api-governance-1)  \n- **FAUN.dev 요약** – Governance 팀의 최신 목표 [링크](http://faun.dev/c/links/kaptain/spotlight-on-sig-architecture-api-governance/)  \n- **DevOpsChat 기사** – 인터뷰 핵심 포인트 정리 [링크](https://www.devopschat.co/articles/spotlight-on-sig-architecture-api-governance)  \n- **daily.dev 포스트** – Jordan Liggitt 인터뷰 요약 [링크](https://app.daily.dev/posts/spotlight-on-sig-architecture-api-governance-ccbyj8elu)  \n\n*위 내용은 현재 공개된 자료에 근거하며, 구체적인 수치·정책 세부사항은 추가 조사가 필요합니다.*",
       "lastModified": "2026-02-22T01:54:52Z",
       "author": "GitHub Action",
-      "status": "draft",
-      "isDraft": true,
+      "status": "published",
+      "isDraft": false,
       "isInvalid": false,
-      "tags": [],
+      "tags": [
+        "Continuous AI",
+        "Human-in-the-Loop",
+        "AI 검증",
+        "CI"
+      ],
+      "order": 4,
       "history": [
         {
           "sha": "7558ef0",
@@ -3669,29 +3293,11 @@
           "deletions": 0
         },
         {
-          "sha": "482f546",
+          "sha": "021de0d",
           "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
-          "date": "2026-02-22T01:24:22Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "b7db918",
-          "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-21T13:04:23Z",
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "3cd7bad",
-          "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
-          "author": "GitHub Action",
-          "authorEmail": "action@github.com",
-          "date": "2026-02-21T11:20:48Z",
+          "date": "2026-02-22T01:56:50Z",
           "additions": 0,
           "deletions": 0
         },
@@ -4286,7 +3892,7 @@
       "title": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
       "slug": "cloud/aws-cost-optimization",
       "content": "\n## 1. 개요\n이 문서는 **AWS VPC** 환경에서 **프라이빗 서브넷**에 배치된 EC2 인스턴스가 **S3**에 접근할 때 발생할 수 있는 비용 폭증 현상을 진단하고, **Terraform**을 활용한 비용 절감 방안을 제시합니다.  \n대상 독자는 AWS 인프라를 설계·운영하는 엔지니어, 비용 관리 담당자, 그리고 Terraform 기반 IaC를 도입하려는 팀입니다.\n\n**핵심 이슈**  \n- 프라이빗 서브넷 → NAT Gateway → 인터넷 → 퍼블릭 S3 엔드포인트 로우팅으로 인해 **데이터가 AWS 백본을 두 번 떠나게** → 아웃바운드 트래픽이 **2배** 청구됨.  \n- NAT Gateway 사용 시 **시간당 가동 비용**과 **GB당 $0.045**의 처리 수수료가 추가되어 비용이 급증함.  \n- 해결책은 **VPC Gateway Endpoint**(S3 전용)를 도입해 트래픽을 AWS 내부로 제한하는 것임.  \n(출처: [euno.news](https://euno.news/posts/ko/the-100k-aws-routing-trap-s3-nat-gateways-and-how-307ce6))\n\n## 2. 전형적인 “Secure‑by‑Default” VPC 설계\n| 요소 | 설명 |\n|------|------|\n| **프라이빗 서브넷** | 퍼블릭 IP가 없는 EC2 인스턴스가 배치되어 외부 직접 접근이 차단됨. |\n| **NAT Gateway** | 프라이빗 서브넷의 아웃바운드 트래픽을 인터넷으로 라우팅하기 위해 사용됨. |\n| **라우팅 테이블** | `0.0.0.0/0` → NAT Gateway → 인터넷 게이트웨이(IGW) → 퍼블릭 서비스(예: S3) 로 흐름을 정의. |\n\n이 설계는 보안 관점에서는 안전하지만, **데이터 전송 경로**가 비효율적일 경우 비용이 크게 증가합니다.\n\n## 3. 비용 폭증 원인 분석\n### 3.1 데이터 중력(Data Gravity)\n데이터가 저장된 위치(예: S3)와 이를 소비하는 컴퓨트 리소스 간의 거리(네트워크 홉)가 비용에 직접적인 영향을 미칩니다. 데이터가 **AWS 백본을 떠나** 외부 인터넷을 경유하면 두 번 과금됩니다.\n\n### 3.2 S3 퍼블릭 엔드포인트 사용 시 이중 egress\n- EC2 → NAT Gateway → 인터넷 게이트웨이 → **퍼블릭 S3 엔드포인트** 로 전송  \n- 데이터가 AWS 백본을 떠난 뒤 다시 **NAT Gateway** 로 돌아와야 하므로 **아웃바운드 트래픽이 2배** 청구됩니다.  \n- 예시: 하루에 **10 TB**를 다운로드하는 파이프라인이라면 실제 청구는 **20 TB**의 아웃바운드가 됩니다. (출처: euno.news)\n\n## 4. NAT Gateway 숨은 비용 상세\n| 비용 항목 | 설명 |\n|----------|------|\n| **시간당 가동 비용** | NAT Gateway는 가동 시간당 요금이 부과됩니다. 정확한 금액은 AWS 요금표에 명시되어 있으며, 사용량에 따라 청구됩니다. |\n| **GB당 처리 수수료** | 데이터 처리량에 대해 **$0.045/GB**가 추가됩니다. |\n| **표준 인터넷 아웃바운드 요금** | AWS 외부로 나가는 트래픽에 대해 일반 인터넷 요금이 적용됩니다. |\n\n이 세 가지 비용이 복합적으로 작용해 **수십만 달러** 규모의 비용이 발생할 수 있습니다.\n\n## 5. 비용 절감 솔루션: VPC Gateway Endpoint for S3\n### 5.1 엔드포인트 개념 및 작동 원리\n- **VPC Gateway Endpoint**는 VPC와 S3 사이에 **프라이빗 연결**을 생성합니다.  \n- 트래픽이 **AWS 백본 내부**에 머무르며, NAT Gateway를 우회합니다.  \n- 내부 전송 비용은 **$0.00**이며, NAT Gateway 사용에 따른 추가 비용도 사라집니다. (출처: euno.news)\n\n### 5.2 라우팅 경로 축소\n```\n기존 경로: Private Subnet → NAT GW → IGW → Public S3 → Internet → NAT GW\n새로운 경로: Private Subnet → VPC Endpoint (S3) → S3 (AWS 내부)\n```\n\n### 5.3 비용 효과 분석\n- **NAT Gateway 시간당 비용** 및 **GB당 $0.045** 수수료가 제거됩니다.  \n- **아웃바운드 트래픽**이 내부 전송으로 전환돼 **표준 인터넷 요금**도 사라집니다.  \n- 결과적으로 **데이터 전송 비용이 0**에 가깝게 감소합니다.\n\n## 6. Terraform을 활용한 구현 예시\n아래는 **Terraform**으로 S3 전용 VPC Gateway Endpoint를 정의하는 예시입니다. (코드 블록은 들여쓰기 형태로 제공)\n\n    resource \"aws_vpc_endpoint\" \"s3\" {\n      vpc_id            = aws_vpc.main.id\n      service_name      = \"com.amazonaws.${var.region}.s3\"\n      vpc_endpoint_type = \"Gateway\"\n    }\n\n### 적용 전후 차이점 검증 방법\n1. **Cost Explorer** 혹은 **AWS Billing Dashboard**에서 NAT Gateway 사용량과 데이터 전송량을 모니터링합니다.  \n2. 엔드포인트 적용 후 **NAT Gateway 트래픽**이 0에 가까워졌는지 확인합니다.  \n3. **VPC Flow Logs**를 통해 S3 트래픽이 `vpce-` 인터페이스를 경유하는지 검증합니다.\n\n## 7. 베스트 프랙티스 및 설계 가이드라인\n| 권장 사항 | 설명 |\n|----------|------|\n| **프라이빗 서브넷 → VPC 엔드포인트 우선 적용** | S3, DynamoDB 등 퍼블릭 서비스에 대한 트래픽은 반드시 엔드포인트로 라우팅합니다. |\n| **NAT Gateway 사용 최소화** | 반드시 외부 인터넷이 필요한 경우에만 NAT Gateway를 배치하고, 비용이 높은 경우 **NAT Instance** 혹은 **VPC Endpoint**로 대체합니다. |\n| **비용 모니터링 자동화** | CloudWatch **Metric Filter**와 **Billing Alarms**를 설정해 NAT Gateway 사용량 급증 시 알림을 받습니다. |\n| **Terraform CI/CD 파이프라인** | 인프라 변경 시 비용 영향을 자동 검증하도록 `terraform plan` 결과를 비용 시뮬레이션 도구와 연동합니다. |\n\n## 8. 추가 참고 자료\n- **오픈소스 라우팅 완화 모델**: `cloud‑egress‑patterns` (GitHub) – VPC 라우팅 최적화 패턴을 제공합니다.  \n- **크로스‑리전 VPC 피어링 비용 심층 분석**: *The Physics of Data Egress* (Rack2Cloud Control Plane) – 리전 간 데이터 전송 비용 구조를 설명합니다.  \n- **AWS 공식 문서**  \n  - VPC Endpoint: https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html  \n  - NAT Gateway 요금: https://aws.amazon.com/vpc/pricing/  \n\n## 9. 결론 및 권고 사항\n- **핵심 포인트**: 프라이빗 서브넷에서 S3에 접근할 때 NAT Gateway를 거치면 데이터가 두 번 egress되어 비용이 급증한다. VPC Gateway Endpoint를 도입하면 내부 전송으로 전환돼 비용을 사실상 0으로 만들 수 있다.  \n- **조직 차원의 정책**  \n  1. **정기 라우팅 리뷰**를 수행해 NAT → S3 경로가 존재하는지 점검한다.  \n  2. **Terraform 모듈**에 VPC Endpoint 리소스를 기본 포함시켜 인프라 표준화한다.  \n  3. **비용 알림**을 설정해 NAT Gateway 사용량 급증 시 즉시 대응한다.  \n- **향후 로드맵**: 엔드포인트 적용 후 **멀티리전 데이터 복제** 전략을 재검토하고, 필요 시 **Transit Gateway**와 결합해 전역 라우팅 최적화를 진행한다.  \n\n---  \n\n*본 문서는 자동 감지된 뉴스 인텔리전스를 기반으로 작성되었습니다.*",
-      "lastModified": "2026-02-22T01:26:11Z",
+      "lastModified": "2026-02-22T01:56:50Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -4301,7 +3907,7 @@
       "order": 1,
       "history": [
         {
-          "sha": "0d0dd36",
+          "sha": "021de0d",
           "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
           "author": "GitHub Action",
           "authorEmail": "action@github.com",
@@ -4341,7 +3947,7 @@
           "title": "Wiki 페이지 API 라우트 상세 가이드",
           "slug": "backend/wiki-api",
           "order": 1,
-          "lastModified": "2026-02-22T01:24:22Z"
+          "lastModified": "2026-02-22T01:56:50Z"
         }
       ]
     },
@@ -4393,7 +3999,7 @@
         {
           "title": "Docker/Hardened Images",
           "slug": "docker/hardened-images",
-          "lastModified": "2026-02-21T13:04:23Z"
+          "lastModified": "2026-02-22T01:56:50Z"
         }
       ]
     },
@@ -4439,7 +4045,7 @@
           "title": "SEPilot Desktop 소개",
           "slug": "projects/sepilot-desktop-intro",
           "order": 4,
-          "lastModified": "2026-02-21T11:20:48Z"
+          "lastModified": "2026-02-22T01:56:50Z"
         },
         {
           "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
@@ -4467,7 +4073,7 @@
           "title": "bun 이란?",
           "slug": "bun/overview",
           "order": 1,
-          "lastModified": "2026-02-22T01:24:22Z"
+          "lastModified": "2026-02-22T01:56:50Z"
         },
         {
           "title": "SEPilot Desktop 소개",
@@ -4487,13 +4093,13 @@
           "slug": "projects/claude-code-release-history",
           "menu": "Claude Code",
           "order": 2,
-          "lastModified": "2026-02-22T01:24:22Z"
+          "lastModified": "2026-02-22T01:56:50Z"
         },
         {
           "title": "GitHub Actions로 bun을 쓰는 방법",
           "slug": "bun/github-actions-setup",
           "order": 3,
-          "lastModified": "2026-02-22T01:24:22Z"
+          "lastModified": "2026-02-22T01:56:50Z"
         }
       ]
     },
@@ -4555,13 +4161,30 @@
           "title": "glm 5",
           "slug": "ai/glm-5",
           "order": 5,
-          "lastModified": "2026-02-22T01:26:11Z"
+          "lastModified": "2026-02-22T01:56:50Z"
         },
         {
           "title": "바이브 코딩이란?",
           "slug": "ai/vibe-coding",
           "order": 8,
-          "lastModified": "2026-02-22T01:23:44Z"
+          "lastModified": "2026-02-22T01:56:50Z"
+        },
+        {
+          "title": "Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처",
+          "slug": "ai/multi-agent-system",
+          "order": 9,
+          "lastModified": "2026-02-22T01:56:50Z"
+        },
+        {
+          "title": "Gemini 3.1 Pro",
+          "slug": "ai/gemini-3-1-pro",
+          "order": 10,
+          "lastModified": "2026-02-22T01:56:50Z"
+        },
+        {
+          "title": "Claude 기반 Git 커밋 리뷰 자동화 (git‑lrc)",
+          "slug": "ai/github-agentic-workflows",
+          "lastModified": "2026-02-22T01:56:50Z"
         }
       ]
     },
