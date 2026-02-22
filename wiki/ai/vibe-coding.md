@@ -6,7 +6,7 @@ tags: [바이브코딩, AI코딩, 프롬프트엔지니어링, 소프트웨어�
 redirect_from:
   - 
 order: 8
-related_docs: ["continuous-ai.md"]
+related_docs: ["continuous-ai.md", "continuous-ai-agentic-ci.md"]
 ---
 
 ## 서론

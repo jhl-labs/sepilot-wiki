@@ -12,10 +12,22 @@
       "name": "CI",
       "path": ".github/workflows/ci.yml",
       "state": "active",
-      "overallStatus": "success",
+      "overallStatus": "in_progress",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/CI/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/ci.yml",
       "recentRuns": [
+        {
+          "id": 22268464193,
+          "name": "CI",
+          "status": "in_progress",
+          "conclusion": null,
+          "branch": "main",
+          "event": "push",
+          "createdAt": "2026-02-22T01:59:43Z",
+          "updatedAt": "2026-02-22T02:00:24Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268464193",
+          "actor": "declue"
+        },
         {
           "id": 22268009231,
           "name": "CI",
@@ -63,21 +75,9 @@
           "updatedAt": "2026-02-22T01:20:21Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267928916",
           "actor": "declue"
-        },
-        {
-          "id": 22267915061,
-          "name": "CI",
-          "status": "completed",
-          "conclusion": "cancelled",
-          "branch": "main",
-          "event": "push",
-          "createdAt": "2026-02-22T01:17:24Z",
-          "updatedAt": "2026-02-22T01:18:44Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267915061",
-          "actor": "declue"
         }
       ],
-      "avgDurationMs": 144400,
+      "avgDurationMs": 160500,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -86,10 +86,22 @@
       "name": "CodeQL",
       "path": ".github/workflows/codeql.yml",
       "state": "active",
-      "overallStatus": "success",
+      "overallStatus": "in_progress",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/CodeQL/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/codeql.yml",
       "recentRuns": [
+        {
+          "id": 22268464187,
+          "name": "CodeQL",
+          "status": "in_progress",
+          "conclusion": null,
+          "branch": "main",
+          "event": "push",
+          "createdAt": "2026-02-22T01:59:43Z",
+          "updatedAt": "2026-02-22T01:59:46Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268464187",
+          "actor": "declue"
+        },
         {
           "id": 22268009245,
           "name": "CodeQL",
@@ -137,21 +149,9 @@
           "updatedAt": "2026-02-22T01:20:16Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267928907",
           "actor": "declue"
-        },
-        {
-          "id": 22267915053,
-          "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "cancelled",
-          "branch": "main",
-          "event": "push",
-          "createdAt": "2026-02-22T01:17:24Z",
-          "updatedAt": "2026-02-22T01:18:42Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267915053",
-          "actor": "declue"
         }
       ],
-      "avgDurationMs": 97600,
+      "avgDurationMs": 102500,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -408,10 +408,22 @@
       "name": "Document Cross Reference",
       "path": ".github/workflows/doc-cross-reference.yml",
       "state": "active",
-      "overallStatus": "success",
+      "overallStatus": "in_progress",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/Document%20Cross%20Reference/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/doc-cross-reference.yml",
       "recentRuns": [
+        {
+          "id": 22268464200,
+          "name": "Document Cross Reference",
+          "status": "in_progress",
+          "conclusion": null,
+          "branch": "main",
+          "event": "push",
+          "createdAt": "2026-02-22T01:59:43Z",
+          "updatedAt": "2026-02-22T01:59:46Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268464200",
+          "actor": "declue"
+        },
         {
           "id": 22268009244,
           "name": "Document Cross Reference",
@@ -459,21 +471,9 @@
           "updatedAt": "2026-02-22T01:20:50Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267928900",
           "actor": "declue"
-        },
-        {
-          "id": 22267915054,
-          "name": "Document Cross Reference",
-          "status": "completed",
-          "conclusion": "cancelled",
-          "branch": "main",
-          "event": "push",
-          "createdAt": "2026-02-22T01:17:24Z",
-          "updatedAt": "2026-02-22T01:18:26Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267915054",
-          "actor": "declue"
         }
       ],
-      "avgDurationMs": 111400,
+      "avgDurationMs": 123750,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -999,15 +999,15 @@
           "actor": "github-actions[bot]"
         },
         {
-          "id": 22268002306,
+          "id": 22268390754,
           "name": "Wiki Tree Maintainer",
           "status": "completed",
           "conclusion": "success",
           "branch": "main",
           "event": "repository_dispatch",
-          "createdAt": "2026-02-22T01:24:07Z",
-          "updatedAt": "2026-02-22T01:26:26Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268002306",
+          "createdAt": "2026-02-22T01:53:53Z",
+          "updatedAt": "2026-02-22T01:57:00Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268390754",
           "actor": "github-actions[bot]"
         }
       ],

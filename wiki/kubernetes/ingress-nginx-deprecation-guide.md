@@ -6,8 +6,8 @@ status: published
 tags: ["Ingress", "NGINX", "Kubernetes", "Migration", "Security", "guide", "deprecation", "k8s", "networking", "load-balancer"]
 redirect_from:
   - ingress-nginx-statement-from-the-kubernetes-steeri
-related_docs: ["node-readiness-controller.md", "cgroup-migration.md", "release-notes.md", "api-governance.md", "kubernetes-kubernetes-v1-33-8.md"]
-order: 2
+related_docs: ["cgroup-migration.md", "release-notes.md"]
+order: 3
 updatedAt: 2026-02-20
 ---
 

@@ -6,6 +6,7 @@ tags: [GitHub, Agentic Workflows, CI/CD, Repository Automation, AI]
 redirect_from:
   - automate-repository-tasks-with-github-agentic-work
 order: 7
+related_docs: ["continuous-ai-agentic-ci.md", "continuous-ai.md"]
 ---
 
 ## 1. 소개
@@ -174,7 +175,41 @@ AI 모델에 레포지토리 코드를 전송하기 때문에, 민감한 코드�
 - **멀티‑에이전트 협업**: 복수 에이전트가 단계별로 작업을 분담하는 기능이 예정되어 있습니다.  
 - **정책 기반 자동 승인**: 사전 정의된 정책에 부합하면 자동 병합을 허용하는 옵션이 추가될 예정입니다.
 
-## 10. 결론
+## 10. Claude 기반 Git 커밋 리뷰 자동화 (git‑lrc)
+
+AI가 코드 생산을 가속화하지만, 코드 품질은 자동으로 확장되지 않습니다. **git‑lrc**는 스테이징된 모든 diff를 커밋 전에 AI가 리뷰하도록 강제하는 도구입니다. 별도 대시보드나 컨텍스트 전환 없이, Git 훅 수준에서 동작합니다.
+
+### 핵심 동작 방식
+1. `git commit` 실행 시 pre‑commit 훅이 스테이징된 diff를 AI(Gemini/Claude)에 전달
+2. AI가 인라인 코멘트로 위험한 변경점을 강조
+3. 개발자가 검토 후 커밋에 **어노테이션**을 부여
+
+### 커밋 어노테이션 체계
+| 어노테이션 | 의미 |
+|-----------|------|
+| `[reviewed]` | 개발자가 AI 리뷰를 확인하고 승인 |
+| `[vouched]` | 개발자가 변경 내용을 보증 |
+| `[skipped]` | 의도적으로 리뷰 없이 커밋 |
+
+이 결정은 git 로그에 영구 기록되어, 팀이 어떤 변경이 리뷰되었고 어떤 변경이 리뷰 없이 배포되었는지 추적할 수 있습니다.
+
+### 설치 및 설정 (~60초)
+```bash
+# 전역 설치 – 머신의 모든 레포에 자동 적용
+npm install -g git-lrc
+git-lrc init --global
+```
+
+무료 티어 Gemini API 키를 사용하며, 좌석 기반 요금이 없습니다.
+
+### CI/CD 통합
+GitHub Actions에서 `git log --format=%s` 를 파싱해 `[skipped]` 비율이 임계값을 초과하면 워크플로를 실패시키는 정책을 적용할 수 있습니다.
+
+*출처: git‑lrc 프로젝트, euno.news (2026‑02‑22)*
+
+---
+
+## 11. 결론
 GitHub Agentic Workflows는 **AI 코딩 에이전트**를 기존 GitHub Actions와 자연스럽게 결합해 레포지토리 관리 작업을 선언형으로 자동화합니다. 이를 통해 팀은 **이슈 triage**, **CI 자동 복구**, **문서 동기화** 등 반복적인 업무를 최소화하고, 실제 개발에 더 많은 시간을 투자할 수 있습니다.
 
 ### 시작을 위한 체크리스트

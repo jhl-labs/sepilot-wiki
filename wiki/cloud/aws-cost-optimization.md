@@ -7,6 +7,7 @@ redirect_from:
   - cloud-aws-nat-gateway-cost-trap
   - 212
 order: 1
+related_docs: ["aws-nat-gateway-cost-trap.md"]
 ---
 
 ## 1. 개요

@@ -1,57 +1,147 @@
 ---
-title: "AWS NAT Gateway 비용 함정 및 Terraform 해결법"
-description: "S3와 NAT 게이트웨이 조합으로 발생하는 높은 데이터 전송 비용과 이를 방지하기 위한 VPC 엔드포인트 설정 방법을 Terraform 예제로 설명합니다."
-category: "Guide"
-tags: ["AWS", "NAT Gateway", "Cost Optimization", "Terraform", "VPC Endpoint"]
-status: deleted
-issueNumber: 0
-createdAt: "2026-02-22T02:00:00Z"
-updatedAt: "2026-02-22T02:00:00Z"
+title: "$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법"
+description: "AWS NAT 게이트웨이를 통한 S3 트래픽의 숨은 비용과 VPC 게이트웨이 엔드포인트를 활용한 해결 방법"
+category: "cloud"
+tags: ["AWS", "NAT Gateway", "S3", "Terraform", "비용 최적화", "VPC"]
+status: "published"
+issueNumber: 212
+createdAt: "2026-02-22T10:00:00Z"
+updatedAt: "2026-02-22T10:00:00Z"
+order: 1
+related_docs: ["aws-cost-optimization.md"]
 ---
 
-# AWS NAT Gateway 비용 함정 및 Terraform 해결법
+# $100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이
 
-## 개요
-AWS에서 프라이빗 서브넷에 배치된 EC2 인스턴스가 인터넷에 접근할 때 일반적으로 **관리형 NAT Gateway** 를 사용합니다. NAT Gateway는 편리하지만, **S3와 같은 퍼블릭 서비스 엔드포인트** 로 트래픽이 나갈 경우 예상치 못한 비용이 발생할 수 있습니다. 이 문서는 해당 비용 함정을 설명하고, **VPC 엔드포인트** 를 활용한 비용 절감 방법을 Terraform 예제로 제공합니다.
+> "기본적으로 보안" AWS 아키텍처가 의도치 않게 비용을 폭발시킬 수 있습니다. 클라우드 비용 급증의 주요 원인은 과다 프로비저닝된 EC2가 아니라 **의도하지 않은 데이터 전송 경로**입니다.
 
-## 문제 상황
-- EC2 인스턴스는 퍼블릭 IP 없이 프라이빗 서브넷에 존재합니다.
-- 아웃바운드 트래픽은 NAT Gateway 를 통해 인터넷으로 라우팅됩니다.
-- 인스턴스가 **Amazon S3** 에서 데이터를 가져오면, 트래픽 흐름은:
-  1. 프라이빗 서브넷 → NAT Gateway → 인터넷 게이트웨이 → 퍼블릭 S3 엔드포인트
-  2. 다시 인터넷 게이트웨이 → NAT Gateway → 프라이빗 서브넷
-- S3는 퍼블릭 서비스이므로 데이터가 **AWS 백본을 떠나 두 번** 측정됩니다. 예를 들어 하루에 **10 TB** 를 다운로드하는 파이프라인이라면 실제 청구는 **20 TB** 의 아웃바운드 트래픽이 됩니다.
+---
 
-## 비용 상세
-- **NAT Gateway 시간당 가동 비용** (정확한 금액은 AWS 요금표를 참고) 
-- **NAT Gateway 처리 수수료** – **GB당 $0.045**
-- **표준 인터넷 아웃바운드 요금** (AWS 리전별 요금 적용)
+## 문제: NAT 게이트웨이의 숨은 비용
 
-> 위 비용은 euno.news 기사에 명시된 내용이며, 실제 금액은 사용 중인 리전 및 요금제에 따라 달라질 수 있습니다. 
+### 일반적인 "보안" 아키텍처
+```
+Private Subnet (EC2)
+    ↓ S3 요청
+NAT Gateway
+    ↓ 퍼블릭 S3 엔드포인트로 전송
+Internet Gateway
+    ↓ AWS 백본을 벗어남
+S3 (퍼블릭 서비스)
+```
+
+### 왜 비용이 두 배가 되는가
+
+1. 컴퓨트 인스턴스는 퍼블릭 IP 없이 **프라이빗 서브넷**에 배치됩니다
+2. 아웃바운드 트래픽은 **관리형 NAT 게이트웨이**를 통해 라우팅됩니다
+3. S3는 퍼블릭 서비스 엔드포인트이므로, 데이터가 AWS 백본을 벗어나 **두 번** 측정됩니다
+
+하루에 10 TB를 다운로드하는 파이프라인이라면 실제로는 **20 TB의 아웃바운드**에 대해 청구됩니다.
+
+### 청구되는 비용 항목
+
+| 항목 | 요금 |
+|------|------|
+| NAT 게이트웨이 시간당 가동 비용 | ~$0.045/hr |
+| NAT 게이트웨이 처리 수수료 | $0.045/GB |
+| 표준 인터넷 아웃바운드 요금 | ~$0.09/GB (첫 10TB) |
+
+> **예시**: 월 300 TB S3 다운로드 시 NAT 처리 수수료만 **$13,500/월** ($162,000/년)
+
+---
 
 ## 해결책: S3용 VPC 게이트웨이 엔드포인트
-VPC **Gateway Endpoint** 를 S3에 대해 생성하면 트래픽이 **완전히 AWS 백본 내**에 머무르게 됩니다. 이렇게 하면:
-- NAT Gateway 를 우회하므로 NAT 비용이 사라집니다.
-- 내부 전송 비용이 **$0.00** 으로 감소합니다.
 
-### Terraform 예시
+VPC 게이트웨이 엔드포인트를 생성하면 S3 트래픽이 **AWS 백본 내부**에 머무르게 됩니다. NAT 게이트웨이를 우회하고, 내부 전송 비용이 **$0.00**으로 감소합니다.
+
+### 변경 후 아키텍처
+```
+Private Subnet (EC2)
+    ↓ S3 요청
+VPC Gateway Endpoint
+    ↓ AWS 내부 네트워크
+S3 (직접 접근)
+```
+
+### Terraform 구현
+
 ```hcl
+# VPC 게이트웨이 엔드포인트 생성
 resource "aws_vpc_endpoint" "s3" {
   vpc_id            = aws_vpc.main.id
   service_name      = "com.amazonaws.${var.region}.s3"
   vpc_endpoint_type = "Gateway"
 }
+
+# 프라이빗 서브넷 라우트 테이블에 연결
+resource "aws_vpc_endpoint_route_table_association" "s3" {
+  route_table_id  = aws_route_table.private.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3.id
+}
 ```
-위 코드는 현재 VPC에 S3 전용 **Gateway Endpoint** 를 생성합니다. 적용 후, 프라이빗 서브넷의 라우팅 테이블에 자동으로 엔드포인트가 추가되어 S3 트래픽이 NAT Gateway 를 통과하지 않게 됩니다.
 
-## 왜 중요한가?
-- **데이터 중력**(Data Gravity) 은 비용을 결정하는 핵심 요소이며, 라우팅 경로가 비용에 직접적인 영향을 미칩니다.
-- 잘못된 라우팅 설계는 **수십만 달러** 규모의 불필요한 비용을 초래할 수 있습니다.
-- VPC 엔드포인트를 활용하면 비용을 크게 절감하면서도 보안 및 성능을 유지할 수 있습니다.
+### 적용 확인
+```bash
+# 엔드포인트 상태 확인
+aws ec2 describe-vpc-endpoints \
+  --filters "Name=service-name,Values=com.amazonaws.ap-northeast-2.s3" \
+  --query "VpcEndpoints[].State"
 
-## 참고 자료
-- 원본 기사: [$100k AWS 라우팅 함정: S3 + NAT 게이트웨이와 Terraform 해결법](https://euno.news/posts/ko/the-100k-aws-routing-trap-s3-nat-gateways-and-how-307ce6) (euno.news)
-- AWS 공식 문서: VPC 엔드포인트 – Gateway 타입 (AWS Documentation)
+# S3 트래픽이 NAT를 우회하는지 확인
+aws ec2 describe-route-tables \
+  --route-table-ids rtb-xxxxx \
+  --query "RouteTables[].Routes[?DestinationPrefixListId]"
+```
 
 ---
-*이 문서는 자동 생성된 뉴스 인텔리전스 정보를 기반으로 작성되었습니다.*
+
+## 추가 비용 절감 포인트
+
+### 1. DynamoDB 게이트웨이 엔드포인트
+S3와 동일하게 DynamoDB도 게이트웨이 엔드포인트를 지원합니다.
+
+```hcl
+resource "aws_vpc_endpoint" "dynamodb" {
+  vpc_id            = aws_vpc.main.id
+  service_name      = "com.amazonaws.${var.region}.dynamodb"
+  vpc_endpoint_type = "Gateway"
+}
+```
+
+### 2. 인터페이스 엔드포인트 (PrivateLink)
+ECR, CloudWatch, SSM 등 다른 AWS 서비스는 **인터페이스 엔드포인트**를 사용합니다. 시간당 비용($0.01/hr)이 있지만, NAT 처리 수수료보다 저렴할 수 있습니다.
+
+### 3. NAT 게이트웨이 모니터링
+```bash
+# NAT 게이트웨이를 통한 바이트 수 확인 (CloudWatch)
+aws cloudwatch get-metric-statistics \
+  --namespace AWS/NATGateway \
+  --metric-name BytesOutToDestination \
+  --dimensions Name=NatGatewayId,Value=nat-xxxxx \
+  --start-time 2026-02-01T00:00:00Z \
+  --end-time 2026-02-22T00:00:00Z \
+  --period 86400 \
+  --statistics Sum
+```
+
+---
+
+## 핵심 원칙
+
+> **데이터 중력**이 기본 비용을 결정하고, **라우팅**이 그 비용에 곱해지는 배수를 결정합니다.
+
+1. **VPC 엔드포인트를 기본으로** – S3, DynamoDB는 게이트웨이 엔드포인트를 항상 생성
+2. **NAT 트래픽을 모니터링** – CloudWatch 메트릭으로 예상치 못한 데이터 전송 감지
+3. **Terraform 모듈화** – VPC 모듈에 엔드포인트를 기본 포함시켜 누락 방지
+
+---
+
+## 참고 자료
+
+- [원본 기사: $100k AWS 라우팅 함정 (euno.news)](https://euno.news/posts/ko/the-100k-aws-routing-trap-s3-nat-gateways-and-how-307ce6)
+- [AWS VPC 엔드포인트 공식 문서](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html)
+- [Terraform aws_vpc_endpoint 리소스](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint)
+
+---
+
+*이 문서는 Issue #212를 기반으로 작성되었습니다.*
