@@ -5,7 +5,7 @@ status: published
 tags: [cgroup, CPU, Kubernetes, 리소스 관리, KEP-2254, 마이그레이션]
 redirect_from:
   - new-conversion-from-cgroup-v1-cpu-shares-to-v2-cpu
-order: 5
+order: 4
 related_docs: ["node-readiness-controller.md", "ingress-nginx-deprecation-guide.md", "release-notes.md", "api-governance.md", "kubernetes-kubernetes-v1-33-8.md"]
 ---
 

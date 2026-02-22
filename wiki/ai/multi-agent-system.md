@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-22T01:48:00Z"
 updatedAt: "2026-02-22T01:48:00Z"
+order: 9
 ---
 
 # Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처
