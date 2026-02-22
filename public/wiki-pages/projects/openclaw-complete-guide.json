@@ -1,11 +1,11 @@
 {
   "title": "OpenClaw Complete Guide",
   "slug": "projects/openclaw-complete-guide",
-  "content": "\n## OpenClaw 개요 및 핵심 개념\n**OpenClaw**는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 *Clawdbot*·*Moltbot*이라는 이름으로 개발되었으며, 현재는 **GitHub**(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1].  \nGitHub 레포지토리는 **213 k 스타**와 **39.7 k 포크**를 기록하고 있으며, 12 843개의 커밋이 누적되어 있습니다.\n\n### 주요 목표\n- **항시 가동** – 언제든지 메시지를 주고받을 수 있는 AI 비서 제공  \n- **멀티채널 지원** – Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo·Zalo Personal, WebChat 등 다양한 메신저와 연동  \n- **자율 실행** – Heartbeat·스케줄러를 통해 정해진 작업을 자동으로 수행  \n- **프라이버시 보호** – 로컬 모델(Ollama) 사용 시 데이터가 외부로 유출되지 않음  \n\n### 지원 AI 모델 및 연동 방식\n| 모델 | 제공 방식 | 연동 방법 |\n|------|-----------|-----------|\n| Claude (Anthropic) | 클라우드 API | OAuth 또는 API Key |\n| GPT‑4o (OpenAI) | 클라우드 API | API Key |\n| Ollama (로컬) | 로컬 실행 바이너리 | 직접 호출 (REST) |\n| 기타 (Gemini, DeepSeek 등) | 클라우드 API | API Key 또는 OAuth |\n\n> **추천 모델**: Anthropic Claude Pro/Max + Opus 4.6 (장기 컨텍스트와 프롬프트‑인젝션 방어에 강점) [2]\n\n*출처: 공식 Docs – 모델 지원 페이지 (2026‑02‑10) [2]*  \n\n### 기본 용어\n- **Gateway**: 모든 채널 연결을 관리하는 중앙 프로세스 (`openclaw gateway` 실행)  \n- **Agent**: AI 모델 호출 및 응답 생성 담당 모듈  \n- **Pairing**: 메신저(예: Telegram)와 Gateway를 연결하기 위한 인증 절차  \n- **Heartbeat**: 정해진 간격으로 자동 실행되는 작업 스케줄러  \n\n---\n\n## 아키텍처 및 동작 원리\n### 전체 시스템 구성\n```\nGateway\n ├─ Connector (Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo …)\n ├─ Scheduler / Heartbeat\n ├─ Memory Store (Long‑term Context)\n └─ Agent (Model Wrapper)\n```\n*※ 위 구조는 공식 Docs에 명시된 기본 아키텍처이며, 실제 구현은 `src/` 디렉터리에서 확인 가능* [3].\n\n- **Gateway**는 하나의 Node.js 프로세스로 실행되며, 각 Connector 플러그인은 독립 모듈 형태로 로드됩니다.  \n- **Scheduler**는 Cron‑like 설정 파일을 읽어 주기적인 작업(예: 일정 알림)을 트리거합니다.  \n- **Memory Store**는 SQLite 또는 PostgreSQL을 백엔드로 사용해 대화 컨텍스트와 사용자 메모리를 영구 저장합니다.  \n\n### 메시징 채널 통합 흐름\n1. 사용자가 Telegram에 메시지를 전송 → **Connector**가 webhook 또는 long‑polling 으로 수신  \n2. 메시지는 **Gateway**에 전달 → **Agent**가 현재 설정된 AI 모델에 호출  \n3. 모델 응답 → **후처리**(필터링, 포맷 변환) → **Connector**를 통해 원 채널에 전송  \n\n### 플러그인·모듈 구조와 확장 포인트\n- 플러그인은 `src/plugins/<channel>` 디렉터리에 위치하며, `register()` 함수만 구현하면 자동 로드됩니다.  \n- 새로운 채널을 추가하려면 **Connector 인터페이스**(init, receive, send)만 구현하면 됩니다.  \n- 커스텀 프롬프트·플러그인 API는 `openclaw plugin create <name>` 명령으로 스켈레톤을 생성할 수 있습니다.  \n\n### 보안·인증 메커니즘\n- **OAuth**: Google, Microsoft 등 OAuth2 제공자를 통해 토큰을 획득하고, 토큰은 환경 변수(`OPENCLAW_OAUTH_TOKEN`)에 저장합니다.  \n- **API Key**: 각 모델별 API 키는 `openclaw config set <model>.apiKey <key>` 로 관리됩니다.  \n- **Allowlist**: 채널별 화이트리스트(`*.allowlist`)를 설정해 허용된 사용자만 접근하도록 제한합니다.  \n\n*출처: 보안 가이드 (2026‑02‑10) [4]*  \n\n---\n\n## 주요 기능과 특징\n- **멀티채널 연동**: Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo·Zalo Personal, WebChat 등 10개 이상 공식 플러그인 제공  \n- **장기 메모리·컨텍스트 유지**: 대화 흐름을 SQLite 기반 Memory Store에 저장, `openclaw memory export` 로 백업 가능  \n- **자동 Heartbeat·스케줄링**: `openclaw schedule add \"0 9 * * *\" \"remind_meetings\"` 형태로 cron 표현식 사용  \n- **커스텀 프롬프트·플러그인 API**: `openclaw plugin create` 로 손쉽게 기능 확장  \n- **로컬 모델 지원**: Ollama와 직접 연동해 GPU 가속 로컬 모델(LLama‑3, Mistral 등) 사용 가능  \n- **관리 인터페이스**  \n  - **Web UI**: `http://localhost:3000` 에서 대시보드, 로그, 메모리 관리 제공 (React 기반)  \n  - **CLI**: `openclaw` 명령어 집합으로 모든 설정·운영 가능  \n\n*출처: 기능 소개 페이지 (2026‑02‑10) [5]*  \n\n---\n\n## 설치 및 설정 방법\n### 사전 요구 사항\n- **Node.js ≥ 22** (LTS) – 최신 릴리스에서는 Node 22 이상을 권장합니다.  \n- **Docker & Docker‑Compose** (선택적, 권장)  \n- **GPU 서버**: Ollama 사용 시 NVIDIA 드라이버 및 CUDA 12 이상 필요  \n- **Git** (소스 클론)  \n\n### 설치 옵션\n1. **Docker Compose 한 줄 설치**  \n   ```bash\n   curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw/main/install.sh | bash && docker compose up -d\n   ```  \n\n2. **npm / pnpm / bun 직접 설치**  \n   ```bash\n   # npm (전역)\n   npm install -g openclaw@latest\n   # pnpm\n   pnpm add -g openclaw@latest\n   # bun (선택)\n   bun add -g openclaw@latest\n   ```  \n\n3. **소스 직접 빌드**  \n   ```bash\n   git clone https://github.com/openclaw/openclaw.git\n   cd openclaw\n   pnpm install\n   pnpm ui:build   # UI 의존성 자동 설치\n   pnpm build\n   pnpm openclaw onboard --install-daemon\n   ```  \n\n4. **로컬 바이너리 배포** (GitHub Releases) – `openclaw-linux-x64.tar.gz` 를 다운로드 후 압축 해제, 실행 파일에 실행 권한 부여  \n\n*출처: 설치 가이드 (2026‑02‑10) [6]*  \n\n### 초기 설정 단계\n1. **기본 설정 파일 생성**  \n   `openclaw config init` → 프로젝트 루트에 `config.yaml` 생성  \n\n2. **API 키·OAuth 연동**  \n   - `openclaw config set openai.apiKey <YOUR_KEY>`  \n   - `openclaw config set anthropic.apiKey <YOUR_KEY>`  \n   - OAuth 연동: `openclaw oauth register google` 후 반환된 URL을 브라우저에서 열어 인증  \n\n3. **채널 별 페어링 (예: Telegram)**  \n   ```bash\n   openclaw pairing generate telegram\n   # 출력된 코드(예: ABC123)를 Telegram Bot에 전송\n   openclaw pairing approve telegram ABC123\n   ```  \n\n### 서비스 운영\n- **systemd 서비스 예시** (`/etc/systemd/system/openclaw.service`)  \n  ```ini\n  [Unit]\n  Description=OpenClaw AI Assistant\n  After=network.target\n\n  [Service]\n  WorkingDirectory=/opt/openclaw\n  ExecStart=/usr/bin/npm start\n  Restart=always\n  User=openclaw\n\n  [Install]\n  WantedBy=multi-user.target\n  ```  \n- **PM2**: `pm2 start dist/index.js --name openclaw` 로 프로세스 관리  \n- **Docker Swarm / Kubernetes**: 공식 `docker-compose.yml` 을 기반으로 Helm chart(예정) 로 변환 가능  \n\n*출처: 운영 가이드 (2026‑02‑10) [7]*  \n\n---\n\n## 사용 사례 및 활용 예시\n### 1. 개인 일정·이메일 자동 정리\n`openclaw schedule add \"0 7 * * *\" \"run_task email_cleanup\"`  \n매일 아침 7시, Gmail API와 연동된 플러그인이 최신 메일을 요약하고, 중요한 일정은 Telegram에 알림.\n\n### 2. 개발팀 코드 리뷰·CI 알림 봇\n```bash\nopenclaw plugin create ci-notifier\n```  \n플러그인 내부에서 GitHub webhook을 수신하고, PR 요약을 Claude에 전달 → Discord 채널에 전송, CI 실패 시 Slack에 즉시 알림.\n\n### 3. 고객 지원 챗봇 (WhatsApp)\nWhatsApp Business API와 페어링 후, `openclaw agent set default ollama/llama3` 로 로컬 모델 사용 → 고객 문의를 실시간 처리하고, 민감 데이터는 로컬에만 저장.\n\n### 4. 교육·학습 보조 AI\n학생이 “다음 주 물리학 시험 요약해줘” 라고 Telegram에 입력 → Memory Store에 저장된 이전 학습 내용과 결합해 GPT‑4o 로 상세 요약 제공.\n\n### 실제 구현 예시 (CLI)\n- **프롬프트 커스텀**  \n  `openclaw config set prompt.default \"You are a helpful personal assistant. Keep responses concise.\"`  \n- **메모리 조회**  \n  `openclaw memory list --user @john` → 최근 10개의 대화 기록 출력  \n\n*출처: 공식 튜토리얼 영상 (2026‑02‑10) [8]*  \n---\n\n## 하드웨어 호환성 및 Claw 변형별 권장 사양\n\nOpenClaw는 \"Claw\"라는 개념의 대표적 구현체입니다. Andrej Karpathy가 제안한 \"Claw\"는 LLM 에이전트 위에 존재하는 **지속적 AI 에이전트 시스템**으로, 오케스트레이션, 스케줄링, 컨텍스트 유지, 도구 호출 및 지속성을 다음 단계로 끌어올리는 새로운 레이어입니다 [12].\n\n### Claw와 에이전트의 차이\n일반적인 LLM 에이전트는 실행하고, 작업을 수행한 뒤 멈춥니다. 반면 Claw는 **지속적으로 실행**됩니다:\n\n- 하드웨어나 서버에서 **항시 가동**됩니다\n- 자체 스케줄링을 가지고 있어 요청 없이도 행동합니다\n- 세션 및 대화 전반에 걸쳐 **컨텍스트를 유지**합니다\n- MCP 등 메시징 프로토콜을 통해 통신합니다\n- 도구 접근 권한을 가진 다수의 에이전트를 **오케스트레이션**합니다\n\n> 스크립트를 실행하는 것과 서비스를 운영하는 것의 차이라고 생각하면 됩니다. Claw는 서비스와 같습니다: 항상 켜져 있고, 항상 감시하며, 언제든 행동할 준비가 되어 있습니다.\n\n### Claw 변형 및 권장 사양\n\n| Claw 변형 | 설명 | 최소 RAM | 권장 CPU | GPU | 비고 |\n|-----------|------|----------|----------|-----|------|\n| **OpenClaw** | 풀스택 AI 비서, 멀티채널 통합 | 16 GB | 8코어 이상 | 선택 (Ollama 사용 시 필수) | 프로덕션 환경 권장 |\n| **NanoClaw** | 경량 단일 에이전트 | 8 GB | 4코어 이상 | 불필요 | 개인 개발 환경 적합 |\n| **zeroclaw** | 최소 구성, 실험용 | 4 GB | 2코어 이상 | 불필요 | 프로토타이핑 용도 |\n| **ironclaw** | 고성능 멀티 에이전트 오케스트레이션 | 32 GB | 16코어 이상 | 권장 (CUDA 12+) | 엔터프라이즈 환경 |\n| **picoclaw** | 임베디드·IoT 경량 버전 | 2 GB | ARM 프로세서 호환 | 불필요 | 제한된 기능 |\n\n### Mac Mini에서의 제한 사항\n\nAndrej Karpathy가 Claw 실험을 위해 Mac Mini를 구입하면서 \"핫케이크처럼 팔리고 있다\"고 언급할 만큼 Mac Mini는 Claw 실행 환경으로 인기가 높습니다. 그러나 Mac Mini에서 OpenClaw를 실행할 때는 다음과 같은 **제한 사항**을 반드시 고려해야 합니다 [12]:\n\n#### 권장하지 않는 이유\n1. **통합 GPU 한계**: Mac Mini(M4/M4 Pro)는 통합 GPU만 탑재하며, Ollama 로컬 모델 실행 시 전용 GPU 대비 추론 속도가 크게 떨어집니다\n2. **메모리 공유 구조**: Apple Silicon의 통합 메모리(Unified Memory)는 CPU와 GPU가 공유하므로, 대형 모델(70B+ 파라미터) 로딩 시 시스템 전체 성능이 저하됩니다\n3. **열 관리**: 지속적 가동이 필수인 Claw 특성상, Mac Mini의 소형 팬 설계로 장시간 고부하 시 스로틀링이 발생할 수 있습니다\n4. **확장성 부족**: RAM·스토리지 업그레이드가 구매 시점에만 가능하며, 이후 확장이 불가능합니다\n5. **네트워크 안정성**: 가정용 네트워크에서 운영 시 IP 변경, 정전 등으로 인한 가동 중단 위험이 있습니다\n\n#### Mac Mini에서 실행 가능한 구성\nMac Mini에서 OpenClaw를 운영하려면 다음 조건을 충족하는 것이 좋습니다:\n\n| 구성 | M4 (기본) | M4 Pro (권장) |\n|------|-----------|---------------|\n| RAM | 16 GB (최소) | 24~48 GB (권장) |\n| 로컬 모델 | 7B 이하 소형 모델만 | 13B~30B 모델까지 가능 |\n| 동시 채널 | 2~3개 | 5개 이상 |\n| Heartbeat 주기 | 5분 이상 간격 권장 | 1분 간격 가능 |\n\n#### 권장 대안 환경\n- **클라우드 서버**: AWS EC2 (g5.xlarge 이상), GCP (a2-highgpu), Azure (NC 시리즈) – GPU 인스턴스로 Ollama 로컬 모델을 최대 성능으로 활용\n- **전용 서버**: Linux 기반 GPU 서버 (NVIDIA RTX 4090 이상) – 가장 안정적인 24/7 운영 환경\n- **하이브리드 구성**: Mac Mini에서 Gateway만 실행하고, AI 모델 호출은 클라우드 API(Claude, GPT-4o)로 위임 – 로컬 모델이 불필요한 경우 현실적인 대안\n\n> **팁**: Mac Mini를 사용하더라도, AI 모델을 클라우드 API로 호출하고 Gateway·Scheduler만 로컬에서 실행하면 안정적으로 운영할 수 있습니다. 이 경우 Mac Mini의 저전력·저소음 특성이 오히려 장점이 됩니다.\n\n*출처: Andrej Karpathy \"Claws\" 개념 정의, euno.news (2026‑02‑22) [12]*\n\n---\n\n## 다른 유사 도구/기술과의 비교\n| 항목 | OpenClaw | LangChain | AutoGPT | Microsoft Copilot |\n|------|----------|-----------|---------|-------------------|\n| 지원 모델·플러그인 생태계 | Claude, GPT‑4o, Ollama 등 다중 모델 + 자체 채널 플러그인 | 다양한 LLM 래퍼, 외부 툴 연동은 코드 기반 | OpenAI API 중심, 플러그인 제한 | Microsoft Graph, Office 연동 전용 |\n| 셀프 호스팅 난이도 | Docker Compose / npm/pnpm/bun → 중급 | Python 패키지 → 낮음 (코드 작성 필요) | Python 스크립트 → 낮음 | SaaS (호스팅 불가) |\n| 멀티채널 통합 기능 | 기본 제공 (Telegram, Discord, WhatsApp, Slack, Google Chat, Signal, iMessage, BlueBubbles, Matrix, Zalo·Zalo Personal, WebChat 등) | 별도 구현 필요 | 없음 | Teams, Outlook 등 Microsoft 제품에 국한 |\n| 비용 구조 | 오픈소스(무료) + 모델 사용료(클라우드) | 오픈소스(무료) + 모델 사용료 | 클라우드 API 비용 | 구독 기반(Office 365) |\n| 커뮤니티·문서 수준 | 활발한 Discord, GitHub Issues, 공식 Docs | 활발한 커뮤니티, 풍부 튜토리얼 | 제한적, GitHub 중심 | Microsoft 공식 지원 |\n\n*출처: 각 프로젝트 공식 홈페이지 (2026‑02‑10) [9]*  \n\n---\n\n## 장단점 분석\n### 장점\n- **완전 오픈소스** → 자체 인프라에 배포 가능, 데이터 주권 보장  \n- **멀티채널 통합**이 기본 제공돼 별도 개발 없이 다양한 메신저 사용 가능  \n- **플러그인 기반** 확장성이 높아 새로운 기능·채널을 손쉽게 추가  \n- **로컬 모델(Ollama) 지원**으로 개인정보 유출 위험 최소화  \n\n### 단점\n- **초기 설정 복잡도**: 채널 인증·API 키 관리가 다소 번거로움  \n- **스케일링 한계**: 단일 Node.js 프로세스 기반이라 대규모 동시 사용자 처리 시 수평 확장 설계가 필요(추가 조사 필요)  \n- **공식 문서·예제 부족**: 최신 기능(예: Allowlist) 관련 예제가 제한적, 커뮤니티 의존도가 높음  \n\n*출처: 사용자 설문 및 Issue 분석 (2026‑02‑10) [10]*  \n\n---\n\n## 릴리즈 히스토리 및 주요 변경사항\n| 버전 | 출시일 | 주요 내용 |\n|------|--------|-----------|\n| v0.1 | 2024‑06‑15 | 최초 공개, 기본 챗봇 기능 구현 |\n| v0.5 | 2025‑01‑20 | 멀티채널 플러그인 추가, Heartbeat 구현 |\n| v1.0 | 2025‑09‑05 | 안정화 버전, Docker Compose 지원, 웹 UI 정식 출시 |\n| v1.3 | 2026‑02‑10 | Ollama 로컬 모델 연동, 보안 강화(Allowlist) |\n| v1.4 (예정) | 2026‑08‑** | Kubernetes 배포 차트, 고가용성 클러스터 지원 (예정) |\n\n### v1.3 주요 개선 (2026‑02‑10)\n- 메모리 동기화 레이스 컨디션 해결  \n- Telegram webhook 재시도 로직 강화  \n- Docker 이미지 경량화 (≈30 % 용량 감소)  \n\n*출처: 릴리즈 노트 (GitHub Releases) [11]*  \n\n---\n\n## 참고 자료 및 공식 문서 링크\n1. **GitHub Repository** – https://github.com/openclaw/openclaw (조회일: 2026‑02‑10)  \n2. **공식 Docs – 모델 지원** – https://docs.openclaw.ai/models (조회일: 2026‑02‑10)  \n3. **아키텍처 개요** – https://docs.openclaw.ai/architecture (조회일: 2026‑02‑10)  \n4. **보안 가이드** – https://docs.openclaw.ai/security (조회일: 2026‑02‑10)  \n5. **기능 소개** – https://docs.openclaw.ai/features (조회일: 2026‑02‑10)  \n6. **설치 가이드** – https://docs.openclaw.ai/installation (조회일: 2026‑02‑10)  \n7. **운영 가이드** – https://docs.openclaw.ai/operations (조회일: 2026‑02‑10)  \n8. **튜토리얼 영상**  \n   - “OpenClaw 전체 설정 튜토리얼” (Metics Media) – https://www.youtube.com/watch?v=W7Ns_FPZg5Q (조회일: 2026‑02‑10)  \n   - “Ollama와 OpenClaw로 구축하는 100 % 비공개 AI 비서” (Nova AI) – https://www.youtube.com/watch?v=2PdyYsqLUMM (조회일: 2026‑02‑10)  \n9. **비교 대상 프로젝트**  \n   - LangChain – https://python.langchain.com (조회일: 2026‑02‑10)  \n   - AutoGPT – https://github.com/Significant-Gravitas/AutoGPT (조회일: 2026‑02‑10)  \n   - Microsoft Copilot – https://www.microsoft.com/copilot (조회일: 2026‑02‑10)  \n10. **사용자 설문·Issue 분석** – https://github.com/openclaw/openclaw/issues?q=is%3Aissue+label%3Afeedback (조회일: 2026‑02‑10)  \n11. **릴리즈 노트** – https://github.com/openclaw/openclaw/releases (조회일: 2026‑02‑10)  \n\n12. **\"Claws\"란 무엇이며, 왜 Mac Mini에서 실행하면 안 되는가** – https://euno.news/posts/ko/what-are-claws-and-why-you-shouldnt-run-them-on-yo-c877cd (조회일: 2026‑02‑22)  \n\n*본 문서는 2026‑02‑22 기준 최신 정보를 기반으로 작성되었습니다. 최신 버전이나 새로운 플러그인에 대한 내용은 공식 리포지터리와 Docs를 지속적으로 확인하시기 바랍니다.*",
-  "lastModified": "2026-02-22T10:22:18+09:00",
-  "author": "SEPilot AI",
-  "status": "published",
-  "isDraft": false,
+  "content": "\n# OpenClaw Complete Guide\n\n## Overview\nOpenClaw is a framework for building **persistent AI agents** (referred to as *Claws*) that run continuously, schedule their own work, maintain context across sessions, and orchestrate multiple tool‑enabled agents. While the platform is flexible, the choice of hardware has a direct impact on reliability, uptime, and scalability.\n\n---\n\n## Hardware Compatibility\n\nOpenClaw can be run on any modern server‑class machine that meets the following baseline requirements:\n\n- **CPU**: 4‑core x86_64 (or Apple Silicon M‑series with Rosetta 2 support) ≥ 2 GHz.\n- **Memory**: Minimum 8 GB RAM; 16 GB+ recommended for multiple concurrent Claws.\n- **Storage**: SSD with at least 50 GB free space for logs, container images, and persistent state.\n- **Network**: Stable broadband connection with inbound ports open for webhooks (typically 443/80) and outbound internet access for API calls.\n- **OS**: Linux (Ubuntu 22.04 LTS, Debian 12, etc.) or macOS 12+ for development environments.\n\nThese specifications are derived from the general guidance in the OpenClaw community and are corroborated by the accessory and workstation guides for the Mac Mini [OpenClaw Mac Mini Developer Workstation Specs](https://openclawn.com/openclaw-mac-mini-developer-workstation-specs/) and the hardware‑software integration article [Seamless Synergy: OpenClaw Mac Mini Hardware‑Software Integration](https://openclawn.com/openclaw-mac-mini-hardware-software-integration/).\n\n---\n\n## Mac Mini Limitations\n\nWhile a Mac Mini is an attractive, low‑cost form factor, several practical constraints make it a **sub‑optimal choice for production‑grade OpenClaw deployments**:\n\n1. **Uptime Risks** – Home‑grade power and macOS automatic updates can cause unexpected reboots, breaking the “always‑on” guarantee of a Claw.\n2. **Networking Complexity** – Residential routers often require manual port‑forwarding, dynamic DNS, and TLS certificate management to expose webhook endpoints.\n3. **Security Surface** – Running privileged agents on a personal workstation exposes the entire LAN to potential compromise if a Claw is mis‑configured.\n4. **Scalability Limits** – A single Mac Mini has limited CPU/Memory headroom; scaling to multiple Claws or heavier workloads quickly exhausts resources.\n5. **Process Supervision** – macOS lacks built‑in process supervisors comparable to Linux systemd or Elixir OTP, requiring custom scripts to auto‑restart crashed agents.\n\nThese points echo the observations from Andrej Karpathy’s Mac Mini experiment, which highlighted power‑outage susceptibility, networking hurdles, and the need for external supervision [OpenClaw Mac Mini as a Developer Workstation: Specs for …](https://openclawn.com/openclaw-mac-mini-developer-workstation-specs/).\n\n**Recommendation** – For production or long‑running Claw deployments, prefer a cloud‑hosted or dedicated server environment (e.g., Fly.io, VPS) that provides robust supervision, automatic restarts, and reliable networking.\n\n---\n\n## Claw Variant Recommendations\n\nOpenClaw offers several variants, each tuned for different trade‑offs:\n\n| Variant | Approx. Code Size | Typical Use‑Case | Key Trade‑offs |\n|---------|-------------------|------------------|---------------|\n| **OpenClaw** | Full feature set | General‑purpose, multi‑agent orchestration | Higher resource consumption |\n| **NanoClaw** | ~4 000 LOC | Lightweight, single‑agent workloads; easy to audit | Limited built‑in tools |\n| **zeroclaw** | Minimal core | Experimental, sandboxed environments | Minimal persistence |\n| **ironclaw** | Moderate | Security‑focused deployments with stricter sandboxing |\n| **picoclaw** | Very small | Edge devices or constrained hardware |\n\nChoosing the right variant depends on the hardware you plan to run on. For a Mac Mini, **NanoClaw** or **picoclaw** are the most feasible, but even these benefit from the robust supervision offered by cloud platforms.\n\n---\n\n## Further Reading & Resources\n- **Accessories & Upgrades for Your OpenClaw Mac Mini (2026)** – Practical hardware add‑ons such as locks, trackers, and external SSDs [OpenClaw Mac Mini Accessories & Upgrades](https://openclawn.com/openclaw-mac-mini-accessories-upgrades/)\n- **The Ultimate Guide to OpenClaw Mac Mini Docks & Hubs (2026)** – Recommendations for connectivity and peripheral expansion [OpenClaw Mac Mini Docks & Hubs Guide](https://openclawn.com/openclaw-mac-mini-docks-hubs-guide/)\n\n---\n\n*This section was added to address the recent feedback requesting explicit hardware compatibility information and a dedicated Mac Mini limitation overview.*",
+  "lastModified": "2026-02-22T01:56:50Z",
+  "author": "GitHub Action",
+  "status": "draft",
+  "isDraft": true,
   "isInvalid": false,
   "tags": [
     "OpenClaw",
@@ -16,146 +16,11 @@
   "order": 1,
   "history": [
     {
-      "sha": "27865ca",
-      "message": "docs: Issue #204 - OpenClaw 하드웨어 호환성 및 Mac Mini 제한 사항 추가",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-22T10:22:18+09:00",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "4a5aec8",
-      "message": "docs: 잔여 draft 문서 7개 일괄 발행 (draft → published)",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-20T22:52:00+09:00",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "9646732",
-      "message": "chore: Issue Processor 실행 결과",
+      "sha": "021de0d",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-20T12:51:13Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "02eda25",
-      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 고르게 배치되어 있으나,  가 중복된 내용이며 삭제 상태이므로  로 병합이 필요합니다. 또한 모든 카테고리마다 문서 순서를 지정하고, 카테고리 메타데이터를 추가해 한국어 표시명과 정렬 순서를 정의하면 탐색성이 향상됩니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-20T01:42:05Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "f08fbbd",
-      "message": "🌳 Wiki Tree Maintenance: Wiki는 4개의 주요 카테고리(ai, projects, kubernetes, bun)와 보조 카테고리(reports)로 구성돼 있습니다. 파일명은 대부분 규칙에 맞지만,  카테고리에 동일 내용의 Opencode 문서가 두 개 존재합니다(하나는 published, 다른 하나는 deleted). 전체적으로 문서가 흩어져 있어 카테고리 내 정렬(order)과 카테고리 메타데이터가 필요합니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-20T01:32:22Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "997dd2a",
-      "message": "🌳 Wiki Tree Maintenance: Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한  가 잘못된 위치·오타이며,  가  와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-20T01:15:23Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "9459c99",
-      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-19T02:01:59Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0b99235",
-      "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-19T01:25:27Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "bbce2ca",
-      "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-12T07:26:28Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "a897516",
-      "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T12:50:57Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0190970",
-      "message": "🔗 교차 참조 업데이트: 16개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T08:01:05Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e873878",
-      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T07:48:29Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "f640314",
-      "message": "🔗 교차 참조 업데이트: 14개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T06:10:24Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "3b31ab0",
-      "message": "fix: 중복 위키 문서 제거 및 스테일 빌드 파일 정리",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-11T15:08:18+09:00",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "ff8a92a",
-      "message": "🔗 교차 참조 업데이트: 10개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T05:57:28Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "6d37c2e",
-      "message": "feat: 위키 카테고리 분류 규칙 정의 및 문서 구조 재배치",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-11T14:56:36+09:00",
+      "date": "2026-02-22T01:56:50Z",
       "additions": 0,
       "deletions": 0
     }
