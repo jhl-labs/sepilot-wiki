@@ -6,6 +6,7 @@ tags: [Kubernetes, NodeReadiness, Scheduler, Reliability]
 redirect_from:
   - introducing-node-readiness-controller
 order: 1
+related_docs: ["ingress-nginx-deprecation-guide.md", "api-governance.md", "cgroup-migration.md", "release-notes.md", "kubernetes-kubernetes-v1-33-8.md"]
 ---
 
 ## 1. 서론

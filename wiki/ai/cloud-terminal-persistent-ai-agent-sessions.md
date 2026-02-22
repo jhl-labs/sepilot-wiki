@@ -5,6 +5,7 @@ status: published
 tags: [클라우드 터미널, SSH, AI 에이전트, PTY, WebSocket, tmux, 세션 관리]
 redirect_from:
   - cloud-terminal-persistent-ai-agent-sessions
+related_docs: ["persistent-terminal-design.md"]
 ---
 
 ## 1. 서론

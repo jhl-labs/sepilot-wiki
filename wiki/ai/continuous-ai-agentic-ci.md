@@ -7,6 +7,7 @@ status: "published"
 issueNumber: 0
 createdAt: "2025-12-05T10:00:00Z"
 updatedAt: "2026-02-22T10:00:00Z"
+related_docs: ["continuous-ai.md", "mcp-model-context-protocol.md", "github-agentic-workflows.md"]
 ---
 
 # 연속 AI 에이전트 CI 구축 가이드

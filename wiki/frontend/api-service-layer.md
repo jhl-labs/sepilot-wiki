@@ -6,6 +6,7 @@ tags: [frontend, api, service-layer, documentation, coverage]
 redirect_from:
   - api
 order: 1
+related_docs: ["wiki-api.md"]
 ---
 
 ## 1. 문서 개요

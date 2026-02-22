@@ -8,6 +8,7 @@ issueNumber: 198
 createdAt: "2026-02-21T13:05:00Z"
 updatedAt: "2026-02-22T00:00:00Z"
 order: 3
+related_docs: ["continuous-ai-agentic-ci.md", "multi-agent-system.md"]
 ---
 
 # Continuous AI – 인간이 AI 오류를 검증하는 방법

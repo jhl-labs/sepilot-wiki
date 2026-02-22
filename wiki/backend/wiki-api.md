@@ -6,6 +6,7 @@ tags: [API, Wiki, 라우트, 인증, 문서화]
 redirect_from:
   - wiki-api
 order: 1
+related_docs: ["api-governance.md", "api-service-layer.md", "node-readiness-controller.md", "release-notes.md", "cgroup-migration.md"]
 ---
 
 ## 1. 문서 개요
