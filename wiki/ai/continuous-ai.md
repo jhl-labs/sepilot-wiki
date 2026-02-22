@@ -3,10 +3,10 @@ title: "Continuous AI – 인간이 AI 오류를 검증하는 방법"
 description: "AI 코딩 에이전트를 활용하면서 인간이 AI의 오류를 검증하고 교정하는 방법에 대한 가이드"
 category: "Guide"
 tags: ["Continuous AI", "Human-in-the-Loop", "Verification", "AI Errors"]
-status: "draft"
-issueNumber: 0
+status: "published"
+issueNumber: 198
 createdAt: "2026-02-21T13:05:00Z"
-updatedAt: "2026-02-21T13:05:00Z"
+updatedAt: "2026-02-22T00:00:00Z"
 order: 3
 ---
 
