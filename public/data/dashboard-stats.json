@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-22T17:42:38.826Z",
+  "collectedAt": "2026-02-22T18:48:19.235Z",
   "overview": {
     "totalDocuments": 34,
     "publishedDocuments": 29,
     "draftDocuments": 5,
     "openRequests": 18,
     "closedRequests": 19,
-    "totalAIActions": 147
+    "totalAIActions": 148
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,16 +19,16 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 15,
-      "documentsCreated": 3,
+      "aiActions": 14,
+      "documentsCreated": 2,
       "documentsModified": 3,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 20,
-      "estimatedTokens": 5024,
-      "totalPipelineDurationMs": 113553
+      "tavilyApiCalls": 6,
+      "tavilyResults": 12,
+      "estimatedTokens": 2973,
+      "totalPipelineDurationMs": 68815
     },
     "last7d": {
-      "aiActions": 72,
+      "aiActions": 73,
       "documentsCreated": 15,
       "documentsModified": 13,
       "tavilyApiCalls": 45,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-22T18:09:59.972Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-22T12:09:27.969Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-21T11:18:32.708Z",
-      "actionType": "recover",
-      "issueNumber": 200,
-      "documentTitle": "chore(deps): bump ajv from 6.12.6 to 6.14.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 139,
+      "totalActions": 140,
       "totalEstimatedTokens": 69204,
       "avgDurationMs": 56637
     },
