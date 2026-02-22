@@ -13,7 +13,7 @@ redirect_from:
   - bun-github-actions-setup
   - bun-github-actions
   - 요청-github-actions로-bun을-쓰는-방법
-related_docs: ["overview.md", "comparison-pnpm-npm.md"]
+related_docs: ["comparison-pnpm-npm.md", "overview.md"]
 order: 3
 ---
 

@@ -8,6 +8,7 @@ redirect_from:
   - 207
   - cloud-terminal-persistent-ai-agent-sessions
 order: 1
+related_docs: ["persistent-terminal-design.md"]
 ---
 
 ## 1. 서론
