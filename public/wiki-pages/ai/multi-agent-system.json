@@ -2,8 +2,8 @@
   "title": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
   "slug": "ai/multi-agent-system",
   "content": "\n# 멀티 에이전트 시스템 – Self‑Healing AI Agents\n\n> 이 문서는 **Self‑Healing AI Agents**(자체 복구 AI 에이전트) 구현 사례를 기반으로, 대규모 자율 에이전트 아키텍처와 8 GB VRAM 환경에서의 효율적인 배포 방법을 소개합니다. 원본 내용은 [euno.news](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8)에서 발췌했습니다.\n\n---\n\n## 1. Self‑Healing Architecture Overview\n\n대부분의 LLM‑기반 에이전트는 단순한 흐름을 따릅니다.\n\n```\nreceive task → call model → return result\n```\n\n오류(환각, 타임아웃, OOM 등)가 발생하면 에이전트가 충돌하거나 쓰레기를 출력합니다. 기존의 `try‑catch` 방식은 임시 방편에 불과합니다. 여기서는 **자체 복구 루프**를 도입해 에이전트가 스스로 상태를 모니터링하고, 필요 시 복구 전략을 실행하도록 설계했습니다.\n\n```\n┌─────────────┐\n│   EXECUTE   │ ← 에이전트가 작업 수행\n└──────┬──────┘\n       │\n┌──────▼──────┐\n│   MONITOR   │ ← 실시간 건강 점수 측정\n└──────┬──────┘\n       │\n┌──────▼──────┐\n│   RECOVER   │ ← 계층적 복구 전략\n└──────┬──────┘\n       │\n       └──────→ EXECUTE 로 돌아감\n```\n\n### 1.1 에이전트 상태 머신\n```python\nfrom enum import Enum\nclass AgentState(Enum):\n    IDLE = \"idle\"\n    RUNNING = \"running\"\n    DEGRADED = \"degraded\"      # 기능은 있지만 성능 저하\n    RECOVERING = \"recovering\"  # 자체 복구 중\n    FAILED = \"failed\"          # 외부 개입 필요\n```\n*핵심 인사이트*: `DEGRADED`는 `FAILED`와 다르며, 대부분의 오류는 여기서 조기에 감지·복구됩니다.\n\n### 1.2 건강 점수\n```python\ndef compute_health(agent_output, context):\n    scores = {\n        \"coherence\":   check_coherence(agent_output),\n        \"completeness\": check_completeness(agent_output, context),\n        \"latency\":     check_latency(context.elapsed_time),\n        \"memory\":      check_memory_usage(),\n        \"consistency\": check_cross_agent_consistency(agent_output)\n    }\n    weights = [0.25, 0.20, 0.15, 0.25, 0.15]\n    return sum(s * w for s, w in zip(scores.values(), weights))\n```\n건강 점수가 임계값 이하이면 복구 전략을 선택하고 실행합니다. 대부분의 복구는 첫 두 단계에서 해결되며, **2.3 %**만이 `FAILED` 상태에 도달합니다.\n\n---\n\n## 2. Resource‑Efficient Deployment (8 GB VRAM)\n\n8 GB VRAM을 가진 단일 머신에서 4,882개의 에이전트를 실행하기 위해 **동적 에이전트 풀링**을 사용합니다. 한 번에 GPU에 상주하는 에이전트 수는 약 12개이며, 나머지는 CPU/디스크에 직렬화됩니다.\n\n```python\nfrom queue import PriorityQueue\nclass AgentPool:\n    def __init__(self, max_concurrent=12, vram_budget_mb=7168):\n        self.active   = PriorityQueue()   # priority = urgency\n        self.dormant  = {}                # serialized agents\n        self.vram_budget = vram_budget_mb\n    def activate(self, agent_id, priority):\n        while self.current_vram() > self.vram_budget * 0.85:\n            _, evicted = self.active.get()\n            self.dormant[evicted.id] = evicted.serialize()\n            evicted.release_gpu()\n        agent = self.dormant.pop(agent_id).deserialize()\n        self.active.put((priority, agent))\n        return agent\n```\n4‑bit 양자화와 KV‑캐시 공유를 결합하면 평균 활성화 지연 시간은 **≈ 850 ms** 수준입니다.\n\n---\n\n## 3. Failure Detection & Automatic Recovery\n\n### 3.1 실시간 모니터링\n에이전트는 매 실행 사이클 후 **복합 건강 점수**를 계산하고, 점수가 임계값 이하이면 `RECOVER` 단계로 전이합니다.\n\n### 3.2 계층적 복구 전략\n1. **경미한 오류** – 재시도, 파라미터 재조정\n2. **자원 부족** – 다른 GPU 슬롯으로 이동, 메모리 압축\n3. **심각한 오류** – `FAILED` 상태로 전이 후 외부 개입 요청\n\n이러한 접근 방식은 단순 재시도 루프보다 **오탐지 실패를 73 %** 감소시켰습니다.\n\n---\n\n## 4. 실험 결과 (예시)\n- **승률**: 96.5 % (201/208)\n- **평균 심판 점수**: 4.68/5.0\n- **전체 품질**: 93.6 %\n- **접근성**: 5.0/5.0\n- **안전 점수**: 4.6/5.0\n\n> 위 지표는 독립 LLM 심판이 구조화된 루브릭을 사용해 블라인드 평가한 결과이며, 자체 보고가 아닙니다.\n\n---\n\n## 5. 참고 자료\n- 원본 기사: [euno.news – 8 GB VRAM으로 4,882개의 Self‑Healing AI Agents 구축](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8) (출처)\n\n---\n\n*이 문서는 초안(draft) 상태이며, 검토 후 `published` 로 전환될 예정입니다.*",
-  "lastModified": "2026-02-22T00:24:12Z",
-  "author": "GitHub Action",
+  "lastModified": "2026-02-22T10:17:12+09:00",
+  "author": "JHL",
   "status": "draft",
   "isDraft": true,
   "isInvalid": false,
@@ -15,11 +15,11 @@
   ],
   "history": [
     {
-      "sha": "4240e24",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T00:24:12Z",
+      "sha": "30cff15",
+      "message": "docs: Issue #209 - Rust 기반 GPU 가속 얼굴 크롭 도구 문서를 projects 카테고리로 이동",
+      "author": "JHL",
+      "authorEmail": "bkperio@gmail.com",
+      "date": "2026-02-22T10:17:12+09:00",
       "additions": 0,
       "deletions": 0
     }

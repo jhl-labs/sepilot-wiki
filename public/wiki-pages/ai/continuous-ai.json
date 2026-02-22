@@ -2,8 +2,8 @@
   "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
   "slug": "ai/continuous-ai",
   "content": "\n# Continuous AI – 인간이 AI 오류를 검증하는 방법\n\n이 문서는 AI 코딩 에이전트를 실제 업무에 적용하면서 **AI가 만든 결과를 인간이 검증하고 교정하는** 핵심 전략을 정리합니다. 최근 euno.news에 실린 사례([원문](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5))를 기반으로 **Human‑in‑the‑Loop Review**, **Common AI Mistake Patterns**, **Verification Workflows** 세 가지 영역을 구체적으로 제시합니다.\n\n---\n\n## Human‑in‑the‑Loop Review\n\nAI 에이전트는 주어진 문제를 빠르게 해결하지만, **‘올바른 문제’를 해결하고 있는지**는 인간이 판단해야 합니다. 아래와 같은 단계로 리뷰 프로세스를 구축합니다.\n\n1. **목표 정의** – 해결하고자 하는 비즈니스 목표와 기대 결과를 명확히 문서화합니다.\n2. **프롬프트 검증** – 에이전트에 전달하는 프롬프트가 목표와 일치하는지 확인합니다.\n3. **출력 샘플링** – 에이전트가 생성한 코드/데이터 중 대표 샘플을 선택해 직접 검토합니다.\n4. **피드백 루프** – 검증 결과를 프롬프트 혹은 파이프라인에 반영해 재실행합니다.\n\n> **예시**: 정규식 기반 스크래퍼를 LLM 기반 추출기로 교체할 때, 기존 정규식이 여전히 사용되는지를 검토하고, 비용 효율성을 재평가했습니다. (출처: euno.news) \n\n## Common AI Mistake Patterns\n\n다음은 실제 현장에서 자주 발견되는 AI 오류 패턴이며, 각 패턴에 대한 예방·대응 방법을 제시합니다.\n\n| 패턴 | 설명 | 예방·대응 방법 |\n|------|------|----------------|\n| **잘못된 도구 선택** | 문제 해결에 적합하지 않은 기술(예: 정규식) 사용 | 문제 정의 단계에서 **대안 기술 조사**를 수행하고, 비용·유연성을 비교합니다. |\n| **Technically Correct, Actually Misleading** | 기술적으로는 맞지만 비즈니스 의미가 잘못된 결과 (예: 지역 태그 `Americas`/`Europe`) | 결과를 **비즈니스 규칙**과 교차 검증하고, 다중 레벨 검증(예: 국가별 필터링) 적용. |\n| **Silent Failure** | 오류가 없다고 보고되지만 실제로 중요한 데이터가 누락 | **로그·메트릭**에 “데이터 누락” 알림을 추가하고, **샘플 데이터 감사**를 정기적으로 수행합니다. |\n\n## Verification Workflows\n\nAI 결과를 체계적으로 검증하기 위한 워크플로우 예시입니다.\n\n1. **자동 테스트** – 생성된 코드에 대해 단위·통합 테스트를 자동 실행합니다.\n2. **정적 분석** – Linter, 보안 스캐너 등 정적 분석 도구로 코드 품질을 점검합니다.\n3. **데이터 검증** – 추출된 데이터는 스키마 검증 및 비즈니스 규칙(예: 국가 리스트)과 교차 검증합니다.\n4. **인간 리뷰** – 중요한 변경(예: 파이프라인 로직, 비용이 큰 LLM 호출)에는 반드시 **코드 리뷰**와 **운영 검증**을 거칩니다.\n5. **피드백 기록** – 검증 결과와 수정 사항을 **위키/이슈**에 기록해 재발 방지 지식베이스를 구축합니다.\n\n### 적용 예시 (euno.news 사례)\n- **정규식 → LLM 전환**: 기존 정규식이 매치되지 않는 경우 LLM 기반 추출기로 교체하고, 비용·성능을 재평가했습니다.\n- **지역 태그 오류**: `Americas`/`Europe` 라벨이 실제 지원 국가와 불일치함을 발견하고, **select‑countries** 배지를 도입해 정확한 국가 리스트로 교체했습니다.\n- **Silent Failure**: 중복 제거와 급여 필드 누락으로 신규 채용이 제외된 사례를 발견하고, **데이터 감사 스크립트**와 **경고 로직**을 추가했습니다.\n\n---\n\n## 결론\nAI 코딩 에이전트를 활용하는 조직은 **‘AI가 틀렸을 때를 아는 것’**이 가장 큰 가치임을 인식해야 합니다. 위에서 제시한 Human‑in‑the‑Loop 리뷰, 흔히 발생하는 오류 패턴, 검증 워크플로우를 도입하면 AI가 만든 결과물의 신뢰성을 크게 향상시킬 수 있습니다.\n\n> 더 자세한 내용은 원본 기사와 관련 블로그 포스트를 참고하세요: [euno.news 원문](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)\n",
-  "lastModified": "2026-02-22T00:24:12Z",
-  "author": "GitHub Action",
+  "lastModified": "2026-02-22T10:17:12+09:00",
+  "author": "JHL",
   "status": "draft",
   "isDraft": true,
   "isInvalid": false,
@@ -16,11 +16,11 @@
   "order": 3,
   "history": [
     {
-      "sha": "4240e24",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T00:24:12Z",
+      "sha": "30cff15",
+      "message": "docs: Issue #209 - Rust 기반 GPU 가속 얼굴 크롭 도구 문서를 projects 카테고리로 이동",
+      "author": "JHL",
+      "authorEmail": "bkperio@gmail.com",
+      "date": "2026-02-22T10:17:12+09:00",
       "additions": 0,
       "deletions": 0
     }
