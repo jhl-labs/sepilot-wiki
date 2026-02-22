@@ -1,104 +1,129 @@
 ---
-title: Continuous AI와 Agentic CI 실무 가이드
-author: SEPilot AI
-status: published
-tags: [Continuous AI, Agentic CI, CI, 자동화, 개발자]
-redirect_from:
-  - continuous-ai-in-practice-what-developers-can-auto
+title: "연속 AI 에이전트 CI 구축 가이드"
+description: "CI 파이프라인에 AI 코드 리뷰 에이전트를 통합하는 방법과 베스트 프랙티스"
+category: "Guide"
+tags: ["AI", "CI", "코드 리뷰", "에이전트"]
+status: "published"
+issueNumber: 0
+createdAt: "2025-12-05T10:00:00Z"
+updatedAt: "2026-02-22T10:00:00Z"
 ---
 
-## 1. 서론
-이 문서는 **Continuous AI**와 **Agentic CI** 개념을 소개하고, 개발자가 현재 레포지토리에서 자동화할 수 있는 실무 시나리오와 구현 방법을 제시합니다.  
-대상 독자는 CI/CD 파이프라인을 운영 중인 소프트웨어 엔지니어, DevOps 팀, 그리고 AI 기반 자동화 도입을 검토 중인 기술 리더입니다.  
+# 연속 AI 에이전트 CI 구축 가이드
 
-*Continuous AI*는 기존 CI가 다루기 어려운 **판단·해석이 필요한 작업**을 배경 에이전트 형태로 레포지토리 안에서 지속적으로 수행하도록 설계된 새로운 자동화 패러다임이라고 GitHub Blog에서 정의하고 있습니다[[GitHub Blog](https://github.blog/ai-and-ml/generative-ai/continuous-ai-in-practice-what-developers-can-automate-today-with-agentic-ci/)].
+이 문서는 CI 파이프라인에 **AI 코드 리뷰 에이전트**를 직접 구현하고, GitHub Actions 를 통해 자동화하는 방법을 단계별로 안내합니다. 아래 섹션에서는 에이전트 설계, CI 통합 단계, 예제 워크플로우 및 베스트 프랙티스를 다룹니다.
 
-## 2. CI(Continuous Integration)의 현황과 한계
-- **전통적 CI가 해결하는 영역**  
-  - 테스트 실행, 빌드, 코드 포맷팅, 정적 분석 등 *결과가 이진(통과/실패)으로 표현*될 수 있는 작업을 자동화합니다[[GitHub Blog](https://github.blog/ai-and-ml/generative-ai/continuous-ai-in-practice-what-developers-can-automate-today-with-agentic-ci/)].
-- **규칙 기반 자동화의 한계**  
-  - “판단·해석”이 요구되는 작업은 **휴리스틱이나 규칙**만으로는 표현하기 어렵습니다. 예를 들어, 코드 리뷰에서의 **의도 파악**, 문서의 **시맨틱 업데이트**, 의존성 충돌 해결 등은 규칙 기반 CI가 다루지 못합니다[[GitHub Blog](https://github.blog/ai-and-ml/generative-ai/continuous-ai-in-practice-what-developers-can-automate-today-with-agentic-ci/)].
-- **비규칙적 업무 사례**  
-  - 변경 사항에 대한 **주관적 평가**, **문서 정확성 유지**, **새로운 테스트 시나리오 설계**, **품질 지표 해석 및 알림** 등은 인간의 판단이 필요합니다.
+---
 
-## 3. Continuous AI 개념 정의
-| 용어 | 정의 |
-|------|------|
-| **Continuous AI** | 레포지토리 내에서 **배경 에이전트(background agents)** 로 동작하며, 규칙이 아닌 **추론·판단**이 필요한 작업을 자동화하는 패턴[[GitHub Blog](https://github.blog/ai-and-ml/generative-ai/continuous-ai-in-practice-what-developers-can-automate-today-with-agentic-ci/)] |
-| **Agentic CI** | 기존 CI와 동일한 트리거·스케줄링 메커니즘을 사용하지만, **LLM·생성 AI** 를 활용해 “규칙 → 판단” 전환을 수행하는 CI 파이프라인의 확장 형태 |
+## 1. AI 코드 리뷰 에이전트 설계
 
-배경 에이전트는 **CI 잡처럼** 레포지토리 이벤트(푸시, PR 등)에 반응하지만, 결과가 **이진이 아닌 텍스트·제안·리팩터링** 등 형태로 반환됩니다.
+### 1.1 문제점 정의
+- **수동 PR 리뷰**는 리뷰어가 피곤할 때 놓치는 부분이 많고, 동일한 코멘트가 반복됩니다.
+- **빠른 PR**도 컨텍스트 재구축에 45분 정도 소요될 수 있습니다.
 
-## 4. Agentic CI 아키텍처
-> **※ 아래 구성 요소는 현재 공개된 자료를 기반으로 한 개념적 모델이며, 구체적인 구현 세부사항은 추가 조사가 필요합니다.**
+### 1.2 AI‑powered 솔루션
+AI 모델을 이용해 모든 Pull Request 를 **구조화된 코드 리뷰**(정확성, 보안, 성능, 테스트) 로 자동 생성합니다. 모델은 OpenAI, Anthropic, OpenRouter, 혹은 로컬 Ollama 인스턴스를 자유롭게 선택할 수 있습니다.
 
-1. **에이전트 (Agent)** – LLM 또는 특화된 생성 AI 모델이 실행되는 런타임.  
-2. **워크플로 (Workflow)** – GitHub Actions 혹은 유사 CI 시스템에 정의된 작업 흐름.  
-3. **트리거 (Trigger)** – 푸시, PR, 스케줄 등 기존 CI와 동일하게 이벤트 기반으로 실행.  
-4. **피드백 루프 (Feedback Loop)** – 에이전트가 생성한 결과를 인간이 검토하고, 승인·수정·거부 후 다시 모델에 피드백으로 제공.  
+### 1.3 핵심 요소 – 리뷰 루브릭
+리뷰 루브릭(프롬프트/워크플로)은 모델 자체보다 중요한 역할을 합니다. 루브릭은 다음을 강제합니다:
+- **고위험 이슈**와 **사소한 지적** 구분
+- **구체적인 수정 방안** 및 **테스트 제안** 요구
+- “내가 살펴본 내용”과 “확신이 없는 부분” 명시
 
-### CI 파이프라인과의 통합 포인트
-- **전통 CI 단계 뒤**에 에이전트 단계 삽입 (예: 테스트 후 자동 코드 리뷰).  
-- **PR 생성 시** 자동 문서·README 업데이트와 같은 **사전 검증** 단계에 활용.  
+---
 
-### 보안·권한 관리 모델
-- 에이전트가 레포지토리 **쓰기 권한**을 최소화하고, **읽기 전용** 혹은 **제한된 스코프**에서 동작하도록 설계하는 것이 권장됩니다. 구체적인 권한 설정 방법은 GitHub Actions 권한 모델을 참고해야 하며, 이는 추가 조사가 필요합니다.
+## 2. CI 파이프라인 통합 단계
 
-## 5. 실무에서 자동화 가능한 주요 시나리오
-GitHub Blog에서 제시한 **“판단이 필요한 작업”**을 중심으로 다음과 같은 자동화 시나리오가 가능합니다[[GitHub Blog](https://github.blog/ai-and-ml/generative-ai/continuous-ai-in-practice-what-developers-can-automate-today-with-agentic-ci/)].
+### 2.1 왜 CI 기반 리뷰인가?
+- **가격 구조**: 채팅 구독은 인터랙티브 사용에 적합하지만, CI 리뷰는 PR 발생 시에만 실행되어 비용 효율적입니다.
+- **사용량 기반 API**: 작은 PR에는 저비용 모델, 대규모 리팩터링에는 고성능 모델을 라우팅할 수 있습니다.
+- **로컬 모델**: Ollama 등 로컬 모델을 사용하면 비용이 거의 제로에 가깝습니다.
 
-| 시나리오 | 기대 효과 |
-|----------|-----------|
-| **코드 리뷰 보조** – 자동 코멘트·리팩터링 제안 | 리뷰 시간 단축, 일관된 스타일 유지 |
-| **문서·README 자동 업데이트** – 변경된 API/설정 반영 | 문서 최신성 확보 |
-| **의존성 관리 및 업데이트 제안** – 최신 버전 검토·PR 자동 생성 | 보안 취약점 빠른 대응 |
-| **회귀 테스트 시나리오 생성·보강** – 새로운 경계 조건 자동 추가 | 테스트 커버리지 향상 |
-| **품질 지표 모니터링 및 알림** – 코드 복잡도·커버리지 추세 분석 | 품질 저하 조기 감지 |
-| **이슈·PR 자동 분류·우선순위 지정** – 라벨링·담당자 자동 할당 | 워크플로 효율화 |
+### 2.2 DIY 파이프라인 제어 항목
+- 모델 선택 (OpenAI, Anthropic 등)
+- 최대 토큰 수
+- 실행 시점 (PR opened, synchronize, reopened 등)
+- “검토할 가치가 있는” 기준 정의
 
-## 6. 구현 가이드
-> **※ 구체적인 구현 방법은 현재 공개된 자료가 제한적이므로, 아래 내용은 일반적인 권고사항이며 실제 적용 시 추가 조사가 필요합니다.**
+---
 
-1. **GitHub Actions와 연동**  
-   - `workflow.yml` 파일에 **LLM 호출 스텝**을 추가하고, 입력으로 `github.event` payload를 전달합니다.  
-   - 결과를 PR 코멘트 혹은 파일 변경으로 반환하도록 설정합니다.  
-   - *구체적인 액션 예시는 GitHub 공식 문서([GitHub Actions Docs](https://docs.github.com/en/actions))를 참고*하십시오.
+## 3. 예제 워크플로우와 베스트 프랙티스
 
-2. **프롬프트 설계 및 LLM 파라미터**  
-   - 작업별 **명확한 목표**와 **컨텍스트**(파일 내용, 변경 diff 등)를 프롬프트에 포함시켜야 합니다.  
-   - 온도(temperature)·최대 토큰(max tokens) 등 파라미터는 **실험을 통해 최적화**합니다.  
+### 3.1 GitHub Action 정의
+`.github/workflows/ai-code-review.yml` 파일을 생성합니다:
 
-3. **상태 관리·컨텍스트 전달**  
-   - 에이전트가 이전 결과를 활용하도록 **artifact** 혹은 **cache**를 이용해 상태를 저장합니다.  
+```yaml
+name: AI Code Review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Jazz (AI 리뷰 도구)
+        run: npm install -g jazz-ai
+      - name: Run code review workflow
+        run: jazz --output raw workflow run code-review --auto-approve
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Generate review markdown
+        run: jazz --output raw workflow run code-review --auto-approve > review.md
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Comment on PR
+        run: gh pr comment "$PR_NUMBER" --body-file review.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+```
 
-4. **로그·디버깅 및 결과 검증**  
-   - 각 에이전트 실행 로그를 **GitHub Actions 로그**에 기록하고, 자동화 결과는 **human‑in‑the‑loop** 검증 단계에서 리뷰합니다.  
+> **참고** `--output raw` 옵션은 CI 환경에서 출력 캡처와 리다이렉션을 쉽게 해줍니다. `--auto-approve` 로 완전 자동화를 구현합니다. 권한은 최소화되었습니다.
 
-## 7. 베스트 프랙티스
-| 권고사항 | 설명 |
-|----------|------|
-| **Human‑in‑the‑loop 설계** | 에이전트가 생성한 코멘트·PR은 반드시 인간이 검토 후 병합하도록 워크플로에 검증 단계 추가 |
-| **권한 최소화** | 에이전트에게 필요한 최소 권한(예: `pull_request` 읽기, 특정 디렉터리 쓰기)만 부여 |
-| **점진적 도입** | 파일·프로젝트 단위로 작은 파일(예: 문서 업데이트)부터 자동화 적용 후 범위 확대 |
-| **성능·비용 모니터링** | LLM 호출 횟수·응답 시간·사용량을 메트릭으로 수집하고, 비용 초과 방지를 위한 알림 설정 |
+### 3.2 리뷰 루브릭 (프롬프트) 정의
+`workflows/code-review/WORKFLOW.md` 파일을 생성하고 아래와 같이 정의합니다:
 
-## 8. 도입 시 고려해야 할 위험 및 한계
-| 위험 요소 | 대응 방안 |
-|-----------|-----------|
-| **오버피팅·잘못된 판단** | 결과를 자동 병합하지 말고, 검증 단계에서 인간이 확인 |
-| **프롬프트 보안·프라이버시** | 민감한 코드·시크릿을 프롬프트에 포함하지 않으며, 모델 제공자의 데이터 정책 검토 |
-| **모델 업데이트·버전 관리** | 모델 버전을 명시하고, 주요 업데이트 시 테스트를 수행 |
-| **팀 문화·워크플로 변화** | 교육·워크숍을 통해 AI 기반 자동화에 대한 이해도 향상 및 저항 최소화 |
+```markdown
+---
+name: code-review
+description: Review PR diff and produce a structured report
+autoApprove: read-only
+---
+Review the current PR diff.
+Output GitHub‑flavored Markdown with:
+1. **Summary** (2–4 bullets)
+2. **High‑risk issues** (correctness + security)
+3. **Performance / complexity concerns**
+4. **API / UX footguns**
+5. **Test gaps + concrete test suggestions**
+6. **Nitpicks** (style/readability)
 
-## 9. 미래 전망 및 발전 방향
-- **멀티모델·멀티에이전트 협업**: 서로 다른 전문성을 가진 여러 에이전트가 협업해 복합 작업(예: 코드·문서·배포) 전체를 자동화하는 시나리오가 기대됩니다.  
-- **자동화 범위 확대**: 현재는 **코드·문서·테스트** 수준이지만, 향후 **배포·운영**까지 연계된 **End‑to‑End AI‑CI** 파이프라인이 등장할 가능성이 있습니다.  
-- **표준화·오픈소스 에코시스템**: GitHub Next와 같은 조직이 **Agentic CI** 패턴을 공개하고, 커뮤니티 기반 플러그인·액션이 성장하면서 표준화가 진행될 전망입니다.
+**Rules**
+- Be specific: reference files/functions.
+- Prefer minimal diffs / smallest safe fix.
+- If you’re unsure, say so and propose how to verify.
+- No generic advice (“add tests”) — propose exact test cases.
+- Rank issues (High/Medium/Low).
+- List files reviewed, assumptions, and what was not checked.
+```
 
-## 10. 결론
-Continuous AI는 **판단·해석이 필요한 작업**을 CI와 동일한 자동화 인프라 위에 올려, 개발 생산성을 크게 향상시킬 수 있는 새로운 패러다임입니다. 조직 차원에서는 **파일·프로젝트 단위의 파일럿**을 통해 위험을 최소화하고, **Human‑in‑the‑loop** 검증을 반드시 포함한 도입 전략을 수립하는 것이 권장됩니다.  
+### 3.3 베스트 프랙티스 체크리스트
+- **읽기 전용 모드**: `autoApprove` 를 `read-only` 로 유지해 에이전트가 저장소를 수정하지 못하도록 합니다.
+- **이슈 순위 매기기**: 모든 이슈에 **High/Medium/Low** 라벨을 부여해 중요도를 명확히 합니다.
+- **오탐 예산**: 잡음이 많으면 무시되므로, 평가 기준을 조정해 오탐을 최소화합니다.
+- **모델 라우팅**: 작은 PR → 저비용 모델, 대규모 리팩터링 → 고성능 모델 사용.
+- **투명성**: 에이전트가 검토한 파일 목록, 가정, 검토하지 않은 항목을 명시하도록 요구합니다.
 
-### 추가 학습·참고 자료
-- GitHub Blog – *Continuous AI in practice: What developers can automate today with agentic CI* [[GitHub Blog](https://github.blog/ai-and-ml/generative-ai/continuous-ai-in-practice-what-developers-can-automate-today-with-agentic-ci/)]  
-- GitHub Actions 공식 문서: <https://docs.github.com/en/actions>  
-- CI/CD 기본 개념 및 베스트 프랙티스: 관련 서적 및 온라인 강좌 (추가 조사 필요)  
+### 3.4 실제 사례
+Jazz 저장소는 자체 코드 리뷰와 릴리즈 노트에 **Jazz** 를 사용합니다. 워크플로 파일은 다음에서 확인할 수 있습니다: https://github.com/lvndry/jazz/tree/main/.github
+
+---
+
+## 4. 마무리
+위 가이드를 따라 CI 파이프라인에 AI 코드 리뷰 에이전트를 구현하면, **자동화된 고품질 리뷰**를 제공하면서 리뷰 비용을 크게 절감할 수 있습니다. 질문이나 개선 사항이 있으면 언제든 이슈를 열어 주세요.
