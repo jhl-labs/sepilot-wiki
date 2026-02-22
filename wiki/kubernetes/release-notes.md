@@ -4,16 +4,13 @@ menu: "K8s 릴리즈 노트"
 description: "Kubernetes v1.23 부터 최신 v1.35+까지 주요 변경 사항을 간략히 정리한 가이드"
 category: "Guide"
 tags: ["Kubernetes", "Release Notes", "버전", "version", "changelog"]
-status: "draft"
+status: "published"
 issueNumber: 0
 createdAt: "2026-02-10T12:15:00Z"
 updatedAt: 2026-02-20
-related_docs: ["node-readiness-controller.md", "ingress-nginx-deprecation-guide.md", "cgroup-migration.md", "api-governance.md", "kubernetes-kubernetes-v1-33-8.md"]
-order: 5
+related_docs: ["node-readiness-controller.md", "ingress-nginx-deprecation-guide.md", "cgroup-migration.md", "api-governance.md"]
+order: 1
 redirect_from:
-  - kubernetes-v1-28-release-notes
-  - kubernetes-kubernetes-v1-33-8
-  - kubernetes-kubernetes-v1-33-8
   - kubernetes-kubernetes-release-notes
   - kubernetes-kubernetes-v1-33-8
 ---
