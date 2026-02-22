@@ -70,15 +70,14 @@
       "isInvalid": false
     },
     {
-      "title": "Continuous AI와 Agentic CI 실무 가이드",
+      "title": "연속 AI 에이전트 CI 구축 가이드",
       "slug": "ai/continuous-ai-agentic-ci",
       "status": "published",
       "tags": [
-        "Continuous AI",
-        "Agentic CI",
+        "AI",
         "CI",
-        "자동화",
-        "개발자"
+        "코드 리뷰",
+        "에이전트"
       ],
       "lastModified": "2026-02-22T10:19:41+09:00",
       "author": "SEPilot AI",
@@ -108,8 +107,8 @@
       "tags": [
         "Continuous AI",
         "Human-in-the-Loop",
-        "AI 검증",
-        "CI"
+        "Verification",
+        "AI Errors"
       ],
       "lastModified": "2026-02-22T10:19:41+09:00",
       "author": "JHL",
@@ -210,7 +209,7 @@
     },
     {
       "title": "클라우드 기반 영구 터미널 설계 및 구현 가이드",
-      "slug": "207",
+      "slug": "cloud/persistent-terminal-design",
       "status": "draft",
       "tags": [
         "클라우드 터미널",
@@ -546,15 +545,14 @@
   ],
   "tree": [
     {
-      "name": "AI & LLM",
-      "path": "ai",
+      "name": "라벨 메타데이터",
+      "path": "labels",
       "isCategory": true,
       "order": 1,
       "children": [
         {
-          "title": "MCP (Model Context Protocol) 완벽 가이드",
-          "slug": "ai/mcp-model-context-protocol",
-          "menu": "MCP 가이드",
+          "title": "Label: dependencies",
+          "slug": "labels/dependencies",
           "order": 1,
           "lastModified": "2026-02-22T10:19:41+09:00"
         },
@@ -562,6 +560,12 @@
           "title": "Qwen 3.5",
           "slug": "ai/qwen3-5",
           "order": 2,
+          "lastModified": "2026-02-22T10:19:41+09:00"
+        },
+        {
+          "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+          "slug": "ai/continuous-ai",
+          "order": 3,
           "lastModified": "2026-02-22T10:19:41+09:00"
         },
         {
@@ -599,27 +603,21 @@
           "lastModified": "2026-02-22T10:19:41+09:00"
         },
         {
-          "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
-          "slug": "ai/continuous-ai",
-          "lastModified": "2026-02-22T10:19:41+09:00"
-        },
-        {
-          "title": "Continuous AI와 Agentic CI 실무 가이드",
+          "title": "연속 AI 에이전트 CI 구축 가이드",
           "slug": "ai/continuous-ai-agentic-ci",
           "lastModified": "2026-02-22T10:19:41+09:00"
         }
       ]
     },
     {
-      "name": "Projects",
-      "path": "projects",
+      "name": "보고서",
+      "path": "reports",
       "isCategory": true,
       "order": 2,
       "children": [
         {
-          "title": "OpenClaw 완벽 가이드",
-          "slug": "projects/openclaw-complete-guide",
-          "menu": "OpenClaw",
+          "title": "주간 위키 보고서 - 2026년 08주차",
+          "slug": "reports/weekly-2026-08",
           "order": 1,
           "lastModified": "2026-02-22T10:19:41+09:00"
         },
@@ -673,8 +671,14 @@
       "name": "Kubernetes",
       "path": "kubernetes",
       "isCategory": true,
-      "order": 3,
+      "order": 4,
       "children": [
+        {
+          "title": "Introducing Node Readiness Controller",
+          "slug": "kubernetes/node-readiness-controller",
+          "order": 1,
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
         {
           "title": "Kubernetes 버전별 릴리즈 노트",
           "slug": "kubernetes/release-notes",
@@ -712,7 +716,7 @@
       "name": "Docker",
       "path": "docker",
       "isCategory": true,
-      "order": 4,
+      "order": 5,
       "children": [
         {
           "title": "Docker/Hardened Images",
@@ -725,7 +729,7 @@
       "name": "Bun",
       "path": "bun",
       "isCategory": true,
-      "order": 5,
+      "order": 7,
       "children": [
         {
           "title": "bun 이란?",
@@ -748,10 +752,76 @@
       ]
     },
     {
-      "name": "Frontend",
+      "name": "AI·LLM",
+      "path": "ai",
+      "isCategory": true,
+      "order": 8,
+      "children": [
+        {
+          "title": "클라우드 터미널 구축: 지속적인 AI 에이전트 세션 유지하기",
+          "slug": "ai/cloud-terminal-persistent-ai-agent-sessions",
+          "lastModified": "2026-02-22T10:18:12+09:00"
+        },
+        {
+          "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+          "slug": "ai/continuous-ai",
+          "order": 3,
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
+        {
+          "title": "glm 5",
+          "slug": "ai/glm-5",
+          "order": 3,
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
+        {
+          "title": "Automate Repository Tasks with GitHub Agentic Workflows",
+          "slug": "ai/github-agentic-workflows",
+          "order": 6,
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
+        {
+          "title": "바이브 코딩이란?",
+          "slug": "ai/vibe-coding",
+          "order": 7,
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
+        {
+          "title": "Gemini 3.1 Pro",
+          "slug": "ai/gemini-3-1-pro",
+          "order": 9,
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
+        {
+          "title": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
+          "slug": "ai/multi-agent-system",
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
+        {
+          "title": "Continuous AI와 Agentic CI 실무 가이드",
+          "slug": "ai/continuous-ai-agentic-ci",
+          "lastModified": "2026-02-21T13:04:23Z"
+        },
+        {
+          "title": "MCP (Model Context Protocol) 완벽 가이드",
+          "slug": "ai/mcp-model-context-protocol",
+          "menu": "MCP 가이드",
+          "order": 1,
+          "lastModified": "2026-02-21T11:20:48Z"
+        },
+        {
+          "title": "Qwen 3.5",
+          "slug": "ai/qwen3-5",
+          "order": 2,
+          "lastModified": "2026-02-21T11:20:48Z"
+        }
+      ]
+    },
+    {
+      "name": "프론트엔드",
       "path": "frontend",
       "isCategory": true,
-      "order": 6,
+      "order": 9,
       "children": [
         {
           "title": "프론트엔드 API 서비스 레이어 설명",
@@ -762,10 +832,10 @@
       ]
     },
     {
-      "name": "Backend",
-      "path": "backend",
+      "name": "클라우드·인프라",
+      "path": "cloud",
       "isCategory": true,
-      "order": 7,
+      "order": 10,
       "children": [
         {
           "title": "Wiki 페이지 API 라우트 상세 가이드",

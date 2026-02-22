@@ -1,18 +1,22 @@
 {
   "entries": [
     {
-      "id": "34df0024-3930-4767-bc4a-e91b3f85c2d0",
-      "timestamp": "2026-02-22T01:23:35.748Z",
-      "actionType": "recover",
-      "issueNumber": 198,
-      "issueTitle": "[Wiki Maintenance] [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
-      "documentSlug": "ai/continuous-ai",
-      "documentTitle": "[Wiki Maintenance] [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
+      "id": "f255090b-316e-4f27-815c-c2a5fe974071",
+      "timestamp": "2026-02-22T01:20:59.899Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "Wiki Tree Maintenance",
+      "documentSlug": "_wiki-tree",
+      "documentTitle": "Wiki Tree Maintenance",
+      "summary": "구조 분석 완료. 21개 자동 적용, 0개 보류, 1개 Issue 생성",
+      "trigger": "scheduled",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
-      "changes": null
+      "changes": {
+        "applied": 21,
+        "skipped": 0,
+        "issues": 1
+      }
     },
     {
       "id": "66695809-72d8-4fd6-8a51-8bdf8c227bc2",
@@ -2873,5 +2877,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-22T01:23:35.748Z"
+  "lastUpdated": "2026-02-22T01:20:59.899Z"
 }
