@@ -195,6 +195,82 @@ WhatsApp Business API와 페어링 후, `openclaw agent set default ollama/llama
 *출처: 공식 튜토리얼 영상 (2026‑02‑10) [8]*  
 ---
 
+## 이메일 인증 자동화 – MailCat 통합
+
+AI 에이전트가 서비스에 가입하거나 인증을 수행할 때 가장 흔한 장벽이 "이메일을 확인해 주세요"입니다. **MailCat**은 이 문제를 해결하기 위한 오픈소스 도구로, 단일 프롬프트만으로 OpenClaw에 이메일 수신 기능을 부여합니다 [13].
+
+### 설정 방법
+OpenClaw 또는 Claude Code에 다음 프롬프트를 입력합니다:
+```
+Read https://mailcat.ai/skill.md and set up a MailCat mailbox for yourself. Save the token securely.
+```
+
+에이전트가 자동으로 수행하는 작업:
+1. `skill.md` 문서를 읽어 API 사양 파악
+2. API를 통해 임시 메일박스 생성
+3. 토큰을 안전하게 저장
+4. 필요 시 받은 편지함을 확인하고 인증 코드를 자동 추출
+
+### 주요 특징
+| 기능 | 설명 |
+|------|------|
+| **단일 프롬프트 설정** | 별도 API 키 불필요, AI가 문서를 읽고 스스로 통합 |
+| **자동 추출** | 이메일에서 인증 코드와 링크를 자동 파싱 |
+| **1시간 보존** | 인증 흐름에 최적화된 임시 메일박스 |
+| **셀프 호스팅** | Cloudflare 계정에 직접 배포 가능 |
+| **오픈소스** | MIT 라이선스 |
+
+### 활용 시나리오
+- **자율 서비스 가입**: 에이전트가 서비스를 자동으로 등록
+- **E2E 테스트**: CI/CD 파이프라인에서 이메일 흐름 테스트
+- **뉴스레터 처리**: 자동 구독 후 내용 요약
+- **알림 모니터링**: 이메일 알림을 감시하고 액션으로 전환
+
+*출처: MailCat 공식 문서 및 euno.news (2026‑02‑21) [13]*
+
+---
+
+## 보안 위험 및 완화 방안
+
+CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며 OpenClaw의 보안 위험을 경고했습니다 [14].
+
+### 주요 위협 벡터
+
+#### 1. 프롬프트 인젝션 (직접 및 간접)
+OpenClaw는 외부 콘텐츠(이메일, 웹 페이지, 문서)를 처리합니다. 해당 콘텐츠에 삽입된 악의적 명령이 에이전트의 동작을 탈취할 수 있습니다. 실제로 Moltbook의 공개 게시물에 지갑을 고갈시키는 페이로드가 삽입된 사례가 보고되었습니다.
+
+#### 2. 자격 증명 탈취
+OpenClaw는 파일 시스템에 접근할 수 있어, `~/.ssh/`, `~/.aws/`, `~/.gnupg/`, 브라우저 자격 증명 저장소, 암호화 지갑 등이 모두 노출 대상입니다.
+
+#### 3. 에이전트 기반 측면 이동
+침해된 에이전트가 정당한 도구 접근 권한을 이용해 시스템 간 측면 이동을 수행합니다.
+
+#### 4. 대규모 노출
+135K+ 개의 OpenClaw 인스턴스가 공개적으로 노출되어 있으며, 다수가 암호화되지 않은 HTTP를 통해 서비스됩니다.
+
+### 완화 전략
+
+| 영역 | 조치 | 상세 |
+|------|------|------|
+| **네트워크** | HTTPS 강제 | 모든 인스턴스에 TLS 적용, HTTP 접근 차단 |
+| **파일 시스템** | 샌드박스 격리 | Docker 컨테이너 또는 firejail로 파일 시스템 접근 제한 |
+| **자격 증명** | 전용 사용자 계정 | 최소 권한 원칙 적용, 민감 디렉터리 마운트 제외 |
+| **프롬프트** | 입력 검증 | 외부 콘텐츠 처리 전 프롬프트 인젝션 필터링 적용 |
+| **모니터링** | 이상 탐지 | 에이전트 API 호출 패턴 모니터링, 비정상 접근 즉시 차단 |
+| **공급망** | 의존성 감사 | `npm audit` / `pnpm audit` 정기 실행, lockfile 무결성 검증 |
+
+### 보안 체크리스트
+- [ ] OpenClaw를 전용 사용자 계정(비root)으로 실행
+- [ ] Docker 컨테이너 내에서 `--read-only` 플래그와 함께 실행
+- [ ] `~/.ssh`, `~/.aws` 등 민감 디렉터리를 마운트에서 제외
+- [ ] 모든 외부 통신에 HTTPS 적용
+- [ ] Allowlist로 허용된 사용자만 접근 허가
+- [ ] 정기적인 의존성 보안 감사 수행
+
+*출처: CrowdStrike "What Security Teams Need to Know About OpenClaw", euno.news (2026‑02‑22) [14]*
+
+---
+
 ## 하드웨어 호환성 및 Claw 변형별 권장 사양
 
 OpenClaw는 "Claw"라는 개념의 대표적 구현체입니다. Andrej Karpathy가 제안한 "Claw"는 LLM 에이전트 위에 존재하는 **지속적 AI 에이전트 시스템**으로, 오케스트레이션, 스케줄링, 컨텍스트 유지, 도구 호출 및 지속성을 다음 단계로 끌어올리는 새로운 레이어입니다 [12].
@@ -318,5 +394,8 @@ Mac Mini에서 OpenClaw를 운영하려면 다음 조건을 충족하는 것이 
 11. **릴리즈 노트** – https://github.com/openclaw/openclaw/releases (조회일: 2026‑02‑10)  
 
 12. **"Claws"란 무엇이며, 왜 Mac Mini에서 실행하면 안 되는가** – https://euno.news/posts/ko/what-are-claws-and-why-you-shouldnt-run-them-on-yo-c877cd (조회일: 2026‑02‑22)  
+
+13. **MailCat – AI 에이전트를 위한 이메일 인증 자동화** – https://euno.news/posts/ko/one-prompt-to-give-your-openclaw-email-access-db7c36 (조회일: 2026‑02‑22)
+14. **CrowdStrike: OpenClaw 보안 위험 분석** – https://euno.news/posts/ko/crowdstrike-says-openclaw-is-dangerous-theyre-righ-5854d2 (조회일: 2026‑02‑22)
 
 *본 문서는 2026‑02‑22 기준 최신 정보를 기반으로 작성되었습니다. 최신 버전이나 새로운 플러그인에 대한 내용은 공식 리포지터리와 Docs를 지속적으로 확인하시기 바랍니다.*

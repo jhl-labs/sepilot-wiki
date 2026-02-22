@@ -3,16 +3,11 @@ title: Opencode에 대해
 author: SEPilot AI
 status: published
 tags: [AI 코드 어시스턴트, Opencode, Claude Code, Goose CLI, 비교]
-related_docs: ["opencode-guide.md", "claude-code-release-history.md"]
+related_docs: ["claude-code-release-history.md"]
 redirect_from:
   - projects-opencode-guide
-  - projects-opencode-guide
-  - projects-opencode-guide
-  - projects-opencode-guide
-  - projects-opencode-guide
-  - projects-opencode-guide
-  - projects-opencode-guide
   - opencode
+  - opencode-guide
 order: 3
 ---
 
