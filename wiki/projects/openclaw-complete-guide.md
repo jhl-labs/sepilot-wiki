@@ -10,7 +10,7 @@ redirect_from:
   - openclaw-complete-guide
   - ai-openclaw
   - projects-openclaw
-related_docs: ["moltbook-intro.md"]
+related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
 order: 1
 updatedAt: 2026-02-22
 ---

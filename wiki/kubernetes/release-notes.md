@@ -8,7 +8,7 @@ status: "published"
 issueNumber: 0
 createdAt: "2026-02-10T12:15:00Z"
 updatedAt: 2026-02-20
-related_docs: ["node-readiness-controller.md", "ingress-nginx-deprecation-guide.md", "cgroup-migration.md", "api-governance.md"]
+related_docs: ["api-governance.md", "node-readiness-controller.md", "cgroup-migration.md", "ingress-nginx-deprecation-guide.md"]
 order: 1
 redirect_from:
   - kubernetes-kubernetes-release-notes

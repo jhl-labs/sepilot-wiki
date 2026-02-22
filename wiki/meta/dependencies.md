@@ -10,6 +10,7 @@ updatedAt: "2026-02-21T11:30:00Z"
 order: 1
 redirect_from:
   - labels-dependencies
+related_docs: ["weekly-2026-08.md"]
 ---
 
 # dependencies 레이블

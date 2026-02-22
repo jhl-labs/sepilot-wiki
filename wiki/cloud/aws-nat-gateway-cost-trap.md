@@ -8,6 +8,7 @@ issueNumber: 212
 createdAt: "2026-02-22T10:00:00Z"
 updatedAt: "2026-02-22T10:00:00Z"
 order: 1
+related_docs: ["aws-cost-optimization.md"]
 ---
 
 # $100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이

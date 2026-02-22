@@ -6,6 +6,7 @@ tags: [AWS, NAT Gateway, Terraform, Cost Optimization, VPC Endpoint]
 redirect_from:
   - 212
 order: 1
+related_docs: ["aws-nat-gateway-cost-trap.md"]
 ---
 
 ## 1. 개요

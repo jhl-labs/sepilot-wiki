@@ -7,7 +7,7 @@ status: "published"
 issueNumber: 199
 createdAt: "2026-02-21T10:00:00Z"
 updatedAt: "2026-02-22T10:00:00Z"
-related_docs: ["continuous-ai.md"]
+related_docs: ["openclaw-complete-guide.md"]
 ---
 
 # 멀티 에이전트 시스템 – Self‑Healing AI Agents
