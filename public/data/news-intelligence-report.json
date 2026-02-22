@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-02-22T00:22:48.999Z",
+  "generatedAt": "2026-02-22T06:17:37.113Z",
   "config": {
     "rssUrl": "https://euno.news/rss.xml",
     "maxAiBatch": 30,
@@ -7,287 +7,279 @@
     "maxIssues": 5
   },
   "summary": {
-    "scannedAt": "2026-02-22T00:22:48.998Z",
+    "scannedAt": "2026-02-22T06:17:37.113Z",
     "totalScanned": 200,
-    "newItems": 72,
+    "newItems": 62,
     "prefiltered": 30,
     "relevant": 19,
     "issuesCreated": 5,
-    "durationMs": 63602
+    "durationMs": 62296
   },
   "items": [
     {
-      "title": "OpenClaw는 설계상 안전하지 않다",
-      "link": "https://euno.news/posts/ko/openclaw-is-unsafe-by-design-f26efc",
-      "guid": "https://euno.news/posts/ko/openclaw-is-unsafe-by-design-f26efc",
-      "relevanceScore": 88,
+      "title": "MCP 보안의 두 층: 런타임 노출 vs 공급망",
+      "link": "https://euno.news/posts/ko/the-two-layers-of-mcp-security-runtime-exposure-vs-5ba7ba",
+      "guid": "https://euno.news/posts/ko/the-two-layers-of-mcp-security-runtime-exposure-vs-5ba7ba",
+      "relevanceScore": 86,
       "relatedDocuments": [
-        "projects/openclaw-complete-guide.md"
+        "ai/mcp-model-context-protocol.md"
       ],
       "keyTopics": [
-        "OpenClaw",
-        "Security",
-        "Supply‑Chain Attack"
+        "MCP",
+        "Security layers",
+        "Supply‑chain vs runtime"
       ],
       "sourceUrl": null
     },
     {
-      "title": "CrowdStrike가 OpenClaw가 위험하다고 말한다. 그들은 옳다. 이에 대한 대처 방법.",
-      "link": "https://euno.news/posts/ko/crowdstrike-says-openclaw-is-dangerous-theyre-righ-5854d2",
-      "guid": "https://euno.news/posts/ko/crowdstrike-says-openclaw-is-dangerous-theyre-righ-5854d2",
-      "relevanceScore": 85,
+      "title": "우리가 자동화된 MCP 보안 스캐너를 구축한 방법 (그리고 우리가 발견한 것)",
+      "link": "https://euno.news/posts/ko/how-we-built-an-automated-mcp-security-scanner-and-017cbc",
+      "guid": "https://euno.news/posts/ko/how-we-built-an-automated-mcp-security-scanner-and-017cbc",
+      "relevanceScore": 82,
       "relatedDocuments": [
-        "projects/openclaw-complete-guide.md"
+        "ai/mcp-model-context-protocol.md"
       ],
       "keyTopics": [
-        "OpenClaw",
-        "CrowdStrike",
-        "Mitigation"
+        "MCP",
+        "Automated security scanner",
+        "Vulnerability discovery"
       ],
       "sourceUrl": null
     },
     {
-      "title": "나는 Rust로 GPU 가속 얼굴 크롭 도구를 Vibe‑Coded했습니다 — 그 이유는",
-      "link": "https://euno.news/posts/ko/i-vibe-coded-a-gpu-accelerated-face-cropping-tool-d85b55",
-      "guid": "https://euno.news/posts/ko/i-vibe-coded-a-gpu-accelerated-face-cropping-tool-d85b55",
+      "title": "Kubernetes ImagePullBackOff: 레지스트리가 아니라 IAM",
+      "link": "https://euno.news/posts/ko/kubernetes-imagepullbackoff-its-not-the-registry-i-8ad561",
+      "guid": "https://euno.news/posts/ko/kubernetes-imagepullbackoff-its-not-the-registry-i-8ad561",
       "relevanceScore": 78,
       "relatedDocuments": [
-        "ai/vibe-coding.md"
+        "kubernetes/release-notes.md"
       ],
       "keyTopics": [
-        "Rust",
-        "GPU Acceleration",
-        "Face Cropping"
+        "Kubernetes",
+        "ImagePullBackOff",
+        "IAM authentication"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Claude와 git commit 사이에 리뷰 강제하기",
-      "link": "https://euno.news/posts/ko/forcing-a-review-between-claude-and-git-commit-4241c4",
-      "guid": "https://euno.news/posts/ko/forcing-a-review-between-claude-and-git-commit-4241c4",
-      "relevanceScore": 78,
-      "relatedDocuments": [
-        "ai/github-agentic-workflows.md",
-        "ai/continuous-ai-agentic-ci.md"
-      ],
-      "keyTopics": [
-        "Claude",
-        "Git commit review",
-        "AI‑driven code review"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "2026년 AI 에이전트 시뮬레이션을 위한 최고의 플랫폼",
-      "link": "https://euno.news/posts/ko/the-best-platforms-for-ai-agent-simulation-in-2026-4ca57e",
-      "guid": "https://euno.news/posts/ko/the-best-platforms-for-ai-agent-simulation-in-2026-4ca57e",
-      "relevanceScore": 75,
-      "relatedDocuments": [
-        "ai/multi-agent-system.md",
-        "ai/continuous-ai.md"
-      ],
-      "keyTopics": [
-        "AI Agent Simulation",
-        "Platforms",
-        "2026 Trends"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 (그리고 Terraform으로 해결하는 방법)",
-      "link": "https://euno.news/posts/ko/the-100k-aws-routing-trap-s3-nat-gateways-and-how-307ce6",
-      "guid": "https://euno.news/posts/ko/the-100k-aws-routing-trap-s3-nat-gateways-and-how-307ce6",
-      "relevanceScore": 75,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "AWS",
-        "NAT Gateway",
-        "Terraform",
-        "cost optimization"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "왜 AI 코딩 에이전트와 멀티태스킹이 무너지는가 (그리고 내가 고친 방법)",
-      "link": "https://euno.news/posts/ko/why-multitasking-with-ai-coding-agents-breaks-down-f2997b",
-      "guid": "https://euno.news/posts/ko/why-multitasking-with-ai-coding-agents-breaks-down-f2997b",
+      "title": "C#에서 SOLID 파트 1: 단일 책임",
+      "link": "https://euno.news/posts/ko/solid-in-c-part-1-single-responsibility-300358",
+      "guid": "https://euno.news/posts/ko/solid-in-c-part-1-single-responsibility-300358",
       "relevanceScore": 72,
-      "relatedDocuments": [
-        "ai/vibe-coding.md",
-        "ai/continuous-ai.md"
-      ],
-      "keyTopics": [
-        "AI Coding Agent",
-        "Multitasking",
-        "Performance Fixes"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "내가 직접 만든 디버깅 툴킷 — Claude 친구와 함께 만들고, 여러분과 공유합니다",
-      "link": "https://euno.news/posts/ko/i-built-myself-a-debugging-toolkit-made-with-my-cl-1b3146",
-      "guid": "https://euno.news/posts/ko/i-built-myself-a-debugging-toolkit-made-with-my-cl-1b3146",
-      "relevanceScore": 70,
-      "relatedDocuments": [
-        "ai/github-agentic-workflows.md",
-        "ai/continuous-ai-agentic-ci.md"
-      ],
-      "keyTopics": [
-        "Debugging Toolkit",
-        "Claude",
-        "Automation"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "실용적인 팁: AI 모델 거버넌스를 위한 &apos;Shadow Auditing&apos;",
-      "link": "https://euno.news/posts/ko/practical-tip-shadow-auditing-for-ai-model-governa-4a39b0",
-      "guid": "https://euno.news/posts/ko/practical-tip-shadow-auditing-for-ai-model-governa-4a39b0",
-      "relevanceScore": 70,
-      "relatedDocuments": [
-        "ai/continuous-ai.md"
-      ],
-      "keyTopics": [
-        "AI model governance",
-        "Shadow Auditing",
-        "trust & fairness"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "LLM Gateway란 무엇인가?",
-      "link": "https://euno.news/posts/ko/what-is-an-llm-gateway-536602",
-      "guid": "https://euno.news/posts/ko/what-is-an-llm-gateway-536602",
-      "relevanceScore": 70,
       "relatedDocuments": [],
       "keyTopics": [
-        "LLM Gateway",
-        "architecture",
-        "LLM integration"
+        "SOLID principles",
+        "C#",
+        "Single Responsibility"
       ],
       "sourceUrl": null
     },
     {
-      "title": "내가 Mac Mini M4에 AI 어시스턴트를 만든 방법",
-      "link": "https://euno.news/posts/ko/how-i-built-an-ai-assistant-on-a-mac-mini-m4-2da511",
-      "guid": "https://euno.news/posts/ko/how-i-built-an-ai-assistant-on-a-mac-mini-m4-2da511",
+      "title": "나는 useQuery/Promise.all 스파게티에 지쳐서 이것을 만들었다 🫖🦡",
+      "link": "https://euno.news/posts/ko/i-got-tired-of-usequerypromiseall-spaghetti-so-i-b-1d6841",
+      "guid": "https://euno.news/posts/ko/i-got-tired-of-usequerypromiseall-spaghetti-so-i-b-1d6841",
       "relevanceScore": 70,
       "relatedDocuments": [
-        "ai/continuous-ai.md",
-        "ai/multi-agent-system.md"
+        "frontend/api-service-layer.md"
       ],
       "keyTopics": [
-        "AI assistant",
-        "Mac Mini M4 hardware",
-        "Local LLM deployment"
+        "React",
+        "useQuery",
+        "Promise.all",
+        "데이터 페칭 패턴"
       ],
       "sourceUrl": null
     },
     {
-      "title": "우리가 SendRec에 Generic Webhooks를 추가한 방법",
-      "link": "https://euno.news/posts/ko/how-we-added-generic-webhooks-to-sendrec-14a7fa",
-      "guid": "https://euno.news/posts/ko/how-we-added-generic-webhooks-to-sendrec-14a7fa",
+      "title": "Express.js와 MongoDB로 인증 시스템을 구축했습니다 (Access/Refresh Tokens, Sessions, Rate Limiting 등)",
+      "link": "https://euno.news/posts/ko/i-built-an-authentication-system-with-expressjs-mo-ef5837",
+      "guid": "https://euno.news/posts/ko/i-built-an-authentication-system-with-expressjs-mo-ef5837",
+      "relevanceScore": 70,
+      "relatedDocuments": [
+        "backend/wiki-api.md"
+      ],
+      "keyTopics": [
+        "Express.js",
+        "MongoDB",
+        "Authentication"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "가장 빠른 P2P 파일 전송 CLI를 찾는 여정: Thruflux (오픈 알파)",
+      "link": "https://euno.news/posts/ko/on-a-quest-for-the-fastest-p2p-file-transfer-cli-t-eb9dba",
+      "guid": "https://euno.news/posts/ko/on-a-quest-for-the-fastest-p2p-file-transfer-cli-t-eb9dba",
       "relevanceScore": 68,
       "relatedDocuments": [],
       "keyTopics": [
-        "Generic Webhooks",
-        "SendRec integration",
-        "Event‑driven workflows"
+        "P2P file transfer",
+        "CLI tool",
+        "Performance benchmarking"
       ],
       "sourceUrl": null
     },
     {
-      "title": "GCP에 Next.js 배포",
-      "link": "https://euno.news/posts/ko/deploying-nextjs-on-gcp-158581",
-      "guid": "https://euno.news/posts/ko/deploying-nextjs-on-gcp-158581",
-      "relevanceScore": 65,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "GCP",
-        "Next.js deployment",
-        "LLM Gateway"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "공정하고 격리된 방식으로 웹 프레임워크를 벤치마크하는 방법 | Mahdi Shamlou",
-      "link": "https://euno.news/posts/ko/how-to-benchmark-web-frameworks-in-a-fair-isolated-9ace46",
-      "guid": "https://euno.news/posts/ko/how-to-benchmark-web-frameworks-in-a-fair-isolated-9ace46",
-      "relevanceScore": 62,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Web Framework",
-        "Benchmark Methodology",
-        "Isolation"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "T2 Linux, Xorg에 XAA를 복원해 2D 그래픽을 다시 빠르게 함",
-      "link": "https://euno.news/posts/ko/t2-linux-restores-xaa-in-xorg-making-2d-graphics-f-44defc",
-      "guid": "https://euno.news/posts/ko/t2-linux-restores-xaa-in-xorg-making-2d-graphics-f-44defc",
-      "relevanceScore": 60,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Linux",
-        "Xorg",
-        "XAA acceleration"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "나는 주말 하나에 AI 제품 7개를 만들었다 — 내가 배운 점 (그리고 당신도 가질 수 있습니다)",
-      "link": "https://euno.news/posts/ko/i-built-7-ai-products-in-one-weekend-heres-what-i-f9f4c7",
-      "guid": "https://euno.news/posts/ko/i-built-7-ai-products-in-one-weekend-heres-what-i-f9f4c7",
-      "relevanceScore": 60,
+      "title": "성능 비교: React vs WebForms Core",
+      "link": "https://euno.news/posts/ko/performance-comparison-react-vs-webforms-core-800261",
+      "guid": "https://euno.news/posts/ko/performance-comparison-react-vs-webforms-core-800261",
+      "relevanceScore": 66,
       "relatedDocuments": [
-        "ai/continuous-ai.md",
-        "ai/continuous-ai-agentic-ci.md",
-        "ai/github-agentic-workflows.md"
+        "frontend/api-service-layer.md"
       ],
       "keyTopics": [
-        "AI product prototyping",
-        "Rapid monetization",
-        "Weekend hackathon"
+        "React",
+        "WebForms Core",
+        "Performance comparison"
       ],
       "sourceUrl": null
     },
     {
-      "title": "NuGet용 lazygit 스타일 TUI",
-      "link": "https://euno.news/posts/ko/lazygit-style-tui-for-nuget-5fb7ee",
-      "guid": "https://euno.news/posts/ko/lazygit-style-tui-for-nuget-5fb7ee",
+      "title": "Pay-as-You-Go(무료 플랜 제외)에서 AWS CloudFront 생성",
+      "link": "https://euno.news/posts/ko/create-aws-cloudfront-on-pay-as-you-go-not-the-fre-09c813",
+      "guid": "https://euno.news/posts/ko/create-aws-cloudfront-on-pay-as-you-go-not-the-fre-09c813",
+      "relevanceScore": 65,
+      "relatedDocuments": [
+        "cloud/aws-cost-optimization.md",
+        "cloud/aws-nat-gateway-cost-trap.md"
+      ],
+      "keyTopics": [
+        "AWS CloudFront",
+        "Pay‑as‑You‑Go",
+        "CDN 설정"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Rust로 로컬‑퍼스트 에이전트 런타임을 만들었습니다 (기존 CLI를 래핑한 것이 왜 작동하지 않았는지)",
+      "link": "https://euno.news/posts/ko/i-built-a-local-first-agent-runtime-in-rust-and-wh-395210",
+      "guid": "https://euno.news/posts/ko/i-built-a-local-first-agent-runtime-in-rust-and-wh-395210",
+      "relevanceScore": 62,
+      "relatedDocuments": [
+        "projects/rust-gpu-face-crop-tool.md"
+      ],
+      "keyTopics": [
+        "Rust",
+        "Local‑first agent",
+        "LLM runtime"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Web Scraper를 만들고 데이터를 판매하는 단계별 가이드",
+      "link": "https://euno.news/posts/ko/build-a-web-scraper-and-sell-the-data-a-step-by-st-9b4aca",
+      "guid": "https://euno.news/posts/ko/build-a-web-scraper-and-sell-the-data-a-step-by-st-9b4aca",
+      "relevanceScore": 60,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Web Scraping",
+        "Data Extraction",
+        "Python/Node.js"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Extraction Node 구축: 400개 이상의 HN 잡 목록 분석 (Python vs Node.js)",
+      "link": "https://euno.news/posts/ko/building-an-extraction-node-analyzing-400-hn-job-l-88a286",
+      "guid": "https://euno.news/posts/ko/building-an-extraction-node-analyzing-400-hn-job-l-88a286",
+      "relevanceScore": 60,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "데이터 추출",
+        "Python vs Node.js",
+        "HN 잡 분석"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "데이터베이스를 죽이지 마세요: Rails 앱을 더 빠르게 만드는 5가지 ActiveRecord 팁",
+      "link": "https://euno.news/posts/ko/stop-killing-your-database-5-activerecord-tips-for-3e8371",
+      "guid": "https://euno.news/posts/ko/stop-killing-your-database-5-activerecord-tips-for-3e8371",
+      "relevanceScore": 60,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Rails",
+        "ActiveRecord",
+        "Performance Tuning"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "픽셀에서 칼로리까지: GPT-4o Vision으로 고정밀 식사 추적기 만들기",
+      "link": "https://euno.news/posts/ko/from-pixels-to-calories-building-a-high-precision-983ccd",
+      "guid": "https://euno.news/posts/ko/from-pixels-to-calories-building-a-high-precision-983ccd",
       "relevanceScore": 58,
       "relatedDocuments": [],
       "keyTopics": [
-        "NuGet",
-        "Lazy‑git style TUI",
-        "CLI tooling"
+        "GPT‑4o Vision",
+        "이미지 인식",
+        "식사 추적"
       ],
       "sourceUrl": null
     },
     {
-      "title": "AI 기반 캘리포니아 물 보전: 성공",
-      "link": "https://euno.news/posts/ko/title-ai-powered-water-conservation-in-california-d59af4",
-      "guid": "https://euno.news/posts/ko/title-ai-powered-water-conservation-in-california-d59af4",
-      "relevanceScore": 55,
+      "title": "Microservices 가장 많이 묻는 면접 질문",
+      "link": "https://euno.news/posts/ko/microservices-most-asked-interview-questions-62c039",
+      "guid": "https://euno.news/posts/ko/microservices-most-asked-interview-questions-62c039",
+      "relevanceScore": 58,
       "relatedDocuments": [],
       "keyTopics": [
-        "AI application",
-        "water conservation",
-        "case study"
+        "Microservices",
+        "Interview questions",
+        "Architecture overview"
       ],
       "sourceUrl": null
     },
     {
-      "title": "두 AI에게 내 robots.txt를 검토하게 했더니 — SEO와 과도한 최적화에 대해 배운 점",
-      "link": "https://euno.news/posts/ko/i-made-two-ais-review-my-robotstxt-heres-what-they-ab237e",
-      "guid": "https://euno.news/posts/ko/i-made-two-ais-review-my-robotstxt-heres-what-they-ab237e",
+      "title": "DFT: 오픈소스 칩 설계에서의 중요한 격차",
+      "link": "https://euno.news/posts/ko/dft-the-crucial-gap-in-open-source-chip-design-b1ee02",
+      "guid": "https://euno.news/posts/ko/dft-the-crucial-gap-in-open-source-chip-design-b1ee02",
       "relevanceScore": 55,
       "relatedDocuments": [],
       "keyTopics": [
-        "AI‑assisted SEO",
-        "robots.txt review",
-        "over‑optimization"
+        "DFT (Design‑for‑Test)",
+        "오픈소스 실리콘",
+        "RTL 검증"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Cursor가 내 파일의 모든 주석을 삭제했습니다",
+      "link": "https://euno.news/posts/ko/cursor-deleted-all-the-comments-in-my-file-093950",
+      "guid": "https://euno.news/posts/ko/cursor-deleted-all-the-comments-in-my-file-093950",
+      "relevanceScore": 55,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Cursor AI",
+        "코드 리팩터링",
+        "주석 자동 삭제"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "터미널 UI: BubbleTea (Go) vs Ratatui (Rust)",
+      "link": "https://euno.news/posts/ko/terminal-ui-bubbletea-go-vs-ratatui-rust-bc3045",
+      "guid": "https://euno.news/posts/ko/terminal-ui-bubbletea-go-vs-ratatui-rust-bc3045",
+      "relevanceScore": 55,
+      "relatedDocuments": [
+        "projects/rust-gpu-face-crop-tool.md"
+      ],
+      "keyTopics": [
+        "BubbleTea",
+        "Ratatui",
+        "Terminal UI (TUI)"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "내가 모든 프로젝트에서 사용하는 5가지 n8n 워크플로우 패턴",
+      "link": "https://euno.news/posts/ko/5-n8n-workflow-patterns-i-use-in-every-project-80b1f4",
+      "guid": "https://euno.news/posts/ko/5-n8n-workflow-patterns-i-use-in-every-project-80b1f4",
+      "relevanceScore": 55,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "n8n",
+        "Workflow Patterns",
+        "Error Handling"
       ],
       "sourceUrl": null
     }
@@ -295,38 +287,38 @@
   "actions": [
     {
       "action": "update_existing",
-      "targetSlug": "projects/openclaw-complete-guide.md",
-      "suggestedTitle": "OpenClaw 보안 위험 및 완화 방안",
+      "targetSlug": "ai/mcp-model-context-protocol.md",
+      "suggestedTitle": "MCP 보안: 공급망 vs 런타임 노출 두 층",
       "priority": "high",
-      "issueNumber": 208
-    },
-    {
-      "action": "new_document",
-      "targetSlug": null,
-      "suggestedTitle": "Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
-      "priority": "medium",
-      "issueNumber": 209
+      "issueNumber": 219
     },
     {
       "action": "update_existing",
-      "targetSlug": "ai/github-agentic-workflows.md",
-      "suggestedTitle": "Claude 기반 Git 커밋 리뷰 자동화",
+      "targetSlug": "ai/mcp-model-context-protocol.md",
+      "suggestedTitle": "자동화된 MCP 보안 스캐너와 AgentAudit 파이프라인",
       "priority": "high",
-      "issueNumber": 210
+      "issueNumber": 220
     },
     {
       "action": "update_existing",
-      "targetSlug": "ai/multi-agent-system.md",
-      "suggestedTitle": "2026년 AI 에이전트 시뮬레이션을 위한 최고의 플랫폼",
+      "targetSlug": "kubernetes/release-notes.md",
+      "suggestedTitle": "Kubernetes ImagePullBackOff – IAM 인증 문제",
       "priority": "medium",
-      "issueNumber": 211
+      "issueNumber": 221
     },
     {
-      "action": "new_document",
-      "targetSlug": null,
-      "suggestedTitle": "$100k AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법",
-      "priority": "high",
-      "issueNumber": 212
+      "action": "update_existing",
+      "targetSlug": "frontend/api-service-layer.md",
+      "suggestedTitle": "React 데이터 페칭 패턴: useQuery vs Promise.all 스파게티 해결",
+      "priority": "medium",
+      "issueNumber": 222
+    },
+    {
+      "action": "update_existing",
+      "targetSlug": "backend/wiki-api.md",
+      "suggestedTitle": "Express.js + MongoDB 기반 인증 시스템 구현 가이드",
+      "priority": "medium",
+      "issueNumber": 223
     }
   ]
 }
