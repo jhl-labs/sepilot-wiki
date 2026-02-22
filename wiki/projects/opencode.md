@@ -15,6 +15,7 @@ redirect_from:
   - projects-opencode-guide
   - projects-opencode-guide
   - projects-opencode-guide
+  - projects-opencode-guide
   - opencode
 order: 3
 ---

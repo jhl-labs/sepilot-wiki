@@ -3,7 +3,7 @@ title: "AWS NAT Gateway 비용 함정 및 Terraform 해결법"
 description: "S3와 NAT 게이트웨이 조합으로 발생하는 높은 데이터 전송 비용과 이를 방지하기 위한 VPC 엔드포인트 설정 방법을 Terraform 예제로 설명합니다."
 category: "Guide"
 tags: ["AWS", "NAT Gateway", "Cost Optimization", "Terraform", "VPC Endpoint"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-02-22T02:00:00Z"
 updatedAt: "2026-02-22T02:00:00Z"

@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [AWS, NAT Gateway, Terraform, Cost Optimization, VPC Endpoint]
 redirect_from:
+  - cloud-aws-nat-gateway-cost-trap
   - 212
 order: 1
 ---
