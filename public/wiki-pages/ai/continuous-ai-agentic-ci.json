@@ -2,7 +2,7 @@
   "title": "AI 코드 리뷰 에이전트 구축 가이드",
   "slug": "ai/continuous-ai-agentic-ci",
   "content": "\n# AI 코드 리뷰 에이전트 구축 가이드\n\n## 개요\n수동 PR 리뷰는 리뷰어가 피곤할 때 놓치는 부분이 생기고, 동일한 코멘트가 반복되는 등 비효율적인 문제가 있습니다. AI‑powered 솔루션을 활용하면 모든 풀 리퀘스트에 대해 구조화된 코드 리뷰(정확성, 보안, 성능, 테스트)를 CI가 자동으로 수행하도록 할 수 있습니다. 원하는 모델(OpenAI, Anthropic, OpenRouter, 혹은 로컬 Ollama 인스턴스)을 사용해 별도의 구독료 없이도 리뷰를 제공할 수 있습니다.\n\n## AI 코드 리뷰 에이전트 설계\n- **리뷰 루브릭(프롬프트/워크플로)**: 모델이 아니라 리뷰 기준을 정의합니다.\n  - 고위험 이슈와 사소한 지적을 구분\n  - 구체적인 수정 방안과 테스트 제안 요구\n  - \"내가 살펴본 내용\"과 \"내가 확신하지 못하는 부분\" 명시\n- **모델 선택**: 비용·속도·정확도에 따라 모델 라우팅\n- **실행 시점**: PR 발생 시 자동 트리거\n- **제어 파라미터**: 최대 토큰 수, 검토 기준 등 사용자 정의 가능\n\n## CI 파이프라인 통합 단계\n1. **GitHub Action 워크플로 파일 생성** (`.github/workflows/ai-code-review.yml`)\n   ```yaml\n   name: AI Code Review\n   on:\n     pull_request:\n   jobs:\n     review:\n       runs-on: ubuntu-latest\n       permissions:\n         contents: read\n         pull-requests: write\n       steps:\n         - uses: actions/checkout@v4\n           with:\n             fetch-depth: 0\n         - name: Install Jazz\n           run: npm install -g jazz-ai\n         - name: Run code review workflow\n           run: jazz --output raw workflow run code-review --auto-approve\n           env:\n             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}\n   ```\n   - `--output raw`는 CI 환경에서 출력 캡처가 용이하도록 합니다.\n   - `--auto-approve`는 완전 자동화를 의미합니다.\n2. **리뷰 루브릭 파일 생성** (`workflows/code-review/WORKFLOW.md`)\n   ```markdown\n   ---\n   name: code-review\n   description: Review PR diff and produce a structured report\n   autoApprove: read-only\n   ---\n   Review the current PR diff.\n   Output GitHub‑flavored Markdown with:\n   1. **Summary** (2–4 bullets)\n   2. **High‑risk issues** (correctness + security)\n   3. **Performance / complexity concerns**\n   4. **API / UX footguns**\n   5. **Test gaps + concrete test suggestions**\n   6. **Nitpicks** (style/readability)\n   **Rules**\n   - Be specific: reference files/functions.\n   - Prefer minimal diffs / smallest safe fix.\n   - If you’re unsure, say so and propose how to verify.\n   - No generic advice (“add tests”) — propose exact test cases.\n   - Rank issues (High/Medium/Low).\n   - List files reviewed, assumptions, and what was not checked.\n   ```\n3. **리뷰 캡처 및 PR 코멘트**\n   ```yaml\n   - name: Generate review markdown\n     run: jazz --output raw workflow run code-review --auto-approve > review.md\n     env:\n       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}\n   - name: Comment on PR\n     run: gh pr comment \"$PR_NUMBER\" --body-file review.md\n     env:\n       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n       PR_NUMBER: ${{ github.event.pull_request.number }}\n   ```\n   인라인 주석은 선택 사항이며, 기본적인 가치 제공을 위해서는 위 단계만으로 충분합니다.\n\n## 예제 워크플로우와 베스트 프랙티스\n- **읽기 전용 모드**: `autoApprove`를 읽기 전용으로 유지해 에이전트가 저장소를 수정하지 못하도록 합니다.\n- **이슈 순위 매기기**: 모든 이슈에 중요도(High/Medium/Low)를 부여해 실제 중요한 문제에 집중합니다.\n- **오탐 예산 관리**: 리뷰가 너무 잡음이 많으면 무시될 수 있으니, 오탐 비율을 조정합니다.\n- **모델 라우팅 전략**:\n  - 작은 PR → 저비용 모델 (예: Ollama, OpenRouter의 경량 모델)\n  - 대규모 리팩터링 → 고성능 모델 (예: OpenAI GPT‑4o)\n- **투명성**: 에이전트가 검토한 파일 목록, 가정한 내용, 검토하지 않은 항목을 명시하도록 요구합니다.\n- **실제 사례**: Jazz 저장소는 자체 코드 리뷰와 릴리즈 노트에 Jazz를 사용합니다. 워크플로 파일은 [GitHub - lvndry/jazz](https://github.com/lvndry/jazz/tree/main/.github) 에서 확인할 수 있습니다.\n\n## 참고 자료\n- 원본 기사: [CI에서 나만의 AI 코드 리뷰 에이전트 만들기 | EUNO.NEWS](https://euno.news/posts/ko/build-your-own-ai-code-review-agent-in-ci-738404) (Dev.to 번역)\n\n---\n*이 문서는 Issue 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*",
-  "lastModified": "2026-02-22T01:56:50Z",
+  "lastModified": "2026-02-22T06:17:37Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -17,74 +17,11 @@
   "order": 6,
   "history": [
     {
-      "sha": "021de0d",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "sha": "6e39239",
+      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:56:50Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "579fb34",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:53:09Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0d0dd36",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:26:11Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "f31a216",
-      "message": "docs: Issue #205 - AI 코드 리뷰 에이전트 구축 가이드 보강",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-22T10:24:11+09:00",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "482f546",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:24:22Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "d169209",
-      "message": "🌳 Wiki Tree Maintenance: Wiki 전체 45개의 문서가 9개의 주요 카테고리와 1개의 신규 카테고리(aws)로 구성돼 있습니다. 루트 레벨에 존재하는 2개의 파일(212.md, 207.md)과 삭제된 중복 파일이 발견되었습니다. 일부 문서는 동일 내용이 여러 위치에 존재해 병합이 필요합니다. 파일명은 대부분 slug 형태이지만, 루트 파일은 적절한 카테고리로 이동하고, 삭제된 파일에 대한 리다이렉트를 추가해야 합니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:23:44Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "bd94672",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:20:23Z",
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "b7db918",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-21T13:04:23Z",
+      "date": "2026-02-22T06:17:37Z",
       "additions": 0,
       "deletions": 0
     }
