@@ -1,9 +1,9 @@
 {
-  "collectedAt": "2026-02-22T01:51:14.425Z",
+  "collectedAt": "2026-02-22T01:49:17.183Z",
   "repository": "jhl-labs/sepilot-wiki",
   "summary": {
     "totalWorkflows": 23,
-    "inProgressCount": 2,
+    "inProgressCount": 1,
     "recentFailuresCount": 10
   },
   "workflows": [
@@ -91,18 +91,6 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/deploy-pages.yml",
       "recentRuns": [
         {
-          "id": 22268335649,
-          "name": "Deploy to GitHub Pages",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "workflow_dispatch",
-          "createdAt": "2026-02-22T01:49:40Z",
-          "updatedAt": "2026-02-22T01:50:59Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268335649",
-          "actor": "github-actions[bot]"
-        },
-        {
           "id": 22268030038,
           "name": "Deploy to GitHub Pages",
           "status": "completed",
@@ -149,9 +137,21 @@
           "updatedAt": "2026-02-22T01:24:27Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268000585",
           "actor": "github-actions[bot]"
+        },
+        {
+          "id": 22267984462,
+          "name": "Deploy to GitHub Pages",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "branch": "main",
+          "event": "push",
+          "createdAt": "2026-02-22T01:22:42Z",
+          "updatedAt": "2026-02-22T01:24:05Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267984462",
+          "actor": "declue"
         }
       ],
-      "avgDurationMs": 58800,
+      "avgDurationMs": 59600,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -165,51 +165,39 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/issue-handler.yml",
       "recentRuns": [
         {
-          "id": 22268353780,
-          "name": "Issue Handler",
-          "status": "pending",
-          "conclusion": null,
-          "branch": "main",
-          "event": "issue_comment",
-          "createdAt": "2026-02-22T01:51:02Z",
-          "updatedAt": "2026-02-22T01:51:04Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268353780",
-          "actor": "declue"
-        },
-        {
-          "id": 22268353775,
+          "id": 22268319238,
           "name": "Issue Handler",
           "status": "in_progress",
           "conclusion": null,
           "branch": "main",
           "event": "issues",
-          "createdAt": "2026-02-22T01:51:02Z",
-          "updatedAt": "2026-02-22T01:51:06Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268353775",
+          "createdAt": "2026-02-22T01:48:20Z",
+          "updatedAt": "2026-02-22T01:48:24Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268319238",
           "actor": "declue"
         },
         {
-          "id": 22268350763,
+          "id": 22268319232,
           "name": "Issue Handler",
           "status": "pending",
           "conclusion": null,
           "branch": "main",
-          "event": "issues",
-          "createdAt": "2026-02-22T01:50:47Z",
-          "updatedAt": "2026-02-22T01:50:47Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268350763",
+          "event": "issue_comment",
+          "createdAt": "2026-02-22T01:48:20Z",
+          "updatedAt": "2026-02-22T01:48:21Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268319232",
           "actor": "declue"
         },
         {
-          "id": 22268350727,
+          "id": 22267950660,
           "name": "Issue Handler",
-          "status": "in_progress",
-          "conclusion": null,
+          "status": "completed",
+          "conclusion": "success",
           "branch": "main",
           "event": "issue_comment",
-          "createdAt": "2026-02-22T01:50:46Z",
-          "updatedAt": "2026-02-22T01:51:00Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268350727",
+          "createdAt": "2026-02-22T01:20:07Z",
+          "updatedAt": "2026-02-22T01:24:25Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267950660",
           "actor": "declue"
         },
         {
@@ -219,13 +207,13 @@
           "conclusion": "skipped",
           "branch": "main",
           "event": "issue_comment",
-          "createdAt": "2026-02-22T01:50:23Z",
-          "updatedAt": "2026-02-22T01:50:25Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268345898",
+          "createdAt": "2026-02-22T01:19:01Z",
+          "updatedAt": "2026-02-22T01:21:48Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22267935764",
           "actor": "declue"
         }
       ],
-      "avgDurationMs": 2000,
+      "avgDurationMs": 173000,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -1228,23 +1216,13 @@
   ],
   "inProgress": [
     {
-      "id": 22268350727,
+      "id": 22268319238,
       "workflowName": "Issue Handler",
       "status": "in_progress",
       "branch": "main",
-      "event": "issue_comment",
-      "createdAt": "2026-02-22T01:50:46Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268350727",
-      "actor": "declue"
-    },
-    {
-      "id": 22268319232,
-      "workflowName": "Issue Handler",
-      "status": "in_progress",
-      "branch": "main",
-      "event": "issue_comment",
+      "event": "issues",
       "createdAt": "2026-02-22T01:48:20Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268319232",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22268319238",
       "actor": "declue"
     }
   ],
