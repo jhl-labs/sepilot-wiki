@@ -95,7 +95,7 @@ JSON으로만 응답하세요:
     const response = await callOpenAI(messages, {
       temperature: 0.1,
       maxTokens: 200,
-      responseFormat: { type: 'json_object' },
+      responseFormat: 'json_object',
     });
 
     const result = parseJsonResponse(response, { fallback: null, silent: true });
