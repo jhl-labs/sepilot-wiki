@@ -1,60 +1,61 @@
 ---
 title: "Continuous AI – 인간이 AI 오류를 검증하는 방법"
-description: "AI 코딩 에이전트를 활용하면서 인간이 AI의 오류를 검증하고 교정하는 방법에 대한 가이드"
+description: "AI 코딩 에이전트를 활용하면서 인간이 오류를 검증하고 검증 워크플로우를 구축하는 방법"
 category: "Guide"
-tags: ["Continuous AI", "Human-in-the-Loop", "Verification", "AI Errors"]
+tags: ["Continuous AI", "Human-in-the-Loop", "AI 검증", "CI"]
 status: "published"
 issueNumber: 198
-createdAt: "2026-02-21T13:05:00Z"
-updatedAt: "2026-02-22T00:00:00Z"
-order: 3
+createdAt: "2026-02-22T01:20:00Z"
+updatedAt: "2026-02-22T01:20:00Z"
 ---
 
 # Continuous AI – 인간이 AI 오류를 검증하는 방법
 
-이 문서는 AI 코딩 에이전트를 실제 업무에 적용하면서 **AI가 만든 결과를 인간이 검증하고 교정하는** 핵심 전략을 정리합니다. 최근 euno.news에 실린 사례([원문](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5))를 기반으로 **Human‑in‑the‑Loop Review**, **Common AI Mistake Patterns**, **Verification Workflows** 세 가지 영역을 구체적으로 제시합니다.
+AI 코딩 에이전트를 **CI 파이프라인**, **스크래퍼**, **데이터베이스 스키마 설계** 등 다양한 작업에 활용하는 사례가 늘어나고 있습니다. 하지만 실제 현장에서 가장 큰 가치는 **AI가 만든 코드를 검증하고, AI가 놓친 오류를 찾아내는 인간의 역할**이라는 인사이트가 있습니다. 본 가이드는 해당 인사이트를 바탕으로 **Human‑in‑the‑Loop(HITL) 리뷰**, **공통 AI 실수 패턴**, **검증 워크플로우**를 제시합니다.
+
+> “일은 코드를 작성하는 것이 아니다. AI가 틀렸을 때를 아는 것이다.” – *Euno.news*[[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]
 
 ---
 
-## Human‑in‑the‑Loop Review
+## 1. Human‑in‑the‑Loop Review
 
-AI 에이전트는 주어진 문제를 빠르게 해결하지만, **‘올바른 문제’를 해결하고 있는지**는 인간이 판단해야 합니다. 아래와 같은 단계로 리뷰 프로세스를 구축합니다.
-
-1. **목표 정의** – 해결하고자 하는 비즈니스 목표와 기대 결과를 명확히 문서화합니다.
-2. **프롬프트 검증** – 에이전트에 전달하는 프롬프트가 목표와 일치하는지 확인합니다.
-3. **출력 샘플링** – 에이전트가 생성한 코드/데이터 중 대표 샘플을 선택해 직접 검토합니다.
-4. **피드백 루프** – 검증 결과를 프롬프트 혹은 파이프라인에 반영해 재실행합니다.
-
-> **예시**: 정규식 기반 스크래퍼를 LLM 기반 추출기로 교체할 때, 기존 정규식이 여전히 사용되는지를 검토하고, 비용 효율성을 재평가했습니다. (출처: euno.news) 
-
-## Common AI Mistake Patterns
-
-다음은 실제 현장에서 자주 발견되는 AI 오류 패턴이며, 각 패턴에 대한 예방·대응 방법을 제시합니다.
-
-| 패턴 | 설명 | 예방·대응 방법 |
-|------|------|----------------|
-| **잘못된 도구 선택** | 문제 해결에 적합하지 않은 기술(예: 정규식) 사용 | 문제 정의 단계에서 **대안 기술 조사**를 수행하고, 비용·유연성을 비교합니다. |
-| **Technically Correct, Actually Misleading** | 기술적으로는 맞지만 비즈니스 의미가 잘못된 결과 (예: 지역 태그 `Americas`/`Europe`) | 결과를 **비즈니스 규칙**과 교차 검증하고, 다중 레벨 검증(예: 국가별 필터링) 적용. |
-| **Silent Failure** | 오류가 없다고 보고되지만 실제로 중요한 데이터가 누락 | **로그·메트릭**에 “데이터 누락” 알림을 추가하고, **샘플 데이터 감사**를 정기적으로 수행합니다. |
-
-## Verification Workflows
-
-AI 결과를 체계적으로 검증하기 위한 워크플로우 예시입니다.
-
-1. **자동 테스트** – 생성된 코드에 대해 단위·통합 테스트를 자동 실행합니다.
-2. **정적 분석** – Linter, 보안 스캐너 등 정적 분석 도구로 코드 품질을 점검합니다.
-3. **데이터 검증** – 추출된 데이터는 스키마 검증 및 비즈니스 규칙(예: 국가 리스트)과 교차 검증합니다.
-4. **인간 리뷰** – 중요한 변경(예: 파이프라인 로직, 비용이 큰 LLM 호출)에는 반드시 **코드 리뷰**와 **운영 검증**을 거칩니다.
-5. **피드백 기록** – 검증 결과와 수정 사항을 **위키/이슈**에 기록해 재발 방지 지식베이스를 구축합니다.
-
-### 적용 예시 (euno.news 사례)
-- **정규식 → LLM 전환**: 기존 정규식이 매치되지 않는 경우 LLM 기반 추출기로 교체하고, 비용·성능을 재평가했습니다.
-- **지역 태그 오류**: `Americas`/`Europe` 라벨이 실제 지원 국가와 불일치함을 발견하고, **select‑countries** 배지를 도입해 정확한 국가 리스트로 교체했습니다.
-- **Silent Failure**: 중복 제거와 급여 필드 누락으로 신규 채용이 제외된 사례를 발견하고, **데이터 감사 스크립트**와 **경고 로직**을 추가했습니다.
+1. **자동화된 결과에 대한 인간 검증** – AI가 생성한 코드·데이터를 그대로 받아들이지 말고, **핵심 로직·비즈니스 규칙**을 인간이 직접 검토합니다.
+2. **검증 체크리스트** – 아래와 같은 항목을 체크리스트 형태로 관리합니다.
+   - 입력 데이터가 기대 형식과 일치하는가?
+   - 출력이 비즈니스 요구사항을 충족하는가?
+   - 보안·프라이버시 위험이 없는가?
+3. **피드백 루프** – 검증 결과를 AI 프롬프트에 반영해 **프롬프트 개선**과 **모델 파인튜닝**에 활용합니다.
 
 ---
 
-## 결론
-AI 코딩 에이전트를 활용하는 조직은 **‘AI가 틀렸을 때를 아는 것’**이 가장 큰 가치임을 인식해야 합니다. 위에서 제시한 Human‑in‑the‑Loop 리뷰, 흔히 발생하는 오류 패턴, 검증 워크플로우를 도입하면 AI가 만든 결과물의 신뢰성을 크게 향상시킬 수 있습니다.
+## 2. Common AI Mistake Patterns
 
-> 더 자세한 내용은 원본 기사와 관련 블로그 포스트를 참고하세요: [euno.news 원문](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)
+### 2.1 잘못된 도구 선택
+AI가 기존에 사용 중인 **정규식** 기반 파싱을 유지하자고 제안하지만, **LLM 기반 파싱**이 더 탄력적이고 유지보수가 용이합니다. (예: 기술 스택 추출) [[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]
+
+### 2.2 Technically Correct, Actually Misleading
+AI가 **다중 지역**(`Americas`, `Europe`) 태그를 붙였지만, 실제로는 **특정 국가**(예: 미국, 캐나다 등)만 지원합니다. 지역 레이블이 오해를 일으켜 사용자에게 잘못된 정보를 제공할 수 있습니다. [[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]
+
+### 2.3 Silent Failure
+파이프라인이 **오류 없이 성공**했지만, 실제로는 **중복 제거 규칙**이나 **급여 필드 파싱** 오류로 유효한 채용 정보를 누락했습니다. 로그에 경고가 없으므로 인간이 **결과를 직관적으로 검토**해야 합니다. [[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]
+
+---
+
+## 3. Verification Workflows
+
+1. **자동 테스트 단계** – AI가 생성한 코드에 대해 **유닛 테스트**, **통합 테스트**를 자동 실행합니다.
+2. **정적 분석** – Linter, 보안 스캐너 등 정적 분석 도구를 적용해 **코드 품질**을 검증합니다.
+3. **Human Review Gate** – 테스트와 정적 분석을 통과한 결과를 **Human‑in‑the‑Loop** 검토 단계로 넘깁니다.
+   - 리뷰어는 **체크리스트**를 활용해 비즈니스 로직, 데이터 정확성, 보안 위험 등을 확인합니다.
+4. **Feedback Integration** – 리뷰 결과를 **프롬프트**와 **CI 설정**에 반영해 다음 사이클에서 동일 오류가 재발하지 않도록 합니다.
+5. **Audit Log** – 모든 검증 단계와 인간 피드백을 **감사 로그**에 기록해 추후 분석 및 학습에 활용합니다.
+
+---
+
+## 4. 참고 자료
+- “일은 코드를 작성하는 것이 아니다. AI가 틀렸을 때를 아는 것이다.” – *Euno.news*[[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]
+- “Being able to quickly evaluate results from AI is crucial.” – *WikiDocs*[[출처](https://wikidocs.net/299683)]
+
+---
+
+*이 가이드는 2026‑02‑22 기준으로 최신 정보를 반영했습니다.*
