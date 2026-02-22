@@ -1,72 +1,69 @@
 ---
 title: "OpenClaw Complete Guide"
-description: "Comprehensive guide for OpenClaw, including hardware compatibility, Mac Mini limitations, and variant recommendations."
+description: "OpenClaw 사용 가이드와 MailCat 이메일 인증 자동화 섹션을 포함한 종합 안내서"
 category: "Guide"
-tags: ["OpenClaw", "Hardware", "Mac Mini", "Claws"]
+tags: ["OpenClaw", "MailCat", "Email 인증", "AI 에이전트"]
 status: "draft"
-issueNumber: null
-createdAt: "2026-02-22T01:52:00Z"
-updatedAt: "2026-02-22T01:52:00Z"
-order: 1
+issueNumber: 0
+createdAt: "2026-02-22T02:15:00Z"
+updatedAt: "2026-02-22T02:15:00Z"
 ---
 
 # OpenClaw Complete Guide
 
-## Overview
-OpenClaw is a framework for building **persistent AI agents** (referred to as *Claws*) that run continuously, schedule their own work, maintain context across sessions, and orchestrate multiple tool‑enabled agents. While the platform is flexible, the choice of hardware has a direct impact on reliability, uptime, and scalability.
+OpenClaw는 AI 에이전트가 웹을 탐색하고, 코드를 작성하며, 다양한 작업을 자동화할 수 있도록 돕는 프레임워크입니다. 본 가이드는 OpenClaw의 기본 설정, 주요 기능, 그리고 실제 사용 예시를 다룹니다.
+
+> **※ 현재 문서는 초안(draft) 상태이며, 추후 검토 후 발행될 예정입니다.**
 
 ---
 
-## Hardware Compatibility
+## 📧 MailCat 이메일 인증 자동화
 
-OpenClaw can be run on any modern server‑class machine that meets the following baseline requirements:
+### MailCat 소개
+MailCat은 AI 에이전트가 이메일 인증 과정을 자동으로 처리할 수 있게 해주는 서비스입니다. 단 한 번의 프롬프트만으로 메일박스를 생성하고, 토큰을 안전하게 저장한 뒤, 필요할 때마다 인증 코드를 추출합니다.
 
-- **CPU**: 4‑core x86_64 (or Apple Silicon M‑series with Rosetta 2 support) ≥ 2 GHz.
-- **Memory**: Minimum 8 GB RAM; 16 GB+ recommended for multiple concurrent Claws.
-- **Storage**: SSD with at least 50 GB free space for logs, container images, and persistent state.
-- **Network**: Stable broadband connection with inbound ports open for webhooks (typically 443/80) and outbound internet access for API calls.
-- **OS**: Linux (Ubuntu 22.04 LTS, Debian 12, etc.) or macOS 12+ for development environments.
+- **One‑prompt setup**: AI가 `skill.md` 문서를 읽고 스스로 통합합니다.
+- **Auto‑extraction**: 인증 코드와 링크를 자동으로 추출합니다.
+- **1‑hour retention**: 인증 흐름에 최적화된 짧은 보관 기간.
+- **Self‑hostable**: Cloudflare 계정에 배포 가능.
+- **Open source**: MIT 라이선스.
 
-These specifications are derived from the general guidance in the OpenClaw community and are corroborated by the accessory and workstation guides for the Mac Mini [OpenClaw Mac Mini Developer Workstation Specs](https://openclawn.com/openclaw-mac-mini-developer-workstation-specs/) and the hardware‑software integration article [Seamless Synergy: OpenClaw Mac Mini Hardware‑Software Integration](https://openclawn.com/openclaw-mac-mini-hardware-software-integration/).
+### 단일 프롬프트 설정 방법
+다음 프롬프트를 OpenClaw(또는 Claude Code, 기타 AI 에이전트)에게 전달하면 MailCat 통합이 자동으로 이루어집니다.
 
----
+```text
+Read https://mailcat.ai/skill.md and set up a MailCat mailbox for yourself. Save the token securely.
+```
 
-## Mac Mini Limitations
+위 명령을 실행하면 에이전트는:
+1. `skill.md` 문서를 읽음
+2. API를 통해 MailCat 메일박스 생성
+3. 토큰을 안전하게 저장
+4. 필요 시 받은 편지함을 확인하고 인증 코드를 자동 추출
 
-While a Mac Mini is an attractive, low‑cost form factor, several practical constraints make it a **sub‑optimal choice for production‑grade OpenClaw deployments**:
+추가적인 설정이나 별도의 API 키가 필요하지 않습니다. AI에게 문서를 읽으라고 지시하면 나머지는 스스로 처리합니다.
 
-1. **Uptime Risks** – Home‑grade power and macOS automatic updates can cause unexpected reboots, breaking the “always‑on” guarantee of a Claw.
-2. **Networking Complexity** – Residential routers often require manual port‑forwarding, dynamic DNS, and TLS certificate management to expose webhook endpoints.
-3. **Security Surface** – Running privileged agents on a personal workstation exposes the entire LAN to potential compromise if a Claw is mis‑configured.
-4. **Scalability Limits** – A single Mac Mini has limited CPU/Memory headroom; scaling to multiple Claws or heavier workloads quickly exhausts resources.
-5. **Process Supervision** – macOS lacks built‑in process supervisors comparable to Linux systemd or Elixir OTP, requiring custom scripts to auto‑restart crashed agents.
+### 통합 예시
+```yaml
+# OpenClaw workflow example
+steps:
+  - name: Setup MailCat
+    run: |
+      echo "Read https://mailcat.ai/skill.md and set up a MailCat mailbox for yourself. Save the token securely."
+  - name: Perform Email Verification
+    run: |
+      # 에이전트가 자동으로 인증 이메일을 확인하고 코드를 추출합니다.
+      openclaw verify-email --service your-service
+```
 
-These points echo the observations from Andrej Karpathy’s Mac Mini experiment, which highlighted power‑outage susceptibility, networking hurdles, and the need for external supervision [OpenClaw Mac Mini as a Developer Workstation: Specs for …](https://openclawn.com/openclaw-mac-mini-developer-workstation-specs/).
-
-**Recommendation** – For production or long‑running Claw deployments, prefer a cloud‑hosted or dedicated server environment (e.g., Fly.io, VPS) that provides robust supervision, automatic restarts, and reliable networking.
-
----
-
-## Claw Variant Recommendations
-
-OpenClaw offers several variants, each tuned for different trade‑offs:
-
-| Variant | Approx. Code Size | Typical Use‑Case | Key Trade‑offs |
-|---------|-------------------|------------------|---------------|
-| **OpenClaw** | Full feature set | General‑purpose, multi‑agent orchestration | Higher resource consumption |
-| **NanoClaw** | ~4 000 LOC | Lightweight, single‑agent workloads; easy to audit | Limited built‑in tools |
-| **zeroclaw** | Minimal core | Experimental, sandboxed environments | Minimal persistence |
-| **ironclaw** | Moderate | Security‑focused deployments with stricter sandboxing |
-| **picoclaw** | Very small | Edge devices or constrained hardware |
-
-Choosing the right variant depends on the hardware you plan to run on. For a Mac Mini, **NanoClaw** or **picoclaw** are the most feasible, but even these benefit from the robust supervision offered by cloud platforms.
+### 왜 작동하나요?
+AI가 문서를 읽고 이해할 수 있다면, 해당 문서에 정의된 API 호출과 토큰 관리 절차를 그대로 실행할 수 있습니다. `skill.md`는 AI 에이전트를 위해 특별히 설계된 문서로, 명확한 구조와 완전한 API 예시를 제공하여 통합을 손쉽게 만듭니다.
 
 ---
 
-## Further Reading & Resources
-- **Accessories & Upgrades for Your OpenClaw Mac Mini (2026)** – Practical hardware add‑ons such as locks, trackers, and external SSDs [OpenClaw Mac Mini Accessories & Upgrades](https://openclawn.com/openclaw-mac-mini-accessories-upgrades/)
-- **The Ultimate Guide to OpenClaw Mac Mini Docks & Hubs (2026)** – Recommendations for connectivity and peripheral expansion [OpenClaw Mac Mini Docks & Hubs Guide](https://openclawn.com/openclaw-mac-mini-docks-hubs-guide/)
+## 참고 자료
+- **출처**: [EUNO.NEWS – OpenClaw 이메일 액세스를 부여하는 한 번의 프롬프트](https://euno.news/posts/ko/one-prompt-to-give-your-openclaw-email-access-db7c36) (Dev.to)
 
 ---
 
-*This section was added to address the recent feedback requesting explicit hardware compatibility information and a dedicated Mac Mini limitation overview.*
+*이 문서는 자동 생성된 초안이며, 검토 후 업데이트될 수 있습니다.*
