@@ -3,7 +3,7 @@ title: "Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드"
 description: "Rust와 wgpu를 활용한 GPU 가속 얼굴 크롭 도구의 설계와 구현 방법을 안내합니다."
 category: "projects"
 tags: ["Rust", "GPU", "Face Cropping", "wgpu", "egui"]
-status: "draft"
+status: published
 issueNumber: 209
 createdAt: "2026-02-22T01:20:00Z"
 updatedAt: "2026-02-22T01:20:00Z"
