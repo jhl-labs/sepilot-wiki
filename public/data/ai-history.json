@@ -1,6 +1,96 @@
 {
   "entries": [
     {
+      "id": "a7046a70-52cc-4b86-b085-b2f014c61f56",
+      "timestamp": "2026-02-22T00:24:12.262Z",
+      "actionType": "generate",
+      "issueNumber": 212,
+      "issueTitle": "문서 요청 #212",
+      "documentSlug": "212",
+      "documentTitle": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
+      "summary": "새 문서 \"$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4714
+            },
+            {
+              "step": "outline",
+              "durationMs": 5361
+            },
+            {
+              "step": "write",
+              "durationMs": 17206
+            },
+            {
+              "step": "review",
+              "durationMs": 4793
+            }
+          ],
+          "totalDurationMs": 32074,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 1368,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "bf6c9547-4c2c-4f7c-af5c-dadd9729ffa9",
+      "timestamp": "2026-02-22T00:23:35.418Z",
+      "actionType": "generate",
+      "issueNumber": 209,
+      "issueTitle": "문서 요청 #209",
+      "documentSlug": "209",
+      "documentTitle": "GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드",
+      "summary": "새 문서 \"GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4640
+            },
+            {
+              "step": "outline",
+              "durationMs": 8221
+            },
+            {
+              "step": "write",
+              "durationMs": 19678
+            },
+            {
+              "step": "review",
+              "durationMs": 4201
+            }
+          ],
+          "totalDurationMs": 36741,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1605,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "270253b3-7f82-4cf1-8278-3e0fc5b20ed8",
       "timestamp": "2026-02-22T00:22:49.000Z",
       "actionType": "maintain",
@@ -2755,5 +2845,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-22T00:22:49.000Z"
+  "lastUpdated": "2026-02-22T00:24:12.262Z"
 }
