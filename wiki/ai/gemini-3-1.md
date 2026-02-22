@@ -3,7 +3,7 @@ title: "gemini 3.1"
 description: "Gemini 3.1 및 Gemini 3.1 Pro의 전체 벤치마크 데이터와 주요 경쟁 모델과의 비교를 제공하는 가이드"
 category: "Guide"
 tags: ["Gemini", "LLM", "Benchmark", "Pro", "Comparison"]
-status: "deleted"
+status: deleted
 issueNumber: 359
 createdAt: "2026-02-20T01:40:00Z"
 updatedAt: "2026-02-20T01:40:00Z"

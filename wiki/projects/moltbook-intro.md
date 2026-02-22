@@ -7,7 +7,7 @@ redirect_from:
   - moltbook
   - moltbook-intro
 related_docs: ["openclaw-complete-guide.md"]
-order: 3
+order: 8
 ---
 
 ## Executive Summary

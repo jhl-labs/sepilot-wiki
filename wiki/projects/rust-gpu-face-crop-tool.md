@@ -7,7 +7,7 @@ status: "draft"
 issueNumber: 209
 createdAt: "2026-02-22T01:20:00Z"
 updatedAt: "2026-02-22T01:20:00Z"
-order: 5
+order: 7
 ---
 
 # Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드

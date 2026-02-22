@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-22T02:00:00Z"
 updatedAt: "2026-02-22T02:00:00Z"
+order: 6
 ---
 
 # AI 코드 리뷰 에이전트 구축 가이드

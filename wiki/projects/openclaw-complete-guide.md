@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: null
 createdAt: "2026-02-22T01:52:00Z"
 updatedAt: "2026-02-22T01:52:00Z"
+order: 1
 ---
 
 # OpenClaw Complete Guide
