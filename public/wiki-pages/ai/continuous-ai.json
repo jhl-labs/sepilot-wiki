@@ -2,8 +2,8 @@
   "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
   "slug": "ai/continuous-ai",
   "content": "\n# Continuous AI – 인간이 AI 오류를 검증하는 방법\n\nAI 코딩 에이전트를 **CI 파이프라인**, **스크래퍼**, **데이터베이스 스키마 설계** 등 다양한 작업에 활용하는 사례가 늘어나고 있습니다. 하지만 실제 현장에서 가장 큰 가치는 **AI가 만든 코드를 검증하고, AI가 놓친 오류를 찾아내는 인간의 역할**이라는 인사이트가 있습니다. 본 가이드는 해당 인사이트를 바탕으로 **Human‑in‑the‑Loop(HITL) 리뷰**, **공통 AI 실수 패턴**, **검증 워크플로우**를 제시합니다.\n\n> “일은 코드를 작성하는 것이 아니다. AI가 틀렸을 때를 아는 것이다.” – *Euno.news*[[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]\n\n---\n\n## 1. Human‑in‑the‑Loop Review\n\n1. **자동화된 결과에 대한 인간 검증** – AI가 생성한 코드·데이터를 그대로 받아들이지 말고, **핵심 로직·비즈니스 규칙**을 인간이 직접 검토합니다.\n2. **검증 체크리스트** – 아래와 같은 항목을 체크리스트 형태로 관리합니다.\n   - 입력 데이터가 기대 형식과 일치하는가?\n   - 출력이 비즈니스 요구사항을 충족하는가?\n   - 보안·프라이버시 위험이 없는가?\n3. **피드백 루프** – 검증 결과를 AI 프롬프트에 반영해 **프롬프트 개선**과 **모델 파인튜닝**에 활용합니다.\n\n---\n\n## 2. Common AI Mistake Patterns\n\n### 2.1 잘못된 도구 선택\nAI가 기존에 사용 중인 **정규식** 기반 파싱을 유지하자고 제안하지만, **LLM 기반 파싱**이 더 탄력적이고 유지보수가 용이합니다. (예: 기술 스택 추출) [[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]\n\n### 2.2 Technically Correct, Actually Misleading\nAI가 **다중 지역**(`Americas`, `Europe`) 태그를 붙였지만, 실제로는 **특정 국가**(예: 미국, 캐나다 등)만 지원합니다. 지역 레이블이 오해를 일으켜 사용자에게 잘못된 정보를 제공할 수 있습니다. [[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]\n\n### 2.3 Silent Failure\n파이프라인이 **오류 없이 성공**했지만, 실제로는 **중복 제거 규칙**이나 **급여 필드 파싱** 오류로 유효한 채용 정보를 누락했습니다. 로그에 경고가 없으므로 인간이 **결과를 직관적으로 검토**해야 합니다. [[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]\n\n---\n\n## 3. Verification Workflows\n\n1. **자동 테스트 단계** – AI가 생성한 코드에 대해 **유닛 테스트**, **통합 테스트**를 자동 실행합니다.\n2. **정적 분석** – Linter, 보안 스캐너 등 정적 분석 도구를 적용해 **코드 품질**을 검증합니다.\n3. **Human Review Gate** – 테스트와 정적 분석을 통과한 결과를 **Human‑in‑the‑Loop** 검토 단계로 넘깁니다.\n   - 리뷰어는 **체크리스트**를 활용해 비즈니스 로직, 데이터 정확성, 보안 위험 등을 확인합니다.\n4. **Feedback Integration** – 리뷰 결과를 **프롬프트**와 **CI 설정**에 반영해 다음 사이클에서 동일 오류가 재발하지 않도록 합니다.\n5. **Audit Log** – 모든 검증 단계와 인간 피드백을 **감사 로그**에 기록해 추후 분석 및 학습에 활용합니다.\n\n---\n\n## 4. 참고 자료\n- “일은 코드를 작성하는 것이 아니다. AI가 틀렸을 때를 아는 것이다.” – *Euno.news*[[출처](https://euno.news/posts/ko/the-job-isnt-writing-code-its-knowing-when-the-ai-f67ef5)]\n- “Being able to quickly evaluate results from AI is crucial.” – *WikiDocs*[[출처](https://wikidocs.net/299683)]\n\n---\n\n*이 가이드는 2026‑02‑22 기준으로 최신 정보를 반영했습니다.*",
-  "lastModified": "2026-02-23T20:49:47Z",
-  "author": "GitHub Action",
+  "lastModified": "2026-02-22T10:19:41+09:00",
+  "author": "JHL",
   "status": "published",
   "isDraft": false,
   "isInvalid": false,
@@ -16,12 +16,182 @@
   "order": 4,
   "history": [
     {
-      "sha": "7602158",
-      "message": "chore: 대시보드 통계 수집 - 2026-02-23 20:49",
+      "sha": "77a095c",
+      "message": "🔗 교차 참조 업데이트: 25개 문서",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-23T20:49:47Z",
+      "date": "2026-02-22T02:01:14Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "021de0d",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-22T01:56:50Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "44f1e3c",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-22T01:52:53Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0d0dd36",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-22T01:26:11Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "482f546",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-22T01:24:22Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "8490bac",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-22T01:24:05Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "d169209",
+      "message": "🌳 Wiki Tree Maintenance: Wiki 전체 45개의 문서가 9개의 주요 카테고리와 1개의 신규 카테고리(aws)로 구성돼 있습니다. 루트 레벨에 존재하는 2개의 파일(212.md, 207.md)과 삭제된 중복 파일이 발견되었습니다. 일부 문서는 동일 내용이 여러 위치에 존재해 병합이 필요합니다. 파일명은 대부분 slug 형태이지만, 루트 파일은 적절한 카테고리로 이동하고, 삭제된 파일에 대한 리다이렉트를 추가해야 합니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-22T01:23:44Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "5596ec0",
+      "message": "docs: Issue #198 - Continuous AI 문서 발행 처리",
+      "author": "JHL",
+      "authorEmail": "bkperio@gmail.com",
+      "date": "2026-02-22T10:19:41+09:00",
       "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "b7db918",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-21T13:04:23Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "d6d14c6",
+      "message": "docs: Issue #198 - 피드백 반영",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-21T13:02:20Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "bd64013",
+      "message": "🔗 교차 참조 업데이트: 5개 문서",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T12:20:59Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "1a39f60",
+      "message": "🔗 교차 참조 업데이트: 9개 문서",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T02:09:33Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e0d1a24",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 대부분 파일명은 이미 slug 형태이며, 내용 중 중복된 문서는 Opencode 관련 두 파일뿐입니다. ‘reports’ 카테고리는 문서가 1개뿐이라 향후 통합을 검토할 필요가 있습니다. 전체 구조는 논리적이지만, 일부 파일명을 더 일관된 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 명시하면 가독성과 탐색성이 크게 향상됩니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T02:07:27Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "02eda25",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 고르게 배치되어 있으나,  가 중복된 내용이며 삭제 상태이므로  로 병합이 필요합니다. 또한 모든 카테고리마다 문서 순서를 지정하고, 카테고리 메타데이터를 추가해 한국어 표시명과 정렬 순서를 정의하면 탐색성이 향상됩니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:42:05Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "894b632",
+      "message": "🔗 교차 참조 업데이트: 7개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-18T00:35:00Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "a897516",
+      "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T12:50:57Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0190970",
+      "message": "🔗 교차 참조 업데이트: 16개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T08:01:05Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e873878",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T07:48:29Z",
+      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }
