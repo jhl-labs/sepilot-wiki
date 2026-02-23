@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "9fc6b141-dfa1-41de-9e9d-2c8065181dc7",
+      "timestamp": "2026-02-23T06:30:17.660Z",
+      "actionType": "generate",
+      "issueNumber": 239,
+      "issueTitle": "문서 요청 #239",
+      "documentSlug": "frontend/239",
+      "documentTitle": "Incremental Static Regeneration (ISR) 가이드",
+      "summary": "새 문서 \"Incremental Static Regeneration (ISR) 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3523
+            },
+            {
+              "step": "outline",
+              "durationMs": 26736
+            },
+            {
+              "step": "write",
+              "durationMs": 46948
+            },
+            {
+              "step": "review",
+              "durationMs": 16872
+            }
+          ],
+          "totalDurationMs": 94080,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 4528,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "de336b15-77ff-4587-92a7-253d32241a81",
       "timestamp": "2026-02-23T06:28:09.321Z",
       "actionType": "maintain",
@@ -3067,5 +3112,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-23T06:28:09.321Z"
+  "lastUpdated": "2026-02-23T06:30:17.660Z"
 }
