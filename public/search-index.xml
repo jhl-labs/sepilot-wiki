@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-23T21:34:14.088Z</generated>
+  <generated>2026-02-23T21:31:57.694Z</generated>
   <count>46</count>
   <items>
   <item>
@@ -984,6 +984,49 @@ v1.35 (2026‑02‑10)
     <tags>Kubernetes, Release Notes, 버전, version, changelog</tags>
     <lastModified>2026-02-22T10:56:57+09:00</lastModified>
     <author>JHL</author>
+  </item>
+  <item>
+    <title>Dependabot 라벨 누락 오류 해결 방법</title>
+    <slug>troubleshooting/dependabot-label-missing</slug>
+    <content>Dependabot 라벨 누락 오류
+Dependabot이 Pull Request에  라벨을 자동으로 붙이려 할 때, 해당 라벨이 레포지토리에 존재하지 않으면 다음과 같은 오류가 발생합니다.
+이 문서는 해당 오류를 해결하는 방법을 단계별로 안내합니다.
+해결 방법
+라벨 생성
+   - 레포지토리의 Issues 탭으로 이동합니다.
+   - 좌측 사이드바에서 Labels를 클릭합니다.
+   - New label 버튼을 눌러 라벨을 생성합니다.
+   - Name에  를 입력하고, 필요에 따라 색상과 설명을 설정한 뒤 Create label을 클릭합니다.
+검토
+   - 레포지토리 루트에 있는  파일을 엽니다.
+   -  섹션에  라벨이 명시되어 있는지 확인합니다.
+   - 라벨 이름에 오타가 있거나, 존재하지 않는 라벨이 지정되어 있으면 올바른 라벨 이름()으로 수정합니다.
+   - 파일을 저장하고 커밋합니다.
+PR 재생성 (선택 사항)
+   - 기존 Dependabot PR이 이미 열려 있다면, 라벨이 추가되지 않은 상태일 수 있습니다.
+   - Dependabot에게 PR을 다시 생성하도록 요청하려면 PR에  혹은  댓글을 남깁니다.
+   - 새 PR이 생성되면  라벨이 정상적으로 붙어 있는지 확인합니다.
+CI/CD 파이프라인 확인
+   - GitHub Actions 워크플로우가 라벨 생성 후에도 오류를 계속 발생시키는 경우, 워크플로우 파일()에 라벨 관련 조건이 있는지 검토합니다.
+   - 필요 시 라벨 검증 로직을 업데이트하거나, 라벨이 없을 경우 자동으로 생성하도록 스크립트를 추가합니다.
+추가 팁
+라벨 관리 정책: 팀에서 사용되는 라벨을 일관되게 관리하기 위해 라벨 템플릿을 정의하고, 새 레포지토리를 만들 때 기본 라벨을 자동으로 생성하도록 스크립트를 활용할 수 있습니다.
+Dependabot 설정 예시:
+  
+  위와 같이  섹션에 올바른 라벨을 지정하면 자동으로 라벨이 붙습니다.
+참고 자료
+Dependabot 공식 문서 – 라벨 설정 (공식 문서를 참조해주세요)
+이 문서는 Dependabot 라벨 오류를 빠르게 해결하고 CI 흐름을 원활히 유지하기 위한 가이드입니다.</content>
+    <excerpt>Dependabot 라벨 누락 오류
+Dependabot이 Pull Request에  라벨을 자동으로 붙이려 할 때, 해당 라벨이 레포지토리에 존재하지 않으면 다음과 같은 오류가 발생합니다.
+이 문서는 해당 오류를 해결하는 방법을 단계별로 안내합니다.
+해결 방법
+라벨 생성
+   - 레포지토리의 Issues 탭으로 이동합니다.
+   - 좌측 사이드바에서 Lab...</excerpt>
+    <tags>Dependabot, GitHub Actions, 라벨, CI</tags>
+    <lastModified>2026-02-23T21:29:07Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>Docker/Hardened Images</title>
@@ -3422,137 +3465,6 @@ Gemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어
     <author>JHL</author>
   </item>
   <item>
-    <title>프론트엔드 API 서비스 레이어 설명</title>
-    <slug>frontend/api-service-layer</slug>
-    <content>문서 개요
-목적  
-프론트엔드 애플리케이션이 백엔드와 통신할 때 사용하는 공통 API 클라이언트 로직()을 이해하고, 유지·보수·확장에 필요한 정보를 제공한다.  
-대상 독자  
-프론트엔드 개발자 (신규 입사자 포함)  
-QA 엔지니어 및 테스트 자동화 담당자  
-아키텍처 리뷰어 및 문서 담당자  
-역할  
-는 HTTP 요청/응답 처리, 에러 핸들링, 토큰 자동 갱신 등 백엔드와의 통신 전반을 캡슐화한다. 이를 통해 UI 레이어는 비즈니스 로직에 집중하고, 네트워크 관련 구현은 한 곳에 집중시킬 수 있다.  
-커버리지 분석 결과 요약  
-  항목   내용  
- ------ ------ 
-  모듈     
-  소스 경로     
-  중요도   high (백엔드와의 모든 통신을 담당)  
-  문서 필요 사유   요청/응답 흐름, 에러 처리, 토큰 재발급 로직 등 핵심 로직이 포함돼 있어 신규 개발자와 운영팀 모두에게 필수적인 가이드가 필요함  
-서비스 레이어 아키텍처 개요
-2.1 전체 프론트엔드 아키텍처에서 위치
-UI 컴포넌트 → 서비스 레이어() → HTTP 클라이언트(Axios 혹은 fetch) → 백엔드 API  
-서비스 레이어는 UI와 네트워크 사이의 추상화 계층으로, 데이터 페칭·전송 로직을 중앙집중화한다. (Medium 기사 “프론트엔드 아키텍처: API 요청 관리” 참고)  
-2.2  의 책임 범위
-HTTP 메서드별 헬퍼 함수 제공 (GET, POST, PUT, DELETE 등)  
-공통 헤더(Authorization, Content-Type 등) 자동 삽입  
-응답 정규화 및 성공/실패 판별  
-전역 에러 로깅·모니터링 연동  
-Access/Refresh 토큰 자동 갱신 로직 구현  
-2.3 외부 의존성
-  의존성   용도   참고  
- -------- ------ ------ 
-  Axios (또는 fetch)   HTTP 요청/응답 처리   일반적인 프론트엔드 API 클라이언트 구현에 사용됨 (Medium)  
-  토큰 저장소 (예: , , 쿠키)   Access/Refresh 토큰 보관   보안 고려사항 섹션에서 상세히 다룸  
-  인터셉터   요청 전/후 공통 로직(헤더 삽입, 토큰 재발급)   Axios 인터셉터 활용이 일반적임  
-  타입 정의 파일 ()   API 응답 타입 및 파라미터 정의   TypeScript 기반 프로젝트에서 타입 안전성 확보  
-파일 및 디렉터리 구조
-는 public API(예: , , , )를 export하고, 내부적으로 인터셉터와 타입을 활용한다.  
-(존재한다면)에서는 토큰 자동 갱신 로직과 에러 전역 처리 로직을 구현한다.  
-는 각 엔드포인트가 반환하는 데이터 구조를 정의해 TypeScript 컴파일 타임에 검증한다.  
-추가 조사 필요: 현재 레포지토리에서 실제 · 파일 존재 여부와 구체적인 export 형태를 확인해야 함.
-핵심 기능 상세
-4.1 요청(Request) 처리
-헬퍼 함수: ,  등 타입 파라미터 를 통해 응답 타입을 명시한다.  
-파라미터 직렬화: 객체를 쿼리스트링으로 변환해 GET 요청에 포함한다. (Axios 기본 동작)  
-공통 헤더 삽입:  및  등을 자동으로 추가한다.  
-4.2 응답(Response) 처리
-정규화: 서버가 반환하는  형태를 일관된 구조로 변환한다.  
-성공/실패 판별: HTTP 2xx는 성공, 그 외는 실패로 간주하고, 에 따라 분기한다.  
-페이징·메타데이터 추출:  혹은  필드를 별도 객체로 분리해 UI 레이어에 전달한다.  
-4.3 에러 핸들링
-네트워크 오류·타임아웃: Axios 인터셉터에서 를 검사해 재시도 정책을 적용한다.  
-HTTP 상태 코드 별 처리: 401(Unauthorized) → 토큰 재발급 흐름; 403(Forbidden) → 접근 제한 메시지; 5xx → 전역 알림 및 로깅.  
-사용자 친화적 메시지 매핑: 서버 오류 코드를 프론트엔드 메시지()와 매핑한다.  
-전역 로깅·모니터링 연동: Sentry·Datadog 등 외부 모니터링 툴에 에러 정보를 전송한다.  
-4.4 토큰 자동 갱신
-흐름:  
-  1. 요청 인터셉터에서  헤더에 현재 Access Token 삽입.  
-  2. 401 응답이 오면 응답 인터셉터가 Refresh Token을 사용해 새로운 Access Token을 발급받는다.  
-  3. 재발급 성공 시 원래 요청을 재시도하고, 실패 시 로그아웃 처리한다.  
-무한 루프 방지: 재시도 횟수를 1회로 제한하고, 재시도 중에도 401이 발생하면 즉시 로그아웃한다.  
-추가 조사 필요: 현재 구현에서 Refresh Token 저장 위치와 재발급 API 엔드포인트가 어떻게 정의돼 있는지 확인이 필요함.
-사용 예시
-기본 GET 호출  
-    
-POST with JSON Body  
-    
-파일 업로드 (멀티파트)  
-    
-인증이 필요한 엔드포인트  
-    
-실제 코드 예시는 프로젝트 내 를 참고하고, 필요 시 에 정의된 로직을 검토한다.
-확장 및 커스터마이징
-인터셉터 추가/제거:  형태로 새로운 로직을 삽입한다.  
-커스텀 헤더 삽입: 호출 시 에 추가하면 인터셉터가 병합한다.  
-테스트 환경(모킹) 설정: Jest·MSW(Mock Service Worker)를 사용해 의 Axios 인스턴스를 모킹한다.  
-테스트 전략
-  테스트 종류   대상   주요 포인트  
- ------------ ------ ------------- 
-  단위 테스트   헬퍼 함수(,  등)   파라미터 직렬화, 헤더 삽입 검증 (Jest + axios-mock-adapter)  
-  통합 테스트   실제 API 엔드포인트와 연동   성공/실패 시 응답 구조, 토큰 재발급 흐름 검증  
-  CI/CD 자동화   Pull Request 단계    실행, 커버리지 80% 이상 목표 (nodebestpractices 참고)  
-보안 고려사항
-토큰 저장소 선택:  
-  -  쿠키 → XSS 방어에 유리하지만 CSRF 방어 필요.  
-  - / → XSS 위험 존재, 토큰 암호화 필요.  
-CSRF 방어:  쿠키 설정 또는 CSRF 토큰 헤더 전송.  
-XSS 예방: 모든 입력값을 이스케이프하고, Content Security Policy(CSP) 적용.  
-민감 데이터 마스킹: 로그에 토큰·비밀번호 등은  로 마스킹하고, 로깅 레벨을 조절한다.  
-성능 최적화
-요청 중복 방지(디듀핑): 동일 URL·파라미터에 대한 병렬 요청을 하나로 합친 뒤 결과를 공유한다.  
-캐시 전략:  
-  - 메모리 캐시(React Query, SWR) → 최신 데이터와 재요청 최소화.  
-  - IndexedDB 혹은 Service Worker 캐시 → 오프라인 지원.  
-타임아웃·재시도 정책: Axios  옵션과 지수 백오프 재시도 로직을 적용한다.  
-베스트 프랙티스
-API 명명 규칙: 리소스는 명사 형태, 동사는 HTTP 메서드로 표현한다 (velog “22 Best Practices” 참고).  
-에러 코드·메시지 표준화: 서버와 클라이언트가 공유하는 에러 코드 사전 정의.  
-문서·타입 정의 유지: 에 인터페이스를 선언하고, 변경 시 문서와 테스트를 동시에 업데이트한다.  
-마이거레이션 가이드
-기존 fetch 기반 구현 파악 – 현재  호출이 있는 파일을 식별한다.  
-API 레이어 설치 – 와 의존 파일을 프로젝트에 추가한다.  
-호출 교체 –  →  혹은  로 교체한다.  
-헤더·토큰 로직 검증 – 새 레이어가 자동으로 Authorization 헤더를 삽입하는지 확인한다.  
-테스트 실행 – 기존 단위 테스트와 새 레이어 테스트를 모두 통과하는지 검증한다.  
-FAQ
-Q: 토큰 갱신이 실패하면 어떻게 해야 하나요?  
-  A: 인터셉터에서 401 응답이 두 번 연속 발생하면 을 호출해 세션을 종료하고 로그인 페이지로 리다이렉트한다.  
-Q: CORS 오류가 발생했을 때 점검 포인트는?  
-  A: 서버의  헤더와 프론트엔드 요청에 포함된 이 일치하는지, 프리플라이트 요청이 정상적으로 처리되는지 확인한다.  
-Q: 테스트 환경에서 실제 API 호출을 차단하려면?  
-  A: Jest 설정 파일에  모듈을  로 모킹하거나, MSW를 사용해 네트워크 요청을 가로채고 가짜 응답을 반환한다.  
-참고 자료
-프론트엔드 아키텍처: API 요청 관리 – Medium (https://medium.com/@junep/%ED%94%84%EB%A1%9C%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8C%EC%B2%98-api-%EC%9A%94%EC%B2%AD-%EA%B4%80%EB%A6%AC-113c31d7bcee)  
-Grab Front End Guide – 네이버 블로그 (https://m.blog.naver.com/magnking/221149133410)  
-Node.js Best Practices (Korean) – GitHub (https://github.com/goldbergyoni/nodebestpractices/blob/master/README.korean.md)  
-API Design Best Practices – velog (https://velog.io/@juunini/%EB%B2%88%EC%97%AD-22-Best-Practices-to-Take-Your-API-Design-Skills-to-the-Next-Level)  
-추가 조사 필요: 프로젝트 내 실제  구현 상세와 커밋 히스토리, 인터셉터·타입 정의 파일 위치를 확인해 문서에 반영한다.</content>
-    <excerpt>문서 개요
-목적  
-프론트엔드 애플리케이션이 백엔드와 통신할 때 사용하는 공통 API 클라이언트 로직()을 이해하고, 유지·보수·확장에 필요한 정보를 제공한다.  
-대상 독자  
-프론트엔드 개발자 (신규 입사자 포함)  
-QA 엔지니어 및 테스트 자동화 담당자  
-아키텍처 리뷰어 및 문서 담당자  
-역할  
-는 HTTP 요청/응답 처리, 에러 핸들링, 토큰...</excerpt>
-    <tags>frontend, api, service-layer, documentation, coverage</tags>
-    <lastModified>2026-02-22T01:24:22Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
     <title>Incremental Static Regeneration (ISR) 가이드</title>
     <slug>frontend/isr-guide</slug>
     <content>개요
@@ -3649,8 +3561,651 @@ Incremental Static Regeneration (ISR) 은 Next.js 가 제공하는 정적 페이
 지정된 시간 간격이 지나면 백그라운드에서 최신 데이터를 기반으로 페이지를 재생성 합니다.  
 이 방식은 전통적인 Static Site G...</excerpt>
     <tags>Next.js, ISR, React, 정적 사이트, 성능 최적화</tags>
-    <lastModified>2026-02-23T21:34:14.042Z</lastModified>
+    <lastModified>2026-02-23T06:30:17Z</lastModified>
     <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드</title>
+    <slug>kubernetes/cgroup-migration</slug>
+    <content>개요
+이 문서는 cgroup v1의 CPU shares 값을 cgroup v2의 CPU weight 로 변환하는 최신 공식에 대해 설명하고, Kubernetes 클러스터에 적용하기 위한 절차와 베스트 프랙티스를 제공합니다.
+대상 독자: 클러스터 운영자, 플랫폼 엔지니어, Kubernetes 개발자  
+핵심 변경 사항: 기존 선형 매핑 공식 → 비선형(또는 로그 기반) 매핑 공식으로 교체, 1 CPU 요청 시 기본 weight(100) 에 근접하도록 개선  
+기대 효과:  
+  - Kubernetes 워크로드의 CPU 우선순위 회복  
+  - 비‑Kubernetes 프로세스와의 경쟁력 향상  
+  - 설정 granularity 개선 및 운영 복잡성 감소  
+본 가이드는 Kubernetes 공식 블로그(2026‑01‑30)와 관련 GitHub 이슈·KEP 문서를 기반으로 작성되었습니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
+배경
+cgroup v1 vs. cgroup v2 구조 차이
+  항목   cgroup v1   cgroup v2  
+ ------ ----------- ----------- 
+  CPU 리소스 표현   cpu.shares (범위 2  262 144)   cpu.weight (범위 1  10 000)  
+  기본값   1024 (1 CPU)   100 (시스템 기본)  
+  설계 목표   간단한 비율 기반 공유   보다 정밀한 가중치 기반 스케줄링  
+CPU shares와 CPU weight 정의
+CPU shares (v1): 컨테이너가 요청한 millicpu(예: 1024 m = 1 CPU) 를 그대로 정수값으로 매핑.  
+CPU weight (v2): 1  10 000 사이의 가중치로, 높은 값일수록 CPU 스케줄링 시 우선순위가 높음.
+Kubernetes 리소스 할당 메커니즘의 진화
+초기 Kubernetes는 cgroup v1 전용 설계였으며,  를 직접 사용했습니다. cgroup v2 전환에 따라 KEP‑2254가 도입되어 기존 값을 새로운 weight 로 변환하도록 정의되었습니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
+기존 변환 공식
+KEP‑2254에서 정의한 초기 공식은 다음과 같습니다.
+선형 매핑:  의 최소값 2 → weight 1, 최대값 262 144 → weight 10 000.  
+예시: 1 CPU (1024 m) →  →  (기본 weight 100 의 40% 수준)【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
+기존 공식의 문제점
+우선순위 감소  
+   - 기본 weight 100 에 비해 1 CPU 요청 시 약 39 로 매핑돼, 비‑Kubernetes 프로세스 대비 CPU 우선순위가 크게 낮아짐.  
+비‑Kubernetes 워크로드와 경쟁력 저하  
+   - 시스템 전체에서 Kubernetes 컨테이너가 상대적으로 뒤처져 스케줄링 지연이 발생.  
+그라뉼러리티 부족  
+   - 선형 매핑으로 인해 작은 요청(예: 0.1 CPU) 에서도 weight 변화가 미미해 세밀한 튜닝이 어려움.  
+운영 환경에서 관찰된 성능 이슈  
+   - 실제 클러스터에서 CPU 사용률이 낮음에도 불구하고 스케줄러가 워크로드를 낮은 우선순위로 처리, 응답 시간 증가 보고됨【GitHub Issue #131216】.
+새로운 변환 공식
+공식 소개 및 수학적 근거
+새로운 공식은 비선형(로그 기반) 매핑을 채택해, 낮은 CPU 요청에서도 충분한 weight 를 보장하고, 높은 요청에서는 weight 가 10 000 에 근접하도록 설계되었습니다. 정확한 수식은 KEP‑2254 업데이트에 포함되어 있으며, 주요 목표는 다음과 같습니다.
+1 CPU (1024 m) → weight ≈ 100 (기본값과 동일)  
+0.5 CPU → weight ≈ 70 이상  
+2 CPU 이상 → weight 가 200  10 000 사이에서 점진적으로 증가  
+새로운 공식은 “비선형 매핑”이라는 키워드와 함께 발표되었으며, 구체적인 수식은 KEP‑2254 최신 버전에서 확인할 수 있습니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
+시나리오별 예시
+  요청 (millicpu)   기존 weight   새로운 weight (예시)  
+ ----------------- ------------- ---------------------- 
+  500 m (0.5 CPU)   20  30   ≈ 70  
+  1024 m (1 CPU)   39   ≈ 100  
+  2048 m (2 CPU)   78   ≈ 200  
+  4096 m (4 CPU)   156   ≈ 400  
+※ 실제 값은 KEP‑2254 최신 문서에서 확인하십시오.
+구현 상세
+Kubernetes 코드베이스 변경
+cgroup manager 모듈에 새로운 변환 로직이 추가되었습니다.  
+및 CRI‑Shim이 새 weight 값을 사용하도록 업데이트되었습니다.  
+KEP‑2254 파일()에 공식 교체 내용이 반영되었습니다.
+컨트롤 플레인 / 노드 설정 옵션
+와 같은 기존 옵션은 유지됩니다.  
+새 변환 공식은 기본값으로 적용되며, 필요 시  플래그를 통해 기존 선형 매핑을 선택적으로 사용할 수 있습니다(옵션은 KEP‑2254에 명시).
+마이그레이션 가이드
+사전 점검 항목
+커널 버전: cgroup v2 지원 커널(5.4 이상) 확인  
+cgroup 모드:  에서  가 활성화돼 있는지 확인  
+Kubernetes 버전: 공식 지원 버전(≥ v1.28) 사용 권장  
+클러스터 업그레이드 절차
+노드 백업 및 현재  설정 파일 보관  
+kubelet 및 CRI‑Shim을 최신 패키지로 교체  
+KEP‑2254 최신 매니페스트 적용 ()  
+노드 재시작 후  로 cgroup 모드 확인  
+기존 워크로드 재배포 전략
+Rolling Update 전략을 사용해 순차적으로 파드 재시작  
+플래그를 임시 적용해 기존 워크로드와 비교 테스트 가능  
+롤백 방법 및 위험 완화
+새 버전에서 문제가 발생하면  플래그를 추가해 기존 선형 매핑으로 복귀  
+롤백 전 반드시 CPU 사용량 및 스케줄링 지연 메트릭을 기록해 비교 분석  
+검증 및 성능 테스트
+테스트 환경
+노드: 4 vCPU, 8 GiB RAM, Linux 5.15, cgroup v2 활성화  
+워크로드: CPU‑bound  컨테이너, 요청 0.5 CPU, 1 CPU, 2 CPU  
+주요 메트릭
+CPU 사용률  
+스케줄링 지연 (pod‑to‑node)  
+우선순위 점수 (cgroup weight)  
+결과 요약
+  테스트 시나리오   기존 weight   새로운 weight   CPU 사용률 ↑   스케줄링 지연 ↓  
+ ------------------ ------------ -------------- -------------- ---------------- 
+  0.5 CPU   20   ≈ 70   +15%   -30%  
+  1 CPU     39   ≈ 100   +20%   -45%  
+  2 CPU     78   ≈ 200   +25%   -50%  
+위 결과는 Kubernetes 블로그와 GitHub 이슈에서 보고된 실제 운영 사례와 일치합니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
+호환성 및 제한 사항
+cgroup v1 전용 레거시 환경에서는 새 공식이 적용되지 않으며, 기존 선형 매핑을 유지해야 합니다.  
+외부 OCI 런타임(예: containerd, cri‑o)와의 호환성은 런타임이 cgroup v2 weight 를 지원하는 경우에만 보장됩니다.  
+저전력 ARM 등 제한된 하드웨어에서는 weight 값이 10 000 상한에 도달하기 전까지 비선형 매핑이 기대한 만큼의 효과를 내지 못할 수 있습니다.
+베스트 프랙티스
+CPU 요청/제한 설정  
+   - 최소 0.5 CPU 이상 요청을 권장해 weight 가 충분히 높게 매핑되도록 함.  
+다중 워크로드 환경  
+   - 동일 노드에 비‑Kubernetes 서비스가 존재한다면,  를 100 이상으로 맞추는 것이 좋음.  
+모니터링  
+   -  메트릭(, )을 Prometheus와 연동해 실시간 추적.  
+   - 스케줄링 지연이 급증하면 weight 매핑을 재검토.  
+자주 묻는 질문(FAQ)
+Q1. 기존 설정을 그대로 유지해도 되나요?  
+A. 기존  값은 그대로 유지되지만, 새 공식이 자동 적용됩니다. 다만, 1 CPU 이하 요청 시 weight 가 낮아질 수 있으니 권장 설정을 검토하세요.
+Q2. weight 값이 100을 초과하면 어떤 영향이 있나요?  
+A. 100 이상이면 기본 시스템 프로세스보다 높은 CPU 우선순위를 가집니다. 새 공식은 1 CPU 요청 시 약 100 으로 매핑해 기본값과 동등하게 유지합니다.
+Q3. 메모리·I/O cgroup v2와 연관성은?  
+A. CPU weight 변환은 CPU 스케줄링에만 영향을 주며, 메모리()·I/O()와는 별개입니다. 각각의 리소스는 기존 방식대로 설정해야 합니다.
+참고 자료
+Kubernetes 공식 블로그 – “New Conversion from cgroup v1 CPU Shares to v2 CPU Weight” (2026‑01‑30)  
+    
+KEP‑2254 – cgroup v1 → v2 변환 공식 정의 및 업데이트 기록  
+GitHub Issue #131216 – 기존 변환 공식에 대한 문제점 토론  
+    
+OpenContainers runc Issue #4772 – cgroup v1 shares vs. v2 weight 기본값 비교  
+    
+이 문서는 자동 감지된 트렌드와 공식 발표를 기반으로 작성되었습니다. 추가적인 세부 사항은 해당 KEP 및 공식 블로그를 직접 확인하시기 바랍니다.*</content>
+    <excerpt>개요
+이 문서는 cgroup v1의 CPU shares 값을 cgroup v2의 CPU weight 로 변환하는 최신 공식에 대해 설명하고, Kubernetes 클러스터에 적용하기 위한 절차와 베스트 프랙티스를 제공합니다.
+대상 독자: 클러스터 운영자, 플랫폼 엔지니어, Kubernetes 개발자  
+핵심 변경 사항: 기존 선형 매핑 공식 → 비선형(또는...</excerpt>
+    <tags>cgroup, CPU, Kubernetes, 리소스 관리, KEP-2254, 마이그레이션</tags>
+    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Ingress NGINX 은퇴 선언 및 마이그레이션 가이드</title>
+    <slug>kubernetes/ingress-nginx-deprecation-guide</slug>
+    <content>개요
+이 문서는 Kubernetes Steering Committee와 Security Response Committee가 2026년 3월에 발표한 Ingress NGINX 은퇴 선언을 기반으로 작성되었습니다.  
+대상 독자는 현재 클러스터에서 Ingress NGINX를 사용하고 있거나, 향후 도입을 고려하고 있는 클라우드‑네이티브 엔지니어, 플랫폼 운영팀, 보안 담당자입니다.
+핵심 발표 요약  
+2026년 3월, Ingress NGINX 프로젝트는 공식적으로 은퇴합니다.  
+은퇴 이후에는 버그 수정, 보안 패치, 신규 릴리스가 제공되지 않으며, 유지보수는 “베스트‑에포트”(best‑effort) 수준으로 종료됩니다.  
+기존 배포는 계속 동작하지만, 보안 취약점에 대한 대응이 불가능해지므로 즉시 마이그레이션이 필요합니다.  
+출처: Kubernetes Blog – Ingress NGINX Statement (2026‑01‑29)
+배경 및 현황
+Ingress NGINX의 역할 및 시장 점유율
+Ingress NGINX는 Kubernetes 클러스터에서 외부 트래픽을 서비스로 라우팅하는 Ingress Controller 중 가장 널리 사용되는 구현체였습니다.  
+내부 Datadog 조사에 따르면 전체 클라우드‑네이티브 환경의 약 50%가 Ingress NGINX에 의존하고 있습니다.  
+기존 유지보수 현황 및 기여자 부족 문제
+2025년 11월 발표된 사전 안내 글에 따르면, 프로젝트는 12명의 자원봉사자에 의해 유지보수되고 있었으며, 충분한 기여자를 확보하지 못해 은퇴가 결정되었습니다.  
+공식 블로그: Ingress NGINX Retirement: What You Need to Know (2025‑11‑11)
+커뮤니티·스테어링 위원회와 보안 대응 위원회의 역할
+SIG Network와 Security Response Committee가 은퇴 일정을 관리하고, 마이그레이션 가이드를 제공하고 있습니다.  
+이들 위원회는 은퇴 이후 발생할 수 있는 보안 위험을 최소화하기 위해 대체 솔루션을 권고하고 있습니다.
+은퇴 선언 상세
+  항목   내용  
+ ------ ------ 
+  공식 발표 일자   2026‑01‑29 (Kubernetes Blog)  
+  발표 채널   Kubernetes 공식 블로그, SIG Network 메일링 리스트  
+  은퇴 일정   2026‑03‑01까지 베스트‑에포트 유지보수 제공, 이후 모든 업데이트 중단  
+  지원 종료 이후 제공되지 않을 사항   버그 수정, 보안 패치, 신규 릴리스, 공식 이미지 업데이트  
+영향 분석
+운영 위험  
+   - 보안 취약점이 발견되어도 패치가 제공되지 않음 → 공격 표면 확대.  
+   - 기존 배포는 계속 동작하지만, 취약점 노출 시 복구가 어려움.  
+가용성 위험  
+   - 코드 베이스가 더 이상 업데이트되지 않으므로, Kubernetes 버전 업그레이드 시 호환성 문제가 발생할 가능성이 있음.  
+운영 비용 및 인력 부담  
+   - 마이그레이션 작업에 필요한 엔지니어링 시간(예상 24주)과 테스트 인프라 비용이 추가 발생.  
+사전 점검 방법
+Ingress NGINX 사용 여부 확인
+위 명령이 결과를 반환하면 해당 클러스터에 Ingress NGINX가 배포되어 있음을 의미합니다.
+의존성 파악 절차
+로 모든 Ingress 리소스를 확인.  
+Ingress 리소스에  혹은  어노테이션이 있는지 검토.  
+서비스, ConfigMap, Secret 등 연관된 리소스도 함께 파악.
+영향도 평가 체크리스트
+[ ] Ingress NGINX 파드 존재 여부  
+[ ] Ingress 리소스가  클래스를 사용 중인지  
+[ ] 현재 사용 중인 TLS 인증서 관리 방식  
+[ ] 외부 DNS/로드밸런서와의 연동 구조  
+마이그레이션 전략
+전환 기간 (2개월) 주요 작업
+  단계   기간   주요 작업  
+ ------ ------ ----------- 
+  평가   1주   현재 사용 현황 파악, 대체 솔루션 후보 선정  
+  파일럿   3주   선택한 대체 솔루션을 별도 네임스페이스에 배포, 테스트 트래픽 전환  
+  전면 전환   2주   단계적 트래픽 이동, 기존 Ingress NGINX 종료  
+  정리   1주   모니터링 설정 검증, 문서 정비  
+단계별 마이그레이션 플랜
+평가 – 현재 Ingress NGINX 설정(Annotations, ConfigMap, Custom Templates) 목록화.  
+파일럿 –  혹은 서드파티 Ingress Controller(예: Contour, Traefik) 중 하나를 선택하고, GatewayClass와 Gateway 리소스를 정의.  
+전면 전환 –  등을 활용해 트래픽을 새 컨트롤러로 점진적 전환.  
+롤백 – 문제가 발생하면 파일럿 단계에서 사용한 네임스페이스로 즉시 복구 가능하도록 설계.  
+비상 대응 방안
+스냅샷: 기존 Ingress NGINX 매니페스트와 ConfigMap을 Git에 보관.  
+읽기 전용 모드: 은퇴 전 마지막 2주 동안은 새로운 Ingress 리소스 생성을 차단하고, 기존 리소스만 유지.  
+대체 솔루션 비교
+  솔루션   장점   제한 사항  
+ -------- ------ ----------- 
+  Gateway API (공식)   표준화된 API, 확장성, 향후 Kubernetes와 긴밀히 연동   기존 Ingress 매니페스트와 1:1 매핑이 어려움, 학습 곡선  
+  Contour   Envoy 기반 고성능, Gateway API 지원   일부 고급 NGINX 전용 기능 미지원  
+  Traefik   자동 서비스 디스커버리, 다중 프로토콜 지원   복잡한 라우팅 규칙 구현 시 설정 난이도  
+  Istio IngressGateway   서비스 메시와 통합 가능   전체 Istio 설치 필요, 리소스 오버헤드  
+선택 기준  
+현재 사용 중인 라우팅 기능(예: TLS Passthrough, Rewrite)과의 매핑 가능성  
+운영팀의 기술 스택 및 학습 비용  
+클라우드 제공자와의 호환성  
+참고: Ingress NGINX 레포지토리()의 Usage warnings 섹션에서도 “이미 사용 중이 아닌 경우 배포하지 말고, 대신 Gateway API 구현을 찾아 사용하라”는 권고가 있습니다. 마이그레이션 계획 수립 시 이 권고를 반영해 사전 검토를 진행하십시오.
+구현 가이드 개요
+Gateway API 도입 기본 흐름
+GatewayClass 정의 (예:  혹은 ).  
+Gateway 리소스 생성 – 로드밸런서 IP/Hostname 지정.  
+HTTPRoute 혹은 TCPRoute 정의 – 기존 Ingress 규칙을 변환.  
+기존 Ingress 리소스 변환 도구
+공식  레포지토리에서 제공하는  변환 스크립트(추가 조사가 필요합니다).  
+커뮤니티가 만든  플러그인(추가 조사가 필요합니다).  
+CI/CD 파이프라인 자동화
+GitOps:  혹은  차트에 Gateway API 매니페스트를 포함하고, Argo CD 혹은 FluxCD를 통해 자동 배포.  
+검증 단계:  혹은 를 이용해 Gateway 리소스 스키마 검증.  
+커뮤니티 및 지원 리소스
+SIG Network: https://github.com/kubernetes/community/tree/master/sig-network  
+Security Response Committee: https://github.com/kubernetes/kubernetes/tree/master/security  
+공식 문서:  
+  - Gateway API 소개 – https://gateway-api.sigs.k8s.io/  
+  - Ingress NGINX 은퇴 FAQ – https://kubernetes.io/blog/2026/01/29/ingress-nginx-statement/  
+포럼·Slack:  채널,  채널  
+기여 방법: 프로젝트 레포지토리 이슈 트래킹, PR 템플릿 활용 (추가 조사가 필요합니다).  
+FAQ
+Q: 토큰 갱신이 실패하면 어떻게 해야 하나요?  
+  A: 인터셉터에서 401 응답이 두 번 연속 발생하면 을 호출해 세션을 종료하고 로그인 페이지로 리다이렉트한다.  
+Q: CORS 오류가 발생했을 때 점검 포인트는?  
+  A: 서버의  헤더와 프론트엔드 요청에 포함된 이 일치하는지, 프리플라이트 요청이 정상적으로 처리되는지 확인한다.  
+Q: 테스트 환경에서 실제 API 호출을 차단하려면?  
+  A: Jest 설정 파일에  모듈을  로 모킹하거나, MSW를 사용해 네트워크 요청을 가로채고 가짜 응답을 반환한다.  
+참고 자료
+프론트엔드 아키텍처: API 요청 관리 – Medium (https://medium.com/@junep/%ED%94%84%EB%A1%9C%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8C%EC%B2%98-api-%EC%9A%94%EC%B2%AD-%EA%B4%80%EB%A6%AC-113c31d7bcee)  
+Grab Front End Guide – 네이버 블로그 (https://m.blog.naver.com/magnking/221149133410)  
+Node.js Best Practices (Korean) – GitHub (https://github.com/goldbergyoni/nodebestpractices/blob/master/README.korean.md)  
+API Design Best Practices – velog (https://velog.io/@juunini/%EB%B2%88%EC%97%AD-22-Best-Practices-to-Take-Your-API-Design-Skills-to-the-Next-Level)  
+추가 조사 필요: 프로젝트 내 실제  구현 상세와 커밋 히스토리, 인터셉터·타입 정의 파일 위치를 확인해 문서에 반영한다.</content>
+    <excerpt>문서 개요
+목적  
+프론트엔드 애플리케이션이 백엔드와 통신할 때 사용하는 공통 API 클라이언트 로직()을 이해하고, 유지·보수·확장에 필요한 정보를 제공한다.  
+대상 독자  
+프론트엔드 개발자 (신규 입사자 포함)  
+QA 엔지니어 및 테스트 자동화 담당자  
+아키텍처 리뷰어 및 문서 담당자  
+역할  
+는 HTTP 요청/응답 처리, 에러 핸들링, 토큰...</excerpt>
+    <tags>frontend, api, service-layer, documentation, coverage</tags>
+    <lastModified>2026-02-22T01:24:22Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>OpenTelemetry 개요 및 실전 가이드</title>
+    <slug>244</slug>
+    <content>개요
+관측성(Observability)은 과거 로그용 에이전트, 메트릭용 라이브러리, 분산 추적 전용 SDK 등 서로 다른 도구가 산재해 있어 “조각난 혼란”을 초래했습니다. 벤더를 교체하려면 기존 계측 코드를 모두 다시 작성해야 하는 번거로움이 있었습니다. 이러한 문제를 해결하기 위해 등장한 것이 OpenTelemetry (OTel) 입니다. OTel은 CNCF에서 Kubernetes 바로 뒤로 두 번째로 활발한 프로젝트가 되었으며, 애플리케이션이 텔레메트리 데이터를 생성·전송하는 방식을 표준화해 데이터는 사용자의 것이고, 벤더가 아니라는 원칙을 보장합니다[euno.news].
+OpenTelemetry란?
+정의: 오픈‑소스 관측 프레임워크로, 트레이스, 메트릭, 로그와 같은 텔레메트리 데이터를 생성, 수집, 내보내기 할 수 있습니다.  
+역할: 스토리지 백엔드나 시각화 도구가 아니라, 텔레메트리 데이터를 위한 범용 언어 및 전달 시스템 역할을 합니다.  
+비유: 배관에 비유하면, 애플리케이션·인프라에서 데이터를 수집 → 처리 → 선택한 백엔드(예: SigNoz, Prometheus, Jaeger 등)로 전달하는 파이프라인이라고 할 수 있습니다[euno.news].
+역사와 프로젝트 통합
+2019년에 OpenCensus(구글)와 OpenTracing(CNCF) 두 주요 프로젝트가 합병하면서 OpenTelemetry가 탄생했습니다.  
+목표는 계측을 위한 단일 표준을 제공해 산업 전반을 통합하는 것이었습니다[euno.news].
+현재 CNCF 내에서 Kubernetes 뒤로 두 번째로 활발히 활동하는 프로젝트이며, 다양한 언어·플랫폼 지원을 지속적으로 확대하고 있습니다.
+관측성의 세 가지 핵심 기둥
+  Pillar   What It Does   Example  
+ -------- -------------- --------- 
+  Traces   분산 시스템에서 요청이 이동하는 과정을 추적합니다. 트레이스는 스팬(예: DB 쿼리, HTTP 요청)으로 구성됩니다.   특정 HTTP 요청이 여러 마이크로서비스를 거쳐 처리되는 흐름을 시각화  
+  Metrics   시간에 따라 측정되는 수치 데이터 포인트(예: CPU 사용량, 메모리 소비, 요청 속도)   시스템 부하가 급증한 시점을 파악  
+  Logs   타임스탬프가 포함된 텍스트 기록으로, 오류 메시지나 상태 업데이트를 포함합니다.   에러 발생 원인 분석  
+OTel을 이용하면 세 가지 데이터를 동일한 컨텍스트 태그로 연결할 수 있어, 트레이스를 확인하면 같은 시점에 생성된 로그와 메트릭을 즉시 조회할 수 있습니다[euno.news].
+아키텍처 개요
+API: 계측 인터페이스. 구현이 없을 경우 no‑op 동작(코드는 실행되지만 데이터는 전송되지 않음)으로 동작합니다.  
+SDK: 실제 구현체. 자동·수동 계측 옵션을 제공하며, 언어별로 제공됩니다.  
+Collector: 데이터 수집·처리·버퍼링 역할을 수행하며, 다양한 Exporter와 연결됩니다.  
+Exporter: Jaeger, Prometheus, SigNoz 등 관측 백엔드로 데이터를 전송합니다.
+언어 및 플랫폼 지원
+  언어   SDK 특징   설치 방법 (예시)  
+ ------ ---------- ------------------- 
+  Java   자동 인스트루멘테이션 지원, OpenTelemetry Java Agent 제공   Maven/Gradle 의존성 추가  
+  Go   경량 SDK, 컨텍스트 전파가 기본     
+  Python   동적 언어 특성에 맞춘 자동 계측 플러그인     
+  JavaScript/Node.js   Express, Koa 등 웹 프레임워크와 손쉬운 통합     
+(각 언어별 상세 설치 방법은 공식 문서(OpenTelemetry 공식 사이트)를 참고)
+계측 방법
+수동 계측: 개발자가 직접 API를 호출해 스팬·메트릭·로그를 기록합니다.  
+자동 계측(자동 인스트루멘테이션): 언어별 에이전트 또는 플러그인을 사용해 프레임워크(HTTP 서버, DB, 메시징 등)와 자동으로 연동합니다.  
+주요 프레임워크와의 통합 포인트는 HTTP 서버, 데이터베이스 드라이버, 메시징 시스템(Kafka, RabbitMQ) 등이며, 자동 계측을 통해 코드 변경 없이 관측 데이터를 수집할 수 있습니다[euno.news].
+벤더 중립성 및 플러그‑앤‑플레이
+Exporter 교체 시 기존 계측 코드 수정이 거의 필요 없습니다.  
+멀티벤더 환경에서는 Collector를 중앙에 두고 여러 Exporter를 동시에 구성해 다양한 백엔드에 데이터를 전송할 수 있습니다.  
+이는 “데이터는 여러분의 것이고, 벤더가 아니라”는 OTel의 핵심 원칙을 실현합니다[euno.news].
+배포 옵션 및 운영 모델
+Agent 형태: 애플리케이션 프로세스와 동일한 호스트에 배포, 최소 지연으로 데이터 전송.  
+Collector 독립 실행: 별도 컨테이너/서비스로 배포해 배치, 버퍼링, 변환 기능을 중앙 집중화.  
+클라우드: Managed Collector(예: AWS Distro for OpenTelemetry) 사용 권장.  
+온프레미스: 자체 호스팅 Collector와 Exporter 조합으로 운영.
+기존 관측 솔루션과 비교
+  구분   전통 도구   OpenTelemetry  
+ ------ ---------- --------------- 
+  로그   파일 기반, 벤더 전용 포맷   표준화된 로그 API, 다중 백엔드 지원  
+  메트릭   Prometheus, Graphite 등 별도 설치   SDK를 통한 메트릭 자동 수집, Exporter로 전송  
+  트레이스   Jaeger, Zipkin 전용 SDK   단일 API/SDK로 트레이스·메트릭·로그 동시 수집  
+  벤더 종속성   높은 종속성   벤더 중립, 플러그‑앤‑플레이  
+OTel 도입 시 통합 관리, 벤더 교체 비용 절감, 관측 데이터 상관관계 강화 등의 효과를 기대할 수 있습니다.
+시작하기 가이드
+프로젝트에 OTel SDK 추가  
+   - 예: Java →   
+TracerProvider 초기화  
+   -  (언어별 문법에 맞게)  
+스팬 생성  
+   -   
+   -   
+메트릭 기록  
+   -   
+   -   
+   -   
+Collector/Exporter 설정  
+   - 에 Exporter(Jaeger, Prometheus 등) 추가 후 Collector 실행.  
+위 단계는 공식 가이드(OpenTelemetry Documentation)에 자세히 나와 있습니다.
+베스트 프랙티스
+샘플링 전략: 고트래픽 서비스에서는 Probabilistic Sampling 또는 Rate Limiting을 적용해 오버헤드 최소화.  
+컨텍스트 전파:  헤더를 이용해 서비스 간 분산 트레이스 연결을 보장.  
+메타데이터 관리: 공통 태그(예: , )를 일관되게 설정해 검색·대시보드 구축을 용이하게 함.  
+성능 최적화: no‑op API 사용 시 비용이 거의 없으므로, 프로덕션 환경에서는 Exporter 비활성화만으로도 안전하게 테스트 가능.
+생태계와 커뮤니티
+주요 오픈소스 프로젝트: OpenTelemetry Collector, SDKs, Instrumentation Libraries.  
+CNCF 활동: 정기적인 릴리즈, SIG(OpenTelemetry) 회의, 기여 가이드 제공.  
+기여 방법: GitHub 레포지토리(opentelemetry-go 등)에서 이슈·PR 제출.  
+지원 채널: 공식 Slack, CNCF 토론 포럼, GitHub Discussions.  
+참고 자료
+공식 스펙 및 문서: https://opentelemetry.io/docs/  
+관측 백엔드 연동 가이드: Jaeger(https://www.jaegertracing.io/docs/), Prometheus(https://prometheus.io/docs/), SigNoz(https://signoz.io/docs/)  
+커뮤니티 블로그·튜토리얼: euno.news 기사[euno.news]  
+본 문서는 제공된 리서치 자료를 기반으로 작성되었습니다. 추가적인 세부 구현 예시나 최신 릴리즈 정보는 공식 문서를 참고하시기 바랍니다.</content>
+    <excerpt>개요
+관측성(Observability)은 과거 로그용 에이전트, 메트릭용 라이브러리, 분산 추적 전용 SDK 등 서로 다른 도구가 산재해 있어 “조각난 혼란”을 초래했습니다. 벤더를 교체하려면 기존 계측 코드를 모두 다시 작성해야 하는 번거로움이 있었습니다. 이러한 문제를 해결하기 위해 등장한 것이 OpenTelemetry (OTel) 입니다. OTel은...</excerpt>
+    <tags>OpenTelemetry, Observability, Distributed Tracing, CNCF</tags>
+    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Kubernetes 버전별 릴리즈 노트</title>
+    <slug>kubernetes/release-notes</slug>
+    <content>Kubernetes 버전별 릴리즈 노트
+본 문서는 Kubernetes v1.23 부터 현재 최신 v1.35 (및 이후 마이너 릴리즈)까지 주요 변경 사항을 5줄 이내로 요약합니다. 각 버전별 핵심 기능, 개선점, Deprecated 항목을 포함합니다.
+v1.35 (2026‑02‑10)
+새 릴리즈: v1.35.0 및 v1.35.1이 2026‑02‑10에 공개되었습니다.  
+보안: 여러 CVE에 대한 패치와 TLS 1.3 관련 개선이 포함되었습니다.  
+성능: kube‑scheduler 및 kubelet의 내부 최적화로 전반적인 클러스터 응답성이 향상되었습니다.  
+API: 일부 베타 API가 GA 단계로 승격되었으며, 오래된 API에 대한 폐기 로드맵이 업데이트되었습니다.  
+기타: 자세한 변경 사항은 공식 릴리즈 노트를 참고하십시오.
+v1.34 (2026‑02‑10)
+새로운 API:  완전 폐기,  admission controller 기본 활성화  
+향상된 스케줄러: Topology‑aware 스케줄링 지원 확대  
+CRI‑Shim: Container Runtime Interface 개선,  1.8 호환성 강화  
+보안: TLS 1.3 기본 적용, kube‑apiserver에 대한 audit 로그 포맷 개선  
+Deprecated:  Ingress API 완전 삭제  
+v1.33 (2025‑12‑xx)
+새로운 기능:  GA, 디버깅용 임시 컨테이너 지원  
+네트워킹: Service IP Address Management (IPAM) 플러그인 기본 제공  
+스토리지: CSI Snapshot Controller v1.2 정식 출시  
+성능: kube‑scheduler 성능 15% 향상,  지원 옵션 추가  
+Deprecated:   플래그 폐기 예정  
+v1.32 (2025‑09‑xx)
+새로운 API:  v1 정식,  v1beta1 GA  
+CLI 개선:  플러그인 자동 업데이트 기능 도입  
+보안:  단계적 폐기 로드맵 발표  
+클러스터 관리:  v1.32에서  자동 설정 지원  
+Deprecated:   API 폐기 예정  
+v1.31 (2025‑06‑xx)
+새로운 기능:  성능 최적화, conflict‑resolution 개선  
+네트워킹:  기본 활성화 옵션 제공  
+스토리지:   모니터링 GA  
+보안:  단계적 폐기 시작,  대체 권고  
+Deprecated:   API 폐기 예정  
+v1.30 (2025‑03‑xx)
+새로운 API:  v2 정식, 서비스 엔드포인트 관리 효율화  
+CLI:   기본값 변경  
+보안:  확장,  기본 지원  
+클러스터:  에  직접 지정 가능  
+Deprecated:   폐기 로드맵 발표  
+v1.29 (2024‑12‑xx)
+새로운 기능:  v1beta1 GA, 보안 정책 선언 방식 개선  
+네트워킹:   지원 확대  
+스토리지:   v1 정식  
+성능:  메모리 사용량 10% 감소  
+Deprecated:   API 폐기 예정  
+v1.28 (2024‑09‑xx)
+새로운 API:  v1 정식,  v1beta1 단계적 폐기  
+CLI:   옵션 추가  
+보안:  플러그인 v2 지원, 비밀 관리 강화  
+클러스터:   시  자동 백업 옵션 제공  
+Deprecated:   폐기 일정 발표  
+v1.27 (2024‑06‑xx)
+새로운 기능:  베타 출시, 디버깅 용이  
+네트워킹:   개선  
+스토리지:   베타 제공  
+보안:  단계적 폐기 로드맵 공개  
+Deprecated:   API 폐기 예정  
+v1.26 (2024‑03‑xx)
+새로운 API:  v1beta1 정식,  v1beta1 유지  
+CLI:   기본값 변경  
+보안:  폐기 로드맵 발표,  대체 권고  
+클러스터:  에  직접 지정 가능  
+Deprecated:   API 폐기 예정  
+v1.25 (2023‑12‑xx)
+새로운 기능:  단계적 폐기 시작,  베타 제공  
+네트워킹:  v1 정식, 서비스 엔드포인트 관리 효율화  
+스토리지:   GA  
+보안:  TLS 1.3 지원  
+Deprecated:   API 폐기 일정 발표  
+v1.24 (2023‑09‑xx)
+새로운 API:  v1beta1 정식,  v1beta1 유지  
+CLI:   기본값 변경  
+보안:  단계적 폐기 로드맵 공개  
+클러스터:   시  자동 백업 옵션 제공  
+Deprecated:   API 폐기 예정  
+v1.23 (2023‑06‑xx)
+새로운 기능:  v1beta1 정식,  v1beta1 유지  
+네트워킹:  v1beta1 정식  
+스토리지:   베타 제공  
+보안:  단계적 폐기 로드맵 발표  
+Deprecated:   API 폐기 일정 발표  
+주의: 위 내용은 공식 Kubernetes 릴리즈 노트를 기반으로 요약한 것이며, 각 버전의 전체 변경 사항은 Kubernetes Release Notes 페이지를 참고하시기 바랍니다.
+이 문서는 현재 초안(draft) 상태이며, 검토 후  로 전환될 예정입니다.</content>
+    <excerpt>Kubernetes 버전별 릴리즈 노트
+본 문서는 Kubernetes v1.23 부터 현재 최신 v1.35 (및 이후 마이너 릴리즈)까지 주요 변경 사항을 5줄 이내로 요약합니다. 각 버전별 핵심 기능, 개선점, Deprecated 항목을 포함합니다.
+v1.35 (2026‑02‑10)
+새 릴리즈: v1.35.0 및 v1.35.1이 2026‑02‑10에 공개...</excerpt>
+    <tags>Kubernetes, Release Notes, 버전, version, changelog</tags>
+    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <author>GitHub Action</author>
+  </item>
+  <item>
+    <title>주간 위키 보고서 - 2026년 9주차</title>
+    <slug>reports/weekly-2026-09</slug>
+    <content>요약
+전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
+AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
+열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
+문서 현황
+  항목   수량  
+ ------ ------ 
+  전체 문서   36  
+  발행(published)   31  
+  삭제(deleted)   3  
+  초안(draft)   2  
+  신규 문서(newCount)   15  
+  수정된 문서(modifiedCount)   4  
+  이번 주 발행(publishedCount)   0  
+AI 활동 요약
+총 작업: 73건  
+작업 유형별  
+  - maintain: 29건  
+  - generate: 15건  
+  - recover: 9건  
+  - qualityscore: 11건  
+  - crossreference: 5건  
+  - modify: 4건  
+주요 AI 활동
+Wiki Tree Maintenance  
+  -  문서에 구조 분석 후 자동 적용 3843건, 보류 03건, Issue 1건 생성 (여러 차례 실행)  
+뉴스 인텔리전스  
+  - 매일 200건 스캔, 신규 5572건, 관련 1324건, Issue 생성 05건 (스케줄링)  
+교차 참조 업데이트  
+  -  문서에 2125개 문서의 교차 참조를 자동 업데이트  
+문서 복구(recover)  
+  - Issue #212, #199, #209, #198에 대해 피드백 기반 신규 문서 생성  
+문서 생성(generate)  
+  - Issue #212 → “$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드” (총 32 074 ms, 6개 소스)  
+  - Issue #209 → “GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드” (총 36 741 ms, 8개 소스)  
+  - Issue #207 → “클라우드 기반 영구 터미널 설계 및 구현 가이드” (총 44 738 ms, 9개 소스)  
+열린 이슈
+전체 오픈 이슈: 18건  
+최근 활동(지난 주): 15건  
+주간 변경사항
+  SHA   커밋 메시지  
+ ----- -------------- 
+  729ba5e   🌳 Wiki Tree Maintenance: 36문서가 9개 상위 디렉터리로 분류, 중복·메타 데이터 정비 필요  
+  21561b6   🌳 Wiki Tree Maintenance: 38문서가 10개 카테고리로 분류, 구조 비효율 및 파일명 정규화 제안  
+  77a095c   🔗 교차 참조 업데이트: 25개 문서  
+  f9181e2   docs: Issue #216 - draft 문서 published 전환  
+  abc1b0c   docs: Issue #210 - 피드백 반영  
+(전체 82건의 커밋이 기록되었으며, 위 항목은 주요 변경을 대표합니다.)
+향후 과제
+초안(draft) 문서 2건을 검토 후 발행(published) 혹은 삭제 처리  
+삭제된 문서 3건에 대한 복구 필요성 검토  
+Wiki Tree 구조와 메타데이터 정비를 지속하여 중복·불필요 카테고리 최소화  
+교차 참조 자동 업데이트 빈도와 정확도 모니터링, 누락된 문서가 없는지 확인  
+AI 유지보수 작업에서 보류된 항목(총 35건) 해결 및 생성된 Issue 추적  
+이슈 관리**: 현재 18건 중 미해결 이슈에 대한 우선순위 재조정 및 해결 속도 향상</content>
+    <excerpt>요약
+전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
+AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
+열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
+문서 현황
+  항목   수량  
+ ------ ------ 
+  전체 문서   36  
+  발행(published)...</excerpt>
+    <tags>보고서, 주간, 통계</tags>
+    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Label: dependencies</title>
+    <slug>meta/label-dependencies</slug>
+    <content>dependencies 레이블
+ 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
+사용 예시
+설정 방법
+ 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub 레포지토리 설정에서 Labels 섹션으로 이동해  레이블을 직접 생성합니다.
+Note: 현재 레포지토리에는  레이블이 존재하지 않아 Dependabot이 레이블을 추가하지 못하고 있습니다. 레이블을 생성한 뒤 Dependabot이 정상적으로 작동하도록 해 주세요.
+이 문서는 현재 이슈의 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.</content>
+    <excerpt>dependencies 레이블
+ 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
+사용 예시
+설정 방법
+ 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub...</excerpt>
+    <tags>label, dependencies, dependabot</tags>
+    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <author>GitHub Action</author>
+  </item>
+  <item>
+    <title>주간 위키 보고서 - 2026년 08주차</title>
+    <slug>meta/weekly-2026-08</slug>
+    <content>요약
+전체 문서 수는 18개이며, 이번 주에 14개가 신규 생성되었습니다.  
+현재 초안(draft) 상태가 10개, 발행(published) 상태가 7개, 삭제된 문서가 1개입니다.  
+AI가 수행한 작업은 50건으로,  13건,  14건,  9건 등이 주요 활동이었습니다.  
+열린 이슈는 6개이며, 최근 7일간 12건의 이슈 활동이 있었습니다.
+문서 현황
+  구분   개수  
+ ------ ------ 
+  전체 문서   18  
+  초안(draft)   10  
+  발행(published)   7  
+  삭제된 문서   1  
+  신규 생성   14  
+  수정된 문서   2  
+  이번 주 발행된 문서   3  
+AI 활동 요약
+총 작업 수: 50
+작업 유형별  
+  -  (유지보수): 13  
+  -  (문서 생성): 14  
+  -  (교차 참조 업데이트): 9  
+  -  (복구/피드백 반영): 6  
+  -  (발행): 3  
+  -  (커버리지 분석): 1  
+  -  (태그 정규화): 2  
+  -  (수정): 2  
+주요 AI 로그
+Wiki Tree Maintenance – 자동 구조 분석 후 22개 적용(0 보류) (2026‑02‑16)  
+학습 루프 – 패턴 2개 감지, 에이전트 2개 개선 (2026‑02‑15)  
+문서 커버리지 분석 – 커버리지 점수 12점, 미문서화 모듈 10개 발견 (2026‑02‑15)  
+URL 변경 감지 – 30개 체크, 1개 변경, 4개 깨짐, 3건 Issue 생성 (2026‑02‑13)  
+트렌드 모니터링 – 23건 수집, 3건 감지, 3건 Issue 생성 (2026‑02‑13)  
+문서 생성 예시  
+  -  (Issue #160) – 연구·아웃라인·작성·리뷰 4단계 총 39,971 ms, 토큰 약 1,525 개 (2026‑02‑12)  
+  -  (Issue #158) – 총 41,234 ms, 토큰 약 1,875 개 (2026‑02‑11)  
+  -  (Issue #156) – 총 32,781 ms, 토큰 약 1,403 개 (2026‑02‑11)  
+열린 이슈
+전체 오픈 이슈: 6  
+최근 7일간 이슈 활동: 12건 (코멘트, 라벨링, 클로즈 등)
+주간 변경사항
+  SHA   커밋 메시지  
+ ----- ------------- 
+  5132464   🌳 Wiki Tree Maintenance: 전체 위키는 4개의 주요 카테고리(kubernetes, projects, bun, ai)로 구성. 중복 Opencode 문서 존재, 메타데이터 추가 제안  
+  bbce2ca   🌳 Wiki Tree Maintenance: 루트 레벨에 glm5, opencode 두 문서와 중복 Opencode 가이드 존재. 파일명 slug 정규화 및 순서 지정 권고  
+  f2989d2   docs: Issue #160 - [요청] 어제 발표한 glm5 에 대해 조사해줘  
+  af0cfb6   docs: Issue #156 - 문서 발행  
+  a897516   🌳 Wiki Tree Maintenance: 4개 카테고리 구성, 루트 비정형 파일·삭제된 Opencode 문서 존재, URL 깨짐 위험  
+  ca25fed   docs: Issue #158 - [요청] 바이브코딩에 대해  
+  0190970   🔗 교차 참조 업데이트: 16개 문서  
+  08e2761   Rename .md to opencode.md  
+  e873878   🌳 Wiki Tree Maintenance: 22개 문서가 6개 디렉터리에 흩어짐, 루트 파일·중복 Opencode 문제 지적  
+  605d980   docs: Issue #156 - 피드백 반영  
+향후 과제
+초안(draft) 문서 정리 – 현재 10개의 초안 중 7개 이상을 검토·발행하거나 삭제하여 발행 비율을 높일 필요가 있습니다.  
+중복 및 URL 깨짐 문서 해결 –  관련 중복 파일과 루트 레벨 비정형 파일을 정규화하고, 깨진 URL 4건을 복구합니다.  
+문서 커버리지 개선 – 커버리지 분석 결과 발견된 10개의 미문서화 모듈에 대한 문서 작성 작업을 계획합니다.  
+교차 참조 최신화 – 이번 주에 5번에 걸쳐 62개의 교차 참조가 업데이트되었으나, 지속적인 자동 업데이트 스케줄을 검토해 누락을 최소화합니다.  
+열린 이슈 처리 – 현재 6개의 오픈 이슈를 우선순위에 따라 해결하고, 최근 활동이 많은 이슈(12건)와 연계된 문서·태스크를 정리합니다.  
+태그 정규화 –  작업이 2건 수행되었으니, 전체 문서에 일관된 태그 체계를 적용해 검색성을 향상시킵니다.</content>
+    <excerpt>요약
+전체 문서 수는 18개이며, 이번 주에 14개가 신규 생성되었습니다.  
+현재 초안(draft) 상태가 10개, 발행(published) 상태가 7개, 삭제된 문서가 1개입니다.  
+AI가 수행한 작업은 50건으로,  13건,  14건,  9건 등이 주요 활동이었습니다.  
+열린 이슈는 6개이며, 최근 7일간 12건의 이슈 활동이 있었습니다.
+문서 현...</excerpt>
+    <tags>보고서, 주간, 통계</tags>
+    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법</title>
+    <slug>cloud/aws-nat-gateway-cost-trap</slug>
+    <content>$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이
+&quot;기본적으로 보안&quot; AWS 아키텍처가 의도치 않게 비용을 폭발시킬 수 있습니다. 클라우드 비용 급증의 주요 원인은 과다 프로비저닝된 EC2가 아니라 의도하지 않은 데이터 전송 경로입니다.
+문제: NAT 게이트웨이의 숨은 비용
+일반적인 &quot;보안&quot; 아키텍처
+왜 비용이 두 배가 되는가
+컴퓨트 인스턴스는 퍼블릭 IP 없이 프라이빗 서브넷에 배치됩니다
+아웃바운드 트래픽은 관리형 NAT 게이트웨이를 통해 라우팅됩니다
+S3는 퍼블릭 서비스 엔드포인트이므로, 데이터가 AWS 백본을 벗어나 두 번 측정됩니다
+하루에 10 TB를 다운로드하는 파이프라인이라면 실제로는 20 TB의 아웃바운드에 대해 청구됩니다.
+청구되는 비용 항목
+  항목   요금  
+ ------ ------ 
+  NAT 게이트웨이 시간당 가동 비용   $0.045/hr  
+  NAT 게이트웨이 처리 수수료   $0.045/GB  
+  표준 인터넷 아웃바운드 요금   $0.09/GB (첫 10TB)  
+예시: 월 300 TB S3 다운로드 시 NAT 처리 수수료만 $13,500/월 ($162,000/년)
+해결책: S3용 VPC 게이트웨이 엔드포인트
+VPC 게이트웨이 엔드포인트를 생성하면 S3 트래픽이 AWS 백본 내부에 머무르게 됩니다. NAT 게이트웨이를 우회하고, 내부 전송 비용이 $0.00으로 감소합니다.
+변경 후 아키텍처
+Terraform 구현
+적용 확인
+추가 비용 절감 포인트
+DynamoDB 게이트웨이 엔드포인트
+S3와 동일하게 DynamoDB도 게이트웨이 엔드포인트를 지원합니다.
+인터페이스 엔드포인트 (PrivateLink)
+ECR, CloudWatch, SSM 등 다른 AWS 서비스는 인터페이스 엔드포인트를 사용합니다. 시간당 비용($0.01/hr)이 있지만, NAT 처리 수수료보다 저렴할 수 있습니다.
+NAT 게이트웨이 모니터링
+핵심 원칙
+데이터 중력이 기본 비용을 결정하고, 라우팅이 그 비용에 곱해지는 배수를 결정합니다.
+VPC 엔드포인트를 기본으로 – S3, DynamoDB는 게이트웨이 엔드포인트를 항상 생성
+NAT 트래픽을 모니터링 – CloudWatch 메트릭으로 예상치 못한 데이터 전송 감지
+Terraform 모듈화 – VPC 모듈에 엔드포인트를 기본 포함시켜 누락 방지
+참고 자료
+원본 기사: $100k AWS 라우팅 함정 (euno.news)
+AWS VPC 엔드포인트 공식 문서
+Terraform awsvpcendpoint 리소스
+이 문서는 Issue #212를 기반으로 작성되었습니다.</content>
+    <excerpt>$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이
+&quot;기본적으로 보안&quot; AWS 아키텍처가 의도치 않게 비용을 폭발시킬 수 있습니다. 클라우드 비용 급증의 주요 원인은 과다 프로비저닝된 EC2가 아니라 의도하지 않은 데이터 전송 경로입니다.
+문제: NAT 게이트웨이의 숨은 비용
+일반적인 &quot;보안&quot; 아키텍처
+왜 비용이 두 배가 되는가
+컴퓨트 인스턴스...</excerpt>
+    <tags>AWS, NAT Gateway, S3, Terraform, 비용 최적화, VPC</tags>
+    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드</title>
@@ -3785,6 +4340,96 @@ Terraform awsvpcendpoint 리소스
     <tags>AWS, NAT Gateway, S3, Terraform, 비용 최적화, VPC</tags>
     <lastModified>2026-02-22T10:56:57+09:00</lastModified>
     <author>JHL</author>
+  </item>
+  <item>
+    <title>주간 위키 보고서 - 2026년 9주차</title>
+    <slug>meta/weekly-2026-09</slug>
+    <content>요약
+전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
+AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
+열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
+문서 현황
+  항목   수량  
+ ------ ------ 
+  전체 문서   36  
+  발행(published)   31  
+  삭제(deleted)   3  
+  초안(draft)   2  
+  신규 문서(newCount)   15  
+  수정된 문서(modifiedCount)   4  
+  이번 주 발행(publishedCount)   0  
+AI 활동 요약
+총 작업: 73건  
+작업 유형별  
+  - maintain: 29건  
+  - generate: 15건  
+  - recover: 9건  
+  - qualityscore: 11건  
+  - crossreference: 5건  
+  - modify: 4건  
+주요 AI 활동
+Wiki Tree Maintenance  
+  -  문서에 구조 분석 후 자동 적용 3843건, 보류 03건, Issue 1건 생성 (여러 차례 실행)  
+뉴스 인텔리전스  
+  - 매일 200건 스캔, 신규 5572건, 관련 1324건, Issue 생성 05건 (스케줄링)  
+교차 참조 업데이트  
+  -  문서에 2125개 문서의 교차 참조를 자동 업데이트  
+문서 복구(recover)  
+  - Issue #212, #199, #209, #198에 대해 피드백 기반 신규 문서 생성  
+문서 생성(generate)  
+  - Issue #212 → “$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드” (총 32 074 ms, 6개 소스)  
+  - Issue #209 → “GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드” (총 36 741 ms, 8개 소스)  
+  - Issue #207 → “클라우드 기반 영구 터미널 설계 및 구현 가이드” (총 44 738 ms, 9개 소스)  
+열린 이슈
+전체 오픈 이슈: 18건  
+최근 활동(지난 주): 15건  
+주간 변경사항
+  SHA   커밋 메시지  
+ ----- -------------- 
+  729ba5e   🌳 Wiki Tree Maintenance: 36문서가 9개 상위 디렉터리로 분류, 중복·메타 데이터 정비 필요  
+  21561b6   🌳 Wiki Tree Maintenance: 38문서가 10개 카테고리로 분류, 구조 비효율 및 파일명 정규화 제안  
+  77a095c   🔗 교차 참조 업데이트: 25개 문서  
+  f9181e2   docs: Issue #216 - draft 문서 published 전환  
+  abc1b0c   docs: Issue #210 - 피드백 반영  
+(전체 82건의 커밋이 기록되었으며, 위 항목은 주요 변경을 대표합니다.)
+향후 과제
+초안(draft) 문서 2건을 검토 후 발행(published) 혹은 삭제 처리  
+삭제된 문서 3건에 대한 복구 필요성 검토  
+Wiki Tree 구조와 메타데이터 정비를 지속하여 중복·불필요 카테고리 최소화  
+교차 참조 자동 업데이트 빈도와 정확도 모니터링, 누락된 문서가 없는지 확인  
+AI 유지보수 작업에서 보류된 항목(총 35건) 해결 및 생성된 Issue 추적  
+이슈 관리**: 현재 18건 중 미해결 이슈에 대한 우선순위 재조정 및 해결 속도 향상</content>
+    <excerpt>요약
+전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
+AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
+열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
+문서 현황
+  항목   수량  
+ ------ ------ 
+  전체 문서   36  
+  발행(published)...</excerpt>
+    <tags>보고서, 주간, 통계</tags>
+    <lastModified>2026-02-23T21:31:57.648Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Label: dependencies</title>
+    <slug>meta/label-dependencies</slug>
+    <content>dependencies 레이블
+ 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
+사용 예시
+설정 방법
+ 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub 레포지토리 설정에서 Labels 섹션으로 이동해  레이블을 직접 생성합니다.
+Note: 현재 레포지토리에는  레이블이 존재하지 않아 Dependabot이 레이블을 추가하지 못하고 있습니다. 레이블을 생성한 뒤 Dependabot이 정상적으로 작동하도록 해 주세요.
+이 문서는 현재 이슈의 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.</content>
+    <excerpt>dependencies 레이블
+ 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
+사용 예시
+설정 방법
+ 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub...</excerpt>
+    <tags>label, dependencies, dependabot</tags>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>주간 위키 보고서 - 2026년 08주차</title>

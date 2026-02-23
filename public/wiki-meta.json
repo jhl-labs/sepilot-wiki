@@ -142,6 +142,21 @@
       "menu": "K8s 릴리즈 노트"
     },
     {
+      "title": "Dependabot 라벨 누락 오류 해결 방법",
+      "slug": "troubleshooting/dependabot-label-missing",
+      "status": "draft",
+      "tags": [
+        "Dependabot",
+        "GitHub Actions",
+        "라벨",
+        "CI"
+      ],
+      "lastModified": "2026-02-23T21:29:07Z",
+      "author": "GitHub Action",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
       "title": "Docker/Hardened Images",
       "slug": "docker/hardened-images",
       "status": "draft",
@@ -545,6 +560,22 @@
       "isInvalid": false
     },
     {
+      "title": "Incremental Static Regeneration (ISR) 가이드",
+      "slug": "frontend/239",
+      "status": "draft",
+      "tags": [
+        "Next.js",
+        "ISR",
+        "React",
+        "정적 사이트",
+        "성능 최적화"
+      ],
+      "lastModified": "2026-02-23T06:30:17Z",
+      "author": "SEPilot AI",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
       "title": "프론트엔드 API 서비스 레이어 설명",
       "slug": "frontend/api-service-layer",
       "status": "published",
@@ -571,25 +602,9 @@
         "정적 사이트",
         "성능 최적화"
       ],
-      "lastModified": "2026-02-23T21:34:14.042Z",
+      "lastModified": "2026-02-23T18:28:24Z",
       "author": "SEPilot AI",
       "isDraft": true,
-      "isInvalid": false
-    },
-    {
-      "title": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
-      "slug": "cloud/aws-cost-optimization",
-      "status": "published",
-      "tags": [
-        "AWS",
-        "NAT Gateway",
-        "Terraform",
-        "Cost Optimization",
-        "VPC Endpoint"
-      ],
-      "lastModified": "2026-02-22T02:01:15Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
       "isInvalid": false
     },
     {
@@ -610,6 +625,34 @@
       "isInvalid": false
     },
     {
+      "title": "주간 위키 보고서 - 2026년 9주차",
+      "slug": "meta/weekly-2026-09",
+      "status": "published",
+      "tags": [
+        "보고서",
+        "주간",
+        "통계"
+      ],
+      "lastModified": "2026-02-23T21:31:57.648Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "Label: dependencies",
+      "slug": "meta/label-dependencies",
+      "status": "draft",
+      "tags": [
+        "label",
+        "dependencies",
+        "dependabot"
+      ],
+      "lastModified": "2026-02-23T00:48:14Z",
+      "author": "GitHub Action",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
       "title": "주간 위키 보고서 - 2026년 08주차",
       "slug": "meta/weekly-2026-08",
       "status": "published",
@@ -626,15 +669,87 @@
   ],
   "tree": [
     {
-      "name": "관측성 (Observability)",
-      "path": "observability",
+      "name": "백엔드",
+      "path": "backend",
       "isCategory": true,
-      "order": 1,
+      "order": 2,
       "children": [
         {
-          "title": "OpenTelemetry 개요 및 실전 가이드",
-          "slug": "observability/open-telemetry-guide",
-          "lastModified": "2026-02-23T21:34:14.029Z"
+          "title": "Wiki 페이지 API 라우트 상세 가이드",
+          "slug": "backend/wiki-api-route-guide",
+          "order": 1,
+          "lastModified": "2026-02-23T00:48:14Z"
+        }
+      ]
+    },
+    {
+      "name": "쿠버네티스",
+      "path": "kubernetes",
+      "isCategory": true,
+      "order": 3,
+      "children": [
+        {
+          "title": "Introducing Node Readiness Controller",
+          "slug": "kubernetes/node-readiness-controller",
+          "order": 1,
+          "lastModified": "2026-02-23T00:48:14Z"
+        },
+        {
+          "title": "Kubernetes 버전별 릴리즈 노트",
+          "slug": "kubernetes/release-notes",
+          "menu": "K8s 릴리즈 노트",
+          "order": 1,
+          "lastModified": "2026-02-22T10:56:57+09:00"
+        },
+        {
+          "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
+          "slug": "kubernetes/cgroup-migration",
+          "order": 5,
+          "lastModified": "2026-02-22T10:56:57+09:00"
+        },
+        {
+          "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
+          "slug": "kubernetes/cgroup-migration",
+          "order": 4,
+          "lastModified": "2026-02-22T02:01:14Z"
+        },
+        {
+          "title": "Kubernetes/Api Governance",
+          "slug": "kubernetes/api-governance",
+          "lastModified": "2026-02-22T02:01:14Z"
+        },
+        {
+          "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+          "slug": "kubernetes/ingress-nginx-deprecation-guide",
+          "menu": "Ingress NGINX 마이그레이션",
+          "order": 2,
+          "lastModified": "2026-02-20T22:52:00+09:00"
+        }
+      ]
+    },
+    {
+      "name": "문제 해결",
+      "path": "troubleshooting",
+      "isCategory": true,
+      "order": 4,
+      "children": [
+        {
+          "title": "Dependabot 라벨 누락 오류 해결 방법",
+          "slug": "troubleshooting/dependabot-label-missing",
+          "lastModified": "2026-02-23T21:29:07Z"
+        }
+      ]
+    },
+    {
+      "name": "Docker",
+      "path": "docker",
+      "isCategory": true,
+      "order": 5,
+      "children": [
+        {
+          "title": "Docker/Hardened Images",
+          "slug": "docker/hardened-images",
+          "lastModified": "2026-02-21T13:04:23Z"
         }
       ]
     },
@@ -642,7 +757,7 @@
       "name": "프로젝트",
       "path": "projects",
       "isCategory": true,
-      "order": 1,
+      "order": 6,
       "children": [
         {
           "title": "SEPilot Desktop 소개",
@@ -699,189 +814,10 @@
       ]
     },
     {
-      "name": "AI 기술",
-      "path": "ai",
-      "isCategory": true,
-      "order": 2,
-      "children": [
-        {
-          "title": "LLM 진화 연대별 타임라인 및 171개 모델 개관",
-          "slug": "ai/243",
-          "lastModified": "2026-02-23T18:28:24Z"
-        },
-        {
-          "title": "AI Agent 배포 실패 방지와 테스트 전략 가이드",
-          "slug": "ai/240",
-          "lastModified": "2026-02-23T12:17:00Z"
-        },
-        {
-          "title": "AI 코드 리뷰 에이전트 구축 가이드",
-          "slug": "ai/code-review-agent-guide",
-          "order": 6,
-          "lastModified": "2026-02-23T00:48:14Z"
-        },
-        {
-          "title": "Gemini 3.1 Pro",
-          "slug": "ai/gemini-3-1-pro",
-          "order": 10,
-          "lastModified": "2026-02-22T11:00:45+09:00"
-        },
-        {
-          "title": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
-          "slug": "ai/multi-agent-system",
-          "order": 4,
-          "lastModified": "2026-02-22T10:56:57+09:00"
-        },
-        {
-          "title": "Automate Repository Tasks with GitHub Agentic Workflows",
-          "slug": "ai/github-agentic-workflows",
-          "order": 7,
-          "lastModified": "2026-02-22T10:56:57+09:00"
-        },
-        {
-          "title": "MCP (Model Context Protocol) 완벽 가이드",
-          "slug": "ai/mcp-model-context-protocol",
-          "menu": "MCP 가이드",
-          "order": 1,
-          "lastModified": "2026-02-22T10:20:27+09:00"
-        },
-        {
-          "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
-          "slug": "ai/continuous-ai",
-          "order": 3,
-          "lastModified": "2026-02-22T10:19:41+09:00"
-        },
-        {
-          "title": "클라우드 터미널 구축: 지속적인 AI 에이전트 세션 유지하기",
-          "slug": "ai/cloud-terminal-persistent-ai-agent-sessions",
-          "order": 2,
-          "lastModified": "2026-02-22T10:18:12+09:00"
-        },
-        {
-          "title": "바이브 코딩이란?",
-          "slug": "ai/vibe-coding",
-          "order": 5,
-          "lastModified": "2026-02-20T22:52:00+09:00"
-        },
-        {
-          "title": "glm 5",
-          "slug": "ai/glm-5",
-          "order": 5,
-          "lastModified": "2026-02-20T22:52:00+09:00"
-        },
-        {
-          "title": "Qwen 3.5",
-          "slug": "ai/qwen3-5",
-          "order": 3,
-          "lastModified": "2026-02-20T21:19:29+09:00"
-        }
-      ]
-    },
-    {
-      "name": "백엔드 API",
-      "path": "backend",
-      "isCategory": true,
-      "order": 3,
-      "children": [
-        {
-          "title": "Wiki 페이지 API 라우트 상세 가이드",
-          "slug": "backend/wiki-api-route-guide",
-          "order": 1,
-          "lastModified": "2026-02-23T00:48:14Z"
-        }
-      ]
-    },
-    {
-      "name": "Kubernetes",
-      "path": "kubernetes",
-      "isCategory": true,
-      "order": 3,
-      "children": [
-        {
-          "title": "Introducing Node Readiness Controller",
-          "slug": "kubernetes/node-readiness-controller",
-          "order": 2,
-          "lastModified": "2026-02-23T00:48:14Z"
-        },
-        {
-          "title": "Kubernetes 버전별 릴리즈 노트",
-          "slug": "kubernetes/release-notes",
-          "menu": "K8s 릴리즈 노트",
-          "order": 1,
-          "lastModified": "2026-02-22T10:56:57+09:00"
-        },
-        {
-          "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
-          "slug": "kubernetes/cgroup-migration",
-          "order": 5,
-          "lastModified": "2026-02-22T02:01:14Z"
-        },
-        {
-          "title": "Kubernetes/Api Governance",
-          "slug": "kubernetes/api-governance",
-          "lastModified": "2026-02-22T02:01:14Z"
-        },
-        {
-          "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
-          "slug": "kubernetes/ingress-nginx-deprecation-guide",
-          "menu": "Ingress NGINX 마이그레이션",
-          "order": 3,
-          "lastModified": "2026-02-20T22:52:00+09:00"
-        }
-      ]
-    },
-    {
-      "name": "클라우드 인프라",
-      "path": "cloud",
-      "isCategory": true,
-      "order": 4,
-      "children": [
-        {
-          "title": "$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법",
-          "slug": "cloud/aws-nat-gateway-cost-trap",
-          "order": 2,
-          "lastModified": "2026-02-22T10:56:57+09:00"
-        },
-        {
-          "title": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
-          "slug": "cloud/aws-cost-optimization",
-          "order": 1,
-          "lastModified": "2026-02-22T02:01:15Z"
-        }
-      ]
-    },
-    {
-      "name": "Docker",
-      "path": "docker",
-      "isCategory": true,
-      "order": 4,
-      "children": [
-        {
-          "title": "Docker/Hardened Images",
-          "slug": "docker/hardened-images",
-          "lastModified": "2026-02-21T13:04:23Z"
-        }
-      ]
-    },
-    {
-      "name": "메타 정보",
-      "path": "meta",
-      "isCategory": true,
-      "order": 5,
-      "children": [
-        {
-          "title": "주간 위키 보고서 - 2026년 08주차",
-          "slug": "meta/weekly-2026-08",
-          "order": 2,
-          "lastModified": "2026-02-22T10:49:27+09:00"
-        }
-      ]
-    },
-    {
       "name": "Bun",
       "path": "bun",
       "isCategory": true,
-      "order": 5,
+      "order": 7,
       "children": [
         {
           "title": "bun 이란?",
@@ -904,49 +840,147 @@
       ]
     },
     {
+      "name": "AI·LLM",
+      "path": "ai",
+      "isCategory": true,
+      "order": 8,
+      "children": [
+        {
+          "title": "LLM 진화 연대별 타임라인 및 171개 모델 개관",
+          "slug": "ai/243",
+          "lastModified": "2026-02-23T18:28:24Z"
+        },
+        {
+          "title": "AI Agent 배포 실패 방지와 테스트 전략 가이드",
+          "slug": "ai/240",
+          "lastModified": "2026-02-23T12:17:00Z"
+        },
+        {
+          "title": "AI 코드 리뷰 에이전트 구축 가이드",
+          "slug": "ai/code-review-agent-guide",
+          "order": 6,
+          "lastModified": "2026-02-23T00:48:14Z"
+        },
+        {
+          "title": "Gemini 3.1 Pro",
+          "slug": "ai/gemini-3-1-pro",
+          "order": 9,
+          "lastModified": "2026-02-22T11:00:45+09:00"
+        },
+        {
+          "title": "Automate Repository Tasks with GitHub Agentic Workflows",
+          "slug": "ai/github-agentic-workflows",
+          "order": 6,
+          "lastModified": "2026-02-22T10:56:57+09:00"
+        },
+        {
+          "title": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
+          "slug": "ai/multi-agent-system",
+          "order": 8,
+          "lastModified": "2026-02-22T10:56:57+09:00"
+        },
+        {
+          "title": "MCP (Model Context Protocol) 완벽 가이드",
+          "slug": "ai/mcp-model-context-protocol",
+          "menu": "MCP 가이드",
+          "order": 2,
+          "lastModified": "2026-02-22T10:20:27+09:00"
+        },
+        {
+          "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+          "slug": "ai/continuous-ai",
+          "order": 4,
+          "lastModified": "2026-02-22T10:19:41+09:00"
+        },
+        {
+          "title": "클라우드 터미널 구축: 지속적인 AI 에이전트 세션 유지하기",
+          "slug": "ai/cloud-terminal-persistent-ai-agent-sessions",
+          "order": 1,
+          "lastModified": "2026-02-22T10:18:12+09:00"
+        },
+        {
+          "title": "glm 5",
+          "slug": "ai/glm-5",
+          "order": 5,
+          "lastModified": "2026-02-20T22:52:00+09:00"
+        },
+        {
+          "title": "바이브 코딩이란?",
+          "slug": "ai/vibe-coding",
+          "order": 7,
+          "lastModified": "2026-02-20T22:52:00+09:00"
+        },
+        {
+          "title": "Qwen 3.5",
+          "slug": "ai/qwen3-5",
+          "order": 3,
+          "lastModified": "2026-02-20T21:19:29+09:00"
+        }
+      ]
+    },
+    {
       "name": "프론트엔드",
       "path": "frontend",
       "isCategory": true,
-      "order": 7,
+      "order": 9,
       "children": [
         {
           "title": "Incremental Static Regeneration (ISR) 가이드",
-          "slug": "frontend/isr-guide",
-          "lastModified": "2026-02-23T21:34:14.042Z"
+          "slug": "frontend/239",
+          "order": 1,
+          "lastModified": "2026-02-23T06:30:17Z"
         },
         {
           "title": "프론트엔드 API 서비스 레이어 설명",
           "slug": "frontend/api-service-layer",
-          "order": 1,
+          "order": 2,
           "lastModified": "2026-02-22T01:24:22Z"
         }
       ]
     },
     {
-      "name": "보고서",
-      "path": "reports",
+      "name": "클라우드",
+      "path": "cloud",
       "isCategory": true,
-      "order": 9,
+      "order": 10,
       "children": [
         {
-          "title": "주간 위키 보고서 - 2026년 9주차",
-          "slug": "reports/weekly-2026-09",
-          "lastModified": "2026-02-23T01:35:21Z"
+          "title": "$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법",
+          "slug": "cloud/aws-nat-gateway-cost-trap",
+          "order": 1,
+          "lastModified": "2026-02-22T10:56:57+09:00"
         }
       ]
     },
     {
-      "name": "github",
-      "path": "github",
+      "name": "메타·보고서",
+      "path": "meta",
       "isCategory": true,
-      "order": 999,
+      "order": 11,
       "children": [
         {
-          "title": "Dependabot 라벨 설정 가이드",
-          "slug": "github/dependabot-labels",
-          "lastModified": "2026-02-23T21:29:26Z"
+          "title": "주간 위키 보고서 - 2026년 9주차",
+          "slug": "meta/weekly-2026-09",
+          "lastModified": "2026-02-23T21:31:57.648Z"
+        },
+        {
+          "title": "Label: dependencies",
+          "slug": "meta/label-dependencies",
+          "order": 1,
+          "lastModified": "2026-02-23T00:48:14Z"
+        },
+        {
+          "title": "주간 위키 보고서 - 2026년 08주차",
+          "slug": "meta/weekly-2026-08",
+          "order": 2,
+          "lastModified": "2026-02-22T10:49:27+09:00"
         }
       ]
+    },
+    {
+      "title": "OpenTelemetry 개요 및 실전 가이드",
+      "slug": "244",
+      "lastModified": "2026-02-23T18:28:24Z"
     }
   ]
 }
