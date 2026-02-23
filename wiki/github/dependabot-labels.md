@@ -1,0 +1,60 @@
+---
+title: "Dependabot용 `dependencies` 라벨 추가하기"
+description: "Dependabot이 PR에 라벨을 자동으로 붙이기 위해 필요한 `dependencies` 라벨을 만드는 방법을 안내합니다."
+category: "Guide"
+tags: ["Dependabot", "GitHub", "라벨", "자동화"]
+status: "draft"
+issueNumber: 0
+createdAt: "2026-02-23T10:00:00Z"
+updatedAt: "2026-02-23T10:00:00Z"
+---
+
+# Dependabot용 `dependencies` 라벨 추가하기
+
+Dependabot이 PR에 자동으로 라벨을 붙이려면 해당 라벨이 레포지토리에 존재해야 합니다. 현재 레포지토리에는 `dependencies` 라벨이 없어서 Dependabot이 라벨을 추가하지 못하고 있습니다. 아래 단계에 따라 라벨을 생성해 주세요.
+
+## 1. GitHub UI를 이용해 라벨 만들기
+1. 레포지토리 메인 페이지에서 **"Issues"** 탭을 클릭합니다.
+2. 오른쪽 사이드바에서 **"Labels"** 를 선택합니다.
+3. **"New label"** 버튼을 클릭합니다.
+4. **Name** 에 `dependencies` 를 입력하고, **Color** 를 원하는 색상(예: `#5319e7`)으로 선택합니다.
+5. **Create label** 을 눌러 라벨을 저장합니다.
+
+## 2. `.github/labels.yml` 파일에 라벨 정의 추가 (옵션)
+레포지토트리에서 라벨을 코드로 관리하고 싶다면, `.github/labels.yml` 파일을 만들고 아래와 같이 정의할 수 있습니다.
+
+```yaml
+- name: dependencies
+  color: "5319e7"
+  description: "Dependabot이 자동으로 붙이는 라벨"
+```
+
+파일을 커밋하고 푸시하면 GitHub Actions 혹은 다른 자동화 도구가 라벨을 동기화하도록 설정할 수 있습니다.
+
+## 3. Dependabot 설정 확인
+라벨을 만든 뒤, `.github/dependabot.yml` 파일에 `labels` 옵션이 올바르게 지정되어 있는지 확인합니다. 예시:
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+```
+
+> **주의**: `labels` 항목에 `dependencies` 라벨이 정확히 명시되어 있어야 합니다.
+
+## 4. 라벨 적용 확인
+라벨을 만든 후, Dependabot이 새 PR을 열면 자동으로 `dependencies` 라벨이 붙는지 확인합니다. 라벨이 보이지 않으면 위 단계들을 다시 점검해 주세요.
+
+---
+
+**추가 참고**
+- 라벨 관리에 대한 자세한 내용은 GitHub 공식 문서를 참고하세요: [GitHub Docs – Managing labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels)
+
+---
+
+*이 문서는 초안(draft) 상태이며, 검토 후 `published` 로 전환될 수 있습니다.*
