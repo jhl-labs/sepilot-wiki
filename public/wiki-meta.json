@@ -15,25 +15,6 @@
         "performance"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
-      "author": "GitHub Action",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "bun 이란?",
-      "slug": "bun/overview",
-      "status": "published",
-      "tags": [
-        "bun",
-        "npm",
-        "yarn",
-        "패키지 매니저",
-        "가이드",
-        "runtime",
-        "javascript-runtime",
-        "package-manager"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
       "isDraft": false,
       "isInvalid": false
@@ -89,6 +70,115 @@
       "isInvalid": false
     },
     {
+      "title": "Dependabot용 `dependencies` 라벨 추가하기",
+      "slug": "github/dependabot-labels",
+      "status": "draft",
+      "tags": [
+        "Dependabot",
+        "GitHub",
+        "라벨",
+        "자동화"
+      ],
+      "lastModified": "2026-02-23T21:29:09.691Z",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
+      "title": "Introducing Node Readiness Controller",
+      "slug": "kubernetes/node-readiness-controller",
+      "status": "published",
+      "tags": [
+        "Kubernetes",
+        "NodeReadiness",
+        "Scheduler",
+        "Reliability"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+      "slug": "kubernetes/ingress-nginx-deprecation-guide",
+      "status": "published",
+      "tags": [
+        "Ingress",
+        "NGINX",
+        "Kubernetes",
+        "Migration",
+        "Security",
+        "guide",
+        "deprecation",
+        "k8s",
+        "networking",
+        "load-balancer"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false,
+      "menu": "Ingress NGINX 마이그레이션"
+    },
+    {
+      "title": "Kubernetes/Api Governance",
+      "slug": "kubernetes/api-governance",
+      "status": "draft",
+      "tags": [],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "GitHub Action",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
+      "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
+      "slug": "kubernetes/cgroup-migration",
+      "status": "published",
+      "tags": [
+        "cgroup",
+        "CPU",
+        "Kubernetes",
+        "리소스 관리",
+        "KEP-2254",
+        "마이그레이션"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "Kubernetes 버전별 릴리즈 노트",
+      "slug": "kubernetes/release-notes",
+      "status": "published",
+      "tags": [
+        "Kubernetes",
+        "Release Notes",
+        "버전",
+        "version",
+        "changelog"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "GitHub Action",
+      "isDraft": false,
+      "isInvalid": false,
+      "menu": "K8s 릴리즈 노트"
+    },
+    {
+      "title": "Dependabot 라벨 누락 오류 해결 방법",
+      "slug": "troubleshooting/dependabot-label-missing",
+      "status": "draft",
+      "tags": [
+        "Dependabot",
+        "GitHub Actions",
+        "라벨",
+        "CI"
+      ],
+      "lastModified": "2026-02-23T21:28:57.000Z",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
       "title": "Docker/Hardened Images",
       "slug": "docker/hardened-images",
       "status": "draft",
@@ -99,39 +189,19 @@
       "isInvalid": false
     },
     {
-      "title": "SEPilot Desktop 소개",
-      "slug": "projects/sepilot-desktop-intro",
+      "title": "주간 위키 보고서 - 2026년 08주차",
+      "slug": "meta/weekly-2026-08",
       "status": "published",
       "tags": [
-        "SEPilot",
-        "Desktop",
-        "LLM",
-        "Project",
-        "ai",
-        "desktop-app",
-        "application",
-        "ai-assistant"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "GitHub Action",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "Opencode에 대해",
-      "slug": "projects/opencode",
-      "status": "published",
-      "tags": [
-        "AI 코드 어시스턴트",
-        "Opencode",
-        "Claude Code",
-        "Goose CLI",
-        "비교"
+        "보고서",
+        "주간",
+        "통계"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
       "isDraft": false,
-      "isInvalid": false
+      "isInvalid": false,
+      "menu": "OpenClaw"
     },
     {
       "title": "Claude Code 릴리즈 히스토리 상세 가이드",
@@ -154,15 +224,34 @@
       "menu": "Claude Code"
     },
     {
-      "title": "Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
-      "slug": "projects/rust-gpu-face-crop-tool",
+      "title": "Opencode에 대해",
+      "slug": "projects/opencode",
       "status": "published",
       "tags": [
-        "Rust",
-        "GPU",
-        "Face Cropping",
-        "wgpu",
-        "egui"
+        "AI 코드 어시스턴트",
+        "Opencode",
+        "Claude Code",
+        "Goose CLI",
+        "비교"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "SEPilot Desktop 소개",
+      "slug": "projects/sepilot-desktop-intro",
+      "status": "published",
+      "tags": [
+        "SEPilot",
+        "Desktop",
+        "LLM",
+        "Project",
+        "ai",
+        "desktop-app",
+        "application",
+        "ai-assistant"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "GitHub Action",
@@ -191,20 +280,36 @@
       "menu": "SEPilot Wiki에 대해"
     },
     {
-      "title": "OpenClaw 완벽 가이드",
-      "slug": "projects/openclaw-complete-guide",
+      "title": "Antigravity 릴리즈 노트 정리",
+      "slug": "projects/antigravity-release-notes",
       "status": "published",
       "tags": [
-        "OpenClaw",
-        "AI 개인 비서",
-        "멀티채널",
-        "오픈소스"
+        "Antigravity",
+        "릴리즈노트",
+        "버전히스토리",
+        "마이그레이션"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
       "isDraft": false,
       "isInvalid": false,
-      "menu": "OpenClaw"
+      "menu": "Antigravity"
+    },
+    {
+      "title": "Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
+      "slug": "projects/rust-gpu-face-crop-tool",
+      "status": "published",
+      "tags": [
+        "Rust",
+        "GPU",
+        "Face Cropping",
+        "wgpu",
+        "egui"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "GitHub Action",
+      "isDraft": false,
+      "isInvalid": false
     },
     {
       "title": "Moltbook 소개",
@@ -223,98 +328,123 @@
       "isInvalid": false
     },
     {
-      "title": "Antigravity 릴리즈 노트 정리",
-      "slug": "projects/antigravity-release-notes",
-      "status": "published",
-      "tags": [
-        "Antigravity",
-        "릴리즈노트",
-        "버전히스토리",
-        "마이그레이션"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false,
-      "menu": "Antigravity"
-    },
-    {
-      "title": "Incremental Static Regeneration (ISR) 가이드",
-      "slug": "frontend/239",
+      "title": "Dependabot 라벨 `dependencies` 누락 문제 해결하기",
+      "slug": "dependabot/missing-dependencies-label",
       "status": "draft",
       "tags": [
-        "Next.js",
-        "ISR",
-        "React",
-        "정적 사이트",
-        "성능 최적화"
+        "dependabot",
+        "labels",
+        "dependencies"
       ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
+      "lastModified": "2026-02-23T21:30:53.386Z",
       "isDraft": true,
       "isInvalid": false
     },
     {
-      "title": "프론트엔드 API 서비스 레이어 설명",
-      "slug": "frontend/api-service-layer",
+      "title": "bun과 pnpm, npm의 차이",
+      "slug": "bun/comparison-pnpm-npm",
       "status": "published",
       "tags": [
-        "frontend",
-        "api",
-        "service-layer",
-        "documentation",
-        "coverage"
+        "bun",
+        "pnpm",
+        "npm",
+        "비교",
+        "가이드",
+        "comparison",
+        "benchmark",
+        "performance"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
+      "author": "GitHub Action",
       "isDraft": false,
       "isInvalid": false
     },
     {
-      "title": "Next.js Incremental Static Regeneration (ISR) 가이드",
-      "slug": "frontend/next-js-incremental-static-regeneration-isr",
-      "status": "draft",
-      "tags": [
-        "Next.js",
-        "ISR",
-        "React",
-        "웹 퍼포먼스",
-        "정적 사이트"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": true,
-      "isInvalid": false
-    },
-    {
-      "title": "OpenTelemetry 개요 및 실전 가이드",
-      "slug": "244",
-      "status": "draft",
-      "tags": [
-        "OpenTelemetry",
-        "Observability",
-        "Distributed Tracing",
-        "CNCF"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": true,
-      "isInvalid": false
-    },
-    {
-      "title": "Automate Repository Tasks with GitHub Agentic Workflows",
-      "slug": "ai/github-agentic-workflows",
+      "title": "bun 이란?",
+      "slug": "bun/overview",
       "status": "published",
       "tags": [
-        "GitHub",
-        "Agentic Workflows",
+        "bun",
+        "npm",
+        "yarn",
+        "패키지 매니저",
+        "가이드",
+        "runtime",
+        "javascript-runtime",
+        "package-manager"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "GitHub Actions로 bun을 쓰는 방법",
+      "slug": "bun/github-actions-setup",
+      "status": "published",
+      "tags": [
+        "github-actions",
+        "bun",
+        "CI",
         "CI/CD",
-        "Repository Automation",
-        "AI"
+        "node-alternative",
+        "automation",
+        "devops",
+        "workflow",
+        "javascript-runtime"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
       "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "클라우드 터미널 구축: 지속적인 AI 에이전트 세션 유지하기",
+      "slug": "ai/cloud-terminal-persistent-ai-agent-sessions",
+      "status": "published",
+      "tags": [
+        "클라우드 터미널",
+        "SSH",
+        "AI 에이전트",
+        "PTY",
+        "WebSocket",
+        "tmux",
+        "세션 관리"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "AI 코드 리뷰 에이전트 구축 가이드",
+      "slug": "ai/code-review-agent-guide",
+      "status": "draft",
+      "tags": [
+        "AI",
+        "코드 리뷰",
+        "CI",
+        "GitHub Actions",
+        "에이전트"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "GitHub Action",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
+      "title": "LLM 진화 연대별 타임라인 및 171개 모델 개관",
+      "slug": "ai/243",
+      "status": "draft",
+      "tags": [
+        "LLM",
+        "AI 타임라인",
+        "모델 진화",
+        "인공지능 역사"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": true,
       "isInvalid": false
     },
     {
@@ -340,17 +470,92 @@
       "menu": "MCP 가이드"
     },
     {
-      "title": "클라우드 터미널 구축: 지속적인 AI 에이전트 세션 유지하기",
-      "slug": "ai/cloud-terminal-persistent-ai-agent-sessions",
+      "title": "Qwen 3.5",
+      "slug": "ai/qwen3-5",
       "status": "published",
       "tags": [
-        "클라우드 터미널",
-        "SSH",
-        "AI 에이전트",
-        "PTY",
-        "WebSocket",
-        "tmux",
-        "세션 관리"
+        "Qwen",
+        "LLM",
+        "멀티모달",
+        "MoE",
+        "벤치마크"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "slug": "ai/continuous-ai",
+      "status": "published",
+      "tags": [
+        "Continuous AI",
+        "Human-in-the-Loop",
+        "AI 검증",
+        "CI"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "GitHub Action",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "glm 5",
+      "slug": "ai/glm-5",
+      "status": "published",
+      "tags": [
+        "GLM-5",
+        "대형 언어 모델",
+        "AI 서비스",
+        "벤치마크"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "AI Agent 배포 실패 방지와 테스트 전략 가이드",
+      "slug": "ai/240",
+      "status": "draft",
+      "tags": [
+        "AI Agent",
+        "테스트",
+        "LangChain",
+        "배포",
+        "품질 보증"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
+      "title": "Automate Repository Tasks with GitHub Agentic Workflows",
+      "slug": "ai/github-agentic-workflows",
+      "status": "published",
+      "tags": [
+        "GitHub",
+        "Agentic Workflows",
+        "CI/CD",
+        "Repository Automation",
+        "AI"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "SEPilot AI",
+      "isDraft": false,
+      "isInvalid": false
+    },
+    {
+      "title": "바이브 코딩이란?",
+      "slug": "ai/vibe-coding",
+      "status": "published",
+      "tags": [
+        "바이브코딩",
+        "AI코딩",
+        "프롬프트엔지니어링",
+        "소프트웨어개발"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
@@ -389,76 +594,15 @@
       "isInvalid": false
     },
     {
-      "title": "바이브 코딩이란?",
-      "slug": "ai/vibe-coding",
-      "status": "published",
-      "tags": [
-        "바이브코딩",
-        "AI코딩",
-        "프롬프트엔지니어링",
-        "소프트웨어개발"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "glm 5",
-      "slug": "ai/glm-5",
-      "status": "published",
-      "tags": [
-        "GLM-5",
-        "대형 언어 모델",
-        "AI 서비스",
-        "벤치마크"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "AI 코드 리뷰 에이전트 구축 가이드",
-      "slug": "ai/code-review-agent-guide",
+      "title": "Next.js Incremental Static Regeneration (ISR) 가이드",
+      "slug": "frontend/next-js-incremental-static-regeneration-isr",
       "status": "draft",
       "tags": [
-        "AI",
-        "코드 리뷰",
-        "CI",
-        "GitHub Actions",
-        "에이전트"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "GitHub Action",
-      "isDraft": true,
-      "isInvalid": false
-    },
-    {
-      "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
-      "slug": "ai/continuous-ai",
-      "status": "published",
-      "tags": [
-        "Continuous AI",
-        "Human-in-the-Loop",
-        "AI 검증",
-        "CI"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "GitHub Action",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "AI Agent 배포 실패 방지와 테스트 전략 가이드",
-      "slug": "ai/240",
-      "status": "draft",
-      "tags": [
-        "AI Agent",
-        "테스트",
-        "LangChain",
-        "배포",
-        "품질 보증"
+        "Next.js",
+        "ISR",
+        "React",
+        "웹 퍼포먼스",
+        "정적 사이트"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
@@ -466,14 +610,15 @@
       "isInvalid": false
     },
     {
-      "title": "LLM 진화 연대별 타임라인 및 171개 모델 개관",
-      "slug": "ai/243",
+      "title": "Incremental Static Regeneration (ISR) 가이드",
+      "slug": "frontend/239",
       "status": "draft",
       "tags": [
-        "LLM",
-        "AI 타임라인",
-        "모델 진화",
-        "인공지능 역사"
+        "Next.js",
+        "ISR",
+        "React",
+        "정적 사이트",
+        "성능 최적화"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
@@ -481,15 +626,15 @@
       "isInvalid": false
     },
     {
-      "title": "Qwen 3.5",
-      "slug": "ai/qwen3-5",
+      "title": "프론트엔드 API 서비스 레이어 설명",
+      "slug": "frontend/api-service-layer",
       "status": "published",
       "tags": [
-        "Qwen",
-        "LLM",
-        "멀티모달",
-        "MoE",
-        "벤치마크"
+        "frontend",
+        "api",
+        "service-layer",
+        "documentation",
+        "coverage"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
@@ -497,122 +642,30 @@
       "isInvalid": false
     },
     {
-      "title": "Kubernetes/Api Governance",
-      "slug": "kubernetes/api-governance",
+      "title": "OpenTelemetry 개요 및 실전 가이드",
+      "slug": "244",
       "status": "draft",
-      "tags": [],
+      "tags": [
+        "OpenTelemetry",
+        "Observability",
+        "Distributed Tracing",
+        "CNCF"
+      ],
       "lastModified": "2026-02-23T20:49:47Z",
-      "author": "GitHub Action",
+      "author": "SEPilot AI",
       "isDraft": true,
       "isInvalid": false
     },
     {
-      "title": "Introducing Node Readiness Controller",
-      "slug": "kubernetes/node-readiness-controller",
+      "title": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
+      "slug": "cloud/aws-cost-optimization",
       "status": "published",
       "tags": [
-        "Kubernetes",
-        "NodeReadiness",
-        "Scheduler",
-        "Reliability"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
-      "slug": "kubernetes/cgroup-migration",
-      "status": "published",
-      "tags": [
-        "cgroup",
-        "CPU",
-        "Kubernetes",
-        "리소스 관리",
-        "KEP-2254",
-        "마이그레이션"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
-      "slug": "kubernetes/ingress-nginx-deprecation-guide",
-      "status": "published",
-      "tags": [
-        "Ingress",
-        "NGINX",
-        "Kubernetes",
-        "Migration",
-        "Security",
-        "guide",
-        "deprecation",
-        "k8s",
-        "networking",
-        "load-balancer"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false,
-      "menu": "Ingress NGINX 마이그레이션"
-    },
-    {
-      "title": "Kubernetes 버전별 릴리즈 노트",
-      "slug": "kubernetes/release-notes",
-      "status": "published",
-      "tags": [
-        "Kubernetes",
-        "Release Notes",
-        "버전",
-        "version",
-        "changelog"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "GitHub Action",
-      "isDraft": false,
-      "isInvalid": false,
-      "menu": "K8s 릴리즈 노트"
-    },
-    {
-      "title": "주간 위키 보고서 - 2026년 9주차",
-      "slug": "reports/weekly-2026-09",
-      "status": "published",
-      "tags": [
-        "보고서",
-        "주간",
-        "통계"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "SEPilot AI",
-      "isDraft": false,
-      "isInvalid": false
-    },
-    {
-      "title": "Label: dependencies",
-      "slug": "meta/label-dependencies",
-      "status": "draft",
-      "tags": [
-        "label",
-        "dependencies",
-        "dependabot"
-      ],
-      "lastModified": "2026-02-23T20:49:47Z",
-      "author": "GitHub Action",
-      "isDraft": true,
-      "isInvalid": false
-    },
-    {
-      "title": "주간 위키 보고서 - 2026년 08주차",
-      "slug": "meta/weekly-2026-08",
-      "status": "published",
-      "tags": [
-        "보고서",
-        "주간",
-        "통계"
+        "AWS",
+        "NAT Gateway",
+        "Terraform",
+        "Cost Optimization",
+        "VPC Endpoint"
       ],
       "lastModified": "2026-02-23T20:49:47Z",
       "author": "SEPilot AI",
@@ -637,8 +690,22 @@
       "isInvalid": false
     },
     {
-      "title": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
-      "slug": "cloud/aws-cost-optimization",
+      "title": "Label: dependencies",
+      "slug": "meta/label-dependencies",
+      "status": "draft",
+      "tags": [
+        "label",
+        "dependencies",
+        "dependabot"
+      ],
+      "lastModified": "2026-02-23T20:49:47Z",
+      "author": "GitHub Action",
+      "isDraft": true,
+      "isInvalid": false
+    },
+    {
+      "title": "주간 위키 보고서 - 2026년 08주차",
+      "slug": "meta/weekly-2026-08",
       "status": "published",
       "tags": [
         "AWS",
@@ -963,15 +1030,15 @@
       ]
     },
     {
-      "name": "dependabot",
-      "path": "dependabot",
+      "name": "troubleshooting",
+      "path": "troubleshooting",
       "isCategory": true,
       "order": 999,
       "children": [
         {
-          "title": "Dependabot 라벨 설정 가이드",
-          "slug": "dependabot/labels",
-          "lastModified": "2026-02-23T21:31:04.142Z"
+          "title": "Dependabot 라벨 누락 오류 해결 방법",
+          "slug": "troubleshooting/dependabot-label-missing",
+          "lastModified": "2026-02-23T21:28:57.000Z"
         }
       ]
     },
