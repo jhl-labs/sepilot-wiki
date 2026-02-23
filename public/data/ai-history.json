@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "3377bc12-a977-44b1-9cdf-c6bcf06fd4d1",
+      "timestamp": "2026-02-23T12:17:00.394Z",
+      "actionType": "generate",
+      "issueNumber": 240,
+      "issueTitle": "문서 요청 #240",
+      "documentSlug": "ai/240",
+      "documentTitle": "AI Agent 배포 실패 방지와 테스트 전략 가이드",
+      "summary": "새 문서 \"AI Agent 배포 실패 방지와 테스트 전략 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3114
+            },
+            {
+              "step": "outline",
+              "durationMs": 5347
+            },
+            {
+              "step": "write",
+              "durationMs": 19194
+            },
+            {
+              "step": "review",
+              "durationMs": 5040
+            }
+          ],
+          "totalDurationMs": 32695,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1479,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "33e15649-f1d8-486e-aafc-61ae255553b7",
       "timestamp": "2026-02-23T12:16:18.715Z",
       "actionType": "maintain",
@@ -3171,5 +3216,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-23T12:16:18.715Z"
+  "lastUpdated": "2026-02-23T12:17:00.394Z"
 }
