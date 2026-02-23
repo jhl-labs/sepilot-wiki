@@ -9,7 +9,7 @@ issueNumber: 0
 createdAt: "2026-02-10T12:15:00Z"
 updatedAt: 2026-02-20
 related_docs: ["api-governance.md", "node-readiness-controller.md", "cgroup-migration.md", "ingress-nginx-deprecation-guide.md"]
-order: 1
+order: 5
 redirect_from:
   - kubernetes-kubernetes-release-notes
   - kubernetes-kubernetes-v1-33-8

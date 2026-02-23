@@ -7,7 +7,7 @@ status: "published"
 issueNumber: 212
 createdAt: "2026-02-22T10:00:00Z"
 updatedAt: "2026-02-22T10:00:00Z"
-order: 1
+order: 2
 related_docs: ["aws-cost-optimization.md"]
 ---
 

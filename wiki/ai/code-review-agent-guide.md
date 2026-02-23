@@ -9,6 +9,8 @@ createdAt: "2026-02-22T02:00:00Z"
 updatedAt: "2026-02-22T02:00:00Z"
 order: 6
 related_docs: ["github-agentic-workflows.md", "continuous-ai.md", "opencode.md", "claude-code-release-history.md"]
+redirect_from:
+  - ai-continuous-ai-agentic-ci
 ---
 
 # AI 코드 리뷰 에이전트 구축 가이드

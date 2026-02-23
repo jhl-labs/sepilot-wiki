@@ -5,7 +5,7 @@ status: published
 tags: [Kubernetes, NodeReadiness, Scheduler, Reliability]
 redirect_from:
   - introducing-node-readiness-controller
-order: 2
+order: 1
 related_docs: ["cgroup-migration.md", "api-governance.md", "release-notes.md"]
 ---
 
