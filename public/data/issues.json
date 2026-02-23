@@ -3,8 +3,8 @@
     {
       "id": 239,
       "number": 239,
-      "title": "문서 요청 #239",
-      "body": "",
+      "title": " [요청] Next.js Incremental Static Regeneration (ISR) 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/reactjsnextjs-rendering-pattern-incremental-static-a406b6)\n**관련도**: 70/100\n**핵심 토픽**: React, Next.js, Incremental Static Regeneration\n\n## 뉴스 요약\nISR 작동 방식 - 캐시에서 제공: 페이지에 대한 최초 요청은 미리 생성된 static version을 캐시에서 제공하여 일관되게 빠른 응답을 보장합니다.\n\n## 상세 내용\nSource: Dev.to\nISR 작동 방식\n캐시에서 제공: 페이지에 대한 최초 요청은 사전 생성된 정적 버전을 캐시에서 제공하여 일관되게 빠른 응답을 보장합니다.\n백그라운드 재생성 (시간 기반): revalidate 시간을 초 단위로 지정합니다. 이 간격이 지나면 다음 사용자 요청은 여전히 오래된(캐시된) 페이지를 즉시 받습니다. 이 요청은 Next.js가 백그라운드에서 페이지의 새로운 버전을 재생성하도록 트리거합니다.\n신선한 콘텐츠 제공: 새로운 페이지가 성공적으로 생성되면 캐시된 버전을 교체하고, 이후 모든 방문자는 업데이트된 콘텐츠를 받습니다.\n온‑디맨드 재검증\nNext.js에서 구현\n// app/page.tsx or similar\nexport const revalidate = 60; // Regenerate the page every 60 seconds\nexport default async function Page() {\nconst res = await fetch('https://example.com/items');\nconst items = await res.json();\n// ... render items\n}\n장점\n성능 향상: 페이지가 CDN 캐시에서 즉시 제공됩니다.\n빌드 시간 감소: 필요한 페이지만 재생성하므로 대규모 사이트에 효율적입니다.\nSEO 이점: 검색 엔진에 최적화된 신선한 정적 HTML 페이지를 제공합니다.\n재배포 없이 최신 콘텐츠: CMS 또는 데이터베이스에서 업데이트된 콘텐츠가 전체 사이트 재빌드 없이 반영됩니다.\n\n## 판단 근거\n현재 위키에 Next.js ISR에 대한 문서가 없으며, ISR은 현대 React/Next.js 프로젝트에서 핵심 성능 최적화 기법이므로 신규 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,10 +25,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-02-23T06:30:17.661Z",
-      "updated_at": "2026-02-23T06:30:17.664Z",
+      "updated_at": "2026-02-23T10:22:49.499Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/239",
-      "documentSlug": "frontend/239",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/239.md",
+      "documentSlug": "frontend/next-js-incremental-static-regeneration-isr",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/next-js-incremental-static-regeneration-isr.md",
       "comments": 0
     },
     {
@@ -1188,5 +1188,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-02-23T06:30:17.664Z"
+  "lastUpdated": "2026-02-23T10:22:49.499Z"
 }

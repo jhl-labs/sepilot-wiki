@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "fe123abb-3acd-46b1-8a81-3d044aaac648",
+      "timestamp": "2026-02-23T10:22:49.497Z",
+      "actionType": "generate",
+      "issueNumber": 239,
+      "issueTitle": " [요청] Next.js Incremental Static Regeneration (ISR) 가이드",
+      "documentSlug": "frontend/next-js-incremental-static-regeneration-isr",
+      "documentTitle": "Next.js Incremental Static Regeneration (ISR) 가이드",
+      "summary": "새 문서 \"Next.js Incremental Static Regeneration (ISR) 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3621
+            },
+            {
+              "step": "outline",
+              "durationMs": 8647
+            },
+            {
+              "step": "write",
+              "durationMs": 20407
+            },
+            {
+              "step": "review",
+              "durationMs": 8140
+            }
+          ],
+          "totalDurationMs": 40815,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1859,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "9fc6b141-dfa1-41de-9e9d-2c8065181dc7",
       "timestamp": "2026-02-23T06:30:17.660Z",
       "actionType": "generate",
@@ -3112,5 +3157,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-23T06:30:17.660Z"
+  "lastUpdated": "2026-02-23T10:22:49.497Z"
 }
