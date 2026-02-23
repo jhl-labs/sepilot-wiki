@@ -1,43 +1,73 @@
 {
-  "collectedAt": "2026-02-23T17:52:36.044Z",
+  "collectedAt": "2026-02-23T18:51:41.817Z",
   "overview": {
-    "totalDocuments": 36,
+    "totalDocuments": 37,
     "publishedDocuments": 30,
-    "draftDocuments": 6,
-    "openRequests": 20,
+    "draftDocuments": 7,
+    "openRequests": 22,
     "closedRequests": 19,
-    "totalAIActions": 156
+    "totalAIActions": 159
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 3,
+      "documentsCreated": 2,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 6,
+      "tavilyResults": 14,
+      "estimatedTokens": 4991,
+      "totalPipelineDurationMs": 112131
     },
     "last24h": {
-      "aiActions": 9,
-      "documentsCreated": 3,
+      "aiActions": 11,
+      "documentsCreated": 5,
       "documentsModified": 0,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 23,
-      "estimatedTokens": 7866,
-      "totalPipelineDurationMs": 167590
+      "tavilyApiCalls": 15,
+      "tavilyResults": 37,
+      "estimatedTokens": 12857,
+      "totalPipelineDurationMs": 279721
     },
     "last7d": {
-      "aiActions": 79,
-      "documentsCreated": 18,
+      "aiActions": 82,
+      "documentsCreated": 20,
       "documentsModified": 13,
-      "tavilyApiCalls": 54,
-      "tavilyResults": 140,
-      "estimatedTokens": 43163,
-      "totalPipelineDurationMs": 960239
+      "tavilyApiCalls": 60,
+      "tavilyResults": 154,
+      "estimatedTokens": 48154,
+      "totalPipelineDurationMs": 1072370
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-23T18:28:22.516Z",
+      "actionType": "generate",
+      "issueNumber": 244,
+      "documentTitle": "OpenTelemetry 개요 및 실전 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 44865,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2007
+    },
+    {
+      "timestamp": "2026-02-23T18:27:34.206Z",
+      "actionType": "generate",
+      "issueNumber": 243,
+      "documentTitle": "LLM 진화 연대별 타임라인 및 171개 모델 개관",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 67266,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2984
+    },
+    {
+      "timestamp": "2026-02-23T18:26:12.706Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-23T12:17:00.394Z",
       "actionType": "generate",
@@ -207,43 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-22T01:20:59.899Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-22T01:19:09.830Z",
-      "actionType": "recover",
-      "issueNumber": 209,
-      "documentTitle": " [요청] Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-22T00:24:12.262Z",
-      "actionType": "generate",
-      "issueNumber": 212,
-      "documentTitle": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 32074,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1368
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 148,
-      "totalEstimatedTokens": 77070,
-      "avgDurationMs": 56560
+      "totalActions": 151,
+      "totalEstimatedTokens": 82061,
+      "avgDurationMs": 56529
     },
     "unknown": {
       "totalActions": 8,
