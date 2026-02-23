@@ -1,8 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-23T00:48:13.942Z</generated>
-  <count>41</count>
+  <generated>2026-02-23T01:35:20.990Z</generated>
+  <count>42</count>
   <items>
+  <item>
+    <title>주간 위키 보고서 - 2026년 9주차</title>
+    <slug>reports/weekly-2026-09</slug>
+    <content>요약
+전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
+AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
+열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
+문서 현황
+  항목   수량  
+ ------ ------ 
+  전체 문서   36  
+  발행(published)   31  
+  삭제(deleted)   3  
+  초안(draft)   2  
+  신규 문서(newCount)   15  
+  수정된 문서(modifiedCount)   4  
+  이번 주 발행(publishedCount)   0  
+AI 활동 요약
+총 작업: 73건  
+작업 유형별  
+  - maintain: 29건  
+  - generate: 15건  
+  - recover: 9건  
+  - qualityscore: 11건  
+  - crossreference: 5건  
+  - modify: 4건  
+주요 AI 활동
+Wiki Tree Maintenance  
+  -  문서에 구조 분석 후 자동 적용 3843건, 보류 03건, Issue 1건 생성 (여러 차례 실행)  
+뉴스 인텔리전스  
+  - 매일 200건 스캔, 신규 5572건, 관련 1324건, Issue 생성 05건 (스케줄링)  
+교차 참조 업데이트  
+  -  문서에 2125개 문서의 교차 참조를 자동 업데이트  
+문서 복구(recover)  
+  - Issue #212, #199, #209, #198에 대해 피드백 기반 신규 문서 생성  
+문서 생성(generate)  
+  - Issue #212 → “$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드” (총 32 074 ms, 6개 소스)  
+  - Issue #209 → “GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드” (총 36 741 ms, 8개 소스)  
+  - Issue #207 → “클라우드 기반 영구 터미널 설계 및 구현 가이드” (총 44 738 ms, 9개 소스)  
+열린 이슈
+전체 오픈 이슈: 18건  
+최근 활동(지난 주): 15건  
+주간 변경사항
+  SHA   커밋 메시지  
+ ----- -------------- 
+  729ba5e   🌳 Wiki Tree Maintenance: 36문서가 9개 상위 디렉터리로 분류, 중복·메타 데이터 정비 필요  
+  21561b6   🌳 Wiki Tree Maintenance: 38문서가 10개 카테고리로 분류, 구조 비효율 및 파일명 정규화 제안  
+  77a095c   🔗 교차 참조 업데이트: 25개 문서  
+  f9181e2   docs: Issue #216 - draft 문서 published 전환  
+  abc1b0c   docs: Issue #210 - 피드백 반영  
+(전체 82건의 커밋이 기록되었으며, 위 항목은 주요 변경을 대표합니다.)
+향후 과제
+초안(draft) 문서 2건을 검토 후 발행(published) 혹은 삭제 처리  
+삭제된 문서 3건에 대한 복구 필요성 검토  
+Wiki Tree 구조와 메타데이터 정비를 지속하여 중복·불필요 카테고리 최소화  
+교차 참조 자동 업데이트 빈도와 정확도 모니터링, 누락된 문서가 없는지 확인  
+AI 유지보수 작업에서 보류된 항목(총 35건) 해결 및 생성된 Issue 추적  
+이슈 관리**: 현재 18건 중 미해결 이슈에 대한 우선순위 재조정 및 해결 속도 향상</content>
+    <excerpt>요약
+전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
+AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
+열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
+문서 현황
+  항목   수량  
+ ------ ------ 
+  전체 문서   36  
+  발행(published)...</excerpt>
+    <tags>보고서, 주간, 통계</tags>
+    <lastModified>2026-02-23T01:35:20.942Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
   <item>
     <title>Wiki 페이지 API 라우트 상세 가이드</title>
     <slug>backend/wiki-api-route-guide</slug>
@@ -241,7 +312,7 @@ Wiki 페이지 조회, 생성, 수정, 삭제 지원
 계층형 경로()를 통한 페이지 식별  
 JWT 기반 인...</excerpt>
     <tags>API, Wiki, 라우트, 인증, 문서화</tags>
-    <lastModified>2026-02-23T00:48:13.871Z</lastModified>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -357,7 +428,7 @@ CRD 스키마 문서:
 이 문서는 Node Readiness Controller(NRC)를 처음 접하는 클러스터 운영자와 플랫폼 엔지니어를 대상으로 합니다.  
 NRC는 기존 “Ready” 조건만으로는 충분히 표현되지 않는 복합 인프라 의존성을 선언형으로 관리하도록 설계되었습니다. 이를 통해 스케줄링 정확성과 서비스 안정성을 크게 향상시킬 수 있습니다 Introducing...</excerpt>
     <tags>Kubernetes, NodeReadiness, Scheduler, Reliability</tags>
-    <lastModified>2026-02-22T02:01:15Z</lastModified>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2195,8 +2266,8 @@ GitHub Action 워크플로 파일 생성 ()
 개요
 수동 PR 리뷰는 리뷰어가 피곤할 때 놓치는 부분이 생기고, 동일한 코멘트가 반복되는 등 비효율적인 문제가 있습니다. AI‑powered 솔루션을 활용하면 모든 풀 리퀘스트에 대해 구조화된 코드 리뷰(정확성, 보안, 성능, 테스트)를 CI가 자동으로 수행하도록 할 수 있습니다. 원하는 모델(OpenAI, Anthr...</excerpt>
     <tags>AI, 코드 리뷰, CI, GitHub Actions, 에이전트</tags>
-    <lastModified>2026-02-23T00:48:13.883Z</lastModified>
-    <author></author>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>MCP (Model Context Protocol) 완벽 가이드</title>
@@ -3276,8 +3347,8 @@ Note: 현재 레포지토리에는  레이블이 존재하지 않아 Dependabot�
 설정 방법
  파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub...</excerpt>
     <tags>label, dependencies, dependabot</tags>
-    <lastModified>2026-02-23T00:48:13.892Z</lastModified>
-    <author></author>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>주간 위키 보고서 - 2026년 08주차</title>

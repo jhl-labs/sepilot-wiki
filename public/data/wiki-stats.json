@@ -1,289 +1,143 @@
 {
-  "generatedAt": "2026-02-16T01:35:01.406Z",
-  "weekNumber": 8,
+  "generatedAt": "2026-02-23T01:35:20.850Z",
+  "weekNumber": 9,
   "year": 2026,
   "period": {
-    "start": "2026-02-09T01:34:49.584Z",
-    "end": "2026-02-16T01:34:49.584Z"
+    "start": "2026-02-16T01:35:10.318Z",
+    "end": "2026-02-23T01:35:10.318Z"
   },
   "documents": {
-    "total": 18,
+    "total": 36,
     "statusDistribution": {
-      "draft": 10,
-      "published": 7,
-      "deleted": 1
+      "deleted": 3,
+      "published": 31,
+      "draft": 2
     },
-    "newCount": 14,
-    "modifiedCount": 2,
-    "publishedCount": 3
+    "newCount": 15,
+    "modifiedCount": 4,
+    "publishedCount": 0
   },
   "aiActivity": {
-    "totalActions": 50,
+    "totalActions": 73,
     "byType": {
-      "maintain": 13,
-      "coverage_analysis": 1,
-      "generate": 14,
-      "publish": 3,
-      "cross_reference": 9,
-      "recover": 6,
-      "tag_normalize": 2,
-      "modify": 2
+      "maintain": 29,
+      "cross_reference": 5,
+      "recover": 9,
+      "generate": 15,
+      "quality_score": 11,
+      "modify": 4
     },
     "entries": [
       {
-        "id": "7836e4cc-123c-416a-b200-d7d9a11880d7",
-        "timestamp": "2026-02-16T00:46:44.271Z",
+        "id": "ae8f2037-06e7-4bbc-addc-17e133decbcb",
+        "timestamp": "2026-02-23T00:47:09.413Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "Wiki Tree Maintenance",
         "documentSlug": "_wiki-tree",
         "documentTitle": "Wiki Tree Maintenance",
-        "summary": "구조 분석 완료. 22개 자동 적용, 0개 보류, 0개 Issue 생성",
+        "summary": "구조 분석 완료. 38개 자동 적용, 3개 보류, 1개 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "applied": 22,
-          "skipped": 0,
-          "issues": 0
+          "applied": 38,
+          "skipped": 3,
+          "issues": 1
         }
       },
       {
-        "id": "c1c02fbb-4dde-496b-8f06-b1753bc4a3a3",
-        "timestamp": "2026-02-15T09:06:12.916Z",
+        "id": "ba3ed717-1a60-48b5-8575-afc933954286",
+        "timestamp": "2026-02-23T00:23:27.611Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 69건 신규, 24건 관련, 0건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "9db851c1-d3fb-44e7-b813-5524335d6326",
+        "timestamp": "2026-02-22T18:09:59.972Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 65건 신규, 13건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "8ae3197e-eb1d-4ff8-b57c-32869c4953ae",
+        "timestamp": "2026-02-22T12:09:27.969Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 61건 신규, 22건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "3156b794-1158-435c-8f8d-44a366bf3942",
+        "timestamp": "2026-02-22T09:06:17.732Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "학습 루프",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "학습 루프: 2개 패턴 감지, 2개 에이전트 개선",
+        "summary": "학습 루프: 2개 패턴 감지, 3개 에이전트 개선",
         "trigger": "weekly_schedule",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "2ceed49d-42be-4367-a836-57690a129f0d",
-        "timestamp": "2026-02-15T03:00:00.965Z",
-        "actionType": "coverage_analysis",
-        "issueNumber": null,
-        "issueTitle": "문서 커버리지 분석",
-        "documentSlug": "_coverage-analysis",
-        "documentTitle": "문서 커버리지 분석",
-        "summary": "커버리지 12점, 10개 미문서화 모듈 발견",
-        "trigger": "monthly_schedule",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "3207d0dc-2c4f-4546-b531-5deaba9c5e39",
-        "timestamp": "2026-02-13T09:21:17.224Z",
+        "id": "bd2d1b36-99fe-412d-8a38-49c5d8771007",
+        "timestamp": "2026-02-22T06:17:37.114Z",
         "actionType": "maintain",
         "issueNumber": null,
-        "issueTitle": "URL 변경 감지",
+        "issueTitle": "뉴스 인텔리전스",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "URL 변경 감지: 30개 체크, 1개 변경, 4개 깨짐, 3건 Issue",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "unknown",
-        "changes": null
-      },
-      {
-        "id": "aea9d0c9-7e6a-47cf-a1dc-d59de540d9ef",
-        "timestamp": "2026-02-13T09:21:07.513Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "트렌드 모니터링",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "트렌드 모니터링: 23건 수집, 3건 감지, 3건 Issue 생성",
+        "summary": "뉴스 인텔리전스: 200건 스캔, 62건 신규, 19건 관련, 5건 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "7fd38403-3cda-4c51-b93f-e978b7eed5f5",
-        "timestamp": "2026-02-12T07:26:00.715Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "Wiki Tree Maintenance",
-        "documentSlug": "_wiki-tree",
-        "documentTitle": "Wiki Tree Maintenance",
-        "summary": "구조 분석 완료. 22개 자동 적용, 1개 보류, 0개 Issue 생성",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "applied": 22,
-          "skipped": 1,
-          "issues": 0
-        }
-      },
-      {
-        "id": "9149037b-7118-4403-9f99-c76a0f639d1a",
-        "timestamp": "2026-02-12T07:25:13.200Z",
-        "actionType": "generate",
-        "issueNumber": 160,
-        "issueTitle": "[요청] 어제 발표한 glm5 에 대해 조사해줘",
-        "documentSlug": "glm5",
-        "documentTitle": "glm 5",
-        "summary": "새 문서 \"glm 5\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 9464
-              },
-              {
-                "step": "outline",
-                "durationMs": 4149
-              },
-              {
-                "step": "write",
-                "durationMs": 16993
-              },
-              {
-                "step": "review",
-                "durationMs": 9365
-              }
-            ],
-            "totalDurationMs": 39971,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 1525,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "bf470721-d300-45cb-93c0-fe495e7990d2",
-        "timestamp": "2026-02-12T00:23:27.280Z",
-        "actionType": "publish",
-        "issueNumber": 156,
-        "issueTitle": "[요청] opencode",
-        "documentSlug": "opencode",
-        "documentTitle": "[요청] opencode",
-        "summary": "문서 발행: draft → published 상태 전환",
-        "trigger": "issue_close",
-        "triggerUser": null,
-        "model": "unknown",
-        "changes": null
-      },
-      {
-        "id": "55b7874d-8144-4d1e-8e26-0f803bbe9f75",
-        "timestamp": "2026-02-11T12:50:33.733Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "Wiki Tree Maintenance",
-        "documentSlug": "_wiki-tree",
-        "documentTitle": "Wiki Tree Maintenance",
-        "summary": "구조 분석 완료. 20개 자동 적용, 1개 보류, 1개 Issue 생성",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "applied": 20,
-          "skipped": 1,
-          "issues": 1
-        }
-      },
-      {
-        "id": "615d7270-c4d5-4479-94b0-fbed775db8f4",
-        "timestamp": "2026-02-11T12:49:41.466Z",
-        "actionType": "generate",
-        "issueNumber": 158,
-        "issueTitle": "[요청] 바이브코딩에 대해",
-        "documentSlug": "",
-        "documentTitle": "바이브 코딩이란?",
-        "summary": "새 문서 \"바이브 코딩이란?\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3734
-              },
-              {
-                "step": "outline",
-                "durationMs": 6231
-              },
-              {
-                "step": "write",
-                "durationMs": 25380
-              },
-              {
-                "step": "review",
-                "durationMs": 5889
-              }
-            ],
-            "totalDurationMs": 41234,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 1875,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "e3a9a988-9979-44f1-9f06-ae2b89343c06",
-        "timestamp": "2026-02-11T08:01:04.445Z",
+        "id": "c7a6b3f6-77d6-43de-89cd-336742627ff7",
+        "timestamp": "2026-02-22T02:01:14.496Z",
         "actionType": "cross_reference",
         "issueNumber": null,
         "issueTitle": "교차 참조 업데이트",
         "documentSlug": "_cross-reference",
         "documentTitle": "교차 참조 업데이트",
-        "summary": "16개 문서의 교차 참조 업데이트",
+        "summary": "25개 문서의 교차 참조 업데이트",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "b3872208-d0a5-4eb3-859c-da64806380df",
-        "timestamp": "2026-02-11T07:47:59.613Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "Wiki Tree Maintenance",
-        "documentSlug": "_wiki-tree",
-        "documentTitle": "Wiki Tree Maintenance",
-        "summary": "구조 분석 완료. 20개 자동 적용, 1개 보류, 1개 Issue 생성",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "applied": 20,
-          "skipped": 1,
-          "issues": 1
-        }
-      },
-      {
-        "id": "9dfab0cd-7f35-402c-b0b5-f33ac33fb63c",
-        "timestamp": "2026-02-11T07:47:03.819Z",
+        "id": "8651a564-b464-40a7-b971-17a930cc44f8",
+        "timestamp": "2026-02-22T01:58:45.253Z",
         "actionType": "recover",
-        "issueNumber": 156,
-        "issueTitle": "[요청] opencode",
-        "documentSlug": "projects/opencode-guide",
-        "documentTitle": "[요청] opencode",
+        "issueNumber": 212,
+        "issueTitle": " [요청] $100k AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법",
+        "documentSlug": "cloud/aws-nat-gateway-cost-trap",
+        "documentTitle": " [요청] $100k AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법",
         "summary": "피드백에 따라 문서 생성",
         "trigger": "maintainer_comment",
         "triggerUser": null,
@@ -291,100 +145,31 @@
         "changes": null
       },
       {
-        "id": "91b4929f-e028-4200-884e-fe696a9767c1",
-        "timestamp": "2026-02-11T07:42:21.405Z",
-        "actionType": "generate",
-        "issueNumber": 156,
-        "issueTitle": "[요청]",
-        "documentSlug": "",
-        "documentTitle": "Opencode에 대해",
-        "summary": "새 문서 \"Opencode에 대해\" 생성",
-        "trigger": "request_label",
+        "id": "49cb5d84-356b-4ab9-a1ef-41e252f14ccd",
+        "timestamp": "2026-02-22T01:54:21.169Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 43개 자동 적용, 0개 보류, 1개 Issue 생성",
+        "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 4726
-              },
-              {
-                "step": "outline",
-                "durationMs": 5292
-              },
-              {
-                "step": "write",
-                "durationMs": 17677
-              },
-              {
-                "step": "review",
-                "durationMs": 5086
-              }
-            ],
-            "totalDurationMs": 32781,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 1403,
-              "method": "duration_based"
-            }
-          }
+          "applied": 43,
+          "skipped": 0,
+          "issues": 1
         }
       },
       {
-        "id": "78f5e19f-bc0c-4faf-bfbf-5e62df8bc5be",
-        "timestamp": "2026-02-11T06:10:23.362Z",
-        "actionType": "cross_reference",
-        "issueNumber": null,
-        "issueTitle": "교차 참조 업데이트",
-        "documentSlug": "_cross-reference",
-        "documentTitle": "교차 참조 업데이트",
-        "summary": "14개 문서의 교차 참조 업데이트",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "e0f55314-3917-495f-95d1-b2cc07d31693",
-        "timestamp": "2026-02-11T05:57:26.694Z",
-        "actionType": "cross_reference",
-        "issueNumber": null,
-        "issueTitle": "교차 참조 업데이트",
-        "documentSlug": "_cross-reference",
-        "documentTitle": "교차 참조 업데이트",
-        "summary": "10개 문서의 교차 참조 업데이트",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "1f0b704d-01de-4387-ab5d-b69b330d40ee",
-        "timestamp": "2026-02-11T05:13:59.762Z",
-        "actionType": "cross_reference",
-        "issueNumber": null,
-        "issueTitle": "교차 참조 업데이트",
-        "documentSlug": "_cross-reference",
-        "documentTitle": "교차 참조 업데이트",
-        "summary": "5개 문서의 교차 참조 업데이트",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "01d38e08-24bc-4427-9356-643b4dda1793",
-        "timestamp": "2026-02-11T05:10:06.615Z",
+        "id": "895e5986-1169-4547-91f6-f4d4907a830b",
+        "timestamp": "2026-02-22T01:51:05.519Z",
         "actionType": "recover",
-        "issueNumber": 139,
-        "issueTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+        "issueNumber": 199,
+        "issueTitle": "[Wiki Maintenance] [업데이트] Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처",
         "documentSlug": "ai/multi-agent-system",
-        "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
+        "documentTitle": "[Wiki Maintenance] [업데이트] Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처",
         "summary": "피드백에 따라 문서 생성",
         "trigger": "maintainer_comment",
         "triggerUser": null,
@@ -392,29 +177,242 @@
         "changes": null
       },
       {
-        "id": "9327a6bf-4773-49ca-9245-c11e294bd7e8",
-        "timestamp": "2026-02-11T05:10:06.614Z",
-        "actionType": "recover",
-        "issueNumber": 139,
-        "issueTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
-        "documentSlug": "kubernetes/kubernetes-release-notes",
-        "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
-        "summary": "피드백에 따라 문서 생성",
-        "trigger": "maintainer_comment",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "7f5159c2-eb04-4288-a3ea-e3ff5647dfa4",
-        "timestamp": "2026-02-11T04:47:55.752Z",
+        "id": "87187734-d5b4-4f49-9355-06ee653e893e",
+        "timestamp": "2026-02-22T01:24:14.651Z",
         "actionType": "cross_reference",
         "issueNumber": null,
         "issueTitle": "교차 참조 업데이트",
         "documentSlug": "_cross-reference",
         "documentTitle": "교차 참조 업데이트",
-        "summary": "17개 문서의 교차 참조 업데이트",
+        "summary": "21개 문서의 교차 참조 업데이트",
         "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "f255090b-316e-4f27-815c-c2a5fe974071",
+        "timestamp": "2026-02-22T01:20:59.899Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 21개 자동 적용, 0개 보류, 1개 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "applied": 21,
+          "skipped": 0,
+          "issues": 1
+        }
+      },
+      {
+        "id": "66695809-72d8-4fd6-8a51-8bdf8c227bc2",
+        "timestamp": "2026-02-22T01:19:09.830Z",
+        "actionType": "recover",
+        "issueNumber": 209,
+        "issueTitle": " [요청] Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
+        "documentSlug": "projects/rust-gpu-face-crop-tool",
+        "documentTitle": " [요청] Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "a7046a70-52cc-4b86-b085-b2f014c61f56",
+        "timestamp": "2026-02-22T00:24:12.262Z",
+        "actionType": "generate",
+        "issueNumber": 212,
+        "issueTitle": "문서 요청 #212",
+        "documentSlug": "212",
+        "documentTitle": "$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드",
+        "summary": "새 문서 \"$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 4714
+              },
+              {
+                "step": "outline",
+                "durationMs": 5361
+              },
+              {
+                "step": "write",
+                "durationMs": 17206
+              },
+              {
+                "step": "review",
+                "durationMs": 4793
+              }
+            ],
+            "totalDurationMs": 32074,
+            "researchSources": 6,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 5
+            },
+            "estimatedTokens": {
+              "estimated": 1368,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "bf6c9547-4c2c-4f7c-af5c-dadd9729ffa9",
+        "timestamp": "2026-02-22T00:23:35.418Z",
+        "actionType": "generate",
+        "issueNumber": 209,
+        "issueTitle": "문서 요청 #209",
+        "documentSlug": "209",
+        "documentTitle": "GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드",
+        "summary": "새 문서 \"GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 4640
+              },
+              {
+                "step": "outline",
+                "durationMs": 8221
+              },
+              {
+                "step": "write",
+                "durationMs": 19678
+              },
+              {
+                "step": "review",
+                "durationMs": 4201
+              }
+            ],
+            "totalDurationMs": 36741,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 7
+            },
+            "estimatedTokens": {
+              "estimated": 1605,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "270253b3-7f82-4cf1-8278-3e0fc5b20ed8",
+        "timestamp": "2026-02-22T00:22:49.000Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 72건 신규, 19건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "4ddcf8de-8475-45bc-a88a-c5238327e630",
+        "timestamp": "2026-02-21T18:09:46.780Z",
+        "actionType": "generate",
+        "issueNumber": 207,
+        "issueTitle": "문서 요청 #207",
+        "documentSlug": "207",
+        "documentTitle": "클라우드 기반 영구 터미널 설계 및 구현 가이드",
+        "summary": "새 문서 \"클라우드 기반 영구 터미널 설계 및 구현 가이드\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 3714
+              },
+              {
+                "step": "outline",
+                "durationMs": 10353
+              },
+              {
+                "step": "write",
+                "durationMs": 25428
+              },
+              {
+                "step": "review",
+                "durationMs": 5243
+              }
+            ],
+            "totalDurationMs": 44738,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 8
+            },
+            "estimatedTokens": {
+              "estimated": 2051,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "9afdb899-eded-46a6-91b2-c79de90cd672",
+        "timestamp": "2026-02-21T18:08:38.463Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 55건 신규, 17건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "431dd8d2-194b-4142-99a8-668ead36cba2",
+        "timestamp": "2026-02-21T13:03:48.965Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 38개 자동 적용, 2개 보류, 1개 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "applied": 38,
+          "skipped": 2,
+          "issues": 1
+        }
+      },
+      {
+        "id": "57a32765-ccd5-4ac0-bd98-9ae39251d789",
+        "timestamp": "2026-02-21T13:02:09.979Z",
+        "actionType": "recover",
+        "issueNumber": 198,
+        "issueTitle": "[Wiki Maintenance] [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
+        "documentSlug": "ai/continuous-ai",
+        "documentTitle": "[Wiki Maintenance] [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
@@ -422,71 +420,71 @@
     ]
   },
   "issues": {
-    "totalOpen": 6,
-    "recentActivity": 12
+    "totalOpen": 18,
+    "recentActivity": 15
   },
   "commits": {
-    "total": 50,
+    "total": 82,
     "entries": [
       {
-        "sha": "5132464",
-        "message": "🌳 Wiki Tree Maintenance: 전체 위키는 4개의 주요 카테고리(kubernetes, projects, bun, ai)로 구성되어 있습니다. 대부분의 문서는 올바른 디렉터리에 위치하고 있으나,  카테고리 내에 중복된 Opencode 문서가 존재합니다(삭제된 파일과 동일한 내용의 파일). 파일명은 이미 영문 slug 형태이며, 추가적인 rename은 필요하지 않습니다. 각 카테고리별 문서 순서를 논리적인 흐름(개요 → 상세 가이드 → 릴리즈 노트)으로 정렬하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
-        "author": "github-actions[bot]",
-        "date": "2026-02-16T00:47:07Z"
-      },
-      {
-        "sha": "bbce2ca",
-        "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
-        "author": "github-actions[bot]",
-        "date": "2026-02-12T07:26:28Z"
-      },
-      {
-        "sha": "f2989d2",
-        "message": "docs: Issue #160 - [요청] 어제 발표한 glm5 에 대해 조사해줘",
+        "sha": "729ba5e",
+        "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
         "author": "GitHub Action",
-        "date": "2026-02-12T07:25:21Z"
+        "date": "2026-02-23T00:48:14Z"
       },
       {
-        "sha": "af0cfb6",
-        "message": "docs: Issue #156 - 문서 발행",
+        "sha": "2ba4988",
+        "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
         "author": "GitHub Action",
-        "date": "2026-02-12T00:23:35Z"
+        "date": "2026-02-22T02:01:37Z"
       },
       {
-        "sha": "a897516",
-        "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-        "author": "github-actions[bot]",
-        "date": "2026-02-11T12:50:57Z"
-      },
-      {
-        "sha": "ca25fed",
-        "message": "docs: Issue #158 - [요청] 바이브코딩에 대해",
+        "sha": "02419c8",
+        "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
         "author": "GitHub Action",
-        "date": "2026-02-11T12:49:49Z"
+        "date": "2026-02-22T02:01:27Z"
       },
       {
-        "sha": "0190970",
-        "message": "🔗 교차 참조 업데이트: 16개 문서",
-        "author": "github-actions[bot]",
-        "date": "2026-02-11T08:01:05Z"
-      },
-      {
-        "sha": "08e2761",
-        "message": "Rename .md to opencode.md",
-        "author": "buizclue",
-        "date": "2026-02-11T17:00:23+09:00"
-      },
-      {
-        "sha": "e873878",
-        "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-        "author": "github-actions[bot]",
-        "date": "2026-02-11T07:48:29Z"
-      },
-      {
-        "sha": "605d980",
-        "message": "docs: Issue #156 - 피드백 반영",
+        "sha": "21561b6",
+        "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 10개의 카테고리(backend, bun, cloud, docker, frontend, ai, kubernetes, labels, projects, reports)로 분류됩니다. 중복·불필요한 카테고리와 삭제된 문서가 존재해 구조가 비효율적이며, 파일명·경로 정규화가 필요합니다. (retry 1)",
         "author": "GitHub Action",
-        "date": "2026-02-11T07:47:11Z"
+        "date": "2026-02-22T02:01:26Z"
+      },
+      {
+        "sha": "a9172d4",
+        "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+        "author": "GitHub Action",
+        "date": "2026-02-22T02:01:21Z"
+      },
+      {
+        "sha": "abc1b0c",
+        "message": "docs: Issue #210 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-02-22T02:01:18Z"
+      },
+      {
+        "sha": "eb34079",
+        "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 10개의 카테고리(backend, bun, cloud, docker, frontend, ai, kubernetes, labels, projects, reports)로 분류됩니다. 중복·불필요한 카테고리와 삭제된 문서가 존재해 구조가 비효율적이며, 파일명·경로 정규화가 필요합니다.",
+        "author": "GitHub Action",
+        "date": "2026-02-22T02:01:15Z"
+      },
+      {
+        "sha": "77a095c",
+        "message": "🔗 교차 참조 업데이트: 25개 문서",
+        "author": "GitHub Action",
+        "date": "2026-02-22T02:01:14Z"
+      },
+      {
+        "sha": "f9181e2",
+        "message": "docs: Issue #216 - draft 문서 published 전환",
+        "author": "JHL",
+        "date": "2026-02-22T11:00:45+09:00"
+      },
+      {
+        "sha": "43539ff",
+        "message": "Merge branch 'main' of github.com:jhl-labs/sepilot-wiki",
+        "author": "JHL",
+        "date": "2026-02-22T10:59:01+09:00"
       }
     ]
   }

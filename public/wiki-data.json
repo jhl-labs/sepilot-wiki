@@ -1,10 +1,26 @@
 {
   "pages": [
     {
+      "title": "주간 위키 보고서 - 2026년 9주차",
+      "slug": "reports/weekly-2026-09",
+      "content": "\n## 요약\n- 전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  \n- AI가 73건의 작업을 수행했으며, 유지보수(`maintain`) 29건이 가장 많음  \n- 열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  \n\n## 문서 현황\n| 항목 | 수량 |\n|------|------|\n| 전체 문서 | 36 |\n| 발행(published) | 31 |\n| 삭제(deleted) | 3 |\n| 초안(draft) | 2 |\n| 신규 문서(newCount) | 15 |\n| 수정된 문서(modifiedCount) | 4 |\n| 이번 주 발행(publishedCount) | 0 |\n\n## AI 활동 요약\n- **총 작업**: 73건  \n- **작업 유형별**  \n  - maintain: 29건  \n  - generate: 15건  \n  - recover: 9건  \n  - quality_score: 11건  \n  - cross_reference: 5건  \n  - modify: 4건  \n\n### 주요 AI 활동\n- **Wiki Tree Maintenance**  \n  - `_wiki-tree` 문서에 구조 분석 후 자동 적용 38~43건, 보류 0~3건, Issue 1건 생성 (여러 차례 실행)  \n- **뉴스 인텔리전스**  \n  - 매일 200건 스캔, 신규 55~72건, 관련 13~24건, Issue 생성 0~5건 (스케줄링)  \n- **교차 참조 업데이트**  \n  - `_cross-reference` 문서에 21~25개 문서의 교차 참조를 자동 업데이트  \n- **문서 복구(recover)**  \n  - Issue #212, #199, #209, #198에 대해 피드백 기반 신규 문서 생성  \n- **문서 생성(generate)**  \n  - Issue #212 → “$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드” (총 32 074 ms, 6개 소스)  \n  - Issue #209 → “GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드” (총 36 741 ms, 8개 소스)  \n  - Issue #207 → “클라우드 기반 영구 터미널 설계 및 구현 가이드” (총 44 738 ms, 9개 소스)  \n\n## 열린 이슈\n- **전체 오픈 이슈**: 18건  \n- **최근 활동(지난 주)**: 15건  \n\n## 주간 변경사항\n| SHA | 커밋 메시지 |\n|-----|--------------|\n| 729ba5e | 🌳 Wiki Tree Maintenance: 36문서가 9개 상위 디렉터리로 분류, 중복·메타 데이터 정비 필요 |\n| 21561b6 | 🌳 Wiki Tree Maintenance: 38문서가 10개 카테고리로 분류, 구조 비효율 및 파일명 정규화 제안 |\n| 77a095c | 🔗 교차 참조 업데이트: 25개 문서 |\n| f9181e2 | docs: Issue #216 - draft 문서 published 전환 |\n| abc1b0c | docs: Issue #210 - 피드백 반영 |\n\n(전체 82건의 커밋이 기록되었으며, 위 항목은 주요 변경을 대표합니다.)\n\n## 향후 과제\n- **초안(draft) 문서** 2건을 검토 후 발행(published) 혹은 삭제 처리  \n- **삭제된 문서** 3건에 대한 복구 필요성 검토  \n- **Wiki Tree** 구조와 메타데이터 정비를 지속하여 중복·불필요 카테고리 최소화  \n- **교차 참조** 자동 업데이트 빈도와 정확도 모니터링, 누락된 문서가 없는지 확인  \n- **AI 유지보수 작업**에서 보류된 항목(총 3~5건) 해결 및 생성된 Issue 추적  \n- **이슈 관리**: 현재 18건 중 미해결 이슈에 대한 우선순위 재조정 및 해결 속도 향상  \n\n---",
+      "lastModified": "2026-02-23T01:35:20.942Z",
+      "author": "SEPilot AI",
+      "status": "published",
+      "isDraft": false,
+      "isInvalid": false,
+      "tags": [
+        "보고서",
+        "주간",
+        "통계"
+      ],
+      "history": []
+    },
+    {
       "title": "Wiki 페이지 API 라우트 상세 가이드",
       "slug": "backend/wiki-api-route-guide",
       "content": "\n## 1. 문서 개요\n**목적**  \n`app/api/wiki/[...slug]/route.ts` 파일이 제공하는 Wiki 페이지 API 엔드포인트의 사용 방법을 외부 개발자와 내부 팀에게 명확히 안내합니다.  \n\n**대상 독자**  \n- 프론트엔드·백엔드 개발자  \n- API 소비자(외부 파트너)  \n- 운영·보안 담당자  \n\n**주요 기능 요약**  \n- Wiki 페이지 조회, 생성, 수정, 삭제 지원  \n- 계층형 경로(`slug`)를 통한 페이지 식별  \n- JWT 기반 인증·인가 적용 및 표준화된 응답 포맷  \n\n**버전 정보 및 적용 범위**  \n- 현재 API 버전: `v1` (프로젝트 루트 `package.json`에 정의)  \n- 적용 범위: `app/api/wiki/[...slug]/route.ts`에 매핑된 모든 HTTP 메서드  \n\n> **참고**: 본 가이드는 로버트의 API 문서 작성 가이드라인을 참고하여 구성되었습니다[[API 문서 작성을 위한 로버트의 가이드라인](https://koko8829.tistory.com/2496)].\n\n---\n\n## 2. 인증·인가 흐름\n| 항목 | 내용 |\n|------|------|\n| **지원 인증 방식** | **JWT (JSON Web Token)** 를 `Authorization: Bearer <token>` 헤더에 담아 전달합니다. 토큰은 `HS256` 알고리즘으로 서명되며, `exp` 클레임을 통해 만료 시간이 관리됩니다. |\n| **토큰 전달 방법** | - `Authorization` 헤더 (권장) <br> - HTTP‑Only `session_token` 쿠키 (옵션, SameSite=Lax) |\n| **권한 레벨 별 접근 제한** | - **읽기**(GET): 인증된 모든 사용자 허용 <br> - **작성·수정·삭제**(POST, PUT/PATCH, DELETE): `editor` 또는 `admin` 역할 필요 |\n| **인증 실패 시 응답** | `401 Unauthorized` 와 아래와 같은 JSON 바디 반환 <br> ```json { \"errorCode\":\"UNAUTHORIZED\", \"message\":\"Invalid or missing token.\" }``` |\n\n**요약**  \nAPI는 JWT 기반 Bearer 토큰을 기본 인증 수단으로 사용합니다. 토큰이 없거나 유효하지 않을 경우 401 오류가 반환되며, 쓰기·삭제 작업은 `editor` 이상 권한이 요구됩니다.\n\n---\n\n## 3. 라우트 구조 및 파라미터\n- **파일 위치**: `app/api/wiki/[...slug]/route.ts`  \n- **라우트 매핑**: Next.js App Router의 와일드카드 `[...]` 로 `/api/wiki/*` 경로 전체를 처리합니다.  \n\n### `slug` 파라미터\n- **형식**: 계층형 경로 문자열 배열 (`string[]`). 예시: `/api/wiki/technology/web/react` → `slug = [\"technology\",\"web\",\"react\"]`.  \n- **역할**: Wiki 페이지의 고유 경로를 식별하며, 페이지 트리 구조를 그대로 반영합니다.  \n\n### 지원 HTTP 메서드\n| 메서드 | 동작 |\n|-------|------|\n| **GET** | 페이지 조회 |\n| **POST** | 새 페이지 생성 |\n| **PUT** / **PATCH** | 기존 페이지 전체/부분 업데이트 |\n| **DELETE** | 페이지 삭제 (soft / hard) |\n\n### 지원 쿼리 파라미터\n| 파라미터 | 타입 | 설명 | 기본값 |\n|----------|------|------|--------|\n| `preview` | boolean | 미발행(초안) 페이지를 조회할 때 `true` 로 설정 | `false` |\n| `includeDeleted` | boolean | 소프트 삭제된 페이지를 포함해 조회 (`true` 시) | `false` |\n| `mode` | string (`soft` \\| `hard`) | DELETE 요청 시 삭제 방식 지정. 지정하지 않으면 `soft` 가 기본 | `soft` |\n\n**요약**  \n`slug` 로 페이지를 식별하고, `preview`, `includeDeleted`, `mode` 같은 쿼리 파라미터로 조회·삭제 동작을 세밀하게 제어할 수 있습니다.\n\n---\n\n## 4. 엔드포인트 상세\n\n### 4‑1. Wiki 페이지 조회 (GET)\n- **요청 URL**: `GET /api/wiki/{slug...}`  \n- **필수 파라미터**: `slug` (경로)  \n- **선택 파라미터**: `preview`, `includeDeleted`  \n\n**성공 응답** (`200 OK`)  \n\n    {\n        \"title\": \"React 소개\",\n        \"content\": \"React는 ...\",\n        \"metadata\": {\n            \"authorId\": \"u123\",\n            \"createdAt\": \"2024-02-01T12:34:56Z\",\n            \"updatedAt\": \"2024-02-10T08:20:00Z\",\n            \"version\": 3,\n            \"deleted\": false\n        }\n    }\n\n- **ETag** 헤더가 포함되어 낙관적 잠금에 활용됩니다.  \n- **캐시**: `Cache-Control: private, max-age=60`  \n\n**요약**  \nGET 은 `slug` 로 페이지를 조회하고, `preview`·`includeDeleted` 로 초안·삭제된 페이지 접근을 제어합니다. 성공 시 페이지 데이터와 메타데이터를 반환합니다.\n\n---\n\n### 4‑2. Wiki 페이지 생성 (POST)\n- **요청 URL**: `POST /api/wiki/{slug...}`  \n- **요청 헤더**: `Content-Type: application/json`  \n- **요청 바디**  \n\n    {\n        \"title\": \"새 페이지 제목\",\n        \"content\": \"본문 내용\",\n        \"metadata\": {\n            \"tags\": [\"frontend\", \"react\"]\n        }\n    }\n\n- **자동 메타데이터**: 서버가 `authorId`(토큰에서 추출), `createdAt`, `updatedAt`, `version(=1)`, `deleted(false)` 를 삽입합니다.  \n\n**성공 응답** (`201 Created`)  \n\n- `Location` 헤더에 새 페이지 URL (`/api/wiki/{slug...}`) 제공  \n- 응답 본문에 생성된 리소스 전체 반환 (위 GET 응답과 동일 포맷)  \n\n**요약**  \nPOST 로 새 페이지를 만들 때 클라이언트는 `title`, `content`, 선택적 `metadata.tags` 만 제공하면 됩니다. 서버는 인증 토큰에서 사용자 정보를 추출해 메타데이터를 자동 채웁니다.\n\n---\n\n### 4‑3. Wiki 페이지 수정 (PUT / PATCH)\n- **요청 URL**: `PUT /api/wiki/{slug...}` (전체 교체) 또는 `PATCH /api/wiki/{slug...}` (부분 업데이트)  \n- **필수 헤더**: `If-Match: \"<ETag>\"` (버전 충돌 방지)  \n- **요청 바디** (예시)  \n\n    {\n        \"title\": \"수정된 제목\",\n        \"content\": \"수정된 내용\",\n        \"metadata\": {\n            \"tags\": [\"updated\"]\n        }\n    }\n\n- **동시성 제어**: `If-Match` 값이 현재 `ETag` 와 일치하지 않으면 `409 Conflict` 반환.  \n\n**성공 응답** (`200 OK`)  \n\n    {\n        \"title\": \"수정된 제목\",\n        \"content\": \"수정된 내용\",\n        \"metadata\": {\n            \"authorId\": \"u123\",\n            \"updatedAt\": \"2024-05-01T10:15:30Z\",\n            \"version\": 4,\n            \"deleted\": false\n        }\n    }\n\n**요약**  \nPUT/PATCH 는 `If-Match` 헤더를 통해 낙관적 잠금을 구현합니다. 전체 교체는 PUT, 부분 업데이트는 PATCH 로 구분됩니다.\n\n---\n\n### 4‑4. Wiki 페이지 삭제 (DELETE)\n- **요청 URL**: `DELETE /api/wiki/{slug...}`  \n- **쿼리 파라미터**: `mode=soft` (기본) 혹은 `mode=hard`  \n\n**동작**  \n- **soft**: `deleted` 플래그를 `true` 로 설정하고 `deletedAt` 타임스탬프 기록.  \n- **hard**: 데이터베이스에서 영구 삭제.  \n\n**성공 응답**  \n\n- **soft delete**: `204 No Content` (본문 없음)  \n- **hard delete**: `202 Accepted` 와 작업 ID 반환 (비동기 처리 시)  \n\n    {\n        \"taskId\": \"del-20240501-abc123\",\n        \"status\": \"queued\"\n    }\n\n**요약**  \nDELETE 은 기본적으로 소프트 삭제를 수행합니다. `mode=hard` 를 지정하면 즉시 영구 삭제가 진행되며, 비동기 처리 시 202 응답과 작업 ID가 반환됩니다.\n\n---\n\n## 5. 요청·응답 예시\n### cURL 예시\n- **GET (preview 포함)**  \n\n    curl -X GET \"https://api.example.com/api/wiki/technology/web/react?preview=true\" \\\n         -H \"Authorization: Bearer <token>\"\n\n- **POST**  \n\n    curl -X POST \"https://api.example.com/api/wiki/technology/web/react\" \\\n         -H \"Content-Type: application/json\" \\\n         -H \"Authorization: Bearer <token>\" \\\n         -d '{\"title\":\"React 소개\",\"content\":\"...\",\"metadata\":{\"tags\":[\"frontend\"]}}'\n\n- **PATCH (ETag 사용)**  \n\n    curl -X PATCH \"https://api.example.com/api/wiki/technology/web/react\" \\\n         -H \"Content-Type: application/json\" \\\n         -H \"Authorization: Bearer <token>\" \\\n         -H 'If-Match: \"W/\\\"3\\\"\"' \\\n         -d '{\"content\":\"업데이트된 내용\"}'\n\n- **DELETE (hard)**  \n\n    curl -X DELETE \"https://api.example.com/api/wiki/technology/web/react?mode=hard\" \\\n         -H \"Authorization: Bearer <token>\"\n\n### JavaScript fetch 예시\n```javascript\n// GET with preview\nfetch('/api/wiki/technology/web/react?preview=true', {\n  method: 'GET',\n  headers: { 'Authorization': `Bearer ${token}` }\n})\n  .then(r => r.json())\n  .then(console.log);\n\n// POST new page\nfetch('/api/wiki/technology/web/react', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json',\n    'Authorization': `Bearer ${token}`\n  },\n  body: JSON.stringify({\n    title: 'React 소개',\n    content: '...',\n    metadata: { tags: ['frontend'] }\n  })\n})\n  .then(r => r.json())\n  .then(console.log);\n```\n\n### 응답 JSON 샘플\n- **성공 (200)**  \n\n    {\n        \"title\": \"React 소개\",\n        \"content\": \"React는 ...\",\n        \"metadata\": {\n            \"authorId\": \"u123\",\n            \"createdAt\": \"2024-02-01T12:34:56Z\",\n            \"updatedAt\": \"2024-05-01T10:15:30Z\",\n            \"version\": 4,\n            \"deleted\": false\n        }\n    }\n\n- **오류 (404)**  \n\n    {\n        \"errorCode\": \"PAGE_NOT_FOUND\",\n        \"message\": \"Requested wiki page does not exist.\",\n        \"details\": { \"slug\": [\"technology\",\"web\",\"react\"] }\n    }\n\n---\n\n## 6. 오류 처리 및 상태 코드\n| 코드 | 의미 | 응답 예시 |\n|------|------|-----------|\n| **400** | 잘못된 요청(파라미터 누락·형식 오류) | `{ \"errorCode\":\"INVALID_REQUEST\", \"message\":\"Missing title.\", \"details\":{...} }` |\n| **401** | 인증 실패 | `{ \"errorCode\":\"UNAUTHORIZED\", \"message\":\"Invalid or missing token.\" }` |\n| **403** | 권한 부족 | `{ \"errorCode\":\"FORBIDDEN\", \"message\":\"Insufficient permissions.\" }` |\n| **404** | 페이지 미존재 | `{ \"errorCode\":\"PAGE_NOT_FOUND\", \"message\":\"...\", \"details\":{ \"slug\": [...] } }` |\n| **409** | 버전 충돌(If-Match 불일치) | `{ \"errorCode\":\"VERSION_CONFLICT\", \"message\":\"ETag mismatch.\", \"details\":{ \"currentVersion\":5 } }` |\n| **410** | 소프트 삭제된 페이지 접근 | `{ \"errorCode\":\"PAGE_GONE\", \"message\":\"Page has been soft‑deleted.\", \"details\":{ \"slug\": [...] } }` |\n| **500** | 서버 내부 오류 | `{ \"errorCode\":\"INTERNAL_ERROR\", \"message\":\"Unexpected error.\", \"details\":null }` |\n\n**권장 대응 방안**  \n\n- `400` → 파라미터 검증 로직 강화 (스키마 검증)  \n- `401/403` → 토큰 재발급·권한 재검토  \n- `409` → 최신 버전 조회 후 `If-Match` 재전송  \n- `410` → 복구 API(soft delete 복원) 사용 검토  \n- `500` → 로그 확인 후 운영팀에 보고  \n\n---\n\n## 7. 베스트 프랙티스\n- **Rate Limiting**: 1분당 60건 이하 요청 권장. 초과 시 `429 Too Many Requests` 반환.  \n- **재시도 전략**: 5xx 오류 시 지수 백오프 적용 (예: 100 ms → 200 ms → 400 ms).  \n- **데이터 검증**: 서버와 클라이언트 모두 Zod·Joi 등 스키마 검증 사용.  \n- **보안**  \n  - 입력값에 대한 **SQL/NoSQL 인젝션 방지** 및 **XSS sanitization** 적용.  \n  - CSRF 방지를 위해 `SameSite=Lax` 쿠키 또는 `X-CSRF-Token` 헤더 사용 권장.  \n\n**요약**  \n안정적인 서비스 운영을 위해 레이트 제한, 재시도 정책, 입력 검증, 그리고 CSRF·XSS 방어를 반드시 적용하십시오.\n\n---\n\n## 8. 테스트·샘플 코드\n### 로컬 개발 환경 설정\n1. `node` ≥ 18, `pnpm` 설치  \n2. 레포지토리 클론 후 `pnpm install` 실행  \n3. `.env.local`에 `NEXT_PUBLIC_API_BASE=/api` 등 환경 변수 설정  \n4. `pnpm dev` 로 개발 서버 실행 (`http://localhost:3000`)  \n\n### 통합 테스트 시나리오 예시\n| 시나리오 | 기대 결과 |\n|----------|-----------|\n| **GET 존재 페이지** | `200 OK` + 페이지 데이터 |\n| **GET 비존재 페이지** | `404 NOT FOUND` |\n| **POST 인증된 사용자** | `201 Created` + `Location` 헤더 |\n| **PUT 버전 충돌** (`If-Match` 불일치) | `409 CONFLICT` |\n| **DELETE soft** | `204 No Content` |\n| **DELETE hard** (비동기) | `202 Accepted` + 작업 ID |\n\n### Mock 서버 활용\n`msw`(Mock Service Worker) 로 `GET /api/wiki/*` 등 핸들러를 등록해 프론트엔드 테스트에 활용합니다.\n\n**요약**  \n위 절차대로 로컬 환경을 구성하고, 표에 제시된 시나리오를 자동화 테스트에 포함하면 API 구현 검증이 용이합니다.\n\n---\n\n## 9. 변경 로그 & 버전 관리\n| 날짜 | 버전 | 변경 내용 | 영향 |\n|------|------|-----------|------|\n| 2024-02-20 | v1.0.0 | 최초 문서 초안 작성 | 전체 가이드 제공 |\n| 2024-03-05 | v1.1.0 | 인증·인가 섹션에 JWT 상세 추가 | 보안 가이드 보강 |\n| 2024-04-12 | v1.2.0 | 오류 코드 표에 409·410 추가 | 개발자 오류 처리 개선 |\n| 2024-05-08 | v1.3.0 | 쿼리 파라미터(`preview`, `includeDeleted`, `mode`) 및 soft/hard delete 설명 추가 | 사용성 향상 |\n\n**마이그레이션 가이드**  \n- 기존 `slug` 기반 경로는 그대로 유지됩니다.  \n- 삭제 옵션이 새롭게 `mode` 파라미터로 노출되므로, 기존 클라이언트는 기본 soft delete 동작에 영향이 없습니다.  \n- `preview` 와 `includeDeleted` 파라미터는 선택 사항이며, 기존 호출에 영향을 주지 않습니다.  \n\n---\n\n## 10. 참고 자료\n- **API 문서 작성 가이드라인** – 로버트의 가이드라인[[API 문서 작성을 위한 로버트의 가이드라인](https://koko8829.tistory.com/2496)]  \n- **Next.js App Router 문서** – 공식 문서([Next.js Docs](https://nextjs.org/docs/app/building-your-application/routing))  \n- **OAuth 2.0 표준** – RFC 6749([IETF RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749))  \n- **JWT (JSON Web Token)** – RFC 7519([IETF RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519))  \n\n> **주의**: 본 문서는 현재 확인 가능한 구현을 기반으로 작성되었습니다. 향후 코드 변경 시 해당 섹션을 업데이트하십시오.",
-      "lastModified": "2026-02-23T00:48:13.871Z",
+      "lastModified": "2026-02-23T00:48:14Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -17,13 +33,24 @@
         "문서화"
       ],
       "order": 1,
-      "history": []
+      "history": [
+        {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        }
+      ]
     },
     {
       "title": "Introducing Node Readiness Controller",
       "slug": "kubernetes/node-readiness-controller",
       "content": "\n## 1. 서론\n이 문서는 **Node Readiness Controller**(NRC)를 처음 접하는 클러스터 운영자와 플랫폼 엔지니어를 대상으로 합니다.  \nNRC는 기존 “Ready” 조건만으로는 충분히 표현되지 않는 복합 인프라 의존성을 선언형으로 관리하도록 설계되었습니다. 이를 통해 **스케줄링 정확성**과 **서비스 안정성**을 크게 향상시킬 수 있습니다 [Introducing Node Readiness Controller](https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/).\n\n## 2. 기존 Kubernetes “Ready” 상태 한계\n- **단일 이진 Ready 조건**: 현재 Kubernetes는 `NodeReady` 라는 하나의 불리언 플래그만을 사용해 노드가 워크로드를 받을 수 있는지를 판단합니다 [Introducing Node Readiness Controller](https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/).\n- **복합 인프라 의존성**: 현대 클러스터에서는 네트워크 에이전트, 스토리지 드라이버, GPU 펌웨어, 사용자 정의 헬스 체크 등 여러 요소가 모두 정상이어야 실제로 “준비된” 상태가 됩니다.  \n- **운영상의 문제**: Ready 플래그가 `True`라 하더라도 아직 초기화되지 않은 DaemonSet이나 드라이버가 존재하면, 워크로드가 조기에 스케줄링되어 서비스 장애가 발생할 수 있습니다 [Introducing Node Readiness Controller](https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/).\n\n## 3. Node Readiness Controller 개요\n- **프로젝트 소개**: Kubernetes 커뮤니티가 발표한 새로운 컨트롤 플레인 기능으로, 노드 부팅 과정에서 **맞춤형 스케줄링 게이트**를 선언형으로 정의합니다 [Introducing Node Readiness Controller](https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/).\n- **핵심 목표**  \n  1. **Custom Readiness** – 플랫폼별 “준비됨” 정의를 가능하게 함.  \n  2. **자동 Taint 관리** – 조건 변화에 따라 노드에 자동으로 taint를 적용·제거.  \n  3. **Declarative Bootstrapping** – 다단계 초기화 흐름을 명확히 관찰 가능하게 함.  \n- **설계 원칙**: Node‑centric, 선언형 API를 통해 운영자가 복잡한 부팅 로직을 코드가 아닌 YAML로 관리하도록 합니다.\n\n## 4. 핵심 개념 및 아키텍처\n| 개념 | 설명 |\n|------|------|\n| **Readiness Gate** | 사용자가 정의하는 커스텀 조건(예: DaemonSet 상태, 외부 HTTP 헬스 체크 등)을 `NodeReadinessGate` CRD 형태로 선언합니다. |\n| **Taint & Toleration 자동화** | 조건이 만족되지 않으면 `node-readiness.kubernetes.io/not-ready` taint가 자동으로 부여되고, 조건이 충족되면 자동 제거됩니다. |\n| **Controller Loop** | API Server를 watch하고, `NodeReadinessGate`와 실제 노드 상태를 비교해 리컨실리시에이션을 수행합니다. |\n| **구성 요소 간 인터페이스** | - **API Server**: CRD와 노드 상태를 저장·조회.<br>- **Scheduler**: taint 기반으로 스케줄링 결정을 내림.<br>- **Kubelet**: 기본 `Ready` 조건을 지속적으로 업데이트. |\n\n## 5. Custom Readiness 정의 방법\n### CRD: `NodeReadinessGate`\n- **apiVersion**: `node.k8s.io/v1alpha1`  \n- **kind**: `NodeReadinessGate`  \n- **spec**:  \n  - `nodeSelector`: 대상 노드 그룹을 라벨로 지정.  \n  - `conditions`: 배열 형태로 정의된 개별 체크 항목. 각 항목은 `type`(HealthCheck, DaemonSet, ExternalSignal 등)과 `target`(예: DaemonSet 이름, HTTP endpoint) 등을 포함합니다.  \n\n> **예시** (핵심 포인트만)  \n```yaml\napiVersion: node.k8s.io/v1alpha1\nkind: NodeReadinessGate\nmetadata:\n  name: gpu-node-gate\nspec:\n  nodeSelector:\n    node.kubernetes.io/instance-type: gpu\n  conditions:\n  - type: DaemonSet\n    name: nvidia-driver-installer\n  - type: ExternalSignal\n    url: https://health.example.com/gpu\n```  \n※ 실제 필드 상세는 공식 CRD 스키마를 참고하십시오 [공식 문서](https://kubernetes.io/docs/reference/).\n\n## 6. 자동 Taint 관리 메커니즘\n- **기본 Taint**: `node-readiness.kubernetes.io/not-ready:NoSchedule` 가 자동으로 생성됩니다.  \n- **트리거**:  \n  - **조건 변화**: 모든 `Readiness Gate`가 `True`가 되면 taint가 제거됩니다.  \n  - **타임아웃**: 지정된 기간 내에 조건이 충족되지 않으면 taint가 유지됩니다.  \n- **충돌 방지**: 기존 사용자 정의 taint와 네임스페이스가 겹치지 않도록 `node-readiness.kubernetes.io/` 네임스페이스를 전용으로 사용합니다.\n\n## 7. 선언형 노드 부트스트래핑 워크플로우\n1. **네트워크 초기화** – 네트워크 에이전트 DaemonSet이 `Ready`가 될 때까지 `not-ready` taint 유지.  \n2. **스토리지 연결** – CSI 플러그인 헬스 체크가 성공하면 두 번째 gate가 해제.  \n3. **특수 하드웨어** – GPU 드라이버, FPGA 펌웨어 등 추가 조건이 모두 만족될 때 최종적으로 taint가 제거되어 스케줄링이 가능해집니다.  \n\n> **상태 전이 다이어그램**: `NotReady → (조건1 OK) → (조건2 OK) → Ready`  \n> **관찰 포인트**: `kubectl get nodes -o wide` 로 현재 taint 상태 확인, `kubectl describe node <name>` 로 개별 gate 상태 확인.\n\n## 8. 실사용 사례\n- **GPU 노드**: `NodeReadinessGate`에 NVIDIA 드라이버 DaemonSet과 외부 펌웨어 검증 endpoint을 지정해, 드라이버가 완전히 로드된 뒤에만 GPU 워크로드가 스케줄됩니다.  \n- **스토리지 전용 노드**: CSI 플러그인 헬스 체크를 `ExternalSignal` 로 연결해, 스토리지 서비스가 정상 작동할 때만 PVC를 바인딩합니다.  \n- **Edge/5G 노드**: 네트워크 에이전트(예: Open5GS) 가용성을 `DaemonSet` 조건으로 지정해, 네트워크 연결이 확보된 시점에만 엣지 워크로드가 배포됩니다.  \n- **다중 클러스터/하이브리드**: 각 클러스터별 라벨링 전략과 `NodeReadinessGate`를 조합해, 동일한 워크로드가 서로 다른 준비 조건을 갖는 노드에 자동으로 맞춤 배포됩니다.  \n\n## 9. 설치 및 설정 가이드\n1. **배포 방법**  \n   - **Helm Chart**: `helm repo add node-readiness-controller https://charts.k8s.io` → `helm install nrc node-readiness-controller`  \n   - **Kustomize**: `kustomize build ./config/default | kubectl apply -f -`  \n2. **필수 RBAC**  \n   - `node-readiness-controller` ServiceAccount에 `nodes`, `nodeprovisioners`, `customresourcedefinitions`에 대한 `get/list/watch` 권한 부여.  \n3. **API Server 설정**  \n   - `--runtime-config=node.k8s.io/v1alpha1=true` 플래그를 활성화해야 CRD가 인식됩니다.  \n4. **기본값 vs 커스텀**  \n   - 기본값: 모든 노드에 `node-readiness.kubernetes.io/not-ready` taint 적용, `NodeReadinessGate`가 없으면 기존 `Ready`와 동일하게 동작.  \n   - 커스텀: 특정 라벨에만 적용, 조건 타임아웃 조정, 추가 taint 키 지정 가능.  \n\n## 10. 운영 베스트 프랙티스\n- **조건 설계**: 지연 허용 범위와 실패 재시도 정책을 명확히 정의하고, 중요한 인프라(예: 스토리지)에서는 보수적인 타임아웃을 설정합니다.  \n- **Taint/Toleration 호환성**: 기존 워크로드가 새로운 `node-readiness.kubernetes.io/not-ready` taint를 tolerates하도록 `PodSpec.tolerations`에 추가하거나, 필요 시 워크로드 별로 별도 toleration을 선언합니다.  \n- **CI/CD 연계**: PR 검증 단계에서 `kubectl wait --for=condition=Ready node/<node>` 대신 `NodeReadinessGate`가 모두 `True`가 되는지 확인하는 스크립트를 포함합니다.  \n\n## 11. 보안 및 접근 제어\n- **CRD 접근 최소화**: `NodeReadinessGate`는 `cluster-admin` 수준이 아닌, 특정 네임스페이스에 제한된 Role을 통해 관리합니다.  \n- **외부 신호 연동**: HTTP 기반 헬스 체크는 TLS와 인증 토큰을 사용해 보호해야 하며, API Server는 해당 endpoint에 대한 네트워크 정책을 적용합니다.  \n- **권한 상승 방지**: 악의적인 사용자가 임의의 taint를 삽입하지 못하도록 `node-readiness.kubernetes.io/` 네임스페이스에 대한 `create`/`update` 권한을 제한합니다.  \n\n## 12. 모니터링·관찰성\n- **주요 메트릭** (kube‑state‑metrics, Prometheus)  \n  - `node_readiness_gate_status{node=\"<name>\",condition=\"<type>\",status=\"true|false\"}`  \n  - `node_readiness_taint_active{node=\"<name>\"}`  \n- **이벤트 로그**: `kubectl get events --field-selector involvedObject.kind=Node` 로 taint 적용·제거 이벤트 확인.  \n- **Grafana 대시보드**: 노드별 gate 진행 상황, 현재 taint 상태, 조건 실패 비율 등을 시각화하는 템플릿이 공식 레포지토리에서 제공됩니다 [공식 문서](https://kubernetes.io/docs/).  \n\n## 13. 업그레이드·마이그레이션 가이드\n1. **단계적 적용**: 먼저 비핵심 워크로드가 있는 테스트 클러스터에 NRC를 배포하고, `NodeReadinessGate` 없이 기본 동작을 확인합니다.  \n2. **버전 호환성**: NRC는 Kubernetes 1.28 이상에서 지원됩니다 [Introducing Node Readiness Controller](https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/).  \n3. **롤백**: `helm uninstall nrc` 혹은 `kubectl delete -f <nrc-manifests>` 로 컨트롤러를 제거하면 기존 `Ready` 플래그만 남게 됩니다. 기존 taint는 자동으로 정리됩니다.  \n\n## 14. 트러블슈팅 FAQ\n- **조건이 인식되지 않음**  \n  - `kubectl describe node <name>` 에서 `Readiness Gates` 섹션을 확인하고, CRD가 올바르게 적용됐는지 검증합니다.  \n- **Taint가 남아 있음**  \n  - 조건이 `True`가 되더라도 타임아웃이 설정돼 있으면 자동 제거가 지연될 수 있습니다. `NodeReadinessGate.spec.timeoutSeconds` 값을 확인합니다.  \n- **Controller 로그 확인**  \n  - 컨트롤러 Pod의 로그 레벨을 `--v=4` 로 높이면 상세 이벤트를 확인할 수 있습니다.  \n\n## 15. 기존 Ready 조건과 비교\n| 항목 | 기존 Ready | Node Readiness Controller |\n|------|------------|---------------------------|\n| 정의 범위 | 단일 이진 플래그 | 다중 커스텀 조건 (Readiness Gate) |\n| 자동 Taint | 없음 (수동) | `node-readiness.kubernetes.io/not-ready` 자동 적용/제거 |\n| 가시성 | `kubectl get nodes` 에서 Ready/NotReady만 표시 | 각 Gate 별 상태와 메트릭 제공 |\n| 사용 시점 | 모든 노드에 적용 | 특정 라벨/노드 그룹에 선택적 적용 가능 |\n\n**언제 기존 Ready만으로 충분한가?**  \n- 단순한 클러스터(네트워크, 스토리지, 하드웨어 의존성이 거의 없는 경우)에서는 기존 Ready가 충분합니다.  \n- 복합 인프라(전용 GPU, CSI, 엣지 네트워크 등)에서는 NRC 도입을 권장합니다.\n\n## 16. 향후 로드맵 및 커뮤니티 참여\n- **예정 기능**  \n  - 멀티‑Gate 조합을 통한 정책 기반 스케줄링.  \n  - Gate 상태에 따른 자동 스케일링 정책 연동.  \n- **기여 방법**  \n  - GitHub `kubernetes-sigs/node-readiness-controller` 레포지토리에서 이슈 제기 및 PR 제출.  \n  - SIG‑Node 토론에 참여해 피드백을 공유합니다.  \n\n## 17. 참고 자료 및 링크\n- **공식 블로그 포스트**: [Introducing Node Readiness Controller](https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/)  \n- **GitHub 레포지토리**: `https://github.com/kubernetes-sigs/node-readiness-controller` (공식 구현)  \n- **CRD 스키마 문서**: `https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#nodereadinessgate-v1alpha1`  \n- **관련 사례 블로그**: Jerry Lee의 “Node Ready를 믿지 마세요!” (LinkedIn) [링크](https://www.linkedin.com/posts/jeeunglee_node-ready%EB%A5%BC-%EB%AF%BF%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94-node-readiness-activity-7426756404750897152-SRxo)  \n\n---",
-      "lastModified": "2026-02-22T02:01:15Z",
+      "lastModified": "2026-02-23T00:48:14Z",
       "author": "SEPilot AI",
       "status": "published",
       "isDraft": false,
@@ -36,6 +63,16 @@
       ],
       "order": 1,
       "history": [
+        {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        },
         {
           "sha": "eb34079",
           "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 10개의 카테고리(backend, bun, cloud, docker, frontend, ai, kubernetes, labels, projects, reports)로 분류됩니다. 중복·불필요한 카테고리와 삭제된 문서가 존재해 구조가 비효율적이며, 파일명·경로 정규화가 필요합니다.",
@@ -132,6 +169,16 @@
       "menu": "Ingress NGINX 마이그레이션",
       "order": 2,
       "history": [
+        {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        },
         {
           "sha": "eb34079",
           "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 10개의 카테고리(backend, bun, cloud, docker, frontend, ai, kubernetes, labels, projects, reports)로 분류됩니다. 중복·불필요한 카테고리와 삭제된 문서가 존재해 구조가 비효율적이며, 파일명·경로 정규화가 필요합니다.",
@@ -437,6 +484,16 @@
       "menu": "K8s 릴리즈 노트",
       "order": 5,
       "history": [
+        {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        },
         {
           "sha": "77a095c",
           "message": "🔗 교차 참조 업데이트: 25개 문서",
@@ -2260,7 +2317,8 @@
       "title": "AI 코드 리뷰 에이전트 구축 가이드",
       "slug": "ai/code-review-agent-guide",
       "content": "\n# AI 코드 리뷰 에이전트 구축 가이드\n\n## 개요\n수동 PR 리뷰는 리뷰어가 피곤할 때 놓치는 부분이 생기고, 동일한 코멘트가 반복되는 등 비효율적인 문제가 있습니다. AI‑powered 솔루션을 활용하면 모든 풀 리퀘스트에 대해 구조화된 코드 리뷰(정확성, 보안, 성능, 테스트)를 CI가 자동으로 수행하도록 할 수 있습니다. 원하는 모델(OpenAI, Anthropic, OpenRouter, 혹은 로컬 Ollama 인스턴스)을 사용해 별도의 구독료 없이도 리뷰를 제공할 수 있습니다.\n\n## AI 코드 리뷰 에이전트 설계\n- **리뷰 루브릭(프롬프트/워크플로)**: 모델이 아니라 리뷰 기준을 정의합니다.\n  - 고위험 이슈와 사소한 지적을 구분\n  - 구체적인 수정 방안과 테스트 제안 요구\n  - \"내가 살펴본 내용\"과 \"내가 확신하지 못하는 부분\" 명시\n- **모델 선택**: 비용·속도·정확도에 따라 모델 라우팅\n- **실행 시점**: PR 발생 시 자동 트리거\n- **제어 파라미터**: 최대 토큰 수, 검토 기준 등 사용자 정의 가능\n\n## CI 파이프라인 통합 단계\n1. **GitHub Action 워크플로 파일 생성** (`.github/workflows/ai-code-review.yml`)\n   ```yaml\n   name: AI Code Review\n   on:\n     pull_request:\n   jobs:\n     review:\n       runs-on: ubuntu-latest\n       permissions:\n         contents: read\n         pull-requests: write\n       steps:\n         - uses: actions/checkout@v4\n           with:\n             fetch-depth: 0\n         - name: Install Jazz\n           run: npm install -g jazz-ai\n         - name: Run code review workflow\n           run: jazz --output raw workflow run code-review --auto-approve\n           env:\n             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}\n   ```\n   - `--output raw`는 CI 환경에서 출력 캡처가 용이하도록 합니다.\n   - `--auto-approve`는 완전 자동화를 의미합니다.\n2. **리뷰 루브릭 파일 생성** (`workflows/code-review/WORKFLOW.md`)\n   ```markdown\n   ---\n   name: code-review\n   description: Review PR diff and produce a structured report\n   autoApprove: read-only\n   ---\n   Review the current PR diff.\n   Output GitHub‑flavored Markdown with:\n   1. **Summary** (2–4 bullets)\n   2. **High‑risk issues** (correctness + security)\n   3. **Performance / complexity concerns**\n   4. **API / UX footguns**\n   5. **Test gaps + concrete test suggestions**\n   6. **Nitpicks** (style/readability)\n   **Rules**\n   - Be specific: reference files/functions.\n   - Prefer minimal diffs / smallest safe fix.\n   - If you’re unsure, say so and propose how to verify.\n   - No generic advice (“add tests”) — propose exact test cases.\n   - Rank issues (High/Medium/Low).\n   - List files reviewed, assumptions, and what was not checked.\n   ```\n3. **리뷰 캡처 및 PR 코멘트**\n   ```yaml\n   - name: Generate review markdown\n     run: jazz --output raw workflow run code-review --auto-approve > review.md\n     env:\n       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}\n   - name: Comment on PR\n     run: gh pr comment \"$PR_NUMBER\" --body-file review.md\n     env:\n       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n       PR_NUMBER: ${{ github.event.pull_request.number }}\n   ```\n   인라인 주석은 선택 사항이며, 기본적인 가치 제공을 위해서는 위 단계만으로 충분합니다.\n\n## 예제 워크플로우와 베스트 프랙티스\n- **읽기 전용 모드**: `autoApprove`를 읽기 전용으로 유지해 에이전트가 저장소를 수정하지 못하도록 합니다.\n- **이슈 순위 매기기**: 모든 이슈에 중요도(High/Medium/Low)를 부여해 실제 중요한 문제에 집중합니다.\n- **오탐 예산 관리**: 리뷰가 너무 잡음이 많으면 무시될 수 있으니, 오탐 비율을 조정합니다.\n- **모델 라우팅 전략**:\n  - 작은 PR → 저비용 모델 (예: Ollama, OpenRouter의 경량 모델)\n  - 대규모 리팩터링 → 고성능 모델 (예: OpenAI GPT‑4o)\n- **투명성**: 에이전트가 검토한 파일 목록, 가정한 내용, 검토하지 않은 항목을 명시하도록 요구합니다.\n- **실제 사례**: Jazz 저장소는 자체 코드 리뷰와 릴리즈 노트에 Jazz를 사용합니다. 워크플로 파일은 [GitHub - lvndry/jazz](https://github.com/lvndry/jazz/tree/main/.github) 에서 확인할 수 있습니다.\n\n## 참고 자료\n- 원본 기사: [CI에서 나만의 AI 코드 리뷰 에이전트 만들기 | EUNO.NEWS](https://euno.news/posts/ko/build-your-own-ai-code-review-agent-in-ci-738404) (Dev.to 번역)\n\n---\n*이 문서는 Issue 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*",
-      "lastModified": "2026-02-23T00:48:13.883Z",
+      "lastModified": "2026-02-23T00:48:14Z",
+      "author": "GitHub Action",
       "status": "draft",
       "isDraft": true,
       "isInvalid": false,
@@ -2272,7 +2330,18 @@
         "에이전트"
       ],
       "order": 6,
-      "history": []
+      "history": [
+        {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        }
+      ]
     },
     {
       "title": "MCP (Model Context Protocol) 완벽 가이드",
@@ -3287,6 +3356,16 @@
       "order": 9,
       "history": [
         {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        },
+        {
           "sha": "77a095c",
           "message": "🔗 교차 참조 업데이트: 25개 문서",
           "author": "GitHub Action",
@@ -3472,16 +3551,6 @@
           "author": "github-actions[bot]",
           "authorEmail": "github-actions[bot]@users.noreply.github.com",
           "date": "2026-02-18T00:35:00Z",
-          "isAutoCommit": true,
-          "additions": 0,
-          "deletions": 0
-        },
-        {
-          "sha": "a897516",
-          "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-          "author": "github-actions[bot]",
-          "authorEmail": "github-actions[bot]@users.noreply.github.com",
-          "date": "2026-02-11T12:50:57Z",
           "isAutoCommit": true,
           "additions": 0,
           "deletions": 0
@@ -3766,6 +3835,16 @@
       "order": 2,
       "history": [
         {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        },
+        {
           "sha": "eb34079",
           "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 10개의 카테고리(backend, bun, cloud, docker, frontend, ai, kubernetes, labels, projects, reports)로 분류됩니다. 중복·불필요한 카테고리와 삭제된 문서가 존재해 구조가 비효율적이며, 파일명·경로 정규화가 필요합니다.",
           "author": "GitHub Action",
@@ -3811,7 +3890,8 @@
       "title": "Label: dependencies",
       "slug": "meta/label-dependencies",
       "content": "\n# dependencies 레이블\n\n`dependencies` 레이블은 프로젝트의 **의존성 업데이트**와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.\n\n## 사용 예시\n- `chore(deps): bump ajv from 6.12.6 to 6.14.0`\n- `chore(deps): bump lodash from 4.17.20 to 4.17.21`\n\n## 설정 방법\n`dependabot.yml` 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub 레포지토리 설정에서 **Labels** 섹션으로 이동해 `dependencies` 레이블을 직접 생성합니다.\n\n> **Note**: 현재 레포지토리에는 `dependencies` 레이블이 존재하지 않아 Dependabot이 레이블을 추가하지 못하고 있습니다. 레이블을 생성한 뒤 Dependabot이 정상적으로 작동하도록 해 주세요.\n\n---\n\n*이 문서는 현재 이슈의 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*",
-      "lastModified": "2026-02-23T00:48:13.892Z",
+      "lastModified": "2026-02-23T00:48:14Z",
+      "author": "GitHub Action",
       "status": "draft",
       "isDraft": true,
       "isInvalid": false,
@@ -3821,7 +3901,18 @@
         "dependabot"
       ],
       "order": 1,
-      "history": []
+      "history": [
+        {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        }
+      ]
     },
     {
       "title": "주간 위키 보고서 - 2026년 08주차",
@@ -3839,6 +3930,16 @@
       ],
       "order": 2,
       "history": [
+        {
+          "sha": "729ba5e",
+          "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+          "author": "GitHub Action",
+          "authorEmail": "action@github.com",
+          "date": "2026-02-23T00:48:14Z",
+          "isAutoCommit": true,
+          "additions": 0,
+          "deletions": 0
+        },
         {
           "sha": "77a095c",
           "message": "🔗 교차 참조 업데이트: 25개 문서",
@@ -3933,7 +4034,7 @@
           "title": "AI 코드 리뷰 에이전트 구축 가이드",
           "slug": "ai/code-review-agent-guide",
           "order": 6,
-          "lastModified": "2026-02-23T00:48:13.883Z"
+          "lastModified": "2026-02-23T00:48:14Z"
         },
         {
           "title": "Gemini 3.1 Pro",
@@ -4002,7 +4103,7 @@
           "title": "Wiki 페이지 API 라우트 상세 가이드",
           "slug": "backend/wiki-api-route-guide",
           "order": 1,
-          "lastModified": "2026-02-23T00:48:13.871Z"
+          "lastModified": "2026-02-23T00:48:14Z"
         }
       ]
     },
@@ -4013,17 +4114,17 @@
       "order": 3,
       "children": [
         {
+          "title": "Introducing Node Readiness Controller",
+          "slug": "kubernetes/node-readiness-controller",
+          "order": 1,
+          "lastModified": "2026-02-23T00:48:14Z"
+        },
+        {
           "title": "Kubernetes 버전별 릴리즈 노트",
           "slug": "kubernetes/release-notes",
           "menu": "K8s 릴리즈 노트",
           "order": 5,
           "lastModified": "2026-02-22T10:56:57+09:00"
-        },
-        {
-          "title": "Introducing Node Readiness Controller",
-          "slug": "kubernetes/node-readiness-controller",
-          "order": 1,
-          "lastModified": "2026-02-22T02:01:15Z"
         },
         {
           "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
@@ -4088,7 +4189,7 @@
           "title": "Label: dependencies",
           "slug": "meta/label-dependencies",
           "order": 1,
-          "lastModified": "2026-02-23T00:48:13.892Z"
+          "lastModified": "2026-02-23T00:48:14Z"
         },
         {
           "title": "주간 위키 보고서 - 2026년 08주차",
@@ -4135,6 +4236,19 @@
           "slug": "frontend/api-service-layer",
           "order": 1,
           "lastModified": "2026-02-22T01:24:22Z"
+        }
+      ]
+    },
+    {
+      "name": "보고서",
+      "path": "reports",
+      "isCategory": true,
+      "order": 9,
+      "children": [
+        {
+          "title": "주간 위키 보고서 - 2026년 9주차",
+          "slug": "reports/weekly-2026-09",
+          "lastModified": "2026-02-23T01:35:20.942Z"
         }
       ]
     }
