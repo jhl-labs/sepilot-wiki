@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-02-23T20:49:47.293Z",
+  "collectedAt": "2026-02-23T21:49:42.465Z",
   "overview": {
-    "totalDocuments": 37,
+    "totalDocuments": 41,
     "publishedDocuments": 30,
-    "draftDocuments": 7,
+    "draftDocuments": 11,
     "openRequests": 22,
     "closedRequests": 19,
-    "totalAIActions": 159
+    "totalAIActions": 161
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 11,
+      "aiActions": 13,
       "documentsCreated": 5,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 15,
       "tavilyResults": 37,
       "estimatedTokens": 12857,
       "totalPipelineDurationMs": 279721
     },
     "last7d": {
-      "aiActions": 82,
+      "aiActions": 84,
       "documentsCreated": 20,
-      "documentsModified": 13,
+      "documentsModified": 14,
       "tavilyApiCalls": 60,
       "tavilyResults": 154,
       "estimatedTokens": 48154,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-23T21:31:25.360Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-23T21:28:56.926Z",
+      "actionType": "recover",
+      "issueNumber": 247,
+      "documentTitle": "chore(deps): bump react-router-dom from 7.13.0 to 7.13.1 in the react group",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-23T18:28:22.516Z",
       "actionType": "generate",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-22T01:51:05.519Z",
-      "actionType": "recover",
-      "issueNumber": 199,
-      "documentTitle": "[Wiki Maintenance] [업데이트] Self‑Healing AI Agents – 대규모 자율 에이전트 아키텍처",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-22T01:24:14.651Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "documentTitle": "교차 참조 업데이트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 151,
+      "totalActions": 153,
       "totalEstimatedTokens": 82061,
       "avgDurationMs": 56529
     },
