@@ -3,7 +3,7 @@ title: "Dependabot 라벨 `dependencies` 누락 문제 해결하기"
 description: "Dependabot이 PR에 `dependencies` 라벨을 추가하려고 할 때 라벨이 존재하지 않아 발생하는 오류를 해결하는 방법을 안내합니다."
 category: "Troubleshooting"
 tags: ["dependabot", "labels", "dependencies"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-02-23T10:00:00Z"
 updatedAt: "2026-02-23T10:00:00Z"

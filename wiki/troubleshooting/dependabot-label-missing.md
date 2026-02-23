@@ -3,7 +3,7 @@ title: "Dependabot 라벨 누락 오류 해결 방법"
 description: "Dependabot이 PR에 `dependencies` 라벨을 추가하려 할 때 라벨이 존재하지 않아 발생하는 오류를 해결하는 단계별 가이드."
 category: "Troubleshooting"
 tags: ["Dependabot", "GitHub Actions", "라벨", "CI"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-02-23T12:00:00Z"
 updatedAt: "2026-02-23T12:00:00Z"

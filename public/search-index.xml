@@ -1,75 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-23T21:28:57.051Z</generated>
-  <count>48</count>
+  <generated>2026-02-23T21:34:14.088Z</generated>
+  <count>46</count>
   <items>
   <item>
-    <title>bun과 pnpm, npm의 차이</title>
-    <slug>bun/comparison-pnpm-npm</slug>
-    <content>bun과 pnpm, npm의 차이
-개요
-은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
-이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤 도구를 선택하면 좋은지 살펴봅니다.
-설치 및 초기 설정
-  항목   bun   npm (Node.js 기본)   pnpm  
- ------ ----- ------------------- ------ 
-  설치 명령    (스크립트) 또는  (macOS)   Node.js 설치 시 자동 포함 ( 확인)     
-  기본 제공 기능   런타임, 패키지 매니저, 번들러, 테스트 러너 등   런타임 + npm (패키지 매니저)   npm 호환 CLI + 효율적인 저장소 관리  
-  설정 파일    (선택)       (멀티패키지)  
-성능 비교
-  항목   bun   npm   pnpm  
- ------ ----- ----- ------ 
-  패키지 설치 속도   매우 빠름 (C++ 로 구현, 병렬 다운로드)   보통 (JavaScript 기반)   npm보다 빠름, 하지만 bun보다는 느림  
-  실행 속도 (런타임)   Node.js 대비 24배 빠름 (V8 엔진 최적화)   Node.js 표준   Node.js 표준 (pnpm은 런타임이 아님)  
-  번들링 속도    로 초단위 번들링   ,  등 별도 도구 필요   별도 번들러 필요  
-벤치마크:  은 10,000개의 의존성을 30초 이내에 설치할 수 있는 반면, npm은 23분, pnpm은 약 1분 정도 소요됩니다(환경에 따라 차이 존재).
-디스크 사용량
-npm: 각 프로젝트마다 에 전체 복사본을 저장 → 중복 파일이 많이 발생.
-pnpm: 내용 주소 기반 저장소(content‑addressable store)를 전역에 두고, 프로젝트마다 심볼릭 링크를 사용 → 중복 최소화, 디스크 사용량 3050% 절감.
-bun:  역시 전역 캐시를 사용하지만, 현재는 pnpm만큼 세밀한 deduplication을 제공하지 않음. 그래도 npm 대비 2030% 정도 절감.
-호환성 및 생태계
-  항목   bun   npm   pnpm  
- ------ ----- ----- ------ 
-  Node.js API 호환   대부분 호환, 일부 네이티브 모듈(특히 C/C++ 애드온)에서 빌드 오류 가능   완전 호환   완전 호환 (npm 스크립트 그대로 사용)  
-  패키지 레지스트리   기본적으로 npm 레지스트리 사용   npm 레지스트리   npm 레지스트리  
-  스크립트 실행    (npm script와 동일)        
-  커뮤니티·플러그인   아직 초기 단계, 공식 플러그인 제한적   가장 큰 생태계, 수많은 플러그인·툴   npm 호환 플러그인 대부분 사용 가능  
-주요 사용 사례
-bun: 빠른 프로토타이핑, 작은 프로젝트, 번들링이 필요 없는 서버리스 함수, 성능이 중요한 CLI 툴.
-npm: 대부분의 Node.js 프로젝트, 레거시 코드베이스, 광범위한 CI/CD 파이프라인.
-pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하고 설치 속도를 개선하고 싶을 때.
-선택 가이드
-  상황   추천 도구  
- ------ ----------- 
-  프로젝트가 작고 빠른 설치·실행이 필요   bun  
-  기존 Node.js 생태계와 완전 호환이 필요   npm  
-  멀티패키지(모노레포) 혹은 디스크 절감이 중요한 대규모 프로젝트   pnpm  
-결론
-은 속도와 통합성을 중시하는 최신 개발자에게 매력적인 선택입니다.
-은 보편성과 광범위한 호환성을 제공하므로 여전히 기본 선택지입니다.
-은 효율적인 저장소 관리와 모노레포 지원이 강점이며, npm과 100% 호환됩니다.
-프로젝트 요구사항(성능, 디스크 사용량, 생태계 지원)을 고려해 적절한 도구를 선택하면 됩니다.
-이 문서는 2025년 기준 정보를 바탕으로 작성되었습니다. 각 툴의 최신 버전 및 업데이트 내용은 공식 문서를 참고하세요.</content>
-    <excerpt>bun과 pnpm, npm의 차이
-개요
-은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
-이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
-    <tags>bun, pnpm, npm, 비교, 가이드, comparison, benchmark, performance</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>bun 이란?</title>
-    <slug>bun/overview</slug>
-    <content>개요
-bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저를 하나로 통합한 도구입니다.
-런타임: Node.js와 호환되는 API를 제공하면서 V8 엔진 대신 JavaScriptCore(Apple의 엔진)를 사용합니다.
-번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
-패키지 매니저:  로 npm 레지스트리의 패키지를 설치하며, 과  구조를 그대로 사용합니다.
-공식 웹사이트: https://bun.sh
-GitHub 레포지터리: https://github.com/oven-sh/bun
-bun을 선택한 이유
-  항목   설명  
+    <title>주간 위키 보고서 - 2026년 9주차</title>
+    <slug>reports/weekly-2026-09</slug>
+    <content>요약
+전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
+AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
+열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
+문서 현황
+  항목   수량  
  ------ ------ 
   전체 문서   36  
   발행(published)   31  
@@ -129,96 +71,8 @@ AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음
   전체 문서   36  
   발행(published)...</excerpt>
     <tags>보고서, 주간, 통계</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-23T01:35:21Z</lastModified>
     <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>GitHub Actions로 bun을 쓰는 방법</title>
-    <slug>bun/github-actions-setup</slug>
-    <content>개요
-GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.
-사전 요구 사항
-저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
-워크플로우는 Linux() 환경을 기준으로 설명합니다. Windows/macOS에서도 동일한 단계가 적용되지만, OS별 경로 차이에 유의하세요.
-워크플로우 파일 구조
- 디렉터리에  과 같은 파일을 생성합니다.
-워크플로우 트리거
-Job 정의
-단계별 설정
-3-1. 레포지토리 체크아웃
-3-2. bun 설치
-bun은 공식 설치 스크립트를 통해 간단히 설치할 수 있습니다.
-공식 설치 스크립트는  에서 확인할 수 있습니다.
-3-3. 의존성 캐시
-bun은  대신 와  디렉터리를 사용합니다.
- 액션을 이용해 이 디렉터리를 캐시하면 설치 속도가 크게 향상됩니다.
-3-4. 의존성 설치
-3-5. 테스트 실행 (예시)
-3-6. 빌드 및 배포 (필요 시)
-전체 예시 워크플로우
-아래는 위 단계들을 하나의 파일에 통합한 최종 예시입니다.
-주의: 위 예시에서는 와  스크립트가  혹은 에 정의되어 있다고 가정합니다. 실제 프로젝트에 맞게 스크립트 명령을 조정하세요.
-macOS / Windows 환경에서 사용하기
-macOS:  로 변경하고,  설치가 기본 제공됩니다.
-Windows:  로 변경하고, PowerShell 스크립트()를 사용해 bun을 설치합니다. 예시:
-Windows에서는 경로 구분자()와 환경 변수 사용법에 유의하세요.
-베스트 프랙티스
-캐시 키 관리:  파일이 변경될 때마다 캐시가 무효화되도록  를 사용합니다.
-CI 속도 최적화:  대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.
-보안: 공식 설치 스크립트는 HTTPS를 통해 전달되며,  옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.
-버전 고정: 특정 bun 버전을 사용하려면  환경 변수를 설정하고 설치 스크립트에 전달합니다.
-참고 자료
-Bun 공식 홈페이지 및 설치 가이드: 
-GitHub Actions 공식 문서: 
-actions/cache 액션: 
-결론
-GitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.</content>
-    <excerpt>개요
-GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.
-사전 요구 사항
-저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
-워크플로우...</excerpt>
-    <tags>github-actions, bun, CI, CI/CD, node-alternative, automation, devops, workflow, javascript-runtime</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Dependabot 라벨 설정 가이드</title>
-    <slug>dependabot/labels</slug>
-    <content>Dependabot 라벨 설정 가이드
-이 문서는 Dependabot이 Pull Request에 자동으로 라벨을 붙일 수 있도록 설정하는 방법과, 라벨이 존재하지 않을 때 발생하는 오류를 해결하는 절차를 설명합니다.
-문제 상황
-Dependabot이 PR에  라벨을 추가하려고 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 다음과 같은 오류가 발생했습니다.
-라벨 생성 방법
-2.1 GitHub UI를 이용한 라벨 생성
-레포지토리 메인 페이지에서 Issues 탭을 클릭합니다.
-오른쪽 사이드바에 Labels 링크가 있습니다. 클릭합니다.
-New label 버튼을 눌러 라벨을 생성합니다.
-Name에  를 입력하고, 필요에 따라 색상을 선택합니다.
-Create label을 클릭합니다.
-2.2  CLI를 이용한 라벨 생성
-위 명령을 실행하면  라벨이 바로 생성됩니다.
-파일 검토
-라벨이 정상적으로 생성된 후에도 오류가 지속된다면  파일에 잘못된 라벨 이름이 지정되어 있는지 확인합니다.
-라벨 이름은 대소문자와 공백을 정확히 일치시켜야 합니다.
-필요 없는 라벨이 포함돼 있다면 해당 항목을 삭제하거나 올바른 라벨 이름으로 교체합니다.
-라벨 자동 생성 (옵션)
-프로젝트에 라벨이 아직 없을 경우, CI 워크플로우에서 자동으로 라벨을 생성하도록 스크립트를 추가할 수 있습니다.
-위 워크플로우는  브랜치에 푸시될 때마다  라벨이 존재하지 않으면 자동으로 생성합니다.
-검증
-라벨을 생성한 뒤, Dependabot이 새 PR을 열면 자동으로  라벨이 붙는지 확인합니다.
-라벨이 정상적으로 붙지 않으면 Actions 로그와 Dependabot 설정을 다시 검토합니다.
-참고 자료
-GitHub Docs: Managing labels for issues and pull requests
-GitHub Docs: Configuring Dependabot
-이 문서는 Dependabot 라벨 설정 문제를 해결하기 위한 가이드이며, 필요에 따라 프로젝트에 맞게 수정해서 사용하세요.</content>
-    <excerpt>Dependabot 라벨 설정 가이드
-이 문서는 Dependabot이 Pull Request에 자동으로 라벨을 붙일 수 있도록 설정하는 방법과, 라벨이 존재하지 않을 때 발생하는 오류를 해결하는 절차를 설명합니다.
-문제 상황
-Dependabot이 PR에  라벨을 추가하려고 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 다음과 같은 오류가 발생했습니다....</excerpt>
-    <tags>Dependabot, 라벨, GitHub, CI</tags>
-    <lastModified>2026-02-23T21:31:04.142Z</lastModified>
-    <author></author>
   </item>
   <item>
     <title>Wiki 페이지 API 라우트 상세 가이드</title>
@@ -458,38 +312,136 @@ Wiki 페이지 조회, 생성, 수정, 삭제 지원
 계층형 경로()를 통한 페이지 식별  
 JWT 기반 인...</excerpt>
     <tags>API, Wiki, 라우트, 인증, 문서화</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
-    <title>Dependabot용 `dependencies` 라벨 추가하기</title>
+    <title>OpenTelemetry 개요 및 실전 가이드</title>
+    <slug>observability/open-telemetry-guide</slug>
+    <content>개요
+관측성(Observability)은 과거 로그용 에이전트, 메트릭용 라이브러리, 분산 추적 전용 SDK 등 서로 다른 도구가 산재해 있어 “조각난 혼란”을 초래했습니다. 벤더를 교체하려면 기존 계측 코드를 모두 다시 작성해야 하는 번거로움이 있었습니다. 이러한 문제를 해결하기 위해 등장한 것이 OpenTelemetry (OTel) 입니다. OTel은 CNCF에서 Kubernetes 바로 뒤로 두 번째로 활발한 프로젝트가 되었으며, 애플리케이션이 텔레메트리 데이터를 생성·전송하는 방식을 표준화해 데이터는 사용자의 것이고, 벤더가 아니라는 원칙을 보장합니다[euno.news].
+OpenTelemetry란?
+정의: 오픈‑소스 관측 프레임워크로, 트레이스, 메트릭, 로그와 같은 텔레메트리 데이터를 생성, 수집, 내보내기 할 수 있습니다.  
+역할: 스토리지 백엔드나 시각화 도구가 아니라, 텔레메트리 데이터를 위한 범용 언어 및 전달 시스템 역할을 합니다.  
+비유: 배관에 비유하면, 애플리케이션·인프라에서 데이터를 수집 → 처리 → 선택한 백엔드(예: SigNoz, Prometheus, Jaeger 등)로 전달하는 파이프라인이라고 할 수 있습니다[euno.news].
+역사와 프로젝트 통합
+2019년에 OpenCensus(구글)와 OpenTracing(CNCF) 두 주요 프로젝트가 합병하면서 OpenTelemetry가 탄생했습니다.  
+목표는 계측을 위한 단일 표준을 제공해 산업 전반을 통합하는 것이었습니다[euno.news].
+현재 CNCF 내에서 Kubernetes 뒤로 두 번째로 활발히 활동하는 프로젝트이며, 다양한 언어·플랫폼 지원을 지속적으로 확대하고 있습니다.
+관측성의 세 가지 핵심 기둥
+  Pillar   What It Does   Example  
+ -------- -------------- --------- 
+  Traces   분산 시스템에서 요청이 이동하는 과정을 추적합니다. 트레이스는 스팬(예: DB 쿼리, HTTP 요청)으로 구성됩니다.   특정 HTTP 요청이 여러 마이크로서비스를 거쳐 처리되는 흐름을 시각화  
+  Metrics   시간에 따라 측정되는 수치 데이터 포인트(예: CPU 사용량, 메모리 소비, 요청 속도)   시스템 부하가 급증한 시점을 파악  
+  Logs   타임스탬프가 포함된 텍스트 기록으로, 오류 메시지나 상태 업데이트를 포함합니다.   에러 발생 원인 분석  
+OTel을 이용하면 세 가지 데이터를 동일한 컨텍스트 태그로 연결할 수 있어, 트레이스를 확인하면 같은 시점에 생성된 로그와 메트릭을 즉시 조회할 수 있습니다[euno.news].
+아키텍처 개요
+API: 계측 인터페이스. 구현이 없을 경우 no‑op 동작(코드는 실행되지만 데이터는 전송되지 않음)으로 동작합니다.  
+SDK: 실제 구현체. 자동·수동 계측 옵션을 제공하며, 언어별로 제공됩니다.  
+Collector: 데이터 수집·처리·버퍼링 역할을 수행하며, 다양한 Exporter와 연결됩니다.  
+Exporter: Jaeger, Prometheus, SigNoz 등 관측 백엔드로 데이터를 전송합니다.
+언어 및 플랫폼 지원
+  언어   SDK 특징   설치 방법 (예시)  
+ ------ ---------- ------------------- 
+  Java   자동 인스트루멘테이션 지원, OpenTelemetry Java Agent 제공   Maven/Gradle 의존성 추가  
+  Go   경량 SDK, 컨텍스트 전파가 기본     
+  Python   동적 언어 특성에 맞춘 자동 계측 플러그인     
+  JavaScript/Node.js   Express, Koa 등 웹 프레임워크와 손쉬운 통합     
+(각 언어별 상세 설치 방법은 공식 문서(OpenTelemetry 공식 사이트)를 참고)
+계측 방법
+수동 계측: 개발자가 직접 API를 호출해 스팬·메트릭·로그를 기록합니다.  
+자동 계측(자동 인스트루멘테이션): 언어별 에이전트 또는 플러그인을 사용해 프레임워크(HTTP 서버, DB, 메시징 등)와 자동으로 연동합니다.  
+주요 프레임워크와의 통합 포인트는 HTTP 서버, 데이터베이스 드라이버, 메시징 시스템(Kafka, RabbitMQ) 등이며, 자동 계측을 통해 코드 변경 없이 관측 데이터를 수집할 수 있습니다[euno.news].
+벤더 중립성 및 플러그‑앤‑플레이
+Exporter 교체 시 기존 계측 코드 수정이 거의 필요 없습니다.  
+멀티벤더 환경에서는 Collector를 중앙에 두고 여러 Exporter를 동시에 구성해 다양한 백엔드에 데이터를 전송할 수 있습니다.  
+이는 “데이터는 여러분의 것이고, 벤더가 아니라”는 OTel의 핵심 원칙을 실현합니다[euno.news].
+배포 옵션 및 운영 모델
+Agent 형태: 애플리케이션 프로세스와 동일한 호스트에 배포, 최소 지연으로 데이터 전송.  
+Collector 독립 실행: 별도 컨테이너/서비스로 배포해 배치, 버퍼링, 변환 기능을 중앙 집중화.  
+클라우드: Managed Collector(예: AWS Distro for OpenTelemetry) 사용 권장.  
+온프레미스: 자체 호스팅 Collector와 Exporter 조합으로 운영.
+기존 관측 솔루션과 비교
+  구분   전통 도구   OpenTelemetry  
+ ------ ---------- --------------- 
+  로그   파일 기반, 벤더 전용 포맷   표준화된 로그 API, 다중 백엔드 지원  
+  메트릭   Prometheus, Graphite 등 별도 설치   SDK를 통한 메트릭 자동 수집, Exporter로 전송  
+  트레이스   Jaeger, Zipkin 전용 SDK   단일 API/SDK로 트레이스·메트릭·로그 동시 수집  
+  벤더 종속성   높은 종속성   벤더 중립, 플러그‑앤‑플레이  
+OTel 도입 시 통합 관리, 벤더 교체 비용 절감, 관측 데이터 상관관계 강화 등의 효과를 기대할 수 있습니다.
+시작하기 가이드
+프로젝트에 OTel SDK 추가  
+   - 예: Java →   
+TracerProvider 초기화  
+   -  (언어별 문법에 맞게)  
+스팬 생성  
+   -   
+   -   
+메트릭 기록  
+   -   
+   -   
+   -   
+Collector/Exporter 설정  
+   - 에 Exporter(Jaeger, Prometheus 등) 추가 후 Collector 실행.  
+위 단계는 공식 가이드(OpenTelemetry Documentation)에 자세히 나와 있습니다.
+베스트 프랙티스
+샘플링 전략: 고트래픽 서비스에서는 Probabilistic Sampling 또는 Rate Limiting을 적용해 오버헤드 최소화.  
+컨텍스트 전파:  헤더를 이용해 서비스 간 분산 트레이스 연결을 보장.  
+메타데이터 관리: 공통 태그(예: , )를 일관되게 설정해 검색·대시보드 구축을 용이하게 함.  
+성능 최적화: no‑op API 사용 시 비용이 거의 없으므로, 프로덕션 환경에서는 Exporter 비활성화만으로도 안전하게 테스트 가능.
+생태계와 커뮤니티
+주요 오픈소스 프로젝트: OpenTelemetry Collector, SDKs, Instrumentation Libraries.  
+CNCF 활동: 정기적인 릴리즈, SIG(OpenTelemetry) 회의, 기여 가이드 제공.  
+기여 방법: GitHub 레포지토리(opentelemetry-go 등)에서 이슈·PR 제출.  
+지원 채널: 공식 Slack, CNCF 토론 포럼, GitHub Discussions.  
+참고 자료
+공식 스펙 및 문서: https://opentelemetry.io/docs/  
+관측 백엔드 연동 가이드: Jaeger(https://www.jaegertracing.io/docs/), Prometheus(https://prometheus.io/docs/), SigNoz(https://signoz.io/docs/)  
+커뮤니티 블로그·튜토리얼: euno.news 기사[euno.news]  
+본 문서는 제공된 리서치 자료를 기반으로 작성되었습니다. 추가적인 세부 구현 예시나 최신 릴리즈 정보는 공식 문서를 참고하시기 바랍니다.</content>
+    <excerpt>개요
+관측성(Observability)은 과거 로그용 에이전트, 메트릭용 라이브러리, 분산 추적 전용 SDK 등 서로 다른 도구가 산재해 있어 “조각난 혼란”을 초래했습니다. 벤더를 교체하려면 기존 계측 코드를 모두 다시 작성해야 하는 번거로움이 있었습니다. 이러한 문제를 해결하기 위해 등장한 것이 OpenTelemetry (OTel) 입니다. OTel은...</excerpt>
+    <tags>OpenTelemetry, Observability, Distributed Tracing, CNCF</tags>
+    <lastModified>2026-02-23T21:34:14.029Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Dependabot 라벨 설정 가이드</title>
     <slug>github/dependabot-labels</slug>
-    <content>Dependabot용  라벨 추가하기
-Dependabot이 PR에 자동으로 라벨을 붙이려면 해당 라벨이 레포지토리에 존재해야 합니다. 현재 레포지토리에는  라벨이 없어서 Dependabot이 라벨을 추가하지 못하고 있습니다. 아래 단계에 따라 라벨을 생성해 주세요.
-GitHub UI를 이용해 라벨 만들기
-레포지토리 메인 페이지에서 &quot;Issues&quot; 탭을 클릭합니다.
-오른쪽 사이드바에서 &quot;Labels&quot; 를 선택합니다.
-&quot;New label&quot; 버튼을 클릭합니다.
-Name 에  를 입력하고, Color 를 원하는 색상(예: )으로 선택합니다.
-Create label 을 눌러 라벨을 저장합니다.
-파일에 라벨 정의 추가 (옵션)
-레포지토트리에서 라벨을 코드로 관리하고 싶다면,  파일을 만들고 아래와 같이 정의할 수 있습니다.
-파일을 커밋하고 푸시하면 GitHub Actions 혹은 다른 자동화 도구가 라벨을 동기화하도록 설정할 수 있습니다.
-Dependabot 설정 확인
-라벨을 만든 뒤,  파일에  옵션이 올바르게 지정되어 있는지 확인합니다. 예시:
-주의:  항목에  라벨이 정확히 명시되어 있어야 합니다.
-라벨 적용 확인
-라벨을 만든 후, Dependabot이 새 PR을 열면 자동으로  라벨이 붙는지 확인합니다. 라벨이 보이지 않으면 위 단계들을 다시 점검해 주세요.
-추가 참고
-라벨 관리에 대한 자세한 내용은 GitHub 공식 문서를 참고하세요: GitHub Docs – Managing labels
-이 문서는 초안(draft) 상태이며, 검토 후  로 전환될 수 있습니다.</content>
-    <excerpt>Dependabot용  라벨 추가하기
-Dependabot이 PR에 자동으로 라벨을 붙이려면 해당 라벨이 레포지토리에 존재해야 합니다. 현재 레포지토리에는  라벨이 없어서 Dependabot이 라벨을 추가하지 못하고 있습니다. 아래 단계에 따라 라벨을 생성해 주세요.
-GitHub UI를 이용해 라벨 만들기
-레포지토리 메인 페이지에서 &quot;Issues&quot; 탭을 클릭...</excerpt>
-    <tags>Dependabot, GitHub, 라벨, 자동화</tags>
-    <lastModified>2026-02-23T21:29:09.691Z</lastModified>
-    <author></author>
+    <content>Dependabot 라벨 설정 가이드
+이 문서는 Dependabot이 Pull Request에 자동으로 라벨을 붙일 수 있도록 설정하는 방법과, 라벨이 존재하지 않을 때 발생하는 오류를 해결하는 절차를 설명합니다.
+문제 상황
+Dependabot이 PR에  라벨을 추가하려고 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 다음과 같은 오류가 발생했습니다.
+라벨 생성 방법
+2.1 GitHub UI를 이용한 라벨 생성
+레포지토리 메인 페이지에서 Issues 탭을 클릭합니다.
+오른쪽 사이드바에 Labels 링크가 있습니다. 클릭합니다.
+New label 버튼을 눌러 라벨을 생성합니다.
+Name에  를 입력하고, 필요에 따라 색상을 선택합니다.
+Create label을 클릭합니다.
+2.2  CLI를 이용한 라벨 생성
+위 명령을 실행하면  라벨이 바로 생성됩니다.
+파일 검토
+라벨이 정상적으로 생성된 후에도 오류가 지속된다면  파일에 잘못된 라벨 이름이 지정되어 있는지 확인합니다.
+라벨 이름은 대소문자와 공백을 정확히 일치시켜야 합니다.
+필요 없는 라벨이 포함돼 있다면 해당 항목을 삭제하거나 올바른 라벨 이름으로 교체합니다.
+라벨 자동 생성 (옵션)
+프로젝트에 라벨이 아직 없을 경우, CI 워크플로우에서 자동으로 라벨을 생성하도록 스크립트를 추가할 수 있습니다.
+위 워크플로우는  브랜치에 푸시될 때마다  라벨이 존재하지 않으면 자동으로 생성합니다.
+검증
+라벨을 생성한 뒤, Dependabot이 새 PR을 열면 자동으로  라벨이 붙는지 확인합니다.
+라벨이 정상적으로 붙지 않으면 Actions 로그와 Dependabot 설정을 다시 검토합니다.
+참고 자료
+GitHub Docs: Managing labels for issues and pull requests
+GitHub Docs: Configuring Dependabot
+이 문서는 Dependabot 라벨 설정 문제를 해결하기 위한 가이드이며, 필요에 따라 프로젝트에 맞게 수정해서 사용하세요.</content>
+    <excerpt>Dependabot 라벨 설정 가이드
+이 문서는 Dependabot이 Pull Request에 자동으로 라벨을 붙일 수 있도록 설정하는 방법과, 라벨이 존재하지 않을 때 발생하는 오류를 해결하는 절차를 설명합니다.
+문제 상황
+Dependabot이 PR에  라벨을 추가하려고 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 다음과 같은 오류가 발생했습니다....</excerpt>
+    <tags>Dependabot, 라벨, GitHub, CI</tags>
+    <lastModified>2026-02-23T21:29:26Z</lastModified>
+    <author>GitHub Action</author>
   </item>
   <item>
     <title>Introducing Node Readiness Controller</title>
@@ -604,7 +556,7 @@ CRD 스키마 문서:
 이 문서는 Node Readiness Controller(NRC)를 처음 접하는 클러스터 운영자와 플랫폼 엔지니어를 대상으로 합니다.  
 NRC는 기존 “Ready” 조건만으로는 충분히 표현되지 않는 복합 인프라 의존성을 선언형으로 관리하도록 설계되었습니다. 이를 통해 스케줄링 정확성과 서비스 안정성을 크게 향상시킬 수 있습니다 Introducing...</excerpt>
     <tags>Kubernetes, NodeReadiness, Scheduler, Reliability</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -721,7 +673,7 @@ Ingress NGINX GitHub 레포지토리 – https://github.com/kubernetes/ingress-n
 이 문서는 Kubernetes Steering Committee와 Security Response Committee가 2026년 3월에 발표한 Ingress NGINX 은퇴 선언을 기반으로 작성되었습니다.  
 대상 독자는 현재 클러스터에서 Ingress NGINX를 사용하고 있거나, 향후 도입을 고려하고 있는 클라우드‑네이티브 엔지니어, 플랫폼 운영팀...</excerpt>
     <tags>Ingress, NGINX, Kubernetes, Migration, Security, guide, deprecation, k8s, networking, load-balancer</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-20T22:52:00+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -733,7 +685,7 @@ status: published
 tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤니티]
 redirectfrom:
   - spotlight-on-sig-architecture-api-governance
-order: 3
+order: 4
 relateddocs: [&quot;release-notes.md&quot;, &quot;node-readiness-controller.md&quot;, &quot;cgroup-migration.md&quot;]
 개요
 이 문서는 SIG Architecture: API Governance 서브프로젝트에 대한 최신 정보를 위키에 반영하기 위해 작성되었습니다.  
@@ -810,7 +762,7 @@ tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤
 redirectfrom:
   - spotlight-...</excerpt>
     <tags></tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T02:01:14Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -937,7 +889,7 @@ OpenContainers runc Issue #4772 – cgroup v1 shares vs. v2 weight 기본값 비
 대상 독자: 클러스터 운영자, 플랫폼 엔지니어, Kubernetes 개발자  
 핵심 변경 사항: 기존 선형 매핑 공식 → 비선형(또는...</excerpt>
     <tags>cgroup, CPU, Kubernetes, 리소스 관리, KEP-2254, 마이그레이션</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T02:01:14Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1030,51 +982,8 @@ Deprecated:   API 폐기 일정 발표
 v1.35 (2026‑02‑10)
 새 릴리즈: v1.35.0 및 v1.35.1이 2026‑02‑10에 공개...</excerpt>
     <tags>Kubernetes, Release Notes, 버전, version, changelog</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>Dependabot 라벨 누락 오류 해결 방법</title>
-    <slug>troubleshooting/dependabot-label-missing</slug>
-    <content>Dependabot 라벨 누락 오류
-Dependabot이 Pull Request에  라벨을 자동으로 붙이려 할 때, 해당 라벨이 레포지토리에 존재하지 않으면 다음과 같은 오류가 발생합니다.
-이 문서는 해당 오류를 해결하는 방법을 단계별로 안내합니다.
-해결 방법
-라벨 생성
-   - 레포지토리의 Issues 탭으로 이동합니다.
-   - 좌측 사이드바에서 Labels를 클릭합니다.
-   - New label 버튼을 눌러 라벨을 생성합니다.
-   - Name에  를 입력하고, 필요에 따라 색상과 설명을 설정한 뒤 Create label을 클릭합니다.
-검토
-   - 레포지토리 루트에 있는  파일을 엽니다.
-   -  섹션에  라벨이 명시되어 있는지 확인합니다.
-   - 라벨 이름에 오타가 있거나, 존재하지 않는 라벨이 지정되어 있으면 올바른 라벨 이름()으로 수정합니다.
-   - 파일을 저장하고 커밋합니다.
-PR 재생성 (선택 사항)
-   - 기존 Dependabot PR이 이미 열려 있다면, 라벨이 추가되지 않은 상태일 수 있습니다.
-   - Dependabot에게 PR을 다시 생성하도록 요청하려면 PR에  혹은  댓글을 남깁니다.
-   - 새 PR이 생성되면  라벨이 정상적으로 붙어 있는지 확인합니다.
-CI/CD 파이프라인 확인
-   - GitHub Actions 워크플로우가 라벨 생성 후에도 오류를 계속 발생시키는 경우, 워크플로우 파일()에 라벨 관련 조건이 있는지 검토합니다.
-   - 필요 시 라벨 검증 로직을 업데이트하거나, 라벨이 없을 경우 자동으로 생성하도록 스크립트를 추가합니다.
-추가 팁
-라벨 관리 정책: 팀에서 사용되는 라벨을 일관되게 관리하기 위해 라벨 템플릿을 정의하고, 새 레포지토리를 만들 때 기본 라벨을 자동으로 생성하도록 스크립트를 활용할 수 있습니다.
-Dependabot 설정 예시:
-  
-  위와 같이  섹션에 올바른 라벨을 지정하면 자동으로 라벨이 붙습니다.
-참고 자료
-Dependabot 공식 문서 – 라벨 설정 (공식 문서를 참조해주세요)
-이 문서는 Dependabot 라벨 오류를 빠르게 해결하고 CI 흐름을 원활히 유지하기 위한 가이드입니다.</content>
-    <excerpt>Dependabot 라벨 누락 오류
-Dependabot이 Pull Request에  라벨을 자동으로 붙이려 할 때, 해당 라벨이 레포지토리에 존재하지 않으면 다음과 같은 오류가 발생합니다.
-이 문서는 해당 오류를 해결하는 방법을 단계별로 안내합니다.
-해결 방법
-라벨 생성
-   - 레포지토리의 Issues 탭으로 이동합니다.
-   - 좌측 사이드바에서 Lab...</excerpt>
-    <tags>Dependabot, GitHub Actions, 라벨, CI</tags>
-    <lastModified>2026-02-23T21:28:57.000Z</lastModified>
-    <author></author>
+    <lastModified>2026-02-22T10:56:57+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>Docker/Hardened Images</title>
@@ -1158,496 +1067,8 @@ tags: [Docker, Hardened Images, Security, Vulnerability Management, Supply Chain
 redirectfrom:
   - hardened-images-...</excerpt>
     <tags></tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-21T13:04:23Z</lastModified>
     <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>SEPilot Desktop 소개</title>
-    <slug>projects/sepilot-desktop-intro</slug>
-    <content>SEPilot Desktop 소개
-SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통합했습니다.
-📦 다운로드 &amp; 소스
-다운로드: SEPilot Desktop 다운로드
-GitHub: GitHub 저장소
-데모 영상: assets/videos/demo-main.mp4
-🧭 3가지 애플리케이션 모드
-Chat 모드
-AI와 대화하고 질문할 수 있습니다.
-LangGraph 워크플로우 (Instant, Sequential, Deep, Coding, RAG, Browser 등 6가지)
-RAG 문서 검색 &amp; 편집, 폴더 관리, Export/Import
-MCP 도구 통합 (GitHub, Brave Search, Filesystem 등)
-이미지 생성 &amp; 해석 (ComfyUI, Vision API)
-Persona 시스템 (AI 역할 정의, SQLite 영구 저장)
-Quick Question (최대 5개 단축키)
-GitHub Sync (AES‑256‑GCM 암호화)
-데모: assets/videos/chat-mode-demo.mp4
-Editor 모드
-코드 작성 및 파일 관리에 최적화된 환경입니다.
-Monaco Editor (VS Code 엔진, 구문 강조, AI 자동완성)
-파일 탐색기 (Working Directory, 파일 생성/삭제/이름변경)
-다중 파일 탭, Markdown 미리보기
-통합 터미널 (xterm.js, PowerShell/bash/zsh, 탭 관리)
-전체 파일 검색 (ripgrep 기반, Ctrl+Shift+F)
-Advanced Editor Agent (50회 반복, 9개 Built‑in Tools)
-10가지 Notion 스타일 Writing Tools
-데모: assets/videos/editor-mode-demo.mp4
-Browser 모드
-AI와 함께 웹을 탐색하고 자동화합니다.
-Chromium 기반 브라우저 (BrowserView, Chrome 스타일 탭)
-18개 자동화 도구 (Navigate, DOM Inspection, Vision Tools 등)
-Google Search Tools (검색, 뉴스, Scholar, 이미지, 고급 필터)
-Vision 기반 UI 제어 (Set‑of‑Mark, 좌표 클릭)
-Bot 감지 우회 (Stealth Fingerprint, 자연스러운 타이밍)
-페이지 캡처 (MHTML + 스크린샷, 오프라인 뷰어)
-북마크 관리 (폴더별 정리)
-데모: assets/videos/browser-mode-demo.mp4
-🌟 주요 기능
-LangGraph 워크플로우
-다양한 사고(Thinking) 모드 지원: Instant, Sequential, Tree‑of‑Thought, Deep 등. 실시간 스트리밍으로 사고 과정 시각화 및 conversationId 기반 격리.
-AI Persona 시스템 (v0.6.0)
-기본 페르소나: 일반 어시스턴트, 번역가, 영어 선생님, 시니어 개발자
-사용자 정의 페르소나 추가/수정/삭제
-슬래시 커맨드 자동완성 (/persona)
-SQLite 기반 영구 저장
-RAG (검색 증강 생성)
-텍스트, URL, 파일(PDF, DOCX, TXT, MD) 업로드 지원
-SQLite‑vec, OpenSearch, Elasticsearch, pgvector 지원
-문서 편집 AI (정제, 확장, 축약, 검증, 커스텀 프롬프트)
-폴더 구조 관리 (드래그 앤 드롭, Tree/List/Grid 뷰)
-Export/Import (JSON 형식, 백업/복원)
-데모: assets/videos/rag-demo.gif
-브라우저 자동화 (v0.6.0)
-Electron BrowserView 기반 Chromium 통합
-Vision 기반 UI 제어 및 Google Search Tools
-DOM Inspection, Vision Tools, Bot 감지 우회 등 27개 도구
-데모: assets/videos/browser-automation.gif
-MCP 프로토콜
-Model Context Protocol을 통한 도구 및 컨텍스트 표준화
-GitHub, Brave Search, Git, Filesystem 등 템플릿 제공
-환경 변수 UI 설정, 실행 전 사용자 승인 (5분 타임아웃)
-데모: assets/videos/mcp-tools.gif
-GitHub Sync (v0.6.0)
-Personal Access Token 기반 안전한 데이터 동기화
-AES‑256‑GCM 암호화로 민감 정보 보호
-설정, 문서, 페르소나, 이미지, 대화 내역 동기화
-데모: assets/videos/github-sync.gif
-이미지 기능
-ComfyUI 통합 이미지 생성
-Vision API 기반 이미지 해석 및 질의응답
-데모: assets/videos/image-generation.gif
-🛠️ 기술 스택
-프론트엔드: Next.js 15.3, React 19, TypeScript 5.7, Tailwind CSS, shadcn/ui, Zustand
-에디터: Monaco Editor (VS Code 엔진)
-데스크톱: Electron 35 (크로스‑플랫폼)
-백엔드 런타임: Node.js 20+
-데이터베이스: better‑sqlite3, SQLite‑vec (벡터 검색)
-IPC: Context Bridge (안전한 통신)
-LLM &amp; AI: LangGraph, LangChain, OpenAI, Anthropic, Google, Groq, MCP Protocol, ComfyUI
-🚀 빠른 시작 (5분 안에 시작)
-다운로드 및 설치
-   - Windows: 
-   - macOS: 
-   - Linux: 
-LLM 설정
-   - 좌측 하단 설정 아이콘 → LLM 제공자 및 API 키 입력
-   - 지원: OpenAI, Anthropic, Google, Custom (OpenAI‑compatible)
-모드 및 그래프 선택
-   - Chat, Editor, Browser 중 선택
-   - 필요 시 LangGraph 워크플로우 타입 선택 (Instant, RAG, Agent 등)
-대화 시작
-   - 준비가 완료되면 AI와 대화를 시작하세요!
-📋 시스템 요구사항
-최소: Node.js 20.9+, 4 GB RAM, 500 MB 디스크
-권장: Node.js 22+, 8 GB RAM, 1 GB 디스크
-이 문서는 초안(draft) 상태이며, 검토 후  로 전환될 예정입니다.</content>
-    <excerpt>SEPilot Desktop 소개
-SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
-    <tags>SEPilot, Desktop, LLM, Project, ai, desktop-app, application, ai-assistant</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>Opencode에 대해</title>
-    <slug>projects/opencode</slug>
-    <content>Opencode 소개
-Opencode 정의 및 핵심 목적
-Opencode은 AI 기반 코드 작성·보조 도구로, 개발자가 IDE 혹은 CLI 환경에서 자연어 프롬프트를 통해 코드 자동 완성, 오류 탐지, 리팩토링 등을 수행하도록 설계되었습니다. 핵심 목적은 생산성 향상과 코드 품질 개선이며, 특히 한국어 사용자에게 친화적인 인터페이스를 제공한다는 점이 강조됩니다.  
-주요 제공 서비스 및 기능 개요
-실시간 코드 자동 완성: 문맥을 이해하고 다음 라인을 제안  
-오류·버그 탐지: 정적 분석과 AI 모델을 결합한 실시간 피드백  
-리팩토링 제안: 가독성·성능 개선을 위한 자동 리팩토링 옵션  
-프로젝트 템플릿·스캐폴딩: 언어·프레임워크 별 초기 구조 자동 생성  
-CI/CD 연동: GitHub Actions, GitLab CI 등과 연동하여 자동 테스트·배포 지원  
-지원되는 프로그래밍 언어와 플랫폼
-Opencode은 현재 30개 이상의 프로그래밍 언어를 지원한다고 알려져 있습니다. 주요 언어는 JavaScript/TypeScript, Python, Java, Go, Rust, Kotlin, C#, PHP 등이며, 한국어 코드 주석·문서화에 최적화된 모델을 포함하고 있습니다. 지원 플랫폼은 Windows, macOS, Linux이며, VS Code, JetBrains IDE, 그리고 독립 실행형 CLI 에이전트 형태로 제공됩니다.  
-추가 조사 필요: 정확한 언어 목록 및 각 언어별 지원 수준  
-Opencode 아키텍처 및 핵심 컴포넌트
-서버‑사이드 구조와 배포 모델
-Opencode은 클라우드 기반 SaaS와 온‑프레미스 두 가지 배포 옵션을 제공합니다. 클라우드 모델에서는 다중 테넌시 환경에서 AI 모델이 API 형태로 제공되며, 온‑프레미스 옵션은 Docker/Kubernetes 이미지 형태로 배포되어 내부 네트워크에서 실행됩니다.  
-플러그인·확장 시스템
-플러그인 프레임워크를 통해 사용자는 JavaScript/TypeScript 기반의 커스텀 플러그인을 작성해 새로운 언어 지원, 워크플로우 자동화, 외부 도구 연동 등을 구현할 수 있습니다. 플러그인 마켓플레이스가 별도로 운영되고 있어 커뮤니티가 만든 확장 기능을 손쉽게 설치할 수 있습니다.  
-보안·인증 메커니즘 (OAuth, SSO 등)
-OAuth 2.0 및 OpenID Connect 기반 인증을 기본 제공  
-기업 환경을 위한 SAML SSO 연동 지원  
-API 키와 토큰 기반의 세분화된 권한 관리 제공  
-추가 조사 필요: 구체적인 암호화 방식 및 데이터 보관 정책  
-주요 기능 상세
-코드 자동 완성 및 제안 엔진
-대규모 코드베이스와 공개 저장소(예: GitHub)에서 수집한 학습 데이터를 바탕으로 Transformer 기반 모델이 실시간으로 문맥을 파악해 코드를 제안합니다. 제안은 IDE 내 팝업 혹은 CLI 프롬프트 형태로 제공됩니다.  
-실시간 오류 검출 및 리팩토링 도구
-정적 분석 엔진(ESLint, Pylint 등)과 AI 모델을 결합해 컴파일 타임·런타임 오류를 사전에 감지하고, 자동 리팩토링 스니펫을 제시합니다.  
-프로젝트 템플릿·스캐폴딩
- 명령을 통해 React, Spring Boot, FastAPI 등 인기 프레임워크 템플릿을 즉시 생성할 수 있습니다. 템플릿은 커스텀 변수(패키지명, 라이선스 등)를 프롬프트로 받아 동적으로 구성됩니다.  
-CI/CD 연동 및 배포 파이프라인 지원
-GitHub Actions, GitLab CI, Jenkins와의 플러그인 연동을 통해 코드 푸시 시 자동으로 Opencode 검증·리팩토링을 실행하고, 결과를 PR에 코멘트 형태로 반환합니다.  
-차별화된 특징
-독자적인 AI 모델·학습 데이터 소스
-Opencode은 자체 구축한 한국어·한글 주석 데이터셋과 국내 오픈소스 프로젝트를 포함한 학습 데이터를 활용해 한국어 코드 이해도가 높은 모델을 제공한다는 점이 차별점으로 강조됩니다.  
-커스텀 프롬프트 및 워크플로우 정의 가능성
-플러그인 API와 프롬프트 템플릿 엔진을 통해 조직별 코딩 가이드라인을 자동 적용하는 워크플로우를 정의할 수 있습니다.  
-오프라인 모드 및 로컬 실행 옵션
-온‑프레미스 Docker 이미지 배포를 통해 인터넷 연결이 차단된 환경에서도 로컬 AI 모델을 실행할 수 있습니다. 이는 보안·규제 요구가 높은 기업에 유용합니다.  
-비용 구조·라이선스 정책 비교
-무료 티어: 월 5,000 라인 코드 자동 완성 제공  
-사용량 기반 과금: 초과 라인당 $0.001$0.005 (언어·플랜에 따라 변동)  
-엔터프라이즈 플랜: 무제한 사용, 전용 모델, SLA 포함  
-추가 조사 필요: 최신 가격표 및 라이선스 상세 내용  
-Opencode vs. Claude Code
-  항목   Opencode   Claude Code  
- ------ ---------- ------------- 
-  AI 모델 기반   자체 학습 모델 + 외부 API 연동   Anthropic Claude 기반  
-  지원 언어   30+ (한국어 최적화 강조)   20+  
-  커스터마이징   플러그인·스크립트 자유도 높음   제한된 커스텀 프롬프트  
-  배포 옵션   클라우드 + 온‑프레미스 (Docker)   클라우드 전용  
-  가격 정책   무료 티어 + 사용량 기반 과금   구독형 플랜 중심  
-  보안·인증   OAuth, SAML SSO, 토큰 기반   OAuth 기반, SSO 옵션 제한  
-기능·성능 비교 요약
-응답 속도: 온‑프레미스 모드에서는 평균 150 ms 이하, 클라우드에서는 200300 ms 수준 (네트워크 상황에 따라 변동)  
-정확도: 한국어 주석·문서에 대한 정확도가 Claude Code 대비 1015% 높게 보고됨 (비공식 벤치마크)  
-사용 사례별 장단점 분석
-Opencode: 한국어 프로젝트, 온‑프레미스 요구, 높은 커스터마이징 필요 시 적합  
-Claude Code: 글로벌 영어 중심 프로젝트, 단순 API 호출만으로 빠른 도입을 원하는 경우 유리  
-추가 조사 필요: 공식 성능 벤치마크 및 사용자 사례 상세  
-Opencode vs. Goose CLI Agent
-설계 철학 및 목표 차이
-Opencode: AI 기반 코드 보조와 워크플로우 자동화에 초점, 플러그인 생태계 강조  
-Goose: 경량 CLI 툴로, 빠른 스크립트 실행·템플릿 생성에 중점, AI 기능은 제한적  
-명령어 인터페이스·사용성 비교
-Opencode:  형태이며, 서브커맨드가 풍부하고 플러그인으로 확장 가능  
-Goose:  형태로 단순화된 명령어 집합, 설정 파일 없이 바로 사용 가능  
-확장성·플러그인 생태계 비교
-Opencode: 공식 플러그인 마켓플레이스와 SDK 제공, 커뮤니티 기여 활발  
-Goose: 기본 기능 중심, 플러그인 시스템은 아직 베타 단계  
-성능·응답 시간 벤치마크 요약
-Opencode(클라우드): 평균 250 ms, 온‑프레미스 120 ms  
-Goose(CLI): 로컬 실행 시 3050 ms (AI 기능 제외)  
-추가 조사 필요: 최신 벤치마크 결과 및 실제 사용자 피드백  
-사용자 평판 및 커뮤니티 현황
-주요 리뷰 플랫폼 평점 요약
-GitHub: ★4.3 / 5 (⭐ 1.2k 스타, 300+ 이슈)  
-Product Hunt: ★4.5 / 5 (2023년 6월 출시 이후 2,000+ 투표)  
-Reddit r/Programming: 긍정적인 사용 후기 다수, 특히 “한국어 코드 자동 완성”이 호평받음  
-실제 기업·개발자 도입 사례
-삼성 SDS: 내부 프로젝트에 Opencode 온‑프레미스 배포, 코드 리뷰 자동화에 활용  
-카카오 엔터프라이즈: 한국어 문서 자동 생성 파이프라인에 연동  
-스타트업 ‘코드플러스’: 프리랜서 개발자 교육 프로그램에 무료 티어 제공  
-추가 조사 필요: 최신 도입 기업 리스트 및 구체적인 ROI 사례  
-커뮤니티 활동 규모와 활발함
-Slack/Discord 채널: 월 평균 1,500명 활발히 토론, 주간 AMA 세션 진행  
-GitHub Discussions: 플러그인 개발, 버그 리포트, 사용 팁 공유가 활발  
-장점·불만 사항 정리
-장점: 한국어 지원 우수, 플러그인 자유도, 온‑프레미스 옵션  
-불만: 초기 설정 복잡도, 일부 언어(예: Swift) 지원 미비, 가격 정책이 사용량에 따라 급변할 수 있음  
-도입 가이드 및 베스트 프랙티스
-초기 설정 단계별 체크리스트
-계정 생성 및 조직 초대  
-인증 방식 선택 (OAuth vs. SAML)  
-CLI 설치 ( 또는 Docker 이미지 pull)  
-프로젝트 루트에  파일 생성  
-첫 번째 프롬프트 테스트 ()  
-프로젝트에 Opencode 통합하는 방법
-VS Code 확장 설치 → 설정 파일에 API 토큰 입력 → 자동 완성 활성화  
-CI 파이프라인:  명령을  훅에 추가  
-효율적인 프롬프트 설계 팁
-문맥 제공: 파일 전체 혹은 관련 함수 코드를 함께 전달  
-구체적 목표: “Refactor this function to use async/await”처럼 명확히 기술  
-제한 조건: “Do not use external libraries” 등 제약 조건 명시  
-CI/CD 파이프라인 연동 실전 예시
-추가 조사 필요: 최신 CI 플러그인 및 공식 예제  
-결론 및 선택 가이드
-Opencode가 적합한 상황과 시나리오
-한국어 기반 프로젝트·팀  
-온‑프레미스·보안 요구가 높은 기업  
-커스텀 워크플로우·플러그인 생태계 활용을 원하는 경우  
-경쟁 제품 대비 선택 포인트 요약
-  포인트   Opencode   Claude Code   Goose CLI  
- -------- ---------- ------------- ----------- 
-  한국어 최적화   ★★★★★   ★★☆☆☆   ★☆☆☆☆  
-  온‑프레미스 지원   ★★★★★   ★☆☆☆☆   ★★☆☆☆  
-  플러그인·커스터마이징   ★★★★★   ★★☆☆☆   ★★☆☆☆  
-  가격 유연성   ★★★★☆   ★★☆☆☆   ★★★★★  
-  사용 난이도   ★★★☆☆   ★★★★★   ★★★★★  
-향후 로드맵 및 기대 기능
-멀티모달 코드 이해 (코드 + 설계 다이어그램)  
-실시간 협업 코딩 (공동 편집 + AI 보조)  
-추가 언어 지원 (Swift, Dart 등)  
-강화된 보안 옵션 (Zero‑Trust 인증, 데이터 암호화 자동화)  
-추가 조사 필요: 공식 로드맵 발표 일정 및 상세 기능  
----  
-본 문서는 현재 공개된 정보와 일반적인 AI 코드 어시스턴트 기술을 바탕으로 작성되었습니다. 구체적인 수치·정책·성능 데이터는 Opencode 공식 문서 및 최신 발표 자료를 참고하시기 바랍니다.</content>
-    <excerpt>Opencode 소개
-Opencode 정의 및 핵심 목적
-Opencode은 AI 기반 코드 작성·보조 도구로, 개발자가 IDE 혹은 CLI 환경에서 자연어 프롬프트를 통해 코드 자동 완성, 오류 탐지, 리팩토링 등을 수행하도록 설계되었습니다. 핵심 목적은 생산성 향상과 코드 품질 개선이며, 특히 한국어 사용자에게 친화적인 인터페이스를 제공한다는 점이 강조됩...</excerpt>
-    <tags>AI 코드 어시스턴트, Opencode, Claude Code, Goose CLI, 비교</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Claude Code 릴리즈 히스토리 상세 가이드</title>
-    <slug>projects/claude-code-release-history</slug>
-    <content>서문
-문서 목적 및 대상 독자
-이 문서는 Claude Code(Anthropic이 제공하는 공식 CLI 도구)의 버전별 변천사를 한눈에 파악하고자 하는 개발자·엔지니어·플랫폼 운영자를 위한 가이드입니다.  
-Claude Code를 처음 접하는 사용자  
-기존 프로젝트에서 특정 버전으로 업그레이드/다운그레이드가 필요한 경우  
-기능 도입 시점(예: MCP 서버, 멀티 모델, Hooks)과 IDE 연동 현황을 확인하고자 하는 경우  
-Claude Code 개요
-Claude Code는 터미널 기반 인터페이스와 IDE 플러그인을 통해 대화형 코드 생성·편집·실행을 지원하는 AI‑assisted 개발 도구입니다. 주요 기능은 다음과 같습니다.  
-대화형 프롬프트를 통한 코드 스니펫 생성  
-파일 시스템 조작 및 Git 연동 (자동 커밋·PR)  
-Bash 명령 실행 및 결과 스트리밍  
-플러그인·Hook 시스템을 통한 워크플로우 확장  
-MCP(Model Context Protocol) 서버와 연동한 멀티‑클라우드·멀티‑모델 실행 환경 제공  
-버전 관리 정책 및 릴리즈 정보 출처
-Claude Code는 Semantic Versioning(semver)을 따르며, 주요 기능 추가는 마이너 버전(vX.Y), 버그·보안 수정은 패치 버전(vX.Y.Z)으로 배포됩니다.  
-모든 릴리즈 노트는 공식 GitHub 릴리즈 페이지(https://github.com/anthropics/claude-code/releases)에서 확인할 수 있습니다.  
-초기 출시 (v0.x)
-  버전   출시일   주요 내용  
- ------ -------- ----------- 
-  v0.1 (preview)   2023‑11‑15   최초 공개. 대화형 코드 생성, 파일 편집, Bash 실행 기본 제공.  
-  v0.2   2024‑01‑08   CLI 인터랙션 개선, 기본 프롬프트 템플릿 추가.  
-  v0.3   2024‑02‑20   초기 버그 수정(세션 복구, 파일 잠금).  
-\ 정확한 날짜는 GitHub 태그 기록을 추가 조사해야 합니다.  
-기본 기능
-로 대화형 세션 시작  
-로 파일 내용 수정  
-로 Bash 명령 실행 및 스트리밍 출력  
-주요 제한 사항 및 알려진 이슈
-단일 모델(Claude 3)만 사용 가능  
-외부 IDE 연동 미지원 (플러그인 미구현)  
-권한 관리가 단순 파일‑레벨에 머물러 보안 샌드박스 부재  
-세션 재연결 시 가끔 중복 세션 발생 (패치 v0.3에서 부분 해결)  
-주요 마이너·패치 릴리즈 흐름 (시간순)
-v1.0  v1.5
-  버전   출시일   핵심 추가·개선   영향도  
- ------ -------- ---------------- -------- 
-  v1.0   2024‑04‑12   프로젝트 초기화(), 기본 프롬프트 템플릿 라이브러리   ★★  
-  v1.1   2024‑05‑03   자동 커밋·PR 생성 옵션 추가   ★★  
-  v1.2   2024‑06‑15   첫 번째 안정화 패치(버그 101, 112)   ★  
-  v1.3   2024‑07‑20   파일‑잠금 메커니즘 강화, 세션 복구 로직 개선   ★★  
-  v1.4   2024‑09‑02    플래그 도입, 테스트 실행 자동화   ★  
-  v1.5   2024‑10‑18   CLI 응답 속도 15% 개선, 로그 레벨 설정()   ★  
-v1.6  v1.9
-  버전   출시일   핵심 추가·개선   영향도  
- ------ -------- ---------------- -------- 
-  v1.6   2024‑12‑05   VS Code 확장 초판 출시, Hooks 시스템(pre‑/post‑command) 도입   ★★★  
-  v1.7   2025‑01‑22   Hook 정의 파일 자동 로드(), 오류 Hook() 지원   ★★  
-  v1.8   2025‑03‑14   Bash 권한 매칭 개선, 환경 변수 래퍼 지원   ★  
-  v1.9   2025‑04‑30    초기 베타, 간단 플랜 파일() 지원   ★★  
-v2.0  v2.1
-  버전   출시일   핵심 추가·개선   영향도  
- ------ -------- ---------------- -------- 
-  v2.0   2025‑06‑10   MCP 서버 지원 시작, 멀티 모델 전환() 기능 도입, Agent 모드(다중 에이전트 협업) 도입   ★★★  
-  v2.0.1   2025‑06‑25   MCP 인증 흐름 개선, 초기 보안 샌드박스 강화   ★★  
-  v2.1   2025‑09‑03   Plan 모드 정식 출시, 플랜 검증·롤백, JetBrains 플러그인 베타 공개   ★★★  
-  v2.1.37   2026‑02‑07    옵션 즉시 활성화 버그 수정   ★  
-  v2.1.38   2026‑02‑10   VS Code 터미널 스크롤 회귀 수정, Tab 키 자동완성 복구, Bash permission 매칭 개선, 스트리밍 텍스트 손실 방지, 세션 중복 방지, heredoc 파싱 강화, sandbox 모드에서  쓰기 차단   ★★★  
-※ 위 표에 기재된 날짜·세부 내용 중 일부는 GitHub 릴리즈 페이지에서 직접 확인 가능한 항목이며, 정확한 릴리즈 노트가 없는 경우 “추가 조사가 필요합니다”로 표시했습니다.
-핵심 기능 도입 시점 및 상세 변화
-MCP 서버 지원 (v2.0)
-서버‑사이드 실행: CLI 명령이 로컬이 아닌 MCP 서버에서 실행돼, 대규모 모델·데이터 접근이 가능해짐.  
-보안 샌드박스 강화: 파일 시스템 접근 권한이 서버‑측 정책에 의해 제한됨.  
-인증 흐름:  로 토큰 기반 인증 전환, 기존 API 키와 병행 사용 가능.  
-멀티 모델 지원 (v2.0)
-플래그 추가 ()  
-자동 모델 전환 로직: 프롬프트 복잡도·예산에 따라 Claude 3 ↔ Claude 4 자동 선택 (옵션 )  
-Hooks 시스템 (v1.6)
-구조:  디렉터리 아래 JSON 파일(,  등)  
-종류  
-  -  : 명령 실행 전 환경 변수·디렉터리 준비  
-  -  : 결과 파일 자동 저장·로그 전송  
-  -  : 오류 발생 시 알림·롤백 스크립트 실행  
-예시  
-  -  에   
-IDE 통합
-  IDE   도입 버전   주요 기능   최신 업데이트  
- ----- ----------- ---------- -------------- 
-  VS Code   v1.6 (2024‑12)   사이드바 UI, 터미널 연동, 자동 완성   v2.1.38 (2026‑02) – 터미널 스크롤 회귀 수정, Tab 자동완성 복구  
-  JetBrains (IntelliJ, PyCharm 등)   v2.0 (2025‑06) 베타   프로젝트 뷰 내 Claude 패널, 단축키()   v2.1 (2025‑09) – 플랜 UI 통합, 에이전트 상태 표시  
-워크플로우·모드 진화
-Agent 모드 (v2.0)
-목적: 복잡한 프로젝트에서 여러 AI 에이전트가 역할을 분담하도록 설계.  
-동작 방식:  로 역할 지정, 에이전트 간 상태는 MCP 서버를 통해 공유 ( 엔드포인트).  
-주요 활용: UI 설계·백엔드 API 설계 동시 진행, 자동 코드 리뷰 에이전트 연계.  
-Plan 모드 (v2.1)
-플랜 정의:  파일에 단계별 명령·조건을 선언.  
-예시 ()  
-    
-검증·롤백:  로 사전 검증, 실패 시 자동  실행.  
-기타 워크플로우 개선
-자동 커밋·PR:  로 변경 사항 자동 커밋 후 PR 생성.  
-테스트 실행:  명령이 · 등을 자동 감지·실행.  
-파일 잠금·권한 검증: v1.3 이후 파일 잠금 메커니즘 도입, v2.1.38에서 sandbox 모드에서  쓰기 차단.  
-성능·안정성 업데이트 연대기
-  버전   주요 성능·안정성 개선   영향도  
- ------ ---------------------- -------- 
-  v1.3   세션 복구 로직 최적화, 파일‑잠금 경합 감소   ★★  
-  v1.5   CLI 응답 속도 15% 개선 (내부 HTTP 풀 재사용)   ★  
-  v1.8   Bash 권한 매칭 최적화, 환경 변수 래퍼 지원으로 실행 오버헤드 감소   ★  
-  v2.0   MCP 서버 기반 병렬 실행, 모델 전환 시 지연 30% 감소   ★★★  
-  v2.1   플랜 검증 파이프라인 도입, 롤백 시 데이터 손실 방지   ★★  
-  v2.1.38   VS Code 터미널 스크롤 회귀 수정, Tab 자동완성 복구, heredoc 파싱 강화(명령어 스머징 방지)   ★★★  
-영향도 표기  
-★★★ – 시스템 전반에 큰 영향을 미침 (업그레이드 시 반드시 검토)  
-★★ – 주요 기능·성능 개선, 권장 업그레이드  
-★ – 작은 버그·성능 개선, 선택적 적용  
-릴리즈 별 영향도·중요도 요약 표
-  버전   릴리즈 날짜   핵심 추가·개선   영향도  
- ------ ------------- ---------------- -------- 
-  v0.1   2023‑11‑15   최초 공개, 기본 대화·편집·실행   ★  
-  v1.0   2024‑04‑12   프로젝트 초기화, 프롬프트 템플릿   ★★  
-  v1.6   2024‑12‑05   VS Code 확장, Hooks 시스템   ★★★  
-  v2.0   2025‑06‑10   MCP 서버, 멀티 모델, Agent 모드   ★★★  
-  v2.1   2025‑09‑03   Plan 모드, JetBrains 플러그인 베타   ★★★  
-  v2.1.38   2026‑02‑10   VS Code UI/UX 회귀 수정, 보안·안정성 강화   ★★★  
-\ 정확한 날짜는 GitHub 태그 확인 필요 → 추가 조사가 필요합니다.
-참고 자료 및 부록
-GitHub 릴리즈 페이지: https://github.com/anthropics/claude-code/releases  
-VS Code Extension (공식 마켓플레이스): https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code  
-JetBrains Plugin (공식 플러그인 레포): https://plugins.jetbrains.com/plugin/XXXXX‑claude-code (플러그인 ID 확인 필요 → 추가 조사가 필요합니다)  
-MCP 프로토콜 문서: https://github.com/anthropics/mcp-spec (공식 스펙)  
-주요 이슈·PR  
-  - Issue #10770 – 버전별 상세 변경 내역 정리 (참조)  
-  - PR #12345 – Hooks 시스템 초기 구현 (참조)  
-  - PR #13890 – Plan 모드 검증 로직 추가 (참조)  
-용어 정의
-  용어   정의  
- ------ ------ 
-  MCP   Model Context Protocol – Anthropic이 제공하는 멀티‑클라우드·멀티‑모델 실행을 위한 표준 API.  
-  Hook   CLI 명령 전·후 혹은 오류 발생 시 자동 실행되는 사용자 정의 스크립트·명령.  
-  Agent 모드   다중 AI 에이전트가 협업하도록 설계된 실행 모드.  
-  Plan 모드    로 정의된 단계별 워크플로우를 순차·조건부 실행하는 모드.  
-  Sandbox Mode   파일 시스템 접근을 제한하고,  등 특정 디렉터리 쓰기를 차단하는 보안 실행 환경.  
-본 문서는 현재 공개된 릴리즈 노트를 기반으로 작성되었습니다. 일부 초기 버전(v0.x)의 정확한 출시일·세부 변경 사항은 GitHub 태그 기록을 추가 조사해야 합니다.*</content>
-    <excerpt>서문
-문서 목적 및 대상 독자
-이 문서는 Claude Code(Anthropic이 제공하는 공식 CLI 도구)의 버전별 변천사를 한눈에 파악하고자 하는 개발자·엔지니어·플랫폼 운영자를 위한 가이드입니다.  
-Claude Code를 처음 접하는 사용자  
-기존 프로젝트에서 특정 버전으로 업그레이드/다운그레이드가 필요한 경우  
-기능 도입 시점(예: MCP 서...</excerpt>
-    <tags>Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 통합, 워크플로우</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드</title>
-    <slug>projects/rust-gpu-face-crop-tool</slug>
-    <content>Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드
-이 문서는 Rust와 wgpu, 그리고 관련 크레이트들을 사용해 GPU 가속 얼굴 크롭 도구를 설계하고 구현하는 방법을 단계별로 설명합니다. 아래 내용은 euno.news에서 제공된 정보를 기반으로 작성되었습니다.
-문제 정의
-학생 데이터와 같은 민감한 이미지를 외부 서버에 업로드하는 온라인 서비스는 보안상 부적합합니다.
-기존 데스크톱 기반 도구는 배치 작업 시 중단되거나 결과가 일관되지 않아 대규모 이미지 처리에 한계가 있습니다.
-수백수천 장의 이미지를 로컬에서 빠르고 결정론적으로 처리할 수 있는 솔루션이 필요합니다.
-왜 Rust인가?
-크레이트 생태계: , , ,  등 GPU 연산·이미지 처리·GUI 구현에 필요한 라이브러리가 풍부합니다.
-안전성: 메모리 안전성을 보장해 대규모 배치 처리 시 메모리 누수·크래시 위험을 최소화합니다.
-LLM 연계: 컴파일러 오류 메시지를 LLM에 전달해 빠르게 문제를 해결할 수 있어 생산성이 높습니다.
-전체 아키텍처
-  구성 요소   역할  
- --- --- 
-  Face Detection   경량 신경망 YuNet을 사용해 실시간 얼굴 검출 (GPU 전용 WGSL 컴퓨트 셰이더)  
-  Compute Shaders   전처리 → 얼굴 검출 → 후처리 등 7개의 커스텀 셰이더가 전체 파이프라인을 담당  
-  Enhancement Pipeline   색 보정, 노출·밝기·대비·채도·샤프닝·피부 부드럽게·적목 제거·배경 흐림 등 GPU·CPU 이중 경로 제공  
-  Batch Processing   CSV/Excel/Parquet/SQLite 등 다양한 스프레드시트 형식에서 메타데이터를 읽어 대량 이미지 처리  
-  GUI    기반 실시간 미리보기, Undo/Redo, 처리 이력 제공  
-  CLI   스크립트·자동화용 명령줄 인터페이스 제공  
-핵심 구현 포인트
-GPU‑First 설계 – 데이터 흐름을 GPU에 머무르게 하여 CPU↔GPU 간 대용량 복사를 최소화합니다.
-VRAM 관리 – 이미지 배치 크기에 따라 동적 메모리 할당·해제 로직을 구현해 메모리 초과를 방지합니다.
-멀티‑Face 지원 – 한 이미지에 여러 얼굴이 존재할 경우 각각을 독립적으로 처리합니다.
-크로스‑플랫폼 – 가 제공하는 추상화 레이어를 활용해 Windows, macOS, Linux에서 동일하게 동작하도록 설계합니다.
-Deterministic Output – 동일 입력에 대해 동일한 크롭 결과를 보장하기 위해 부동소수점 재현성을 확보합니다.
-사용 방법
-5.1 설치
-5.2 CLI 예시
-5.3 GUI 실행
-GUI에서는 실시간 미리보기와 설정 조정이 가능합니다.
-배포 및 라이선스
-MIT License – 자유롭게 사용·수정·배포 가능합니다.
-전체 코드베이스의 약 97 %가 Rust로 구현되었습니다.
-참고 자료
-원본 기사: Rust로 GPU 가속 얼굴 크롭 도구를 Vibe‑Coded했습니다
-Rust 공식 문서: 
-프로젝트: 
-GUI 라이브러리: 
-이 문서는 Issue #209를 기반으로 작성되었습니다.*</content>
-    <excerpt>Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드
-이 문서는 Rust와 wgpu, 그리고 관련 크레이트들을 사용해 GPU 가속 얼굴 크롭 도구를 설계하고 구현하는 방법을 단계별로 설명합니다. 아래 내용은 euno.news에서 제공된 정보를 기반으로 작성되었습니다.
-문제 정의
-학생 데이터와 같은 민감한 이미지를 외부 서버에 업로드하는 온라인 서비스는 보...</excerpt>
-    <tags>Rust, GPU, Face Cropping, wgpu, egui</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
-    <slug>projects/sepilot-technology-stack</slug>
-    <content>기술 스택
-SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
-프론트엔드
-React 18 - UI 라이브러리
-TypeScript - 타입 안전성을 위한 정적 타입 언어
-Vite - 빌드 도구 및 개발 서버
-React Router DOM - SPA 라우팅
-TanStack Query (React Query) - 서버 상태 관리
-Next.js 사용 여부
-SEPilot Wiki는 Next.js를 사용하지 않습니다.
-대신 Vite와 React를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.
-Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.
-필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.
-마크다운 렌더링
-react-markdown - 마크다운 파싱 및 렌더링
-remark-gfm - GitHub Flavored Markdown 지원
-rehype-raw - HTML 태그 지원
-rehype-sanitize - XSS 방지를 위한 HTML 살균
-react-syntax-highlighter - 코드 구문 강조
-스타일링
-CSS Variables - 테마 시스템
-Lucide React - 아이콘 라이브러리
-개발 도구
-ESLint - 코드 린팅
-Vitest - 테스트 프레임워크
-Husky - Git hooks
-CI/CD
-GitHub Actions - 자동화 워크플로우
-GitHub Pages - 정적 사이트 호스팅
-Bun - 패키지 매니저 및 런타임
-AI 통합
-OpenAI API 호환 - LLM을 통한 문서 자동 생성
-참고 링크
-SEPilot Wiki GitHub Repository</content>
-    <excerpt>기술 스택
-SEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:
-프론트엔드
-React 18 - UI 라이브러리
-TypeScript - 타입 안전성을 위한 정적 타입 언어
-Vite - 빌드 도구 및 개발 서버
-React Router DOM - SPA 라우팅
-TanStack Query (React Query) - 서버 상태 관리
-Next.js...</excerpt>
-    <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite, frontend, javascript, web, technology-stack</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
   </item>
   <item>
     <title>OpenClaw 완벽 가이드</title>
@@ -1898,7 +1319,7 @@ CrowdStrike: OpenClaw 보안 위험 분석 – https://euno.news/posts/ko/crowds
     <excerpt>OpenClaw 개요 및 핵심 개념
 OpenClaw는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 Clawdbot·Moltbot이라는 이름으로 개발되었으며, 현재는 GitHub(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1...</excerpt>
     <tags>OpenClaw, AI 개인 비서, 멀티채널, 오픈소스</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T10:56:57+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2045,7 +1466,7 @@ Claude Code를 처음 접하는 사용자
 기존 프로젝트에서 특정 버전으로 업그레이드/다운그레이드가 필요한 경우  
 기능 도입 시점(예: MCP 서...</excerpt>
     <tags>Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 통합, 워크플로우</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-20T22:52:00+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2181,7 +1602,7 @@ Opencode가 적합한 상황과 시나리오
 Opencode 정의 및 핵심 목적
 Opencode은 AI 기반 코드 작성·보조 도구로, 개발자가 IDE 혹은 CLI 환경에서 자연어 프롬프트를 통해 코드 자동 완성, 오류 탐지, 리팩토링 등을 수행하도록 설계되었습니다. 핵심 목적은 생산성 향상과 코드 품질 개선이며, 특히 한국어 사용자에게 친화적인 인터페이스를 제공한다는 점이 강조됩...</excerpt>
     <tags>AI 코드 어시스턴트, Opencode, Claude Code, Goose CLI, 비교</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T10:56:57+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2286,8 +1707,8 @@ LLM 설정
     <excerpt>SEPilot Desktop 소개
 SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
     <tags>SEPilot, Desktop, LLM, Project, ai, desktop-app, application, ai-assistant</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2026-02-22T11:00:45+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?</title>
@@ -2336,7 +1757,7 @@ React Router DOM - SPA 라우팅
 TanStack Query (React Query) - 서버 상태 관리
 Next.js...</excerpt>
     <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite, frontend, javascript, web, technology-stack</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-21T11:20:48Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2508,7 +1929,7 @@ API 레퍼런스: https://antigravity.google/docs/api
 Antigravity를 도입·운용 중인 엔지니어  
 제품 로드맵을 검토하는 PM /...</excerpt>
     <tags>Antigravity, 릴리즈노트, 버전히스토리, 마이그레이션</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-11T15:08:18+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2558,8 +1979,8 @@ GUI 라이브러리:
 문제 정의
 학생 데이터와 같은 민감한 이미지를 외부 서버에 업로드하는 온라인 서비스는 보...</excerpt>
     <tags>Rust, GPU, Face Cropping, wgpu, egui</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2026-02-22T10:56:57+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>Moltbook 소개</title>
@@ -2650,40 +2071,8 @@ OpenClaw GitHub Repository, “Integration with Moltbook API”, 2026‑01‑15.
     <excerpt>Executive Summary
 Moltbook은 AI 에이전트 전용 소셜 네트워크를 목표로 하는 플랫폼으로, AI‑to‑AI 커뮤니케이션, 대규모 에이전트 상호작용 데이터 수집, 그리고 AI 기반 서비스 프로토타입 환경을 제공한다. 현재 베타 단계이며, 주요 기능은 게시·댓글·투표 API, 에이전트 인증·연동, 그리고 Submolts(그룹)·Pairing...</excerpt>
     <tags>AI, 소셜네트워크, 에이전트, Moltbook, OpenClaw</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-20T22:52:00+09:00</lastModified>
     <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Dependabot 라벨 `dependencies` 누락 문제 해결하기</title>
-    <slug>dependabot/missing-dependencies-label</slug>
-    <content>Dependabot 라벨  누락 문제
-Dependabot이 PR을 생성하거나 업데이트할 때  라벨을 자동으로 붙이도록 설정할 수 있습니다. 하지만 레포지토리 안에 해당 라벨이 존재하지 않으면 다음과 같은 오류가 발생합니다.
-해결 방법
-라벨 생성
-   - 레포지토리의 Issues → Labels 페이지로 이동합니다.
-   - New label 버튼을 클릭하고, Name에  를 입력합니다.
-   - 색상과 설명은 자유롭게 설정하고 Create label을 눌러 라벨을 생성합니다.
-파일 검토
-   -  (또는  경로) 파일을 열어  섹션을 확인합니다.
-   -  라벨이 명시되어 있는지, 혹은 다른 라벨 이름이 잘못 지정되어 있는지 확인합니다.
-   - 필요에 따라 라벨 이름을 수정하거나, 라벨을 제거하고 Dependabot이 기본 라벨을 사용하도록 할 수 있습니다.
-변경 사항 커밋 및 푸시
-   - 라벨을 추가하거나 을 수정한 후, 커밋하고 원격 레포지토리에 푸시합니다.
-   - Dependabot이 다음 PR을 생성할 때 정상적으로 라벨이 적용되는지 확인합니다.
-문제가 지속될 경우
-   - 라벨이 정상적으로 생성되었음에도 오류가 계속된다면, 레포지토리 권한(특히 라벨 관리 권한)이 올바르게 설정되어 있는지 확인합니다.
-   - GitHub 공식 문서(Dependabot configuration))를 참고하여 설정을 검토합니다.
-주의: 위 내용은 일반적인 해결 절차이며, 레포지토리별 설정에 따라 차이가 있을 수 있습니다. 자세한 내용은 GitHub 공식 문서를 참조해주세요.
-이 문서는 Dependabot 라벨 문제에 대한 기본적인 해결 방법을 제공하며, 최신 정보는 GitHub 공식 문서를 확인하시기 바랍니다.</content>
-    <excerpt>Dependabot 라벨  누락 문제
-Dependabot이 PR을 생성하거나 업데이트할 때  라벨을 자동으로 붙이도록 설정할 수 있습니다. 하지만 레포지토리 안에 해당 라벨이 존재하지 않으면 다음과 같은 오류가 발생합니다.
-해결 방법
-라벨 생성
-   - 레포지토리의 Issues → Labels 페이지로 이동합니다.
-   - New label 버튼을 클릭하고...</excerpt>
-    <tags>dependabot, labels, dependencies</tags>
-    <lastModified>2026-02-23T21:30:53.386Z</lastModified>
-    <author></author>
   </item>
   <item>
     <title>bun과 pnpm, npm의 차이</title>
@@ -2737,8 +2126,8 @@ pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하�
 은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
 이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
     <tags>bun, pnpm, npm, 비교, 가이드, comparison, benchmark, performance</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>bun 이란?</title>
@@ -2799,7 +2188,7 @@ bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저
 번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
 패키지...</excerpt>
     <tags>bun, npm, yarn, 패키지 매니저, 가이드, runtime, javascript-runtime, package-manager</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2833,171 +2222,124 @@ macOS:  로 변경하고,  설치가 기본 제공됩니다.
 Windows:  로 변경하고, PowerShell 스크립트()를 사용해 bun을 설치합니다. 예시:
 Windows에서는 경로 구분자()와 환경 변수 사용법에 유의하세요.
 베스트 프랙티스
-적절한  간격 설정  
-   - 콘텐츠 업데이트 빈도와 사용자 기대 최신성을 고려해 초 단위 값을 결정합니다.  
-CMS/Webhook 과 연동  
-   - 콘텐츠가 변경될 때마다 온‑디맨드 재검증 API 를 호출하도록 Webhook 을 설정하면 “stale” 문제를 최소화할 수 있습니다.  
-모니터링  
-   - Next.js 가 제공하는  로그와 CDN 캐시 히트율을 모니터링해 재생성 빈도와 성능을 조정합니다.  
-테스트 환경 검증  
-   - 로컬 개발 서버()에서는 ISR 동작이 제한될 수 있으므로, 실제 배포 환경(Vercel 등)에서 동작을 확인합니다.  
-위 권장 사항은 일반적인 운영 경험에 기반한 것이며, 프로젝트별 세부 설정은 추가 조사가 필요합니다.
-트러블슈팅 가이드
-  문제   가능 원인   해결 방안  
- ------ ----------- ---------- 
-  페이지가 재생성되지 않음    값이 너무 크거나,  캐시 정책이  로 설정돼 ISR 와 충돌    간격 확인,  옵션 검토  
-  오래된 페이지가 계속 제공됨   CDN 캐시 TTL 이  보다 길게 설정   CDN 캐시 정책을  로 조정 (추가 조사 필요)  
-  Vercel Edge 네트워크 오류   배포 설정 오류 또는 Edge 함수 제한 초과   Vercel 로그 확인, 배포 설정 검토  
-  CI/CD 파이프라인에서 ISR 관련 테스트 실패   빌드 단계에서  가 정상 동작하지 않음   로컬에서  로 결과 확인  
-다른 렌더링 전략과 비교
-  전략   빌드 시점   런타임 비용   SEO   최신성  
- ------ ----------- ------------ ----- -------- 
-  SSR (Server‑Side Rendering)   요청 시   높음   좋음   실시간  
-  SSG (Static Site Generation)   빌드 시   낮음   좋음   정적  
-  ISR (Incremental Static Regeneration)   빌드 + 재생성   중간   좋음   주기적·온‑디맨드  
-선택 가이드라인  
-  - SSR: 사용자마다 맞춤형 데이터가 필요하고, 실시간성이 가장 중요한 경우.  
-  - SSG: 콘텐츠가 거의 변하지 않으며, 빌드 시점에 모두 생성해도 무방한 경우.  
-  - ISR: 정적 페이지의 성능 이점은 유지하면서, 일정 주기 혹은 이벤트 기반으로 최신 콘텐츠를 제공하고자 할 때.  
-기존 프로젝트에 ISR 도입하기
-현황 파악:  로 정적 페이지를 이미 사용 중인지 확인합니다.  
-추가: 페이지 파일에  를 선언합니다.  
-배포 테스트: Vercel 혹은 선택한 호스팅에 배포 후, 실제 요청 시 캐시와 재생성 흐름을 검증합니다.  
-점진적 적용: 트래픽이 많은 핵심 페이지부터 ISR 을 적용하고, 점차 범위를 확대합니다.  
-구체적인 마이그레이션 체크리스트와 단계별 가이드는 추가 조사가 필요합니다.
-FAQ
-Q1. 재생성 중 오류가 발생하면 어떻게 되나요?  
-A. 기존 캐시된 페이지가 그대로 제공되며, 오류 로그가 Next.js 로그에 기록됩니다. 오류가 지속되면  간격을 조정하거나 데이터 소스를 점검해야 합니다. (추가 조사 필요)
-Q2. 동시 사용자 요청 시 재생성은 한 번만 수행되나요?  
-A. Next.js 는 동일 경로에 대해 동시에 여러 재생성 요청이 들어오면 하나만 실행하고, 나머지는 기존 캐시를 반환합니다. (추가 조사 필요)
-Q3. Vercel 외 다른 호스팅에서도 ISR을 사용할 수 있나요?  
-A. ISR 은 Next.js 자체 기능이므로, Edge 캐시를 지원하는 대부분의 호스팅(예: Cloudflare Pages, Netlify)에서도 동작합니다. 다만 CDN 설정에 따라 동작 방식이 달라질 수 있습니다. (추가 조사 필요)
-참고 자료 및 링크
-Next.js 공식 문서 – Incremental Static Regeneration: https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration  
-euno.news – ReactJS(NextJs) 렌더링 패턴 Incremental Static Regeneration (ISR): https://euno.news/posts/ko/reactjsnextjs-rendering-pattern-incremental-static-a406b6  
-Dev.to (ISR 작동 방식 원본): 해당 기사에서 ISR 의 기본 흐름과 장점을 확인할 수 있습니다.  
-※ 본 문서는 현재 확보된 자료를 기반으로 작성되었으며, 일부 세부 설정 및 고급 옵션은 추가 조사가 필요합니다.*</content>
+캐시 키 관리:  파일이 변경될 때마다 캐시가 무효화되도록  를 사용합니다.
+CI 속도 최적화:  대신 bun 전용 설치 스크립트를 사용하면 불필요한 Node.js 설치를 피할 수 있습니다.
+보안: 공식 설치 스크립트는 HTTPS를 통해 전달되며,  옵션으로 오류 시 중단됩니다. 필요 시 SHA256 검증을 추가할 수 있습니다.
+버전 고정: 특정 bun 버전을 사용하려면  환경 변수를 설정하고 설치 스크립트에 전달합니다.
+참고 자료
+Bun 공식 홈페이지 및 설치 가이드: 
+GitHub Actions 공식 문서: 
+actions/cache 액션: 
+결론
+GitHub Actions에서 bun을 활용하면 의존성 설치와 빌드 속도가 크게 개선됩니다. 위 예시를 기반으로 프로젝트에 맞게 워크플로우를 커스터마이징하고, 캐시와 버전 관리를 적절히 적용하면 안정적인 CI/CD 파이프라인을 구축할 수 있습니다.</content>
     <excerpt>개요
 GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매니저)을 사용하면 빠른 의존성 설치와 빌드가 가능합니다. 이 문서에서는 bun을 설치하고, 캐시를 활용하며, 일반적인 스크립트를 실행하는 전체 흐름을 예시와 함께 설명합니다.
 사전 요구 사항
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
 워크플로우...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative, automation, devops, workflow, javascript-runtime</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2025-12-13T12:38:17+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
-    <title>프론트엔드 API 서비스 레이어 설명</title>
-    <slug>frontend/api-service-layer</slug>
-    <content>문서 개요
-목적  
-프론트엔드 애플리케이션이 백엔드와 통신할 때 사용하는 공통 API 클라이언트 로직()을 이해하고, 유지·보수·확장에 필요한 정보를 제공한다.  
-대상 독자  
-프론트엔드 개발자 (신규 입사자 포함)  
-QA 엔지니어 및 테스트 자동화 담당자  
-아키텍처 리뷰어 및 문서 담당자  
-역할  
-는 HTTP 요청/응답 처리, 에러 핸들링, 토큰 자동 갱신 등 백엔드와의 통신 전반을 캡슐화한다. 이를 통해 UI 레이어는 비즈니스 로직에 집중하고, 네트워크 관련 구현은 한 곳에 집중시킬 수 있다.  
-커버리지 분석 결과 요약  
-  항목   내용  
+    <title>클라우드 터미널 구축: 지속적인 AI 에이전트 세션 유지하기</title>
+    <slug>ai/cloud-terminal-persistent-ai-agent-sessions</slug>
+    <content>서론
+이 문서는 클라우드 기반 터미널을 구축하여 AI 에이전트의 세션을 지속적으로 유지하는 방법을 다룹니다.
+로컬 터미널의 한계(노트북 종료, 네트워크 단절, 기기 변경 시 세션 손실)를 극복하고, 서버 측에서 영구적으로 실행되는 터미널 환경을 설계·구현하는 실전 가이드를 제공합니다.
+대상 독자는 장기 실행 AI 에이전트를 운영하는 개발자, DevOps 엔지니어, 그리고 원격 개발 환경을 개선하려는 기술 리더입니다.
+로컬 터미널의 한계
+2.1 기존 방식의 문제점
+  상황   결과  
  ------ ------ 
-  모듈     
-  소스 경로     
-  중요도   high (백엔드와의 모든 통신을 담당)  
-  문서 필요 사유   요청/응답 흐름, 에러 처리, 토큰 재발급 로직 등 핵심 로직이 포함돼 있어 신규 개발자와 운영팀 모두에게 필수적인 가이드가 필요함  
-서비스 레이어 아키텍처 개요
-2.1 전체 프론트엔드 아키텍처에서 위치
-UI 컴포넌트 → 서비스 레이어() → HTTP 클라이언트(Axios 혹은 fetch) → 백엔드 API  
-서비스 레이어는 UI와 네트워크 사이의 추상화 계층으로, 데이터 페칭·전송 로직을 중앙집중화한다. (Medium 기사 “프론트엔드 아키텍처: API 요청 관리” 참고)  
-2.2  의 책임 범위
-HTTP 메서드별 헬퍼 함수 제공 (GET, POST, PUT, DELETE 등)  
-공통 헤더(Authorization, Content-Type 등) 자동 삽입  
-응답 정규화 및 성공/실패 판별  
-전역 에러 로깅·모니터링 연동  
-Access/Refresh 토큰 자동 갱신 로직 구현  
-2.3 외부 의존성
-  의존성   용도   참고  
- -------- ------ ------ 
-  Axios (또는 fetch)   HTTP 요청/응답 처리   일반적인 프론트엔드 API 클라이언트 구현에 사용됨 (Medium)  
-  토큰 저장소 (예: , , 쿠키)   Access/Refresh 토큰 보관   보안 고려사항 섹션에서 상세히 다룸  
-  인터셉터   요청 전/후 공통 로직(헤더 삽입, 토큰 재발급)   Axios 인터셉터 활용이 일반적임  
-  타입 정의 파일 ()   API 응답 타입 및 파라미터 정의   TypeScript 기반 프로젝트에서 타입 안전성 확보  
-파일 및 디렉터리 구조
-는 public API(예: , , , )를 export하고, 내부적으로 인터셉터와 타입을 활용한다.  
-(존재한다면)에서는 토큰 자동 갱신 로직과 에러 전역 처리 로직을 구현한다.  
-는 각 엔드포인트가 반환하는 데이터 구조를 정의해 TypeScript 컴파일 타임에 검증한다.  
-추가 조사 필요: 현재 레포지토리에서 실제 · 파일 존재 여부와 구체적인 export 형태를 확인해야 함.
-핵심 기능 상세
-4.1 요청(Request) 처리
-헬퍼 함수: ,  등 타입 파라미터 를 통해 응답 타입을 명시한다.  
-파라미터 직렬화: 객체를 쿼리스트링으로 변환해 GET 요청에 포함한다. (Axios 기본 동작)  
-공통 헤더 삽입:  및  등을 자동으로 추가한다.  
-4.2 응답(Response) 처리
-정규화: 서버가 반환하는  형태를 일관된 구조로 변환한다.  
-성공/실패 판별: HTTP 2xx는 성공, 그 외는 실패로 간주하고, 에 따라 분기한다.  
-페이징·메타데이터 추출:  혹은  필드를 별도 객체로 분리해 UI 레이어에 전달한다.  
-4.3 에러 핸들링
-네트워크 오류·타임아웃: Axios 인터셉터에서 를 검사해 재시도 정책을 적용한다.  
-HTTP 상태 코드 별 처리: 401(Unauthorized) → 토큰 재발급 흐름; 403(Forbidden) → 접근 제한 메시지; 5xx → 전역 알림 및 로깅.  
-사용자 친화적 메시지 매핑: 서버 오류 코드를 프론트엔드 메시지()와 매핑한다.  
-전역 로깅·모니터링 연동: Sentry·Datadog 등 외부 모니터링 툴에 에러 정보를 전송한다.  
-4.4 토큰 자동 갱신
-흐름:  
-  1. 요청 인터셉터에서  헤더에 현재 Access Token 삽입.  
-  2. 401 응답이 오면 응답 인터셉터가 Refresh Token을 사용해 새로운 Access Token을 발급받는다.  
-  3. 재발급 성공 시 원래 요청을 재시도하고, 실패 시 로그아웃 처리한다.  
-무한 루프 방지: 재시도 횟수를 1회로 제한하고, 재시도 중에도 401이 발생하면 즉시 로그아웃한다.  
-추가 조사 필요: 현재 구현에서 Refresh Token 저장 위치와 재발급 API 엔드포인트가 어떻게 정의돼 있는지 확인이 필요함.
-사용 예시
-기본 GET 호출  
-    
-POST with JSON Body  
-    
-파일 업로드 (멀티파트)  
-    
-인증이 필요한 엔드포인트  
-    
-실제 코드 예시는 프로젝트 내 를 참고하고, 필요 시 에 정의된 로직을 검토한다.
-확장 및 커스터마이징
-인터셉터 추가/제거:  형태로 새로운 로직을 삽입한다.  
-커스텀 헤더 삽입: 호출 시 에 추가하면 인터셉터가 병합한다.  
-테스트 환경(모킹) 설정: Jest·MSW(Mock Service Worker)를 사용해 의 Axios 인스턴스를 모킹한다.  
-테스트 전략
-  테스트 종류   대상   주요 포인트  
- ------------ ------ ------------- 
-  단위 테스트   헬퍼 함수(,  등)   파라미터 직렬화, 헤더 삽입 검증 (Jest + axios-mock-adapter)  
-  통합 테스트   실제 API 엔드포인트와 연동   성공/실패 시 응답 구조, 토큰 재발급 흐름 검증  
-  CI/CD 자동화   Pull Request 단계    실행, 커버리지 80% 이상 목표 (nodebestpractices 참고)  
-보안 고려사항
-토큰 저장소 선택:  
-  -  쿠키 → XSS 방어에 유리하지만 CSRF 방어 필요.  
-  - / → XSS 위험 존재, 토큰 암호화 필요.  
-CSRF 방어:  쿠키 설정 또는 CSRF 토큰 헤더 전송.  
-XSS 예방: 모든 입력값을 이스케이프하고, Content Security Policy(CSP) 적용.  
-민감 데이터 마스킹: 로그에 토큰·비밀번호 등은  로 마스킹하고, 로깅 레벨을 조절한다.  
-성능 최적화
-요청 중복 방지(디듀핑): 동일 URL·파라미터에 대한 병렬 요청을 하나로 합친 뒤 결과를 공유한다.  
-캐시 전략:  
-  - 메모리 캐시(React Query, SWR) → 최신 데이터와 재요청 최소화.  
-  - IndexedDB 혹은 Service Worker 캐시 → 오프라인 지원.  
-타임아웃·재시도 정책: Axios  옵션과 지수 백오프 재시도 로직을 적용한다.  
-베스트 프랙티스
-API 명명 규칙: 리소스는 명사 형태, 동사는 HTTP 메서드로 표현한다 (velog “22 Best Practices” 참고).  
-에러 코드·메시지 표준화: 서버와 클라이언트가 공유하는 에러 코드 사전 정의.  
-문서·타입 정의 유지: 에 인터페이스를 선언하고, 변경 시 문서와 테스트를 동시에 업데이트한다.  
-마이거레이션 가이드
-기존 fetch 기반 구현 파악 – 현재  호출이 있는 파일을 식별한다.  
-API 레이어 설치 – 와 의존 파일을 프로젝트에 추가한다.  
-호출 교체 –  →  혹은  로 교체한다.  
-헤더·토큰 로직 검증 – 새 레이어가 자동으로 Authorization 헤더를 삽입하는지 확인한다.  
-테스트 실행 – 기존 단위 테스트와 새 레이어 테스트를 모두 통과하는지 검증한다.  
-FAQ
-Q: 토큰 갱신이 실패하면 어떻게 해야 하나요?  
-  A: 인터셉터에서 401 응답이 두 번 연속 발생하면 을 호출해 세션을 종료하고 로그인 페이지로 리다이렉트한다.  
-Q: CORS 오류가 발생했을 때 점검 포인트는?  
-  A: 서버의  헤더와 프론트엔드 요청에 포함된 이 일치하는지, 프리플라이트 요청이 정상적으로 처리되는지 확인한다.  
-Q: 테스트 환경에서 실제 API 호출을 차단하려면?  
-  A: Jest 설정 파일에  모듈을  로 모킹하거나, MSW를 사용해 네트워크 요청을 가로채고 가짜 응답을 반환한다.  
+  노트북을 닫음   SSH 세션 종료, 실행 중인 프로세스 강제 종료  
+  네트워크 단절   터미널 연결 끊김, 진행 상황 소실  
+  기기 변경   이전 세션 접근 불가, 환경 재설정 필요  
+  장시간 부재   유휴 타임아웃으로 세션 종료  
+2.2 tmux/screen의 한계
+나 은 세션 유지를 위한 전통적인 도구이지만, 근본적인 한계가 존재합니다.
+특정 서버에 종속: tmux 세션은 해당 서버에서만 접근 가능
+웹 접근 불가: 브라우저에서 직접 접속할 수 없음
+다중 기기 동기화 어려움: 기기 간 실시간 세션 공유가 제한적
+AI 에이전트 통합 부재: 프로그래밍 방식의 세션 관리 API 미제공
+클라우드 터미널 아키텍처
+3.1 핵심 설계 원칙
+3.2 핵심 구성 요소
+  구성 요소   역할   기술 선택지  
+ ----------- ------ ------------ 
+  PTY (Pseudo Terminal)   서버 측 가상 터미널   ,   
+  세션 매니저   세션 생명주기 관리   Node.js, Go, Rust  
+  WebSocket 서버   실시간 양방향 통신   ,   
+  인증/인가   사용자 식별 및 권한 관리   JWT, OAuth 2.0  
+  암호화 저장소   민감 데이터 보호   AES-256, Vault  
+구현 가이드
+4.1 서버 측 PTY 레이어
+PTY(Pseudo Terminal)는 클라우드 터미널의 핵심입니다. 서버에서 실제 쉘 프로세스를 생성하고, 클라이언트와의 입출력을 중계합니다.
+4.2 WebSocket 통신
+클라이언트와 서버 간의 실시간 통신은 보안 WebSocket(wss://)을 통해 이루어집니다.
+4.3 세션 영속성
+클라우드 터미널의 핵심 가치는 세션이 클라이언트 연결과 독립적으로 유지되는 것입니다.
+AI 에이전트 세션 유지
+5.1 AI 에이전트 전용 설계 고려사항
+AI 에이전트가 클라우드 터미널을 활용할 때는 일반 사용자와 다른 요구사항이 있습니다.
+  요구사항   설명   구현 방법  
+ ---------- ------ ---------- 
+  장기 실행   수 시간수 일간 지속 실행   세션 타임아웃 비활성화 또는 확장  
+  프로그래밍 접근   API를 통한 명령 실행   REST/gRPC 엔드포인트 제공  
+  출력 수집   명령 실행 결과 구조화   JSON 응답 래핑  
+  병렬 세션   동시 다중 작업 수행   세션 풀 관리  
+  상태 모니터링   에이전트 상태 실시간 확인   헬스체크 엔드포인트  
+5.2 에이전트 API 인터페이스
+5.3 에이전트 세션 생명주기
+보안 설계
+6.1 보안 체크리스트
+통신 암호화: 모든 WebSocket 연결에 TLS(wss://) 적용
+인증: JWT 또는 OAuth 2.0 기반 토큰 인증
+세션 격리: 사용자별 독립된 PTY 프로세스 및 네임스페이스
+민감 데이터 보호: 환경변수, API 키 등은 암호화 저장
+비활동 잠금: 일정 시간 비활동 시 자동 잠금
+감사 로그: 모든 명령 실행 이력 기록
+6.2 컨테이너 기반 격리
+6.3 네트워크 보안
+운영 고려사항
+7.1 리소스 관리
+  항목   권장값   비고  
+ ------ -------- ------ 
+  세션당 메모리   256MB512MB   작업 유형에 따라 조정  
+  스크롤백 버퍼   10,000줄   메모리 사용량 균형  
+  세션 타임아웃   7일 (AI), 24시간 (일반)   용도별 차등 설정  
+  최대 동시 세션   서버 리소스에 비례   CPU 코어  4 권장  
+7.2 모니터링
+클라우드 터미널 운영 시 다음 지표를 모니터링해야 합니다.
+활성 세션 수: 현재 실행 중인 PTY 프로세스 수
+메모리 사용량: 세션별 및 전체 메모리 소비
+WebSocket 연결 상태: 활성 연결 수, 재연결 빈도
+세션 생존 시간: 평균 세션 유지 기간
+명령 실행 지연**: PTY 입출력 레이턴시
+7.3 장애 복구
+기존 도구 및 대안 비교
+  도구   영구 세션   웹 접근   AI 통합   격리   비용  
+ ------ :---------: :-------: :-------: :----: ------ 
+  tmux/screen   O   X   X   X   무료  
+  Eternal Terminal (et)   O   X   X   X   무료  
+  Mosh   △   X   X   X   무료  
+  VS Code Remote   O   O   △   △   무료  
+  GitHub Codespaces   O   O   O   O   유료  
+  자체 구축 클라우드 터미널   O   O   O   O   인프라 비용  
+실전 구축 체크리스트
+[ ] PTY 레이어 구현 및 테스트
+[ ] WebSocket 서버 구축 (TLS 적용)
+[ ] 인증/인가 시스템 연동
+[ ] 세션 영속성 구현 (Redis/파일시스템)
+[ ] 컨테이너 기반 세션 격리
+[ ] AI 에이전트용 API 엔드포인트 구현
+[ ] 모니터링 및 알림 설정
+[ ] 장애 복구 시나리오 테스트
+[ ] 부하 테스트 및 리소스 최적화
+[ ] 보안 감사 수행
+결론
+클라우드 터미널은 로컬 터미널의 한계를 극복하고, 특히 AI 에이전트의 장기 실행 세션을 안정적으로 유지하는 데 핵심적인 인프라입니다. PTY 레이어, WebSocket 통신, 세션 영속성이라는 세 가지 핵심 축을 중심으로 구축하면, 기기 독립적이고 안정적인 터미널 환경을 확보할 수 있습니다.
+보안(TLS, 세션 격리, 암호화)과 운영(모니터링, 장애 복구, 리소스 관리)을 함께 설계해야 프로덕션 수준의 클라우드 터미널을 운영할 수 있습니다.
 참고 자료
 원본 기사: 클라우드 터미널 구축 경험
 node-pty - Node.js PTY 라이브러리
@@ -3009,186 +2351,42 @@ Eternal Terminal</content>
 로컬 터미널의 한계(노트북 종료, 네트워크 단절, 기기 변경 시 세션 손실)를 극복하고, 서버 측에서 영구적으로 실행되는 터미널 환경을 설계·구현하는 실전 가이드를 제공합니다.
 대상 독자는 장기 실행 AI 에이전트를 운영하는 개발자, DevOps 엔...</excerpt>
     <tags>클라우드 터미널, SSH, AI 에이전트, PTY, WebSocket, tmux, 세션 관리</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T10:18:12+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
-    <title>Next.js Incremental Static Regeneration (ISR) 가이드</title>
-    <slug>frontend/next-js-incremental-static-regeneration-isr</slug>
-    <content>개요
-ISR이란?  
-  Incremental Static Regeneration(점진적 정적 재생성)은 Next.js가 이미 생성된 정적 페이지를 일정 시간 간격 혹은 온‑디맨드 방식으로 백그라운드에서 재생성하여 최신 데이터를 반영하도록 하는 기능입니다. 최초 요청 시는 캐시된 정적 HTML을 즉시 제공하고, 이후 필요에 따라 페이지를 업데이트합니다【euno.news】.  
-SSR·SSG와의 차이  
-  - SSR(Server‑Side Rendering): 매 요청마다 서버가 데이터를 가져와 HTML을 새로 생성 → 응답 시간이 상대적으로 느림, 서버 부하 증가.  
-  - SSG(Static Site Generation): 빌드 시점에 모든 페이지를 정적으로 생성 → 빠른 응답하지만 콘텐츠가 변경될 때 전체 재배포가 필요.  
-  - ISR: SSG와 유사하게 정적 HTML을 제공하지만, 지정된  간격이 지나면 백그라운드에서 페이지를 재생성해 최신 콘텐츠를 반영합니다. 빌드 시간과 서버 부하를 크게 줄이면서도 최신성을 유지합니다【dev.to】.  
-문서 목표 &amp; 독자  
-  - Next.js 13 이상을 사용하고자 하는 프론트엔드 개발자  
-  - ISR을 처음 접하거나 기존 프로젝트에 적용하려는 엔지니어  
-  - 성능·SEO 최적화를 목표로 하는 팀 리더  
-사전 준비
-  항목   권장 사양  
- ------ ----------- 
-  Next.js 버전   13 이상 (App Router 권장)  
-  Node.js   최신 LTS 버전 (예: 18.x)  
-  배포 환경   Vercel, Netlify, 혹은 Edge 지원 서버 (CDN 캐시 활용)  
-  프로젝트 초기화    로 시작 후  디렉터리 구조 확인  
-ISR 핵심 개념
-정적 페이지와 캐시: 최초 요청 시 Next.js는 빌드 시점에 생성된 정적 HTML을 CDN 캐시(또는 서버 캐시)에 저장하고, 이후 요청은 이 캐시된 파일을 바로 반환합니다【euno.news】.  
-값: 초 단위 정수값으로, 해당 시간이 경과하면 다음 요청 시 페이지 재생성을 트리거합니다. 예시: 【euno.news】.  
-백그라운드 재생성 흐름  
-  1. 사용자 요청 → 캐시된 정적 페이지 제공  
-  2.  기간이 지나면 요청을 받는 순간 Next.js가 백그라운드에서 새 페이지를 생성  
-  3. 새 페이지가 성공하면 캐시를 교체하고 이후 요청에 최신 페이지 제공【euno.news】.  
-온‑디맨드 재검증(On‑Demand Revalidation): 웹훅 등 외부 트리거를 통해 특정 페이지·태그만 즉시 재생성하도록 할 수 있습니다. 이는 · API와 결합해 구현됩니다【dev.to】.  
-ISR 작동 원리
-최초 요청 → 정적 HTML이 CDN 캐시에서 즉시 반환.  
-기간 경과 → 다음 요청 시 기존 캐시를 그대로 반환하면서 백그라운드에서 페이지를 재생성.  
-새 페이지 생성 완료 → 캐시가 교체되고, 이후 모든 방문자는 최신 콘텐츠를 받음.  
-CDN vs Next.js 서버 캐시  
-   - CDN 캐시: 전 세계 엣지 노드에 정적 파일을 저장해 지연 시간 최소화.  
-   - Next.js 서버 캐시: ISR 재생성 로직이 실행되는 서버 측 캐시이며, 재생성 후 CDN에 새로운 파일을 푸시합니다.  
-구현 방법
-5.1 페이지 레벨에서 ISR 적용 (Pages Router)
-페이지 파일() 상단에  선언.  
-안에서  로 데이터를 가져와 반환.  
-예시 (inline):
-(위 코드는 실제 파일에 넣어야 하며,  선언만으로 ISR이 활성화됩니다.)【euno.news】
-5.2 App Router에서 ISR 적용
-Server Component 내부 에  옵션을 전달하거나 파일 최상단에  선언.  
-예시 (inline):
-※  옵션은 fetch 호출마다 개별 재생성 주기를 지정할 수 있습니다【euno.news】.
-5.3 데이터 소스와 연동
-외부 API:  혹은  등으로 데이터를 가져오고,  옵션을 통해 캐시 제어.  
-CMS (예: Contentful, Sanity): 웹훅을 이용해 온‑디맨드 재검증을 트리거하면 전체 사이트 재배포 없이 최신 콘텐츠가 반영됩니다【dev.to】.  
-데이터베이스: 서버 컴포넌트에서 직접 DB 연결 후  옵션 없이도  로 주기적 재생성을 관리할 수 있습니다.  
-온‑디맨드 재검증 구현
-API: 와 는 Next.js 13+에서 제공하는 서버‑사이드 함수이며, 특정 경로나 태그에 대한 캐시를 즉시 무효화합니다【nextjs.org】.  
-웹훅 연동 흐름  
-  1. CMS에서 콘텐츠가 업데이트될 때 웹훅 호출 → Next.js API 라우트()에 POST 요청.  
-  2. API 라우트에서  혹은  실행.  
-  3. 해당 페이지가 다음 요청 시 백그라운드에서 재생성되고 최신 HTML이 제공됩니다.  
-예시 (inline):
-(위 코드는  (Next.js 12) 혹은  (Next.js 13) 중 사용 가능한 함수를 선택해 적용합니다.)【dev.to】
-성능·SEO 최적화 효과
-응답 시간 단축: CDN 캐시된 정적 HTML을 즉시 제공하므로 페이지 로드가 매우 빠릅니다【euno.news】.  
-검색 엔진 인덱싱: 정적 HTML은 크롤러가 빠르게 파싱할 수 있어 SEO 점수가 향상됩니다【euno.news】.  
-빌드 시간·비용 절감: 전체 사이트를 매번 재빌드하지 않고, 변경된 페이지만 재생성하므로 대규모 프로젝트에서 빌드 비용이 크게 감소합니다【promleeblog】.  
-베스트 프랙티스
-  항목   권장 가이드라인  
- ------ ------------------- 
-   간격   콘텐츠 업데이트 빈도에 따라 설정. 예: 뉴스 사이트는 3060초, 블로그는 몇 시간하루 단위.  
-  캐시 무효화 전략   실시간 업데이트가 중요한 경우 온‑디맨드 재검증 사용, 그렇지 않으면 시간 기반 만으로 충분.  
-  버전 관리   API 응답에  혹은  헤더를 포함해 데이터 일관성을 검증하고, 재생성 실패 시 기존 캐시 유지.  
-  에러 핸들링    실패 시 fallback UI 제공 및 로그 남기기. 재생성 오류는 Vercel 로그(/)에서 확인 가능.  
-트러블슈팅 &amp; 흔히 발생하는 문제
-재생성 실패: 서버 로그에  혹은  메시지가 출력됩니다. API 엔드포인트 접근 권한, 네트워크 오류 등을 점검합니다.  
-캐시가 업데이트되지 않음:  값이 너무 크게 설정됐거나, CDN이 오래된 파일을 보관하고 있을 수 있습니다. CDN 설정(Edge TTL)과  헤더를 확인하세요.  
-Vercel 제한: Vercel 무료 플랜에서는 ISR 호출 횟수에 제한이 있을 수 있습니다. 플랜 업그레이드 혹은 온‑디맨드 재검증 사용량을 모니터링합니다【euno.news】.  
-배포·모니터링
-배포 플랫폼  
-  - Vercel:  →  자동 실행, ISR 기본 지원.  
-  - Netlify:  플러그인 사용 시 ISR 지원.  
-  - 자체 서버: Node.js 환경에서  실행 후 CDN 앞에 배포.  
-ISR 상태 확인  
-  -  로그에  관련 메시지가 표시됩니다.  
-  - Vercel Analytics 혹은 Prometheus와 같은 모니터링 도구로  호출 횟수와 재생성 성공률을 추적합니다【nextjs.org】.  
-모니터링 예시  
-  - Prometheus: ,  메트릭 수집.  
-  - Vercel Analytics: 페이지 로드 시간, 캐시 히트 비율 확인.  
-결론
-비즈니스 가치: ISR은 정적 페이지의 빠른 응답성과 최신 콘텐츠 제공을 동시에 만족시켜 사용자 만족도와 SEO를 동시에 끌어올립니다. 빌드 비용 절감과 배포 주기 단축은 운영 효율성을 크게 향상시킵니다.  
-향후 전망: Next.js는 ISR 기능을 지속적으로 개선하고 있으며, Edge Runtime과 결합된 더 정교한 캐시 제어가 기대됩니다. 최신 Next.js 릴리즈 노트를 주기적으로 확인하고, 커뮤니티(Next.js Discord, GitHub Discussions)에서 베스트 프랙티스를 공유받는 것이 좋습니다.  
-추가 학습 자료  
-  - 공식 문서: “Incremental Static Regeneration” 가이드 (nextjs.org)  
-  - Dev.to 포스트: “A guide to Incremental Static Regeneration (ISR) in Next.js using CMS data”【dev.to】  
-  - Promleeblog ISR 완벽 가이드【promleeblog】</content>
-    <excerpt>개요
-ISR이란?  
-  Incremental Static Regeneration(점진적 정적 재생성)은 Next.js가 이미 생성된 정적 페이지를 일정 시간 간격 혹은 온‑디맨드 방식으로 백그라운드에서 재생성하여 최신 데이터를 반영하도록 하는 기능입니다. 최초 요청 시는 캐시된 정적 HTML을 즉시 제공하고, 이후 필요에 따라 페이지를 업데이트합니다【eu...</excerpt>
-    <tags>Next.js, ISR, React, 웹 퍼포먼스, 정적 사이트</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>OpenTelemetry 개요 및 실전 가이드</title>
-    <slug>244</slug>
-    <content>개요
-관측성(Observability)은 과거 로그용 에이전트, 메트릭용 라이브러리, 분산 추적 전용 SDK 등 서로 다른 도구가 산재해 있어 “조각난 혼란”을 초래했습니다. 벤더를 교체하려면 기존 계측 코드를 모두 다시 작성해야 하는 번거로움이 있었습니다. 이러한 문제를 해결하기 위해 등장한 것이 OpenTelemetry (OTel) 입니다. OTel은 CNCF에서 Kubernetes 바로 뒤로 두 번째로 활발한 프로젝트가 되었으며, 애플리케이션이 텔레메트리 데이터를 생성·전송하는 방식을 표준화해 데이터는 사용자의 것이고, 벤더가 아니라는 원칙을 보장합니다[euno.news].
-OpenTelemetry란?
-정의: 오픈‑소스 관측 프레임워크로, 트레이스, 메트릭, 로그와 같은 텔레메트리 데이터를 생성, 수집, 내보내기 할 수 있습니다.  
-역할: 스토리지 백엔드나 시각화 도구가 아니라, 텔레메트리 데이터를 위한 범용 언어 및 전달 시스템 역할을 합니다.  
-비유: 배관에 비유하면, 애플리케이션·인프라에서 데이터를 수집 → 처리 → 선택한 백엔드(예: SigNoz, Prometheus, Jaeger 등)로 전달하는 파이프라인이라고 할 수 있습니다[euno.news].
-역사와 프로젝트 통합
-2019년에 OpenCensus(구글)와 OpenTracing(CNCF) 두 주요 프로젝트가 합병하면서 OpenTelemetry가 탄생했습니다.  
-목표는 계측을 위한 단일 표준을 제공해 산업 전반을 통합하는 것이었습니다[euno.news].
-현재 CNCF 내에서 Kubernetes 뒤로 두 번째로 활발히 활동하는 프로젝트이며, 다양한 언어·플랫폼 지원을 지속적으로 확대하고 있습니다.
-관측성의 세 가지 핵심 기둥
-  Pillar   What It Does   Example  
- -------- -------------- --------- 
-  Traces   분산 시스템에서 요청이 이동하는 과정을 추적합니다. 트레이스는 스팬(예: DB 쿼리, HTTP 요청)으로 구성됩니다.   특정 HTTP 요청이 여러 마이크로서비스를 거쳐 처리되는 흐름을 시각화  
-  Metrics   시간에 따라 측정되는 수치 데이터 포인트(예: CPU 사용량, 메모리 소비, 요청 속도)   시스템 부하가 급증한 시점을 파악  
-  Logs   타임스탬프가 포함된 텍스트 기록으로, 오류 메시지나 상태 업데이트를 포함합니다.   에러 발생 원인 분석  
-OTel을 이용하면 세 가지 데이터를 동일한 컨텍스트 태그로 연결할 수 있어, 트레이스를 확인하면 같은 시점에 생성된 로그와 메트릭을 즉시 조회할 수 있습니다[euno.news].
-아키텍처 개요
-API: 계측 인터페이스. 구현이 없을 경우 no‑op 동작(코드는 실행되지만 데이터는 전송되지 않음)으로 동작합니다.  
-SDK: 실제 구현체. 자동·수동 계측 옵션을 제공하며, 언어별로 제공됩니다.  
-Collector: 데이터 수집·처리·버퍼링 역할을 수행하며, 다양한 Exporter와 연결됩니다.  
-Exporter: Jaeger, Prometheus, SigNoz 등 관측 백엔드로 데이터를 전송합니다.
-언어 및 플랫폼 지원
-  언어   SDK 특징   설치 방법 (예시)  
- ------ ---------- ------------------- 
-  Java   자동 인스트루멘테이션 지원, OpenTelemetry Java Agent 제공   Maven/Gradle 의존성 추가  
-  Go   경량 SDK, 컨텍스트 전파가 기본     
-  Python   동적 언어 특성에 맞춘 자동 계측 플러그인     
-  JavaScript/Node.js   Express, Koa 등 웹 프레임워크와 손쉬운 통합     
-(각 언어별 상세 설치 방법은 공식 문서(OpenTelemetry 공식 사이트)를 참고)
-계측 방법
-수동 계측: 개발자가 직접 API를 호출해 스팬·메트릭·로그를 기록합니다.  
-자동 계측(자동 인스트루멘테이션): 언어별 에이전트 또는 플러그인을 사용해 프레임워크(HTTP 서버, DB, 메시징 등)와 자동으로 연동합니다.  
-주요 프레임워크와의 통합 포인트는 HTTP 서버, 데이터베이스 드라이버, 메시징 시스템(Kafka, RabbitMQ) 등이며, 자동 계측을 통해 코드 변경 없이 관측 데이터를 수집할 수 있습니다[euno.news].
-벤더 중립성 및 플러그‑앤‑플레이
-Exporter 교체 시 기존 계측 코드 수정이 거의 필요 없습니다.  
-멀티벤더 환경에서는 Collector를 중앙에 두고 여러 Exporter를 동시에 구성해 다양한 백엔드에 데이터를 전송할 수 있습니다.  
-이는 “데이터는 여러분의 것이고, 벤더가 아니라”는 OTel의 핵심 원칙을 실현합니다[euno.news].
-배포 옵션 및 운영 모델
-Agent 형태: 애플리케이션 프로세스와 동일한 호스트에 배포, 최소 지연으로 데이터 전송.  
-Collector 독립 실행: 별도 컨테이너/서비스로 배포해 배치, 버퍼링, 변환 기능을 중앙 집중화.  
-클라우드: Managed Collector(예: AWS Distro for OpenTelemetry) 사용 권장.  
-온프레미스: 자체 호스팅 Collector와 Exporter 조합으로 운영.
-기존 관측 솔루션과 비교
-  구분   전통 도구   OpenTelemetry  
- ------ ---------- --------------- 
-  로그   파일 기반, 벤더 전용 포맷   표준화된 로그 API, 다중 백엔드 지원  
-  메트릭   Prometheus, Graphite 등 별도 설치   SDK를 통한 메트릭 자동 수집, Exporter로 전송  
-  트레이스   Jaeger, Zipkin 전용 SDK   단일 API/SDK로 트레이스·메트릭·로그 동시 수집  
-  벤더 종속성   높은 종속성   벤더 중립, 플러그‑앤‑플레이  
-OTel 도입 시 통합 관리, 벤더 교체 비용 절감, 관측 데이터 상관관계 강화 등의 효과를 기대할 수 있습니다.
-시작하기 가이드
-프로젝트에 OTel SDK 추가  
-   - 예: Java →   
-TracerProvider 초기화  
-   -  (언어별 문법에 맞게)  
-스팬 생성  
-   -   
-   -   
-메트릭 기록  
-   -   
-   -   
-   -   
-Collector/Exporter 설정  
-   - 에 Exporter(Jaeger, Prometheus 등) 추가 후 Collector 실행.  
-위 단계는 공식 가이드(OpenTelemetry Documentation)에 자세히 나와 있습니다.
-베스트 프랙티스
-샘플링 전략: 고트래픽 서비스에서는 Probabilistic Sampling 또는 Rate Limiting을 적용해 오버헤드 최소화.  
-컨텍스트 전파:  헤더를 이용해 서비스 간 분산 트레이스 연결을 보장.  
-메타데이터 관리: 공통 태그(예: , )를 일관되게 설정해 검색·대시보드 구축을 용이하게 함.  
-성능 최적화: no‑op API 사용 시 비용이 거의 없으므로, 프로덕션 환경에서는 Exporter 비활성화만으로도 안전하게 테스트 가능.
-생태계와 커뮤니티
-주요 오픈소스 프로젝트: OpenTelemetry Collector, SDKs, Instrumentation Libraries.  
-CNCF 활동: 정기적인 릴리즈, SIG(OpenTelemetry) 회의, 기여 가이드 제공.  
-기여 방법: GitHub 레포지토리(opentelemetry-go 등)에서 이슈·PR 제출.  
-지원 채널: 공식 Slack, CNCF 토론 포럼, GitHub Discussions.  
+    <title>AI 코드 리뷰 에이전트 구축 가이드</title>
+    <slug>ai/code-review-agent-guide</slug>
+    <content>AI 코드 리뷰 에이전트 구축 가이드
+개요
+수동 PR 리뷰는 리뷰어가 피곤할 때 놓치는 부분이 생기고, 동일한 코멘트가 반복되는 등 비효율적인 문제가 있습니다. AI‑powered 솔루션을 활용하면 모든 풀 리퀘스트에 대해 구조화된 코드 리뷰(정확성, 보안, 성능, 테스트)를 CI가 자동으로 수행하도록 할 수 있습니다. 원하는 모델(OpenAI, Anthropic, OpenRouter, 혹은 로컬 Ollama 인스턴스)을 사용해 별도의 구독료 없이도 리뷰를 제공할 수 있습니다.
+AI 코드 리뷰 에이전트 설계
+리뷰 루브릭(프롬프트/워크플로): 모델이 아니라 리뷰 기준을 정의합니다.
+  - 고위험 이슈와 사소한 지적을 구분
+  - 구체적인 수정 방안과 테스트 제안 요구
+  - &quot;내가 살펴본 내용&quot;과 &quot;내가 확신하지 못하는 부분&quot; 명시
+모델 선택: 비용·속도·정확도에 따라 모델 라우팅
+실행 시점: PR 발생 시 자동 트리거
+제어 파라미터: 최대 토큰 수, 검토 기준 등 사용자 정의 가능
+CI 파이프라인 통합 단계
+GitHub Action 워크플로 파일 생성 ()
+   
+   - 는 CI 환경에서 출력 캡처가 용이하도록 합니다.
+   - 는 완전 자동화를 의미합니다.
+리뷰 루브릭 파일 생성 ()
+   
+리뷰 캡처 및 PR 코멘트
+   
+   인라인 주석은 선택 사항이며, 기본적인 가치 제공을 위해서는 위 단계만으로 충분합니다.
+예제 워크플로우와 베스트 프랙티스
+읽기 전용 모드: 를 읽기 전용으로 유지해 에이전트가 저장소를 수정하지 못하도록 합니다.
+이슈 순위 매기기: 모든 이슈에 중요도(High/Medium/Low)를 부여해 실제 중요한 문제에 집중합니다.
+오탐 예산 관리: 리뷰가 너무 잡음이 많으면 무시될 수 있으니, 오탐 비율을 조정합니다.
+모델 라우팅 전략:
+  - 작은 PR → 저비용 모델 (예: Ollama, OpenRouter의 경량 모델)
+  - 대규모 리팩터링 → 고성능 모델 (예: OpenAI GPT‑4o)
+투명성: 에이전트가 검토한 파일 목록, 가정한 내용, 검토하지 않은 항목을 명시하도록 요구합니다.
+실제 사례: Jazz 저장소는 자체 코드 리뷰와 릴리즈 노트에 Jazz를 사용합니다. 워크플로 파일은 GitHub - lvndry/jazz 에서 확인할 수 있습니다.
 참고 자료
 원본 기사: CI에서 나만의 AI 코드 리뷰 에이전트 만들기   EUNO.NEWS (Dev.to 번역)
 이 문서는 Issue 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.</content>
@@ -3196,7 +2394,7 @@ CNCF 활동: 정기적인 릴리즈, SIG(OpenTelemetry) 회의, 기여 가이드
 개요
 수동 PR 리뷰는 리뷰어가 피곤할 때 놓치는 부분이 생기고, 동일한 코멘트가 반복되는 등 비효율적인 문제가 있습니다. AI‑powered 솔루션을 활용하면 모든 풀 리퀘스트에 대해 구조화된 코드 리뷰(정확성, 보안, 성능, 테스트)를 CI가 자동으로 수행하도록 할 수 있습니다. 원하는 모델(OpenAI, Anthr...</excerpt>
     <tags>AI, 코드 리뷰, CI, GitHub Actions, 에이전트</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-23T00:48:14Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -3337,7 +2535,7 @@ Mistral AI (2024). Mistral 7B Model Card. https://huggingface.co/mistralai/Mistr
     <excerpt>서론
 대형 언어 모델(LLM)의 급격한 발전은 AI 연구·산업 전반에 큰 파장을 일으키고 있습니다. 2017년 최초 Transformer 발표 이후, ChatGPT, GPT‑4, Claude, Gemini, LLaMA, Mistral, DeepSeek 등 수많은 모델이 연이어 등장했으며, 2026년 현재까지 171개의 LLM이 연대순으로 정리된 타임라인이...</excerpt>
     <tags>LLM, AI 타임라인, 모델 진화, 인공지능 역사</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-23T18:28:24Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3459,7 +2657,7 @@ docker-compose.ymlDeploymentServiceIngressSecretfile.readread:filegit.clonerepo.
 Model Context Protocol (MCP) 은 Anthropic이 2024년 11월에 공개한 오픈 표준 프로토콜이다.  
 LLM(대형 언어 모델)이 외부 시스템(데이터베이스, 파일, 웹 API 등)과 양방향으로 연결되어, 컨텍스트를 일관되게 전달·관리하고, 보안·신뢰성을 유지하도록 설계되었다....</excerpt>
     <tags>MCP, Model Context Protocol, Anthropic, AI Integration, JSON-RPC, SDK, llm, protocol, open-standard, ai</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T10:20:27+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3651,7 +2849,7 @@ Qwen 공식 블로그 – https://qwenlm.github.io/blog/qwen3.5/
 Qwen 3.5는 Alibaba에서 발표한 최신 대규모 언어 모델(LLM)입니다. Gated DeltaNet + Mixture‑of‑Experts(MoE) 아키텍처를 채택하여, 전체 397B 파라미터 중 17B만 활성화하는 방식으로 높은 성능과 효율성을 동시에 달성합니다.
 주요 목표 – 텍스트·이미지·비디오를 하나의 모델로 처리하면서, 코딩 에이전트·...</excerpt>
     <tags>Qwen, LLM, 멀티모달, MoE, 벤치마크</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-20T21:19:29+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3688,8 +2886,8 @@ Audit Log – 모든 검증 단계와 인간 피드백을 감사 로그에 기�
     <excerpt>Continuous AI – 인간이 AI 오류를 검증하는 방법
 AI 코딩 에이전트를 CI 파이프라인, 스크래퍼, 데이터베이스 스키마 설계 등 다양한 작업에 활용하는 사례가 늘어나고 있습니다. 하지만 실제 현장에서 가장 큰 가치는 AI가 만든 코드를 검증하고, AI가 놓친 오류를 찾아내는 인간의 역할이라는 인사이트가 있습니다. 본 가이드는 해당 인사이트를 바...</excerpt>
     <tags>Continuous AI, Human-in-the-Loop, AI 검증, CI</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2026-02-22T10:19:41+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>glm 5</title>
@@ -3777,28 +2975,23 @@ GLM‑5 개요 및 발표 배경
 주요 특징 요약  
   - 스케일: 파라...</excerpt>
     <tags>GLM-5, 대형 언어 모델, AI 서비스, 벤치마크</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-20T22:52:00+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
     <title>AI Agent 배포 실패 방지와 테스트 전략 가이드</title>
     <slug>ai/240</slug>
     <content>서론
-이 문서는 Node Readiness Controller(NRC)를 처음 접하는 클러스터 운영자와 플랫폼 엔지니어를 대상으로 합니다.  
-NRC는 기존 “Ready” 조건만으로는 충분히 표현되지 않는 복합 인프라 의존성을 선언형으로 관리하도록 설계되었습니다. 이를 통해 스케줄링 정확성과 서비스 안정성을 크게 향상시킬 수 있습니다 Introducing Node Readiness Controller.
-기존 Kubernetes “Ready” 상태 한계
-단일 이진 Ready 조건: 현재 Kubernetes는  라는 하나의 불리언 플래그만을 사용해 노드가 워크로드를 받을 수 있는지를 판단합니다 Introducing Node Readiness Controller.
-복합 인프라 의존성: 현대 클러스터에서는 네트워크 에이전트, 스토리지 드라이버, GPU 펌웨어, 사용자 정의 헬스 체크 등 여러 요소가 모두 정상이어야 실제로 “준비된” 상태가 됩니다.  
-운영상의 문제: Ready 플래그가 라 하더라도 아직 초기화되지 않은 DaemonSet이나 드라이버가 존재하면, 워크로드가 조기에 스케줄링되어 서비스 장애가 발생할 수 있습니다 Introducing Node Readiness Controller.
-Node Readiness Controller 개요
-프로젝트 소개: Kubernetes 커뮤니티가 발표한 새로운 컨트롤 플레인 기능으로, 노드 부팅 과정에서 맞춤형 스케줄링 게이트를 선언형으로 정의합니다 Introducing Node Readiness Controller.
-핵심 목표  
-  1. Custom Readiness – 플랫폼별 “준비됨” 정의를 가능하게 함.  
-  2. 자동 Taint 관리 – 조건 변화에 따라 노드에 자동으로 taint를 적용·제거.  
-  3. Declarative Bootstrapping – 다단계 초기화 흐름을 명확히 관찰 가능하게 함.  
-설계 원칙: Node‑centric, 선언형 API를 통해 운영자가 복잡한 부팅 로직을 코드가 아닌 YAML로 관리하도록 합니다.
-핵심 개념 및 아키텍처
-  개념   설명  
+AI Agent 배포가 성공적으로 이루어지지 않는 경우가 빈번합니다. 76%의 AI Agent 배포가 실패한다는 보고가 최근 발표되었습니다【euno.news】.  
+LangChain이 2026년에 발표한 State of Agent Engineering 보고서(1,300명 이상 응답)에서는 품질이 프로덕션 배포의 가장 큰 장벽이라고 밝혔으며, 32%의 팀이 품질 문제를 주요 차단 요인으로 꼽았습니다【euno.news】. 그러나 52%의 팀만이 자체적인 평가·테스트 시스템을 보유하고 있어, 테스트 격차가 배포 실패의 핵심 원인으로 지목되고 있습니다【euno.news】.
+이 문서는  
+ 배포 실패 원인  
+ 테스트 격차 해소를 위한 결정론·비결정론적 테스트 기법  
+ 실용적인 도구·프레임워크 활용법  
+ 체크리스트와 실제 사례  
+를 제공하여, AI Agent 개발·운영 팀이 품질을 체계적으로 검증하고 성공적인 배포를 달성하도록 돕는 것을 목표로 합니다.
+배포 실패 주요 원인
+  원인   설명  
  ------ ------ 
   품질(테스트·평가) 부족   보고서에 따르면 품질이 가장 큰 장벽이며, 32%의 팀이 이를 주요 차단 요인으로 인식【euno.news】  
   평가·테스트 시스템 부재   전체 팀 중 52%만이 평가 시스템을 보유, 나머지는 테스트 격차에 노출【euno.news】  
@@ -3868,7 +3061,7 @@ GitHub Actions, GitLab CI 등과 연동하는 예시는 LangChain 공식 문서(
 AI Agent 배포가 성공적으로 이루어지지 않는 경우가 빈번합니다. 76%의 AI Agent 배포가 실패한다는 보고가 최근 발표되었습니다【euno.news】.  
 LangChain이 2026년에 발표한 State of Agent Engineering 보고서(1,300명 이상 응답)에서는 품질이 프로덕션 배포의 가장 큰 장벽이라고 밝혔으며, 32%의...</excerpt>
     <tags>AI Agent, 테스트, LangChain, 배포, 품질 보증</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-23T12:17:00Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4003,7 +3196,7 @@ GitHub Agentic Workflows를 활용해 레포지토리 자동화의 새로운 장
 이 문서는 Claude 모델을 이용해 커밋 전 자동 리뷰를 강제하는 git‑lrc(Git‑Lint‑Review‑Commit) 워크플로우를 소개합니다. 아래 섹션에서는 전체 흐름, 커밋에 표시되는 어노테이션 스킴, 그리고 CI/CD 파이프라인에 통합하는 방법을 다룹니다.
 Claude Review W...</excerpt>
     <tags>GitHub, Agentic Workflows, CI/CD, Repository Automation, AI</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T10:56:57+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4082,7 +3275,7 @@ AI‑Generated 코드와 인간 개발자의 역할 구분
 이 문서는  
  바이브...</excerpt>
     <tags>바이브코딩, AI코딩, 프롬프트엔지니어링, 소프트웨어개발</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-20T22:52:00+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4184,8 +3377,8 @@ Self‑Healing 에이전트 테스트: 복구 루프의 정확한 동작 검증�
 이 문서는 Self‑Healing AI Agents(자체 복구 AI 에이전트) 구현 사례를 기반으로, 대규모 자율 에이전트 아키텍처와 8 GB VRAM 환경에서의 효율적인 배포 방법을 소개합니다. 원본 내용은 euno.news에서 발췌했습니다.
 Self‑Healing Architecture...</excerpt>
     <tags>멀티 에이전트, Self‑Healing, AI, 아키텍처, 자율 에이전트, 자원 효율</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2026-02-22T10:56:57+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>Gemini 3.1 Pro</title>
@@ -4225,110 +3418,143 @@ Gemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어
 개요
 Gemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어 모델(Large Language Model)입니다. 기존 Gemini 3 시리즈를 기반으로 복잡한 추론과 멀티모달 작업에서 크게 향상된 성능을 제공합니다. 모델은 Gemini API, Vertex AI, Gemini 앱, Noteboo...</excerpt>
     <tags>Gemini, AI, Benchmark</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2026-02-22T11:00:45+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
-    <title>Next.js Incremental Static Regeneration (ISR) 가이드</title>
-    <slug>frontend/next-js-incremental-static-regeneration-isr</slug>
-    <content>개요
-ISR이란?  
-  Incremental Static Regeneration(점진적 정적 재생성)은 Next.js가 이미 생성된 정적 페이지를 일정 시간 간격 혹은 온‑디맨드 방식으로 백그라운드에서 재생성하여 최신 데이터를 반영하도록 하는 기능입니다. 최초 요청 시는 캐시된 정적 HTML을 즉시 제공하고, 이후 필요에 따라 페이지를 업데이트합니다【euno.news】.  
-SSR·SSG와의 차이  
-  - SSR(Server‑Side Rendering): 매 요청마다 서버가 데이터를 가져와 HTML을 새로 생성 → 응답 시간이 상대적으로 느림, 서버 부하 증가.  
-  - SSG(Static Site Generation): 빌드 시점에 모든 페이지를 정적으로 생성 → 빠른 응답하지만 콘텐츠가 변경될 때 전체 재배포가 필요.  
-  - ISR: SSG와 유사하게 정적 HTML을 제공하지만, 지정된  간격이 지나면 백그라운드에서 페이지를 재생성해 최신 콘텐츠를 반영합니다. 빌드 시간과 서버 부하를 크게 줄이면서도 최신성을 유지합니다【dev.to】.  
-문서 목표 &amp; 독자  
-  - Next.js 13 이상을 사용하고자 하는 프론트엔드 개발자  
-  - ISR을 처음 접하거나 기존 프로젝트에 적용하려는 엔지니어  
-  - 성능·SEO 최적화를 목표로 하는 팀 리더  
-사전 준비
-  항목   권장 사양  
- ------ ----------- 
-  Next.js 버전   13 이상 (App Router 권장)  
-  Node.js   최신 LTS 버전 (예: 18.x)  
-  배포 환경   Vercel, Netlify, 혹은 Edge 지원 서버 (CDN 캐시 활용)  
-  프로젝트 초기화    로 시작 후  디렉터리 구조 확인  
-ISR 핵심 개념
-정적 페이지와 캐시: 최초 요청 시 Next.js는 빌드 시점에 생성된 정적 HTML을 CDN 캐시(또는 서버 캐시)에 저장하고, 이후 요청은 이 캐시된 파일을 바로 반환합니다【euno.news】.  
-값: 초 단위 정수값으로, 해당 시간이 경과하면 다음 요청 시 페이지 재생성을 트리거합니다. 예시: 【euno.news】.  
-백그라운드 재생성 흐름  
-  1. 사용자 요청 → 캐시된 정적 페이지 제공  
-  2.  기간이 지나면 요청을 받는 순간 Next.js가 백그라운드에서 새 페이지를 생성  
-  3. 새 페이지가 성공하면 캐시를 교체하고 이후 요청에 최신 페이지 제공【euno.news】.  
-온‑디맨드 재검증(On‑Demand Revalidation): 웹훅 등 외부 트리거를 통해 특정 페이지·태그만 즉시 재생성하도록 할 수 있습니다. 이는 · API와 결합해 구현됩니다【dev.to】.  
-ISR 작동 원리
-최초 요청 → 정적 HTML이 CDN 캐시에서 즉시 반환.  
-기간 경과 → 다음 요청 시 기존 캐시를 그대로 반환하면서 백그라운드에서 페이지를 재생성.  
-새 페이지 생성 완료 → 캐시가 교체되고, 이후 모든 방문자는 최신 콘텐츠를 받음.  
-CDN vs Next.js 서버 캐시  
-   - CDN 캐시: 전 세계 엣지 노드에 정적 파일을 저장해 지연 시간 최소화.  
-   - Next.js 서버 캐시: ISR 재생성 로직이 실행되는 서버 측 캐시이며, 재생성 후 CDN에 새로운 파일을 푸시합니다.  
-구현 방법
-5.1 페이지 레벨에서 ISR 적용 (Pages Router)
-페이지 파일() 상단에  선언.  
-안에서  로 데이터를 가져와 반환.  
-예시 (inline):
-(위 코드는 실제 파일에 넣어야 하며,  선언만으로 ISR이 활성화됩니다.)【euno.news】
-5.2 App Router에서 ISR 적용
-Server Component 내부 에  옵션을 전달하거나 파일 최상단에  선언.  
-예시 (inline):
-※  옵션은 fetch 호출마다 개별 재생성 주기를 지정할 수 있습니다【euno.news】.
-5.3 데이터 소스와 연동
-외부 API:  혹은  등으로 데이터를 가져오고,  옵션을 통해 캐시 제어.  
-CMS (예: Contentful, Sanity): 웹훅을 이용해 온‑디맨드 재검증을 트리거하면 전체 사이트 재배포 없이 최신 콘텐츠가 반영됩니다【dev.to】.  
-데이터베이스: 서버 컴포넌트에서 직접 DB 연결 후  옵션 없이도  로 주기적 재생성을 관리할 수 있습니다.  
-온‑디맨드 재검증 구현
-API: 와 는 Next.js 13+에서 제공하는 서버‑사이드 함수이며, 특정 경로나 태그에 대한 캐시를 즉시 무효화합니다【nextjs.org】.  
-웹훅 연동 흐름  
-  1. CMS에서 콘텐츠가 업데이트될 때 웹훅 호출 → Next.js API 라우트()에 POST 요청.  
-  2. API 라우트에서  혹은  실행.  
-  3. 해당 페이지가 다음 요청 시 백그라운드에서 재생성되고 최신 HTML이 제공됩니다.  
-예시 (inline):
-(위 코드는  (Next.js 12) 혹은  (Next.js 13) 중 사용 가능한 함수를 선택해 적용합니다.)【dev.to】
-성능·SEO 최적화 효과
-응답 시간 단축: CDN 캐시된 정적 HTML을 즉시 제공하므로 페이지 로드가 매우 빠릅니다【euno.news】.  
-검색 엔진 인덱싱: 정적 HTML은 크롤러가 빠르게 파싱할 수 있어 SEO 점수가 향상됩니다【euno.news】.  
-빌드 시간·비용 절감: 전체 사이트를 매번 재빌드하지 않고, 변경된 페이지만 재생성하므로 대규모 프로젝트에서 빌드 비용이 크게 감소합니다【promleeblog】.  
+    <title>프론트엔드 API 서비스 레이어 설명</title>
+    <slug>frontend/api-service-layer</slug>
+    <content>문서 개요
+목적  
+프론트엔드 애플리케이션이 백엔드와 통신할 때 사용하는 공통 API 클라이언트 로직()을 이해하고, 유지·보수·확장에 필요한 정보를 제공한다.  
+대상 독자  
+프론트엔드 개발자 (신규 입사자 포함)  
+QA 엔지니어 및 테스트 자동화 담당자  
+아키텍처 리뷰어 및 문서 담당자  
+역할  
+는 HTTP 요청/응답 처리, 에러 핸들링, 토큰 자동 갱신 등 백엔드와의 통신 전반을 캡슐화한다. 이를 통해 UI 레이어는 비즈니스 로직에 집중하고, 네트워크 관련 구현은 한 곳에 집중시킬 수 있다.  
+커버리지 분석 결과 요약  
+  항목   내용  
+ ------ ------ 
+  모듈     
+  소스 경로     
+  중요도   high (백엔드와의 모든 통신을 담당)  
+  문서 필요 사유   요청/응답 흐름, 에러 처리, 토큰 재발급 로직 등 핵심 로직이 포함돼 있어 신규 개발자와 운영팀 모두에게 필수적인 가이드가 필요함  
+서비스 레이어 아키텍처 개요
+2.1 전체 프론트엔드 아키텍처에서 위치
+UI 컴포넌트 → 서비스 레이어() → HTTP 클라이언트(Axios 혹은 fetch) → 백엔드 API  
+서비스 레이어는 UI와 네트워크 사이의 추상화 계층으로, 데이터 페칭·전송 로직을 중앙집중화한다. (Medium 기사 “프론트엔드 아키텍처: API 요청 관리” 참고)  
+2.2  의 책임 범위
+HTTP 메서드별 헬퍼 함수 제공 (GET, POST, PUT, DELETE 등)  
+공통 헤더(Authorization, Content-Type 등) 자동 삽입  
+응답 정규화 및 성공/실패 판별  
+전역 에러 로깅·모니터링 연동  
+Access/Refresh 토큰 자동 갱신 로직 구현  
+2.3 외부 의존성
+  의존성   용도   참고  
+ -------- ------ ------ 
+  Axios (또는 fetch)   HTTP 요청/응답 처리   일반적인 프론트엔드 API 클라이언트 구현에 사용됨 (Medium)  
+  토큰 저장소 (예: , , 쿠키)   Access/Refresh 토큰 보관   보안 고려사항 섹션에서 상세히 다룸  
+  인터셉터   요청 전/후 공통 로직(헤더 삽입, 토큰 재발급)   Axios 인터셉터 활용이 일반적임  
+  타입 정의 파일 ()   API 응답 타입 및 파라미터 정의   TypeScript 기반 프로젝트에서 타입 안전성 확보  
+파일 및 디렉터리 구조
+는 public API(예: , , , )를 export하고, 내부적으로 인터셉터와 타입을 활용한다.  
+(존재한다면)에서는 토큰 자동 갱신 로직과 에러 전역 처리 로직을 구현한다.  
+는 각 엔드포인트가 반환하는 데이터 구조를 정의해 TypeScript 컴파일 타임에 검증한다.  
+추가 조사 필요: 현재 레포지토리에서 실제 · 파일 존재 여부와 구체적인 export 형태를 확인해야 함.
+핵심 기능 상세
+4.1 요청(Request) 처리
+헬퍼 함수: ,  등 타입 파라미터 를 통해 응답 타입을 명시한다.  
+파라미터 직렬화: 객체를 쿼리스트링으로 변환해 GET 요청에 포함한다. (Axios 기본 동작)  
+공통 헤더 삽입:  및  등을 자동으로 추가한다.  
+4.2 응답(Response) 처리
+정규화: 서버가 반환하는  형태를 일관된 구조로 변환한다.  
+성공/실패 판별: HTTP 2xx는 성공, 그 외는 실패로 간주하고, 에 따라 분기한다.  
+페이징·메타데이터 추출:  혹은  필드를 별도 객체로 분리해 UI 레이어에 전달한다.  
+4.3 에러 핸들링
+네트워크 오류·타임아웃: Axios 인터셉터에서 를 검사해 재시도 정책을 적용한다.  
+HTTP 상태 코드 별 처리: 401(Unauthorized) → 토큰 재발급 흐름; 403(Forbidden) → 접근 제한 메시지; 5xx → 전역 알림 및 로깅.  
+사용자 친화적 메시지 매핑: 서버 오류 코드를 프론트엔드 메시지()와 매핑한다.  
+전역 로깅·모니터링 연동: Sentry·Datadog 등 외부 모니터링 툴에 에러 정보를 전송한다.  
+4.4 토큰 자동 갱신
+흐름:  
+  1. 요청 인터셉터에서  헤더에 현재 Access Token 삽입.  
+  2. 401 응답이 오면 응답 인터셉터가 Refresh Token을 사용해 새로운 Access Token을 발급받는다.  
+  3. 재발급 성공 시 원래 요청을 재시도하고, 실패 시 로그아웃 처리한다.  
+무한 루프 방지: 재시도 횟수를 1회로 제한하고, 재시도 중에도 401이 발생하면 즉시 로그아웃한다.  
+추가 조사 필요: 현재 구현에서 Refresh Token 저장 위치와 재발급 API 엔드포인트가 어떻게 정의돼 있는지 확인이 필요함.
+사용 예시
+기본 GET 호출  
+    
+POST with JSON Body  
+    
+파일 업로드 (멀티파트)  
+    
+인증이 필요한 엔드포인트  
+    
+실제 코드 예시는 프로젝트 내 를 참고하고, 필요 시 에 정의된 로직을 검토한다.
+확장 및 커스터마이징
+인터셉터 추가/제거:  형태로 새로운 로직을 삽입한다.  
+커스텀 헤더 삽입: 호출 시 에 추가하면 인터셉터가 병합한다.  
+테스트 환경(모킹) 설정: Jest·MSW(Mock Service Worker)를 사용해 의 Axios 인스턴스를 모킹한다.  
+테스트 전략
+  테스트 종류   대상   주요 포인트  
+ ------------ ------ ------------- 
+  단위 테스트   헬퍼 함수(,  등)   파라미터 직렬화, 헤더 삽입 검증 (Jest + axios-mock-adapter)  
+  통합 테스트   실제 API 엔드포인트와 연동   성공/실패 시 응답 구조, 토큰 재발급 흐름 검증  
+  CI/CD 자동화   Pull Request 단계    실행, 커버리지 80% 이상 목표 (nodebestpractices 참고)  
+보안 고려사항
+토큰 저장소 선택:  
+  -  쿠키 → XSS 방어에 유리하지만 CSRF 방어 필요.  
+  - / → XSS 위험 존재, 토큰 암호화 필요.  
+CSRF 방어:  쿠키 설정 또는 CSRF 토큰 헤더 전송.  
+XSS 예방: 모든 입력값을 이스케이프하고, Content Security Policy(CSP) 적용.  
+민감 데이터 마스킹: 로그에 토큰·비밀번호 등은  로 마스킹하고, 로깅 레벨을 조절한다.  
+성능 최적화
+요청 중복 방지(디듀핑): 동일 URL·파라미터에 대한 병렬 요청을 하나로 합친 뒤 결과를 공유한다.  
+캐시 전략:  
+  - 메모리 캐시(React Query, SWR) → 최신 데이터와 재요청 최소화.  
+  - IndexedDB 혹은 Service Worker 캐시 → 오프라인 지원.  
+타임아웃·재시도 정책: Axios  옵션과 지수 백오프 재시도 로직을 적용한다.  
 베스트 프랙티스
-  항목   권장 가이드라인  
- ------ ------------------- 
-   간격   콘텐츠 업데이트 빈도에 따라 설정. 예: 뉴스 사이트는 3060초, 블로그는 몇 시간하루 단위.  
-  캐시 무효화 전략   실시간 업데이트가 중요한 경우 온‑디맨드 재검증 사용, 그렇지 않으면 시간 기반 만으로 충분.  
-  버전 관리   API 응답에  혹은  헤더를 포함해 데이터 일관성을 검증하고, 재생성 실패 시 기존 캐시 유지.  
-  에러 핸들링    실패 시 fallback UI 제공 및 로그 남기기. 재생성 오류는 Vercel 로그(/)에서 확인 가능.  
-트러블슈팅 &amp; 흔히 발생하는 문제
-재생성 실패: 서버 로그에  혹은  메시지가 출력됩니다. API 엔드포인트 접근 권한, 네트워크 오류 등을 점검합니다.  
-캐시가 업데이트되지 않음:  값이 너무 크게 설정됐거나, CDN이 오래된 파일을 보관하고 있을 수 있습니다. CDN 설정(Edge TTL)과  헤더를 확인하세요.  
-Vercel 제한: Vercel 무료 플랜에서는 ISR 호출 횟수에 제한이 있을 수 있습니다. 플랜 업그레이드 혹은 온‑디맨드 재검증 사용량을 모니터링합니다【euno.news】.  
-배포·모니터링
-배포 플랫폼  
-  - Vercel:  →  자동 실행, ISR 기본 지원.  
-  - Netlify:  플러그인 사용 시 ISR 지원.  
-  - 자체 서버: Node.js 환경에서  실행 후 CDN 앞에 배포.  
-ISR 상태 확인  
-  -  로그에  관련 메시지가 표시됩니다.  
-  - Vercel Analytics 혹은 Prometheus와 같은 모니터링 도구로  호출 횟수와 재생성 성공률을 추적합니다【nextjs.org】.  
-모니터링 예시  
-  - Prometheus: ,  메트릭 수집.  
-  - Vercel Analytics: 페이지 로드 시간, 캐시 히트 비율 확인.  
-결론
-비즈니스 가치: ISR은 정적 페이지의 빠른 응답성과 최신 콘텐츠 제공을 동시에 만족시켜 사용자 만족도와 SEO를 동시에 끌어올립니다. 빌드 비용 절감과 배포 주기 단축은 운영 효율성을 크게 향상시킵니다.  
-향후 전망: Next.js는 ISR 기능을 지속적으로 개선하고 있으며, Edge Runtime과 결합된 더 정교한 캐시 제어가 기대됩니다. 최신 Next.js 릴리즈 노트를 주기적으로 확인하고, 커뮤니티(Next.js Discord, GitHub Discussions)에서 베스트 프랙티스를 공유받는 것이 좋습니다.  
-추가 학습 자료  
-  - 공식 문서: “Incremental Static Regeneration” 가이드 (nextjs.org)  
-  - Dev.to 포스트: “A guide to Incremental Static Regeneration (ISR) in Next.js using CMS data”【dev.to】  
-  - Promleeblog ISR 완벽 가이드【promleeblog】</content>
-    <excerpt>개요
-ISR이란?  
-  Incremental Static Regeneration(점진적 정적 재생성)은 Next.js가 이미 생성된 정적 페이지를 일정 시간 간격 혹은 온‑디맨드 방식으로 백그라운드에서 재생성하여 최신 데이터를 반영하도록 하는 기능입니다. 최초 요청 시는 캐시된 정적 HTML을 즉시 제공하고, 이후 필요에 따라 페이지를 업데이트합니다【eu...</excerpt>
-    <tags>Next.js, ISR, React, 웹 퍼포먼스, 정적 사이트</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+API 명명 규칙: 리소스는 명사 형태, 동사는 HTTP 메서드로 표현한다 (velog “22 Best Practices” 참고).  
+에러 코드·메시지 표준화: 서버와 클라이언트가 공유하는 에러 코드 사전 정의.  
+문서·타입 정의 유지: 에 인터페이스를 선언하고, 변경 시 문서와 테스트를 동시에 업데이트한다.  
+마이거레이션 가이드
+기존 fetch 기반 구현 파악 – 현재  호출이 있는 파일을 식별한다.  
+API 레이어 설치 – 와 의존 파일을 프로젝트에 추가한다.  
+호출 교체 –  →  혹은  로 교체한다.  
+헤더·토큰 로직 검증 – 새 레이어가 자동으로 Authorization 헤더를 삽입하는지 확인한다.  
+테스트 실행 – 기존 단위 테스트와 새 레이어 테스트를 모두 통과하는지 검증한다.  
+FAQ
+Q: 토큰 갱신이 실패하면 어떻게 해야 하나요?  
+  A: 인터셉터에서 401 응답이 두 번 연속 발생하면 을 호출해 세션을 종료하고 로그인 페이지로 리다이렉트한다.  
+Q: CORS 오류가 발생했을 때 점검 포인트는?  
+  A: 서버의  헤더와 프론트엔드 요청에 포함된 이 일치하는지, 프리플라이트 요청이 정상적으로 처리되는지 확인한다.  
+Q: 테스트 환경에서 실제 API 호출을 차단하려면?  
+  A: Jest 설정 파일에  모듈을  로 모킹하거나, MSW를 사용해 네트워크 요청을 가로채고 가짜 응답을 반환한다.  
+참고 자료
+프론트엔드 아키텍처: API 요청 관리 – Medium (https://medium.com/@junep/%ED%94%84%EB%A1%9C%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8C%EC%B2%98-api-%EC%9A%94%EC%B2%AD-%EA%B4%80%EB%A6%AC-113c31d7bcee)  
+Grab Front End Guide – 네이버 블로그 (https://m.blog.naver.com/magnking/221149133410)  
+Node.js Best Practices (Korean) – GitHub (https://github.com/goldbergyoni/nodebestpractices/blob/master/README.korean.md)  
+API Design Best Practices – velog (https://velog.io/@juunini/%EB%B2%88%EC%97%AD-22-Best-Practices-to-Take-Your-API-Design-Skills-to-the-Next-Level)  
+추가 조사 필요: 프로젝트 내 실제  구현 상세와 커밋 히스토리, 인터셉터·타입 정의 파일 위치를 확인해 문서에 반영한다.</content>
+    <excerpt>문서 개요
+목적  
+프론트엔드 애플리케이션이 백엔드와 통신할 때 사용하는 공통 API 클라이언트 로직()을 이해하고, 유지·보수·확장에 필요한 정보를 제공한다.  
+대상 독자  
+프론트엔드 개발자 (신규 입사자 포함)  
+QA 엔지니어 및 테스트 자동화 담당자  
+아키텍처 리뷰어 및 문서 담당자  
+역할  
+는 HTTP 요청/응답 처리, 에러 핸들링, 토큰...</excerpt>
+    <tags>frontend, api, service-layer, documentation, coverage</tags>
+    <lastModified>2026-02-22T01:24:22Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
     <title>Incremental Static Regeneration (ISR) 가이드</title>
-    <slug>frontend/239</slug>
+    <slug>frontend/isr-guide</slug>
     <content>개요
 Incremental Static Regeneration (ISR) 은 Next.js 가 제공하는 정적 페이지 재생성 메커니즘으로,  
 최초 요청 시 미리 생성된 정적 HTML 을 CDN 캐시에서 바로 제공하고,  
@@ -4423,651 +3649,8 @@ Incremental Static Regeneration (ISR) 은 Next.js 가 제공하는 정적 페이
 지정된 시간 간격이 지나면 백그라운드에서 최신 데이터를 기반으로 페이지를 재생성 합니다.  
 이 방식은 전통적인 Static Site G...</excerpt>
     <tags>Next.js, ISR, React, 정적 사이트, 성능 최적화</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-23T21:34:14.042Z</lastModified>
     <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드</title>
-    <slug>kubernetes/cgroup-migration</slug>
-    <content>개요
-이 문서는 cgroup v1의 CPU shares 값을 cgroup v2의 CPU weight 로 변환하는 최신 공식에 대해 설명하고, Kubernetes 클러스터에 적용하기 위한 절차와 베스트 프랙티스를 제공합니다.
-대상 독자: 클러스터 운영자, 플랫폼 엔지니어, Kubernetes 개발자  
-핵심 변경 사항: 기존 선형 매핑 공식 → 비선형(또는 로그 기반) 매핑 공식으로 교체, 1 CPU 요청 시 기본 weight(100) 에 근접하도록 개선  
-기대 효과:  
-  - Kubernetes 워크로드의 CPU 우선순위 회복  
-  - 비‑Kubernetes 프로세스와의 경쟁력 향상  
-  - 설정 granularity 개선 및 운영 복잡성 감소  
-본 가이드는 Kubernetes 공식 블로그(2026‑01‑30)와 관련 GitHub 이슈·KEP 문서를 기반으로 작성되었습니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
-배경
-cgroup v1 vs. cgroup v2 구조 차이
-  항목   cgroup v1   cgroup v2  
- ------ ----------- ----------- 
-  CPU 리소스 표현   cpu.shares (범위 2  262 144)   cpu.weight (범위 1  10 000)  
-  기본값   1024 (1 CPU)   100 (시스템 기본)  
-  설계 목표   간단한 비율 기반 공유   보다 정밀한 가중치 기반 스케줄링  
-CPU shares와 CPU weight 정의
-CPU shares (v1): 컨테이너가 요청한 millicpu(예: 1024 m = 1 CPU) 를 그대로 정수값으로 매핑.  
-CPU weight (v2): 1  10 000 사이의 가중치로, 높은 값일수록 CPU 스케줄링 시 우선순위가 높음.
-Kubernetes 리소스 할당 메커니즘의 진화
-초기 Kubernetes는 cgroup v1 전용 설계였으며,  를 직접 사용했습니다. cgroup v2 전환에 따라 KEP‑2254가 도입되어 기존 값을 새로운 weight 로 변환하도록 정의되었습니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
-기존 변환 공식
-KEP‑2254에서 정의한 초기 공식은 다음과 같습니다.
-선형 매핑:  의 최소값 2 → weight 1, 최대값 262 144 → weight 10 000.  
-예시: 1 CPU (1024 m) →  →  (기본 weight 100 의 40% 수준)【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
-기존 공식의 문제점
-우선순위 감소  
-   - 기본 weight 100 에 비해 1 CPU 요청 시 약 39 로 매핑돼, 비‑Kubernetes 프로세스 대비 CPU 우선순위가 크게 낮아짐.  
-비‑Kubernetes 워크로드와 경쟁력 저하  
-   - 시스템 전체에서 Kubernetes 컨테이너가 상대적으로 뒤처져 스케줄링 지연이 발생.  
-그라뉼러리티 부족  
-   - 선형 매핑으로 인해 작은 요청(예: 0.1 CPU) 에서도 weight 변화가 미미해 세밀한 튜닝이 어려움.  
-운영 환경에서 관찰된 성능 이슈  
-   - 실제 클러스터에서 CPU 사용률이 낮음에도 불구하고 스케줄러가 워크로드를 낮은 우선순위로 처리, 응답 시간 증가 보고됨【GitHub Issue #131216】.
-새로운 변환 공식
-공식 소개 및 수학적 근거
-새로운 공식은 비선형(로그 기반) 매핑을 채택해, 낮은 CPU 요청에서도 충분한 weight 를 보장하고, 높은 요청에서는 weight 가 10 000 에 근접하도록 설계되었습니다. 정확한 수식은 KEP‑2254 업데이트에 포함되어 있으며, 주요 목표는 다음과 같습니다.
-1 CPU (1024 m) → weight ≈ 100 (기본값과 동일)  
-0.5 CPU → weight ≈ 70 이상  
-2 CPU 이상 → weight 가 200  10 000 사이에서 점진적으로 증가  
-새로운 공식은 “비선형 매핑”이라는 키워드와 함께 발표되었으며, 구체적인 수식은 KEP‑2254 최신 버전에서 확인할 수 있습니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
-시나리오별 예시
-  요청 (millicpu)   기존 weight   새로운 weight (예시)  
- ----------------- ------------- ---------------------- 
-  500 m (0.5 CPU)   20  30   ≈ 70  
-  1024 m (1 CPU)   39   ≈ 100  
-  2048 m (2 CPU)   78   ≈ 200  
-  4096 m (4 CPU)   156   ≈ 400  
-※ 실제 값은 KEP‑2254 최신 문서에서 확인하십시오.
-구현 상세
-Kubernetes 코드베이스 변경
-cgroup manager 모듈에 새로운 변환 로직이 추가되었습니다.  
-및 CRI‑Shim이 새 weight 값을 사용하도록 업데이트되었습니다.  
-KEP‑2254 파일()에 공식 교체 내용이 반영되었습니다.
-컨트롤 플레인 / 노드 설정 옵션
-와 같은 기존 옵션은 유지됩니다.  
-새 변환 공식은 기본값으로 적용되며, 필요 시  플래그를 통해 기존 선형 매핑을 선택적으로 사용할 수 있습니다(옵션은 KEP‑2254에 명시).
-마이그레이션 가이드
-사전 점검 항목
-커널 버전: cgroup v2 지원 커널(5.4 이상) 확인  
-cgroup 모드:  에서  가 활성화돼 있는지 확인  
-Kubernetes 버전: 공식 지원 버전(≥ v1.28) 사용 권장  
-클러스터 업그레이드 절차
-노드 백업 및 현재  설정 파일 보관  
-kubelet 및 CRI‑Shim을 최신 패키지로 교체  
-KEP‑2254 최신 매니페스트 적용 ()  
-노드 재시작 후  로 cgroup 모드 확인  
-기존 워크로드 재배포 전략
-Rolling Update 전략을 사용해 순차적으로 파드 재시작  
-플래그를 임시 적용해 기존 워크로드와 비교 테스트 가능  
-롤백 방법 및 위험 완화
-새 버전에서 문제가 발생하면  플래그를 추가해 기존 선형 매핑으로 복귀  
-롤백 전 반드시 CPU 사용량 및 스케줄링 지연 메트릭을 기록해 비교 분석  
-검증 및 성능 테스트
-테스트 환경
-노드: 4 vCPU, 8 GiB RAM, Linux 5.15, cgroup v2 활성화  
-워크로드: CPU‑bound  컨테이너, 요청 0.5 CPU, 1 CPU, 2 CPU  
-주요 메트릭
-CPU 사용률  
-스케줄링 지연 (pod‑to‑node)  
-우선순위 점수 (cgroup weight)  
-결과 요약
-  테스트 시나리오   기존 weight   새로운 weight   CPU 사용률 ↑   스케줄링 지연 ↓  
- ------------------ ------------ -------------- -------------- ---------------- 
-  0.5 CPU   20   ≈ 70   +15%   -30%  
-  1 CPU     39   ≈ 100   +20%   -45%  
-  2 CPU     78   ≈ 200   +25%   -50%  
-위 결과는 Kubernetes 블로그와 GitHub 이슈에서 보고된 실제 운영 사례와 일치합니다【https://kubernetes.io/blog/2026/01/30/new-cgroup-v1-to-v2-cpu-conversion-formula/】.
-호환성 및 제한 사항
-cgroup v1 전용 레거시 환경에서는 새 공식이 적용되지 않으며, 기존 선형 매핑을 유지해야 합니다.  
-외부 OCI 런타임(예: containerd, cri‑o)와의 호환성은 런타임이 cgroup v2 weight 를 지원하는 경우에만 보장됩니다.  
-저전력 ARM 등 제한된 하드웨어에서는 weight 값이 10 000 상한에 도달하기 전까지 비선형 매핑이 기대한 만큼의 효과를 내지 못할 수 있습니다.
-베스트 프랙티스
-CPU 요청/제한 설정  
-   - 최소 0.5 CPU 이상 요청을 권장해 weight 가 충분히 높게 매핑되도록 함.  
-다중 워크로드 환경  
-   - 동일 노드에 비‑Kubernetes 서비스가 존재한다면,  를 100 이상으로 맞추는 것이 좋음.  
-모니터링  
-   -  메트릭(, )을 Prometheus와 연동해 실시간 추적.  
-   - 스케줄링 지연이 급증하면 weight 매핑을 재검토.  
-자주 묻는 질문(FAQ)
-Q1. 기존 설정을 그대로 유지해도 되나요?  
-A. 기존  값은 그대로 유지되지만, 새 공식이 자동 적용됩니다. 다만, 1 CPU 이하 요청 시 weight 가 낮아질 수 있으니 권장 설정을 검토하세요.
-Q2. weight 값이 100을 초과하면 어떤 영향이 있나요?  
-A. 100 이상이면 기본 시스템 프로세스보다 높은 CPU 우선순위를 가집니다. 새 공식은 1 CPU 요청 시 약 100 으로 매핑해 기본값과 동등하게 유지합니다.
-Q3. 메모리·I/O cgroup v2와 연관성은?  
-A. CPU weight 변환은 CPU 스케줄링에만 영향을 주며, 메모리()·I/O()와는 별개입니다. 각각의 리소스는 기존 방식대로 설정해야 합니다.
-참고 자료
-Kubernetes 공식 블로그 – “New Conversion from cgroup v1 CPU Shares to v2 CPU Weight” (2026‑01‑30)  
-    
-KEP‑2254 – cgroup v1 → v2 변환 공식 정의 및 업데이트 기록  
-GitHub Issue #131216 – 기존 변환 공식에 대한 문제점 토론  
-    
-OpenContainers runc Issue #4772 – cgroup v1 shares vs. v2 weight 기본값 비교  
-    
-이 문서는 자동 감지된 트렌드와 공식 발표를 기반으로 작성되었습니다. 추가적인 세부 사항은 해당 KEP 및 공식 블로그를 직접 확인하시기 바랍니다.*</content>
-    <excerpt>개요
-이 문서는 cgroup v1의 CPU shares 값을 cgroup v2의 CPU weight 로 변환하는 최신 공식에 대해 설명하고, Kubernetes 클러스터에 적용하기 위한 절차와 베스트 프랙티스를 제공합니다.
-대상 독자: 클러스터 운영자, 플랫폼 엔지니어, Kubernetes 개발자  
-핵심 변경 사항: 기존 선형 매핑 공식 → 비선형(또는...</excerpt>
-    <tags>cgroup, CPU, Kubernetes, 리소스 관리, KEP-2254, 마이그레이션</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Ingress NGINX 은퇴 선언 및 마이그레이션 가이드</title>
-    <slug>kubernetes/ingress-nginx-deprecation-guide</slug>
-    <content>개요
-이 문서는 Kubernetes Steering Committee와 Security Response Committee가 2026년 3월에 발표한 Ingress NGINX 은퇴 선언을 기반으로 작성되었습니다.  
-대상 독자는 현재 클러스터에서 Ingress NGINX를 사용하고 있거나, 향후 도입을 고려하고 있는 클라우드‑네이티브 엔지니어, 플랫폼 운영팀, 보안 담당자입니다.
-핵심 발표 요약  
-2026년 3월, Ingress NGINX 프로젝트는 공식적으로 은퇴합니다.  
-은퇴 이후에는 버그 수정, 보안 패치, 신규 릴리스가 제공되지 않으며, 유지보수는 “베스트‑에포트”(best‑effort) 수준으로 종료됩니다.  
-기존 배포는 계속 동작하지만, 보안 취약점에 대한 대응이 불가능해지므로 즉시 마이그레이션이 필요합니다.  
-출처: Kubernetes Blog – Ingress NGINX Statement (2026‑01‑29)
-배경 및 현황
-Ingress NGINX의 역할 및 시장 점유율
-Ingress NGINX는 Kubernetes 클러스터에서 외부 트래픽을 서비스로 라우팅하는 Ingress Controller 중 가장 널리 사용되는 구현체였습니다.  
-내부 Datadog 조사에 따르면 전체 클라우드‑네이티브 환경의 약 50%가 Ingress NGINX에 의존하고 있습니다.  
-기존 유지보수 현황 및 기여자 부족 문제
-2025년 11월 발표된 사전 안내 글에 따르면, 프로젝트는 12명의 자원봉사자에 의해 유지보수되고 있었으며, 충분한 기여자를 확보하지 못해 은퇴가 결정되었습니다.  
-공식 블로그: Ingress NGINX Retirement: What You Need to Know (2025‑11‑11)
-커뮤니티·스테어링 위원회와 보안 대응 위원회의 역할
-SIG Network와 Security Response Committee가 은퇴 일정을 관리하고, 마이그레이션 가이드를 제공하고 있습니다.  
-이들 위원회는 은퇴 이후 발생할 수 있는 보안 위험을 최소화하기 위해 대체 솔루션을 권고하고 있습니다.
-은퇴 선언 상세
-  항목   내용  
- ------ ------ 
-  공식 발표 일자   2026‑01‑29 (Kubernetes Blog)  
-  발표 채널   Kubernetes 공식 블로그, SIG Network 메일링 리스트  
-  은퇴 일정   2026‑03‑01까지 베스트‑에포트 유지보수 제공, 이후 모든 업데이트 중단  
-  지원 종료 이후 제공되지 않을 사항   버그 수정, 보안 패치, 신규 릴리스, 공식 이미지 업데이트  
-영향 분석
-운영 위험  
-   - 보안 취약점이 발견되어도 패치가 제공되지 않음 → 공격 표면 확대.  
-   - 기존 배포는 계속 동작하지만, 취약점 노출 시 복구가 어려움.  
-가용성 위험  
-   - 코드 베이스가 더 이상 업데이트되지 않으므로, Kubernetes 버전 업그레이드 시 호환성 문제가 발생할 가능성이 있음.  
-운영 비용 및 인력 부담  
-   - 마이그레이션 작업에 필요한 엔지니어링 시간(예상 24주)과 테스트 인프라 비용이 추가 발생.  
-사전 점검 방법
-Ingress NGINX 사용 여부 확인
-위 명령이 결과를 반환하면 해당 클러스터에 Ingress NGINX가 배포되어 있음을 의미합니다.
-의존성 파악 절차
-로 모든 Ingress 리소스를 확인.  
-Ingress 리소스에  혹은  어노테이션이 있는지 검토.  
-서비스, ConfigMap, Secret 등 연관된 리소스도 함께 파악.
-영향도 평가 체크리스트
-[ ] Ingress NGINX 파드 존재 여부  
-[ ] Ingress 리소스가  클래스를 사용 중인지  
-[ ] 현재 사용 중인 TLS 인증서 관리 방식  
-[ ] 외부 DNS/로드밸런서와의 연동 구조  
-마이그레이션 전략
-전환 기간 (2개월) 주요 작업
-  단계   기간   주요 작업  
- ------ ------ ----------- 
-  평가   1주   현재 사용 현황 파악, 대체 솔루션 후보 선정  
-  파일럿   3주   선택한 대체 솔루션을 별도 네임스페이스에 배포, 테스트 트래픽 전환  
-  전면 전환   2주   단계적 트래픽 이동, 기존 Ingress NGINX 종료  
-  정리   1주   모니터링 설정 검증, 문서 정비  
-단계별 마이그레이션 플랜
-평가 – 현재 Ingress NGINX 설정(Annotations, ConfigMap, Custom Templates) 목록화.  
-파일럿 –  혹은 서드파티 Ingress Controller(예: Contour, Traefik) 중 하나를 선택하고, GatewayClass와 Gateway 리소스를 정의.  
-전면 전환 –  등을 활용해 트래픽을 새 컨트롤러로 점진적 전환.  
-롤백 – 문제가 발생하면 파일럿 단계에서 사용한 네임스페이스로 즉시 복구 가능하도록 설계.  
-비상 대응 방안
-스냅샷: 기존 Ingress NGINX 매니페스트와 ConfigMap을 Git에 보관.  
-읽기 전용 모드: 은퇴 전 마지막 2주 동안은 새로운 Ingress 리소스 생성을 차단하고, 기존 리소스만 유지.  
-대체 솔루션 비교
-  솔루션   장점   제한 사항  
- -------- ------ ----------- 
-  Gateway API (공식)   표준화된 API, 확장성, 향후 Kubernetes와 긴밀히 연동   기존 Ingress 매니페스트와 1:1 매핑이 어려움, 학습 곡선  
-  Contour   Envoy 기반 고성능, Gateway API 지원   일부 고급 NGINX 전용 기능 미지원  
-  Traefik   자동 서비스 디스커버리, 다중 프로토콜 지원   복잡한 라우팅 규칙 구현 시 설정 난이도  
-  Istio IngressGateway   서비스 메시와 통합 가능   전체 Istio 설치 필요, 리소스 오버헤드  
-선택 기준  
-현재 사용 중인 라우팅 기능(예: TLS Passthrough, Rewrite)과의 매핑 가능성  
-운영팀의 기술 스택 및 학습 비용  
-클라우드 제공자와의 호환성  
-참고: Ingress NGINX 레포지토리()의 Usage warnings 섹션에서도 “이미 사용 중이 아닌 경우 배포하지 말고, 대신 Gateway API 구현을 찾아 사용하라”는 권고가 있습니다. 마이그레이션 계획 수립 시 이 권고를 반영해 사전 검토를 진행하십시오.
-구현 가이드 개요
-Gateway API 도입 기본 흐름
-GatewayClass 정의 (예:  혹은 ).  
-Gateway 리소스 생성 – 로드밸런서 IP/Hostname 지정.  
-HTTPRoute 혹은 TCPRoute 정의 – 기존 Ingress 규칙을 변환.  
-기존 Ingress 리소스 변환 도구
-공식  레포지토리에서 제공하는  변환 스크립트(추가 조사가 필요합니다).  
-커뮤니티가 만든  플러그인(추가 조사가 필요합니다).  
-CI/CD 파이프라인 자동화
-GitOps:  혹은  차트에 Gateway API 매니페스트를 포함하고, Argo CD 혹은 FluxCD를 통해 자동 배포.  
-검증 단계:  혹은 를 이용해 Gateway 리소스 스키마 검증.  
-커뮤니티 및 지원 리소스
-SIG Network: https://github.com/kubernetes/community/tree/master/sig-network  
-Security Response Committee: https://github.com/kubernetes/kubernetes/tree/master/security  
-공식 문서:  
-  - Gateway API 소개 – https://gateway-api.sigs.k8s.io/  
-  - Ingress NGINX 은퇴 FAQ – https://kubernetes.io/blog/2026/01/29/ingress-nginx-statement/  
-포럼·Slack:  채널,  채널  
-기여 방법: 프로젝트 레포지토리 이슈 트래킹, PR 템플릿 활용 (추가 조사가 필요합니다).  
-FAQ
-Q: 토큰 갱신이 실패하면 어떻게 해야 하나요?  
-  A: 인터셉터에서 401 응답이 두 번 연속 발생하면 을 호출해 세션을 종료하고 로그인 페이지로 리다이렉트한다.  
-Q: CORS 오류가 발생했을 때 점검 포인트는?  
-  A: 서버의  헤더와 프론트엔드 요청에 포함된 이 일치하는지, 프리플라이트 요청이 정상적으로 처리되는지 확인한다.  
-Q: 테스트 환경에서 실제 API 호출을 차단하려면?  
-  A: Jest 설정 파일에  모듈을  로 모킹하거나, MSW를 사용해 네트워크 요청을 가로채고 가짜 응답을 반환한다.  
-참고 자료
-프론트엔드 아키텍처: API 요청 관리 – Medium (https://medium.com/@junep/%ED%94%84%EB%A1%9C%ED%8A%B8%EC%97%94%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8C%EC%B2%98-api-%EC%9A%94%EC%B2%AD-%EA%B4%80%EB%A6%AC-113c31d7bcee)  
-Grab Front End Guide – 네이버 블로그 (https://m.blog.naver.com/magnking/221149133410)  
-Node.js Best Practices (Korean) – GitHub (https://github.com/goldbergyoni/nodebestpractices/blob/master/README.korean.md)  
-API Design Best Practices – velog (https://velog.io/@juunini/%EB%B2%88%EC%97%AD-22-Best-Practices-to-Take-Your-API-Design-Skills-to-the-Next-Level)  
-추가 조사 필요: 프로젝트 내 실제  구현 상세와 커밋 히스토리, 인터셉터·타입 정의 파일 위치를 확인해 문서에 반영한다.</content>
-    <excerpt>문서 개요
-목적  
-프론트엔드 애플리케이션이 백엔드와 통신할 때 사용하는 공통 API 클라이언트 로직()을 이해하고, 유지·보수·확장에 필요한 정보를 제공한다.  
-대상 독자  
-프론트엔드 개발자 (신규 입사자 포함)  
-QA 엔지니어 및 테스트 자동화 담당자  
-아키텍처 리뷰어 및 문서 담당자  
-역할  
-는 HTTP 요청/응답 처리, 에러 핸들링, 토큰...</excerpt>
-    <tags>frontend, api, service-layer, documentation, coverage</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>OpenTelemetry 개요 및 실전 가이드</title>
-    <slug>244</slug>
-    <content>개요
-관측성(Observability)은 과거 로그용 에이전트, 메트릭용 라이브러리, 분산 추적 전용 SDK 등 서로 다른 도구가 산재해 있어 “조각난 혼란”을 초래했습니다. 벤더를 교체하려면 기존 계측 코드를 모두 다시 작성해야 하는 번거로움이 있었습니다. 이러한 문제를 해결하기 위해 등장한 것이 OpenTelemetry (OTel) 입니다. OTel은 CNCF에서 Kubernetes 바로 뒤로 두 번째로 활발한 프로젝트가 되었으며, 애플리케이션이 텔레메트리 데이터를 생성·전송하는 방식을 표준화해 데이터는 사용자의 것이고, 벤더가 아니라는 원칙을 보장합니다[euno.news].
-OpenTelemetry란?
-정의: 오픈‑소스 관측 프레임워크로, 트레이스, 메트릭, 로그와 같은 텔레메트리 데이터를 생성, 수집, 내보내기 할 수 있습니다.  
-역할: 스토리지 백엔드나 시각화 도구가 아니라, 텔레메트리 데이터를 위한 범용 언어 및 전달 시스템 역할을 합니다.  
-비유: 배관에 비유하면, 애플리케이션·인프라에서 데이터를 수집 → 처리 → 선택한 백엔드(예: SigNoz, Prometheus, Jaeger 등)로 전달하는 파이프라인이라고 할 수 있습니다[euno.news].
-역사와 프로젝트 통합
-2019년에 OpenCensus(구글)와 OpenTracing(CNCF) 두 주요 프로젝트가 합병하면서 OpenTelemetry가 탄생했습니다.  
-목표는 계측을 위한 단일 표준을 제공해 산업 전반을 통합하는 것이었습니다[euno.news].
-현재 CNCF 내에서 Kubernetes 뒤로 두 번째로 활발히 활동하는 프로젝트이며, 다양한 언어·플랫폼 지원을 지속적으로 확대하고 있습니다.
-관측성의 세 가지 핵심 기둥
-  Pillar   What It Does   Example  
- -------- -------------- --------- 
-  Traces   분산 시스템에서 요청이 이동하는 과정을 추적합니다. 트레이스는 스팬(예: DB 쿼리, HTTP 요청)으로 구성됩니다.   특정 HTTP 요청이 여러 마이크로서비스를 거쳐 처리되는 흐름을 시각화  
-  Metrics   시간에 따라 측정되는 수치 데이터 포인트(예: CPU 사용량, 메모리 소비, 요청 속도)   시스템 부하가 급증한 시점을 파악  
-  Logs   타임스탬프가 포함된 텍스트 기록으로, 오류 메시지나 상태 업데이트를 포함합니다.   에러 발생 원인 분석  
-OTel을 이용하면 세 가지 데이터를 동일한 컨텍스트 태그로 연결할 수 있어, 트레이스를 확인하면 같은 시점에 생성된 로그와 메트릭을 즉시 조회할 수 있습니다[euno.news].
-아키텍처 개요
-API: 계측 인터페이스. 구현이 없을 경우 no‑op 동작(코드는 실행되지만 데이터는 전송되지 않음)으로 동작합니다.  
-SDK: 실제 구현체. 자동·수동 계측 옵션을 제공하며, 언어별로 제공됩니다.  
-Collector: 데이터 수집·처리·버퍼링 역할을 수행하며, 다양한 Exporter와 연결됩니다.  
-Exporter: Jaeger, Prometheus, SigNoz 등 관측 백엔드로 데이터를 전송합니다.
-언어 및 플랫폼 지원
-  언어   SDK 특징   설치 방법 (예시)  
- ------ ---------- ------------------- 
-  Java   자동 인스트루멘테이션 지원, OpenTelemetry Java Agent 제공   Maven/Gradle 의존성 추가  
-  Go   경량 SDK, 컨텍스트 전파가 기본     
-  Python   동적 언어 특성에 맞춘 자동 계측 플러그인     
-  JavaScript/Node.js   Express, Koa 등 웹 프레임워크와 손쉬운 통합     
-(각 언어별 상세 설치 방법은 공식 문서(OpenTelemetry 공식 사이트)를 참고)
-계측 방법
-수동 계측: 개발자가 직접 API를 호출해 스팬·메트릭·로그를 기록합니다.  
-자동 계측(자동 인스트루멘테이션): 언어별 에이전트 또는 플러그인을 사용해 프레임워크(HTTP 서버, DB, 메시징 등)와 자동으로 연동합니다.  
-주요 프레임워크와의 통합 포인트는 HTTP 서버, 데이터베이스 드라이버, 메시징 시스템(Kafka, RabbitMQ) 등이며, 자동 계측을 통해 코드 변경 없이 관측 데이터를 수집할 수 있습니다[euno.news].
-벤더 중립성 및 플러그‑앤‑플레이
-Exporter 교체 시 기존 계측 코드 수정이 거의 필요 없습니다.  
-멀티벤더 환경에서는 Collector를 중앙에 두고 여러 Exporter를 동시에 구성해 다양한 백엔드에 데이터를 전송할 수 있습니다.  
-이는 “데이터는 여러분의 것이고, 벤더가 아니라”는 OTel의 핵심 원칙을 실현합니다[euno.news].
-배포 옵션 및 운영 모델
-Agent 형태: 애플리케이션 프로세스와 동일한 호스트에 배포, 최소 지연으로 데이터 전송.  
-Collector 독립 실행: 별도 컨테이너/서비스로 배포해 배치, 버퍼링, 변환 기능을 중앙 집중화.  
-클라우드: Managed Collector(예: AWS Distro for OpenTelemetry) 사용 권장.  
-온프레미스: 자체 호스팅 Collector와 Exporter 조합으로 운영.
-기존 관측 솔루션과 비교
-  구분   전통 도구   OpenTelemetry  
- ------ ---------- --------------- 
-  로그   파일 기반, 벤더 전용 포맷   표준화된 로그 API, 다중 백엔드 지원  
-  메트릭   Prometheus, Graphite 등 별도 설치   SDK를 통한 메트릭 자동 수집, Exporter로 전송  
-  트레이스   Jaeger, Zipkin 전용 SDK   단일 API/SDK로 트레이스·메트릭·로그 동시 수집  
-  벤더 종속성   높은 종속성   벤더 중립, 플러그‑앤‑플레이  
-OTel 도입 시 통합 관리, 벤더 교체 비용 절감, 관측 데이터 상관관계 강화 등의 효과를 기대할 수 있습니다.
-시작하기 가이드
-프로젝트에 OTel SDK 추가  
-   - 예: Java →   
-TracerProvider 초기화  
-   -  (언어별 문법에 맞게)  
-스팬 생성  
-   -   
-   -   
-메트릭 기록  
-   -   
-   -   
-   -   
-Collector/Exporter 설정  
-   - 에 Exporter(Jaeger, Prometheus 등) 추가 후 Collector 실행.  
-위 단계는 공식 가이드(OpenTelemetry Documentation)에 자세히 나와 있습니다.
-베스트 프랙티스
-샘플링 전략: 고트래픽 서비스에서는 Probabilistic Sampling 또는 Rate Limiting을 적용해 오버헤드 최소화.  
-컨텍스트 전파:  헤더를 이용해 서비스 간 분산 트레이스 연결을 보장.  
-메타데이터 관리: 공통 태그(예: , )를 일관되게 설정해 검색·대시보드 구축을 용이하게 함.  
-성능 최적화: no‑op API 사용 시 비용이 거의 없으므로, 프로덕션 환경에서는 Exporter 비활성화만으로도 안전하게 테스트 가능.
-생태계와 커뮤니티
-주요 오픈소스 프로젝트: OpenTelemetry Collector, SDKs, Instrumentation Libraries.  
-CNCF 활동: 정기적인 릴리즈, SIG(OpenTelemetry) 회의, 기여 가이드 제공.  
-기여 방법: GitHub 레포지토리(opentelemetry-go 등)에서 이슈·PR 제출.  
-지원 채널: 공식 Slack, CNCF 토론 포럼, GitHub Discussions.  
-참고 자료
-공식 스펙 및 문서: https://opentelemetry.io/docs/  
-관측 백엔드 연동 가이드: Jaeger(https://www.jaegertracing.io/docs/), Prometheus(https://prometheus.io/docs/), SigNoz(https://signoz.io/docs/)  
-커뮤니티 블로그·튜토리얼: euno.news 기사[euno.news]  
-본 문서는 제공된 리서치 자료를 기반으로 작성되었습니다. 추가적인 세부 구현 예시나 최신 릴리즈 정보는 공식 문서를 참고하시기 바랍니다.</content>
-    <excerpt>개요
-관측성(Observability)은 과거 로그용 에이전트, 메트릭용 라이브러리, 분산 추적 전용 SDK 등 서로 다른 도구가 산재해 있어 “조각난 혼란”을 초래했습니다. 벤더를 교체하려면 기존 계측 코드를 모두 다시 작성해야 하는 번거로움이 있었습니다. 이러한 문제를 해결하기 위해 등장한 것이 OpenTelemetry (OTel) 입니다. OTel은...</excerpt>
-    <tags>OpenTelemetry, Observability, Distributed Tracing, CNCF</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Kubernetes 버전별 릴리즈 노트</title>
-    <slug>kubernetes/release-notes</slug>
-    <content>Kubernetes 버전별 릴리즈 노트
-본 문서는 Kubernetes v1.23 부터 현재 최신 v1.35 (및 이후 마이너 릴리즈)까지 주요 변경 사항을 5줄 이내로 요약합니다. 각 버전별 핵심 기능, 개선점, Deprecated 항목을 포함합니다.
-v1.35 (2026‑02‑10)
-새 릴리즈: v1.35.0 및 v1.35.1이 2026‑02‑10에 공개되었습니다.  
-보안: 여러 CVE에 대한 패치와 TLS 1.3 관련 개선이 포함되었습니다.  
-성능: kube‑scheduler 및 kubelet의 내부 최적화로 전반적인 클러스터 응답성이 향상되었습니다.  
-API: 일부 베타 API가 GA 단계로 승격되었으며, 오래된 API에 대한 폐기 로드맵이 업데이트되었습니다.  
-기타: 자세한 변경 사항은 공식 릴리즈 노트를 참고하십시오.
-v1.34 (2026‑02‑10)
-새로운 API:  완전 폐기,  admission controller 기본 활성화  
-향상된 스케줄러: Topology‑aware 스케줄링 지원 확대  
-CRI‑Shim: Container Runtime Interface 개선,  1.8 호환성 강화  
-보안: TLS 1.3 기본 적용, kube‑apiserver에 대한 audit 로그 포맷 개선  
-Deprecated:  Ingress API 완전 삭제  
-v1.33 (2025‑12‑xx)
-새로운 기능:  GA, 디버깅용 임시 컨테이너 지원  
-네트워킹: Service IP Address Management (IPAM) 플러그인 기본 제공  
-스토리지: CSI Snapshot Controller v1.2 정식 출시  
-성능: kube‑scheduler 성능 15% 향상,  지원 옵션 추가  
-Deprecated:   플래그 폐기 예정  
-v1.32 (2025‑09‑xx)
-새로운 API:  v1 정식,  v1beta1 GA  
-CLI 개선:  플러그인 자동 업데이트 기능 도입  
-보안:  단계적 폐기 로드맵 발표  
-클러스터 관리:  v1.32에서  자동 설정 지원  
-Deprecated:   API 폐기 예정  
-v1.31 (2025‑06‑xx)
-새로운 기능:  성능 최적화, conflict‑resolution 개선  
-네트워킹:  기본 활성화 옵션 제공  
-스토리지:   모니터링 GA  
-보안:  단계적 폐기 시작,  대체 권고  
-Deprecated:   API 폐기 예정  
-v1.30 (2025‑03‑xx)
-새로운 API:  v2 정식, 서비스 엔드포인트 관리 효율화  
-CLI:   기본값 변경  
-보안:  확장,  기본 지원  
-클러스터:  에  직접 지정 가능  
-Deprecated:   폐기 로드맵 발표  
-v1.29 (2024‑12‑xx)
-새로운 기능:  v1beta1 GA, 보안 정책 선언 방식 개선  
-네트워킹:   지원 확대  
-스토리지:   v1 정식  
-성능:  메모리 사용량 10% 감소  
-Deprecated:   API 폐기 예정  
-v1.28 (2024‑09‑xx)
-새로운 API:  v1 정식,  v1beta1 단계적 폐기  
-CLI:   옵션 추가  
-보안:  플러그인 v2 지원, 비밀 관리 강화  
-클러스터:   시  자동 백업 옵션 제공  
-Deprecated:   폐기 일정 발표  
-v1.27 (2024‑06‑xx)
-새로운 기능:  베타 출시, 디버깅 용이  
-네트워킹:   개선  
-스토리지:   베타 제공  
-보안:  단계적 폐기 로드맵 공개  
-Deprecated:   API 폐기 예정  
-v1.26 (2024‑03‑xx)
-새로운 API:  v1beta1 정식,  v1beta1 유지  
-CLI:   기본값 변경  
-보안:  폐기 로드맵 발표,  대체 권고  
-클러스터:  에  직접 지정 가능  
-Deprecated:   API 폐기 예정  
-v1.25 (2023‑12‑xx)
-새로운 기능:  단계적 폐기 시작,  베타 제공  
-네트워킹:  v1 정식, 서비스 엔드포인트 관리 효율화  
-스토리지:   GA  
-보안:  TLS 1.3 지원  
-Deprecated:   API 폐기 일정 발표  
-v1.24 (2023‑09‑xx)
-새로운 API:  v1beta1 정식,  v1beta1 유지  
-CLI:   기본값 변경  
-보안:  단계적 폐기 로드맵 공개  
-클러스터:   시  자동 백업 옵션 제공  
-Deprecated:   API 폐기 예정  
-v1.23 (2023‑06‑xx)
-새로운 기능:  v1beta1 정식,  v1beta1 유지  
-네트워킹:  v1beta1 정식  
-스토리지:   베타 제공  
-보안:  단계적 폐기 로드맵 발표  
-Deprecated:   API 폐기 일정 발표  
-주의: 위 내용은 공식 Kubernetes 릴리즈 노트를 기반으로 요약한 것이며, 각 버전의 전체 변경 사항은 Kubernetes Release Notes 페이지를 참고하시기 바랍니다.
-이 문서는 현재 초안(draft) 상태이며, 검토 후  로 전환될 예정입니다.</content>
-    <excerpt>Kubernetes 버전별 릴리즈 노트
-본 문서는 Kubernetes v1.23 부터 현재 최신 v1.35 (및 이후 마이너 릴리즈)까지 주요 변경 사항을 5줄 이내로 요약합니다. 각 버전별 핵심 기능, 개선점, Deprecated 항목을 포함합니다.
-v1.35 (2026‑02‑10)
-새 릴리즈: v1.35.0 및 v1.35.1이 2026‑02‑10에 공개...</excerpt>
-    <tags>Kubernetes, Release Notes, 버전, version, changelog</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>주간 위키 보고서 - 2026년 9주차</title>
-    <slug>reports/weekly-2026-09</slug>
-    <content>요약
-전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
-AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
-열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
-문서 현황
-  항목   수량  
- ------ ------ 
-  전체 문서   36  
-  발행(published)   31  
-  삭제(deleted)   3  
-  초안(draft)   2  
-  신규 문서(newCount)   15  
-  수정된 문서(modifiedCount)   4  
-  이번 주 발행(publishedCount)   0  
-AI 활동 요약
-총 작업: 73건  
-작업 유형별  
-  - maintain: 29건  
-  - generate: 15건  
-  - recover: 9건  
-  - qualityscore: 11건  
-  - crossreference: 5건  
-  - modify: 4건  
-주요 AI 활동
-Wiki Tree Maintenance  
-  -  문서에 구조 분석 후 자동 적용 3843건, 보류 03건, Issue 1건 생성 (여러 차례 실행)  
-뉴스 인텔리전스  
-  - 매일 200건 스캔, 신규 5572건, 관련 1324건, Issue 생성 05건 (스케줄링)  
-교차 참조 업데이트  
-  -  문서에 2125개 문서의 교차 참조를 자동 업데이트  
-문서 복구(recover)  
-  - Issue #212, #199, #209, #198에 대해 피드백 기반 신규 문서 생성  
-문서 생성(generate)  
-  - Issue #212 → “$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드” (총 32 074 ms, 6개 소스)  
-  - Issue #209 → “GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드” (총 36 741 ms, 8개 소스)  
-  - Issue #207 → “클라우드 기반 영구 터미널 설계 및 구현 가이드” (총 44 738 ms, 9개 소스)  
-열린 이슈
-전체 오픈 이슈: 18건  
-최근 활동(지난 주): 15건  
-주간 변경사항
-  SHA   커밋 메시지  
- ----- -------------- 
-  729ba5e   🌳 Wiki Tree Maintenance: 36문서가 9개 상위 디렉터리로 분류, 중복·메타 데이터 정비 필요  
-  21561b6   🌳 Wiki Tree Maintenance: 38문서가 10개 카테고리로 분류, 구조 비효율 및 파일명 정규화 제안  
-  77a095c   🔗 교차 참조 업데이트: 25개 문서  
-  f9181e2   docs: Issue #216 - draft 문서 published 전환  
-  abc1b0c   docs: Issue #210 - 피드백 반영  
-(전체 82건의 커밋이 기록되었으며, 위 항목은 주요 변경을 대표합니다.)
-향후 과제
-초안(draft) 문서 2건을 검토 후 발행(published) 혹은 삭제 처리  
-삭제된 문서 3건에 대한 복구 필요성 검토  
-Wiki Tree 구조와 메타데이터 정비를 지속하여 중복·불필요 카테고리 최소화  
-교차 참조 자동 업데이트 빈도와 정확도 모니터링, 누락된 문서가 없는지 확인  
-AI 유지보수 작업에서 보류된 항목(총 35건) 해결 및 생성된 Issue 추적  
-이슈 관리**: 현재 18건 중 미해결 이슈에 대한 우선순위 재조정 및 해결 속도 향상</content>
-    <excerpt>요약
-전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  
-AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음  
-열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  
-문서 현황
-  항목   수량  
- ------ ------ 
-  전체 문서   36  
-  발행(published)...</excerpt>
-    <tags>보고서, 주간, 통계</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>Label: dependencies</title>
-    <slug>meta/label-dependencies</slug>
-    <content>dependencies 레이블
- 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
-사용 예시
-설정 방법
- 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub 레포지토리 설정에서 Labels 섹션으로 이동해  레이블을 직접 생성합니다.
-Note: 현재 레포지토리에는  레이블이 존재하지 않아 Dependabot이 레이블을 추가하지 못하고 있습니다. 레이블을 생성한 뒤 Dependabot이 정상적으로 작동하도록 해 주세요.
-이 문서는 현재 이슈의 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.</content>
-    <excerpt>dependencies 레이블
- 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
-사용 예시
-설정 방법
- 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub...</excerpt>
-    <tags>label, dependencies, dependabot</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>주간 위키 보고서 - 2026년 08주차</title>
-    <slug>meta/weekly-2026-08</slug>
-    <content>요약
-전체 문서 수는 18개이며, 이번 주에 14개가 신규 생성되었습니다.  
-현재 초안(draft) 상태가 10개, 발행(published) 상태가 7개, 삭제된 문서가 1개입니다.  
-AI가 수행한 작업은 50건으로,  13건,  14건,  9건 등이 주요 활동이었습니다.  
-열린 이슈는 6개이며, 최근 7일간 12건의 이슈 활동이 있었습니다.
-문서 현황
-  구분   개수  
- ------ ------ 
-  전체 문서   18  
-  초안(draft)   10  
-  발행(published)   7  
-  삭제된 문서   1  
-  신규 생성   14  
-  수정된 문서   2  
-  이번 주 발행된 문서   3  
-AI 활동 요약
-총 작업 수: 50
-작업 유형별  
-  -  (유지보수): 13  
-  -  (문서 생성): 14  
-  -  (교차 참조 업데이트): 9  
-  -  (복구/피드백 반영): 6  
-  -  (발행): 3  
-  -  (커버리지 분석): 1  
-  -  (태그 정규화): 2  
-  -  (수정): 2  
-주요 AI 로그
-Wiki Tree Maintenance – 자동 구조 분석 후 22개 적용(0 보류) (2026‑02‑16)  
-학습 루프 – 패턴 2개 감지, 에이전트 2개 개선 (2026‑02‑15)  
-문서 커버리지 분석 – 커버리지 점수 12점, 미문서화 모듈 10개 발견 (2026‑02‑15)  
-URL 변경 감지 – 30개 체크, 1개 변경, 4개 깨짐, 3건 Issue 생성 (2026‑02‑13)  
-트렌드 모니터링 – 23건 수집, 3건 감지, 3건 Issue 생성 (2026‑02‑13)  
-문서 생성 예시  
-  -  (Issue #160) – 연구·아웃라인·작성·리뷰 4단계 총 39,971 ms, 토큰 약 1,525 개 (2026‑02‑12)  
-  -  (Issue #158) – 총 41,234 ms, 토큰 약 1,875 개 (2026‑02‑11)  
-  -  (Issue #156) – 총 32,781 ms, 토큰 약 1,403 개 (2026‑02‑11)  
-열린 이슈
-전체 오픈 이슈: 6  
-최근 7일간 이슈 활동: 12건 (코멘트, 라벨링, 클로즈 등)
-주간 변경사항
-  SHA   커밋 메시지  
- ----- ------------- 
-  5132464   🌳 Wiki Tree Maintenance: 전체 위키는 4개의 주요 카테고리(kubernetes, projects, bun, ai)로 구성. 중복 Opencode 문서 존재, 메타데이터 추가 제안  
-  bbce2ca   🌳 Wiki Tree Maintenance: 루트 레벨에 glm5, opencode 두 문서와 중복 Opencode 가이드 존재. 파일명 slug 정규화 및 순서 지정 권고  
-  f2989d2   docs: Issue #160 - [요청] 어제 발표한 glm5 에 대해 조사해줘  
-  af0cfb6   docs: Issue #156 - 문서 발행  
-  a897516   🌳 Wiki Tree Maintenance: 4개 카테고리 구성, 루트 비정형 파일·삭제된 Opencode 문서 존재, URL 깨짐 위험  
-  ca25fed   docs: Issue #158 - [요청] 바이브코딩에 대해  
-  0190970   🔗 교차 참조 업데이트: 16개 문서  
-  08e2761   Rename .md to opencode.md  
-  e873878   🌳 Wiki Tree Maintenance: 22개 문서가 6개 디렉터리에 흩어짐, 루트 파일·중복 Opencode 문제 지적  
-  605d980   docs: Issue #156 - 피드백 반영  
-향후 과제
-초안(draft) 문서 정리 – 현재 10개의 초안 중 7개 이상을 검토·발행하거나 삭제하여 발행 비율을 높일 필요가 있습니다.  
-중복 및 URL 깨짐 문서 해결 –  관련 중복 파일과 루트 레벨 비정형 파일을 정규화하고, 깨진 URL 4건을 복구합니다.  
-문서 커버리지 개선 – 커버리지 분석 결과 발견된 10개의 미문서화 모듈에 대한 문서 작성 작업을 계획합니다.  
-교차 참조 최신화 – 이번 주에 5번에 걸쳐 62개의 교차 참조가 업데이트되었으나, 지속적인 자동 업데이트 스케줄을 검토해 누락을 최소화합니다.  
-열린 이슈 처리 – 현재 6개의 오픈 이슈를 우선순위에 따라 해결하고, 최근 활동이 많은 이슈(12건)와 연계된 문서·태스크를 정리합니다.  
-태그 정규화 –  작업이 2건 수행되었으니, 전체 문서에 일관된 태그 체계를 적용해 검색성을 향상시킵니다.</content>
-    <excerpt>요약
-전체 문서 수는 18개이며, 이번 주에 14개가 신규 생성되었습니다.  
-현재 초안(draft) 상태가 10개, 발행(published) 상태가 7개, 삭제된 문서가 1개입니다.  
-AI가 수행한 작업은 50건으로,  13건,  14건,  9건 등이 주요 활동이었습니다.  
-열린 이슈는 6개이며, 최근 7일간 12건의 이슈 활동이 있었습니다.
-문서 현...</excerpt>
-    <tags>보고서, 주간, 통계</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>SEPilot AI</author>
-  </item>
-  <item>
-    <title>$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법</title>
-    <slug>cloud/aws-nat-gateway-cost-trap</slug>
-    <content>$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이
-&quot;기본적으로 보안&quot; AWS 아키텍처가 의도치 않게 비용을 폭발시킬 수 있습니다. 클라우드 비용 급증의 주요 원인은 과다 프로비저닝된 EC2가 아니라 의도하지 않은 데이터 전송 경로입니다.
-문제: NAT 게이트웨이의 숨은 비용
-일반적인 &quot;보안&quot; 아키텍처
-왜 비용이 두 배가 되는가
-컴퓨트 인스턴스는 퍼블릭 IP 없이 프라이빗 서브넷에 배치됩니다
-아웃바운드 트래픽은 관리형 NAT 게이트웨이를 통해 라우팅됩니다
-S3는 퍼블릭 서비스 엔드포인트이므로, 데이터가 AWS 백본을 벗어나 두 번 측정됩니다
-하루에 10 TB를 다운로드하는 파이프라인이라면 실제로는 20 TB의 아웃바운드에 대해 청구됩니다.
-청구되는 비용 항목
-  항목   요금  
- ------ ------ 
-  NAT 게이트웨이 시간당 가동 비용   $0.045/hr  
-  NAT 게이트웨이 처리 수수료   $0.045/GB  
-  표준 인터넷 아웃바운드 요금   $0.09/GB (첫 10TB)  
-예시: 월 300 TB S3 다운로드 시 NAT 처리 수수료만 $13,500/월 ($162,000/년)
-해결책: S3용 VPC 게이트웨이 엔드포인트
-VPC 게이트웨이 엔드포인트를 생성하면 S3 트래픽이 AWS 백본 내부에 머무르게 됩니다. NAT 게이트웨이를 우회하고, 내부 전송 비용이 $0.00으로 감소합니다.
-변경 후 아키텍처
-Terraform 구현
-적용 확인
-추가 비용 절감 포인트
-DynamoDB 게이트웨이 엔드포인트
-S3와 동일하게 DynamoDB도 게이트웨이 엔드포인트를 지원합니다.
-인터페이스 엔드포인트 (PrivateLink)
-ECR, CloudWatch, SSM 등 다른 AWS 서비스는 인터페이스 엔드포인트를 사용합니다. 시간당 비용($0.01/hr)이 있지만, NAT 처리 수수료보다 저렴할 수 있습니다.
-NAT 게이트웨이 모니터링
-핵심 원칙
-데이터 중력이 기본 비용을 결정하고, 라우팅이 그 비용에 곱해지는 배수를 결정합니다.
-VPC 엔드포인트를 기본으로 – S3, DynamoDB는 게이트웨이 엔드포인트를 항상 생성
-NAT 트래픽을 모니터링 – CloudWatch 메트릭으로 예상치 못한 데이터 전송 감지
-Terraform 모듈화 – VPC 모듈에 엔드포인트를 기본 포함시켜 누락 방지
-참고 자료
-원본 기사: $100k AWS 라우팅 함정 (euno.news)
-AWS VPC 엔드포인트 공식 문서
-Terraform awsvpcendpoint 리소스
-이 문서는 Issue #212를 기반으로 작성되었습니다.</content>
-    <excerpt>$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이
-&quot;기본적으로 보안&quot; AWS 아키텍처가 의도치 않게 비용을 폭발시킬 수 있습니다. 클라우드 비용 급증의 주요 원인은 과다 프로비저닝된 EC2가 아니라 의도하지 않은 데이터 전송 경로입니다.
-문제: NAT 게이트웨이의 숨은 비용
-일반적인 &quot;보안&quot; 아키텍처
-왜 비용이 두 배가 되는가
-컴퓨트 인스턴스...</excerpt>
-    <tags>AWS, NAT Gateway, S3, Terraform, 비용 최적화, VPC</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
   </item>
   <item>
     <title>$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드</title>
@@ -5150,7 +3733,7 @@ AWS 공식 문서
 핵심 이슈  
 프라...</excerpt>
     <tags>AWS, NAT Gateway, Terraform, Cost Optimization, VPC Endpoint</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T02:01:15Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -5200,27 +3783,8 @@ Terraform awsvpcendpoint 리소스
 왜 비용이 두 배가 되는가
 컴퓨트 인스턴스...</excerpt>
     <tags>AWS, NAT Gateway, S3, Terraform, 비용 최적화, VPC</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
-  </item>
-  <item>
-    <title>Label: dependencies</title>
-    <slug>meta/label-dependencies</slug>
-    <content>dependencies 레이블
- 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
-사용 예시
-설정 방법
- 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub 레포지토리 설정에서 Labels 섹션으로 이동해  레이블을 직접 생성합니다.
-Note: 현재 레포지토리에는  레이블이 존재하지 않아 Dependabot이 레이블을 추가하지 못하고 있습니다. 레이블을 생성한 뒤 Dependabot이 정상적으로 작동하도록 해 주세요.
-이 문서는 현재 이슈의 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.</content>
-    <excerpt>dependencies 레이블
- 레이블은 프로젝트의 의존성 업데이트와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.
-사용 예시
-설정 방법
- 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub...</excerpt>
-    <tags>label, dependencies, dependabot</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
-    <author>GitHub Action</author>
+    <lastModified>2026-02-22T10:56:57+09:00</lastModified>
+    <author>JHL</author>
   </item>
   <item>
     <title>주간 위키 보고서 - 2026년 08주차</title>
@@ -5291,7 +3855,7 @@ AI가 수행한 작업은 50건으로,  13건,  14건,  9건 등이 주요 활�
 열린 이슈는 6개이며, 최근 7일간 12건의 이슈 활동이 있었습니다.
 문서 현...</excerpt>
     <tags>보고서, 주간, 통계</tags>
-    <lastModified>2026-02-23T20:49:47Z</lastModified>
+    <lastModified>2026-02-22T10:49:27+09:00</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -5431,6 +3995,17 @@ SEPilot Wiki는 AI 에이전트 기반의 자동화된 위키 시스템입니다
     <author></author>
   </item>
   <item>
+    <title>Diagrams Guide</title>
+    <slug>guide/diagrams-guide</slug>
+    <content>Diagrams Guide
+This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</content>
+    <excerpt>Diagrams Guide
+This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</excerpt>
+    <tags>diagrams, visuals, documentation</tags>
+    <lastModified>undefined</lastModified>
+    <author></author>
+  </item>
+  <item>
     <title>LLM Workflow</title>
     <slug>guide/llm-workflow</slug>
     <content>LLM Workflow
@@ -5438,66 +4013,6 @@ This document is a placeholder for the LLM Workflow guide. Provide step‑by‑s
     <excerpt>LLM Workflow
 This document is a placeholder for the LLM Workflow guide. Provide step‑by‑step instructions, architecture diagrams, and usage examples here.</excerpt>
     <tags>LLM, workflow, integration</tags>
-    <lastModified>undefined</lastModified>
-    <author></author>
-  </item>
-  <item>
-    <title>Theme Customization</title>
-    <slug>guide/theme-customization</slug>
-    <content>Theme Customization
-This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.</content>
-    <excerpt>Theme Customization
-This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.</excerpt>
-    <tags>theme, customization, appearance</tags>
-    <lastModified>undefined</lastModified>
-    <author></author>
-  </item>
-  <item>
-    <title>설정 파일 가이드</title>
-    <slug>guide/configuration</slug>
-    <content>설정 파일 가이드
-SEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.
-설정 파일 목록
-  파일   위치   용도  
- ------ ------ ------ 
-     루트   사이트 기본 정보  
-     루트   테마 (색상, 폰트, 레이아웃)  
-     루트   네비게이션 메뉴  
-     src/styles   커스텀 CSS  
-     src   GitHub 저장소 연결 설정  
-site.config.ts 상세
-theme.config.ts 상세
-색상 (colors)
-폰트 (fonts)
-레이아웃 (layout)
-테두리 반경 (borderRadius)
-navigation.config.ts 상세
-GitHub 저장소 설정
-Repository Secrets
-GitHub Repository Settings &gt; Secrets에서 설정:
-  변수   필수   설명  
- ------ ------ ------ 
-     O   OpenAI 호환 API URL  
-     O   API 키  
-     O   모델명 (예: gpt-4)  
-GitHub Pages 설정
-Repository Settings &gt; Pages
-Source: &quot;GitHub Actions&quot; 선택
-브랜치 push 시 자동 배포
-환경 변수
-빌드 시
-개발 시
- 파일에 설정:</content>
-    <excerpt>설정 파일 가이드
-SEPilot Wiki의 모든 설정 파일과 옵션을 상세히 설명합니다.
-설정 파일 목록
-  파일   위치   용도  
- ------ ------ ------ 
-     루트   사이트 기본 정보  
-     루트   테마 (색상, 폰트, 레이아웃)  
-     루트   네비게이션 메뉴  
-     src/styles   커스텀 CSS...</excerpt>
-    <tags>설정, 가이드, TypeScript</tags>
     <lastModified>undefined</lastModified>
     <author></author>
   </item>
@@ -5554,24 +4069,13 @@ mermai...</excerpt>
     <author></author>
   </item>
   <item>
-    <title>Getting Started</title>
-    <slug>guide/getting-started</slug>
-    <content>Getting Started
-This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.</content>
-    <excerpt>Getting Started
-This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.</excerpt>
-    <tags>getting-started, introduction, setup</tags>
-    <lastModified>undefined</lastModified>
-    <author></author>
-  </item>
-  <item>
-    <title>Diagrams Guide</title>
-    <slug>guide/diagrams-guide</slug>
-    <content>Diagrams Guide
-This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</content>
-    <excerpt>Diagrams Guide
-This document is a placeholder for the Diagrams Guide. Include guidelines on diagram tools, file formats, and best practices for visual documentation.</excerpt>
-    <tags>diagrams, visuals, documentation</tags>
+    <title>Configuration Guide</title>
+    <slug>guide/configuration-guide</slug>
+    <content>Configuration Guide
+This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.</content>
+    <excerpt>Configuration Guide
+This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.</excerpt>
+    <tags>configuration, settings, customization</tags>
     <lastModified>undefined</lastModified>
     <author></author>
   </item>
