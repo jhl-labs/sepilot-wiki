@@ -1,6 +1,100 @@
 {
   "entries": [
     {
+      "id": "82b7a052-b7f4-4ef8-9804-84d366b993f6",
+      "timestamp": "2026-02-23T18:28:22.516Z",
+      "actionType": "generate",
+      "issueNumber": 244,
+      "issueTitle": "문서 요청 #244",
+      "documentSlug": "244",
+      "documentTitle": "OpenTelemetry 개요 및 실전 가이드",
+      "summary": "새 문서 \"OpenTelemetry 개요 및 실전 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4716
+            },
+            {
+              "step": "outline",
+              "durationMs": 6762
+            },
+            {
+              "step": "write",
+              "durationMs": 25802
+            },
+            {
+              "step": "review",
+              "durationMs": 7585
+            }
+          ],
+          "totalDurationMs": 44865,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2007,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "0255d338-8567-4ee9-9b91-b48b0317db69",
+      "timestamp": "2026-02-23T18:27:34.206Z",
+      "actionType": "generate",
+      "issueNumber": 243,
+      "issueTitle": "문서 요청 #243",
+      "documentSlug": "ai/243",
+      "documentTitle": "LLM 진화 연대별 타임라인 및 171개 모델 개관",
+      "summary": "새 문서 \"LLM 진화 연대별 타임라인 및 171개 모델 개관\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 7590
+            },
+            {
+              "step": "outline",
+              "durationMs": 6963
+            },
+            {
+              "step": "write",
+              "durationMs": 20615
+            },
+            {
+              "step": "review",
+              "durationMs": 6493
+            },
+            {
+              "step": "refine",
+              "durationMs": 25605
+            }
+          ],
+          "totalDurationMs": 67266,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2984,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "7894c0ec-0a14-410e-958e-0b38ded90bf5",
       "timestamp": "2026-02-23T18:26:12.706Z",
       "actionType": "maintain",
@@ -3230,5 +3324,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-23T18:26:12.706Z"
+  "lastUpdated": "2026-02-23T18:28:22.517Z"
 }
