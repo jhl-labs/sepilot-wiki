@@ -1,43 +1,63 @@
 {
-  "collectedAt": "2026-02-23T05:56:14.140Z",
+  "collectedAt": "2026-02-23T06:52:08.682Z",
   "overview": {
     "totalDocuments": 34,
     "publishedDocuments": 30,
     "draftDocuments": 4,
-    "openRequests": 18,
+    "openRequests": 19,
     "closedRequests": 19,
-    "totalAIActions": 151
+    "totalAIActions": 153
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 2,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 7,
+      "estimatedTokens": 4528,
+      "totalPipelineDurationMs": 94080
     },
     "last24h": {
-      "aiActions": 7,
-      "documentsCreated": 0,
+      "aiActions": 8,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 7,
+      "estimatedTokens": 4528,
+      "totalPipelineDurationMs": 94080
     },
     "last7d": {
-      "aiActions": 74,
-      "documentsCreated": 15,
+      "aiActions": 76,
+      "documentsCreated": 16,
       "documentsModified": 13,
-      "tavilyApiCalls": 45,
-      "tavilyResults": 117,
-      "estimatedTokens": 35297,
-      "totalPipelineDurationMs": 792649
+      "tavilyApiCalls": 48,
+      "tavilyResults": 124,
+      "estimatedTokens": 39825,
+      "totalPipelineDurationMs": 886729
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-23T06:30:17.660Z",
+      "actionType": "generate",
+      "issueNumber": 239,
+      "documentTitle": "Incremental Static Regeneration (ISR) 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 94080,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4528
+    },
+    {
+      "timestamp": "2026-02-23T06:28:09.321Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-23T01:35:20.851Z",
       "actionType": "status_report",
@@ -217,33 +237,13 @@
       "durationMs": 44738,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2051
-    },
-    {
-      "timestamp": "2026-02-21T18:08:38.463Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-21T13:03:48.965Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 143,
-      "totalEstimatedTokens": 69204,
-      "avgDurationMs": 56637
+      "totalActions": 145,
+      "totalEstimatedTokens": 73732,
+      "avgDurationMs": 57975
     },
     "unknown": {
       "totalActions": 8,
