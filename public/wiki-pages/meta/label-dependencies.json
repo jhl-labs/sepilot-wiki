@@ -2,7 +2,7 @@
   "title": "Label: dependencies",
   "slug": "meta/label-dependencies",
   "content": "\n# dependencies 레이블\n\n`dependencies` 레이블은 프로젝트의 **의존성 업데이트**와 관련된 Pull Request에 자동으로 적용됩니다. Dependabot이 새로운 버전이 발견되면 해당 PR에 이 레이블을 붙여서 리뷰어가 의존성 변경임을 쉽게 인식할 수 있도록 합니다.\n\n## 사용 예시\n- `chore(deps): bump ajv from 6.12.6 to 6.14.0`\n- `chore(deps): bump lodash from 4.17.20 to 4.17.21`\n\n## 설정 방법\n`dependabot.yml` 파일에 의존성 업데이트를 활성화하고, 레이블이 존재하지 않을 경우 GitHub 레포지토리 설정에서 **Labels** 섹션으로 이동해 `dependencies` 레이블을 직접 생성합니다.\n\n> **Note**: 현재 레포지토리에는 `dependencies` 레이블이 존재하지 않아 Dependabot이 레이블을 추가하지 못하고 있습니다. 레이블을 생성한 뒤 Dependabot이 정상적으로 작동하도록 해 주세요.\n\n---\n\n*이 문서는 현재 이슈의 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*",
-  "lastModified": "2026-02-23T00:48:14Z",
+  "lastModified": "2026-02-23T06:28:09Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,12 +15,12 @@
   "order": 1,
   "history": [
     {
-      "sha": "729ba5e",
-      "message": "🌳 Wiki Tree Maintenance: 전체 36개의 문서가 9개의 상위 디렉터리(backend, kubernetes, docker, projects, bun, ai, frontend, cloud, meta)로 분류돼 있습니다. 대부분은 적절한 카테고리에 배치돼 있으나, 와 가 내용·해시가 동일해 중복이 존재하고, 는 메타 카테고리로 이동해야 합니다. 또한 몇몇 파일명이 한글·공백을 포함하거나 의미가 모호해 slug 형태로 정규화하면 가독성이 높아집니다. 루트 레벨에 문서가 없으므로 홈 페이지 유지만 하면 됩니다. 카테고리 메타데이터가 없는 , ,  디렉터리에 표시명과 정렬 순서를 추가하는 것이 좋습니다.",
+      "sha": "d1582fa",
+      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-23T00:48:14Z",
-      "isAutoCommit": true,
+      "date": "2026-02-23T06:28:09Z",
+      "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
     }
