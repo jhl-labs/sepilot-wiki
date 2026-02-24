@@ -1,6 +1,151 @@
 {
   "entries": [
     {
+      "id": "06adb54e-2232-477e-8127-7126581c9330",
+      "timestamp": "2026-02-24T06:29:46.315Z",
+      "actionType": "generate",
+      "issueNumber": 263,
+      "issueTitle": "문서 요청 #263",
+      "documentSlug": "ai/263",
+      "documentTitle": "Steerling‑8B – 토큰‑레벨 해석 가능한 대형 언어 모델",
+      "summary": "새 문서 \"Steerling‑8B – 토큰‑레벨 해석 가능한 대형 언어 모델\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2717
+            },
+            {
+              "step": "outline",
+              "durationMs": 14528
+            },
+            {
+              "step": "write",
+              "durationMs": 27186
+            },
+            {
+              "step": "review",
+              "durationMs": 8328
+            }
+          ],
+          "totalDurationMs": 52759,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2501,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "3661a512-6b4c-47a0-ac0e-877eb1267c8c",
+      "timestamp": "2026-02-24T06:28:50.353Z",
+      "actionType": "modify",
+      "issueNumber": 262,
+      "issueTitle": " [업데이트] OpenClaw Agent Security Incident: Email Automation Misbehavior",
+      "documentSlug": "projects/openclaw-complete-guide",
+      "documentTitle": "OpenClaw 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenClaw Agent Security Incident: Email Automation Misbehavior\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "0584d488-1a05-484e-8c2d-d4c53026bc85",
+      "timestamp": "2026-02-24T06:27:56.163Z",
+      "actionType": "generate",
+      "issueNumber": 261,
+      "issueTitle": "문서 요청 #261",
+      "documentSlug": "ai/261",
+      "documentTitle": "TPU v5e‑1에서 Tunix를 이용한 Easy FunctionGemma 파인튜닝 가이드",
+      "summary": "새 문서 \"TPU v5e‑1에서 Tunix를 이용한 Easy FunctionGemma 파인튜닝 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3856
+            },
+            {
+              "step": "outline",
+              "durationMs": 22103
+            },
+            {
+              "step": "write",
+              "durationMs": 29089
+            },
+            {
+              "step": "review",
+              "durationMs": 11994
+            },
+            {
+              "step": "refine",
+              "durationMs": 27793
+            }
+          ],
+          "totalDurationMs": 94835,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 4549,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ed7bcb7c-5ec2-4c41-bcee-224a75dfa1c3",
+      "timestamp": "2026-02-24T06:26:16.513Z",
+      "actionType": "modify",
+      "issueNumber": 260,
+      "issueTitle": " [업데이트] NIST AI Agent Security RFI and Emerging Standards",
+      "documentSlug": "ai/ai",
+      "documentTitle": "AI 에이전트 배포 실패 원인과 테스트 전략",
+      "summary": "문서 수정 요청 처리: \" [업데이트] NIST AI Agent Security RFI and Emerging Standards\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 45,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "56158b87-c822-4a81-b632-8dfead441aa2",
+      "timestamp": "2026-02-24T06:25:24.360Z",
+      "actionType": "modify",
+      "issueNumber": 259,
+      "issueTitle": " [업데이트] MCP Server Filesystem Mapping Attack and Mitigations",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP Server Filesystem Mapping Attack and Mitigations\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 68
+      }
+    },
+    {
       "id": "611396e0-5987-4cdc-8e54-028e61cb3f24",
       "timestamp": "2026-02-24T06:24:21.577Z",
       "actionType": "maintain",
@@ -4036,5 +4181,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-24T06:24:21.577Z"
+  "lastUpdated": "2026-02-24T06:29:46.315Z"
 }
