@@ -946,6 +946,8 @@ async function retriggerAgent(requestItems, updateItems) {
   console.log('\n🔁 === Retrigger Agent ===');
   const actions = [];
   const marker = '[issue-processor:retrigger]';
+  const retriggerClosedMarker = '[issue-processor:retrigger-closed]';
+  const retriggerUnresolvedMarker = '[issue-processor:retrigger-unresolved]';
   const { owner, repo, token } = getGitHubInfoFromEnv();
 
   // ── request Issue 처리 (문서 생성) ──
@@ -1029,13 +1031,25 @@ async function retriggerAgent(requestItems, updateItems) {
       break;
     }
 
+    const issueLabels = (issue.labels || []).map(l => l.name);
+    const isAutoDetectedIssue =
+      issueLabels.includes('auto-detected') || issueLabels.includes('news-intelligence');
     const comments = await fetchIssueComments(owner, repo, issue.number, token);
-
-    // 이미 수정 완료된 경우 (retrigger 마커 또는 성공 댓글 존재) → 닫기만 수행
-    const alreadyProcessed = comments.some(c =>
-      c.body.includes(marker) || c.body.includes('문서 수정 완료') || c.body.includes('✅')
+    const hasSuccessComment = comments.some(c =>
+      c.body.includes('## ✅ 문서가 수정되었습니다') ||
+      c.body.includes('✅ 문서가 수정되었습니다') ||
+      c.body.includes('문서 수정 완료')
     );
-    if (alreadyProcessed) {
+    const hasCloseMarker = comments.some(c =>
+      c.body.includes(retriggerClosedMarker) || c.body.includes(retriggerUnresolvedMarker)
+    );
+    const hasDocumentNotFoundComment = comments.some(c =>
+      c.user.type === 'Bot' && c.body.includes('대상 문서를 찾을 수 없습니다')
+    );
+    const hasHumanComment = comments.some(c => c.user.type !== 'Bot');
+
+    // 이미 수정 완료 판정이 있거나 이전 Retrigger가 종료 마커를 남겼으면 닫기
+    if (hasSuccessComment || hasCloseMarker) {
       console.log(`   🔒 #${issue.number} — 이미 수정 완료, 닫기 처리`);
       await closeGitHubIssue(issue.number);
       recordAction();
@@ -1043,8 +1057,19 @@ async function retriggerAgent(requestItems, updateItems) {
       continue;
     }
 
-    // 댓글이 있지만 retrigger 흔적 없음 → 건너뜀
-    if (comments.length > 0) {
+    // 문서 미탐지 댓글만 있는 경우에는 재시도 허용 (영구 정체 방지)
+    const canRetryNotFound = comments.length > 0 && hasDocumentNotFoundComment && !hasHumanComment;
+    if (canRetryNotFound) {
+      const hasRecentRetry = await hasRecentBotComment(issue.number, marker, 24);
+      if (hasRecentRetry) {
+        console.log(`   ⏭️ #${issue.number} — 최근 재시도 이력 있음, 건너뜀`);
+        continue;
+      }
+      console.log(`   🔁 #${issue.number} — 문서 미탐지 이력으로 재시도`);
+    }
+
+    // 댓글이 있으나 자동 재시도 조건이 아니면 사람 검토 대기
+    if (comments.length > 0 && !canRetryNotFound) {
       console.log(`   ⏭️ #${issue.number} — 댓글 있음 (미처리), 건너뜀`);
       continue;
     }
@@ -1073,11 +1098,49 @@ async function retriggerAgent(requestItems, updateItems) {
         'issue-body': issue.body || '',
       });
 
-      // 문서 수정 완료 → Issue 닫기
-      await closeGitHubIssue(issue.number);
-      recordAction();
-      actions.push({ type: 'retrigger_update', issueNumber: issue.number, title: issue.title });
-      console.log(`   ✅ #${issue.number} — 문서 수정 완료 및 닫기`);
+      // 재실행 후 결과를 댓글로 판단
+      const refreshedComments = await fetchIssueComments(owner, repo, issue.number, token);
+      const updatedSuccess = refreshedComments.some(c =>
+        c.body.includes('## ✅ 문서가 수정되었습니다') ||
+        c.body.includes('✅ 문서가 수정되었습니다') ||
+        c.body.includes('문서 수정 완료')
+      );
+      const updatedNotFound = refreshedComments.some(c =>
+        c.user.type === 'Bot' && c.body.includes('대상 문서를 찾을 수 없습니다')
+      );
+
+      if (updatedSuccess) {
+        await safeAddComment(issue.number, [
+          '✅ 수정 완료가 확인되어 Issue를 자동 종료합니다.',
+          '',
+          `<!-- ${retriggerClosedMarker} -->`,
+        ].join('\n'));
+        await closeGitHubIssue(issue.number);
+        recordAction();
+        actions.push({ type: 'retrigger_update', issueNumber: issue.number, title: issue.title });
+        console.log(`   ✅ #${issue.number} — 문서 수정 완료 및 닫기`);
+        continue;
+      }
+
+      if (updatedNotFound) {
+        if (isAutoDetectedIssue && !hasHumanComment) {
+          await safeAddComment(issue.number, [
+            '⚠️ 자동 업데이트를 재시도했지만 대상 문서를 확인할 수 없어 자동 종료합니다.',
+            '필요하면 문서 경로를 명시해 Issue를 다시 열어주세요.',
+            '',
+            `<!-- ${retriggerUnresolvedMarker} -->`,
+          ].join('\n'));
+          await closeGitHubIssue(issue.number);
+          recordAction();
+          actions.push({ type: 'retrigger_update_not_found_close', issueNumber: issue.number, title: issue.title });
+          console.log(`   🔒 #${issue.number} — 대상 문서 미탐지로 자동 종료`);
+        } else {
+          console.log(`   ⏸️ #${issue.number} — 대상 문서 미탐지, 수동 경로 입력 대기`);
+        }
+        continue;
+      }
+
+      console.log(`   ⏸️ #${issue.number} — 수정 결과 확인 불가, 열린 상태 유지`);
     } catch (error) {
       console.error(`   ❌ #${issue.number} — 문서 수정 실패: ${error.message}`);
       await safeAddComment(issue.number, [

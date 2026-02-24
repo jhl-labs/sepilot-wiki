@@ -64,7 +64,7 @@ export const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.yml', '.yaml']
 /* ── Issue Processor 설정 ── */
 
 /** Issue Processor: 한 번 실행당 최대 GitHub 액션 수 */
-export const MAX_ACTIONS_PER_RUN = parseInt(process.env.MAX_ACTIONS_PER_RUN, 10) || 5;
+export const MAX_ACTIONS_PER_RUN = parseInt(process.env.MAX_ACTIONS_PER_RUN, 10) || 30;
 
 /** Issue Processor: 미활동 판단 임계값 (일) */
 export const STALENESS_THRESHOLD_DAYS = parseInt(process.env.STALENESS_THRESHOLD_DAYS, 10) || 14;

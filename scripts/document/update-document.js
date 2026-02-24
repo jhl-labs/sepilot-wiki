@@ -24,9 +24,26 @@ const WIKI_DIR = resolve(process.cwd(), 'wiki');
  * Issue 본문에서 대상 문서 경로 추출
  */
 function extractTargetDocument(issueBody) {
-  // "대상 문서" 필드에서 경로 추출
-  const pathMatch = issueBody.match(/wiki\/([^\s\n]+\.md)/i);
-  if (pathMatch) return pathMatch[1];
+  const patterns = [
+    // "경로: `ai/foo.md`" 또는 "경로: `wiki/ai/foo.md`"
+    /경로[^\n`]*`([^`]+\.md)`/i,
+    // 일반적인 wiki 경로 표기
+    /wiki\/([^\s\n`]+\.md)/i,
+    // 백틱으로 감싼 상대 경로 (카테고리/문서.md)
+    /`([a-z0-9][^`\n]*\/[^`\n]+\.md)`/i,
+    // 따옴표로 감싼 파일 경로
+    /['"]([^'"]+\.md)['"]/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = issueBody.match(pattern);
+    if (match?.[1]) {
+      return match[1]
+        .trim()
+        .replace(/^\/?wiki\//i, '')
+        .replace(/^\/+/, '');
+    }
+  }
 
   // 제목으로 매칭할 문자열 추출
   const titleMatch = issueBody.match(/['"](.+?)['"]/);
@@ -62,12 +79,14 @@ runIssueWorkflow(
     if (!document.found) {
       const targetPath = extractTargetDocument(context.issueBody);
       if (targetPath) {
+        const targetSlug = targetPath.replace(/\.md$/i, '');
         // 전체 문서에서 검색
         const allDocs = await loadAllDocuments({ wikiDir: WIKI_DIR, includeContent: true });
         const match = allDocs.find(
           (d) =>
             d.path === targetPath ||
             d.filename === targetPath ||
+            d.slug === targetSlug ||
             d.title.includes(targetPath) ||
             targetPath.includes(d.slug)
         );

@@ -2,8 +2,9 @@ name: Issue Processor
 
 on:
   schedule:
-    # 매일 19:00 KST (10:00 UTC)
-    - cron: '0 10 * * *'
+    # 4시간마다 실행 (뉴스 인텔리전스 직후 30분)
+    # KST 09:30, 15:30, 21:30, 03:30
+    - cron: '30 0,6,12,18 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -13,7 +14,7 @@ on:
       max_actions:
         description: '한 번 실행당 최대 액션 수'
         required: false
-        default: '5'
+        default: '30'
       enabled_agents:
         description: '활성화할 에이전트 (쉼표 구분)'
         required: false
@@ -53,7 +54,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
-          MAX_ACTIONS_PER_RUN: ${{ github.event.inputs.max_actions || '5' }}
+          MAX_ACTIONS_PER_RUN: ${{ github.event.inputs.max_actions || '30' }}
           ENABLED_AGENTS: ${{ github.event.inputs.enabled_agents || 'quality_review,maintenance,staleness,deduplication,retrigger' }}
           DEDUP_HOURS: ${{ github.event.inputs.dedup_hours || '48' }}
 
