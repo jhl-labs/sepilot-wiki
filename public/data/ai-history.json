@@ -1,6 +1,93 @@
 {
   "entries": [
     {
+      "id": "c827e185-0a3c-4cda-8e02-5e33522f9d8b",
+      "timestamp": "2026-02-24T12:49:31.737Z",
+      "actionType": "generate",
+      "issueNumber": 273,
+      "issueTitle": " [요청] Enterprise GitOps Implementation – From CI/CD to Continuous Delivery at Scale",
+      "documentSlug": "enterprise-gitops-implementation-from-ci-cd-to-con",
+      "documentTitle": "Enterprise GitOps Implementation – From CI/CD to Continuous Delivery at Scale",
+      "summary": "새 문서 \"Enterprise GitOps Implementation – From CI/CD to Continuous Delivery at Scale\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5812
+            },
+            {
+              "step": "outline",
+              "durationMs": 11010
+            },
+            {
+              "step": "write",
+              "durationMs": 33459
+            },
+            {
+              "step": "review",
+              "durationMs": 6431
+            }
+          ],
+          "totalDurationMs": 56712,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2546,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "99237c81-f1a1-41ff-b1c3-ad16e720b1bb",
+      "timestamp": "2026-02-24T12:48:23.556Z",
+      "actionType": "quality_score",
+      "issueNumber": 264,
+      "issueTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Architecture: API Governance",
+      "documentSlug": "kubernetes/spotlight-on-sig-architecture-api-governance",
+      "documentTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Architecture: API Governance",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "dfc8a331-62f9-4f39-9783-8d2bec51a49d",
+      "timestamp": "2026-02-24T12:48:12.289Z",
+      "actionType": "quality_score",
+      "issueNumber": 265,
+      "issueTitle": "[Wiki Maintenance] [요청] Gordon: Docker&#8217;s AI Agent Just Got an Update",
+      "documentSlug": "gordon-docker-8217-s-ai-agent-just-got-an-update",
+      "documentTitle": "[Wiki Maintenance] [요청] Gordon: Docker&#8217;s AI Agent Just Got an Update",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "28ef2965-584e-4c1b-aeff-de672c4c4cfb",
+      "timestamp": "2026-02-24T12:47:57.692Z",
+      "actionType": "quality_score",
+      "issueNumber": 266,
+      "issueTitle": "[Wiki Maintenance] [요청] Run OpenClaw Securely in Docker Sandboxes",
+      "documentSlug": "docker/run-openclaw-securely-in-docker-sandboxes",
+      "documentTitle": "[Wiki Maintenance] [요청] Run OpenClaw Securely in Docker Sandboxes",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "9b0ef95a-5bfe-4796-b278-6d7a423f58d1",
       "timestamp": "2026-02-24T12:22:56.665Z",
       "actionType": "modify",
@@ -4651,5 +4738,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-24T12:22:56.665Z"
+  "lastUpdated": "2026-02-24T12:49:31.738Z"
 }

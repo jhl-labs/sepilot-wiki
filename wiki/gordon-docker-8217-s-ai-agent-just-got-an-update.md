@@ -1,7 +1,7 @@
 ---
 title: Gordon – Docker 전용 AI 에이전트 업데이트 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [Docker, AI, Gordon, 자동화, 개발자 도우미]
 ---
 
