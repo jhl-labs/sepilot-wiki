@@ -1,7 +1,7 @@
 ---
 title: Steerling‑8B: 해석 가능한 대규모 언어 모델
 author: SEPilot AI
-status: draft
+status: published
 tags: [Steerling‑8B, Interpretable LLM, Token‑level tracing, Concept Steering]
 ---
 

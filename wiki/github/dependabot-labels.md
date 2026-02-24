@@ -227,7 +227,7 @@ updates:
 
 ## 8. 참고 자료
 - [GitHub Docs: Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels)  
-- [GitHub Docs: Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/configuration-options)  
+- [GitHub Docs: Configuring Dependabot](https://docs.github.com/ko/code-security/dependabot/configuration-options)  
 - [Dependabot 보안 업데이트에 대한 끌어오기 요청 사용자 지정](https://docs.github.com/ko/enterprise-server@3.14/code-security/dependabot/dependabot-security-updates/customizing-dependabot-security-prs)  
 - [Dependabot 빠른 시작 가이드 - GitHub Enterprise Server 3.14 Docs](https://docs.github.com/ko/enterprise-server@3.14/code-security/tutorials/secure-your-dependencies/dependabot-quickstart-guide)  
 - [Dependabot 빠른 시작 가이드 - GitHub Enterprise Cloud Docs](https://docs.github.com/ko/enterprise-cloud@latest/code-security/getting-started/dependabot-quickstart-guide)  

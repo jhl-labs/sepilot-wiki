@@ -3,6 +3,7 @@ title: OpenTelemetry 입문 – 관측성 통합 가이드
 author: SEPilot AI
 status: published
 tags: [OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF]
+updatedAt: 2026-02-24
 ---
 
 ## 1. OpenTelemetry 소개  
@@ -50,7 +51,7 @@ OTel을 세 가지 모두에 적용하면 **자동 상관관계**가 형성됩�
 | **Exporter & Receiver** | OTLP, Jaeger, Zipkin, Prometheus, Datadog 등 다양한 백엔드와 통신합니다. |
 
 ### 데이터 모델 및 컨텍스트 전파  
-OpenTelemetry는 **Specification**을 통해 텔레메트리 데이터가 어떻게 정의·전파·내보내져야 하는지를 표준화합니다. 이는 언어·도구·벤더 간 **interoperability**를 보장합니다 [출처: ServiceNow](https://www.servicenow.com/kr/products/observability/what-is-opentelemetry.html).  
+OpenTelemetry는 **Specification**을 통해 텔레메트리 데이터가 어떻게 정의·전파·내보내져야 하는지를 표준화합니다. 이는 언어·도구·벤더 간 **interoperability**를 보장합니다 [출처: OpenTelemetry 공식 사이트](https://opentelemetry.io/).  
 
 ---
 
@@ -69,12 +70,14 @@ OpenTelemetry는 **Specification**을 통해 텔레메트리 데이터가 어떻
 
 예시 (Python 수동 계측)  
 
-    from opentelemetry import trace
-    tracer = trace.get_tracer(__name__)
+```python
+from opentelemetry import trace
+tracer = trace.get_tracer(__name__)
 
-    with tracer.start_as_current_span("my-span"):
-        # 비즈니스 로직
-        ...
+with tracer.start_as_current_span("my-span"):
+    # 비즈니스 로직
+    ...
+```
 
 ---
 
@@ -158,9 +161,11 @@ exporters:
    - `pip install opentelemetry-sdk opentelemetry-instrumentation-flask opentelemetry-exporter-otlp`  
    - 코드에 자동 계측 플래그 추가  
 
+        ```bash
         export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
         export OTEL_TRACES_EXPORTER=otlp
-        opentelemetry-instrument python app.py  
+        opentelemetry-instrument python app.py
+        ```
 
 3. **Collector 연결**  
    - 위에서 소개한 `otelcol` Docker 컨테이너를 실행하고, OTLP Receiver를 4317 포트에 바인딩.  

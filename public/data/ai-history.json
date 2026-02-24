@@ -1,6 +1,189 @@
 {
   "entries": [
     {
+      "id": "9f1e8c29-e787-4563-9cf9-24307a8c194d",
+      "timestamp": "2026-02-24T11:12:31.170Z",
+      "actionType": "modify",
+      "issueNumber": 267,
+      "issueTitle": "[Wiki Maintenance] [URL 깨짐] observability/opentelemetry 문서 참조 URL 확인 필요",
+      "documentSlug": "observability/opentelemetry",
+      "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] observability/opentelemetry 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 5,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "5d6c3ab6-57ee-4188-8c1d-8423963290a2",
+      "timestamp": "2026-02-24T11:11:48.969Z",
+      "actionType": "modify",
+      "issueNumber": 269,
+      "issueTitle": "[Wiki Maintenance] [URL 깨짐] github/dependabot-labels 문서 참조 URL 확인 필요",
+      "documentSlug": "github/dependabot-labels",
+      "documentTitle": "Dependabot 라벨 설정 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] github/dependabot-labels 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "3738269e-d34c-4092-af32-3d86dd19695a",
+      "timestamp": "2026-02-24T11:11:11.054Z",
+      "actionType": "generate",
+      "issueNumber": 264,
+      "issueTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Architecture: API Governance",
+      "documentSlug": "kubernetes/spotlight-on-sig-architecture-api-governance",
+      "documentTitle": "Spotlight on SIG Architecture: API Governance",
+      "summary": "새 문서 \"Spotlight on SIG Architecture: API Governance\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4346
+            },
+            {
+              "step": "outline",
+              "durationMs": 6122
+            },
+            {
+              "step": "write",
+              "durationMs": 19190
+            },
+            {
+              "step": "review",
+              "durationMs": 7995
+            }
+          ],
+          "totalDurationMs": 37654,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1666,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "6f3e7541-2380-4f28-8e6c-5a849dec5f75",
+      "timestamp": "2026-02-24T11:10:22.441Z",
+      "actionType": "generate",
+      "issueNumber": 265,
+      "issueTitle": "[Wiki Maintenance] [요청] Gordon: Docker&#8217;s AI Agent Just Got an Update",
+      "documentSlug": "gordon-docker-8217-s-ai-agent-just-got-an-update",
+      "documentTitle": "Gordon – Docker 전용 AI 에이전트 업데이트 가이드",
+      "summary": "새 문서 \"Gordon – Docker 전용 AI 에이전트 업데이트 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2909
+            },
+            {
+              "step": "outline",
+              "durationMs": 6167
+            },
+            {
+              "step": "write",
+              "durationMs": 23006
+            },
+            {
+              "step": "review",
+              "durationMs": 9572
+            }
+          ],
+          "totalDurationMs": 41654,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 1937,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "b20fb3bc-329e-43a1-9c7e-d0530ddb7465",
+      "timestamp": "2026-02-24T11:09:29.797Z",
+      "actionType": "generate",
+      "issueNumber": 266,
+      "issueTitle": "[Wiki Maintenance] [요청] Run OpenClaw Securely in Docker Sandboxes",
+      "documentSlug": "docker/run-openclaw-securely-in-docker-sandboxes",
+      "documentTitle": "Run OpenClaw Securely in Docker Sandboxes",
+      "summary": "새 문서 \"Run OpenClaw Securely in Docker Sandboxes\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3006
+            },
+            {
+              "step": "outline",
+              "durationMs": 7673
+            },
+            {
+              "step": "write",
+              "durationMs": 19747
+            },
+            {
+              "step": "review",
+              "durationMs": 14507
+            }
+          ],
+          "totalDurationMs": 44933,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2096,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "52f63e24-dae7-42f5-8062-f0607c5c7adf",
+      "timestamp": "2026-02-24T11:08:01.933Z",
+      "actionType": "quality_score",
+      "issueNumber": 263,
+      "issueTitle": " [요청] Steerling‑8B: An Interpretable Large Language Model",
+      "documentSlug": "ai/steerling-8b-an-interpretable-large-language-model",
+      "documentTitle": " [요청] Steerling‑8B: An Interpretable Large Language Model",
+      "summary": "자동 품질 검토 통과 (81점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "6fef38c6-1282-4ac0-83e5-e4e4c79e8246",
       "timestamp": "2026-02-24T09:24:29.905Z",
       "actionType": "maintain",
@@ -4341,5 +4524,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-24T09:24:29.905Z"
+  "lastUpdated": "2026-02-24T11:12:31.170Z"
 }
