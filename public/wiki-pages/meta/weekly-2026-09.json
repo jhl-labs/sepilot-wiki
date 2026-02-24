@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 9주차",
   "slug": "meta/weekly-2026-09",
   "content": "\n## 요약\n- 전체 문서 36개 중 신규 15개, 수정 4개, 현재 발행된 문서 31개(삭제 3개, 초안 2개)  \n- AI가 73건의 작업을 수행했으며, 유지보수(`maintain`) 29건이 가장 많음  \n- 열린 이슈 18건(최근 활동 15건)과 커밋 82건이 기록됨  \n\n## 문서 현황\n| 항목 | 수량 |\n|------|------|\n| 전체 문서 | 36 |\n| 발행(published) | 31 |\n| 삭제(deleted) | 3 |\n| 초안(draft) | 2 |\n| 신규 문서(newCount) | 15 |\n| 수정된 문서(modifiedCount) | 4 |\n| 이번 주 발행(publishedCount) | 0 |\n\n## AI 활동 요약\n- **총 작업**: 73건  \n- **작업 유형별**  \n  - maintain: 29건  \n  - generate: 15건  \n  - recover: 9건  \n  - quality_score: 11건  \n  - cross_reference: 5건  \n  - modify: 4건  \n\n### 주요 AI 활동\n- **Wiki Tree Maintenance**  \n  - `_wiki-tree` 문서에 구조 분석 후 자동 적용 38~43건, 보류 0~3건, Issue 1건 생성 (여러 차례 실행)  \n- **뉴스 인텔리전스**  \n  - 매일 200건 스캔, 신규 55~72건, 관련 13~24건, Issue 생성 0~5건 (스케줄링)  \n- **교차 참조 업데이트**  \n  - `_cross-reference` 문서에 21~25개 문서의 교차 참조를 자동 업데이트  \n- **문서 복구(recover)**  \n  - Issue #212, #199, #209, #198에 대해 피드백 기반 신규 문서 생성  \n- **문서 생성(generate)**  \n  - Issue #212 → “$100k AWS 라우팅 함정: S3 + NAT 게이트웨이 비용 최적화 가이드” (총 32 074 ms, 6개 소스)  \n  - Issue #209 → “GPU 가속 Rust 기반 얼굴 크롭 도구 설계 및 구현 가이드” (총 36 741 ms, 8개 소스)  \n  - Issue #207 → “클라우드 기반 영구 터미널 설계 및 구현 가이드” (총 44 738 ms, 9개 소스)  \n\n## 열린 이슈\n- **전체 오픈 이슈**: 18건  \n- **최근 활동(지난 주)**: 15건  \n\n## 주간 변경사항\n| SHA | 커밋 메시지 |\n|-----|--------------|\n| 729ba5e | 🌳 Wiki Tree Maintenance: 36문서가 9개 상위 디렉터리로 분류, 중복·메타 데이터 정비 필요 |\n| 21561b6 | 🌳 Wiki Tree Maintenance: 38문서가 10개 카테고리로 분류, 구조 비효율 및 파일명 정규화 제안 |\n| 77a095c | 🔗 교차 참조 업데이트: 25개 문서 |\n| f9181e2 | docs: Issue #216 - draft 문서 published 전환 |\n| abc1b0c | docs: Issue #210 - 피드백 반영 |\n\n(전체 82건의 커밋이 기록되었으며, 위 항목은 주요 변경을 대표합니다.)\n\n## 향후 과제\n- **초안(draft) 문서** 2건을 검토 후 발행(published) 혹은 삭제 처리  \n- **삭제된 문서** 3건에 대한 복구 필요성 검토  \n- **Wiki Tree** 구조와 메타데이터 정비를 지속하여 중복·불필요 카테고리 최소화  \n- **교차 참조** 자동 업데이트 빈도와 정확도 모니터링, 누락된 문서가 없는지 확인  \n- **AI 유지보수 작업**에서 보류된 항목(총 3~5건) 해결 및 생성된 Issue 추적  \n- **이슈 관리**: 현재 18건 중 미해결 이슈에 대한 우선순위 재조정 및 해결 속도 향상  \n\n---",
-  "lastModified": "2026-02-24T00:25:40Z",
+  "lastModified": "2026-02-24T00:29:41Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "13792f1",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
+      "sha": "a8575f1",
+      "message": "chore: 자동 상태 수집 - 2026-02-24 00:29",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-24T00:25:40Z",
+      "date": "2026-02-24T00:29:41Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0

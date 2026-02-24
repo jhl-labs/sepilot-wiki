@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-02-24T00:29:41.044Z",
+  "collectedAt": "2026-02-24T00:33:11.582Z",
   "repository": "jhl-labs/sepilot-wiki",
   "summary": {
     "totalWorkflows": 23,
@@ -708,10 +708,22 @@
       "name": "Issue Handler",
       "path": ".github/workflows/issue-handler.yml",
       "state": "active",
-      "overallStatus": "success",
+      "overallStatus": "in_progress",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/Issue%20Handler/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/issue-handler.yml",
       "recentRuns": [
+        {
+          "id": 22331140156,
+          "name": "Issue Handler",
+          "status": "in_progress",
+          "conclusion": null,
+          "branch": "main",
+          "event": "issues",
+          "createdAt": "2026-02-24T00:31:16Z",
+          "updatedAt": "2026-02-24T00:31:20Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22331140156",
+          "actor": "declue"
+        },
         {
           "id": 22325578472,
           "name": "Issue Handler",
@@ -759,21 +771,9 @@
           "updatedAt": "2026-02-23T21:31:33Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22325526536",
           "actor": "dependabot[bot]"
-        },
-        {
-          "id": 22325505204,
-          "name": "Issue Handler",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "issue_comment",
-          "createdAt": "2026-02-23T21:26:55Z",
-          "updatedAt": "2026-02-23T21:29:37Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22325505204",
-          "actor": "dependabot[bot]"
         }
       ],
-      "avgDurationMs": 185000,
+      "avgDurationMs": 190750,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -994,19 +994,19 @@
       "name": "Scheduled Status Collection",
       "path": ".github/workflows/scheduled-collect.yml",
       "state": "active",
-      "overallStatus": "in_progress",
+      "overallStatus": "success",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/Scheduled%20Status%20Collection/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/scheduled-collect.yml",
       "recentRuns": [
         {
           "id": 22331074441,
           "name": "Scheduled Status Collection",
-          "status": "in_progress",
-          "conclusion": null,
+          "status": "completed",
+          "conclusion": "success",
           "branch": "main",
           "event": "schedule",
           "createdAt": "2026-02-24T00:28:54Z",
-          "updatedAt": "2026-02-24T00:28:58Z",
+          "updatedAt": "2026-02-24T00:29:57Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22331074441",
           "actor": "declue"
         },
@@ -1059,7 +1059,7 @@
           "actor": "declue"
         }
       ],
-      "avgDurationMs": 66750,
+      "avgDurationMs": 66000,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -1252,13 +1252,13 @@
   ],
   "inProgress": [
     {
-      "id": 22331074441,
-      "workflowName": "Scheduled Status Collection",
+      "id": 22331140156,
+      "workflowName": "Issue Handler",
       "status": "in_progress",
       "branch": "main",
-      "event": "schedule",
-      "createdAt": "2026-02-24T00:28:54Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22331074441",
+      "event": "issues",
+      "createdAt": "2026-02-24T00:31:16Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22331140156",
       "actor": "declue"
     }
   ],
