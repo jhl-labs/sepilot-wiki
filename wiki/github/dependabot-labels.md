@@ -2,11 +2,15 @@
 title: "Dependabot 라벨 설정 가이드"
 description: "Dependabot이 PR에 자동으로 라벨을 추가하도록 설정하고, 누락된 라벨을 생성하는 방법을 안내합니다."
 category: "Guide"
-tags: ["Dependabot", "라벨", "GitHub", "CI"]
+tags:
+  - "Dependabot"
+  - "라벨"
+  - "GitHub"
+  - "CI"
 status: "draft"
 issueNumber: 0
 createdAt: "2026-02-23T10:00:00Z"
-updatedAt: "2026-02-23T10:00:00Z"
+updatedAt: 2026-02-24
 redirect_from:
   - meta-label-dependencies
   - backend-label-dependencies
@@ -38,10 +42,10 @@ Please fix the above issues or remove invalid values from `dependabot.yml`.
 ## 2. 라벨 생성 방법
 
 ### 2.1 GitHub UI를 이용한 라벨 생성
-1. 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.
-2. 오른쪽 사이드바에 **Labels** 링크가 있습니다. 클릭합니다.
-3. **New label** 버튼을 눌러 라벨을 생성합니다.
-4. **Name**에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택합니다.
+1. 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.  
+2. 오른쪽 사이드바에 **Labels** 링크가 있습니다. 클릭합니다.  
+3. **New label** 버튼을 눌러 라벨을 생성합니다.  
+4. **Name**에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택합니다.  
 5. **Create label**을 클릭합니다.
 
 ### 2.2 `gh` CLI를 이용한 라벨 생성
@@ -65,7 +69,8 @@ updates:
     labels:
       - "dependencies"   # 여기 라벨 이름이 정확히 일치해야 합니다.
 ```
-- 라벨 이름은 **대소문자와 공백을 정확히 일치**시켜야 합니다.
+
+- 라벨 이름은 **대소문자와 공백을 정확히 일치**시켜야 합니다.  
 - 필요 없는 라벨이 포함돼 있다면 해당 항목을 삭제하거나 올바른 라벨 이름으로 교체합니다.
 
 ## 4. 라벨 자동 생성 (옵션)
@@ -92,15 +97,140 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 위 워크플로우는 `main` 브랜치에 푸시될 때마다 `dependencies` 라벨이 존재하지 않으면 자동으로 생성합니다.
 
 ## 5. 검증
-1. 라벨을 생성한 뒤, Dependabot이 새 PR을 열면 자동으로 `dependencies` 라벨이 붙는지 확인합니다.
+1. 라벨을 생성한 뒤, Dependabot이 새 PR을 열면 자동으로 `dependencies` 라벨이 붙는지 확인합니다.  
 2. 라벨이 정상적으로 붙지 않으면 **Actions** 로그와 **Dependabot** 설정을 다시 검토합니다.
 
-## 6. 참고 자료
-- [GitHub Docs: Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels)
-- [GitHub Docs: Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/configuration-options)
+## 6. Handling Vulnerable Transitive npm Dependencies
+
+Dependabot은 직접적인 의존성(직접 종속)만 업데이트하지만, **전이적(transitive) npm 의존성**에 보안 취약점이 발견될 경우에도 자동으로 패치를 적용할 수 있습니다. 최근 커밋(`security: override vulnerable transitive npm deps`)에서는 `systeminformation` 과 `cookie` 같은 전이적 패키지를 강제로 업데이트하는 방법이 소개되었습니다.
+
+### 6.1 전이적 의존성 업데이트를 강제하는 방법
+Dependabot 설정 파일에 `allow` 섹션을 추가하면 특정 패키지에 대해 원하는 버전을 강제로 적용할 수 있습니다.
+
+```yaml
+# .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "indirect"   # 전이적 의존성 포함
+    ignore:
+      - dependency-name: "lodash"     # 예시: 특정 패키지는 무시
+    labels:
+      - "dependencies"
+```
+
+- `dependency-type: "indirect"` 를 지정하면 전이적 의존성도 검사 대상에 포함됩니다.  
+- `allow` 를 사용해 특정 전이적 패키지에 대해 버전 범위를 제한하거나, 최신 보안 버전을 강제로 적용하도록 할 수 있습니다.
+
+### 6.2 보안 업데이트 전용 설정
+전이적 의존성에 대한 보안 업데이트만 별도로 관리하고 싶다면 `security-updates` 옵션을 활용합니다.
+
+```yaml
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    security-updates-only: true   # 보안 업데이트만 생성
+    labels:
+      - "security"
+      - "dependencies"
+```
+
+이 설정은 **보안 취약점이 발견된 경우에만** PR을 생성하므로, 전이적 의존성의 긴급 패치를 놓치지 않을 수 있습니다.
+
+## 7. Security Override Practices
+
+전이적 의존성에 대한 직접적인 패치를 적용하려면 **보안 오버라이드**(security override) 전략을 사용합니다. 이는 Dependabot이 자동으로 생성하는 PR에 추가적인 메타데이터를 삽입하거나, 커밋 메시지를 커스터마이징해 팀이 빠르게 인식하도록 돕습니다.
+
+### 7.1 커밋 메시지 커스터마이징
+Dependabot PR의 커밋 메시지를 `security: override vulnerable transitive npm deps (package-name)` 형태로 지정하면, 리뷰어가 보안 관련 PR임을 즉시 파악할 수 있습니다.
+
+```yaml
+# .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "security"
+      include: "override vulnerable transitive npm deps"
+    labels:
+      - "security"
+      - "dependencies"
+```
+
+### 7.2 라벨 및 담당자 자동 지정
+Dependabot PR에 `security` 라벨을 추가하고, 보안 담당자를 자동으로 지정하도록 설정할 수 있습니다. 이는 **Dependabot 보안 업데이트에 대한 끌어오기 요청 사용자 지정** 문서에 설명된 방법과 동일합니다.
+
+```yaml
+# .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "security"
+      - "dependencies"
+    reviewers:
+      - "org/security-team"
+    assignees:
+      - "org/security-lead"
+```
+
+- `reviewers` 와 `assignees` 에 팀 또는 개인을 지정하면 PR이 생성될 때 자동으로 할당됩니다.  
+- 라벨을 `security` 로 지정하면 기존 라벨 정책(`dependencies`)과 함께 보안 이슈임을 명확히 표시합니다.
+
+### 7.3 실제 적용 예시
+아래는 최근 커밋 메시지를 반영한 실제 `dependabot.yml` 예시입니다.
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "security"
+      include: "override vulnerable transitive npm deps"
+    labels:
+      - "security"
+      - "dependencies"
+    reviewers:
+      - "security-team"
+    assignees:
+      - "security-lead"
+    allow:
+      - dependency-type: "indirect"
+        dependency-name: "systeminformation"
+      - dependency-type: "indirect"
+        dependency-name: "cookie"
+```
+
+위 설정은 `systeminformation` 과 `cookie` 같은 전이적 npm 패키지에 대한 보안 취약점이 발견될 경우, 자동으로 `security` 라벨이 붙은 PR을 생성하고, 지정된 리뷰어와 담당자에게 할당합니다.
+
+## 8. 참고 자료
+- [GitHub Docs: Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels)  
+- [GitHub Docs: Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/configuration-options)  
+- [Dependabot 보안 업데이트에 대한 끌어오기 요청 사용자 지정](https://docs.github.com/ko/enterprise-server@3.14/code-security/dependabot/dependabot-security-updates/customizing-dependabot-security-prs)  
+- [Dependabot 빠른 시작 가이드 - GitHub Enterprise Server 3.14 Docs](https://docs.github.com/ko/enterprise-server@3.14/code-security/tutorials/secure-your-dependencies/dependabot-quickstart-guide)  
+- [Dependabot 빠른 시작 가이드 - GitHub Enterprise Cloud Docs](https://docs.github.com/ko/enterprise-cloud@latest/code-security/getting-started/dependabot-quickstart-guide)  
 
 ---
 *이 문서는 Dependabot 라벨 설정 문제를 해결하기 위한 가이드이며, 필요에 따라 프로젝트에 맞게 수정해서 사용하세요.*

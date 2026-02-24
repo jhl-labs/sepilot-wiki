@@ -34,8 +34,8 @@
     {
       "id": 244,
       "number": 244,
-      "title": "문서 요청 #244",
-      "body": "",
+      "title": " [요청] OpenTelemetry 입문 – 관측성 통합 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8)\n**관련도**: 73/100\n**핵심 토픽**: OpenTelemetry, Observability, Distributed Tracing\n\n## 뉴스 요약\nObservability는 조각난 혼란이었습니다. 로그를 위한 하나의 에이전트, 메트릭을 위한 다른 라이브러리, 그리고 분산 추적을 위한 독점 SDK가 있었습니다. 만약 당신이 …\n\n## 상세 내용\nSource: Dev.to\n번역하려는 전체 텍스트를 제공해 주시면, 원본 형식과 마크다운 구문을 유지하면서 한국어로 번역해 드리겠습니다.\n관측성은 조각난 혼란이었습니다\n로그용 에이전트 하나, 메트릭용 다른 라이브러리, 그리고 분산 추적용 독점 SDK가 있었습니다.\n벤더를 교체하고 싶다면, 계측 코드를 처음부터 다시 작성해야 했습니다.\nOpenTelemetry (OTel)가 이를 해결했습니다.\nOpenTelemetry는 CNCF(클라우드 네이티브 컴퓨팅 재단)에서 Kubernetes 바로 뒤로 두 번째로 가장 활발한 프로젝트가 되었습니다. 애플리케이션이 텔레메트리 데이터를 생성하고 전송하는 방식을 표준화함으로써, OpenTelemetry는 데이터는 여러분의 것이고, 벤더가 아니라라는 것을 보장합니다.\n이 가이드에서 다루는 내용\nOpenTelemetry가 무엇인지\n아키텍처가 어떻게 작동하는지\n왜 현대 인프라에서 이제 기본 선택이 되었는지\nComic: OTel의 힘을 설명 (placeholder for illustration)\nOpenTelemetry란?\nOpenTelemetry는 오픈‑소스 관측 프레임워크로, 트레이스, 메트릭, 로그와 같은 텔레메트리 데이터를 생성, 수집, 내보낼 수 있게 해줍니다.\n스토리지 백엔드나 시각화 도구가 아닙니다.\n대신, 텔레메트리 데이터를 위한 범용 언어 및 전달 시스템 역할을 합니다.\nOpenTelemetry를 배관에 비유해 보세요: 애플리케이션과 인프라에서 데이터를 수집하고, 처리한 뒤, 선택한 백엔드(SigNoz, Prometheus, Jaeger 등)로 전달합니다.\n역사\n2019년에 두 주요 프로젝트의 합병으로 탄생했습니다:\n구글의 OpenCensus\nCNCF의 OpenTracing\n목표: 계측을 위한 단일 표준으로 산업을 통합하는 것.\n관측성의 세 가지 핵심 기둥\nPillarWhat It DoesExample\nTraces분산 시스템에서 요청이 이동하는 과정을 추적합니다. 트레이스는 스팬(예: DB 쿼리 또는 HTTP 요청)으\n\n## 판단 근거\nOpenTelemetry는 관측성 분야의 핵심 프로젝트이며, 현재 위키에 해당 주제가 전혀 다루어지지 않는다. 새로운 문서로 개념, 아키텍처, 주요 SDK 사용법을 정리한다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,17 +56,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-02-23T18:28:22.517Z",
-      "updated_at": "2026-02-23T18:28:22.519Z",
+      "updated_at": "2026-02-24T05:55:06.732Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/244",
-      "documentSlug": "244",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/244.md",
+      "documentSlug": "observability/opentelemetry",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/observability/opentelemetry.md",
       "comments": 0
     },
     {
       "id": 243,
       "number": 243,
-      "title": "문서 요청 #243",
-      "body": "",
+      "title": " [요청] AI LLM 타임라인 2017‑2026",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/show-hn-ai-timeline-171-llms-from-transformer-2017-6ebcbc)\n**관련도**: 77/100\n**핵심 토픽**: LLM timeline, Model evolution, AI history\n\n## 뉴스 요약\n전체 AI 타임라인 — 2017년 원본 Transformer부터 ChatGPT, GPT‑4, Claude, Gemini, LLaMA, Mistral, DeepSe...까지 모든 Large Language Model을 추적합니다.\n\n## 판단 근거\nTransformer부터 최신 GPT‑5.3까지 171개의 LLM을 연대순으로 정리한 내용은 현재 어떤 문서에도 존재하지 않으며, LLM 진화 흐름을 한눈에 볼 수 있는 독립 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -87,17 +87,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-02-23T18:27:34.207Z",
-      "updated_at": "2026-02-23T18:27:34.208Z",
+      "updated_at": "2026-02-24T05:56:05.906Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/243",
-      "documentSlug": "ai/243",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/243.md",
+      "documentSlug": "ai/ai-llm-2017-2026",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai-llm-2017-2026.md",
       "comments": 0
     },
     {
       "id": 240,
       "number": 240,
-      "title": "문서 요청 #240",
-      "body": "",
+      "title": " [요청] AI 에이전트 배포 실패 원인과 테스트 전략",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/why-76-of-ai-agent-deployments-fail-and-how-to-tes-2cd6f4)\n**관련도**: 73/100\n**핵심 토픽**: AI Agent 배포 실패, LangChain 보고서, 테스트 전략\n\n## 업데이트 제안 섹션\n- 배포 실패 주요 원인\n- 테스트 전략 – 결정론적·비결정론적 테스트 기법\n- 도구 및 프레임워크 (LangChain, 평가 파이프라인 등)\n- 실제 사례와 체크리스트\n\n## 뉴스 요약\nLangChain의 2026 State of Agent Engineering 보고서에 따르면 1,300명 이상의 응답자 중, 품질이 프로덕션 에이전트 배포에 대한 가장 큰 장벽이라고 답했습니다. 32%의 팀이 i...\n\n## 상세 내용\nSource: Dev.to\nLangChain의 2026 State of Agent Engineering 보고서(1,300명 이상 응답자)에 따르면, 품질이 #1 장벽입니다. 팀의 32%가 이를 주요 차단 요인으로 꼽습니다. 하지만 오직 52%의 팀만이 평가 시스템을 갖추고 있습니다.\n이것이 테스트 격차입니다. 에이전트는 비결정적이며 다단계 시스템이어서 전통적인 단위 테스트가 거의 무용지물입니다. 하지만 그렇다고 해서 전혀 테스트할 수 없는 것은 아닙니다.\nSource: …\n결정론적으로 테스트할 수 있는 것들은?\nLLM‑as‑judge(비용이 많이 들고 비결정적인) 를 사용하기 전에, 단순한 어설션만으로 검증할 수 있는 놀라운 양이 있습니다.\n1. 도구 호출 정확성\n에이전트가 올바른 도구를 호출했나요? 올바른 순서였나요? 올바른 인자를 사용했나요?\nfrom agent_eval import Trace, assert_tool_called, assert_tool_not_called, assert_tool_call_order\ntrace = Trace.from_jsonl(\"weather_agent_run.jsonl\")\nassert_tool_called(trace, \"get_weather\", args={\"city\": \"SF\"})\nassert_tool_not_called(trace, \"delete_user\")  # 안전 검사\nassert_tool_call_order(trace, [\"search\", \"read\", \"summarize\"])\n이렇게 하면 큰 범위의 회귀를 잡아낼 수 있습니다: 프롬프트가 바뀌어 에이전트가 도구 사용을 잊어버리거나, 도구를 잘못된 순서로 사용하는 경우 등.\n2. 루프 감지\n에이전트는 같은 도구를 같은 인자로 반복해서 호출하며 멈추는 경우가 많습니다.\nassert_no_loop(trace, max_repeats=3)      # 연속으로 3번 이상 같은 도구가 호출되면 실패\nassert_max_steps(trace, 10)              # \n\n## 판단 근거\n‘76% AI Agent 배포 실패’ 보고서는 배포 품질·테스트 격차라는 새로운 주제를 다루며, 현재 멀티‑에이전트 시스템 문서에 충분히 포함되지 않음. 별도 실용 가이드를 만들어 배포 검증 방법을 정리하는 것이 독자에게 큰 도움이 됨.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -118,10 +118,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-02-23T12:17:00.395Z",
-      "updated_at": "2026-02-23T12:17:00.397Z",
+      "updated_at": "2026-02-24T05:57:53.993Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/240",
-      "documentSlug": "ai/240",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/240.md",
+      "documentSlug": "ai/ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai.md",
       "comments": 0
     },
     {
@@ -1312,5 +1312,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-02-24T00:37:55.629Z"
+  "lastUpdated": "2026-02-24T05:57:53.993Z"
 }

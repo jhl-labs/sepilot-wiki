@@ -3,7 +3,7 @@ title: "Ollama와 Claude Code 연결 방법"
 description: "Ollama와 Claude Code를 연동하여 로컬 모델을 사용하는 방법을 단계별로 안내합니다."
 category: "Guide"
 tags: ["Ollama", "Claude Code", "로컬 모델", "AI 통합", "가이드"]
-status: "draft"
+status: published
 issueNumber: 0
 createdAt: "2026-02-24T12:40:00Z"
 updatedAt: "2026-02-24T12:40:00Z"

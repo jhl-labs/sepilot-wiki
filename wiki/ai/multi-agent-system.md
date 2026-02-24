@@ -6,7 +6,7 @@ tags: ["멀티 에이전트", "Self‑Healing", "AI", "아키텍처", "자율 �
 status: "published"
 issueNumber: 199
 createdAt: "2026-02-21T10:00:00Z"
-updatedAt: "2026-02-22T10:00:00Z"
+updatedAt: 2026-02-24
 related_docs: ["openclaw-complete-guide.md"]
 order: 8
 ---
@@ -62,7 +62,7 @@ class AgentState(Enum):
     FAILED = "failed"          # 외부 개입 필요
 ```
 
-*핵심 인사이트*: `DEGRADED`는 `FAILED`와 다르며, 대부분의 오류는 여기서 조기에 감지·복구됩니다. 실제 운영에서 **97.7 %** 이상의 오류가 `DEGRADED` 단계에서 자동 복구되며, `FAILED` 상태에 도달하는 비율은 **2.3 %**에 불과합니다.
+*핵심 인사이트*: `DEGRADED`는 `FAILED`와 다르며, 대부분의 오류는 여기서 조기에 감지·복구됩니다. 실제 운영에서 **97.7 %** 이상의 오류가 `DEGRADED` 단계에서 자동 복구되며, `FAILED` 상태에 도달하는 비율은 **2.3 %**에 불과합니다.
 
 ### 1.2 건강 점수(Health Score)
 
@@ -83,21 +83,21 @@ def compute_health(agent_output, context):
 
 | 지표 | 가중치 | 설명 |
 |------|--------|------|
-| coherence | 25% | 응답의 논리적 일관성 |
-| completeness | 20% | 작업 요구사항 충족 여부 |
-| latency | 15% | 응답 지연 시간 임계값 준수 |
-| memory | 25% | VRAM/RAM 사용량 안전 범위 |
-| consistency | 15% | 다른 에이전트와의 출력 일관성 |
+| coherence | 25 % | 응답의 논리적 일관성 |
+| completeness | 20 % | 작업 요구사항 충족 여부 |
+| latency | 15 % | 응답 지연 시간 임계값 준수 |
+| memory | 25 % | VRAM/RAM 사용량 안전 범위 |
+| consistency | 15 % | 다른 에이전트와의 출력 일관성 |
 
 건강 점수가 임계값 이하이면 복구 전략을 선택하고 실행합니다.
 
 ---
 
-## 2. Resource‑Efficient Deployment (8 GB VRAM)
+## 2. Resource‑Efficient Deployment (8 GB VRAM)
 
 ### 2.1 동적 에이전트 풀링
 
-8 GB VRAM을 가진 단일 머신에서 4,882개의 에이전트를 실행하기 위해 **동적 에이전트 풀링**을 사용합니다. 한 번에 GPU에 상주하는 에이전트 수는 약 12개이며, 나머지는 CPU/디스크에 직렬화됩니다.
+8 GB VRAM을 가진 단일 머신에서 4,882개의 에이전트를 실행하기 위해 **동적 에이전트 풀링**을 사용합니다. 한 번에 GPU에 상주하는 에이전트 수는 약 12개이며, 나머지는 CPU/디스크에 직렬화됩니다.
 
 ```python
 from queue import PriorityQueue
@@ -109,7 +109,7 @@ class AgentPool:
         self.vram_budget = vram_budget_mb
 
     def activate(self, agent_id, priority):
-        # VRAM 예산의 85%를 초과하면 우선순위가 낮은 에이전트를 퇴거
+        # VRAM 예산의 85 %를 초과하면 우선순위가 낮은 에이전트를 퇴거
         while self.current_vram() > self.vram_budget * 0.85:
             _, evicted = self.active.get()
             self.dormant[evicted.id] = evicted.serialize()
@@ -124,12 +124,12 @@ class AgentPool:
 
 | 기법 | 효과 | 설명 |
 |------|------|------|
-| 4‑bit 양자화 | VRAM 75% 절감 | 모델 가중치를 4비트로 압축 |
-| KV‑캐시 공유 | 메모리 40% 절감 | 유사한 컨텍스트의 에이전트 간 캐시 재사용 |
+| 4‑bit 양자화 | VRAM 75 % 절감 | 모델 가중치를 4비트로 압축 |
+| KV‑캐시 공유 | 메모리 40 % 절감 | 유사한 컨텍스트의 에이전트 간 캐시 재사용 |
 | 동적 풀링 | 동시 실행 제어 | 우선순위 기반 에이전트 활성화/비활성화 |
 | 디스크 직렬화 | 무제한 에이전트 수 | 비활성 에이전트를 디스크에 저장 |
 
-4‑bit 양자화와 KV‑캐시 공유를 결합하면 평균 활성화 지연 시간은 **약 850 ms** 수준입니다. 클라우드 없이, API 호출 없이, 감독 없이 단일 소비자 하드웨어에서 운영이 가능합니다.
+4‑bit 양자화와 KV‑캐시 공유를 결합하면 평균 활성화 지연 시간은 **≈ 850 ms** 수준입니다. 클라우드 없이, API 호출 없이, 감독 없이 단일 소비자 하드웨어에서 운영이 가능합니다.
 
 ---
 
@@ -137,39 +137,35 @@ class AgentPool:
 
 ### 3.1 실시간 모니터링
 
-에이전트는 매 실행 사이클 후 **복합 건강 점수**를 계산하고, 점수가 임계값 이하이면 `RECOVER` 단계로 전이합니다. 모니터링은 에이전트 외부가 아닌 **에이전트 내부**에 내장되어 있어, 별도의 모니터링 인프라 없이도 자체적으로 상태를 감지합니다.
+에이전트는 매 실행 사이클 후 **복합 건강 점수**를 계산하고, 점수가 임계값 이하이면 `RECOVER` 단계로 전이합니다. 모니터링은 에이전트 외부가 아닌 **에이전트 내부**에 내장되어 있어 별도의 인프라 없이 자체 감지가 가능합니다.
 
 ### 3.2 계층적 복구 전략
 
-복구 전략은 오류의 심각도에 따라 세 단계로 나뉩니다.
-
 | 단계 | 복구 전략 | 대상 오류 | 예시 |
 |------|-----------|-----------|------|
-| Level 1 | 재시도 + 파라미터 재조정 | 경미한 오류 | 환각, 일시적 타임아웃 |
-| Level 2 | GPU 슬롯 이동 + 메모리 압축 | 자원 부족 | OOM, VRAM 초과 |
-| Level 3 | FAILED 전이 + 외부 개입 요청 | 심각한 오류 | 모델 손상, 하드웨어 장애 |
+| Level 1 | 재시도 + 파라미터 재조정 | 경미한 오류 | 환각, 일시적 타임아웃 |
+| Level 2 | GPU 슬롯 이동 + 메모리 압축 | 자원 부족 | OOM, VRAM 초과 |
+| Level 3 | FAILED 전이 + 외부 개입 요청 | 심각한 오류 | 모델 손상, 하드웨어 장애 |
 
 ### 3.3 복구 성과
 
-이러한 접근 방식은 단순 재시도 루프 대비 다음과 같은 개선을 달성합니다.
-
-- 오탐지 실패(false‑positive failure) **73 % 감소**
-- 전체 에이전트 중 FAILED 도달 비율 **2.3 %**
-- 평균 복구 시간(MTTR) **< 2 초**
+| 지표 | 개선 |
+|------|------|
+| 오탐지 실패 감소 | 73 % |
+| FAILED 도달 비율 | 2.3 % |
+| 평균 복구 시간(MTTR) | < 2 초 |
 
 ---
 
 ## 4. 실험 결과
 
-아래 결과는 **독립 LLM 심판**이 구조화된 루브릭을 사용해 블라인드 평가한 것이며, 자체 보고가 아닙니다.
-
 | 지표 | 결과 | 비고 |
 |------|------|------|
-| 승률 | 96.5 % (201/208) | 토론 에이전트 블라인드 평가 |
-| 평균 심판 점수 | 4.68 / 5.0 | 독립 LLM 심판 |
-| 전체 품질 | 93.6 % | 복합 품질 지표 |
-| 접근성 | 5.0 / 5.0 | 사용 편의성 |
-| 안전 점수 | 4.6 / 5.0 | 안전성 평가 |
+| 승률 | 96.5 % (201/208) | 토론 에이전트 블라인드 평가 |
+| 평균 심판 점수 | 4.68 / 5.0 | 독립 LLM 심판 |
+| 전체 품질 | 93.6 % | 복합 품질 지표 |
+| 접근성 | 5.0 / 5.0 | 사용 편의성 |
+| 안전 점수 | 4.6 / 5.0 | 안전성 평가 |
 
 ---
 
@@ -187,47 +183,89 @@ class AgentPool:
 
 ## 6. 적용 시 고려사항
 
-1. **하드웨어 요구사항**: 최소 8 GB VRAM GPU (소비자급 가능)
-2. **양자화 트레이드오프**: 4‑bit 양자화는 모델 정확도를 소폭 희생하므로, 정밀도가 중요한 작업에서는 8‑bit 이상 권장
-3. **에이전트 간 통신**: 대규모 에이전트 풀에서는 메시지 큐 기반 비동기 통신이 효율적
-4. **직렬화 비용**: 디스크 I/O가 병목이 될 수 있으므로, NVMe SSD 사용 권장
-5. **건강 점수 튜닝**: 도메인에 따라 가중치 조정이 필요하며, 초기에는 보수적 임계값 설정을 추천
+1. **하드웨어 요구사항**: 최소 8 GB VRAM GPU (소비자급 가능)  
+2. **양자화 트레이드오프**: 4‑bit 양자화는 정확도에 약간 영향을 미치므로, 정밀도가 중요한 작업에서는 8‑bit 이상 권장  
+3. **에이전트 간 통신**: 대규모 풀에서는 메시지 큐 기반 비동기 통신이 효율적  
+4. **직렬화 비용**: 디스크 I/O가 병목이 될 수 있어 NVMe SSD 사용 권장  
+5. **건강 점수 튜닝**: 도메인별 가중치 조정이 필요하며, 초기에는 보수적 임계값 설정을 권장  
 
 ---
 
-## 7. AI 에이전트 시뮬레이션 플랫폼 (2026)
+## 7. 핵심 설계 패턴 (Agentic AI Design Patterns)
 
-AI 에이전트가 프로덕션에 진입하면서, 배포 전 체계적인 시뮬레이션이 필수가 되었습니다. 표준 벤치마크는 고정 프롬프트에 대한 출력만 측정하지만, 에이전트는 동적 상호작용과 복잡한 실행 경로 전반에 걸쳐 테스트되어야 합니다.
+euno.news와 Google Cloud Architecture Center에서 제시한 내용을 종합하면, 현대 LLM 기반 시스템에서 흔히 사용되는 **여섯 가지 기본 패턴**이 있습니다.
 
-### 효과적인 시뮬레이션 플랫폼의 핵심 기능
-- **다중 턴 상호작용 테스트**: 장시간 대화에서 메모리, 지시사항, 상태 전이가 올바르게 작동하는지 검증
-- **도구 오케스트레이션 검증**: 올바른 도구 선택, 파라미터 사용, 실패 시 폴백 동작 확인
-- **경로 분석**: 에이전트가 답변에 도달하는 과정을 추적하여 최종 응답뿐 아니라 추론 과정도 평가
+| 패턴 | 설명 | 주요 적용 사례 |
+|------|------|----------------|
+| **Agency Workflow (코드‑구동)** | 제어 엔지니어가 단계·분기·가드레일을 정의하고, LLM은 제한된 기능(생성·분류·검색)만 수행. deterministic pipeline. | 전통 RAG 파이프라인, 프롬프트 체이닝, 도구‑보강 서비스 |
+| **Autonomous Agent (모델‑구동)** | 목표·도구·제약을 제공하면 LLM이 스스로 행동·관찰·계획을 반복(ReAct). | 연구 에이전트, 코딩 어시스턴트, 조사/탐색 시스템 |
+| **Prompt Chaining** | 복잡 작업을 순차적인 프롬프트 단계로 분해. 각 단계는 구조화된 출력과 검증을 거침. | 계약 검토, 다단계 데이터 정제 |
+| **Iterative Refinement** | 초기 출력 → 평가 → 피드백 → 재생성. 반복 횟수 제한과 루브릭 기반 평가가 핵심. | 문서 요약, 코드 리뷰, 이미지 캡션 개선 |
+| **Parallelization (병렬화)** | 독립 서브태스크를 동시에 실행. Sectioning 또는 Voting 방식 사용. | 대규모 의견 분석, 멀티모달 입력 처리 |
+| **Routing + Specialist Workers** | 분류기(라우터)가 요청을 전문 워커에게 전달. 워커는 도메인‑특화 로직을 수행. | 고객 문의 라우팅, 법률 문서 분류, 의료 기록 처리 |
 
-### 주요 플랫폼 비교
+### 설계 프리미티브
+
+| 프리미티브 | 역할 |
+|------------|------|
+| **Tools** | API, DB 쿼리, 코드 실행 등 LLM이 호출 가능한 외부 기능 |
+| **Retrieval** | RAG를 통해 관련 문서를 컨텍스트에 삽입 |
+| **Memory** | STM(프롬프트 창)·LTM(벡터 DB, 파일) 형태의 지속적 컨텍스트 |
+| **Collaboration** | 에이전트 간 작업 위임·결과 교환·다중 에이전트 오케스트레이션 |
+
+---
+
+## 8. 실제 적용 사례
+
+| 사례 | 사용된 패턴 | 핵심 구현 포인트 |
+|------|------------|------------------|
+| **Self‑Healing AI Agents** (본 문서) | Autonomous Agent + Health‑Score Loop + Dynamic Pooling | 실시간 모니터링 → 계층적 복구 → 8 GB VRAM에서 4,882 에이전트 동시 운영 |
+| **법무 계약 검토 시스템** | Routing → Specialist Workers + Prompt Chaining + Durable Agent | 라우터가 NDA/계약을 분류 → 각 워커가 조항 추출·위험 평가 → 검증 단계에서 오류 차단 |
+| **코딩 어시스턴트 (Research Agent)** | Autonomous Agent + Tools (코드 실행) + Retrieval | 목표‑구동 루프가 코드 생성 → 실행 → 결과 관찰 → 재시도/개선 |
+| **고객 의견 감정 분석** | Parallelization + Retrieval + Tools | 4개의 전문 에이전트(감정, 키워드, 분류, 긴급도)에게 동시에 전달 → 결과 집계 |
+| **Durable Agent 기반 대출 승인** | Durable Agent + Orchestrator + Workers | 단계별 체크포인트 저장 → 중단·재개 지원 → 감사 로그 자동 생성 |
+
+---
+
+## 9. 패턴 선택 가이드
+
+| 선택 기준 | 권장 패턴 | 이유 |
+|----------|-----------|------|
+| **예측 가능성·감사 필요** | Agency Workflow, Prompt Chaining, Routing | deterministic 흐름 → 로그와 가드레일이 명확 |
+| **복잡한 의사결정·탐색** | Autonomous Agent, Iterative Refinement | 모델이 스스로 목표를 조정·학습 가능 |
+| **고처리량·스케일** | Parallelization, Dynamic Pooling | 독립 작업을 동시에 실행해 비용·시간 절감 |
+| **도메인‑전문성** | Specialist Workers, Routing | 각 워커가 최적화된 로직을 보유 |
+| **장기 실행·인증** | Durable Agent, Orchestrator + Workers | 체크포인트·재시도·감사 로그 제공 |
+| **리소스 제한 (예: 8 GB VRAM)** | Dynamic Pooling + 4‑bit Quantization | 메모리 사용 최소화, 활성 에이전트 수 제한 |
+
+**결정 트리 예시**  
+1. 작업이 **단순하고** 재현 가능해야 하나? → **Agency Workflow**  
+2. 작업이 **동적 목표**와 **도구 선택**을 요구? → **Autonomous Agent**  
+3. **동시성**이 핵심? → **Parallelization** + **Dynamic Pooling**  
+4. **전문 도메인**이 필요하고 **오류 차단**이 중요? → **Routing → Specialist Workers**  
+5. **장기 실행**·**인증**이 요구되면 → **Durable Agent**  
+
+---
+
+## 10. AI 에이전트 시뮬레이션 플랫폼 (2026)
 
 | 플랫폼 | 특화 영역 | 다중 에이전트 | 도구 테스트 | 가격 |
 |--------|-----------|:---:|:---:|------|
 | **AgentOps** | 에이전트 모니터링·디버깅 | ✅ | ✅ | Freemium |
 | **LangSmith** | LangChain 생태계 평가 | ✅ | ✅ | Freemium |
 | **Braintrust** | LLM 평가·실험 추적 | ✅ | ❌ | Freemium |
-| **Patronus AI** | 안전성·규정 준수 테스트 | ❌ | ✅ | Enterprise |
+| **Patronus AI** | 안전·규정 준수 테스트 | ❌ | ✅ | Enterprise |
 | **Confident AI** | 자동화된 에이전트 벤치마크 | ✅ | ✅ | Freemium |
 
-### 선택 가이드
-1. **Self‑Healing 에이전트 테스트**: 복구 루프의 정확한 동작 검증이 필요하면 AgentOps의 trace 기능 활용
-2. **멀티 에이전트 오케스트레이션**: 4,882+ 에이전트 규모의 시뮬레이션은 LangSmith의 배치 평가 기능 권장
-3. **프로덕션 안전성 검증**: 프롬프트 인젝션 방어 테스트는 Patronus AI 특화
-
-*출처: euno.news – The Best Platforms for AI Agent Simulation in 2026 (2026‑02‑22)*
+*Self‑Healing 에이전트*는 **AgentOps**의 trace 기능으로 복구 루프를 검증하고, **LangSmith**의 배치 평가로 4,882+ 규모의 시뮬레이션을 수행합니다.
 
 ---
 
-## 8. 참고 자료
+## 11. 참고 자료
 
-- 원본 기사: [euno.news – 8 GB VRAM으로 4,882개의 Self‑Healing AI Agents 구축](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8)
-- 관련 위키: [AI 에이전트 시스템 개요](../ai/)
-
----
+- 원본 기사: [euno.news – 8 GB VRAM으로 4,882개의 Self‑Healing AI Agents 구축](https://euno.news/posts/ko/i-built-4882-self-healing-ai-agents-on-8-gb-vram-h-f27aa8)  
+- 설계 패턴 원문: [euno.news – Designing Agentic AI Systems (How Real Applications Use Patterns)](https://euno.news/posts/ko/designing-agentic-ai-systems-how-real-applications-d71aa5)  
+- Google Cloud Architecture Center – *Agentic AI 시스템 설계 패턴 선택*  
+- YouTube – *Agentic AI Design Patterns Introduction and walkthrough*  
 
 *이 문서는 Issue #199를 기반으로 작성·업데이트되었습니다.*
