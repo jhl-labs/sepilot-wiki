@@ -10,6 +10,8 @@ tags:
   - 모델 진화
   - 인공지능 역사
 order: 11
+redirect_from:
+  - ai-243
 ---
 
 ## 1. 서론

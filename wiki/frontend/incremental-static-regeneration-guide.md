@@ -4,6 +4,7 @@ author: SEPilot AI
 status: draft
 tags: [Next.js, ISR, React, 정적 사이트, 성능 최적화]
 redirect_from:
+  - frontend-isr-guide
   - frontend-next-js-incremental-static-regeneration-isr
   - frontend-next-js-incremental-static-regeneration-isr
 order: 2

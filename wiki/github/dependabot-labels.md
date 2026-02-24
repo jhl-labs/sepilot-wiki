@@ -8,6 +8,8 @@ issueNumber: 0
 createdAt: "2026-02-23T10:00:00Z"
 updatedAt: "2026-02-23T10:00:00Z"
 redirect_from:
+  - meta-label-dependencies
+  - backend-label-dependencies
   - dependabot-missing-dependencies-label
   - troubleshooting-dependabot-label-missing
   - meta-label-dependencies

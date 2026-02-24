@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [API, Wiki, 라우트, 인증, 문서화]
 redirect_from:
+  - backend-wiki-api-route-guide
   - backend-wiki-api
   - wiki-api
 order: 1
