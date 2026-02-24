@@ -343,6 +343,8 @@ function triageAgent(issues) {
 async function qualityReviewAgent(items, allDocuments) {
   console.log('\n📝 === Quality Review Agent ===');
   const actions = [];
+  const marker = '[issue-processor:quality-review]';
+  const { owner, repo, token } = getGitHubInfoFromEnv();
 
   for (const issue of items) {
     if (!canAct()) {
@@ -350,13 +352,23 @@ async function qualityReviewAgent(items, allDocuments) {
       break;
     }
 
-    const marker = '[issue-processor:quality-review]';
+    const comments = await fetchIssueComments(owner, repo, issue.number, token);
+    const latestMarkerComment = comments
+      .filter(c => c.body.includes(marker))
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
 
-    // 중복 방지: 24시간 이내 마커 댓글 체크
-    const hasRecent = await hasRecentBotComment(issue.number, marker, 24);
-    if (hasRecent) {
-      console.log(`   ⏭️ #${issue.number} — 최근 리뷰 댓글 있음, 건너뜀`);
-      continue;
+    // 중복 방지:
+    // 24시간 이내 품질 리뷰 댓글이 있더라도, 그 이후 업데이트(새 댓글/라벨/수정)가 있으면 재검토 허용
+    if (latestMarkerComment) {
+      const reviewAt = new Date(latestMarkerComment.created_at);
+      const issueUpdatedAt = new Date(issue.updated_at);
+      const hoursSinceReview = (Date.now() - reviewAt.getTime()) / (1000 * 60 * 60);
+      const hasNewActivitySinceReview = issueUpdatedAt > reviewAt;
+
+      if (hoursSinceReview < 24 && !hasNewActivitySinceReview) {
+        console.log(`   ⏭️ #${issue.number} — 최근 리뷰 댓글 있음, 건너뜀`);
+        continue;
+      }
     }
 
     console.log(`   🔍 #${issue.number} — ${issue.title} 품질 검토 중...`);
@@ -370,8 +382,6 @@ async function qualityReviewAgent(items, allDocuments) {
     };
 
     // 이전 댓글에서 문서 경로 정보 추출
-    const { owner, repo, token } = getGitHubInfoFromEnv();
-    const comments = await fetchIssueComments(owner, repo, issue.number, token);
     for (const c of comments) {
       const locationMatch = c.body.match(/문서 위치[^\`]*\`([^`]+)\`/);
       const slugMatch = c.body.match(/\/wiki\/([^)"\s]+)/);
@@ -1180,14 +1190,33 @@ async function main() {
   }
 
   // 2. Triage — 분류
-  const categories = triageAgent(issues);
+  let currentIssues = issues;
+  let categories = triageAgent(currentIssues);
 
   // 3. Wiki 문서 로드 (Quality Review, Maintenance에 필요)
-  const allDocuments = await loadAllDocuments({ includeContent: true });
+  let allDocuments = await loadAllDocuments({ includeContent: true });
   console.log(`📚 Wiki 문서 ${allDocuments.length}개 로드됨`);
 
   // 4. 각 에이전트 실행
   const allActions = [];
+
+  // retrigger를 먼저 수행해 request/update-request를 즉시 처리한 뒤,
+  // 같은 런에서 재분류하여 품질 검토까지 연쇄 수행한다.
+  if (ISSUE_PROCESSOR_ENABLED_AGENTS.includes('retrigger')) {
+    const requestItems = categories.get('pending_request') || [];
+    const updateItems = categories.get('update_request') || [];
+    if (requestItems.length > 0 || updateItems.length > 0) {
+      const actions = await retriggerAgent(requestItems, updateItems);
+      allActions.push(...actions);
+
+      // retrigger 결과(새 draft 생성/이슈 닫힘)를 반영해 즉시 재분류
+      const refreshedIssues = await fetchAllOpenIssues();
+      currentIssues = refreshedIssues;
+      categories = triageAgent(currentIssues);
+      allDocuments = await loadAllDocuments({ includeContent: true });
+      console.log(`📚 Wiki 문서 재로드: ${allDocuments.length}개`);
+    }
+  }
 
   if (ISSUE_PROCESSOR_ENABLED_AGENTS.includes('quality_review')) {
     const draftItems = categories.get('draft_review') || [];
@@ -1214,24 +1243,15 @@ async function main() {
   }
 
   if (ISSUE_PROCESSOR_ENABLED_AGENTS.includes('deduplication')) {
-    const actions = await deduplicationAgent(issues);
+    const actions = await deduplicationAgent(currentIssues);
     allActions.push(...actions);
-  }
-
-  if (ISSUE_PROCESSOR_ENABLED_AGENTS.includes('retrigger')) {
-    const requestItems = categories.get('pending_request') || [];
-    const updateItems = categories.get('update_request') || [];
-    if (requestItems.length > 0 || updateItems.length > 0) {
-      const actions = await retriggerAgent(requestItems, updateItems);
-      allActions.push(...actions);
-    }
   }
 
   // 5. 결과 보고서
   const report = {
     timestamp: new Date().toISOString(),
     dryRun: IS_DRY_RUN,
-    totalIssuesScanned: issues.length,
+    totalIssuesScanned: currentIssues.length,
     categories: Object.fromEntries(
       [...categories.entries()].map(([k, v]) => [k, v.map(i => ({
         number: i.number,
@@ -1248,7 +1268,7 @@ async function main() {
 
   // 6. 요약
   console.log('\n📊 === 실행 요약 ===');
-  console.log(`   스캔된 Issue: ${issues.length}개`);
+  console.log(`   스캔된 Issue: ${currentIssues.length}개`);
   console.log(`   수행된 액션: ${actionCount}/${MAX_ACTIONS_PER_RUN}`);
   for (const action of allActions) {
     console.log(`   - #${action.issueNumber} [${action.type}] ${action.title}`);
