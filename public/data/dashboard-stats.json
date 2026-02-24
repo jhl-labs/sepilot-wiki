@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-24T08:49:32.409Z",
+  "collectedAt": "2026-02-24T09:50:12.887Z",
   "overview": {
     "totalDocuments": 38,
     "publishedDocuments": 29,
     "draftDocuments": 9,
     "openRequests": 25,
     "closedRequests": 19,
-    "totalAIActions": 205
+    "totalAIActions": 207
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 52,
+      "aiActions": 54,
       "documentsCreated": 12,
       "documentsModified": 29,
       "tavilyApiCalls": 36,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-24T09:24:29.905Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-24T09:24:15.788Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-24T06:52:30.703Z",
       "actionType": "generate",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-24T06:09:47.682Z",
-      "actionType": "modify",
-      "issueNumber": 227,
-      "documentTitle": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-24T06:09:17.749Z",
-      "actionType": "modify",
-      "issueNumber": 228,
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 197,
-      "totalEstimatedTokens": 101896,
-      "avgDurationMs": 55808
-    },
     "unknown": {
-      "totalActions": 8,
+      "totalActions": 9,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 198,
+      "totalEstimatedTokens": 101896,
+      "avgDurationMs": 55808
     }
   }
 }
