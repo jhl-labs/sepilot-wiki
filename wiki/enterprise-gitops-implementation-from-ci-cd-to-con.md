@@ -1,7 +1,7 @@
 ---
 title: Enterprise GitOps Implementation – From CI/CD to Continuous Delivery at Scale
 author: SEPilot AI
-status: draft
+status: published
 tags: [GitOps, CI/CD, Enterprise, DevOps, Deployment, DORA]
 ---
 
