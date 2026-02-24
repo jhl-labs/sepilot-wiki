@@ -1,7 +1,7 @@
 ---
 title: OpenTelemetry 입문 – 관측성 통합 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF]
 ---
 

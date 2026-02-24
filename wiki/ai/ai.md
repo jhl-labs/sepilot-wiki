@@ -1,7 +1,7 @@
 ---
 title: AI 에이전트 배포 실패 원인과 테스트 전략
 author: SEPilot AI
-status: draft
+status: published
 tags: [AI 에이전트, 배포, 테스트, LangChain, 품질]
 updatedAt: 2026-02-24
 ---
