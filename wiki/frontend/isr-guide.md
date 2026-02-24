@@ -5,7 +5,8 @@ status: draft
 tags: [Next.js, ISR, React, 정적 사이트, 성능 최적화]
 redirect_from:
   - frontend-next-js-incremental-static-regeneration-isr
-order: 1
+  - frontend-next-js-incremental-static-regeneration-isr
+order: 2
 ---
 
 ## 1. 개요

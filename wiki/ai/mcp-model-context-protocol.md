@@ -5,7 +5,7 @@ author: SEPilot AI
 status: published
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]
 related_docs: ["claude-code-release-history.md", "continuous-ai-agentic-ci.md", "continuous-ai.md"]
-order: 1
+order: 2
 updatedAt: 2026-02-24
 ---
 

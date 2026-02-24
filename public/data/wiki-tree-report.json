@@ -1,198 +1,174 @@
 {
-  "timestamp": "2026-02-23T21:31:25.359Z",
+  "timestamp": "2026-02-24T00:34:57.706Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "전체 43개의 위키 문서를 검토한 결과, 카테고리 구조가 전반적으로 잘 정의되어 있으나 몇 가지 중복·오류가 발견되었습니다. 주요 문제는 (1) `reports/` 폴더가 메타 보고서 용도로 사용돼 `meta/` 로 이동 필요, (2) 라벨 문서가 `backend/`와 `meta/`에 중복 존재, (3) 프론트엔드 ISR 가이드가 두 파일로 분리돼 중복, (4) AWS 비용 최적화 가이드가 두 파일로 중복, (5) 일부 카테고리 메타데이터와 문서 순서가 정의되지 않음.",
-    "totalDocuments": 43,
+    "summary": "전체 46개의 위키 문서가 13개의 카테고리로 흩어져 있습니다. Dependabot 라벨 가이드가 여러 위치에 중복되어 있고, ISR 가이드와 같은 오래된 파일이 삭제 상태이며, AI 카테고리에 초안(draft) 문서가 다수 존재합니다. 대부분 파일명은 slug 형태이지만, 중복·삭제된 문서는 정리하고, 카테고리 메타데이터와 문서 순서를 명시하면 탐색성이 크게 향상됩니다.",
+    "totalDocuments": 46,
     "categories": [
-      "reports",
       "backend",
+      "observability",
       "github",
       "kubernetes",
       "troubleshooting",
       "docker",
+      "projects",
+      "dependabot",
       "bun",
+      "ai",
       "frontend",
       "cloud",
-      "observability",
-      "troubleshooting",
-      "reports",
       "meta"
     ],
     "issues": [
-      "reports 폴더는 메타 보고서 용도로 사용되므로 meta/ 로 이동해야 함",
-      "Label: dependencies 문서가 backend/ 와 meta/ 에 중복 존재 (contentHash 동일)",
-      "프론트엔드 ISR 가이드가 두 파일( next‑js‑incremental‑static‑regeneration‑isr.md, 239.md )에 중복",
-      "AWS 비용 최적화 가이드가 두 파일( aws‑cost‑optimization.md, aws‑nat‑gateway‑cost‑trap.md )에 중복",
-      "카테고리별 displayName·order 메타데이터가 부재"
+      "Dependabot 라벨 가이드가 backend, meta, troubleshooting, dependabot 디렉터리에 중복 존재합니다.",
+      "Frontend ISR 가이드가 두 파일로 분리돼 있어 오래된 파일이 삭제 상태이며, 최신 파일은 draft 상태입니다.",
+      "AI 카테고리에 초안(draft) 문서가 9개 이상 있어 검토·출판이 필요합니다."
     ]
   },
   "suggestedStructure": {
-    "backend": [
-      "wiki-api-route-guide.md"
-    ],
-    "kubernetes": [
-      "node-readiness-controller.md",
-      "ingress-nginx-deprecation-guide.md",
-      "api-governance.md",
-      "cgroup-migration.md",
-      "release-notes.md"
-    ],
-    "troubleshooting": [
-      "dependabot-label-missing.md"
-    ],
-    "docker": [
-      "hardened-images.md"
-    ],
     "projects": [
-      "openclaw-complete-guide.md",
-      "claude-code-release-history.md",
-      "opencode.md",
-      "sepilot-desktop-intro.md",
-      "sepilot-technology-stack.md",
-      "antigravity-release-notes.md",
-      "rust-gpu-face-crop-tool.md",
-      "moltbook-intro.md"
+      "openclaw-complete-guide",
+      "claude-code-release-history",
+      "opencode",
+      "sepilot-desktop-intro",
+      "sepilot-technology-stack",
+      "antigravity-release-notes",
+      "rust-gpu-face-crop-tool",
+      "moltbook-intro"
     ],
     "ai": [
-      "mcp-model-context-protocol.md",
-      "cloud-terminal-persistent-ai-agent-sessions.md",
-      "continuous-ai.md",
-      "multi-agent-system.md",
-      "vibe-coding.md",
-      "gemini-3-1-pro.md",
-      "qwen3-5.md",
-      "glm-5.md",
-      "github-agentic-workflows.md"
-    ],
-    "backend": [
-      "wiki-api-route-guide.md"
-    ],
-    "github": [
-      "dependabot-labels.md"
+      "cloud-terminal-persistent-ai-agent-sessions",
+      "mcp-model-context-protocol",
+      "qwen3-5",
+      "continuous-ai",
+      "glm-5",
+      "github-agentic-workflows",
+      "vibe-coding",
+      "multi-agent-system",
+      "gemini-3-1-pro",
+      "code-review-agent-guide",
+      "243",
+      "240",
+      "ollama-claude-code"
     ],
     "kubernetes": [
-      "release-notes.md",
-      "node-readiness-controller.md",
-      "ingress-nginx-deprecation-guide.md",
-      "api-governance.md",
-      "cgroup-migration.md"
-    ],
-    "docker": [
-      "hardened-images.md"
+      "node-readiness-controller",
+      "ingress-nginx-deprecation-guide",
+      "api-governance",
+      "cgroup-migration",
+      "release-notes"
     ],
     "bun": [
-      "overview.md",
-      "comparison-pnpm-npm.md",
-      "github-actions-setup.md"
+      "overview",
+      "comparison-pnpm-npm",
+      "github-actions-setup"
     ],
-    "ai": [
-      "cloud-terminal-persistent-ai-agent-sessions.md",
-      "mcp-model-context-protocol.md",
-      "qwen3-5.md",
-      "continuous-ai.md",
-      "glm-5.md",
-      "github-agentic-workflows.md",
-      "vibe-coding.md",
-      "multi-agent-system.md",
-      "gemini-3-1-pro.md"
-    ],
-    "frontend": [
-      "239.md",
-      "api-service-layer.md"
+    "docker": [
+      "hardened-images"
     ],
     "cloud": [
-      "aws-nat-gateway-cost-trap.md"
+      "aws-nat-gateway-cost-trap"
+    ],
+    "frontend": [
+      "api-service-layer",
+      "isr-guide"
+    ],
+    "backend": [
+      "wiki-api-route-guide"
     ],
     "observability": [
-      "open-telemetry-guide.md"
+      "open-telemetry-guide"
     ],
-    "troubleshooting": [
-      "dependabot-label-missing.md"
-    ],
-    "reports": [
-      "weekly-2026-09.md"
+    "github": [
+      "dependabot-labels"
     ],
     "meta": [
-      "label-dependencies.md",
-      "weekly-2026-08.md",
-      "weekly-2026-09.md"
+      "weekly-2026-09",
+      "weekly-2026-08"
     ]
   },
   "results": {
-    "appliedActions": 46,
-    "skippedActions": 1,
+    "appliedActions": 54,
+    "skippedActions": 0,
     "dryRunPreviewedActions": 0,
     "createdIssues": 0
   },
   "actions": {
     "applied": [
       {
-        "type": "rename",
-        "priority": "high",
-        "source": "reports/weekly-2026-09.md",
-        "target": "meta/weekly-2026-09.md",
-        "reason": "보고서는 메타 데이터이며 meta/ 카테고리로 통합",
-        "autoApply": true
-      },
-      {
         "type": "merge",
-        "priority": "high",
         "source": "backend/label-dependencies.md",
-        "target": "meta/label-dependencies.md",
-        "reason": "contentHash 동일, meta/ 에서 관리하도록 통합 (backend/ 문서는 삭제 상태)",
+        "target": "github/dependabot-labels.md",
+        "reason": "Dependabot 라벨 설정 가이드가 동일 내용(내용 해시 9fegai)이며, github 디렉터리가 가장 적절한 위치입니다.",
         "autoApply": true
       },
       {
         "type": "merge",
-        "priority": "high",
+        "source": "meta/label-dependencies.md",
+        "target": "github/dependabot-labels.md",
+        "reason": "중복된 라벨 가이드(내용 해시 9fegai) 삭제 및 리다이렉트.",
+        "autoApply": true
+      },
+      {
+        "type": "merge",
+        "source": "troubleshooting/dependabot-label-missing.md",
+        "target": "github/dependabot-labels.md",
+        "reason": "같은 주제(Dependabot 라벨 누락)이며, 내용이 github 가이드에 통합됩니다.",
+        "autoApply": true
+      },
+      {
+        "type": "merge",
+        "source": "dependabot/missing-dependencies-label.md",
+        "target": "github/dependabot-labels.md",
+        "reason": "중복된 라벨 문제 해결 가이드(삭제된 파일) 를 github 가이드에 통합.",
+        "autoApply": true
+      },
+      {
+        "type": "merge",
         "source": "frontend/next-js-incremental-static-regeneration-isr.md",
-        "target": "frontend/239.md",
-        "reason": "두 파일 모두 ISR 가이드를 다루며 239.md 가 더 완전함. 중복 제거 및 239.md 를 최종 문서로 유지",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "cloud/aws-cost-optimization.md",
-        "target": "cloud/aws-nat-gateway-cost-trap.md",
-        "reason": "두 문서가 동일 주제( NAT Gateway 비용 함정) 를 다루며 내용이 중복. aws‑nat‑gateway‑cost‑trap.md 를 유지하고 나머지는 삭제",
+        "target": "frontend/isr-guide.md",
+        "reason": "ISR 가이드가 최신 파일(frontend/isr-guide.md)으로 통합되고, 오래된 파일은 삭제됩니다.",
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "backend",
+        "target": "projects",
         "metadata": {
-          "displayName": "백엔드",
+          "displayName": "프로젝트",
+          "order": 1
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "target": "ai",
+        "metadata": {
+          "displayName": "AI·LLM",
           "order": 2
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "kubernetes",
         "metadata": {
-          "displayName": "쿠버네티스",
+          "displayName": "Kubernetes",
           "order": 3
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "troubleshooting",
+        "target": "bun",
         "metadata": {
-          "displayName": "문제 해결",
+          "displayName": "Bun",
           "order": 4
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "docker",
         "metadata": {
           "displayName": "Docker",
@@ -202,57 +178,51 @@
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "projects",
+        "target": "cloud",
         "metadata": {
-          "displayName": "프로젝트",
+          "displayName": "클라우드 인프라",
           "order": 6
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "bun",
+        "target": "frontend",
         "metadata": {
-          "displayName": "Bun",
+          "displayName": "프론트엔드",
           "order": 7
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "ai",
+        "target": "backend",
         "metadata": {
-          "displayName": "AI·LLM",
+          "displayName": "백엔드",
           "order": 8
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "frontend",
+        "target": "observability",
         "metadata": {
-          "displayName": "프론트엔드",
+          "displayName": "관측성",
           "order": 9
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "cloud",
+        "target": "github",
         "metadata": {
-          "displayName": "클라우드",
+          "displayName": "GitHub",
           "order": 10
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
         "target": "meta",
         "metadata": {
           "displayName": "메타·보고서",
@@ -262,218 +232,234 @@
       },
       {
         "type": "set_order",
-        "priority": "low",
-        "target": "backend/wiki-api-route-guide.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "kubernetes/node-readiness-controller.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "kubernetes/api-governance.md",
-        "order": 3,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "kubernetes/cgroup-migration.md",
-        "order": 4,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "kubernetes/release-notes.md",
-        "order": 5,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "docker/hardened-images.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
         "target": "projects/openclaw-complete-guide.md",
         "order": 1,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
         "target": "projects/claude-code-release-history.md",
         "order": 2,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
         "target": "projects/opencode.md",
         "order": 3,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
         "target": "projects/sepilot-desktop-intro.md",
         "order": 4,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
         "target": "projects/sepilot-technology-stack.md",
         "order": 5,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
         "target": "projects/antigravity-release-notes.md",
         "order": 6,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
         "target": "projects/rust-gpu-face-crop-tool.md",
         "order": 7,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
         "target": "projects/moltbook-intro.md",
         "order": 8,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "ai/mcp-model-context-protocol.md",
+        "target": "ai/cloud-terminal-persistent-ai-agent-sessions.md",
         "order": 1,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "ai/cloud-terminal-persistent-ai-agent-sessions.md",
+        "target": "ai/mcp-model-context-protocol.md",
         "order": 2,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "ai/continuous-ai.md",
+        "target": "ai/qwen3-5.md",
         "order": 3,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "ai/multi-agent-system.md",
+        "target": "ai/continuous-ai.md",
         "order": 4,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "ai/vibe-coding.md",
+        "target": "ai/glm-5.md",
         "order": 5,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
         "target": "ai/github-agentic-workflows.md",
         "order": 6,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
         "target": "ai/vibe-coding.md",
         "order": 7,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
         "target": "ai/multi-agent-system.md",
         "order": 8,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
         "target": "ai/gemini-3-1-pro.md",
         "order": 9,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
-        "target": "frontend/239.md",
+        "target": "ai/code-review-agent-guide.md",
+        "order": 10,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/243.md",
+        "order": 11,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/240.md",
+        "order": 12,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "ai/ollama-claude-code.md",
+        "order": 13,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/node-readiness-controller.md",
         "order": 1,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
-        "target": "frontend/api-service-layer.md",
+        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
         "order": 2,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
+        "target": "kubernetes/api-governance.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/cgroup-migration.md",
+        "order": 4,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "kubernetes/release-notes.md",
+        "order": 5,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/overview.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/comparison-pnpm-npm.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "bun/github-actions-setup.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "docker/hardened-images.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
         "target": "cloud/aws-nat-gateway-cost-trap.md",
         "order": 1,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "low",
-        "target": "meta/label-dependencies.md",
+        "target": "frontend/api-service-layer.md",
         "order": 1,
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
-        "order": 3,
+        "target": "frontend/isr-guide.md",
+        "order": 2,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "backend/wiki-api-route-guide.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "observability/open-telemetry-guide.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "github/dependabot-labels.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "meta/weekly-2026-09.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "target": "meta/weekly-2026-08.md",
+        "order": 2,
         "autoApply": true
       }
     ],
-    "skipped": [
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "meta/weekly-2026-09.md",
-        "order": 3,
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: meta/weekly-2026-09.md"
-      }
-    ],
+    "skipped": [],
     "dryRunPreviewed": []
   },
   "createdIssues": []

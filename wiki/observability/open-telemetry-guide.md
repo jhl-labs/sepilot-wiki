@@ -5,6 +5,7 @@ status: draft
 tags: [OpenTelemetry, Observability, Distributed Tracing, CNCF]
 redirect_from:
   - 244
+order: 1
 ---
 
 ## 개요

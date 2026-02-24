@@ -3,6 +3,7 @@ title: Ollama와 Claude Code 연결 방법
 author: SEPilot AI
 status: draft
 tags: [Ollama, Claude Code, 로컬 모델, AI 통합, 가이드]
+order: 13
 ---
 
 ## 1. 문서 개요

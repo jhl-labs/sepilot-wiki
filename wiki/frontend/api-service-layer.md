@@ -5,7 +5,7 @@ status: published
 tags: [frontend, api, service-layer, documentation, coverage]
 redirect_from:
   - api
-order: 2
+order: 1
 related_docs: ["wiki-api.md"]
 ---
 
