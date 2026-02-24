@@ -2,7 +2,7 @@
   "title": "Dependabot 라벨 설정 가이드",
   "slug": "github/dependabot-labels",
   "content": "\n# Dependabot 라벨 설정 가이드\n\n이 문서는 **Dependabot**이 Pull Request에 자동으로 라벨을 붙일 수 있도록 설정하는 방법과, 라벨이 존재하지 않을 때 발생하는 오류를 해결하는 절차를 설명합니다.\n\n## 1. 문제 상황\n\nDependabot이 PR에 `dependencies` 라벨을 추가하려고 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 다음과 같은 오류가 발생했습니다.\n\n```\nThe following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\nPlease fix the above issues or remove invalid values from `dependabot.yml`.\n```\n\n## 2. 라벨 생성 방법\n\n### 2.1 GitHub UI를 이용한 라벨 생성\n1. 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.\n2. 오른쪽 사이드바에 **Labels** 링크가 있습니다. 클릭합니다.\n3. **New label** 버튼을 눌러 라벨을 생성합니다.\n4. **Name**에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택합니다.\n5. **Create label**을 클릭합니다.\n\n### 2.2 `gh` CLI를 이용한 라벨 생성\n```bash\ngh label create dependencies --color \"BFD4F2\" --description \"Dependabot dependency updates\"\n```\n위 명령을 실행하면 `dependencies` 라벨이 바로 생성됩니다.\n\n## 3. `dependabot.yml` 파일 검토\n\n라벨이 정상적으로 생성된 후에도 오류가 지속된다면 `dependabot.yml` 파일에 잘못된 라벨 이름이 지정되어 있는지 확인합니다.\n\n```yaml\n# .github/dependabot.yml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # 여기 라벨 이름이 정확히 일치해야 합니다.\n```\n- 라벨 이름은 **대소문자와 공백을 정확히 일치**시켜야 합니다.\n- 필요 없는 라벨이 포함돼 있다면 해당 항목을 삭제하거나 올바른 라벨 이름으로 교체합니다.\n\n## 4. 라벨 자동 생성 (옵션)\n\n프로젝트에 라벨이 아직 없을 경우, CI 워크플로우에서 자동으로 라벨을 생성하도록 스크립트를 추가할 수 있습니다.\n\n```yaml\n# .github/workflows/create-label.yml\nname: Create Dependabot Labels\non:\n  push:\n    branches: [ main ]\njobs:\n  create-label:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout repo\n        uses: actions/checkout@v3\n      - name: Create dependencies label if missing\n        run: |\n          if ! gh label list | grep -q \"dependencies\"; then\n            gh label create dependencies --color \"BFD4F2\" --description \"Dependabot dependency updates\"\n          fi\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n```\n위 워크플로우는 `main` 브랜치에 푸시될 때마다 `dependencies` 라벨이 존재하지 않으면 자동으로 생성합니다.\n\n## 5. 검증\n1. 라벨을 생성한 뒤, Dependabot이 새 PR을 열면 자동으로 `dependencies` 라벨이 붙는지 확인합니다.\n2. 라벨이 정상적으로 붙지 않으면 **Actions** 로그와 **Dependabot** 설정을 다시 검토합니다.\n\n## 6. 참고 자료\n- [GitHub Docs: Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels)\n- [GitHub Docs: Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/configuration-options)\n\n---\n*이 문서는 Dependabot 라벨 설정 문제를 해결하기 위한 가이드이며, 필요에 따라 프로젝트에 맞게 수정해서 사용하세요.*",
-  "lastModified": "2026-02-23T21:34:20Z",
+  "lastModified": "2026-02-24T00:35:21Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -16,21 +16,11 @@
   "order": 1,
   "history": [
     {
-      "sha": "0525d82",
-      "message": "🌳 Wiki Tree Maintenance: 46개의 위키 문서가 13개의 카테고리(프로젝트, AI, 백엔드, GitHub, Kubernetes, Docker, Bun, 프론트엔드, 클라우드, Observability, 트러블슈팅, 레포트, 메타)로 분류됩니다. 중복·유사 문서가 여러 군데 존재하고, 루트에 위치한 244.md 파일이 카테고리 밖에 있어 구조적 문제가 있습니다. 주요 개선점은 중복 문서 병합·삭제, 파일 이동·이름 정규화, 루트 파일을 적절한 카테고리로 이동, 카테고리 메타데이터와 문서 순서(order) 지정입니다. (retry 1)",
+      "sha": "60b9a30",
+      "message": "🌳 Wiki Tree Maintenance: 전체 46개의 위키 문서가 13개의 카테고리로 흩어져 있습니다. Dependabot 라벨 가이드가 여러 위치에 중복되어 있고, ISR 가이드와 같은 오래된 파일이 삭제 상태이며, AI 카테고리에 초안(draft) 문서가 다수 존재합니다. 대부분 파일명은 slug 형태이지만, 중복·삭제된 문서는 정리하고, 카테고리 메타데이터와 문서 순서를 명시하면 탐색성이 크게 향상됩니다.",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-23T21:34:20Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e6f2202",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-23T21:29:26Z",
+      "date": "2026-02-24T00:35:21Z",
       "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
