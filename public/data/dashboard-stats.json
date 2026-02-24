@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-02-24T13:58:08.138Z",
+  "collectedAt": "2026-02-24T14:50:22.847Z",
   "overview": {
     "totalDocuments": 38,
     "publishedDocuments": 29,
     "draftDocuments": 9,
     "openRequests": 29,
     "closedRequests": 19,
-    "totalAIActions": 223
+    "totalAIActions": 224
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 67,
+      "aiActions": 68,
       "documentsCreated": 15,
       "documentsModified": 35,
       "tavilyApiCalls": 45,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 769635
     },
     "last7d": {
-      "aiActions": 144,
+      "aiActions": 145,
       "documentsCreated": 33,
       "documentsModified": 48,
       "tavilyApiCalls": 99,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-24T14:12:50.845Z",
+      "actionType": "quality_score",
+      "issueNumber": 273,
+      "documentTitle": " [요청] Enterprise GitOps Implementation – From CI/CD to Continuous Delivery at Scale",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-24T12:49:31.737Z",
       "actionType": "generate",
@@ -227,21 +237,11 @@
       "durationMs": 55997,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2644
-    },
-    {
-      "timestamp": "2026-02-24T06:51:18.646Z",
-      "actionType": "generate",
-      "issueNumber": 263,
-      "documentTitle": "Steerling‑8B: 해석 가능한 대규모 언어 모델",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 37919,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1743
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 214,
+      "totalActions": 215,
       "totalEstimatedTokens": 112650,
       "avgDurationMs": 54810
     },
