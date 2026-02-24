@@ -1,6 +1,119 @@
 {
   "entries": [
     {
+      "id": "9b0ef95a-5bfe-4796-b278-6d7a423f58d1",
+      "timestamp": "2026-02-24T12:22:56.665Z",
+      "actionType": "modify",
+      "issueNumber": 274,
+      "issueTitle": " [업데이트] 전통적인 QA가 AI 에이전트에 실패하는 이유와 대응 방안",
+      "documentSlug": "ai/continuous-ai",
+      "documentTitle": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 전통적인 QA가 AI 에이전트에 실패하는 이유와 대응 방안\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 59,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "10b98d7d-5825-492a-836c-558fd762025b",
+      "timestamp": "2026-02-24T12:21:56.435Z",
+      "actionType": "generate",
+      "issueNumber": 273,
+      "issueTitle": "문서 요청 #273",
+      "documentSlug": "273",
+      "documentTitle": "엔터프라이즈 규모 GitOps 구현 가이드",
+      "summary": "새 문서 \"엔터프라이즈 규모 GitOps 구현 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3005
+            },
+            {
+              "step": "outline",
+              "durationMs": 8340
+            },
+            {
+              "step": "write",
+              "durationMs": 29711
+            },
+            {
+              "step": "review",
+              "durationMs": 12126
+            }
+          ],
+          "totalDurationMs": 53183,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2509,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "8e951b92-b550-4972-961f-bd441f83b087",
+      "timestamp": "2026-02-24T12:20:58.715Z",
+      "actionType": "modify",
+      "issueNumber": 272,
+      "issueTitle": " [업데이트] MCP 관련 최근 CVE 정리 및 방어 가이드",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP 관련 최근 CVE 정리 및 방어 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 21
+      }
+    },
+    {
+      "id": "47d21868-e6b3-48a7-8110-9cbd1d9e8c98",
+      "timestamp": "2026-02-24T12:19:16.141Z",
+      "actionType": "modify",
+      "issueNumber": 271,
+      "issueTitle": " [업데이트] MCP 보안 위협 – IDE 레이어 추가",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP 보안 위협 – IDE 레이어 추가\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 30
+      }
+    },
+    {
+      "id": "724ff559-8da7-4bec-80d9-aa9f27510c4d",
+      "timestamp": "2026-02-24T12:18:02.679Z",
+      "actionType": "modify",
+      "issueNumber": 270,
+      "issueTitle": " [업데이트] Model Context Protocol (MCP) – Playground & Testing Tools",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Model Context Protocol (MCP) – Playground & Testing Tools\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 10,
+        "deletions": 0
+      }
+    },
+    {
       "id": "cca4697c-a78d-4fe0-9774-fba4ea6d225c",
       "timestamp": "2026-02-24T12:16:47.697Z",
       "actionType": "maintain",
@@ -4538,5 +4651,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-24T12:16:47.697Z"
+  "lastUpdated": "2026-02-24T12:22:56.665Z"
 }
