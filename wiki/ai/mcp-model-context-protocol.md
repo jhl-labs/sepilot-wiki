@@ -251,9 +251,9 @@ scopes:
 
 | 기업 | 적용 영역 | 주요 Tool/Resource | 기대 효과 |
 |------|-----------|---------------------|-----------|
-| **FinTech A** | 고객 상담 자동화 | `crm.fetchCustomer`, `payment.initiate` | 평균 응답 시간 45 % 감소, PCI‑DSS 준수 |
-| **Manufacturing B** | 생산 라인 모니터링 | `sensor.read`, `maintenance.schedule` | 다운타임 20 % 감소, 로그 중앙화 |
-| **E‑commerce C** | 상품 추천 엔진 | `catalog.search`, `user.profile` | 전환율 12 % 상승, A/B 테스트 자동화 |
+| **FinTech A** | 고객 상담 자동화 | `crm.fetchCustomer`, `payment.initiate` | 평균 응답 시간 45 % 감소, PCI‑DSS 준수 |
+| **Manufacturing B** | 생산 라인 모니터링 | `sensor.read`, `maintenance.schedule` | 다운타임 20 % 감소, 로그 중앙화 |
+| **E‑commerce C** | 상품 추천 엔진 | `catalog.search`, `user.profile` | 전환율 12 % 상승, A/B 테스트 자동화 |
 
 ### 5.4 Claude MCP 기반 SonarCloud 자동화 파이프라인  
 
@@ -306,141 +306,75 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 - **성능**: 평균 RPC 레이턴시 45 ms (Docker), 120 ms (K8s)  
 - **유지보수**: 플러그인 기반 Tool 추가 시 재배포 없이 Hot‑Reload 지원  
 
-### 5.6 MCP Hammer – 신뢰 위험 요약  
+### 5.6 대규모 AI 에이전트 연결 사례  
 
-2024‑12 경 **Praetorian**이 공개한 **MCPHammer** 연구에 따르면, MCP 환경에서 신뢰 문제가 두 가지 주요 공격 벡터로 구분된다.
+**출처**: Euno.News – “250 AI 에이전트가 내 MCP 보안 스캐너에 연결될 때 내가 보는 것” (2026‑02‑24)  
 
-| 위험 유형 | 설명 | 현재 상황 (2025‑08 기준) |
-|----------|------|--------------------------|
-| **1️⃣ 노출된 인증‑없음 서버** | 인증이 전혀 없으며, `tools/list` 와 `tools/call` 모두 무제한으로 열려 있다. 187대가 민감한 도구(결제, 암호화폐 지갑, 코드 실행 등)를 노출하고 있다. | 기존 “Tier 1” 분류에 포함되며, 수동 스캔만으로는 위험을 완전히 파악하기 어렵다. |
-| **2️⃣ 악성 서버 위장** | 정상적인 MCP 서버처럼 보이지만, 모든 Tool 응답에 공격자가 삽입한 텍스트를 추가한다(프롬프트 인젝션). 텔레메트리 수집·원격 명령 실행 등 부가 악의적 행동을 수행한다. | 기존 인증‑티어(1‑3)로는 구분되지 않으며, **수동 스캔**(tools/list)만으로는 탐지 불가. |
+- **전체 요청**: 250건 (로그 시작 이후)  
+- **API Ask 사용량**: 137건 (`api_ask` 인터페이스)  
+- **허니팟 히트**: 1건 – `get_aws_credentials` 도구가 10일간 노출된 뒤 한 번 호출됨  
+- **고유 IP**: 146개 (MCP 프로토콜을 통해 연결)  
+- **연결 패턴**: 약 70 %가 `initialize → tools/list → disconnect` 순서만 수행, 실제 도구 호출은 없음. 이는 **도구 목록 자체가 공격 표면**임을 보여준다.  
 
-#### 핵심 신뢰 결함  
+#### 반복 방문자  
+- **서버**: `mcp.tableall.com` (일본 레스토랑 예약 시스템)  
+- **활동**: `api_ask` 인터페이스를 9회 스캔, 인증이 없고 6개의 도구가 노출됨(`create_reservation` 포함). 발견 후 1시간 내에 공개 책임자에게 보고.  
 
-1. **암호학적 검증 부재** – 클라이언트는 서버가 제공하는 Tool 설명·응답이 진짜인지 검증할 메커니즘이 없다.  
-2. **스코프·인증만으로는 충분치 않음** – 인증이 있더라도 악성 서버가 정상 스코프를 사용해 악의적 응답을 반환할 수 있다.  
-3. **동적 행동 변화 미감지** – 도구 설명이 바뀌거나 응답에 삽입된 텍스트가 추가되는 경우, 기존 정적 스캔은 이를 포착하지 못한다.  
+#### 지속 관찰자  
+- **IP**: 프랑스/포르투갈 지역, `/api/live` 엔드포인트를 매시간 폴링. 대시보드에 임베드된 형태로 추정, 인간과의 직접 교류는 없음.  
 
-### 5.7 MCPHammer Findings and Recommendations  
+#### 전체 보안 인사이트 (2025‑2026)  
+- **무인증 서버 비율**: 38 % (560개 서버 중) – 인증이 없으면 모든 AI 에이전트가 자유롭게 연결 가능.  
+- **대다수 독립 개발자·테스트 서버**는 공개적으로 열려 있어, 실제 공격자가 연결을 시도하는 경우가 빈번함.  
 
-#### 주요 발견  
+### 5.7 스케일링 및 모니터링 베스트 프랙티스  
 
-| 항목 | 내용 |
-|------|------|
-| **데이터셋 규모** | 535대 MCP 서버 조사, 그 중 200대는 인증이 없고 187대는 무제한 도구 노출. |
-| **악성 서버 기능** | *프롬프트 인젝션*, *텔레메트리 수집*, *임의 파일 다운로드·실행*, *원격 명령 수신* 등. |
-| **인증 티어 한계** | Tier 1(인증 없음)과 악성 서버를 동일하게 표시, 기존 스캔으로는 구분 불가. |
-| **행동 기반 탐지 필요** | 도구 설명 체크섬, 응답 패턴, 버전 변동 등을 지속적으로 모니터링해야 함. |
+대규모 에이전트 트래픽(수백~수천 연결) 환경에서 MCP 서버를 안정적으로 운영하기 위한 핵심 권고사항은 다음과 같다.
 
-#### 권고 사항  
+#### 1. **연결 제한 및 레이트 리밋**  
+- **IP‑당** 최소 10 req/min, 피크 시 100 req/min 수준으로 제한.  
+- **도구 호출**에 별도 레이트 리밋을 적용해 `api_ask`와 `tool.invoke`를 구분한다.  
 
-1. **행동 기반 모니터링 도입**  
-   - 도구 설명(`description`)과 스키마에 체크섬을 부여하고, 변경 시 알림을 생성한다.  
-   - 응답에 삽입된 텍스트(프롬프트 인젝션) 여부를 정규식·해시 기반으로 검증한다.  
-   - `mcp.event.resourceUpdated` 와 같은 알림을 활용해 실시간 변화를 추적한다.  
+#### 2. **도구 목록 최소화**  
+- `tools/list` 응답에 **필수 도구만** 노출하고, 내부 전용 도구는 별도 비공개 엔드포인트에 배치한다.  
+- **스코프 기반** 접근 제어로 읽기 전용 도구와 쓰기 전용 도구를 분리한다.  
 
-2. **활성 테스트(Active Probing)**  
-   - `tools/list` 후 **빈** `tools/call` 요청을 전송해 401/403 응답을 확인한다.  
-   - 인증‑티어가 `none`인 경우에도 최소 하나의 **인증 없는** 호출을 시도해 실제 실행 가능성을 검증한다.  
+#### 3. **실시간 로그 집계 & 알림**  
+- **JSON‑L** 형식으로 요청·응답을 중앙 로그(예: Elasticsearch, Loki)로 전송.  
+- **Prometheus** 메트릭: `mcp_requests_total`, `mcp_unique_ips`, `mcp_tool_calls_total`.  
+- **Alertmanager** 규칙: 동일 IP가 1분 내 50회 이상 `tools/list` 호출 시 경고, 허니팟 호출 감지 시 즉시 Slack/Email 알림.  
 
-3. **서버 신원 검증 강화**  
-   - MCP 서버 배포 시 JWS/PGP 서명 적용, IDE가 서명 검증에 실패하면 자동 차단한다.  
-   - 클라이언트는 서버가 제공하는 **Tool Manifest**(JSON)와 사전 공유된 해시를 비교한다.  
+#### 4. **헬스 체크와 자동 스케일링**  
+- **Kubernetes**: `readinessProbe`와 `livenessProbe`를 `/healthz` 엔드포인트에 구현.  
+- **Horizontal Pod Autoscaler**: CPU 사용률 70 % 초과 시 파드 수를 2배 확대, `mcp_active_sessions` 메트릭을 기준으로도 스케일링 가능.  
 
-4. **스코프·권한 최소화**  
-   - 공개된 서버라 하더라도 `read:file`·`invoke:weather_api` 등 **필요 최소 권한**만 부여한다.  
-   - 정기적으로 스코프를 리뷰하고, 사용되지 않는 Tool·Resource는 비활성화한다.  
+#### 5. **허니팟 및 위협 인텔리전스**  
+- 의도적으로 위험한 도구(예: `get_aws_credentials`)를 **허니팟**으로 배치해 악의적 스캔을 탐지한다.  
+- 탐지 시 자동으로 **IP 차단**(NetworkPolicy) 및 **보고서 생성**(CSV/JSON) 후 보안팀에 전달.  
 
-5. **멀티‑Tier 구분 정책**  
-   - 기존 Tier 1/2/3 외에 **Tier 1‑Malicious** 라벨을 도입해 “인증 없음 + 행동 이상 감지” 서버를 별도 관리한다.  
-   - CI/CD 파이프라인에 **MCPTrustScanner**를 포함해 배포 전 자동 검증을 수행한다.  
+#### 6. **보안 텍스트 & 책임 보고**  
+- `/.well-known/security.txt` 파일에 연락처와 취약점 보고 절차를 명시한다.  
+- 허니팟이나 비정상 트래픽이 감지되면 **CVE‑style** 보고서(날짜, IP, 도구, 행동)를 내부 위협 인텔리전스 플랫폼에 전송한다.  
 
-6. **공개 레지스트리 활용**  
-   - 공식 MCP 레지스트리(<https://modelcontextprotocol.io/registry>)에 서버 메타데이터를 등록하고, **신뢰 점수**(인증, 행동 이력, 서명 여부)를 표시한다.  
-   - 커뮤니티와 공유된 신뢰 점수를 기반으로 클라이언트가 자동으로 서버를 선택하도록 구현한다.  
+#### 7. **인증 강화**  
+- **API 키** 외에 **OAuth 2.0** 혹은 **JWT** 기반 토큰을 도입해 토큰 회전 주기를 짧게 유지한다.  
+- **Scope 검증**을 서버 측에서 강제하고, 클라이언트가 요청 시 `scope` 헤더를 포함하도록 표준화한다.  
 
-#### 적용 예시 (Python SDK)  
+#### 8. **관측 가능한 도구 버전 관리**  
+- 각 Tool·Resource에 **버전/체크섬** 메타데이터를 부여하고, `tools/list` 응답에 포함한다.  
+- 클라이언트는 버전이 변경될 경우 자동 업데이트 혹은 경고를 표시하도록 구현한다.  
 
-```python
-from mcp import McpClient
-import hashlib, json
+#### 9. **패턴 기반 탐지**  
+- `initialize → tools/list → disconnect` 와 같은 **정찰 패턴**을 탐지하는 규칙을 추가한다.  
+- 정찰이 일정 비율(예: 60 % 이상) 이상이면 **잠재적 스캐닝**으로 분류하고, 해당 IP를 **관찰 리스트**에 추가한다.  
 
-def checksum_schema(schema):
-    return hashlib.sha256(json.dumps(schema, sort_keys=True).encode()).hexdigest()
+#### 10. **주기적 보안 스캔**  
+- 내부 CI 파이프라인에 `scan_mcp_server` 도구를 포함해 **주간** 혹은 **일일** 스캔을 자동화한다.  
+- 스캔 결과는 **보안 대시보드**에 시각화하고, 미해결 이슈는 티켓 시스템에 자동 등록한다.  
 
-client = McpClient(
-    endpoint="https://mcp.example.com",
-    api_key="YOUR_KEY",
-    verify_signature=True,   # 서버 서명 검증 활성화
-)
+> 위 권고사항은 2025‑2026년 사이 560개 MCP 서버 조사 결과와 250개의 AI 에이전트가 실제로 연결된 운영 사례([Euno.News](https://euno.news/posts/ko/what-i-see-when-250-ai-agents-connect-to-my-mcp-se-054ac2))를 기반으로 도출된 실증적 데이터에 근거한다.  
 
-# 도구 목록 조회 후 체크섬 비교
-tools = client.call("mcp.tools.list")
-for t in tools:
-    local_hash = checksum_schema(t["schema"])
-    if local_hash != t["checksum"]:
-        print(f"[⚠️] Tool {t['toolId']} schema changed!")
-```
-
-위와 같은 **행동 기반 검증**을 기존 SDK에 통합하면, 악성 서버가 삽입한 프롬프트 텍스트나 변조된 스키마를 실시간으로 탐지할 수 있다.  
-
-### 5.8 Security Threats – IDE Layer  
-
-#### 개요  
-2026‑02‑24에 발표된 Knostic.ai 연구(CVE‑2026‑27180)에서는 **네 번째 공격 계층**으로 IDE(통합 개발 환경)를 정의한다. 기존 3계층(서버, 개발자 도구, 호스트 애플리케이션) 외에, **IDE 자체가 MCP 클라이언트 역할을 수행하면서 공격 표면이 크게 확대**된다.  
-
-- **대상**: Cursor IDE – 수백만 개발자가 사용하는 AI‑기반 코드 편집기 (VS Code 포크)  
-- **공격 흐름**  
-  1. 악성 MCP 서버가 배포(예: GitHub, Discord, 공개 리스트)  
-  2. Cursor가 `tools/list` 를 호출해 사용 가능한 도구를 탐색  
-  3. 악성 서버는 **Hook**을 삽입해 Cursor 내부 확장 디렉터리를 조작  
-  4. Cursor에 내장된 브라우저에 `document.body.innerHTML = <attacker payload>` 를 삽입  
-  5. 사용자가 IDE 내 브라우저 탭에서 정상 URL을 보면서도 공격자가 제어하는 페이지에 로그인 정보를 입력 → **자격 증명 탈취**  
-  6. 탈취된 자격 증명으로 워크스테이션 전체가 장악됨  
-
-> **핵심**: 도구 실행이 전혀 필요 없으며, 단순히 `tools/list` 정찰 호출만으로 IDE 내부 코드가 변조된다.  
-
-### 5.9 Mitigation Strategies for IDE‑Based Attacks  
-
-| 방어 조치 | 구현 방법 | 기대 효과 |
-|-----------|----------|-----------|
-| **확장 파일 무결성 검사** | VS Code와 동일하게 SHA‑256 체크섬·디지털 서명을 적용. IDE 시작 시 확장 디렉터리 전체를 검증하고, 변조 시 경고 표시. | 무단 수정 즉시 탐지, 악성 서버가 삽입한 스크립트 차단 |
-| **내장 브라우저 샌드박싱** | 브라우저 프로세스를 별도 OS‑레벨 샌드박스(예: Chromium sandbox)에서 실행하고, 파일·네트워크 접근을 제한. | 브라우저 인젝션이 IDE 전체에 미치는 영향 최소화 |
-| **MCP 서버 패키지 코드 서명** | 서버 배포 시 JWS/PGP 서명 적용, IDE가 서명 검증에 실패하면 자동 차단. | 악성 서버 배포 방지, 신뢰 체인 구축 |
-| **컨테이너 격리 (Docker)** | MCP 서버를 Docker 컨테이너에서 실행하고, `--read-only` 파일시스템 및 최소 권한 네트워크 정책 적용. | 서버 자체 침해 시 IDE 환경으로 전파 차단 |
-| **YOLO/Auto‑run 모드 비활성화** | IDE 설정 파일(`cursor.yaml`)에 `autoRun: false` 기본값 적용, 사용자에게 명시적 확인 요구. | 자동 도구 호출에 의한 무인 공격 차단 |
-| **MCP 서버 감시·화이트리스트** | `mcp.trust.registry`에 신뢰된 서버 리스트를 유지하고, IDE가 리스트 외 서버와 연결 시 경고·차단. | 악성 서버와의 초기 연결 차단 |
-| **정기적인 IDE 무결성 스캔** | CI 파이프라인에 `ide-integrity-scanner` 에이전트 추가, 매일 IDE 설치 파일·확장 디렉터리 해시 비교. | 지속적인 무결성 모니터링, 침해 조기 탐지 |
-| **사용자 교육** | “MCP 서버는 IDE 권한으로 실행됩니다 → 루트 접근처럼 다루세요” 메시지와 함께 보안 가이드 제공. | 인간 실수에 의한 위험 감소 |
-
-#### 구체적인 적용 예시 (Cursor 설정)  
-
-```yaml
-# ~/.cursor/mcp.yaml
-apiKey: ${MCP_API_KEY}
-server: https://trusted-mcp.example.com
-autoRun: false          # 자동 실행 비활성화
-integrityCheck: true    # 서명·체크섬 검증 활성화
-whitelist:
-  - https://trusted-mcp.example.com
-  - https://internal-mcp.corp
-```
-
-#### 보안 워크플로  
-
-1. **배포 전**: 모든 MCP 서버는 CI에서 `code‑sign` 단계 거쳐 서명 파일(`server.sig`)을 생성한다.  
-2. **IDE 시작 시**: Cursor는 `server.sig`와 공개키를 검증하고, 검증 실패 시 연결을 차단한다.  
-3. **런타임**: `tools/list` 응답에 포함된 스키마 체크섬을 검증하고, 변조 시 `mcp.event.securityAlert` 를 발생시켜 UI에 경고한다.  
-4. **사후 대응**: `ide-integrity-scanner` 가 정기적으로 해시를 비교해 변조를 감지하면, 자동으로 해당 확장을 비활성화하고 관리자에게 알린다.  
-
-#### 기대 효과 요약  
-
-- **공격 표면 축소**: 악성 서버가 `tools/list` 로 IDE를 변조하는 경로 차단  
-- **실시간 탐지**: 무결성 검사와 서명 검증을 통해 변조 시 즉시 알림  
-- **격리 강화**: 브라우저 샌드박스와 컨테이너 격리로 침해 확산 방지  
-- **운영 비용 절감**: 자동화된 무결성 스캔으로 수동 검토 부담 감소  
-
-### 5.10 Recent MCP CVEs (2025‑2026)
+### 5.8 최근 MCP CVEs (2025‑2026)
 
 아래 표는 2025‑2026년에 보고된 주요 MCP 관련 CVE와 해당 취약점이 발생한 함수·구현을 정리한 것이다. 모든 CVE는 **CWE‑78 (OS Command Injection)** 에 해당한다.
 
@@ -458,28 +392,50 @@ whitelist:
 | **CVE‑2026‑25650** | 2026 | `MCP‑Salesforce Connector` – `getattr(obj, user_input)` (Python) | 임의 객체 속성 접근 → 코드 실행 | 9.5 | euno.news |
 
 **공통 패턴**  
-- 대부분 `exec`, `execSync`, `child_process.exec`, `subprocess.run(..., shell=True)` 형태의 **문자열 연결**을 사용.  
-- 입력값 검증이 부재하거나, **인자 배열** 대신 **쉘 문자열**을 직접 구성한다.  
+- 대부분 `exec`, `execSync`, `child_process.exec`, `subprocess.run(..., shell=True)` 형태의 문자열 연결을 사용.  
+- 입력값 검증이 부재하거나 **인자 배열** 대신 **쉘 문자열**을 직접 구성한다.  
 
-### 5.11 Mitigation & Patch Recommendations
+### 5.9 Mitigation & Patch Recommendations  
 
 #### 1. 코드 레벨 방어  
 | 언어 | 위험 함수 | 안전 대체 함수 | 구현 팁 |
 |------|-----------|----------------|--------|
-| **Node.js** | `exec`, `execSync` | `execFile`, `spawn` (인자 배열) | 인자를 배열 형태로 전달하고 `shell: false` 옵션을 명시 |
+| **Node.js** | `exec`, `execSync` | `execFile`, `spawn` (인자 배열) | 인자를 배열 형태로 전달하고 `shell: false` 옵션 명시 |
 | **Python** | `subprocess.run(..., shell=True)` | `subprocess.run([...], shell=False)` | 리스트 형태 인자 전달, `shlex.quote` 로 개별 파라미터 이스케이프 |
 | **Go** | `os/exec.Command` (문자열) | `exec.CommandContext` (인자 배열) | `CommandContext(ctx, "git", "clone", userInput)` 형태 사용 |
 | **Rust** | `std::process::Command::new(...).arg(...).output()` | 동일하지만 **절대 경로 검증** 추가 | `Path::new(user_input).canonicalize()?` 로 경로 정규화 |
 
 #### 2. 입력 검증 & 정규화  
 - **화이트리스트** 기반 파라미터 허용 (예: 허용된 파일 확장자·디렉터리).  
-- **정규식** 혹은 **스키마**(JSON Schema) 로 입력 구조를 강제.  
-- **길이 제한** 및 **특수 문자 이스케이프**를 기본 적용.
+- **정규식** 혹은 **JSON Schema** 로 입력 구조 강제.  
+- **길이 제한** 및 **특수 문자 이스케이프**를 기본 적용.  
 
 #### 3. 런타임 샌드박스  
-- **Docker** 혹은 **gVisor** 로 MCP 서버를 격리하고, 파일시스템을 **읽기 전용**(`--read-only`)으로 마운트.  
-- **Seccomp** 프로파일을 사용해 `execve` 등 위험 시스템 콜을 차단(필요 시 허용).  
+- **Docker** 혹은 **gVisor** 로 MCP 서버 격리, 파일시스템을 **읽기 전용**(`--read-only`)으로 마운트.  
+- **Seccomp** 프로파일을 사용해 `execve` 등 위험 시스템 콜 차단(필요 시 허용).  
 
 #### 4. 자동 정적·동적 분석 파이프라인  
-1. **CI 단계**에 `bandit`(Python), `eslint-plugin-security`(Node), `gosec`(Go) 등 정적 분석 도구를 적용.  
-2. **CI**에서 **SAST** 결과가
+1. **CI 단계**에 `bandit`(Python), `eslint-plugin-security`(Node), `gosec`(Go) 등 정적 분석 도구 적용.  
+2. **CI**에서 **SAST** 결과가 **높은 심각도**이면 **빌드 차단**.  
+
+#### 5. 보안 모니터링 연계  
+- **Prometheus** 메트릭 `mcp_exec_calls_total` 로 `exec` 호출 횟수 추적.  
+- **Alertmanager** 규칙: 5분 내 `exec` 호출이 10회 초과 시 경고.  
+
+#### 6. 패치 배포 전략  
+- **버전 관리**: 각 Tool·Resource에 `version` 메타데이터를 부여하고, 클라이언트가 버전 불일치를 감지하면 자동 업데이트를 권고.  
+- **핫‑리로드**: 플러그인 기반 Server는 코드 변경 시 재시작 없이 새로운 Tool을 로드하도록 설계.  
+
+#### 7. 커뮤니티·공개 레지스트리 활용  
+- **MCP 레지스트리**(<https://modelcontextprotocol.io/registry>)에 서버 메타데이터를 등록하고, **신뢰 점수**(인증, 행동 이력, 서명 여부)를 표시한다.  
+- 커뮤니티와 공유된 신뢰 점수를 기반으로 클라이언트가 자동으로 서버를 선택하도록 구현한다.  
+
+---
+
+## 6. MCP Server 구축 방법  
+
+(섹션 4와 동일 내용이므로 여기서는 중복을 피하기 위해 생략)  
+
+--- 
+
+*※ 본 문서는 2026‑02‑24 기준 최신 정보를 반영했으며, 모든 내용은 공개된 자료와 보안 연구 결과에 근거합니다.*
