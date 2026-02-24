@@ -3,8 +3,8 @@
     {
       "id": 279,
       "number": 279,
-      "title": "문서 요청 #279",
-      "body": "",
+      "title": " [요청] SNKV – SQLite B‑Tree 기반 키‑값 저장소 (C/C++ & Python 바인딩)",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/show-hn-snkv-sqlites-b-tree-as-a-key-value-store-c-f5496d)\n**관련도**: 75/100\n**핵심 토픽**: SQLite 아키텍처, B‑tree 기반 키‑값 저장소, C/C++·Python 바인딩\n\n## 뉴스 요약\nSQLite는 여섯 개의 계층으로 구성됩니다: SQL parser → query planner → VDBE → B‑tree → pager → OS (SQLite architecture https://sqlite.org/arch.html). 키‑값 워크로드의 경우 당신은 오직…\n\n## 상세 내용\nSource: Hacker News\n아키텍처\nSQLite는 SQL 파서 → 쿼리 플래너 → VDBE → B-트리 → 페이저 → OS의 여섯 계층으로 구성됩니다\n(SQLite 아키텍처).\n키‑값 워크로드에서는 하위 세 계층만 필요합니다. SNKV는 상위 세 계층을 제거하고 SQLite의 B‑트리 엔진에 직접 접근합니다. SQL 문자열도, 쿼리 플래너도, VM도 없이 동일한 저장소 코어에서 put/get/delete만 수행합니다.\nPython\npip install snkv\nfrom snkv import KVStore\nwith KVStore(\"mydb.db\") as db:\ndb[\"hello\"] = \"world\"\nprint(db[\"hello\"])   # b\"world\"\nC / C++\n#define SNKV_IMPLEMENTATION\n#include \"snkv.h\"\nKVStore *db;\nkvstore_open(\"mydb.db\", &#x26;db, KVSTORE_JOURNAL_WAL);\nkvstore_put(db, \"key\", 3, \"value\", 5);\n성능 (상대 개선)\n작업개선률\n순차 쓰기+57%\n랜덤 읽기+68%\n순차 스캔+90%\n랜덤 업데이트+72%\n랜덤 삭제+104%\n존재 여부 확인+75%\n혼합 워크로드+84%\n대량 삽입+10%\n제공되는 기능\nACID 보장\nWAL 동시성\n컬럼 패밀리\n충돌 복구 안전성\n읽기‑중심 키‑값 워크로드에 대한 오버헤드가 적습니다.\nComments: (32 points, 19 comments)\n\n## 판단 근거\nSQLite 엔진을 직접 활용한 경량 키‑값 스토어는 현재 위키에 다루는 자료가 없으며, 데이터베이스·스토리지 분야 독자에게 가치가 높음.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-02-24T18:27:56.132Z",
-      "updated_at": "2026-02-24T18:27:56.134Z",
+      "updated_at": "2026-02-24T18:30:13.899Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/279",
-      "documentSlug": "backend/279",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/backend/279.md",
+      "documentSlug": "snkv-sqlite-b-tree-c-c-python",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/snkv-sqlite-b-tree-c-c-python.md",
       "comments": 0
     },
     {
       "id": 275,
       "number": 275,
-      "title": "문서 요청 #275",
-      "body": "",
+      "title": " [요청] 2026 AI Agent Comparison: OpenClaw vs Claude Cowork vs Claude Code",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-ultimate-guide-to-ai-agents-in-2026-openclaw-v-0af5a9)\n**관련도**: 92/100\n**핵심 토픽**: AI agents comparison, OpenClaw vs Claude Cowork vs Claude Code, 2026 AI agent landscape\n\n## 뉴스 요약\n대화형 AI 챗봇 시대는 공식적으로 에이전시 AI—단순히 대화만 하는 것이 아니라 실제로 작업을 수행해 주는 시스템—시대로 전환하고 있습니다.\n\n## 상세 내용\nSource: Dev.to\n대화형 AI 챗봇 시대는 공식적으로 agentic AI 시대와 맞바뀌고 있습니다—단순히 대화만 하는 것이 아니라 실제로 작업을 수행해 주는 시스템들입니다. 2026년 초에는 Anthropic과 오픈소스 커뮤니티가 산업을 적극적으로 뒤흔드는 도구들을 출시했습니다. 아래는 가장 많이 언급되는 세 가지 에이전트, Claude Code, Claude Cowork, 그리고 OpenClaw에 대한 명확한 정리입니다.\nClaude Code – 개발자를 위한 파워하우스\nAnthropic의 터미널‑네이티브 어시스턴트로, 소프트웨어 엔지니어를 위해 특별히 설계되었습니다.\n주요 기능\n자율 엔지니어링 – 저장소를 읽고, 접근 방식을 계획하며, 여러 파일에 걸쳐 코드를 작성하고, 테스트를 실행하고, 풀 리퀘스트를 생성할 수 있습니다.\nClaude Code 보안 – 서명 매칭에 의존하지 않고 데이터 흐름을 추적하여 복잡한 취약점을 탐지함으로써 프로덕션 코드베이스를 스캔합니다.\n레거시 현대화 – 레거시 언어(예: COBOL)를 해독하고 현대화하여 엔터프라이즈 서버 마이그레이션을 자동화합니다.\n대상 사용자\n명령줄 인터페이스(CLI)에서 작업하는 데 익숙하고, 자율적인 AI 페어 프로그래머를 원하는 소프트웨어 개발자, 보안 분석가, DevOps 엔지니어.\nClaude Cowork – The Desktop Digital Employee\nAnthropic의 “우리 모두를 위한 Claude Code”에 대한 답변으로, 데스크톱 애플리케이션 형태(현재 macOS)로 제공됩니다.\n주요 기능\n직접 파일 시스템 접근 – 특정 로컬 폴더에 대한 권한을 부여합니다; Apple의 Virtualization Framework를 이용한 안전한 컨테이너 샌드박스에서 실행됩니다.\n워크플로 자동화 – 어수선한 “Downloads” 폴더를 정리하고, 파일 이름을 바꾸며, 영수증 PDF에서 데이터를 추출해 Excel 스프레드시트에 자동으로 입력합니다.\n점진적 스킬 – Anthropic의 “Ag\n\n## 판단 근거\n현재 문서들은 각각의 에이전트를 개별적으로 다루고 있으나, 세 제품을 비교·분석한 종합 가이드는 존재하지 않음. 최신 에이전트 시장 흐름을 한눈에 보여주는 새로운 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,10 +56,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-02-24T18:23:43.996Z",
-      "updated_at": "2026-02-24T18:23:43.998Z",
+      "updated_at": "2026-02-24T18:31:32.067Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/275",
-      "documentSlug": "ai/275",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/275.md",
+      "documentSlug": "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
       "comments": 0
     },
     {
@@ -1560,5 +1560,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-02-24T18:27:56.134Z"
+  "lastUpdated": "2026-02-24T18:31:32.067Z"
 }
