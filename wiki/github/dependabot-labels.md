@@ -7,7 +7,7 @@ tags:
   - "라벨"
   - "GitHub"
   - "CI"
-status: "draft"
+status: "published"
 issueNumber: 0
 createdAt: "2026-02-23T10:00:00Z"
 updatedAt: 2026-02-24
@@ -16,13 +16,8 @@ redirect_from:
   - backend-label-dependencies
   - dependabot-missing-dependencies-label
   - troubleshooting-dependabot-label-missing
-  - meta-label-dependencies
-  - backend-label-dependencies
   - dependabot-labels
-  - meta-label-dependencies
-  - troubleshooting-dependabot-label-missing
   - github-dependabot-labels
-  - dependabot-missing-dependencies-label
 order: 1
 ---
 
