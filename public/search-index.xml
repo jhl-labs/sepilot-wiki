@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-02-25T12:17:40.021Z</generated>
-  <count>76</count>
+  <generated>2026-02-25T18:26:44.418Z</generated>
+  <count>78</count>
   <items>
   <item>
     <title>DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성</title>
@@ -96,7 +96,7 @@ NIST SP 800‑53 Rev. 5 – https://csrc.nist.gov/publications/detail/sp/800-5
 이 문서는 DevSecOps 실무자·보안 엔지니어·CI/CD 운영 담당자를 주요 독자로 하여, 최근 보안 자동화가 오히려 새로운 취약점을 만들 수 있다는 “DevSecOps 역설”을 체계적으로 분석한다.  
 DevSecOps와 보안 자동화는 현대 소프트웨어 공급망에서 핵심적인 역할을 수행하지만, 자동화된 프로세스 자체가 공격 표면을 확대한다는 경고가...</excerpt>
     <tags>DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -203,7 +203,7 @@ redirectfrom:
   - backend-280
 서론 – 백엔드...</excerpt>
     <tags></tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -289,14 +289,42 @@ Agentic FaaS와 MDL은 “요청‑응답”을 넘어 지속적 의사결정 �
 핵심 요약  
 기존 백엔드의 99 %가 요청을 기다리는 ‘Lazy’ 상태 → Agentic FaaS 로 전환 필요.  
 MDL은 Observe‑Orient‑Decide‑Act 4단계 루프를 통해 연속적, 목표‑정렬 의사결정을 제공.  
-40 % 속도 향상 사례와 프리컴파일·SIMD 등 최적화 기법을 활용해 실시간 루프를 구현한다.  
-다음 단계: 파일럿 프로젝트를 선정하고, MDL 기반 Agentic FaaS 프로토타입을 구축해 성능·보안·운영 지표를 검증합니다.</content>
+40 % 속도 향상 사례와 프리컴파일·SIMD 등 최적화 기법을 활용해 실시간 루프 구현 가능.  
+다음 단계: 파일럿 프로젝트를 선정하고, MDL 기반 Agentic FaaS 프로토타입을 구축해 성능·보안·운영 지표를 검증합니다.
+Autonomous Integration 정의
+2026년 AI 에이전트와 Agent Plugins에 의해 구동되는 Autonomous Integration은 개발·배포·운영 전 과정을 인간 개입 없이 자동화하는 통합 방식을 의미합니다. 핵심 요소는 다음과 같습니다.
+  요소   설명  
+ ------ ------ 
+  AI 코딩 에이전트   자연어 명령을 해석해 코드 생성·수정·배포까지 수행 (Barecheck Research 조사에 따르면 배포 시간이 30 % 감소, 코드 품질 지표가 20 % 향상)  
+  Agent Plugins   특정 도메인(예: AWS 인프라, CI/CD, 보안) 기능을 캡슐화한 모듈로, 에이전트가 필요 시 호출해 재사용 가능  
+  컨텍스트‑드리븐 워크플로   이벤트(코드 커밋, 인프라 변경 등)를 실시간으로 관찰하고, 목표(Goal)와 매핑해 자동 의사결정 수행  
+“긴 AWS 가이드를 프롬프트에 반복해서 붙여넣는 대신, 개발자는 이제 해당 가이드를 재사용 가능하고 버전 관리된 기능으로 인코딩하여 에이전트가 필요할 때 호출하도록 할 수 있다.” – AWS Developer Tools Blog
+워크플로우 재구성 사례
+13.1 클라우드 배포 자동화
+Observe – 개발자가 “배포” 명령을 채팅창에 입력.  
+Orient – 에이전트가 현재 인프라 상태와 목표(예: 비용 최적화) 파악.  
+Decide – AWS Deploy‑on‑AWS 플러그인을 선택, 아키텍처 권장 사항·비용 추정·인프라‑코드 생성.  
+Act – 생성된 IaC를 바로 적용하고, 배포 완료 알림을 Observe 단계로 반환.
+결과: 수시간 걸리던 구성 과정이 몇 분 안에 완료, 인프라 표준화와 오류 감소.
+13.2 CI/CD 파이프라인 재구성
+자동 코드 리뷰: AI 에이전트가 PR을 실시간 분석, 보안·성능 이슈를 자동 표시.  
+테스트 자동 선택: 변경된 모듈에 맞는 테스트 스위트를 자동으로 선택·실행.  
+배포 최적화: 성공적인 테스트 후 즉시 배포 플러그인 호출, 롤백 정책 자동 적용.
+13.3 조직·팀 협업 표준화
+플러그인 기반 스킬 공유: 팀 전체가 동일한 플러그인(예: “AWS 비용 최적화”)을 사용해 일관된 인프라 설계.  
+투명한 의사결정 로그: 모든 에이전트 행동이 immutable 로그에 기록돼 감사와 교육에 활용.
+미래 전망
+플러그인 생태계 확대: AWS, Azure, GCP 등 주요 클라우드 공급자가 자체 Agent Plugins를 공개하면서, 다양한 도메인(데이터 파이프라인, 보안, 모니터링)으로 확장될 전망.  
+AgentOps 문화 정착: 기존 DevOps에 AI 모델·플러그인 관리가 추가돼, 모델 버전 관리, 프롬프트 테스트, 신뢰성 검증이 표준 프로세스로 자리 잡음.  
+투명성·신뢰성 강화 도구: 시각화·디버깅 툴이 발전해 에이전트 행동 흐름을 실시간으로 추적하고, 의사결정 근거를 설명할 수 있게 됨.  
+윤리·규제 대응: AI 에이전트가 코드와 인프라를 자동으로 변경함에 따라, 조직은 윤리 가이드라인·자동화 검증 파이프라인을 필수적으로 도입할 것임.
+핵심 인사이트: Autonomous Integration은 단순 자동화를 넘어, AI‑구동 플러그인 기반의 자율적인 전체 스택 관리를 가능하게 하며, 이를 통해 개발 속도·품질·운영 효율성이 크게 향상됩니다. 조직이 이 흐름을 조기에 수용하면 경쟁 우위를 확보하고, 차세대 백엔드와 워크플로우 전환을 원활히 진행할 수 있습니다.</content>
     <excerpt>서론 – 변화하는 소프트웨어 개발 패러다임
 프론트엔드는 실시간 UI, 컴포넌트 기반 리액티브 프레임워크 등으로 급격히 동적화되었습니다.  
 백엔드는 여전히 “요청‑응답” 중심의 ‘Lazy’ 백엔드 형태에 머물러 있습니다. ※ euno.news에 따르면 현재 API의 99 %가 요청이 들어와야 비로소 동작한다고 합니다【euno.news】.  
 AI·자율 에이...</excerpt>
     <tags>Agentic FaaS, MDL, Backend Architecture, Serverless, AI Agents</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -508,7 +536,7 @@ Wiki 페이지 조회, 생성, 수정, 삭제 지원
 계층형 경로()를 통한 페이지 식별  
 JWT 기반 인...</excerpt>
     <tags>API, Wiki, 라우트, 인증, 문서화</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -641,7 +669,7 @@ SNKV GitHub 레포지토리 – (공개 소스 코드, 정확한 URL은 문서�
 목적: SQLite 내부 B‑tree 엔진을 직접 호출하여 키‑값 워크로드에 최적화된 경량 스토어를 이해하고, 실제 프로젝트에 적용할 수 있도록 안내한다.  
 대상 독자: 임베디드·IoT 개발자,...</excerpt>
     <tags>SQLite, 키‑값 저장소, SNKV, B‑tree, C++, Python</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -764,7 +792,7 @@ Exporter 교체 체크리스트
 OpenTelemetry 정의 및 핵심 목표  
 OpenTelemetry(OTel...</excerpt>
     <tags>OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -929,7 +957,7 @@ AI 에이전트 시스템에서 관측성(Observability) 을 구현하기 위한
 대상 독자는 AI 에이전트를 개발·운영하는 엔지니어, DevOps 팀, 그리고 OpenTelemetry 등 관측성 도구 도입을 검토하는 기술 리더입니다.  
 관측성은 트레이싱, 메트릭, 로깅 세 축을 통해 시스템 상태·동작을 가...</excerpt>
     <tags>observability, AI, tracing, metrics, logging, OpenTelemetry</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -970,7 +998,7 @@ GitHub 라벨 관리 가이드: https://docs.github.com/en/issues/tracking-your-
 자동 라벨링: Dependabot이 생성한 PR에 자동으로 붙여, 리뷰어가 의존성 업데이트임을 즉시 파악할 수 있게 합니다.
 필터링: 라벨을 이용해 PR...</excerpt>
     <tags>label, dependencies, github</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -1031,8 +1059,80 @@ Dependabot 빠른 시작 가이드 - GitHub Enterprise Cloud Docs
 문제 상황
 Dependabot이 PR에  라벨을 추가하려고 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 다음과 같은 오류가 발생했습니다....</excerpt>
     <tags>Dependabot, 라벨, GitHub, CI</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
+  </item>
+  <item>
+    <title>Serv‑U 15.5 보안 취약점 및 패치 가이드</title>
+    <slug>security/303</slug>
+    <content>개요
+SolarWinds는 2026년 2월 24일에 발표한 Serv‑U 15.5.4 업데이트를 통해 Serv‑U 15.5에 존재하던 네 가지 치명적인 취약점을 모두 해결했습니다. 해당 취약점은 성공적으로 악용될 경우 원격 코드 실행(RCE)을 초래할 수 있으며, CVSS 9.1 점수(고위험)로 평가되었습니다. 본 문서는 취약점 상세 분석, 위험도 평가, 과거 악용 사례, 패치 적용 절차 및 운영 환경에서의 완화 방안을 제공하여 보안 담당자와 시스템 관리자가 신속히 대응할 수 있도록 돕습니다.  
+대상 독자: 보안 엔지니어, 시스템 관리자, IT 운영팀, 위험 관리 담당자
+영향을 받는 제품 및 버전
+제품: Serv‑U 파일 전송 서버  
+영향을 받는 버전: Serv‑U 15.5  
+지원 운영 체제: Windows (기본 서비스 계정은 권한이 낮은 계정으로 실행) 및 Ubuntu 24.04 LTS(새 버전에서 지원)【Serv‑U 15.5.4 release notes】  
+패치 적용 버전: Serv‑U 15.5.4 (2026‑02‑24 릴리스)【Serv‑U 15.5.4 release notes】
+취약점 상세 분석
+  CVE   유형   설명   필요 권한   CVSS  
+ ----- ------ ------ ----------- ------ 
+  CVE‑2025‑40538   접근 제어 결함   도메인 관리자 또는 그룹 관리자 권한을 가진 공격자가 시스템 관리자 계정을 생성하고, 이를 통해 루트 권한으로 임의 코드를 실행할 수 있음   관리 권한(도메인/그룹 관리자)   9.1  
+  CVE‑2025‑40539   타입 혼동   타입 혼동을 이용해 루트 권한으로 네이티브 코드를 실행할 수 있음   관리 권한   9.1  
+  CVE‑2025‑40540   타입 혼동   위와 동일한 메커니즘으로 루트 권한 코드 실행 가능   관리 권한   9.1  
+  CVE‑2025‑40541   직접 객체 참조(IDOR)   IDOR 취약점을 통해 루트 권한으로 네이티브 코드를 실행할 수 있음   관리 권한   9.1  
+공통점: 모든 CVE는 관리 권한이 전제 조건이며, 성공 시 루트(시스템) 권한을 획득하게 됩니다. SolarWinds는 일반적인 Windows 배포 환경에서 Serv‑U 서비스가 낮은 권한의 서비스 계정으로 실행되므로 위험도를 중간 수준으로 분류했습니다【SolarWinds, 루트 코드 실행을 허용하는 4개의 치명적인 Serv‑U 15.5 결함을 패치】.
+위험도 및 영향 평가
+관리 권한 필요성: 공격자는 도메인/그룹 관리자 수준의 권한을 확보해야 함. 내부 위협 또는 피싱·크리덴셜 스터핑 등으로 권한을 탈취할 가능성이 있음.  
+루트 권한 획득 시 시나리오: 루트 권한을 얻은 뒤 파일 시스템 전체 접근, 서비스 중단, 악성 코드 배포, 데이터 유출 등 광범위한 악용이 가능함.  
+기업 환경에서의 비즈니스 영향: 파일 전송 서비스가 핵심 업무 흐름에 사용되는 경우, 서비스 중단·데이터 손실·규제 위반(PCI‑DSS, GDPR 등) 위험이 존재함.
+과거 악용 사례 및 위협 인텔리전스
+이전 Serv‑U 취약점: CVE‑2021‑35211, CVE‑2021‑35247, CVE‑2024‑28995가 실제 공격에 이용된 사례가 보고됨.  
+악의적 행위자: 중국 기반 해킹 그룹 Storm‑0322(이전 DEV‑0322)가 위 취약점을 활용한 것으로 확인됨【SolarWinds, 루트 코드 실행을 허용하는 4개의 치명적인 Serv‑U 15.5 결함을 패치】.  
+현재 실시간 악용 여부: 2026년 현재, 새롭게 공개된 CVE‑2025‑xxxx에 대한 실시간 악용 사례는 보고되지 않았음. 그러나 과거 사례를 고려해 신속한 패치 적용이 권고됩니다.
+패치 내용 및 릴리스 노트
+보안 개선: CVE‑2025‑40538, CVE‑2025‑40539, CVE‑2025‑40540, CVE‑2025‑40541 전부 해결【Serv‑U 15.5.4 release notes】.  
+기능 추가:  
+  - 파일 공유에서 다운로드 히스토리 재도입 (이전 Web‑Client 기능 복구)【Serv‑U 15.5.4 release notes】.  
+  - ‘Last Modified’ 날짜에 시간 표시 추가【Serv‑U 15.5.4 release notes】.  
+  - Ubuntu 24.04 LTS 지원【Serv‑U 15.5.4 release notes】.  
+일반 개선: 포맷·레이아웃 변경, 전반적인 보안·기능·버그 수정 포함.
+패치 적용 절차
+사전 준비  
+   - 현재 Serv‑U 버전 확인 ( 등) 및 백업 수행.  
+   - 운영 체제와 의존성(예: .NET, OpenSSL) 호환성 검증.  
+업데이트 방법  
+   - 자동 업데이트: SolarWinds 관리 콘솔에서 “Check for Updates” 후 자동 적용.  
+   - 수동 업데이트: SolarWinds 공식 다운로드 페이지에서 Serv‑U 15.5.4 설치 파일 다운로드 후 실행.  
+검증 단계  
+   - 설치 후 서비스 재시작 및 로그()에 오류 여부 확인.  
+   -  로 버전이 15.5.4인지 확인.  
+   - 보안 로그에 새로운 CVE 관련 이벤트가 기록되지 않는지 검토.  
+운영 환경에서의 완화 방안
+최소 권한 원칙: 서비스 계정을 가능한 가장 낮은 권한으로 실행하고, 도메인/그룹 관리자 권한을 가진 계정의 사용을 제한.  
+계정 권한 재조정: 기존 관리자 계정에 대한 권한 검토·감축, MFA 적용.  
+모니터링: IDS/IPS에서 Serv‑U 관련 프로세스·네트워크 트래픽에 대한 서명 기반·행위 기반 규칙 적용.  
+로그 분석: 파일 전송 로그, 인증 로그, 시스템 이벤트 로그를 중앙 SIEM에 연계하여 비정상적인 파일 접근·코드 실행 시 알림 설정.
+권고 사항 및 베스트 프랙티스
+패치 적용 시점: 보안 공지가 발표된 즉시(가능하면 24시간 이내) 적용 권고.  
+정기적인 취약점 스캔: Nessus, Qualys 등 도구를 활용해 Serv‑U 및 연관 서비스에 대한 정기 스캔 수행.  
+패치 관리 프로세스:  
+  1. 취약점 공지 수신 → 영향도 평가 → 테스트 환경 적용 → 운영 적용 → 검증 → 문서화.  
+보안 체크리스트 (예시)  
+  - [ ] 현재 버전 확인  
+  - [ ] 백업 완료  
+  - [ ] 서비스 계정 권한 검토  
+  - [ ] 패치 적용 후 버전 및 로그 검증  
+  - [ ] IDS/IPS 규칙 업데이트  
+참고 자료
+공식 릴리스 노트: Serv‑U 15.5.4 release notes  
+CVE 상세 페이지: 각 CVE‑2025‑xxxx는 NVD 또는 MITRE CVE 데이터베이스에서 확인 가능 (예: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-40538)  
+보안 뉴스: SolarWinds, 루트 코드 실행을 허용하는 4개의 치명적인 Serv‑U 15.5 결함을 패치   EUNO.NEWS  
+※ 본 문서는 현재 공개된 정보에 기반하여 작성되었습니다. 추가적인 내부 조사나 최신 보안 인텔리전스가 필요할 경우 “추가 조사가 필요합니다”라고 명시해 주세요.</content>
+    <excerpt>개요
+SolarWinds는 2026년 2월 24일에 발표한 Serv‑U 15.5.4 업데이트를 통해 Serv‑U 15.5에 존재하던 네 가지 치명적인 취약점을 모두 해결했습니다. 해당 취약점은 성공적으로 악용될 경우 원격 코드 실행(RCE)을 초래할 수 있으며, CVSS 9.1 점수(고위험)로 평가되었습니다. 본 문서는 취약점 상세 분석, 위험도 평가, 과...</excerpt>
+    <tags>SolarWinds, Serv-U, CVE, 패치, 보안, 원격 코드 실행</tags>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
+    <author>SEPilot AI</author>
   </item>
   <item>
     <title>WordPress Vulnerability Triaging Playbook (2026)</title>
@@ -1181,7 +1281,7 @@ euno.news. “WordPress Vulnerability Triaging Playbook (Week of FE)”. https:/
 대상 독자: 보안 엔지니어, 개발자, 운영 담당자, 경영진 등 WordPress 생태계 전반에 걸친 이해관계자.  
 2026년 WordPress 취약점 환경 개...</excerpt>
     <tags>WordPress, Vulnerability Management, Triaging, DevSecOps, Security Playbook</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1355,7 +1455,7 @@ CVE 상세 페이지 예시 – CVE‑2023‑41044: https://cve.mitre.org/cgi-bi
 주요 용어 정의  
   - 취약점(Vulne...</excerpt>
     <tags>WordPress, Vulnerability, Triage, Security, DevSecOps</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1430,7 +1530,179 @@ Infograb, “AI 개발 시대, DevSecOps가 기본값인 이유”. [링크]</co
 자동화가 보안 검출·수정을 가속화한다는 기대와는 달리, 자동화 자체가 새로운 공격 표면을 만들고 파이프라인 전반에 취약점을 유입시킬 수 있다는 핵심 질문에 답하고자 합니다.
 DevSecOps...</excerpt>
     <tags>DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
+    <author>SEPilot AI</author>
+  </item>
+  <item>
+    <title>Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드</title>
+    <slug>security/serv-u-15-5</slug>
+    <content>문서 개요
+목적 및 대상 독자
+본 가이드는 SolarWinds Serv‑U 15.5 를 운영 중인 시스템 관리자, 보안 담당자, 그리고 관련 인프라 엔지니어를 대상으로 합니다.  
+최신 보안 패치를 적용하여 서비스 중단 및 데이터 유출 위험을 최소화하고자 함  
+취약점 메커니즘을 이해하고, 사후 검증·모니터링 절차를 수립하고자 함  
+문서 범위와 한계
+범위: Serv‑U 15.5 → 15.5.4 업그레이드와 관련된 네 가지 CVE(CVE‑2025‑4053841) 및 기존 주요 취약점 사례  
+한계: CVSS 세부 항목(Attack Vector, Complexity 등)은 공개된 자료에 포함되지 않아 별도 조사 필요  
+관련 뉴스·보안 인텔리전스 요약
+SolarWinds는 2026‑02‑24에 Serv‑U 15.5.4 를 배포, 네 가지 치명적인 RCE 취약점을 모두 해결🔗 euno.news  
+주요 보도 매체(The Hacker News, BleepingComputer, Petri)에서 CVE‑2025‑40538을 “broken access control”이라 명시, 루트 권한 획득 가능성을 강조🔗 Petri, 🔗 BleepingComputer  
+Serv‑U 15.5 개요
+  항목   내용  
+ ------ ------ 
+  제품 정의   Managed File Transfer 및 Secure FTP 기능을 제공하는 파일 전송 서버 솔루션  
+  주요 기능   파일 공유·다운로드 히스토리, 웹·클라이언트 UI, LDAP/AD 연동, 정책 기반 권한 관리  
+  지원 OS·배포 방식   Windows Server, Linux (Ubuntu 포함) – 2026‑02‑24 릴리즈 노트에 Ubuntu 24.04 LTS 지원 추가🔗 Release Notes  
+  기본 보안 모델   서비스는 권한이 낮은 서비스 계정(예:  사용자)으로 실행되며, 관리자는 별도 도메인/그룹 관리자 권한을 통해 시스템 관리자 계정을 생성 가능🔗 euno.news  
+취약점 요약 (CVSS 9.1)
+  CVE   취약점 유형   주요 영향   필요 권한  
+ ----- ------------ ---------- ----------- 
+  CVE‑2025‑40538   접근 제어 결함 (Broken Access Control)   도메인·그룹 관리자 권한을 이용해 시스템 관리자 계정 생성 → 루트 권한으로 임의 코드 실행   도메인/그룹 관리자  
+  CVE‑2025‑40539   타입 혼동 (Type Confusion)   루트 권한으로 네이티브 코드 실행   관리자 권한  
+  CVE‑2025‑40540   타입 혼동 (Type Confusion)   동일하게 루트 권한 네이티브 코드 실행   관리자 권한  
+  CVE‑2025‑40541   직접 객체 참조(IDOR)   루트 권한으로 네이티브 코드 실행   관리자 권한  
+공통 특성  
+모두 원격 코드 실행(RCE)을 가능하게 함  
+성공적인 악용에 관리자 권한이 전제되지만, Windows 배포에서는 서비스 계정이 낮은 권한으로 실행돼 위험도가 “중간” 수준으로 평가됨🔗 euno.news  
+상세 취약점 분석
+4.1 CVE‑2025‑40538 – 접근 제어 결함
+메커니즘: 도메인·그룹 관리자 권한을 가진 사용자가 내부 API를 조작해 시스템 관리자 계정을 생성함. 생성된 계정은 루트 수준 권한을 갖고, 이후 임의 코드를 실행할 수 있음🔗 Petri  
+공격 전제 조건: 해당 조직의 AD/LDAP에 도메인·그룹 관리자 권한 보유  
+악용 시나리오: 공격자는 웹 UI 혹은 API 호출을 통해 관리자 계정을 삽입 → 서비스 재시작 시 루트 권한 획득  
+4.2 CVE‑2025‑40539 &amp; CVE‑2025‑40540 – 타입 혼동
+메커니즘: 내부 객체 타입 검증 로직에 결함이 있어, 공격자가 조작된 입력을 전달하면 네이티브 코드가 루트 권한으로 실행됨🔗 euno.news  
+공통점: 두 CVE는 서로 다른 코드 경로에서 동일한 타입 혼동 취약점을 이용함  
+4.3 CVE‑2025‑40541 – 직접 객체 참조(IDOR)
+메커니즘: 객체 식별자를 직접 지정해 접근할 수 있는 API가 존재, 이를 통해 루트 권한으로 실행 가능한 네이티브 코드를 호출 가능🔗 euno.news  
+4.4 CVSS 9.1 세부 항목 해설
+현재 공개된 자료에서는 CVSS 기본 점수(9.1)만 제공되며, Attack Vector, Complexity, Privileges Required 등 세부 항목은 별도 조사 필요합니다.  
+위험도 평가
+  환경   권한 수준   위험도 (예상)   비고  
+ ------ ----------- -------------- ------ 
+  Windows (기본 서비스 계정)   낮은 서비스 계정 → 관리자 권한 필요   중간 (관리자 권한이 전제)   SolarWinds는 이 시나리오를 기준으로 위험도를 중간으로 분류[🔗 euno.news]  
+  Linux / Ubuntu   서비스 계정이 루트에 가까운 경우   높음 (루트 권한 직접 노출)   실제 배포 시 서비스 계정 권한 확인 필요  
+  대규모 엔터프라이즈   다수의 AD/LDAP 연동   높음 (도메인·그룹 관리자 권한이 존재 가능)   권한 분리와 최소 권한 원칙 적용 필요  
+비즈니스 영향  
+가용성: 루트 권한 탈취 시 서비스 중단·백도어 설치 가능  
+무결성: 파일 전송 경로 조작·데이터 변조 위험  
+기밀성: 민감 파일 접근·유출 가능  
+패치 정보
+영향을 받는 버전: Serv‑U 15.5 (모든 15.5.x)  
+수정된 버전: Serv‑U 15.5.4 (릴리즈 일자: 2026‑02‑24)  
+공식 릴리즈 노트: Serv‑U 15.5.4 Release Notes  
+6.1 릴리즈 노트 주요 내용
+보안 개선: 위 네 가지 CVE 전부 해결[🔗 Release Notes]  
+신규 기능: 다운로드 히스토리 복구, ‘Last Modified’에 시간 표시, Ubuntu 24.04 LTS 지원[🔗 Release Notes]  
+일반 개선: 포맷·레이아웃 업데이트, 기능·버그 수정  
+6.2 패치 적용 전·후 차이점
+  항목   패치 전   패치 후  
+ ------ -------- ---------- 
+  취약점 존재 여부   CVE‑2025‑4053841 존재   모두 해결  
+  서비스 계정 권한   낮은 권한 실행 (Windows)   동일하지만 취약점 제거  
+  지원 OS   Ubuntu 22.04 LTS 등   Ubuntu 24.04 LTS 추가 지원  
+패치 적용 가이드
+주의: 실제 운영 환경에 적용하기 전 반드시 테스트 환경에서 검증하십시오.
+7.1 사전 준비
+백업  
+   - Serv‑U 데이터베이스( 등)와 설정 파일()을 안전한 위치에 백업  
+호환성 확인  
+   - 현재 OS와 하드웨어가 Serv‑U 15.5.4 시스템 요구사항을 충족하는지 확인(Release Notes 참고)  
+서비스 중단 계획  
+   - 업무 영향 최소화를 위해 비활성 시간대에 적용 권고  
+7.2 단계별 설치 절차
+  단계   작업   명령/설명  
+ ------ ------ ----------- 
+  1   패키지 다운로드   SolarWinds 고객 포털에서  다운로드 (공식 URL은 고객 포털에 제공)  
+  2   무결성 검증   SHA‑256 체크섬을 SolarWinds 제공값과 비교  
+  3   서비스 정지    (Windows) /  (Linux)  
+  4   업그레이드   압축 해제 후 기존 설치 디렉터리에 덮어쓰기  
+  5   서비스 재시작    /   
+  6   버전 확인   웹 UI → About 페이지 또는 CLI  로  확인  
+7.3 롤백 절차 및 주의사항
+패키지 교체: 백업한 이전 버전 파일()을 원위치에 복원  
+서비스 재시작 후 정상 동작 여부 확인  
+데이터베이스 스키마가 이전 버전과 호환되지 않을 경우, 데이터 복구가 필요할 수 있음(추가 조사 필요)  
+7.4 자동화·배포 도구 활용 팁
+Ansible: / 모듈로 서비스 제어,  모듈로 패키지 배포  
+PowerShell DSC 혹은 Chef: 동일한 절차를 스크립트화하여 대규모 환경에 적용 가능  
+사후 검증 및 모니터링
+8.1 패치 적용 확인
+버전 확인: UI 또는 CLI에서  표시 여부  
+CVE 검증: NVD 혹은 내부 취약점 스캐너에서 이 Not Detected 상태인지 확인  
+8.2 로그·감사 강화
+  로그 항목   권장 설정  
+ ---------- ----------- 
+  인증 로그   AD/LDAP 로그인 시도 모두 기록  
+  관리자 계정 생성 로그    계정 생성 이벤트 알림  
+  파일 전송 로그   다운로드·업로드 시 파일 해시 저장  
+  서비스 오류 로그    레벨을  이상으로 설정  
+8.3 침해 사고 대응 절차 업데이트
+탐지: 신규 RCE 시도 감지 시 즉시 알림 (SIEM 연동)  
+격리: 해당 Serv‑U 인스턴스 네트워크 차단 후 포렌식 진행  
+복구: 최신 백업에서 복구 후 패치 적용 여부 재검증  
+역사적 배경 및 사례 연구
+  연도   CVE   악용 주체   비고  
+ ------ ----- ----------- ------ 
+  2021   CVE‑2021‑35211   Storm‑0322 (DEV‑0322)   실제 공격 보고  
+  2021   CVE‑2021‑35247   Storm‑0322   파일 전송 서버 탈취  
+  2024   CVE‑2024‑28995   Storm‑0322   권한 상승 사례  
+공통 교훈: 과거에도 Serv‑U는 고위험 RCE 취약점이 실전에서 악용된 전력이 있음[🔗 euno.news]  
+연관성: 현재 CVE‑2025‑ 시리즈는 권한 상승·타입 혼동을 중심으로 하며, 과거와 동일하게 관리자 권한이 전제된 점이 유사함  
+권고 보안 베스트 프랙티스
+최소 권한 원칙 적용  
+   - 서비스 계정에 불필요한 관리자 권한 부여 금지  
+서비스 계정 보안 강화  
+   - 강력한 복잡도 비밀번호 정책, 정기 교체, 계정 잠금 정책 적용  
+정기 패치 관리  
+   - SolarWinds 보안 공지 구독, 월간 취약점 스캔 수행  
+네트워크 분리  
+   - Serv‑U 서버를 DMZ 혹은 별도 VLAN에 배치, 외부 접근은 VPN/SSH 터널로 제한  
+감사·모니터링 자동화  
+   - SIEM 연동, 이상 행위 탐지 규칙 구축 (예: 비정상적인 관리자 계정 생성)  
+참고 자료 및 링크
+  종류   링크  
+ ------ ------ 
+  공식 릴리즈 노트   https://documentation.solarwinds.com/en/successcenter/servu/content/releasenotes/servu15-5-4releasenotes.htm  
+  euno.news 기사   https://euno.news/posts/ko/solarwinds-patches-4-critical-serv-u-155-flaws-all-a771be  
+  Petri 보안 분석   https://petri.com/solarwinds-serv-u-patch-server-takeover/  
+  BleepingComputer 보도   https://www.bleepingcomputer.com/news/security/critical-solarwinds-serv-u-flaws-offer-root-access-to-servers/  
+  AhnLab 보안 권고   https://www.ahnlab.com/ko/contents/asec/advice/1791  
+  SecPod 블로그   https://www.secpod.com/blog/critical-security-update-solarwinds-remediates-multiple-serv-u-vulnerabilities/  
+  SecurityAffairs 요약   https://securityaffairs.com/188454/hacking/solarwinds-patches-four-critical-serv-u-flaws-enabling-root-access.html  
+  Alyac 블로그   https://blog.alyac.co.kr/3905  
+  NVD CVE 상세   (각 CVE 번호에 대해 NVD 검색 URL 제공 – 별도 입력 필요)  
+부록
+12.1 용어 정의
+  약어   의미  
+ ------ ------ 
+  RCE   Remote Code Execution, 원격 코드 실행  
+  IDOR   Insecure Direct Object Reference, 직접 객체 참조 취약점  
+  CVSS   Common Vulnerability Scoring System, 취약점 점수 체계  
+  AD   Active Directory  
+  LDAP   Lightweight Directory Access Protocol  
+  SIEM   Security Information and Event Management  
+12.2 CVSS 점수 계산 표
+  항목   값 (예시)   비고  
+ ------ ----------- ------ 
+  Base Score   9.1   공개된 점수  
+  Vector   (정보 없음)   추가 조사 필요  
+  Temporal/Environmental   (정보 없음)   추가 조사 필요  
+12.3 FAQ
+Q1. 패치를 적용해도 기존 서비스 계정이 여전히 낮은 권한으로 실행되나요?  
+A1. 네. Serv‑U 15.5.4는 기존 서비스 계정 권한을 변경하지 않으며, 취약점 자체만 제거합니다. 권한 최소화는 별도 보안 정책으로 관리해야 합니다.
+Q2. Linux에서 Serv‑U를 서비스로 등록하는 방법은?  
+A2. 공식 문서에  유닛 파일 예시가 제공되며, 에 정의 후  로 등록합니다. (구체적인 파일 내용은 공식 가이드 참조)
+Q3. 현재 진행 중인 악용 사례가 있나요?  
+A3. 현재까지 실제 악용 사례는 보고되지 않았습니다**[🔗 euno.news] 다만, 과거 사례를 고려해 신속한 패치 적용이 권고됩니다.</content>
+    <excerpt>문서 개요
+목적 및 대상 독자
+본 가이드는 SolarWinds Serv‑U 15.5 를 운영 중인 시스템 관리자, 보안 담당자, 그리고 관련 인프라 엔지니어를 대상으로 합니다.  
+최신 보안 패치를 적용하여 서비스 중단 및 데이터 유출 위험을 최소화하고자 함  
+취약점 메커니즘을 이해하고, 사후 검증·모니터링 절차를 수립하고자 함  
+문서 범위와 한계
+범위...</excerpt>
+    <tags>Serv‑U, SolarWinds, 취약점, 원격코드실행, 패치, 보안</tags>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1546,7 +1818,7 @@ CRD 스키마 문서:
 이 문서는 Node Readiness Controller(NRC)를 처음 접하는 클러스터 운영자와 플랫폼 엔지니어를 대상으로 합니다.  
 NRC는 기존 “Ready” 조건만으로는 충분히 표현되지 않는 복합 인프라 의존성을 선언형으로 관리하도록 설계되었습니다. 이를 통해 스케줄링 정확성과 서비스 안정성을 크게 향상시킬 수 있습니다 Introducing...</excerpt>
     <tags>Kubernetes, NodeReadiness, Scheduler, Reliability</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1649,7 +1921,7 @@ tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수]
 위키 유지보수 배경  
   - Kubernetes 생태계에서 API 설...</excerpt>
     <tags></tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -1766,7 +2038,7 @@ Ingress NGINX GitHub 레포지토리 – https://github.com/kubernetes/ingress-n
 이 문서는 Kubernetes Steering Committee와 Security Response Committee가 2026년 3월에 발표한 Ingress NGINX 은퇴 선언을 기반으로 작성되었습니다.  
 대상 독자는 현재 클러스터에서 Ingress NGINX를 사용하고 있거나, 향후 도입을 고려하고 있는 클라우드‑네이티브 엔지니어, 플랫폼 운영팀...</excerpt>
     <tags>Ingress, NGINX, Kubernetes, Migration, Security, guide, deprecation, k8s, networking, load-balancer</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -1856,7 +2128,7 @@ tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤
 redirectfrom:
   - kubernetes...</excerpt>
     <tags></tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -1983,7 +2255,7 @@ OpenContainers runc Issue #4772 – cgroup v1 shares vs. v2 weight 기본값 비
 대상 독자: 클러스터 운영자, 플랫폼 엔지니어, Kubernetes 개발자  
 핵심 변경 사항: 기존 선형 매핑 공식 → 비선형(또는...</excerpt>
     <tags>cgroup, CPU, Kubernetes, 리소스 관리, KEP-2254, 마이그레이션</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2114,7 +2386,7 @@ TL;DR
 v1.35 (2026‑02‑10)
 새 릴리즈: v1.35.0 및 v1.35.1이 2026‑02‑10에 공개...</excerpt>
     <tags>Kubernetes, Release Notes, 버전, version, changelog</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -2157,7 +2429,7 @@ Dependabot이 Pull Request에  라벨을 자동으로 붙이려 할 때, 해당 
    - 레포지토리의 Issues 탭으로 이동합니다.
    - 좌측 사이드바에서 Lab...</excerpt>
     <tags>Dependabot, GitHub Actions, 라벨, CI</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -2274,7 +2546,7 @@ YouTube 영상: AI Agents for Developers: What&apos;s New in Docker&apos;s AI As
 이 문서는 Docker Desktop 4.61 베타에 포함된 Gordon AI 에이전트의 최신 업데이트를 소개하고, 실제 개발·운영 워크플로우에 적용하는 방법을 안내합니다.  
 대상 독자는 Docker를 일상적으로 사용하고, AI 기반 자동화를 도입하고자 하는 개발자·운영자이며, 기존 일반 목적 AI 어시스턴트와 Docker 환경의 차이를 이해하고자...</excerpt>
     <tags>Docker, AI, Gordon, 자동화, 개발자 도우미</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2410,7 +2682,7 @@ AI 에이전트·코딩 도구를 운영하는 개발자·DevOps 엔지니어
 기대 효과와 적용 범위  
 마이크로‑VM 기반 격리로 호스트 시스템 침해 위험 최소화...</excerpt>
     <tags>Docker, Sandbox, OpenClaw, Security, AI Agents</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2495,7 +2767,7 @@ tags: [Docker, Hardened Images, Security, Vulnerability Management, Supply Chain
 redirectfrom:
   - hardened-images-...</excerpt>
     <tags></tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -2612,7 +2884,7 @@ Agentic AI 개념: https://sendbird.com/ko/blog/what-is-agentic-ai
     <excerpt>개요
 Emdash는 provider‑agnostic(프로바이더 독립) 데스크톱 애플리케이션으로, 여러 코딩 에이전트를 병렬로 실행하고 각각을 독립된 Git worktree에 격리시켜 개발 워크플로우를 단순화합니다. 본 문서는 Emdash의 개념, 핵심 아키텍처, 주요 기능, 설치·사용 방법 등을 정리하여 개발자와 팀이 ADE(Agentic Developme...</excerpt>
     <tags>Emdash, ADE, Agentic AI, 오픈소스, 개발 환경</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -2880,7 +3152,7 @@ Mitigation and Best Practices
     <excerpt>OpenClaw 개요 및 핵심 개념
 OpenClaw는 24 시간 언제든지 사용할 수 있는 AI 개인 비서 및 자율 에이전트를 목표로 하는 오픈소스 프로젝트입니다. 초기에는 Clawdbot·Moltbot이라는 이름으로 개발되었으며, 현재는 GitHub(https://github.com/openclaw/openclaw) 에서 활발히 유지·관리되고 있습니다 [1...</excerpt>
     <tags>OpenClaw, AI 개인 비서, 멀티채널, 오픈소스</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3027,7 +3299,7 @@ Claude Code를 처음 접하는 사용자
 기존 프로젝트에서 특정 버전으로 업그레이드/다운그레이드가 필요한 경우  
 기능 도입 시점(예: MCP 서...</excerpt>
     <tags>Claude Code, 릴리즈 히스토리, CLI, MCP, 멀티 모델, Hooks, IDE 통합, 워크플로우</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3201,7 +3473,7 @@ Opencode가 적합한 상황과 시나리오
 Opencode 정의 및 핵심 목적
 Opencode은 AI 기반 코드 작성·보조 도구로, 개발자가 IDE 혹은 CLI 환경에서 자연어 프롬프트를 통해 코드 자동 완성, 오류 탐지, 리팩토링 등을 수행하도록 설계되었습니다. 핵심 목적은 생산성 향상과 코드 품질 개선이며, 특히 한국어 사용자에게 친화적인 인터페이스를 제공한다는 점이 강조됩...</excerpt>
     <tags>AI 코드 어시스턴트, Opencode, Claude Code, Goose CLI, 비교</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3306,7 +3578,7 @@ LLM 설정
     <excerpt>SEPilot Desktop 소개
 SEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, Chat, Editor, Browser 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통...</excerpt>
     <tags>SEPilot, Desktop, LLM, Project, ai, desktop-app, application, ai-assistant</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -3356,7 +3628,7 @@ React Router DOM - SPA 라우팅
 TanStack Query (React Query) - 서버 상태 관리
 Next.js...</excerpt>
     <tags>sepilot-wiki, 기술스택, React, TypeScript, Vite, frontend, javascript, web, technology-stack</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3459,7 +3731,7 @@ AI·ML 기반 배포 최적화 – 자동 카나리 배포, 트래픽 샤딩을 
 확장성·신뢰성 문제  
   - 전통적인 CI/CD 파이프라인은 모놀리식 구조와 중앙 집중형 배포 단계 때문에 규모가...</excerpt>
     <tags>GitOps, CI/CD, Enterprise, DevOps, Deployment, DORA</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3631,7 +3903,7 @@ API 레퍼런스: https://antigravity.google/docs/api
 Antigravity를 도입·운용 중인 엔지니어  
 제품 로드맵을 검토하는 PM /...</excerpt>
     <tags>Antigravity, 릴리즈노트, 버전히스토리, 마이그레이션</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3681,7 +3953,7 @@ GUI 라이브러리:
 문제 정의
 학생 데이터와 같은 민감한 이미지를 외부 서버에 업로드하는 온라인 서비스는 보...</excerpt>
     <tags>Rust, GPU, Face Cropping, wgpu, egui</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -3773,7 +4045,7 @@ OpenClaw GitHub Repository, “Integration with Moltbook API”, 2026‑01‑15.
     <excerpt>Executive Summary
 Moltbook은 AI 에이전트 전용 소셜 네트워크를 목표로 하는 플랫폼으로, AI‑to‑AI 커뮤니케이션, 대규모 에이전트 상호작용 데이터 수집, 그리고 AI 기반 서비스 프로토타입 환경을 제공한다. 현재 베타 단계이며, 주요 기능은 게시·댓글·투표 API, 에이전트 인증·연동, 그리고 Submolts(그룹)·Pairing...</excerpt>
     <tags>AI, 소셜네트워크, 에이전트, Moltbook, OpenClaw</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -3798,7 +4070,7 @@ Original intent
 Update  to .
 Corresponding changelog...</excerpt>
     <tags>react-router-dom, dependency, bump, dependabot</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -3835,7 +4107,7 @@ This document was generated based on publicly available information and the feed
 Overview
 Dependabot is a GitHub‑provided automation tool that can automatically raise pull requests to keep your dependencies up‑to‑d...</excerpt>
     <tags>Dependabot, pnpm, transitive dependencies, limitations</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -3890,7 +4162,7 @@ pnpm: 모노레포, 대규모 프로젝트, 디스크 사용량을 최소화하�
 은 JavaScript 런타임, 패키지 매니저, 번들러를 하나의 바이너리로 제공하는 통합 툴입니다. 반면에 과 은 패키지 매니저에 초점을 맞추고 있으며, 각각 Node.js와 별도로 동작합니다.
 이 가이드에서는 설치 방식, 성능, 디스크 사용량, 호환성, 생태계 등을 기준으로 세 도구를 비교하고, 어떤 상황에서 어떤...</excerpt>
     <tags>bun, pnpm, npm, 비교, 가이드, comparison, benchmark, performance</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -3952,7 +4224,7 @@ bun은 JavaScript/TypeScript 런타임, 번들러, 그리고 패키지 매니저
 번들러:  명령을 통해 ES 모듈, CommonJS, TypeScript 등을 빠르게 번들링합니다.
 패키지...</excerpt>
     <tags>bun, npm, yarn, 패키지 매니저, 가이드, runtime, javascript-runtime, package-manager</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4002,7 +4274,7 @@ GitHub Actions 워크플로우에서 bun(JavaScript 런타임 및 패키지 매�
 저장소에 을 사용하도록 설정된  혹은  파일이 존재해야 합니다.
 워크플로우...</excerpt>
     <tags>github-actions, bun, CI, CI/CD, node-alternative, automation, devops, workflow, javascript-runtime</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4045,7 +4317,7 @@ GitHub Action 워크플로 파일 생성 ()
 개요
 수동 PR 리뷰는 리뷰어가 피곤할 때 놓치는 부분이 생기고, 동일한 코멘트가 반복되는 등 비효율적인 문제가 있습니다. AI‑powered 솔루션을 활용하면 모든 풀 리퀘스트에 대해 구조화된 코드 리뷰(정확성, 보안, 성능, 테스트)를 CI가 자동으로 수행하도록 할 수 있습니다. 원하는 모델(OpenAI, Anthr...</excerpt>
     <tags>AI, 코드 리뷰, CI, GitHub Actions, 에이전트</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -4156,7 +4428,7 @@ Hugging Face Hub API: https://huggingface.co/docs/huggingfacehub
 대상 독자 – 머신러닝 엔지니어, 연구원, TPU에서 LLM 파인튜닝을 시도하고자 하는 개발자.  
 핵심 주제 – FunctionGemma(270 M paramete...</excerpt>
     <tags>FunctionGemma, Tunix, TPU, LoRA, 파인튜닝, JAX</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4269,7 +4541,7 @@ Eternal Terminal</content>
 로컬 터미널의 한계(노트북 종료, 네트워크 단절, 기기 변경 시 세션 손실)를 극복하고, 서버 측에서 영구적으로 실행되는 터미널 환경을 설계·구현하는 실전 가이드를 제공합니다.
 대상 독자는 장기 실행 AI 에이전트를 운영하는 개발자, DevOps 엔...</excerpt>
     <tags>클라우드 터미널, SSH, AI 에이전트, PTY, WebSocket, tmux, 세션 관리</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4442,7 +4714,7 @@ API Ask 사용량: 137건 ( 인터페이스)
 IP: 프랑스/포르투갈 지역,  엔드포인트를 매시간 폴링. 대시보드에 임베드된 형태로 추정, 인간과의 직접 교류는 없음.  
 전체 보안 인사이트 (2025‑2026)  
 무인증 서버 비율: 38 % (560개 서버 중) – 인증이 없으면 모든 AI 에이전트가 자유롭게 연결 가능.  
-대다수 독립 개발자·테스트 서버는 공개적으로 열려 있어, 실제 공격자가 연결을 시도하는 경우가 빈번함.  
+대다수 독립 개발자·테스트 서버는 공개적으로 열려 있어 실제 공격자가 연결을 시도하는 경우가 빈번함.  
 5.7 스케일링 및 모니터링 베스트 프랙티스  
 대규모 에이전트 트래픽(수백수천 연결) 환경에서 MCP 서버를 안정적으로 운영하기 위한 핵심 권고사항은 다음과 같다.
 연결 제한 및 레이트 리밋  
@@ -4459,8 +4731,8 @@ Alertmanager 규칙: 동일 IP가 1분 내 50회 이상  호출 시 경고, 허�
 Kubernetes: 와 를  엔드포인트에 구현.  
 Horizontal Pod Autoscaler: CPU 사용률 70 % 초과 시 파드 수를 2배 확대,  메트릭을 기준으로도 스케일링 가능.  
 허니팟 및 위협 인텔리전스  
-의도적으로 위험한 도구(예: )를 허니팟으로 배치해 악의적 스캔을 탐지한다.  
-탐지 시 자동으로 IP 차단(NetworkPolicy) 및 보고서 생성(CSV/JSON) 후 보안팀에 전달.  
+위험한 도구(예: )를 허니팟으로 배치해 악의적 스캔을 탐지한다.  
+탐지 시 자동 IP 차단(NetworkPolicy) 및 보고서 생성(CSV/JSON) 후 보안팀에 전달한다.  
 보안 텍스트 &amp; 책임 보고  
 파일에 연락처와 취약점 보고 절차를 명시한다.  
 허니팟이나 비정상 트래픽이 감지되면 CVE‑style 보고서(날짜, IP, 도구, 행동)를 내부 위협 인텔리전스 플랫폼에 전송한다.  
@@ -4474,7 +4746,7 @@ Scope 검증을 서버 측에서 강제하고, 클라이언트가 요청 시  �
 와 같은 정찰 패턴을 탐지하는 규칙을 추가한다.  
 정찰이 일정 비율(예: 60 % 이상) 이상이면 잠재적 스캐닝으로 분류하고, 해당 IP를 관찰 리스트에 추가한다.  
 주기적 보안 스캔  
-내부 CI 파이프라인에  도구를 포함해 주간 혹은 일일 스캔을 자동화한다.  
+CI 파이프라인에  도구를 포함해 주간 혹은 일일 스캔을 자동화한다.  
 스캔 결과는 보안 대시보드에 시각화하고, 미해결 이슈는 티켓 시스템에 자동 등록한다.  
 위 권고사항은 2025‑2026년 사이 560개 MCP 서버 조사 결과와 250개의 AI 에이전트가 실제로 연결된 운영 사례(Euno.News)를 기반으로 도출된 실증적 데이터에 근거한다.  
 5.8 최근 MCP CVEs (2025‑2026)
@@ -4516,21 +4788,39 @@ CI에서 SAST 결과가 높은 심각도이면 빌드 차단.
 Prometheus 메트릭  로  호출 횟수 추적.  
 Alertmanager 규칙: 5분 내  호출이 10회 초과 시 경고.  
 패치 배포 전략  
-버전 관리: 각 Tool·Resource에  메타데이터를 부여하고, 클라이언트가 버전 불일치를 감지하면 자동 업데이트를 권고.  
+버전 관리: 각 Tool·Resource에  메타데이터 부여, 클라이언트가 버전 불일치를 감지하면 자동 업데이트 권고.  
 핫‑리로드: 플러그인 기반 Server는 코드 변경 시 재시작 없이 새로운 Tool을 로드하도록 설계.  
 커뮤니티·공개 레지스트리 활용  
-MCP 레지스트리()에 서버 메타데이터를 등록하고, 신뢰 점수(인증, 행동 이력, 서명 여부)를 표시한다.  
-커뮤니티와 공유된 신뢰 점수를 기반으로 클라이언트가 자동으로 서버를 선택하도록 구현한다.  
-MCP Server 구축 방법  
-(섹션 4와 동일 내용이므로 여기서는 중복을 피하기 위해 생략)  
---- 
-※ 본 문서는 2026‑02‑24 기준 최신 정보를 반영했으며, 모든 내용은 공개된 자료와 보안 연구 결과에 근거합니다.*</content>
+MCP 레지스트리()에 서버 메타데이터 등록, 신뢰 점수(인증, 행동 이력, 서명 여부) 표시.  
+신뢰 점수를 기반으로 클라이언트가 자동으로 서버 선택하도록 구현.  
+Compression Techniques  
+6.1 배경  
+MCP 도구 호출 시 Claude Code의 200 KB 컨텍스트 창에 원시 데이터가 그대로 덤프된다. 실제 사례에 따르면  
+Playwright 스냅샷 하나: 56 KB  
+20개의 GitHub 이슈: 59 KB  
+30 분이 지나면 컨텍스트의 40 %가 사라진다.  
+이러한 비효율은 복잡한 워크플로우에서 세션 지속 시간을 크게 제한한다.  
+6.2 서버‑사이드 요약·압축 솔루션  
+Euno.News(2026‑02‑24)에서 소개된 Claude Code와 MCP 사이에 위치하는 압축 서버는 다음과 같은 특징을 갖는다.  
+  특징   상세 내용  
+ ------ ----------- 
+  데이터 요약   샌드박스에서 원시 데이터를 처리하고 요약만 반환. 315 KB → 5.4 KB 로 98 % 압축.  
+  다중 언어 런타임   Python, Node.js, Go, Rust 등 10개 언어 지원.  
+  검색 엔진   SQLite FTS5 + BM25 순위 알고리즘을 사용해 요약 전 필요한 정보만 추출.  
+  배치 실행   여러 도구 호출을 하나의 배치로 묶어 한 번에 요약, 네트워크 왕복 횟수 감소.  
+  세션 연장   압축·요약 덕분에 사용 가능한 세션 시간이 30 분 → 3 시간 으로 확대, 속도 저하 방지.  
+6.3 설치 및 사용법  
+플러그인 마켓플레이스에 추가  
+   
+플러그인 설치**  
+   
+3</content>
     <excerpt>MCP란 무엇인가  
 1.1 정의 및 핵심 개념  
 Model Context Protocol (MCP) 은 Anthropic이 2024년 11월에 공개한 오픈 표준 프로토콜이다.  
 LLM(대형 언어 모델)이 외부 시스템(데이터베이스, 파일, 웹 API 등)과 양방향으로 연결되어, 컨텍스트를 일관되게 전달·관리하고, 보안·신뢰성을 유지하도록 설계되었다....</excerpt>
     <tags>MCP, Model Context Protocol, Anthropic, AI Integration, JSON-RPC, SDK, llm, protocol, open-standard, ai</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4722,7 +5012,7 @@ Qwen 공식 블로그 – https://qwenlm.github.io/blog/qwen3.5/
 Qwen 3.5는 Alibaba에서 발표한 최신 대규모 언어 모델(LLM)입니다. Gated DeltaNet + Mixture‑of‑Experts(MoE) 아키텍처를 채택하여, 전체 397B 파라미터 중 17B만 활성화하는 방식으로 높은 성능과 효율성을 동시에 달성합니다.
 주요 목표 – 텍스트·이미지·비디오를 하나의 모델로 처리하면서, 코딩 에이전트·...</excerpt>
     <tags>Qwen, LLM, 멀티모달, MoE, 벤치마크</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4763,16 +5053,18 @@ Claude Cowork
  ------ ------ 
   제품 형태   macOS 전용 데스크톱 애플리케이션 (Anthropic “우리 모두를 위한 Claude Code”에 대한 답변)【euno.news】  
   주요 기능   - 직접 파일 시스템 접근: 로컬 폴더 권한 부여·Apple Virtualization Framework 기반 샌드박스 실행【euno.news】- 워크플로 자동화: Downloads 폴더 정리·파일 이름 변경·영수증 PDF → Excel 자동 입력【euno.news】- 점진적 스킬: Anthropic “Agent Skills”를 통해 외부 소프트웨어 없이 XLSX, DOCX, PPTX 등 사무 파일과 네이티브 상호작용【euno.news】  
+  새 플러그인·커넥터 (2026 업데이트)   플러그인: 인사·디자인·엔지니어링·재무·운영·브랜드 보이스 등 6개 분야별 플러그인 제공 (예: 인사채용 제안서 작성, 디자인 비평 프레임워크, 엔지니어링 스탠드업 회의 요약 등)【euno.news】비즈니스 앱 커넥터: 구글 워크스페이스(캘린더·드라이브·Gmail), 도큐사인, 워드프레스, 아폴로, 클레이, 아웃리치, 시밀러웹, MSCI, 리걸줌, 팩트셋, 하비, 세일즈포스·슬랙, LSEG, S&amp;P 글로벌, 커먼룸, 트라이브AI 등 다수 기업용 소프트웨어와 연동【euno.news】  
   대상 사용자   터미널을 열지 않고도 AI 에이전트의 힘을 활용하고 싶은 지식 근로자·프로젝트 매니저·관리자 등【euno.news】  
   가격·구독   Claude Pro($20 /월) 및 Max 구독자에게 제공【euno.news】  
 비교 차원 (Comparison Dimensions)
   차원   OpenClaw   Claude Code   Claude Cowork  
  ------ ---------- ------------- ---------------- 
   배포·접근 방식   로컬‑퍼스트, 서버·라즈베리 Pi 등 다양한 환경에서 실행 가능【euno.news】   클라우드·Anthropic 관리 터미널 환경, 모델은 Anthropic 인프라에 의존【euno.news】   macOS 전용 데스크톱 앱, Apple Virtualization Framework 샌드박스 사용【euno.news】  
-  주요 기능   메신저 기반 대화·예약 작업·커뮤니티 스킬 연동【euno.news】   전체 코드베이스 이해·자율 코딩·보안·레거시 현대화【euno.news】   파일·문서 자동화·스마트 폴더 정리·스킬 기반 사무 자동화【euno.news】  
+  주요 기능   메신저 기반 대화·예약 작업·커뮤니티 스킬 연동【euno.news】   전체 코드베이스 이해·자율 코딩·보안·레거시 현대화【euno.news】   파일·문서 자동화·스마트 폴더 정리·스킬 기반 사무 자동화 + 2026년 신규 플러그인·커넥터【euno.news】  
+  플러그인·커넥터 지원   ClawHub 마켓플레이스(3,000+ 스킬)【euno.news】   Anthropic “Agent Skills” (프리미엄 구독자 전용)【euno.news】   2026년 업데이트로 인사·디자인·엔지니어링·재무·운영·브랜드 보이스 플러그인 + 구글 워크스페이스·도큐사인·워드프레스·세일즈포스·LSEG·S&amp;P 등 다수 커넥터 제공【euno.news】  
   보안·프라이버시   모델 독립성·로컬 실행으로 데이터 유출 위험 최소화【euno.news】   샌드박스·세분화된 권한 제어·데이터 흐름 추적 기반 취약점 탐지【euno.news】   Apple Virtualization Framework 기반 컨테이너 샌드박스, 권한 기반 파일 접근【euno.news】  
   사용자 인터페이스   텔레그램·WhatsApp·Discord 등 메신저 UI【euno.news】   터미널/CLI UI【euno.news】   macOS GUI 애플리케이션【euno.news】  
-  확장성·생태계   ClawHub 마켓플레이스(3,000+ 스킬)·오픈소스 플러그인【euno.news】   Anthropic “Agent Skills”·프리미엄 구독자 전용 스킬【euno.news】   Anthropic “Agent Skills”·점진적 스킬 추가 가능【euno.news】  
+  확장성·생태계   ClawHub 마켓플레이스(3,000+ 스킬)·오픈소스 플러그인【euno.news】   Anthropic “Agent Skills”·프리미엄 구독자 전용 스킬【euno.news】   Anthropic “Agent Skills”·2026년 신규 플러그인·커넥터와 조직별 비공개 마켓플레이스 지원【euno.news】  
   가격·비용 모델   오픈소스·무료, 로컬 모델 사용 시 인프라 비용만 발생【euno.news】   Claude Pro/Max 구독(예: $20 /월)·API 사용료(Anthropic 공식 요금)【euno.news】   Claude Pro/Max 구독(예: $20 /월) 제공【euno.news】  
   성능·벤치마크   추가 조사가 필요합니다 – 공개된 정량적 벤치마크가 없음【euno.news】   추가 조사가 필요합니다 – 구체적인 코드 생성 정확도·작업 시간 수치는 제공되지 않음【euno.news】   추가 조사가 필요합니다 – 파일 자동화 속도·정확도에 대한 공개 데이터 부재【euno.news】  
 실제 사용 사례 시나리오  
@@ -4781,17 +5073,23 @@ Claude Cowork
   소프트웨어 개발복잡한 레포 탐색·자동 PR 생성   Claude Code   전체 코드베이스를 이해하고, 테스트·디버깅까지 자동화해 개발 생산성 극대화【euno.news】  
   사무·관리 자동화Downloads 폴더 정리·영수증 데이터 추출·Excel 입력   Claude Cowork   파일 시스템 직접 접근과 사무 파일 스킬을 활용해 반복 작업을 0‑click 자동화【euno.news】  
   개인 생산성·프라이버시 중심WhatsApp·Discord 등 메신저에서 24/7 프로액티브 어시스턴스   OpenClaw   메신저 기반 대화·예약 작업·커뮤니티 스킬 연동으로 언제 어디서든 작업 수행 가능【euno.news】  
+  인사·HR 자동화채용 제안서 작성·온보딩 플랜·성과 평가   Claude Cowork (HR 플러그인)   플러그인으로 인사 프로세스 전 단계 자동화, 인사 담당자의 업무 부담 감소【euno.news】  
+  디자인·UX 지원디자인 비평 프레임워크 생성·UX 카피 초안·접근성 감사   Claude Cowork (디자인 플러그인)   AI가 디자인 검토와 초안을 빠르게 제공, 디자인 팀의 반복 작업을 최소화【euno.news】  
+  엔지니어링·운영스탠드업 회의 요약·배포 체크리스트·사후 분석 보고서   Claude Cowork (엔지니어링 플러그인)   회의 내용 자동 요약·배포 검증 자동화, 운영 효율성 향상【euno.news】  
+  재무·투자시장 데이터 수집·재무 모델링·포트폴리오 리밸런싱   Claude Cowork (재무 플러그인)   팩트셋·MSCI·S&amp;P·LSEG 커넥터를 통해 실시간 시장 데이터 활용, 재무 분석·투자 의사결정 가속화【euno.news】  
+  브랜드 보이스 관리마케팅 자료·대화 분석·가이드라인 자동 생성   Claude Cowork (브랜드 보이스 플러그인)   기존 문서·마케팅 자료를 AI가 분석해 일관된 브랜드 가이드라인 제공【euno.news】  
 선택 가이드 – 어떤 에이전트를 선택할까?
   평가 요소   OpenClaw   Claude Code   Claude Cowork  
  ---------- ---------- -------------- --------------- 
   기술 수준·선호 인터페이스   메신저·스크립트 친화, 로컬 환경에 익숙한 사용자   터미널·CLI에 익숙한 개발자   macOS GUI를 선호하는 비개발자·관리자  
   조직 규모·보안 요구   데이터 프라이버시 최우선, 자체 인프라 운영 가능   Anthropic 관리 샌드박스, 기업 보안 정책에 맞는 권한 제어   macOS 전용, Apple 보안 모델 활용  
   비용·ROI   오픈소스·무료, 인프라 비용만 발생   구독료($20 /월) + API 사용료   구독료($20 /월)  
-  생태계·장기 지원   활발한 커뮤니티·ClawHub 확장성   Anthropic 공식 스킬·프리미엄 구독자 전용   Anthropic 스킬·점진적 업데이트  
-  핵심 업무 매칭   메신저 기반 업무 관리·프로액티브 알림   전체 코드베이스 자동화·보안·레거시 현대화   파일·문서 자동화·데스크톱 워크플로  
+  생태계·장기 지원   활발한 커뮤니티·ClawHub 확장성   Anthropic 공식 스킬·프리미엄 구독자 전용   Anthropic 스킬·2026년 신규 플러그인·커넥터, 조직별 비공개 마켓플레이스  
+  핵심 업무 매칭   메신저 기반 업무 관리·프로액티브 알림   전체 코드베이스 자동화·보안·레거시 현대화   파일·문서 자동화·데스크톱 워크플로·다양한 비즈니스 앱 커넥터  
+  플러그인·커넥터 지원   3,000+ 커뮤니티 스킬   프리미엄 구독자 전용 스킬   2026년 업데이트로 인사·디자인·엔지니어링·재무·운영·브랜드 보이스 플러그인 + 구글 워크스페이스·도큐사인·워드프레스·세일즈포스·LSEG·S&amp;P 등 다수 커넥터  
 추천 요약  
 개발·보안 중심: Claude Code  
-데스크톱 사무 자동화: Claude Cowork  
+데스크톱 사무 자동화·다양한 비즈니스 앱 연동: Claude Cowork (특히 2026년 신규 플러그인·커넥터 활용)  
 프라이버시·오픈소스·멀티채널: OpenClaw  
 구현 및 운영 베스트 프랙티스  
 6.1 설치·배포 체크리스트
@@ -4799,17 +5097,17 @@ Claude Cowork
  ------ ---------- ------------- --------------- 
   환경 준비   로컬 머신·Docker·라즈베리 Pi 등 (Linux/Windows)   Anthropic 계정·CLI 환경 (macOS·Linux)   macOS 12+ + Apple Virtualization Framework  
   의존성 설치   Python 3.9+, , 메신저 Bot API 토큰   Anthropic SDK, ,  (옵션)   앱 스토어 다운로드, 권한 부여  
-  보안 설정   로컬 모델 실행 시 GPU 드라이버 최신화·방화벽 제한   Anthropic API 키 보관·권한 최소화   샌드박스 컨테이너 설정 확인  
-  스킬/플러그인   ClawHub에서 필요 스킬 설치 ()   Anthropic “Agent Skills” 활성화 (Pro/Max 구독)   “Agent Skills” 활성화 및 필요 플러그인 추가  
+  보안 설정   로컬 모델 실행 시 GPU 드라이버 최신화·방화벽 제한   Anthropic API 키 보관·권한 최소화   샌드박스 컨테이너 설정 확인·Full Disk Encryption  
+  스킬/플러그인   ClawHub에서 필요 스킬 설치 ()   Anthropic “Agent Skills” 활성화 (Pro/Max 구독)   2026년 신규 플러그인·커넥터 활성화 (설정 → 플러그인)  
 6.2 보안·권한 관리 권고사항
-OpenClaw: 로컬 모델 사용 시 GPU 메모리 접근 제한, 네트워크 포트 최소화. 메신저 Bot 토큰은 별도 비밀 관리 서비스에 저장.  
+OpenClaw: 로컬 모델 사용 시 GPU 메모리 접근 제한, 네트워크 포트 최소화. 메신저 Bot 토큰은 비밀 관리 서비스에 저장.  
 Claude Code: Anthropic 제공 샌드박스 권한을 최소화하고, 데이터 흐름 추적 옵션을 활성화하여 민감 파일 접근을 로그에 기록.  
-Claude Cowork: macOS 보안 설정(Full Disk Encryption)과 Virtualization Framework 샌드박스 옵션을 검토하고, 파일 폴더 권한을 최소한으로 부여.
+Claude Cowork: macOS 보안 설정(Full Disk Encryption)과 Virtualization Framework 샌드박스 옵션을 검토하고, 파일 폴더 권한을 최소한으로 부여.  
 6.3 커스텀 스킬·플러그인 개발 흐름
 API 정의 – 외부 서비스 REST/GraphQL 엔드포인트 명세.  
 스킬 템플릿 – OpenClaw은  로 기본 템플릿 생성, Claude 시리즈는 Anthropic “Skill Manifest” JSON 형식 사용【euno.news】.  
 테스트 – 로컬 환경에서 단위 테스트 후 샌드박스/컨테이너 내에서 통합 테스트.  
-배포 – OpenClaw은 GitHub에 PR 제출, Claude 스킬은 Anthropic 포털에 업로드 후 검증.
+배포 – OpenClaw은 GitHub에 PR 제출, Claude 스킬은 Anthropic 포털에 업로드 후 검증.  
 6.4 모니터링·성능 튜닝 팁
 리소스 사용량: · 로 GPU/CPU 사용량 모니터링.  
 작업 지연: 에이전트 로그에 작업 시작·완료 타임스탬프 기록, 평균 지연 시간 분석.  
@@ -4820,11 +5118,11 @@ API 정의 – 외부 서비스 REST/GraphQL 엔드포인트 명세.
   모델‑중립 에이전트 성장   특정 클라우드 공급자에 종속되지 않고, 로컬·오픈소스 모델을 자유롭게 교체 가능   OpenClaw이 모델 독립성을 강조하고 있음【euno.news】  
   멀티‑모달·프롬프트‑없는 자동화   이미지·음성·텍스트를 모두 인식해 자연어 명령만으로 복합 작업 수행   Anthropic은 “Agent Skills”를 통해 멀티‑모달 인터페이스 확대 중【euno.news】  
   기업·개인 통합 시나리오   기업용 SSO·보안 정책과 개인용 프라이버시 보호를 동시에 만족   OpenClaw은 로컬 프라이버시, Claude Cowork은 기업 샌드박스, Claude Code은 보안·코드 스캔 기능 제공【euno.news】  
-  플러그인·커뮤니티 생태계 확대   수천 개의 커뮤니티 스킬·플러그인이 에이전트 기능을 급속히 확장   ClawHub(3,000+ 스킬)·Anthropic Skills(점진적 추가)【euno.news】  
+  플러그인·커뮤니티 생태계 확대   수천 개의 커뮤니티 스킬·플러그인이 에이전트 기능을 급속히 확장   ClawHub(3,000+ 스킬)·Anthropic Skills(점진적 추가)·Claude Cowork 2026년 신규 플러그인·커넥터【euno.news】  
 결론  
 OpenClaw은 오픈소스·로컬‑퍼스트·메신저 기반으로 프라이버시와 커스터마이징을 최우선으로 하는 사용자에게 적합합니다.  
 Claude Code는 전체 코드베이스를 이해하고 보안·레거시 현대화까지 자동화하는 개발자 중심 에이전트이며, Anthropic 구독 모델이 필요합니다.  
-Claude Cowork은 macOS 전용 데스크톱 앱으로 파일·문서 자동화에 강점이 있으며, GUI 기반 작업을 선호하는 비개발자·관리자에게 최적화돼 있습니다.  
+Claude Cowork은 macOS 전용 데스크톱 앱으로 파일·문서 자동화에 강점이 있으며, 2026년 신규 플러그인·커넥터 덕분에 인사·디자인·엔지니어링·재무·운영·브랜드 보이스 등 다양한 비즈니스 영역을 포괄합니다.  
 각 조직·개인의 기술 스택, 보안 요구, 비용 구조를 고려해 위 비교 차원을 기준으로 선택하면, 2026년 AI 에이전트 도입 성공률을 크게 높일 수 있습니다.
 참고 자료
 EUNO.NEWS – “2026년 AI 에이전트 궁극 가이드: OpenClaw vs Claude Cowork vs Claude Code” (2026) – https://euno.news/posts/ko/the-ultimate-guide-to-ai-agents-in-2026-openclaw-v-0af5a9  
@@ -4834,6 +5132,7 @@ AI with Allie – “Claude Code vs Claude Cowork vs OpenClaw” – https://aiw
 LinkedIn Pulse – “OpenClaw vs. Claude Cowork – The Two AI Agents Everyone’s Talking About” – https://www.linkedin.com/pulse/openclaw-vs-claude-cowork-two-ai-agents-everyones-talking-polzer-dzktf  
 Adapt Blog – “Claude Cowork vs OpenClaw: Which AI agent works for your business?” – https://adapt.com/blog/claude-cowork-vs-openclaw  
 Skywork.ai – “OpenClaw vs ChatGPT vs Claude — What&apos;s Different in 2026” – https://skywork.ai/blog/ai-agent/openclaw-vs-chatgpt-claude-cline-roo-code-comparison/  
+EUNO.NEWS – Claude Cowork 최신 플러그인·커넥터 – https://euno.news/posts/ko/c39b6f  
 위 자료에 명시된 내용만을 근거로 작성되었습니다. 구체적인 성능 수치·벤치마크는 공개된 자료가 없어 “추가 조사가 필요합니다”로 표기했습니다.</content>
     <excerpt>서론
 문서 목적 및 독자 정의
@@ -4841,7 +5140,7 @@ Skywork.ai – “OpenClaw vs ChatGPT vs Claude — What&apos;s Different in 202
 대상 독자는  
 소프트웨어 엔지니어, DevOps,...</excerpt>
     <tags>AI Agent, OpenClaw, Claude Cowork, Claude Code, 비교, 2026</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -4913,7 +5212,7 @@ Steerling‑8B는 토큰‑레벨 해석 가능성을 최초로 구현한 8 B 
 2026년 2월 23일 Guide Labs Team이 발표한 Steerling‑8B는 생성 과정의 모든 토큰을 입력 컨텍스트, 인간이 이해할 수 있는 개념, 그리고 학습 데이터와 연결시킬 수 있는 최초의 해석 가능한 대형 언어 모델이다[출처].  
 이 문서는 Steerling‑8B의 기술적 혁신을 정리하고, 기존 LLM의 한계와 비교하여 해석 가능성의...</excerpt>
     <tags>LLM, 해석 가능성, 토큰 레벨 추적, Concept Steering, Training Data Attribution</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -5012,7 +5311,7 @@ Hugging Face Hub, Mobile‑Action 데이터셋 페이지, .
 FunctionGemma는 작고 효율적인 언어 모델로, 자연어를 바로 실행 가능한 API 호출 형태로 변환합니다. 기존에는 Hugging Face TRL을 활용해 GPU 환경에서 파인튜닝하는 방법이 주로 소개되었습니다[euno.news].
 이번 가이드에서는 Google TPU와 JAX 기반 경량 라이브러리 Tunix를 사용해 LoRA(Low‑Rank...</excerpt>
     <tags>FunctionGemma, TPU, Tunix, JAX, LoRA, 파인튜닝</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -5178,7 +5477,7 @@ FastCampus – 데이터생성·RAG·파인튜닝 강의.
 활용 대상: AI 연구자·엔지니어, 기업 전략 담당자, 정책 입안자 등 LLM 진화와 시장 동향을 한눈에 파악하고자 하는 모든 이해관계자.  
 L...</excerpt>
     <tags>LLM, AI History, Timeline, Large Language Models, 기술 문서</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -5242,7 +5541,7 @@ Community tutorials (Reddit, Habr 등) – 최신 사용 사례 참고</content>
 개요
 Claude Code는 Anthropic이 제공하는 agentic coding tool 으로, 로컬 디렉터리의 코드를 읽고, 수정하고, 실행할 수 있습니다. Ollama는 Anthropic‑compatible API를 제공하므로, Ollama에 설치된 모델을 Claude Code와 바로 연결해 로컬에서 코...</excerpt>
     <tags>Ollama, Claude Code, 로컬 모델, AI 통합, 가이드</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -5419,7 +5718,7 @@ AI 에이전트 비용 75% 절감 – Euno.news “내 AI 에이전트 비용을
     <excerpt>Continuous AI – 인간이 AI 오류를 검증하는 방법
 AI 코딩 에이전트를 CI 파이프라인, 스크래퍼, 데이터베이스 스키마 설계 등 다양한 작업에 활용하는 사례가 늘어나고 있습니다. 하지만 실제 현장에서 가장 큰 가치는 AI가 만든 코드를 검증하고, AI가 놓친 오류를 찾아내는 인간의 역할이라는 인사이트가 있습니다. 본 가이드는 해당 인사이트를 바...</excerpt>
     <tags>Continuous AI, Human-in-the-Loop, AI 검증, CI</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -5508,7 +5807,7 @@ GLM‑5 개요 및 발표 배경
 주요 특징 요약  
   - 스케일: 파라...</excerpt>
     <tags>GLM-5, 대형 언어 모델, AI 서비스, 벤치마크</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -5529,8 +5828,8 @@ GLM‑5 개요 및 발표 배경
   조직·프로세스   테스트·평가 문화 부재, 책임 주체 불명확, 품질 기준 미설정  
 위 원인들은 CIO.com·Verint·Operant AI 등 외부 기사에서도 동일하게 지적되고 있습니다【CIO.com】.
 Regulatory Landscape
-AI 에이전트 시스템은 자율적인 행동을 통해 실제 세계에 영향을 미칠 수 있어, 보안·거버넌스 위험이 크게 부각되고 있습니다.  
-미국 상무부 산하 National Institute of Standards and Technology (NIST) 의 Center for AI Standards and Innovation (CAISI) 가 주도하고 있는 AI Agent Standards Initiative는 다음과 같은 목표를 가지고 있습니다.
+AI 에이전트 시스템은 자율적인 행동을 통해 실제 세계에 영향을 미칠 수 있어 보안·거버넌스 위험이 크게 부각됩니다.  
+미국 상무부 산하 National Institute of Standards and Technology (NIST) 의 Center for AI Standards and Innovation (CAISI) 가 주도하는 AI Agent Standards Initiative는 다음과 같은 목표를 가지고 있습니다.
 산업 주도 기술 표준 및 개방형 프로토콜을 통해 에이전트가 안전하게 동작하도록 촉진  
 모델‑레벨, 에이전트‑시스템‑레벨, 인간‑감시 등 3가지 차원의 보안·거버넌스 프레임워크 정의  
 연방 규제와 연계해 AI 에이전트의 데이터 보호, 권한 관리, 위험 완화 가이드라인 제공  
@@ -5548,7 +5847,7 @@ NIST RFI Summary
 Implications for Agent Development
 보안‑우선 설계  
    - 모델·에이전트 설계 단계에서 권한 최소화와 데이터 격리를 기본 원칙으로 채택.  
-   - 민감 데이터는 암호화·마스킹 후에만 도구에 전달하고, Trace 로그에 마스킹 처리 적용.  
+   - 민감 데이터는 암호화·마스킹 후에만 도구에 전달하고, Trace 로그에도 마스킹 처리 적용.  
 거버넌스·인증 절차  
    - 중요 행동(예: 외부 시스템 호출, 파일 삭제) 에는 사전 인간 승인 워크플로우를 CI/CD에 통합.  
    - 정책 파일()에 승인 기준을 명시하고, 위반 시 자동 차단.  
@@ -5563,6 +5862,35 @@ Implications for Agent Development
    - OpenTelemetry 기반 보안 메트릭(예: 비정상 API 호출 빈도, 권한 상승 시도) 수집 및 알림 설정.  
    - 이상 징후 발생 시 자동 롤백 및 인시던트 대응 플랜을 트리거하도록 CI/CD 파이프라인에 연동.  
 위 권고사항은 NIST RFI에서 강조된 보안·거버넌스 요구사항을 실무에 적용하기 위한 구체적인 방안이며, 향후 표준이 확정될 경우 추가 조정이 필요합니다.
+13.1 Safety Constraints Overview
+AI 에이전트가 실제 업무에 투입될 때 가장 중요한 보호 장치는 안전 제약(Safety Constraints) 입니다. NIST CAISI가 제시한 3‑계층 보안 프레임워크에서 Safety는 NON‑NEGOTIABLE 레벨로 정의되며, 다음과 같은 핵심 요소를 포함합니다.
+  요소   설명  
+ ------ ------ 
+  데이터 보호   민감·비신뢰 데이터는 전송 전 암호화·마스킹하고, 도구 호출 시 최소 권한만 부여  
+  행동 제한   위험도가 높은 도구(예: 파일 삭제, 시스템 명령) 호출은 사전 승인 워크플로우와 정책 파일()에 명시  
+  실시간 감시   OpenTelemetry 로깅을 통해 비정상 API 호출, 권한 상승 시도, 레이턴시 급증 등을 실시간으로 탐지  
+  위험 완화   비정상 상황 발생 시 자동 롤백, 격리된 샌드박스 실행, 인시던트 알림을 즉시 발송  
+이러한 제약은 AI 에이전트가 인간의 의도와 일치하도록 강제하고, 규제 위반이나 데이터 유출 위험을 사전에 차단합니다.
+13.2 Intent‑Based Design Pattern
+전통적인 프롬프트는 “안전성, 명확성, 간결성”을 쉼표로 구분된 평면 리스트로 전달합니다. LLM은 이를 동등한 우선순위로 해석해 의도와 실제 동작 사이에 격차가 발생합니다.  
+Intent Engineering은 목표를 계층형(Value Hierarchy) 으로 구조화해 우선순위를 명시적으로 지정합니다.
+핵심 데이터 구조 (Python / Pydantic)
+프롬프트 인젝션 예시
+라우팅 티어와 연계
+NONNEGOTIABLE 라벨이 붙은 목표가 존재하면, 요청은 자동으로 고성능 모델(예: GPT‑4‑Turbo) 로 라우팅되어 안전 검증을 강화합니다.
+실전 적용 (MCP 통합)
+위와 같이 정의된 계층은 Prompt Optimizer(npm 패키지)와 연동해 자동으로 프롬프트에 삽입됩니다.
+13.3 프롬프트 엔지니어링 팁
+우선순위 라벨 명시 – 목표 리스트 앞에 ,  등 라벨을 붙여 LLM에게 명확히 전달합니다.  
+계층형 JSON 전달 –  객체를 시스템 프롬프트에 포함시키면, 모델이 내부 로직에서 자동으로 충돌 해결 규칙을 적용합니다.  
+단계적 프롬프트 –  
+   - Step 1: 안전 제약을 먼저 선언 ().  
+   - Step 2: 명확성·간결성 등 부수 목표를 순차적으로 추가.  
+   - Step 3: 최종 작업 지시를 제공.  
+   이렇게 하면 모델이 “동전 던지기” 대신 계층적 의사결정을 수행합니다.  
+검증 어설션 삽입 –  과 같은 Layer 1 어설션을 테스트 스위트에 포함시켜, 안전 라벨이 누락되면 CI 단계에서 즉시 실패하도록 합니다.  
+비용 관리 – LLM‑as‑Judge 를 사용할 때는 샘플 비율(예: 5 %)만 적용하고, 결과를 캐시해 재사용합니다.  
+위 팁들은 euno.news 기사에서 제시된 “Intent Engineering” 접근법을 실제 개발 파이프라인에 적용하기 위한 실용적인 가이드입니다.
 테스트 전략 프레임워크
 3‑계층 테스트 피라미드
 Layer 1 – 결정론적 어설션  
@@ -5638,11 +5966,11 @@ OpenAI는 2026년 초 OpenAI Frontier for Enterprises 라는 새로운 플랫폼
 가격·측정 모델  
   - 현재 가격은 공개되지 않았으며, OpenAI는 좌석 기반이 아닌 비즈니스 결과(예: 매출 증대, 비용 절감)와 연계한 성과 기반 과금을 검토 중이라고 밝혔습니다.
 기업용 AI 에이전트 도입 현황 및 전망
-Brad Lightcap(OpenAI COO)는 2026년 India AI Summit에서 “아직 기업 AI가 비즈니스 프로세스에 깊게 침투하지 못했다”며 현 상황을 진단했습니다.
+Brad Lightcap(OpenAI COO)는 2026년 India AI Summit에서 “아직 기업 AI가 비즈니스 프로세스에 깊게 침투하지 못했다”고 진단했습니다.
 도입 현황  
   - 대규모 채택 미비: 주요 기업들은 아직 파일럿 단계에 머물고 있으며, 실제 비즈니스 핵심 프로세스에 AI 에이전트를 적용한 사례는 제한적입니다.  
   - 전통 엔터프라이즈 소프트웨어 의존: OpenAI 자체도 지난해 Slack을 대규모로 활용했으며, 이는 AI 기업이 여전히 기존 SaaS 도구에 의존하고 있음을 시사합니다.  
-  - 시장 규모: OpenAI CFO Sarah Friar는 2025년 매출이 200억 달러를 넘어섰다고 발표했으며, 이는 AI 에이전트 시장이 빠르게 성장하고 있음을 보여줍니다.  
+  - 시장 규모: OpenAI CFO Sarah Friar는 2025년 매출이 200억 달러를 넘어섰다고 발표했으며, AI 에이전트 시장이 빠르게 성장하고 있음을 보여줍니다.  
 주요 도전 과제  
   1. 복잡한 조직 구조 – 기업은 다수 팀·시스템·데이터 레이크를 보유하고 있어, 에이전트가 다양한 도구와 권한을 안전하게 조정해야 함.  
   2. 보안·규제 – 데이터 보호, 권한 관리, 모델 중독 방지 등 NIST·CAISI 가이드라인을 충족해야 함.  
@@ -5654,7 +5982,7 @@ Brad Lightcap(OpenAI COO)는 2026년 India AI Summit에서 “아직 기업 AI�
 기업이 AI 에이전트를 성공적으로 도입하려면 보안·거버넌스, ROI 측정, 멀티‑모달 지원을 동시에 고려한 전략이 필요합니다. OpenAI Frontier는 이러한 요구를 충족시키기 위한 플랫폼으로 자리매김하고 있으며, 향후 표준화된 에이전트 관리·평가 프레임워크와 연계될 가능성이 높습니다.
 Coding Agent Architecture (코딩 에이전트 아키텍처)
 15‑1. 코딩 에이전트란?
-코딩 에이전트는 단순한 LLM이 아니라 시스템이다. 전체 흐름은 다음과 같다.
+코딩 에이전트는 단순 LLM이 아니라 시스템이다. 전체 흐름은 다음과 같다.
 모델은 순수 추론 엔진에 불과하다.  
 런타임은 오케스트레이션을 담당한다.  
 모델은 레포 전체를 볼 수 없으며, 에이전트가 무엇을 보낼지 선택한다.
@@ -5715,55 +6043,12 @@ PLAN.md 에는 현재 작업 계획과 제약을 명시한다.
 Structure &gt; Verbosity → 구조 &gt; 장황함  
 Relevance &gt; Volume → 관련성 &gt; 단순 양  
 Completeness → 완전성  
-Constraints &gt; Freedom → 제약 &gt; 자유  
-Iteration &gt; Giant Prompts → 반복 &gt; 거대한 프롬프트  
-Plan → Execute → Verify → 계획 → 실행 → 검증  
-자율 웹 탐색 AI 에이전트 구현 사례 – Xiaona
-16‑1. 에이전트 아키텍처
-프레임워크: OpenClaw 에이전트 프레임워크 위에 LLM 기반 추론 엔진 배치.  
-툴 세트:  
-  - Browser control – 실제 인터랙티브 브라우저(Playwright 또는 Puppeteer) 조작 (navigate, click, type, read DOM).  
-  - Shell access – , ,  등 로컬 명령 실행.  
-  - File I/O – 파일 읽기·쓰기·편집.  
-  - Web search &amp; fetch – 외부 검색·데이터 수집.  
-핵심 차별점: 헤드리스가 아닌 실제 디스플레이 컨텍스트를 가진 브라우저를 사용해 접근성 트리와 스크린샷을 LLM에게 제공, 시각 OCR 없이 페이지 내용을 “볼” 수 있음.
-16‑2. 브라우저 자동화 연동
-OpenClaw는 Playwright(또는 Puppeteer) 드라이버를 래핑하여 고수준 API를 제공한다.
-Playwright와 Puppeteer 모두 Chromium 기반이며, OpenClaw는 브라우저 실행 시 실제 사용자 지문(헤더, 쿠키, 랜덤 지연)을 적용해 안티‑봇 시스템을 회피한다.  
-모든 액션은 Trace 객체에 기록되어 을 통해 결정론적 테스트가 가능하다.
-16‑3. 폼 제출·회원가입 자동화 흐름
-Xiaona 에이전트가 GitHub 회원가입을 자동화한 흐름을 요약하면 다음과 같다.
-  단계   주요 동작   코드 스니펫 (개념)  
- ------ ----------- ------------------- 
-  1. 페이지 로드        
-  2. 이메일 입력        
-  3. Cloudflare Turnstile 처리   실제 브라우저가 자동으로 지문 제공 → 별도 코드 필요 없음     
-  4. 비밀번호·사용자명 입력   연속  +  로 진행     
-  5. 이메일 인증   메일함 접근(쉘 도구) → 인증 코드 추출브라우저로 돌아와 코드 입력    →   
-  6. SSH 키 생성·등록   로컬  실행 → 브라우저를 통해 SSH 키 페이지에 공개키 붙여넣기    →   
-  7. 최종 확인   페이지 스냅샷 검증 → 성공 메시지 확인     
-각 단계는 Trace에 기록되며, ,  등 Layer 1 어설션으로 회귀를 방지한다.
-16‑4. 보안·프라이버시 고려사항
-  고려 항목   설명  
- ---------- ------ 
-  자격 증명 관리   API 키·비밀번호는 환경 변수 또는 비밀 관리 서비스(Vault)에서 로드하고, Trace에 마스킹 처리한다.  
-  안티‑봇 회피   실제 브라우저 인스턴스 사용, 랜덤 마우스 이동·타이핑 지연, 사용자 에이전트 스푸핑 적용.  
-  데이터 최소화   스냅샷은 접근성 트리만 저장하고, 화면 이미지·전체 HTML은 필요 시에만 캡처한다.  
-  법적·서비스 약관   자동 회원가입은 서비스 제공자의 이용 약관을 검토하고, 테스트 전용 계정(예: )을 사용한다.  
-  감사 로그   모든 브라우저 액션·쉘 명령은 구조화된 로그에 기록해 추적 가능하도록 한다.  
-  네트워크 격리   에이전트는 전용 VPC/컨테이너에서 실행해 외부 침해 위험을 제한한다.  
-16‑5. 교훈 및 적용 포인트
-실제 브라우저 사용이 Cloudflare Turnstile·reCAPTCHA와 같은 안티‑봇 방어를 자연스럽게 우회한다.  
-접근성 스냅샷은 LLM이 시각 정보를 해석하도록 해 별도 OCR이 필요하지 않다.  
-다중 도구 오케스트레이션(브라우저 ↔ 쉘 ↔ 파일) 은 복잡한 웹·시스템 워크플로우 구현의 핵심 메커니즘이다.  
-오류 복구(예: 사용자명 충돌, 이메일 지연)는 ·와 같은 결정론적 검증과, LLM‑as‑Judge 기반 재시도 로직을 조합해 구현한다.  
----  
-📰 자동 감지: 뉴스 인텔리전스 (euno.news)*</content>
+-</content>
     <excerpt>서론 – AI 에이전트 배포 현황과 문제 인식
 배포 실패 비율: 2026 State of Agent Engineering 보고서(1,300명 이상 응답)에서 76 %의 AI 에이전트 배포가 실패한다고 밝혀졌습니다【euno.news】.  
 주요 장벽: 동일 보고서에 따르면 품질이 가장 큰 장벽이며, 32 %의 팀이 품질 문제를 배포 차단 요인으로 꼽았습니다【...</excerpt>
     <tags>AI 에이전트, 배포, 테스트, LangChain, 품질</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -5904,7 +6189,7 @@ Mistral AI (2024). Mistral 7B Model Card. https://huggingface.co/mistralai/Mistr
     <excerpt>서론
 대형 언어 모델(LLM)의 급격한 발전은 AI 연구·산업 전반에 큰 파장을 일으키고 있습니다. 2017년 최초 Transformer 발표 이후, ChatGPT, GPT‑4, Claude, Gemini, LLaMA, Mistral, DeepSeek 등 수많은 모델이 연이어 등장했으며, 2026년 현재까지 171개의 LLM이 연대순으로 정리된 타임라인이...</excerpt>
     <tags>LLM, AI 타임라인, 모델 진화, 인공지능 역사</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -5999,7 +6284,7 @@ tags: [AI, 정책, 군사, Anthropic, Claude, AI 거버넌스]
 개요
 뉴스 요약: 미국 국방부(DoD)와 AI 기업 Anthropic이 대형 언어 모델 Claude의 군사 활용에 대...</excerpt>
     <tags></tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -6214,7 +6499,7 @@ Stripe 내부에서는 결제 플러그인 개발, 대시보드 UI 업데이트,
 이 문서는 Claude 모델을 이용해 커밋 전 자동 리뷰를 강제하는 git‑lrc(Git‑Lint‑Review‑Commit) 워크플로우를 소개합니다. 아래 섹션에서는 전체 흐름, 커밋에 표시되는 어노테이션 스킴, 그리고 CI/CD 파이프라인에 통합하는 방법을 다룹니다.
 Claude Review W...</excerpt>
     <tags>GitHub, Agentic Workflows, CI/CD, Repository Automation, AI</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -6312,7 +6597,7 @@ order: 1
 서론
 시맨틱 레이어는 비즈니스 용어와 물리적 데이터 구조 사이의 추상화 계층을 의미합니다....</excerpt>
     <tags></tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -6398,7 +6683,7 @@ GitHub Actions, GitLab CI 등과 연동하는 예시는 LangChain 공식 문서(
 AI Agent 배포가 성공적으로 이루어지지 않는 경우가 빈번합니다. 76%의 AI Agent 배포가 실패한다는 보고가 최근 발표되었습니다【euno.news】.  
 LangChain이 2026년에 발표한 State of Agent Engineering 보고서(1,300명 이상 응답)에서는 품질이 프로덕션 배포의 가장 큰 장벽이라고 밝혔으며, 32%의...</excerpt>
     <tags>AI Agent, 테스트, LangChain, 배포, 품질 보증</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -6477,7 +6762,7 @@ AI‑Generated 코드와 인간 개발자의 역할 구분
 이 문서는  
  바이브...</excerpt>
     <tags>바이브코딩, AI코딩, 프롬프트엔지니어링, 소프트웨어개발</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -6644,7 +6929,7 @@ Skill 파일은 이제 명령이자 코드이며, 전통적인 프롬프트 인�
 이 문서는 Self‑Healing AI Agents(자체 복구 AI 에이전트) 구현 사례를 기반으로, 대규모 자율 에이전트 아키텍처와 8 GB VRAM 환경에서의 효율적인 배포 방법을 소개합니다. 원본 내용은 euno.news에서 발췌했습니다.
 Self‑Healing Architecture...</excerpt>
     <tags>멀티 에이전트, Self‑Healing, AI, 아키텍처, 자율 에이전트, 자원 효율</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -6735,7 +7020,7 @@ Anthropic과 미국 국방부 간의 충돌은 정부의 군사적 AI 활용 요
 이 문서는 2026년 초 미국 국방부(DoD)와 인공지능 기업 Anthropic 간에 발생한 정책 충돌을 정리하고, 양측의 요구·입장, 법·규제적 배경, 윤리·사회적 파급 효과 등을 종합적으로 분석한다.  
 주요 이해관계자는 Anthropic(Claude 모델 개발·운영), 미국 국방부(DoD), 그리고 다른 주요 AI 기업(Google, OpenAI...</excerpt>
     <tags>Anthropic, Claude, AI 정책, 국방부, 윤리, 규제</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -6821,7 +7106,7 @@ CI/CD 파이프라인 연계
 이 문서는 AI 이니셔티브를 추진하는 데이터·분석·엔지니어링 팀을 대상으로, 시맨틱 레이어가 왜 필수적인지와 이를 도입·운영하는 구체적인 방법을 제시합니다.  
 AI 프로젝트는 데이터와 알고리즘만으로는 성공하기 어렵고, 비즈니스 용어와 물리적 데이터 구조 사이의 일관된 정의가 핵심이라는 점이 최근 EUNO.NEWS 기사에서 강조되었습니다[EUNO.NE...</excerpt>
     <tags>시맨틱 레이어, AI 프로젝트, 데이터 웨어하우스, 메트릭 관리, 데이터 거버넌스</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -6862,7 +7147,7 @@ Gemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어
 개요
 Gemini 3.1 Pro는 Google이 2026년 2월 19일에 발표한 최신 대형 언어 모델(Large Language Model)입니다. 기존 Gemini 3 시리즈를 기반으로 복잡한 추론과 멀티모달 작업에서 크게 향상된 성능을 제공합니다. 모델은 Gemini API, Vertex AI, Gemini 앱, Noteboo...</excerpt>
     <tags>Gemini, AI, Benchmark</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -6956,7 +7241,7 @@ GPAI 위험 관리 프레임워크 – AI 시스템 위험 관리와 데이터 �
 대상 독자: AI 플랫폼 엔지니어, DevSecOps 담당자, 보안 아키텍트, 클라우드 운영팀 등 AI 에이전트를 서비스 형태로 제공하거나 내부에 배포하는 모든 이해관계자.  
 AI 에이전트 보안...</excerpt>
     <tags>AI, 보안, 에이전트, 베스트프랙티스, 운영</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -7056,7 +7341,7 @@ Incremental Static Regeneration (ISR) 은 Next.js 가 제공하는 정적 페이
 지정된 시간 간격이 지나면 백그라운드에서 최신 데이터를 기반으로 페이지를 재생성 합니다.  
 이 방식은 전통적인 Static Site G...</excerpt>
     <tags>Next.js, ISR, React, 정적 사이트, 성능 최적화</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -7243,7 +7528,7 @@ QA 엔지니어 및 테스트 자동화 담당자
 역할  
 는 HTTP 요청/응답 처리, 에러 핸들링, 토큰...</excerpt>
     <tags>frontend, api, service-layer, documentation, coverage</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -7312,7 +7597,7 @@ GitOps는 엔터프라이즈 DevOps 생태계에 신뢰성, 보안, 속도를 �
     <excerpt>서론
 전통적인 CI/CD 파이프라인은 조직이 성장함에 따라 확장성과 복잡성의 한계에 직면합니다. 파이프라인이 여러 팀·환경을 아우를 때, 설정 드리프트, 파이프라인 스파게티, 그리고 배포 실패 위험이 증가합니다. 이러한 문제를 해결하기 위해 GitOps가 주목받고 있습니다. GitOps는 선언적 인프라와 Git‑as‑Source‑of‑Truth 방식을 통해...</excerpt>
     <tags>GitOps, Enterprise, CI/CD, DORA, DevOps, 배포신뢰성</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -7362,7 +7647,7 @@ Terraform awsvpcendpoint 리소스
 왜 비용이 두 배가 되는가
 컴퓨트 인스턴스...</excerpt>
     <tags>AWS, NAT Gateway, S3, Terraform, 비용 최적화, VPC</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>GitHub Action</author>
   </item>
   <item>
@@ -7433,7 +7718,7 @@ AI가 73건의 작업을 수행했으며, 유지보수() 29건이 가장 많음
   전체 문서   36  
   발행(published)...</excerpt>
     <tags>보고서, 주간, 통계</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -7505,7 +7790,7 @@ AI가 수행한 작업은 50건으로,  13건,  14건,  9건 등이 주요 활�
 열린 이슈는 6개이며, 최근 7일간 12건의 이슈 활동이 있었습니다.
 문서 현...</excerpt>
     <tags>보고서, 주간, 통계</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
@@ -7621,7 +7906,7 @@ AI 서비스 개발자
 이며, GitOps와 AI 모델 배포를 결합해 일관된 배포 파이프라인을 구축하고자 하는 팀을 목표로 합니다.
 GitOps와...</excerpt>
     <tags>kubernetes, gitops, mlops, ai, deployment</tags>
-    <lastModified>2026-02-25T12:15:34Z</lastModified>
+    <lastModified>2026-02-25T17:51:39Z</lastModified>
     <author>SEPilot AI</author>
   </item>
   <item>
