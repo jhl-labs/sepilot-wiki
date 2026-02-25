@@ -1,23 +1,13 @@
 {
   "pages": [
     {
-      "title": "Configuration Guide",
-      "slug": "configuration-guide",
-      "content": "\n# Configuration Guide\n\n*This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.*\n",
+      "title": "Getting Started",
+      "slug": "getting-started",
+      "content": "\n# Getting Started\n\n*This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.*\n",
       "tags": [
-        "configuration",
-        "settings",
-        "customization"
-      ]
-    },
-    {
-      "title": "FAQ",
-      "slug": "faq",
-      "content": "\n# FAQ\n\nSEPilot Wiki 사용에 관한 자주 묻는 질문과 답변입니다.\n\n## 일반\n\n### SEPilot Wiki란 무엇인가요?\n\nSEPilot Wiki는 AI 에이전트 기반의 자동화된 위키 시스템입니다. GitHub 저장소의 `/wiki` 폴더를 데이터 저장소로 활용하고, GitHub Issues를 통해 사용자와 소통하며, AI가 문서를 자동으로 생성/수정/유지보수합니다.\n\n### 어떤 기술 스택을 사용하나요?\n\n- **Frontend**: React 18 + TypeScript + Vite\n- **State Management**: TanStack Query\n- **Routing**: React Router 7\n- **Hosting**: GitHub Pages\n- **CI/CD**: GitHub Actions\n\n## 문서 작성\n\n### AI에게 문서 작성을 요청하려면 어떻게 하나요?\n\n1. GitHub Issues에서 새 이슈를 생성합니다\n2. `request` 라벨을 추가합니다\n3. 이슈 본문에 원하는 문서의 내용을 설명합니다\n4. AI가 자동으로 문서 초안을 작성합니다\n\n### 직접 문서를 추가하려면 어떻게 하나요?\n\n`/wiki` 폴더에 마크다운 파일을 직접 추가할 수 있습니다:\n\n```markdown\n---\ntitle: \"문서 제목\"\ndescription: \"문서 설명\"\ncategory: \"카테고리\"\ntags: [\"태그1\", \"태그2\"]\nstatus: \"published\"\n---\n\n# 문서 내용\n```\n\n### 문서 수정을 요청하려면 어떻게 하나요?\n\n해당 문서와 관련된 이슈에 댓글로 수정 사항을 작성하면 AI가 피드백을 반영하여 문서를 업데이트합니다.\n\n## 기능\n\n### 검색은 어떻게 작동하나요?\n\nFuse.js 기반의 전문 검색(Full-text search)을 지원합니다. 문서 제목, 내용, 태그 등을 대상으로 검색하며, 2자 이상 입력 시 검색이 시작됩니다.\n\n### 다크 모드를 지원하나요?\n\n예, 라이트/다크/시스템 테마를 지원합니다. 우측 상단의 테마 토글 버튼으로 변경할 수 있습니다.\n\n### Mermaid 다이어그램을 사용할 수 있나요?\n\n예, 마크다운 코드 블록에서 `mermaid` 언어를 지정하면 다이어그램이 렌더링됩니다:\n\n~~~markdown\n```mermaid\ngraph TD\n    A[시작] --> B[처리]\n    B --> C[종료]\n```\n~~~\n\n### Plotly 차트도 지원하나요?\n\n예, `plotly` 코드 블록으로 인터랙티브 차트를 추가할 수 있습니다:\n\n~~~markdown\n```plotly\n{\n  \"data\": [{\"x\": [1, 2, 3], \"y\": [2, 6, 3], \"type\": \"scatter\"}],\n  \"layout\": {\"title\": \"샘플 차트\"}\n}\n```\n~~~\n\n## 문제 해결\n\n### 페이지가 404 오류를 표시합니다\n\nGitHub Pages의 SPA 라우팅 특성상, 직접 URL 접근 시 404가 발생할 수 있습니다. 새로고침하거나 홈페이지에서 네비게이션을 통해 접근해 보세요.\n\n### 문서가 목록에 표시되지 않습니다\n\n- 프론트매터의 `status`가 `published`인지 확인하세요\n- 파일 확장자가 `.md`인지 확인하세요\n- GitHub Actions 배포가 완료되었는지 확인하세요 (약 2-3분 소요)\n\n### AI가 문서를 생성하지 않습니다\n\n- 이슈에 `request` 라벨이 추가되었는지 확인하세요\n- GitHub Actions 워크플로우가 활성화되어 있는지 확인하세요\n- 워크플로우 실행 로그에서 오류를 확인하세요\n\n## 기여\n\n### 프로젝트에 기여하려면 어떻게 하나요?\n\n1. 이슈를 통해 기능 제안 또는 버그 리포트\n2. `request` 라벨로 문서 작성 요청\n3. PR을 통한 직접 코드 기여\n\n### 코드 스타일 가이드가 있나요?\n\n- ESLint + Prettier 설정을 준수합니다\n- TypeScript strict 모드를 사용합니다\n- 커밋 전 `bun run lint` 검사를 통과해야 합니다\n",
-      "tags": [
-        "FAQ",
-        "가이드",
-        "도움말"
+        "getting-started",
+        "introduction",
+        "setup"
       ]
     },
     {
@@ -31,13 +21,13 @@
       ]
     },
     {
-      "title": "Theme Customization",
-      "slug": "theme-customization",
-      "content": "\n# Theme Customization\n\n*This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.*\n",
+      "title": "Configuration Guide",
+      "slug": "configuration-guide",
+      "content": "\n# Configuration Guide\n\n*This document is a placeholder for the Configuration Guide. Include configuration options, environment variables, and best practices here.*\n",
       "tags": [
-        "theme",
-        "customization",
-        "appearance"
+        "configuration",
+        "settings",
+        "customization"
       ]
     },
     {
@@ -63,13 +53,23 @@
       ]
     },
     {
-      "title": "Getting Started",
-      "slug": "getting-started",
-      "content": "\n# Getting Started\n\n*This document is a placeholder for the Getting Started guide. Add detailed steps, screenshots, and examples here.*\n",
+      "title": "Theme Customization",
+      "slug": "theme-customization",
+      "content": "\n# Theme Customization\n\n*This document is a placeholder for the Theme Customization guide. Add details on CSS overrides, theme variables, and design guidelines here.*\n",
       "tags": [
-        "getting-started",
-        "introduction",
-        "setup"
+        "theme",
+        "customization",
+        "appearance"
+      ]
+    },
+    {
+      "title": "FAQ",
+      "slug": "faq",
+      "content": "\n# FAQ\n\nSEPilot Wiki 사용에 관한 자주 묻는 질문과 답변입니다.\n\n## 일반\n\n### SEPilot Wiki란 무엇인가요?\n\nSEPilot Wiki는 AI 에이전트 기반의 자동화된 위키 시스템입니다. GitHub 저장소의 `/wiki` 폴더를 데이터 저장소로 활용하고, GitHub Issues를 통해 사용자와 소통하며, AI가 문서를 자동으로 생성/수정/유지보수합니다.\n\n### 어떤 기술 스택을 사용하나요?\n\n- **Frontend**: React 18 + TypeScript + Vite\n- **State Management**: TanStack Query\n- **Routing**: React Router 7\n- **Hosting**: GitHub Pages\n- **CI/CD**: GitHub Actions\n\n## 문서 작성\n\n### AI에게 문서 작성을 요청하려면 어떻게 하나요?\n\n1. GitHub Issues에서 새 이슈를 생성합니다\n2. `request` 라벨을 추가합니다\n3. 이슈 본문에 원하는 문서의 내용을 설명합니다\n4. AI가 자동으로 문서 초안을 작성합니다\n\n### 직접 문서를 추가하려면 어떻게 하나요?\n\n`/wiki` 폴더에 마크다운 파일을 직접 추가할 수 있습니다:\n\n```markdown\n---\ntitle: \"문서 제목\"\ndescription: \"문서 설명\"\ncategory: \"카테고리\"\ntags: [\"태그1\", \"태그2\"]\nstatus: \"published\"\n---\n\n# 문서 내용\n```\n\n### 문서 수정을 요청하려면 어떻게 하나요?\n\n해당 문서와 관련된 이슈에 댓글로 수정 사항을 작성하면 AI가 피드백을 반영하여 문서를 업데이트합니다.\n\n## 기능\n\n### 검색은 어떻게 작동하나요?\n\nFuse.js 기반의 전문 검색(Full-text search)을 지원합니다. 문서 제목, 내용, 태그 등을 대상으로 검색하며, 2자 이상 입력 시 검색이 시작됩니다.\n\n### 다크 모드를 지원하나요?\n\n예, 라이트/다크/시스템 테마를 지원합니다. 우측 상단의 테마 토글 버튼으로 변경할 수 있습니다.\n\n### Mermaid 다이어그램을 사용할 수 있나요?\n\n예, 마크다운 코드 블록에서 `mermaid` 언어를 지정하면 다이어그램이 렌더링됩니다:\n\n~~~markdown\n```mermaid\ngraph TD\n    A[시작] --> B[처리]\n    B --> C[종료]\n```\n~~~\n\n### Plotly 차트도 지원하나요?\n\n예, `plotly` 코드 블록으로 인터랙티브 차트를 추가할 수 있습니다:\n\n~~~markdown\n```plotly\n{\n  \"data\": [{\"x\": [1, 2, 3], \"y\": [2, 6, 3], \"type\": \"scatter\"}],\n  \"layout\": {\"title\": \"샘플 차트\"}\n}\n```\n~~~\n\n## 문제 해결\n\n### 페이지가 404 오류를 표시합니다\n\nGitHub Pages의 SPA 라우팅 특성상, 직접 URL 접근 시 404가 발생할 수 있습니다. 새로고침하거나 홈페이지에서 네비게이션을 통해 접근해 보세요.\n\n### 문서가 목록에 표시되지 않습니다\n\n- 프론트매터의 `status`가 `published`인지 확인하세요\n- 파일 확장자가 `.md`인지 확인하세요\n- GitHub Actions 배포가 완료되었는지 확인하세요 (약 2-3분 소요)\n\n### AI가 문서를 생성하지 않습니다\n\n- 이슈에 `request` 라벨이 추가되었는지 확인하세요\n- GitHub Actions 워크플로우가 활성화되어 있는지 확인하세요\n- 워크플로우 실행 로그에서 오류를 확인하세요\n\n## 기여\n\n### 프로젝트에 기여하려면 어떻게 하나요?\n\n1. 이슈를 통해 기능 제안 또는 버그 리포트\n2. `request` 라벨로 문서 작성 요청\n3. PR을 통한 직접 코드 기여\n\n### 코드 스타일 가이드가 있나요?\n\n- ESLint + Prettier 설정을 준수합니다\n- TypeScript strict 모드를 사용합니다\n- 커밋 전 `bun run lint` 검사를 통과해야 합니다\n",
+      "tags": [
+        "FAQ",
+        "가이드",
+        "도움말"
       ]
     },
     {

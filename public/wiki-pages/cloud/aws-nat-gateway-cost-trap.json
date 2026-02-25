@@ -2,7 +2,7 @@
   "title": "$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법",
   "slug": "cloud/aws-nat-gateway-cost-trap",
   "content": "\n# $100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이\n\n> \"기본적으로 보안\" AWS 아키텍처가 의도치 않게 비용을 폭발시킬 수 있습니다. 클라우드 비용 급증의 주요 원인은 과다 프로비저닝된 EC2가 아니라 **의도하지 않은 데이터 전송 경로**입니다.\n\n---\n\n## 문제: NAT 게이트웨이의 숨은 비용\n\n### 일반적인 \"보안\" 아키텍처\n```\nPrivate Subnet (EC2)\n    ↓ S3 요청\nNAT Gateway\n    ↓ 퍼블릭 S3 엔드포인트로 전송\nInternet Gateway\n    ↓ AWS 백본을 벗어남\nS3 (퍼블릭 서비스)\n```\n\n### 왜 비용이 두 배가 되는가\n\n1. 컴퓨트 인스턴스는 퍼블릭 IP 없이 **프라이빗 서브넷**에 배치됩니다\n2. 아웃바운드 트래픽은 **관리형 NAT 게이트웨이**를 통해 라우팅됩니다\n3. S3는 퍼블릭 서비스 엔드포인트이므로, 데이터가 AWS 백본을 벗어나 **두 번** 측정됩니다\n\n하루에 10 TB를 다운로드하는 파이프라인이라면 실제로는 **20 TB의 아웃바운드**에 대해 청구됩니다.\n\n### 청구되는 비용 항목\n\n| 항목 | 요금 |\n|------|------|\n| NAT 게이트웨이 시간당 가동 비용 | ~$0.045/hr |\n| NAT 게이트웨이 처리 수수료 | $0.045/GB |\n| 표준 인터넷 아웃바운드 요금 | ~$0.09/GB (첫 10TB) |\n\n> **예시**: 월 300 TB S3 다운로드 시 NAT 처리 수수료만 **$13,500/월** ($162,000/년)\n\n---\n\n## 해결책: S3용 VPC 게이트웨이 엔드포인트\n\nVPC 게이트웨이 엔드포인트를 생성하면 S3 트래픽이 **AWS 백본 내부**에 머무르게 됩니다. NAT 게이트웨이를 우회하고, 내부 전송 비용이 **$0.00**으로 감소합니다.\n\n### 변경 후 아키텍처\n```\nPrivate Subnet (EC2)\n    ↓ S3 요청\nVPC Gateway Endpoint\n    ↓ AWS 내부 네트워크\nS3 (직접 접근)\n```\n\n### Terraform 구현\n\n```hcl\n# VPC 게이트웨이 엔드포인트 생성\nresource \"aws_vpc_endpoint\" \"s3\" {\n  vpc_id            = aws_vpc.main.id\n  service_name      = \"com.amazonaws.${var.region}.s3\"\n  vpc_endpoint_type = \"Gateway\"\n}\n\n# 프라이빗 서브넷 라우트 테이블에 연결\nresource \"aws_vpc_endpoint_route_table_association\" \"s3\" {\n  route_table_id  = aws_route_table.private.id\n  vpc_endpoint_id = aws_vpc_endpoint.s3.id\n}\n```\n\n### 적용 확인\n```bash\n# 엔드포인트 상태 확인\naws ec2 describe-vpc-endpoints \\\n  --filters \"Name=service-name,Values=com.amazonaws.ap-northeast-2.s3\" \\\n  --query \"VpcEndpoints[].State\"\n\n# S3 트래픽이 NAT를 우회하는지 확인\naws ec2 describe-route-tables \\\n  --route-table-ids rtb-xxxxx \\\n  --query \"RouteTables[].Routes[?DestinationPrefixListId]\"\n```\n\n---\n\n## 추가 비용 절감 포인트\n\n### 1. DynamoDB 게이트웨이 엔드포인트\nS3와 동일하게 DynamoDB도 게이트웨이 엔드포인트를 지원합니다.\n\n```hcl\nresource \"aws_vpc_endpoint\" \"dynamodb\" {\n  vpc_id            = aws_vpc.main.id\n  service_name      = \"com.amazonaws.${var.region}.dynamodb\"\n  vpc_endpoint_type = \"Gateway\"\n}\n```\n\n### 2. 인터페이스 엔드포인트 (PrivateLink)\nECR, CloudWatch, SSM 등 다른 AWS 서비스는 **인터페이스 엔드포인트**를 사용합니다. 시간당 비용($0.01/hr)이 있지만, NAT 처리 수수료보다 저렴할 수 있습니다.\n\n### 3. NAT 게이트웨이 모니터링\n```bash\n# NAT 게이트웨이를 통한 바이트 수 확인 (CloudWatch)\naws cloudwatch get-metric-statistics \\\n  --namespace AWS/NATGateway \\\n  --metric-name BytesOutToDestination \\\n  --dimensions Name=NatGatewayId,Value=nat-xxxxx \\\n  --start-time 2026-02-01T00:00:00Z \\\n  --end-time 2026-02-22T00:00:00Z \\\n  --period 86400 \\\n  --statistics Sum\n```\n\n---\n\n## 핵심 원칙\n\n> **데이터 중력**이 기본 비용을 결정하고, **라우팅**이 그 비용에 곱해지는 배수를 결정합니다.\n\n1. **VPC 엔드포인트를 기본으로** – S3, DynamoDB는 게이트웨이 엔드포인트를 항상 생성\n2. **NAT 트래픽을 모니터링** – CloudWatch 메트릭으로 예상치 못한 데이터 전송 감지\n3. **Terraform 모듈화** – VPC 모듈에 엔드포인트를 기본 포함시켜 누락 방지\n\n---\n\n## 참고 자료\n\n- [원본 기사: $100k AWS 라우팅 함정 (euno.news)](https://euno.news/posts/ko/the-100k-aws-routing-trap-s3-nat-gateways-and-how-307ce6)\n- [AWS VPC 엔드포인트 공식 문서](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html)\n- [Terraform aws_vpc_endpoint 리소스](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint)\n\n---\n\n*이 문서는 Issue #212를 기반으로 작성되었습니다.*\n",
-  "lastModified": "2026-02-25T17:34:03+09:00",
+  "lastModified": "2026-02-25T17:45:21+09:00",
   "author": "dependabot[bot]",
   "status": "published",
   "isDraft": false,
@@ -18,11 +18,11 @@
   "order": 1,
   "history": [
     {
-      "sha": "4a1f09d",
-      "message": "chore(deps): bump typescript-eslint from 8.56.0 to 8.56.1 (#251)",
+      "sha": "ca90870",
+      "message": "chore(deps): bump ioredis from 5.9.2 to 5.9.3 (#172)",
       "author": "dependabot[bot]",
       "authorEmail": "49699333+dependabot[bot]@users.noreply.github.com",
-      "date": "2026-02-25T17:34:03+09:00",
+      "date": "2026-02-25T17:45:21+09:00",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
