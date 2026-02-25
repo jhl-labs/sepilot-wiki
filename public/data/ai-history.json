@@ -1,56 +1,31 @@
 {
   "entries": [
     {
-      "id": "624c322f-d56a-4fc5-ae5a-217396e5539a",
-      "timestamp": "2026-02-25T06:33:15.416Z",
-      "actionType": "quality_score",
-      "issueNumber": 285,
-      "issueTitle": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
-      "documentSlug": "security/wordpress-vulnerability-triaging-playbook-2026",
-      "documentTitle": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
+      "id": "d304c556-9411-4a97-ba14-9603368c15fd",
+      "timestamp": "2026-02-25T06:32:27.749Z",
+      "actionType": "modify",
+      "issueNumber": 289,
+      "issueTitle": " [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "documentSlug": "ai/continuous-ai",
+      "documentTitle": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
-      "changes": null
+      "changes": {
+        "additions": 28,
+        "deletions": 0
+      }
     },
     {
-      "id": "a535b543-473b-4deb-b701-3cc3bd2e424a",
-      "timestamp": "2026-02-25T06:33:03.473Z",
-      "actionType": "quality_score",
-      "issueNumber": 287,
-      "issueTitle": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
-      "documentSlug": "ai/anthropic-claude-government-regulation-and-dod-pol",
-      "documentTitle": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "b2b3f7a0-88f6-4f3f-88a3-519611199381",
-      "timestamp": "2026-02-25T06:32:52.886Z",
-      "actionType": "quality_score",
-      "issueNumber": 288,
-      "issueTitle": " [요청] Semantic Layer: Importance and Implementation Guide",
-      "documentSlug": "ai/semantic-layer-importance-and-implementation-guide",
-      "documentTitle": " [요청] Semantic Layer: Importance and Implementation Guide",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "2f4b0e1a-60a1-4ab0-aeec-3a20862d046b",
-      "timestamp": "2026-02-25T06:32:30.225Z",
+      "id": "97454a0d-d729-4de5-a3eb-1a8896e03da6",
+      "timestamp": "2026-02-25T06:31:35.175Z",
       "actionType": "generate",
-      "issueNumber": 285,
-      "issueTitle": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
-      "documentSlug": "security/wordpress-vulnerability-triaging-playbook-2026",
-      "documentTitle": "WordPress Vulnerability Triaging Playbook (2026)",
-      "summary": "새 문서 \"WordPress Vulnerability Triaging Playbook (2026)\" 생성",
+      "issueNumber": 288,
+      "issueTitle": "문서 요청 #288",
+      "documentSlug": "ai/288",
+      "documentTitle": "시맨틱 레이어와 AI 이니셔티브 성공 전략",
+      "summary": "새 문서 \"시맨틱 레이어와 AI 이니셔티브 성공 전략\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -59,43 +34,43 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 2913
+              "durationMs": 2602
             },
             {
               "step": "outline",
-              "durationMs": 7884
+              "durationMs": 10897
             },
             {
               "step": "write",
-              "durationMs": 26221
+              "durationMs": 13525
             },
             {
               "step": "review",
-              "durationMs": 8082
+              "durationMs": 9393
             }
           ],
-          "totalDurationMs": 45100,
-          "researchSources": 5,
+          "totalDurationMs": 36417,
+          "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 5
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 2109,
+            "estimated": 1691,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "a166b8f6-afb5-49b1-a52d-22cfce473b23",
-      "timestamp": "2026-02-25T06:31:36.762Z",
+      "id": "ed22f8e0-53b4-4983-aa67-9e8bcf823f8d",
+      "timestamp": "2026-02-25T06:30:55.114Z",
       "actionType": "generate",
       "issueNumber": 287,
-      "issueTitle": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
-      "documentSlug": "ai/anthropic-claude-government-regulation-and-dod-pol",
-      "documentTitle": "Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (2026)",
-      "summary": "새 문서 \"Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (2026)\" 생성",
+      "issueTitle": "문서 요청 #287",
+      "documentSlug": "ai/287",
+      "documentTitle": "미국 국방부와 Anthropic 간 AI 정책 갈등: Claude 모델 접근 논쟁",
+      "summary": "새 문서 \"미국 국방부와 Anthropic 간 AI 정책 갈등: Claude 모델 접근 논쟁\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -104,43 +79,64 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 2829
+              "durationMs": 5059
             },
             {
               "step": "outline",
-              "durationMs": 7983
+              "durationMs": 8645
             },
             {
               "step": "write",
-              "durationMs": 30153
+              "durationMs": 29798
             },
             {
               "step": "review",
-              "durationMs": 6691
+              "durationMs": 11524
+            },
+            {
+              "step": "refine",
+              "durationMs": 27763
             }
           ],
-          "totalDurationMs": 47657,
-          "researchSources": 7,
+          "totalDurationMs": 82789,
+          "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 9
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 2242,
+            "estimated": 3886,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "74c296cb-fc4b-4ac6-87c6-45ac29fa051e",
-      "timestamp": "2026-02-25T06:30:32.255Z",
+      "id": "1f0c9df1-6df9-4e41-b16c-3861e0b20d00",
+      "timestamp": "2026-02-25T06:29:28.082Z",
+      "actionType": "modify",
+      "issueNumber": 286,
+      "issueTitle": " [업데이트] OpenClaw 완벽 가이드",
+      "documentSlug": "projects/openclaw-complete-guide",
+      "documentTitle": "OpenClaw 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenClaw 완벽 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 2
+      }
+    },
+    {
+      "id": "bbc851bf-702b-4a96-bde2-4dc42a8e73b1",
+      "timestamp": "2026-02-25T06:28:17.368Z",
       "actionType": "generate",
-      "issueNumber": 288,
-      "issueTitle": " [요청] Semantic Layer: Importance and Implementation Guide",
-      "documentSlug": "ai/semantic-layer-importance-and-implementation-guide",
-      "documentTitle": "시맨틱 레이어: 중요성 및 구현 가이드",
-      "summary": "새 문서 \"시맨틱 레이어: 중요성 및 구현 가이드\" 생성",
+      "issueNumber": 285,
+      "issueTitle": "문서 요청 #285",
+      "documentSlug": "security/285",
+      "documentTitle": "WordPress 취약점 대응 Playbook",
+      "summary": "새 문서 \"WordPress 취약점 대응 Playbook\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -149,29 +145,33 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 2932
+              "durationMs": 3124
             },
             {
               "step": "outline",
-              "durationMs": 11188
+              "durationMs": 8216
             },
             {
               "step": "write",
-              "durationMs": 32139
+              "durationMs": 16711
             },
             {
               "step": "review",
-              "durationMs": 11781
+              "durationMs": 8315
+            },
+            {
+              "step": "refine",
+              "durationMs": 39175
             }
           ],
-          "totalDurationMs": 58040,
-          "researchSources": 10,
+          "totalDurationMs": 75541,
+          "researchSources": 9,
           "tavilyUsage": {
             "apiCalls": 3,
             "totalResults": 9
           },
           "estimatedTokens": {
-            "estimated": 2755,
+            "estimated": 3622,
             "method": "duration_based"
           }
         }
@@ -5622,5 +5622,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-25T06:33:15.416Z"
+  "lastUpdated": "2026-02-25T06:32:27.749Z"
 }

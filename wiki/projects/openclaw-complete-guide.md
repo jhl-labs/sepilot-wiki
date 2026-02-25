@@ -12,7 +12,7 @@ redirect_from:
   - projects-openclaw
 related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
 order: 6
-updatedAt: 2026-02-24
+updatedAt: 2026-02-25
 ---
 
 ## OpenClaw 개요 및 핵심 개념
@@ -267,14 +267,14 @@ qmd query "database connection pooling" --collection openclaw-memory
 
 ## Impact of OpenAI Acquisition on OpenClaw Ecosystem
 1. **전략적 방향 전환**  
-   OpenAI의 인수는 OpenClaw가 단순히 커뮤니티 주도 프로젝트에서 OpenAI의 제품 포트폴리오에 포함되는 전략적 자산으로 변모함을 의미합니다. 향후 OpenClaw는 OpenAI의 에이전트형 AI 로드맵에 맞춰 기능 로드맵이 조정될 가능성이 높습니다.
+   OpenAI의 인수는 OpenClaw가 단순히 커뮤니티 주도 프로젝트에서 OpenAI 제품 포트폴리오에 포함되는 전략적 자산으로 변모함을 의미합니다. 향후 OpenClaw는 OpenAI의 에이전트형 AI 로드맵에 맞춰 기능 로드맵이 조정될 가능성이 높습니다.
 
 2. **통합 및 호환성 강화**  
-   - OpenAI의 클라우드 모델(GPT‑4o, Claude 등)과의 네이티브 연동이 보다 원활해질 것으로 예상됩니다.  
+   - OpenAI 클라우드 모델(GPT‑4o, Claude 등)과의 네이티브 연동이 보다 원활해질 것으로 예상됩니다.  
    - 기존 Ollama 기반 로컬 모델 지원은 유지되겠지만, OpenAI API를 통한 고성능 모델 접근이 기본 옵션으로 제공될 가능성이 있습니다.
 
 3. **커뮤니티와 오픈소스 생태계**  
-   - OpenAI는 오픈소스 기여를 지속적으로 장려하므로, 현재 활발한 Discord·GitHub 커뮤니티는 유지될 전망입니다.  
+   - OpenAI는 오픈소스 기여를 지속적으로 장려하므로 현재 활발한 Discord·GitHub 커뮤니티는 유지될 전망입니다.  
    - 다만, 프로젝트 관리와 의사결정 구조가 OpenAI 내부 프로세스에 맞춰 재조정될 수 있어, 커뮤니티 주도 개발 속도에 변화가 있을 수 있습니다.
 
 4. **비즈니스 모델 및 비용 구조**  
@@ -284,12 +284,12 @@ qmd query "database connection pooling" --collection openclaw-memory
 5. **보안 및 규정 준수**  
    - OpenAI는 자체 보안 가이드라인을 적용하므로, OpenClaw의 보안 체크리스트가 강화될 전망입니다. 특히, API 키 관리와 데이터 전송 암호화가 기본화될 가능성이 높습니다.
 
-> **요약**: OpenAI의 인수는 OpenClaw를 에이전트형 AI 분야의 핵심 인프라로 자리매김하게 하며, 모델 통합, 보안, 비즈니스 모델 측면에서 중요한 변화를 가져올 것으로 보입니다 [13].
+> **요약**: OpenAI 인수는 OpenClaw를 에이전트형 AI 분야의 핵심 인프라로 자리매김하게 하며, 모델 통합, 보안, 비즈니스 모델 측면에서 중요한 변화를 가져올 것으로 보입니다 [13].
 
 ---
 
 ## Docker Sandbox Overview
-Docker Sandbox는 마이크로‑VM 기반 격리 기술을 활용해 코딩 에이전트(Claude Code, Gemini, Codex, Kiro 등)를 **감독 없이** 안전하게 실행할 수 있도록 설계되었습니다 [15].  
+Docker Sandbox는 마이크로‑VM 기반 격리 기술을 활용해 코딩 에이전트(Claude Code, Gemini, Codex, Kiro 등)를 **감독 없이** 안전하게 실행하도록 설계되었습니다 [15].  
 주요 특징은 다음과 같습니다.
 
 | 특징 | 설명 |
@@ -304,7 +304,7 @@ Docker Blog(2026‑01‑30)에서는 이러한 Sandbox가 “코딩 에이전트
 ---
 
 ## Micro‑VM Isolation Setup
-아래 예시는 **OpenClaw**를 Docker Hardened Image와 gVisor 기반 마이크로‑VM 격리로 실행하는 최소 구성입니다. 기존 `docker-compose.yml`에 보안 옵션을 추가하면 됩니다.
+아래 예시는 **OpenClaw**를 Docker Hardened Image와 gVisor 기반 마이크로‑VM 격리로 실행하는 최소 구성입니다. 기존 `docker‑compose.yml`에 보안 옵션을 추가하면 됩니다.
 
 ```yaml
 version: "3.9"
@@ -365,22 +365,16 @@ OpenClaw를 Docker Sandbox에서 운영할 때 확인해야 할 보안 체크리
 ---
 
 ## 보안 위험 및 완화 방안
-
-CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며 OpenClaw의 보안 위험을 경고했습니다 [14].
+CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며 OpenClaw의 보안 위험을 경고했습니다 [14].
 
 ### 주요 위협 벡터
 
-#### 1. 프롬프트 인젝션 (직접 및 간접)
-OpenClaw는 외부 콘텐츠(이메일, 웹 페이지, 문서)를 처리합니다. 해당 콘텐츠에 삽입된 악의적 명령이 에이전트의 동작을 탈취할 수 있습니다. 실제로 Moltbook의 공개 게시물에 지갑을 고갈시키는 페이로드가 삽입된 사례가 보고되었습니다.
-
-#### 2. 자격 증명 탈취
-OpenClaw는 파일 시스템에 접근할 수 있어, `~/.ssh/`, `~/.aws/`, `~/.gnupg/`, 브라우저 자격 증명 저장소, 암호화 지갑 등이 모두 노출 대상입니다.
-
-#### 3. 에이전트 기반 측면 이동
-침해된 에이전트가 정당한 도구 접근 권한을 이용해 시스템 간 측면 이동을 수행합니다.
-
-#### 4. 대규모 노출
-135K+ 개의 OpenClaw 인스턴스가 공개적으로 노출되어 있으며, 다수가 암호화되지 않은 HTTP를 통해 서비스됩니다.
+| 위협 | 설명 |
+|------|------|
+| **프롬프트 인젝션** (직접 및 간접) | 외부 콘텐츠(이메일, 웹 페이지, 문서) 내 악의적 명령이 에이전트 동작을 탈취 |
+| **자격 증명 탈취** | 파일 시스템 접근을 통해 `~/.ssh/`, `~/.aws/`, `~/.gnupg/` 등 민감 파일 노출 |
+| **에이전트 기반 측면 이동** | 침해된 에이전트가 정당 도구 권한을 이용해 시스템 간 이동 |
+| **대규모 노출** | 135K+ 개의 OpenClaw 인스턴스가 공개적으로 노출, 다수가 암호화되지 않은 HTTP 사용 |
 
 ### 완화 전략
 
@@ -395,13 +389,55 @@ OpenClaw는 파일 시스템에 접근할 수 있어, `~/.ssh/`, `~/.aws/`, `~/.
 
 ### 보안 체크리스트
 - [ ] OpenClaw를 전용 사용자 계정(비root)으로 실행  
-- [ ] Docker 컨테이너 내에서 `--read-only` 플래그와 함께 실행  
+- [ ] Docker 컨테이너 내 `--read-only` 플래그와 함께 실행  
 - [ ] `~/.ssh`, `~/.aws` 등 민감 디렉터리를 마운트에서 제외  
 - [ ] 모든 외부 통신에 HTTPS 적용  
 - [ ] Allowlist로 허용된 사용자만 접근 허가  
 - [ ] 정기적인 의존성 보안 감사 수행  
 
 *출처: CrowdStrike "What Security Teams Need to Know About OpenClaw", euno.news (2026‑02‑22) [14]*  
+
+---
+
+## **Security Risks and Mitigations** *(English Summary)*
+- **Prompt Injection**: Malicious content injected via SKILL.md or external documents can cause the agent to execute unintended commands.  
+- **Credential Exposure**: The agent’s file‑system access may reveal SSH keys, AWS credentials, or password stores.  
+- **Supply‑Chain Abuse**: Attackers can embed malicious skills in OpenClaw’s `SKILL.md` (see next section) to weaponize trusted AI agents.  
+- **Mitigations**: Enforce TLS, run OpenClaw in a read‑only, non‑root container, whitelist allowed users, apply multi‑stage input sanitization, and perform regular dependency audits (`npm audit`, `pnpm audit`).  
+
+---
+
+## **Malicious Skill Abuse Cases (macOS Stealer)**
+**Source**: EUNO.NEWS – “악성 OpenClaw 스킬을 사용하여 Atomic MacOS 스틸러를 배포” (2026‑02‑25)  
+
+### Overview
+Atomic Stealer (AMOS) has evolved from traditional cracked‑software distribution to a sophisticated **supply‑chain attack** that leverages AI‑agentic workflows.  
+Attackers modify the `SKILL.md` file of OpenClaw‑based agents, inserting malicious commands that cause the AI to act as a trusted intermediary. By presenting fabricated configuration requirements, the AI convinces the user to manually execute a macOS payload.
+
+### Technical Details
+- **Payload**: Mach‑O universal binary encrypted with multi‑key XOR, designed to evade static analysis.  
+- **Data Harvested**: Apple Keychain, KeePass keychain, browser credentials, cryptocurrency wallets, personal messages.  
+- **Persistence**: No traditional foothold; the attack relies on the user manually running the binary after AI‑generated instructions.  
+- **Delivery Mechanism**: The malicious `SKILL.md` is distributed via compromised OpenClaw repositories or third‑party plugin marketplaces. When an OpenClaw instance loads the skill, the AI follows the embedded instructions and prompts the user to download and execute the macOS stealer.
+
+### Impact
+- **Trust Exploitation**: Demonstrates a new attack surface where the **trust relationship between a user and an AI agent** is abused.  
+- **Social Engineering Shift**: Even without persistent malware, the attacker can achieve wide impact by leveraging AI‑driven user interaction.  
+- **Detection Difficulty**: The XOR‑encrypted Mach‑O binary makes static detection challenging; the malicious behavior surfaces only after user execution.
+
+### Mitigation Recommendations
+1. **Skill Validation**  
+   - Implement a verification step for any `SKILL.md` or plugin before loading: checksum verification, digital signature, or CI‑based security scan.  
+2. **User Prompt Hardening**  
+   - Require explicit user confirmation for any action that involves downloading or executing external binaries, especially on macOS.  
+3. **Network Allowlist**  
+   - Restrict outbound connections from OpenClaw to known, vetted domains; block unknown download URLs.  
+4. **Audit Logs**  
+   - Log all skill load events and any AI‑generated commands that request file downloads or system changes; monitor for anomalous patterns.  
+5. **Education**  
+   - Inform operators that AI agents can be **co‑opted** to deliver malware; encourage manual review of AI‑generated instructions before execution.  
+
+By applying these controls, organizations can reduce the risk of **AI‑mediated supply‑chain attacks** such as the macOS Atomic Stealer described above.
 
 ---
 
@@ -426,42 +462,4 @@ OpenClaw는 파일 시스템에 접근할 수 있어, `~/.ssh/`, `~/.aws/`, `~/.
 - **프롬프트 가드레일 강화**  
   - 외부 이메일·문서 입력에 대해 **다중 단계 검증**(정규식 필터 → LLM 기반 안전성 검사) 후에만 에이전트에 전달합니다.  
 - **실시간 중지 인터페이스**  
-  - `openclaw abort <task-id>` 와 같은 **CLI 중지 명령**을 구현하고, 웹 UI/REST API에서도 즉시 취소 요청을 받을 수 있도록 합니다.  
-- **전용 안전 모드**  
-  - 고위험 작업(대량 삭제, 시스템 변경 등)은 **‘safe‑mode’** 플래그를 활성화해야 하며, 이 모드에서는 **두 단계 확인**(사용자 확인 + 관리자 승인) 절차가 필요합니다.  
-- **감시 및 알림**  
-  - 대량 작업 시작 시 **Slack/Telegram 알림**을 전송하고, 작업 진행 중에 **토큰 사용량**이 급증하면 자동으로 일시 중지하도록 설정합니다.  
-- **교육 및 문서화**  
-  - 사용자에게 **프롬프트 설계 가이드**와 **위험 작업 예시**를 제공하고, 커뮤니티 포럼에 사고 사례를 공유해 인식 제고를 돕습니다.  
-
-위 조치를 적용하면 유사한 **컨텍스트 압축·프롬프트 인젝션** 기반 사고를 예방하고, 운영 중 발생할 수 있는 비상 상황에 빠르게 대응할 수 있습니다.
-
----
-
-## 하드웨어 호환성 및 Claw 변형별 권장 사양
-
-OpenClaw는 "Claw"라는 개념의 대표적 구현체입니다. Andrej Karpathy가 제안한 "Claw"는 LLM 에이전트 위에 존재하는 **지속적 AI 에이전트 시스템**으로, 오케스트레이션, 스케줄링, 컨텍스트 유지, 도구 호출 및 지속성을 다음 단계로 끌어올리는 새로운 레이어입니다 [12].
-
-### Claw와 에이전트의 차이
-일반적인 LLM 에이전트는 실행하고 작업을 수행한 뒤 멈춥니다. 반면 Claw는 **지속적으로 실행**됩니다:
-
-- 하드웨어나 서버에서 **항시 가동**됩니다  
-- 자체 스케줄링을 가지고 있어 요청 없이도 행동합니다  
-- 세션 및 대화 전반에 걸쳐 **컨텍스트를 유지**합니다  
-- MCP 등 메시징 프로토콜을 통해 통신합니다  
-- 도구 접근 권한을 가진 다수의 에이전트를 **오케스트레이션**합니다  
-
-> 스크립트를 실행하는 것과 서비스를 운영하는 것의 차이라고 생각하면 됩니다. Claw는 서비스와 같습니다: 항상 켜져 있고, 항상 감시하며, 언제든 행동할 준비가 되어 있습니다.
-
-### Claw 변형 및 권장 사양
-
-| Claw 변형 | 설명 | 최소 RAM | 권장 CPU | GPU | 비고 |
-|-----------|------|----------|----------|-----|------|
-| **OpenClaw** | 풀스택 AI 비서, 멀티채널 통합 | 16 GB | 8코어 이상 | 선택 (Ollama 사용 시 필수) | 프로덕션 환경 권장 |
-| **NanoClaw** | 경량 단일 에이전트 | 8 GB | 4코어 이상 | 불필요 | 개인 개발 환경 적합 |
-| **zeroclaw** | 최소 구성, 실험용 | 4 GB | 2코어 이상 | 불필요 | 프로토타이핑 용도 |
-| **ironclaw** | 고성능 멀티 에이전트 오케스트레이션 | 32 GB | 16코어 이상 | 권장 (CUDA 12+) | 엔터프라이즈 환경 |
-| **picoclaw** | 임베디드·IoT 경량 버전 | 2 GB | ARM 프로세서 호환 | 불필요 | 제한된 기능 |
-
-### Mac Mini에서의 제한 사항
-Andrej Karpathy가 Claw 실험을 위해 Mac Mini를 구입하면서 “핫케이크처럼 팔리고 있다”고 언급할 만큼 Mac Mini는 Claw 실행 환경으로 인기가 높습니다. 그러나 Mac Mini에서 OpenClaw를 실행할 때는 다음 **제한 사항**을 반드시 고려해야 합니다 [12
+  - `openclaw abort <task-id>` 와 같은 **CLI 중지 명령**을 구현하고, 웹 UI/REST API에서도 즉시 취소
