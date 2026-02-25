@@ -9,6 +9,7 @@ redirect_from:
   - wiki-api
 order: 1
 related_docs: ["api-service-layer.md"]
+updatedAt: 2026-02-25
 ---
 
 ## 1. 문서 개요
@@ -83,17 +84,19 @@ API는 JWT 기반 Bearer 토큰을 기본 인증 수단으로 사용합니다. �
 
 **성공 응답** (`200 OK`)  
 
-    {
-        "title": "React 소개",
-        "content": "React는 ...",
-        "metadata": {
-            "authorId": "u123",
-            "createdAt": "2024-02-01T12:34:56Z",
-            "updatedAt": "2024-02-10T08:20:00Z",
-            "version": 3,
-            "deleted": false
-        }
+```json
+{
+    "title": "React 소개",
+    "content": "React는 ...",
+    "metadata": {
+        "authorId": "u123",
+        "createdAt": "2024-02-01T12:34:56Z",
+        "updatedAt": "2024-02-10T08:20:00Z",
+        "version": 3,
+        "deleted": false
     }
+}
+```
 
 - **ETag** 헤더가 포함되어 낙관적 잠금에 활용됩니다.  
 - **캐시**: `Cache-Control: private, max-age=60`  
@@ -108,13 +111,15 @@ GET 은 `slug` 로 페이지를 조회하고, `preview`·`includeDeleted` 로 �
 - **요청 헤더**: `Content-Type: application/json`  
 - **요청 바디**  
 
-    {
-        "title": "새 페이지 제목",
-        "content": "본문 내용",
-        "metadata": {
-            "tags": ["frontend", "react"]
-        }
+```json
+{
+    "title": "새 페이지 제목",
+    "content": "본문 내용",
+    "metadata": {
+        "tags": ["frontend", "react"]
     }
+}
+```
 
 - **자동 메타데이터**: 서버가 `authorId`(토큰에서 추출), `createdAt`, `updatedAt`, `version(=1)`, `deleted(false)` 를 삽입합니다.  
 
@@ -133,28 +138,32 @@ POST 로 새 페이지를 만들 때 클라이언트는 `title`, `content`, 선�
 - **필수 헤더**: `If-Match: "<ETag>"` (버전 충돌 방지)  
 - **요청 바디** (예시)  
 
-    {
-        "title": "수정된 제목",
-        "content": "수정된 내용",
-        "metadata": {
-            "tags": ["updated"]
-        }
+```json
+{
+    "title": "수정된 제목",
+    "content": "수정된 내용",
+    "metadata": {
+        "tags": ["updated"]
     }
+}
+```
 
 - **동시성 제어**: `If-Match` 값이 현재 `ETag` 와 일치하지 않으면 `409 Conflict` 반환.  
 
 **성공 응답** (`200 OK`)  
 
-    {
-        "title": "수정된 제목",
-        "content": "수정된 내용",
-        "metadata": {
-            "authorId": "u123",
-            "updatedAt": "2024-05-01T10:15:30Z",
-            "version": 4,
-            "deleted": false
-        }
+```json
+{
+    "title": "수정된 제목",
+    "content": "수정된 내용",
+    "metadata": {
+        "authorId": "u123",
+        "updatedAt": "2024-05-01T10:15:30Z",
+        "version": 4,
+        "deleted": false
     }
+}
+```
 
 **요약**  
 PUT/PATCH 는 `If-Match` 헤더를 통해 낙관적 잠금을 구현합니다. 전체 교체는 PUT, 부분 업데이트는 PATCH 로 구분됩니다.
@@ -174,10 +183,12 @@ PUT/PATCH 는 `If-Match` 헤더를 통해 낙관적 잠금을 구현합니다. �
 - **soft delete**: `204 No Content` (본문 없음)  
 - **hard delete**: `202 Accepted` 와 작업 ID 반환 (비동기 처리 시)  
 
-    {
-        "taskId": "del-20240501-abc123",
-        "status": "queued"
-    }
+```json
+{
+    "taskId": "del-20240501-abc123",
+    "status": "queued"
+}
+```
 
 **요약**  
 DELETE 은 기본적으로 소프트 삭제를 수행합니다. `mode=hard` 를 지정하면 즉시 영구 삭제가 진행되며, 비동기 처리 시 202 응답과 작업 ID가 반환됩니다.
@@ -188,28 +199,36 @@ DELETE 은 기본적으로 소프트 삭제를 수행합니다. `mode=hard` 를 
 ### cURL 예시
 - **GET (preview 포함)**  
 
-    curl -X GET "https://api.example.com/api/wiki/technology/web/react?preview=true" \
-         -H "Authorization: Bearer <token>"
+```bash
+curl -X GET "https://api.example.com/api/wiki/technology/web/react?preview=true" \
+     -H "Authorization: Bearer <token>"
+```
 
 - **POST**  
 
-    curl -X POST "https://api.example.com/api/wiki/technology/web/react" \
-         -H "Content-Type: application/json" \
-         -H "Authorization: Bearer <token>" \
-         -d '{"title":"React 소개","content":"...","metadata":{"tags":["frontend"]}}'
+```bash
+curl -X POST "https://api.example.com/api/wiki/technology/web/react" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <token>" \
+     -d '{"title":"React 소개","content":"...","metadata":{"tags":["frontend"]}}'
+```
 
 - **PATCH (ETag 사용)**  
 
-    curl -X PATCH "https://api.example.com/api/wiki/technology/web/react" \
-         -H "Content-Type: application/json" \
-         -H "Authorization: Bearer <token>" \
-         -H 'If-Match: "W/\"3\""' \
-         -d '{"content":"업데이트된 내용"}'
+```bash
+curl -X PATCH "https://api.example.com/api/wiki/technology/web/react" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <token>" \
+     -H 'If-Match: "W/\"3\""' \
+     -d '{"content":"업데이트된 내용"}'
+```
 
 - **DELETE (hard)**  
 
-    curl -X DELETE "https://api.example.com/api/wiki/technology/web/react?mode=hard" \
-         -H "Authorization: Bearer <token>"
+```bash
+curl -X DELETE "https://api.example.com/api/wiki/technology/web/react?mode=hard" \
+     -H "Authorization: Bearer <token>"
+```
 
 ### JavaScript fetch 예시
 ```javascript
@@ -241,25 +260,29 @@ fetch('/api/wiki/technology/web/react', {
 ### 응답 JSON 샘플
 - **성공 (200)**  
 
-    {
-        "title": "React 소개",
-        "content": "React는 ...",
-        "metadata": {
-            "authorId": "u123",
-            "createdAt": "2024-02-01T12:34:56Z",
-            "updatedAt": "2024-05-01T10:15:30Z",
-            "version": 4,
-            "deleted": false
-        }
+```json
+{
+    "title": "React 소개",
+    "content": "React는 ...",
+    "metadata": {
+        "authorId": "u123",
+        "createdAt": "2024-02-01T12:34:56Z",
+        "updatedAt": "2024-05-01T10:15:30Z",
+        "version": 4,
+        "deleted": false
     }
+}
+```
 
 - **오류 (404)**  
 
-    {
-        "errorCode": "PAGE_NOT_FOUND",
-        "message": "Requested wiki page does not exist.",
-        "details": { "slug": ["technology","web","react"] }
-    }
+```json
+{
+    "errorCode": "PAGE_NOT_FOUND",
+    "message": "Requested wiki page does not exist.",
+    "details": { "slug": ["technology","web","react"] }
+}
+```
 
 ---
 
@@ -344,3 +367,126 @@ fetch('/api/wiki/technology/web/react', {
 - **JWT (JSON Web Token)** – RFC 7519([IETF RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519))  
 
 > **주의**: 본 문서는 현재 확인 가능한 구현을 기반으로 작성되었습니다. 향후 코드 변경 시 해당 섹션을 업데이트하십시오.
+
+---
+
+## 11. Octrafic – 자연어 기반 API 테스트 도구
+Octrafic은 **plain English** 으로 API 테스트 시나리오를 작성하면, AI가 제공된 OpenAPI/Swagger 스펙을 기반으로 적절한 HTTP 요청을 자동 생성·실행하고 결과를 보고합니다. Wiki API 라우트에 대한 테스트 자동화를 손쉽게 구현할 수 있습니다.
+
+### 11‑1. 설치 방법
+| OS | 설치 명령 |
+|----|-----------|
+| **Linux / macOS** | `curl -fsSL https://octrafic.com/install.sh \| bash` |
+| **Homebrew** | `brew install octrafic/tap/octrafic` |
+| **Windows (PowerShell)** | `iex (iwr -useb https://octrafic.com/install.ps1)` |
+
+> 설치 스크립트는 최신 릴리스를 자동으로 다운로드하고, 실행 파일을 사용자 PATH에 추가합니다.
+
+### 11‑2. 기본 사용 예시
+#### 1) 인터랙티브 TUI 로 테스트 작성
+```bash
+octrafic -u https://api.example.com -s openapi.json -n "Wiki API"
+```
+- `-u` : API 기본 URL  
+- `-s` : OpenAPI 스펙 파일 경로 (`app/api/wiki/[...slug]/route.ts` 를 포함한 스펙)  
+- `-n` : 프로젝트 이름  
+
+TUI가 시작되면 자연어로 테스트를 입력합니다.
+
+```
+test the GET endpoint for /api/wiki/technology/web/react with preview=true
+test creating a new wiki page at /api/wiki/technology/web/react
+test updating the title of /api/wiki/technology/web/react
+test deleting the page with mode=hard
+```
+
+Octrafic는 각각에 대해 **HTTP 메서드, URL, 헤더, 본문**을 자동 생성하고 실행합니다. 성공/실패 결과와 응답 본문을 바로 확인할 수 있습니다.
+
+#### 2) 비‑인터랙티브 모드 (CI/CD용)
+```bash
+octrafic test \
+  --url https://api.example.com \
+  --spec openapi.json \
+  --prompt "test all CRUD operations on /api/wiki/*" \
+  --auth bearer --token $API_TOKEN
+```
+- `--prompt` 로 한 줄 설명만 제공하면 전체 테스트를 자동 생성·실행합니다.  
+- 모든 테스트가 통과하면 명령은 `0`을 반환하고, 하나라도 실패하면 `1`을 반환합니다.
+
+### 11‑3. CI / 파이프라인 적용
+#### GitHub Actions 예시
+```yaml
+name: API 테스트
+on: [push, pull_request]
+
+jobs:
+  test-wiki-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Octrafic
+        run: curl -fsSL https://octrafic.com/install.sh | bash
+      - name: Run Wiki API tests
+        env:
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+        run: |
+          octrafic test \
+            --url ${{ secrets.API_URL }} \
+            --spec ./openapi.json \
+            --auth bearer \
+            --token ${{ secrets.API_TOKEN }}
+```
+
+#### Jenkins 파이프라인 스니펫
+```groovy
+stage('Octrafic API Tests') {
+    steps {
+        sh '''
+            curl -fsSL https://octrafic.com/install.sh | bash
+            octrafic test \
+                --url $API_URL \
+                --spec openapi.json \
+                --auth bearer \
+                --token $API_TOKEN
+        '''
+    }
+}
+```
+
+### 11‑4. 인증 옵션
+Octrafic은 다양한 인증 방식을 지원합니다. Wiki API가 JWT Bearer 토큰을 사용하므로 아래와 같이 전달합니다.
+
+```bash
+octrafic -u https://api.example.com -s openapi.json \
+  --auth bearer --token "your-jwt-token"
+```
+
+환경 변수 활용도 가능해 쉘 히스토리에 토큰이 남지 않게 할 수 있습니다.
+
+```bash
+export OCTRAFIC_AUTH_TYPE=bearer
+export OCTRAFIC_AUTH_TOKEN=your-jwt-token
+octrafic -u https://api.example.com -s openapi.json
+```
+
+### 11‑5. 테스트 내보내기
+- **Postman**: `export these tests to postman`  
+- **Shell script**: `export tests as a shell script`  
+- **Python pytest**: `export to pytest and name it test_wiki_api.py`
+
+내보낸 파일은 기본적으로 `~/Documents/octrafic/tests/` 에 저장됩니다. 필요 시 CI 단계에서 미리 생성된 테스트 파일을 실행할 수 있습니다.
+
+### 11‑6. 주요 장점
+- **생산성**: 테스트 스크립트를 직접 코딩할 필요 없이 자연어로 작성.  
+- **일관성**: OpenAPI 스펙과 동기화돼 스펙 변경 시 자동 반영.  
+- **CI 친화적**: 비‑인터랙티브 모드와 명령 반환값을 활용해 파이프라인에서 테스트 성공 여부를 판단.  
+- **다양한 LLM 지원**: Claude, OpenAI, OpenRouter, Gemini, Ollama, llama.cpp 등 선택 가능. 로컬 모델(`ollama pull qwen2.5:7b`)을 사용하면 외부 API 키 없이도 동작합니다.
+
+---
+
+## 12. 기타 참고
+- **Octrafic GitHub**: https://github.com/Octrafic/octrafic-cli  
+- **Octrafic 문서**: https://docs.octrafic.com  
+- **Octrafic 설치 스크립트**: https://octrafic.com/install.ps1  
+
+---
