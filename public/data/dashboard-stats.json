@@ -1,43 +1,103 @@
 {
-  "collectedAt": "2026-02-25T09:50:44.686Z",
+  "collectedAt": "2026-02-25T10:50:07.256Z",
   "overview": {
     "totalDocuments": 65,
     "publishedDocuments": 45,
     "draftDocuments": 20,
-    "openRequests": 37,
+    "openRequests": 40,
     "closedRequests": 19,
-    "totalAIActions": 260
+    "totalAIActions": 266
   },
   "activity": {
     "last1h": {
-      "aiActions": 3,
-      "documentsCreated": 0,
+      "aiActions": 4,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 3236,
+      "totalPipelineDurationMs": 68404
     },
     "last24h": {
-      "aiActions": 53,
-      "documentsCreated": 18,
+      "aiActions": 59,
+      "documentsCreated": 21,
       "documentsModified": 16,
-      "tavilyApiCalls": 54,
-      "tavilyResults": 138,
-      "estimatedTokens": 43635,
-      "totalPipelineDurationMs": 954162
+      "tavilyApiCalls": 63,
+      "tavilyResults": 165,
+      "estimatedTokens": 54563,
+      "totalPipelineDurationMs": 1196458
     },
     "last7d": {
-      "aiActions": 180,
-      "documentsCreated": 46,
+      "aiActions": 186,
+      "documentsCreated": 49,
       "documentsModified": 58,
-      "tavilyApiCalls": 138,
-      "tavilyResults": 358,
-      "estimatedTokens": 111624,
-      "totalPipelineDurationMs": 2449900
+      "tavilyApiCalls": 147,
+      "tavilyResults": 385,
+      "estimatedTokens": 122552,
+      "totalPipelineDurationMs": 2692196
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-25T09:51:42.703Z",
+      "actionType": "quality_score",
+      "issueNumber": 295,
+      "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트 보안 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T09:51:26.026Z",
+      "actionType": "quality_score",
+      "issueNumber": 296,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes에서 AI 모델 GitOps 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T09:51:13.170Z",
+      "actionType": "quality_score",
+      "issueNumber": 297,
+      "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트를 위한 관측성 패턴",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T09:51:00.098Z",
+      "actionType": "generate",
+      "issueNumber": 295,
+      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 68404,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3236
+    },
+    {
+      "timestamp": "2026-02-25T09:49:36.715Z",
+      "actionType": "generate",
+      "issueNumber": 296,
+      "documentTitle": "Kubernetes에서 AI 모델 GitOps 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 62475,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2446
+    },
+    {
+      "timestamp": "2026-02-25T09:48:09.486Z",
+      "actionType": "generate",
+      "issueNumber": 297,
+      "documentTitle": "AI 에이전트를 위한 관측성 패턴",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 111417,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 5246
+    },
     {
       "timestamp": "2026-02-25T09:23:05.154Z",
       "actionType": "maintain",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T00:34:21.986Z",
-      "actionType": "quality_score",
-      "issueNumber": 280,
-      "documentTitle": " [요청] Agentic FaaS와 MDL: 차세대 백엔드 아키텍처",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T00:34:10.834Z",
-      "actionType": "quality_score",
-      "issueNumber": 281,
-      "documentTitle": " [요청] Emdash – 오픈소스 에이전틱 개발 환경 소개",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T00:33:59.889Z",
-      "actionType": "quality_score",
-      "issueNumber": 284,
-      "documentTitle": " [요청] DevSecOps 자동화 역설: 파이프라인 보안 취약점 생성 메커니즘",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T00:33:45.337Z",
-      "actionType": "generate",
-      "issueNumber": 280,
-      "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 41693,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1765
-    },
-    {
-      "timestamp": "2026-02-25T00:32:51.506Z",
-      "actionType": "generate",
-      "issueNumber": 281,
-      "documentTitle": "Emdash – 오픈소스 에이전틱 개발 환경 소개",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 48361,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1873
-    },
-    {
-      "timestamp": "2026-02-25T00:31:51.606Z",
-      "actionType": "generate",
-      "issueNumber": 284,
-      "documentTitle": "DevSecOps 자동화 역설 – 파이프라인 보안 취약점 생성 메커니즘",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 43533,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2028
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 251,
-      "totalEstimatedTokens": 145531,
-      "avgDurationMs": 54939
+      "totalActions": 257,
+      "totalEstimatedTokens": 156459,
+      "avgDurationMs": 56209
     },
     "unknown": {
       "totalActions": 9,
