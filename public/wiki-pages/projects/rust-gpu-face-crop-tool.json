@@ -2,7 +2,7 @@
   "title": "Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
   "slug": "projects/rust-gpu-face-crop-tool",
   "content": "\n# Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드\n\n이 문서는 Rust와 wgpu, 그리고 관련 크레이트들을 사용해 **GPU 가속 얼굴 크롭 도구**를 설계하고 구현하는 방법을 단계별로 설명합니다. 아래 내용은 [euno.news](https://euno.news/posts/ko/i-vibe-coded-a-gpu-accelerated-face-cropping-tool-d85b55)에서 제공된 정보를 기반으로 작성되었습니다.\n\n---\n\n## 1. 문제 정의\n- 학생 데이터와 같은 민감한 이미지를 외부 서버에 업로드하는 온라인 서비스는 보안상 부적합합니다.\n- 기존 데스크톱 기반 도구는 배치 작업 시 중단되거나 결과가 일관되지 않아 대규모 이미지 처리에 한계가 있습니다.\n- 수백~수천 장의 이미지를 **로컬**에서 빠르고 **결정론적**으로 처리할 수 있는 솔루션이 필요합니다.\n\n## 2. 왜 Rust인가?\n- **크레이트 생태계**: `wgpu`, `ndarray`, `image`, `egui` 등 GPU 연산·이미지 처리·GUI 구현에 필요한 라이브러리가 풍부합니다.\n- **안전성**: 메모리 안전성을 보장해 대규모 배치 처리 시 메모리 누수·크래시 위험을 최소화합니다.\n- **LLM 연계**: 컴파일러 오류 메시지를 LLM에 전달해 빠르게 문제를 해결할 수 있어 생산성이 높습니다.\n\n## 3. 전체 아키텍처\n| 구성 요소 | 역할 |\n|---|---|\n| **Face Detection** | 경량 신경망 **YuNet**을 사용해 실시간 얼굴 검출 (GPU 전용 WGSL 컴퓨트 셰이더) |\n| **Compute Shaders** | 전처리 → 얼굴 검출 → 후처리 등 7개의 커스텀 셰이더가 전체 파이프라인을 담당 |\n| **Enhancement Pipeline** | 색 보정, 노출·밝기·대비·채도·샤프닝·피부 부드럽게·적목 제거·배경 흐림 등 GPU·CPU 이중 경로 제공 |\n| **Batch Processing** | CSV/Excel/Parquet/SQLite 등 다양한 스프레드시트 형식에서 메타데이터를 읽어 대량 이미지 처리 |\n| **GUI** | `egui` 기반 실시간 미리보기, Undo/Redo, 처리 이력 제공 |\n| **CLI** | 스크립트·자동화용 명령줄 인터페이스 제공 |\n\n## 4. 핵심 구현 포인트\n1. **GPU‑First 설계** – 데이터 흐름을 GPU에 머무르게 하여 CPU↔GPU 간 대용량 복사를 최소화합니다.\n2. **VRAM 관리** – 이미지 배치 크기에 따라 동적 메모리 할당·해제 로직을 구현해 메모리 초과를 방지합니다.\n3. **멀티‑Face 지원** – 한 이미지에 여러 얼굴이 존재할 경우 각각을 독립적으로 처리합니다.\n4. **크로스‑플랫폼** – `wgpu`가 제공하는 추상화 레이어를 활용해 Windows, macOS, Linux에서 동일하게 동작하도록 설계합니다.\n5. **Deterministic Output** – 동일 입력에 대해 동일한 크롭 결과를 보장하기 위해 부동소수점 재현성을 확보합니다.\n\n## 5. 사용 방법\n### 5.1 설치\n```bash\n# Rust toolchain 설치 (stable)\ncurl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh\n# 프로젝트 클론 및 빌드\ngit clone https://github.com/your-org/rust-gpu-face-crop-tool.git\ncd rust-gpu-face-crop-tool\ncargo build --release\n```\n### 5.2 CLI 예시\n```bash\n# 배치 CSV 파일을 이용한 처리\n./target/release/face_crop_tool \\\n    --input-dir ./images \\\n    --metadata ./batch.csv \\\n    --preset linkedin \\\n    --output-dir ./cropped\n```\n### 5.3 GUI 실행\n```bash\n./target/release/face_crop_tool --gui\n```\nGUI에서는 실시간 미리보기와 설정 조정이 가능합니다.\n\n## 6. 배포 및 라이선스\n- **MIT License** – 자유롭게 사용·수정·배포 가능합니다.\n- 전체 코드베이스의 약 **97 %**가 Rust로 구현되었습니다.\n\n## 7. 참고 자료\n- 원본 기사: [Rust로 GPU 가속 얼굴 크롭 도구를 Vibe‑Coded했습니다](https://euno.news/posts/ko/i-vibe-coded-a-gpu-accelerated-face-cropping-tool-d85b55)\n- Rust 공식 문서: <https://www.rust-lang.org/>\n- `wgpu` 프로젝트: <https://github.com/gfx-rs/wgpu>\n- `egui` GUI 라이브러리: <https://github.com/emilk/egui>\n\n---\n*이 문서는 Issue #209를 기반으로 작성되었습니다.*",
-  "lastModified": "2026-02-22T10:56:57+09:00",
+  "lastModified": "2026-02-25T11:34:36+09:00",
   "author": "JHL",
   "status": "published",
   "isDraft": false,
@@ -17,61 +17,11 @@
   "order": 7,
   "history": [
     {
-      "sha": "e5a3aaa",
-      "message": "docs: Issue #206,#208,#209,#210,#211,#212,#213,#214,#215 일괄 처리",
+      "sha": "807d43f",
+      "message": "fix: skip pre-commit hook for CI auto-commits",
       "author": "JHL",
       "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-22T10:56:57+09:00",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "021de0d",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:56:50Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "44f1e3c",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:52:53Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0d0dd36",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:26:11Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "f4f5859",
-      "message": "docs: Issue #209 - 피드백 반영",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:19:19Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "30cff15",
-      "message": "docs: Issue #209 - Rust 기반 GPU 가속 얼굴 크롭 도구 문서를 projects 카테고리로 이동",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-22T10:17:12+09:00",
+      "date": "2026-02-25T11:34:36+09:00",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0

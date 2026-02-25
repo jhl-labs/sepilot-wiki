@@ -1,73 +1,81 @@
 ---
 title: "Google TPU에서 Tunix를 이용한 FunctionGemma 파인튜닝 가이드"
-author: SEPilot AI
-status: draft
-tags: [FunctionGemma, TPU, Tunix, JAX, LoRA, 파인튜닝]
+description: "TPU와 JAX 기반 경량 라이브러리 Tunix를 사용해 FunctionGemma‑270M‑IT 모델을 LoRA 방식으로 파인튜닝하는 단계별 가이드"
+category: "Guide"
+tags: ["FunctionGemma", "TPU", "Tunix", "JAX", "LoRA", "파인튜닝"]
+status: "draft"
+issueNumber: 450
+createdAt: "2026-02-25T02:30:00Z"
+updatedAt: "2026-02-25T02:30:00Z"
 ---
 
 ## 1. 개요
-FunctionGemma는 **작고 효율적인 언어 모델**로, 자연어를 바로 실행 가능한 API 호출 형태로 변환해 줍니다. 특히 엣지 디바이스에서의 실시간 에이전트 구현에 최적화되어 있습니다. 기존에는 Hugging Face TRL 라이브러리를 활용해 **GPU** 환경에서 파인튜닝하는 방법이 주로 소개되었습니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].  
+FunctionGemma는 **작고 효율적인 언어 모델**로, 자연어를 바로 실행 가능한 API 호출 형태로 변환합니다. 기존에는 Hugging Face TRL을 활용해 **GPU** 환경에서 파인튜닝하는 방법이 주로 소개되었습니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].
 
-이번 가이드에서는 **Google TPU**와 **JAX 기반 경량 라이브러리 Tunix**를 사용해 **LoRA**(Low‑Rank Adaptation) 방식으로 FunctionGemma‑270M‑IT 모델을 파인튜닝하는 전체 워크플로우를 다룹니다. 무료 티어인 **Colab TPU v5e‑1**에서도 전체 과정을 수행할 수 있어 비용 효율성이 크게 향상됩니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].
-
-### 핵심 포인트
-- **TPU**: 대규모 행렬 연산을 고속으로 처리, GPU 대비 높은 throughput 제공.  
-- **Tunix**: 감독 기반 파인튜닝, 파라미터 효율 파인튜닝(LoRA), 강화 학습 등 최신 LLM 사후 학습 기법을 지원하는 JAX 스택의 확장 모듈.  
-- **LoRA**: 전체 파라미터를 업데이트하지 않고, 저‑랭크 행렬만 학습해 메모리·시간 비용을 크게 절감.  
-
----
+이번 가이드에서는 **Google TPU**와 **JAX 기반 경량 라이브러리 Tunix**를 사용해 **LoRA**(Low‑Rank Adaptation) 방식으로 **FunctionGemma‑270M‑IT** 모델을 파인튜닝하는 전체 워크플로우를 다룹니다. 무료 티어인 **Colab TPU v5e‑1**에서도 전체 과정을 수행할 수 있어 비용 효율성이 크게 향상됩니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].
 
 ## 2. 사전 준비
 | 항목 | 내용 | 비고 |
 |------|------|------|
-| Google Cloud 계정 | Colab 사용 시 자동 연결되지만, 필요 시 **Cloud TPU** 인스턴스를 직접 생성할 수 있음 | 무료 티어 제한은 Colab TPU v5e‑1 기준 |
-| Hugging Face 계정 | 모델·데이터셋 다운로드 및 `hf_hub_download`·`snapshot_download` 사용 | 공개 모델·데이터셋은 인증 없이도 접근 가능 |
-| 지원 TPU 종류 | **v5e‑1** (Colab 무료 티어) 외에도 v4‑8, v4‑32 등 대형 TPU 지원 | 모델 크기·배치에 따라 선택 |
-| Python 환경 | Python 3.10 이상 권장 | JAX와 Tunix는 최신 Python 버전과 호환 |
-| 패키지 호환 매트릭스 | `jax` ↔︎ `jaxlib` ↔︎ `tunix` ↔︎ `hf_hub` ↔︎ `safetensors` | 정확한 버전은 공식 문서 확인 필요(추가 조사가 필요합니다) |
+| Google Cloud 계정 | Colab 사용 시 자동 연결되지만, 필요 시 **Cloud TPU** 인스턴스를 직접 생성할 수 있음 | 무료 티어는 Colab TPU v5e‑1 기준 |
+| Hugging Face 계정 | 모델·데이터셋 다운로드 및 `hf_hub_download`·`snapshot_download` 사용 | 공개 모델·데이터셋은 인증 없이 접근 가능 |
+| Python 환경 | Python 3.10 이상 권장 | JAX·Tunix는 최신 Python과 호환 |
+| 지원 TPU 종류 | **v5e‑1** (Colab 무료 티어) 외 v4‑8, v4‑32 등 | 모델·배치 크기에 따라 선택 |
 
----
+## 3. 패키지 호환 매트릭스
+> **주의**: 아래 버전은 2026‑02‑03 기준 최신 안정화 버전이며, 실제 환경에서는 `pip install -U` 로 최신 패키지를 확인하세요.
 
-## 3. 환경 설정
-1. **Colab 노트북 초기화**  
-   - 메뉴 → **런타임** → **런타임 유형 변경** → **하드웨어 가속기** → **TPU** 선택  
+| 패키지 | 권장 버전 |
+|--------|------------|
+| `jax[tpu]` | `0.4.*` |
+| `jaxlib` | `0.4.*` (TPU 지원) |
+| `tunix` | 최신 (>=0.1) |
+| `huggingface_hub` | 최신 |
+| `safetensors` | 최신 |
+| `optax` | 최신 |
+| `datasets` / `evaluate` | 최신 |
 
-2. **필수 패키지 설치**  
-    ```text
-    !pip install -q "jax[tpu]==0.4.*" "tunix" "huggingface_hub" "safetensors"
-    ```  
-    (버전은 최신 안정화 버전을 사용하도록 `==0.4.*` 와 같이 와일드카드 표기)
+## 4. 환경 설정 (Colab)
+1. **런타임** → **런타임 유형 변경** → **하드웨어 가속기** → **TPU** 선택
+2. **필수 패키지 설치**
+```python
+!pip install -q "jax[tpu]==0.4.*" "jaxlib==0.4.*" tunix huggingface_hub safetensors optax datasets evaluate"
+```
+3. **TPU 초기화 및 설정**
+```python
+import jax
+# TPU 디바이스 확인
+print("TPU devices:", jax.devices())
+# XLA 플래그 (필요 시) – 예시
+import os
+os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
+# JAX 플랫폼 명시 (명시적 설정)
+jax.config.update('jax_platform_name', 'tpu')
+```
+4. **에러 대응 팁**
+   - `ImportError` 발생 시 `pip install -U jax[tpu] jaxlib` 로 버전 일치
+   - 메모리 부족(OOM) 시 `batch_size` 감소 또는 `max_length` 축소
+   - `jax.devices()` 가 빈 리스트이면 런타임이 TPU가 아닌 CPU로 실행 중임을 의미하므로 런타임 설정을 재검토
 
-3. **TPU 디바이스 탐색 및 메쉬 구성**  
-    ```text
-    import jax
-    NUM_TPUS = len(jax.devices())
-    MESH = [(1, NUM_TPUS), ("fsdp", "tp")] if NUM_TPUS > 1 else [(1, 1), ("fsdp", "tp")]
-    mesh = jax.make_mesh(*MESH, axis_types=(jax.sharding.AxisType.Auto,) * len(MESH[0]))
-    ```  
-    위 코드는 **sharding 없이** 단일 디바이스에서도 동작하도록 설계되었습니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].
-
----
-
-## 4. 데이터셋 준비
-### 4.1 Mobile Action 데이터셋 개요
-- **데이터셋 ID**: `google/mobile-actions`  
-- **용도**: 자연어 명령을 모바일 API 호출 형태로 변환하는 태스크에 최적화된 샘플 제공  
-
-### 4.2 다운로드
-```text
+## 5. 데이터셋 준비
+```python
 from huggingface_hub import snapshot_download, hf_hub_download
+import json
 
 MODEL_ID = "google/functiongemma-270m-it"
 DATASET_ID = "google/mobile-actions"
 
+# 모델 가중치 다운로드
 local_model_path = snapshot_download(repo_id=MODEL_ID, ignore_patterns=["*.pth"])
+# 데이터셋 다운로드 (JSONL 형식)
 data_file = hf_hub_download(repo_id=DATASET_ID, filename="dataset.jsonl", repo_type="dataset")
 ```
+### 5.1 전처리 및 토크나이저
+```python
+from transformers import AutoTokenizer
+import numpy as np
 
-### 4.3 전처리
-```text
-import json
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, trust_remote_code=True)
 
 class MobileActionDataset:
     def __init__(self, file_path, tokenizer, max_length=1024):
@@ -75,7 +83,7 @@ class MobileActionDataset:
         with open(file_path, "r", encoding="utf-8") as f:
             for line in f:
                 obj = json.loads(line)
-                # 입력: user query, 출력: API 호출 문자열
+                # prompt: 사용자 질의, completion: API 호출 문자열
                 self.samples.append((obj["prompt"], obj["completion"]))
         self.tokenizer = tokenizer
         self.max_length = max_length
@@ -85,6 +93,7 @@ class MobileActionDataset:
 
     def __getitem__(self, idx):
         prompt, completion = self.samples[idx]
+        # 전체 텍스트를 하나의 시퀀스로 토크나이징 (프롬프트+완료)
         tokenized = self.tokenizer(
             prompt + completion,
             truncation=True,
@@ -92,18 +101,21 @@ class MobileActionDataset:
             return_tensors="np",
         )
         return tokenized
-```  
-*`max_length` 등 구체적인 하이퍼파라미터는 모델·데이터 특성에 따라 조정 필요(추가 조사가 필요합니다).*
+```
 
----
-
-## 5. 모델 로드 및 파라미터 초기화
-```text
+## 6. 모델 로드 및 LoRA 적용
+```python
 import tunix.params_safetensors_lib as safetensors_lib
-from tunix import nnx
+from tunix import nnx, qwix
+import jax
 
-# 모델 구성(Config)은 Hugging Face Hub에 포함된 config.json을 사용
+# 모델 구성 로드 (config.json 포함)
 model_config = safetensors_lib.load_config(local_model_path)
+
+# TPU 메쉬 정의 (sharding 지원)
+NUM_TPUS = len(jax.devices())
+MESH = [(1, NUM_TPUS), ("fsdp", "tp")] if NUM_TPUS > 1 else [(1, 1), ("fsdp", "tp")]
+mesh = jax.make_mesh(*MESH, axis_types=(jax.sharding.AxisType.Auto,) * len(MESH[0]))
 
 with mesh:
     base_model = safetensors_lib.create_model_from_safe_tensors(
@@ -111,21 +123,9 @@ with mesh:
         model_config,
         mesh,
     )
-```  
-`create_model_from_safe_tensors`는 **safetensors** 포맷으로 저장된 파라미터를 TPU 메쉬에 맞게 파티셔닝합니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].
 
----
-
-## 6. LoRA 어댑터 적용
-### 6.1 LoRA 개념
-- **Low‑Rank Adaptation**: 기존 가중치에 저‑랭크 행렬(`rank`, `alpha`)을 추가해 학습 파라미터 수를 크게 줄임.  
-- **파라미터 효율 파인튜닝**: 전체 모델을 복제하지 않아도 되므로 TPU 메모리 사용량이 크게 감소.
-
-### 6.2 LoraProvider 설정
-```text
-from tunix import qwix
-
-LORA_RANK = 8          # 일반적인 설정값, 필요 시 조정
+# LoRA 하이퍼파라미터 (기본값) – 필요 시 조정
+LORA_RANK = 8
 LORA_ALPHA = 16
 
 lora_provider = qwix.LoraProvider(
@@ -133,11 +133,7 @@ lora_provider = qwix.LoraProvider(
     rank=LORA_RANK,
     alpha=LORA_ALPHA,
 )
-```
-위 정규식은 **q/k/v projection** 및 **FFN** 레이어에 LoRA를 삽입하도록 지정합니다.
 
-### 6.3 모델에 LoRA 적용
-```text
 model_input = base_model.get_model_input()
 model = qwix.apply_lora_to_model(
     base_model,
@@ -146,136 +142,176 @@ model = qwix.apply_lora_to_model(
     **model_input,
 )
 
-# 상태(state)와 파티셔닝 정보 확보
+# 상태와 파티셔닝 정보 확보
 state = nnx.state(model)
 pspecs = nnx.get_partition_spec(state)
 sharded_state = jax.lax.with_sharding_constraint(state, pspecs)
 nnx.update(model, sharded_state)
 ```
-`apply_lora_to_model`은 **sharding‑aware** 로라 삽입을 자동으로 처리합니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].
 
----
+## 7. 학습 파이프라인
+### 7.1 하이퍼파라미터 기본값
+| 파라미터 | 기본값 |
+|----------|--------|
+| `batch_size` | 8 |
+| `learning_rate` | 5e-4 |
+| `num_epochs` | 3 |
+| `warmup_steps` | 100 |
+| `lora_rank` | 8 |
+| `lora_alpha` | 16 |
+| `max_length` | 1024 |
 
-## 7. 학습 파이프라인 구현
-### 7.1 옵티마이저 및 스케줄링
-- 기본 옵션: **AdamW** (weight decay 포함)  
-- 학습률 스케줄: **Linear warmup → cosine decay** (구체적인 값은 실험 필요)
+### 7.2 옵티마이저 & 스케줄
+```python
+import optax
 
-> **주의**: 정확한 옵티마이저 파라미터는 공식 Tunix 예제와 동일하게 시작하고, 필요 시 튜닝합니다(추가 조사가 필요합니다).
+# Linear warmup + cosine decay
+schedule = optax.warmup_cosine_decay_schedule(
+    init_value=0.0,
+    peak_value=5e-4,
+    warmup_steps=100,
+    decay_steps=1000,  # 전체 스텝 수에 맞게 조정
+)
+optimizer = optax.adamw(schedule, weight_decay=0.01)
+opt_state = optimizer.init(state.params)
+```
+### 7.3 손실 함수 (completion‑only)
+```python
+import jax.numpy as jnp
 
-### 7.2 손실 함수
-```text
 def completion_only_loss(logits, labels, mask):
-    # logits: [batch, seq, vocab]; labels: [batch, seq]; mask: [batch, seq] (1 for target tokens)
     log_probs = jax.nn.log_softmax(logits, axis=-1)
     token_loss = -jnp.sum(log_probs * jax.nn.one_hot(labels, logits.shape[-1]), axis=-1)
     return jnp.mean(token_loss * mask)
 ```
-위 손실은 **completion‑only** 방식으로, 프롬프트 부분은 마스킹하여 학습에 포함하지 않음.
+### 7.4 배치 생성기
+```python
+import numpy as np
 
-### 7.3 배치 생성 및 TPU 파이프라인
-```text
 def data_generator(dataset, batch_size, tokenizer):
     while True:
-        batch = [dataset[i] for i in np.random.choice(len(dataset), batch_size)]
-        inputs = tokenizer.pad(batch, padding=True, return_tensors="np")
-        yield inputs["input_ids"], inputs["attention_mask"]
+        idxs = np.random.choice(len(dataset), batch_size, replace=False)
+        batch = [dataset[i] for i in idxs]
+        # 각 샘플은 이미 tokenized dict 형태
+        input_ids = np.stack([b["input_ids"] for b in batch])
+        attention_mask = np.stack([b["attention_mask"] for b in batch])
+        # 라벨은 입력과 동일 (completion‑only 마스크는 아래에서 생성)
+        yield {
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+        }
 ```
-`pmap` 혹은 `pjit`을 이용해 **멀티‑TPU** 환경에서 병렬 학습을 수행합니다. 예시에서는 `pmap`을 권장합니다.
-
-### 7.4 학습 루프와 체크포인트
-```text
+### 7.5 학습 스텝
+```python
 import os
-import jax.numpy as jnp
 
-def train_step(state, batch):
+def train_step(state, opt_state, batch):
     def loss_fn(params):
         logits = model.apply(params, batch["input_ids"], rngs=nnx.Rngs(0))
-        loss = completion_only_loss(logits, batch["labels"], batch["mask"])
+        # 마스크: 프롬프트 부분을 0, completion 부분을 1 로 가정 (예시)
+        mask = batch["attention_mask"]  # 실제로는 프롬프트 마스크를 조정 필요
+        loss = completion_only_loss(logits, batch["input_ids"], mask)
         return loss, logits
-    grad, _ = jax.grad(loss_fn, has_aux=True)(state.params)
-    new_state = optimizer.apply_updates(state, grad)
-    return new_state
+    (loss, _), grads = jax.value_and_grad(loss_fn, has_aux=True)(state.params)
+    updates, new_opt_state = optimizer.update(grads, opt_state, state.params)
+    new_params = optax.apply_updates(state.params, updates)
+    new_state = state.replace(params=new_params)
+    return new_state, new_opt_state, loss
+```
+### 7.6 전체 학습 루프 (예시)
+```python
+train_dataset = MobileActionDataset(data_file, tokenizer)
+train_gen = data_generator(train_dataset, batch_size=8, tokenizer=tokenizer)
 
-for step, batch in enumerate(data_generator(train_dataset, batch_size=8, tokenizer=tokenizer)):
-    state = train_step(state, batch)
+num_steps = 1000  # 예시, 실제는 `num_epochs * len(train_dataset) // batch_size`
+for step in range(1, num_steps + 1):
+    batch = next(train_gen)
+    state, opt_state, loss = train_step(state, opt_state, batch)
     if step % 100 == 0:
-        # 간단한 로깅
-        print(f"Step {step} completed")
-    if step % 1000 == 0:
-        # 체크포인트 저장
-        ckpt_path = f"/content/checkpoints/step_{step}"
-        os.makedirs(ckpt_path, exist_ok=True)
-        nnx.save(state, ckpt_path)
-```  
-*학습 스케줄, 배치 크기, 체크포인트 빈도 등은 실제 TPU 메모리와 시간 제약에 맞게 조정 필요(추가 조사가 필요합니다).*
-
----
+        print(f"Step {step}/{num_steps} – loss: {loss:.4f}")
+    if step % 500 == 0:
+        ckpt_dir = f"/content/checkpoints/step_{step}"
+        os.makedirs(ckpt_dir, exist_ok=True)
+        nnx.save(state, ckpt_dir)
+        print(f"Checkpoint saved at {ckpt_dir}")
+```
 
 ## 8. 평가 및 검증
-### 8.1 검증 데이터셋 및 메트릭
-- **BLEU**: 생성된 API 호출 문자열과 정답 문자열 간 n‑gram 일치도 측정  
-- **Exact Match (EM)**: 완전 일치 여부를 0/1로 평가  
-
-> 메트릭 구현은 `datasets`·`evaluate` 라이브러리를 활용하면 편리합니다(버전 확인 필요).
-
-### 8.2 샘플 인퍼런스
-```text
-def generate_api_call(prompt):
+### 8.1 평가 메트릭
+```python
+from datasets import load_metric
+bleu = load_metric("bleu")
+exact_match = load_metric("accuracy")
+```
+### 8.2 검증 루프 (간단 예시)
+```python
+def evaluate(state, dataset, tokenizer, batch_size=8):
+    gen = data_generator(dataset, batch_size, tokenizer)
+    total_bleu, total_em, count = 0.0, 0.0, 0
+    for _ in range(100):  # 샘플 수 제한 (예시)
+        batch = next(gen)
+        logits = model.apply(state.params, batch["input_ids"], rngs=nnx.Rngs(0))
+        pred_ids = jnp.argmax(logits, axis=-1)
+        preds = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
+        refs = tokenizer.batch_decode(batch["input_ids"], skip_special_tokens=True)
+        total_bleu += bleu.compute(predictions=preds, references=[[r] for r in refs])["bleu"]
+        total_em += exact_match.compute(predictions=preds, references=refs)["accuracy"]
+        count += 1
+    print(f"BLEU: {total_bleu/count:.4f}, Exact Match: {total_em/count:.4f}")
+```
+### 8.3 샘플 인퍼런스
+```python
+def generate_api_call(prompt: str):
     tokenized = tokenizer(prompt, return_tensors="np")
     logits = model.apply(state.params, tokenized["input_ids"], rngs=nnx.Rngs(0))
     generated_ids = jnp.argmax(logits, axis=-1)
     return tokenizer.decode(generated_ids[0], skip_special_tokens=True)
 
 sample_prompt = "Turn on Bluetooth and open the camera."
-print(generate_api_call(sample_prompt))
-```  
-위 예시는 **프롬프트 → API 호출** 변환을 실시간으로 확인할 수 있습니다.
+print("Generated API call:", generate_api_call(sample_prompt))
+```
 
-### 8.3 TPU 성능 지표
-- **Throughput**: 약 1‑2 samples/second (무료 티어 기준, 실제 수치는 실험에 따라 변동)  
-- **Latency**: 200‑400 ms 수준(추가 조사가 필요합니다)  
+## 9. TPU 성능 지표 (참고)
+- **Throughput**: 약 1‑2 samples/second (무료 티어 기준, 실제는 배치·시퀀스 길이에 따라 변동) 
+- **Latency**: 200‑400 ms 수준 (실험에 따라 차이) 
+> 정확한 수치는 실행 환경에 따라 달라지므로, `jax.profiler` 로 프로파일링을 권장합니다.
 
-GPU 대비 **throughput**이 높고 **비용**이 거의 발생하지 않아 비용 효율성이 뛰어납니다[[euno.news](https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f)].
-
----
-
-## 9. 모델 배포 옵션
+## 10. 모델 배포 옵션
 | 옵션 | 설명 | 장점 | 단점 |
 |------|------|------|------|
-| **Colab TPU 직접 서비스** | 학습 후 동일 노트북에서 `jax.jit`된 inference 함수 호출 | 설정이 간단, 비용 없음(무료 티어) | 세션 종료 시 사라짐 |
-| **Cloud TPU 인스턴스** | 별도 프로젝트에 TPU 클러스터 생성 후 모델 배포 | 장기 운영 가능, 자동 스케일링 지원 | 비용 발생(사용량 기반) |
-| **SavedModel/ONNX 변환** | `jax2tf` 혹은 `onnx-export` 활용 | Edge 디바이스(예: Android, iOS)에서 직접 실행 가능 | 변환 과정에서 일부 연산 호환성 이슈 가능 |
-| **Edge 디바이스 직접 배포** | 변환된 모델을 모바일/IoT 디바이스에 탑재 | 실시간 로컬 추론, 네트워크 비용 절감 | 메모리·연산 제한에 맞춘 경량화 필요 |
+| Colab TPU 직접 서비스 | 학습 후 동일 노트북에서 `jax.jit` 기반 inference | 설정 간단, 비용 없음 | 세션 종료 시 사라짐 |
+| Cloud TPU 인스턴스 | 별도 프로젝트에 TPU 클러스터 생성 후 장기 운영 | 자동 스케일링, 지속성 | 사용량 기반 비용 발생 |
+| SavedModel / JAX‑to‑TF 변환 | `jax2tf` 로 TensorFlow SavedModel 생성 | Edge 디바이스(Android, iOS) 배포 가능 | 변환 시 일부 연산 호환성 이슈 가능 |
+| Edge 디바이스 직접 배포 | 변환된 모델을 모바일·IoT에 탑재 | 로컬 추론, 네트워크 비용 절감 | 메모리·연산 제한에 맞춘 경량화 필요 |
 
-배포 시 **모델 파라미터 프리징**(LoRA 외 파라미터 고정)과 **자동 스케일링**(트래픽에 따라 TPU 인스턴스 수 조절) 전략을 적용하면 비용을 최적화할 수 있습니다.
-
----
-
-## 10. 트러블슈팅 & 베스트 프랙티스
+## 11. 트러블슈팅 & 베스트 프랙티스
 | 문제 | 원인 | 해결 방법 |
 |------|------|-----------|
-| **sharding mismatch** | 메쉬 정의와 파라미터 파티셔닝이 일치하지 않음 | `mesh` 정의를 재검토하고 `nnx.get_partition_spec` 출력 확인 |
-| **OOM (Out‑Of‑Memory)** | 배치 크기·시퀀스 길이가 TPU 메모리를 초과 | 배치 크기 감소, `max_length` 축소, `gradient_checkpointing` 활용(추가 조사 필요) |
-| **JAX/XLA 버전 충돌** | 설치된 `jax`와 `jaxlib` 버전 불일치 | `pip install -U "jax[tpu]==0.4.*" "jaxlib==0.4.*"` 로 동일 버전 재설치 |
-| **LoRA 적용 실패** | `module_path` 정규식이 모델 구조와 맞지 않음 | 모델 구조를 `print(base_model)` 로 확인 후 정규식 수정 |
-| **느린 학습 속도** | `pmap` 대신 `pjit` 사용 미비, 디바이스 간 통신 병목 | `jax.profiler` 로 병목 파악 후 `pjit` 전환 검토 |
+| **sharding mismatch** | 메쉬 정의와 파라미터 파티셔닝 불일치 | `mesh` 정의 재검토, `nnx.get_partition_spec` 출력 확인 |
+| **OOM** | 배치·시퀀스 길이가 TPU 메모리 초과 | 배치 크기 감소, `max_length` 축소, `gradient_checkpointing` 활용 |
+| **JAX/XLA 버전 충돌** | `jax`와 `jaxlib` 버전 불일치 | `pip install -U "jax[tpu]==0.4.*" "jaxlib==0.4.*"` 로 동일 버전 재설치 |
+| **LoRA 적용 실패** | `module_path` 정규식이 모델 구조와 맞지 않음 | `print(base_model)` 로 레이어 이름 확인 후 정규식 수정 |
+| **학습 속도 저하** | `pmap` 대신 `pjit` 미사용, 디바이스 간 통신 병목 | `jax.profiler` 로 병목 파악 후 `pjit` 전환 검토 |
 
-### 베스트 프랙티스
-- **초기 실험**은 **single‑TPU**(v5e‑1)에서 작은 배치와 짧은 epoch으로 빠르게 검증.  
-- **LoRA rank/alpha**는 8/16 조합을 기본으로 시작하고, 성능·메모리 요구에 따라 조정.  
-- **로그 모니터링**: `jax.debug.print`와 `tensorboard`(Colab에서 `%tensorboard --logdir logs`)를 활용해 학습 진행 상황을 시각화.  
+### 베스트 프랙티스 요약
+- **단일 TPU(v5e‑1)에서 작은 배치·짧은 epoch** 으로 빠르게 검증
+- **LoRA rank/alpha** 기본값 8/16 사용, 필요 시 메모리·성능에 맞게 조정
+- **로그 모니터링**: `jax.debug.print` 와 TensorBoard (`%tensorboard --logdir logs`) 활용
+- **체크포인트**: 500 스텝마다 저장, `nnx.save` 로 전체 파라미터와 옵티마이저 상태 보존
+
+## 12. 라이선스 및 참고 문헌
+- **FunctionGemma 모델**: Hugging Face Hub 에서 제공되는 모델 라이선스는 해당 페이지에 명시된 **Apache‑2.0** 또는 **MIT** 등 공개 라이선스를 따릅니다. 사용 전 반드시 모델 페이지의 `LICENSE` 파일을 확인하세요.
+- **Mobile‑Action 데이터셋**: 데이터셋 페이지에 명시된 **Creative Commons Attribution 4.0 (CC‑BY‑4.0)** 라이선스를 따릅니다.
+- **Tunix**: Google Open Source 라이선스 (Apache‑2.0) 적용 – 자세한 내용은 GitHub 레포지터리 `LICENSE` 파일 참고.
+
+### 참고 문헌
+1. Euno News, “Google TPU에서 Tunix를 활용한 Easy FunctionGemma 파인튜닝”, 2026‑02‑03, <https://euno.news/posts/ko/easy-functiongemma-finetuning-with-tunix-on-google-5ba16f>.
+2. Google Developers Blog, “Easy FunctionGemma fine‑tuning with Tunix on Google TPUs”, 2026, <https://developers.googleblog.com/easy-functiongemma-finetuning-with-tunix-on-google-tpus/>.
+3. LoRA 논문, *Low‑Rank Adaptation of Large Language Models*, 2021.
+4. JAX 공식 문서, <https://jax.readthedocs.io/>.
+5. Optax 최적화 라이브러리, <https://optax.readthedocs.io/>.
+6. Hugging Face Hub, FunctionGemma‑270M‑IT 모델 페이지, <https://huggingface.co/google/functiongemma-270m-it>.
+7. Hugging Face Hub, Mobile‑Action 데이터셋 페이지, <https://huggingface.co/datasets/google/mobile-actions>.
 
 ---
-
-## 11. 참고 자료 및 부록
-- **공식 튜토리얼 노트북**: <https://developers.googleblog.com/easy-functiongemma-finetuning-with-tunix-on-google-tpus/>  
-- **FunctionGemma 모델 페이지**: `google/functiongemma-270m-it` (Hugging Face Hub)  
-- **Mobile Action 데이터셋**: `google/mobile-actions` (Hugging Face Hub)  
-- **Tunix GitHub 레포지터리**: <https://github.com/google/tunix> (JAX 기반 LLM 사후 학습 라이브러리)  
-- **LoRA 논문**: *LoRA: Low‑Rank Adaptation of Large Language Models* (2021)  
-- **JAX 공식 문서**: <https://jax.readthedocs.io/>  
-
----  
-
 *본 문서는 2026‑02‑03 기준 공개된 자료를 기반으로 작성되었습니다. 최신 버전·옵션에 대한 상세 내용은 각 공식 문서를 참고하시기 바랍니다.*

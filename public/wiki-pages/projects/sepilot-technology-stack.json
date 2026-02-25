@@ -2,7 +2,7 @@
   "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
   "slug": "projects/sepilot-technology-stack",
   "content": "\n## 기술 스택\n\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n\n### 프론트엔드\n- **React 18** - UI 라이브러리\n- **TypeScript** - 타입 안전성을 위한 정적 타입 언어\n- **Vite** - 빌드 도구 및 개발 서버\n- **React Router DOM** - SPA 라우팅\n- **TanStack Query (React Query)** - 서버 상태 관리\n\n### Next.js 사용 여부\n- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.\n- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\n- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n\n### 마크다운 렌더링\n- **react-markdown** - 마크다운 파싱 및 렌더링\n- **remark-gfm** - GitHub Flavored Markdown 지원\n- **rehype-raw** - HTML 태그 지원\n- **rehype-sanitize** - XSS 방지를 위한 HTML 살균\n- **react-syntax-highlighter** - 코드 구문 강조\n\n### 스타일링\n- **CSS Variables** - 테마 시스템\n- **Lucide React** - 아이콘 라이브러리\n\n### 개발 도구\n- **ESLint** - 코드 린팅\n- **Vitest** - 테스트 프레임워크\n- **Husky** - Git hooks\n\n### CI/CD\n- **GitHub Actions** - 자동화 워크플로우\n- **GitHub Pages** - 정적 사이트 호스팅\n- **Bun** - 패키지 매니저 및 런타임\n\n### AI 통합\n- **OpenAI API 호환** - LLM을 통한 문서 자동 생성\n\n## 참고 링크\n\n- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)\n",
-  "lastModified": "2026-02-21T11:20:48Z",
+  "lastModified": "2026-02-25T11:34:36+09:00",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -22,22 +22,12 @@
   "order": 5,
   "history": [
     {
-      "sha": "3cd7bad",
-      "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-21T11:20:48Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e0d1a24",
-      "message": "🌳 Wiki Tree Maintenance: Wiki는 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 대부분 파일명은 이미 slug 형태이며, 내용 중 중복된 문서는 Opencode 관련 두 파일뿐입니다. ‘reports’ 카테고리는 문서가 1개뿐이라 향후 통합을 검토할 필요가 있습니다. 전체 구조는 논리적이지만, 일부 파일명을 더 일관된 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 명시하면 가독성과 탐색성이 크게 향상됩니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-20T02:07:27Z",
-      "isAutoCommit": true,
+      "sha": "807d43f",
+      "message": "fix: skip pre-commit hook for CI auto-commits",
+      "author": "JHL",
+      "authorEmail": "bkperio@gmail.com",
+      "date": "2026-02-25T11:34:36+09:00",
+      "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
     }
