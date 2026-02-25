@@ -11,6 +11,7 @@ order: 9
 related_docs: ["gemini-3-1.md"]
 redirect_from:
   - ai-gemini-3-1
+  - ai-gemini-3-1
 ---
 
 # Gemini 3.1 Pro

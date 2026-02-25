@@ -2,7 +2,7 @@
   "title": "Dependabot 라벨 설정 가이드",
   "slug": "github/dependabot-labels",
   "content": "\n# Dependabot 라벨 설정 가이드\n\n이 문서는 **Dependabot**이 Pull Request에 자동으로 라벨을 붙일 수 있도록 설정하는 방법과, 라벨이 존재하지 않을 때 발생하는 오류를 해결하는 절차를 설명합니다.\n\n## 1. 문제 상황\n\nDependabot이 PR에 `dependencies` 라벨을 추가하려고 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 다음과 같은 오류가 발생했습니다.\n\n```\nThe following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\nPlease fix the above issues or remove invalid values from `dependabot.yml`.\n```\n\n## 2. 라벨 생성 방법\n\n### 2.1 GitHub UI를 이용한 라벨 생성\n1. 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.  \n2. 오른쪽 사이드바에 **Labels** 링크가 있습니다. 클릭합니다.  \n3. **New label** 버튼을 눌러 라벨을 생성합니다.  \n4. **Name**에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택합니다.  \n5. **Create label**을 클릭합니다.\n\n### 2.2 `gh` CLI를 이용한 라벨 생성\n```bash\ngh label create dependencies --color \"BFD4F2\" --description \"Dependabot dependency updates\"\n```\n위 명령을 실행하면 `dependencies` 라벨이 바로 생성됩니다.\n\n## 3. `dependabot.yml` 파일 검토\n\n라벨이 정상적으로 생성된 후에도 오류가 지속된다면 `dependabot.yml` 파일에 잘못된 라벨 이름이 지정되어 있는지 확인합니다.\n\n```yaml\n# .github/dependabot.yml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # 여기 라벨 이름이 정확히 일치해야 합니다.\n```\n\n- 라벨 이름은 **대소문자와 공백을 정확히 일치**시켜야 합니다.  \n- 필요 없는 라벨이 포함돼 있다면 해당 항목을 삭제하거나 올바른 라벨 이름으로 교체합니다.\n\n## 4. 라벨 자동 생성 (옵션)\n\n프로젝트에 라벨이 아직 없을 경우, CI 워크플로우에서 자동으로 라벨을 생성하도록 스크립트를 추가할 수 있습니다.\n\n```yaml\n# .github/workflows/create-label.yml\nname: Create Dependabot Labels\non:\n  push:\n    branches: [ main ]\njobs:\n  create-label:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout repo\n        uses: actions/checkout@v3\n      - name: Create dependencies label if missing\n        run: |\n          if ! gh label list | grep -q \"dependencies\"; then\n            gh label create dependencies --color \"BFD4F2\" --description \"Dependabot dependency updates\"\n          fi\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n```\n\n위 워크플로우는 `main` 브랜치에 푸시될 때마다 `dependencies` 라벨이 존재하지 않으면 자동으로 생성합니다.\n\n## 5. 검증\n1. 라벨을 생성한 뒤, Dependabot이 새 PR을 열면 자동으로 `dependencies` 라벨이 붙는지 확인합니다.  \n2. 라벨이 정상적으로 붙지 않으면 **Actions** 로그와 **Dependabot** 설정을 다시 검토합니다.\n\n## 6. Handling Vulnerable Transitive npm Dependencies\n\nDependabot은 직접적인 의존성(직접 종속)만 업데이트하지만, **전이적(transitive) npm 의존성**에 보안 취약점이 발견될 경우에도 자동으로 패치를 적용할 수 있습니다. 최근 커밋(`security: override vulnerable transitive npm deps`)에서는 `systeminformation` 과 `cookie` 같은 전이적 패키지를 강제로 업데이트하는 방법이 소개되었습니다.\n\n### 6.1 전이적 의존성 업데이트를 강제하는 방법\nDependabot 설정 파일에 `allow` 섹션을 추가하면 특정 패키지에 대해 원하는 버전을 강제로 적용할 수 있습니다.\n\n```yaml\n# .github/dependabot.yml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    allow:\n      - dependency-type: \"direct\"\n      - dependency-type: \"indirect\"   # 전이적 의존성 포함\n    ignore:\n      - dependency-name: \"lodash\"     # 예시: 특정 패키지는 무시\n    labels:\n      - \"dependencies\"\n```\n\n- `dependency-type: \"indirect\"` 를 지정하면 전이적 의존성도 검사 대상에 포함됩니다.  \n- `allow` 를 사용해 특정 전이적 패키지에 대해 버전 범위를 제한하거나, 최신 보안 버전을 강제로 적용하도록 할 수 있습니다.\n\n### 6.2 보안 업데이트 전용 설정\n전이적 의존성에 대한 보안 업데이트만 별도로 관리하고 싶다면 `security-updates` 옵션을 활용합니다.\n\n```yaml\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"daily\"\n    open-pull-requests-limit: 5\n    security-updates-only: true   # 보안 업데이트만 생성\n    labels:\n      - \"security\"\n      - \"dependencies\"\n```\n\n이 설정은 **보안 취약점이 발견된 경우에만** PR을 생성하므로, 전이적 의존성의 긴급 패치를 놓치지 않을 수 있습니다.\n\n## 7. Security Override Practices\n\n전이적 의존성에 대한 직접적인 패치를 적용하려면 **보안 오버라이드**(security override) 전략을 사용합니다. 이는 Dependabot이 자동으로 생성하는 PR에 추가적인 메타데이터를 삽입하거나, 커밋 메시지를 커스터마이징해 팀이 빠르게 인식하도록 돕습니다.\n\n### 7.1 커밋 메시지 커스터마이징\nDependabot PR의 커밋 메시지를 `security: override vulnerable transitive npm deps (package-name)` 형태로 지정하면, 리뷰어가 보안 관련 PR임을 즉시 파악할 수 있습니다.\n\n```yaml\n# .github/dependabot.yml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    commit-message:\n      prefix: \"security\"\n      include: \"override vulnerable transitive npm deps\"\n    labels:\n      - \"security\"\n      - \"dependencies\"\n```\n\n### 7.2 라벨 및 담당자 자동 지정\nDependabot PR에 `security` 라벨을 추가하고, 보안 담당자를 자동으로 지정하도록 설정할 수 있습니다. 이는 **Dependabot 보안 업데이트에 대한 끌어오기 요청 사용자 지정** 문서에 설명된 방법과 동일합니다.\n\n```yaml\n# .github/dependabot.yml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"daily\"\n    labels:\n      - \"security\"\n      - \"dependencies\"\n    reviewers:\n      - \"org/security-team\"\n    assignees:\n      - \"org/security-lead\"\n```\n\n- `reviewers` 와 `assignees` 에 팀 또는 개인을 지정하면 PR이 생성될 때 자동으로 할당됩니다.  \n- 라벨을 `security` 로 지정하면 기존 라벨 정책(`dependencies`)과 함께 보안 이슈임을 명확히 표시합니다.\n\n### 7.3 실제 적용 예시\n아래는 최근 커밋 메시지를 반영한 실제 `dependabot.yml` 예시입니다.\n\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"daily\"\n    open-pull-requests-limit: 10\n    commit-message:\n      prefix: \"security\"\n      include: \"override vulnerable transitive npm deps\"\n    labels:\n      - \"security\"\n      - \"dependencies\"\n    reviewers:\n      - \"security-team\"\n    assignees:\n      - \"security-lead\"\n    allow:\n      - dependency-type: \"indirect\"\n        dependency-name: \"systeminformation\"\n      - dependency-type: \"indirect\"\n        dependency-name: \"cookie\"\n```\n\n위 설정은 `systeminformation` 과 `cookie` 같은 전이적 npm 패키지에 대한 보안 취약점이 발견될 경우, 자동으로 `security` 라벨이 붙은 PR을 생성하고, 지정된 리뷰어와 담당자에게 할당합니다.\n\n## 8. 참고 자료\n- [GitHub Docs: Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels)  \n- [GitHub Docs: Configuring Dependabot](https://docs.github.com/ko/code-security/dependabot/configuration-options)  \n- [Dependabot 보안 업데이트에 대한 끌어오기 요청 사용자 지정](https://docs.github.com/ko/enterprise-server@3.14/code-security/dependabot/dependabot-security-updates/customizing-dependabot-security-prs)  \n- [Dependabot 빠른 시작 가이드 - GitHub Enterprise Server 3.14 Docs](https://docs.github.com/ko/enterprise-server@3.14/code-security/tutorials/secure-your-dependencies/dependabot-quickstart-guide)  \n- [Dependabot 빠른 시작 가이드 - GitHub Enterprise Cloud Docs](https://docs.github.com/ko/enterprise-cloud@latest/code-security/getting-started/dependabot-quickstart-guide)  \n\n---\n*이 문서는 Dependabot 라벨 설정 문제를 해결하기 위한 가이드이며, 필요에 따라 프로젝트에 맞게 수정해서 사용하세요.*\n",
-  "lastModified": "2026-02-25T11:34:36+09:00",
+  "lastModified": "2026-02-24T23:07:20+09:00",
   "author": "JHL",
   "status": "published",
   "isDraft": false,
@@ -16,12 +16,72 @@
   "order": 1,
   "history": [
     {
-      "sha": "807d43f",
-      "message": "fix: skip pre-commit hook for CI auto-commits",
+      "sha": "98ea1d6",
+      "message": "docs: resolve maintenance issues for category meta and dependabot guides",
       "author": "JHL",
       "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-25T11:34:36+09:00",
+      "date": "2026-02-24T23:07:20+09:00",
       "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "8c3e66c",
+      "message": "chore: Issue Processor 실행 결과",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-24T11:12:33Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "2761cc0",
+      "message": "chore: Issue Processor 실행 결과",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-24T06:15:27Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "cdd1c77",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 38개의 문서가 12개의 상위 디렉터리(backend, observability, github, kubernetes, docker, projects, bun, ai, frontend, cloud, meta) 로 분산돼 있습니다. 다수의 문서가 올바른 슬러그 형태가 아니며, ‘Dependabot label’ 관련 문서가 5개(그중 3개는 삭제 상태) 중복됩니다. 1‑개 카테고리(관측성, Docker, Cloud‑cost‑opt 등)는 내용이 단일 문서이므로 유지 가능하지만, ‘dependabot’ 카테고리는 삭제하고 github 로 통합해야 합니다. 전체 구조는 카테고리‑별로 논리적 순서를 부여하고, 파일명을 영문‑slug 로 정규화하면 탐색·링크 관리가 크게 개선됩니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-24T00:40:01Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "60b9a30",
+      "message": "🌳 Wiki Tree Maintenance: 전체 46개의 위키 문서가 13개의 카테고리로 흩어져 있습니다. Dependabot 라벨 가이드가 여러 위치에 중복되어 있고, ISR 가이드와 같은 오래된 파일이 삭제 상태이며, AI 카테고리에 초안(draft) 문서가 다수 존재합니다. 대부분 파일명은 slug 형태이지만, 중복·삭제된 문서는 정리하고, 카테고리 메타데이터와 문서 순서를 명시하면 탐색성이 크게 향상됩니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-24T00:35:21Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0525d82",
+      "message": "🌳 Wiki Tree Maintenance: 46개의 위키 문서가 13개의 카테고리(프로젝트, AI, 백엔드, GitHub, Kubernetes, Docker, Bun, 프론트엔드, 클라우드, Observability, 트러블슈팅, 레포트, 메타)로 분류됩니다. 중복·유사 문서가 여러 군데 존재하고, 루트에 위치한 244.md 파일이 카테고리 밖에 있어 구조적 문제가 있습니다. 주요 개선점은 중복 문서 병합·삭제, 파일 이동·이름 정규화, 루트 파일을 적절한 카테고리로 이동, 카테고리 메타데이터와 문서 순서(order) 지정입니다. (retry 1)",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-23T21:34:20Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e6f2202",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-23T21:29:26Z",
+      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }

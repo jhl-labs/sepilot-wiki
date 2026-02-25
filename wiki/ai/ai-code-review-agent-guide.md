@@ -7,7 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-22T02:00:00Z"
 updatedAt: "2026-02-22T02:00:00Z"
-order: 10
+order: 3
 related_docs: ["github-agentic-workflows.md", "continuous-ai.md", "opencode.md", "claude-code-release-history.md"]
 redirect_from:
   - ai-code-review-agent-guide

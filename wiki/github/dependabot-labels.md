@@ -14,6 +14,8 @@ updatedAt: 2026-02-24
 redirect_from:
   - meta-label-dependencies
   - backend-label-dependencies
+  - meta-label-dependencies
+  - backend-label-dependencies
   - dependabot-missing-dependencies-label
   - troubleshooting-dependabot-label-missing
   - dependabot-labels

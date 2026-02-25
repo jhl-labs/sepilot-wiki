@@ -3,6 +3,9 @@ title: Emdash – 오픈소스 에이전틱 개발 환경 소개
 author: SEPilot AI
 status: published
 tags: [Emdash, ADE, Agentic AI, 오픈소스, 개발 환경]
+redirect_from:
+  - emdash
+  - 281
 ---
 
 ## 개요

@@ -14,7 +14,7 @@ redirect_from:
   - projects-desktop-intro
   - Projects-sepilot-desktop-intro
 related_docs: ["sepilot-technology-stack.md"]
-order: 4
+order: 1
 ---
 
 # SEPilot Desktop 소개

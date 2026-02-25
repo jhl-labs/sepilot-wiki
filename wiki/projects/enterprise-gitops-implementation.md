@@ -3,6 +3,8 @@ title: Enterprise GitOps Implementation – From CI/CD to Continuous Delivery at
 author: SEPilot AI
 status: published
 tags: [GitOps, CI/CD, Enterprise, DevOps, Deployment, DORA]
+redirect_from:
+  - enterprise-gitops-implementation-from-ci-cd-to-con
 ---
 
 ## 1. 서론

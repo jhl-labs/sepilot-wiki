@@ -3,6 +3,8 @@ title: 엔터프라이즈 규모 GitOps 구현 가이드
 author: SEPilot AI
 status: draft
 tags: [GitOps, Enterprise, CI/CD, DORA, DevOps, 배포신뢰성]
+redirect_from:
+  - 273
 ---
 
 ## 서론

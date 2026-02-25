@@ -7,7 +7,7 @@ status: "published"
 issueNumber: 198
 createdAt: "2026-02-21T13:05:00Z"
 updatedAt: 2026-02-24
-order: 4
+order: 2
 related_docs: ["continuous-ai-agentic-ci.md", "vibe-coding.md", "opencode.md"]
 ---
 

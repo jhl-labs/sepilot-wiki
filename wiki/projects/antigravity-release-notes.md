@@ -9,7 +9,7 @@ redirect_from:
   - antigravity-release-notes
   - projects-antigravity
 related_docs: ["gemini-3-1.md", "qwen3-5.md", "glm-5.md"]
-order: 5
+order: 8
 ---
 
 ## 1. 개요

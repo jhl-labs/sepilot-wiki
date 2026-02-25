@@ -8,7 +8,7 @@ redirect_from:
   - projects-opencode-guide
   - opencode
   - opencode-guide
-order: 3
+order: 2
 updatedAt: 2026-02-24
 ---
 
