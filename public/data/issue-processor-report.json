@@ -1,84 +1,146 @@
 {
-  "timestamp": "2026-02-25T06:33:15.417Z",
+  "timestamp": "2026-02-25T09:52:54.722Z",
   "dryRun": false,
-  "totalIssuesScanned": 4,
+  "totalIssuesScanned": 10,
   "categories": {
     "draft_review": [
       {
-        "number": 288,
-        "title": " [요청] Semantic Layer: Importance and Implementation Guide",
+        "number": 297,
+        "title": "[Wiki Maintenance] [요청] AI 에이전트를 위한 관측성 패턴",
         "daysSinceUpdate": 0
       },
       {
-        "number": 287,
-        "title": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
+        "number": 296,
+        "title": "[Wiki Maintenance] [요청] Kubernetes에서 AI 모델 GitOps 구현 가이드",
         "daysSinceUpdate": 0
       },
       {
-        "number": 285,
-        "title": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
+        "number": 295,
+        "title": "[Wiki Maintenance] [요청] AI 에이전트 보안 베스트 프랙티스",
         "daysSinceUpdate": 0
       }
     ],
-    "maintenance": [],
-    "update_request": [
+    "maintenance": [
       {
-        "number": 286,
-        "title": " [업데이트] OpenClaw 완벽 가이드",
+        "number": 300,
+        "title": "[Wiki Maintenance] [품질] SEPilot Desktop: Feature Overview, Installation & Contribution Guide",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 299,
+        "title": "[Wiki Maintenance] [품질] Kubernetes v1.23‑v1.35 Release Notes Overview",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 298,
+        "title": "[Wiki Maintenance] [품질] Opencode 제품 개요 및 기능 상세 – 최신 정보와 실무 적용 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 294,
+        "title": "[Wiki Maintainer] OpenTelemetry 및 Kubernetes API Governance 중복 제거",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 293,
+        "title": "[Wiki Maintainer] 중복 라벨·Dependabot 문서 정리",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 292,
+        "title": "[Wiki Maintainer] Move SNKV KV‑store documentation to the Projects category",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 291,
+        "title": "[Wiki Maintainer] Consolidate duplicate Dependabot/label documentation",
         "daysSinceUpdate": 0
       }
     ],
+    "update_request": [],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
     {
       "type": "retrigger_request",
-      "issueNumber": 288,
-      "title": " [요청] Semantic Layer: Importance and Implementation Guide"
+      "issueNumber": 297,
+      "title": "[Wiki Maintenance] [요청] AI 에이전트를 위한 관측성 패턴"
     },
     {
       "type": "retrigger_request",
-      "issueNumber": 287,
-      "title": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)"
+      "issueNumber": 296,
+      "title": "[Wiki Maintenance] [요청] Kubernetes에서 AI 모델 GitOps 구현 가이드"
     },
     {
       "type": "retrigger_request",
-      "issueNumber": 285,
-      "title": " [요청] WordPress Vulnerability Triaging Playbook (2026)"
-    },
-    {
-      "type": "retrigger_update_close",
-      "issueNumber": 289,
-      "title": " [업데이트] Continuous AI – 인간이 AI 오류를 검증하는 방법"
-    },
-    {
-      "type": "retrigger_update_close",
-      "issueNumber": 286,
-      "title": " [업데이트] OpenClaw 완벽 가이드"
+      "issueNumber": 295,
+      "title": "[Wiki Maintenance] [요청] AI 에이전트 보안 베스트 프랙티스"
     },
     {
       "type": "auto_publish",
-      "issueNumber": 288,
-      "title": " [요청] Semantic Layer: Importance and Implementation Guide",
+      "issueNumber": 297,
+      "title": "[Wiki Maintenance] [요청] AI 에이전트를 위한 관측성 패턴",
       "score": 89,
-      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/semantic-layer-importance-and-implementation-guide.md"
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md"
     },
     {
       "type": "auto_publish",
-      "issueNumber": 287,
-      "title": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
+      "issueNumber": 296,
+      "title": "[Wiki Maintenance] [요청] Kubernetes에서 AI 모델 GitOps 구현 가이드",
       "score": 89,
-      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/anthropic-claude-government-regulation-and-dod-pol.md"
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-ai-gitops.md"
     },
     {
       "type": "auto_publish",
-      "issueNumber": 285,
-      "title": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
-      "score": 89,
-      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/wordpress-vulnerability-triaging-playbook-2026.md"
+      "issueNumber": 295,
+      "title": "[Wiki Maintenance] [요청] AI 에이전트 보안 베스트 프랙티스",
+      "score": 93,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 300,
+      "title": "[Wiki Maintenance] [품질] SEPilot Desktop: Feature Overview, Installation & Contribution Guide",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 299,
+      "title": "[Wiki Maintenance] [품질] Kubernetes v1.23‑v1.35 Release Notes Overview",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 298,
+      "title": "[Wiki Maintenance] [품질] Opencode 제품 개요 및 기능 상세 – 최신 정보와 실무 적용 가이드",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 294,
+      "title": "[Wiki Maintainer] OpenTelemetry 및 Kubernetes API Governance 중복 제거",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 293,
+      "title": "[Wiki Maintainer] 중복 라벨·Dependabot 문서 정리",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 292,
+      "title": "[Wiki Maintainer] Move SNKV KV‑store documentation to the Projects category",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 291,
+      "title": "[Wiki Maintainer] Consolidate duplicate Dependabot/label documentation",
+      "verdict": "actionable"
     }
   ],
-  "actionCount": 8,
+  "actionCount": 13,
   "maxActions": 60
 }

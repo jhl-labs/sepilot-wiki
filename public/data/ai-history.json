@@ -1,6 +1,187 @@
 {
   "entries": [
     {
+      "id": "1bb482f4-7dfb-4e16-997f-4a5757996aff",
+      "timestamp": "2026-02-25T09:51:42.703Z",
+      "actionType": "quality_score",
+      "issueNumber": 295,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 에이전트 보안 베스트 프랙티스",
+      "documentSlug": "ai",
+      "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트 보안 베스트 프랙티스",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "5152ac3f-d87e-4804-9166-0bb490d8f1ee",
+      "timestamp": "2026-02-25T09:51:26.026Z",
+      "actionType": "quality_score",
+      "issueNumber": 296,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes에서 AI 모델 GitOps 구현 가이드",
+      "documentSlug": "kubernetes-ai-gitops",
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes에서 AI 모델 GitOps 구현 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "e7c88e7c-6877-4a71-9ba1-00e4e3e8f1c4",
+      "timestamp": "2026-02-25T09:51:13.170Z",
+      "actionType": "quality_score",
+      "issueNumber": 297,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 에이전트를 위한 관측성 패턴",
+      "documentSlug": "ai",
+      "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트를 위한 관측성 패턴",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "2d1a4107-4f6a-4b0b-8fd2-ee8d6f808c02",
+      "timestamp": "2026-02-25T09:51:00.098Z",
+      "actionType": "generate",
+      "issueNumber": 295,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 에이전트 보안 베스트 프랙티스",
+      "documentSlug": "ai",
+      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
+      "summary": "새 문서 \"AI 에이전트 보안 베스트 프랙티스\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3672
+            },
+            {
+              "step": "outline",
+              "durationMs": 13140
+            },
+            {
+              "step": "write",
+              "durationMs": 44287
+            },
+            {
+              "step": "review",
+              "durationMs": 7304
+            }
+          ],
+          "totalDurationMs": 68404,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3236,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "bcbf5b8d-85b2-4856-9e70-18bef720c288",
+      "timestamp": "2026-02-25T09:49:36.715Z",
+      "actionType": "generate",
+      "issueNumber": 296,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes에서 AI 모델 GitOps 구현 가이드",
+      "documentSlug": "kubernetes-ai-gitops",
+      "documentTitle": "Kubernetes에서 AI 모델 GitOps 구현 가이드",
+      "summary": "새 문서 \"Kubernetes에서 AI 모델 GitOps 구현 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 13563
+            },
+            {
+              "step": "outline",
+              "durationMs": 10535
+            },
+            {
+              "step": "write",
+              "durationMs": 32932
+            },
+            {
+              "step": "review",
+              "durationMs": 5445
+            }
+          ],
+          "totalDurationMs": 62475,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2446,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "6757418a-4cea-405d-b986-86c4d04706b4",
+      "timestamp": "2026-02-25T09:48:09.486Z",
+      "actionType": "generate",
+      "issueNumber": 297,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 에이전트를 위한 관측성 패턴",
+      "documentSlug": "observability/ai",
+      "documentTitle": "AI 에이전트를 위한 관측성 패턴",
+      "summary": "새 문서 \"AI 에이전트를 위한 관측성 패턴\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6506
+            },
+            {
+              "step": "outline",
+              "durationMs": 12680
+            },
+            {
+              "step": "write",
+              "durationMs": 32448
+            },
+            {
+              "step": "review",
+              "durationMs": 11711
+            },
+            {
+              "step": "refine",
+              "durationMs": 48072
+            }
+          ],
+          "totalDurationMs": 111417,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 5246,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "953e83b1-9258-40cc-8dfe-9708f4aaadb5",
       "timestamp": "2026-02-25T09:23:05.154Z",
       "actionType": "maintain",
@@ -5696,5 +5877,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-25T09:23:05.154Z"
+  "lastUpdated": "2026-02-25T09:51:42.704Z"
 }
