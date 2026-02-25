@@ -1,9 +1,15 @@
 {
-  "timestamp": "2026-02-25T12:21:47.017Z",
+  "timestamp": "2026-02-25T12:20:54.391Z",
   "dryRun": false,
-  "totalIssuesScanned": 7,
+  "totalIssuesScanned": 10,
   "categories": {
-    "draft_review": [],
+    "draft_review": [
+      {
+        "number": 303,
+        "title": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
+        "daysSinceUpdate": 0
+      }
+    ],
     "maintenance": [
       {
         "number": 300,
@@ -41,11 +47,55 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 302,
+        "title": " [업데이트] Claude Cowork 최신 플러그인·커넥터 업데이트 (2026)",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 301,
+        "title": " [업데이트] MCP 압축 및 컨텍스트 최적화",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 303,
+      "title": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 305,
+      "title": " [업데이트] 2026년 AI 에이전트 기반 Autonomous Integration"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 304,
+      "title": " [업데이트] AI 안전 제약과 Intent 설계"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 302,
+      "title": " [업데이트] Claude Cowork 최신 플러그인·커넥터 업데이트 (2026)"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 301,
+      "title": " [업데이트] MCP 압축 및 컨텍스트 최적화"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 303,
+      "title": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/serv-u-15-5.md"
+    }
+  ],
+  "actionCount": 6,
   "maxActions": 60
 }
