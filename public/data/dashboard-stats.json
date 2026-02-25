@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-02-25T07:50:29.879Z",
+  "collectedAt": "2026-02-25T08:50:37.478Z",
   "overview": {
-    "totalDocuments": 58,
-    "publishedDocuments": 44,
-    "draftDocuments": 14,
+    "totalDocuments": 67,
+    "publishedDocuments": 47,
+    "draftDocuments": 20,
     "openRequests": 37,
     "closedRequests": 19,
-    "totalAIActions": 255
+    "totalAIActions": 256
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 50,
+      "aiActions": 51,
       "documentsCreated": 18,
-      "documentsModified": 14,
+      "documentsModified": 15,
       "tavilyApiCalls": 54,
       "tavilyResults": 138,
       "estimatedTokens": 43635,
       "totalPipelineDurationMs": 954162
     },
     "last7d": {
-      "aiActions": 175,
+      "aiActions": 176,
       "documentsCreated": 46,
-      "documentsModified": 56,
+      "documentsModified": 57,
       "tavilyApiCalls": 138,
       "tavilyResults": 358,
       "estimatedTokens": 111624,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-25T08:38:15.230Z",
+      "actionType": "recover",
+      "issueNumber": 247,
+      "documentTitle": "chore(deps): bump react-router-dom from 7.13.0 to 7.13.1 in the react group",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-25T06:32:27.749Z",
       "actionType": "modify",
@@ -227,21 +237,11 @@
       "durationMs": 49467,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2259
-    },
-    {
-      "timestamp": "2026-02-25T00:26:21.620Z",
-      "actionType": "generate",
-      "issueNumber": 280,
-      "documentTitle": "Lazy Backend를 넘어: Agentic FaaS와 Musfique Decision Loop (MDL)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 43540,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1940
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 246,
+      "totalActions": 247,
       "totalEstimatedTokens": 145531,
       "avgDurationMs": 54939
     },
