@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "624c322f-d56a-4fc5-ae5a-217396e5539a",
+      "timestamp": "2026-02-25T06:33:15.416Z",
+      "actionType": "quality_score",
+      "issueNumber": 285,
+      "issueTitle": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
+      "documentSlug": "security/wordpress-vulnerability-triaging-playbook-2026",
+      "documentTitle": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "a535b543-473b-4deb-b701-3cc3bd2e424a",
+      "timestamp": "2026-02-25T06:33:03.473Z",
+      "actionType": "quality_score",
+      "issueNumber": 287,
+      "issueTitle": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
+      "documentSlug": "ai/anthropic-claude-government-regulation-and-dod-pol",
+      "documentTitle": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "b2b3f7a0-88f6-4f3f-88a3-519611199381",
+      "timestamp": "2026-02-25T06:32:52.886Z",
+      "actionType": "quality_score",
+      "issueNumber": 288,
+      "issueTitle": " [요청] Semantic Layer: Importance and Implementation Guide",
+      "documentSlug": "ai/semantic-layer-importance-and-implementation-guide",
+      "documentTitle": " [요청] Semantic Layer: Importance and Implementation Guide",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "2f4b0e1a-60a1-4ab0-aeec-3a20862d046b",
+      "timestamp": "2026-02-25T06:32:30.225Z",
+      "actionType": "generate",
+      "issueNumber": 285,
+      "issueTitle": " [요청] WordPress Vulnerability Triaging Playbook (2026)",
+      "documentSlug": "security/wordpress-vulnerability-triaging-playbook-2026",
+      "documentTitle": "WordPress Vulnerability Triaging Playbook (2026)",
+      "summary": "새 문서 \"WordPress Vulnerability Triaging Playbook (2026)\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2913
+            },
+            {
+              "step": "outline",
+              "durationMs": 7884
+            },
+            {
+              "step": "write",
+              "durationMs": 26221
+            },
+            {
+              "step": "review",
+              "durationMs": 8082
+            }
+          ],
+          "totalDurationMs": 45100,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2109,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "a166b8f6-afb5-49b1-a52d-22cfce473b23",
+      "timestamp": "2026-02-25T06:31:36.762Z",
+      "actionType": "generate",
+      "issueNumber": 287,
+      "issueTitle": " [요청] Anthropic Claude Government Regulation and DoD Policy (2026)",
+      "documentSlug": "ai/anthropic-claude-government-regulation-and-dod-pol",
+      "documentTitle": "Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (2026)",
+      "summary": "새 문서 \"Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (2026)\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2829
+            },
+            {
+              "step": "outline",
+              "durationMs": 7983
+            },
+            {
+              "step": "write",
+              "durationMs": 30153
+            },
+            {
+              "step": "review",
+              "durationMs": 6691
+            }
+          ],
+          "totalDurationMs": 47657,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2242,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "74c296cb-fc4b-4ac6-87c6-45ac29fa051e",
+      "timestamp": "2026-02-25T06:30:32.255Z",
+      "actionType": "generate",
+      "issueNumber": 288,
+      "issueTitle": " [요청] Semantic Layer: Importance and Implementation Guide",
+      "documentSlug": "ai/semantic-layer-importance-and-implementation-guide",
+      "documentTitle": "시맨틱 레이어: 중요성 및 구현 가이드",
+      "summary": "새 문서 \"시맨틱 레이어: 중요성 및 구현 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2932
+            },
+            {
+              "step": "outline",
+              "durationMs": 11188
+            },
+            {
+              "step": "write",
+              "durationMs": 32139
+            },
+            {
+              "step": "review",
+              "durationMs": 11781
+            }
+          ],
+          "totalDurationMs": 58040,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2755,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "8629a913-6010-417c-a289-245af3c02815",
       "timestamp": "2026-02-25T06:26:52.353Z",
       "actionType": "maintain",
@@ -5445,5 +5622,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-25T06:26:52.353Z"
+  "lastUpdated": "2026-02-25T06:33:15.416Z"
 }
