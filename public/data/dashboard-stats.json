@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-02-25T02:20:30.781Z",
+  "collectedAt": "2026-02-25T03:28:33.020Z",
   "overview": {
-    "totalDocuments": 38,
-    "publishedDocuments": 29,
-    "draftDocuments": 9,
+    "totalDocuments": 58,
+    "publishedDocuments": 43,
+    "draftDocuments": 15,
     "openRequests": 34,
     "closedRequests": 19,
-    "totalAIActions": 246
+    "totalAIActions": 249
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 3,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 78,
+      "aiActions": 81,
       "documentsCreated": 22,
-      "documentsModified": 36,
+      "documentsModified": 37,
       "tavilyApiCalls": 66,
       "tavilyResults": 172,
       "estimatedTokens": 52282,
       "totalPipelineDurationMs": 1138616
     },
     "last7d": {
-      "aiActions": 166,
+      "aiActions": 169,
       "documentsCreated": 43,
-      "documentsModified": 53,
+      "documentsModified": 54,
       "tavilyApiCalls": 129,
       "tavilyResults": 335,
       "estimatedTokens": 102425,
@@ -38,6 +38,36 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-25T03:05:37.746Z",
+      "actionType": "quality_score",
+      "issueNumber": 261,
+      "documentTitle": " [요청] Fine‑tuning FunctionGemma on Google TPU with Tunix",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T03:01:37.754Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T02:59:27.612Z",
+      "actionType": "modify",
+      "issueNumber": 261,
+      "documentTitle": " [요청] Fine‑tuning FunctionGemma on Google TPU with Tunix",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-25T00:34:21.986Z",
       "actionType": "quality_score",
@@ -207,41 +237,11 @@
       "durationMs": 74755,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3536
-    },
-    {
-      "timestamp": "2026-02-24T18:26:37.301Z",
-      "actionType": "modify",
-      "issueNumber": 278,
-      "documentTitle": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-24T18:25:37.304Z",
-      "actionType": "modify",
-      "issueNumber": 277,
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-24T18:24:25.696Z",
-      "actionType": "modify",
-      "issueNumber": 276,
-      "documentTitle": "Steerling‑8B: 해석 가능한 대규모 언어 모델",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 237,
+      "totalActions": 240,
       "totalEstimatedTokens": 136332,
       "avgDurationMs": 54395
     },
