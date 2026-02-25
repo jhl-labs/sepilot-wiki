@@ -3,8 +3,8 @@
     {
       "id": 303,
       "number": 303,
-      "title": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/solarwinds-patches-4-critical-serv-u-155-flaws-all-a771be)\n**관련도**: 82/100\n**핵심 토픽**: Serv‑U 15.5 vulnerabilities, Remote code execution, Patch release\n\n## 뉴스 요약\nSolarWinds가 네 가지 문제를 해결하기 위해 업데이트를 출시했습니다 https://documentation.solarwinds.com/en/success_center/servu/content/release_notes/servu_15-5-4_release_notes.htm\n\n## 상세 내용\nSource: The Hacker News\nSolarWinds는 Serv‑U 파일 전송 소프트웨어에 존재하는 네 가지 치명적인 보안 결함을 해결하기 위해 업데이트를 출시했습니다. 이 결함들은 성공적으로 악용될 경우 원격 코드 실행을 초래할 수 있습니다.\n취약점 (CVSS 9.1)\nCVE설명\nCVE-2025-40538접근 제어 결함 – 도메인 관리자 또는 그룹 관리자 권한을 가진 공격자가 시스템 관리자 사용자를 생성하고 루트 권한으로 임의 코드를 실행할 수 있습니다.\nCVE-2025-40539타입 혼동 – 루트 권한으로 임의의 네이티브 코드를 실행할 수 있습니다.\nCVE-2025-40540타입 혼동 – 루트 권한으로 임의의 네이티브 코드를 실행할 수 있습니다.\nCVE-2025-40541직접 객체 참조 취약점(IDOR) – 루트 권한으로 네이티브 코드를 실행할 수 있습니다.\nSolarWinds는 성공적인 악용에 관리 권한이 필요하다고 밝히고 있습니다. 또한 일반적인 Windows 배포 환경에서는 Serv‑U 서비스가 기본적으로 권한이 낮은 서비스 계정으로 실행되기 때문에 위험도를 중간 수준으로 분류했습니다.\n패치 정보\n영향을 받는 버전: Serv‑U 15.5\n수정된 버전: Serv‑U 15.5.4\n이번 업데이트는 위에 열거된 네 가지 취약점을 모두 해결합니다.\n역사적 배경\n이전 Serv‑U 결함이 실제 공격에 이용된 사례가 있습니다:\nCVE-2021-35211\nCVE-2021-35247\nCVE-2024-28995\n이들은 중국 기반 그룹 Storm‑0322(이전 DEV‑0322)와 같은 악의적인 행위자에 의해 악용되었습니다. SolarWinds는 새롭게 공개된 결함에 대한 현재 진행 중인 악용 사례는 보고되지 않았지만, 과거 사례는 패치를 신속히 적용할 필요성을 강조합니다.\n\n## 판단 근거\nServ‑U 15.5에 대한 4개의 CVE(예: CVE‑2025‑40538, CVE‑2025‑40539 등)와 패치 절차가 현재 위키에 없으며, 보안 담당자가 필요로 하는 구체적인 정보다\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "title": "문서 요청 #303",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,11 +24,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-02-25T12:19:52.624Z",
-      "updated_at": "2026-02-25T12:19:52.626Z",
+      "created_at": "2026-02-25T12:18:47.220Z",
+      "updated_at": "2026-02-25T12:18:47.222Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/303",
-      "documentSlug": "security/serv-u-15-5",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/serv-u-15-5.md",
+      "documentSlug": "security/303",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/303.md",
       "comments": 0
     },
     {
@@ -1870,5 +1870,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-02-25T12:19:52.626Z"
+  "lastUpdated": "2026-02-25T12:18:47.222Z"
 }

@@ -1,22 +1,8 @@
 {
   "entries": [
     {
-      "id": "e33b8dbf-0d1d-4463-a12a-93d3245a6e33",
-      "timestamp": "2026-02-25T12:20:51.749Z",
-      "actionType": "quality_score",
-      "issueNumber": 303,
-      "issueTitle": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
-      "documentSlug": "security/serv-u-15-5",
-      "documentTitle": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "666f7ba7-0d75-49bb-bd34-93a1471d4b86",
-      "timestamp": "2026-02-25T12:20:29.622Z",
+      "id": "a247c0d9-53f3-472d-accb-c15388a8f9d5",
+      "timestamp": "2026-02-25T12:20:35.989Z",
       "actionType": "modify",
       "issueNumber": 305,
       "issueTitle": " [업데이트] 2026년 AI 에이전트 기반 Autonomous Integration",
@@ -27,19 +13,36 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
-        "additions": 39,
+        "additions": 38,
         "deletions": 0
       }
     },
     {
-      "id": "9c8e083a-0208-4a34-81c2-67af1128b0c6",
-      "timestamp": "2026-02-25T12:19:52.622Z",
+      "id": "80c57b2b-5446-4b40-a132-9cf5a5af040f",
+      "timestamp": "2026-02-25T12:20:03.912Z",
+      "actionType": "modify",
+      "issueNumber": 304,
+      "issueTitle": " [업데이트] AI 안전 제약과 Intent 설계",
+      "documentSlug": "ai/ai",
+      "documentTitle": "[업데이트] AI 에이전트 개요 및 최신 플랫폼",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 안전 제약과 Intent 설계\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 20,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "7c64c36f-d78c-4b70-92a5-d5b84c3f6dd5",
+      "timestamp": "2026-02-25T12:18:47.219Z",
       "actionType": "generate",
       "issueNumber": 303,
-      "issueTitle": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
-      "documentSlug": "security/serv-u-15-5",
-      "documentTitle": "Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
-      "summary": "새 문서 \"Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드\" 생성",
+      "issueTitle": "문서 요청 #303",
+      "documentSlug": "security/303",
+      "documentTitle": "Serv‑U 15.5 보안 취약점 및 패치 가이드",
+      "summary": "새 문서 \"Serv‑U 15.5 보안 취약점 및 패치 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -48,32 +51,66 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 3535
+              "durationMs": 3029
             },
             {
               "step": "outline",
-              "durationMs": 11177
+              "durationMs": 13197
             },
             {
               "step": "write",
-              "durationMs": 31800
+              "durationMs": 22887
             },
             {
               "step": "review",
-              "durationMs": 6189
+              "durationMs": 6391
             }
           ],
-          "totalDurationMs": 52701,
+          "totalDurationMs": 45505,
           "researchSources": 10,
           "tavilyUsage": {
             "apiCalls": 3,
             "totalResults": 9
           },
           "estimatedTokens": {
-            "estimated": 2458,
+            "estimated": 2124,
             "method": "duration_based"
           }
         }
+      }
+    },
+    {
+      "id": "201d9a8e-6ff6-4cf3-b243-39f0e8c36c75",
+      "timestamp": "2026-02-25T12:17:57.552Z",
+      "actionType": "modify",
+      "issueNumber": 302,
+      "issueTitle": " [업데이트] Claude Cowork 최신 플러그인·커넥터 업데이트 (2026)",
+      "documentSlug": "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork",
+      "documentTitle": "2026 AI Agent Comparison – OpenClaw vs Claude Cowork vs Claude Code",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Cowork 최신 플러그인·커넥터 업데이트 (2026)\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 10,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "57779150-9521-4010-b458-dad9c84481a4",
+      "timestamp": "2026-02-25T12:16:58.051Z",
+      "actionType": "modify",
+      "issueNumber": 301,
+      "issueTitle": " [업데이트] MCP 압축 및 컨텍스트 최적화",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP 압축 및 컨텍스트 최적화\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 27,
+        "deletions": 0
       }
     },
     {
@@ -5967,5 +6004,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-25T12:20:51.749Z"
+  "lastUpdated": "2026-02-25T12:20:35.989Z"
 }
