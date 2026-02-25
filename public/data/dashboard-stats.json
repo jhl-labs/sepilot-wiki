@@ -1,43 +1,103 @@
 {
-  "collectedAt": "2026-02-25T17:51:39.842Z",
+  "collectedAt": "2026-02-25T18:51:47.425Z",
   "overview": {
-    "totalDocuments": 68,
-    "publishedDocuments": 47,
-    "draftDocuments": 21,
-    "openRequests": 41,
+    "totalDocuments": 70,
+    "publishedDocuments": 48,
+    "draftDocuments": 22,
+    "openRequests": 44,
     "closedRequests": 19,
-    "totalAIActions": 272
+    "totalAIActions": 278
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 6,
+      "documentsCreated": 3,
+      "documentsModified": 2,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 26,
+      "estimatedTokens": 6235,
+      "totalPipelineDurationMs": 136155
     },
     "last24h": {
-      "aiActions": 48,
-      "documentsCreated": 17,
-      "documentsModified": 14,
-      "tavilyApiCalls": 51,
-      "tavilyResults": 141,
-      "estimatedTokens": 45933,
-      "totalPipelineDurationMs": 1007827
+      "aiActions": 44,
+      "documentsCreated": 16,
+      "documentsModified": 13,
+      "tavilyApiCalls": 48,
+      "tavilyResults": 134,
+      "estimatedTokens": 39888,
+      "totalPipelineDurationMs": 880297
     },
     "last7d": {
-      "aiActions": 192,
-      "documentsCreated": 50,
-      "documentsModified": 62,
-      "tavilyApiCalls": 150,
-      "tavilyResults": 394,
-      "estimatedTokens": 124676,
-      "totalPipelineDurationMs": 2737701
+      "aiActions": 198,
+      "documentsCreated": 53,
+      "documentsModified": 64,
+      "tavilyApiCalls": 159,
+      "tavilyResults": 420,
+      "estimatedTokens": 130911,
+      "totalPipelineDurationMs": 2873856
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-25T18:29:28.773Z",
+      "actionType": "generate",
+      "issueNumber": 310,
+      "documentTitle": "Jira AI 에이전트 가이드 – 인간·AI 협업을 위한 설정 및 운영 매뉴얼",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 49329,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2283
+    },
+    {
+      "timestamp": "2026-02-25T18:28:36.274Z",
+      "actionType": "generate",
+      "issueNumber": 309,
+      "documentTitle": "AI 코딩 어시스턴스와 생산성 역설 – 개발자 Throughput 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 33566,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1509
+    },
+    {
+      "timestamp": "2026-02-25T18:27:58.972Z",
+      "actionType": "generate",
+      "issueNumber": 308,
+      "documentTitle": "Open WebUI와 Docker Model Runner를 활용한 셀프‑호스티드 LLM 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 53260,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2443
+    },
+    {
+      "timestamp": "2026-02-25T18:27:02.569Z",
+      "actionType": "modify",
+      "issueNumber": 307,
+      "documentTitle": "DevSecOps 자동화 역설 – 파이프라인 보안 취약점 생성 메커니즘",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T18:26:18.506Z",
+      "actionType": "modify",
+      "issueNumber": 306,
+      "documentTitle": "엔터프라이즈 규모 GitOps 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T18:25:46.851Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-25T12:20:35.989Z",
       "actionType": "modify",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T08:56:15.988Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T08:50:00.513Z",
-      "actionType": "recover",
-      "issueNumber": 200,
-      "documentTitle": "chore(deps): bump ajv from 6.12.6 to 6.14.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T08:38:15.230Z",
-      "actionType": "recover",
-      "issueNumber": 247,
-      "documentTitle": "chore(deps): bump react-router-dom from 7.13.0 to 7.13.1 in the react group",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T06:32:27.749Z",
-      "actionType": "modify",
-      "issueNumber": 289,
-      "documentTitle": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T06:31:35.175Z",
-      "actionType": "generate",
-      "issueNumber": 288,
-      "documentTitle": "시맨틱 레이어와 AI 이니셔티브 성공 전략",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 36417,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1691
-    },
-    {
-      "timestamp": "2026-02-25T06:30:55.114Z",
-      "actionType": "generate",
-      "issueNumber": 287,
-      "documentTitle": "미국 국방부와 Anthropic 간 AI 정책 갈등: Claude 모델 접근 논쟁",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 82789,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3886
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 263,
-      "totalEstimatedTokens": 158583,
-      "avgDurationMs": 56037
+      "totalActions": 269,
+      "totalEstimatedTokens": 164818,
+      "avgDurationMs": 55545
     },
     "unknown": {
       "totalActions": 9,
