@@ -24,8 +24,8 @@ updatedAt: 2026-02-25
 > 위 원인들은 CIO.com·Verint·Operant AI 등 외부 기사에서도 동일하게 지적되고 있습니다【CIO.com】.
 
 ## 3. Regulatory Landscape
-AI 에이전트 시스템은 자율적인 행동을 통해 실제 세계에 영향을 미칠 수 있어, **보안·거버넌스 위험**이 크게 부각되고 있습니다.  
-미국 상무부 산하 **National Institute of Standards and Technology (NIST)** 의 **Center for AI Standards and Innovation (CAISI)** 가 주도하고 있는 **AI Agent Standards Initiative**는 다음과 같은 목표를 가지고 있습니다.
+AI 에이전트 시스템은 자율적인 행동을 통해 실제 세계에 영향을 미칠 수 있어 **보안·거버넌스 위험**이 크게 부각됩니다.  
+미국 상무부 산하 **National Institute of Standards and Technology (NIST)** 의 **Center for AI Standards and Innovation (CAISI)** 가 주도하는 **AI Agent Standards Initiative**는 다음과 같은 목표를 가지고 있습니다.
 
 - **산업 주도 기술 표준** 및 **개방형 프로토콜**을 통해 에이전트가 안전하게 동작하도록 촉진  
 - **모델‑레벨**, **에이전트‑시스템‑레벨**, **인간‑감시** 등 3가지 차원의 보안·거버넌스 프레임워크 정의  
@@ -47,7 +47,7 @@ AI 에이전트 시스템은 자율적인 행동을 통해 실제 세계에 영�
 ## 5. Implications for Agent Development
 1. **보안‑우선 설계**  
    - 모델·에이전트 설계 단계에서 **권한 최소화**와 **데이터 격리**를 기본 원칙으로 채택.  
-   - 민감 데이터는 **암호화·마스킹** 후에만 도구에 전달하고, Trace 로그에 마스킹 처리 적용.  
+   - 민감 데이터는 **암호화·마스킹** 후에만 도구에 전달하고, Trace 로그에도 마스킹 처리 적용.  
 
 2. **거버넌스·인증 절차**  
    - **중요 행동(예: 외부 시스템 호출, 파일 삭제)** 에는 사전 **인간 승인** 워크플로우를 CI/CD에 통합.  
@@ -67,6 +67,95 @@ AI 에이전트 시스템은 자율적인 행동을 통해 실제 세계에 영�
    - 이상 징후 발생 시 **자동 롤백** 및 **인시던트 대응 플랜**을 트리거하도록 CI/CD 파이프라인에 연동.  
 
 > 위 권고사항은 NIST RFI에서 강조된 **보안·거버넌스** 요구사항을 실무에 적용하기 위한 구체적인 방안이며, 향후 표준이 확정될 경우 추가 조정이 필요합니다.
+
+## 13.1 Safety Constraints Overview
+AI 에이전트가 실제 업무에 투입될 때 가장 중요한 보호 장치는 **안전 제약(Safety Constraints)** 입니다. NIST CAISI가 제시한 3‑계층 보안 프레임워크에서 **Safety**는 *NON‑NEGOTIABLE* 레벨로 정의되며, 다음과 같은 핵심 요소를 포함합니다.
+
+| 요소 | 설명 |
+|------|------|
+| **데이터 보호** | 민감·비신뢰 데이터는 전송 전 암호화·마스킹하고, 도구 호출 시 최소 권한만 부여 |
+| **행동 제한** | 위험도가 높은 도구(예: 파일 삭제, 시스템 명령) 호출은 사전 승인 워크플로우와 정책 파일(`AGENTS.md`)에 명시 |
+| **실시간 감시** | OpenTelemetry 로깅을 통해 비정상 API 호출, 권한 상승 시도, 레이턴시 급증 등을 실시간으로 탐지 |
+| **위험 완화** | 비정상 상황 발생 시 자동 롤백, 격리된 샌드박스 실행, 인시던트 알림을 즉시 발송 |
+
+이러한 제약은 **AI 에이전트가 인간의 의도와 일치하도록 강제**하고, 규제 위반이나 데이터 유출 위험을 사전에 차단합니다.
+
+## 13.2 Intent‑Based Design Pattern
+전통적인 프롬프트는 “안전성, 명확성, 간결성”을 쉼표로 구분된 평면 리스트로 전달합니다. LLM은 이를 **동등한 우선순위**로 해석해 의도와 실제 동작 사이에 격차가 발생합니다.  
+**Intent Engineering**은 목표를 **계층형(Value Hierarchy)** 으로 구조화해 우선순위를 명시적으로 지정합니다.
+
+### 핵심 데이터 구조 (Python / Pydantic)
+```python
+from enum import Enum
+from typing import List, Optional
+from pydantic import BaseModel
+
+class PriorityLabel(str, Enum):
+    NON_NEGOTIABLE = "NON_NEGOTIABLE"   # 반드시 최우선, 안전 보장
+    HIGH           = "HIGH"           # 명확성 등 높은 우선순위
+    MEDIUM         = "MEDIUM"         # 간결성 등 중간 우선순위
+    LOW            = "LOW"            # 부수적 목표
+
+class HierarchyEntry(BaseModel):
+    goal: str
+    label: PriorityLabel
+    description: Optional[str] = None
+
+class ValueHierarchy(BaseModel):
+    name: Optional[str] = None
+    entries: List[HierarchyEntry]
+    conflict_rule: Optional[str] = None
+```
+
+### 프롬프트 인젝션 예시
+```
+INTENT ENGINEERING DIRECTIVES (user‑defined — enforce strictly):
+When optimization goals conflict, resolve in this order:
+1. [NON_NEGOTIABLE] safety: Always prioritise safety
+2. [HIGH] clarity
+3. [MEDIUM] conciseness
+Conflict resolution: Safety first, always.
+```
+
+### 라우팅 티어와 연계
+```python
+has_non_negotiable = any(
+    e.label == PriorityLabel.NON_NEGOTIABLE for e in value_hierarchy.entries
+)
+if has_non_negotiable:
+    score["final_score"] = max(score.get("final_score", 0.0), 0.72)  # 스마트 모델 강제
+```
+*NON_NEGOTIABLE* 라벨이 붙은 목표가 존재하면, 요청은 자동으로 **고성능 모델**(예: GPT‑4‑Turbo) 로 라우팅되어 안전 검증을 강화합니다.
+
+### 실전 적용 (MCP 통합)
+```json
+{
+  "tool": "define_value_hierarchy",
+  "arguments": {
+    "name": "Medical Safety Stack",
+    "entries": [
+      { "goal": "safety", "label": "NON_NEGOTIABLE", "description": "Always prioritise patient safety" },
+      { "goal": "clarity", "label": "HIGH" },
+      { "goal": "conciseness", "label": "MEDIUM" }
+    ],
+    "conflict_rule": "Safety first, always."
+  }
+}
+```
+위와 같이 정의된 계층은 **Prompt Optimizer**(npm 패키지)와 연동해 자동으로 프롬프트에 삽입됩니다.
+
+## 13.3 프롬프트 엔지니어링 팁
+1. **우선순위 라벨 명시** – 목표 리스트 앞에 `[NON_NEGOTIABLE]`, `[HIGH]` 등 라벨을 붙여 LLM에게 명확히 전달합니다.  
+2. **계층형 JSON 전달** – `value_hierarchy` 객체를 시스템 프롬프트에 포함시키면, 모델이 내부 로직에서 자동으로 충돌 해결 규칙을 적용합니다.  
+3. **단계적 프롬프트** –  
+   - **Step 1**: 안전 제약을 먼저 선언 (`[NON_NEGOTIABLE] safety`).  
+   - **Step 2**: 명확성·간결성 등 부수 목표를 순차적으로 추가.  
+   - **Step 3**: 최종 작업 지시를 제공.  
+   이렇게 하면 모델이 “동전 던지기” 대신 **계층적 의사결정**을 수행합니다.  
+4. **검증 어설션 삽입** – `assert_tool_permission` 과 같은 Layer 1 어설션을 테스트 스위트에 포함시켜, 안전 라벨이 누락되면 CI 단계에서 즉시 실패하도록 합니다.  
+5. **비용 관리** – LLM‑as‑Judge 를 사용할 때는 **샘플 비율**(예: 5 %)만 적용하고, 결과를 캐시해 재사용합니다.  
+
+> 위 팁들은 *euno.news* 기사에서 제시된 “Intent Engineering” 접근법을 실제 개발 파이프라인에 적용하기 위한 실용적인 가이드입니다.
 
 ## 6. 테스트 전략 프레임워크
 ### 3‑계층 테스트 피라미드
@@ -194,12 +283,12 @@ OpenAI는 2026년 초 **OpenAI Frontier for Enterprises** 라는 새로운 플�
   - 현재 가격은 공개되지 않았으며, OpenAI는 **좌석 기반이 아닌 비즈니스 결과**(예: 매출 증대, 비용 절감)와 연계한 **성과 기반 과금**을 검토 중이라고 밝혔습니다.
 
 ## 14. 기업용 AI 에이전트 도입 현황 및 전망
-Brad Lightcap(OpenAI COO)는 2026년 **India AI Summit**에서 “아직 기업 AI가 비즈니스 프로세스에 깊게 침투하지 못했다”며 현 상황을 진단했습니다.
+Brad Lightcap(OpenAI COO)는 2026년 **India AI Summit**에서 “아직 기업 AI가 비즈니스 프로세스에 깊게 침투하지 못했다”고 진단했습니다.
 
 - **도입 현황**  
   - **대규모 채택 미비**: 주요 기업들은 아직 **파일럿 단계**에 머물고 있으며, 실제 비즈니스 핵심 프로세스에 AI 에이전트를 적용한 사례는 제한적입니다.  
   - **전통 엔터프라이즈 소프트웨어 의존**: OpenAI 자체도 지난해 **Slack**을 대규모로 활용했으며, 이는 AI 기업이 여전히 기존 SaaS 도구에 의존하고 있음을 시사합니다.  
-  - **시장 규모**: OpenAI CFO Sarah Friar는 2025년 매출이 **200억 달러**를 넘어섰다고 발표했으며, 이는 AI 에이전트 시장이 빠르게 성장하고 있음을 보여줍니다.  
+  - **시장 규모**: OpenAI CFO Sarah Friar는 2025년 매출이 **200억 달러**를 넘어섰다고 발표했으며, AI 에이전트 시장이 빠르게 성장하고 있음을 보여줍니다.  
 
 - **주요 도전 과제**  
   1. **복잡한 조직 구조** – 기업은 다수 팀·시스템·데이터 레이크를 보유하고 있어, 에이전트가 **다양한 도구와 권한**을 안전하게 조정해야 함.  
@@ -215,7 +304,7 @@ Brad Lightcap(OpenAI COO)는 2026년 **India AI Summit**에서 “아직 기업 
 
 ## 15. Coding Agent Architecture (코딩 에이전트 아키텍처)
 ### 15‑1. 코딩 에이전트란?
-코딩 에이전트는 단순한 LLM이 아니라 **시스템**이다. 전체 흐름은 다음과 같다.
+코딩 에이전트는 단순 LLM이 아니라 **시스템**이다. 전체 흐름은 다음과 같다.
 
 ```
 IDE / CLI
@@ -312,73 +401,4 @@ Loop
 - **Structure > Verbosity** → 구조 > 장황함  
 - **Relevance > Volume** → 관련성 > 단순 양  
 - **Completeness** → 완전성  
-- **Constraints > Freedom** → 제약 > 자유  
-- **Iteration > Giant Prompts** → 반복 > 거대한 프롬프트  
-- **Plan → Execute → Verify** → 계획 → 실행 → 검증  
-
-## 16. 자율 웹 탐색 AI 에이전트 구현 사례 – Xiaona
-### 16‑1. 에이전트 아키텍처
-- **프레임워크**: OpenClaw 에이전트 프레임워크 위에 LLM 기반 추론 엔진 배치.  
-- **툴 세트**:  
-  - **Browser control** – 실제 인터랙티브 브라우저(Playwright 또는 Puppeteer) 조작 (navigate, click, type, read DOM).  
-  - **Shell access** – `git`, `ssh`, `curl` 등 로컬 명령 실행.  
-  - **File I/O** – 파일 읽기·쓰기·편집.  
-  - **Web search & fetch** – 외부 검색·데이터 수집.  
-
-- **핵심 차별점**: 헤드리스가 아닌 **실제 디스플레이 컨텍스트를 가진 브라우저**를 사용해 접근성 트리와 스크린샷을 LLM에게 제공, 시각 OCR 없이 페이지 내용을 “볼” 수 있음.
-
-### 16‑2. 브라우저 자동화 연동
-OpenClaw는 Playwright(또는 Puppeteer) 드라이버를 래핑하여 고수준 API를 제공한다.
-
-```python
-# 기본 브라우저 세션 시작
-browser = agent.tools.browser  # OpenClaw가 제공하는 객체
-
-# 페이지 이동
-browser.navigate("https://github.com/signup")
-
-# 현재 페이지 상태 스냅샷 (접근성 트리)
-snapshot = browser.snapshot()   # JSON 형태의 DOM 트리 반환
-
-# 요소 찾기·입력·클릭
-browser.act(kind="fill", ref="email_input", text="xiaona@example.com")
-browser.act(kind="click", ref="continue_button")
-```
-
-- **Playwright**와 **Puppeteer** 모두 Chromium 기반이며, OpenClaw는 브라우저 실행 시 실제 사용자 지문(헤더, 쿠키, 랜덤 지연)을 적용해 안티‑봇 시스템을 회피한다.  
-- 모든 액션은 **Trace** 객체에 기록되어 `agent_eval`을 통해 결정론적 테스트가 가능하다.
-
-### 16‑3. 폼 제출·회원가입 자동화 흐름
-Xiaona 에이전트가 GitHub 회원가입을 자동화한 흐름을 요약하면 다음과 같다.
-
-| 단계 | 주요 동작 | 코드 스니펫 (개념) |
-|------|-----------|-------------------|
-| 1. 페이지 로드 | `browser.navigate("https://github.com/signup")` | `browser.navigate(url)` |
-| 2. 이메일 입력 | `browser.act(kind="fill", ref="email_input", text="xiaona@example.com")` | `act(... )` |
-| 3. Cloudflare Turnstile 처리 | 실제 브라우저가 자동으로 지문 제공 → 별도 코드 필요 없음 | `browser.act(kind="wait", timeMs=3000)` |
-| 4. 비밀번호·사용자명 입력 | 연속 `fill` + `click` 로 진행 | `browser.act(kind="fill", ref="password_input", text="StrongPass!123")` |
-| 5. 이메일 인증 | <ul><li>메일함 접근(쉘 도구) → 인증 코드 추출</li><li>브라우저로 돌아와 코드 입력</li></ul> | `ssh.exec("mailcat ...")` → `browser.act(kind="fill", ref="code_input", text=code)` |
-| 6. SSH 키 생성·등록 | 로컬 `ssh-keygen` 실행 → 브라우저를 통해 SSH 키 페이지에 공개키 붙여넣기 | `ssh.exec("ssh-keygen -t ed25519 -C ...")` → `browser.act(kind="fill", ref="ssh_key_input", text=pub_key)` |
-| 7. 최종 확인 | 페이지 스냅샷 검증 → 성공 메시지 확인 | `assert "Welcome to GitHub" in browser.snapshot().text` |
-
-각 단계는 **Trace**에 기록되며, `assert_tool_called`, `assert_no_loop` 등 Layer 1 어설션으로 회귀를 방지한다.
-
-### 16‑4. 보안·프라이버시 고려사항
-| 고려 항목 | 설명 |
-|----------|------|
-| **자격 증명 관리** | API 키·비밀번호는 환경 변수 또는 비밀 관리 서비스(Vault)에서 로드하고, Trace에 마스킹 처리한다. |
-| **안티‑봇 회피** | 실제 브라우저 인스턴스 사용, 랜덤 마우스 이동·타이핑 지연, 사용자 에이전트 스푸핑 적용. |
-| **데이터 최소화** | 스냅샷은 접근성 트리만 저장하고, 화면 이미지·전체 HTML은 필요 시에만 캡처한다. |
-| **법적·서비스 약관** | 자동 회원가입은 서비스 제공자의 이용 약관을 검토하고, 테스트 전용 계정(예: `xiaona‑ai`)을 사용한다. |
-| **감사 로그** | 모든 브라우저 액션·쉘 명령은 구조화된 로그에 기록해 추적 가능하도록 한다. |
-| **네트워크 격리** | 에이전트는 전용 VPC/컨테이너에서 실행해 외부 침해 위험을 제한한다. |
-
-### 16‑5. 교훈 및 적용 포인트
-- **실제 브라우저 사용**이 Cloudflare Turnstile·reCAPTCHA와 같은 안티‑봇 방어를 자연스럽게 우회한다.  
-- **접근성 스냅샷**은 LLM이 시각 정보를 해석하도록 해 별도 OCR이 필요하지 않다.  
-- **다중 도구 오케스트레이션**(브라우저 ↔ 쉘 ↔ 파일) 은 복잡한 웹·시스템 워크플로우 구현의 핵심 메커니즘이다.  
-- **오류 복구**(예: 사용자명 충돌, 이메일 지연)는 `assert_no_loop`·`assert_max_steps`와 같은 결정론적 검증과, LLM‑as‑Judge 기반 재시도 로직을 조합해 구현한다.  
-
----  
-
-*📰 자동 감지: 뉴스 인텔리전스 (euno.news)*  
+-
