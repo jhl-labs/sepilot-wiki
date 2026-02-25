@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "a77d389b-3fba-4318-9785-e73e5632a2d4",
+      "timestamp": "2026-02-25T00:34:21.986Z",
+      "actionType": "quality_score",
+      "issueNumber": 280,
+      "issueTitle": " [요청] Agentic FaaS와 MDL: 차세대 백엔드 아키텍처",
+      "documentSlug": "backend/agentic-faas-mdl",
+      "documentTitle": " [요청] Agentic FaaS와 MDL: 차세대 백엔드 아키텍처",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "91b7bdbc-0057-44c1-925c-288136d857e0",
+      "timestamp": "2026-02-25T00:34:10.834Z",
+      "actionType": "quality_score",
+      "issueNumber": 281,
+      "issueTitle": " [요청] Emdash – 오픈소스 에이전틱 개발 환경 소개",
+      "documentSlug": "emdash",
+      "documentTitle": " [요청] Emdash – 오픈소스 에이전틱 개발 환경 소개",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "9b144244-31e7-41a4-8846-4e562cbbfd13",
+      "timestamp": "2026-02-25T00:33:59.889Z",
+      "actionType": "quality_score",
+      "issueNumber": 284,
+      "issueTitle": " [요청] DevSecOps 자동화 역설: 파이프라인 보안 취약점 생성 메커니즘",
+      "documentSlug": "devsecops",
+      "documentTitle": " [요청] DevSecOps 자동화 역설: 파이프라인 보안 취약점 생성 메커니즘",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "ec55bfc1-b236-4d24-aa71-18eff4fb42e7",
+      "timestamp": "2026-02-25T00:33:45.337Z",
+      "actionType": "generate",
+      "issueNumber": 280,
+      "issueTitle": " [요청] Agentic FaaS와 MDL: 차세대 백엔드 아키텍처",
+      "documentSlug": "backend/agentic-faas-mdl",
+      "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
+      "summary": "새 문서 \"Agentic FaaS와 MDL – 차세대 백엔드 아키텍처\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6388
+            },
+            {
+              "step": "outline",
+              "durationMs": 7721
+            },
+            {
+              "step": "write",
+              "durationMs": 21148
+            },
+            {
+              "step": "review",
+              "durationMs": 6436
+            }
+          ],
+          "totalDurationMs": 41693,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 6
+          },
+          "estimatedTokens": {
+            "estimated": 1765,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "e6bd2049-0bb8-45ac-a91f-f4ced4bf1813",
+      "timestamp": "2026-02-25T00:32:51.506Z",
+      "actionType": "generate",
+      "issueNumber": 281,
+      "issueTitle": " [요청] Emdash – 오픈소스 에이전틱 개발 환경 소개",
+      "documentSlug": "emdash",
+      "documentTitle": "Emdash – 오픈소스 에이전틱 개발 환경 소개",
+      "summary": "새 문서 \"Emdash – 오픈소스 에이전틱 개발 환경 소개\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 10888
+            },
+            {
+              "step": "outline",
+              "durationMs": 6928
+            },
+            {
+              "step": "write",
+              "durationMs": 24079
+            },
+            {
+              "step": "review",
+              "durationMs": 6466
+            }
+          ],
+          "totalDurationMs": 48361,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1873,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "4a523bb0-0d25-49ca-abb4-17ccd668dbce",
+      "timestamp": "2026-02-25T00:31:51.606Z",
+      "actionType": "generate",
+      "issueNumber": 284,
+      "issueTitle": " [요청] DevSecOps 자동화 역설: 파이프라인 보안 취약점 생성 메커니즘",
+      "documentSlug": "devsecops",
+      "documentTitle": "DevSecOps 자동화 역설 – 파이프라인 보안 취약점 생성 메커니즘",
+      "summary": "새 문서 \"DevSecOps 자동화 역설 – 파이프라인 보안 취약점 생성 메커니즘\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2988
+            },
+            {
+              "step": "outline",
+              "durationMs": 10614
+            },
+            {
+              "step": "write",
+              "durationMs": 21600
+            },
+            {
+              "step": "review",
+              "durationMs": 8331
+            }
+          ],
+          "totalDurationMs": 43533,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2028,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "32374036-0a08-45de-8d4e-2bbeebbad15a",
       "timestamp": "2026-02-25T00:29:44.023Z",
       "actionType": "generate",
@@ -5208,5 +5385,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-25T00:29:44.023Z"
+  "lastUpdated": "2026-02-25T00:34:21.986Z"
 }
