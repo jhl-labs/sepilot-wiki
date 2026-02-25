@@ -1,0 +1,736 @@
+{
+  "generatedAt": "2026-02-25T09:23:05.152Z",
+  "config": {
+    "freshnessWarningDays": 90,
+    "minDocumentLength": 500,
+    "maxReviewBatch": 10
+  },
+  "summary": {
+    "totalPublished": 48,
+    "structuralIssuesFound": 33,
+    "aiReviewsPerformed": 10,
+    "issueCandidates": 10,
+    "issuesCreated": 3
+  },
+  "structuralIssues": [
+    {
+      "slug": "backend/wiki-api-route-guide",
+      "title": "Wiki 페이지 API 라우트 상세 가이드",
+      "path": "backend/wiki-api-route-guide.md",
+      "wordCount": 2064,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: api-service-layer.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "kubernetes/node-readiness-controller",
+      "title": "Introducing Node Readiness Controller",
+      "path": "kubernetes/node-readiness-controller.md",
+      "wordCount": 1130,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: cgroup-migration.md",
+        "깨진 관련문서 참조: api-governance.md",
+        "깨진 관련문서 참조: release-notes.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "kubernetes/ingress-nginx-deprecation-guide",
+      "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+      "path": "kubernetes/ingress-nginx-deprecation-guide.md",
+      "wordCount": 1015,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: cgroup-migration.md",
+        "깨진 관련문서 참조: release-notes.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "kubernetes/api-governance",
+      "title": "Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드",
+      "path": "kubernetes/api-governance.md",
+      "wordCount": 811,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: release-notes.md",
+        "깨진 관련문서 참조: node-readiness-controller.md",
+        "깨진 관련문서 참조: cgroup-migration.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "kubernetes/cgroup-migration",
+      "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
+      "path": "kubernetes/cgroup-migration.md",
+      "wordCount": 1125,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: node-readiness-controller.md",
+        "깨진 관련문서 참조: ingress-nginx-deprecation-guide.md",
+        "깨진 관련문서 참조: release-notes.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "kubernetes/release-notes",
+      "title": "Kubernetes 버전별 릴리즈 노트",
+      "path": "kubernetes/release-notes.md",
+      "wordCount": 1006,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: api-governance.md",
+        "깨진 관련문서 참조: node-readiness-controller.md",
+        "깨진 관련문서 참조: cgroup-migration.md",
+        "깨진 관련문서 참조: ingress-nginx-deprecation-guide.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "projects/openclaw-complete-guide",
+      "title": "OpenClaw 완벽 가이드",
+      "path": "projects/openclaw-complete-guide.md",
+      "wordCount": 3189,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: moltbook-intro.md",
+        "깨진 관련문서 참조: multi-agent-system.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "projects/claude-code-release-history",
+      "title": "Claude Code 릴리즈 히스토리 상세 가이드",
+      "path": "projects/claude-code-release-history.md",
+      "wordCount": 1411,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: opencode.md",
+        "깨진 관련문서 참조: mcp-model-context-protocol.md",
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md",
+        "깨진 관련문서 참조: continuous-ai.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "projects/opencode",
+      "title": "Opencode에 대해",
+      "path": "projects/opencode.md",
+      "wordCount": 1811,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: claude-code-release-history.md",
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md",
+        "깨진 관련문서 참조: continuous-ai.md",
+        "깨진 관련문서 참조: mcp-model-context-protocol.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "projects/sepilot-desktop-intro",
+      "title": "SEPilot Desktop 소개",
+      "path": "projects/sepilot-desktop-intro.md",
+      "wordCount": 655,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: sepilot-technology-stack.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "projects/sepilot-technology-stack",
+      "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
+      "path": "projects/sepilot-technology-stack.md",
+      "wordCount": 221,
+      "daysSinceModified": 3,
+      "issues": [
+        "깨진 관련문서 참조: sepilot-desktop-intro.md",
+        "짧은 문서 (221자, 최소 500자)"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "projects/antigravity-release-notes",
+      "title": "Antigravity 릴리즈 노트 정리",
+      "path": "projects/antigravity-release-notes.md",
+      "wordCount": 1629,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: gemini-3-1.md",
+        "깨진 관련문서 참조: qwen3-5.md",
+        "깨진 관련문서 참조: glm-5.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "projects/moltbook-intro",
+      "title": "Moltbook 소개",
+      "path": "projects/moltbook-intro.md",
+      "wordCount": 985,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: openclaw-complete-guide.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "bun/comparison-pnpm-npm",
+      "title": "bun과 pnpm, npm의 차이",
+      "path": "bun/comparison-pnpm-npm.md",
+      "wordCount": 542,
+      "daysSinceModified": 3,
+      "issues": [
+        "깨진 관련문서 참조: overview.md",
+        "깨진 관련문서 참조: github-actions-setup.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "bun/overview",
+      "title": "bun 이란?",
+      "path": "bun/overview.md",
+      "wordCount": 502,
+      "daysSinceModified": 3,
+      "issues": [
+        "깨진 관련문서 참조: comparison-pnpm-npm.md",
+        "깨진 관련문서 참조: github-actions-setup.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "bun/github-actions-setup",
+      "title": "GitHub Actions로 bun을 쓰는 방법",
+      "path": "bun/github-actions-setup.md",
+      "wordCount": 546,
+      "daysSinceModified": 3,
+      "issues": [
+        "깨진 관련문서 참조: comparison-pnpm-npm.md",
+        "깨진 관련문서 참조: overview.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/cloud-terminal-persistent-ai-agent-sessions",
+      "title": "클라우드 터미널 구축: 지속적인 AI 에이전트 세션 유지하기",
+      "path": "ai/cloud-terminal-persistent-ai-agent-sessions.md",
+      "wordCount": 1589,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: persistent-terminal-design.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/mcp-model-context-protocol",
+      "title": "MCP (Model Context Protocol) 완벽 가이드",
+      "path": "ai/mcp-model-context-protocol.md",
+      "wordCount": 2698,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: claude-code-release-history.md",
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md",
+        "깨진 관련문서 참조: continuous-ai.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/qwen3-5",
+      "title": "Qwen 3.5",
+      "path": "ai/qwen3-5.md",
+      "wordCount": 1797,
+      "daysSinceModified": 3,
+      "issues": [
+        "깨진 관련문서 참조: glm-5.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/continuous-ai",
+      "title": "Continuous AI – 인간이 AI 오류를 검증하는 방법",
+      "path": "ai/continuous-ai.md",
+      "wordCount": 2301,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md",
+        "깨진 관련문서 참조: vibe-coding.md",
+        "깨진 관련문서 참조: opencode.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/glm-5",
+      "title": "glm 5",
+      "path": "ai/glm-5.md",
+      "wordCount": 784,
+      "daysSinceModified": 3,
+      "issues": [
+        "깨진 관련문서 참조: qwen3-5.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/github-agentic-workflows",
+      "title": "Automate Repository Tasks with GitHub Agentic Workflows",
+      "path": "ai/github-agentic-workflows.md",
+      "wordCount": 2256,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md",
+        "깨진 관련문서 참조: continuous-ai.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/vibe-coding",
+      "title": "바이브 코딩이란?",
+      "path": "ai/vibe-coding.md",
+      "wordCount": 815,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: continuous-ai.md",
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/multi-agent-system",
+      "title": "멀티 에이전트 시스템 – Self‑Healing AI Agents",
+      "path": "ai/multi-agent-system.md",
+      "wordCount": 2199,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: openclaw-complete-guide.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "ai/gemini-3-1-pro",
+      "title": "Gemini 3.1 Pro",
+      "path": "ai/gemini-3-1-pro.md",
+      "wordCount": 317,
+      "daysSinceModified": 0,
+      "issues": [
+        "깨진 관련문서 참조: gemini-3-1.md",
+        "짧은 문서 (317자, 최소 500자)"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "frontend/api-service-layer",
+      "title": "프론트엔드 API 서비스 레이어 설명",
+      "path": "frontend/api-service-layer.md",
+      "wordCount": 2258,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: wiki-api.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "cloud/aws-nat-gateway-cost-trap",
+      "title": "$100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이와 Terraform 해결법",
+      "path": "cloud/aws-nat-gateway-cost-trap.md",
+      "wordCount": 463,
+      "daysSinceModified": 1,
+      "issues": [
+        "깨진 관련문서 참조: aws-cost-optimization.md",
+        "짧은 문서 (463자, 최소 500자)"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "meta/weekly-2026-08",
+      "title": "주간 위키 보고서 - 2026년 08주차",
+      "path": "meta/weekly-2026-08.md",
+      "wordCount": 556,
+      "daysSinceModified": 2,
+      "issues": [
+        "깨진 관련문서 참조: dependencies.md"
+      ],
+      "severity": "high"
+    },
+    {
+      "slug": "github/dependabot-labels",
+      "title": "Dependabot 라벨 설정 가이드",
+      "path": "github/dependabot-labels.md",
+      "wordCount": 840,
+      "daysSinceModified": 0,
+      "issues": [
+        "태그 미지정"
+      ],
+      "severity": "low"
+    },
+    {
+      "slug": "troubleshooting/dependabot-label-missing",
+      "title": "Dependabot 라벨 누락 오류 해결 방법",
+      "path": "troubleshooting/dependabot-label-missing.md",
+      "wordCount": 300,
+      "daysSinceModified": 0,
+      "issues": [
+        "짧은 문서 (300자, 최소 500자)"
+      ],
+      "severity": "low"
+    },
+    {
+      "slug": "projects/rust-gpu-face-crop-tool",
+      "title": "Rust 기반 GPU 가속 얼굴 크롭 도구 구현 가이드",
+      "path": "projects/rust-gpu-face-crop-tool.md",
+      "wordCount": 432,
+      "daysSinceModified": 0,
+      "issues": [
+        "짧은 문서 (432자, 최소 500자)"
+      ],
+      "severity": "low"
+    },
+    {
+      "slug": "ai/ollama-claude-code",
+      "title": "Ollama와 Claude Code 연결 방법",
+      "path": "ai/ollama-claude-code.md",
+      "wordCount": 493,
+      "daysSinceModified": 1,
+      "issues": [
+        "짧은 문서 (493자, 최소 500자)"
+      ],
+      "severity": "low"
+    },
+    {
+      "slug": "meta/weekly-2026-09",
+      "title": "주간 위키 보고서 - 2026년 9주차",
+      "path": "meta/weekly-2026-09.md",
+      "wordCount": 415,
+      "daysSinceModified": 1,
+      "issues": [
+        "짧은 문서 (415자, 최소 500자)"
+      ],
+      "severity": "low"
+    }
+  ],
+  "aiReviews": [
+    {
+      "slug": "backend/wiki-api-route-guide",
+      "title": "Wiki 페이지 API 라우트 상세 가이드",
+      "structuralIssues": [
+        "깨진 관련문서 참조: api-service-layer.md"
+      ],
+      "severity": "high",
+      "aiScore": 78,
+      "freshness": "current",
+      "aiIssues": [
+        "POST, PUT/PATCH, DELETE 엔드포인트에 대한 상세 응답 예시와 오류 코드가 누락됨",
+        "각 메서드별 입력값 검증 규칙 및 필수/선택 필드 설명이 부족함",
+        "Rate‑limiting, 요청 크기 제한, CSRF 방어 등 보안/운영 정책에 대한 언급이 없음",
+        "버전 관리가 URL에 반영되지 않아 향후 버전 업그레이드 시 혼동 가능성 존재",
+        "예시 요청을 curl 혹은 HTTPie 형태로 제공하지 않아 실전 사용 시 불편함",
+        "소프트/하드 삭제 동작에 대한 구체적인 비즈니스 로직 설명이 부족함",
+        "전체 API 스키마(OpenAPI/Swagger) 혹은 타입 정의에 대한 링크가 없음"
+      ],
+      "aiSuggestions": [
+        "POST, PUT/PATCH, DELETE 각각에 대해 성공·실패 응답 예시(JSON)와 HTTP 상태 코드를 명시",
+        "요청 바디에 대한 필드 설명, 필수/옵션 구분, 데이터 타입 및 길이 제한 등을 추가",
+        "Rate‑limiting, 최대 요청 크기, 재시도 정책 등 운영/보안 가이드라인을 별도 섹션에 포함",
+        "API 버전을 URL에 포함시키는 (`/api/v1/wiki/...`) 방식을 고려하고, 버전 변경 시 마이그레이션 가이드를 제공",
+        "curl 혹은 HTTPie 예시를 각 엔드포인트에 삽입해 개발자가 바로 테스트할 수 있게 함",
+        "소프트 삭제와 하드 삭제가 데이터베이스에 미치는 영향, 복구 가능 여부 등을 구체적으로 기술",
+        "OpenAPI 스펙 파일(.yaml/.json) 혹은 타입 정의(TypeScript interface) 링크를 제공하여 자동 문서화와 클라이언트 코드 생성 지원"
+      ],
+      "suggestedTitle": "Wiki 페이지 API 라우트 상세 가이드 (v1) – 인증·인가, 라우트 구조 및 엔드포인트 설명"
+    },
+    {
+      "slug": "kubernetes/node-readiness-controller",
+      "title": "Introducing Node Readiness Controller",
+      "structuralIssues": [
+        "깨진 관련문서 참조: cgroup-migration.md",
+        "깨진 관련문서 참조: api-governance.md",
+        "깨진 관련문서 참조: release-notes.md"
+      ],
+      "severity": "high",
+      "aiScore": 78,
+      "freshness": "current",
+      "aiIssues": [
+        "문서가 중간에 끊겨 있어 (예: “충돌 방지: 기존 사용자 정의 taint와 네임스페이스가 겹치지 않도록 `node-re” 로 끝남) 전체 흐름을 파악하기 어렵습니다.",
+        "설치·배포 가이드가 누락되었습니다. 컨트롤러 매니페스트 적용 방법, Helm 차트, 버전 호환성 정보가 필요합니다.",
+        "업그레이드·마이그레이션 절차와 기존 `NodeReady`와의 호환성(예: 기존 클러스터에서 단계적 전환 방법)가 설명되지 않았습니다.",
+        "트러블슈팅 섹션이 없습니다. 흔히 발생하는 오류(예: CRD 스키마 불일치, taint이 제거되지 않는 경우)와 로그 확인 방법이 필요합니다.",
+        "보안·권한 관리에 대한 언급이 없습니다. `NodeReadinessGate`를 생성·수정할 수 있는 RBAC 정책이 명시돼 있지 않습니다.",
+        "예시 매니페스트가 하나뿐이며, 실제 사용 시 고려해야 할 옵션(타임아웃, 재시도 정책, 외부 신호 인증 등)이 충분히 다루어지지 않았습니다.",
+        "링크가 동일 블로그 포스트만 반복해서 사용돼 있어, 공식 API 레퍼런스, KEP(Kubernetes Enhancement Proposal) 문서 등 추가적인 참고 자료가 부족합니다."
+      ],
+      "aiSuggestions": [
+        "문서를 끝까지 작성하고, 현재 끊긴 부분을 완성해 전체 흐름을 제공하십시오.",
+        "‘설치 및 배포’ 섹션을 추가하여 매니페스트 적용, Helm 차트 사용법, 버전 호환성 표 등을 포함하세요.",
+        "업그레이드 가이드와 기존 `NodeReady`와의 호환성 전략(예: 단계적 전환, dual‑gate 운영) 을 명시하십시오.",
+        "‘트러블슈팅’ 섹션을 만들어 흔히 발생하는 문제와 해결 방법, 로그/이벤트 확인 방법을 제공하세요.",
+        "RBAC 정책 예시와 보안 고려사항(예: 외부 HTTP 헬스 체크 인증, 네트워크 정책) 을 추가해 운영자의 권한 관리에 도움을 주세요.",
+        "다양한 사용 사례(예: GPU 노드, 고가용성 스토리지, 서비스 메쉬 프록시)와 함께 완전한 매니페스트 예시를 제공하고, 옵션 설명을 상세히 적으세요.",
+        "블로그 포스트 외에 공식 KEP(Kubernetes Enhancement Proposal) 문서, API 레퍼런스, GitHub 리포지터리 링크 등을 추가해 신뢰성을 높이세요."
+      ],
+      "suggestedTitle": "Node Readiness Controller – 설치, 사용법, 마이그레이션 및 트러블슈팅 가이드"
+    },
+    {
+      "slug": "kubernetes/ingress-nginx-deprecation-guide",
+      "title": "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+      "structuralIssues": [
+        "깨진 관련문서 참조: cgroup-migration.md",
+        "깨진 관련문서 참조: release-notes.md"
+      ],
+      "severity": "high",
+      "aiScore": 78,
+      "freshness": "current",
+      "aiIssues": [
+        "문서가 2026년 3월 은퇴 선언을 다루고 있지만, 실제 배포 환경에서 바로 적용하기 위한 구체적인 버전 호환성 매트릭스가 누락됨.",
+        "대체 솔루션(예: Gateway API, Contour, Traefik 등) 선택 시 고려해야 할 평가 기준이 충분히 제시되지 않음.",
+        "롤백 절차가 ‘즉시 복구 가능하도록 설계’라고만 언급되고 구체적인 명령어·절차가 제공되지 않음.",
+        "마이그레이션 테스트를 위한 CI/CD 파이프라인 예시나 자동화 스크립트가 없으며, 실제 운영팀이 바로 활용하기 어려움.",
+        "문서 전반에 다이어그램·플로우 차트가 없어 전체 흐름을 한눈에 파악하기 어려움.",
+        "TL;DR 요약 섹션이 없어 핵심 포인트를 빠르게 파악하려는 독자에게 불편함.",
+        "FAQ 혹은 흔히 발생하는 문제와 해결 방안이 포함되지 않아 사후 지원 시 추가 문서 검색이 필요함.",
+        "링크된 외부 자료(블로그 포스트 등)의 접근성을 확인할 수 없으며, 일부 URL이 오래된 형식으로 표시돼 가독성이 떨어짐."
+      ],
+      "aiSuggestions": [
+        "Ingress NGINX와 대체 컨트롤러 간 Kubernetes 버전 호환성 표를 추가해 마이그레이션 시 버전 충돌 위험을 최소화한다.",
+        "대체 솔루션 선택 시 ‘성능’, ‘보안’, ‘운영 복잡도’, ‘커뮤니티 지원’ 등 평가 항목을 명시하고, 각 솔루션에 대한 장단점을 표 형태로 정리한다.",
+        "구체적인 롤백 절차를 단계별 명령어와 함께 제공하고, 롤백 시점에 필요한 스냅샷·백업 전략을 상세히 기술한다.",
+        "CI/CD 파이프라인 예시(예: GitHub Actions, Argo CD)와 자동화 스크립트를 포함해 마이그레이션을 자동화할 수 있도록 안내한다.",
+        "전체 마이그레이션 흐름을 시각화한 다이어그램(평가 → 파일럿 → 전면 전환 → 정리)과 각 단계별 체크리스트를 삽입한다.",
+        "문서 앞부분에 TL;DR 섹션을 두어 핵심 일정, 위험도, 권고 대체 솔루션을 3~4줄 요약한다.",
+        "FAQ 섹션을 추가해 ‘Ingress NGINX가 아직 동작 중일 때 발생할 수 있는 오류’, ‘Gateway API 전환 시 흔히 마주치는 문제’ 등을 미리 답변한다.",
+        "외부 링크는 최신 URL로 업데이트하고, 가능한 경우 공식 문서(예: Kubernetes SIG Network, Gateway API)로 직접 연결한다.",
+        "문서 내 헤딩 레벨을 일관되게 맞추고, 표와 코드 블록에 적절한 설명을 추가해 가독성을 높인다."
+      ],
+      "suggestedTitle": "Ingress NGINX Retirement Announcement (2026) and Comprehensive Migration Guide"
+    },
+    {
+      "slug": "kubernetes/api-governance",
+      "title": "Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드",
+      "structuralIssues": [
+        "깨진 관련문서 참조: release-notes.md",
+        "깨진 관련문서 참조: node-readiness-controller.md",
+        "깨진 관련문서 참조: cgroup-migration.md"
+      ],
+      "severity": "high",
+      "aiScore": 78,
+      "freshness": "current",
+      "aiIssues": [
+        "문서가 중간에 끊겨 있어 전체 흐름을 파악하기 어려움 (예: 마지막 URL이 불완전함).",
+        "몇몇 외부 링크가 실제 존재 여부를 확인하지 않았으며, 마크다운 형식이 일관되지 않음 (예: 인라인 링크와 풀 URL 혼용).",
+        "API 폐기(deprecation) 정책에 대한 구체적인 일정·절차가 언급되지 않아 실무 적용에 한계가 있음.",
+        "CI 연계 자동화 흐름에 대한 상세 설정 예시(예: `api-review` 플러그인 구성)와 스크린샷이 부족함.",
+        "위키 스타일 가이드(목차, 헤더 레벨, 메타데이터)와 일치하지 않는 부분이 존재함.",
+        "표와 텍스트가 혼재돼 가독성이 떨어짐; 특히 역할·책임 표는 색상·정렬이 없어서 읽기 어려움.",
+        "문서 최상단에 메타 정보(작성일, 최종 업데이트 일자, 담당자)와 버전 히스토리가 누락됨.",
+        "다국어 지원이나 접근성(예: 이미지 대체 텍스트) 관련 언급이 없음."
+      ],
+      "aiSuggestions": [
+        "문서를 전체적으로 검토하여 누락된 부분을 보완하고, 현재 제공된 3000자 이후 내용도 포함시켜 완전한 문서로 완성한다.",
+        "모든 외부 링크를 검증하고, 마크다운 표준에 맞게 `[텍스트](URL)` 형식으로統一한다.",
+        "API 폐기 정책 섹션을 추가하고, 실제 deprecation 일정·버전 관리 표를 제공한다.",
+        "CI 연계 자동화 예시를 구체적으로 제시하고, `api-review` 체크를 설정하는 YAML 스니펫과 스크린샷을 삽입한다.",
+        "위키 스타일 가이드에 맞춰 메타데이터(작성일, 업데이트 일자, 담당자), 목차, 헤더 레벨을 정리한다.",
+        "표를 시각적으로 구분하기 위해 마크다운 테이블에 정렬 및 강조(볼드) 등을 적용하고, 필요 시 다이어그램(플로우 차트)으로 워크플로우를 보강한다.",
+        "문서 하단에 ‘변경 로그’ 섹션을 두어 주요 업데이트 내역을 기록하고, 버전 번호를 명시한다.",
+        "다국어 번역 가이드를 포함하고, 이미지·다이어그램에 alt 텍스트를 제공하여 접근성을 향상시킨다."
+      ],
+      "suggestedTitle": "SIG Architecture API Governance – 위키 유지보수 가이드 (2026 최신 업데이트)"
+    },
+    {
+      "slug": "kubernetes/cgroup-migration",
+      "title": "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드",
+      "structuralIssues": [
+        "깨진 관련문서 참조: node-readiness-controller.md",
+        "깨진 관련문서 참조: ingress-nginx-deprecation-guide.md",
+        "깨진 관련문서 참조: release-notes.md"
+      ],
+      "severity": "high",
+      "aiScore": 78,
+      "freshness": "current",
+      "aiIssues": [
+        "새로운 변환 공식의 실제 수식이 문서에 명시되지 않아 독자가 직접 확인해야 함",
+        "마이그레이션 절차가 개요 수준에 머물고 구체적인 단계(예: kubelet 설정 변경, CRI‑Shim 업데이트, 재시작 순서 등)가 부족함",
+        "지원되는 Kubernetes 버전 및 cgroup v2 커널 요구사항에 대한 호환성 매트릭스가 없음",
+        "트러블슈팅 가이드(예: weight 적용 확인 방법, 예상 오류 및 해결책)가 부재",
+        "예시 명령어나 매니페스트가 제한적이며, 실제 적용 시 검증 방법이 제시되지 않음",
+        "외부 링크(블로그, GitHub 이슈) URL이 텍스트만 제공돼 클릭 가능한 하이퍼링크가 없고, 접근성 검증이 필요함",
+        "보안·권한 관련 고려사항(예: cgroup 파일 권한, rootless 환경 지원) 언급이 없음"
+      ],
+      "aiSuggestions": [
+        "새로운 변환 공식의 완전한 수식을 문서에 직접 삽입하고, 수식 유도 과정을 간단히 설명",
+        "‘마이그레이션 단계’ 섹션을 추가하여 kubelet 플래그, CRI‑Shim 업데이트, 노드 재시작 순서, 적용 확인 명령어 등을 단계별로 제시",
+        "지원되는 Kubernetes 릴리즈와 최소 커널 버전을 표 형태로 정리하여 호환성 정보를 제공",
+        "‘트러블슈팅’ 섹션을 만들어 weight 적용 확인(`cat /sys/fs/cgroup/.../cpu.weight`), 예상 오류(예: weight 범위 초과) 및 해결 방안 제시",
+        "예시 YAML 매니페스트와 `kubectl` 명령어를 포함해 실제 워크로드에 적용하는 방법을 구체화",
+        "외부 참고 자료를 하이퍼링크 형태로 삽입하고, 접근 가능한 URL 검증을 수행",
+        "cgroup 파일 권한, rootless 쿠버네티스, 보안 프로파일 등 보안·운영 고려사항을 별도 섹션에 추가"
+      ],
+      "suggestedTitle": "cgroup v1 CPU Shares → cgroup v2 CPU Weight 변환 공식 및 마이그레이션 가이드 (2026 최신 업데이트)"
+    },
+    {
+      "slug": "kubernetes/release-notes",
+      "title": "Kubernetes 버전별 릴리즈 노트",
+      "structuralIssues": [
+        "깨진 관련문서 참조: api-governance.md",
+        "깨진 관련문서 참조: node-readiness-controller.md",
+        "깨진 관련문서 참조: cgroup-migration.md",
+        "깨진 관련문서 참조: ingress-nginx-deprecation-guide.md"
+      ],
+      "severity": "high",
+      "aiScore": 70,
+      "freshness": "current",
+      "aiIssues": [
+        "v1.23‑v1.25에 대한 내용이 전혀 없으며, 실제 문서가 1006단어라면 일부가 누락된 것으로 보임",
+        "버전별 날짜가 ‘xx’ 로 표시돼 정확한 릴리즈 일자를 알 수 없음",
+        "v1.34와 v1.35가 동일한 날짜(2026‑02‑10)로 표기돼 실제 릴리즈 일정과 충돌 가능성",
+        "공식 릴리즈 노트에 대한 하이퍼링크나 출처가 제공되지 않음",
+        "Markdown 형식이 일관되지 않아 가독성이 떨어짐 (예: 헤더 레벨, 리스트 들여쓰기 등)",
+        "Deprecated 항목에 ‘예정’이라고만 적혀 있어 실제 폐기 시점이 명시되지 않음",
+        "‘새로운 API’, ‘보안’, ‘성능’ 등 카테고리 구분이 일부 버전에서만 사용돼 일관성 부족",
+        "문서가 5줄 이내 요약이라는 목표와 실제 각 버전마다 5줄을 초과하는 내용이 혼재",
+        "버전 번호와 릴리즈 날짜 사이에 공백이 없거나 잘못된 형식이 있음 (예: v1.33 (2025‑12‑xx))"
+      ],
+      "aiSuggestions": [
+        "v1.23부터 v1.35까지 모든 마이너 릴리즈를 포함한 완전한 리스트를 제공하고, 각 버전마다 5줄 이내 요약을 엄격히 적용",
+        "‘xx’ 로 표시된 날짜를 실제 릴리즈 날짜로 교체하고, 동일 날짜가 겹치지 않도록 검증",
+        "각 버전 항목에 공식 Kubernetes 릴리즈 노트 URL을 하이퍼링크 형태로 삽입하여 출처를 명시",
+        "Markdown 헤더와 리스트 스타일을 일관되게 적용하고, 목차를 추가해 빠른 탐색이 가능하도록 구성",
+        "Deprecated 항목에 정확한 폐기 일정과 대체 API를 명시하고, ‘예정’ 대신 ‘폐기 예정일’을 표기",
+        "‘새로운 API’, ‘보안’, ‘성능’, ‘기타’ 등 카테고리를 모든 버전에 동일하게 적용해 일관성 유지",
+        "문서 서두에 ‘이 문서는 각 버전별 주요 변경 사항을 5줄 이내로 요약한다’는 목표를 명확히 하고, 실제 내용이 목표와 일치하도록 편집",
+        "버전별 요약 뒤에 ‘자세히 보기’ 섹션을 두어 주요 변경 사항에 대한 간략한 설명과 링크를 제공"
+      ],
+      "suggestedTitle": "Kubernetes v1.23‑v1.35 Release Notes Overview"
+    },
+    {
+      "slug": "projects/openclaw-complete-guide",
+      "title": "OpenClaw 완벽 가이드",
+      "structuralIssues": [
+        "깨진 관련문서 참조: moltbook-intro.md",
+        "깨진 관련문서 참조: multi-agent-system.md"
+      ],
+      "severity": "high",
+      "aiScore": 78,
+      "freshness": "current",
+      "aiIssues": [
+        "문서가 3000자까지만 제공돼 전체 내용이 누락되어 있어 완전성을 판단하기 어렵습니다.",
+        "몇몇 문장이 중간에 끊겨 있어(예: \"로컬 모델 지원\" 섹션) 가독성이 떨어집니다.",
+        "표와 코드 블록에 대한 설명이 부족해 초보자가 이해하기 힘듭니다.",
+        "통계(스타, 포크, 커밋 수)가 2026‑02‑10 기준이지만, 실제 레포지토리 수치는 빠르게 변할 수 있어 자동 업데이트 메커니즘이 언급되지 않았습니다.",
+        "보안·인증 섹션에서 토큰 저장 방법이 환경 변수만 언급돼 있어 파일 기반 비밀 관리(예: .env, HashiCorp Vault) 옵션이 빠져 있습니다.",
+        "플러그인 개발 가이드가 ‘register() 함수만 구현하면’이라고만 적히고, 구체적인 인터페이스 시그니처가 제공되지 않아 실습에 어려움이 있습니다.",
+        "Markdown 형식이 일관되지 않아(예: 헤더 레벨, 인용구, 리스트) 렌더링 시 레이아웃이 깨질 수 있습니다."
+      ],
+      "aiSuggestions": [
+        "문서 전체를 포함하도록 하여 누락된 섹션(예: 설치, 배포, 트러블슈팅)을 보완하고, 각 섹션에 목차를 추가해 탐색성을 높이세요.",
+        "중간에 끊긴 문장을 완성하고, 모든 코드 블록·표에 설명을 붙여 독자가 바로 실행해볼 수 있게 하세요.",
+        "통계 수치를 자동으로 최신 GitHub API와 동기화하도록 스크립트를 삽입하거나, ‘2026‑02‑10 기준’과 같은 날짜 표기를 명시해 최신성을 유지하세요.",
+        "보안 섹션에 환경 변수 외에 .env 파일, secret manager, 파일 권한 설정 등 다양한 비밀 관리 방법을 추가하고, 최소 권한 원칙(least‑privilege) 예시를 제공하세요.",
+        "플러그인 인터페이스 정의(TypeScript 혹은 JSDoc)와 샘플 구현 코드를 포함해 개발자가 바로 따라 할 수 있게 하세요.",
+        "Markdown 스타일 가이드를 적용해 헤더 레벨, 리스트, 인용구, 코드 블록을 일관되게 포맷하고, 문서 전체에 자동 lint 도구(예: markdownlint) 적용을 권장하세요.",
+        "‘로드맵’·‘FAQ·‘트러블슈팅’ 섹션을 추가해 사용자가 흔히 겪는 문제와 향후 기능 계획을 한눈에 파악할 수 있게 하세요."
+      ],
+      "suggestedTitle": "OpenClaw 완전 가이드: 최신 설치·설정·플러그인 개발 매뉴얼"
+    },
+    {
+      "slug": "projects/claude-code-release-history",
+      "title": "Claude Code 릴리즈 히스토리 상세 가이드",
+      "structuralIssues": [
+        "깨진 관련문서 참조: opencode.md",
+        "깨진 관련문서 참조: mcp-model-context-protocol.md",
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md",
+        "깨진 관련문서 참조: continuous-ai.md"
+      ],
+      "severity": "high",
+      "aiScore": 78,
+      "freshness": "current",
+      "aiIssues": [
+        "일부 릴리즈 날짜에 ‘*’ 표시가 있어 정확성 검증이 필요함 (예: v0.1‑v0.3).",
+        "버전 표에 누락된 항목이 있음 – v2.0 이후 마이너·패치 전체 리스트가 불완전함.",
+        "‘추가 조사가 필요합니다’ 라는 메모가 그대로 남아 있어 문서가 완결되지 않음.",
+        "GitHub 릴리즈 페이지에 대한 하이퍼링크가 텍스트만 제공돼 클릭 가능한 링크가 없음.",
+        "업그레이드/다운그레이드 절차, 마이그레이션 가이드, 호환성 주의사항이 부재함.",
+        "주요 기능·제한 사항에 대한 구체적인 코드 예시·CLI 사용 예시가 부족함.",
+        "‘영향도’ 컬럼에 ★ 표시만 사용돼 의미가 모호함 – 등급 정의가 필요함.",
+        "문서 전반에 걸쳐 표 형식이 일관되지 않아 가독성이 떨어짐 (예: 표 경계선, 정렬).",
+        "버전별 주요 변경점에 대한 요약(Breaking Changes)과 알려진 이슈 섹션이 없음.",
+        "라이선스, 지원 정책, 커뮤니티 링크 등 부가 정보가 누락됨."
+      ],
+      "aiSuggestions": [
+        "모든 릴리즈 날짜와 내용은 공식 GitHub 릴리즈 노트와 교차 검증하고, * 표시를 제거하거나 정확한 출처를 명시한다.",
+        "v2.0 이후 모든 마이너·패치 버전을 표에 포함하고, 각 버전별 주요 변경점과 버그 수정 내역을 간략히 요약한다.",
+        "‘추가 조사가 필요합니다’와 같은 메모를 제거하고, 조사 결과를 반영한 최종 내용을 제공한다.",
+        "GitHub 릴리즈 페이지, 문서 저장소, 지원 포럼 등 외부 리소스에 대한 클릭 가능한 하이퍼링크를 삽입한다.",
+        "버전 업그레이드/다운그레이드 절차, 마이그레이션 가이드, 호환성 주의사항을 별도 섹션으로 추가한다.",
+        "주요 CLI 명령어와 옵션에 대한 사용 예시·샘플 코드를 삽입해 실무 적용성을 높인다.",
+        "‘영향도’ 컬럼에 ★ 등급 정의를 문서 앞부분에 명시하거나, 숫자·텍스트 형태(예: High/Medium/Low)로 바꾼다.",
+        "표 스타일을 통일하고, Markdown 표 렌더링이 깔끔히 보이도록 정렬 및 구분선을 일관되게 적용한다.",
+        "각 버전별 ‘Breaking Changes’와 ‘Known Issues’를 별도 열에 표시하거나, 하단에 요약 섹션을 만든다.",
+        "문서 말미에 라이선스 정보, 지원 채널, 커뮤니티·포럼 링크, 최신 업데이트 알림 배지를 추가한다."
+      ],
+      "suggestedTitle": "Claude Code 릴리즈 히스토리 및 업그레이드 가이드"
+    },
+    {
+      "slug": "projects/opencode",
+      "title": "Opencode에 대해",
+      "structuralIssues": [
+        "깨진 관련문서 참조: claude-code-release-history.md",
+        "깨진 관련문서 참조: continuous-ai-agentic-ci.md",
+        "깨진 관련문서 참조: continuous-ai.md",
+        "깨진 관련문서 참조: mcp-model-context-protocol.md"
+      ],
+      "severity": "high",
+      "aiScore": 65,
+      "freshness": "aging",
+      "aiIssues": [
+        "문서에 여러 ‘추가 조사 필요’ 표시가 남아 있어 핵심 정보(지원 언어 목록, 암호화 방식, 최신 가격표 등)가 누락되어 있음",
+        "발표일·버전·리비전 정보가 없으며, 최신 업데이트 일자를 명시하지 않아 문서의 최신성을 판단하기 어려움",
+        "가격·라이선스 정책이 구체적이지 않고, 변동 가능성이 높은 수치를 제시하고 있어 실제 서비스와 차이가 있을 수 있음",
+        "보안·인증 섹션에 구체적인 암호화 알고리즘, 데이터 보관 기간, GDPR/한국 개인정보보호법 준수 여부 등 상세 내용이 부족함",
+        "지원 언어·플랫폼에 대한 정확한 리스트와 각 언어별 지원 수준(자동 완성, 정적 분석 등)이 명시되지 않음",
+        "외부 참고 자료·링크·API 문서 등 근거 자료가 전혀 제공되지 않아 신뢰성이 낮음",
+        "표와 코드 예시가 제한적이며, 실제 사용 예시(CLI 명령어 출력, IDE 플러그인 UI 스크린샷 등)가 없어 실무 적용성을 판단하기 어려움"
+      ],
+      "aiSuggestions": [
+        "문서 상단에 ‘작성일/최종 업데이트일’과 현재 버전을 명시하여 최신성을 명확히 표시한다.",
+        "‘추가 조사 필요’ 항목을 모두 조사·보완하고, 정확한 지원 언어 리스트와 각 언어별 기능 지원 수준을 표 형태로 정리한다.",
+        "가격·라이선스 섹션에 최신 공식 가격표와 플랜별 상세 조건(예: 라인당 비용, SLA 수준, 엔터프라이즈 계약 조건 등)을 포함한다.",
+        "보안·인증 파트에 사용되는 암호화 알고리즘(TLS 1.3, AES‑256 등), 데이터 보관 정책, 개인정보 보호 규정 준수 여부 등을 구체적으로 기술한다.",
+        "외부 문서·공식 홈페이지·API 레퍼런스 등에 대한 하이퍼링크를 삽입하고, 주요 주장에 대한 출처를 각주 형태로 명시한다.",
+        "CLI 사용 예시, IDE 플러그인 UI 스크린샷, 플러그인 개발 예제 코드 등 실전 예시를 추가해 독자가 바로 적용해볼 수 있도록 한다.",
+        "비교 표(예: Opencode vs. Claude Code)에서 성능 지표(응답 시간, 정확도, 토큰당 비용 등)와 테스트 환경을 명시하여 객관성을 높인다.",
+        "문서 전체에 일관된 용어 정의와 약어 설명을 제공하고, ‘AI 모델 기반’, ‘플러그인 프레임워크’ 등 핵심 개념에 대한 별도 섹션을 두어 이해도를 높인다."
+      ],
+      "suggestedTitle": "Opencode 제품 개요 및 기능 상세 – 최신 정보와 실무 적용 가이드"
+    },
+    {
+      "slug": "projects/sepilot-desktop-intro",
+      "title": "SEPilot Desktop 소개",
+      "structuralIssues": [
+        "깨진 관련문서 참조: sepilot-technology-stack.md"
+      ],
+      "severity": "high",
+      "aiScore": 70,
+      "freshness": "current",
+      "aiIssues": [
+        "문서가 중간에 끊겨 있어 백엔드 스택 및 이후 내용이 누락됨",
+        "설치·시작 가이드, 시스템 요구사항, 라이선스 정보가 없음",
+        "기여 방법·컨트리뷰션 가이드가 포함되지 않음",
+        "버전·작성 일자와 같은 메타데이터가 명시되지 않아 최신성을 판단하기 어려움",
+        "링크가 외부 URL만 제공되고, 로컬 파일(예: assets/videos/…)에 대한 접근 방법이 설명되지 않음",
+        "섹션 간 구분이 충분히 명확하지 않아 가독성이 다소 떨어짐",
+        "기술 스택 리스트가 “백엔드”에서 멈추어 불완전함"
+      ],
+      "aiSuggestions": [
+        "문서를 완전하게 마무리하고 ‘백엔드’ 섹션을 채워 기술 스택을 명시",
+        "설치·시작 가이드(Prerequisites, Installation Steps, First‑Run)와 시스템 요구사항을 추가",
+        "문서 상단에 버전 번호와 작성·최종 업데이트 날짜를 명시해 최신성을 보장",
+        "오픈소스 프로젝트이므로 LICENSE, CONTRIBUTING, CODE OF CONDUCT 섹션을 포함",
+        "외부 링크와 로컬 파일(데모 영상, 이미지) 접근 방법을 명확히 안내하고, 가능한 경우 썸네일·스크린샷을 삽입",
+        "목차(Table of Contents)와 각 섹션에 고유 ID를 부여해 탐색성을 향상",
+        "용어·약어(예: MCP, RAG, LangGraph) 정의를 별도 용어집에 정리",
+        "문서 전반에 걸쳐 일관된 언어(한국어 혹은 영어) 사용을 검토"
+      ],
+      "suggestedTitle": "SEPilot Desktop: Feature Overview, Installation & Contribution Guide"
+    }
+  ]
+}
