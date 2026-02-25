@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "33f3eff6-ac91-4b60-af1a-189a28db0099",
+      "timestamp": "2026-02-25T18:31:57.695Z",
+      "actionType": "quality_score",
+      "issueNumber": 308,
+      "issueTitle": " [요청] Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide",
+      "documentSlug": "docker/open-webui-docker-model-runner-self-hosted-llm-dep",
+      "documentTitle": " [요청] Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide",
+      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "c5b728f4-ab03-4952-a2fd-4fbbcf0fe73e",
+      "timestamp": "2026-02-25T18:31:46.328Z",
+      "actionType": "quality_score",
+      "issueNumber": 309,
+      "issueTitle": " [요청] AI Productivity Paradox – Why Developer Throughput May Stagnate",
+      "documentSlug": "ai/ai-productivity-paradox-why-developer-throughput-m",
+      "documentTitle": " [요청] AI Productivity Paradox – Why Developer Throughput May Stagnate",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "4eb0045c-977a-494b-b6f3-410f42017e58",
+      "timestamp": "2026-02-25T18:31:34.597Z",
+      "actionType": "quality_score",
+      "issueNumber": 310,
+      "issueTitle": " [요청] Jira AI Agents – Integrating Generative AI into Project Management Workflows",
+      "documentSlug": "jira-ai-agents-integrating-generative-ai-into-proj",
+      "documentTitle": " [요청] Jira AI Agents – Integrating Generative AI into Project Management Workflows",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "5b2eb0c8-5550-4d7d-b7b4-513f8c2d2fbf",
+      "timestamp": "2026-02-25T18:31:11.423Z",
+      "actionType": "generate",
+      "issueNumber": 308,
+      "issueTitle": " [요청] Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide",
+      "documentSlug": "docker/open-webui-docker-model-runner-self-hosted-llm-dep",
+      "documentTitle": "Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide",
+      "summary": "새 문서 \"Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4823
+            },
+            {
+              "step": "outline",
+              "durationMs": 13145
+            },
+            {
+              "step": "write",
+              "durationMs": 37303
+            },
+            {
+              "step": "review",
+              "durationMs": 6137
+            }
+          ],
+          "totalDurationMs": 61408,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2829,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "2b6a4ddb-c3d0-46fd-96ca-0421814cbea5",
+      "timestamp": "2026-02-25T18:29:54.885Z",
+      "actionType": "generate",
+      "issueNumber": 309,
+      "issueTitle": " [요청] AI Productivity Paradox – Why Developer Throughput May Stagnate",
+      "documentSlug": "ai/ai-productivity-paradox-why-developer-throughput-m",
+      "documentTitle": "AI 생산성 역설 – 개발자 처리량 정체 원인 분석",
+      "summary": "새 문서 \"AI 생산성 역설 – 개발자 처리량 정체 원인 분석\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3982
+            },
+            {
+              "step": "outline",
+              "durationMs": 7409
+            },
+            {
+              "step": "write",
+              "durationMs": 17500
+            },
+            {
+              "step": "review",
+              "durationMs": 8066
+            }
+          ],
+          "totalDurationMs": 36958,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1648,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "cd16b111-3ce3-44e0-98d8-2a22b5f9fc10",
+      "timestamp": "2026-02-25T18:28:58.779Z",
+      "actionType": "generate",
+      "issueNumber": 310,
+      "issueTitle": " [요청] Jira AI Agents – Integrating Generative AI into Project Management Workflows",
+      "documentSlug": "jira-ai-agents-integrating-generative-ai-into-proj",
+      "documentTitle": "Jira AI Agents – Generative AI를 프로젝트 관리 워크플로에 통합하기",
+      "summary": "새 문서 \"Jira AI Agents – Generative AI를 프로젝트 관리 워크플로에 통합하기\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5356
+            },
+            {
+              "step": "outline",
+              "durationMs": 11529
+            },
+            {
+              "step": "write",
+              "durationMs": 34096
+            },
+            {
+              "step": "review",
+              "durationMs": 7285
+            }
+          ],
+          "totalDurationMs": 58266,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 2645,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "daa67b35-3da6-4d24-8f13-747f78faace2",
       "timestamp": "2026-02-25T18:25:46.851Z",
       "actionType": "maintain",
@@ -6018,5 +6195,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-25T18:25:46.851Z"
+  "lastUpdated": "2026-02-25T18:31:57.695Z"
 }

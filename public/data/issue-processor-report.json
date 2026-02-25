@@ -1,9 +1,25 @@
 {
-  "timestamp": "2026-02-25T17:47:48.755Z",
+  "timestamp": "2026-02-25T18:32:00.498Z",
   "dryRun": false,
-  "totalIssuesScanned": 7,
+  "totalIssuesScanned": 11,
   "categories": {
-    "draft_review": [],
+    "draft_review": [
+      {
+        "number": 310,
+        "title": " [요청] Jira AI Agents – Integrating Generative AI into Project Management Workflows",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 309,
+        "title": " [요청] AI Productivity Paradox – Why Developer Throughput May Stagnate",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 308,
+        "title": " [요청] Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide",
+        "daysSinceUpdate": 0
+      }
+    ],
     "maintenance": [
       {
         "number": 300,
@@ -41,11 +57,64 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 306,
+        "title": " [업데이트] GitOps Implementation with Terraform – Large‑Scale Cloud Automation",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 310,
+      "title": " [요청] Jira AI Agents – Integrating Generative AI into Project Management Workflows"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 309,
+      "title": " [요청] AI Productivity Paradox – Why Developer Throughput May Stagnate"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 308,
+      "title": " [요청] Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 307,
+      "title": " [업데이트] DevSecOps – Supply‑Chain Attacks via Malicious NuGet & npm Packages"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 306,
+      "title": " [업데이트] GitOps Implementation with Terraform – Large‑Scale Cloud Automation"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 310,
+      "title": " [요청] Jira AI Agents – Integrating Generative AI into Project Management Workflows",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/jira-ai-agents-integrating-generative-ai-into-proj.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 309,
+      "title": " [요청] AI Productivity Paradox – Why Developer Throughput May Stagnate",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai-productivity-paradox-why-developer-throughput-m.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 308,
+      "title": " [요청] Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide",
+      "score": 86,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/docker/open-webui-docker-model-runner-self-hosted-llm-dep.md"
+    }
+  ],
+  "actionCount": 8,
   "maxActions": 60
 }
