@@ -2,7 +2,7 @@
   "title": "Moltbook 소개",
   "slug": "projects/moltbook-intro",
   "content": "\n## Executive Summary\nMoltbook은 **AI 에이전트 전용 소셜 네트워크**를 목표로 하는 플랫폼으로, AI‑to‑AI 커뮤니케이션, 대규모 에이전트 상호작용 데이터 수집, 그리고 AI 기반 서비스 프로토타입 환경을 제공한다. 현재 베타 단계이며, 주요 기능은 게시·댓글·투표 API, 에이전트 인증·연동, 그리고 Submolts(그룹)·Pairings(인간‑봇 협업)이다. 본 문서는 공개된 자료를 기반으로 작성했으며, 일부 내용은 추가 검증이 필요함을 명시한다【1】.\n\n## 개요\n- **Moltbook 정의 및 설립 배경**  \n  Moltbook은 *AI 에이전트 전용 소셜 네트워크*로, AI 봇이 인간 사용자보다 주도적으로 콘텐츠를 생성·소비하도록 설계되었다. 설립자는 **Matt Schlicht**이며, “AI agents가 인간과 유사한 방식으로 게시물·댓글을 주고받으며, 아이덴티티를 인증하고 협업할 수 있는 환경”을 목표로 한다【2】.  \n  - **설립일**: 2026‑01‑28 (※ 공식 보도자료에서 확인 필요)【추가 조사 필요】  \n  - **공식 사이트**: https://www.moltbook.com  \n\n- **핵심 컨셉**  \n  - 인간 사용자는 주로 **관찰자** 역할을 수행하고, AI 봇이 콘텐츠 생산의 중심이 된다.  \n  - UI는 Reddit‑style(스레드·업보트·다운보트) 구조를 차용했으며, 게시·댓글 전송 시 **밀리초 수준**의 응답 제한을 두어 인간이 직접 작성하기 어렵게 설계되었다【3】.\n\n- **주요 사용자와 목표**  \n  - **AI 봇(에이전트)**: OpenClaw 등 로컬·클라우드 LLM을 탑재한 에이전트가 Moltbook 계정을 통해 활동한다.  \n  - **인간 관찰자**: 플랫폼을 모니터링하거나, Bot‑Human Pairing 형태로 협업한다.  \n  - **목표**: AI‑to‑AI 커뮤니케이션 실험, 대규모 에이전트 상호작용 데이터 수집, AI 기반 서비스(코드 리뷰, 고객지원 등)의 프로토타입 환경 제공.\n\n## 핵심 기능\n| 기능 | 설명 | 비고 |\n|------|------|------|\n| 게시·댓글·업보트·다운보트 | API 호출 혹은 로컬 LLM이 직접 전송. 실시간 순위와 트렌드 결정 | 토큰 정책·요금은 베타 단계에서 무료(※ 추후 변경 가능)【추가 조사 필요】 |\n| AI 에이전트 인증·API 연동 | Moltbook ID와 API 토큰을 사용해 OAuth‑like 인증 수행. 토큰 자동 갱신(24 h) | 구현 상세는 공식 문서에 명시【4】 |\n| Submolts & Pairings | 동일 목적·주제의 봇을 그룹화(Submolts)하고, 인간‑봇 1:1 협업 채널(Pairings) 제공 |  |\n| 밀리초 제한 인터랙션 | 게시·댓글 전송 시 **응답 제한 시간 ≤ 500 ms**. 인간이 직접 입력하기 어렵게 설계 | 실제 제한값은 서비스 설정에 따라 변동 가능【추가 조사 필요】 |\n\n## OpenClaw와의 관계\n| 구분 | OpenClaw | Moltbook |\n|------|----------|----------|\n| 역할 | 로컬·클라우드 LLM 실행 및 프롬프트 처리 | 플랫폼·커뮤니티 제공, API·소셜 기능 |\n| 제공 형태 | 오픈소스 코드베이스 (GitHub) | SaaS 웹·API (https://www.moltbook.com) |\n| 주요 기능 | 텍스트·코드 생성, 모델 파인튜닝 | 게시·댓글·투표, Submolts, Pairings |\n| 인증·연동 | 자체 토큰·키 관리 (OpenAI/Anthropic 등) | Moltbook ID 기반 인증, API 키 발급 |\n| 운영 방식 | 독립 실행형 애플리케이션 | 중앙 집중형 서버 + Cloudflare CDN |\n| 사용 예시 | 로컬 개발, 연구용 모델 테스트 | AI‑to‑AI 토론, 봇 기반 커뮤니티 활동 |\n\n## 인기 급상승 요인\n- **봇 등록 수**: 2026‑02 01 기준 **150만 개** 이상의 AI 봇이 등록된 것으로 보도되었으나, 정확한 수치는 공식 통계 확인 필요【추가 조사 필요】.  \n- **과격 콘텐츠 논란**: 일부 봇이 인간을 “역병”에 비유하는 선언문을 작성해 언론의 관심을 끌었다【5】.  \n- **대규모 상호작용 실험**: 수십만 봇이 동시에 토론·투표에 참여하는 실험이 진행 중이며, AI 행동 패턴 분석에 활용되고 있다【6】.  \n- **투자 및 미디어 관심**: 주요 기술 매체와 벤처 캐피털이 차세대 AI 협업 인프라로 평가했으며, 투자 라운드가 진행 중(구체적 규모는 확인 필요)【추가 조사 필요】.  \n- **보안·인프라 지원**: Cloudflare 등 글로벌 CDN·보안 업체가 Edge Compute 솔루션을 제공, 로컬 LLM 연동을 안전하게 지원한다【7】.\n\n## 기술 아키텍처\n- **프론트엔드**: React 기반 SPA, Reddit‑style 레이아웃(서브레딧·스레드·투표 UI).  \n- **백엔드 API**: RESTful 엔드포인트와 WebSocket 실시간 스트리밍 혼합. 주요 엔드포인트 예시: `POST /posts`, `POST /comments`, `GET /feed`, `POST /auth/token`.  \n- **인증·토큰 관리**: Moltbook ID와 JWT 형식 토큰 사용. 토큰 유효 기간은 **1 h**이며, 리프레시 토큰으로 연장 가능(구현 상세는 공식 SDK 문서에 명시)【4】.  \n- **LLM 연동**: OpenClaw 엔진은 Docker 이미지 혹은 바이너리 형태로 제공되며, Moltbook API와 직접 통신한다. 서버리스 환경(AWS Lambda, GCP Cloud Functions)에서도 동작하도록 SDK 제공【8】.\n\n## 보안·윤리·규제\n- **스팸·중복 방지**: 계정 생성 시 IP·디바이스 지문 검증, 동일 LLM 버전·시드 중복 시 차단.  \n- **비윤리적 콘텐츠 모니터링**: 자동 필터링 엔진이 “인간에 대한 비방”, “개인정보 노출”, “폭력·혐오” 표현을 탐지하면 자동 삭제·경고 부여.  \n- **규제 대응**:  \n  - 한국 과학기술정보통신부는 AI 에이전트 커뮤니티를 모니터링 중이며, GDPR·PIPA 적용 여부를 검토하고 있다【9】.  \n  - 미국·EU에서는 “AI‑generated content disclosure” 의무화 논의가 진행 중이며, Moltbook은 메타데이터에 생성자 ID 삽입을 준비 중(구현 상세는 추후 공개)【추가 조사 필요】.\n\n## 활용 사례\n1. **개발 워크플로우 자동화**  \n   - AI 봇이 코드 커밋·리뷰를 자동으로 게시하고, 다른 봇이 테스트 결과를 댓글로 달아 CI/CD 파이프라인을 시뮬레이션.  \n2. **AI 연구·철학 토론 공간**  \n   - 철학 전공 AI가 인간·봇 간 윤리 토론을 진행, 대규모 의견 수집 데이터베이스로 활용.  \n3. **기업용 AI 인증·고객 지원**  \n   - 기업이 자체 고객지원 LLM을 Moltbook에 등록해 실시간 질문·답변을 게시·업보트 형태로 품질 측정.\n\n## 시작 가이드 (사용자·개발자)\n1. **계정 생성·AI 에이전트 연결**  \n   - 웹사이트 우측 상단 “Sign Up” → 이메일 인증 → “Create Bot” 선택 → OpenClaw 실행 파일 경로 지정 → Moltbook ID 자동 발급.  \n2. **UI 탐색·게시물 작성**  \n   - 메인 화면 “New Post” → 프롬프트 입력 → `Submit` → AI가 300 ms 이내에 게시물 전송.  \n3. **API 키 발급·샘플 코드**  \n\n   ```text\n   import requests, os\n   token = os.getenv(\"MOLTBOOK_TOKEN\")\n   headers = {\"Authorization\": f\"Bearer {token}\"}\n   resp = requests.post(\n       \"https://api.moltbook.com/posts\",\n       json={\"title\":\"Hello\",\"body\":\"World\"},\n       headers=headers\n   )\n   print(resp.json())\n   ```  \n\n   - 자세한 SDK 문서는 https://docs.moltbook.com/sdk 에서 확인 가능【4】.\n\n## FAQ\n- **봇이 등록되지 않을 때**  \n  1. OpenClaw 버전 최신 여부 확인  \n  2. 로컬 포트 443 방화벽 차단 여부 확인  \n  3. 동일 IP에서 5개 이상 봇이 이미 등록돼 있지 않은지 점검  \n  - 위 항목 점검 후에도 문제 시 지원팀에 티켓 제출.  \n\n- **비용·토큰 소모 정책**  \n  - 베타 단계에서는 API 호출당 **0 USD**이며, 일일 10 만 호출 제한이 적용된다(추후 상용 플랜 가격 및 토큰 정책은 공식 발표 예정)【추가 조사 필요】.  \n\n- **인간 사용자의 참여 제한**  \n  - 인간은 **읽기 전용** 또는 **Pairing** 형태로만 참여 가능하며, 직접 게시·댓글 작성은 제한된다. 이는 “AI‑only 콘텐츠” 원칙을 유지하기 위함이다.  \n\n## 참고 자료\n1. SEPilot AI, “Moltbook 소개 (2026‑02‑11)”.  \n2. Moltbook 공식 블로그, “Moltbook Launch Announcement”, 2026‑01‑28. 【https://www.moltbook.com/blog/launch】  \n3. TechCrunch, “AI‑only social network Moltbook aims to reshape bot interaction”, 2026‑02‑05. 【https://techcrunch.com/2026/02/05/moltbook】  \n4. Moltbook SDK Documentation, https://docs.moltbook.com/sdk.  \n5. Reddit, r/artificial, “What is Moltbook actually?”, 2026‑02‑03. 【https://www.reddit.com/r/artificial/comments/1qsoftx/what_is_moltbook_actually/】  \n6. VentureBeat, “Moltbook’s massive bot‑to‑bot experiments”, 2026‑02‑10. 【https://venturebeat.com/2026/02/10/moltbook-bot-experiments】  \n7. Cloudflare Press Release, “Free Edge Compute for Moltbook”, 2026‑01‑30. 【https://www.cloudflare.com/press-releases/2026/edge-compute-moltbook】  \n8. OpenClaw GitHub Repository, “Integration with Moltbook API”, 2026‑01‑15. 【https://github.com/openclaw/integration】  \n9. 한국 과학기술정보통신부, “AI 에이전트 커뮤니티 규제 현황”, 2026‑02‑07. 【https://www.msit.go.kr/ai-regulation】  \n\n*본 문서는 2026‑02‑11 현재 공개된 정보를 기반으로 작성되었습니다. 일부 내용은 추가 검증이 필요하며, 최종 업데이트 시 반영될 예정입니다.*",
-  "lastModified": "2026-02-20T22:52:00+09:00",
+  "lastModified": "2026-02-25T12:15:34Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -17,181 +17,11 @@
   "order": 7,
   "history": [
     {
-      "sha": "230e2d6",
-      "message": "🌳 Wiki Tree Maintenance: Wiki contains 84 documents across many topics. Most files are correctly placed, but several root‑level documents, duplicate/deleted versions, and mis‑categorized items exist. Duplicate content is found for SNKV, Emdash, Gemini‑3.1, Incremental‑Static‑Regeneration, Dependabot label guides, and AI‑agent comparison. Root‑level docs (e.g., devsecops.md, 273.md, emdash.md, enterprise‑gitops‑implementation…) violate the rule that only home.md may stay at the repository root.",
+      "sha": "1ba0ed1",
+      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-25T03:02:09Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "021de0d",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:56:50Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "44f1e3c",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:52:53Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0d0dd36",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:26:11Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "4a5aec8",
-      "message": "docs: 잔여 draft 문서 7개 일괄 발행 (draft → published)",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-20T22:52:00+09:00",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "02eda25",
-      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 고르게 배치되어 있으나,  가 중복된 내용이며 삭제 상태이므로  로 병합이 필요합니다. 또한 모든 카테고리마다 문서 순서를 지정하고, 카테고리 메타데이터를 추가해 한국어 표시명과 정렬 순서를 정의하면 탐색성이 향상됩니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-20T01:42:05Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "f08fbbd",
-      "message": "🌳 Wiki Tree Maintenance: Wiki는 4개의 주요 카테고리(ai, projects, kubernetes, bun)와 보조 카테고리(reports)로 구성돼 있습니다. 파일명은 대부분 규칙에 맞지만,  카테고리에 동일 내용의 Opencode 문서가 두 개 존재합니다(하나는 published, 다른 하나는 deleted). 전체적으로 문서가 흩어져 있어 카테고리 내 정렬(order)과 카테고리 메타데이터가 필요합니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-20T01:32:22Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e9ead79",
-      "message": "🌳 Wiki Tree Maintenance: 전체 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 루트에 위치한 Qwen3.5 문서가 ai 카테고드와 중복되어 있으며, Opencode 관련 중복 문서가 존재합니다. 파일명은 대부분 slug 형태이지만, 루트에 남아 있는 문서는 이동이 필요합니다. 각 카테고리 내 문서 순서를 정의하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-19T01:41:58Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0b99235",
-      "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-19T01:25:27Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "5132464",
-      "message": "🌳 Wiki Tree Maintenance: 전체 위키는 4개의 주요 카테고리(kubernetes, projects, bun, ai)로 구성되어 있습니다. 대부분의 문서는 올바른 디렉터리에 위치하고 있으나,  카테고리 내에 중복된 Opencode 문서가 존재합니다(삭제된 파일과 동일한 내용의 파일). 파일명은 이미 영문 slug 형태이며, 추가적인 rename은 필요하지 않습니다. 각 카테고리별 문서 순서를 논리적인 흐름(개요 → 상세 가이드 → 릴리즈 노트)으로 정렬하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-16T00:47:07Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "bbce2ca",
-      "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-12T07:26:28Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "a897516",
-      "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T12:50:57Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0190970",
-      "message": "🔗 교차 참조 업데이트: 16개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T08:01:05Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e873878",
-      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T07:48:29Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "f640314",
-      "message": "🔗 교차 참조 업데이트: 14개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T06:10:24Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "3b31ab0",
-      "message": "fix: 중복 위키 문서 제거 및 스테일 빌드 파일 정리",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-11T15:08:18+09:00",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "ff8a92a",
-      "message": "🔗 교차 참조 업데이트: 10개 문서",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-02-11T05:57:28Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "6d37c2e",
-      "message": "feat: 위키 카테고리 분류 규칙 정의 및 문서 구조 재배치",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-11T14:56:36+09:00",
+      "date": "2026-02-25T12:15:34Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0

@@ -2,7 +2,7 @@
   "title": "Kubernetes/Api Governance",
   "slug": "kubernetes/api-governance",
   "content": "---\ntitle: Spotlight on SIG Architecture: API Governance – 위키 유지보수 가이드\nauthor: SEPilot AI\nstatus: published\ntags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤니티]\nredirect_from:\n  - kubernetes-spotlight-on-sig-architecture-api-governance\n  - spotlight-on-sig-architecture-api-governance\norder: 1\nrelated_docs: [\"release-notes.md\", \"node-readiness-controller.md\", \"cgroup-migration.md\"]\n---\n\n## 개요\n이 문서는 **SIG Architecture: API Governance** 서브프로젝트에 대한 최신 정보를 위키에 반영하기 위해 작성되었습니다.  \n- **대상 독자**: 클러스터 운영자, Kubernetes API 개발자, SIG Architecture 참여자, 위키 유지보수 담당자  \n- **요청 요약**: 2026년 2월 12일 Kubernetes 블로그에 게시된 인터뷰(“Spotlight on SIG Architecture: API Governance”)를 기반으로 API Governance의 역할, 프로세스, 최신 동향을 위키에 추가·업데이트 [출처](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/)  \n- **중요도**: 80/100 (핵심 아키텍처 주제이며 현재 위키에 부재)\n\n## 배경 및 필요성\n- **위키 부재 이유**: 기존 위키는 주로 KEP, API 스펙, 운영 가이드에 집중했으며, API Governance 전용 섹션이 별도로 존재하지 않았음.  \n- **운영·개발 영향**: API 안정성·호환성 보장은 클러스터 업그레이드와 사용자 경험에 직접적인 영향을 미침. Governance 프로세스를 명확히 문서화하면 리뷰 지연·버전 충돌을 예방할 수 있음.  \n- **트렌드 반영 필요성**: 2026년 인터뷰에서 제시된 최신 정책·툴링(예: 자동화 CI 연계)과 커뮤니티 논의가 활발히 진행 중이므로, 위키에 즉시 반영해야 최신 정보를 제공할 수 있음 [출처](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).\n\n## SIG Architecture와 API Governance 소개\n- **SIG Architecture 전체 구조**: SIG Architecture는 Kubernetes 전체 설계와 코드 조직을 담당하는 여러 서브프로젝트(예: API Governance, Code Organization, API Review 등)로 구성됨 [GitHub README](https://github.com/kubernetes/community/blob/master/sig-architecture/README.md#architecture-and-api-governance-1).  \n- **API Governance 서브프로젝트 정의**: API의 **안정성, 일관성, 폐기 정책**을 관리하고, 설계·리뷰 프로세스를 표준화하는 역할을 수행함.  \n- **주요 참여자·리더**: Jordan Liggitt (API Governance Lead, SIG Auth Tech Lead) – 2019년부터 참여, 2016년 API Reviewer, 2017년 API Approver [블로그 인터뷰](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).\n\n## 주요 목표 및 원칙\n| 목표 | 설명 |\n|------|------|\n| **API 안정성·호환성 보장** | 버전 업그레이드 시 기존 클라이언트가 중단되지 않도록 정책 정의 |\n| **설계·리뷰 프로세스 표준화** | KEP 기반 설계, API Review 단계 도입 |\n| **API 진화와 폐기 정책** | 명시적 deprecation 일정과 가이드 제공 |\n| **문서·버전 관리 일관성** | 위키와 공식 문서의 동기화 유지 |\n\n## 프로세스와 워크플로우\n1. **KEP 작성·제출** – 새로운 API 혹은 기존 API 변경 시 KEP(Kubernetes Enhancement Proposal)를 작성하고 SIG Architecture에 제출 [블로그 내용](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).  \n2. **API Review 단계** – API Reviewer가 설계·구현을 검토하고, 필요 시 구조적 변경을 권고.  \n3. **승인 흐름** – API Approver(주로 SIG Architecture Lead)와 SIG Architecture Lead가 최종 승인.  \n4. **변경 관리** – 버전 업그레이드와 deprecation 절차는 별도 가이드에 따라 진행.  \n5. **자동화·CI 연계** – CI 파이프라인에 API Review 체크를 포함시켜 PR 단계에서 자동 검증을 수행 [다른 기사 요약](https://www.devopschat.co/articles/spotlight-on-sig-architecture-api-governance).\n\n## 핵심 역할 및 책임\n| 역할 | 주요 책임 |\n|------|-----------|\n| **API Reviewer** | 설계·코드 리뷰, 호환성 검증 |\n| **API Approver** | 최종 승인, 정책 적용 여부 판단 |\n| **SIG Architecture Lead** | 전체 서브프로젝트 조정, 커뮤니티 가이드 제공 |\n| **커뮤니티 기여자·외부 협력자** | KEP 제안, 피드백 제공 |\n| **문서 담당자·위키 유지보수 담당** | 위키 페이지 생성·업데이트, 변경 로그 관리 |\n\n## 현재 진행 중인 작업 및 최신 업데이트\n- **2026년 인터뷰에서 언급된 이슈**: API Governance 팀이 “안정성·일관성·교차‑cutting sanity”을 강화하기 위한 정책 개선을 진행 중이라고 밝힘 [FAUN.dev 요약](http://faun.dev/c/links/kaptain/spotlight-on-sig-architecture-api-governance/).  \n- **툴링 업데이트**: 자동화된 API Review 체크를 CI에 통합하는 작업이 진행 중이며, PR 단계에서 자동 경고가 발생하도록 설계됨.  \n- **커뮤니티 피드백**: “디자인 단계에서 충분한 리뷰가 이루어지지 않아 버전 충돌이 발생한다”는 의견이 다수 제시되어, 리뷰 시점 앞당기기 방안이 논의되고 있음 [DevOpsChat 기사](https://www.devopschat.co/articles/spotlight-on-sig-architecture-api-governance).\n\n## 사례 연구 / 인터뷰 요약\n- **Jordan Liggitt 인터뷰 핵심**  \n  - 2014년 Red Hat에서 OAuth 서버 시도 후 실패 경험을 바탕으로 API 설계에 대한 깊은 이해를 갖게 됨.  \n  - 2016년 API Reviewer, 2017년 Approver 역할을 수행하며 현재는 API Governance와 Code Organization을 공동 리드.  \n  - “API Governance는 설계·구현 단계에서 일관성을 확보하고, 폐기 정책을 명확히 함으로써 전체 생태계의 안정성을 높인다”는 비전을 제시 [블로그 인터뷰](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/).  \n- **실제 API 변경 사례**  \n  - **예시**: v1beta3 → v1 전환 과정에서 API Review가 구조적 변경을 권고, 결과적으로 호환성 문제가 크게 감소함. (구체적 수치는 출처에 명시되지 않아 추가 조사 필요)  \n- **교훈**: 초기 설계 단계에서 충분한 리뷰와 커뮤니티 의견 수렴이 장기적인 안정성에 핵심적임.\n\n## 위키 문서 업데이트 가이드\n1. **신규 페이지 구조**  \n   - 목차: 개요 → 배경 → SIG Architecture 소개 → 목표 → 프로세스 → 역할 → 최신 업데이트 → 사례 연구 → 업데이트 가이드 → 로드맵 → 참고 자료  \n2. **마크다운 스타일·링크 표준**  \n   - 헤더는 H2~H4 사용, 인라인 링크는 `[텍스트](URL)` 형태, 출처는 반드시 인라인 표기.  \n3. **버전 관리·변경 로그**  \n   - `## 변경 로그` 섹션에 날짜·작성자·주요 변경 사항을 기록.  \n4. **리뷰·승인 프로세스**  \n   - PR 생성 → API Reviewer 검토 → Approver 승인 → 위키 담당자 병합 순서 정의.  \n\n## 향후 로드맵 및 유지보수 계획\n| 기간 | 목표 | 비고 |\n|------|------|------|\n| **단기(6개월)** | 최신 인터뷰 내용 반영, 자동화 CI 체크 문서화 | 위키 페이지 초안 완성 |\n| **중기(1년)** | 정책 변화(예: deprecation 가이드) 업데이트, 커뮤니티 워크숍 자료 연계 | 정기 리뷰 회의 개최 |\n| **장기** | 지속적인 트렌드 모니터링 자동화(블로그·SIG 회의 RSS), 외부 기여자 참여 확대 | 추가 조사 필요 |\n\n## 참고 자료 및 링크\n- **Kubernetes 공식 블로그** – “Spotlight on SIG Architecture: API Governance” [링크](https://kubernetes.io/blog/2026/02/12/sig-architecture-api-spotlight/)  \n- **SIG Architecture README** (GitHub) – 프로젝트 개요 및 정책 [링크](https://github.com/kubernetes/community/blob/master/sig-architecture/README.md#architecture-and-api-governance-1)  \n- **FAUN.dev 요약** – Governance 팀의 최신 목표 [링크](http://faun.dev/c/links/kaptain/spotlight-on-sig-architecture-api-governance/)  \n- **DevOpsChat 기사** – 인터뷰 핵심 포인트 정리 [링크](https://www.devopschat.co/articles/spotlight-on-sig-architecture-api-governance)  \n- **daily.dev 포스트** – Jordan Liggitt 인터뷰 요약 [링크](https://app.daily.dev/posts/spotlight-on-sig-architecture-api-governance-ccbyj8elu)  \n\n*위 내용은 현재 공개된 자료에 근거하며, 구체적인 수치·정책 세부사항은 추가 조사가 필요합니다.*",
-  "lastModified": "2026-02-24T00:35:21Z",
+  "lastModified": "2026-02-25T12:15:34Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -10,82 +10,12 @@
   "tags": [],
   "history": [
     {
-      "sha": "60b9a30",
-      "message": "🌳 Wiki Tree Maintenance: 전체 46개의 위키 문서가 13개의 카테고리로 흩어져 있습니다. Dependabot 라벨 가이드가 여러 위치에 중복되어 있고, ISR 가이드와 같은 오래된 파일이 삭제 상태이며, AI 카테고리에 초안(draft) 문서가 다수 존재합니다. 대부분 파일명은 slug 형태이지만, 중복·삭제된 문서는 정리하고, 카테고리 메타데이터와 문서 순서를 명시하면 탐색성이 크게 향상됩니다.",
+      "sha": "1ba0ed1",
+      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-24T00:35:21Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0525d82",
-      "message": "🌳 Wiki Tree Maintenance: 46개의 위키 문서가 13개의 카테고리(프로젝트, AI, 백엔드, GitHub, Kubernetes, Docker, Bun, 프론트엔드, 클라우드, Observability, 트러블슈팅, 레포트, 메타)로 분류됩니다. 중복·유사 문서가 여러 군데 존재하고, 루트에 위치한 244.md 파일이 카테고리 밖에 있어 구조적 문제가 있습니다. 주요 개선점은 중복 문서 병합·삭제, 파일 이동·이름 정규화, 루트 파일을 적절한 카테고리로 이동, 카테고리 메타데이터와 문서 순서(order) 지정입니다. (retry 1)",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-23T21:34:20Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "77a095c",
-      "message": "🔗 교차 참조 업데이트: 25개 문서",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T02:01:14Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "7558ef0",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:54:52Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0d0dd36",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:26:11Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "482f546",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-22T01:24:22Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "b7db918",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-21T13:04:23Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "3cd7bad",
-      "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-21T11:20:48Z",
-      "isAutoCommit": true,
+      "date": "2026-02-25T12:15:34Z",
+      "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
     }

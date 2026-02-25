@@ -2,7 +2,7 @@
   "title": "Ollama와 Claude Code 연결 방법",
   "slug": "ai/ollama-claude-code",
   "content": "\n# Ollama와 Claude Code 연결 방법\n\n## 1. 개요\nClaude Code는 Anthropic이 제공하는 **agentic coding tool** 으로, 로컬 디렉터리의 코드를 읽고, 수정하고, 실행할 수 있습니다. Ollama는 Anthropic‑compatible API를 제공하므로, Ollama에 설치된 모델을 Claude Code와 바로 연결해 로컬에서 코딩 보조 AI를 사용할 수 있습니다. 본 가이드는 최신 Ollama Integration 문서([Claude Code – Ollama](https://docs.ollama.com/integrations/claude-code))를 기반으로 작성되었습니다.\n\n## 2. 사전 준비\n| 항목 | 권장 사양 / 도구 |\n|------|-----------------|\n| 운영 체제 | macOS 12+, Linux (Ubuntu 20.04+), Windows 10+ |\n| 하드웨어 | CPU ≥ 4 코어, 메모리 ≥ 8 GB (GPU 선택적) |\n| 필수 도구 | `curl`, `git`, 터미널 |\n| 네트워크 | 로컬 포트 **11434**(기본) 개방 여부 확인 |\n\n## 3. Ollama 설치 및 기본 설정\n1. **설치**\n   ```bash\n   curl -fsSL https://ollama.com/install.sh | sh\n   ```\n   (macOS/리눅스) 혹은 Windows에서는 PowerShell 스크립트를 사용합니다.\n2. **서비스 시작**\n   ```bash\n   ollama serve   # 백그라운드에서 API 서버 실행\n   ```\n3. **기본 모델 다운로드 예시**\n   ```bash\n   ollama pull llama3   # 원하는 모델을 pull 하면 로컬에 저장됩니다.\n   ```\n4. **API 엔드포인트**\n   Ollama는 `http://localhost:11434` 에 Anthropic Messages API 호환 엔드포인트를 제공합니다. Claude Code는 이 주소를 통해 모델에 접근합니다.\n\n## 4. Claude Code 설치\n```bash\ncurl -fsSL https://claude.ai/install.sh | bash\n```\n설치가 완료되면 `claude` 명령이 사용 가능해집니다.\n\n## 5. 연동을 위한 환경 변수 설정\nClaude Code는 Anthropic API와 호환되는 환경 변수를 통해 Ollama와 연결됩니다.\n```bash\nexport ANTHROPIC_BASE_URL=http://localhost:11434\nexport ANTHROPIC_API_KEY=\"\"          # 빈 문자열 또는 임시값 \"ollama\"\nexport ANTHROPIC_AUTH_TOKEN=ollama   # 옵션, 일부 경우 필요\n```\n위 변수를 영구적으로 적용하려면 `~/.bashrc` 혹은 `~/.zshrc` 에 추가합니다.\n\n## 6. Quick Setup (한 줄 명령) \n```bash\nANTHROPIC_BASE_URL=http://localhost:11434 ANTHROPIC_API_KEY=\"\" ANTHROPIC_AUTH_TOKEN=ollama claude --model qwen3-coder\n```\n환경 변수를 한 번에 지정하고 바로 Claude Code를 실행합니다. 테스트용으로 편리합니다.\n\n## 7. Manual Setup (영구 설정) \n1. 위 **환경 변수**를 쉘 설정 파일에 저장합니다.\n2. Ollama에서 원하는 모델을 pull 합니다.\n   ```bash\n   ollama pull qwen3-coder\n   ollama pull glm-4.7\n   ```\n3. Claude Code 실행 시 모델만 지정합니다.\n   ```bash\n   claude --model qwen3-coder\n   ```\n\n## 8. 권장 모델\n| 모델 | 비고 |\n|------|------|\n| `qwen3-coder` | 코드 생성에 최적화된 모델 |\n| `glm-4.7` | 다목적, 높은 컨텍스트 길이 지원 |\n| `gpt-oss:20b` | 오픈소스 GPT 계열, 20B 파라미터 |\n| `gpt-oss:120b` | 대규모 모델, 높은 메모리 요구 |\n\n클라우드 모델도 `ollama.com/search?c=cloud` 에서 검색해 사용할 수 있습니다.\n\n## 9. 연동 검증\n```bash\nclaude \"Python으로 파일 읽기 예제 코드를 보여줘.\"\n```\n정상적으로 동작하면 Claude Code가 Ollama에서 실행 중인 `qwen3-coder` 모델의 결과를 반환합니다.\n\n## 10. 트러블슈팅\n| 오류 | 원인 | 해결 방안 |\n|------|------|-----------|\n| `connection refused` | Ollama 서비스가 실행되지 않음 | `ollama serve` 로 서비스 시작 확인 |\n| `401 Unauthorized` | `ANTHROPIC_API_KEY` 설정 오류 | `export ANTHROPIC_API_KEY=\"\"` 로 빈 문자열 지정 |\n| 포트 충돌 | 다른 프로세스가 11434 사용 | `export ANTHROPIC_BASE_URL=http://localhost:11435` 후 `ollama serve --port 11435` |\n| 모델 로드 실패 | 모델 파일 손상 | `ollama pull <model>` 로 재다운로드 |\n\n## 11. 참고 자료\n- Claude Code – Ollama Integration: <https://docs.ollama.com/integrations/claude-code>[[Claude Code - Ollama](https://docs.ollama.com/integrations/claude-code)]\n- Ollama 공식 설치 가이드\n- Community tutorials (Reddit, Habr 등) – 최신 사용 사례 참고\n\n---\n",
-  "lastModified": "2026-02-24T06:15:27Z",
+  "lastModified": "2026-02-25T12:15:34Z",
   "author": "GitHub Action",
   "status": "published",
   "isDraft": false,
@@ -16,41 +16,11 @@
   ],
   "history": [
     {
-      "sha": "2761cc0",
-      "message": "chore: Issue Processor 실행 결과",
+      "sha": "1ba0ed1",
+      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-24T06:15:27Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "09b3e93",
-      "message": "docs: Issue #257 - 피드백 반영",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T00:38:05Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "60b9a30",
-      "message": "🌳 Wiki Tree Maintenance: 전체 46개의 위키 문서가 13개의 카테고리로 흩어져 있습니다. Dependabot 라벨 가이드가 여러 위치에 중복되어 있고, ISR 가이드와 같은 오래된 파일이 삭제 상태이며, AI 카테고리에 초안(draft) 문서가 다수 존재합니다. 대부분 파일명은 slug 형태이지만, 중복·삭제된 문서는 정리하고, 카테고리 메타데이터와 문서 순서를 명시하면 탐색성이 크게 향상됩니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T00:35:21Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "d5a786d",
-      "message": "docs: Issue #257 - [요청] ollama와 claude code 연결 방법",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T00:33:11Z",
+      "date": "2026-02-25T12:15:34Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
