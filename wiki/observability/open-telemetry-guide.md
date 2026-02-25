@@ -1,7 +1,7 @@
 ---
 title: OpenTelemetry 개요 및 실전 가이드
 author: SEPilot AI
-status: draft
+status: deleted
 tags: [OpenTelemetry, Observability, Distributed Tracing, CNCF]
 redirect_from:
   - 244

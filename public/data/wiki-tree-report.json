@@ -1,482 +1,291 @@
 {
-  "timestamp": "2026-02-25T03:01:37.753Z",
+  "timestamp": "2026-02-25T08:56:15.987Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "Wiki contains 84 documents across many topics. Most files are correctly placed, but several root‑level documents, duplicate/deleted versions, and mis‑categorized items exist. Duplicate content is found for SNKV, Emdash, Gemini‑3.1, Incremental‑Static‑Regeneration, Dependabot label guides, and AI‑agent comparison. Root‑level docs (e.g., devsecops.md, 273.md, emdash.md, enterprise‑gitops‑implementation…) violate the rule that only home.md may stay at the repository root.",
-    "totalDocuments": 84,
+    "summary": "77개의 위키 문서 중 30여 개가 중복·불필요하거나 잘못된 위치에 존재합니다. 대부분은 라벨·Dependabot·OpenTelemetry·Kubernetes API Governance 등 동일 내용이 여러 경로에 흩어져 있어 유지보수가 어려워지고 있습니다. 또한 파일명에 한글·공백·특수문자가 포함돼 URL 가독성이 낮으며, 루트 레벨에 문서가 남아 있어 카테고리 규칙을 위반하고 있습니다.",
+    "totalDocuments": 77,
     "categories": [
-      "bun",
-      "ai",
       "projects",
+      "ai",
       "backend",
-      "frontend",
-      "docker",
-      "kubernetes",
       "observability",
-      "cloud",
-      "reports",
-      "meta",
-      "troubleshooting",
-      "github",
       "security",
-      "devops"
+      "kubernetes",
+      "docker",
+      "bun",
+      "devops",
+      "cloud",
+      "frontend",
+      "meta",
+      "reports",
+      "troubleshooting",
+      "dependencies",
+      "github"
     ],
     "issues": [
-      "Root‑level documents that are not home.md",
-      "Multiple deleted/duplicate files for the same content",
-      "Several published documents duplicate content in other locations"
+      "중복된 라벨·Dependabot 문서 3곳(labels/dependencies.md, backend/label‑dependencies.md, meta/label‑dependencies.md)과 삭제된 dependabot/missing‑dependencies‑label.md이 존재합니다.",
+      "OpenTelemetry 가이드가 두 개(opentelemetry.md, open‑telemetry‑guide.md)와 Kubernetes API Governance 가이드가 두 개(api‑governance.md, spotlight‑on‑sig‑architecture‑api‑governance.md)로 중복돼 있습니다."
     ]
   },
   "suggestedStructure": {
+    "projects": [
+      "emdash.md",
+      "openclaw-complete-guide.md",
+      "claude-code-release-history.md",
+      "opencode.md",
+      "sepilot-desktop-intro.md",
+      "sepilot-technology-stack.md",
+      "enterprise-gitops-implementation.md",
+      "antigravity-release-notes.md",
+      "rust-gpu-face-crop-tool.md",
+      "moltbook-intro.md"
+    ],
+    "ai": [
+      "ai-code-review-agent-guide.md",
+      "261.md",
+      "steerling-8b-an-interpretable-large-language-model.md",
+      "cloud-terminal-persistent-ai-agent-sessions.md",
+      "mcp-model-context-protocol.md",
+      "qwen3-5.md",
+      "2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
+      "263.md",
+      "fine-tuning-functiongemma-on-google-tpu-with-tunix.md",
+      "ai-llm-2017-2026.md",
+      "ollama-claude-code.md",
+      "continuous-ai.md",
+      "glm-5.md",
+      "ai.md",
+      "anthropic-claude-government-regulation-and-dod-pol.md",
+      "github-agentic-workflows.md",
+      "semantic-layer-importance-and-implementation-guide.md",
+      "ai-agent-deployment-failure-prevention-and-testing-strategy.md",
+      "vibe-coding.md",
+      "multi-agent-system.md",
+      "gemini-3-1-pro.md"
+    ],
+    "backend": [
+      "wiki-api-route-guide.md",
+      "agentic-faas-mdl.md",
+      "lazy-backend-agentic-faas-mdl.md",
+      "snkv-sqlite-btree-kv-store.md"
+    ],
+    "observability": [
+      "opentelemetry.md"
+    ],
+    "security": [
+      "wordpress-vulnerability-triaging-playbook-2026.md",
+      "285.md",
+      "devsecops.md"
+    ],
+    "kubernetes": [
+      "node-readiness-controller.md",
+      "api-governance.md",
+      "ingress-nginx-deprecation-guide.md",
+      "cgroup-migration.md",
+      "release-notes.md"
+    ],
+    "docker": [
+      "gordon-ai-agent-update.md",
+      "run-openclaw-securely-in-docker-sandboxes.md",
+      "hardened-images.md"
+    ],
     "bun": [
       "overview.md",
       "comparison-pnpm-npm.md",
       "github-actions-setup.md"
     ],
-    "ai": [
-      "mcp-model-context-protocol.md",
-      "continuous-ai.md",
-      "ai-code-review-agent-guide.md",
-      "ai-agent-deployment-failure-prevention-and-testing-strategy.md",
-      "ai.md",
-      "2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
-      "github-agentic-workflows.md",
-      "fine-tuning-functiongemma-on-google-tpu-with-tunix.md",
-      "gemini-3-1-pro.md",
-      "vibe-coding.md",
-      "glm-5.md",
-      "qwen3-5.md",
-      "ollama-claude-code.md",
-      "steerling-8b-an-interpretable-large-language-model.md",
-      "multi-agent-system.md",
-      "llm-evolution-timeline-171-models-overview.md",
-      "ai-llm-2017-2026.md",
-      "cloud-terminal-persistent-ai-agent-sessions.md",
-      "ai-agent-deployment-failure-prevention-and-testing-strategy.md",
-      "continuous-ai.md"
-    ],
-    "projects": [
-      "sepilot-desktop-intro.md",
-      "opencode.md",
-      "claude-code-release-history.md",
-      "rust-gpu-face-crop-tool.md",
-      "sepilot-technology-stack.md",
-      "openclaw-complete-guide.md",
-      "moltbook-intro.md",
-      "antigravity-release-notes.md",
-      "emdash.md",
-      "enterprise-gitops-implementation.md"
-    ],
-    "backend": [
-      "wiki-api-route-guide.md",
-      "agentic-faas-mdl.md",
-      "280.md",
-      "279.md"
-    ],
-    "frontend": [
-      "api-service-layer.md",
-      "incremental-static-regeneration-guide.md"
-    ],
-    "docker": [
-      "hardened-images.md",
-      "run-openclaw-securely-in-docker-sandboxes.md",
-      "gordon-ai-agent-update.md"
-    ],
-    "kubernetes": [
-      "release-notes.md",
-      "cgroup-migration.md",
-      "ingress-nginx-deprecation-guide.md",
-      "node-readiness-controller.md",
-      "api-governance.md",
-      "spotlight-on-sig-architecture-api-governance.md"
-    ],
-    "observability": [
-      "opentelemetry.md",
-      "open-telemetry-guide.md"
+    "devops": [
+      "gitops-implementation.md"
     ],
     "cloud": [
       "aws-nat-gateway-cost-trap.md"
     ],
-    "security": [
-      "devsecops.md"
-    ],
-    "devops": [
-      "gitops-implementation.md"
-    ],
-    "reports": [
-      "284.md"
+    "frontend": [
+      "api-service-layer.md",
+      "incremental-static-regeneration.md"
     ],
     "meta": [
-      "weekly-2026-08.md",
-      "weekly-2026-09.md"
+      "weekly-2026-09.md",
+      "weekly-2026-08.md"
+    ],
+    "reports": [
+      "devsecops-paradox.md"
     ],
     "troubleshooting": [
       "dependabot-label-missing.md"
     ],
+    "dependencies": [
+      "react-router-dom-7-13-1-bump-no-longer-needed.md"
+    ],
     "github": [
-      "dependabot-labels.md"
+      "dependencies-label.md"
     ]
   },
   "results": {
-    "appliedActions": 37,
+    "appliedActions": 18,
     "skippedActions": 2,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 0
+    "createdIssues": 2
   },
   "actions": {
     "applied": [
       {
-        "type": "merge",
+        "type": "rename",
         "priority": "high",
-        "source": "281.md",
-        "target": "emdash.md",
-        "reason": "Duplicate Emdash guide – keep the canonical file and delete the duplicate",
+        "source": "labels/dependencies.md",
+        "target": "github/dependencies-label.md",
+        "reason": "라벨 문서를 GitHub 설정 가이드와 통합하고, 파일명을 영문 slug 형태로 정규화",
         "autoApply": true
       },
       {
         "type": "merge",
-        "priority": "high",
         "source": "backend/label-dependencies.md",
-        "target": "github/dependabot-labels.md",
-        "reason": "Deleted duplicate of Dependabot label guide",
+        "target": "github/dependencies-label.md",
+        "reason": "중복 라벨 문서 삭제, 기존 라벨 가이드를 중앙화",
         "autoApply": true
       },
       {
         "type": "merge",
-        "priority": "high",
         "source": "meta/label-dependencies.md",
-        "target": "github/dependabot-labels.md",
-        "reason": "Deleted duplicate of Dependabot label guide",
+        "target": "github/dependencies-label.md",
+        "reason": "중복 라벨 문서 삭제, 메타 레포에 리다이렉트 추가",
         "autoApply": true
       },
       {
         "type": "merge",
-        "priority": "high",
-        "source": "ai/gemini-3-1.md",
-        "target": "ai/gemini-3-1-pro.md",
-        "reason": "Deleted older Gemini 3.1 file – keep the Pro version as the canonical document",
+        "source": "dependabot/missing-dependencies-label.md",
+        "target": "troubleshooting/dependabot-label-missing.md",
+        "reason": "중복된 Dependabot 라벨 오류 문서 통합",
         "autoApply": true
       },
       {
         "type": "merge",
-        "priority": "high",
-        "source": "frontend/next-js-incremental-static-regeneration-isr.md",
-        "target": "frontend/incremental-static-regeneration-guide.md",
-        "reason": "Deleted duplicate ISR guide – keep the published version",
+        "source": "observability/open-telemetry-guide.md",
+        "target": "observability/opentelemetry.md",
+        "reason": "OpenTelemetry 가이드 중복 제거, 최신 문서 유지",
         "autoApply": true
       },
       {
         "type": "merge",
-        "priority": "high",
-        "source": "ai/275.md",
-        "target": "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
-        "reason": "Draft duplicate of the 2026 AI Agent comparison – keep the more complete published version",
+        "source": "kubernetes/spotlight-on-sig-architecture-api-governance.md",
+        "target": "kubernetes/api-governance.md",
+        "reason": "Kubernetes API Governance 문서 중복 제거",
         "autoApply": true
       },
       {
         "type": "merge",
-        "priority": "high",
-        "source": "snkv-sqlite-b-tree-c-c-python.md",
-        "target": "backend/279.md",
-        "reason": "Published duplicate of SNKV guide – keep the file under backend/ directory",
+        "source": "ai/steerling-8b-an-interpretable-large-language-model.md",
+        "target": "ai/263.md",
+        "reason": "Steerling‑8B 문서가 두 개 존재, 최신 draft 삭제",
         "autoApply": true
       },
       {
-        "type": "move",
-        "priority": "high",
-        "source": "devsecops.md",
-        "target": "security/devsecops.md",
-        "reason": "Root‑level document moved to a proper category (security)",
+        "type": "merge",
+        "source": "ai/287.md",
+        "target": "ai/semantic-layer-importance-and-implementation-guide.md",
+        "reason": "시맨틱 레이어 가이드가 두 개(287, 288) 존재, 288을 삭제하고 287에 통합",
         "autoApply": true
       },
       {
-        "type": "move",
-        "priority": "high",
-        "source": "273.md",
-        "target": "devops/gitops-implementation.md",
-        "reason": "Root‑level GitOps guide moved to a dedicated devops category",
+        "type": "rename",
+        "priority": "medium",
+        "source": "backend/280.md",
+        "target": "backend/lazy-backend-agentic-faas-mdl.md",
+        "reason": "파일명을 내용에 맞는 slug 형태로 정규화",
         "autoApply": true
       },
       {
-        "type": "move",
-        "priority": "high",
-        "source": "emdash.md",
-        "target": "projects/emdash.md",
-        "reason": "Project‑level tool documentation should live under projects/",
+        "type": "rename",
+        "priority": "medium",
+        "source": "backend/279.md",
+        "target": "backend/snkv-sqlite-btree-kv-store.md",
+        "reason": "SNKV 문서 slug 정규화",
         "autoApply": true
       },
       {
-        "type": "move",
-        "priority": "high",
-        "source": "enterprise-gitops-implementation-from-ci-cd-to-con.md",
-        "target": "projects/enterprise-gitops-implementation.md",
-        "reason": "Enterprise GitOps guide belongs to projects/ category",
+        "type": "rename",
+        "priority": "medium",
+        "source": "reports/284.md",
+        "target": "reports/devsecops-paradox.md",
+        "reason": "보고서 제목을 slug 형태로 변환",
         "autoApply": true
       },
       {
-        "type": "move",
-        "priority": "high",
-        "source": "gordon-docker-8217-s-ai-agent-just-got-an-update.md",
-        "target": "docker/gordon-ai-agent-update.md",
-        "reason": "Docker‑related AI agent update should be inside docker/ directory",
+        "type": "rename",
+        "priority": "low",
+        "source": "dependencies/react-router-dom-7.13.1-bump-no-longer-needed.md",
+        "target": "dependencies/react-router-dom-7-13-1-bump-no-longer-needed.md",
+        "reason": "버전 번호에 하이픈 사용, 파일명 정규화",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "low",
+        "source": "frontend/incremental-static-regeneration-guide.md",
+        "target": "frontend/incremental-static-regeneration.md",
+        "reason": "파일명 간결화 및 slug 규칙 적용",
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "bun/overview.md",
+        "target": "backend/wiki-api-route-guide.md",
         "order": 1,
-        "reason": "Overview should be first in the bun category",
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "bun/comparison-pnpm-npm.md",
+        "target": "backend/agentic-faas-mdl.md",
         "order": 2,
-        "reason": "Comparison guide follows the overview",
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "bun/github-actions-setup.md",
-        "order": 3,
-        "reason": "CI guide after basic overview/comparison",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "ai/mcp-model-context-protocol.md",
+        "target": "observability/opentelemetry.md",
         "order": 1,
-        "reason": "Core protocol guide should be first in ai/",
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "ai/continuous-ai.md",
-        "order": 2,
-        "reason": "Follow the core protocol with a practical CI pattern",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "ai/ai-code-review-agent-guide.md",
-        "order": 3,
-        "reason": "Next logical AI‑agent guide",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "projects/sepilot-desktop-intro.md",
+        "target": "kubernetes/api-governance.md",
         "order": 1,
-        "reason": "Project overview first",
         "autoApply": true
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "projects/opencode.md",
-        "order": 2,
-        "reason": "Second project guide",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "projects/claude-code-release-history.md",
-        "order": 3,
-        "reason": "Release notes after project intros",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "projects/rust-gpu-face-crop-tool.md",
-        "order": 4,
-        "reason": "Technical guide after main project docs",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "projects/sepilot-technology-stack.md",
-        "order": 5,
-        "reason": "Technology stack follows project intros",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "projects/openclaw-complete-guide.md",
-        "order": 6,
-        "reason": "Comprehensive guide placed after other project docs",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "projects/moltbook-intro.md",
-        "order": 7,
-        "reason": "Next project guide",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "projects/antigravity-release-notes.md",
-        "order": 8,
-        "reason": "Release notes at the end of project list",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "bun",
-        "metadata": {
-          "displayName": "Bun (JavaScript Runtime & Package Manager)",
-          "order": 1
-        },
-        "reason": "Add human‑readable name and ordering for sidebar",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "ai",
-        "metadata": {
-          "displayName": "AI & LLM",
-          "order": 2
-        },
-        "reason": "Category metadata for AI docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "projects",
-        "metadata": {
-          "displayName": "Projects & Products",
-          "order": 3
-        },
-        "reason": "Category metadata for project documentation",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "backend",
-        "metadata": {
-          "displayName": "Backend Architecture",
-          "order": 4
-        },
-        "reason": "Category metadata for backend docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "frontend",
-        "metadata": {
-          "displayName": "Frontend Guides",
-          "order": 5
-        },
-        "reason": "Category metadata for frontend docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "docker",
-        "metadata": {
-          "displayName": "Docker & Container Guides",
-          "order": 6
-        },
-        "reason": "Category metadata for Docker docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "kubernetes",
-        "metadata": {
-          "displayName": "Kubernetes",
-          "order": 7
-        },
-        "reason": "Category metadata for Kubernetes docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "observability",
-        "metadata": {
-          "displayName": "Observability",
-          "order": 8
-        },
-        "reason": "Category metadata for observability docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "cloud",
-        "metadata": {
-          "displayName": "Cloud & Infra",
-          "order": 9
-        },
-        "reason": "Category metadata for cloud docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "security",
-        "metadata": {
-          "displayName": "Security & DevSecOps",
-          "order": 10
-        },
-        "reason": "New category for security‑related docs",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "high",
-        "target": "devops",
-        "metadata": {
-          "displayName": "DevOps & GitOps",
-          "order": 11
-        },
-        "reason": "New category for GitOps and related guides",
+        "target": "ai/semantic-layer-importance-and-implementation-guide.md",
+        "order": 1,
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "merge",
-        "priority": "high",
-        "source": "missing-dependencies-label.md",
-        "target": "github/dependabot-labels.md",
-        "reason": "Deleted Dependabot label guide – redirect to the published version",
+        "type": "set_order",
+        "target": "backend/lazy-backend-agentic-faas-mdl.md",
+        "order": 3,
         "autoApply": true,
-        "error": "소스 문서를 찾을 수 없음: missing-dependencies-label.md"
+        "error": "문서를 찾을 수 없음: backend/lazy-backend-agentic-faas-mdl.md"
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "projects/emdash.md",
-        "order": 9,
-        "reason": "Emdash tool guide after other projects",
+        "target": "backend/snkv-sqlite-btree-kv-store.md",
+        "order": 4,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/emdash.md"
+        "error": "문서를 찾을 수 없음: backend/snkv-sqlite-btree-kv-store.md"
       }
     ],
     "dryRunPreviewed": []
   },
-  "createdIssues": []
+  "createdIssues": [
+    {
+      "number": 293,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/293",
+      "title": "중복 라벨·Dependabot 문서 정리"
+    },
+    {
+      "number": 294,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/294",
+      "title": "OpenTelemetry 및 Kubernetes API Governance 중복 제거"
+    }
+  ]
 }

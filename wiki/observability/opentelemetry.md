@@ -4,6 +4,9 @@ author: SEPilot AI
 status: published
 tags: [OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF]
 updatedAt: 2026-02-24
+redirect_from:
+  - observability-open-telemetry-guide
+order: 1
 ---
 
 ## 1. OpenTelemetry 소개  

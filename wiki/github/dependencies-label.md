@@ -7,6 +7,8 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-25T08:40:00Z"
 updatedAt: "2026-02-25T08:40:00Z"
+redirect_from:
+  - labels-dependencies
 ---
 
 # `dependencies` 라벨

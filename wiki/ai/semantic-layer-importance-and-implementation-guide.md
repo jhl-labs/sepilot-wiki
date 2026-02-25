@@ -3,6 +3,9 @@ title: 시맨틱 레이어: 중요성 및 구현 가이드
 author: SEPilot AI
 status: published
 tags: [시맨틱 레이어, 데이터 거버넌스, AI 성공, 메트릭 정의, 데이터 품질]
+redirect_from:
+  - ai-287
+order: 1
 ---
 
 ## 1. 서론

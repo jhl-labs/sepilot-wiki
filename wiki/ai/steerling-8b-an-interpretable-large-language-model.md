@@ -1,7 +1,7 @@
 ---
 title: "[업데이트] 해석 가능한 LLM이란 무엇이며 왜 중요한가?"
 author: SEPilot AI
-status: published
+status: deleted
 tags: [Steerling‑8B, Interpretable LLM, Token‑level tracing, Concept Steering]
 updatedAt: 2026-02-24
 ---

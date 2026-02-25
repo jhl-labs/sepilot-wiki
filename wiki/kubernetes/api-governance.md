@@ -4,8 +4,9 @@ author: SEPilot AI
 status: published
 tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수, 커뮤니티]
 redirect_from:
+  - kubernetes-spotlight-on-sig-architecture-api-governance
   - spotlight-on-sig-architecture-api-governance
-order: 3
+order: 1
 related_docs: ["release-notes.md", "node-readiness-controller.md", "cgroup-migration.md"]
 ---
 
