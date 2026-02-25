@@ -5,6 +5,7 @@ status: draft
 tags: [GitOps, Enterprise, CI/CD, DORA, DevOps, 배포신뢰성]
 redirect_from:
   - 273
+updatedAt: 2026-02-25
 ---
 
 ## 서론
@@ -46,6 +47,46 @@ redirect_from:
 | **비밀 관리** | HashiCorp Vault, Sealed Secrets[출처] | Git에 비밀을 노출하지 않음 |
 
 > **주의**: 도구 선택은 조직의 기존 생태계와 보안 요구사항에 따라 달라질 수 있습니다. 추가 조사가 필요합니다.
+
+## Terraform Overview
+Terraform은 HashiCorp에서 만든 오픈‑소스 **Infrastructure as Code (IaC)** 도구로, 선언형 구성 파일(.tf)로 클라우드 리소스를 정의합니다. Terraform은 **실행 계획(plan)**을 생성해 제안된 변경 사항을 미리 보여주고, **apply** 단계에서 실제 인프라를 선언된 상태와 일치하도록 적용합니다. 이를 통해 **일관성**, **반복 가능성**, **자동화**를 확보하고, 구성 드리프트를 방지할 수 있습니다[[Terraform Overview – euno.news](https://euno.news/posts/ko/terraform-for-modern-infrastructure-automating-clo-eb5f8e)].
+
+## Declarative Infrastructure with Terraform
+- **코드 기반 인프라 정의**: VPC, IAM, 데이터베이스, Kubernetes 클러스터 등 모든 리소스를 HCL(HashiCorp Configuration Language)로 선언합니다.  
+- **모듈화**: 재사용 가능한 모듈을 만들어 여러 환경(개발, 스테이징, 프로덕션)에서 동일한 아키텍처를 적용합니다.  
+- **상태 관리**: Terraform은 상태 파일(.tfstate)로 현재 인프라 상태를 추적하며, 원격 백엔드(예: Terraform Cloud, S3)와 연동해 팀 간 협업을 지원합니다.  
+- **플랜 & 적용**: `terraform plan`으로 변경을 검증하고, `terraform apply`로 안전하게 적용합니다.  
+
+이러한 선언적 접근은 **구성 드리프트 감소**와 **감사 가능성**을 제공하며, GitOps와 자연스럽게 결합됩니다.
+
+## Terraform + GitOps Workflow
+Terraform을 GitOps 파이프라인에 통합하면 인프라와 애플리케이션 배포를 동일한 Git 레포지토리에서 관리할 수 있습니다.
+
+1. **Git 레포지토리 구조**  
+   - `infra/` 디렉터리 아래에 Terraform 모듈 및 환경별 디렉터리(`dev/`, `prod/`)를 배치합니다.  
+   - PR을 통해 인프라 변경을 검토하고, 승인 후 자동 적용됩니다.
+
+2. **CI 단계**  
+   - PR 생성 시 GitHub Actions, GitLab CI, 혹은 Azure Pipelines 등에서 `terraform fmt`, `terraform validate`, `terraform plan`을 실행해 변경 내용을 자동으로 검증합니다.  
+   - 정책 검사(OPA/Kyverno)와 보안 스캔(Trivy, Checkov)도 함께 수행합니다.
+
+3. **자동 적용**  
+   - PR이 머지되면 **Terraform Cloud** 혹은 **Terraform Enterprise**와 연동된 워크플로가 `terraform apply`를 실행합니다.  
+   - 적용 결과는 GitOps 도구(Argo CD, Flux)와 동일한 **Git‑sync** 메커니즘을 통해 클러스터에 반영됩니다.  
+
+> **드리프트 감지**: Argo CD·Flux는 클러스터 상태와 Git 선언을 지속적으로 비교하고, Terraform이 관리하는 리소스에 드리프트가 발생하면 알림을 보냅니다[[Terraform & GitOps Workflows – firefly.ai](https://www.firefly.ai/academy/terraform-gitops-workflows-automating-infrastructure-with-version-control)].
+
+## Best Practices & Cost Considerations
+| 카테고리 | 권장 사항 | 이유 |
+|----------|-----------|------|
+| **코드 관리** | 모든 Terraform 파일을 Git에 저장하고, PR 기반 리뷰를 강제 | 변경 가시성 및 감사 가능 |
+| **모듈화** | 공통 인프라(네트워크, IAM 등)는 별도 모듈로 추출 | 재사용성 및 일관성 |
+| **상태 백엔드** | Terraform Cloud, S3 + DynamoDB 잠금, 혹은 Azure Storage 사용 | 동시 실행 방지 및 팀 협업 |
+| **플랜 검증** | `terraform plan` 결과를 PR 코멘트에 자동 첨부 | 리뷰어가 실제 변경을 확인 |
+| **정책 자동화** | Sentinel(Enterprise) 혹은 OPA/Checkov을 CI에 통합 | 보안·규정 준수 자동 검증 |
+| **비용 최적화** | `terraform plan -out=plan.out` 후 `terraform show -json plan.out`을 파싱해 예상 비용을 계산하고, 비용 알림을 설정 | 과다 프로비저닝 방지 |
+| **멀티‑클라우드** | 클라우드 별 프로바이더를 모듈화하고, 워크스페이스(또는 환경)별 변수 파일을 사용 | 확장성 및 벤더 락인 방지 |
+| **모니터링** | Terraform Cloud의 실행 로그와 Argo CD/Flux의 동기화 상태를 중앙 대시보드에 통합 | 운영 가시성 확보 |
 
 ## 배포 신뢰성 및 보안 강화 메커니즘
 - **자동화된 검증**: 테스트, 정책 검사, 이미지 스캔을 CI 단계에서 자동 실행합니다.

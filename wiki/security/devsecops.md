@@ -5,6 +5,7 @@ status: published
 tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling]
 redirect_from:
   - devsecops
+updatedAt: 2026-02-25
 ---
 
 ## 서론
@@ -21,6 +22,41 @@ redirect_from:
 - **2024년 사이버 공격의 45%**가 CI/CD 파이프라인 취약점을 이용한 것으로 보고되었습니다[[EUNO.NEWS](https://euno.news/posts/ko/the-devsecops-paradox-why-security-automation-is-b-e31b7a)].  
 - 주요 공격 대상은 **빌드·배포 인프라, IaC(인프라스트럭처 코드), 시크릿 관리** 등이며, 이는 기존에 애플리케이션 코드나 사용자 자격 증명에 집중하던 공격과 차별화됩니다.  
 - 이전 연도 대비 파이프라인 공격 비중이 상승하고 있음을 여러 산업 추적 데이터가 확인하고 있습니다.
+
+## Supply‑Chain Threat Landscape
+공급망 공격은 개발 파이프라인에 직접 침투해 악성 코드를 배포 단계까지 전파한다는 점에서 기존 공격과 근본적으로 다릅니다. 최근 사례는 두 가지 주요 생태계에서 확인됩니다.
+
+| 생태계 | 주요 사례 | 공격 목표 |
+|-------|----------|-----------|
+| **npm** | 2023년~2024년 사이 18개 npm 패키지(예: `debug`, `chalk`, `ansi‑styles`)에 악성 업데이트가 배포됨. 악성 코드는 암호화폐 지갑을 탈취하도록 설계됨[[Palo Alto Networks](https://www.paloaltonetworks.com/blog/cloud-security/npm-supply-chain-attack/)] | JavaScript 애플리케이션 전반에 악성 코드 삽입 |
+| **NuGet** | 4개의 악성 NuGet 패키지가 ASP.NET Identity 데이터를 탈취. 유출 항목: 사용자 계정, 역할 할당, 권한 매핑. 또한 권한 부여 규칙을 조작해 백도어를 지속적으로 유지[[EUNO.NEWS](https://euno.news/posts/ko/malicious-nuget-packages-stole-aspnet-data-npm-pac-8377bc)] | .NET/ASP.NET 애플리케이션의 인증·인가 정보 탈취 |
+
+이러한 공격은 **공급망 신뢰 체인**을 무력화하고, 한 번의 악성 배포가 수천·수만 개의 최종 사용자에게 영향을 미치게 만든다.
+
+## Malicious NuGet Packages
+- **대상**: ASP.NET 웹 애플리케이션 개발자  
+- **패키지 수**: 4개 (공격자는 `Socket`이라는 보안 연구팀이 발견)  
+- **유출 데이터**:  
+  - 사용자 계정  
+  - 역할 할당  
+  - 권한 매핑  
+- **추가 악성 행위**: 권한 부여 규칙을 조작해 지속적인 백도어를 삽입, 공격자는 이후에도 애플리케이션에 무단 접근이 가능.  
+- **공격 경로**: 악성 NuGet 패키지는 공식 레지스트리에 정상 패키지처럼 게시된 뒤, 개발자가 의존성에 추가하면 빌드 시 자동으로 악성 코드를 포함.  
+
+### 교훈
+1. **패키지 서명 검증**이 필수. 서명되지 않은 패키지는 자동 차단 정책을 적용.  
+2. **레지스트리 모니터링**: 의심스러운 새 버전이 공개될 경우 알림을 받도록 설정.  
+3. **의존성 스코프 최소화**: 프로젝트에 실제 필요한 패키지만 포함하고, 불필요한 패키지는 제거.
+
+## Malicious npm Packages
+- **공격 규모**: 18개 npm 패키지에 악성 업데이트가 배포됨. 주요 타깃은 `debug`, `chalk`, `ansi‑styles` 등 광범위하게 사용되는 라이브러리.  
+- **악성 코드 목적**: 암호화폐 지갑 주소를 가로채고, 채굴 작업을 수행하도록 설계.  
+- **공격 메커니즘**: 공격자는 오픈소스 유지관리자를 피싱하여 npm 계정을 탈취하고, 권한을 이용해 악성 버전을 퍼블리시[[Snyk](https://snyk.io/blog/npm-supply-chain-attack-via-open-source-maintainer-compromise/)].
+
+### 교훈
+1. **멀티팩터 인증(MFA)**을 npm 계정에 적용하고, 유지관리자에게 피싱 교육을 제공.  
+2. **패키지 무결성 검사**: `npm audit`, `Snyk`, `GitHub Dependabot` 등 자동 도구로 의심스러운 변경을 탐지.  
+3. **서드파티 레지스트리 차단**: 사설 레지스트리 사용 시 서명 검증 정책을 강제.
 
 ## 공격자 동기와 전략 변화
 - **우물 오염 메타포**: 공격자는 파이프라인을 장악함으로써 하위 서비스 전체에 악성 코드를 전파할 수 있어, 개별 시스템을 공격하는 것보다 **시간·비용 효율**이 높습니다[[EUNO.NEWS](https://euno.news/posts/ko/the-devsecops-paradox-why-security-automation-is-b-e31b7a)].  
@@ -61,10 +97,30 @@ redirect_from:
 - **멀티‑팩터 인증·워크플로우 승인** 단계 추가 – 중요한 배포 단계에 MFA와 수동 승인 절차를 삽입합니다.  
 - **플러그인 검증·서명 기반 배포** – 서드파티 플러그인은 공식 서명 여부를 확인하고, 검증된 레포만 사용합니다.  
 
+## Detection & Remediation Strategies
+1. **공급망 무결성 검사**  
+   - `npm audit`, `Snyk`, `GitHub Dependabot`, `OSS Index` 등 자동 도구를 CI에 통합하여 의존성 취약점을 실시간 감지.  
+   - NuGet의 경우 `dotnet list package --vulnerable`와 같은 명령어와 `GitHub Dependabot`을 활용해 서명되지 않은 패키지를 차단.  
+
+2. **패키지 서명 및 인증**  
+   - npm은 `npm config set strict-ssl true`와 `npm ci --prefer-offline`을 사용해 서명된 레지스트리만 허용.  
+   - NuGet은 `nuget verify -Signature` 명령으로 서명 검증을 자동화하고, 서명되지 않은 패키지는 빌드 파이프라인에서 실패하도록 정책 설정.  
+
+3. **행위 기반 탐지**  
+   - 런타임에 비정상적인 네트워크 호출(예: 암호화폐 채굴 서버)이나 파일 시스템 접근을 모니터링하는 EDR/EDM 솔루션을 배치.  
+   - `Cortex Cloud SSCS`와 같은 클라우드 기반 공급망 탐지 솔루션을 활용해 악성 의존성 사용을 사전 차단[[Palo Alto Networks](https://www.paloaltonetworks.com/blog/cloud-security/npm-supply-chain-attack/)].  
+
+4. **위협 인텔리전스 연동**  
+   - 최신 악성 패키지 리스트(예: `npm` 악성 레포지터리, `NuGet` 악성 패키지 피드)를 정기적으로 Pull하고, CI 단계에서 차단 규칙을 업데이트.  
+
+5. **사후 대응**  
+   - 악성 패키지 식별 시 즉시 해당 버전을 롤백하고, 영향을 받은 아티팩트를 재빌드·재배포.  
+   - 유출된 시크릿은 즉시 회전하고, 침해 사고 보고 절차에 따라 포렌식 분석을 수행.  
+
 ## 설계 원칙 및 모범 사례
 - **Zero‑Trust 파이프라인** 구현 – 모든 단계에서 인증·인가를 재검증하고, 네트워크 분리를 적용합니다.  
 - **Immutable Infrastructure**와 자동화 연계 – 빌드된 이미지가 변하지 않도록 하고, 배포 시점에만 교체합니다[[Elancer](https://www.elancer.co.kr/blog/detail/930)].  
-- **Policy‑as‑Code**와 CI/CD 연동 – OPA, Sentinel 등 정책 엔진을 코드 형태로 관리하고 파이프라인에 자동 적용합니다.  
+- **Policy‑as‑Code**와 CI/CD 연동 – OPA, Sentinel 등 정책 엔진을 코드 형태로 관리하고 파이프라인에 자동 적용.  
 - **지속적인 Threat Modeling** 및 **레드팀 테스트** – 정기적인 위협 모델링과 파이프라인 침투 테스트로 새로운 공격 경로를 탐지합니다.  
 
 ## 미래 전망 및 연구 과제
@@ -73,7 +129,7 @@ redirect_from:
 - **자동화 역설 정량화 메트릭**: “자동화에 의한 취약점 비율”, “인증 토큰 노출 빈도” 등 정량적 지표 개발이 필요합니다.  
 
 ## 결론
-DevSecOps 자동화는 **보안 검출·수정 속도를 높이는** 강력한 수단이지만, **자동화 자체가 새로운 공격 표면을 만들고** 파이프라인 전반에 취약점을 전파할 수 있다는 역설이 존재합니다. 조직은 **최소 권한, 시크릿 회전, 정책‑as‑Code, Zero‑Trust** 원칙을 기반으로 자동화 설계를 재검토하고, 지속적인 위협 모델링과 레드팀 테스트를 통해 역설을 완화해야 합니다.
+DevSecOps 자동화는 **보안 검출·수정 속도를 높이는** 강력한 수단이지만, **자동화 자체가 새로운 공격 표면을 만들고** 파이프라인 전반에 취약점을 전파할 수 있다는 역설이 존재합니다. 조직은 **최소 권한, 시크릿 회전, 정책‑as‑Code, Zero‑Trust** 원칙을 기반으로 자동화 설계를 재검토하고, **공급망 무결성 검사**, **패키지 서명 검증**, **위협 인텔리전스 연동** 등을 통해 npm 및 NuGet 같은 생태계에서 발생하는 최신 공급망 위협에 대비해야 합니다.
 
 ## 참고 문헌
 - EUNO.NEWS, “DevSecOps 역설: Security Automation이 파이프라인 취약점을 해결하면서 동시에 생성하는 이유”, 2024. [[링크](https://euno.news/posts/ko/the-devsecops-paradox-why-security-automation-is-b-e31b7a)]  
@@ -84,3 +140,6 @@ DevSecOps 자동화는 **보안 검출·수정 속도를 높이는** 강력한 �
 - LinkedIn, “2025년 파이프라인을 보호하기 위한 상위 20개 DevSecOps 도구”. [[링크](https://kr.linkedin.com/pulse/top-20-devsecops-tools-secure-your-pipeline-2025-timspark-t8wff?tl=ko)]  
 - Elancer, “DevSecOps, 개발 속도와 보안을 동시에 높이는 운영 전략”. [[링크](https://www.elancer.co.kr/blog/detail/930)]  
 - Infograb, “AI 개발 시대, DevSecOps가 기본값인 이유”. [[링크](https://insight.infograb.net/blog/2025/08/20/ai-devsecops/)]  
+- Palo Alto Networks, “Widespread npm Supply Chain Attack Puts Billions of …”. [[링크](https://www.paloaltonetworks.com/blog/cloud-security/npm-supply-chain-attack/)]  
+- Snyk, “npm Supply Chain Attack via Open Source maintainer compromise”. [[링크](https://snyk.io/blog/npm-supply-chain-attack-via-open-source-maintainer-compromise/)]  
+- The Hacker News, “Malicious NuGet Packages Stole ASP.NET Data”. [[링크](https://euno.news/posts/ko/malicious-nuget-packages-stole-aspnet-data-npm-pac-8377bc)]  
