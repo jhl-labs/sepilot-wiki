@@ -3,7 +3,7 @@ title: "Google TPU에서 Tunix를 이용한 FunctionGemma 파인튜닝 가이드
 description: "TPU와 JAX 기반 경량 라이브러리 Tunix를 사용해 FunctionGemma‑270M‑IT 모델을 LoRA 방식으로 파인튜닝하는 단계별 가이드"
 category: "Guide"
 tags: ["FunctionGemma", "TPU", "Tunix", "JAX", "LoRA", "파인튜닝"]
-status: "draft"
+status: published
 issueNumber: 450
 createdAt: "2026-02-25T02:30:00Z"
 updatedAt: "2026-02-25T02:30:00Z"
