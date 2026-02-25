@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-02-25T08:50:37.478Z",
+  "collectedAt": "2026-02-25T09:50:44.686Z",
   "overview": {
-    "totalDocuments": 67,
-    "publishedDocuments": 47,
+    "totalDocuments": 65,
+    "publishedDocuments": 45,
     "draftDocuments": 20,
     "openRequests": 37,
     "closedRequests": 19,
-    "totalAIActions": 256
+    "totalAIActions": 260
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
-      "documentsModified": 1,
+      "documentsModified": 0,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 51,
+      "aiActions": 53,
       "documentsCreated": 18,
-      "documentsModified": 15,
+      "documentsModified": 16,
       "tavilyApiCalls": 54,
       "tavilyResults": 138,
       "estimatedTokens": 43635,
       "totalPipelineDurationMs": 954162
     },
     "last7d": {
-      "aiActions": 176,
+      "aiActions": 180,
       "documentsCreated": 46,
-      "documentsModified": 57,
+      "documentsModified": 58,
       "tavilyApiCalls": 138,
       "tavilyResults": 358,
       "estimatedTokens": 111624,
@@ -38,6 +38,46 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-25T09:23:05.154Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "콘텐츠 리뷰",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T09:21:28.151Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "지식 확장 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T08:56:15.988Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-25T08:50:00.513Z",
+      "actionType": "recover",
+      "issueNumber": 200,
+      "documentTitle": "chore(deps): bump ajv from 6.12.6 to 6.14.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-25T08:38:15.230Z",
       "actionType": "recover",
@@ -197,51 +237,11 @@
       "durationMs": 43533,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2028
-    },
-    {
-      "timestamp": "2026-02-25T00:29:44.023Z",
-      "actionType": "generate",
-      "issueNumber": 284,
-      "documentTitle": "DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 35000,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1537
-    },
-    {
-      "timestamp": "2026-02-25T00:29:05.616Z",
-      "actionType": "modify",
-      "issueNumber": 283,
-      "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T00:28:21.558Z",
-      "actionType": "modify",
-      "issueNumber": 282,
-      "documentTitle": "AI 에이전트 배포 실패 원인과 테스트 전략",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T00:27:14.580Z",
-      "actionType": "generate",
-      "issueNumber": 281,
-      "documentTitle": "Emdash – 오픈소스 에이전틱 개발 환경 (ADE) 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 49467,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2259
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 247,
+      "totalActions": 251,
       "totalEstimatedTokens": 145531,
       "avgDurationMs": 54939
     },
