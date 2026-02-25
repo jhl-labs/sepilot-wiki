@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# CI/자동 커밋 경로에서는 훅을 건너뛴다.
+# (.github/actions/git-commit-push 에서 HUSKY=0 설정)
+if [ "${HUSKY:-1}" = "0" ] || [ "${SKIP_GIT_HOOKS:-0}" = "1" ]; then
+    echo "⏭️ pre-commit 훅 건너뜀 (HUSKY=${HUSKY:-unset})"
+    exit 0
+fi
+
 # 민감 정보 노출 검사
 echo "🔍 민감 정보 검사 중..."
 
