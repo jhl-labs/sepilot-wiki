@@ -1,6 +1,82 @@
 {
   "entries": [
     {
+      "id": "e33b8dbf-0d1d-4463-a12a-93d3245a6e33",
+      "timestamp": "2026-02-25T12:20:51.749Z",
+      "actionType": "quality_score",
+      "issueNumber": 303,
+      "issueTitle": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
+      "documentSlug": "security/serv-u-15-5",
+      "documentTitle": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "666f7ba7-0d75-49bb-bd34-93a1471d4b86",
+      "timestamp": "2026-02-25T12:20:29.622Z",
+      "actionType": "modify",
+      "issueNumber": 305,
+      "issueTitle": " [업데이트] 2026년 AI 에이전트 기반 Autonomous Integration",
+      "documentSlug": "backend/agentic-faas-mdl",
+      "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 2026년 AI 에이전트 기반 Autonomous Integration\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 39,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "9c8e083a-0208-4a34-81c2-67af1128b0c6",
+      "timestamp": "2026-02-25T12:19:52.622Z",
+      "actionType": "generate",
+      "issueNumber": 303,
+      "issueTitle": " [요청] Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
+      "documentSlug": "security/serv-u-15-5",
+      "documentTitle": "Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드",
+      "summary": "새 문서 \"Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3535
+            },
+            {
+              "step": "outline",
+              "durationMs": 11177
+            },
+            {
+              "step": "write",
+              "durationMs": 31800
+            },
+            {
+              "step": "review",
+              "durationMs": 6189
+            }
+          ],
+          "totalDurationMs": 52701,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2458,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "e54f8fe9-9f20-46db-be36-eb0edf329b94",
       "timestamp": "2026-02-25T12:15:34.340Z",
       "actionType": "maintain",
@@ -5891,5 +5967,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-25T12:15:34.340Z"
+  "lastUpdated": "2026-02-25T12:20:51.749Z"
 }
