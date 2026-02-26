@@ -1,9 +1,20 @@
 {
-  "timestamp": "2026-02-26T00:30:06.311Z",
+  "timestamp": "2026-02-26T00:28:54.445Z",
   "dryRun": false,
-  "totalIssuesScanned": 7,
+  "totalIssuesScanned": 12,
   "categories": {
-    "draft_review": [],
+    "draft_review": [
+      {
+        "number": 315,
+        "title": " [요청] AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 312,
+        "title": " [요청] Adaptive Merging of LoRA Modules – 재활용 LoRA를 통한 효율적인 파인튜닝",
+        "daysSinceUpdate": 0
+      }
+    ],
     "maintenance": [
       {
         "number": 300,
@@ -41,11 +52,67 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 314,
+        "title": " [업데이트] 런타임 LLM 금지 정책과 대안 설계",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 313,
+        "title": " [업데이트] OpenClaw 보안 사고와 Docker 샌드박스 한계 – 최신 대응 방안",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 311,
+        "title": " [업데이트] Agentic SDLC – AI‑Driven 소프트웨어 팩토리와 보안 고려사항",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 315,
+      "title": " [요청] AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 312,
+      "title": " [요청] Adaptive Merging of LoRA Modules – 재활용 LoRA를 통한 효율적인 파인튜닝"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 314,
+      "title": " [업데이트] 런타임 LLM 금지 정책과 대안 설계"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 313,
+      "title": " [업데이트] OpenClaw 보안 사고와 Docker 샌드박스 한계 – 최신 대응 방안"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 311,
+      "title": " [업데이트] Agentic SDLC – AI‑Driven 소프트웨어 팩토리와 보안 고려사항"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 315,
+      "title": " [요청] AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 312,
+      "title": " [요청] Adaptive Merging of LoRA Modules – 재활용 LoRA를 통한 효율적인 파인튜닝",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/adaptive-merging-of-lora-modules-lora.md"
+    }
+  ],
+  "actionCount": 7,
   "maxActions": 60
 }
