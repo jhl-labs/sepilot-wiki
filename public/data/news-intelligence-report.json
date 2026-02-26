@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-02-26T00:21:07.738Z",
+  "generatedAt": "2026-02-26T06:23:56.717Z",
   "config": {
     "rssUrl": "https://euno.news/rss.xml",
     "maxAiBatch": 30,
@@ -7,232 +7,220 @@
     "maxIssues": 5
   },
   "summary": {
-    "scannedAt": "2026-02-26T00:21:07.737Z",
+    "scannedAt": "2026-02-26T06:23:56.716Z",
     "totalScanned": 200,
-    "newItems": 72,
-    "prefiltered": 30,
-    "relevant": 14,
+    "newItems": 43,
+    "prefiltered": 26,
+    "relevant": 13,
     "issuesCreated": 5,
-    "durationMs": 72003
+    "durationMs": 70963
   },
   "items": [
     {
-      "title": "Agentic SDLC: AI 팀이 기업 인프라를 논의하고, 코딩하며, 보안하는 방법",
-      "link": "https://euno.news/posts/ko/the-agentic-sdlc-how-ai-teams-debate-code-and-secu-58fd86",
-      "guid": "https://euno.news/posts/ko/the-agentic-sdlc-how-ai-teams-debate-code-and-secu-58fd86",
-      "relevanceScore": 85,
+      "title": "왜 Agent Testing이 깨졌는가",
+      "link": "https://euno.news/posts/ko/why-agent-testing-is-broken-a07ad0",
+      "guid": "https://euno.news/posts/ko/why-agent-testing-is-broken-a07ad0",
+      "relevanceScore": 90,
       "relatedDocuments": [
-        "backend/agentic-faas-mdl.md",
-        "backend/lazy-backend-agentic-faas-mdl.md",
-        "security/devsecops.md",
-        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
-      ],
-      "keyTopics": [
-        "Agentic SDLC",
-        "AI‑Driven Development",
-        "Enterprise Security"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "재활용 LoRA의 매력과 현실: Adaptive Merging",
-      "link": "https://euno.news/posts/ko/the-appeal-and-reality-of-recycling-loras-with-ada-b53d00",
-      "guid": "https://euno.news/posts/ko/the-appeal-and-reality-of-recycling-loras-with-ada-b53d00",
-      "relevanceScore": 85,
-      "relatedDocuments": [
-        "ai/261.md",
-        "ai/263.md",
-        "ai/ai.md",
-        "ai/ai-code-review-agent-guide.md"
-      ],
-      "keyTopics": [
-        "LoRA 재활용",
-        "Adaptive Merging",
-        "파인튜닝 효율"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "샌드박스는 OpenClaw로부터 당신을 구해주지 않는다",
-      "link": "https://euno.news/posts/ko/sandboxes-wont-save-you-from-openclaw-9589c1",
-      "guid": "https://euno.news/posts/ko/sandboxes-wont-save-you-from-openclaw-9589c1",
-      "relevanceScore": 85,
-      "relatedDocuments": [
-        "docker/run-openclaw-securely-in-docker-sandboxes.md",
-        "projects/openclaw-complete-guide.md",
-        "docker/hardened-images.md"
-      ],
-      "keyTopics": [
-        "OpenClaw 보안",
-        "샌드박스 격리",
-        "악성 행위"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "왜 우리는 Runtime에서 LLM을 금지했는가 — 그리고 우리가 대신 하는 일",
-      "link": "https://euno.news/posts/ko/why-we-banned-llms-from-runtime-and-what-we-do-ins-b3c103",
-      "guid": "https://euno.news/posts/ko/why-we-banned-llms-from-runtime-and-what-we-do-ins-b3c103",
-      "relevanceScore": 80,
-      "relatedDocuments": [
-        "ai/ai.md",
-        "ai/continuous-ai.md",
         "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md",
         "ai/ai-code-review-agent-guide.md"
       ],
       "keyTopics": [
-        "런타임 LLM 금지",
-        "LLM 운영 정책",
-        "대안 설계"
+        "Agent testing",
+        "CI breakage",
+        "Debugging strategies"
       ],
       "sourceUrl": null
     },
     {
-      "title": "모든 AI 개발자가 필요로 하는 오픈 데이터셋 (그리고 기여 방법)",
-      "link": "https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4",
-      "guid": "https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4",
-      "relevanceScore": 75,
+      "title": "AgentSpace를 만들었습니다 — OpenClaw Agents를 위한 개인 채팅 방",
+      "link": "https://euno.news/posts/ko/i-built-agentspace-a-private-chat-room-for-opencla-2804c2",
+      "guid": "https://euno.news/posts/ko/i-built-agentspace-a-private-chat-room-for-opencla-2804c2",
+      "relevanceScore": 88,
+      "relatedDocuments": [
+        "projects/openclaw-complete-guide.md",
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
+      ],
+      "keyTopics": [
+        "OpenClaw",
+        "AgentSpace chat room",
+        "Self‑hosted agent UI"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "당신의 AI 에이전트가 방금 rm -rf / 를 실행했습니다 — 이를 멈추는 방법",
+      "link": "https://euno.news/posts/ko/your-ai-agent-just-ran-rm-rf-heres-how-to-stop-it-06b436",
+      "guid": "https://euno.news/posts/ko/your-ai-agent-just-ran-rm-rf-heres-how-to-stop-it-06b436",
+      "relevanceScore": 85,
+      "relatedDocuments": [
+        "ai/ai.md",
+        "ai/ai-code-review-agent-guide.md",
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
+      ],
+      "keyTopics": [
+        "AI 코딩 에이전트 안전",
+        "쉘 명령 실행 위험",
+        "샌드박스·권한 제한"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "왜 OpenTelemetry가 Observability Warehouse의 부상을 이끌고 있는가",
+      "link": "https://euno.news/posts/ko/why-opentelemetry-is-paving-the-way-for-the-rise-o-a8fbee",
+      "guid": "https://euno.news/posts/ko/why-opentelemetry-is-paving-the-way-for-the-rise-o-a8fbee",
+      "relevanceScore": 85,
+      "relatedDocuments": [
+        "observability/opentelemetry.md",
+        "observability/open-telemetry-guide.md",
+        "observability/ai.md"
+      ],
+      "keyTopics": [
+        "OpenTelemetry 채택",
+        "Observability Warehouse",
+        "분산 관측성 트렌드"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "OpenClaw 실행을 위한 최고의 미니 PC 딜: Apple Mac mini, Kamuri Pinova P2, Beelink Mini 절약",
+      "link": "https://euno.news/posts/ko/the-best-mini-pc-deals-for-running-openclaw-save-o-6e81fc",
+      "guid": "https://euno.news/posts/ko/the-best-mini-pc-deals-for-running-openclaw-save-o-6e81fc",
+      "relevanceScore": 82,
+      "relatedDocuments": [
+        "projects/openclaw-complete-guide.md",
+        "docker/run-openclaw-securely-in-docker-sandboxes.md"
+      ],
+      "keyTopics": [
+        "Mini‑PC 하드웨어",
+        "OpenClaw 실행",
+        "가격·성능 딜"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "하루에 80억 토큰이 AT&amp;T에게 AI 오케스트레이션을 재고하도록 강요하고 비용을 90% 절감",
+      "link": "https://euno.news/posts/ko/8-billion-tokens-a-day-forced-att-to-rethink-ai-or-5b758a",
+      "guid": "https://euno.news/posts/ko/8-billion-tokens-a-day-forced-att-to-rethink-ai-or-5b758a",
+      "relevanceScore": 76,
+      "relatedDocuments": [
+        "ai/309.md",
+        "ai/ai-productivity-paradox-why-developer-throughput-m.md"
+      ],
+      "keyTopics": [
+        "AT&T",
+        "AI orchestration",
+        "Token‑usage cost reduction"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "당신의 AI가 백엔드를 작성했습니다. 누가 침해에 대한 책임을 지나요?",
+      "link": "https://euno.news/posts/ko/your-ai-wrote-the-backend-who-owns-the-breach-9357a3",
+      "guid": "https://euno.news/posts/ko/your-ai-wrote-the-backend-who-owns-the-breach-9357a3",
+      "relevanceScore": 71,
       "relatedDocuments": [
         "ai/ai.md",
         "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
       ],
       "keyTopics": [
-        "Open Datasets",
-        "AI Development",
-        "Data Contribution"
+        "AI‑generated backend",
+        "Liability",
+        "Security & compliance"
       ],
       "sourceUrl": null
     },
     {
-      "title": "프롬프트 작성을 멈추세요. AI 시스템 엔지니어링을 시작하세요.",
-      "link": "https://euno.news/posts/ko/stop-writing-prompts-start-engineering-ai-systems-eef1d1",
-      "guid": "https://euno.news/posts/ko/stop-writing-prompts-start-engineering-ai-systems-eef1d1",
+      "title": "기술 기업들은 직원들에게 AI 사용을 장려하는 것에 그치지 않는다. 그들은 이를 강제하고 있다.",
+      "link": "https://euno.news/posts/ko/tech-firms-arent-just-encouraging-their-workers-to-56f753",
+      "guid": "https://euno.news/posts/ko/tech-firms-arent-just-encouraging-their-workers-to-56f753",
       "relevanceScore": 70,
       "relatedDocuments": [
         "ai/ai.md",
         "ai/ai-code-review-agent-guide.md",
-        "ai/continuous-ai.md",
-        "ai/ai-productivity-paradox-why-developer-throughput-m.md"
+        "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
+        "ai/310.md"
       ],
       "keyTopics": [
-        "AI System Engineering",
-        "Prompt Engineering",
-        "AI Agent Development"
+        "기업 AI 사용 강제화",
+        "AI 정책·거버넌스",
+        "조직 내 AI 도입 전략"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Serializers &amp; DTOs: API가 노출하는 것을 제어하기",
-      "link": "https://euno.news/posts/ko/serializers-dtos-controlling-what-your-api-exposes-230636",
-      "guid": "https://euno.news/posts/ko/serializers-dtos-controlling-what-your-api-exposes-230636",
-      "relevanceScore": 70,
+      "title": "🇰🇪 케냐 개발자들: AI 아이덴티티 표준에 Huduma Namba / National ID 추가 — Soulprint 오픈 소스 (30분 PR)",
+      "link": "https://euno.news/posts/ko/kenya-devs-add-huduma-namba-national-id-to-the-ai-c1a0ae",
+      "guid": "https://euno.news/posts/ko/kenya-devs-add-huduma-namba-national-id-to-the-ai-c1a0ae",
+      "relevanceScore": 62,
       "relatedDocuments": [
-        "backend/wiki-api-route-guide.md",
-        "frontend/api-service-layer.md"
-      ],
-      "keyTopics": [
-        "DTO",
-        "API Design",
-        "Data Exposure Control"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "프론트엔드 개발자는 죽었다 (그리고 그게 좋다)",
-      "link": "https://euno.news/posts/ko/the-frontend-developer-is-dead-and-thats-good-8515b4",
-      "guid": "https://euno.news/posts/ko/the-frontend-developer-is-dead-and-thats-good-8515b4",
-      "relevanceScore": 70,
-      "relatedDocuments": [
-        "frontend/incremental-static-regeneration.md",
-        "frontend/api-service-layer.md",
-        "ai/ai-productivity-paradox-why-developer-throughput-m.md",
         "ai/ai.md"
       ],
       "keyTopics": [
-        "프론트엔드 개발 변화",
-        "AI 자동화",
-        "생산성 패러독스"
+        "AI identity standard",
+        "National ID (Huduma Namba)",
+        "Soulprint OSS"
       ],
       "sourceUrl": null
     },
     {
-      "title": "GitHub 패키지 매니저로 비용 절감",
-      "link": "https://euno.news/posts/ko/save-money-with-githubs-package-manager-94e1d9",
-      "guid": "https://euno.news/posts/ko/save-money-with-githubs-package-manager-94e1d9",
-      "relevanceScore": 65,
+      "title": "스캠 감지가 Samsung의 S26 폰 앱에 도입되고 Google Messages가 Gemini 부스트를 받는다",
+      "link": "https://euno.news/posts/ko/scam-detection-comes-to-samsungs-s26-phone-app-as-9f6d2c",
+      "guid": "https://euno.news/posts/ko/scam-detection-comes-to-samsungs-s26-phone-app-as-9f6d2c",
+      "relevanceScore": 62,
       "relatedDocuments": [
-        "github/dependencies-label.md",
-        "github/dependabot-labels.md",
-        "backend/label-dependencies.md",
-        "dependabot/missing-dependencies-label.md"
+        "security/devsecops.md",
+        "ai/ai.md"
       ],
       "keyTopics": [
-        "GitHub Packages",
-        "Cost Optimization",
-        "NPM"
+        "스마트폰 사기 탐지",
+        "Google Messages Gemini 부스트",
+        "AI 기반 보안"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Show HN: 나는 Tree-sitter를 Go에 포팅했습니다",
-      "link": "https://euno.news/posts/ko/show-hn-i-ported-tree-sitter-to-go-1cdf9b",
-      "guid": "https://euno.news/posts/ko/show-hn-i-ported-tree-sitter-to-go-1cdf9b",
-      "relevanceScore": 65,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Tree‑sitter",
-        "Go 포팅",
-        "코드 파싱"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Symfony Console Command를 사용한 웹사이트 스크래핑 (클린 및 프로덕션 친화적)",
-      "link": "https://euno.news/posts/ko/scraping-a-website-using-a-symfony-console-command-eb577a",
-      "guid": "https://euno.news/posts/ko/scraping-a-website-using-a-symfony-console-command-eb577a",
+      "title": "백악관은 AI 기업들에게 금리 인상을 보전해줄 것을 원한다. 대부분은 이미 그렇게 하겠다고 말했다.",
+      "link": "https://euno.news/posts/ko/the-white-house-wants-ai-companies-to-cover-rate-h-5dfe69",
+      "guid": "https://euno.news/posts/ko/the-white-house-wants-ai-companies-to-cover-rate-h-5dfe69",
       "relevanceScore": 60,
-      "relatedDocuments": [],
+      "relatedDocuments": [
+        "ai/ai.md",
+        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
+      ],
       "keyTopics": [
-        "Symfony Console",
-        "웹 스크래핑 자동화"
+        "AI 기업 규제·보조금",
+        "데이터센터 전력 소비",
+        "정부·AI 산업 정책"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Umbraco 테스트 예제, 이제 Umbraco 17에서도",
-      "link": "https://euno.news/posts/ko/umbraco-testing-examples-now-also-for-umbraco-17-8b3a48",
-      "guid": "https://euno.news/posts/ko/umbraco-testing-examples-now-also-for-umbraco-17-8b3a48",
-      "relevanceScore": 60,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Umbraco 17",
-        "자동화 테스트"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Data Pipelines 테스트: 무엇을 검증하고 언제",
-      "link": "https://euno.news/posts/ko/testing-data-pipelines-what-to-validate-and-when-8d4d94",
-      "guid": "https://euno.news/posts/ko/testing-data-pipelines-what-to-validate-and-when-8d4d94",
+      "title": "Fedora / Red Hat에 Kiro 설치",
+      "link": "https://euno.news/posts/ko/installing-kiro-on-fedora-red-hat-e74f33",
+      "guid": "https://euno.news/posts/ko/installing-kiro-on-fedora-red-hat-e74f33",
       "relevanceScore": 55,
       "relatedDocuments": [],
       "keyTopics": [
-        "Data Pipeline Testing",
-        "Test Pyramid",
-        "Validation"
+        "Kiro IDE",
+        "Fedora / Red Hat",
+        "Desktop app installation"
       ],
       "sourceUrl": null
     },
     {
-      "title": "웨어러블 스타트업 CUDIS, AI 기반 ‘코치’와 함께 새로운 헬스 링 라인 출시",
-      "link": "https://euno.news/posts/ko/wearable-startup-cudis-launches-a-new-health-ring-b8f0f2",
-      "guid": "https://euno.news/posts/ko/wearable-startup-cudis-launches-a-new-health-ring-b8f0f2",
+      "title": "평화봉사단이 개발도상국에 AI를 판매하기 위해 자원봉사자를 모집하고 있다",
+      "link": "https://euno.news/posts/ko/the-peace-corps-is-recruiting-volunteers-to-sell-a-679e68",
+      "guid": "https://euno.news/posts/ko/the-peace-corps-is-recruiting-volunteers-to-sell-a-679e68",
       "relevanceScore": 55,
-      "relatedDocuments": [],
+      "relatedDocuments": [
+        "ai/ai.md",
+        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
+      ],
       "keyTopics": [
-        "AI 기반 헬스 링",
-        "웨어러블",
-        "헬스케어"
+        "AI 기술 해외 판매",
+        "개발도상국 윤리·거버넌스",
+        "AI 인도주의적 활용"
       ],
       "sourceUrl": null
     }
@@ -240,38 +228,38 @@
   "actions": [
     {
       "action": "update_existing",
-      "targetSlug": "backend/agentic-faas-mdl.md",
-      "suggestedTitle": "Agentic SDLC – AI‑Driven 소프트웨어 팩토리와 보안 고려사항",
+      "targetSlug": "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md",
+      "suggestedTitle": "AI 에이전트 배포 실패 방지와 테스트 전략",
       "priority": "high",
-      "issueNumber": 311
+      "issueNumber": 316
     },
     {
       "action": "new_document",
-      "targetSlug": "",
-      "suggestedTitle": "Adaptive Merging of LoRA Modules – 재활용 LoRA를 통한 효율적인 파인튜닝",
+      "targetSlug": "projects/agentspace-openclaw-chat-room.md",
+      "suggestedTitle": "AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
       "priority": "medium",
-      "issueNumber": 312
-    },
-    {
-      "action": "update_existing",
-      "targetSlug": "docker/run-openclaw-securely-in-docker-sandboxes.md",
-      "suggestedTitle": "OpenClaw 보안 사고와 Docker 샌드박스 한계 – 최신 대응 방안",
-      "priority": "high",
-      "issueNumber": 313
+      "issueNumber": 317
     },
     {
       "action": "update_existing",
       "targetSlug": "ai/ai.md",
-      "suggestedTitle": "런타임 LLM 금지 정책과 대안 설계",
-      "priority": "medium",
-      "issueNumber": 314
+      "suggestedTitle": "AI 에이전트 보안 베스트 프랙티스",
+      "priority": "high",
+      "issueNumber": 318
     },
     {
       "action": "new_document",
-      "targetSlug": "",
-      "suggestedTitle": "AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드",
+      "targetSlug": "observability/open-telemetry-warehouse-trend.md",
+      "suggestedTitle": "OpenTelemetry와 Observability Warehouse 부상",
       "priority": "medium",
-      "issueNumber": 315
+      "issueNumber": 319
+    },
+    {
+      "action": "update_existing",
+      "targetSlug": "ai/309.md",
+      "suggestedTitle": "AI 생산성 역설 – 개발자 Throughput 분석",
+      "priority": "medium",
+      "issueNumber": 320
     }
   ]
 }
