@@ -1,9 +1,20 @@
 {
-  "timestamp": "2026-02-26T05:48:08.437Z",
+  "timestamp": "2026-02-26T06:31:13.358Z",
   "dryRun": false,
-  "totalIssuesScanned": 7,
+  "totalIssuesScanned": 10,
   "categories": {
-    "draft_review": [],
+    "draft_review": [
+      {
+        "number": 319,
+        "title": " [요청] OpenTelemetry와 Observability Warehouse 부상",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 317,
+        "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
+        "daysSinceUpdate": 0
+      }
+    ],
     "maintenance": [
       {
         "number": 300,
@@ -41,11 +52,56 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 316,
+        "title": " [업데이트] AI 에이전트 배포 실패 방지와 테스트 전략",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 319,
+      "title": " [요청] OpenTelemetry와 Observability Warehouse 부상"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 317,
+      "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 320,
+      "title": " [업데이트] AI 생산성 역설 – 개발자 Throughput 분석"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 318,
+      "title": " [업데이트] AI 에이전트 보안 베스트 프랙티스"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 316,
+      "title": " [업데이트] AI 에이전트 배포 실패 방지와 테스트 전략"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 319,
+      "title": " [요청] OpenTelemetry와 Observability Warehouse 부상",
+      "score": 84,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/observability/opentelemetry-observability-warehouse.md"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 317,
+      "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
+      "score": 79
+    }
+  ],
+  "actionCount": 7,
   "maxActions": 60
 }

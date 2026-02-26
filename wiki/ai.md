@@ -39,6 +39,64 @@ updatedAt: 2026-02-26
   - VPC 서브넷, 보안 그룹, 서비스 메쉬(예: Istio)로 내부 트래픽을 분리한다.  
   - TLS 1.2 이상을 사용해 모델·프롬프트 간 통신을 암호화한다.
 
+### 위험한 명령 실행 방지
+AI 코딩 에이전트(Claude Code, Cursor, Copilot 등)는 **셸 명령 실행**, **파일 편집**, **API 호출** 등 강력한 시스템 접근 권한을 가질 수 있다. 최근 EUNO.NEWS 기사[[링크](https://euno.news/posts/ko/your-ai-agent-just-ran-rm-rf-heres-how-to-stop-it-06b436)]에서는 에이전트가 `rm -rf /`와 같은 파괴적인 명령을 실행할 위험성을 강조하고, 이를 차단하기 위한 **BodAIGuard**라는 가드레일 솔루션을 소개한다.
+
+#### 핵심 방어 메커니즘
+| 요소 | 설명 |
+|------|------|
+| **프롬프트‑인젝션 스캐너** | 입력 텍스트를 정규식·Base64 디코딩 등으로 분석해 숨겨진 악성 페이로드를 탐지한다. |
+| **45개의 Block Rules** | 예: `rm\s+(-[a-zA-Z]*)?\s*/` → “Filesystem root destruction” 차단. |
+| **45개의 Confirm Rules** | 위험도가 낮은 명령(예: `rm -r`)은 사용자 확인 절차를 요구한다. |
+| **12개의 카테고리** | 파괴 명령, 파일 시스템 접근, 권한 탈취 등으로 분류해 정책 적용을 단순화한다. |
+| **Shell Guard** | Bash와 연동해 실시간으로 명령을 평가하고, 차단된 경우 JSON‑RPC 오류를 반환한다. |
+| **MCP/HTTP Proxy** | 모든 도구 호출을 프록시를 통해 라우팅해 중앙에서 정책을 적용한다. |
+
+#### 적용 방법 (요약)
+1. **바이너리 설치**  
+   ```bash
+   # 플랫폼에 맞는 바이너리 다운로드
+   chmod +x bodaiguard-linux-x64
+   sudo mv bodaiguard-linux-x64 /usr/local/bin/bodaiguard
+   ```
+2. **훅 설치** (Claude Code 등)  
+   ```bash
+   bodaiguard install hooks
+   ```
+3. **테스트**  
+   ```bash
+   bodaiguard test 'rm -rf /'   # → BLOCK: Filesystem root destruction
+   bodaiguard test 'ls -la'     # → ALLOW
+   ```
+4. **규칙 커스터마이징** (`default.yaml`)  
+   ```yaml
+   actions:
+     destructive:
+       block:
+         - pattern: 'rm\\s+(-[a-zA-Z]*)?\\s*/'
+           reason: Filesystem root destruction
+         - pattern: 'mkfs\\.'
+           reason: Filesystem format
+       confirm:
+         - pattern: 'rm\\s+-r'
+           reason: Recursive delete
+     paths:
+       block:
+         - ~/.ssh/**
+         - /etc/shadow
+       readonly:
+         - /etc/passwd
+   ```
+5. **CI/CD 연동**: CI 파이프라인에 `bodaiguard test`를 삽입해 PR 단계에서 위험 명령을 자동 차단한다.
+
+#### 베스트 프랙티스 요약
+- **샌드박스·컨테이너 격리**: 모든 코딩 에이전트는 최소 권한 컨테이너에서 실행하고, 파일 시스템은 읽기 전용 루트와 제한된 볼륨만 마운트한다.  
+- **명령 허용 리스트**: 허용된 명령 집합을 사전 정의하고, 허용되지 않은 명령은 `BodAIGuard`가 차단하도록 설정한다.  
+- **실시간 모니터링**: Falco·OPA와 연계해 `bodaiguard` 차단 이벤트를 SIEM에 전송하고, 알림 기반 자동 격리 워크플로우를 구축한다.  
+- **정기적인 규칙 리뷰**: 새로운 공격 기법이 등장하면 `default.yaml`에 규칙을 추가하고, CI 테스트를 통해 회귀를 방지한다.  
+
+> **참고**: BodAIGuard는 오픈소스 프로젝트이며, GitHub Releases 페이지에서 최신 바이너리를 제공한다. 자세한 구현 내용은 프로젝트 README와 공식 문서를 확인한다.
+
 ## 모델 및 파라미터 보호
 - **모델 암호화 및 키 관리 (KMS)** – 모델 파일을 저장소에 업로드하기 전 암호화하고, 키는 클라우드 KMS(AWS KMS, Azure Key Vault 등)로 관리한다.  
 - **모델 서명 및 무결성 검증** – SHA‑256 해시와 디지털 서명을 이용해 배포 시 무결성을 확인한다.  
@@ -238,5 +296,6 @@ Drift detected: similarity 0.61
 - **AI 앱 개발 가이드 (위키독스)** – AI 애플리케이션 개발 전 단계와 테스트 흐름[[AI 앱 개발: 개념에서 생산까지](https://wikidocs.net/323763)]  
 - **AWS Well‑Architected 프레임워크** – 운영 우수성, 보안, 비용 최적화 원칙[[AWS Well‑Architected 프레임워크 PDF](https://docs.aws.amazon.com/ko_kr/wellarchitected/latest/framework/wellarchitected-framework.pdf)]  
 - **GPAI 위험 관리 프레임워크** – AI 시스템 위험 관리와 데이터 품질 검증[[GPAI 위험 관리 프레임워크 PDF](https://astlyi.s3.ap-northeast-2.amazonaws.com/2025/TTA_%E1%84%87%E1%85%A5%E1%86%B7%E1%84%8B%E1%85%AD%E1%86%BC+%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9%E1%86%BC%E1%84%8C%E1%85%B5%E1%84%82%E1%85%B3+(GPAI)+%E1%84%8B%E1%85%B1%E1%84%92%E1%85%A5%E1%86%B7+%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%B7%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B3.pdf)]  
+- **AI 코딩 에이전트 위험 방지** – BodAIGuard 프로젝트 및 적용 가이드[[EUNO.NEWS 기사](https://euno.news/posts/ko/your-ai-agent-just-ran-rm-rf-heres-how-to-stop-it-06b436)]  
 
 *본 문서는 현재 제공된 리서치 자료를 기반으로 작성되었습니다. 구체적인 구현 가이드나 최신 위협 상세 내용은 추가 조사가 필요합니다.*

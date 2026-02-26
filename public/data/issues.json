@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 319,
-      "number": 319,
-      "title": "문서 요청 #319",
-      "body": "",
+      "id": 317,
+      "number": 317,
+      "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-built-agentspace-a-private-chat-room-for-opencla-2804c2)\n**관련도**: 88/100\n**핵심 토픽**: OpenClaw, AgentSpace chat room, Self‑hosted agent UI\n\n## 뉴스 요약\nAgentSpace란 무엇인가? AgentSpace는 OpenClaw 에이전트를 위해 특별히 설계된 오픈소스, 자체 호스팅 채팅 방이다. 아이디어는 간단하다: 에이전트가 작성하고, 인간은 관찰한다.\n\n## 상세 내용\nSource: Dev.to\nAgentSpace란?\nAgentSpace는 OpenClaw 에이전트를 위해 특별히 설계된 오픈‑소스, 자체 호스팅 채팅 방입니다. 아이디어는 간단합니다: 에이전트가 글을 쓰고, 인간이 관찰한다. 이를 실행하고, 보안 코드를 원하는 사람에게 공유하면, 서로 다른 설정의 에이전트들이 대화를 시작할 때 어떤 일이 일어나는지 볼 수 있습니다.\nGitHub:\nDemo:\n저는 제 OpenClaw 에이전트가 다른 에이전트와 함께 방에 있을 때 어떻게 행동하는지 보고 싶었습니다—단순히 제 에이전트가 스스로와 대화하는 것이 아니라, 서로 다른 사람들의 두 에이전트가 공유된 컨텍스트나 조정 없이 상호작용하는 모습을 실제로 관찰하고 싶었습니다. 기존 도구들은 인간을 위해 만들어졌고, 에이전트를 위해서는 부족했기에 최소한의 무언가를 만들었습니다.\n아마도 설계상의 결함, 아키텍처상의 실수, 그리고 누락된 기능들이 있을 것입니다. 더 나은 접근법이 분명히 존재하겠지만, 현재는 동작하고, 관찰하는 재미가 있습니다.\nOpenClaw 혹은 멀티‑에이전트 시스템을 실험하고 있다면 여러분의 의견을 듣고 싶습니다:\n개념이나 아키텍처에 대한 피드백\n버그를 발견하면 이슈 제기\n기여하고 싶다면 PR 제출\n행복한 코딩 되세요! 🙂\n\n## 판단 근거\nAgentSpace는 OpenClaw 에이전트를 위한 새로운 오픈‑소스 채팅 UI이며, 현재 위키에 해당 주제가 없으므로 독립 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -24,18 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-02-26T06:33:19.681Z",
-      "updated_at": "2026-02-26T06:33:19.685Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/319",
-      "documentSlug": "observability/319",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/observability/319.md",
+      "created_at": "2026-02-26T06:29:21.740Z",
+      "updated_at": "2026-02-26T06:29:21.743Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/317",
+      "documentSlug": "ai/agentspace-openclaw",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/agentspace-openclaw.md",
       "comments": 0
     },
     {
-      "id": 317,
-      "number": 317,
-      "title": "문서 요청 #317",
-      "body": "",
+      "id": 319,
+      "number": 319,
+      "title": " [요청] OpenTelemetry와 Observability Warehouse 부상",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/why-opentelemetry-is-paving-the-way-for-the-rise-o-a8fbee)\n**관련도**: 85/100\n**핵심 토픽**: OpenTelemetry 채택, Observability Warehouse, 분산 관측성 트렌드\n\n## 뉴스 요약\nImply의 수석 아키텍트이자 Apache Druid의 창시자인 Eric Tschetter는 애플리케이션 계측을 위한 오픈소스 OpenTelemetry의 급속한 채택에 대해 설명합니다.\n\n## 상세 내용\nSource: DevOps.com\nOverview\nImply의 수석 아키텍트이자 Apache Druid의 창시자인 Eric Tschetter는 애플리케이션 계측을 위한 오픈소스 OpenTelemetry의 빠른 채택이 현대 관측성 아키텍처를 어떻게 재구성하고 있는지 설명합니다. 텔레메트리 데이터 양이 급증함에 따라 조직들은 로그, 메트릭, 트레이스를 하나의 확장 가능한 분석 기반으로 통합하는 “관측성 웨어하우스” 모델로 이동하고 있습니다…\n\n## 판단 근거\nOpenTelemetry가 관측성 웨어하우스 모델을 주도한다는 트렌드가 기존 OpenTelemetry 가이드와 별도 전략 문서로 다루어야 함을 보여준다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -55,11 +55,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-02-26T06:30:06.375Z",
-      "updated_at": "2026-02-26T06:30:06.379Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/317",
-      "documentSlug": "317",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/317.md",
+      "created_at": "2026-02-26T06:28:17.170Z",
+      "updated_at": "2026-02-26T06:28:17.173Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/319",
+      "documentSlug": "observability/opentelemetry-observability-warehouse",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/observability/opentelemetry-observability-warehouse.md",
       "comments": 0
     },
     {
@@ -2087,5 +2087,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-02-26T06:33:19.685Z"
+  "lastUpdated": "2026-02-26T06:29:21.743Z"
 }
