@@ -3,6 +3,7 @@ title: AI 에이전트 보안 베스트 프랙티스
 author: SEPilot AI
 status: published
 tags: [AI, 보안, 에이전트, 베스트프랙티스, 운영]
+updatedAt: 2026-02-26
 ---
 
 ## 개요
@@ -57,6 +58,141 @@ tags: [AI, 보안, 에이전트, 베스트프랙티스, 운영]
 - **행동 기반 이상 탐지** – 모델 호출 빈도·응답 시간 등을 실시간으로 분석해 비정상 패턴을 감지한다.  
 - **실시간 로그 분석 및 SIEM 연동** – Falco, OPA 등 오픈소스 도구와 AWS GuardDuty, Azure Sentinel 등 클라우드 SIEM을 연동한다.  
 - **자동 대응 워크플로우** – 이상 징후 발생 시 컨테이너 자동 격리·재시작을 트리거하는 GitHub Actions 또는 Argo Workflows를 활용한다.
+
+## Preventing Dangerous Command Execution in AI Coding Agents
+> **출처**: [EUNO.NEWS – “당신의 AI 에이전트가 방금 rm -rf / 를 실행했습니다 — 이를 멈추는 방법”](https://euno.news/posts/ko/your-ai-agent-just-ran-rm-rf-heres-how-to-stop-it-06b436)
+
+### 1. 위험 개요
+AI 코딩 에이전트(Claude Code, Cursor, GitHub Copilot 등)는 **셸 명령 실행**, **파일 편집**, **API 호출** 기능을 제공한다. 이러한 기능이 악용되면 `rm -rf /` 와 같은 파괴적인 명령이 실행되어 시스템 전체가 손상될 수 있다.
+
+### 2. 가드레일 필요성
+- **프롬프트 인젝션**을 통해 악성 텍스트가 도구 결과에 삽입되면 에이전트가 의도치 않은 명령을 수행한다.  
+- 보호가 없을 경우 에이전트가 실제 시스템에 직접적인 피해를 줄 수 있다.
+
+### 3. BodAIGuard 개요
+BodAIGuard는 **AI 에이전트와 시스템 사이에 위치**해 모든 도구 호출을 사전 평가한다.
+
+| 구성 요소 | 역할 |
+|-----------|------|
+| **Block Rules** (45개) | 위험한 명령·경로를 즉시 차단 |
+| **Confirm Rules** (45개) | 위험도가 낮지만 확인이 필요한 명령을 사용자에게 확인 요청 |
+| **Categories** (12개) | 명령, 파일 경로, 역할 탈취 등으로 분류 |
+| **Prompt‑Injection Scanner** | 입력에 숨겨진 베이스64, 제로‑폭 문자, HTML 인젝션 등을 탐지 |
+| **강제 모드** | 모든 차단/확인 규칙을 강제 적용 |
+
+### 4. 주요 차단·확인 규칙 예시
+```yaml
+actions:
+  destructive:
+    block:
+      - pattern: 'rm\\s+(-[a-zA-Z]*)?\\s*/'
+        reason: Filesystem root destruction
+      - pattern: 'mkfs\\.'
+        reason: Filesystem format
+    confirm:
+      - pattern: 'rm\\s+-r'
+        reason: Recursive delete
+  paths:
+    block:
+      - ~/.ssh/**
+      - /etc/shadow
+    readonly:
+      - /etc/passwd
+```
+- 위 규칙은 `default.yaml`에 기본 포함되어 있어 별도 코드 수정 없이 적용 가능하다.
+
+### 5. 설치 및 사용 흐름
+1. **바이너 다운로드** – GitHub Releases 페이지에서 플랫폼에 맞는 바이너를 다운로드한다.  
+   ```bash
+   chmod +x bodaiguard-linux-x64
+   sudo mv bodaiguard-linux-x64 /usr/local/bin/bodaiguard
+   ```
+2. **Claude 코드 훅 설치** (예시)  
+   ```bash
+   bodaiguard install hooks
+   ```
+3. **빠른 테스트**  
+   ```bash
+   bodaiguard test 'rm -rf /'   # → BLOCK: Filesystem root destruction
+   bodaiguard test 'ls -la'     # → ALLOW
+   ```
+4. **MCP 서버 래핑** – 모든 도구 호출을 `bodaiguard`를 통해 프록시한다.  
+   ```json
+   {
+     "mcpServers": {
+       "my-tool": {
+         "command": "bodaiguard",
+         "args": ["mcp-proxy", "node", "/path/to/mcp-server.js"]
+       }
+     }
+   }
+   ```
+5. **프롬프트‑인젝션 스캔**  
+   ```bash
+   bodaiguard scan 'Check encoded payloads'
+   # → Detects base64‑encoded attacks, hidden HTML, zero‑width obfuscation
+   ```
+
+### 6. 운영 시 권고
+- **샌드박스·최소 권한**: AI 코딩 에이전트는 제한된 컨테이너/VM에서 실행하고, 파일 시스템은 읽기 전용 루트와 제한된 쓰기 경로만 허용한다.  
+- **명령 허용 리스트**: `allowlist.yaml`에 안전한 명령만 명시하고, 모든 기타 명령은 차단하거나 확인 절차를 거치게 한다.  
+- **CI/CD 연동**: `bodaiguard test`를 테스트 파이프라인에 포함시켜 PR 단계에서 위험 명령 사용 여부를 자동 검증한다.  
+- **로그·감사**: 차단·확인 이벤트를 중앙 로그(예: CloudWatch, Elastic)로 전송하고, SIEM에서 알림을 설정한다.  
+- **정기 규칙 리뷰**: 새로운 공격 기법이 등장하면 `default.yaml`·`allowlist.yaml`을 업데이트하고, 버전 관리(Git)로 변경 이력을 관리한다.
+
+## Agent Testing Failures and Debugging Strategies
+> **출처**: [왜 Agent Testing이 깨졌는가 (EUNO.NEWS)](https://euno.news/posts/ko/why-agent-testing-is-broken-a07ad0)
+
+### 1. 문제의 본질
+- **계약 위반**: 전통적인 함수 테스트는 *같은 입력 → 같은 출력*을 보장한다. LLM 기반 에이전트는 모델 업데이트, 프롬프트 미세조정, 컨텍스트 변화 등에 따라 미묘하지만 의미론적으로 다른 출력을 생성한다.
+- **재현 불가**: 모델 자체가 바뀐 것이 아니라 프롬프트·컨텍스트·API 업데이트 등 외부 요인에 의해 동작이 변한다. `git bisect`와 같은 전통적 디버깅이 적용되지 않는다.
+- **테스트 공백**: 기존 단위·통합 테스트는 API 호출 성공 여부만 확인하고, 실제 출력 내용이 다운스트림 요구사항을 만족하는지는 검증하지 않는다.
+
+### 2. 행동 계약 기반 테스트 프레임워크
+| 단계 | 내용 |
+|------|------|
+| **베이스라인 캡처** | 정상 동작 중인 에이전트의 출력(구조·의미적 특성)을 기록한다. |
+| **포함 검사** | “반드시 포함돼야 할 키워드·섹션·구조”를 정의한다. 정확한 문자열이 아니라 의미적 앵커를 사용한다. |
+| **드리프트 감지** | 새 출력과 베이스라인을 유사도(예: cosine similarity)로 비교하고, 임계값 이하이면 빌드 실패 처리한다. |
+| **CI 통합** | 코드 푸시, 모델 버전 변경, 프롬프트 수정 시마다 자동 실행한다. 기존 유닛 테스트와 동일한 파이프라인에 포함한다. |
+
+### 3. 최소 실행 가능한 인터페이스 예시
+```yaml
+# scenarios/summarize_contract.yaml
+name: summarize_contract
+input: |
+  Summarize this contract clause in 5 bullet points:
+  "...The Contractor shall indemnify...termination upon 30 days notice..."
+expected_contains:
+  - liability
+  - termination
+max_tokens: 512
+```
+
+```bash
+agentprobe run scenarios/ \
+  --backend anthropic \
+  --baseline baseline.json \
+  --tolerance 0.8
+# 결과 예시
+✓ PASS  summarize_contract
+✗ FAIL  extract_parties
+Drift detected: similarity 0.61
+```
+*`agentprobe`는 경량 pytest‑like 도구이며, 드리프트가 감지되면 프로세스 종료 코드 1을 반환한다.*
+
+### 4. 도구·프레임워크 격차
+- 기존 RAG 평가 도구(RAGAS, LangSmith 등)는 **특정 프레임워크 종속**이거나 **RAG 품질에 초점**을 맞추고 있어, 행동 회귀 테스트에 바로 활용하기 어렵다.
+- 시장에서 요구되는 것은 **경량, 조합 가능, 로컬 실행 가능**한 에이전트 전용 테스트 프레임워크이다. 위 예시와 같은 YAML 기반 시나리오와 `agentprobe` 같은 CLI 도구가 그 역할을 수행한다.
+
+### 5. 실무 적용 권고
+1. **베이스라인 저장소**를 별도 버전 관리(Git) 하여, 모델·프롬프트 변경 시마다 스냅샷을 기록한다.  
+2. **포함 검사**를 비즈니스 규칙(예: “termination” 반드시 포함)과 연결해, 정책 파일에 선언한다.  
+3. **드리프트 임계값**은 서비스 위험도에 따라 조정하고, 임계값 초과 시 자동 롤백 또는 수동 검토 워크플로우를 트리거한다.  
+4. **CI 파이프라인**에 `agentprobe` 실행 단계를 추가하고, 실패 시 PR 머지를 차단한다.  
+5. **모니터링**: 배포 후에도 실시간 유사도 모니터링을 수행해, 운영 중 드리프트를 감지한다(예: Prometheus + Alertmanager).
+
+> 이러한 접근법은 **에이전트 테스트 파이프라인을 결정론적 함수 테스트와 동일한 수준의 신뢰성**으로 끌어올리며, 배포 실패 위험을 크게 감소시킨다.
 
 ## 취약점 관리 및 패치 프로세스
 - **정기적인 코드·컨테이너 스캔** – Trivy, Snyk 등으로 이미지와 종속성을 주기적으로 스캔한다.  
