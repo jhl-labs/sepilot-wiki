@@ -1,6 +1,147 @@
 {
   "entries": [
     {
+      "id": "59e7cc05-84d9-4b0c-b791-a2900d77310e",
+      "timestamp": "2026-02-26T00:25:00.485Z",
+      "actionType": "generate",
+      "issueNumber": 315,
+      "issueTitle": "문서 요청 #315",
+      "documentSlug": "ai/315",
+      "documentTitle": "오픈 데이터셋 이니셔티브 – AI 에이전트 개발을 위한 데이터 인프라",
+      "summary": "새 문서 \"오픈 데이터셋 이니셔티브 – AI 에이전트 개발을 위한 데이터 인프라\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3642
+            },
+            {
+              "step": "outline",
+              "durationMs": 6520
+            },
+            {
+              "step": "write",
+              "durationMs": 18353
+            },
+            {
+              "step": "review",
+              "durationMs": 5573
+            }
+          ],
+          "totalDurationMs": 34089,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 6
+          },
+          "estimatedTokens": {
+            "estimated": 1523,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "13853aa3-70fb-42b4-8104-6754e1902e8b",
+      "timestamp": "2026-02-26T00:24:22.856Z",
+      "actionType": "modify",
+      "issueNumber": 314,
+      "issueTitle": " [업데이트] 런타임 LLM 금지 정책과 대안 설계",
+      "documentSlug": "ai/ai",
+      "documentTitle": "[업데이트] AI 에이전트 개요 및 최신 플랫폼",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 런타임 LLM 금지 정책과 대안 설계\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 15
+      }
+    },
+    {
+      "id": "9f5f8ff4-10bc-4507-999d-48cf0e9db381",
+      "timestamp": "2026-02-26T00:23:16.290Z",
+      "actionType": "modify",
+      "issueNumber": 313,
+      "issueTitle": " [업데이트] OpenClaw 보안 사고와 Docker 샌드박스 한계 – 최신 대응 방안",
+      "documentSlug": "docker/run-openclaw-securely-in-docker-sandboxes",
+      "documentTitle": "Run OpenClaw Securely in Docker Sandboxes",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenClaw 보안 사고와 Docker 샌드박스 한계 – 최신 대응 방안\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 55,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "cc298387-4689-401d-a830-9f4fa1336440",
+      "timestamp": "2026-02-26T00:22:36.174Z",
+      "actionType": "generate",
+      "issueNumber": 312,
+      "issueTitle": "문서 요청 #312",
+      "documentSlug": "ai/312",
+      "documentTitle": "LoRA 재활용 및 Adaptive Merging 가이드",
+      "summary": "새 문서 \"LoRA 재활용 및 Adaptive Merging 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3710
+            },
+            {
+              "step": "outline",
+              "durationMs": 7029
+            },
+            {
+              "step": "write",
+              "durationMs": 23591
+            },
+            {
+              "step": "review",
+              "durationMs": 5364
+            }
+          ],
+          "totalDurationMs": 39694,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 1799,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "0580b265-8ad6-4765-adee-206a0cc474a1",
+      "timestamp": "2026-02-26T00:21:53.583Z",
+      "actionType": "modify",
+      "issueNumber": 311,
+      "issueTitle": " [업데이트] Agentic SDLC – AI‑Driven 소프트웨어 팩토리와 보안 고려사항",
+      "documentSlug": "backend/agentic-faas-mdl",
+      "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Agentic SDLC – AI‑Driven 소프트웨어 팩토리와 보안 고려사항\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 49,
+        "deletions": 0
+      }
+    },
+    {
       "id": "e84b3bd7-d0a9-4018-80b9-e6066c53e647",
       "timestamp": "2026-02-26T00:21:07.739Z",
       "actionType": "maintain",
@@ -6201,5 +6342,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-26T00:21:07.739Z"
+  "lastUpdated": "2026-02-26T00:25:00.485Z"
 }
