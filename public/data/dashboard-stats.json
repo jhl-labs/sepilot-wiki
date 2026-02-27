@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-02-27T09:48:33.712Z",
+  "collectedAt": "2026-02-27T10:48:04.894Z",
   "overview": {
     "totalDocuments": 83,
     "publishedDocuments": 52,
     "draftDocuments": 31,
-    "openRequests": 48,
+    "openRequests": 51,
     "closedRequests": 19,
-    "totalAIActions": 296
+    "totalAIActions": 305
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
+      "aiActions": 6,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 3,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 11,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 25,
+      "estimatedTokens": 7938,
+      "totalPipelineDurationMs": 176531
     },
     "last7d": {
-      "aiActions": 199,
-      "documentsCreated": 57,
-      "documentsModified": 64,
-      "tavilyApiCalls": 171,
-      "tavilyResults": 447,
-      "estimatedTokens": 139837,
-      "totalPipelineDurationMs": 3069992
+      "aiActions": 208,
+      "documentsCreated": 60,
+      "documentsModified": 67,
+      "tavilyApiCalls": 180,
+      "tavilyResults": 472,
+      "estimatedTokens": 147775,
+      "totalPipelineDurationMs": 3246523
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-02-27T09:50:36.412Z",
+      "actionType": "quality_score",
+      "issueNumber": 321,
+      "documentTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-27T09:50:24.206Z",
+      "actionType": "quality_score",
+      "issueNumber": 322,
+      "documentTitle": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-27T09:50:12.676Z",
+      "actionType": "quality_score",
+      "issueNumber": 323,
+      "documentTitle": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-27T09:50:00.635Z",
+      "actionType": "modify",
+      "issueNumber": 324,
+      "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-27T09:48:58.388Z",
+      "actionType": "modify",
+      "issueNumber": 325,
+      "documentTitle": "OpenTelemetry와 Observability Warehouse: 현황과 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-27T09:48:20.921Z",
+      "actionType": "modify",
+      "issueNumber": 326,
+      "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-02-27T09:47:30.066Z",
+      "actionType": "generate",
+      "issueNumber": 321,
+      "documentTitle": "What's new with GitHub Copilot coding agent",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 48107,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2265
+    },
+    {
+      "timestamp": "2026-02-27T09:46:31.055Z",
+      "actionType": "generate",
+      "issueNumber": 322,
+      "documentTitle": "Docker Model Runner가 macOS Apple Silicon에서 vLLM을 지원합니다",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 59573,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2663
+    },
+    {
+      "timestamp": "2026-02-27T09:45:16.835Z",
+      "actionType": "generate",
+      "issueNumber": 323,
+      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 68851,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3010
+    },
     {
       "timestamp": "2026-02-27T09:19:47.129Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 71323,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3385
-    },
-    {
-      "timestamp": "2026-02-26T00:26:59.830Z",
-      "actionType": "generate",
-      "issueNumber": 315,
-      "documentTitle": "AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 53291,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2445
-    },
-    {
-      "timestamp": "2026-02-26T00:25:00.485Z",
-      "actionType": "generate",
-      "issueNumber": 315,
-      "documentTitle": "오픈 데이터셋 이니셔티브 – AI 에이전트 개발을 위한 데이터 인프라",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 34089,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1523
-    },
-    {
-      "timestamp": "2026-02-26T00:24:22.856Z",
-      "actionType": "modify",
-      "issueNumber": 314,
-      "documentTitle": "[업데이트] AI 에이전트 개요 및 최신 플랫폼",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T00:23:16.290Z",
-      "actionType": "modify",
-      "issueNumber": 313,
-      "documentTitle": "Run OpenClaw Securely in Docker Sandboxes",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T00:22:36.174Z",
-      "actionType": "generate",
-      "issueNumber": 312,
-      "documentTitle": "LoRA 재활용 및 Adaptive Merging 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 39694,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1799
-    },
-    {
-      "timestamp": "2026-02-26T00:21:53.583Z",
-      "actionType": "modify",
-      "issueNumber": 311,
-      "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T00:21:07.739Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-25T18:29:28.773Z",
-      "actionType": "generate",
-      "issueNumber": 310,
-      "documentTitle": "Jira AI 에이전트 가이드 – 인간·AI 협업을 위한 설정 및 운영 매뉴얼",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 49329,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2283
-    },
-    {
-      "timestamp": "2026-02-25T18:28:36.274Z",
-      "actionType": "generate",
-      "issueNumber": 309,
-      "documentTitle": "AI 코딩 어시스턴스와 생산성 역설 – 개발자 Throughput 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 33566,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1509
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 295,
+      "totalEstimatedTokens": 188026,
+      "avgDurationMs": 55639
+    },
     "unknown": {
       "totalActions": 10,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 286,
-      "totalEstimatedTokens": 180088,
-      "avgDurationMs": 55503
     }
   }
 }
