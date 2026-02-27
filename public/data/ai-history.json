@@ -1,6 +1,234 @@
 {
   "entries": [
     {
+      "id": "54c92b2e-5710-4429-9dcf-bdb6b934d9de",
+      "timestamp": "2026-02-27T09:50:36.412Z",
+      "actionType": "quality_score",
+      "issueNumber": 321,
+      "issueTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
+      "documentSlug": "github/what-8217-s-new-with-github-copilot-coding-agent",
+      "documentTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "2a3d669f-bda0-45b2-9539-0776c3594103",
+      "timestamp": "2026-02-27T09:50:24.206Z",
+      "actionType": "quality_score",
+      "issueNumber": 322,
+      "issueTitle": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
+      "documentSlug": "docker-model-runner-brings-vllm-to-macos-with-appl",
+      "documentTitle": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "e1d6aca9-d64b-4394-8095-9f2929b51c1b",
+      "timestamp": "2026-02-27T09:50:12.676Z",
+      "actionType": "quality_score",
+      "issueNumber": 323,
+      "issueTitle": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
+      "documentSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
+      "documentTitle": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
+      "summary": "자동 품질 검토 통과 (92점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "cb0eabd4-9b0d-4043-9362-56e3ae7bb0a8",
+      "timestamp": "2026-02-27T09:50:00.635Z",
+      "actionType": "modify",
+      "issueNumber": 324,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요",
+      "documentSlug": "backend/wiki-api-route-guide",
+      "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 2,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "2cc95401-9d28-4f48-b4b7-c4c89ecac244",
+      "timestamp": "2026-02-27T09:48:58.388Z",
+      "actionType": "modify",
+      "issueNumber": 325,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] observability/319 문서 참조 URL 확인 필요",
+      "documentSlug": "observability/319",
+      "documentTitle": "OpenTelemetry와 Observability Warehouse: 현황과 구현 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] observability/319 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 2,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "931bc195-8dbc-4466-8380-f51c25d64f4c",
+      "timestamp": "2026-02-27T09:48:20.921Z",
+      "actionType": "modify",
+      "issueNumber": 326,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] observability/opentelemetry 문서 참조 URL 확인 필요",
+      "documentSlug": "observability/opentelemetry",
+      "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] observability/opentelemetry 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "2919014e-5b12-480a-a30a-b4d6895dacff",
+      "timestamp": "2026-02-27T09:47:30.066Z",
+      "actionType": "generate",
+      "issueNumber": 321,
+      "issueTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
+      "documentSlug": "github/what-8217-s-new-with-github-copilot-coding-agent",
+      "documentTitle": "What's new with GitHub Copilot coding agent",
+      "summary": "새 문서 \"What's new with GitHub Copilot coding agent\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2797
+            },
+            {
+              "step": "outline",
+              "durationMs": 8366
+            },
+            {
+              "step": "write",
+              "durationMs": 27924
+            },
+            {
+              "step": "review",
+              "durationMs": 9020
+            }
+          ],
+          "totalDurationMs": 48107,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2265,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5fadf0ae-8d6a-4523-9b50-71364edc3974",
+      "timestamp": "2026-02-27T09:46:31.055Z",
+      "actionType": "generate",
+      "issueNumber": 322,
+      "issueTitle": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
+      "documentSlug": "docker-model-runner-brings-vllm-to-macos-with-appl",
+      "documentTitle": "Docker Model Runner가 macOS Apple Silicon에서 vLLM을 지원합니다",
+      "summary": "새 문서 \"Docker Model Runner가 macOS Apple Silicon에서 vLLM을 지원합니다\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6315
+            },
+            {
+              "step": "outline",
+              "durationMs": 7464
+            },
+            {
+              "step": "write",
+              "durationMs": 31121
+            },
+            {
+              "step": "review",
+              "durationMs": 14673
+            }
+          ],
+          "totalDurationMs": 59573,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2663,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "22716bc6-a560-4c5e-870b-f4859c2d9f0a",
+      "timestamp": "2026-02-27T09:45:16.835Z",
+      "actionType": "generate",
+      "issueNumber": 323,
+      "issueTitle": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
+      "documentSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
+      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
+      "summary": "새 문서 \"멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 8653
+            },
+            {
+              "step": "outline",
+              "durationMs": 18178
+            },
+            {
+              "step": "write",
+              "durationMs": 31659
+            },
+            {
+              "step": "review",
+              "durationMs": 10361
+            }
+          ],
+          "totalDurationMs": 68851,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3010,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "0ef05436-08e7-4890-9c97-1a59f9e60e37",
       "timestamp": "2026-02-27T09:19:47.129Z",
       "actionType": "maintain",
@@ -6640,5 +6868,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-02-27T09:19:47.129Z"
+  "lastUpdated": "2026-02-27T09:50:36.412Z"
 }

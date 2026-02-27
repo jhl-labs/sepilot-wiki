@@ -3,7 +3,7 @@ title: OpenTelemetry 입문 – 관측성 통합 가이드
 author: SEPilot AI
 status: published
 tags: [OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF]
-updatedAt: 2026-02-24
+updatedAt: 2026-02-27
 redirect_from:
   - observability-open-telemetry-guide
 order: 1
@@ -12,13 +12,13 @@ order: 1
 ## 1. OpenTelemetry 소개  
 
 ### 관측성의 기존 문제점  
-전통적으로 로그, 메트릭, 분산 추적은 각각 별도 에이전트·라이브러리·SDK 로 구현되었습니다. 벤더를 교체하려면 각 계측 코드를 처음부터 다시 작성해야 하는 **벤더 락인** 문제가 있었습니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
+관측성은 **조각난 혼란**이었습니다. 로그용 에이전트 하나, 메트릭용 다른 라이브러리, 그리고 분산 추적용 독점 SDK가 별도로 존재했으며, 벤더를 교체하려면 각 계측 코드를 처음부터 다시 작성해야 하는 **벤더 락인** 문제가 있었습니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
 
 ### OpenTelemetry 정의 및 핵심 목표  
-OpenTelemetry(OTel)는 **오픈‑소스 관측 프레임워크**로, 트레이스·메트릭·로그와 같은 텔레메트리 데이터를 **생성·수집·내보내기** 할 수 있게 해줍니다. 스토리지 백엔드나 시각화 도구가 아니라, 텔레메트리 데이터를 위한 **범용 언어·전달 시스템** 역할을 합니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
+OpenTelemetry(OTel)는 **오픈‑소스 관측 프레임워크**로, 트레이스·메트릭·로그와 같은 텔레메트리 데이터를 **생성·수집·내보내기** 할 수 있게 해줍니다. 스토리지 백엔드나 시각화 도구가 아니라, 텔레메트리 데이터를 위한 **범용 언어·전달 시스템** 역할을 하며, “데이터는 여러분의 것이고 벤더가 아니라는 것”을 보장합니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
 
 ### CNCF 프로젝트 현황 및 성장 배경  
-OpenTelemetry는 CNCF에서 **Kubernetes 바로 뒤로 두 번째로 가장 활발한 프로젝트**가 되었으며, 2019년 Google의 OpenCensus와 CNCF의 OpenTracing이 합병하면서 탄생했습니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
+OpenTelemetry는 **CNCF에서 Kubernetes 바로 뒤로 두 번째로 가장 활발한 프로젝트**가 되었으며, 2019년 Google의 OpenCensus와 CNCF의 OpenTracing이 합병하면서 탄생했습니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
 
 ---
 

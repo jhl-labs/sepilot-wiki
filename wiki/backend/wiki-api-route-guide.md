@@ -9,7 +9,7 @@ redirect_from:
   - wiki-api
 order: 1
 related_docs: ["api-service-layer.md"]
-updatedAt: 2026-02-25
+updatedAt: 2026-02-27
 ---
 
 ## 1. 문서 개요
@@ -352,6 +352,7 @@ fetch('/api/wiki/technology/web/react', {
 | 2024-03-05 | v1.1.0 | 인증·인가 섹션에 JWT 상세 추가 | 보안 가이드 보강 |
 | 2024-04-12 | v1.2.0 | 오류 코드 표에 409·410 추가 | 개발자 오류 처리 개선 |
 | 2024-05-08 | v1.3.0 | 쿼리 파라미터(`preview`, `includeDeleted`, `mode`) 및 soft/hard delete 설명 추가 | 사용성 향상 |
+| 2026-02-27 | v1.4.0 | Next.js 라우팅 문서 업데이트 반영 (파일‑시스템 기반 라우팅, 레이아웃·페이지 파일 규칙) | 최신 Next.js 라우팅 개념과 일치 |
 
 **마이그레이션 가이드**  
 - 기존 `slug` 기반 경로는 그대로 유지됩니다.  
@@ -362,7 +363,8 @@ fetch('/api/wiki/technology/web/react', {
 
 ## 10. 참고 자료
 - **API 문서 작성 가이드라인** – 로버트의 가이드라인[[API 문서 작성을 위한 로버트의 가이드라인](https://koko8829.tistory.com/2496)]  
-- **Next.js App Router 문서** – 공식 문서([Next.js Docs](https://nextjs.org/docs/app/building-your-application/routing))  
+- **Next.js App Router 문서** – 공식 문서([Next.js Docs – Routing](https://nextjs.org/docs/app/building-your-application/routing))  
+  *Next.js는 파일‑시스템 기반 라우팅을 사용합니다. `app` 디렉터리 아래에 `page.tsx`·`layout.tsx` 파일을 배치해 각각 페이지와 레이아웃을 정의하며, 폴더 구조가 URL 세그먼트를 결정합니다. 루트 레이아웃(`app/layout.tsx`)은 `html`·`body` 태그를 포함해야 하고, 중첩 레이아웃은 `children` prop을 통해 하위 페이지·레아웃을 감쌉니다.*  
 - **OAuth 2.0 표준** – RFC 6749([IETF RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749))  
 - **JWT (JSON Web Token)** – RFC 7519([IETF RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519))  
 
@@ -400,7 +402,7 @@ test updating the title of /api/wiki/technology/web/react
 test deleting the page with mode=hard
 ```
 
-Octrafic는 각각에 대해 **HTTP 메서드, URL, 헤더, 본문**을 자동 생성하고 실행합니다. 성공/실패 결과와 응답 본문을 바로 확인할 수 있습니다.
+Octrafic는 각각에 대해 **HTTP 메서드, URL, 헤더, 본문**을 자동 생성·실행합니다. 성공/실패 결과와 응답 본문을 바로 확인할 수 있습니다.
 
 #### 2) 비‑인터랙티브 모드 (CI/CD용)
 ```bash

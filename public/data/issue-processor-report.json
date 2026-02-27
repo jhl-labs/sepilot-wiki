@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-02-27T08:43:48.162Z",
+  "timestamp": "2026-02-27T09:50:39.161Z",
   "dryRun": false,
-  "totalIssuesScanned": 8,
+  "totalIssuesScanned": 12,
   "categories": {
     "draft_review": [
+      {
+        "number": 323,
+        "title": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 322,
+        "title": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 321,
+        "title": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 317,
         "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
@@ -47,11 +62,69 @@
         "daysSinceUpdate": 1
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 324,
+        "title": "[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요",
+        "daysSinceUpdate": -1
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 323,
+      "title": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t."
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 322,
+      "title": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 321,
+      "title": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 326,
+      "title": "[Wiki Maintenance] [URL 변경] observability/opentelemetry 문서 참조 URL 확인 필요"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 325,
+      "title": "[Wiki Maintenance] [URL 변경] observability/319 문서 참조 URL 확인 필요"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 324,
+      "title": "[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 323,
+      "title": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
+      "score": 92,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/multi-agent-workflows-often-fail-here-s-how-to-eng.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 322,
+      "title": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/docker-model-runner-brings-vllm-to-macos-with-appl.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 321,
+      "title": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/github/what-8217-s-new-with-github-copilot-coding-agent.md"
+    }
+  ],
+  "actionCount": 9,
   "maxActions": 60
 }
