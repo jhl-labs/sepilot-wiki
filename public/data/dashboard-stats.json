@@ -1,43 +1,83 @@
 {
-  "collectedAt": "2026-03-01T09:43:40.795Z",
+  "collectedAt": "2026-03-01T10:43:11.177Z",
   "overview": {
     "totalDocuments": 86,
     "publishedDocuments": 55,
     "draftDocuments": 31,
-    "openRequests": 51,
+    "openRequests": 54,
     "closedRequests": 19,
-    "totalAIActions": 308
+    "totalAIActions": 312
   },
   "activity": {
     "last1h": {
       "aiActions": 2,
-      "documentsCreated": 0,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 7,
+      "estimatedTokens": 2872,
+      "totalPipelineDurationMs": 60882
     },
     "last24h": {
-      "aiActions": 3,
-      "documentsCreated": 0,
+      "aiActions": 7,
+      "documentsCreated": 3,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 9,
+      "tavilyResults": 17,
+      "estimatedTokens": 6842,
+      "totalPipelineDurationMs": 146105
     },
     "last7d": {
-      "aiActions": 162,
-      "documentsCreated": 47,
+      "aiActions": 166,
+      "documentsCreated": 50,
       "documentsModified": 59,
-      "tavilyApiCalls": 141,
-      "tavilyResults": 373,
-      "estimatedTokens": 118822,
-      "totalPipelineDurationMs": 2588040
+      "tavilyApiCalls": 150,
+      "tavilyResults": 390,
+      "estimatedTokens": 125664,
+      "totalPipelineDurationMs": 2734145
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-01T09:43:47.294Z",
+      "actionType": "quality_score",
+      "issueNumber": 329,
+      "documentTitle": "[Wiki Maintenance] [문서] vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-01T09:43:36.911Z",
+      "actionType": "generate",
+      "issueNumber": 327,
+      "documentTitle": "React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 60882,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2872
+    },
+    {
+      "timestamp": "2026-03-01T09:42:26.647Z",
+      "actionType": "generate",
+      "issueNumber": 328,
+      "documentTitle": "monaco-editor/react 기반 인라인 코드 편집기 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 48826,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2306
+    },
+    {
+      "timestamp": "2026-03-01T09:41:30.351Z",
+      "actionType": "generate",
+      "issueNumber": 329,
+      "documentTitle": "vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 36397,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1664
+    },
     {
       "timestamp": "2026-03-01T09:08:50.535Z",
       "actionType": "coverage_analysis",
@@ -197,53 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T06:29:57.330Z",
-      "actionType": "modify",
-      "issueNumber": 320,
-      "documentTitle": "AI 코딩 어시스턴스와 생산성 역설 – 개발자 Throughput 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T06:29:21.739Z",
-      "actionType": "generate",
-      "issueNumber": 317,
-      "documentTitle": "AgentSpace – OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 44003,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2021
-    },
-    {
-      "timestamp": "2026-02-26T06:28:17.169Z",
-      "actionType": "generate",
-      "issueNumber": 319,
-      "documentTitle": "OpenTelemetry와 Observability Warehouse 부상",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 87902,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4097
-    },
-    {
-      "timestamp": "2026-02-26T06:23:56.718Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 298,
-      "totalEstimatedTokens": 188026,
-      "avgDurationMs": 55639
+      "totalActions": 302,
+      "totalEstimatedTokens": 194868,
+      "avgDurationMs": 55368
     },
     "unknown": {
       "totalActions": 10,
