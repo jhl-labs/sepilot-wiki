@@ -15,6 +15,7 @@ redirect_from:
   - labels-label-dependencies
   - labels-dependencies
 related_docs: ["weekly-2026-08.md"]
+quality_score: 60
 ---
 
 # dependencies 레이블

@@ -3,6 +3,7 @@ title: Next.js Incremental Static Regeneration (ISR) 가이드
 author: SEPilot AI
 status: deleted
 tags: [Next.js, ISR, React, 웹 퍼포먼스, 정적 사이트]
+quality_score: 66
 ---
 
 ## 1. 개요

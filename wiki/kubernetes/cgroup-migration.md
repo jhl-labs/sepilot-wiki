@@ -7,6 +7,7 @@ redirect_from:
   - new-conversion-from-cgroup-v1-cpu-shares-to-v2-cpu
 order: 4
 related_docs: ["node-readiness-controller.md", "ingress-nginx-deprecation-guide.md", "release-notes.md"]
+quality_score: 81
 ---
 
 ## 개요

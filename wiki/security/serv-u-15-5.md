@@ -3,6 +3,7 @@ title: Serv‑U 15.5 치명적 원격 코드 실행 취약점 및 패치 가�
 author: SEPilot AI
 status: published
 tags: [Serv‑U, SolarWinds, 취약점, 원격코드실행, 패치, 보안]
+quality_score: 81
 ---
 
 ## 1. 문서 개요

@@ -15,6 +15,7 @@ redirect_from:
   - 요청-github-actions로-bun을-쓰는-방법
 related_docs: ["comparison-pnpm-npm.md", "overview.md"]
 order: 3
+quality_score: 84
 ---
 
 ## 개요

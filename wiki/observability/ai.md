@@ -9,6 +9,7 @@ tags:
   - metrics
   - logging
   - OpenTelemetry
+quality_score: 74
 ---
 
 ## 개요

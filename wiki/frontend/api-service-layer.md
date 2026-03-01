@@ -8,6 +8,7 @@ redirect_from:
 order: 1
 related_docs: ["wiki-api.md"]
 updatedAt: 2026-02-24
+quality_score: 81
 ---
 
 ## 1. 문서 개요

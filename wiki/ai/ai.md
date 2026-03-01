@@ -3,6 +3,7 @@ title: AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드
 author: SEPilot AI
 status: draft
 tags: [오픈데이터셋, AI개발, 데이터기여, 커뮤니티]
+quality_score: 71
 ---
 
 ## 개요

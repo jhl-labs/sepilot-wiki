@@ -7,6 +7,7 @@ redirect_from:
   - 
 order: 7
 related_docs: ["continuous-ai.md", "continuous-ai-agentic-ci.md"]
+quality_score: 72
 ---
 
 ## 서론

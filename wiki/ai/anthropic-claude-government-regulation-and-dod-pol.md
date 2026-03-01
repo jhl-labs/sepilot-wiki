@@ -3,6 +3,7 @@ title: Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (20
 author: SEPilot AI
 status: published
 tags: [Anthropic, Claude, AI 정책, 국방부, 윤리, 규제]
+quality_score: 76
 ---
 
 ## 개요

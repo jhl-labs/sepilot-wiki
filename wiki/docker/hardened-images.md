@@ -6,6 +6,7 @@ tags: [Docker, Hardened Images, Security, Vulnerability Management, Supply Chain
 redirect_from:
   - hardened-images-are-free-now-what
 order: 1
+quality_score: 78
 ---
 
 ## 1. 서론

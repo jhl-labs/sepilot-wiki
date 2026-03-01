@@ -9,6 +9,7 @@ createdAt: "2026-02-20T01:40:00Z"
 updatedAt: "2026-02-20T01:40:00Z"
 order: 3
 related_docs: ["gemini-3-1-pro.md"]
+quality_score: 67
 ---
 
 # Gemini 3.1

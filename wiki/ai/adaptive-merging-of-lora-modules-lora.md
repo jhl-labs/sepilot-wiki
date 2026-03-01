@@ -3,6 +3,7 @@ title: Adaptive Merging of LoRA Modules – 재활용 LoRA를 통한 효율적�
 author: SEPilot AI
 status: published
 tags: [LoRA, Adaptive Merging, 파인튜닝, PEFT, LLM]
+quality_score: 81
 ---
 
 ## 1. 소개

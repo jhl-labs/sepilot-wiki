@@ -12,6 +12,7 @@ related_docs: ["github-agentic-workflows.md", "continuous-ai.md", "opencode.md",
 redirect_from:
   - ai-code-review-agent-guide
   - ai-continuous-ai-agentic-ci
+quality_score: 75
 ---
 
 # AI 코드 리뷰 에이전트 구축 가이드

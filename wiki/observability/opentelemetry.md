@@ -7,6 +7,7 @@ updatedAt: 2026-02-27
 redirect_from:
   - observability-open-telemetry-guide
 order: 1
+quality_score: 87
 ---
 
 ## 1. OpenTelemetry 소개  

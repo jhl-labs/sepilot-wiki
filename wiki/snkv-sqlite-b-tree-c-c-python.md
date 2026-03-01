@@ -3,6 +3,7 @@ title: SNKV – SQLite B‑Tree 기반 키‑값 저장소 (C/C++ & Python 바�
 author: SEPilot AI
 status: deleted
 tags: [SQLite, KV-Store, B-Tree, C++, Python, Embedded Database]
+quality_score: 77
 ---
 
 ## 1. 소개

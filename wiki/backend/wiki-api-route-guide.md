@@ -10,6 +10,7 @@ redirect_from:
 order: 1
 related_docs: ["api-service-layer.md"]
 updatedAt: 2026-02-27
+quality_score: 88
 ---
 
 ## 1. 문서 개요

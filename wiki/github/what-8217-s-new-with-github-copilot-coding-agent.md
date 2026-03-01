@@ -3,6 +3,7 @@ title: What's new with GitHub Copilot coding agent
 author: SEPilot AI
 status: published
 tags: [GitHub Copilot, coding agent, model picker, self-review, security scanning, custom agents, CLI handoff]
+quality_score: 76
 ---
 
 ## 개요

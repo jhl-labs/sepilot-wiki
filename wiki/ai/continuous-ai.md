@@ -9,6 +9,7 @@ createdAt: "2026-02-21T13:05:00Z"
 updatedAt: 2026-02-25
 order: 2
 related_docs: ["continuous-ai-agentic-ci.md", "vibe-coding.md", "opencode.md"]
+quality_score: 87
 ---
 
 # Continuous AI – 인간이 AI 오류를 검증하는 방법

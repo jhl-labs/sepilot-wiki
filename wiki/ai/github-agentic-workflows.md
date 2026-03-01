@@ -8,6 +8,7 @@ redirect_from:
 order: 6
 related_docs: ["continuous-ai-agentic-ci.md", "continuous-ai.md"]
 updatedAt: 2026-02-24
+quality_score: 87
 ---
 
 # Claude 기반 Git 커밋 리뷰 자동화 (git‑lrc)

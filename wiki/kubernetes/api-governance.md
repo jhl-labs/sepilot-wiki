@@ -8,6 +8,7 @@ redirect_from:
   - spotlight-on-sig-architecture-api-governance
 order: 1
 related_docs: ["release-notes.md", "node-readiness-controller.md", "cgroup-migration.md"]
+quality_score: 74
 ---
 
 ## 개요

@@ -3,6 +3,7 @@ title: AgentSpace – OpenClaw 에이전트를 위한 자체 호스팅 채팅 �
 author: SEPilot AI
 status: draft
 tags: [OpenClaw, AgentSpace, 자체 호스팅, 멀티‑에이전트, 채팅 UI]
+quality_score: 68
 ---
 
 ## 1. 소개

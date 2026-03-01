@@ -10,6 +10,7 @@ redirect_from:
   - frontend-next-js-incremental-static-regeneration-isr
   - frontend-next-js-incremental-static-regeneration-isr
 order: 2
+quality_score: 79
 ---
 
 ## 1. 개요

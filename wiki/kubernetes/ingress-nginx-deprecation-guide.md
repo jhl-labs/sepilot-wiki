@@ -9,6 +9,7 @@ redirect_from:
 related_docs: ["cgroup-migration.md", "release-notes.md"]
 order: 2
 updatedAt: 2026-02-20
+quality_score: 85
 ---
 
 ## 개요

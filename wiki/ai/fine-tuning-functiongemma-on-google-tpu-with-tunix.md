@@ -7,6 +7,7 @@ status: published
 issueNumber: 450
 createdAt: "2026-02-25T02:30:00Z"
 updatedAt: "2026-02-25T02:30:00Z"
+quality_score: 84
 ---
 
 ## 1. 개요

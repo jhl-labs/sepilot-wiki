@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-02-25T09:00:00Z"
 updatedAt: "2026-02-25T09:00:00Z"
+quality_score: 78
 ---
 
 # Dependabot does not support transitive dependency updates for pnpm

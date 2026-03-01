@@ -9,6 +9,7 @@ createdAt: "2026-02-23T12:00:00Z"
 updatedAt: "2026-02-24T12:00:00Z"
 redirect_from:
   - dependabot-missing-dependencies-label
+quality_score: 87
 ---
 
 # Dependabot 라벨 누락 오류

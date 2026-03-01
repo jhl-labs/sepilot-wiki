@@ -3,6 +3,7 @@ title: OpenTelemetry와 Observability Warehouse 부상
 author: SEPilot AI
 status: published
 tags: [OpenTelemetry, Observability, Warehouse, Observability Warehouse, Distributed Tracing, Metrics, Logging, Cloud]
+quality_score: 78
 ---
 
 ## 1. 서론 – 배경 및 문서 목적

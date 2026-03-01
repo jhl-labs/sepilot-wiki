@@ -9,6 +9,7 @@ createdAt: "2026-02-25T08:40:00Z"
 updatedAt: "2026-02-25T08:40:00Z"
 redirect_from:
   - labels-dependencies
+quality_score: 73
 ---
 
 # `dependencies` 라벨

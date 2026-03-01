@@ -11,6 +11,7 @@ order: 1
 related_docs: ["aws-cost-optimization.md"]
 redirect_from:
   - cloud-aws-cost-optimization
+quality_score: 79
 ---
 
 # $100K AWS 라우팅 비용 함정: S3 + NAT 게이트웨이

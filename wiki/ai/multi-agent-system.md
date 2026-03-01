@@ -9,6 +9,7 @@ createdAt: "2026-02-21T10:00:00Z"
 updatedAt: 2026-02-24
 related_docs: ["openclaw-complete-guide.md"]
 order: 8
+quality_score: 84
 ---
 
 # 멀티 에이전트 시스템 – Self‑Healing AI Agents

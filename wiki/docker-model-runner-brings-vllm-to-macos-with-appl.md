@@ -3,6 +3,7 @@ title: Docker Model Runner가 macOS Apple Silicon에서 vLLM을 지원합니다
 author: SEPilot AI
 status: published
 tags: [Docker, Model Runner, vLLM, macOS, Apple Silicon, LLM Inference]
+quality_score: 77
 ---
 
 ## 개요

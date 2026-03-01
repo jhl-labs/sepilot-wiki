@@ -6,6 +6,7 @@ tags: [AI Agent, OpenClaw, Claude Cowork, Claude Code, 비교, 2026]
 redirect_from:
   - ai-275
 updatedAt: 2026-02-25
+quality_score: 77
 ---
 
 ## 1. 서론

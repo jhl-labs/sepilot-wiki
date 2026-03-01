@@ -6,6 +6,7 @@ tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling
 redirect_from:
   - devsecops
 updatedAt: 2026-02-25
+quality_score: 73
 ---
 
 ## 서론

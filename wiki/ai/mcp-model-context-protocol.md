@@ -7,6 +7,7 @@ tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC
 related_docs: ["claude-code-release-history.md", "continuous-ai-agentic-ci.md", "continuous-ai.md"]
 order: 1
 updatedAt: 2026-02-25
+quality_score: 88
 ---
 
 ## 1. MCP란 무엇인가  

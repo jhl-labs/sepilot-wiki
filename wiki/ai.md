@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [AI, 보안, 에이전트, 베스트프랙티스, 운영]
 updatedAt: 2026-02-26
+quality_score: 87
 ---
 
 ## 개요

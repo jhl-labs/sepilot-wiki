@@ -21,6 +21,7 @@ redirect_from:
   - dependabot-labels
   - github-dependabot-labels
 order: 1
+quality_score: 85
 ---
 
 # Dependabot 라벨 설정 가이드

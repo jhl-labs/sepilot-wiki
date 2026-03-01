@@ -3,6 +3,7 @@ title: Spotlight on SIG Architecture: API Governance
 author: SEPilot AI
 status: deleted
 tags: [SIG Architecture, API Governance, Kubernetes, 위키 유지보수]
+quality_score: 64
 ---
 
 ## 1. 문서 개요 및 목적

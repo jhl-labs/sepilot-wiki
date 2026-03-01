@@ -5,6 +5,7 @@ status: draft
 tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling]
 redirect_from:
   - reports-284
+quality_score: 74
 ---
 
 ## 1. 서론

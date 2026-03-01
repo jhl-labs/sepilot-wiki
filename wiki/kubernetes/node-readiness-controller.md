@@ -7,6 +7,7 @@ redirect_from:
   - introducing-node-readiness-controller
 order: 1
 related_docs: ["cgroup-migration.md", "api-governance.md", "release-notes.md"]
+quality_score: 77
 ---
 
 ## 1. 서론
