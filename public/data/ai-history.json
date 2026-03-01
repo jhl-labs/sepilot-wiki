@@ -1,6 +1,155 @@
 {
   "entries": [
     {
+      "id": "a41fea92-c502-4a94-9cc5-4a007d8f55fc",
+      "timestamp": "2026-03-01T09:43:47.294Z",
+      "actionType": "quality_score",
+      "issueNumber": 329,
+      "issueTitle": "[Wiki Maintenance] [문서] vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
+      "documentSlug": "vite-plugin-pwa-pwa",
+      "documentTitle": "[Wiki Maintenance] [문서] vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "81ae0f56-f489-4925-a4ea-62e34a15c787",
+      "timestamp": "2026-03-01T09:43:36.911Z",
+      "actionType": "generate",
+      "issueNumber": 327,
+      "issueTitle": "[Wiki Maintenance] [문서] React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
+      "documentSlug": "frontend/react-query",
+      "documentTitle": "React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
+      "summary": "새 문서 \"React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3431
+            },
+            {
+              "step": "outline",
+              "durationMs": 7506
+            },
+            {
+              "step": "write",
+              "durationMs": 44679
+            },
+            {
+              "step": "review",
+              "durationMs": 5266
+            }
+          ],
+          "totalDurationMs": 60882,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2872,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "8f0e08ac-93ee-49f5-92ac-330bdace2c75",
+      "timestamp": "2026-03-01T09:42:26.647Z",
+      "actionType": "generate",
+      "issueNumber": 328,
+      "issueTitle": "[Wiki Maintenance] [문서] monaco‑editor/react 기반 인라인 코드 편집기 구현 가이드",
+      "documentSlug": "frontend/monaco-editor-react",
+      "documentTitle": "monaco-editor/react 기반 인라인 코드 편집기 구현 가이드",
+      "summary": "새 문서 \"monaco-editor/react 기반 인라인 코드 편집기 구현 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2698
+            },
+            {
+              "step": "outline",
+              "durationMs": 7065
+            },
+            {
+              "step": "write",
+              "durationMs": 35177
+            },
+            {
+              "step": "review",
+              "durationMs": 3885
+            }
+          ],
+          "totalDurationMs": 48826,
+          "researchSources": 3,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2306,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "4da7b711-5c81-4826-9e41-1f3c38dcf60a",
+      "timestamp": "2026-03-01T09:41:30.351Z",
+      "actionType": "generate",
+      "issueNumber": 329,
+      "issueTitle": "[Wiki Maintenance] [문서] vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
+      "documentSlug": "vite-plugin-pwa-pwa",
+      "documentTitle": "vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
+      "summary": "새 문서 \"vite-plugin-pwa 로 PWA 설정 및 배포 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3111
+            },
+            {
+              "step": "outline",
+              "durationMs": 6874
+            },
+            {
+              "step": "write",
+              "durationMs": 21725
+            },
+            {
+              "step": "review",
+              "durationMs": 4685
+            }
+          ],
+          "totalDurationMs": 36397,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 1664,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "bfbd8925-f753-46eb-89c8-130e81ee08c8",
       "timestamp": "2026-03-01T09:08:50.535Z",
       "actionType": "coverage_analysis",
@@ -6910,5 +7059,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-01T09:08:50.535Z"
+  "lastUpdated": "2026-03-01T09:43:47.294Z"
 }
