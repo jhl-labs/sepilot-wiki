@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-01T02:20:39.321Z",
+  "collectedAt": "2026-03-01T03:32:32.560Z",
   "overview": {
     "totalDocuments": 86,
     "publishedDocuments": 55,
     "draftDocuments": 31,
     "openRequests": 51,
     "closedRequests": 19,
-    "totalAIActions": 305
+    "totalAIActions": 306
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 161,
+      "aiActions": 162,
       "documentsCreated": 47,
       "documentsModified": 59,
       "tavilyApiCalls": 141,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-01T03:03:46.601Z",
+      "actionType": "quality_score",
+      "issueNumber": null,
+      "documentTitle": "문서 품질 평가",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-02-27T09:50:36.412Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T00:28:24.564Z",
-      "actionType": "generate",
-      "issueNumber": 312,
-      "documentTitle": "Adaptive Merging of LoRA Modules – 재활용 LoRA를 통한 효율적인 파인튜닝",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 71323,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3385
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 295,
+      "totalActions": 296,
       "totalEstimatedTokens": 188026,
       "avgDurationMs": 55639
     },
