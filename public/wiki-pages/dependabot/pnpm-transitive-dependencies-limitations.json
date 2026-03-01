@@ -2,7 +2,7 @@
   "title": "Dependabot does not support transitive dependency updates for pnpm",
   "slug": "dependabot/pnpm-transitive-dependencies-limitations",
   "content": "\n# Dependabot does not support transitive dependency updates for pnpm\n\n## Overview\nDependabot is a GitHub‑provided automation tool that can automatically raise pull requests to keep your dependencies up‑to‑date. While it supports direct dependency updates for many package managers, **pnpm** is an exception when it comes to *transitive* (indirect) dependency updates.\n\n> \"Dependabot doesn't support transitive dependency updates for pnpm, a very popular package manager (31M downloads / week as of writing).\"[Reference](https://github.com/dependabot/dependabot-core/issues/13177)\n\n## What are transitive dependencies?\nA transitive dependency is a package that is **not** listed directly in your `package.json` but is required by one of your direct dependencies. Updating these can be necessary when a security vulnerability is discovered in a deep‑nested package.\n\n## Current limitation for pnpm\n- Dependabot **only** updates the versions that appear in your `package.json` (direct dependencies).\n- It **does not** attempt to bump versions of packages that appear only in the lockfile (`pnpm-lock.yaml`).\n- Consequently, PRs that rely on updating a transitive dependency (e.g., a security fix in a sub‑dependency) will fail for pnpm projects.\n\nThis limitation is reflected in the CI feedback you are seeing:\n```\nDependabot doesn't support the 'updating transitive dependencies' feature for pnpm package_manager. Because of this, Dependabot cannot update this pull request.\n```\n\n## Impact on your workflow\n1. **Security patches may be missed** if the vulnerable code lives in a transitive dependency.\n2. **Manual intervention** is required: you must either:\n   - Update the direct dependency that brings in the transitive one, **or**\n   - Manually edit the lockfile and commit the change.\n3. **CI pipelines** that expect Dependabot to handle all updates will need to be adjusted for pnpm projects.\n\n## Workarounds\n- **Upgrade the direct dependency** that depends on the vulnerable transitive package. This often pulls in a newer version of the transitive dependency.\n- **Use a different package manager** (e.g., npm or Yarn) for projects where automatic transitive updates are critical.\n- **Run a manual audit** with tools like `pnpm audit` and apply patches manually.\n\n## Related discussions\n- Issue discussing the lack of support: [pnpm transitive dependency updates support #13177](https://github.com/dependabot/dependabot-core/issues/13177)\n- Community reports of unnecessary bumps and limitations: [pnpm dependabot updates transitive dependencies when ... #11620](https://github.com/dependabot/dependabot-core/issues/11620)\n\n## Future outlook\nDependabot’s roadmap may include support for transitive updates in pnpm, but as of the latest information (2026), this feature is **not** available. Keep an eye on the official Dependabot repository for announcements.\n\n---\n*This document was generated based on publicly available information and the feedback from the PR attempting to bump `ajv` from 6.12.6 to 6.14.0.*",
-  "lastModified": "2026-02-25T08:50:19Z",
+  "lastModified": "2026-03-01T06:16:47Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,11 +15,11 @@
   ],
   "history": [
     {
-      "sha": "150d2de",
-      "message": "docs: Issue #200 - 피드백 반영",
+      "sha": "53b0b04",
+      "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-25T08:50:19Z",
+      "date": "2026-03-01T06:16:47Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0

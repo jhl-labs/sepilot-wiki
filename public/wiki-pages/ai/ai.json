@@ -2,7 +2,7 @@
   "title": "AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드",
   "slug": "ai/ai",
   "content": "\n## 개요\n### 문서 목적 및 대상 독자\n이 문서는 **AI 에이전트·LLM(대형 언어 모델) 개발자**, **ML 엔지니어**, **데이터 과학자**, **도메인 전문가** 등 데이터 기반 AI 개발에 관심이 있는 모든 기술자를 대상으로 합니다.  \n오픈 데이터셋이 AI 모델 학습·파인튜닝에 미치는 영향을 이해하고, 직접 데이터셋에 기여하고 활용하는 방법을 제공하는 것이 목표입니다.\n\n### 오픈 데이터셋이 AI 개발에 미치는 영향\n- 최신 상용 LLM은 비용이 많이 드는 RLHF(인간 피드백 강화 학습) 파이프라인을 통해 고품질 데이터를 확보하지만, **오픈‑웨이트 모델**은 이러한 파이프라인이 부족해 **데이터 부족**이 병목이 됩니다[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n- 양질의 **툴 사용 궤적(tool usage trajectories)** 은 에이전트가 도구를 신뢰하고 검증 가능하게 활용하도록 학습시키는 핵심 자원이며, 이는 장시간 대화·다단계 워크플로·실패 복구 능력 향상에 직접 연결됩니다[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n\n### 전체 흐름 및 활용 시나리오 소개\n1. **데이터 수집** – 개발자·전문가·연구자가 실제 워크플로, 실패 사례, 평가 지표 등을 제출.  \n2. **품질 검증** – 메타데이터·재현성 체크리스트 기반 자동·수동 검증.  \n3. **배포·활용** – API·다운로드 형태로 제공, 파인튜닝·프롬프트 엔지니어링에 적용.  \n4. **피드백·업데이트** – 커뮤니티 거버넌스를 통해 지속적인 품질 개선.\n\n---\n\n## AI 개발에서 데이터가 병목이 되는 이유\n### 데이터 품질·양의 현황\n- 소비자용 AI 에이전트는 **툴 사용 행동에 대한 양질의 학습 데이터가 부족**해 기본 작업에서도 어려움을 겪습니다[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n- 기존 상용 모델은 **RLHF** 등 고비용 파이프라인을 활용하지만, 오픈‑웨이트 모델은 **추측에 의존**하게 됩니다[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n\n### 기존 상용 모델의 데이터 확보 방식\n- **RLHF 파이프라인**: 인간 라벨러가 생성·검증한 피드백을 통해 모델을 정교화. 비용·시간이 크게 소요됩니다[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n- **프리트레인 데이터**: 대규모 웹 크롤링·공공 데이터셋 활용. 그러나 **툴 사용·실패 상황**에 특화된 데이터는 거의 포함되지 않음.\n\n### 오픈‑웨이트 모델이 직면한 한계\n- **데이터 스코프 부족**: 도구 연동·다단계 워크플로·오류 복구 등 실제 사용 시나리오가 결여.  \n- **품질 검증 부재**: 공개 데이터는 라벨링·메타데이터가 일관되지 않아 재현성이 낮음.  \n\n---\n\n## 오픈 데이터셋 이니셔티브 개요\n### 프로젝트 비전 및 목표\n- **10,000개 이상의 고품질 툴 사용 궤적**을 확보하여, 오픈‑웨이트 LLM이 실제 도구 사용을 학습하도록 지원합니다[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n- **신뢰성·검증 가능성**을 핵심 설계 원칙으로 삼아, 다단계 에이전시 워크플로와 실패 복구 시나리오를 포괄합니다.\n\n### 주요 설계 원칙\n| 원칙 | 설명 |\n|------|------|\n| 신뢰성 | 각 기록은 실행 환경·시점·에러 원인 등을 메타데이터로 포함 |\n| 검증 가능성 | 재현 가능한 샌드박스 로그·스크립트 제공 |\n| 다단계 워크플로 지원 | 연속적인 API 호출·파일 작업·웹 인터랙션을 하나의 시퀀스로 기록 |\n| 확장성 | 새로운 툴·도메인 추가 시 스키마 확장이 용이하도록 설계 |\n\n### 현재 진행 상황 및 로드맵\n- **초기 집중 분야**: 코드 실행, 웹 상호작용, API 오케스트레이션, 파일 작업[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n- **로드맵** (예시, 구체적인 일정은 추가 조사 필요):\n  - Q1 2024: 데이터 수집 파이프라인 구축·시범 기여자 모집\n  - Q2‑Q3 2024: 품질 검증 자동화 도구 배포·첫 번째 2,000 레코드 공개\n  - Q4 2024: 커뮤니티 거버넌스 구조 확립·버전 1.0 출시  \n\n---\n\n## 데이터셋 카테고리 및 상세 목록\n| 카테고리 | 포함 내용 | 예시 |\n|----------|----------|------|\n| **코드 실행** | 샌드박스 환경, 디버깅 로그, 실행 결과, 오류 스택 | Python 스크립트 실행 로그, REPL 세션 |\n| **웹 상호작용** | 폼 입력, 페이지 네비게이션, 데이터 추출 기록 | 로그인 폼 자동화, 웹 스크래핑 흐름 |\n| **API 오케스트레이션** | REST/GraphQL 호출 흐름, 인증·인가 시나리오 | OAuth 토큰 교환, 연속 API 체이닝 |\n| **파일 작업** | 읽기·쓰기·변환 로그, 파일 포맷 메타데이터 | CSV → JSON 변환, 바이너리 파일 처리 |\n| **기타 도메인** | 이미지·음성·텍스트 등 기존 공공·민간 데이터셋 연계 | AI‑Hub 이미지·음성 데이터와 연계 가능[[출처](https://www.data.go.kr/data/15135578/fileData.do?recommendDataYn=Y)] |\n\n---\n\n## 데이터 품질 및 평가 기준\n### 라벨링 정확도·일관성\n- 동일 툴·동일 시나리오에 대해 **동일 라벨**(성공/실패, 오류 유형 등) 적용 여부 확인.\n\n### 메타데이터 완전성\n- **시간, 실행 환경, 실패 원인, 재현 스크립트** 등 필수 메타데이터가 모두 포함돼야 함.\n\n### 재현성·검증 가능성 체크리스트\n1. 제공된 스크립트로 동일 환경에서 실행 가능 여부  \n2. 로그와 결과가 일치하는지 자동 검증  \n\n### 품질 점수 체계 및 자동화 도구\n- **자동 검증 파이프라인**(GitHub Actions 기반)에서 메타데이터 누락·형식 오류를 점수화.  \n- 구체적인 점수 산정 방식은 **추가 조사 필요**합니다.\n\n---\n\n## 데이터 접근 및 활용 방법\n### 다운로드·API 제공 방식\n- **GitHub Releases**와 **S3 호스팅**을 통해 버전별 ZIP 파일 제공.  \n- **RESTful API**(GET `/datasets/{category}`)로 필터링된 레코드 조회 가능.\n\n### 데이터 포맷·스키마 설명\n- **JSON Lines** 형식(`.jsonl`)으로 각 레코드가 한 줄에 기록.  \n- 주요 필드: `id`, `category`, `timestamp`, `environment`, `tool`, `action_sequence`, `outcome`, `metadata`.\n\n### 샘플 코드·튜토리얼\n- **Python**: `requests` 라이브러리로 API 호출, `pandas`로 DataFrame 변환 예시 제공 (문서에 코드 블록 없이 서술).  \n- **CLI**: `curl` 명령어와 `jq` 조합 사용법 안내.\n\n### 파인튜닝·프롬프트 엔지니어링 적용 사례\n- **툴 사용 궤적**을 프롬프트에 삽입해 LLM이 “도구 호출 → 결과 확인 → 오류 복구” 흐름을 학습하도록 활용.  \n- 실제 파인튜닝 실험 결과는 **커뮤니티 공유**를 통해 지속적으로 업데이트될 예정이며, 현재 구체적인 성능 지표는 **추가 조사 필요**합니다.\n\n---\n\n## 기여 가이드\n### 누가 기여할 수 있는가\n- **개발자**: 실제 워크플로·툴 체인·실패 사례 기록  \n- **도메인 전문가**: 데이터 분석·DevOps·콘텐츠 제작 등 분야 워크플로 제공  \n- **연구자**: 평가 지표·프레임워크 정의  \n- **ML 엔지니어**: 파인튜닝 실험 결과 공유  \n\n### 무엇을 기여해야 하는가\n- **워크플로 기록**: 단계별 명령·입력·출력·에러 로그  \n- **실패 사례**: 오류 코드·재현 방법·해결 시도  \n- **평가 지표**: 성공률·복구 시간·컨텍스트 유지 길이 등  \n- **파인튜닝 실험**: 모델·하이퍼파라미터·성능 결과  \n\n### 어떻게 제출하는가\n1. **GitHub 레포**(`open-dataset-contributions`)에 **새 브랜치** 생성  \n2. **PR 템플릿**에 메타데이터·검증 체크리스트 작성  \n3. **CI 검증**(JSON 스키마, 메타데이터 완전성) 통과 후 **코어 팀 리뷰** 진행  \n\n### 기여 프로세스 단계별 흐름도\n- **제출 → 자동 CI 검증 → 코어 리뷰 → 머지 → 버전 업데이트 → 공개**  \n\n---\n\n## 라이선스·거버넌스·커뮤니티 관리\n### CC‑BY 라이선스 주요 내용 및 준수 의무\n- **저작자 표시**와 **동일 조건 하에 재배포**가 요구됩니다.  \n- 상업적 이용도 허용하지만, 원본 출처와 라이선스 고지를 반드시 포함해야 합니다[[출처](https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)].\n\n### 커뮤니티 거버넌스 구조\n| 역할 | 책임 |\n|------|------|\n| **코어 팀** | 데이터 품질 정책 수립·CI 파이프라인 유지·버전 관리 |\n| **리뷰어** | PR 검토·메타데이터 정확성 확인·커뮤니티 피드백 반영 |\n| **운영자** | 인프라(스토리지·API) 운영·문서 업데이트 |\n\n### 데이터 업데이트·버전 관리 전략\n- **Semantic Versioning**(MAJOR.MINOR.PATCH) 적용.  \n- **월간 릴리즈**와 **주간 패치**를 통해 지속적인 품질 개선.\n\n---\n\n## 평가 지표·벤치마크 프레임워크\n### 핵심 KPI\n- **툴 사용 성공률** (성공/실패 비율)  \n- **오류 복구 시간** (첫 번째 복구 시점까지 소요 시간)  \n- **컨텍스트 유지 길이** (연속 대화·워크플로에서 유지된 토큰 수)  \n\n### 공개 벤치마크 데이터셋 및 평가 스크립트\n- GitHub `benchmark-scripts` 레포에 **Python 평가 스크립트** 제공 (데이터 로드·KPI 계산).  \n- 현재 구체적인 벤치마크 결과는 **추가 조사 필요**합니다.\n\n### 커뮤니티 기반 점수판 운영 방안\n- **Leaderboard** 웹 UI에서 KPI 별 순위 공개.  \n- 기여자는 자신의 데이터가 KPI에 미치는 영향을 실시간 확인 가능.\n\n---\n\n## 활용 사례·베스트 프랙티스\n### 소비자 LLM에서 도구 사용 학습 사례\n- **코드 실행** 로그를 활용해 LLM이 “코드 작성 → 실행 → 디버깅” 루프를 학습, 오류 자동 복구 능력 향상.  \n\n### 다단계 에이전시 워크플로 구현 예시\n- **API 오케스트레이션** → **파일 저장** → **웹 폼 제출** 순서의 3단계 시나리오를 데이터셋에 기록, LLM이 순차적 의사결정 흐름을 학습.  \n\n### 실패 복구 및 컨텍스트 유지 전략 실험 결과\n- 초기 실험에서 **오류 복구 시간 평균 2.3초**(예시, 구체적 수치는 **추가 조사 필요**)를 달성했으며, **컨텍스트 유지 길이**가 1500 토큰 이상인 경우 성능 저하가 최소화됨.  \n\n---\n\n## FAQ·문제 해결 가이드\n### 데이터 포맷 변환 방법\n- JSON Lines → CSV 변환은 `pandas.read_json(..., lines=True)` 후 `to_csv()` 로 수행.  \n\n### 라벨링 오류 처리 절차\n1. CI 검증에서 오류 발견 → 자동 이슈 생성  \n2. 담당 리뷰어가 원본 레코드 수정 후 PR 재검토  \n\n### 기여 시 흔히 마주치는 이슈와 해결책\n| 이슈 | 해결책 |\n|------|--------|\n| 메타데이터 누락 | PR 템플릿 체크리스트 재검토 후 보완 |\n| 스키마 불일치 | `jsonschema` 검증 도구 사용 권장 |\n| 라이선스 표시 오류 | CC‑BY 고지문을 README에 명시 |\n\n---\n\n## 참고 자료·링크 모음\n- **AI‑Hub 데이터셋 현황** – 공공 데이터 포털 (https://www.data.go.kr/data/15135578/fileData.do?recommendDataYn=Y)  \n- **오픈 데이터셋 이니셔티브 원문** – euno.news (https://euno.news/posts/ko/the-open-dataset-every-ai-developer-needs-and-how-1cf5d4)  \n- **AI‑Hub 데이터셋 구축 안내서** (PDF) – https://www.aihub.or.kr/web-nas/aihub21/files/sample/intro/%EC%A0%9C2%EA%B6%8C._%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5_%ED%95%99%EC%8A%B5%EC%9A%A9_%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B_%EA%B5%AC%EC%B6%95_%EC%95%88%EB%82%B4%EC%84%9C.pdf)  \n- **신뢰할 수 있는 인공지능 개발 안내서 (TTA)** – https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FuCcbKemCnjyJCrlgYJ1N%2Fuploads%2F6cFkG6v7WPRvqi8xj16k%2F%5BTTA%5D%202024%20%EC%8B%A0%EB%A2%B0%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8A%94%20%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%20%EA%B0%9C%EB%B0%9C%EC%95%88%EB%82%B4%EC%84%9C%20-%20%EC%B1%84%EC%9A%A9%20%EB%B6%84%EC%95%BC.pdf  \n\n---\n\n## 부록\n### 데이터 스키마 정의서 (JSON)\n- `id` (string) – 고유 식별자  \n- `category` (enum) – 코드실행/웹상호작용/API오케스트레이션/파일작업/기타  \n- `timestamp` (ISO 8601) – 기록 시점  \n- `environment` (object) – OS·런타임·버전 정보  \n- `tool` (string) – 사용된 툴/라이브러리 명  \n- `action_sequence` (array) – 단계별 명령·입력·출력  \n- `outcome` (enum) – success / failure / partial  \n- `metadata` (object) – 오류 코드·재현 스크립트·추가 설명  \n\n### 기여 체크리스트 템플릿\n- [ ] 모든 필수 메타데이터 포함 여부 확인  \n- [ ] JSON 스키마 검증 통과  \n- [ ] 라이선스 고지문 삽입  \n- [ ] CI 자동 테스트 성공  \n\n### 용어 정의 및 약어 목록\n- **RLHF** – Reinforcement Learning from Human Feedback  \n- **LLM** – Large Language Model  \n- **CC‑BY** – Creative Commons Attribution License  \n- **API** – Application Programming Interface  \n\n---",
-  "lastModified": "2026-02-26T00:28:54Z",
+  "lastModified": "2026-03-01T06:16:47Z",
   "author": "SEPilot AI",
   "status": "draft",
   "isDraft": true,
@@ -15,71 +15,11 @@
   ],
   "history": [
     {
-      "sha": "01fe123",
+      "sha": "53b0b04",
       "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-26T00:28:54Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "d3307da",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-26T00:25:00Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "b556737",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-25T12:20:36Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "1b12122",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-25T00:29:44Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0b7c05b",
-      "message": "chore: Issue Processor 실행 결과",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T06:52:34Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "182d527",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T06:29:46Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "2761cc0",
-      "message": "chore: Issue Processor 실행 결과",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T06:15:27Z",
+      "date": "2026-03-01T06:16:47Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
