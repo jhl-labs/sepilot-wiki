@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-01T08:46:36.957Z",
+  "collectedAt": "2026-03-01T09:43:40.795Z",
   "overview": {
     "totalDocuments": 86,
     "publishedDocuments": 55,
     "draftDocuments": 31,
     "openRequests": 51,
     "closedRequests": 19,
-    "totalAIActions": 306
+    "totalAIActions": 308
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 161,
+      "aiActions": 162,
       "documentsCreated": 47,
       "documentsModified": 59,
       "tavilyApiCalls": 141,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-01T09:08:50.535Z",
+      "actionType": "coverage_analysis",
+      "issueNumber": null,
+      "documentTitle": "갭 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-01T09:05:08.802Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-01T03:03:46.601Z",
       "actionType": "quality_score",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T00:28:52.053Z",
-      "actionType": "quality_score",
-      "issueNumber": 312,
-      "documentTitle": " [요청] Adaptive Merging of LoRA Modules – 재활용 LoRA를 통한 효율적인 파인튜닝",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T00:28:41.713Z",
-      "actionType": "quality_score",
-      "issueNumber": 315,
-      "documentTitle": " [요청] AI 개발자를 위한 오픈 데이터셋 모음 및 기여 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 296,
+      "totalActions": 298,
       "totalEstimatedTokens": 188026,
       "avgDurationMs": 55639
     },
