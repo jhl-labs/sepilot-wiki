@@ -1,7 +1,7 @@
 ---
 title: monaco-editor/react 기반 인라인 코드 편집기 구현 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [monaco-editor, react, 인라인-코드-편집기, 가이드]
 ---
 
