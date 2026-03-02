@@ -1,12 +1,12 @@
 {
-  "collectedAt": "2026-03-02T21:48:08.684Z",
+  "collectedAt": "2026-03-02T22:45:08.402Z",
   "overview": {
-    "totalDocuments": 92,
+    "totalDocuments": 93,
     "publishedDocuments": 56,
-    "draftDocuments": 36,
+    "draftDocuments": 37,
     "openRequests": 54,
     "closedRequests": 19,
-    "totalAIActions": 315
+    "totalAIActions": 316
   },
   "activity": {
     "last1h": {
@@ -19,18 +19,18 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 3,
+      "aiActions": 4,
       "documentsCreated": 0,
-      "documentsModified": 1,
+      "documentsModified": 2,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 154,
+      "aiActions": 155,
       "documentsCreated": 45,
-      "documentsModified": 59,
+      "documentsModified": 60,
       "tavilyApiCalls": 135,
       "tavilyResults": 353,
       "estimatedTokens": 112807,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-02T21:48:21.040Z",
+      "actionType": "recover",
+      "issueNumber": 335,
+      "documentTitle": "chore(deps): bump lucide-react from 0.564.0 to 0.576.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-02T21:39:51.871Z",
       "actionType": "recover",
@@ -227,21 +237,11 @@
       "durationMs": 68851,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3010
-    },
-    {
-      "timestamp": "2026-02-27T09:19:47.129Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 305,
+      "totalActions": 306,
       "totalEstimatedTokens": 194868,
       "avgDurationMs": 55368
     },
