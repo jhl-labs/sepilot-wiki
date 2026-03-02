@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-02T00:55:59.780Z",
+  "collectedAt": "2026-03-02T02:20:24.458Z",
   "overview": {
-    "totalDocuments": 89,
-    "publishedDocuments": 56,
+    "totalDocuments": 90,
+    "publishedDocuments": 57,
     "draftDocuments": 33,
     "openRequests": 54,
     "closedRequests": 19,
-    "totalAIActions": 312
+    "totalAIActions": 313
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 7,
+      "aiActions": 8,
       "documentsCreated": 3,
       "documentsModified": 0,
       "tavilyApiCalls": 9,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-02T01:35:18.868Z",
+      "actionType": "status_report",
+      "issueNumber": null,
+      "documentTitle": "주간 위키 보고서 - 2026년 10주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-01T09:43:47.294Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T06:30:45.428Z",
-      "actionType": "modify",
-      "issueNumber": 318,
-      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 302,
+      "totalActions": 303,
       "totalEstimatedTokens": 194868,
       "avgDurationMs": 55368
     },
