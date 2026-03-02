@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-02T08:49:22.390Z",
+  "collectedAt": "2026-03-02T09:49:52.669Z",
   "overview": {
     "totalDocuments": 90,
     "publishedDocuments": 57,
     "draftDocuments": 33,
     "openRequests": 54,
     "closedRequests": 19,
-    "totalAIActions": 313
+    "totalAIActions": 314
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,16 +19,16 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 7,
-      "documentsCreated": 3,
+      "aiActions": 2,
+      "documentsCreated": 0,
       "documentsModified": 0,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 17,
-      "estimatedTokens": 6842,
-      "totalPipelineDurationMs": 146105
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 160,
+      "aiActions": 161,
       "documentsCreated": 49,
       "documentsModified": 59,
       "tavilyApiCalls": 147,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-02T09:45:21.521Z",
+      "actionType": "quality_score",
+      "issueNumber": 328,
+      "documentTitle": "[Wiki Maintenance] [문서] monaco‑editor/react 기반 인라인 코드 편집기 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-02T01:35:18.868Z",
       "actionType": "status_report",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-26T06:30:58.736Z",
-      "actionType": "quality_score",
-      "issueNumber": 319,
-      "documentTitle": " [요청] OpenTelemetry와 Observability Warehouse 부상",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 303,
+      "totalActions": 304,
       "totalEstimatedTokens": 194868,
       "avgDurationMs": 55368
     },
