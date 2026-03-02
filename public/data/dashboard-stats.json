@@ -1,34 +1,34 @@
 {
-  "collectedAt": "2026-03-02T20:48:00.835Z",
+  "collectedAt": "2026-03-02T21:48:08.684Z",
   "overview": {
-    "totalDocuments": 90,
-    "publishedDocuments": 58,
-    "draftDocuments": 32,
+    "totalDocuments": 92,
+    "publishedDocuments": 56,
+    "draftDocuments": 36,
     "openRequests": 54,
     "closedRequests": 19,
-    "totalAIActions": 314
+    "totalAIActions": 315
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
+      "aiActions": 3,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 155,
+      "aiActions": 154,
       "documentsCreated": 45,
       "documentsModified": 59,
       "tavilyApiCalls": 135,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-02T21:39:51.871Z",
+      "actionType": "recover",
+      "issueNumber": 330,
+      "documentTitle": "chore(ci): bump actions/upload-artifact from 6 to 7",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-02T09:45:21.521Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-02-27T09:19:32.175Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 304,
+      "totalActions": 305,
       "totalEstimatedTokens": 194868,
       "avgDurationMs": 55368
     },
