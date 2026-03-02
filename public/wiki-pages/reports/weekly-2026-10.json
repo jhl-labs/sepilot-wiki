@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 10주차",
   "slug": "reports/weekly-2026-10",
   "content": "\n## 요약\n- 이번 주(2026‑02‑23 ~ 2026‑03‑02)에 전체 문서 수는 101개이며, 새 문서 50개와 수정된 문서 56개가 발생했습니다.  \n- AI가 수행한 총 162건의 작업 중 품질 점수 평가 26건, 자동 생성 50건, 유지·보수 25건이 주요 활동이었습니다.  \n- 품질 평가 결과 98개 문서 평균 76점, 3건은 자동 발행 기준(≥ 89점)을 만족했습니다.\n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 101 |\n| Published(발행) | 59 |\n| Draft(초안) | 28 |\n| Deleted(삭제) | 14 |\n| 신규 문서 | 50 |\n| 수정된 문서 | 56 |\n| 이번 주 발행된 문서 | 0 |\n\n## AI 활동 요약\n- **총 작업 수**: 162\n- **작업 유형별**  \n  - quality_score: 26  \n  - generate(문서 생성): 50  \n  - coverage_analysis(갭 분석): 1  \n  - maintain(유지·보수): 25  \n  - modify(수정): 56  \n  - recover(복구): 3  \n  - status_report: 1  \n\n### 주요 AI 이벤트\n| 시간 | 유형 | 내용 |\n|------|------|------|\n| 2026‑03‑01 09:43:47 | quality_score | Issue #329 “vite‑plugin‑pwa 로 PWA 설정 및 배포 가이드” 자동 품질 검토 통과(89점) → 자동 발행 |\n| 2026‑03‑01 09:43:36 | generate | Issue #327 “React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스” 신규 문서 생성 (총 60 s 파이프라인) |\n| 2026‑03‑01 09:42:26 | generate | Issue #328 “monaco‑editor/react 기반 인라인 코드 편집기 구현 가이드” 신규 문서 생성 |\n| 2026‑03‑01 09:41:30 | generate | Issue #329 “vite‑plugin‑pwa 로 PWA 설정 및 배포 가이드” 신규 문서 생성 |\n| 2026‑03‑01 09:08:50 | coverage_analysis | 갭 분석 수행 – 미문서화 주제 10개 발견, 3건 Issue 생성 |\n| 2026‑03‑01 03:03:46 | quality_score | 전체 98문서 평가, 평균 76점, 저품질 문서 0개 |\n| 2026‑02‑27 ~ 03‑01 | maintain | 학습 루프, URL 변경 감지, 트렌드 모니터링 등 3건 이상 자동 유지 작업 수행 |\n\n## 열린 이슈\n- 현재 오픈된 이슈 총수: **54**  \n- 최근 1주일 동안 활동이 있었던 이슈: **36**  \n\n## 주간 변경사항\n### 커밋 요약 (총 59건)\n| SHA | 메시지 | 작성자 | 날짜 |\n|-----|--------|--------|------|\n| 41ef9152 | chore: Issue Processor 실행 결과 | GitHub Action | 2026‑03‑01 09:44:04 |\n| ff b01411 | 📊 문서 품질 평가: 평균 76점 | github-actions[bot] | 2026‑03‑01 03:03:46 |\n| c122fa1e | chore: Issue Processor 실행 결과 | GitHub Action | 2026‑02‑27 09:50:39 |\n| 5e233a7f | Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki | GitHub Action | 2026‑02‑26 06:33:48 |\n| baa56501 | docs: 뉴스 인텔리전스 기반 문서 자동 처리 | GitHub Action | 2026‑02‑26 06:33:47 |\n| d49e8d2c | chore: Issue Processor 실행 결과 | GitHub Action | 2026‑02‑26 06:31:13 |\n| 01fe123f | chore: Issue Processor 실행 결과 | GitHub Action | 2026‑02‑26 00:28:54 |\n| d3307dad | docs: 뉴스 인텔리전스 기반 문서 자동 처리 | GitHub Action | 2026‑02‑26 00:25:00 |\n| e935272b | Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki | GitHub Action | 2026‑02‑25 18:32:02 |\n| dd9f03ed | chore: Issue Processor 실행 결과 | GitHub Action | 2026‑02‑25 18:32:00 |\n\n(위 커밋들은 주요 자동화·품질 평가·문서 생성 작업과 연관된 변경을 포함합니다.)\n\n## 향후 과제\n1. **발행 프로세스 활성화** – 현재 주간 발행된 문서가 0건이므로, 품질 점수 89점 이상 자동 발행 기준을 확대하거나 수동 검토 절차를 검토합니다.  \n2. **갭 분석 후속 조치** – 10개의 미문서화 주제 중 3건이 Issue로 생성되었으니, 남은 7건에 대한 문서화 로드맵을 수립합니다.  \n3. **문서 삭제 관리** – 삭제된 문서 14건 중 일부는 복구 가능성이 있으니, 삭제 사유를 추적하고 필요 시 복구 작업을 계획합니다.  \n4. **AI 유지·보수 효율화** – modify 작업이 56건으로 가장 많으므로, 반복적인 URL 변경·링크 업데이트 자동화 스크립트를 강화합니다.  ",
-  "lastModified": "2026-03-02T01:35:18.973Z",
+  "lastModified": "2026-03-02T06:21:19Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -12,5 +12,16 @@
     "주간",
     "통계"
   ],
-  "history": []
+  "history": [
+    {
+      "sha": "069704f",
+      "message": "chore: Issue Processor 실행 결과",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-03-02T06:21:19Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    }
+  ]
 }
