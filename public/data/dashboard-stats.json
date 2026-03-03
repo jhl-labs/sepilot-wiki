@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-03T08:48:54.673Z",
+  "collectedAt": "2026-03-03T09:49:12.807Z",
   "overview": {
     "totalDocuments": 94,
     "publishedDocuments": 56,
     "draftDocuments": 38,
     "openRequests": 54,
     "closedRequests": 19,
-    "totalAIActions": 316
+    "totalAIActions": 318
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 3,
+      "aiActions": 4,
       "documentsCreated": 0,
       "documentsModified": 2,
       "tavilyApiCalls": 0,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-03T09:20:02.695Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-03T09:19:50.430Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-02T21:48:21.040Z",
       "actionType": "recover",
@@ -217,38 +237,18 @@
       "durationMs": 48107,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2265
-    },
-    {
-      "timestamp": "2026-02-27T09:46:31.055Z",
-      "actionType": "generate",
-      "issueNumber": 322,
-      "documentTitle": "Docker Model Runner가 macOS Apple Silicon에서 vLLM을 지원합니다",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 59573,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2663
-    },
-    {
-      "timestamp": "2026-02-27T09:45:16.835Z",
-      "actionType": "generate",
-      "issueNumber": 323,
-      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 68851,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3010
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 306,
-      "totalEstimatedTokens": 194868,
-      "avgDurationMs": 55368
-    },
     "unknown": {
-      "totalActions": 10,
+      "totalActions": 11,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 307,
+      "totalEstimatedTokens": 194868,
+      "avgDurationMs": 55368
     }
   }
 }
