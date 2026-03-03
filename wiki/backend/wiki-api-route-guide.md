@@ -9,7 +9,7 @@ redirect_from:
   - wiki-api
 order: 1
 related_docs: ["api-service-layer.md"]
-updatedAt: 2026-02-27
+updatedAt: 2026-03-03
 quality_score: 88
 ---
 
@@ -354,6 +354,7 @@ fetch('/api/wiki/technology/web/react', {
 | 2024-04-12 | v1.2.0 | 오류 코드 표에 409·410 추가 | 개발자 오류 처리 개선 |
 | 2024-05-08 | v1.3.0 | 쿼리 파라미터(`preview`, `includeDeleted`, `mode`) 및 soft/hard delete 설명 추가 | 사용성 향상 |
 | 2026-02-27 | v1.4.0 | Next.js 라우팅 문서 업데이트 반영 (파일‑시스템 기반 라우팅, 레이아웃·페이지 파일 규칙) | 최신 Next.js 라우팅 개념과 일치 |
+| 2026-03-03 | v1.5.0 | Next.js 공식 문서 내용 최신화 (Layouts, Pages, Nested Routes, Dynamic Segments, searchParams, Link 등) | 최신 라우팅 가이드와 일치 |
 
 **마이그레이션 가이드**  
 - 기존 `slug` 기반 경로는 그대로 유지됩니다.  
@@ -365,7 +366,15 @@ fetch('/api/wiki/technology/web/react', {
 ## 10. 참고 자료
 - **API 문서 작성 가이드라인** – 로버트의 가이드라인[[API 문서 작성을 위한 로버트의 가이드라인](https://koko8829.tistory.com/2496)]  
 - **Next.js App Router 문서** – 공식 문서([Next.js Docs – Routing](https://nextjs.org/docs/app/building-your-application/routing))  
-  *Next.js는 파일‑시스템 기반 라우팅을 사용합니다. `app` 디렉터리 아래에 `page.tsx`·`layout.tsx` 파일을 배치해 각각 페이지와 레이아웃을 정의하며, 폴더 구조가 URL 세그먼트를 결정합니다. 루트 레이아웃(`app/layout.tsx`)은 `html`·`body` 태그를 포함해야 하고, 중첩 레이아웃은 `children` prop을 통해 하위 페이지·레아웃을 감쌉니다.*  
+  *Next.js는 파일‑시스템 기반 라우팅을 사용합니다. `app` 디렉터리 아래에 `page.tsx`·`layout.tsx` 파일을 배치해 각각 페이지와 레이아웃을 정의하며, 폴더 구조가 URL 세그먼트를 결정합니다.*  
+  - **Page**: `app/page.tsx` 와 같은 파일에서 기본 내보내기된 React 컴포넌트는 해당 경로에 UI를 렌더링합니다.  
+  - **Layout**: `app/layout.tsx` 등에서 `children` prop을 받아 페이지와 중첩 레이아웃을 감싸며, 루트 레이아웃은 반드시 `<html>`·`<body>` 태그를 포함해야 합니다.  
+  - **Nested Routes**: 폴더를 중첩해 `/blog/[slug]` 와 같은 다중 세그먼트 경로를 만들 수 있습니다.  
+  - **Dynamic Segments**: 폴더명을 `[slug]` 형태로 감싸면 동적 라우트가 생성됩니다. `params` 를 통해 해당 값을 접근합니다.  
+  - **searchParams**: 서버 컴포넌트 페이지에서 `searchParams` prop 으로 쿼리 문자열을 읽을 수 있으며, 이는 페이지를 동적 렌더링하게 합니다. 클라이언트에서는 `useSearchParams` 훅을 사용합니다.  
+  - **Link & useRouter**: `<Link href="/...">` 로 클라이언트‑사이드 네비게이션을 수행하고, `useRouter` 로 프로그래밍적 라우팅이 가능합니다.  
+  - **Route Props Helpers**: `PageProps`·`LayoutProps` 타입이 자동 생성되어 `params`, `searchParams`, `children` 등을 타입 안전하게 사용할 수 있습니다.  
+
 - **OAuth 2.0 표준** – RFC 6749([IETF RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749))  
 - **JWT (JSON Web Token)** – RFC 7519([IETF RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519))  
 

@@ -6,6 +6,7 @@ tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling
 redirect_from:
   - reports-284
 quality_score: 74
+updatedAt: 2026-03-03
 ---
 
 ## 1. 서론
@@ -110,7 +111,7 @@ DZone DevOps가 인용한 산업 추적 데이터에 따르면, **2024년 사이
 - **OWASP CI/CD Security Guide** – https://owasp.org/www-project-ci-cd-security/  
 - **CNCF Artifact Hub** – https://artifacthub.io/  
 - **HashiCorp Vault Documentation** – https://www.vaultproject.io/docs  
-- **CIS Controls** – https://www.cisecurity.org/controls/  
+- **CIS Critical Security Controls (v8.1)** – The CIS Controls are a prescriptive, prioritized set of best‑practice safeguards that help organizations simplify threat protection, achieve essential cyber hygiene, comply with regulations such as PCI DSS, HIPAA, GDPR, and support a Zero‑Trust, hybrid‑cloud environment. More details at https://www.cisecurity.org/controls/  
 - **NIST SP 800‑53 Rev. 5** – https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final  
 
 *※ 본 문서는 제공된 리서치 자료를 기반으로 작성되었으며, 구체적인 수치·사례에 대한 추가 조사가 필요할 수 있습니다.*
