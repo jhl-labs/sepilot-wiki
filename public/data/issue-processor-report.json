@@ -1,9 +1,14 @@
 {
-  "timestamp": "2026-03-04T05:44:24.580Z",
+  "timestamp": "2026-03-04T06:21:12.577Z",
   "dryRun": false,
-  "totalIssuesScanned": 10,
+  "totalIssuesScanned": 13,
   "categories": {
     "draft_review": [
+      {
+        "number": 351,
+        "title": " [요청] AgentBus – 중앙 집중식 AI 에이전트 메시징 REST API",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 342,
         "title": " [요청] Shared Workflows for Node.js Backend and AWS Deployments",
@@ -57,11 +62,55 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 348,
+        "title": " [업데이트] MCP (Model Context Protocol) – Developer Knowledge API Overview",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 347,
+        "title": " [업데이트] OpenClaw Complete Guide – Security Vulnerability GHSA‑GQ83‑8Q7Q‑9HFX (Sandbox Registry Race Condition)",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 351,
+      "title": " [요청] AgentBus – 중앙 집중식 AI 에이전트 메시징 REST API"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 350,
+      "title": " [업데이트] OpenAI‑Pentagon 계약 이후 사용자 보이콧 움직임"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 349,
+      "title": " [업데이트] MCP Server – Self‑Logging Architecture with SQLite & FastAPI"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 348,
+      "title": " [업데이트] MCP (Model Context Protocol) – Developer Knowledge API Overview"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 347,
+      "title": " [업데이트] OpenClaw Complete Guide – Security Vulnerability GHSA‑GQ83‑8Q7Q‑9HFX (Sandbox Registry Race Condition)"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 351,
+      "title": " [요청] AgentBus – 중앙 집중식 AI 에이전트 메시징 REST API",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/agentbus-ai-rest-api.md"
+    }
+  ],
+  "actionCount": 6,
   "maxActions": 60
 }
