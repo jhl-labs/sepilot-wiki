@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-04T08:48:31.291Z",
+  "collectedAt": "2026-03-04T09:48:54.556Z",
   "overview": {
     "totalDocuments": 105,
     "publishedDocuments": 61,
     "draftDocuments": 44,
     "openRequests": 62,
     "closedRequests": 19,
-    "totalAIActions": 343
+    "totalAIActions": 345
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,45 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 27,
-      "documentsCreated": 12,
-      "documentsModified": 4,
-      "tavilyApiCalls": 36,
-      "tavilyResults": 99,
-      "estimatedTokens": 26282,
-      "totalPipelineDurationMs": 598253
+      "aiActions": 22,
+      "documentsCreated": 9,
+      "documentsModified": 2,
+      "tavilyApiCalls": 27,
+      "tavilyResults": 72,
+      "estimatedTokens": 20812,
+      "totalPipelineDurationMs": 460739
     },
     "last7d": {
-      "aiActions": 87,
-      "documentsCreated": 31,
-      "documentsModified": 21,
-      "tavilyApiCalls": 93,
-      "tavilyResults": 248,
-      "estimatedTokens": 75619,
-      "totalPipelineDurationMs": 1675147
+      "aiActions": 84,
+      "documentsCreated": 30,
+      "documentsModified": 20,
+      "tavilyApiCalls": 90,
+      "tavilyResults": 239,
+      "estimatedTokens": 70373,
+      "totalPipelineDurationMs": 1563730
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-04T09:17:20.368Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "콘텐츠 리뷰",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-04T09:16:08.029Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "지식 확장 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-04T06:21:09.086Z",
       "actionType": "quality_score",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-03T09:49:15.183Z",
-      "actionType": "quality_score",
-      "issueNumber": 338,
-      "documentTitle": "[Wiki Maintenance] [요청] Before You Migrate: Five Surprising Ingress-NGINX Behaviors You Need to Know",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-03T09:49:02.220Z",
-      "actionType": "modify",
-      "issueNumber": 339,
-      "documentTitle": "주간 위키 보고서 - 2026년 10주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 332,
+      "totalActions": 334,
       "totalEstimatedTokens": 221150,
       "avgDurationMs": 54625
     },
