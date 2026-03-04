@@ -1,6 +1,147 @@
 {
   "entries": [
     {
+      "id": "6fb334e4-e8f7-4b8d-ab37-a1153fe6d2eb",
+      "timestamp": "2026-03-04T18:19:27.918Z",
+      "actionType": "generate",
+      "issueNumber": 367,
+      "issueTitle": "문서 요청 #367",
+      "documentSlug": "ai/367",
+      "documentTitle": "AI 사용 제어·거버넌스 RFP 템플릿 가이드",
+      "summary": "새 문서 \"AI 사용 제어·거버넌스 RFP 템플릿 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3961
+            },
+            {
+              "step": "outline",
+              "durationMs": 8438
+            },
+            {
+              "step": "write",
+              "durationMs": 25363
+            },
+            {
+              "step": "review",
+              "durationMs": 5068
+            }
+          ],
+          "totalDurationMs": 42830,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1943,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "206e05c5-196c-4d91-a862-0060f84c1907",
+      "timestamp": "2026-03-04T18:18:36.991Z",
+      "actionType": "generate",
+      "issueNumber": 366,
+      "issueTitle": "문서 요청 #366",
+      "documentSlug": "366",
+      "documentTitle": "Xcode Cloud를 활용한 iOS CI/CD 실전 가이드",
+      "summary": "새 문서 \"Xcode Cloud를 활용한 iOS CI/CD 실전 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4202
+            },
+            {
+              "step": "outline",
+              "durationMs": 6967
+            },
+            {
+              "step": "write",
+              "durationMs": 18916
+            },
+            {
+              "step": "review",
+              "durationMs": 5815
+            }
+          ],
+          "totalDurationMs": 35900,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1585,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ca7a145a-8af0-4616-bb20-f93e160b8c4e",
+      "timestamp": "2026-03-04T18:17:58.019Z",
+      "actionType": "modify",
+      "issueNumber": 365,
+      "issueTitle": " [업데이트] Google Gemini 기반 프라이버시‑우선 AI 어시스턴스 설계",
+      "documentSlug": "observability/ai",
+      "documentTitle": "멀티‑에이전트 AI 관측성 설계 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Google Gemini 기반 프라이버시‑우선 AI 어시스턴스 설계\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 44,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "4d7f0cad-b34d-4b8f-958e-f044c2eeb3cd",
+      "timestamp": "2026-03-04T18:17:14.665Z",
+      "actionType": "modify",
+      "issueNumber": 364,
+      "issueTitle": " [업데이트] AI 코딩 에이전트와 SODAX 실시간 데이터 연동 가이드",
+      "documentSlug": "ai/ai-code-review-agent-guide",
+      "documentTitle": "AI 코드 리뷰 에이전트 구축 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 코딩 에이전트와 SODAX 실시간 데이터 연동 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 114,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "69002baf-d396-4bd8-a096-72223419a10c",
+      "timestamp": "2026-03-04T18:16:38.699Z",
+      "actionType": "modify",
+      "issueNumber": 363,
+      "issueTitle": " [업데이트] OpenAI‑Pentagon 계약 수정 및 정책 영향 (2024‑2025)",
+      "documentSlug": "ai/openai-pentagon-contract-revision-and-policy-impli",
+      "documentTitle": "[업데이트] OpenAI‑Pentagon 계약 이후 사용자 보이콧 움직임",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenAI‑Pentagon 계약 수정 및 정책 영향 (2024‑2025)\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 20
+      }
+    },
+    {
       "id": "342290fe-82a9-4c26-a392-3aa5dd358802",
       "timestamp": "2026-03-04T18:16:02.301Z",
       "actionType": "maintain",
@@ -8271,5 +8412,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-04T18:16:02.301Z"
+  "lastUpdated": "2026-03-04T18:19:27.918Z"
 }
