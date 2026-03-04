@@ -1,12 +1,12 @@
 {
-  "collectedAt": "2026-03-04T09:48:54.556Z",
+  "collectedAt": "2026-03-04T10:48:10.190Z",
   "overview": {
     "totalDocuments": 105,
     "publishedDocuments": 61,
     "draftDocuments": 44,
-    "openRequests": 62,
+    "openRequests": 65,
     "closedRequests": 19,
-    "totalAIActions": 345
+    "totalAIActions": 351
   },
   "activity": {
     "last1h": {
@@ -19,25 +19,85 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 22,
-      "documentsCreated": 9,
-      "documentsModified": 2,
-      "tavilyApiCalls": 27,
-      "tavilyResults": 72,
-      "estimatedTokens": 20812,
-      "totalPipelineDurationMs": 460739
+      "aiActions": 24,
+      "documentsCreated": 12,
+      "documentsModified": 1,
+      "tavilyApiCalls": 36,
+      "tavilyResults": 96,
+      "estimatedTokens": 29322,
+      "totalPipelineDurationMs": 643444
     },
     "last7d": {
-      "aiActions": 84,
-      "documentsCreated": 30,
+      "aiActions": 85,
+      "documentsCreated": 31,
       "documentsModified": 20,
-      "tavilyApiCalls": 90,
-      "tavilyResults": 239,
-      "estimatedTokens": 70373,
-      "totalPipelineDurationMs": 1563730
+      "tavilyApiCalls": 93,
+      "tavilyResults": 245,
+      "estimatedTokens": 73201,
+      "totalPipelineDurationMs": 1615556
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-04T09:48:27.177Z",
+      "actionType": "quality_score",
+      "issueNumber": 352,
+      "documentTitle": "[Wiki Maintenance] [요청] GitHub Copilot CI/CD 통합 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-04T09:48:11.798Z",
+      "actionType": "quality_score",
+      "issueNumber": 353,
+      "documentTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 AI 관측성 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-04T09:47:59.277Z",
+      "actionType": "quality_score",
+      "issueNumber": 354,
+      "documentTitle": "[Wiki Maintenance] [요청] 최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-04T09:47:47.649Z",
+      "actionType": "generate",
+      "issueNumber": 352,
+      "documentTitle": "GitHub Copilot CI/CD 통합 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 85983,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4146
+    },
+    {
+      "timestamp": "2026-03-04T09:45:59.859Z",
+      "actionType": "generate",
+      "issueNumber": 353,
+      "documentTitle": "멀티‑에이전트 AI 관측성 설계 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 48593,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2116
+    },
+    {
+      "timestamp": "2026-03-04T09:44:54.944Z",
+      "actionType": "generate",
+      "issueNumber": 354,
+      "documentTitle": "최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 48129,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2248
+    },
     {
       "timestamp": "2026-03-04T09:17:20.368Z",
       "actionType": "maintain",
@@ -177,73 +237,13 @@
       "durationMs": 42772,
       "tavilyApiCalls": 3,
       "estimatedTokens": 1950
-    },
-    {
-      "timestamp": "2026-03-04T00:25:11.686Z",
-      "actionType": "generate",
-      "issueNumber": 344,
-      "documentTitle": "SkyDiscover – LLM‑Driven 알고리즘 디스커버리 오픈 프레임워크",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 46889,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2128
-    },
-    {
-      "timestamp": "2026-03-04T00:24:21.699Z",
-      "actionType": "modify",
-      "issueNumber": 343,
-      "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-04T00:23:40.604Z",
-      "actionType": "generate",
-      "issueNumber": 342,
-      "documentTitle": "Node.js 백엔드와 AWS 인프라를 위한 Shared Workflows 표준 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 49932,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2312
-    },
-    {
-      "timestamp": "2026-03-04T00:22:45.653Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-03T09:49:44.485Z",
-      "actionType": "quality_score",
-      "issueNumber": 336,
-      "documentTitle": "[Wiki Maintenance] [요청] From idea to pull request: A practical guide to building with GitHub Copilot CLI",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-03T09:49:30.705Z",
-      "actionType": "quality_score",
-      "issueNumber": 337,
-      "documentTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 334,
-      "totalEstimatedTokens": 221150,
-      "avgDurationMs": 54625
+      "totalActions": 340,
+      "totalEstimatedTokens": 229660,
+      "avgDurationMs": 54830
     },
     "unknown": {
       "totalActions": 11,
