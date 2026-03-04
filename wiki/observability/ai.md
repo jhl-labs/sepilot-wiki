@@ -3,6 +3,7 @@ title: 멀티‑에이전트 AI 관측성 설계 가이드
 author: SEPilot AI
 status: draft
 tags: [AI, 관측성, 멀티‑에이전트, OpenTelemetry, 트레이싱, 메트릭, 알림]
+updatedAt: 2026-03-04
 ---
 
 ## 1. 개요 및 필요성
@@ -232,7 +233,45 @@ service:
 - [ ] 민감 데이터 마스킹·암호화 적용  
 - [ ] CI/CD 관측성 테스트 자동화  
 
-## 12. 참고 문서·추가 리소스
+## 12. Google Gemini 기반 프라이버시‑우선 AI 어시스턴스 설계
+### 12.1 Gemini 프라이버시 기능 개요
+Google Gemini은 **엔터프라이즈급 보안 및 프라이버시**를 기본 제공합니다.
+
+- **데이터 최소화**: 기본적으로 입력 데이터는 모델 추론에만 사용되며, 장기 저장되지 않습니다.  
+- **지역(로컬) 처리 옵션**: Gemini for Education 및 Gemini Enterprise에서는 **로컬 인스턴스** 혹은 **VPC‑전용** 배포가 가능해, 데이터가 Google 외부 네트워크를 떠나지 않도록 할 수 있습니다.  
+- **전송 및 저장 암호화**: TLS 1.3 기반 전송 암호화와, 저장소(예: Vertex AI) 에서는 **암호화된 디스크**를 사용합니다.  
+- **감사 및 접근 제어**: Google Cloud IAM 과 연계된 세분화된 권한 관리와 **감사 로그**가 자동 기록됩니다.  
+- **사용자 제어 옵션**: 사용자는 “데이터 사용 안 함”(Data‑Usage‑Opt‑Out) 설정을 통해 모델이 입력을 학습에 활용하지 못하도록 할 수 있습니다.  
+
+> 출처: Google Cloud를 위한 Gemini 개요, Gemini 기반 Google Workspace 자세히 알아보기, 개발자와 비즈니스를 위한 Gemini 시대.
+
+### 12.2 데이터 최소화 및 로컬 처리 전략
+1. **입력 전처리 단계에서 PII 마스킹**  
+   - 정규식·NER 기반 필터링으로 이름, 주민등록번호, 전화번호 등을 `***` 로 대체.  
+2. **필요 최소 데이터만 전송**  
+   - 프롬프트에 포함된 컨텍스트는 핵심 질문·명령만 남기고, 부가 메타데이터는 별도 로그로 관리.  
+3. **로컬 인스턴스 배포**  
+   - Vertex AI Custom Model 혹은 **Gemini Enterprise**의 온프레미스 옵션을 활용해, 모델 추론을 VPC 내부 혹은 온프레미스 환경에서 실행.  
+4. **전송 전 암호화**  
+   - gRPC/HTTPS 호출 시 항상 TLS 1.3 사용.  
+5. **데이터 보관 정책**  
+   - 추론 로그는 **30일** 이내 자동 삭제(또는 고객 정의 보관 기간)하도록 설정.  
+
+### 12.3 프라이버시‑우선 설계 체크리스트
+| 체크 항목 | 확인 방법 | 비고 |
+|----------|----------|------|
+| **PII 마스킹 적용** | 입력 전처리 파이프라인에 정규식/NER 필터 적용 여부 | Gemini 입력에 PII가 포함되지 않음 |
+| **데이터 전송 암호화** | TLS 1.3 사용 여부 확인 (네트워크 트래픽 캡처) | 모든 gRPC/HTTPS 호출에 적용 |
+| **데이터 보관 기간 설정** | 로그/메트릭 보관 정책 검증 | 기본 30일, 필요 시 커스텀 |
+| **옵션형 로컬 배포** | Vertex AI Custom Model 혹은 Gemini Enterprise 온프레미스 사용 여부 | 데이터가 Google 외부로 유출되지 않음 |
+| **사용자 데이터 사용 옵트아웃** | 서비스 설정 UI/API에 `data_usage_opt_out` 플래그 존재 여부 | 사용자가 직접 비활성화 가능 |
+| **감사 로그 활성화** | Cloud Audit Logs 에 `admin_read`, `admin_write` 이벤트 기록 여부 | 모든 설정·구성 변경 추적 |
+| **IAM 최소 권한 원칙** | 각 서비스 계정에 필요한 권한만 부여했는지 검증 | 과다 권한 방지 |
+| **OpenTelemetry 라벨링** | `privacy` 라벨(`privacy=high`)이 모든 Span/Metric에 포함 | 관측성 데이터에서도 프라이버시 레벨 표시 |
+
+위 체크리스트를 CI 파이프라인에 통합하면 배포 전 자동 검증이 가능하며, 지속적인 컴플라이언스 유지에 도움이 됩니다.
+
+## 13. 참고 문서·추가 리소스
 - **기존 가이드**  
   - `open-telemetry-입문-관측성-통합-가이드`  
   - `observability-warehouse-부상`  
@@ -246,6 +285,11 @@ service:
   - Prometheus (시계열 메트릭) – <https://prometheus.io/>  
   - Grafana (대시보드·알림) – <https://grafana.com/>  
   - Loki (로그 집계) – <https://grafana.com/oss/loki/>  
+
+- **Google Gemini 관련**  
+  - Google Cloud를 위한 Gemini 개요 – <https://docs.cloud.google.com/gemini/docs/overview?hl=ko>  
+  - Gemini 기반 Google Workspace 자세히 알아보기 – <https://edu.google.com/intl/ALL_kr/workspace-for-education/add-ons/google-workspace-with-gemini/>  
+  - 개발자와 비즈니스를 위한 Gemini 시대 – <https://cloud.google.com/ai/gemini?hl=ko>  
 
 - **보안 가이드**  
   - OpenTelemetry 보안 베스트 프랙티스 – <https://opentelemetry.io/docs/specs/otel/security/>  
