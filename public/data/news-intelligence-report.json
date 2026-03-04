@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-04T06:17:02.989Z",
+  "generatedAt": "2026-03-04T12:12:41.870Z",
   "config": {
     "rssUrl": "https://euno.news/rss.xml",
     "maxAiBatch": 30,
@@ -7,253 +7,268 @@
     "maxIssues": 5
   },
   "summary": {
-    "scannedAt": "2026-03-04T06:17:02.988Z",
+    "scannedAt": "2026-03-04T12:12:41.870Z",
     "totalScanned": 200,
-    "newItems": 74,
+    "newItems": 52,
     "prefiltered": 30,
     "relevant": 16,
     "issuesCreated": 5,
-    "durationMs": 76772
+    "durationMs": 99719
   },
   "items": [
     {
-      "title": "GHSA-GQ83-8Q7Q-9HFX: GHSA-GQ83-8Q7Q-9HFX: OpenClaw Sandbox 레지스트리의 레이스 컨디션으로 인한 데이터 손상",
-      "link": "https://euno.news/posts/ko/ghsa-gq83-8q7q-9hfx-ghsa-gq83-8q7q-9hfx-race-condi-50689c",
-      "guid": "https://euno.news/posts/ko/ghsa-gq83-8q7q-9hfx-ghsa-gq83-8q7q-9hfx-race-condi-50689c",
-      "relevanceScore": 87,
+      "title": "LD_PRELOAD를 사용해 OpenTelemetry를 모든 곳에 주입하기",
+      "link": "https://euno.news/posts/ko/use-ldpreload-to-inject-opentelemetry-into-everyth-c257a8",
+      "guid": "https://euno.news/posts/ko/use-ldpreload-to-inject-opentelemetry-into-everyth-c257a8",
+      "relevanceScore": 88,
+      "relatedDocuments": [
+        "observability/opentelemetry.md",
+        "observability/open-telemetry-guide.md",
+        "observability/ai.md",
+        "observability/opentelemetry-observability-warehouse.md"
+      ],
+      "keyTopics": [
+        "OpenTelemetry 자동 주입",
+        "LD_PRELOAD 활용",
+        "관측성 인프라 확장"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "CRUD 앱의 종말: 개발자들이 다음에 만들게 될 것",
+      "link": "https://euno.news/posts/ko/the-end-of-crud-apps-what-developers-will-build-ne-25b9e9",
+      "guid": "https://euno.news/posts/ko/the-end-of-crud-apps-what-developers-will-build-ne-25b9e9",
+      "relevanceScore": 75,
+      "relatedDocuments": [
+        "backend/agentic-faas-mdl.md",
+        "backend/lazy-backend-agentic-faas-mdl.md"
+      ],
+      "keyTopics": [
+        "CRUD 대체 패러다임",
+        "서버리스·에이전틱 FaaS",
+        "이벤트 기반 아키텍처"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "내 Docker 예제가 공식 Next.js 문서에 포함되었습니다",
+      "link": "https://euno.news/posts/ko/my-docker-examples-are-now-part-of-the-official-ne-40e8ad",
+      "guid": "https://euno.news/posts/ko/my-docker-examples-are-now-part-of-the-official-ne-40e8ad",
+      "relevanceScore": 71,
+      "relatedDocuments": [
+        "frontend/next-js-incremental-static-regeneration-isr.md",
+        "frontend/api-service-layer.md",
+        "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md",
+        "docker/gordon-ai-agent-update.md"
+      ],
+      "keyTopics": [
+        "Docker 예제",
+        "Next.js 공식 문서 포함",
+        "커뮤니티 기여 흐름"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "[Paper] NeuroSkill(tm): 인간 정신 상태 모델링이 가능한 프로액티브 실시간 에이전시 시스템",
+      "link": "https://euno.news/posts/ko/neuroskilltm-proactive-real-time-agentic-system-ca-39e1bd",
+      "guid": "https://euno.news/posts/ko/neuroskilltm-proactive-real-time-agentic-system-ca-39e1bd",
+      "relevanceScore": 71,
+      "relatedDocuments": [
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
+      ],
+      "keyTopics": [
+        "프로액티브 에이전시",
+        "정신 상태 모델링",
+        "오프라인 실행"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "missless가 실시간 비디오에서 실패했습니다 — 그래서 우리는 vibeCat으로 전환했습니다",
+      "link": "https://euno.news/posts/ko/missless-failed-at-real-time-video-so-we-pivoted-t-e27fcb",
+      "guid": "https://euno.news/posts/ko/missless-failed-at-real-time-video-so-we-pivoted-t-e27fcb",
+      "relevanceScore": 70,
+      "relatedDocuments": [
+        "docker/run-openclaw-securely-in-docker-sandboxes.md",
+        "cloud/persistent-terminal-design.md"
+      ],
+      "keyTopics": [
+        "실시간 비디오 스트리밍",
+        "WebSocket 프록시",
+        "Cloud Run 배포"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Viscat, Bluepoint Partners로부터 시드 투자 유치… 이기종 로봇 통합 운영 플랫폼 개발",
+      "link": "https://euno.news/posts/ko/dcdb52",
+      "guid": "https://euno.news/posts/ko/dcdb52",
+      "relevanceScore": 70,
+      "relatedDocuments": [
+        "ai/agentspace-openclaw.md",
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
+      ],
+      "keyTopics": [
+        "이기종 로봇 통합 플랫폼",
+        "AI 에이전트 운영",
+        "산업 자동화"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "[Paper] MoD‑DPO: Omni LLM에서 Cross‑modal Hallucinations를 완화하기 위한 Modality Decoupled Preference Optimization 활용",
+      "link": "https://euno.news/posts/ko/mod-dpo-towards-mitigating-cross-modal-hallucinati-54c1e5",
+      "guid": "https://euno.news/posts/ko/mod-dpo-towards-mitigating-cross-modal-hallucinati-54c1e5",
+      "relevanceScore": 68,
+      "relatedDocuments": [
+        "ai/ai-llm-2017-2026.md"
+      ],
+      "keyTopics": [
+        "멀티모달 LLM",
+        "Hallucination 완화",
+        "MoD‑DPO"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "[Paper] UniG2U-Bench: 통합 모델이 멀티모달 이해를 발전시키는가?",
+      "link": "https://euno.news/posts/ko/unig2u-bench-do-unified-models-advance-multimodal-9c7f51",
+      "guid": "https://euno.news/posts/ko/unig2u-bench-do-unified-models-advance-multimodal-9c7f51",
+      "relevanceScore": 66,
+      "relatedDocuments": [
+        "ai/ai-llm-2017-2026.md"
+      ],
+      "keyTopics": [
+        "멀티모달 벤치마크",
+        "통합 모델 평가",
+        "UniG2U‑Bench"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "스프레드시트용 “ChatGPT”가 어려운 엔지니어링 과제를 더 빠르게 해결하도록 돕는다",
+      "link": "https://euno.news/posts/ko/a-chatgpt-for-spreadsheets-helps-solve-difficult-e-357a33",
+      "guid": "https://euno.news/posts/ko/a-chatgpt-for-spreadsheets-helps-solve-difficult-e-357a33",
+      "relevanceScore": 65,
+      "relatedDocuments": [
+        "ai/ai-code-review-agent-guide.md",
+        "ai/ai.md"
+      ],
+      "keyTopics": [
+        "ChatGPT 기반 스프레드시트 어시스턴트",
+        "엔지니어링 생산성",
+        "AI 코딩 보조"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "내가 GitHub에서 코드를 접근할 수 없었던 날 (그리고 그 후에 만든 것)",
+      "link": "https://euno.news/posts/ko/the-day-i-couldnt-access-my-code-on-github-and-wha-4cd612",
+      "guid": "https://euno.news/posts/ko/the-day-i-couldnt-access-my-code-on-github-and-wha-4cd612",
+      "relevanceScore": 62,
+      "relatedDocuments": [
+        "github/labels/dependencies.md",
+        "github/dependencies-label.md",
+        "github/dependabot-labels.md",
+        "from-idea-to-pull-request-a-practical-guide-to-bui.md",
+        "github/what-8217-s-new-with-github-copilot-coding-agent.md"
+      ],
+      "keyTopics": [
+        "GitHub 서비스 중단",
+        "레포지토리 접근 차단",
+        "사후 복구 방안"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "엔씽, 국내 최초 빌딩형 수직농장에 158억 규모 AI 플랫폼 공급…삼성벤처투자 유치",
+      "link": "https://euno.news/posts/ko/158-ai-42d530",
+      "guid": "https://euno.news/posts/ko/158-ai-42d530",
+      "relevanceScore": 62,
+      "relatedDocuments": [
+        "ai/ai.md",
+        "ai/ai-2024-2026.md"
+      ],
+      "keyTopics": [
+        "AI 플랫폼",
+        "수직 농업",
+        "Agri‑Tech"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "엘리스그룹, 한-싱 AI 커넥트 서밋 참석…모듈형 데이터센터 이재명 대통령 앞 시연",
+      "link": "https://euno.news/posts/ko/ai-5bac0d",
+      "guid": "https://euno.news/posts/ko/ai-5bac0d",
+      "relevanceScore": 60,
+      "relatedDocuments": [
+        "kubernetes-ai-gitops.md"
+      ],
+      "keyTopics": [
+        "AI 커넥트 서밋",
+        "모듈형 데이터센터",
+        "AI 모델 GitOps"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "[Paper] MIBURI: 표현력 있는 인터랙티브 제스처 합성을 향해",
+      "link": "https://euno.news/posts/ko/miburi-towards-expressive-interactive-gesture-synt-4c1afd",
+      "guid": "https://euno.news/posts/ko/miburi-towards-expressive-interactive-gesture-synt-4c1afd",
+      "relevanceScore": 58,
+      "relatedDocuments": [
+        "ai/multi-agent-workflows-often-fail.md"
+      ],
+      "keyTopics": [
+        "제스처 합성",
+        "Embodied Conversational Agents",
+        "멀티모달 인터랙션"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "왜 당신의 AGENTS.md 파일이 무시되는지 (그리고 해결 방법)",
+      "link": "https://euno.news/posts/ko/why-your-agentsmd-files-are-being-ignored-and-how-13875f",
+      "guid": "https://euno.news/posts/ko/why-your-agentsmd-files-are-being-ignored-and-how-13875f",
+      "relevanceScore": 57,
+      "relatedDocuments": [
+        "backend/agentic-faas-mdl.md",
+        "backend/lazy-backend-agentic-faas-mdl.md",
+        "ai/agentspace-openclaw.md",
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
+      ],
+      "keyTopics": [
+        "AGENTS.md 파일 무시",
+        "에이전트 설정 문제",
+        "디버깅 및 해결책"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "[스타트업 스토리 #515] “연구비 제안서가 연구보다 어렵다” – 한국 연구자와 유럽을 잇는 AI 플랫폼",
+      "link": "https://euno.news/posts/ko/startups-story-515-d51dfc",
+      "guid": "https://euno.news/posts/ko/startups-story-515-d51dfc",
+      "relevanceScore": 55,
       "relatedDocuments": [
         "projects/openclaw-complete-guide.md"
       ],
       "keyTopics": [
-        "OpenClaw",
-        "Sandbox 레지스트리",
-        "레이스 컨디션 취약점"
+        "AI 플랫폼",
+        "연구비 제안 자동화",
+        "한‑유럽 협업"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Developer Knowledge API 및 MCP Server 소개",
-      "link": "https://euno.news/posts/ko/introducing-the-developer-knowledge-api-and-mcp-se-1c17fa",
-      "guid": "https://euno.news/posts/ko/introducing-the-developer-knowledge-api-and-mcp-se-1c17fa",
-      "relevanceScore": 86,
-      "relatedDocuments": [
-        "ai/mcp-model-context-protocol.md"
-      ],
-      "keyTopics": [
-        "Model Context Protocol (MCP)",
-        "Developer Knowledge API",
-        "AI‑powered developer tools"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "왜 당신의 MCP 서버는 자체 로깅이 필요할까 — 클로드 데스크톱만으로는 안 된다",
-      "link": "https://euno.news/posts/ko/why-your-mcp-server-needs-its-own-logging-not-just-910ed5",
-      "guid": "https://euno.news/posts/ko/why-your-mcp-server-needs-its-own-logging-not-just-910ed5",
-      "relevanceScore": 85,
-      "relatedDocuments": [
-        "ai/mcp-model-context-protocol.md",
-        "backend/snkv-sqlite-btree-kv-store.md"
-      ],
-      "keyTopics": [
-        "MCP 서버",
-        "자체 로깅",
-        "SQLite + FastAPI + Streamlit"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "OpenAI Pentagon 군사 계약 이후 ChatGPT AI 보이콧 취소 물결",
-      "link": "https://euno.news/posts/ko/cancel-chatgpt-ai-boycott-surges-after-openai-pent-3d6a05",
-      "guid": "https://euno.news/posts/ko/cancel-chatgpt-ai-boycott-surges-after-openai-pent-3d6a05",
-      "relevanceScore": 82,
-      "relatedDocuments": [
-        "ai/openai-pentagon-contract-revision-and-policy-impli.md"
-      ],
-      "keyTopics": [
-        "OpenAI",
-        "Pentagon 계약",
-        "사용자 보이콧"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Show HN: AgentBus – 중앙 집중식 AI 에이전트 간 메시징 REST API를 통해",
-      "link": "https://euno.news/posts/ko/show-hn-agentbus-centralized-ai-agent-to-agent-mes-4654c5",
-      "guid": "https://euno.news/posts/ko/show-hn-agentbus-centralized-ai-agent-to-agent-mes-4654c5",
-      "relevanceScore": 78,
-      "relatedDocuments": [
-        "ai/agentspace-openclaw.md",
-        "backend/agentic-faas-mdl.md",
-        "ai/github-agentic-workflows.md"
-      ],
-      "keyTopics": [
-        "AgentBus",
-        "AI 에이전트 메시징",
-        "REST API"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Conductor 업데이트: 자동 리뷰 소개",
-      "link": "https://euno.news/posts/ko/conductor-update-introducing-automated-reviews-911ce9",
-      "guid": "https://euno.news/posts/ko/conductor-update-introducing-automated-reviews-911ce9",
-      "relevanceScore": 78,
-      "relatedDocuments": [
-        "ai/ai-code-review-agent-guide.md",
-        "ai/github-agentic-workflows.md"
-      ],
-      "keyTopics": [
-        "Conductor 자동 리뷰",
-        "Gemini CLI 확장",
-        "AI 기반 코드 리뷰"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "알리바바가 강력한 Qwen AI 팀을 무너뜨렸을까? 최신 오픈소스 출시 이후 핵심 인물들이 떠난다",
-      "link": "https://euno.news/posts/ko/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-b2f44e",
-      "guid": "https://euno.news/posts/ko/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-b2f44e",
-      "relevanceScore": 78,
-      "relatedDocuments": [
-        "ai/qwen3-5.md"
-      ],
-      "keyTopics": [
-        "Qwen 모델",
-        "오픈소스 AI 출시",
-        "인재 이탈"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "OpenAI가 GitHub에 대한 대안을 개발하고 있다",
-      "link": "https://euno.news/posts/ko/openai-is-developing-an-alternative-to-github-b61932",
-      "guid": "https://euno.news/posts/ko/openai-is-developing-an-alternative-to-github-b61932",
-      "relevanceScore": 75,
-      "relatedDocuments": [
-        "github/labels/dependencies.md",
-        "github/dependabot-labels.md",
-        "github/what-8217-s-new-with-github-copilot-coding-agent.md"
-      ],
-      "keyTopics": [
-        "OpenAI 코드 호스팅",
-        "GitHub 대안",
-        "플랫폼 경쟁"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "왜 Deep Research Pipelines가 깨지는가 그리고 올바르게 구축하는 방법 (Systems-Level Deep Dive)",
-      "link": "https://euno.news/posts/ko/why-deep-research-pipelines-break-and-how-to-build-3c4ec0",
-      "guid": "https://euno.news/posts/ko/why-deep-research-pipelines-break-and-how-to-build-3c4ec0",
-      "relevanceScore": 71,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Deep Research Pipelines",
-        "시스템 레벨 설계",
-        "파이프라인 안정성"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "나는 로컬 AI(Ollama)를 사용해 Git 커밋 메시지를 작성하는 CLI 도구를 만들었다",
-      "link": "https://euno.news/posts/ko/i-built-a-cli-tool-that-writes-git-commit-messages-7a4419",
-      "guid": "https://euno.news/posts/ko/i-built-a-cli-tool-that-writes-git-commit-messages-7a4419",
-      "relevanceScore": 70,
-      "relatedDocuments": [
-        "ai/ollama-claude-code.md",
-        "from-idea-to-pull-request-a-practical-guide-to-bui.md",
-        "ai/ai-code-review-agent-guide.md"
-      ],
-      "keyTopics": [
-        "Ollama",
-        "CLI tool",
-        "Git commit message generation"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "모델 과대광고에서 패치 규율로: AI 릴리즈, 런타임 변화, 그리고 활성 취약점",
-      "link": "https://euno.news/posts/ko/from-model-hype-to-patch-discipline-ai-releases-ru-ace911",
-      "guid": "https://euno.news/posts/ko/from-model-hype-to-patch-discipline-ai-releases-ru-ace911",
-      "relevanceScore": 70,
-      "relatedDocuments": [
-        "ai/ai.md"
-      ],
-      "keyTopics": [
-        "AI 모델 출시",
-        "런타임 기본값 변경",
-        "보안 권고·패치"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "개발자를 위한 Disposable Email API를 만들었습니다",
-      "link": "https://euno.news/posts/ko/i-built-a-disposable-email-api-for-developers-ed0841",
-      "guid": "https://euno.news/posts/ko/i-built-a-disposable-email-api-for-developers-ed0841",
-      "relevanceScore": 68,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Disposable Email API",
-        "테스트용 이메일 주소",
-        "개발자 워크플로우"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Gemini CLI 확장 기능을 더 쉽게 사용하기",
-      "link": "https://euno.news/posts/ko/making-gemini-cli-extensions-easier-to-use-d8d9dc",
-      "guid": "https://euno.news/posts/ko/making-gemini-cli-extensions-easier-to-use-d8d9dc",
-      "relevanceScore": 66,
-      "relatedDocuments": [
-        "ai/gemini-3-1.md",
-        "ai/gemini-3-1-pro.md"
-      ],
-      "keyTopics": [
-        "Gemini CLI",
-        "구조화된 확장 설정",
-        "개발자 경험 개선"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "OROSYNC: Vifi 멀티모달 에이전트와 함께 Keyboard Tax 해체",
-      "link": "https://euno.news/posts/ko/orosync-dismantling-the-keyboard-tax-with-the-vifi-c1bc61",
-      "guid": "https://euno.news/posts/ko/orosync-dismantling-the-keyboard-tax-with-the-vifi-c1bc61",
-      "relevanceScore": 60,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "OROSYNC",
-        "Vifi 멀티모달 에이전트",
-        "Keyboard Tax 해체"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "창의적인 프롬프트를 Gemini와 함께 인터랙티브 XR 경험으로 전환하세요",
-      "link": "https://euno.news/posts/ko/turn-creative-prompts-into-interactive-xr-experien-d085b8",
-      "guid": "https://euno.news/posts/ko/turn-creative-prompts-into-interactive-xr-experien-d085b8",
-      "relevanceScore": 58,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Gemini",
-        "XR 인터랙티브 경험",
-        "프롬프트‑to‑XR 변환"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Marcus AI 클레임 데이터셋",
-      "link": "https://euno.news/posts/ko/marcus-ai-claims-dataset-ab7d4e",
-      "guid": "https://euno.news/posts/ko/marcus-ai-claims-dataset-ab7d4e",
+      "title": "[Paper] Utonia: 모든 포인트 클라우드를 위한 하나의 Encoder",
+      "link": "https://euno.news/posts/ko/utonia-toward-one-encoder-for-all-point-clouds-fc1750",
+      "guid": "https://euno.news/posts/ko/utonia-toward-one-encoder-for-all-point-clouds-fc1750",
       "relevanceScore": 55,
-      "relatedDocuments": [
-        "ai/ai.md"
-      ],
+      "relatedDocuments": [],
       "keyTopics": [
-        "Marcus AI Claim Dataset",
-        "데이터셋 수집",
-        "AI 모델 평가"
+        "point cloud",
+        "통합 인코더",
+        "멀티모달"
       ],
       "sourceUrl": null
     }
@@ -261,38 +276,38 @@
   "actions": [
     {
       "action": "update_existing",
-      "targetSlug": "projects/openclaw-complete-guide.md",
-      "suggestedTitle": "OpenClaw Complete Guide – Security Vulnerability GHSA‑GQ83‑8Q7Q‑9HFX (Sandbox Registry Race Condition)",
+      "targetSlug": "observability/opentelemetry.md",
+      "suggestedTitle": "LD_PRELOAD 기반 OpenTelemetry 자동 주입",
       "priority": "high",
-      "issueNumber": 347
+      "issueNumber": 358
     },
     {
       "action": "update_existing",
-      "targetSlug": "ai/mcp-model-context-protocol.md",
-      "suggestedTitle": "MCP (Model Context Protocol) – Developer Knowledge API Overview",
+      "targetSlug": "backend/agentic-faas-mdl.md",
+      "suggestedTitle": "CRUD 패러다임의 종말과 Agentic FaaS의 부상",
       "priority": "medium",
-      "issueNumber": 348
-    },
-    {
-      "action": "update_existing",
-      "targetSlug": "ai/mcp-model-context-protocol.md",
-      "suggestedTitle": "MCP Server – Self‑Logging Architecture with SQLite & FastAPI",
-      "priority": "medium",
-      "issueNumber": 349
-    },
-    {
-      "action": "update_existing",
-      "targetSlug": "ai/openai-pentagon-contract-revision-and-policy-impli.md",
-      "suggestedTitle": "OpenAI‑Pentagon 계약 이후 사용자 보이콧 움직임",
-      "priority": "medium",
-      "issueNumber": 350
+      "issueNumber": 359
     },
     {
       "action": "new_document",
-      "targetSlug": "ai/agentbus-central-messaging.md",
-      "suggestedTitle": "AgentBus – 중앙 집중식 AI 에이전트 메시징 REST API",
+      "targetSlug": "",
+      "suggestedTitle": "NeuroSkill™: 엣지 BCI 기반 프로액티브 실시간 AI 에이전시 시스템",
       "priority": "medium",
-      "issueNumber": 351
+      "issueNumber": 360
+    },
+    {
+      "action": "new_document",
+      "targetSlug": "",
+      "suggestedTitle": "Viscat: 이기종 로봇 통합 운영 플랫폼",
+      "priority": "medium",
+      "issueNumber": 361
+    },
+    {
+      "action": "update_existing",
+      "targetSlug": "ai/ai-llm-2017-2026.md",
+      "suggestedTitle": "MoD‑DPO: 멀티모달 LLM 환각 완화 최신 연구",
+      "priority": "medium",
+      "issueNumber": 362
     }
   ]
 }
