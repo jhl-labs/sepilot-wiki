@@ -85,7 +85,67 @@ with tracer.start_as_current_span("my-span"):
 
 ---
 
-## 5. OpenTelemetry Collector 상세 설정  
+## 5. LD_PRELOAD 기반 OpenTelemetry 자동 주입  
+
+### 5.1 자동 주입 개요  
+2024년 공개된 **OpenTelemetry Injector**는 LD_PRELOAD(또는 `/etc/ld.so.preload`)를 이용해 실행 파일을 수정하거나 스타트업 스크립트를 변경하지 않고도 자동으로 OTel 에이전트를 삽입합니다. 이 메커니즘은 **Zero‑Touch Instrumentation**을 제공하며, 특히 VM, 베어‑메탈, 혹은 쿠버네티스 외 워크로드에 유용합니다 [출처: euno.news](https://euno.news/posts/ko/use-ldpreload-to-inject-opentelemetry-into-everyth-c257a8).  
+
+핵심 기능  
+- **자동 에이전트 로드**: Java, Node.js, .NET 등 지원 런타임에 맞는 자동 계측 에이전트를 사전 번들링한 `libotelinject.so`를 프리로드.  
+- **리소스 속성 자동 설정**: Kubernetes 메타데이터, 서비스 이름 등 기본 리소스 어트리뷰트를 자동으로 주입.  
+- **구성 파일 기반 제어**: `/etc/opentelemetry/otelinject.conf`(기본) 혹은 `OTEL_INJECTOR_CONFIG_FILE` 환경 변수로 지정한 파일에서 에이전트 경로, 포함/제외 규칙 등을 정의.  
+
+### 5.2 비‑Kubernetes 워크로드 적용 방법  
+
+1. **패키지 설치**  
+   - 공식 RPM/DEB 패키지를 다운로드(릴리즈 페이지)하고 설치하면 `/usr/lib/opentelemetry/libotelinject.so`와 기본 `otelinject.conf`가 배포됩니다.  
+
+2. **전역 프리로드 (시스템 전체)**  
+   ```bash
+   echo /usr/lib/opentelemetry/libotelinject.so >> /etc/ld.so.preload
+   ```  
+   *루트 권한 필요* – 시스템 재부팅 혹은 서비스 재시작 후 모든 새 프로세스에 자동 주입됩니다.  
+
+3. **프로세스 단위 프리로드**  
+   ```bash
+   LD_PRELOAD=/usr/lib/opentelemetry/libotelinject.so node myapp.js
+   ```  
+   특정 애플리케이션에만 적용하고 싶을 때 사용합니다.  
+
+4. **구성 파일 예시** (`/etc/opentelemetry/otelinject.conf`)  
+
+   ```properties
+   # 자동 계측 에이전트 경로
+   jvm_auto_instrumentation_agent_path=/usr/lib/opentelemetry/jvm/javaagent.jar
+   nodejs_auto_instrumentation_agent_path=/usr/lib/opentelemetry/nodejs/node_modules/@opentelemetry/auto-instrumentations-node/build/src/register.js
+   dotnet_auto_instrumentation_agent_path_prefix=/usr/lib/opentelemetry/dotnet
+
+   # Collector 엔드포인트
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4317
+   OTEL_PROPAGATORS=tracecontext,baggage
+
+   # 포함/제외 규칙 (옵션)
+   OTEL_INJECTOR_INCLUDE_PATHS=/usr/bin/myservice*
+   OTEL_INJECTOR_EXCLUDE_PATHS=/usr/bin/ignore-*
+   ```  
+
+5. **Collector 연동**  
+   위와 같이 `OTEL_EXPORTER_OTLP_ENDPOINT`를 설정하면, 프리로드된 에이전트가 생성한 트레이스·메트릭·로그가 바로 Collector에 전송됩니다.  
+
+### 5.3 주의사항 및 보안 고려사항  
+
+| Concern | Recommendation |
+|---------|----------------|
+| **루트 권한 필요** | `/etc/ld.so.preload`를 수정하려면 관리자 권한이 필요합니다. 최소 권한 원칙을 적용하고, 변경 후 파일 권한을 644로 제한하세요. |
+| **전체 프로세스 영향** | 전역 프리로드 시 모든 실행 파일에 라이브러리가 로드되므로, 호환되지 않는 바이너리가 오류를 일으킬 수 있습니다. `OTEL_INJECTOR_EXCLUDE_PATHS` 로 안전하게 제외하세요. |
+| **환경 변수 오염** | 인젝터는 `OTEL_` 접두사가 아닌 변수는 무시하지만, 민감한 정보(예: API 키)는 반드시 `OTEL_` 접두사와 TLS를 사용해 전달하세요. |
+| **업데이트/버전 호환성** | 에이전트와 인젝터 라이브러리는 동일 버전이어야 합니다. 패키지 업데이트 시 `/usr/lib/opentelemetry` 경로를 재검증하세요. |
+| **초기 개발 단계** | GitHub README에 “still early‑stage” 경고가 명시돼 있습니다. 프로덕션 적용 전 스테이징 환경에서 충분히 테스트하고, 롤백 플랜을 마련하세요 [출처: GitHub](https://github.com/open-telemetry/opentelemetry-injector). |
+| **TLS·인증** | Collector와 통신할 때는 `OTEL_EXPORTER_OTLP_ENDPOINT`에 `https://`를 사용하고, 필요한 경우 `OTEL_EXPORTER_OTLP_CERTIFICATE` 등으로 인증서를 지정하세요. |
+
+---
+
+## 6. OpenTelemetry Collector 상세 설정  
 
 ### 배포 옵션  
 - **Docker**: `otelcol` 이미지 사용.  
@@ -137,7 +197,7 @@ exporters:
 
 ---
 
-## 6. Exporter와 백엔드 연동  
+## 7. Exporter와 백엔드 연동  
 
 | Exporter | 대상 백엔드 | 주요 특징 |
 |----------|------------|-----------|
@@ -158,7 +218,7 @@ exporters:
 
 ---
 
-## 7. 실전 예제: 간단한 애플리케이션에 OpenTelemetry 적용  
+## 8. 실전 예제: 간단한 애플리케이션에 OpenTelemetry 적용  
 
 1. **샘플 애플리케이션**: Python Flask 기반 웹 서비스.  
 2. **계측 단계**  
@@ -179,7 +239,7 @@ exporters:
 
 ---
 
-## 8. 베스트 프랙티스와 흔히 발생하는 문제 해결법  
+## 9. 베스트 프랙티스와 흔히 발생하는 문제 해결법  
 
 | Issue | 해결 방안 |
 |-------|-----------|
@@ -191,7 +251,7 @@ exporters:
 
 ---
 
-## 9. 벤더 중립성 및 플러그‑앤‑플레이 전략  
+## 10. 벤더 중립성 및 플러그‑앤‑플레이 전략  
 
 - **벤더 락인 방지**: OpenTelemetry는 **스펙 기반**이므로 Exporter만 교체하면 백엔드를 자유롭게 전환할 수 있습니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
 - **Exporter 교체 체크리스트**  
@@ -202,7 +262,7 @@ exporters:
 
 ---
 
-## 10. 향후 로드맵 및 추가 학습 자료  
+## 11. 향후 로드맵 및 추가 학습 자료  
 
 - **로드맵**: OpenTelemetry는 현재 **Trace·Metric·Log** 3‑pillars 를 모두 지원하고 있으며, 향후 **Logs** 표준화와 **Semantic Conventions** 확장이 예정되어 있습니다 [출처: OpenTelemetry Specification].  
 - **공식 문서**  
@@ -220,24 +280,25 @@ exporters:
 
 ---  
 
-## 11. Broadcom Network Observability Overview  
+## 12. Broadcom Network Observability Overview  
 
-### 11.1 개요  
+### 12.1 개요  
 Broadcom은 **Network Observability** 솔루션을 제공하며, 하이브리드·멀티‑클라우드 환경에서 엔드‑투‑엔드 가시성을 확보하도록 설계되었습니다. VMware 블로그의 “Network Observability by Broadcom: End‑to‑End Visibility for Modern Distributed Applications” 기사에 따르면, 이 솔루션은 전통적인 네트워크 모니터링을 넘어 애플리케이션 레이어까지 확장됩니다 [출처: euno.news](https://euno.news/posts/ko/network-observability-by-broadcom-end-to-end-visib-7ddfdc).  
 
-### 11.2 주요 기능  
+### 12.2 주요 기능  
+
 | 기능 | 설명 |
 |------|------|
 | **통합 트래픽 시각화** | 네트워크 흐름, 서비스 매시브, 그리고 애플리케이션 레이어의 트레이스를 하나의 대시보드에 결합. |
 | **멀티‑클라우드 지원** | AWS, Azure, GCP 등 다양한 클라우드 제공자의 네트워크 데이터를 자동 수집. |
-| **실시간 알림** | 이상 징후(지연, 패킷 손실 등)를 감지하면 즉시 알림을 전송. |
+| **실시간 알림** | 이상 징후(지연, 패킷 손실 등)를 감지하면 즉시 알림 전송. |
 | **데이터 보존 및 분석** | 장기 보관을 위한 스토리지 옵션과 고급 쿼리 기능 제공. |
 
 ---
 
-## 12. Integration with OpenTelemetry  
+## 13. Integration with OpenTelemetry  
 
-### 12.1 Exporter 연결  
+### 13.1 Exporter 연결  
 Broadcom의 Network Observability는 **OTLP** 기반 Exporter를 지원합니다. OpenTelemetry Collector에 다음과 같은 `otlp` Exporter를 추가하면, 트레이스·메트릭·로그가 Broadcom 백엔드로 직접 전송됩니다.  
 
 ```yaml
@@ -248,7 +309,8 @@ exporters:
       "Authorization": "Bearer ${BCM_TOKEN}"
 ```
 
-### 12.2 Collector 파이프라인 예시  
+### 13.2 Collector 파이프라인 예시  
+
 ```yaml
 receivers:
   otlp:
@@ -276,12 +338,12 @@ service:
 
 위 구성은 **Batch**와 **Memory Limiter** 프로세서를 사용해 대량 트래픽을 효율적으로 처리하면서 Broadcom 엔드포인트로 전송합니다.  
 
-### 12.3 자동 계측 활용  
-Broadcom 솔루션은 **OpenTelemetry 자동 계측**과 호환됩니다. 예를 들어, Java 애플리케이션에 `opentelemetry-javaagent.jar`를 적용하면, 네트워크 레이어와 애플리케이션 레이어 모두에서 생성된 스팬이 Collector를 거쳐 Broadcom으로 전달됩니다.  
+### 13.3 자동 계측 활용  
+Broadcom 솔루션은 **OpenTelemetry 자동 계측**과 호환됩니다. 예를 들어 Java 애플리케이션에 `opentelemetry-javaagent.jar`를 적용하면, 네트워크 레이어와 애플리케이션 레이어 모두에서 생성된 스팬이 Collector를 거쳐 Broadcom으로 전달됩니다.  
 
 ---
 
-## 13. Best Practices & Migration Considerations  
+## 14. Best Practices & Migration Considerations  
 
 | 고려 사항 | 권장 방법 |
 |-----------|-----------|
@@ -289,8 +351,8 @@ Broadcom 솔루션은 **OpenTelemetry 자동 계측**과 호환됩니다. 예를
 | **보안** | API 토큰(`BCM_TOKEN`)을 환경 변수로 관리하고, TLS(`https`)를 반드시 사용. |
 | **샘플링** | 네트워크 트래픽이 높은 경우 `parentbased_traceidratio` 샘플러로 트레이스 비율을 0.1~0.5 사이로 조정. |
 | **데이터 정합성** | OpenTelemetry **Semantic Conventions**(예: `net.host.name`, `net.sock.peer.addr`)를 적용해 Broadcom이 기대하는 메타데이터와 일치시킴. |
-| **관측 파이프라인 테스트** | 로컬 `otelcol` 인스턴스에 `logging` Exporter를 추가해 전송되는 데이터를 검증 후 프로덕션에 적용. |
-| **점진적 마이그레이션** | 기존 네트워크 모니터링 툴과 병행 운영하면서, 단계별로 트레이스와 메트릭을 Broadcom으로 라우팅해 리스크를 최소화. |
+| **관측 파이프라인 테스트** | 로컬 `otelcol` 인스턴스에 `logging` Exporter를 추가해 전송 데이터를 검증 후 프로덕션에 적용. |
+| **점진적 마이그레이션** | 기존 네트워크 모니터링 툴과 병행 운영하면서, 단계별로 트레이스와 메트릭을 Broadcom으로 라우팅해 리스크 최소화. |
 
 ---
 

@@ -1,6 +1,151 @@
 {
   "entries": [
     {
+      "id": "a0147966-c923-4693-9979-975d29da9ca8",
+      "timestamp": "2026-03-04T12:17:53.157Z",
+      "actionType": "modify",
+      "issueNumber": 362,
+      "issueTitle": " [업데이트] MoD‑DPO: 멀티모달 LLM 환각 완화 최신 연구",
+      "documentSlug": "ai/ai-llm-2017-2026",
+      "documentTitle": "AI LLM 타임라인 2017‑2026",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MoD‑DPO: 멀티모달 LLM 환각 완화 최신 연구\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 9,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "8e014322-7f9f-431f-9508-4483b0f4acd8",
+      "timestamp": "2026-03-04T12:16:56.282Z",
+      "actionType": "generate",
+      "issueNumber": 361,
+      "issueTitle": "문서 요청 #361",
+      "documentSlug": "361",
+      "documentTitle": "이기종 로봇 통합 플랫폼 – Viscat (비스캣) 기술 백서",
+      "summary": "새 문서 \"이기종 로봇 통합 플랫폼 – Viscat (비스캣) 기술 백서\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3767
+            },
+            {
+              "step": "outline",
+              "durationMs": 7345
+            },
+            {
+              "step": "write",
+              "durationMs": 27616
+            },
+            {
+              "step": "review",
+              "durationMs": 8692
+            }
+          ],
+          "totalDurationMs": 47421,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2183,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "21bd5ff0-208b-488e-b121-652058a9192a",
+      "timestamp": "2026-03-04T12:16:04.597Z",
+      "actionType": "generate",
+      "issueNumber": 360,
+      "issueTitle": "문서 요청 #360",
+      "documentSlug": "ai/360",
+      "documentTitle": "NeuroSkill™ – 프로액티브 실시간 에이전시 시스템",
+      "summary": "새 문서 \"NeuroSkill™ – 프로액티브 실시간 에이전시 시스템\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3258
+            },
+            {
+              "step": "outline",
+              "durationMs": 11204
+            },
+            {
+              "step": "write",
+              "durationMs": 24225
+            },
+            {
+              "step": "review",
+              "durationMs": 5673
+            },
+            {
+              "step": "refine",
+              "durationMs": 32895
+            }
+          ],
+          "totalDurationMs": 77256,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3700,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ffa58fd4-ccf5-4c50-af58-14293f5285d5",
+      "timestamp": "2026-03-04T12:14:44.097Z",
+      "actionType": "modify",
+      "issueNumber": 359,
+      "issueTitle": " [업데이트] CRUD 패러다임의 종말과 Agentic FaaS의 부상",
+      "documentSlug": "backend/agentic-faas-mdl",
+      "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
+      "summary": "문서 수정 요청 처리: \" [업데이트] CRUD 패러다임의 종말과 Agentic FaaS의 부상\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 38,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "00f6dc84-20a4-4ccf-967b-beefdddd8f03",
+      "timestamp": "2026-03-04T12:13:35.910Z",
+      "actionType": "modify",
+      "issueNumber": 358,
+      "issueTitle": " [업데이트] LD_PRELOAD 기반 OpenTelemetry 자동 주입",
+      "documentSlug": "observability/opentelemetry",
+      "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] LD_PRELOAD 기반 OpenTelemetry 자동 주입\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 62,
+        "deletions": 0
+      }
+    },
+    {
       "id": "c8337b71-b4ee-44c2-a2c8-531bb2c7dc17",
       "timestamp": "2026-03-04T12:12:41.872Z",
       "actionType": "maintain",
@@ -8112,5 +8257,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-04T12:12:41.872Z"
+  "lastUpdated": "2026-03-04T12:17:53.158Z"
 }
