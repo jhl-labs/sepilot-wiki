@@ -3,7 +3,7 @@ title: OpenTelemetry 입문 – 관측성 통합 가이드
 author: SEPilot AI
 status: published
 tags: [OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF]
-updatedAt: 2026-02-27
+updatedAt: 2026-03-04
 redirect_from:
   - observability-open-telemetry-guide
 order: 1
@@ -219,5 +219,79 @@ exporters:
   - Datadog OpenTelemetry 가이드 [출처: Datadog Docs](https://docs.datadoghq.com/ko/getting_started/opentelemetry/).  
 
 ---  
+
+## 11. Broadcom Network Observability Overview  
+
+### 11.1 개요  
+Broadcom은 **Network Observability** 솔루션을 제공하며, 하이브리드·멀티‑클라우드 환경에서 엔드‑투‑엔드 가시성을 확보하도록 설계되었습니다. VMware 블로그의 “Network Observability by Broadcom: End‑to‑End Visibility for Modern Distributed Applications” 기사에 따르면, 이 솔루션은 전통적인 네트워크 모니터링을 넘어 애플리케이션 레이어까지 확장됩니다 [출처: euno.news](https://euno.news/posts/ko/network-observability-by-broadcom-end-to-end-visib-7ddfdc).  
+
+### 11.2 주요 기능  
+| 기능 | 설명 |
+|------|------|
+| **통합 트래픽 시각화** | 네트워크 흐름, 서비스 매시브, 그리고 애플리케이션 레이어의 트레이스를 하나의 대시보드에 결합. |
+| **멀티‑클라우드 지원** | AWS, Azure, GCP 등 다양한 클라우드 제공자의 네트워크 데이터를 자동 수집. |
+| **실시간 알림** | 이상 징후(지연, 패킷 손실 등)를 감지하면 즉시 알림을 전송. |
+| **데이터 보존 및 분석** | 장기 보관을 위한 스토리지 옵션과 고급 쿼리 기능 제공. |
+
+---
+
+## 12. Integration with OpenTelemetry  
+
+### 12.1 Exporter 연결  
+Broadcom의 Network Observability는 **OTLP** 기반 Exporter를 지원합니다. OpenTelemetry Collector에 다음과 같은 `otlp` Exporter를 추가하면, 트레이스·메트릭·로그가 Broadcom 백엔드로 직접 전송됩니다.  
+
+```yaml
+exporters:
+  otlp:
+    endpoint: "network-observability.broadcom.com:4317"
+    headers:
+      "Authorization": "Bearer ${BCM_TOKEN}"
+```
+
+### 12.2 Collector 파이프라인 예시  
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+processors:
+  batch:
+  memory_limiter:
+    limit_mib: 500
+exporters:
+  otlp:
+    endpoint: "network-observability.broadcom.com:4317"
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp]
+```
+
+위 구성은 **Batch**와 **Memory Limiter** 프로세서를 사용해 대량 트래픽을 효율적으로 처리하면서 Broadcom 엔드포인트로 전송합니다.  
+
+### 12.3 자동 계측 활용  
+Broadcom 솔루션은 **OpenTelemetry 자동 계측**과 호환됩니다. 예를 들어, Java 애플리케이션에 `opentelemetry-javaagent.jar`를 적용하면, 네트워크 레이어와 애플리케이션 레이어 모두에서 생성된 스팬이 Collector를 거쳐 Broadcom으로 전달됩니다.  
+
+---
+
+## 13. Best Practices & Migration Considerations  
+
+| 고려 사항 | 권장 방법 |
+|-----------|-----------|
+| **벤더 전환 전략** | 초기에는 **OTLP** Exporter만 사용하고, 백엔드 URL만 교체해 Broadcom ↔ 다른 솔루션 간 전환을 용이하게 함. |
+| **보안** | API 토큰(`BCM_TOKEN`)을 환경 변수로 관리하고, TLS(`https`)를 반드시 사용. |
+| **샘플링** | 네트워크 트래픽이 높은 경우 `parentbased_traceidratio` 샘플러로 트레이스 비율을 0.1~0.5 사이로 조정. |
+| **데이터 정합성** | OpenTelemetry **Semantic Conventions**(예: `net.host.name`, `net.sock.peer.addr`)를 적용해 Broadcom이 기대하는 메타데이터와 일치시킴. |
+| **관측 파이프라인 테스트** | 로컬 `otelcol` 인스턴스에 `logging` Exporter를 추가해 전송되는 데이터를 검증 후 프로덕션에 적용. |
+| **점진적 마이그레이션** | 기존 네트워크 모니터링 툴과 병행 운영하면서, 단계별로 트레이스와 메트릭을 Broadcom으로 라우팅해 리스크를 최소화. |
+
+---
 
 *본 가이드는 제공된 리서치 자료에 기반하여 작성되었습니다. 최신 스펙이나 특정 환경에 대한 상세 설정은 공식 문서와 커뮤니티 업데이트를 참고하시기 바랍니다.*
