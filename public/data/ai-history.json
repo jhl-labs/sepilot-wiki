@@ -1,6 +1,141 @@
 {
   "entries": [
     {
+      "id": "0c3f0ad5-a7eb-442d-9d6d-acd3751b6196",
+      "timestamp": "2026-03-04T12:19:12.531Z",
+      "actionType": "quality_score",
+      "issueNumber": 360,
+      "issueTitle": " [요청] NeuroSkill™: 엣지 BCI 기반 프로액티브 실시간 AI 에이전시 시스템",
+      "documentSlug": "neuroskill-bci-ai",
+      "documentTitle": " [요청] NeuroSkill™: 엣지 BCI 기반 프로액티브 실시간 AI 에이전시 시스템",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "7c13a7f9-659a-4d87-9d9e-bede8939ba24",
+      "timestamp": "2026-03-04T12:18:58.974Z",
+      "actionType": "quality_score",
+      "issueNumber": 361,
+      "issueTitle": " [요청] Viscat: 이기종 로봇 통합 운영 플랫폼",
+      "documentSlug": "viscat",
+      "documentTitle": " [요청] Viscat: 이기종 로봇 통합 운영 플랫폼",
+      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "60226067-2729-4d6d-8ded-002cab58c4d5",
+      "timestamp": "2026-03-04T12:18:41.429Z",
+      "actionType": "modify",
+      "issueNumber": 362,
+      "issueTitle": " [업데이트] MoD‑DPO: 멀티모달 LLM 환각 완화 최신 연구",
+      "documentSlug": "ai/ai-llm-2017-2026",
+      "documentTitle": "AI LLM 타임라인 2017‑2026",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MoD‑DPO: 멀티모달 LLM 환각 완화 최신 연구\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 37,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "269c024b-0d2c-44f9-852a-d8ea0f602928",
+      "timestamp": "2026-03-04T12:17:47.484Z",
+      "actionType": "generate",
+      "issueNumber": 360,
+      "issueTitle": " [요청] NeuroSkill™: 엣지 BCI 기반 프로액티브 실시간 AI 에이전시 시스템",
+      "documentSlug": "neuroskill-bci-ai",
+      "documentTitle": "NeuroSkill™ – 엣지 BCI 기반 프로액티브 실시간 AI 에이전시 시스템",
+      "summary": "새 문서 \"NeuroSkill™ – 엣지 BCI 기반 프로액티브 실시간 AI 에이전시 시스템\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6180
+            },
+            {
+              "step": "outline",
+              "durationMs": 8139
+            },
+            {
+              "step": "write",
+              "durationMs": 34119
+            },
+            {
+              "step": "review",
+              "durationMs": 5823
+            }
+          ],
+          "totalDurationMs": 54261,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2404,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "71792c4e-f83e-4190-a2a9-6a26cac6841d",
+      "timestamp": "2026-03-04T12:16:40.020Z",
+      "actionType": "generate",
+      "issueNumber": 361,
+      "issueTitle": " [요청] Viscat: 이기종 로봇 통합 운영 플랫폼",
+      "documentSlug": "viscat",
+      "documentTitle": "Viscat – 이기종 로봇 통합 운영 플랫폼",
+      "summary": "새 문서 \"Viscat – 이기종 로봇 통합 운영 플랫폼\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4313
+            },
+            {
+              "step": "outline",
+              "durationMs": 7281
+            },
+            {
+              "step": "write",
+              "durationMs": 26837
+            },
+            {
+              "step": "review",
+              "durationMs": 6786
+            }
+          ],
+          "totalDurationMs": 45217,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2045,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "c8337b71-b4ee-44c2-a2c8-531bb2c7dc17",
       "timestamp": "2026-03-04T12:12:41.872Z",
       "actionType": "maintain",
@@ -8112,5 +8247,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-04T12:12:41.872Z"
+  "lastUpdated": "2026-03-04T12:19:12.531Z"
 }
