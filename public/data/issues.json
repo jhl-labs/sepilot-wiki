@@ -3,8 +3,8 @@
     {
       "id": 346,
       "number": 346,
-      "title": "문서 요청 #346",
-      "body": "",
+      "title": " [요청] Telegram‑Based Access‑Layer Authentication with OIDC and PKCE",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/telegram-and-the-architectural-shift-toward-access-c22b35)\n**관련도**: 62/100\n**핵심 토픽**: Telegram, OIDC, PKCE, access‑layer authentication\n\n## 뉴스 요약\n프로토콜 기반 접근 OIDC가 적용된 경우, 접근은 다음을 통해 공식화됩니다: - Authorization Code Flow - PKCE - ID tokens - Signature verification - Issuer and aud\n\n## 상세 내용\nSource: Dev.to\nProtocol-Driven Access\nOIDC가 도입되면 접근은 다음을 통해 공식화됩니다:\nAuthorization Code Flow\nPKCE\nID 토큰\n서명 검증\nIssuer 및 audience 검증\n엄격한 redirect_uri 제어\n로그인 과정은 클라이언트, 브라우저, 서버 간에 접근을 협상하는 표준화된 프로토콜이 됩니다. 로그인은 공식적인 접근 발급 메커니즘으로 진화합니다.\nFrom Identity-Centric to Access-Centric Design\n전통적인 인증 시스템은 신원 저장에 초점을 맞추었습니다:\n사용자 계정\n프로필 속성\n자격 증명 검증\n비밀번호 복구\n현대 아키텍처는 점점 접근 제어에 초점을 맞춥니다:\n언제 접근이 허용되는가?\n어떤 범위(scope)에서인가?\n얼마나 오래인가?\n어떤 검증 보장을 갖는가?\n신원은 시스템의 일부로 남아 있지만, 접근이 아키텍처상의 핵심이 됩니다.\nAccess as a Dedicated Layer\n인증을 OIDC + PKCE로 구현하면 관심사가 다음으로 이동합니다:\n세션 발급\n토큰 수명 주기\n스코프 정의\n암호학적 검증\n수명 강제 적용\n이는 접근 레이어를 정의합니다 — 접근이 어떻게 협상·발급·검증되는지를 담당하는 구성 요소입니다. 이러한 레이어는 기존 인증 스택 및 접근 관리 시스템과 깔끔하게 통합됩니다.\nTrusted Client Confirmation\n텔레그램의 흐름은 애플리케이션 내부에서 확인을 포함합니다. 아키텍처적으로 이는:\n브라우저 세션을 인증된 클라이언트에 바인딩\n확인을 신뢰할 수 있는 환경으로 이동\n피싱 형태의 자격 증명 탈취 노출 감소\n세션 바인딩은 접근 아키텍처의 일부가 됩니다.\nScoped and Contextual Access\n스코프(예: 전화번호 공유, 통신 권한)의 사용은 접근을 정의된 권리 집합으로 구조화합니다. 이 모델은 다음을 도입합니다:\n명시적 권한 협상\n컨텍스트에 묶인 접근\n명확히 정의된 기능 경계\n권한 부여는 정의된 파라미터를 가진 권리의 제어된\n\n## 판단 근거\nTelegram과 OIDC/PKCE를 활용한 접근‑레이어 인증 설계는 현재 위키에 다루어지지 않은 최신 인증 아키텍처이며, 구현 가이드와 보안 고려사항을 정리한 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-04T00:27:22.794Z",
-      "updated_at": "2026-03-04T00:27:22.797Z",
+      "updated_at": "2026-03-04T00:29:51.298Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/346",
-      "documentSlug": "security/346",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/346.md",
+      "documentSlug": "telegram-based-access-layer-authentication-with-oi",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/telegram-based-access-layer-authentication-with-oi.md",
       "comments": 0
     },
     {
       "id": 345,
       "number": 345,
-      "title": "문서 요청 #345",
-      "body": "",
+      "title": " [요청] OpenAI Pentagon Contract Revision and Policy Implications",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/openai-amends-pentagon-deal-as-sam-altman-admits-i-5d5f22)\n**관련도**: 68/100\n**핵심 토픽**: OpenAI, Pentagon contract, AI policy & governance\n\n## 뉴스 요약\n배경: OpenAI는 CEO Sam Altman이 원래 계약이 “기회주의적이고 부실했다”고 인정한 후 Pentagon 계약을 수정하고 있습니다. The comp...\n\n## 상세 내용\nSource: Slashdot\n배경\nOpenAI는 CEO Sam Altman이 원래 계약이 “기회주의적이고 부실해 보였다”고 인정한 뒤 펜타곤 계약을 수정하고 있습니다. 이제 회사는 자사의 기술이 정보기관이나 대규모 국내 감시 목적으로 사용되는 것을 명시적으로 제한할 것입니다.\n이 계약은 펜타곤의 기존 AI 계약업체였던 Anthropic이 계약 해지된 직후 발표되었습니다. 9억 명이 넘는 ChatGPT 사용자를 보유한 OpenAI는 Anthropic이 제외된 직후 거의 즉시 계약에 서명했습니다.\n발표 직후 온라인에서 반발이 일었으며, X와 Reddit 사용자들은 “ChatGPT 삭제” 캠페인을 독려했습니다. Reddit 게시물 중 하나는 다음과 같이 적었습니다:\n“당신은 이제 전쟁 기계를 훈련시키고 있습니다. 취소 증거를 보여 주세요.”\nSource: Reddit post\nAltman의 성명\nX에 재게시된 직원 대상 메시지에서 Altman은 Anthropic이 제외된 뒤 금요일에 발표된 원래 계약이 너무 급하게 체결됐다고 밝혔습니다. 그는 다음과 같이 썼습니다:\n“우리는 금요일에 이 계약을 서두르게 된 것을 후회합니다. 문제는 매우 복잡하고 명확한 소통이 필요합니다. 우리는 진심으로 상황을 진정시키고 더 나쁜 결과를 피하려고 했지만, 결국 기회주의적이고 부실해 보였던 것 같습니다.”\nOpenAI는 처음에 이 계약이 “분류된 AI 배포에 대한 이전 어떤 계약보다 더 많은 가드레일을 포함하고 있다”고 주장했으며, 여기에는 Anthropic의 경우도 포함되었습니다.\n반응\nMiles Brundage의 우려\nOpenAI 전 정책 연구 책임자인 Miles Brundage는 Anthropic이 극복할 수 없다고 판단한 윤리적 문제들을 해결한 듯 보이는 계약을 OpenAI가 어떻게 따냈는지 의문을 제기했습니다. 그는 X에 다음과 같이 적었습니다:\n“OpenAI 직원들의 기본 가정은 안타깝게도 OpenAI가 굽히고도 굽히지 않은 척하며 Anthropic을 괴롭히고, 이를 돕는\n\n## 판단 근거\nOpenAI가 펜타곤 계약을 수정하고 정책을 명시적으로 제한한다는 내용은 AI 거버넌스와 정책 분야에서 최신 사례이며, 기존 ‘Anthropic‑Claude 정부 규제’ 문서와는 별도 주제이므로 새로운 정책·규제 문서를 만든다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,17 +56,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-04T00:25:57.726Z",
-      "updated_at": "2026-03-04T00:25:57.729Z",
+      "updated_at": "2026-03-04T00:30:43.736Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/345",
-      "documentSlug": "345",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/345.md",
+      "documentSlug": "ai/openai-pentagon-contract-revision-and-policy-impli",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/openai-pentagon-contract-revision-and-policy-impli.md",
       "comments": 0
     },
     {
       "id": 344,
       "number": 344,
-      "title": "문서 요청 #344",
-      "body": "",
+      "title": " [요청] SkyDiscover: Open‑Source Framework for LLM‑Driven Algorithm Discovery",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/skydiscover-an-open-framework-for-llm-driven-algor-f20ef7)\n**관련도**: 71/100\n**핵심 토픽**: SkyDiscover, LLM‑driven algorithm discovery, open‑source framework\n\n## 뉴스 요약\n우리는 AI‑드리븐 알고리즘 디스커버리를 위한 모듈형 프레임워크인 SkyDiscover를 오픈소스화합니다. Framework Overview SkyDiscover는 디스커버리 루프를 네 가지 단계로 분해합니다.\n\n## 상세 내용\nSource: Dev.to\n프레임워크 개요\nSkyDiscover는 발견 루프를 네 개의 교체 가능한 구성 요소로 분해합니다:\nContext Builder – LLM을 위한 문제 컨텍스트를 구축합니다.\nSolution Generator – 후보 알고리즘이나 솔루션을 생성합니다.\nEvaluator – 각 후보의 품질 또는 성능을 평가합니다.\nSelector – 다음 반복을 위해 가장 유망한 후보를 선택합니다.\n구현\n프레임워크 위에 구축된 두 가지 발견 알고리즘:\nAdaEvolve – 적응형 탐색 전략.\nEvoX – 자체 수정 탐색 전략.\n결과 (200+ 벤치마크)\n수학, 시스템, 프로그래밍, 멀티모달 작업 전반에 걸쳐:\n기존 오픈 메서드와 비교했을 때 172개의 Frontier‑CS 문제에서 +34 % 중간 개선.\n여러 수학 및 시스템 작업에서 AlphaEvolve와 동등하거나 능가.\n41 % 낮은 크로스‑클라우드 전송 비용.\n29 % 낮은 KV‑cache 압력.\nSkyDiscover는 발견 알고리즘을 구축, 비교 및 확장하기 위한 깔끔한 인터페이스를 제공합니다.\n리소스\nBlog:\nGitHub:\nAdaEvolve paper:\nEvoX paper:\nTwitter announcement:\n\n## 판단 근거\nLLM 기반 알고리즘 탐색 프레임워크인 SkyDiscover는 현재 위키에 다루어지지 않은 새로운 오픈소스 프로젝트이며, 구성 요소와 사용 예시를 정리한 전용 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -87,17 +87,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-04T00:25:11.688Z",
-      "updated_at": "2026-03-04T00:25:11.691Z",
+      "updated_at": "2026-03-04T00:31:38.527Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/344",
-      "documentSlug": "ai/344",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/344.md",
+      "documentSlug": "ai/skydiscover-open-source-framework-for-llm-driven-a",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/skydiscover-open-source-framework-for-llm-driven-a.md",
       "comments": 0
     },
     {
       "id": 342,
       "number": 342,
-      "title": "문서 요청 #342",
-      "body": "",
+      "title": " [요청] Shared Workflows for Node.js Backend and AWS Deployments",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/shared-workflows-minha-experincia-definindo-pipeli-2dc274)\n**관련도**: 77/100\n**핵심 토픽**: Shared workflows, Node.js backend, CI/CD pipeline\n\n## 뉴스 요약\n동기 부여: 최근 몇 달 동안 나는 백엔드 Node.js 프로젝트와 인프라 리소스를 위한 표준 shared workflows 모델을 정의하는 작업을 수행했다.\n\n## 상세 내용\nSource: Dev.to\n번역을 진행하려면 번역이 필요한 전체 텍스트를 제공해 주시겠어요?\n코드 블록, URL 및 마크다운 형식은 그대로 유지하면서 본문만 한국어로 번역해 드리겠습니다.\n동기\n지난 몇 달 동안 나는 Node.js 백엔드 프로젝트와 AWS에 배포된 인프라 자원을 위한 shared workflows 표준 모델을 정의하는 작업을 해왔다. 여러 팀과 저장소가 있는 조직에서는 각 프로젝트가 파이프라인(lint, test, build, deploy)을 자체적으로 만들곤 한다. 이는 중복 작업, 보안 일관성 부족, 높은 유지보수 비용을 초래한다. 나의 목표는 재사용 가능한 워크플로우 세트를 만들고 — 소비자 저장소가 쉽게 설정할 수 있도록 — 중복을 줄이고 모범 사례를 표준화하는 것이었다.\n워크플로우 아키텍처\n재사용 가능한 워크플로우(GitHub Actions on: workflow_call)를 사용하고 책임을 명확히 분리했습니다:\n워크플로우책임\nCIlint, install, cache, unit/integration tests, security scan (yarn audit)\nInfra CITerraform fmt / init / plan (shared‑terraform‑ci)\nCDbuild/push to ECR, blue/green deployment on ECS (shared‑backend‑deploy‑ecs)\nRelease자동으로 release 브랜치를 생성하고 main에 PR을 생성 (shared‑release‑workflow)\n이러한 분리는 재사용성을 높입니다: 하나의 레포지토리는 CI shared만 호출하거나, deploy shared만 호출하거나, 혹은 래퍼를 통해 두 가지를 모두 호출할 수 있습니다.\nShared CI 사용\njobs:\nci:\nuses: ./.github/workflows/shared-backend-ci.yml\nwith:\nworking_directory: app\nnode_version: '20'\nenable_security_\n\n## 판단 근거\n뉴스는 Node.js 백엔드와 AWS 인프라를 위한 재사용 가능한 파이프라인(Shared Workflows) 정의 경험을 다루고 있으며, 현재 위키에 해당 주제에 대한 문서가 존재하지 않는다. CI/CD 표준화와 조직 차원의 파이프라인 관리에 대한 실용 가이드가 필요하므로 새 문서를 만든다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -118,10 +118,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-04T00:23:40.605Z",
-      "updated_at": "2026-03-04T00:23:40.608Z",
+      "updated_at": "2026-03-04T00:32:39.034Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/342",
-      "documentSlug": "342",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/342.md",
+      "documentSlug": "devops/shared-workflows-for-node-js-backend-and-aws-deplo",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/devops/shared-workflows-for-node-js-backend-and-aws-deplo.md",
       "comments": 0
     },
     {
@@ -2490,5 +2490,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-04T00:27:22.797Z"
+  "lastUpdated": "2026-03-04T00:32:39.035Z"
 }
