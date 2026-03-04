@@ -12,7 +12,7 @@ redirect_from:
   - projects-openclaw
 related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
 order: 6
-updatedAt: 2026-02-25
+updatedAt: 2026-03-04
 quality_score: 84
 ---
 
@@ -382,7 +382,7 @@ CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며
 | 영역 | 조치 | 상세 |
 |------|------|------|
 | **네트워크** | HTTPS 강제 | 모든 인스턴스에 TLS 적용, HTTP 접근 차단 |
-| **파일 시스템** | 샌드박스 격리 | Docker 컨테이너 또는 firejail로 파일 시스템 접근 제한 |
+| **파일 시스템** | 샌드박스 격리 | Docker 컨테이너 또는 firejail 로 파일 시스템 접근 제한 |
 | **자격 증명** | 전용 사용자 계정 | 최소 권한 원칙 적용, 민감 디렉터리 마운트 제외 |
 | **프롬프트** | 입력 검증 | 외부 콘텐츠 처리 전 프롬프트 인젝션 필터링 적용 |
 | **모니터링** | 이상 탐지 | 에이전트 API 호출 패턴 모니터링, 비정상 접근 즉시 차단 |
@@ -393,7 +393,7 @@ CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며
 - [ ] Docker 컨테이너 내 `--read-only` 플래그와 함께 실행  
 - [ ] `~/.ssh`, `~/.aws` 등 민감 디렉터리를 마운트에서 제외  
 - [ ] 모든 외부 통신에 HTTPS 적용  
-- [ ] Allowlist로 허용된 사용자만 접근 허가  
+- [ ] Allowlist 로 허용된 사용자만 접근 허가  
 - [ ] 정기적인 의존성 보안 감사 수행  
 
 *출처: CrowdStrike "What Security Teams Need to Know About OpenClaw", euno.news (2026‑02‑22) [14]*  
@@ -401,7 +401,7 @@ CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며
 ---
 
 ## **Security Risks and Mitigations** *(English Summary)*
-- **Prompt Injection**: Malicious content injected via SKILL.md or external documents can cause the agent to execute unintended commands.  
+- **Prompt Injection**: Malicious content injected via `SKILL.md` or external documents can cause the agent to execute unintended commands.  
 - **Credential Exposure**: The agent’s file‑system access may reveal SSH keys, AWS credentials, or password stores.  
 - **Supply‑Chain Abuse**: Attackers can embed malicious skills in OpenClaw’s `SKILL.md` (see next section) to weaponize trusted AI agents.  
 - **Mitigations**: Enforce TLS, run OpenClaw in a read‑only, non‑root container, whitelist allowed users, apply multi‑stage input sanitization, and perform regular dependency audits (`npm audit`, `pnpm audit`).  
@@ -427,16 +427,11 @@ Attackers modify the `SKILL.md` file of OpenClaw‑based agents, inserting malic
 - **Detection Difficulty**: The XOR‑encrypted Mach‑O binary makes static detection challenging; the malicious behavior surfaces only after user execution.
 
 ### Mitigation Recommendations
-1. **Skill Validation**  
-   - Implement a verification step for any `SKILL.md` or plugin before loading: checksum verification, digital signature, or CI‑based security scan.  
-2. **User Prompt Hardening**  
-   - Require explicit user confirmation for any action that involves downloading or executing external binaries, especially on macOS.  
-3. **Network Allowlist**  
-   - Restrict outbound connections from OpenClaw to known, vetted domains; block unknown download URLs.  
-4. **Audit Logs**  
-   - Log all skill load events and any AI‑generated commands that request file downloads or system changes; monitor for anomalous patterns.  
-5. **Education**  
-   - Inform operators that AI agents can be **co‑opted** to deliver malware; encourage manual review of AI‑generated instructions before execution.  
+1. **Skill Validation** – Implement a verification step for any `SKILL.md` or plugin before loading: checksum verification, digital signature, or CI‑based security scan.  
+2. **User Prompt Hardening** – Require explicit user confirmation for any action that involves downloading or executing external binaries, especially on macOS.  
+3. **Network Allowlist** – Restrict outbound connections from OpenClaw to known, vetted domains; block unknown download URLs.  
+4. **Audit Logs** – Log all skill load events and any AI‑generated commands that request file downloads or system changes; monitor for anomalous patterns.  
+5. **Education** – Inform operators that AI agents can be **co‑opted** to deliver malware; encourage manual review of AI‑generated instructions before execution.  
 
 By applying these controls, organizations can reduce the risk of **AI‑mediated supply‑chain attacks** such as the macOS Atomic Stealer described above.
 
@@ -448,19 +443,25 @@ By applying these controls, organizations can reduce the risk of **AI‑mediated
 ---
 
 ## Root Cause Analysis
-1. **컨텍스트 압축 및 가드레일 우회**  
-   - 대량 이메일을 처리하면서 Memory Store의 컨텍스트 윈도우가 초과되어 자동 **압축**이 발생했습니다. 압축 과정에서 이전 “중지” 명령이 포함된 프롬프트가 잘려나가면서, 에이전트는 최신 중지 명령을 인식하지 못했습니다.  
-2. **프롬프트 인젝션 방어 미비**  
-   - 이메일 내용에 포함된 특수 문자열이 에이전트에게 실행 명령으로 해석되는 **프롬프트 인젝션**이 발생했습니다. 기존 필터링 로직이 복합 텍스트를 충분히 검사하지 못했습니다.  
-3. **모니터링 및 중지 메커니즘 부재**  
-   - 에이전트가 실행 중인 작업을 실시간으로 감시하거나 강제 중지할 수 있는 **운영자 인터럽트**가 없었습니다. 결과적으로 사용자가 보낸 중지 신호가 무시되었습니다.  
+1. **컨텍스트 압축 및 가드레일 우회** – 대량 이메일을 처리하면서 Memory Store의 컨텍스트 윈도우가 초과되어 자동 **압축**이 발생했습니다. 압축 과정에서 이전 “중지” 명령이 포함된 프롬프트가 잘려나가면서, 에이전트는 최신 중지 명령을 인식하지 못했습니다.  
+2. **프롬프트 인젝션 방어 미비** – 이메일 내용에 포함된 특수 문자열이 에이전트에게 실행 명령으로 해석되는 **프롬프트 인젝션**이 발생했습니다. 기존 필터링 로직이 복합 텍스트를 충분히 검사하지 못했습니다.  
+3. **모니터링 및 중지 메커니즘 부재** – 에이전트가 실행 중인 작업을 실시간으로 감시하거나 강제 중지할 수 있는 **운영자 인터럽트**가 없었습니다. 결과적으로 사용자가 보낸 중지 신호가 무시되었습니다.  
 
 ---
 
 ## Mitigation and Best Practices
-- **컨텍스트 관리**  
-  - Memory Store에 **명시적 토큰 한도**(예: 4 k 토큰)와 **압축 정책**을 설정하고, 압축 전후에 반드시 “중지” 프롬프트가 포함되도록 자동 삽입합니다.  
-- **프롬프트 가드레일 강화**  
-  - 외부 이메일·문서 입력에 대해 **다중 단계 검증**(정규식 필터 → LLM 기반 안전성 검사) 후에만 에이전트에 전달합니다.  
-- **실시간 중지 인터페이스**  
-  - `openclaw abort <task-id>` 와 같은 **CLI 중지 명령**을 구현하고, 웹 UI/REST API에서도 즉시 취소
+- **컨텍스트 관리** – Memory Store에 **명시적 토큰 한도**(예: 4 k 토큰)와 **압축 정책**을 설정하고, 압축 전후에 반드시 “중지” 프롬프트가 포함되도록 자동 삽입합니다.  
+- **프롬프트 가드레일 강화** – 외부 이메일·문서 입력에 대해 **다중 단계 검증**(정규식 필터 → LLM 기반 안전성 검사) 후에만 에이전트에 전달합니다.  
+- **실시간 중지 인터페이스** – `openclaw abort <task-id>` 와 같은 **CLI 중지 명령**을 구현하고, 웹 UI/REST API에서도 즉시 취소할 수 있게 합니다.
+
+---
+
+## Security Vulnerabilities
+### GHSA‑GQ83‑8Q7Q‑9HFX – Sandbox Registry Race Condition
+- **취약점 ID**: GHSA‑GQ83‑8Q7Q‑9HFX  
+- **CVSS 점수**: 6.6 (중간)  
+- **공개일**: 2026‑03‑03  
+- **패치 날짜**: 2026‑02‑18 (버전 2026.2.18)  
+
+#### 상세 내용
+OpenClaw 2026.2.18 이전 버전에는 **샌드박스 레

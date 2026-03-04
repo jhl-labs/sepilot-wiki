@@ -6,7 +6,7 @@ status: published
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]
 related_docs: ["claude-code-release-history.md", "continuous-ai-agentic-ci.md", "continuous-ai.md"]
 order: 1
-updatedAt: 2026-02-25
+updatedAt: 2026-03-04
 quality_score: 88
 ---
 
@@ -233,6 +233,203 @@ scopes:
 
 ---
 
+### 4.7 Self‑Logging Architecture (새로운 요구사항)
+
+#### 4.7.1 Self‑Logging Requirements  
+| 요구사항 | 설명 |
+|----------|------|
+| **전체 호출 가시성** | 모든 Tool·Resource 호출을 중앙 DB에 기록해, 클라이언트(Desktop, 서버, API) 구분 없이 추적 가능해야 함. |
+| **멀티‑유저 태깅** | `user_id` 혹은 `role` 파라미터를 로그에 포함해, 동일 서버를 사용하는 여러 사용자를 구분한다. |
+| **정확한 실행 시간** | 네트워크 왕복을 제외하고 실제 Tool 실행에 걸린 **duration_ms** 를 측정한다. |
+| **오류·예외 기록** | `success` 플래그와 `error_message` 를 반드시 저장해, 실패 원인 분석이 가능하도록 한다. |
+| **증분 업로드 & 중복 방지** | 로컬 로그 파일을 파싱할 때 **bookmark**(파일 오프셋) 방식을 사용해 이미 전송된 라인은 재전송하지 않는다. |
+| **데이터 보존** | 최소 30 일 이상 보관하고, 배포 시 DB 파일이 덮어지지 않도록 외부 볼륨에 마운트한다. |
+| **대시보드 연동** | Streamlit 기반 UI에서 `source`(remote/local), `tool_name`, `user_id`, 시간 범위 등으로 필터링·드릴‑다운이 가능해야 함. |
+
+> 출처: EUNO.NEWS, “왜 당신의 MCP 서버는 자체 로깅이 필요할까” (2026‑02‑24)  
+
+#### 4.7.2 Implementation with SQLite, FastAPI, Streamlit  
+
+1. **프로젝트 레이아웃**  
+
+```
+mcp-logging/
+├─ app/
+│  ├─ main.py          # FastAPI 엔드포인트
+│  ├─ middleware.py    # FastMCP 로깅 미들웨어
+│  ├─ db.py            # SQLite 연결 & ORM (SQLModel)
+│  └─ models.py        # LogRecord Pydantic/SQLModel 정의
+├─ dashboard/
+│  └─ app.py           # Streamlit 대시보드
+├─ Dockerfile
+├─ docker-compose.yml
+└─ README.md
+```
+
+2. **SQLite 스키마 (SQLModel)**  
+
+```python
+# models.py
+from sqlmodel import SQLModel, Field
+from datetime import datetime
+from typing import Optional, Dict, Any
+
+class LogRecord(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    source: str                     # "remote" or "local"
+    user_id: Optional[str] = None
+    tool_name: str
+    parameters: Dict[str, Any] = Field(sa_column_kwargs={"type": "JSON"})
+    success: bool
+    duration_ms: Optional[float] = None
+    result_summary: Optional[str] = None
+    error_message: Optional[str] = None
+```
+
+3. **FastAPI 미들웨어**  
+
+```python
+# middleware.py
+import time, json
+from fastapi import Request, Response
+from starlette.middleware.base import BaseHTTPMiddleware
+from .db import get_session
+from .models import LogRecord
+
+class MCPLoggingMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        start = time.time()
+        body = await request.json()
+        tool_name = body.get("method", "").split(".")[-1]
+        user_id = request.headers.get("X-User-Id")
+        log = LogRecord(
+            source="remote",
+            user_id=user_id,
+            tool_name=tool_name,
+            parameters=body.get("params", {}),
+            success=False,   # provisional
+        )
+        try:
+            response: Response = await call_next(request)
+            duration = (time.time() - start) * 1000
+            log.duration_ms = duration
+            log.success = response.status_code == 200
+            # 간단히 결과 요약
+            try:
+                result = await response.body()
+                log.result_summary = json.dumps(json.loads(result)[:200])
+            except Exception:
+                log.result_summary = None
+            return response
+        except Exception as exc:
+            log.success = False
+            log.error_message = str(exc)
+            raise
+        finally:
+            async with get_session() as session:
+                session.add(log)
+                await session.commit()
+```
+
+4. **FastAPI 엔드포인트**  
+
+```python
+# main.py
+from fastapi import FastAPI
+from .middleware import MCPLoggingMiddleware
+from .db import init_db
+
+app = FastAPI()
+app.add_middleware(MCPLoggingMiddleware)
+
+@app.on_event("startup")
+async def on_startup():
+    await init_db()   # 테이블 자동 생성
+```
+
+5. **Streamlit 대시보드**  
+
+```python
+# dashboard/app.py
+import streamlit as st
+import pandas as pd
+import sqlite3
+from datetime import datetime, timedelta
+
+@st.cache_data
+def load_logs():
+    conn = sqlite3.connect("../app/logs.db")
+    df = pd.read_sql_query("SELECT * FROM logrecord", conn, parse_dates=["timestamp"])
+    conn.close()
+    return df
+
+df = load_logs()
+
+st.title("MCP Server Observability Dashboard")
+st.sidebar.selectbox("Source", options=["remote", "local", "all"], index=0)
+user = st.sidebar.text_input("User ID (optional)")
+
+if st.sidebar.button("Apply Filters"):
+    mask = (df["source"] == st.sidebar.selectbox) if st.sidebar.selectbox != "all" else True
+    if user:
+        mask &= df["user_id"] == user
+    filtered = df[mask]
+else:
+    filtered = df
+
+st.metric("Total Calls", len(filtered))
+st.metric("Success Rate", f"{filtered['success'].mean():.1%}")
+st.metric("Avg Duration (ms)", f"{filtered['duration_ms'].mean():.1f}")
+
+st.dataframe(
+    filtered.sort_values("timestamp", ascending=False)[
+        ["timestamp", "source", "user_id", "tool_name", "success", "duration_ms"]
+    ]
+)
+```
+
+6. **Docker‑Compose** (볼륨을 외부에 마운트해 데이터 보존)  
+
+```yaml
+version: "3.9"
+services:
+  api:
+    build: ./app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:////data/logs.db
+    volumes:
+      - mcp_data:/data
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+volumes:
+  mcp_data:
+```
+
+#### 4.7.3 Performance & Reliability Considerations  
+
+| 고려사항 | 권장 설정 / 구현 |
+|----------|-----------------|
+| **쓰기 성능** | SQLite는 단일 파일이므로 **WAL (Write‑Ahead Logging)** 모드 활성화 (`PRAGMA journal_mode=WAL;`). |
+| **동시성** | FastAPI + `async` DB 세션을 사용하고, 필요 시 **SQLModel + asyncpg** 로 PostgreSQL 전환을 준비한다. |
+| **백업** | `cron` 으로 매일 00:00에 `sqlite3 /data/logs.db ".backup '/backup/logs_$(date +%F).db'"` 실행. |
+| **지연 시간 측정** | 미들웨어가 `time.time()` 기반으로 **툴 실행 시간**만 기록해, 네트워크 RTT와 구분한다. |
+| **오류 격리** | 로그 기록은 `finally` 블록에서 수행해, 도구 자체 오류와 무관하게 로그가 남는다. |
+| **스케일 아웃** | 로그 수집만을 담당하는 **FastMCP Middleware**를 별도 서비스로 분리하고, **Kafka** 혹은 **Pub/Sub** 로 이벤트 스트림을 전송하면 다중 API 서버가 동일 DB에 경쟁 없이 로그를 전송할 수 있다. |
+| **보안** | API 엔드포인트는 **API‑Key + Scope** 검증을 유지하고, 로그 조회 API는 **읽기 전용 토큰**만 허용한다. |
+| **모니터링** | Prometheus exporter를 FastAPI에 추가 (`/metrics`) → `mcp_log_writes_total`, `mcp_log_errors_total` 메트릭을 수집한다. |
+| **리소스 제한** | 로그 레코드당 최대 1 MB 로 제한하고, 오래된 레코드는 **TTL**(예: 90 days) 정책으로 자동 삭제한다 (`DELETE FROM logrecord WHERE timestamp < datetime('now','-90 days');`). |
+
+> 위 설계는 EUNO.NEWS 기사(2026‑02‑24)에서 제시된 **FastMCP 미들웨어**, **SQLite 기반 중앙 로그**, **Streamlit 대시보드** 구현을 그대로 반영한다.  
+
+---
+
 ## 5. 실제 활용 사례  
 
 ### 5.1 Claude Desktop  
@@ -319,7 +516,7 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 
 #### 반복 방문자  
 - **서버**: `mcp.tableall.com` (일본 레스토랑 예약 시스템)  
-- **활동**: `api_ask` 인터페이스를 9회 스캔, 인증이 없고 6개의 도구가 노출됨(`create_reservation` 포함). 발견 후 1시간 내에 공개 책임자에게 보고.  
+- **활동**: `api_ask` 인터페이스를 9회 스캔, 인증 없이 6개의 도구가 노출(`create_reservation` 포함). 발견 후 1시간 내에 공개 책임자에게 보고.  
 
 #### 지속 관찰자  
 - **IP**: 프랑스/포르투갈 지역, `/api/live` 엔드포인트를 매시간 폴링. 대시보드에 임베드된 형태로 추정, 인간과의 직접 교류는 없음.  
@@ -334,11 +531,11 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 
 #### 1. 연결 제한 및 레이트 리밋  
 - **IP‑당** 최소 10 req/min, 피크 시 100 req/min 수준으로 제한.  
-- **도구 호출**에 별도 레이트 리밋을 적용해 `api_ask`와 `tool.invoke`를 구분한다.  
+- **도구 호출**에 별도 레이트 리밋 적용, `api_ask`와 `tool.invoke` 구분.  
 
 #### 2. 도구 목록 최소화  
-- `tools/list` 응답에 **필수 도구만** 노출하고, 내부 전용 도구는 별도 비공개 엔드포인트에 배치한다.  
-- **스코프 기반** 접근 제어로 읽기 전용 도구와 쓰기 전용 도구를 분리한다.  
+- `tools/list` 응답에 **필수 도구만** 노출하고, 내부 전용 도구는 별도 비공개 엔드포인트에 배치.  
+- **스코프 기반** 접근 제어로 읽기 전용 도구와 쓰기 전용 도구를 분리.  
 
 #### 3. 실시간 로그 집계 & 알림  
 - **JSON‑L** 형식으로 요청·응답을 중앙 로그(예: Elasticsearch, Loki)로 전송.  
@@ -350,28 +547,28 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 - **Horizontal Pod Autoscaler**: CPU 사용률 70 % 초과 시 파드 수를 2배 확대, `mcp_active_sessions` 메트릭을 기준으로도 스케일링 가능.  
 
 #### 5. 허니팟 및 위협 인텔리전스  
-- 위험한 도구(예: `get_aws_credentials`)를 **허니팟**으로 배치해 악의적 스캔을 탐지한다.  
-- 탐지 시 자동 **IP 차단**(NetworkPolicy) 및 **보고서 생성**(CSV/JSON) 후 보안팀에 전달한다.  
+- 위험한 도구(예: `get_aws_credentials`)를 **허니팟**으로 배치해 악의적 스캔을 탐지.  
+- 탐지 시 자동 **IP 차단**(NetworkPolicy) 및 **보고서 생성**(CSV/JSON) 후 보안팀에 전달.  
 
 #### 6. 보안 텍스트 & 책임 보고  
-- `/.well-known/security.txt` 파일에 연락처와 취약점 보고 절차를 명시한다.  
-- 허니팟이나 비정상 트래픽이 감지되면 **CVE‑style** 보고서(날짜, IP, 도구, 행동)를 내부 위협 인텔리전스 플랫폼에 전송한다.  
+- `/.well-known/security.txt` 파일에 연락처와 취약점 보고 절차 명시.  
+- 허니팟이나 비정상 트래픽 감지 시 **CVE‑style** 보고서(날짜, IP, 도구, 행동)를 내부 위협 인텔리전스 플랫폼에 전송.  
 
 #### 7. 인증 강화  
-- **API 키** 외에 **OAuth 2.0** 혹은 **JWT** 기반 토큰을 도입해 토큰 회전 주기를 짧게 유지한다.  
-- **Scope 검증**을 서버 측에서 강제하고, 클라이언트가 요청 시 `scope` 헤더를 포함하도록 표준화한다.  
+- **API 키** 외에 **OAuth 2.0** 혹은 **JWT** 기반 토큰 도입, 토큰 회전 주기 짧게 유지.  
+- **Scope 검증**을 서버 측에서 강제하고, 클라이언트가 요청 시 `scope` 헤더 포함하도록 표준화.  
 
 #### 8. 관측 가능한 도구 버전 관리  
-- 각 Tool·Resource에 **버전/체크섬** 메타데이터를 부여하고, `tools/list` 응답에 포함한다.  
-- 클라이언트는 버전이 변경될 경우 자동 업데이트 혹은 경고를 표시하도록 구현한다.  
+- 각 Tool·Resource에 **버전/체크섬** 메타데이터 부여, `tools/list` 응답에 포함.  
+- 클라이언트는 버전이 변경될 경우 자동 업데이트 혹은 경고 표시하도록 구현.  
 
 #### 9. 패턴 기반 탐지  
-- `initialize → tools/list → disconnect` 와 같은 **정찰 패턴**을 탐지하는 규칙을 추가한다.  
-- 정찰이 일정 비율(예: 60 % 이상) 이상이면 **잠재적 스캐닝**으로 분류하고, 해당 IP를 **관찰 리스트**에 추가한다.  
+- `initialize → tools/list → disconnect` 와 같은 **정찰 패턴** 탐지 규칙 추가.  
+- 정찰이 일정 비율(예: 60 % 이상) 초과 시 **잠재적 스캐닝**으로 분류, 해당 IP를 **관찰 리스트**에 추가.  
 
 #### 10. 주기적 보안 스캔  
-- CI 파이프라인에 `scan_mcp_server` 도구를 포함해 **주간** 혹은 **일일** 스캔을 자동화한다.  
-- 스캔 결과는 **보안 대시보드**에 시각화하고, 미해결 이슈는 티켓 시스템에 자동 등록한다.  
+- CI 파이프라인에 `scan_mcp_server` 도구 포함, **주간** 혹은 **일일** 스캔 자동화.  
+- 스캔 결과는 **보안 대시보드**에 시각화하고, 미해결 이슈는 티켓 시스템에 자동 등록.  
 
 > 위 권고사항은 2025‑2026년 사이 560개 MCP 서버 조사 결과와 250개의 AI 에이전트가 실제로 연결된 운영 사례([Euno.News](https://euno.news/posts/ko/what-i-see-when-250-ai-agents-connect-to-my-mcp-se-054ac2))를 기반으로 도출된 실증적 데이터에 근거한다.  
 
@@ -384,86 +581,4 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 | **CVE‑2025‑66401** | 2025 | `MCP Watch` (security scanner) – `execSync("git clone " + githubUrl)` | 원격 코드 실행, 임의 리포지터리 클론 | 9.6 (Critical) | euno.news |
 | **CVE‑2025‑68144** | 2025 | `mcp-server-git` (Anthropic) – `git_diff / git_checkout` 인자 삽입 | 쉘 인젝션 → 파일 시스템 조작 | 9.4 | euno.news |
 | **CVE‑2026‑2178** | 2026 | `xcode-mcp-server` – `run_lldb` 명령어 구성 | Lldb 명령어 조작 → 디버거 원격 제어 | 9.5 | euno.news |
-| **CVE‑2026‑27203** | 2026 | 다양한 `exec` 사용 – `Variousexec` 를 통한 쉘 인젝션 | 임의 명령 실행, 데이터 탈취 | 9.6 | euno.news |
-| **CVE‑2026‑25546** | 2026 | `Godot MCP` – `exec(projectPath)` | 파일 경로 조작 → 악성 코드 실행 | 9.3 | euno.news |
-| **CVE‑2026‑26029** | 2026 | `sf-mcp-server` (Salesforce) – `child_process.exec` 와 CLI 인자 사용 | 쉘 인젝션 → Salesforce CLI 악용 | 9.5 | euno.news |
-| **CVE‑2026‑0755** | 2026 | `Variousexec()` – 파일 경로와 함께 사용 | 경로 조작 → 임의 파일 실행 | 9.2 | euno.news |
-| **CVE‑2026‑2130** | 2026 | `Variousexec()` – 사용자 매개변수 사용 | 쉘 인젝션 | 9.4 | euno.news |
-| **CVE‑2026‑2131** | 2026 | `Variousexec()` – 사용자 매개변수 사용 (중복) | 쉘 인젝션 | 9.4 | euno.news |
-| **CVE‑2026‑25650** | 2026 | `MCP‑Salesforce Connector` – `getattr(obj, user_input)` (Python) | 임의 객체 속성 접근 → 코드 실행 | 9.5 | euno.news |
-
-**공통 패턴**  
-- 대부분 `exec`, `execSync`, `child_process.exec`, `subprocess.run(..., shell=True)` 형태의 문자열 연결을 사용.  
-- 입력값 검증이 부재하거나 **인자 배열** 대신 **쉘 문자열**을 직접 구성한다.  
-
-### 5.9 Mitigation & Patch Recommendations  
-
-#### 1. 코드 레벨 방어  
-| 언어 | 위험 함수 | 안전 대체 함수 | 구현 팁 |
-|------|-----------|----------------|--------|
-| **Node.js** | `exec`, `execSync` | `execFile`, `spawn` (인자 배열) | 인자를 배열 형태로 전달하고 `shell: false` 옵션 명시 |
-| **Python** | `subprocess.run(..., shell=True)` | `subprocess.run([...], shell=False)` | 리스트 형태 인자 전달, `shlex.quote` 로 개별 파라미터 이스케이프 |
-| **Go** | `os/exec.Command` (문자열) | `exec.CommandContext` (인자 배열) | `CommandContext(ctx, "git", "clone", userInput)` 형태 사용 |
-| **Rust** | `std::process::Command::new(...).arg(...).output()` | 동일하지만 **절대 경로 검증** 추가 | `Path::new(user_input).canonicalize()?` 로 경로 정규화 |
-
-#### 2. 입력 검증 & 정규화  
-- **화이트리스트** 기반 파라미터 허용 (예: 허용된 파일 확장자·디렉터리).  
-- **정규식** 혹은 **JSON Schema** 로 입력 구조 강제.  
-- **길이 제한** 및 **특수 문자 이스케이프**를 기본 적용.  
-
-#### 3. 런타임 샌드박스  
-- **Docker** 혹은 **gVisor** 로 MCP 서버 격리, 파일시스템을 **읽기 전용**(`--read-only`)으로 마운트.  
-- **Seccomp** 프로파일을 사용해 `execve` 등 위험 시스템 콜 차단(필요 시 허용).  
-
-#### 4. 자동 정적·동적 분석 파이프라인  
-1. **CI 단계**에 `bandit`(Python), `eslint-plugin-security`(Node), `gosec`(Go) 등 정적 분석 도구 적용.  
-2. **CI**에서 **SAST** 결과가 **높은 심각도**이면 **빌드 차단**.  
-
-#### 5. 보안 모니터링 연계  
-- **Prometheus** 메트릭 `mcp_exec_calls_total` 로 `exec` 호출 횟수 추적.  
-- **Alertmanager** 규칙: 5분 내 `exec` 호출이 10회 초과 시 경고.  
-
-#### 6. 패치 배포 전략  
-- **버전 관리**: 각 Tool·Resource에 `version` 메타데이터 부여, 클라이언트가 버전 불일치를 감지하면 자동 업데이트 권고.  
-- **핫‑리로드**: 플러그인 기반 Server는 코드 변경 시 재시작 없이 새로운 Tool을 로드하도록 설계.  
-
-#### 7. 커뮤니티·공개 레지스트리 활용  
-- **MCP 레지스트리**(<https://modelcontextprotocol.io/registry>)에 서버 메타데이터 등록, **신뢰 점수**(인증, 행동 이력, 서명 여부) 표시.  
-- 신뢰 점수를 기반으로 클라이언트가 자동으로 서버 선택하도록 구현.  
-
----
-
-## 6. Compression Techniques  
-
-### 6.1 배경  
-MCP 도구 호출 시 Claude Code의 200 KB 컨텍스트 창에 원시 데이터가 그대로 덤프된다. 실제 사례에 따르면  
-- Playwright 스냅샷 하나: **56 KB**  
-- 20개의 GitHub 이슈: **59 KB**  
-- 30 분이 지나면 컨텍스트의 **40 %**가 사라진다.  
-
-이러한 비효율은 복잡한 워크플로우에서 세션 지속 시간을 크게 제한한다.  
-
-### 6.2 서버‑사이드 요약·압축 솔루션  
-Euno.News(2026‑02‑24)에서 소개된 **Claude Code와 MCP 사이에 위치하는 압축 서버**는 다음과 같은 특징을 갖는다.  
-
-| 특징 | 상세 내용 |
-|------|-----------|
-| **데이터 요약** | 샌드박스에서 원시 데이터를 처리하고 요약만 반환. 315 KB → **5.4 KB** 로 98 % 압축. |
-| **다중 언어 런타임** | Python, Node.js, Go, Rust 등 **10개** 언어 지원. |
-| **검색 엔진** | SQLite FTS5 + BM25 순위 알고리즘을 사용해 요약 전 필요한 정보만 추출. |
-| **배치 실행** | 여러 도구 호출을 하나의 배치로 묶어 한 번에 요약, 네트워크 왕복 횟수 감소. |
-| **세션 연장** | 압축·요약 덕분에 **사용 가능한 세션 시간**이 **30 분 → 3 시간** 으로 확대, 속도 저하 방지. |
-
-### 6.3 설치 및 사용법  
-
-1. **플러그인 마켓플레이스에 추가**  
-   ```bash
-   /plugin marketplace add mksglu/claude-context-mode
-   ```
-
-2. **플러그인 설치**  
-   ```bash
-   /plugin install context-mode@claude-context-mode
-   ```
-
-3
+| **CVE‑2026‑27203** | 2026 | 다양한 `exec` 사용 – `Variousexec` 를 통한 쉘 인젝션 | 임의 명령 실행, 데이터 탈취
