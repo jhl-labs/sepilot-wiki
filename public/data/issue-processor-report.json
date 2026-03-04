@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-03-04T08:43:42.936Z",
+  "timestamp": "2026-03-04T09:49:00.348Z",
   "dryRun": false,
-  "totalIssuesScanned": 10,
+  "totalIssuesScanned": 16,
   "categories": {
     "draft_review": [
+      {
+        "number": 354,
+        "title": "[Wiki Maintenance] [요청] 최신 AI 에이전트 비교 분석 (2024‑2026)",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 353,
+        "title": "[Wiki Maintenance] [요청] 멀티‑에이전트 AI 관측성 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 352,
+        "title": "[Wiki Maintenance] [요청] GitHub Copilot CI/CD 통합 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 342,
         "title": " [요청] Shared Workflows for Node.js Backend and AWS Deployments",
@@ -21,6 +36,21 @@
       }
     ],
     "maintenance": [
+      {
+        "number": 357,
+        "title": "[Wiki Maintenance] [품질] Introducing Node Readiness Controller – Overview, CRD Specification, and Operational Guide",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 356,
+        "title": "[Wiki Maintenance] [품질] Next.js 기반 Wiki 페이지 API 라우트 상세 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 355,
+        "title": "[Wiki Maintenance] [품질] Kubernetes v1.23–v1.35 Release Notes Summary (2023‑2026)",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 300,
         "title": "[Wiki Maintenance] [품질] SEPilot Desktop: Feature Overview, Installation & Contribution Guide",
@@ -61,7 +91,62 @@
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 354,
+      "title": "[Wiki Maintenance] [요청] 최신 AI 에이전트 비교 분석 (2024‑2026)"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 353,
+      "title": "[Wiki Maintenance] [요청] 멀티‑에이전트 AI 관측성 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 352,
+      "title": "[Wiki Maintenance] [요청] GitHub Copilot CI/CD 통합 가이드"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 354,
+      "title": "[Wiki Maintenance] [요청] 최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai-2024-2026.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 353,
+      "title": "[Wiki Maintenance] [요청] 멀티‑에이전트 AI 관측성 가이드",
+      "score": 81,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 352,
+      "title": "[Wiki Maintenance] [요청] GitHub Copilot CI/CD 통합 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/github-copilot-ci-cd.md"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 357,
+      "title": "[Wiki Maintenance] [품질] Introducing Node Readiness Controller – Overview, CRD Specification, and Operational Guide",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 356,
+      "title": "[Wiki Maintenance] [품질] Next.js 기반 Wiki 페이지 API 라우트 상세 가이드",
+      "verdict": "actionable"
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 355,
+      "title": "[Wiki Maintenance] [품질] Kubernetes v1.23–v1.35 Release Notes Summary (2023‑2026)",
+      "verdict": "actionable"
+    }
+  ],
+  "actionCount": 9,
   "maxActions": 60
 }

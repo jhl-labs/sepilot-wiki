@@ -1,6 +1,187 @@
 {
   "entries": [
     {
+      "id": "ad91e249-4fc1-4a47-80c7-6bb1bcfa0cd8",
+      "timestamp": "2026-03-04T09:48:27.177Z",
+      "actionType": "quality_score",
+      "issueNumber": 352,
+      "issueTitle": "[Wiki Maintenance] [요청] GitHub Copilot CI/CD 통합 가이드",
+      "documentSlug": "github-copilot-ci-cd",
+      "documentTitle": "[Wiki Maintenance] [요청] GitHub Copilot CI/CD 통합 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "08bfa5dc-65bd-47f5-80c9-dfdb16d0939b",
+      "timestamp": "2026-03-04T09:48:11.798Z",
+      "actionType": "quality_score",
+      "issueNumber": 353,
+      "issueTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 AI 관측성 가이드",
+      "documentSlug": "ai",
+      "documentTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 AI 관측성 가이드",
+      "summary": "자동 품질 검토 통과 (81점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "0b333ab1-ee61-4bbf-bc1f-a94c78753beb",
+      "timestamp": "2026-03-04T09:47:59.277Z",
+      "actionType": "quality_score",
+      "issueNumber": 354,
+      "issueTitle": "[Wiki Maintenance] [요청] 최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "documentSlug": "ai/ai-2024-2026",
+      "documentTitle": "[Wiki Maintenance] [요청] 최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "770faf59-8118-423d-9323-4b6e3cb4d7c4",
+      "timestamp": "2026-03-04T09:47:47.649Z",
+      "actionType": "generate",
+      "issueNumber": 352,
+      "issueTitle": "[Wiki Maintenance] [요청] GitHub Copilot CI/CD 통합 가이드",
+      "documentSlug": "github-copilot-ci-cd",
+      "documentTitle": "GitHub Copilot CI/CD 통합 가이드",
+      "summary": "새 문서 \"GitHub Copilot CI/CD 통합 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3092
+            },
+            {
+              "step": "outline",
+              "durationMs": 18070
+            },
+            {
+              "step": "write",
+              "durationMs": 23699
+            },
+            {
+              "step": "review",
+              "durationMs": 8251
+            },
+            {
+              "step": "refine",
+              "durationMs": 32871
+            }
+          ],
+          "totalDurationMs": 85983,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 4146,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "3eaddca2-19ca-4ec2-9ce9-2ff6b93deed5",
+      "timestamp": "2026-03-04T09:45:59.859Z",
+      "actionType": "generate",
+      "issueNumber": 353,
+      "issueTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 AI 관측성 가이드",
+      "documentSlug": "observability/ai",
+      "documentTitle": "멀티‑에이전트 AI 관측성 설계 가이드",
+      "summary": "새 문서 \"멀티‑에이전트 AI 관측성 설계 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6281
+            },
+            {
+              "step": "outline",
+              "durationMs": 7211
+            },
+            {
+              "step": "write",
+              "durationMs": 27775
+            },
+            {
+              "step": "review",
+              "durationMs": 7326
+            }
+          ],
+          "totalDurationMs": 48593,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2116,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5ed4ba8a-8860-4f29-b4ef-dd824d4062b0",
+      "timestamp": "2026-03-04T09:44:54.944Z",
+      "actionType": "generate",
+      "issueNumber": 354,
+      "issueTitle": "[Wiki Maintenance] [요청] 최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "documentSlug": "ai/ai-2024-2026",
+      "documentTitle": "최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "summary": "새 문서 \"최신 AI 에이전트 비교 분석 (2024‑2026)\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3167
+            },
+            {
+              "step": "outline",
+              "durationMs": 7059
+            },
+            {
+              "step": "write",
+              "durationMs": 33077
+            },
+            {
+              "step": "review",
+              "durationMs": 4826
+            }
+          ],
+          "totalDurationMs": 48129,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2248,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "5d68a763-389f-4483-857b-02671e017623",
       "timestamp": "2026-03-04T09:17:20.368Z",
       "actionType": "maintain",
@@ -7917,5 +8098,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-04T09:17:20.368Z"
+  "lastUpdated": "2026-03-04T09:48:27.177Z"
 }
