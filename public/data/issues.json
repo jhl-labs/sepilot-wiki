@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 360,
-      "number": 360,
-      "title": " [요청] NeuroSkill™: 엣지 BCI 기반 프로액티브 실시간 AI 에이전시 시스템",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/neuroskilltm-proactive-real-time-agentic-system-ca-39e1bd)\n**관련도**: 71/100\n**핵심 토픽**: 프로액티브 에이전시, 정신 상태 모델링, 오프라인 실행\n\n## 뉴스 요약\n실시간 사전 대응형 에이전시 시스템으로, 인간 정신 상태를 모델링할 수 있으며, foundation EXG 모델과 텍스트 임베딩 모델을 사용하고, 완전히 오프라인에서 실행됩니다...\n\n## 상세 내용\nSource: arXiv - 2603.03212v1\nOverview\n이 논문은 **NeuroSkill™**을 소개한다. NeuroSkill™은 인간의 정신 상태를 뇌‑컴퓨터 인터페이스(BCI) 신호로부터 직접 추론한 뒤, 그 정보를 기반으로 행동할 수 있는 사전 대응형 실시간 에이전시 시스템이다. 완전히 오프라인으로 엣지 하드웨어에서 실행됨으로써, NeuroSkill™은 “마음‑인식” AI 어시스턴트를 데이터센터가 아닌 개인 디바이스로 옮겨, 공감적이고 상황‑인식적인 상호작용을 위한 새로운 가능성을 열어준다.\n핵심 기여\nEdge‑only, offline operation – 전체 파이프라인(신호 획득, 임베딩, 추론, 행동)이 로컬 하드웨어에서 실행되어 프라이버시 민감한 클라우드 왕복을 없앱니다.\nSKILL.md language – 사용자의 “정신 상태”를 설명하기 위한 가벼운 마크다운 기반 스키마로, 간단한 API/CLI를 통해 질의할 수 있습니다.\nNeuroLoop™ harness – BCI 스트림을 지속적으로 수집하고, 이를 기반 EXG 모델과 텍스트 임베딩 모델에 전달한 뒤, 적절한 도구 호출이나 프로토콜을 트리거하는 오케스트레이터입니다.\nMulti‑level cognitive engagement – 시스템이 감정적 신호(예: 스트레스, 공감)를 감지하고 UI 조정, 휴식 제안, 생산성 도구 실행 등 상황에 맞는 행동을 수행할 수 있습니다.\nOpen‑source release – GPL‑v3 코드와 SKILL.md 사양에 대한 윤리적 AI100 라이선스를 제공하여 커뮤니티 감시와 확장을 장려합니다.\n방법론\nSignal Capture – 시판 중인 BCI 헤드셋을 사용해 뇌전도(EEG)와 주변 생리 데이터(예: 심박수, 피부 전도도)를 수집합니다.\nPre‑processing – 원시 신호를 필터링하고, 세분화한 뒤, 대규모 다중모달 바이오시그널 코퍼스에 대해 학습된 EXG 기반 모델(트랜스포머)과 호환되는 특징 벡터로 변환합니다.\nEmbedding Gen\n\n## 판단 근거\n신규 연구 결과이며, 현재 Wiki에 해당 주제가 없으므로 독립적인 기술 소개 문서가 필요함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 361,
+      "number": 361,
+      "title": "문서 요청 #361",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,18 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-04T12:17:47.486Z",
-      "updated_at": "2026-03-04T12:17:47.490Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/360",
-      "documentSlug": "neuroskill-bci-ai",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/neuroskill-bci-ai.md",
+      "created_at": "2026-03-04T12:16:56.284Z",
+      "updated_at": "2026-03-04T12:16:56.287Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/361",
+      "documentSlug": "361",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/361.md",
       "comments": 0
     },
     {
-      "id": 361,
-      "number": 361,
-      "title": " [요청] Viscat: 이기종 로봇 통합 운영 플랫폼",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/dcdb52)\n**관련도**: 70/100\n**핵심 토픽**: 이기종 로봇 통합 플랫폼, AI 에이전트 운영, 산업 자동화\n\n## 뉴스 요약\n로봇 운영 인텔리전스 스타트업 비스캣이 딥테크 액셀러레이터 블루포인트 파트너스로부터 시드 투자를 유치했다. 투자 금액과 기업 가치는 비공개다. 비스캣은 제조·물류 현장에서 …\n\n## 상세 내용\nSource: Platum\n자금 조달 발표\n로봇 운영지능 스타트업 비스캣이 딥테크 액셀러레이터 블루포인트파트너스로부터 시드 투자를 유치했다. 투자 금액과 기업 가치는 비공개다.\n플랫폼 개요\n비스캣은 제조·물류 현장에서 서로 다른 제조사의 로봇과 설비를 하나의 시스템으로 통합 운영하는 자율 운영 플랫폼을 개발한다. 현재 대부분의 제조·물류 현장은 제조사와 규격이 제각각인 로봇 수십~수백 대가 혼재하지만, 이를 통합 관리하는 소프트웨어가 사실상 부재한 상태다. 공정 하나가 바뀔 때마다 엔지니어가 코드를 처음부터 다시 짜야 하는 구조적 비효율이 반복되고 있다.\n핵심 기술\n비스캣은 두 가지 핵심 기술을 개발했다.\nSTAR‑Core\n로봇의 구동 방식이나 모터 종류에 관계없이 모든 이동형 로봇에 공통 적용할 수 있는 범용 모션 플래닝·주행 엔진이다. 기존에는 로봇 하드웨어가 바뀌면 주행 소프트웨어를 새로 개발해야 했지만, STAR‑Core를 활용하면 1~2주 내 대응이 가능하다.\nSTAR‑Grapher\n설비·로봇·공정 제약 조건을 의미 단위로 연결한 **지식 구조(온톨로지)**를 기반으로, 작업 지시부터 돌발 상황 대응까지 시스템이 스스로 판단하고 재계획하는 오케스트레이션 엔진이다.\n고객 및 파트너십\n비스캣은 다수 대기업을 초기 고객사로 확보했으며, 로봇 제조사 티라로보틱스, CA시스템 등과 파트너십을 구축하고 있다. 고동욱 대표는 전 코가로보틱스 대표 출신의 로봇 지능 전문가다.\nCEO 발언\n“어떤 환경에서도 스스로 판단하는 자율 운영 시스템을 시장에 안착시키겠다.” – 고동욱 비스캣 대표\n\n## 판단 근거\n산업용 로봇 통합 플랫폼은 현재 Wiki에 다루어지지 않은 주제이며, AI 에이전트와 로봇 자동화 연결을 설명하는 새로운 문서가 필요함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 360,
+      "number": 360,
+      "title": "문서 요청 #360",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -55,11 +55,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-04T12:16:40.022Z",
-      "updated_at": "2026-03-04T12:16:40.025Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/361",
-      "documentSlug": "viscat",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/viscat.md",
+      "created_at": "2026-03-04T12:16:04.599Z",
+      "updated_at": "2026-03-04T12:16:04.603Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/360",
+      "documentSlug": "ai/360",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/360.md",
       "comments": 0
     },
     {
@@ -2676,5 +2676,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-04T12:17:47.490Z"
+  "lastUpdated": "2026-03-04T12:16:56.287Z"
 }
