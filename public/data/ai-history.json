@@ -1,136 +1,31 @@
 {
   "entries": [
     {
-      "id": "3c640c12-d175-47a2-84b6-f501ca1a60f6",
-      "timestamp": "2026-03-05T18:44:45.130Z",
-      "actionType": "quality_score",
-      "issueNumber": 383,
-      "issueTitle": " [요청] Claude Code 비용 관리와 실시간 모니터링 가이드",
-      "documentSlug": "ai/claude-code",
-      "documentTitle": " [요청] Claude Code 비용 관리와 실시간 모니터링 가이드",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "05bb7c13-8d6e-4e3a-8b95-92f96e13f000",
-      "timestamp": "2026-03-05T18:44:33.327Z",
-      "actionType": "quality_score",
-      "issueNumber": 385,
-      "issueTitle": " [요청] iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략",
-      "documentSlug": "security/ios-exploit-kit-coruna-lockdown-mode",
-      "documentTitle": " [요청] iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "b5232b00-31aa-459f-bcc0-a47bd0db0d3a",
-      "timestamp": "2026-03-05T18:44:13.807Z",
-      "actionType": "generate",
-      "issueNumber": 383,
-      "issueTitle": " [요청] Claude Code 비용 관리와 실시간 모니터링 가이드",
-      "documentSlug": "ai/claude-code",
-      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
-      "summary": "새 문서 \"Claude Code 비용 관리와 실시간 모니터링 가이드\" 생성",
-      "trigger": "request_label",
+      "id": "ac2be61b-edca-45b0-bd13-b83943ed3366",
+      "timestamp": "2026-03-05T18:42:33.845Z",
+      "actionType": "modify",
+      "issueNumber": 387,
+      "issueTitle": " [업데이트] Google AI Pro 활용 실전 가이드",
+      "documentSlug": "ai/gemini-3-1",
+      "documentTitle": "gemini 3.1",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Google AI Pro 활용 실전 가이드\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 3691
-            },
-            {
-              "step": "outline",
-              "durationMs": 8535
-            },
-            {
-              "step": "write",
-              "durationMs": 24674
-            },
-            {
-              "step": "review",
-              "durationMs": 4516
-            }
-          ],
-          "totalDurationMs": 41416,
-          "researchSources": 10,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 1887,
-            "method": "duration_based"
-          }
-        }
+        "additions": 55,
+        "deletions": 0
       }
     },
     {
-      "id": "e358f16d-d151-4fee-a243-64ecac02dafe",
-      "timestamp": "2026-03-05T18:43:15.900Z",
-      "actionType": "generate",
-      "issueNumber": 385,
-      "issueTitle": " [요청] iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략",
-      "documentSlug": "security/ios-exploit-kit-coruna-lockdown-mode",
-      "documentTitle": "iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략",
-      "summary": "새 문서 \"iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 3366
-            },
-            {
-              "step": "outline",
-              "durationMs": 7250
-            },
-            {
-              "step": "write",
-              "durationMs": 26834
-            },
-            {
-              "step": "review",
-              "durationMs": 5991
-            },
-            {
-              "step": "refine",
-              "durationMs": 31903
-            }
-          ],
-          "totalDurationMs": 75344,
-          "researchSources": 10,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 3600,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "65f7217c-a0ad-44fe-927d-426fa8a96bda",
-      "timestamp": "2026-03-05T18:41:50.657Z",
+      "id": "e76134a2-bd55-469c-a25a-d5a463547007",
+      "timestamp": "2026-03-05T18:42:05.085Z",
       "actionType": "generate",
       "issueNumber": 386,
-      "issueTitle": " [요청] 포스트‑양자 암호학 웨비나 요약 및 실무 적용 가이드",
-      "documentSlug": "security/untitled-1772736110655",
-      "documentTitle": "포스트‑양자 암호학 웨비나 요약 및 실무 적용 가이드",
-      "summary": "새 문서 \"포스트‑양자 암호학 웨비나 요약 및 실무 적용 가이드\" 생성",
+      "issueTitle": "문서 요청 #386",
+      "documentSlug": "security/386",
+      "documentTitle": "양자 시대 대비 포스트‑양자 암호화 전략 가이드",
+      "summary": "새 문서 \"양자 시대 대비 포스트‑양자 암호화 전략 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -139,29 +34,136 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 3217
+              "durationMs": 6103
             },
             {
               "step": "outline",
-              "durationMs": 7914
+              "durationMs": 6419
             },
             {
               "step": "write",
-              "durationMs": 23431
+              "durationMs": 25512
             },
             {
               "step": "review",
-              "durationMs": 6227
+              "durationMs": 6830
             }
           ],
-          "totalDurationMs": 40789,
+          "totalDurationMs": 44865,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1939,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "87ff36c3-af7a-48d6-9fe7-c1b83b81cb51",
+      "timestamp": "2026-03-05T18:41:18.084Z",
+      "actionType": "generate",
+      "issueNumber": 385,
+      "issueTitle": "문서 요청 #385",
+      "documentSlug": "security/385",
+      "documentTitle": "Coruna iOS 익스플로잇 키트 위협 보고서",
+      "summary": "새 문서 \"Coruna iOS 익스플로잇 키트 위협 보고서\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4008
+            },
+            {
+              "step": "outline",
+              "durationMs": 6870
+            },
+            {
+              "step": "write",
+              "durationMs": 24246
+            },
+            {
+              "step": "review",
+              "durationMs": 6167
+            }
+          ],
+          "totalDurationMs": 41291,
           "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 8
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 1879,
+            "estimated": 1864,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "7daa420e-2798-4016-b33d-174981567540",
+      "timestamp": "2026-03-05T18:40:33.898Z",
+      "actionType": "modify",
+      "issueNumber": 384,
+      "issueTitle": " [업데이트] OpenTelemetry 기반 API 대시보드 구축 피하기",
+      "documentSlug": "observability/opentelemetry",
+      "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenTelemetry 기반 API 대시보드 구축 피하기\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 59,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "499dd680-c1f4-409a-bb7d-4a60fdeb32f0",
+      "timestamp": "2026-03-05T18:39:20.257Z",
+      "actionType": "generate",
+      "issueNumber": 383,
+      "issueTitle": "문서 요청 #383",
+      "documentSlug": "383",
+      "documentTitle": "Claude Code 비용 관리와 Bifrost 활용 가이드",
+      "summary": "새 문서 \"Claude Code 비용 관리와 Bifrost 활용 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3561
+            },
+            {
+              "step": "outline",
+              "durationMs": 6504
+            },
+            {
+              "step": "write",
+              "durationMs": 26015
+            },
+            {
+              "step": "review",
+              "durationMs": 6453
+            }
+          ],
+          "totalDurationMs": 42533,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1949,
             "method": "duration_based"
           }
         }
@@ -9016,5 +9018,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-05T18:44:45.130Z"
+  "lastUpdated": "2026-03-05T18:42:33.845Z"
 }
