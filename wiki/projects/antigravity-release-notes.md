@@ -11,6 +11,7 @@ redirect_from:
 related_docs: ["gemini-3-1.md", "qwen3-5.md", "glm-5.md"]
 order: 8
 quality_score: 84
+updatedAt: 2026-03-05
 ---
 
 ## 1. 개요
@@ -150,9 +151,51 @@ Antigravity는 Google이 제공하는 AI‑기반 개발 보조 플랫폼으로,
 
 ---
 
-## 6. Breaking Changes 및 마이그레이션 가이드
+## 6. 2026‑02 보안 취약점 요약 및 완화 권고
 
-### 6.1 주요 Breaking Changes
+### 6.1 발견된 주요 취약점 (v1.107.0)
+2026년 2월 11일, 외부 보안 연구자가 Google Antigravity IDE **v1.107.0**에 대해 70개 이상의 취약점을 보고했습니다[^4]. 주요 내용은 다음과 같습니다.
+
+| 번호 | 취약점 유형 | 핵심 내용 | 잠재 영향 |
+|------|------------|-----------|-----------|
+| A | **WMI 기반 CSRF 토큰 유출** | 관리자 권한이 없어도 모든 프로세스의 명령줄을 읽을 수 있음. `Get-CimInstance Win32_Process …` 로 CSRF 토큰을 추출 가능. | 인증 토큰 탈취 → 전체 인증 체계 손상 |
+| B | **ACL 없는 네임드 파이프** | IDE가 생성하는 파이프에 접근 제어가 설정되지 않음. | 로컬 악성 프로세스가 파이프에 직접 연결, 명령 실행 및 데이터 탈취 |
+| C | **민감 자산 탈취** | SSH 키, Git 설정, 클라우드 자격증명(AWS, Azure, GCP), DPAPI 마스터 키, Chrome 세션 쿠키 등. | 공격자가 로컬 머신에서 모든 클라우드·레포지토리 접근 가능 |
+| D | **메모리 누수 및 성능 저하** | 장시간 세션 시 RAM 사용량 급증, 작업 후 성능 급격히 저하. | 서비스 불안정·재시작 필요 |
+| E | **대량 403/400 오류** | 인증·요청 처리 로직 결함으로 인해 빈번한 HTTP 오류 발생. | 사용자 작업 중단 및 생산성 저하 |
+
+> **출처**: “왜 Google Antigravity는 건축적 카드 하우스인가” – euno.news 기사[^4] (접근일: 2026‑03‑05).
+
+### 6.2 완화 권고
+1. **버전 업그레이드**  
+   - 가능한 경우 최신 안정 버전(v3.1 이상)으로 업그레이드합니다. 최신 릴리즈는 Prompt‑injection 방어와 메모리 관리 개선을 포함하고 있습니다.
+
+2. **운영 체제 수준 방어**  
+   - **WMI 제한**: 그룹 정책 또는 로컬 보안 정책에서 `Windows Management Instrumentation` 접근을 제한하고, 필요 시 `wmiprvse.exe` 실행 권한을 최소화합니다.  
+   - **네임드 파이프 ACL 적용**: 파이프 생성 시 명시적으로 `SECURITY_ATTRIBUTES`를 지정해 `Authenticated Users`만 접근하도록 설정합니다.
+
+3. **환경 격리**  
+   - Antigravity IDE를 **샌드박스**(예: Windows Sandbox, macOS App Sandbox) 혹은 컨테이너(Docker) 안에서 실행해 로컬 프로세스와의 직접 상호작용을 차단합니다.  
+   - 권한이 낮은 사용자 계정으로 실행하고, 관리자 권한이 필요한 작업은 별도 프로세스로 분리합니다.
+
+4. **민감 자산 관리**  
+   - IDE가 접근하는 SSH 키·Git 인증 정보는 **키 관리 서비스**(예: HashiCorp Vault, GCP Secret Manager)로 이동하고, 로컬 파일에 저장되지 않도록 설정합니다.  
+   - 브라우저 쿠키·DPAPI 키는 OS 수준 암호화가 적용된 스토리지에만 보관하고, IDE 설정에서 자동 로드 옵션을 비활성화합니다.
+
+5. **모니터링 및 로그**  
+   - WMI 쿼리 및 네임드 파이프 접근 시도를 **감사 로그**에 기록하고, 이상 징후(예: 비정상적인 프로세스 명령줄 읽기) 발생 시 알림을 설정합니다.  
+   - 메모리 사용량과 CPU 부하를 실시간으로 모니터링하고, 일정 임계치를 초과하면 자동 재시작 정책을 적용합니다.
+
+6. **네트워크 방어**  
+   - 403/400 오류가 빈번히 발생하는 경우, **역방향 프록시**(예: Envoy, Nginx)에서 요청 검증 규칙을 강화하고, 비정상적인 토큰 사용을 차단합니다.
+
+> 위 권고는 현재 공개된 정보에 기반한 일반적인 보안 방어 전략이며, 실제 적용 전에는 내부 보안 팀과 검증 절차를 거치는 것이 권장됩니다.
+
+---
+
+## 7. Breaking Changes 및 마이그레이션 가이드
+
+### 7.1 주요 Breaking Changes
 | 버전 | 변경 내용 | 영향받는 영역 |
 |------|-----------|----------------|
 | v2.0 | 플러그인 API v2 도입 (함수 시그니처 변경) | 기존 플러그인·스크립트 |
@@ -160,7 +203,7 @@ Antigravity는 Google이 제공하는 AI‑기반 개발 보조 플랫폼으로,
 | v3.0 | 워크스페이스 권한 모델 변경 (owner/editor → owner/contributor) | 팀 협업 설정 |
 | v3.1 | Realtime Collaboration 프로토콜 변경 (WebSocket → WebRTC) | 실시간 협업 클라이언트 |
 
-### 6.2 마이그레이션 체크리스트
+### 7.2 마이그레이션 체크리스트
 1. **플러그인 API 업데이트**  
    - `manifest.json`의 `apiVersion`을 `2` 로 수정  
    - 함수 호출 시 새로운 파라미터(`contextId`) 추가  
@@ -174,7 +217,7 @@ Antigravity는 Google이 제공하는 AI‑기반 개발 보조 플랫폼으로,
    - WebSocket 기반 SDK를 WebRTC 기반 SDK로 교체  
    - 연결 설정에 `iceServers` 옵션 추가  
 
-### 6.3 마이그레이션 예시 (플러그인 API)
+### 7.3 마이그레이션 예시 (플러그인 API)
 ```javascript
 // v1 API (예시)
 antigravity.runCommand('build', { path: './src' });
@@ -186,7 +229,7 @@ antigravity.runCommand('build', { path: './src', contextId: 'workspace-123' });
 
 ---
 
-## 7. 릴리즈 날짜 및 중요도 표시
+## 8. 릴리즈 날짜 및 중요도 표시
 | 버전 | 출시 날짜 | 중요도 | 아이콘 |
 |------|-----------|--------|--------|
 | v1.0 | 2023‑05‑15 | 보통 | 🟦 |
@@ -206,17 +249,17 @@ antigravity.runCommand('build', { path: './src', contextId: 'workspace-123' });
 
 ---
 
-## 8. 부록
+## 9. 부록
 
-### 8.1 공식 릴리즈 페이지·Changelog
+### 9.1 공식 릴리즈 페이지·Changelog
 - Antigravity 공식 Changelog: https://antigravity.google/changelog  
 - Releasebot Antigravity 업데이트 피드: https://releasebot.io/updates/google/antigravity  
 
-### 8.2 참고 문서·API 가이드
+### 9.2 참고 문서·API 가이드
 - 개발자 문서: https://antigravity.google/docs  
 - API 레퍼런스: https://antigravity.google/docs/api  
 
-### 8.3 용어 정의
+### 9.3 용어 정의
 | 용어 | 정의 |
 |------|------|
 | **Agent Skills** | 사용자가 정의한 커스텀 기능을 AI 에이전트에 연결하는 메커니즘 |
@@ -233,4 +276,5 @@ antigravity.runCommand('build', { path: './src', contextId: 'workspace-123' });
 
 [^1]: Antigravity 공식 Changelog, https://antigravity.google/changelog (접근일: 2026‑02‑05)  
 [^2]: Releasebot 업데이트 피드, https://releasebot.io/updates/google/antigravity (접근일: 2026‑02‑05)  
-[^3]: Antigravity API 가이드, https://antigravity.google/docs/api (접근일: 2026‑02‑05)
+[^3]: Antigravity API 가이드, https://antigravity.google/docs/api (접근일: 2026‑02‑05)  
+[^4]: “왜 Google Antigravity는 건축적 카드 하우스인가: 70개 이상의 취약점 및 대규모 차단”, euno.news, https://euno.news/posts/ko/why-google-antigravity-is-an-architectural-house-o-817131 (접근일: 2026‑03‑05)
