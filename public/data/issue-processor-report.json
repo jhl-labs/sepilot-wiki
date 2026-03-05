@@ -1,9 +1,14 @@
 {
-  "timestamp": "2026-03-05T12:20:29.654Z",
+  "timestamp": "2026-03-05T12:19:22.825Z",
   "dryRun": false,
-  "totalIssuesScanned": 12,
+  "totalIssuesScanned": 15,
   "categories": {
     "draft_review": [
+      {
+        "number": 380,
+        "title": " [요청] AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 327,
         "title": "[Wiki Maintenance] [문서] React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
@@ -67,18 +72,55 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 379,
+        "title": " [업데이트] MCP 서버 보안 베스트 프랙티스",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 378,
+        "title": " [업데이트] 멀티‑에이전트 워크플로우에서 Governance와 Traceability 강화",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
     {
-      "type": "suggestion",
-      "issueNumber": 355,
-      "title": "[Wiki Maintenance] [품질] Kubernetes v1.23–v1.35 Release Notes Summary (2023‑2026)",
-      "verdict": "actionable"
+      "type": "retrigger_request",
+      "issueNumber": 380,
+      "title": " [요청] AI 환각 기반 공급망 공격 – Slopsquatting 가이드"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 382,
+      "title": " [업데이트] AI 메모리·컨텍스트 설계 – 비용·신호‑대‑노이즈 트레이드오프"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 381,
+      "title": " [업데이트] VMware Aria Operations (CVE‑2026‑22719) – KEV 등재 및 대응 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 379,
+      "title": " [업데이트] MCP 서버 보안 베스트 프랙티스"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 378,
+      "title": " [업데이트] 멀티‑에이전트 워크플로우에서 Governance와 Traceability 강화"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 380,
+      "title": " [요청] AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
+      "score": 86,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai-slopsquatting.md"
     }
   ],
-  "actionCount": 1,
+  "actionCount": 6,
   "maxActions": 60
 }
