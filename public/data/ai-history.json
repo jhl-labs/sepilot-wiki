@@ -1,6 +1,82 @@
 {
   "entries": [
     {
+      "id": "5a37e378-a4eb-4137-9ccc-7077856fc577",
+      "timestamp": "2026-03-05T12:19:18.240Z",
+      "actionType": "quality_score",
+      "issueNumber": 380,
+      "issueTitle": " [요청] AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
+      "documentSlug": "ai-slopsquatting",
+      "documentTitle": " [요청] AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
+      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "488852a7-76fb-4118-96d2-cd14e95c9a51",
+      "timestamp": "2026-03-05T12:18:58.226Z",
+      "actionType": "modify",
+      "issueNumber": 382,
+      "issueTitle": " [업데이트] AI 메모리·컨텍스트 설계 – 비용·신호‑대‑노이즈 트레이드오프",
+      "documentSlug": "ai",
+      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 메모리·컨텍스트 설계 – 비용·신호‑대‑노이즈 트레이드오프\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 134
+      }
+    },
+    {
+      "id": "d22d8ed6-4f17-4315-83e8-a2cfbc98b161",
+      "timestamp": "2026-03-05T12:18:08.363Z",
+      "actionType": "generate",
+      "issueNumber": 380,
+      "issueTitle": " [요청] AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
+      "documentSlug": "ai-slopsquatting",
+      "documentTitle": "AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
+      "summary": "새 문서 \"AI 환각 기반 공급망 공격 – Slopsquatting 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4669
+            },
+            {
+              "step": "outline",
+              "durationMs": 5444
+            },
+            {
+              "step": "write",
+              "durationMs": 34604
+            },
+            {
+              "step": "review",
+              "durationMs": 8478
+            }
+          ],
+          "totalDurationMs": 53195,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2426,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "6d8352c9-33eb-4fa1-96e1-c5a02aac511c",
       "timestamp": "2026-03-05T12:13:46.964Z",
       "actionType": "maintain",
@@ -8722,5 +8798,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-05T12:13:46.964Z"
+  "lastUpdated": "2026-03-05T12:19:18.241Z"
 }

@@ -3,7 +3,7 @@ title: AI 에이전트 보안 베스트 프랙티스
 author: SEPilot AI
 status: published
 tags: [AI, 보안, 에이전트, 베스트프랙티스, 운영]
-updatedAt: 2026-02-26
+updatedAt: 2026-03-05
 quality_score: 87
 ---
 
@@ -118,163 +118,28 @@ AI 코딩 에이전트(Claude Code, Cursor, Copilot 등)는 **셸 명령 실행*
 - **실시간 로그 분석 및 SIEM 연동** – Falco, OPA 등 오픈소스 도구와 AWS GuardDuty, Azure Sentinel 등 클라우드 SIEM을 연동한다.  
 - **자동 대응 워크플로우** – 이상 징후 발생 시 컨테이너 자동 격리·재시작을 트리거하는 GitHub Actions 또는 Argo Workflows를 활용한다.
 
-## Preventing Dangerous Command Execution in AI Coding Agents
-> **출처**: [EUNO.NEWS – “당신의 AI 에이전트가 방금 rm -rf / 를 실행했습니다 — 이를 멈추는 방법”](https://euno.news/posts/ko/your-ai-agent-just-ran-rm-rf-heres-how-to-stop-it-06b436)
+## 컨텍스트 윈도우 최적화
+- **Naive Memory 비용**: 거대한 컨텍스트 윈도우를 무조건 확대하면 토큰 비용이 급증하고, 불필요한 잡음이 늘어나 신호‑대‑노이즈 비율이 붕괴된다.  
+- **프레임‑인식 토큰 예산**: 상호작용을 **프레임**(대화, 작업, 결정, 디버그, 연구)으로 구분하고, 각 프레임에 맞는 토큰 한도를 할당한다. 예시)  
+  - 캐주얼 채팅: ~3 K 토큰  
+  - 복잡한 결정: ~12 K 토큰 + 과거 결정 3배  
+- **배치된 검색**: 여러 데이터 소스에 대한 개별 호출 대신, 하나의 임베디드 스크립트가 모든 쿼리를 실행하고 결과를 압축·요약해 컨텍스트에 삽입한다. 이는 전체 도구 호출 수를 크게 감소시킨다.  
+- **적극적인 가지치기**: 4 K 문자 이상인 도구 출력은 앞·뒤 각각 1 500 문자만 남기고 잘라내며, 오래된 출력은 자동 삭제한다.  
 
-### 1. 위험 개요
-AI 코딩 에이전트(Claude Code, Cursor, GitHub Copilot 등)는 **셸 명령 실행**, **파일 편집**, **API 호출** 기능을 제공한다. 이러한 기능이 악용되면 `rm -rf /` 와 같은 파괴적인 명령이 실행되어 시스템 전체가 손상될 수 있다.
+> 출처: EUNO.NEWS – “AI 메모리의 역설”[[링크](https://euno.news/posts/ko/the-paradox-of-ai-memory-remembering-everything-is-f90f35)]
 
-### 2. 가드레일 필요성
-- **프롬프트 인젝션**을 통해 악성 텍스트가 도구 결과에 삽입되면 에이전트가 의도치 않은 명령을 수행한다.  
-- 보호가 없을 경우 에이전트가 실제 시스템에 직접적인 피해를 줄 수 있다.
+## 메모리 비용 관리
+- **구조화된 추출 및 요약**: 사실을 독립적으로 저장하고, 결정 시 신뢰도·추론·결과와 함께 기록한다. 대화 종료 시 요약을 남겨 핵심 인사이트만 보존하고 원문은 폐기한다.  
+- **의도적인 망각**: 일정 기간이 지난 정보는 자동으로 삭제하거나 압축한다. 이는 토큰 사용량을 억제하고 비용을 절감한다.  
+- **토큰 예산 모니터링**: 실시간 토큰 사용량을 추적하고, 예산 초과 시 자동으로 컨텍스트를 축소하거나 요약을 트리거한다.  
+- **비용‑효율적인 기억 설계**: “모든 것을 기억”하는 대신 “현명하게 기억”하도록 설계해, 비용 대비 성능을 최적화한다.
 
-### 3. BodAIGuard 개요
-BodAIGuard는 **AI 에이전트와 시스템 사이에 위치**해 모든 도구 호출을 사전 평가한다.
-
-| 구성 요소 | 역할 |
-|-----------|------|
-| **Block Rules** (45개) | 위험한 명령·경로를 즉시 차단 |
-| **Confirm Rules** (45개) | 위험도가 낮지만 확인이 필요한 명령을 사용자에게 확인 요청 |
-| **Categories** (12개) | 명령, 파일 경로, 역할 탈취 등으로 분류 |
-| **Prompt‑Injection Scanner** | 입력에 숨겨진 베이스64, 제로‑폭 문자, HTML 인젝션 등을 탐지 |
-| **강제 모드** | 모든 차단/확인 규칙을 강제 적용 |
-
-### 4. 주요 차단·확인 규칙 예시
-```yaml
-actions:
-  destructive:
-    block:
-      - pattern: 'rm\\s+(-[a-zA-Z]*)?\\s*/'
-        reason: Filesystem root destruction
-      - pattern: 'mkfs\\.'
-        reason: Filesystem format
-    confirm:
-      - pattern: 'rm\\s+-r'
-        reason: Recursive delete
-  paths:
-    block:
-      - ~/.ssh/**
-      - /etc/shadow
-    readonly:
-      - /etc/passwd
-```
-- 위 규칙은 `default.yaml`에 기본 포함되어 있어 별도 코드 수정 없이 적용 가능하다.
-
-### 5. 설치 및 사용 흐름
-1. **바이너 다운로드** – GitHub Releases 페이지에서 플랫폼에 맞는 바이너를 다운로드한다.  
-   ```bash
-   chmod +x bodaiguard-linux-x64
-   sudo mv bodaiguard-linux-x64 /usr/local/bin/bodaiguard
-   ```
-2. **Claude 코드 훅 설치** (예시)  
-   ```bash
-   bodaiguard install hooks
-   ```
-3. **빠른 테스트**  
-   ```bash
-   bodaiguard test 'rm -rf /'   # → BLOCK: Filesystem root destruction
-   bodaiguard test 'ls -la'     # → ALLOW
-   ```
-4. **MCP 서버 래핑** – 모든 도구 호출을 `bodaiguard`를 통해 프록시한다.  
-   ```json
-   {
-     "mcpServers": {
-       "my-tool": {
-         "command": "bodaiguard",
-         "args": ["mcp-proxy", "node", "/path/to/mcp-server.js"]
-       }
-     }
-   }
-   ```
-5. **프롬프트‑인젝션 스캔**  
-   ```bash
-   bodaiguard scan 'Check encoded payloads'
-   # → Detects base64‑encoded attacks, hidden HTML, zero‑width obfuscation
-   ```
-
-### 6. 운영 시 권고
-- **샌드박스·최소 권한**: AI 코딩 에이전트는 제한된 컨테이너/VM에서 실행하고, 파일 시스템은 읽기 전용 루트와 제한된 쓰기 경로만 허용한다.  
-- **명령 허용 리스트**: `allowlist.yaml`에 안전한 명령만 명시하고, 모든 기타 명령은 차단하거나 확인 절차를 거치게 한다.  
-- **CI/CD 연동**: `bodaiguard test`를 테스트 파이프라인에 포함시켜 PR 단계에서 위험 명령 사용 여부를 자동 검증한다.  
-- **로그·감사**: 차단·확인 이벤트를 중앙 로그(예: CloudWatch, Elastic)로 전송하고, SIEM에서 알림을 설정한다.  
-- **정기 규칙 리뷰**: 새로운 공격 기법이 등장하면 `default.yaml`·`allowlist.yaml`을 업데이트하고, 버전 관리(Git)로 변경 이력을 관리한다.
-
-## Agent Testing Failures and Debugging Strategies
-> **출처**: [왜 Agent Testing이 깨졌는가 (EUNO.NEWS)](https://euno.news/posts/ko/why-agent-testing-is-broken-a07ad0)
-
-### 1. 문제의 본질
-- **계약 위반**: 전통적인 함수 테스트는 *같은 입력 → 같은 출력*을 보장한다. LLM 기반 에이전트는 모델 업데이트, 프롬프트 미세조정, 컨텍스트 변화 등에 따라 미묘하지만 의미론적으로 다른 출력을 생성한다.
-- **재현 불가**: 모델 자체가 바뀐 것이 아니라 프롬프트·컨텍스트·API 업데이트 등 외부 요인에 의해 동작이 변한다. `git bisect`와 같은 전통적 디버깅이 적용되지 않는다.
-- **테스트 공백**: 기존 단위·통합 테스트는 API 호출 성공 여부만 확인하고, 실제 출력 내용이 다운스트림 요구사항을 만족하는지는 검증하지 않는다.
-
-### 2. 행동 계약 기반 테스트 프레임워크
-| 단계 | 내용 |
-|------|------|
-| **베이스라인 캡처** | 정상 동작 중인 에이전트의 출력(구조·의미적 특성)을 기록한다. |
-| **포함 검사** | “반드시 포함돼야 할 키워드·섹션·구조”를 정의한다. 정확한 문자열이 아니라 의미적 앵커를 사용한다. |
-| **드리프트 감지** | 새 출력과 베이스라인을 유사도(예: cosine similarity)로 비교하고, 임계값 이하이면 빌드 실패 처리한다. |
-| **CI 통합** | 코드 푸시, 모델 버전 변경, 프롬프트 수정 시마다 자동 실행한다. 기존 유닛 테스트와 동일한 파이프라인에 포함한다. |
-
-### 3. 최소 실행 가능한 인터페이스 예시
-```yaml
-# scenarios/summarize_contract.yaml
-name: summarize_contract
-input: |
-  Summarize this contract clause in 5 bullet points:
-  "...The Contractor shall indemnify...termination upon 30 days notice..."
-expected_contains:
-  - liability
-  - termination
-max_tokens: 512
-```
-
-```bash
-agentprobe run scenarios/ \
-  --backend anthropic \
-  --baseline baseline.json \
-  --tolerance 0.8
-# 결과 예시
-✓ PASS  summarize_contract
-✗ FAIL  extract_parties
-Drift detected: similarity 0.61
-```
-*`agentprobe`는 경량 pytest‑like 도구이며, 드리프트가 감지되면 프로세스 종료 코드 1을 반환한다.*
-
-### 4. 도구·프레임워크 격차
-- 기존 RAG 평가 도구(RAGAS, LangSmith 등)는 **특정 프레임워크 종속**이거나 **RAG 품질에 초점**을 맞추고 있어, 행동 회귀 테스트에 바로 활용하기 어렵다.
-- 시장에서 요구되는 것은 **경량, 조합 가능, 로컬 실행 가능**한 에이전트 전용 테스트 프레임워크이다. 위 예시와 같은 YAML 기반 시나리오와 `agentprobe` 같은 CLI 도구가 그 역할을 수행한다.
-
-### 5. 실무 적용 권고
-1. **베이스라인 저장소**를 별도 버전 관리(Git) 하여, 모델·프롬프트 변경 시마다 스냅샷을 기록한다.  
-2. **포함 검사**를 비즈니스 규칙(예: “termination” 반드시 포함)과 연결해, 정책 파일에 선언한다.  
-3. **드리프트 임계값**은 서비스 위험도에 따라 조정하고, 임계값 초과 시 자동 롤백 또는 수동 검토 워크플로우를 트리거한다.  
-4. **CI 파이프라인**에 `agentprobe` 실행 단계를 추가하고, 실패 시 PR 머지를 차단한다.  
-5. **모니터링**: 배포 후에도 실시간 유사도 모니터링을 수행해, 운영 중 드리프트를 감지한다(예: Prometheus + Alertmanager).
-
-> 이러한 접근법은 **에이전트 테스트 파이프라인을 결정론적 함수 테스트와 동일한 수준의 신뢰성**으로 끌어올리며, 배포 실패 위험을 크게 감소시킨다.
-
-## 취약점 관리 및 패치 프로세스
-- **정기적인 코드·컨테이너 스캔** – Trivy, Snyk 등으로 이미지와 종속성을 주기적으로 스캔한다.  
-- **의존성 관리와 서드파티 라이브러리 업데이트** – Dependabot, Renovate Bot 등을 CI에 통합해 최신 버전을 자동 적용한다.  
-- **CVE 트래킹 및 긴급 패치 절차** – NVD, GitHub Advisory DB를 모니터링하고, 심각도 높은 CVE는 24시간 이내 패치한다.
-
-## 사고 대응 및 복구 계획
-- **AI 에이전트 전용 사고 대응 플레인** – 탐지 → 격리 → 원인 분석 → 복구 → 사후 검토 단계로 구성한다.  
-- **포렌식 수집 및 증거 보존 방법** – 로그, 메모리 덤프, 컨테이너 이미지 등을 안전하게 보관하고, 체인 오브 커스터디를 유지한다.  
-- **복구 시나리오와 복원 테스트** – 백업된 모델·컨테이너를 사용해 복구 연습을 정기적으로 수행한다.
-
-## 규정·표준·컴플라이언스 연계
-- **GDPR, HIPAA, ISO/IEC 27001** 등 개인정보·보건 데이터와 관련된 규제는 모델·데이터 암호화·접근 통제 요구사항을 충족해야 한다.  
-- **AI 윤리·투명성 가이드** – 모델 설명 가능성, 데이터 출처 투명성 등을 보안 정책에 포함한다.  
-- **감사 체크리스트와 문서화 요구사항** – 설계 문서, 위험 평가, 보안 테스트 결과 등을 문서화하고, 정기 리뷰를 수행한다.
-
-## 도구·플랫폼 베스트 프랙티스
-| 카테고리 | 도구/서비스 | 적용 포인트 |
-|----------|-------------|--------------|
-| 클라우드 보안 | AWS GuardDuty, Azure Sentinel | 실시간 위협 탐지·알림 |
-| 오픈소스 보안 | Trivy (이미지 스캔), OPA (정책 엔진), Falco (런타임 탐지) | CI/CD 파이프라인에 자동화 삽입 |
-| CI/CD 보안 자동화 | GitHub Actions, GitLab CI, Argo CD | 코드·컨테이너 스캔, 정책 검증 단계 추가 |
-| 비밀 관리 | AWS Secrets Manager, HashiCorp Vault | 모델·프롬프트 시크릿 안전하게 주입 |
+## 신호‑대‑노이즈 비율 개선 팁
+1. **노이즈 필터링 프롬프트**: 입력 전 정규화·필터링을 적용해 불필요한 잡음을 제거한다.  
+2. **핵심 정보 강조**: 프레임별로 중요한 키워드·엔티티를 강조하고, 낮은 신뢰도 정보는 낮은 가중치로 처리한다.  
+3. **요약 기반 컨텍스트 재구성**: 장기 대화에서는 주기적으로 요약을 생성해 최신 핵심만 유지한다.  
+4. **동적 토큰 할당**: 현재 작업의 복잡도에 따라 토큰 할당량을 동적으로 조정한다(예: 간단 질의는 1 K 이하, 복합 분석은 8 K 이상).  
+5. **모니터링 및 피드백 루프**: 신호‑대‑노이즈 비율을 메트릭(예: 유사도 점수, 응답 정확도)으로 측정하고, 임계값 이하일 경우 자동으로 컨텍스트 축소 또는 재요청을 수행한다.
 
 ## 체크리스트·요약 가이드
 ### 설계 단계
@@ -298,5 +163,6 @@ Drift detected: similarity 0.61
 - **AWS Well‑Architected 프레임워크** – 운영 우수성, 보안, 비용 최적화 원칙[[AWS Well‑Architected 프레임워크 PDF](https://docs.aws.amazon.com/ko_kr/wellarchitected/latest/framework/wellarchitected-framework.pdf)]  
 - **GPAI 위험 관리 프레임워크** – AI 시스템 위험 관리와 데이터 품질 검증[[GPAI 위험 관리 프레임워크 PDF](https://astlyi.s3.ap-northeast-2.amazonaws.com/2025/TTA_%E1%84%87%E1%85%A5%E1%86%B7%E1%84%8B%E1%85%AD%E1%86%BC+%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9%E1%86%BC%E1%84%8C%E1%85%B5%E1%84%82%E1%85%B3+(GPAI)+%E1%84%8B%E1%85%B1%E1%84%92%E1%85%A5%E1%86%B7+%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%B7%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B3.pdf)]  
 - **AI 코딩 에이전트 위험 방지** – BodAIGuard 프로젝트 및 적용 가이드[[EUNO.NEWS 기사](https://euno.news/posts/ko/your-ai-agent-just-ran-rm-rf-heres-how-to-stop-it-06b436)]  
+- **AI 메모리의 역설** – 컨텍스트 관리와 비용 최적화에 대한 심층 분석[[EUNO.NEWS 원문](https://euno.news/posts/ko/the-paradox-of-ai-memory-remembering-everything-is-f90f35)]  
 
 *본 문서는 현재 제공된 리서치 자료를 기반으로 작성되었습니다. 구체적인 구현 가이드나 최신 위협 상세 내용은 추가 조사가 필요합니다.*
