@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-03-05T18:45:53.293Z",
+  "timestamp": "2026-03-05T18:44:49.505Z",
   "dryRun": false,
-  "totalIssuesScanned": 12,
+  "totalIssuesScanned": 17,
   "categories": {
     "draft_review": [
+      {
+        "number": 386,
+        "title": " [요청] 포스트‑양자 암호학 웨비나 요약 및 실무 적용 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 385,
+        "title": " [요청] iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 383,
+        "title": " [요청] Claude Code 비용 관리와 실시간 모니터링 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 327,
         "title": "[Wiki Maintenance] [문서] React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
@@ -67,11 +82,67 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 387,
+        "title": " [업데이트] Google AI Pro 활용 실전 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 384,
+        "title": " [업데이트] OpenTelemetry 기반 API 대시보드 구축 피하기",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 386,
+      "title": " [요청] 포스트‑양자 암호학 웨비나 요약 및 실무 적용 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 385,
+      "title": " [요청] iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 383,
+      "title": " [요청] Claude Code 비용 관리와 실시간 모니터링 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 387,
+      "title": " [업데이트] Google AI Pro 활용 실전 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 384,
+      "title": " [업데이트] OpenTelemetry 기반 API 대시보드 구축 피하기"
+    },
+    {
+      "type": "orphan_draft_close",
+      "issueNumber": 386,
+      "title": " [요청] 포스트‑양자 암호학 웨비나 요약 및 실무 적용 가이드"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 385,
+      "title": " [요청] iOS Exploit Kit Coruna와 Lockdown Mode 방어 전략",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/ios-exploit-kit-coruna-lockdown-mode.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 383,
+      "title": " [요청] Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/claude-code.md"
+    }
+  ],
+  "actionCount": 8,
   "maxActions": 60
 }
