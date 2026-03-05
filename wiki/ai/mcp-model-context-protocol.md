@@ -6,7 +6,7 @@ status: published
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]
 related_docs: ["claude-code-release-history.md", "continuous-ai-agentic-ci.md", "continuous-ai.md"]
 order: 1
-updatedAt: 2026-03-04
+updatedAt: 2026-03-05
 quality_score: 88
 ---
 
@@ -238,13 +238,13 @@ scopes:
 #### 4.7.1 Self‑Logging Requirements  
 | 요구사항 | 설명 |
 |----------|------|
-| **전체 호출 가시성** | 모든 Tool·Resource 호출을 중앙 DB에 기록해, 클라이언트(Desktop, 서버, API) 구분 없이 추적 가능해야 함. |
-| **멀티‑유저 태깅** | `user_id` 혹은 `role` 파라미터를 로그에 포함해, 동일 서버를 사용하는 여러 사용자를 구분한다. |
-| **정확한 실행 시간** | 네트워크 왕복을 제외하고 실제 Tool 실행에 걸린 **duration_ms** 를 측정한다. |
-| **오류·예외 기록** | `success` 플래그와 `error_message` 를 반드시 저장해, 실패 원인 분석이 가능하도록 한다. |
-| **증분 업로드 & 중복 방지** | 로컬 로그 파일을 파싱할 때 **bookmark**(파일 오프셋) 방식을 사용해 이미 전송된 라인은 재전송하지 않는다. |
-| **데이터 보존** | 최소 30 일 이상 보관하고, 배포 시 DB 파일이 덮어지지 않도록 외부 볼륨에 마운트한다. |
-| **대시보드 연동** | Streamlit 기반 UI에서 `source`(remote/local), `tool_name`, `user_id`, 시간 범위 등으로 필터링·드릴‑다운이 가능해야 함. |
+| **전체 호출 가시성** | 모든 Tool·Resource 호출을 중앙 DB에 기록해, 클라이언트(Desktop, 서버, API) 구분 없이 추적 가능 |
+| **멀티‑유저 태깅** | `user_id` 혹은 `role` 파라미터를 로그에 포함해, 동일 서버를 사용하는 여러 사용자를 구분 |
+| **정확한 실행 시간** | 네트워크 왕복을 제외하고 실제 Tool 실행에 걸린 **duration_ms** 를 측정 |
+| **오류·예외 기록** | `success` 플래그와 `error_message` 를 반드시 저장해, 실패 원인 분석 가능 |
+| **증분 업로드 & 중복 방지** | 로컬 로그 파일을 파싱할 때 **bookmark**(파일 오프셋) 방식을 사용해 이미 전송된 라인은 재전송하지 않음 |
+| **데이터 보존** | 최소 30 일 이상 보관하고, 배포 시 DB 파일이 덮어지지 않도록 외부 볼륨에 마운트 |
+| **대시보드 연동** | Streamlit 기반 UI에서 `source`(remote/local), `tool_name`, `user_id`, 시간 범위 등으로 필터링·드릴‑다운 가능 |
 
 > 출처: EUNO.NEWS, “왜 당신의 MCP 서버는 자체 로깅이 필요할까” (2026‑02‑24)  
 
@@ -308,14 +308,13 @@ class MCPLoggingMiddleware(BaseHTTPMiddleware):
             user_id=user_id,
             tool_name=tool_name,
             parameters=body.get("params", {}),
-            success=False,   # provisional
+            success=False,
         )
         try:
             response: Response = await call_next(request)
             duration = (time.time() - start) * 1000
             log.duration_ms = duration
             log.success = response.status_code == 200
-            # 간단히 결과 요약
             try:
                 result = await response.body()
                 log.result_summary = json.dumps(json.loads(result)[:200])
@@ -344,8 +343,8 @@ app = FastAPI()
 app.add_middleware(MCPLoggingMiddleware)
 
 @app.on_event("startup")
-async def on_startup():
-    await init_db()   # 테이블 자동 생성
+async def startup():
+    await init_db()
 ```
 
 5. **Streamlit 대시보드**  
@@ -355,7 +354,6 @@ async def on_startup():
 import streamlit as st
 import pandas as pd
 import sqlite3
-from datetime import datetime, timedelta
 
 @st.cache_data
 def load_logs():
@@ -367,11 +365,11 @@ def load_logs():
 df = load_logs()
 
 st.title("MCP Server Observability Dashboard")
-st.sidebar.selectbox("Source", options=["remote", "local", "all"], index=0)
+source = st.sidebar.selectbox("Source", ["remote", "local", "all"], index=2)
 user = st.sidebar.text_input("User ID (optional)")
 
 if st.sidebar.button("Apply Filters"):
-    mask = (df["source"] == st.sidebar.selectbox) if st.sidebar.selectbox != "all" else True
+    mask = (df["source"] == source) if source != "all" else True
     if user:
         mask &= df["user_id"] == user
     filtered = df[mask]
@@ -414,19 +412,20 @@ volumes:
 
 #### 4.7.3 Performance & Reliability Considerations  
 
-| 고려사항 | 권장 설정 / 구현 |
-|----------|-----------------|
-| **쓰기 성능** | SQLite는 단일 파일이므로 **WAL (Write‑Ahead Logging)** 모드 활성화 (`PRAGMA journal_mode=WAL;`). |
-| **동시성** | FastAPI + `async` DB 세션을 사용하고, 필요 시 **SQLModel + asyncpg** 로 PostgreSQL 전환을 준비한다. |
-| **백업** | `cron` 으로 매일 00:00에 `sqlite3 /data/logs.db ".backup '/backup/logs_$(date +%F).db'"` 실행. |
-| **지연 시간 측정** | 미들웨어가 `time.time()` 기반으로 **툴 실행 시간**만 기록해, 네트워크 RTT와 구분한다. |
-| **오류 격리** | 로그 기록은 `finally` 블록에서 수행해, 도구 자체 오류와 무관하게 로그가 남는다. |
-| **스케일 아웃** | 로그 수집만을 담당하는 **FastMCP Middleware**를 별도 서비스로 분리하고, **Kafka** 혹은 **Pub/Sub** 로 이벤트 스트림을 전송하면 다중 API 서버가 동일 DB에 경쟁 없이 로그를 전송할 수 있다. |
-| **보안** | API 엔드포인트는 **API‑Key + Scope** 검증을 유지하고, 로그 조회 API는 **읽기 전용 토큰**만 허용한다. |
-| **모니터링** | Prometheus exporter를 FastAPI에 추가 (`/metrics`) → `mcp_log_writes_total`, `mcp_log_errors_total` 메트릭을 수집한다. |
-| **리소스 제한** | 로그 레코드당 최대 1 MB 로 제한하고, 오래된 레코드는 **TTL**(예: 90 days) 정책으로 자동 삭제한다 (`DELETE FROM logrecord WHERE timestamp < datetime('now','-90 days');`). |
+| 고려사항 | 권장 구현 |
+|----------|-----------|
+| **쓰기 성능** | SQLite `WAL` 모드 활성화 (`PRAGMA journal_mode=WAL;`) |
+| **동시성** | FastAPI + async DB 세션 사용, 필요 시 PostgreSQL 전환 준비 |
+| **백업** | `cron` 으로 매일 `sqlite3 /data/logs.db ".backup '/backup/logs_$(date +%F).db'"` 실행 |
+| **지연 시간 측정** | 미들웨어가 네트워크 RTT 제외하고 Tool 실행 시간만 기록 |
+| **오류 격리** | `finally` 블록에서 로그 저장 보장 |
+| **스케일 아웃** | 로그 전용 서비스로 분리하고 Kafka/PubSub 로 이벤트 스트림 전송 가능 |
+| **보안** | API‑Key + Scope 검증 유지, 로그 조회는 읽기 전용 토큰만 허용 |
+| **데이터 보존** | 최소 30 일 보관, 오래된 레코드 자동 삭제 (`DELETE FROM logrecord WHERE timestamp < datetime('now','-30 days');`) |
+| **모니터링** | Prometheus `/metrics` 엔드포인트 추가 (`mcp_log_writes_total`, `mcp_log_errors_total`) |
+| **리소스 제한** | 레코드당 최대 1 MB 제한, 오래된 레코드 TTL 정책 적용 |
 
-> 위 설계는 EUNO.NEWS 기사(2026‑02‑24)에서 제시된 **FastMCP 미들웨어**, **SQLite 기반 중앙 로그**, **Streamlit 대시보드** 구현을 그대로 반영한다.  
+> 위 설계는 EUNO.NEWS 기사(2026‑02‑24)에서 제시된 **FastMCP 미들웨어**, **SQLite 중앙 로그**, **Streamlit 대시보드** 구현을 그대로 반영합니다.  
 
 ---
 
@@ -581,4 +580,24 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 | **CVE‑2025‑66401** | 2025 | `MCP Watch` (security scanner) – `execSync("git clone " + githubUrl)` | 원격 코드 실행, 임의 리포지터리 클론 | 9.6 (Critical) | euno.news |
 | **CVE‑2025‑68144** | 2025 | `mcp-server-git` (Anthropic) – `git_diff / git_checkout` 인자 삽입 | 쉘 인젝션 → 파일 시스템 조작 | 9.4 | euno.news |
 | **CVE‑2026‑2178** | 2026 | `xcode-mcp-server` – `run_lldb` 명령어 구성 | Lldb 명령어 조작 → 디버거 원격 제어 | 9.5 | euno.news |
-| **CVE‑2026‑27203** | 2026 | 다양한 `exec` 사용 – `Variousexec` 를 통한 쉘 인젝션 | 임의 명령 실행, 데이터 탈취
+| **CVE‑2026‑27203** | 2026 | 다양한 `exec` 사용 – `Variousexec` 를 통한 쉘 인젝션 | 임의 명령 실행, 데이터 탈취 | 9.5 | euno.news |
+
+---
+
+## 6. Google Cloud Hosting  
+
+### 6.1 서비스 개요  
+2025년 9월에 출시된 **Data Commons Model Context Protocol (MCP) 서버**는 이제 **Google Cloud Platform**에서 완전 관리형 서비스로 제공됩니다. 주요 특징은 다음과 같습니다.
+
+- **완전 관리형**: Google이 Python 런타임, 의존성, TLS 인증서, 버전 업데이트 및 보안 패치를 자동으로 수행합니다.  
+- **무료 이용**: 기본 데이터 Commons API 키만 있으면 별도 비용 없이 연결 가능(사용량 제한은 Google Cloud 정책에 따름).  
+- **전용 엔드포인트**: `https://api.datacommons.org/mcp` 로 접근하며, 기존 로컬 MCP 서버와 동일한 JSON‑RPC 2.0 인터페이스를 제공합니다.  
+- **보안·컴플라이언스**: Google Cloud IAM, VPC Service Controls, Cloud Armor 등과 연동돼 데이터 전송 및 저장 시 엔드‑투‑엔드 암호화가 보장됩니다.  
+
+### 6.2 왜 Google Cloud Hosting을 선택해야 하는가?  
+
+| 장점 | 설명 |
+|------|------|
+| **스케일링** | 자동 수평 확장(HPA)으로 수천 개의 동시 에이전트 요청을 처리. |
+| **운영 부담 감소** | 로컬 Python 환경, 패키지 버전 관리, TLS 인증서 갱신 등을 Google이 담당. |
+| **보안·규정 준수** | ISO 27001, SOC 2, GDPR 등 Google Cloud 인증을 그대로 활용

@@ -1,56 +1,14 @@
 {
   "entries": [
     {
-      "id": "df0e24ac-7e7b-4cf3-a6d6-8066fc2899c2",
-      "timestamp": "2026-03-05T06:26:16.831Z",
-      "actionType": "quality_score",
-      "issueNumber": 374,
-      "issueTitle": " [요청] Logmera – Self‑Hosted LLM Observability Tool",
-      "documentSlug": "observability/logmera-self-hosted-llm-observability-tool",
-      "documentTitle": " [요청] Logmera – Self‑Hosted LLM Observability Tool",
-      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "27b2519c-d6f7-42d2-8b7c-cc9a6ec8e31e",
-      "timestamp": "2026-03-05T06:26:04.071Z",
-      "actionType": "quality_score",
-      "issueNumber": 376,
-      "issueTitle": " [요청] Shinobi‑Scan – 파이썬 기반 Secret Scanning CLI 도구",
-      "documentSlug": "security/shinobi-scan-secret-scanning-cli",
-      "documentTitle": " [요청] Shinobi‑Scan – 파이썬 기반 Secret Scanning CLI 도구",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "8ab2e77f-d76e-4e0d-b6df-413b1b87d3d8",
-      "timestamp": "2026-03-05T06:25:45.091Z",
-      "actionType": "quality_score",
-      "issueNumber": 377,
-      "issueTitle": " [요청] FastAPI 로 AI 예측 API 구축 – 실전 가이드",
-      "documentSlug": "ai/fastapi-ai-api",
-      "documentTitle": " [요청] FastAPI 로 AI 예측 API 구축 – 실전 가이드",
-      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "87d44a45-c3f9-4b74-a426-ab48677a8639",
-      "timestamp": "2026-03-05T06:25:27.691Z",
+      "id": "b12e6aae-f6e4-4a97-a442-bccb18b1a9d3",
+      "timestamp": "2026-03-05T06:23:27.736Z",
       "actionType": "generate",
-      "issueNumber": 374,
-      "issueTitle": " [요청] Logmera – Self‑Hosted LLM Observability Tool",
-      "documentSlug": "observability/logmera-self-hosted-llm-observability-tool",
-      "documentTitle": "Logmera – Self‑Hosted LLM Observability Tool",
-      "summary": "새 문서 \"Logmera – Self‑Hosted LLM Observability Tool\" 생성",
+      "issueNumber": 377,
+      "issueTitle": "문서 요청 #377",
+      "documentSlug": "377",
+      "documentTitle": "FastAPI 기반 AI 추론 서비스 구현 가이드",
+      "summary": "새 문서 \"FastAPI 기반 AI 추론 서비스 구현 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -59,43 +17,105 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 2921
+              "durationMs": 2841
             },
             {
               "step": "outline",
-              "durationMs": 16970
+              "durationMs": 6354
             },
             {
               "step": "write",
-              "durationMs": 48776
+              "durationMs": 23194
             },
             {
               "step": "review",
-              "durationMs": 5909
+              "durationMs": 8529
             }
           ],
-          "totalDurationMs": 74577,
+          "totalDurationMs": 40918,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 1904,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "bf9c1a1b-5ca8-4fba-817c-37964fa44946",
+      "timestamp": "2026-03-05T06:22:43.589Z",
+      "actionType": "generate",
+      "issueNumber": 376,
+      "issueTitle": "문서 요청 #376",
+      "documentSlug": "security/376",
+      "documentTitle": "shinobi‑scan – 빠른 로컬 보안 스캔 CLI 도구",
+      "summary": "새 문서 \"shinobi‑scan – 빠른 로컬 보안 스캔 CLI 도구\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3174
+            },
+            {
+              "step": "outline",
+              "durationMs": 6927
+            },
+            {
+              "step": "write",
+              "durationMs": 19441
+            },
+            {
+              "step": "review",
+              "durationMs": 10009
+            }
+          ],
+          "totalDurationMs": 39552,
           "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
             "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 3583,
+            "estimated": 1818,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "4cae4847-d91d-4a4e-ad7e-b688afe3a165",
-      "timestamp": "2026-03-05T06:23:58.204Z",
+      "id": "064a64a9-f640-4b7c-8c31-e443ba12813e",
+      "timestamp": "2026-03-05T06:22:00.925Z",
+      "actionType": "modify",
+      "issueNumber": 375,
+      "issueTitle": " [업데이트] Antigravity 릴리즈 노트 – 2026년 보안 취약점 업데이트",
+      "documentSlug": "projects/antigravity-release-notes",
+      "documentTitle": "Antigravity 릴리즈 노트 정리",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Antigravity 릴리즈 노트 – 2026년 보안 취약점 업데이트\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 44,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "c1b08e00-95fb-490a-a5e8-508225d4d6e6",
+      "timestamp": "2026-03-05T06:21:13.012Z",
       "actionType": "generate",
-      "issueNumber": 376,
-      "issueTitle": " [요청] Shinobi‑Scan – 파이썬 기반 Secret Scanning CLI 도구",
-      "documentSlug": "security/shinobi-scan-secret-scanning-cli",
-      "documentTitle": "Shinobi‑Scan – 파이썬 기반 Secret Scanning CLI 도구",
-      "summary": "새 문서 \"Shinobi‑Scan – 파이썬 기반 Secret Scanning CLI 도구\" 생성",
+      "issueNumber": 374,
+      "issueTitle": "문서 요청 #374",
+      "documentSlug": "observability/374",
+      "documentTitle": "Logmera – 셀프‑호스팅 LLM 관측 도구 가이드",
+      "summary": "새 문서 \"Logmera – 셀프‑호스팅 LLM 관측 도구 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -104,77 +124,49 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 3934
+              "durationMs": 2951
             },
             {
               "step": "outline",
-              "durationMs": 6992
+              "durationMs": 9972
             },
             {
               "step": "write",
-              "durationMs": 29058
+              "durationMs": 28097
             },
             {
               "step": "review",
-              "durationMs": 6108
+              "durationMs": 5563
             }
           ],
-          "totalDurationMs": 46093,
-          "researchSources": 5,
+          "totalDurationMs": 46583,
+          "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 5
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 2108,
+            "estimated": 2182,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "8f907530-a9dd-4654-9a03-aa5aaa001c5f",
-      "timestamp": "2026-03-05T06:22:57.652Z",
-      "actionType": "generate",
-      "issueNumber": 377,
-      "issueTitle": " [요청] FastAPI 로 AI 예측 API 구축 – 실전 가이드",
-      "documentSlug": "ai/fastapi-ai-api",
-      "documentTitle": "FastAPI 로 AI 예측 API 구축 – 실전 가이드",
-      "summary": "새 문서 \"FastAPI 로 AI 예측 API 구축 – 실전 가이드\" 생성",
-      "trigger": "request_label",
+      "id": "363ae967-209d-4014-966d-5ce3d9e6ed2a",
+      "timestamp": "2026-03-05T06:20:23.237Z",
+      "actionType": "modify",
+      "issueNumber": 373,
+      "issueTitle": " [업데이트] MCP (Model Context Protocol) – Google Cloud 호스팅 및 Gemini CLI 확장",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP (Model Context Protocol) – Google Cloud 호스팅 및 Gemini CLI 확장\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 3377
-            },
-            {
-              "step": "outline",
-              "durationMs": 7212
-            },
-            {
-              "step": "write",
-              "durationMs": 32245
-            },
-            {
-              "step": "review",
-              "durationMs": 6113
-            }
-          ],
-          "totalDurationMs": 48947,
-          "researchSources": 9,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 2279,
-            "method": "duration_based"
-          }
-        }
+        "additions": 19,
+        "deletions": 0
       }
     },
     {
@@ -8716,5 +8708,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-05T06:26:16.832Z"
+  "lastUpdated": "2026-03-05T06:23:27.736Z"
 }
