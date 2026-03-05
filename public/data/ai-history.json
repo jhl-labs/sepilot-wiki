@@ -1,6 +1,175 @@
 {
   "entries": [
     {
+      "id": "ac2be61b-edca-45b0-bd13-b83943ed3366",
+      "timestamp": "2026-03-05T18:42:33.845Z",
+      "actionType": "modify",
+      "issueNumber": 387,
+      "issueTitle": " [업데이트] Google AI Pro 활용 실전 가이드",
+      "documentSlug": "ai/gemini-3-1",
+      "documentTitle": "gemini 3.1",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Google AI Pro 활용 실전 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 55,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "e76134a2-bd55-469c-a25a-d5a463547007",
+      "timestamp": "2026-03-05T18:42:05.085Z",
+      "actionType": "generate",
+      "issueNumber": 386,
+      "issueTitle": "문서 요청 #386",
+      "documentSlug": "security/386",
+      "documentTitle": "양자 시대 대비 포스트‑양자 암호화 전략 가이드",
+      "summary": "새 문서 \"양자 시대 대비 포스트‑양자 암호화 전략 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6103
+            },
+            {
+              "step": "outline",
+              "durationMs": 6419
+            },
+            {
+              "step": "write",
+              "durationMs": 25512
+            },
+            {
+              "step": "review",
+              "durationMs": 6830
+            }
+          ],
+          "totalDurationMs": 44865,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1939,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "87ff36c3-af7a-48d6-9fe7-c1b83b81cb51",
+      "timestamp": "2026-03-05T18:41:18.084Z",
+      "actionType": "generate",
+      "issueNumber": 385,
+      "issueTitle": "문서 요청 #385",
+      "documentSlug": "security/385",
+      "documentTitle": "Coruna iOS 익스플로잇 키트 위협 보고서",
+      "summary": "새 문서 \"Coruna iOS 익스플로잇 키트 위협 보고서\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4008
+            },
+            {
+              "step": "outline",
+              "durationMs": 6870
+            },
+            {
+              "step": "write",
+              "durationMs": 24246
+            },
+            {
+              "step": "review",
+              "durationMs": 6167
+            }
+          ],
+          "totalDurationMs": 41291,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1864,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "7daa420e-2798-4016-b33d-174981567540",
+      "timestamp": "2026-03-05T18:40:33.898Z",
+      "actionType": "modify",
+      "issueNumber": 384,
+      "issueTitle": " [업데이트] OpenTelemetry 기반 API 대시보드 구축 피하기",
+      "documentSlug": "observability/opentelemetry",
+      "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenTelemetry 기반 API 대시보드 구축 피하기\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 59,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "499dd680-c1f4-409a-bb7d-4a60fdeb32f0",
+      "timestamp": "2026-03-05T18:39:20.257Z",
+      "actionType": "generate",
+      "issueNumber": 383,
+      "issueTitle": "문서 요청 #383",
+      "documentSlug": "383",
+      "documentTitle": "Claude Code 비용 관리와 Bifrost 활용 가이드",
+      "summary": "새 문서 \"Claude Code 비용 관리와 Bifrost 활용 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3561
+            },
+            {
+              "step": "outline",
+              "durationMs": 6504
+            },
+            {
+              "step": "write",
+              "durationMs": 26015
+            },
+            {
+              "step": "review",
+              "durationMs": 6453
+            }
+          ],
+          "totalDurationMs": 42533,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1949,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "4ecb1f2e-b028-4be9-93b0-72e71e50f86f",
       "timestamp": "2026-03-05T18:38:33.157Z",
       "actionType": "maintain",
@@ -8849,5 +9018,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-05T18:38:33.157Z"
+  "lastUpdated": "2026-03-05T18:42:33.845Z"
 }
