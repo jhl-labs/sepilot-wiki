@@ -1,6 +1,119 @@
 {
   "entries": [
     {
+      "id": "d02046c3-e686-4cc1-b932-da4f4d863468",
+      "timestamp": "2026-03-05T12:18:33.846Z",
+      "actionType": "modify",
+      "issueNumber": 382,
+      "issueTitle": " [업데이트] AI 메모리·컨텍스트 설계 – 비용·신호‑대‑노이즈 트레이드오프",
+      "documentSlug": "ai",
+      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 메모리·컨텍스트 설계 – 비용·신호‑대‑노이즈 트레이드오프\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 102
+      }
+    },
+    {
+      "id": "c1241755-804c-4225-ac92-fae2a3c6b303",
+      "timestamp": "2026-03-05T12:17:44.565Z",
+      "actionType": "modify",
+      "issueNumber": 381,
+      "issueTitle": " [업데이트] VMware Aria Operations (CVE‑2026‑22719) – KEV 등재 및 대응 가이드",
+      "documentSlug": "security/devsecops",
+      "documentTitle": "DevSecOps 자동화 역설 – 파이프라인 보안 취약점 생성 메커니즘",
+      "summary": "문서 수정 요청 처리: \" [업데이트] VMware Aria Operations (CVE‑2026‑22719) – KEV 등재 및 대응 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 34,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "d82029aa-5a3b-490a-b8dd-dcbffd71c5d3",
+      "timestamp": "2026-03-05T12:16:45.867Z",
+      "actionType": "generate",
+      "issueNumber": 380,
+      "issueTitle": "문서 요청 #380",
+      "documentSlug": "security/380",
+      "documentTitle": "슬롭스쿼팅(Slopsquatting) – AI 환각을 이용한 공급망 공격 가이드",
+      "summary": "새 문서 \"슬롭스쿼팅(Slopsquatting) – AI 환각을 이용한 공급망 공격 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3592
+            },
+            {
+              "step": "outline",
+              "durationMs": 10880
+            },
+            {
+              "step": "write",
+              "durationMs": 34108
+            },
+            {
+              "step": "review",
+              "durationMs": 5302
+            }
+          ],
+          "totalDurationMs": 53882,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 2514,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "bc9dd926-84fa-4e12-a166-bb619d824409",
+      "timestamp": "2026-03-05T12:15:48.396Z",
+      "actionType": "modify",
+      "issueNumber": 379,
+      "issueTitle": " [업데이트] MCP 서버 보안 베스트 프랙티스",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP 서버 보안 베스트 프랙티스\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 7,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "d5ca3328-f368-418a-8f8e-555b02516e28",
+      "timestamp": "2026-03-05T12:14:34.545Z",
+      "actionType": "modify",
+      "issueNumber": 378,
+      "issueTitle": " [업데이트] 멀티‑에이전트 워크플로우에서 Governance와 Traceability 강화",
+      "documentSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
+      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 멀티‑에이전트 워크플로우에서 Governance와 Traceability 강화\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 23,
+        "deletions": 0
+      }
+    },
+    {
       "id": "6d8352c9-33eb-4fa1-96e1-c5a02aac511c",
       "timestamp": "2026-03-05T12:13:46.964Z",
       "actionType": "maintain",
@@ -8722,5 +8835,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-05T12:13:46.964Z"
+  "lastUpdated": "2026-03-05T12:18:33.846Z"
 }
