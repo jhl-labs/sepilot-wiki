@@ -3,8 +3,8 @@
     {
       "id": 380,
       "number": 380,
-      "title": " [요청] AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/slopsquatting-ai-hallucinations-as-supply-chain-at-801d9c)\n**관련도**: 85/100\n**핵심 토픽**: AI 환각, 공급망 공격, 패키지 슬롭스쿼팅\n\n## 뉴스 요약\n5개 중 1개의 AI‑생성 코드 샘플이 존재하지 않는 패키지를 추천한다. 공격자들은 그 가짜 이름들을 npm과 PyPI에 등록하고, 내부에 악성코드를 심고 있다.\n\n## 상세 내용\nSource: Dev.to\nAI가 생성한 코드 샘플 중 5개 중 1개는 존재하지 않는 패키지를 추천합니다.\n공격자들은 그 가짜 이름들을 npm과 PyPI에 악성코드를 포함시켜 등록하고 있습니다. 이 현상을 slopsquatting이라고 부르며, 이미 진행 중입니다.\n슬롭스쿼팅이란?\n타이포스쿼팅은 인간의 철자 오류에 베팅합니다.\n슬롭스쿼팅은 AI 환각에 베팅합니다.\n이 용어는 파이썬 소프트웨어 재단의 보안 개발자‑인‑레지던스인 Seth Larson이 특정 공격을 설명하기 위해 만들었습니다:\nLLM이 지속적으로 만들어내는 패키지 이름을 등록한 뒤, 개발자들이 AI의 권고에 따라 이를 설치하도록 기다립니다.\nEvidence\n연구범위주요 결과\nUSENIX Security 202516개 언어 모델에 걸친 576 000개의 코드 샘플• 약 20 %의 샘플이 최소 하나의 존재하지 않는 패키지를 권장합니다.\n• 환각은 세 가지 범주로 나뉩니다:\n- 51 % 순수 허구(실제 근거 없음).\n- 38 % 실제 패키지를 혼합한 경우(예: express-mongoose).\n- 13 % 정식 이름의 오타 변형.\nConsistency반복 질의(10×)• **43 %**의 환각된 이름이 매번 나타났습니다.\n• **58 %**는 두 번 이상 나타났습니다.\nImplication: 공격자는 LLM이 어떤 이름을 만들어낼지 추측할 필요가 없습니다. 동일한 질문을 몇 번 반복해 환상적인 이름들을 수집하고, 이를 등록하면 됩니다.\n기존 방어가 실패하는 이유\n전통적인 타이포스쿼팅은 crossenv와 같은 이름을 등록하여 누군가 cross‑env를 오타낼 것을 기대합니다.\n레지스트리 방어는 인기 있는 이름과 너무 유사한 새로운 이름을 표시합니다.\n환상적인 이름은 이를 완전히 우회합니다 – 실제 패키지가 없기 때문에 어떤 필터도 예상하지 못하는 새로운 문자열입니다.\nSource: …\n실제 사례\n패키지생태계결과\nhuggingface-cliPyPI빈 자리표시자(악성 코드 없음)로 등록됨. 3개월 만에 개발자\n\n## 판단 근거\n‘Slopsquatting’이라는 새로운 공격 기법이 기존 LLM 연대기·보안 플레이북에 다루어지지 않아 독립적인 실용 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "title": "문서 요청 #380",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,11 +24,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-05T12:18:08.365Z",
-      "updated_at": "2026-03-05T12:18:08.369Z",
+      "created_at": "2026-03-05T12:16:45.869Z",
+      "updated_at": "2026-03-05T12:16:45.872Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/380",
-      "documentSlug": "ai-slopsquatting",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai-slopsquatting.md",
+      "documentSlug": "security/380",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/380.md",
       "comments": 0
     },
     {
@@ -2862,5 +2862,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-05T12:18:08.369Z"
+  "lastUpdated": "2026-03-05T12:16:45.872Z"
 }

@@ -429,6 +429,113 @@ volumes:
 
 ---
 
+## 4.8 보안 위협 모델  
+
+MCP 서버는 LLM과 외부 인프라 사이의 **신뢰 다리** 역할을 수행한다. 현재 표준화된 검증·감사 메커니즘이 부재한 상황에서 다음과 같은 주요 위협이 존재한다(출처: EUNO.NEWS).
+
+| 위협 카테고리 | 가능한 악용 시나리오 |
+|---------------|----------------------|
+| **파일 시스템 접근** | `file.read`, `file.write`, `file.delete` 도구를 통해 민감 파일 탈취·파괴 |
+| **코드 실행** | `exec`, `shell`, `git.clone` 등 도구가 임의 명령을 실행해 서버를 장악 |
+| **네트워크 아웃바운드** | `http.request`, `curl` 등 도구가 외부 C2 서버와 통신하거나 데이터 유출 |
+| **자격 증명 접근** | 환경 변수·설정 파일을 읽어 API 키, DB 비밀번호 등을 획득 |
+| **도구 메타데이터 변조** | 악의적인 Tool 선언을 삽입해 권한 상승 또는 권한 회피 시도 |
+
+이러한 위험을 완화하려면 **능력 선언**(what‑can‑do)과 **거부된 능력**(what‑cannot‑do) 를 기계가 읽을 수 있는 형식으로 명시하고, 선언과 실제 동작을 지속적으로 **감사**해야 한다.
+
+---
+
+## 4.9 서버‑사이드 인증·인가  
+
+### 4.9.1 기본 인증 메커니즘  
+| 요소 | 권장 구현 |
+|------|-----------|
+| **API 키** | 서버‑사이드에 사전 등록하고 `Authorization: Bearer <key>` 헤더로 전달 (MongoDB MCP 보안 권장사항) |
+| **TLS** | 모든 통신은 HTTPS(또는 WSS) 로 암호화. 인증서 자동 갱신을 위해 Let’s Encrypt 또는 Cloud‑Managed TLS 사용 |
+| **Scope‑Based 권한** | 키당 허용된 Tool·Resource 목록을 `scope` 로 정의. 예: `read:file`, `invoke:weather_api` (Foundry MCP 베스트 프랙티스) |
+| **조건부 액세스** | IP 화이트리스트, 시간대 제한, MFA 등 추가 정책을 IAM 레이어에서 적용 |
+| **RBAC** | 조직 단위·역할에 따라 서로 다른 API 키와 스코프를 발급. 예: `admin`, `developer`, `viewer` 역할 |
+
+### 4.9.2 권한 최소화 (Least Privilege)  
+1. **능력 선언 파일** (`agent-card.kya.json`)에 `allowed` 와 `denied` 리스트를 명시.  
+2. 서버 시작 시 선언을 **검증**하고, 선언과 실제 플러그인 매핑이 일치하지 않을 경우 시작을 차단.  
+3. **동적 스코프 검증**: 요청 시 `scope` 헤더와 선언된 `allowed` 를 교차 검증하여 허용되지 않은 Tool 호출을 차단.
+
+### 4.9.3 인증 연동 예시 (TypeScript)  
+
+```typescript
+import { McpServer } from 'typescript-mcp';
+import { verifyJwt, getUserScopes } from './auth';
+
+const server = new McpServer({
+  port: 8080,
+  authMiddleware: async (req) => {
+    const token = req.headers.get('authorization')?.split(' ')[1];
+    const payload = await verifyJwt(token!);
+    const scopes = await getUserScopes(payload.sub);
+    return { userId: payload.sub, scopes };
+  },
+});
+
+server.defineScope('read:file', ['file.read']);
+server.defineScope('invoke:weather_api', ['weather.getCurrent']);
+```
+
+---
+
+## 4.10 감사 및 로깅 권고사항  
+
+### 4.10.1 로그 내용 (KYA 표준)  
+| 필드 | 설명 |
+|------|------|
+| **identity** | 서버 소유자, 연락처, 버전 |
+| **capabilities** | `allowed` (가능한 작업)와 `denied` (불가능한 작업) |
+| **auditHistory** | 마지막 감사 일시, 사용 도구, 점수, 발견된 취약점 |
+| **riskClassification** | `low`, `medium`, `high` 및 PII·GDPR 등 규제 적용 여부 |
+| **compliance** | EU AI Act, NIST AI RMF 매핑 |
+| **operationalControls** | 로깅, 속도 제한, 킬‑스위치 구현 여부 |
+
+KYA 에이전트 카드 생성 예시:
+
+```bash
+pip install kya-agent
+kya init --agent-id "my-org/mcp-server" --name "My MCP Server"
+kya validate agent-card.kya.json
+kya score agent-card.kya.json
+```
+
+### 4.10.2 실시간 감사 로그  
+* 기존 **Self‑Logging Architecture**(섹션 4.7) 를 그대로 활용하면서, 아래 항목을 추가한다.
+
+- **user_id / role**: `X-User-Id` 헤더 또는 JWT `sub` 클레임을 기록.  
+- **duration_ms**: 네트워크 RTT 제외, 실제 Tool 실행 시간만 측정.  
+- **error_message**: 예외 발생 시 스택 트레이스 대신 요약 메시지 저장.  
+- **audit_timestamp**: UTC 기준 자동 삽입.  
+
+### 4.10.3 로그 보존 및 접근 제어  
+| 정책 | 구현 |
+|------|------|
+| **보존 기간** | 최소 30 일, 필요 시 GDPR‑compliant 보관 정책 적용. |
+| **외부 볼륨** | Kubernetes `PersistentVolumeClaim` 혹은 Docker `volume`에 `/data` 마운트. |
+| **읽기 전용 조회** | 로그 조회 전용 API 키 발급, `GET /logs` 엔드포인트는 `read:logs` 스코프만 허용. |
+| **증분 전송** | 파일 오프셋(`bookmark`) 기반 파싱으로 이미 전송된 라인 재전송 방지. |
+| **백업** | 일일 `sqlite3` 백업 스크립트와 S3/Blob 스토리지 복제. |
+
+### 4.10.4 대시보드와 알림  
+* **Streamlit 대시보드**(섹션 4.7) 에서 `source`, `tool_name`, `user_id`, `time range` 로 필터링 가능.  
+* **Prometheus 알림**: `mcp_tool_calls_total{tool="code_execution"}` 가 급증하거나 `mcp_log_errors_total` 이 일정 임계값을 초과하면 Slack/Email 알림 전송.  
+
+### 4.10.5 표준화된 감사 흐름  
+
+1. **배포 전**: `kya init` 로 Agent Card 생성 → `kya validate` 로 스키마 검증 → `kya score` 로 완성도 점수 확인.  
+2. **CI/CD**: `mcp-security-audit` 도구를 파이프라인에 포함해 자동 스캔 수행.  
+3. **운영**: Self‑Logging Middleware 로 실시간 로그 수집 → 중앙 DB 저장 → Streamlit/Prometheus 대시보드 모니터링.  
+4. **주기적 재감사**: 최소 월 1회 `mcp-security-audit` 실행, 결과를 Agent Card `auditHistory` 에 기록.  
+
+> 위 권고사항은 **MongoDB MCP 서버 보안 권장사항**, **Microsoft Foundry MCP 보안 베스트 프랙티스**, 그리고 **EUNO.NEWS**(2026‑02‑24)에서 제시된 KYA 표준 및 자체 로깅 설계를 종합한 것이다.  
+
+---
+
 ## 5. 실제 활용 사례  
 
 ### 5.1 Claude Desktop  
@@ -500,104 +607,4 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 
 ### 5.5 성공 지표 및 베스트 프랙티스 요약  
 - **보안**: 스코프 기반 최소 권한 원칙 적용 → 권한 오용 0%  
-- **성능**: 평균 RPC 레이턴시 45 ms (Docker), 120 ms (K8s)  
-- **유지보수**: 플러그인 기반 Tool 추가 시 재배포 없이 Hot‑Reload 지원  
-
-### 5.6 대규모 AI 에이전트 연결 사례  
-
-**출처**: Euno.News – “250 AI 에이전트가 내 MCP 보안 스캐너에 연결될 때 내가 보는 것” (2026‑02‑24)  
-
-- **전체 요청**: 250건 (로그 시작 이후)  
-- **API Ask 사용량**: 137건 (`api_ask` 인터페이스)  
-- **허니팟 히트**: 1건 – `get_aws_credentials` 도구가 10일간 노출된 뒤 한 번 호출됨  
-- **고유 IP**: 146개 (MCP 프로토콜을 통해 연결)  
-- **연결 패턴**: 약 70 %가 `initialize → tools/list → disconnect` 순서만 수행, 실제 도구 호출은 없음. 이는 **도구 목록 자체가 공격 표면**임을 보여준다.  
-
-#### 반복 방문자  
-- **서버**: `mcp.tableall.com` (일본 레스토랑 예약 시스템)  
-- **활동**: `api_ask` 인터페이스를 9회 스캔, 인증 없이 6개의 도구가 노출(`create_reservation` 포함). 발견 후 1시간 내에 공개 책임자에게 보고.  
-
-#### 지속 관찰자  
-- **IP**: 프랑스/포르투갈 지역, `/api/live` 엔드포인트를 매시간 폴링. 대시보드에 임베드된 형태로 추정, 인간과의 직접 교류는 없음.  
-
-#### 전체 보안 인사이트 (2025‑2026)  
-- **무인증 서버 비율**: 38 % (560개 서버 중) – 인증이 없으면 모든 AI 에이전트가 자유롭게 연결 가능.  
-- **대다수 독립 개발자·테스트 서버**는 공개적으로 열려 있어 실제 공격자가 연결을 시도하는 경우가 빈번함.  
-
-### 5.7 스케일링 및 모니터링 베스트 프랙티스  
-
-대규모 에이전트 트래픽(수백~수천 연결) 환경에서 MCP 서버를 안정적으로 운영하기 위한 핵심 권고사항은 다음과 같다.
-
-#### 1. 연결 제한 및 레이트 리밋  
-- **IP‑당** 최소 10 req/min, 피크 시 100 req/min 수준으로 제한.  
-- **도구 호출**에 별도 레이트 리밋 적용, `api_ask`와 `tool.invoke` 구분.  
-
-#### 2. 도구 목록 최소화  
-- `tools/list` 응답에 **필수 도구만** 노출하고, 내부 전용 도구는 별도 비공개 엔드포인트에 배치.  
-- **스코프 기반** 접근 제어로 읽기 전용 도구와 쓰기 전용 도구를 분리.  
-
-#### 3. 실시간 로그 집계 & 알림  
-- **JSON‑L** 형식으로 요청·응답을 중앙 로그(예: Elasticsearch, Loki)로 전송.  
-- **Prometheus** 메트릭: `mcp_requests_total`, `mcp_unique_ips`, `mcp_tool_calls_total`.  
-- **Alertmanager** 규칙: 동일 IP가 1분 내 50회 이상 `tools/list` 호출 시 경고, 허니팟 호출 감지 시 즉시 Slack/Email 알림.  
-
-#### 4. 헬스 체크와 자동 스케일링  
-- **Kubernetes**: `readinessProbe`와 `livenessProbe`를 `/healthz` 엔드포인트에 구현.  
-- **Horizontal Pod Autoscaler**: CPU 사용률 70 % 초과 시 파드 수를 2배 확대, `mcp_active_sessions` 메트릭을 기준으로도 스케일링 가능.  
-
-#### 5. 허니팟 및 위협 인텔리전스  
-- 위험한 도구(예: `get_aws_credentials`)를 **허니팟**으로 배치해 악의적 스캔을 탐지.  
-- 탐지 시 자동 **IP 차단**(NetworkPolicy) 및 **보고서 생성**(CSV/JSON) 후 보안팀에 전달.  
-
-#### 6. 보안 텍스트 & 책임 보고  
-- `/.well-known/security.txt` 파일에 연락처와 취약점 보고 절차 명시.  
-- 허니팟이나 비정상 트래픽 감지 시 **CVE‑style** 보고서(날짜, IP, 도구, 행동)를 내부 위협 인텔리전스 플랫폼에 전송.  
-
-#### 7. 인증 강화  
-- **API 키** 외에 **OAuth 2.0** 혹은 **JWT** 기반 토큰 도입, 토큰 회전 주기 짧게 유지.  
-- **Scope 검증**을 서버 측에서 강제하고, 클라이언트가 요청 시 `scope` 헤더 포함하도록 표준화.  
-
-#### 8. 관측 가능한 도구 버전 관리  
-- 각 Tool·Resource에 **버전/체크섬** 메타데이터 부여, `tools/list` 응답에 포함.  
-- 클라이언트는 버전이 변경될 경우 자동 업데이트 혹은 경고 표시하도록 구현.  
-
-#### 9. 패턴 기반 탐지  
-- `initialize → tools/list → disconnect` 와 같은 **정찰 패턴** 탐지 규칙 추가.  
-- 정찰이 일정 비율(예: 60 % 이상) 초과 시 **잠재적 스캐닝**으로 분류, 해당 IP를 **관찰 리스트**에 추가.  
-
-#### 10. 주기적 보안 스캔  
-- CI 파이프라인에 `scan_mcp_server` 도구 포함, **주간** 혹은 **일일** 스캔 자동화.  
-- 스캔 결과는 **보안 대시보드**에 시각화하고, 미해결 이슈는 티켓 시스템에 자동 등록.  
-
-> 위 권고사항은 2025‑2026년 사이 560개 MCP 서버 조사 결과와 250개의 AI 에이전트가 실제로 연결된 운영 사례([Euno.News](https://euno.news/posts/ko/what-i-see-when-250-ai-agents-connect-to-my-mcp-se-054ac2))를 기반으로 도출된 실증적 데이터에 근거한다.  
-
-### 5.8 최근 MCP CVEs (2025‑2026)
-
-아래 표는 2025‑2026년에 보고된 주요 MCP 관련 CVE와 해당 취약점이 발생한 함수·구현을 정리한 것이다. 모든 CVE는 **CWE‑78 (OS Command Injection)** 에 해당한다.
-
-| CVE | 연도 | 취약한 구현 | 주요 영향 | CVSS (v3.1) | 참고 출처 |
-|-----|------|-------------|-----------|-------------|------------|
-| **CVE‑2025‑66401** | 2025 | `MCP Watch` (security scanner) – `execSync("git clone " + githubUrl)` | 원격 코드 실행, 임의 리포지터리 클론 | 9.6 (Critical) | euno.news |
-| **CVE‑2025‑68144** | 2025 | `mcp-server-git` (Anthropic) – `git_diff / git_checkout` 인자 삽입 | 쉘 인젝션 → 파일 시스템 조작 | 9.4 | euno.news |
-| **CVE‑2026‑2178** | 2026 | `xcode-mcp-server` – `run_lldb` 명령어 구성 | Lldb 명령어 조작 → 디버거 원격 제어 | 9.5 | euno.news |
-| **CVE‑2026‑27203** | 2026 | 다양한 `exec` 사용 – `Variousexec` 를 통한 쉘 인젝션 | 임의 명령 실행, 데이터 탈취 | 9.5 | euno.news |
-
----
-
-## 6. Google Cloud Hosting  
-
-### 6.1 서비스 개요  
-2025년 9월에 출시된 **Data Commons Model Context Protocol (MCP) 서버**는 이제 **Google Cloud Platform**에서 완전 관리형 서비스로 제공됩니다. 주요 특징은 다음과 같습니다.
-
-- **완전 관리형**: Google이 Python 런타임, 의존성, TLS 인증서, 버전 업데이트 및 보안 패치를 자동으로 수행합니다.  
-- **무료 이용**: 기본 데이터 Commons API 키만 있으면 별도 비용 없이 연결 가능(사용량 제한은 Google Cloud 정책에 따름).  
-- **전용 엔드포인트**: `https://api.datacommons.org/mcp` 로 접근하며, 기존 로컬 MCP 서버와 동일한 JSON‑RPC 2.0 인터페이스를 제공합니다.  
-- **보안·컴플라이언스**: Google Cloud IAM, VPC Service Controls, Cloud Armor 등과 연동돼 데이터 전송 및 저장 시 엔드‑투‑엔드 암호화가 보장됩니다.  
-
-### 6.2 왜 Google Cloud Hosting을 선택해야 하는가?  
-
-| 장점 | 설명 |
-|------|------|
-| **스케일링** | 자동 수평 확장(HPA)으로 수천 개의 동시 에이전트 요청을 처리. |
-| **운영 부담 감소** | 로컬 Python 환경, 패키지 버전 관리, TLS 인증서 갱신 등을 Google이 담당. |
-| **보안·규정 준수** | ISO 27001, SOC 2, GDPR 등 Google Cloud 인증을 그대로 활용
+- **성능**: 평균 RPC 레이
