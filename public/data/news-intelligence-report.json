@@ -1,11 +1,68 @@
 {
-  "generatedAt": "2026-03-06T06:16:23.241Z",
-  "summary": {
-    "totalScanned": 200,
-    "newItems": 0,
-    "prefiltered": 0,
-    "relevant": 0,
-    "issuesCreated": 0
+  "generatedAt": "2026-03-06T12:10:51.058Z",
+  "config": {
+    "rssUrl": "https://euno.news/rss.xml",
+    "maxAiBatch": 30,
+    "relevanceThreshold": 55,
+    "maxIssues": 5
   },
-  "items": []
+  "summary": {
+    "scannedAt": "2026-03-06T12:10:51.057Z",
+    "totalScanned": 200,
+    "newItems": 5,
+    "prefiltered": 3,
+    "relevant": 2,
+    "issuesCreated": 2,
+    "durationMs": 21505
+  },
+  "items": [
+    {
+      "title": "[Paper] Vibe Code Bench: 엔드‑투‑엔드 웹 애플리케이션 개발에 대한 AI 모델 평가",
+      "link": "https://euno.news/posts/ko/vibe-code-bench-evaluating-ai-models-on-end-to-end-1a8d6b",
+      "guid": "https://euno.news/posts/ko/vibe-code-bench-evaluating-ai-models-on-end-to-end-1a8d6b",
+      "relevanceScore": 85,
+      "relatedDocuments": [
+        "ai/vibe-coding.md",
+        "ai/ai.md",
+        "ai/ai-productivity-paradox-why-developer-throughput-m.md"
+      ],
+      "keyTopics": [
+        "AI code‑generation benchmark",
+        "end‑to‑end web‑app development",
+        "Vibe Code Bench methodology"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "[Paper] RoboPocket: 휴대폰으로 로봇 정책을 즉시 개선",
+      "link": "https://euno.news/posts/ko/robopocket-improve-robot-policies-instantly-with-y-fba2e0",
+      "guid": "https://euno.news/posts/ko/robopocket-improve-robot-policies-instantly-with-y-fba2e0",
+      "relevanceScore": 65,
+      "relatedDocuments": [
+        "viscat.md"
+      ],
+      "keyTopics": [
+        "handheld robot control",
+        "policy improvement via imitation learning",
+        "scalable robot interaction"
+      ],
+      "sourceUrl": null
+    }
+  ],
+  "actions": [
+    {
+      "action": "update_existing",
+      "targetSlug": "ai/vibe-coding.md",
+      "suggestedTitle": "Vibe Coding – AI 코드 생성 벤치마크 Vibe Code Bench 소개",
+      "priority": "high",
+      "issueNumber": 395
+    },
+    {
+      "action": "new_document",
+      "targetSlug": "",
+      "suggestedTitle": "RoboPocket – 스마트폰으로 로봇 정책을 즉시 개선하는 AR 기반 인터페이스",
+      "priority": "medium",
+      "issueNumber": 396
+    }
+  ]
 }
