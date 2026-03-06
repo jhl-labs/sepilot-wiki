@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-03-06T09:48:30.141Z",
+  "collectedAt": "2026-03-06T10:48:00.238Z",
   "overview": {
     "totalDocuments": 132,
     "publishedDocuments": 75,
     "draftDocuments": 57,
-    "openRequests": 77,
+    "openRequests": 80,
     "closedRequests": 19,
-    "totalAIActions": 394
+    "totalAIActions": 403
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
+      "aiActions": 5,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 2,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 18,
-      "documentsCreated": 6,
-      "documentsModified": 6,
-      "tavilyApiCalls": 18,
-      "tavilyResults": 47,
-      "estimatedTokens": 12724,
-      "totalPipelineDurationMs": 278898
+      "aiActions": 27,
+      "documentsCreated": 9,
+      "documentsModified": 9,
+      "tavilyApiCalls": 27,
+      "tavilyResults": 74,
+      "estimatedTokens": 20905,
+      "totalPipelineDurationMs": 468996
     },
     "last7d": {
-      "aiActions": 94,
-      "documentsCreated": 31,
-      "documentsModified": 27,
-      "tavilyApiCalls": 93,
-      "tavilyResults": 236,
-      "estimatedTokens": 69673,
-      "totalPipelineDurationMs": 1536421
+      "aiActions": 98,
+      "documentsCreated": 34,
+      "documentsModified": 28,
+      "tavilyApiCalls": 102,
+      "tavilyResults": 263,
+      "estimatedTokens": 77854,
+      "totalPipelineDurationMs": 1726519
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-06T09:49:52.185Z",
+      "actionType": "quality_score",
+      "issueNumber": 389,
+      "documentTitle": "[Wiki Maintenance] [요청] Before You Migrate: Five Surprising Ingress-NGINX Behaviors You Need to Know",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T09:49:42.883Z",
+      "actionType": "quality_score",
+      "issueNumber": 390,
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Docker Hardened System Packages",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T09:49:22.088Z",
+      "actionType": "quality_score",
+      "issueNumber": 391,
+      "documentTitle": "[Wiki Maintenance] [요청] How we rebuilt the search architecture for high availability in GitHub Enterprise Server",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T09:49:08.720Z",
+      "actionType": "modify",
+      "issueNumber": 392,
+      "documentTitle": "주간 위키 보고서 - 2026년 10주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T09:48:36.678Z",
+      "actionType": "modify",
+      "issueNumber": 393,
+      "documentTitle": "DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T09:47:58.090Z",
+      "actionType": "modify",
+      "issueNumber": 394,
+      "documentTitle": "DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T09:47:30.179Z",
+      "actionType": "generate",
+      "issueNumber": 389,
+      "documentTitle": "Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 66830,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2802
+    },
+    {
+      "timestamp": "2026-03-06T09:46:08.817Z",
+      "actionType": "generate",
+      "issueNumber": 390,
+      "documentTitle": "Docker Hardened System Packages 안내",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 76207,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3537
+    },
+    {
+      "timestamp": "2026-03-06T09:44:38.508Z",
+      "actionType": "generate",
+      "issueNumber": 391,
+      "documentTitle": "How We Rebuilt the Search Architecture for High Availability in GitHub Enterprise Server",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 47061,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1842
+    },
     {
       "timestamp": "2026-03-06T09:17:29.793Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 42533,
       "tavilyApiCalls": 3,
       "estimatedTokens": 1949
-    },
-    {
-      "timestamp": "2026-03-05T18:38:33.157Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T12:18:33.846Z",
-      "actionType": "modify",
-      "issueNumber": 382,
-      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T12:17:44.565Z",
-      "actionType": "modify",
-      "issueNumber": 381,
-      "documentTitle": "DevSecOps 자동화 역설 – 파이프라인 보안 취약점 생성 메커니즘",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T12:16:45.867Z",
-      "actionType": "generate",
-      "issueNumber": 380,
-      "documentTitle": "슬롭스쿼팅(Slopsquatting) – AI 환각을 이용한 공급망 공격 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 53882,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2514
-    },
-    {
-      "timestamp": "2026-03-05T12:15:48.396Z",
-      "actionType": "modify",
-      "issueNumber": 379,
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T12:14:34.545Z",
-      "actionType": "modify",
-      "issueNumber": 378,
-      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T12:13:46.964Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T06:23:27.736Z",
-      "actionType": "generate",
-      "issueNumber": 377,
-      "documentTitle": "FastAPI 기반 AI 추론 서비스 구현 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 40918,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1904
-    },
-    {
-      "timestamp": "2026-03-05T06:22:43.589Z",
-      "actionType": "generate",
-      "issueNumber": 376,
-      "documentTitle": "shinobi‑scan – 빠른 로컬 보안 스캔 CLI 도구",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 39552,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1818
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 391,
+      "totalEstimatedTokens": 265880,
+      "avgDurationMs": 54109
+    },
     "unknown": {
       "totalActions": 12,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 382,
-      "totalEstimatedTokens": 257699,
-      "avgDurationMs": 53844
     }
   }
 }
