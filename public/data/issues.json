@@ -3,8 +3,8 @@
     {
       "id": 396,
       "number": 396,
-      "title": "문서 요청 #396",
-      "body": "",
+      "title": " [요청] RoboPocket – 스마트폰으로 로봇 정책을 즉시 개선하는 AR 기반 인터페이스",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/robopocket-improve-robot-policies-instantly-with-y-fba2e0)\n**관련도**: 65/100\n**핵심 토픽**: handheld robot control, policy improvement via imitation learning, scalable robot interaction\n\n## 뉴스 요약\n스케일링 모방 학습은 근본적으로 데이터 수집 효율성에 의해 제한됩니다. 핸드헬드 인터페이스는 확장 가능한 솔루션으로 부상하고 있습니다.\n\n## 상세 내용\nSource: arXiv - 2603.05504v1\n개요\nRoboPocket은 일반 스마트폰이 로봇 제어 정책을 즉시 개선하는 강력한 도구가 될 수 있음을 보여줍니다. 증강 현실(AR)을 통해 로봇이 예측한 미래 움직임을 실제 세계에 투사함으로써, 사용자는 물리적인 로봇 없이도 실패 사례를 발견하고 수정할 수 있으며, 이를 통해 모방 학습의 데이터 수집 병목 현상을 빠르고 인터랙티브한 루프로 전환합니다.\n주요 기여\nRemote Inference + AR Visual Foresight: 정책이 예측한 궤적을 사용자의 환경에 시각화하여, 실제 실행 전에 로봇이 어디로 갈지 운영자가 확인할 수 있게 함.\nRobot‑Free Interactive Data Collection: 소비자용 스마트폰만으로 “즉시 정책 반복”을 가능하게 하여, 보정 단계에서 비용이 많이 드는 로봇 하드웨어가 필요 없게 함.\nAsynchronous Online Fine‑tuning Pipeline: 새로 수집된 시연 데이터를 학습 서버로 스트리밍하고, 몇 분 안에 정책을 업데이트하여 거의 실시간에 가까운 학습 루프를 닫음.\nEmpirical Validation of Scaling Laws: 시스템이 기존 데이터‑스케일링 추세를 따르고, 순수 오프라인 데이터‑스케일링 접근법에 비해 2× higher sample efficiency 를 달성함을 입증.\nDistributed Interactive Corrections: 소수의 사용자가 목표 지향적인 보정을 제공함으로써 로봇 군집 전체의 성능을 크게 향상시킬 수 있음을 보여줌.\n방법론\n전화기에서 정책 예측 – 현재 로봇 정책은 클라우드 서버에서 실행됩니다; 전화기는 실시간 카메라 프레임을 서버에 스트리밍하고, 서버는 짧은 시간(예: 몇 초)의 로봇 움직임에 대한 궤적 예측을 반환합니다.\nAR 오버레이 – 전화기의 AR 툴킷을 사용해 예측된 경로를 가상 선이나 유령 로봇 형태로 사용자 화면에 렌더링하고, 실제 장면에 고정합니다.\n인간‑인‑루프 보정 – \n\n## 판단 근거\nRoboPocket 논문은 휴대폰과 AR을 활용해 로봇 정책을 실시간으로 시각화·수정하는 새로운 워크플로를 제시한다. 현재 위키에 로봇 정책 개선이나 모바일‑AR 인터페이스에 대한 문서가 없으므로, 별도 문서를 만들어 기술 스택, 원리, 적용 사례, 연구 결과 등을 정리하는 것이 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,10 +25,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-06T12:12:19.325Z",
-      "updated_at": "2026-03-06T12:12:19.329Z",
+      "updated_at": "2026-03-06T12:14:12.841Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/396",
-      "documentSlug": "ai/396",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/396.md",
+      "documentSlug": "robopocket-ar",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/robopocket-ar.md",
       "comments": 0
     },
     {
@@ -3110,5 +3110,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-06T12:12:19.329Z"
+  "lastUpdated": "2026-03-06T12:14:12.841Z"
 }

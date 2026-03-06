@@ -1,6 +1,65 @@
 {
   "entries": [
     {
+      "id": "50b4ec8a-9a52-4c14-bd31-befb872b55ac",
+      "timestamp": "2026-03-06T12:14:29.268Z",
+      "actionType": "quality_score",
+      "issueNumber": 396,
+      "issueTitle": " [요청] RoboPocket – 스마트폰으로 로봇 정책을 즉시 개선하는 AR 기반 인터페이스",
+      "documentSlug": "robopocket-ar",
+      "documentTitle": " [요청] RoboPocket – 스마트폰으로 로봇 정책을 즉시 개선하는 AR 기반 인터페이스",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "607d8a6e-d397-493d-8ede-daa19626ba11",
+      "timestamp": "2026-03-06T12:14:12.835Z",
+      "actionType": "generate",
+      "issueNumber": 396,
+      "issueTitle": " [요청] RoboPocket – 스마트폰으로 로봇 정책을 즉시 개선하는 AR 기반 인터페이스",
+      "documentSlug": "robopocket-ar",
+      "documentTitle": "RoboPocket – 스마트폰으로 로봇 정책을 즉시 개선하는 AR 기반 인터페이스",
+      "summary": "새 문서 \"RoboPocket – 스마트폰으로 로봇 정책을 즉시 개선하는 AR 기반 인터페이스\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5303
+            },
+            {
+              "step": "outline",
+              "durationMs": 8507
+            },
+            {
+              "step": "write",
+              "durationMs": 27782
+            },
+            {
+              "step": "review",
+              "durationMs": 9140
+            }
+          ],
+          "totalDurationMs": 50733,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 2271,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "5b8359c3-f6ea-41ae-b100-f8891072ba3c",
       "timestamp": "2026-03-06T12:12:19.323Z",
       "actionType": "generate",
@@ -9472,5 +9531,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-06T12:12:19.323Z"
+  "lastUpdated": "2026-03-06T12:14:29.268Z"
 }
