@@ -1,6 +1,65 @@
 {
   "entries": [
     {
+      "id": "e79c9756-36fc-4f17-a9cf-3e436dea79e7",
+      "timestamp": "2026-03-06T00:29:38.849Z",
+      "actionType": "quality_score",
+      "issueNumber": 388,
+      "issueTitle": " [요청] 멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "documentSlug": "ai",
+      "documentTitle": " [요청] 멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "b4b36aa3-342d-4843-bc76-89aa8d418365",
+      "timestamp": "2026-03-06T00:29:26.965Z",
+      "actionType": "generate",
+      "issueNumber": 388,
+      "issueTitle": " [요청] 멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "documentSlug": "ai/ai",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "새 문서 \"멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3782
+            },
+            {
+              "step": "outline",
+              "durationMs": 13087
+            },
+            {
+              "step": "write",
+              "durationMs": 26068
+            },
+            {
+              "step": "review",
+              "durationMs": 7254
+            }
+          ],
+          "totalDurationMs": 50191,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2320,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "aead1c98-9cb0-4689-9db0-c9861447346e",
       "timestamp": "2026-03-06T00:27:18.150Z",
       "actionType": "generate",
@@ -9077,5 +9136,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-06T00:27:18.150Z"
+  "lastUpdated": "2026-03-06T00:29:38.849Z"
 }

@@ -3,8 +3,8 @@
     {
       "id": 388,
       "number": 388,
-      "title": "문서 요청 #388",
-      "body": "",
+      "title": " [요청] 멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/why-running-multiple-ai-coding-agents-creates-chao-8b847f)\n**관련도**: 88/100\n**핵심 토픽**: AI 코딩 에이전트, 멀티‑에이전트 혼돈, 오케스트레이션\n\n## 뉴스 요약\n‘Why Running Multiple AI Coding Agents Creates Chaos And How We&apos;re Fixing It’ 표지 이미지 https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,…\n\n## 상세 내용\nSource: Dev.to\n꿈: 병렬 AI 코딩\n복잡한 작업이 있습니다 — 인증 모듈을 리팩터링해야 하는데, 이 모듈은 API, 프론트엔드, 테스트, 문서 전반에 걸쳐 12개의 파일을 건드립니다.\n단일 AI 에이전트(Claude, Copilot, Cursor)는 20‑30분이 걸립니다. 컨텍스트 제한에 걸릴 수도 있고 파일을 순차적으로 처리합니다.\n그래서 생각합니다: “터미널 5개를 열고 작업을 나눠서 할 거야.”\n현실: 5분간의 혼돈\nTerminal 1: auth.rs 리팩터링 시작\nTerminal 3: 역시 auth.rs 편집 시작 → ❌ 파일 충돌. 하나가 다른 것을 덮어씀.\nTerminal 4: api.rs의 함수를 임포트하는 테스트 작성\nTerminal 2: 아직 그 함수를 작성하지 않음 → ❌ 의존성 실패.\nTerminal 5: /auth/login 엔드포인트 문서화\nTerminal 3: 이를 /auth/signin으로 이름 변경 → ❌ 구식 참조.\n조정 없이 병렬 AI 코딩은 순차 작업보다 더 나쁩니다. 실행 시간은 절약하지만 충돌 해결에 시간을 잃게 됩니다.\n기존 솔루션이 맞지 않는 이유\n멀티‑에이전트 프레임워크 (AutoGen, CrewAI, LangGraph):\n에이전트 간 대화를 조정하는 데는 좋지만 파일 잠금, 의존성 순서, 코드베이스 수준 충돌 방지는 하지 못합니다.\n수동 조정:\n스케줄러가 되어 어떤 터미널이 어떤 파일을 작업할지, 충돌을 확인하고 의존성을 관리해야 합니다. 결국 병목이 됩니다.\n단일 에이전트:\n안전하지만 느림. 병렬성이 없고 큰 작업에서는 컨텍스트 제한에 걸립니다.\n실제로 필요한 것\n작업 분해: 모호한 요청을 구체적이고 병렬화 가능한 하위 작업으로 나누기.\n의존성 관리: 어떤 작업이 다른 작업보다 먼저 완료돼야 하는지 파악하기.\n파일 잠금: 두 작업자가 동시에 같은 파일을 편집하지 못하도록 방지하기.\n모니터링: 모든 작업자가 실시간으로 무엇을 하고 있는지 보기.\n복구: 수동 개입 없이 실패를 처리하기.\n이 요구사항들은 \n\n## 판단 근거\n뉴스는 여러 AI 코딩 에이전트를 동시에 실행할 때 발생하는 혼돈 현상과 이를 해결하기 위한 오케스트레이션·워크플로우 전략을 다루고 있다. 기존 문서들은 개별 에이전트 사용법, 생산성 패러독스, 혹은 GitHub Agentic 워크플로우 정도만 다루고 있어, 다중 에이전트 조율에 특화된 새로운 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,10 +25,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-06T00:27:18.152Z",
-      "updated_at": "2026-03-06T00:27:18.155Z",
+      "updated_at": "2026-03-06T00:29:26.971Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/388",
-      "documentSlug": "ai/388",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/388.md",
+      "documentSlug": "ai/ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai.md",
       "comments": 0
     },
     {
@@ -2986,5 +2986,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-06T00:27:18.155Z"
+  "lastUpdated": "2026-03-06T00:29:26.971Z"
 }
