@@ -1,43 +1,83 @@
 {
-  "collectedAt": "2026-03-05T23:49:59.697Z",
+  "collectedAt": "2026-03-06T00:58:04.066Z",
   "overview": {
-    "totalDocuments": 125,
-    "publishedDocuments": 73,
-    "draftDocuments": 52,
-    "openRequests": 76,
+    "totalDocuments": 132,
+    "publishedDocuments": 75,
+    "draftDocuments": 57,
+    "openRequests": 77,
     "closedRequests": 19,
-    "totalAIActions": 388
+    "totalAIActions": 392
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 4,
+      "documentsCreated": 2,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 6,
+      "tavilyResults": 16,
+      "estimatedTokens": 4458,
+      "totalPipelineDurationMs": 96327
     },
     "last24h": {
-      "aiActions": 25,
-      "documentsCreated": 7,
-      "documentsModified": 13,
-      "tavilyApiCalls": 21,
-      "tavilyResults": 50,
-      "estimatedTokens": 14170,
-      "totalPipelineDurationMs": 309624
+      "aiActions": 22,
+      "documentsCreated": 9,
+      "documentsModified": 8,
+      "tavilyApiCalls": 27,
+      "tavilyResults": 66,
+      "estimatedTokens": 18628,
+      "totalPipelineDurationMs": 405951
     },
     "last7d": {
-      "aiActions": 94,
-      "documentsCreated": 32,
+      "aiActions": 98,
+      "documentsCreated": 34,
       "documentsModified": 28,
-      "tavilyApiCalls": 96,
-      "tavilyResults": 245,
-      "estimatedTokens": 73153,
-      "totalPipelineDurationMs": 1616625
+      "tavilyApiCalls": 102,
+      "tavilyResults": 261,
+      "estimatedTokens": 77611,
+      "totalPipelineDurationMs": 1712952
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-06T00:29:38.849Z",
+      "actionType": "quality_score",
+      "issueNumber": 388,
+      "documentTitle": " [요청] 멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T00:29:26.965Z",
+      "actionType": "generate",
+      "issueNumber": 388,
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 50191,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2320
+    },
+    {
+      "timestamp": "2026-03-06T00:27:18.150Z",
+      "actionType": "generate",
+      "issueNumber": 388,
+      "documentTitle": "멀티‑AI 코딩 에이전트 오케스트레이션 가이드 – Jupiter 설계 및 구현",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 46136,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2138
+    },
+    {
+      "timestamp": "2026-03-06T00:26:27.520Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-05T18:42:33.845Z",
       "actionType": "modify",
@@ -197,53 +237,13 @@
       "durationMs": 46583,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2182
-    },
-    {
-      "timestamp": "2026-03-05T06:20:23.237Z",
-      "actionType": "modify",
-      "issueNumber": 373,
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T06:19:15.987Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T00:54:18.704Z",
-      "actionType": "quality_score",
-      "issueNumber": 342,
-      "documentTitle": " [요청] Shared Workflows for Node.js Backend and AWS Deployments",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T00:26:51.851Z",
-      "actionType": "modify",
-      "issueNumber": 372,
-      "documentTitle": "Qwen 3.5",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 377,
-      "totalEstimatedTokens": 253241,
-      "avgDurationMs": 53955
+      "totalActions": 381,
+      "totalEstimatedTokens": 257699,
+      "avgDurationMs": 53844
     },
     "unknown": {
       "totalActions": 11,
