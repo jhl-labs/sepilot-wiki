@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-06T08:48:39.973Z",
+  "collectedAt": "2026-03-06T09:48:30.141Z",
   "overview": {
     "totalDocuments": 132,
     "publishedDocuments": 75,
     "draftDocuments": 57,
     "openRequests": 77,
     "closedRequests": 19,
-    "totalAIActions": 392
+    "totalAIActions": 394
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 16,
+      "aiActions": 18,
       "documentsCreated": 6,
       "documentsModified": 6,
       "tavilyApiCalls": 18,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 278898
     },
     "last7d": {
-      "aiActions": 98,
-      "documentsCreated": 34,
-      "documentsModified": 28,
-      "tavilyApiCalls": 102,
-      "tavilyResults": 261,
-      "estimatedTokens": 77611,
-      "totalPipelineDurationMs": 1712952
+      "aiActions": 94,
+      "documentsCreated": 31,
+      "documentsModified": 27,
+      "tavilyApiCalls": 93,
+      "tavilyResults": 236,
+      "estimatedTokens": 69673,
+      "totalPipelineDurationMs": 1536421
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-06T09:17:29.793Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-06T09:17:18.488Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-06T00:29:38.849Z",
       "actionType": "quality_score",
@@ -217,38 +237,18 @@
       "durationMs": 39552,
       "tavilyApiCalls": 3,
       "estimatedTokens": 1818
-    },
-    {
-      "timestamp": "2026-03-05T06:22:00.925Z",
-      "actionType": "modify",
-      "issueNumber": 375,
-      "documentTitle": "Antigravity 릴리즈 노트 정리",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-05T06:21:13.012Z",
-      "actionType": "generate",
-      "issueNumber": 374,
-      "documentTitle": "Logmera – 셀프‑호스팅 LLM 관측 도구 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 46583,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2182
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 381,
-      "totalEstimatedTokens": 257699,
-      "avgDurationMs": 53844
-    },
     "unknown": {
-      "totalActions": 11,
+      "totalActions": 12,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 382,
+      "totalEstimatedTokens": 257699,
+      "avgDurationMs": 53844
     }
   }
 }
