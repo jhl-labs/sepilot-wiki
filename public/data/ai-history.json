@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "aead1c98-9cb0-4689-9db0-c9861447346e",
+      "timestamp": "2026-03-06T00:27:18.150Z",
+      "actionType": "generate",
+      "issueNumber": 388,
+      "issueTitle": "문서 요청 #388",
+      "documentSlug": "ai/388",
+      "documentTitle": "멀티‑AI 코딩 에이전트 오케스트레이션 가이드 – Jupiter 설계 및 구현",
+      "summary": "새 문서 \"멀티‑AI 코딩 에이전트 오케스트레이션 가이드 – Jupiter 설계 및 구현\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3370
+            },
+            {
+              "step": "outline",
+              "durationMs": 14625
+            },
+            {
+              "step": "write",
+              "durationMs": 22026
+            },
+            {
+              "step": "review",
+              "durationMs": 6115
+            }
+          ],
+          "totalDurationMs": 46136,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2138,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "2b31b309-a905-4977-8f7b-65cb01944867",
       "timestamp": "2026-03-06T00:26:27.520Z",
       "actionType": "maintain",
@@ -9032,5 +9077,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-06T00:26:27.520Z"
+  "lastUpdated": "2026-03-06T00:27:18.150Z"
 }
