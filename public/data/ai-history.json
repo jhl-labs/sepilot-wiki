@@ -1,6 +1,68 @@
 {
   "entries": [
     {
+      "id": "5b8359c3-f6ea-41ae-b100-f8891072ba3c",
+      "timestamp": "2026-03-06T12:12:19.323Z",
+      "actionType": "generate",
+      "issueNumber": 396,
+      "issueTitle": "문서 요청 #396",
+      "documentSlug": "ai/396",
+      "documentTitle": "RoboPocket – 모바일·AR 기반 로봇 정책 즉시 개선 가이드",
+      "summary": "새 문서 \"RoboPocket – 모바일·AR 기반 로봇 정책 즉시 개선 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3112
+            },
+            {
+              "step": "outline",
+              "durationMs": 9438
+            },
+            {
+              "step": "write",
+              "durationMs": 18770
+            },
+            {
+              "step": "review",
+              "durationMs": 7749
+            }
+          ],
+          "totalDurationMs": 39070,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 1798,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "b322f7c1-ea11-4846-90db-76709011aaaa",
+      "timestamp": "2026-03-06T12:11:36.721Z",
+      "actionType": "modify",
+      "issueNumber": 395,
+      "issueTitle": " [업데이트] Vibe Coding – AI 코드 생성 벤치마크 Vibe Code Bench 소개",
+      "documentSlug": "ai/vibe-coding",
+      "documentTitle": "바이브 코딩이란?",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Vibe Coding – AI 코드 생성 벤치마크 Vibe Code Bench 소개\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 43,
+        "deletions": 0
+      }
+    },
+    {
       "id": "8775f6f3-03b8-49ae-b15c-12e434686e22",
       "timestamp": "2026-03-06T12:10:51.060Z",
       "actionType": "maintain",
@@ -9410,5 +9472,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-06T12:10:51.060Z"
+  "lastUpdated": "2026-03-06T12:12:19.323Z"
 }
