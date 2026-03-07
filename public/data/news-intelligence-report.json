@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-07T06:12:14.684Z",
+  "generatedAt": "2026-03-07T12:09:31.689Z",
   "config": {
     "rssUrl": "https://euno.news/rss.xml",
     "maxAiBatch": 30,
@@ -7,359 +7,364 @@
     "maxIssues": 5
   },
   "summary": {
-    "scannedAt": "2026-03-07T06:12:14.683Z",
+    "scannedAt": "2026-03-07T12:09:31.689Z",
     "totalScanned": 200,
-    "newItems": 76,
+    "newItems": 62,
     "prefiltered": 30,
-    "relevant": 19,
-    "issuesCreated": 5,
-    "durationMs": 81697
+    "relevant": 22,
+    "issuesCreated": 0,
+    "durationMs": 94036
   },
   "items": [
     {
-      "title": "AI 슬롭을 코드베이스에서 감지하는 도구를 만든 방법 (그리고 발견한 패턴)",
-      "link": "https://euno.news/posts/ko/how-i-built-a-tool-that-detects-ai-slop-in-codebas-6a00ff",
-      "guid": "https://euno.news/posts/ko/how-i-built-a-tool-that-detects-ai-slop-in-codebas-6a00ff",
-      "relevanceScore": 88,
+      "title": "Docker MCP 에코시스템으로 로컬에서 MCP 서버 실행하기: Dynamic MCP + Kiro (DIY 가이드)",
+      "link": "https://euno.news/posts/ko/running-mcp-servers-locally-with-docker-mcp-ecosys-2ab767",
+      "guid": "https://euno.news/posts/ko/running-mcp-servers-locally-with-docker-mcp-ecosys-2ab767",
+      "relevanceScore": 86,
       "relatedDocuments": [
-        "ai-slopsquatting.md",
-        "security/380.md"
-      ],
-      "keyTopics": [
-        "AI 슬롭 탐지 도구",
-        "공급망 보안",
-        "패턴 분석"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Anthropic, Claude Marketplace 출시, 기업에 Replit, GitLab, Harvey 등 Claude 기반 도구 제공",
-      "link": "https://euno.news/posts/ko/anthropic-launches-claude-marketplace-giving-enter-7b7dcf",
-      "guid": "https://euno.news/posts/ko/anthropic-launches-claude-marketplace-giving-enter-7b7dcf",
-      "relevanceScore": 82,
-      "relatedDocuments": [
-        "383.md",
-        "ai/claude-code.md",
-        "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md"
-      ],
-      "keyTopics": [
-        "Claude Marketplace",
-        "Anthropic",
-        "Replit·GitLab·Harvey 통합"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "GHSA-H343-GG57-2Q67: CVE-2026-27574: OneUptime Probe에서 VM 샌드박스 탈출을 통한 원격 코드 실행",
-      "link": "https://euno.news/posts/ko/ghsa-h343-gg57-2q67-cve-2026-27574-remote-code-exe-15b555",
-      "guid": "https://euno.news/posts/ko/ghsa-h343-gg57-2q67-cve-2026-27574-remote-code-exe-15b555",
-      "relevanceScore": 81,
-      "relatedDocuments": [
-        "security/devsecops.md",
-        "security/303.md"
-      ],
-      "keyTopics": [
-        "CVE‑2026‑27574",
-        "OneUptime Probe",
-        "샌드박스 탈출 RCE"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Docker + ZFS: 완벽한 홈랩 스토리지 설정",
-      "link": "https://euno.news/posts/ko/docker-zfs-the-perfect-home-lab-storage-setup-af4849",
-      "guid": "https://euno.news/posts/ko/docker-zfs-the-perfect-home-lab-storage-setup-af4849",
-      "relevanceScore": 78,
-      "relatedDocuments": [
-        "docker/hardened-images.md",
-        "docker/announcing-docker-hardened-system-packages.md"
+        "ai/mcp-model-context-protocol.md",
+        "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md",
+        "docker/docker-zfs.md"
       ],
       "keyTopics": [
         "Docker",
-        "ZFS",
-        "홈랩 스토리지"
+        "MCP",
+        "로컬 서버 실행"
       ],
       "sourceUrl": null
     },
     {
-      "title": "read-once: 중복 파일 읽기를 중단하는 Claude Code Hook",
-      "link": "https://euno.news/posts/ko/read-once-a-claude-code-hook-that-stops-redundant-04fe59",
-      "guid": "https://euno.news/posts/ko/read-once-a-claude-code-hook-that-stops-redundant-04fe59",
-      "relevanceScore": 78,
+      "title": "GitHub Weekly: Copilot 코딩 에이전트 레벨업, Enterprise AI가 실질적인 거버넌스를 구현",
+      "link": "https://euno.news/posts/ko/github-weekly-copilot-coding-agent-levels-up-enter-d54b90",
+      "guid": "https://euno.news/posts/ko/github-weekly-copilot-coding-agent-levels-up-enter-d54b90",
+      "relevanceScore": 85,
       "relatedDocuments": [
-        "383.md",
-        "ai/claude-code.md"
+        "github/what-8217-s-new-with-github-copilot-coding-agent.md",
+        "github-copilot-ci-cd.md"
       ],
       "keyTopics": [
-        "Claude Code",
-        "read‑once Hook",
-        "중복 파일 읽기 방지"
+        "GitHub Copilot",
+        "코딩 에이전트",
+        "Enterprise AI Governance"
       ],
       "sourceUrl": null
     },
     {
-      "title": "내 AI 에이전트의 메모리가 낙관주의 피드백 루프를 만든 방법",
-      "link": "https://euno.news/posts/ko/how-my-ai-agents-memory-created-an-optimism-feedba-a8d9f5",
-      "guid": "https://euno.news/posts/ko/how-my-ai-agents-memory-created-an-optimism-feedba-a8d9f5",
-      "relevanceScore": 78,
+      "title": "코딩을 위한 AI 활용 최고의 방법",
+      "link": "https://euno.news/posts/ko/the-best-way-to-use-ai-for-coding-0e375a",
+      "guid": "https://euno.news/posts/ko/the-best-way-to-use-ai-for-coding-0e375a",
+      "relevanceScore": 84,
       "relatedDocuments": [
-        "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
         "ai/ai-code-review-agent-guide.md",
-        "ai/agentspace-openclaw.md",
-        "backend/agentic-faas-mdl.md"
+        "ai/ai.md",
+        "ai/ai-productivity-paradox-why-developer-throughput-m.md"
       ],
       "keyTopics": [
-        "자율 AI 에이전트",
-        "Boucle 프레임워크",
-        "메모리 피드백 루프"
+        "AI 코딩 도구",
+        "프롬프트 엔지니어링",
+        "생산성 팁"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Google Analytics를 2KB 스크립트로 교체했습니다 — 이유는 이렇습니다",
-      "link": "https://euno.news/posts/ko/i-replaced-google-analytics-with-a-2-kb-script-her-23d557",
-      "guid": "https://euno.news/posts/ko/i-replaced-google-analytics-with-a-2-kb-script-her-23d557",
-      "relevanceScore": 72,
+      "title": "왜 쿠버네티스만으로는 충분하지 않은가: API 게이트웨이와 서비스 메시의 필요성",
+      "link": "https://euno.news/posts/ko/why-kubernetes-alone-isnt-enough-the-case-for-api-869dcb",
+      "guid": "https://euno.news/posts/ko/why-kubernetes-alone-isnt-enough-the-case-for-api-869dcb",
+      "relevanceScore": 84,
       "relatedDocuments": [
-        "frontend/incremental-static-regeneration.md",
-        "frontend/api-service-layer.md"
+        "kubernetes/ingress-nginx-deprecation-guide.md",
+        "kubernetes/api-governance.md",
+        "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b.md"
       ],
       "keyTopics": [
-        "Google Analytics 대체",
-        "초소형 웹 분석 스크립트",
-        "퍼포먼스 최적화"
+        "Kubernetes",
+        "API 게이트웨이",
+        "서비스 메시"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Show HN: Kula – 가볍고 독립형 Linux 서버 모니터링 도구",
-      "link": "https://euno.news/posts/ko/show-hn-kula-lightweight-self-contained-linux-serv-e89aa6",
-      "guid": "https://euno.news/posts/ko/show-hn-kula-lightweight-self-contained-linux-serv-e89aa6",
-      "relevanceScore": 72,
+      "title": "프로덕션 크래시와 수정 사이의 시간 단축",
+      "link": "https://euno.news/posts/ko/reducing-the-time-between-a-production-crash-and-a-9358ed",
+      "guid": "https://euno.news/posts/ko/reducing-the-time-between-a-production-crash-and-a-9358ed",
+      "relevanceScore": 78,
       "relatedDocuments": [
-        "observability/319.md",
         "observability/opentelemetry.md",
-        "observability/logmera-self-hosted-llm-observability-tool.md",
-        "kubernetes/node-readiness-controller.md"
+        "observability/open-telemetry-guide.md",
+        "observability/ai.md"
       ],
       "keyTopics": [
-        "경량 Linux 모니터링",
-        "단일 바이너리",
-        "실시간 메트릭"
+        "프로덕션 크래시",
+        "인시던트 대응",
+        "관측성"
       ],
       "sourceUrl": null
     },
     {
-      "title": "UUID 패키지, Go 표준 라이브러리에 도입",
-      "link": "https://euno.news/posts/ko/uuid-package-coming-to-go-standard-library-b99526",
-      "guid": "https://euno.news/posts/ko/uuid-package-coming-to-go-standard-library-b99526",
-      "relevanceScore": 70,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Go",
-        "UUID 패키지",
-        "표준 라이브러리 제안"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Allen AI의 오픈소스 모델을 위한 Telegram Bot 구축",
-      "link": "https://euno.news/posts/ko/building-a-telegram-bot-for-allen-ais-open-source-43073f",
-      "guid": "https://euno.news/posts/ko/building-a-telegram-bot-for-allen-ais-open-source-43073f",
-      "relevanceScore": 70,
+      "title": "Syne 소개 — 실제로 당신을 기억하는 AI 에이전트",
+      "link": "https://euno.news/posts/ko/introducing-syne-an-ai-agent-that-actually-remembe-806e7d",
+      "guid": "https://euno.news/posts/ko/introducing-syne-an-ai-agent-that-actually-remembe-806e7d",
+      "relevanceScore": 77,
       "relatedDocuments": [
-        "telegram-based-access-layer-authentication-with-oi.md",
-        "ai/ollama-claude-code.md"
-      ],
-      "keyTopics": [
-        "Allen AI",
-        "OLMo Bot",
-        "Telegram Bot",
-        "오픈소스 LLM"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Gemini와 함께 창의적인 프롬프트를 인터랙티브 XR 경험으로 전환하기",
-      "link": "https://euno.news/posts/ko/turn-creative-prompts-into-interactive-xr-experien-d085b8",
-      "guid": "https://euno.news/posts/ko/turn-creative-prompts-into-interactive-xr-experien-d085b8",
-      "relevanceScore": 70,
-      "relatedDocuments": [
-        "ai/gemini-3-1.md",
-        "ai/gemini-3-1-pro.md"
-      ],
-      "keyTopics": [
-        "Gemini",
-        "XR 인터랙티브 프롬프트",
-        "Canvas"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "AI 과대광고를 넘어서는 릴리즈 규율: Drupal 패치, KEV, 실제 에이전트 워크플로우 현장 노트",
-      "link": "https://euno.news/posts/ko/release-discipline-over-ai-hype-field-notes-from-d-20839e",
-      "guid": "https://euno.news/posts/ko/release-discipline-over-ai-hype-field-notes-from-d-20839e",
-      "relevanceScore": 70,
-      "relatedDocuments": [
-        "devops/gitops-implementation.md",
-        "security/devsecops.md",
-        "security/386.md"
-      ],
-      "keyTopics": [
-        "릴리즈 규율",
-        "Drupal 패치",
-        "KEV(Known Exploited Vulnerabilities)"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "가짜 아마존 리뷰에 속은 뒤 내가 FakeScan을 만든 이유",
-      "link": "https://euno.news/posts/ko/why-i-built-fakescan-after-falling-for-fake-amazon-68429a",
-      "guid": "https://euno.news/posts/ko/why-i-built-fakescan-after-falling-for-fake-amazon-68429a",
-      "relevanceScore": 68,
-      "relatedDocuments": [
-        "ai-slopsquatting.md",
-        "security/380.md"
-      ],
-      "keyTopics": [
-        "Fake Amazon 리뷰",
-        "FakeScan",
-        "AI 기반 공급망 보안"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "React / Next.js에서 react-progressive-blur를 사용하여 Progressive Blur Effects를 추가하는 방법",
-      "link": "https://euno.news/posts/ko/how-to-add-progressive-blur-effects-in-react-nextj-001cdc",
-      "guid": "https://euno.news/posts/ko/how-to-add-progressive-blur-effects-in-react-nextj-001cdc",
-      "relevanceScore": 65,
-      "relatedDocuments": [
-        "frontend/incremental-static-regeneration.md",
-        "frontend/react-query.md"
-      ],
-      "keyTopics": [
-        "React",
-        "Next.js",
-        "progressive‑blur UI 효과"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Conductor 업데이트: 자동 리뷰 도입",
-      "link": "https://euno.news/posts/ko/conductor-update-introducing-automated-reviews-911ce9",
-      "guid": "https://euno.news/posts/ko/conductor-update-introducing-automated-reviews-911ce9",
-      "relevanceScore": 65,
-      "relatedDocuments": [
-        "ai/ai-code-review-agent-guide.md",
-        "ai/gemini-3-1.md"
-      ],
-      "keyTopics": [
-        "Conductor",
-        "자동 리뷰",
-        "Gemini CLI 확장"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "당신의 상사는 이제 당신의 생각을 읽을 수 있다: 미국 직장에서의 AI 감시 폭발",
-      "link": "https://euno.news/posts/ko/your-boss-can-read-your-mind-now-the-ai-surveillan-0d84fc",
-      "guid": "https://euno.news/posts/ko/your-boss-can-read-your-mind-now-the-ai-surveillan-0d84fc",
-      "relevanceScore": 65,
-      "relatedDocuments": [
-        "ai/ai-rfp.md",
-        "ai/anthropic-claude-government-regulation-and-dod-pol.md",
+        "ai/agentspace-openclaw.md",
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md",
         "ai/ai.md"
       ],
       "keyTopics": [
-        "AI 직장 감시",
-        "프라이버시",
-        "거버넌스"
+        "AI 에이전트",
+        "장기 메모리",
+        "Syne 프로젝트"
       ],
       "sourceUrl": null
     },
     {
-      "title": "이 Jammer는 Always-Listening AI Wearables를 차단하려고 합니다. 아마도 효과가 없을 겁니다.",
-      "link": "https://euno.news/posts/ko/this-jammer-wants-to-block-always-listening-ai-wea-60c239",
-      "guid": "https://euno.news/posts/ko/this-jammer-wants-to-block-always-listening-ai-wea-60c239",
-      "relevanceScore": 62,
+      "title": "Amazon EKS를 사용한 Kubernetes에 2048 게임 배포 — 엔드투엔드 DevOps 프로젝트",
+      "link": "https://euno.news/posts/ko/deploying-a-2048-game-on-kubernetes-using-amazon-e-71d184",
+      "guid": "https://euno.news/posts/ko/deploying-a-2048-game-on-kubernetes-using-amazon-e-71d184",
+      "relevanceScore": 73,
       "relatedDocuments": [
-        "security/ai.md",
-        "security/386.md",
-        "security/400.md"
+        "kubernetes/ingress-nginx-deprecation-guide.md",
+        "kubernetes/release-notes.md",
+        "kubernetes/api-governance.md"
       ],
       "keyTopics": [
-        "AI 웨어러블",
-        "신호 차단(Jammer)",
-        "프라이버시 보안"
+        "Amazon EKS",
+        "Kubernetes 배포",
+        "2048 게임"
       ],
       "sourceUrl": null
     },
     {
-      "title": "#100DaysOfCode 33일 차 — Mongoose",
-      "link": "https://euno.news/posts/ko/day-33-of-100daysofcode-mongoose-0c3528",
-      "guid": "https://euno.news/posts/ko/day-33-of-100daysofcode-mongoose-0c3528",
-      "relevanceScore": 60,
+      "title": "Next.js에서 tRPC를 수동으로 설정하는 것을 멈추고 — 대신 이 CLI를 사용하세요",
+      "link": "https://euno.news/posts/ko/stop-manually-setting-up-trpc-in-nextjs-use-this-c-06e8f9",
+      "guid": "https://euno.news/posts/ko/stop-manually-setting-up-trpc-in-nextjs-use-this-c-06e8f9",
+      "relevanceScore": 72,
       "relatedDocuments": [
-        "backend/snkv-sqlite-btree-kv-store.md"
+        "frontend/next-js-incremental-static-regeneration-isr.md",
+        "frontend/api-service-layer.md"
       ],
       "keyTopics": [
-        "Mongoose",
-        "MongoDB ODM",
-        "#100DaysOfCode"
+        "Next.js",
+        "tRPC",
+        "CLI 자동화"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Pulsebit API (Python)를 사용하여 이민 감정 변화를 감지하는 방법",
-      "link": "https://euno.news/posts/ko/how-to-detect-immigration-sentiment-shifts-with-th-11b67b",
-      "guid": "https://euno.news/posts/ko/how-to-detect-immigration-sentiment-shifts-with-th-11b67b",
-      "relevanceScore": 58,
+      "title": "React와 Groq API를 활용한 고성능 AI‑네이티브 노트북 인터페이스 구축",
+      "link": "https://euno.news/posts/ko/building-a-high-performance-ai-native-notebook-int-d14d9e",
+      "guid": "https://euno.news/posts/ko/building-a-high-performance-ai-native-notebook-int-d14d9e",
+      "relevanceScore": 71,
       "relatedDocuments": [
+        "frontend/react-query.md",
+        "ai/ai-code-review-agent-guide.md",
         "ai/fastapi-ai-api.md"
       ],
       "keyTopics": [
-        "Pulsebit API",
-        "감정 분석",
-        "Python SDK"
+        "React",
+        "Groq API",
+        "AI‑네이티브 UI"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "기존의 모든 API 모니터링 툴이 너무 비싸거나 상업적 사용을 제한해서 직접 만들었다",
+      "link": "https://euno.news/posts/ko/i-built-an-api-monitoring-tool-because-every-exist-8c3cf1",
+      "guid": "https://euno.news/posts/ko/i-built-an-api-monitoring-tool-because-every-exist-8c3cf1",
+      "relevanceScore": 71,
+      "relatedDocuments": [
+        "observability/opentelemetry.md",
+        "observability/ai.md",
+        "backend/wiki-api-route-guide.md"
+      ],
+      "keyTopics": [
+        "API 모니터링",
+        "자체 툴 개발",
+        "관측성"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "wati-cli를 사용해 10분 안에 WhatsApp AI 에이전트 구축하기",
+      "link": "https://euno.news/posts/ko/build-a-whatsapp-ai-agent-in-10-minutes-with-wati-3f1cae",
+      "guid": "https://euno.news/posts/ko/build-a-whatsapp-ai-agent-in-10-minutes-with-wati-3f1cae",
+      "relevanceScore": 71,
+      "relatedDocuments": [
+        "ai/agentbus-ai-rest-api.md",
+        "ai/fastapi-ai-api.md"
+      ],
+      "keyTopics": [
+        "WhatsApp",
+        "AI 에이전트",
+        "CLI 도구"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "무대 뒤에서: AI가 코딩 실력을 해치는 이유",
+      "link": "https://euno.news/posts/ko/behind-the-scenes-why-ai-hurts-coding-skills-049718",
+      "guid": "https://euno.news/posts/ko/behind-the-scenes-why-ai-hurts-coding-skills-049718",
+      "relevanceScore": 70,
+      "relatedDocuments": [
+        "ai/ai-productivity-paradox-why-developer-throughput-m.md"
+      ],
+      "keyTopics": [
+        "AI 코딩 보조",
+        "개발자 스킬 저하",
+        "생산성 역설"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "AWS 오퍼링 2025",
+      "link": "https://euno.news/posts/ko/aws-offerings-2025-a532ae",
+      "guid": "https://euno.news/posts/ko/aws-offerings-2025-a532ae",
+      "relevanceScore": 68,
+      "relatedDocuments": [
+        "cloud/aws-cost-optimization.md",
+        "cloud/aws-nat-gateway-cost-trap.md"
+      ],
+      "keyTopics": [
+        "AWS 서비스",
+        "2025 오퍼링",
+        "클라우드 서비스 카탈로그"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Rust에서 종속성이 전혀 없는 TOML 라이브러리를 출시했습니다.",
+      "link": "https://euno.news/posts/ko/released-a-toml-library-with-zero-dependencies-in-de4d2b",
+      "guid": "https://euno.news/posts/ko/released-a-toml-library-with-zero-dependencies-in-de4d2b",
+      "relevanceScore": 66,
+      "relatedDocuments": [
+        "projects/rust-gpu-face-crop-tool.md"
+      ],
+      "keyTopics": [
+        "Rust",
+        "TOML 파서",
+        "무종속성 라이브러리"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "내 WordPress PageSpeed 점수를 60에서 95로 향상시킨 방법",
+      "link": "https://euno.news/posts/ko/how-i-improved-my-wordpress-pagespeed-score-from-6-bd321f",
+      "guid": "https://euno.news/posts/ko/how-i-improved-my-wordpress-pagespeed-score-from-6-bd321f",
+      "relevanceScore": 62,
+      "relatedDocuments": [
+        "security/wordpress-vulnerability-triaging-playbook-2026.md",
+        "security/wordpress-vulnerability-triaging-playbook-2026.md"
+      ],
+      "keyTopics": [
+        "WordPress",
+        "PageSpeed 최적화",
+        "퍼포먼스 튜닝"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Linux에서 디스크 상태 추측 그만: SMART + NVMe 검사와 systemd 타이머 알림",
+      "link": "https://euno.news/posts/ko/stop-guessing-disk-health-on-linux-smart-nvme-chec-0d3f20",
+      "guid": "https://euno.news/posts/ko/stop-guessing-disk-health-on-linux-smart-nvme-chec-0d3f20",
+      "relevanceScore": 62,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "SMART",
+        "NVMe health checks",
+        "systemd timer alerts"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "Nextcloud vs ownCloud: 어떤 파일 서버를 사용해야 할까요?",
+      "link": "https://euno.news/posts/ko/nextcloud-vs-owncloud-which-file-server-to-use-793887",
+      "guid": "https://euno.news/posts/ko/nextcloud-vs-owncloud-which-file-server-to-use-793887",
+      "relevanceScore": 61,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "Nextcloud",
+        "ownCloud",
+        "파일 서버 비교"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "AI 오류가 이란 소녀 학교 폭격에 기여했을 가능성",
+      "link": "https://euno.news/posts/ko/ai-error-may-have-contributed-to-girls-school-bomb-518ed7",
+      "guid": "https://euno.news/posts/ko/ai-error-may-have-contributed-to-girls-school-bomb-518ed7",
+      "relevanceScore": 60,
+      "relatedDocuments": [
+        "security/ai.md",
+        "security/ai-slopsquatting.md"
+      ],
+      "keyTopics": [
+        "AI 무기화",
+        "보안 위험",
+        "군사 AI"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "나는 하루에 $0로 운영되는 AI 기반 뉴스 채널 3개를 만들었다",
+      "link": "https://euno.news/posts/ko/i-built-3-ai-powered-news-channels-that-run-for-0d-9df404",
+      "guid": "https://euno.news/posts/ko/i-built-3-ai-powered-news-channels-that-run-for-0d-9df404",
+      "relevanceScore": 60,
+      "relatedDocuments": [
+        "ai/ai-2024-2026.md",
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
+      ],
+      "keyTopics": [
+        "AI 뉴스 채널",
+        "Zero‑cost 운영",
+        "LLM 파이프라인"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "노트북을 버리며: 나의 N8N 클라우드 자동화 모험!",
+      "link": "https://euno.news/posts/ko/ditching-the-laptop-my-n8n-cloud-automation-advent-271b9a",
+      "guid": "https://euno.news/posts/ko/ditching-the-laptop-my-n8n-cloud-automation-advent-271b9a",
+      "relevanceScore": 58,
+      "relatedDocuments": [
+        "devops/dependabot.md",
+        "docker/docker-zfs.md"
+      ],
+      "keyTopics": [
+        "n8n",
+        "워크플로 자동화",
+        "클라우드 자동화"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "🪨 RIVERLITHOSCOPE: Gemini로 구축된 AI 지질 어드바이저",
+      "link": "https://euno.news/posts/ko/riverlithoscope-an-ai-geological-advisor-built-wi-3524d7",
+      "guid": "https://euno.news/posts/ko/riverlithoscope-an-ai-geological-advisor-built-wi-3524d7",
+      "relevanceScore": 58,
+      "relatedDocuments": [
+        "ai/gemini-3-1.md",
+        "ai/ai.md"
+      ],
+      "keyTopics": [
+        "Gemini",
+        "AI 지질 어드바이저",
+        "AI 앱 개발"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "MIRROR 구축: Perfect Corp API를 활용한 럭셔리 AI 패션 가상 피팅 앱",
+      "link": "https://euno.news/posts/ko/building-mirror-a-luxury-ai-fashion-try-on-app-wit-d12354",
+      "guid": "https://euno.news/posts/ko/building-mirror-a-luxury-ai-fashion-try-on-app-wit-d12354",
+      "relevanceScore": 58,
+      "relatedDocuments": [],
+      "keyTopics": [
+        "AI 패션",
+        "Perfect Corp API",
+        "가상 피팅"
       ],
       "sourceUrl": null
     }
   ],
-  "actions": [
-    {
-      "action": "update_existing",
-      "targetSlug": "ai-slopsquatting.md",
-      "suggestedTitle": "AI Slopsquatting 탐지 도구와 패턴 분석",
-      "priority": "high",
-      "issueNumber": 402
-    },
-    {
-      "action": "new_document",
-      "targetSlug": "ai/claude-marketplace.md",
-      "suggestedTitle": "Claude Marketplace – 개요와 기업 통합 가이드",
-      "priority": "medium",
-      "issueNumber": 403
-    },
-    {
-      "action": "new_document",
-      "targetSlug": "security/oneuptime-probe-cve-2026-27574.md",
-      "suggestedTitle": "CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 RCE",
-      "priority": "high",
-      "issueNumber": 404
-    },
-    {
-      "action": "new_document",
-      "targetSlug": "docker/docker-zfs-home-lab-storage.md",
-      "suggestedTitle": "Docker + ZFS 로 홈랩 스토리지 구축하기",
-      "priority": "medium",
-      "issueNumber": 405
-    },
-    {
-      "action": "update_existing",
-      "targetSlug": "ai/claude-code.md",
-      "suggestedTitle": "Claude Code – read‑once Hook 으로 중복 파일 읽기 방지",
-      "priority": "medium",
-      "issueNumber": 406
-    }
-  ]
+  "actions": []
 }
