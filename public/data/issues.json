@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 411,
-      "number": 411,
-      "title": "문서 요청 #411",
-      "body": "",
+      "id": 408,
+      "number": 408,
+      "title": " [요청] GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/ghsa-qr2g-p6q7-w82m-ghsa-qr2g-p6q7-w82m-critical-p-e0c755)\n**관련도**: 86/100\n**핵심 토픽**: GHSA 취약점, Coinbase SDK, Solana 결제 검증 우회\n\n## 뉴스 요약\n!CVE 보고서 https://media2.dev.to/dynamic/image/width=50,height=50,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2F...\n\n## 상세 내용\nSource: Dev.to\n취약점 개요\n취약점 ID: GHSA-QR2G-P6Q7-W82M\nCVSS 점수: 9.9 (Critical)\n공개일: 2026-03-07\nCoinbase x402 SDK의 Solana (SVM) 결제 검증에 심각한 취약점이 존재합니다. 이 결함은 자동 HTTP 402 결제를 검증하는 중개자 역할을 하는 facilitator 컴포넌트에 위치합니다. Solana 구현에서 Ed25519 암호 서명을 올바르게 검증하지 않아 공격자가 결제 요구 사항을 우회할 수 있게 되며, 블록체인에 거래를 정산하지 않고도 유료 API, 컴퓨팅 리소스 또는 디지털 상품에 무단으로 접근할 수 있습니다. 이 취약점은 @x402/svm npm 패키지, x402 PyPI 패키지 및 Go SDK에 영향을 미칩니다.\nTL;DR\nCoinbase x402 SDK의 Solana 결제 검증 로직에 치명적인 결함이 있습니다. 공격자는 결제 서명을 위조하여 프로토콜을 사용하는 API 및 서비스에 대한 수수료를 회피할 수 있습니다. 영향을 받는 버전은 다음과 같습니다:\nnpm: &#x3C; 2.6.0\nPython: &#x3C; 2.3.0\nGo: &#x3C; 2.5.0\n모든 facilitator는 즉시 업그레이드가 필요합니다.\nExploit Status\n⚠️ POC Available\n기술 세부 정보\nCWE ID: CWE‑347\n공격 벡터: 네트워크\n영향받는 프로토콜: Solana (SVM)\n패치 날짜: 2026-03-07\n영향을 받는 시스템\n@x402/svm을 사용하는 Node.js 애플리케이션\nx402를 사용하는 Python 애플리케이션\ngithub.com/coinbase/x402/go를 사용하는 Go 애플리케이션\n구성 요소영향을 받는 버전수정된 버전\n@x402/svm (npm)&#x3C; 2.6.02.6.0\nx402 (PyPI)&#x3C; 2.3.02.3.0\ngithub.com/coinbase/x402/go&#x3C; 2.5.02.5.0\n완화 전략\n모든 x402 SDK 구성 요소를 \n\n## 판단 근거\n중요도 9.9 점의 신규 CVE이며 기존 보안 문서에 해당 취약점이 전혀 다루어지지 않음\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -24,49 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-07T18:16:41.723Z",
-      "updated_at": "2026-03-07T18:16:41.727Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/411",
-      "documentSlug": "security/411",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/411.md",
-      "comments": 0
-    },
-    {
-      "id": 410,
-      "number": 410,
-      "title": "문서 요청 #410",
-      "body": "",
-      "state": "open",
-      "labels": [
-        {
-          "name": "request",
-          "color": "0e8a16"
-        },
-        {
-          "name": "draft",
-          "color": "fbca04"
-        },
-        {
-          "name": "ai-generated",
-          "color": "5319e7"
-        }
-      ],
-      "user": {
-        "login": "unknown",
-        "avatar_url": ""
-      },
-      "created_at": "2026-03-07T18:16:01.658Z",
-      "updated_at": "2026-03-07T18:16:01.661Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/410",
-      "documentSlug": "frontend/410",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/410.md",
+      "created_at": "2026-03-07T18:14:56.790Z",
+      "updated_at": "2026-03-07T18:14:56.795Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/408",
+      "documentSlug": "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
       "comments": 0
     },
     {
       "id": 409,
       "number": 409,
-      "title": "문서 요청 #409",
-      "body": "",
+      "title": " [요청] Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/mastering-kubernetes-service-discovery-navigating-b416af)\n**관련도**: 84/100\n**핵심 토픽**: Kubernetes 서비스 디스커버리, 마이크로서비스 메쉬, 동적 라우팅\n\n## 뉴스 요약\n마이크로서비스 서비스 디스커버리의 복잡성 마이크로서비스 기반 애플리케이션이 성장함에 따라, 모든 움직이는 부품들을 추적하는 것이 점점 더 어려워질 수 있습니다...\n\n## 상세 내용\nSource: Dev.to\n위에 제공된 소스 링크 외에 번역할 텍스트를 알려주시면, 해당 내용을 한국어로 번역해 드리겠습니다.\n마이크로서비스 서비스 디스커버리의 복잡성\n마이크로서비스 기반 애플리케이션이 성장함에 따라, 모든 구성 요소를 추적하는 일이 점점 더 복잡해질 수 있습니다. 각 서비스는 고유한 엔드포인트, 포트 및 네트워킹 요구 사항을 가질 수 있어 애플리케이션 토폴로지에 대한 중앙 집중식 뷰를 유지하기 어려워집니다. 이러한 복잡성은 다음과 같은 다양한 문제를 초래할 수 있습니다:\n서비스 상호 의존성 – 여러 서비스가 서로 의존하고 있기 때문에, 서비스가 신뢰할 수 있게 위치를 찾고 통신할 수 있도록 보장하는 것이 중요합니다. 이를 실패하면 연쇄적인 장애가 발생하고 전체 애플리케이션에 차질이 생길 수 있습니다.\n동적 스케일링 – 마이크로서비스 기반 애플리케이션은 수요에 따라 확장하거나 축소해야 하는 경우가 많습니다. 새로운 인스턴스가 생성되거나 기존 인스턴스가 종료될 때, 서비스 디스커버리 메커니즘은 라우팅 정보를 적절히 업데이트하고 조정해야 합니다.\n이기종 환경 – 서비스가 온프레미스, 클라우드 또는 하이브리드 환경에 걸쳐 배포될 수 있습니다. 이러한 다양한 환경 전반에 걸쳐 일관되고 신뢰할 수 있는 디스커버리를 보장하는 것은 큰 도전 과제입니다.\n서비스 버전 관리 – 애플리케이션이 진화함에 따라 동시에 여러 버전의 서비스를 배포해야 할 수도 있습니다. 적절한 디스커버리 메커니즘은 특정 요구 사항에 따라 트래픽을 올바른 버전으로 라우팅해야 합니다.\n쿠버네티스와 서비스 디스커버리\n쿠버네티스는 널리 채택된 컨테이너 오케스트레이션 플랫폼으로, 마이크로서비스 서비스 디스커버리의 과제를 해결하기 위한 강력한 솔루션을 제공합니다. 핵심적으로 쿠버네티스는 디스커버리와 통신을 단순화하는 일련의 내장 기능과 추상화를 제공합니다.\n쿠버네티스 서비스\n서비스 디스커버리를 위한 쿠버네티스의 기본 추상화는 Service 리소스입니다. Service는 동일한 기능을 수행하는 파\n\n## 판단 근거\n서비스 디스커버리·메시 라우팅은 현재 위키에 전용 문서가 없으며, 마이크로서비스 운영에 필수적인 주제임\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -86,18 +55,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-07T18:15:13.814Z",
-      "updated_at": "2026-03-07T18:15:13.818Z",
+      "created_at": "2026-03-07T18:13:19.723Z",
+      "updated_at": "2026-03-07T18:13:19.728Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/409",
-      "documentSlug": "kubernetes/409",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes/409.md",
+      "documentSlug": "kubernetes/kubernetes",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes/kubernetes.md",
       "comments": 0
     },
     {
-      "id": 408,
-      "number": 408,
-      "title": "문서 요청 #408",
-      "body": "",
+      "id": 410,
+      "number": 410,
+      "title": " [요청] 클라이언트‑사이드 WebP 변환기 구현 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-built-a-100-client-side-webp-converter-because-i-f9c153)\n**관련도**: 78/100\n**핵심 토픽**: 클라이언트‑사이드 이미지 변환, WebP, JavaScript\n\n## 뉴스 요약\n표지 이미지: 나는 데이터를 업로드하는 것이 지겨워서 100% 클라이언트 사이드 WebP 변환기를 만들었습니다. https://media2.dev.to/dynamic/image/width=1000,height=420,fit=c...\n\n## 상세 내용\nSource: Dev.to\n현대 이미지 변환기의 문제점\n우리는 모두 이런 경험을 해봤습니다: 블로그 포스트나 프로젝트를 위해 빠르게 WebP가 필요할 때. “PNG to WebP”를 구글에 검색하고, 첫 번째 링크를 클릭한 뒤… 기다립니다.\n업로드가 끝나길 기다립니다. 서버가 처리하길 기다립니다. 그리고 가장 중요한 것은, 데이터를 내어준다는 점입니다. 대부분의 무료 도구는 “블랙 박스”라서 이미지가 저장되거나 모델 학습에 사용되는지 전혀 알 수 없습니다.\nWebPit 소개\n이 문제를 해결하기 위해 WebPit을 만들었습니다. 최소주의적이며 고속인 유틸리티로, 한 가지 일을 합니다: 이미지를 브라우저를 떠나지 않은 채 WebP로 변환합니다.\n왜 클라이언트‑사이드인가?\n프라이버시: 이미지가 당신의 기기에 그대로 남습니다. 끝.\n속도: 업로드/다운로드 병목 현상이 없습니다. 로컬 CPU만큼 빠릅니다.\n효율성: 개발자가 거대한 서버 비용을 부담하지 않으므로, 여러분에게는 무료로 유지됩니다.\n기술 스택\n프론트엔드\nNext.js &#x26; Vercel\n코어\n클라이언트‑사이드 캔버스 렌더링을 통한 즉시 변환.\n윤리\n회원가입 없음, 추적 없음, 불필요한 요소 없음.\n여기서 확인해 보세요:\n\n## 판단 근거\n이미 존재하는 API‑서비스 레이어 문서와는 주제와 범위가 다르며, 프론트엔드 이미지 최적화 실무에 바로 활용 가능함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -117,11 +86,42 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-07T18:14:21.743Z",
-      "updated_at": "2026-03-07T18:14:21.746Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/408",
-      "documentSlug": "408",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/408.md",
+      "created_at": "2026-03-07T18:12:21.164Z",
+      "updated_at": "2026-03-07T18:12:21.168Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/410",
+      "documentSlug": "frontend/webp",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/webp.md",
+      "comments": 0
+    },
+    {
+      "id": 411,
+      "number": 411,
+      "title": " [요청] 2026년 초보자를 위한 VPS 보안 설정 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/how-to-set-up-a-secure-vps-in-2026-beginner-friend-adb503)\n**관련도**: 75/100\n**핵심 토픽**: VPS 보안, 초보자 가이드, 시스템 관리\n\n## 뉴스 요약\nVPS Virtual Private Server는 개발자, 시스템 관리자, DevOps 엔지니어에게 가장 가치 있는 기술 중 하나입니다. 이는 인프라에 대한 완전한 제어를 제공합니다…\n\n## 상세 내용\nSource: Dev.to\nVPS (Virtual Private Server)는 개발자, 시스템 관리자, DevOps 엔지니어에게 가장 가치 있는 기술 중 하나입니다. 인프라를 완전히 제어할 수 있게 해 주며 실제 프로덕션 시스템이 어떻게 동작하는지 이해하는 데 도움이 됩니다. 초보자에게는 SSH 접근, 방화벽 규칙, 패키지 관리, 서버 하드닝, 웹 서버 설치, 모니터링 및 로깅 등을 다루어야 하기 때문에 VPS 배포가 혼란스러울 수 있습니다.\n배울 내용\nLinux VPS를 배포하고 보안하는 필수 단계.\n1. 초기 서버 설정\n일반적인 첫 명령어:\nssh user@server-ip\nsudo apt update &#x26;&#x26; sudo apt upgrade\n2. SSH 보안\nSSH 키를 사용합니다.\n예시 워크플로우:\nssh-keygen\nssh-copy-id user@server-ip\n3. 방화벽 구성\nUFW 사용 예시:\nsudo ufw allow OpenSSH\nsudo ufw enable\nsudo ufw status\n4. 웹 서버 설치\nNginx 또는 Apache를 설치하고 웹 호스팅을 위한 서버를 준비합니다.\nNginx 예시:\nsudo apt install nginx\nsudo systemctl enable nginx\nsudo systemctl start nginx\n5. 필수 서버 도구\n유용한 명령어 몇 가지:\nhtop\ndf -h\njournalctl\nsystemctl status\n6. DevOps 워크플로우 준비\nDocker 컨테이너\nCI/CD 실험\n인프라 테스트\n클라우드 개념 학습\n개인 DevOps 실험실\n이 가이드는 누구를 위한 것인가?\nLinux 서버를 배우는 개발자\nDevOps 초보자\n클라우드 경력을 준비하는 학생\n첫 서버를 배포하는 모든 사람\n마무리 생각\n자신만의 VPS를 배포하고 보안하는 과정을 배우면 다음을 익히게 됩니다:\nLinux 관리\n네트워킹 기본\n서버 보안\n실제 문제 해결\n전체 가이드는 다음을 방문하세요:\n\n## 판단 근거\nVPS 보안은 별도 주제로 다루어야 하며, 기존 보안 문서(400, 386)는 AI·암호화 중심이라 겹치지 않음\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-07T18:11:17.351Z",
+      "updated_at": "2026-03-07T18:11:17.356Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/411",
+      "documentSlug": "security/2026-vps",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/2026-vps.md",
       "comments": 0
     },
     {
@@ -3389,5 +3389,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-07T18:16:41.727Z"
+  "lastUpdated": "2026-03-07T18:14:56.795Z"
 }

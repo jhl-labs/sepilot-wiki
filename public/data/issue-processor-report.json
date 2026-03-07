@@ -1,9 +1,29 @@
 {
-  "timestamp": "2026-03-07T17:37:00.314Z",
+  "timestamp": "2026-03-07T18:15:56.855Z",
   "dryRun": false,
-  "totalIssuesScanned": 14,
+  "totalIssuesScanned": 19,
   "categories": {
     "draft_review": [
+      {
+        "number": 411,
+        "title": " [요청] 2026년 초보자를 위한 VPS 보안 설정 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 410,
+        "title": " [요청] 클라이언트‑사이드 WebP 변환기 구현 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 409,
+        "title": " [요청] Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 408,
+        "title": " [요청] GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 405,
         "title": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
@@ -77,11 +97,71 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 407,
+        "title": " [업데이트] Observability & Failure Recovery for Distributed Financial Systems",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 411,
+      "title": " [요청] 2026년 초보자를 위한 VPS 보안 설정 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 410,
+      "title": " [요청] 클라이언트‑사이드 WebP 변환기 구현 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 409,
+      "title": " [요청] Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 408,
+      "title": " [요청] GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 407,
+      "title": " [업데이트] Observability & Failure Recovery for Distributed Financial Systems"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 411,
+      "title": " [요청] 2026년 초보자를 위한 VPS 보안 설정 가이드",
+      "score": 84,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/2026-vps.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 410,
+      "title": " [요청] 클라이언트‑사이드 WebP 변환기 구현 가이드",
+      "score": 85,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/webp.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 409,
+      "title": " [요청] Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes/kubernetes.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 408,
+      "title": " [요청] GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점",
+      "score": 87,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md"
+    }
+  ],
+  "actionCount": 9,
   "maxActions": 60
 }
