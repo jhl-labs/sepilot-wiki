@@ -3,6 +3,7 @@ title: 멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 
 author: SEPilot AI
 status: draft
 tags: [AI 코딩, 멀티 에이전트, 오케스트레이션, 워크플로, Jupiter]
+updatedAt: 2026-03-07
 ---
 
 ## 1. 서론
@@ -138,12 +139,147 @@ A. Lock Manager가 파일에 대한 **쓰기 잠금**을 획득한 워커만 편
 A. Recovery Engine이 오류를 감지하면 해당 작업을 **롤백**하고, 설정된 재시도 정책(예: 지수 백오프)으로 다시 실행합니다. 필요 시 다른 모델로 라우팅할 수 있습니다.
 
 **Q3. 기존 CI/CD 파이프라인과 통합하려면?**  
-A. Jupiter는 **REST/gRPC API**를 제공하므로, CI 단계에서 `jupiter submit` 호출로 작업을 등록하고, 결과를 `jupiter status` 로 확인하면 됩니다. 또한, 성공/실패 웹훅을 CI 트리거에 연결할 수 있습니다.
+A. Jupiter는 **REST/gRPC API**를 제공하므로, CI 단계에서 `jupiter submit` 호출로 작업을 등록하고, 결과를 `jupiter status` 로 확인하면 됩니다. 성공/실패 웹훅을 CI 트리거에 연결할 수도 있습니다.
 
-## 17. 참고 문헌·링크
-- **euno.news** – “왜 여러 AI 코딩 에이전트를 실행하면 혼돈이 발생하는가 (그리고 우리가 이를 해결하는 방법)”【euno.news】  
+## 17. Verification Loop Prompt – 개념 및 적용 가이드
+### 17.1 개념 정의
+**Verification Loop Prompt**는 AI 어시스턴트에게 **출력물을 최종 전달하기 전에 자체 검증**하도록 요구하는 두 단계 프롬프트 패턴입니다.  
+- 첫 단계: 작업 결과(코드, 문서 등)를 생성.  
+- 두 번째 단계: 생성된 결과에 대해 **가정, 제약 조건 검증, 경계 사례, 최소 테스트 계획** 등을 명시하도록 요구【euno.news】.  
+이 방식은 완벽함을 목표로 하지 않으며, **실패 모드의 상위 80 %**를 빠르고 저렴하게 포착하는 것을 목표로 합니다.
+
+### 17.2 프롬프트 설계 가이드
+아래 템플릿을 기본값으로 사용하고, 작업 특성에 맞게 조정합니다.
+
+```
+You are helping me with: <작업 설명>
+Constraints:
+- <제약 1>
+- <제약 2>
+- <제약 3>
+Deliverable:
+- <산출물 정의>
+
+Verification loop (do this *after* you draft the deliverable):
+1. List assumptions you made (bullet list).
+2. Check the deliverable against each constraint (pass/fail + fix if fail).
+3. Provide 5 edge cases / failure modes relevant to this task.
+4. Propose a minimal test plan (steps I can actually run).
+5. If anything is uncertain, flag it explicitly and ask up to 3 clarifying questions.
+Only then output the final deliverable.
+```
+
+**핵심 포인트**
+- **Assumptions**: 현재 코드·데이터에 대한 추정 명시.  
+- **Constraint check**: 각 제약을 통과했는지 명확히 표시하고, 실패 시 즉시 수정.  
+- **Edge cases**: 경계 입력·예외 상황을 5가지 제시.  
+- **Test plan**: 실제 실행 가능한 최소 테스트 명령어와 기대 결과 제공.  
+- **Uncertainty flag**: 불확실한 부분을 질문 형태로 제한(최대 3개)하여 반복적인 프롬프트를 방지.
+
+### 17.3 CI/CD 파이프라인에 통합 예시
+1. **CI 단계**: `verification-loop.sh` 스크립트를 호출해 AI에게 위 템플릿을 전달하고, 검증 결과를 JSON 파일로 저장.  
+2. **검증 파싱**: `jq` 등으로 `pass/fail` 결과를 파싱하고, 실패 시 파이프라인을 `exit 1` 로 중단.  
+3. **자동 재시도**: 실패 시 다른 모델(예: Claude → Copilot)로 재시도하도록 환경 변수를 전환.  
+
+```yaml
+# .github/workflows/ci.yml
+name: CI with Verification Loop
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run AI code generation with verification loop
+        env:
+          MODEL: "claude"
+        run: |
+          ./verification-loop.sh > result.json
+          cat result.json
+
+      - name: Fail if verification did not pass
+        run: |
+          if jq -e '.verification_pass == false' result.json; then
+            echo "Verification failed – aborting CI"
+            exit 1
+          fi
+```
+
+`verification-loop.sh`는 AI API 호출(예: OpenAI, Anthropic)과 위 템플릿을 결합해 **생성 → 검증 → 최종 출력** 순서를 자동화합니다. CI 로그에 검증 단계가 명시되므로, 코드 리뷰어는 결과물의 품질을 즉시 확인할 수 있습니다.
+
+## 18. Reverse‑CAPTCHA: AI 에이전트 검증 메커니즘
+### 18.1 개념
+전통적인 CAPTCHA는 **인간**임을 증명하기 위한 테스트이며, AI 에이전트를 차단하는 데 사용됩니다. **Reverse‑CAPTCHA**는 그 반대로, **클라이언트가 실제 AI 에이전트인지**를 검증하는 메커니즘입니다.  
+euno.news에 소개된 `imrobot` 프로젝트는 문자열 변환 파이프라인(예: reverse → base64 → rot13)을 자동 생성하고, AI 모델이 이를 순차적으로 실행해 정답을 반환하도록 설계되었습니다【euno.news】. 인간은 동일 변환을 수동으로 수행해야 하므로 실용적으로 해결하기 어렵습니다.
+
+### 18.2 구현 예시
+#### 1) 챌린지 파이프라인 생성
+```js
+import { generateChallenge } from 'imrobot';
+
+// 난이도에 따라 연산 단계 수가 결정됩니다.
+const challenge = generateChallenge({ difficulty: 'medium' });
+```
+*예시 파이프라인*  
+```
+seed: "a7f3b2c1d4e5f609"
+1. reverse()
+2. base64_encode()
+3. rot13()
+```
+
+#### 2) AI 에이전트가 해결
+```js
+import { solveChallenge } from 'imrobot';
+
+const answer = solveChallenge(challenge);   // ≈ 0.3 s
+```
+
+#### 3) 검증 (무상태, 결정론적)
+```js
+import { verifyAnswer } from 'imrobot';
+
+const isVerified = verifyAnswer(challenge, answer);
+console.log(isVerified); // true
+```
+
+#### 4) REST API 흐름
+```bash
+# 서버 시작
+npx imrobot-server
+
+# 챌린지 생성
+curl http://localhost:3000/api/challenge
+
+# 답변 검증
+curl -X POST http://localhost:3000/api/verify \
+  -H "Content-Type: application/json" \
+  -d '{"challengeId":"<id>", "answer":"<answer>"}'
+```
+엔드포인트는 `challenge`, `solve`, `verify`, `health`, `info` 총 5개이며, Node.js 기본 `http` 모듈만 사용합니다(Express/Fastify 미사용)【euno.news】.
+
+### 18.3 보안 고려사항
+| 고려 항목 | 설명 |
+|---|---|
+| **무상태·결정론성** | 챌린지는 매번 동일 파이프라인을 재생산해 검증하므로 재생 가능 공격이 어렵습니다. |
+| **난이도 조절** | 연산 단계 수를 늘리면 AI에게는 여전히 빠르지만 인간에게는 비현실적인 작업량이 됩니다. |
+| **레이트 리밋·API 키** | 서비스 운영 시 IP 기반 레이트 리밋과 API 키 인증을 추가해 무차별 시도를 방지합니다. |
+| **챌린지 재사용 방지** | `challengeId`와 타임스탬프를 포함해 일정 시간 이후 만료되도록 설계합니다. |
+| **오픈소스 공급망** | `imrobot`은 외부 의존성이 없으며 15 KB 이하의 경량 패키지이므로 공급망 위험이 최소화됩니다【euno.news】. |
+
+### 18.4 한계
+- **모델 의존성**: 현재 구현은 문자열 변환에 특화돼 있어, 복잡한 논리·코드 실행을 검증하기엔 제한적입니다.  
+- **인프라 요구**: 자체 호스팅이 필요하므로 운영 비용과 유지보수가 발생합니다.  
+- **우회 가능성**: 공격자가 동일 파이프라인을 사전 학습하거나 자체 솔루션을 구현하면 우회가 가능하므로, 다른 인증 레이어와 결합하는 것이 권장됩니다.
+
+## 19. 참고 문헌·링크
+- **euno.news** – “Verification Loop Prompt: 당신의 어시스턴트가 당신보다 먼저 자신의 작업을 테스트하도록 하세요”【euno.news】  
+- **euno.news** – “왜 나는 인간이 아닌 AI 에이전트를 검증하는 Reverse‑CAPTCHA를 만들었는가”【euno.news】  
 - **AWS** – Agentic AI Patterns 가이드 (워크플로 패턴)【AWS Docs】  
-- **AutoGen**, **CrewAI**, **LangGraph** 공식 문서 (대화형 프레임워크)  
+- **AutoGen**, **CrewAI**, **LangGraph** 공식 문서  
 - **Rust async & Tokio** 베스트 프랙티스 (비동기 런타임)  
 
 ---  

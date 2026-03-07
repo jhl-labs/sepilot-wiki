@@ -1,6 +1,151 @@
 {
   "entries": [
     {
+      "id": "1ceda3f4-21dc-4d92-8ba7-811a8d639ba5",
+      "timestamp": "2026-03-07T00:26:29.281Z",
+      "actionType": "modify",
+      "issueNumber": 401,
+      "issueTitle": " [업데이트] Verification Loop Prompt: AI 어시스턴트 자동 검증",
+      "documentSlug": "ai/ai",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Verification Loop Prompt: AI 어시스턴트 자동 검증\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 70,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "660e855b-17bf-4f54-b085-513bee6c0a2b",
+      "timestamp": "2026-03-07T00:25:42.414Z",
+      "actionType": "generate",
+      "issueNumber": 400,
+      "issueTitle": "문서 요청 #400",
+      "documentSlug": "security/400",
+      "documentTitle": "AI‑생성 코드와 시크릿 관리 위험 – 실무 가이드",
+      "summary": "새 문서 \"AI‑생성 코드와 시크릿 관리 위험 – 실무 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3258
+            },
+            {
+              "step": "outline",
+              "durationMs": 6477
+            },
+            {
+              "step": "write",
+              "durationMs": 17313
+            },
+            {
+              "step": "review",
+              "durationMs": 5878
+            }
+          ],
+          "totalDurationMs": 32926,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1484,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ed642990-5b35-4556-8911-600c4e26a624",
+      "timestamp": "2026-03-07T00:25:06.044Z",
+      "actionType": "modify",
+      "issueNumber": 399,
+      "issueTitle": " [업데이트] Claude‑replay: Claude Code 세션 재생 및 공유",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude‑replay: Claude Code 세션 재생 및 공유\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 57,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "b081fa5c-d0a0-422d-a167-38c20f84f918",
+      "timestamp": "2026-03-07T00:24:27.624Z",
+      "actionType": "generate",
+      "issueNumber": 398,
+      "issueTitle": "문서 요청 #398",
+      "documentSlug": "ai/398",
+      "documentTitle": "TensorFlow 2.21 릴리스 가이드",
+      "summary": "새 문서 \"TensorFlow 2.21 릴리스 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3421
+            },
+            {
+              "step": "outline",
+              "durationMs": 7096
+            },
+            {
+              "step": "write",
+              "durationMs": 25394
+            },
+            {
+              "step": "review",
+              "durationMs": 6940
+            },
+            {
+              "step": "refine",
+              "durationMs": 26025
+            }
+          ],
+          "totalDurationMs": 68876,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3273,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "4b6b2648-7a44-43b9-bc41-3ab622d36f72",
+      "timestamp": "2026-03-07T00:23:14.800Z",
+      "actionType": "modify",
+      "issueNumber": 397,
+      "issueTitle": " [업데이트] Reverse‑CAPTCHA: AI 에이전트 검증 메커니즘",
+      "documentSlug": "ai/ai",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Reverse‑CAPTCHA: AI 에이전트 검증 메커니즘\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 66,
+        "deletions": 0
+      }
+    },
+    {
       "id": "4e38ebba-dd79-460d-a162-039bb76f8ebc",
       "timestamp": "2026-03-07T00:22:37.558Z",
       "actionType": "maintain",
@@ -9545,5 +9690,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-07T00:22:37.558Z"
+  "lastUpdated": "2026-03-07T00:26:29.281Z"
 }

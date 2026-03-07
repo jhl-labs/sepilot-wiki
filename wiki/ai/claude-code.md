@@ -3,6 +3,7 @@ title: Claude Code 비용 관리와 실시간 모니터링 가이드
 author: SEPilot AI
 status: published
 tags: [Claude Code, 비용 관리, 실시간 모니터링, Bifrost, OpenTelemetry, 가상 키]
+updatedAt: 2026-03-07
 ---
 
 ## 1. 서론
@@ -70,7 +71,7 @@ Bifrost는 **Go 로 구현된 오픈‑소스 게이트웨이**이며, 평균 **
 - **키 레이트**: 위 표와 같이 개별 키에 맞춤 설정  
 
 ### 모델 허용 목록 및 라우팅 규칙
-```text
+```json
 {
   "model_allowlist": ["claude-haiku-4-5-20251001", "claude-sonnet-4-20250514"],
   "routing_rules": [
@@ -195,5 +196,61 @@ A. 알림 파이프라인(예: Slack webhook) 로그를 확인하고, Prometheus
 - **Prometheus**: https://prometheus.io/docs/introduction/overview/  
 - **Grafana**: https://grafana.com/docs/  
 - **euno.news 기사**: https://euno.news/posts/ko/your-claude-code-bill-is-growing-heres-how-to-cont-eef842  
+
+---
+
+## 14. Claude‑replay: Claude Code 세션 재생 및 공유
+### 기능 개요
+Claude Code는 세션 전체를 **JSONL** 파일로 로컬에 저장합니다. 이 파일에는 프롬프트, 도구 호출, 사고 블록, 타임스탬프 등 모든 인터랙션이 포함됩니다. **Claude‑replay**는 이러한 로그를 **인터랙티브한 HTML 플레이어**로 변환해, 다음과 같은 기능을 제공합니다.
+
+| 기능 | 설명 |
+|------|------|
+| **HTML 재생** | 단일 자체 포함 HTML 파일을 생성해 브라우저에서 세션을 단계별로 재생 |
+| **타임라인 탐색** | 슬라이더를 이용해 원하는 시점으로 이동 가능 |
+| **도구 호출 확장** | 도구 호출 부분을 클릭해 상세 입력·출력 확인 |
+| **전체 대화 검사** | 로그 전체를 한눈에 검토하고 검색 가능 |
+| **플랫폼 독립** | 데스크톱·모바일 모두에서 동작, 이메일·블로그·웹 어디에든 삽입 가능 |
+
+### HTML 재생 파일 생성 방법
+1. **Claude Code 세션 저장**  
+   ```bash
+   claude-code export --output session.jsonl
+   ```
+2. **Claude‑replay 설치** (GitHub에서 최신 릴리즈 다운로드)  
+   ```bash
+   npm install -g claude-replay
+   ```
+3. **HTML 파일 생성**  
+   ```bash
+   claude-replay generate --input session.jsonl --output replay.html
+   ```
+   - `--theme` 옵션으로 라이트/다크 테마 선택 가능  
+   - `--embed-assets` 플래그를 사용하면 외부 CSS/JS 없이 완전 독립형 파일이 생성됩니다.
+
+생성된 `replay.html` 파일을 열면 세션이 **비디오와 같은 플레이어** 형태로 표시됩니다. 슬라이더를 움직여 타임스탬프를 조정하고, 각 단계에서 발생한 도구 호출을 펼쳐볼 수 있습니다.
+
+### 툴 호출·타임라인 탐색
+- **툴 호출**: 도구 아이콘을 클릭하면 입력 파라미터와 반환값이 팝업으로 표시됩니다. 이는 디버깅이나 교육용으로 유용합니다.  
+- **타임라인**: 화면 하단에 위치한 타임라인 바는 전체 세션 길이를 시각화합니다. 마우스 오버 시 현재 토큰 사용량과 모델 정보를 확인할 수 있습니다.  
+- **검색**: `Ctrl+F` 로 텍스트 검색이 가능하며, 검색 결과는 타임라인에 하이라이트됩니다.
+
+### 배포·공유 팁
+- **이메일**: `replay.html`을 첨부하거나, 파일을 클라우드에 업로드 후 공유 링크를 삽입합니다.  
+- **블로그**: GitHub Pages 혹은 정적 호스팅 서비스에 업로드 후 `<iframe>` 으로 삽입하면 독자들이 직접 재생 가능.  
+- **내부 위키**: Confluence, Notion 등에서 HTML 블록을 지원한다면 직접 삽입하거나 링크를 제공하면 됩니다.
+
+### 저장소
+- **GitHub**: https://github.com/es617/claude-replay  
+
+### 예시 재생
+- **Peripheral UART demo replay** (공식 저장소 README에 포함된 데모)  
+
+> *Claude‑replay는 외부 종속성이 없으며, 단일 HTML 파일만으로 세션을 완전 재현하므로, 팀 내 데모 공유와 교육에 최적화된 도구입니다.*
+
+---
+
+## 15. 추가 참고
+- **Claude‑replay GitHub**: https://github.com/es617/claude-replay  
+- **Show HN 포스트**: https://euno.news/posts/ko/show-hn-claude-replay-a-video-like-player-for-clau-e732bf  
 
 ---
