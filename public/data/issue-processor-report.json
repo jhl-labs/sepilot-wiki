@@ -1,9 +1,19 @@
 {
-  "timestamp": "2026-03-07T00:31:38.582Z",
+  "timestamp": "2026-03-07T00:30:33.480Z",
   "dryRun": false,
-  "totalIssuesScanned": 12,
+  "totalIssuesScanned": 16,
   "categories": {
     "draft_review": [
+      {
+        "number": 400,
+        "title": " [요청] AI‑생성 코드와 시크릿 관리 위험",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 398,
+        "title": " [요청] TensorFlow 2.21 새로운 기능 및 LiteRT 통합 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 327,
         "title": "[Wiki Maintenance] [문서] React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
@@ -67,11 +77,62 @@
         "daysSinceUpdate": 1
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 399,
+        "title": " [업데이트] Claude‑replay: Claude Code 세션 재생 및 공유",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 397,
+        "title": " [업데이트] Reverse‑CAPTCHA: AI 에이전트 검증 메커니즘",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 400,
+      "title": " [요청] AI‑생성 코드와 시크릿 관리 위험"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 398,
+      "title": " [요청] TensorFlow 2.21 새로운 기능 및 LiteRT 통합 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 401,
+      "title": " [업데이트] Verification Loop Prompt: AI 어시스턴트 자동 검증"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 399,
+      "title": " [업데이트] Claude‑replay: Claude Code 세션 재생 및 공유"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 397,
+      "title": " [업데이트] Reverse‑CAPTCHA: AI 에이전트 검증 메커니즘"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 400,
+      "title": " [요청] AI‑생성 코드와 시크릿 관리 위험",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 398,
+      "title": " [요청] TensorFlow 2.21 새로운 기능 및 LiteRT 통합 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/tensorflow-2-21-litert.md"
+    }
+  ],
+  "actionCount": 7,
   "maxActions": 60
 }

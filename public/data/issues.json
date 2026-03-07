@@ -3,8 +3,8 @@
     {
       "id": 400,
       "number": 400,
-      "title": "문서 요청 #400",
-      "body": "",
+      "title": " [요청] AI‑생성 코드와 시크릿 관리 위험",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/why-ai-generated-code-is-raising-the-stakes-for-se-389cc3)\n**관련도**: 78/100\n**핵심 토픽**: AI‑generated 코드, 시크릿 관리 위험, 보안 베스트 프랙티스\n\n## 뉴스 요약\n$5천만 달러의 펀딩 라운드 이후, GitGuardian CEO Eric Fourrier는 AI‑generated 시대에 비밀 보안이 훨씬 더 큰 문제로 부상하고 있는 이유를 논의한다.\n\n## 상세 내용\nSource: DevOps.com\n왜 AI‑생성 코드가 비밀 관리의 위험을 높이는가\n$50 million 규모의 투자 라운드 이후, GitGuardian CEO인 Eric Fourrier는 AI‑생성 코드와 자율 에이전트 시대에 비밀 보안이 훨씬 더 큰 문제로 부상하고 있는 이유를 논의합니다. 더 많은 조직이 코딩 어시스턴트와 AI 에이전트를 급히 도입함에 따라, Fourrier는 노출된 자격 증명, API 키 및 토큰의 수가 급격히 증가하고 있다고 주장합니다.\n\n## 판단 근거\nAI‑생성 코드가 시크릿 노출을 증가시킨다는 주제는 기존 보안 문서(슬롭스쿼팅)와는 차별화된 내용이며, 독립적인 보안 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-07T00:25:42.416Z",
-      "updated_at": "2026-03-07T00:25:42.420Z",
+      "updated_at": "2026-03-07T00:28:25.618Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/400",
-      "documentSlug": "security/400",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/400.md",
+      "documentSlug": "security/ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/ai.md",
       "comments": 0
     },
     {
       "id": 398,
       "number": 398,
-      "title": "문서 요청 #398",
-      "body": "",
+      "title": " [요청] TensorFlow 2.21 새로운 기능 및 LiteRT 통합 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/whats-new-in-tensorflow-221-f351ee)\n**관련도**: 85/100\n**핵심 토픽**: TensorFlow 2.21, 머신러닝 프레임워크, 새 기능\n\n## 뉴스 요약\nTensorFlow 2.21이 출시되었습니다! 전체 릴리스 노트에서 모든 변경 사항의 전체 목록을 GitHub에서 확인할 수 있습니다: https://github.com/tensorflow/tensorflow/blob/...\n\n## 상세 내용\nSource: Google Developers Blog\nTensorFlow 2.21이 출시되었습니다! 모든 변경 사항은 GitHub의 전체 릴리스 노트에서 확인할 수 있습니다.\nLiteRT 스택의 새로운 기능은?\nGoogle I/O ‘25에서 우리는 LiteRT의 진화(the evolution)에 대한 미리보기를 공유했습니다. LiteRT는 고성능 하드웨어 가속을 위해 특별히 설계된 런타임입니다. 오늘 우리는 이러한 고급 가속 기능이 완전히 LiteRT 프로덕션 스택에 포함되었으며, 이제 모든 개발자가 사용할 수 있게 되었음을 발표하게 되어 기쁩니다.\n이 이정표는 LiteRT를 AI 시대를 위한 범용 온‑디바이스 추론 프레임워크로 확고히 자리매김하게 하며, TFLite에 비해 다음과 같은 큰 도약을 의미합니다:\n더 빠름 – TFLite보다 GPU 성능이 1.4배 빠르며 최신 NPU 가속을 도입했습니다.\n더 간단함 – 엣지 플랫폼 전반에 걸친 GPU 및 NPU 가속을 위한 통합되고 간소화된 워크플로를 제공합니다.\n더 강력함 – Gemma와 같은 인기 오픈 모델에 대한 뛰어난 크로스‑플랫폼 GenAI 배포를 지원합니다.\n더 유연함 – 원활한 모델 변환을 통해 일류 PyTorch/JAX 지원을 제공합니다.\n이 모든 기능은 TFLite 이후로 신뢰받아 온 안정적이고 크로스‑플랫폼 배포를 유지하면서 제공됩니다.\n전체 발표를 읽고 시작해 보세요: full announcement.\ntf.lite\n여러 연산자가 이제 int8 및 int16x8(예: SQRT 연산자)과 비교 연산자를 위한 int16x8 등 낮은 정밀도 데이터 타입을 지원하여 성능과 효율성을 향상시킵니다.\n더 작은 데이터 타입에 대한 지원이 여러 연산자로 확대되었습니다:\ntfl.cast가 INT2와 INT4 변환을 지원하도록 업데이트되었습니다;\ntfl.slice에 INT4 지원이 추가되었습니다;\ntfl.fully_connected가 이제 INT2를 지원합니다.\n커뮤니티 업데이트\n커뮤니티로부터 더 빠른 버그 수정\n\n## 판단 근거\nTensorFlow 2.21 릴리스는 현재 위키에 다루는 항목이 없으며, 머신러닝 프레임워크 최신 기능을 별도 문서로 정리하는 것이 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,10 +56,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-07T00:24:27.626Z",
-      "updated_at": "2026-03-07T00:24:27.630Z",
+      "updated_at": "2026-03-07T00:30:00.911Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/398",
-      "documentSlug": "ai/398",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/398.md",
+      "documentSlug": "ai/tensorflow-2-21-litert",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/tensorflow-2-21-litert.md",
       "comments": 0
     },
     {
@@ -3172,5 +3172,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-07T00:25:42.420Z"
+  "lastUpdated": "2026-03-07T00:30:00.911Z"
 }
