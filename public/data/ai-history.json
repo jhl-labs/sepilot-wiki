@@ -1,6 +1,155 @@
 {
   "entries": [
     {
+      "id": "4d3a9dca-c962-49b7-8b02-31aeef58a030",
+      "timestamp": "2026-03-07T06:18:08.640Z",
+      "actionType": "quality_score",
+      "issueNumber": 404,
+      "issueTitle": " [요청] CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 RCE",
+      "documentSlug": "security/cve-2026-27574-oneuptime-probe-vm-rce",
+      "documentTitle": " [요청] CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 RCE",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "18b55a6b-7689-45d7-b9c7-b718c63ea5c4",
+      "timestamp": "2026-03-07T06:17:36.122Z",
+      "actionType": "generate",
+      "issueNumber": 403,
+      "issueTitle": " [요청] Claude Marketplace – 개요와 기업 통합 가이드",
+      "documentSlug": "ai/claude-marketplace",
+      "documentTitle": "Claude Marketplace – 개요와 기업 통합 가이드",
+      "summary": "새 문서 \"Claude Marketplace – 개요와 기업 통합 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3093
+            },
+            {
+              "step": "outline",
+              "durationMs": 5963
+            },
+            {
+              "step": "write",
+              "durationMs": 23094
+            },
+            {
+              "step": "review",
+              "durationMs": 4849
+            }
+          ],
+          "totalDurationMs": 36999,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1695,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "e3502e80-e348-4a1c-8eda-5fdf61df5149",
+      "timestamp": "2026-03-07T06:16:35.099Z",
+      "actionType": "generate",
+      "issueNumber": 404,
+      "issueTitle": " [요청] CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 RCE",
+      "documentSlug": "security/cve-2026-27574-oneuptime-probe-vm-rce",
+      "documentTitle": "CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 RCE",
+      "summary": "새 문서 \"CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 RCE\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3143
+            },
+            {
+              "step": "outline",
+              "durationMs": 5658
+            },
+            {
+              "step": "write",
+              "durationMs": 21669
+            },
+            {
+              "step": "review",
+              "durationMs": 6341
+            }
+          ],
+          "totalDurationMs": 36812,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1683,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "8c2c46d4-181e-4684-b8a0-6b6e52e20d8b",
+      "timestamp": "2026-03-07T06:15:46.993Z",
+      "actionType": "generate",
+      "issueNumber": 405,
+      "issueTitle": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
+      "documentSlug": "docker/docker-zfs",
+      "documentTitle": "Docker + ZFS 로 홈랩 스토리지 구축하기",
+      "summary": "새 문서 \"Docker + ZFS 로 홈랩 스토리지 구축하기\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4194
+            },
+            {
+              "step": "outline",
+              "durationMs": 8984
+            },
+            {
+              "step": "write",
+              "durationMs": 26053
+            },
+            {
+              "step": "review",
+              "durationMs": 9334
+            }
+          ],
+          "totalDurationMs": 48565,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2219,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "898a19ef-67dd-4412-b4af-04cc264bb237",
       "timestamp": "2026-03-07T06:12:14.686Z",
       "actionType": "maintain",
@@ -9826,5 +9975,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-07T06:12:14.686Z"
+  "lastUpdated": "2026-03-07T06:18:08.640Z"
 }

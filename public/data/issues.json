@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 403,
+      "number": 403,
+      "title": " [요청] Claude Marketplace – 개요와 기업 통합 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/anthropic-launches-claude-marketplace-giving-enter-7b7dcf)\n**관련도**: 82/100\n**핵심 토픽**: Claude Marketplace, Anthropic, Replit·GitLab·Harvey 통합\n\n## 뉴스 요약\nAnthropic의 Claude Marketplace: 무엇이며 왜 중요한가 샌프란시스코 스타트업 Anthropic은 새로운 AI 제품과 서비스를 놀라운 속도로 지속적으로 출시하고 있다.\n\n## 상세 내용\nSource: VentureBeat\nAnthropic’s Claude Marketplace: What It Is and Why It Matters\n샌프란시스코 스타트업 Anthropic은 미 국방부와의 복잡한 분쟁에도 불구하고 새로운 AI 제품과 서비스를 빠른 속도로 지속적으로 출시하고 있습니다.\n오늘 회사는 Claude Marketplace를 발표했으며, 이는 기존에 Anthropic에 대한 지출 약속이 있는 기업이 그 약속의 일부를 Anthropic의 Claude 모델을 기반으로 하지만 외부 파트너가 구축하고 제공하는 도구 및 애플리케이션에 사용할 수 있게 합니다.\n주요 파트너 (미리 보기)\nGitLab\nHarvey\nLovable\nReplit\nRogo\nSnowflake\n마켓플레이스 작동 방식\nAnthropic의 Claude Marketplace FAQ에 따르면:\n목적: 조달을 간소화하고 AI 지출을 통합합니다.\n상태: 제한된 미리 보기. 관심 있는 기업은 Anthropic 계정 팀에 연락하십시오.\n지출 회계: 마켓플레이스를 통해 이루어진 구매는 기존 Anthropic 약정의 일부에 차감됩니다.\n청구: Anthropic이 파트너 지출에 대한 청구를 관리하므로 기업은 별도의 파트너 청구서를 처리하지 않고 기존 약정을 사용할 수 있습니다.\n실제로 Anthropic은 Claude Marketplace를 기업이 특정 Claude 기반 파트너 도구를 보다 중앙집중식으로 조달할 수 있는 방법으로 자리매김하고 있습니다.\n전략적 긴장\nAnthropic의 Claude Code와 Claude Cowork 애플리케이션이 처음 약속한 바는 사용자가 기존 서드파티 SaaS 앱에서 기업 비용과 시간을 전환하여 새로운 맞춤형 AI‑기반 워크플로우를 “vibe code” 하도록 하는 것이었습니다.\n이전 Claude 통합은 여러 차례 SaaS 주식 매도를 촉발했으며, 투자자들은 Claude가 해당 기업 및 애플리케이션을 위협할 수 있다고 우려했습니다.\nClaude Marketplace는 \n\n## 판단 근거\nClaude Marketplace는 기존 문서에 다루어지지 않은 신규 서비스이며, Replit·GitLab·Harvey 등과의 연동 정보를 제공해야 함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-07T06:17:36.124Z",
+      "updated_at": "2026-03-07T06:17:36.128Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/403",
+      "documentSlug": "ai/claude-marketplace",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/claude-marketplace.md",
+      "comments": 0
+    },
+    {
+      "id": 404,
+      "number": 404,
+      "title": " [요청] CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 RCE",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/ghsa-h343-gg57-2q67-cve-2026-27574-remote-code-exe-15b555)\n**관련도**: 81/100\n**핵심 토픽**: CVE‑2026‑27574, OneUptime Probe, 샌드박스 탈출 RCE\n\n## 뉴스 요약\n!CVE 보고서https://media2.dev.to/dynamic/image/width=50,height=50,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2F...\n\n## 상세 내용\nSource: Dev.to\n](https://dev.to/cverports)\nCVE-2026-27574: OneUptime Probe에서 VM 샌드박스 탈출을 통한 원격 코드 실행\n취약점 ID: GHSA-H343-GG57-2Q67\nCVSS 점수: 10.0\n공개일: 2026-03-07\nTL;DR\nOneUptime Probe는 보안에 취약한 Node.js vm 모듈을 사용해 사용자 정의 모니터링 스크립트를 실행합니다. 공격자는 this.constructor.constructor를 이용해 샌드박스를 탈출하고 호스트에서 완전한 RCE와 모든 클러스터 비밀에 접근할 수 있습니다. 버전 10.0.5에서 isolated-vm으로 마이그레이션하여 수정되었습니다.\n⚠️ Exploit Status: PoC\nTechnical Details\nCWE ID: CWE-94\nCVSS v3.1: 10.0 (Critical)\nAttack Vector: Network\nEPSS Score: 0.00055\nPrivileges Required: Low (Project Member)\nExploit Status: PoC Available\nAffected Systems\nOneUptime Probe\nOneUptime Synthetic Monitor Component\n버전: OneUptime ≤ 9.5.13 (10.0.5에서 수정)\nCode Analysis\nCommit: 7f9ed4d – fix: security vulnerability in probe\n// Diff shows removal of 'node:vm' usage and introduction of 'isolated-vm' logic in SyntheticMonitor/Worker.ts\nExploit Details\nGitHub Security Advisory: Advisory containing PoC and technical details\nMitigation Strategies\n버전 10.0.5 이상으로 업그레이드\n모든 클러스터 비밀(데이터베이\n\n## 판단 근거\n새로운 고위험 CVE이며 현재 위키에 해당 내용이 없으므로 별도 보안 어드바이스 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-07T06:16:35.101Z",
+      "updated_at": "2026-03-07T06:16:35.105Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/404",
+      "documentSlug": "security/cve-2026-27574-oneuptime-probe-vm-rce",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/cve-2026-27574-oneuptime-probe-vm-rce.md",
+      "comments": 0
+    },
+    {
+      "id": 405,
+      "number": 405,
+      "title": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/docker-zfs-the-perfect-home-lab-storage-setup-af4849)\n**관련도**: 78/100\n**핵심 토픽**: Docker, ZFS, 홈랩 스토리지\n\n## 뉴스 요약\n홈 랩 서버에서 Docker와 함께 ZFS 스토리지를 설정하기: 실용 가이드. 홈‑랩 애호가라면 신뢰할 수 있는 …\n\n## 상세 내용\nSource: Dev.to\n홈랩 애호가라면 신뢰할 수 있고 효율적인 스토리지 솔루션의 중요성에 익숙하실 겁니다. ZFS(Zettabyte File System)는 시스템 관리자와 파워 유저 사이에서 인기가 높으며, 데이터 중복 제거, 압축, 스냅샷 등 고급 기능을 제공합니다. Docker와 결합하면 컨테이너 오케스트레이션 플랫폼으로서 홈랩 서버를 위한 견고하고 확장 가능한 스토리지 인프라를 구축할 수 있습니다.\n이 가이드에서는 다음 항목들을 단계별로 안내합니다:\n풀 생성\n데이터셋 구성\nDocker 볼륨 통합\n자동 스냅샷\n백업 전략\n전제 조건\n설정 과정을 시작하기 전에 다음 항목을 준비하십시오:\n호환 가능한 운영 체제 (예: Ubuntu, FreeBSD, macOS)\nZFS 풀을 위한 최소 2–3개의 물리 디스크 (HDD 또는 SSD)\n시스템에 Docker가 설치되어 실행 중인 상태\nLinux 명령줄 인터페이스와 Docker 개념에 대한 기본 지식\n1단계: ZFS 설치 및 풀 생성\nZFS 설치\nUbuntu 기반 시스템에서:\nsudo apt-get update &#x26;&#x26; sudo apt-get install zfsutils-linux\n다른 운영 체제의 경우, 설치 방법은 공식 ZFS 문서를 참조하십시오.\n디스크 확인\nlsblk\n세 개의 디스크가 있다고 가정합니다: /dev/sdb, /dev/sdc, 그리고 /dev/sdd.\n풀 생성\nsudo zpool create -f -o ashift=12 -o autoreplace=on tank raidz1 /dev/sdb /dev/sdc /dev/sdd\ntank – ZFS 풀의 이름\nraidz1 – 단일 패리티 RAID‑Z 구성\nashift=12 – 4 KB 정렬 (현대 디스크에 일반적)\nautoreplace=on – 장애 시 자동 디스크 교체\n풀 생성 확인:\nsudo zpool status\nStep 2: 데이터셋 구성\nZFS 데이터셋은 풀 내에서 데이터를 저장하기 위한 논리적 컨테이너입니다. Docker 볼륨,\n\n## 판단 근거\nDocker와 ZFS 결합 가이드는 기존 Docker 보안·패키지 문서와 주제가 다르므로 독립 문서가 적합함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-07T06:15:46.995Z",
+      "updated_at": "2026-03-07T06:15:46.999Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/405",
+      "documentSlug": "docker/docker-zfs",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/docker/docker-zfs.md",
+      "comments": 0
+    },
+    {
       "id": 400,
       "number": 400,
       "title": " [요청] AI‑생성 코드와 시크릿 관리 위험",
@@ -3172,5 +3265,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-07T00:30:00.911Z"
+  "lastUpdated": "2026-03-07T06:17:36.128Z"
 }
