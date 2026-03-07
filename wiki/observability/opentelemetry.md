@@ -3,7 +3,7 @@ title: OpenTelemetry 입문 – 관측성 통합 가이드
 author: SEPilot AI
 status: published
 tags: [OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF]
-updatedAt: 2026-03-05
+updatedAt: 2026-03-07
 redirect_from:
   - observability-open-telemetry-guide
 order: 1
@@ -298,7 +298,92 @@ service:
 
 ---
 
-## 10. 베스트 프랙티스와 흔히 발생하는 문제 해결법  
+## 10. 금융 시스템에서 관측성 및 장애 복구  
+
+### 10.1 금융 시스템에 흔히 발생하는 장애 시나리오  
+| 시나리오 | 설명 | 관측성 요구 |
+|----------|------|------------|
+| **트랜잭션 커밋은 되었지만 하위 서비스에 미관측** | 원장에 커밋된 거래가 결제 서비스에서는 아직 보이지 않음. | 전역 `TraceID`와 `TransactionID` 로 전체 흐름을 추적하고, 각 서비스가 이벤트를 수신했는지 확인하는 메트릭/로그가 필요. |
+| **보관 서명 라운드 중 노드 충돌** | 서명 라운드가 일부만 실행되고 노드가 충돌해 중단. | `SigningRoundStarted` → `SignatureProduced` 이벤트 체인을 기록하고, 라운드 진행 상태를 메트릭(`signing_round_progress`)으로 노출. |
+| **정산 어댑터 재시도 중 중복 전파** | 재시도 로직이 중복 전파를 일으켜 원장에 두 번 기록될 위험. | 멱등성 보장을 위한 `operation_id` 라벨과 재시도 카운터 메트릭을 수집. |
+| **네트워크 지연·메시지 중복 전달** | 메시지가 두 번 전달되거나 지연돼 순서가 뒤바뀜. | `message_id` 로 로그와 스팬을 연결하고, 지연 메트릭(`message_latency`)을 모니터링. |
+| **서비스 장애 후 상태 재구성 실패** | 장애 복구 후 시스템이 과거 상태를 정확히 복원하지 못함. | 이벤트 소싱 기반 `EventID` 로 모든 상태 전이를 저장하고, 재구성 시점에 `replay_timestamp` 메트릭을 확인. |
+
+> 위 시나리오는 **Zero Observability**(관측성 부재) 상황에서 발생하는 전형적인 문제이며, 관측 데이터가 없으면 원인 파악이 거의 불가능합니다 [Facebook “Zero Observability”].  
+
+### 10.2 OpenTelemetry 베스트 프랙티스 for Distributed Transactions  
+1. **전역 식별자 정의**  
+   - `TransactionID` – 금융 거래 전체를 식별.  
+   - `TraceID` – 서비스 간 요청 흐름을 연결.  
+   - `EventID` – 각 상태 전이(예: `TransactionValidated`, `SigningRoundStarted`)를 고유하게 식별.  
+
+2. **컨텍스트 전파**  
+   - 모든 서비스에서 **W3C TraceContext**와 **Baggage**를 사용해 `TransactionID`와 `EventID`를 전파.  
+   - OpenTelemetry SDK의 `propagation` API를 통해 자동 삽입.  
+
+3. **Semantic Conventions 적용**  
+   - `service.name`, `service.version`, `deployment.environment` 라벨 외에 `transaction.id`, `event.id` 라벨을 추가.  
+   - 메트릭은 `transaction.duration`, `signing.round.progress` 등 표준 네이밍 사용.  
+
+4. **자동 계측 + 수동 보강**  
+   - HTTP, gRPC, DB 클라이언트 등 핵심 인프라에 자동 계측 적용.  
+   - 비즈니스 로직(예: 서명 라운드)에서는 수동 스팬을 생성해 중요한 단계마다 `EventID` 를 기록.  
+
+5. **멱등성 및 재시도**  
+   - 재시도 시 `operation_id` 라벨을 동일하게 유지해 중복 실행을 감지하고, Collector에서 `duplicate_attempts` 메트릭을 집계.  
+
+6. **배치·메모리 제한 프로세서**  
+   - 고트래픽 금융 서비스에서는 `memory_limiter`와 `batch` 프로세서를 조합해 Collector 과부하 방지.  
+
+### 10.3 실패 복구 전략  
+
+| 전략 | 목적 | OpenTelemetry 연계 |
+|------|------|-------------------|
+| **재시도 (Retry) with Idempotency** | 일시적 오류 복구, 중복 실행 방지 | `operation_id` 라벨 + `retry_attempt` 메트릭. 재시도 로직이 스팬을 재사용하면 트레이스에 재시도 흐름이 시각화됨. |
+| **회로 차단 (Circuit Breaker)** | 연속 실패 시 서비스 보호 | `circuit_breaker.state` 라벨(OPEN/CLOSED)와 `circuit_breaker.failure_count` 메트릭을 Exporter에 전송. Grafana에서 상태 변화를 알림으로 활용. |
+| **카오스 엔지니어링 (Chaos Engineering)** | 장애 시나리오 검증 | Chaos 실험 도구(예: Gremlin)와 OpenTelemetry를 연동해 실험 시작/종료 시 `chaos.experiment.id` 라벨을 스팬에 삽입, 실험 중 발생한 오류를 자동 수집. |
+| **자동 복구 워크플로** | 관측 데이터 기반 자동 조치 | Alertmanager가 특정 메트릭(예: `transaction.failure_rate > 0.01`)을 감지하면, 웹훅으로 오케스트레이션 엔진(Kubernetes Job, AWS Step Functions 등)을 호출해 롤백·재시작·재전송 작업 수행. |
+
+### 10.4 관측 데이터 기반 자동 복구 워크플로 예시  
+
+```yaml
+# 1️⃣ Collector → Prometheus Exporter
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:9464"
+
+# 2️⃣ Prometheus Alertmanager 규칙
+groups:
+  - name: financial-recovery
+    rules:
+      - alert: TransactionFailureSpike
+        expr: rate(transaction.failure_total[5m]) > 0.02
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "거래 실패 급증"
+          runbook: "https://internal.example.com/runbooks/transaction-failure"
+
+# 3️⃣ Alertmanager → Webhook (오케스트레이션)
+receivers:
+  - name: recovery-webhook
+    webhook_configs:
+      - url: "https://orchestrator.example.com/recover"
+        http_config:
+          bearer_token: "${RECOVERY_TOKEN}"
+```
+
+- **동작 흐름**  
+  1. 서비스가 `transaction.failure_total` 메트릭을 Collector → Prometheus 로 전송.  
+  2. Alertmanager가 정의된 임계값을 초과하면 `TransactionFailureSpike` 알림을 발생.  
+  3. 웹훅이 오케스트레이션 엔진에 호출되어, 해당 `TransactionID` 를 재전송하거나, 관련 서비스의 **circuit breaker** 를 자동으로 **OPEN** 상태로 전환하고, 인시던트 페이지를 생성한다.  
+
+이와 같이 **관측 → 알림 → 자동 조치** 파이프라인을 구축하면, 금융 시스템에서 발생하는 복잡한 장애를 빠르게 완화할 수 있습니다.  
+
+---
+
+## 11. 베스트 프랙티스와 흔히 발생하는 문제 해결법  
 
 | Issue | 해결 방안 |
 |-------|-----------|
@@ -310,7 +395,7 @@ service:
 
 ---
 
-## 11. 벤더 중립성 및 플러그‑앤‑플레이 전략  
+## 12. 벤더 중립성 및 플러그‑앤‑플레이 전략  
 
 - **벤더 락인 방지**: OpenTelemetry는 **스펙 기반**이므로 Exporter만 교체하면 백엔드를 자유롭게 전환할 수 있습니다 [출처: euno.news](https://euno.news/posts/ko/what-is-opentelemetry-everything-you-need-to-know-2d60c8).  
 - **Exporter 교체 체크리스트**  
@@ -320,24 +405,6 @@ service:
 - **커뮤니티 활용**: CNCF Slack, GitHub 이슈, 공식 포럼을 통해 최신 스펙·버그·베스트 프랙티스 정보를 얻을 수 있습니다.  
 
 ---
-
-## 12. 향후 로드맵 및 추가 학습 자료  
-
-- **로드맵**: OpenTelemetry는 현재 **Trace·Metric·Log** 3‑pillars 를 모두 지원하고 있으며, 향후 **Logs** 표준화와 **Semantic Conventions** 확장이 예정되어 있습니다 [출처: OpenTelemetry Specification].  
-- **공식 문서**  
-  - OpenTelemetry 공식 사이트: https://opentelemetry.io  
-  - API·SDK 레퍼런스: https://opentelemetry.io/docs/  
-- **샘플 레포지토리**  
-  - GitHub `open-telemetry/opentelemetry-java` 등 언어별 예제.  
-- **커뮤니티 채널**  
-  - CNCF Slack `#opentelemetry`  
-  - GitHub Discussions.  
-- **심화 학습**  
-  - *Observability Engineering* (책)  
-  - Elastic Observability Labs 블로그 [출처: Elastic Blog](https://www.elastic.co/observability-labs/blog/best-practices-instrumenting-opentelemetry)  
-  - Datadog OpenTelemetry 가이드 [출처: Datadog Docs](https://docs.datadoghq.com/ko/getting_started/opentelemetry/).  
-
----  
 
 ## 13. Broadcom Network Observability Overview  
 
@@ -398,7 +465,7 @@ service:
 위 구성은 **Batch**와 **Memory Limiter** 프로세서를 사용해 대량 트래픽을 효율적으로 처리하면서 Broadcom 엔드포인트로 전송합니다.  
 
 ### 14.3 자동 계측 활용  
-Broadcom 솔루션은 **OpenTelemetry 자동 계측**과 호환됩니다. 예를 들어 Java 애플리케이션에 `opentelemetry-javaagent.jar`를 적용하면, 네트워크 레이어와 애플리케이션 레이어 모두에서 생성된 스팬이 Collector를 거쳐 Broadcom으로 전달됩니다.  
+Broadcom 솔루션은 **OpenTelemetry 자동 계측**과 호환됩니다. 예를 들어 Java 애플리케이션에 `opentelemetry-javaagent.jar` 를 적용하면, 네트워크 레이어와 애플리케이션 레이어 모두에서 생성된 스팬이 Collector를 거쳐 Broadcom으로 전달됩니다.  
 
 ---
 
@@ -406,13 +473,4 @@ Broadcom 솔루션은 **OpenTelemetry 자동 계측**과 호환됩니다. 예를
 
 | 고려 사항 | 권장 방법 |
 |-----------|-----------|
-| **벤더 전환 전략** | 초기에는 **OTLP** Exporter만 사용하고, 백엔드 URL만 교체해 Broadcom ↔ 다른 솔루션 간 전환을 용이하게 함. |
-| **보안** | API 토큰(`BCM_TOKEN`)을 환경 변수로 관리하고, TLS(`https`)를 반드시 사용. |
-| **샘플링** | 네트워크 트래픽이 높은 경우 `parentbased_traceidratio` 샘플러로 트레이스 비율을 0.1~0.5 사이로 조정. |
-| **데이터 정합성** | OpenTelemetry **Semantic Conventions**(예: `net.host.name`, `net.sock.peer.addr`)를 적용해 Broadcom이 기대하는 메타데이터와 일치시킴. |
-| **관측 파이프라인 테스트** | 로컬 `otelcol` 인스턴스에 `logging` Exporter를 추가해 전송 데이터를 검증 후 프로덕션에 적용. |
-| **점진적 마이그레이션** | 기존 네트워크 모니터링 툴과 병행 운영하면서, 단계별로 트레이스와 메트릭을 Broadcom으로 라우팅해 리스크 최소화. |
-
----
-
-*본 가이드는 제공된 리서치 자료에 기반하여 작성되었습니다. 최신 스펙이나 특정 환경에 대한 상세 설정은 공식 문서와 커뮤니티 업데이트를 참고하시기 바랍니다.*
+| **벤더 전환 전략** | 초기에는 **OTLP** Exporter만 사용하고, 백엔드 URL
