@@ -1,6 +1,128 @@
 {
   "entries": [
     {
+      "id": "1ee26f5d-3bed-4462-a1dc-39c43fa9aff8",
+      "timestamp": "2026-03-07T00:30:29.720Z",
+      "actionType": "quality_score",
+      "issueNumber": 398,
+      "issueTitle": " [요청] TensorFlow 2.21 새로운 기능 및 LiteRT 통합 가이드",
+      "documentSlug": "ai/tensorflow-2-21-litert",
+      "documentTitle": " [요청] TensorFlow 2.21 새로운 기능 및 LiteRT 통합 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "ec707a4b-8ff9-418b-b8d2-cb2dbc7199ad",
+      "timestamp": "2026-03-07T00:30:18.477Z",
+      "actionType": "quality_score",
+      "issueNumber": 400,
+      "issueTitle": " [요청] AI‑생성 코드와 시크릿 관리 위험",
+      "documentSlug": "ai",
+      "documentTitle": " [요청] AI‑생성 코드와 시크릿 관리 위험",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "a261ed4a-f724-4872-b030-009e51f02003",
+      "timestamp": "2026-03-07T00:30:00.905Z",
+      "actionType": "generate",
+      "issueNumber": 398,
+      "issueTitle": " [요청] TensorFlow 2.21 새로운 기능 및 LiteRT 통합 가이드",
+      "documentSlug": "ai/tensorflow-2-21-litert",
+      "documentTitle": "TensorFlow 2.16 새로운 기능 및 TensorFlow Lite Runtime 통합 가이드",
+      "summary": "새 문서 \"TensorFlow 2.16 새로운 기능 및 TensorFlow Lite Runtime 통합 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6030
+            },
+            {
+              "step": "outline",
+              "durationMs": 10805
+            },
+            {
+              "step": "write",
+              "durationMs": 26055
+            },
+            {
+              "step": "review",
+              "durationMs": 6750
+            },
+            {
+              "step": "refine",
+              "durationMs": 33578
+            }
+          ],
+          "totalDurationMs": 83219,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3860,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "84b36104-634f-4124-aa8c-9e00caaa923d",
+      "timestamp": "2026-03-07T00:28:25.613Z",
+      "actionType": "generate",
+      "issueNumber": 400,
+      "issueTitle": " [요청] AI‑생성 코드와 시크릿 관리 위험",
+      "documentSlug": "security/ai",
+      "documentTitle": "AI‑생성 코드와 시크릿 관리 위험",
+      "summary": "새 문서 \"AI‑생성 코드와 시크릿 관리 위험\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3241
+            },
+            {
+              "step": "outline",
+              "durationMs": 16617
+            },
+            {
+              "step": "write",
+              "durationMs": 21957
+            },
+            {
+              "step": "review",
+              "durationMs": 7853
+            }
+          ],
+          "totalDurationMs": 49668,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2322,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "1ceda3f4-21dc-4d92-8ba7-811a8d639ba5",
       "timestamp": "2026-03-07T00:26:29.281Z",
       "actionType": "modify",
@@ -9690,5 +9812,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-07T00:26:29.281Z"
+  "lastUpdated": "2026-03-07T00:30:29.720Z"
 }
