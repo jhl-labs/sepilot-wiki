@@ -1,6 +1,246 @@
 {
   "entries": [
     {
+      "id": "41cde19c-f795-4be3-80a9-c51263873c81",
+      "timestamp": "2026-03-07T18:15:52.258Z",
+      "actionType": "quality_score",
+      "issueNumber": 408,
+      "issueTitle": " [요청] GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점",
+      "documentSlug": "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana",
+      "documentTitle": " [요청] GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점",
+      "summary": "자동 품질 검토 통과 (87점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "dca44bcc-38d9-4a47-a3c2-8dc42d08b799",
+      "timestamp": "2026-03-07T18:15:42.516Z",
+      "actionType": "quality_score",
+      "issueNumber": 409,
+      "issueTitle": " [요청] Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
+      "documentSlug": "kubernetes/kubernetes",
+      "documentTitle": " [요청] Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "2fd9e64f-07f3-46e2-9adc-be1364c4e379",
+      "timestamp": "2026-03-07T18:15:30.837Z",
+      "actionType": "quality_score",
+      "issueNumber": 410,
+      "issueTitle": " [요청] 클라이언트‑사이드 WebP 변환기 구현 가이드",
+      "documentSlug": "frontend/webp",
+      "documentTitle": " [요청] 클라이언트‑사이드 WebP 변환기 구현 가이드",
+      "summary": "자동 품질 검토 통과 (85점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "922ba4c9-fdf2-4ca4-9df6-e3220c0c513a",
+      "timestamp": "2026-03-07T18:15:15.452Z",
+      "actionType": "quality_score",
+      "issueNumber": 411,
+      "issueTitle": " [요청] 2026년 초보자를 위한 VPS 보안 설정 가이드",
+      "documentSlug": "security/2026-vps",
+      "documentTitle": " [요청] 2026년 초보자를 위한 VPS 보안 설정 가이드",
+      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "684ecf1d-cf36-4272-a56e-a334bdf528a9",
+      "timestamp": "2026-03-07T18:14:56.788Z",
+      "actionType": "generate",
+      "issueNumber": 408,
+      "issueTitle": " [요청] GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점",
+      "documentSlug": "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana",
+      "documentTitle": "GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점",
+      "summary": "새 문서 \"GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 우회 취약점\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 7448
+            },
+            {
+              "step": "outline",
+              "durationMs": 7772
+            },
+            {
+              "step": "write",
+              "durationMs": 30212
+            },
+            {
+              "step": "review",
+              "durationMs": 7958
+            },
+            {
+              "step": "refine",
+              "durationMs": 25795
+            }
+          ],
+          "totalDurationMs": 79185,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3588,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "90e12e83-17e9-4174-89d5-999499800634",
+      "timestamp": "2026-03-07T18:13:19.721Z",
+      "actionType": "generate",
+      "issueNumber": 409,
+      "issueTitle": " [요청] Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
+      "documentSlug": "kubernetes/kubernetes",
+      "documentTitle": "Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
+      "summary": "새 문서 \"Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3440
+            },
+            {
+              "step": "outline",
+              "durationMs": 8425
+            },
+            {
+              "step": "write",
+              "durationMs": 25939
+            },
+            {
+              "step": "review",
+              "durationMs": 5956
+            }
+          ],
+          "totalDurationMs": 43760,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2016,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "abe3a5ef-dc12-4994-a700-9d6f7b7c9085",
+      "timestamp": "2026-03-07T18:12:21.161Z",
+      "actionType": "generate",
+      "issueNumber": 410,
+      "issueTitle": " [요청] 클라이언트‑사이드 WebP 변환기 구현 가이드",
+      "documentSlug": "frontend/webp",
+      "documentTitle": "클라이언트‑사이드 WebP 변환기 구현 가이드",
+      "summary": "새 문서 \"클라이언트‑사이드 WebP 변환기 구현 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5337
+            },
+            {
+              "step": "outline",
+              "durationMs": 12303
+            },
+            {
+              "step": "write",
+              "durationMs": 29102
+            },
+            {
+              "step": "review",
+              "durationMs": 6111
+            }
+          ],
+          "totalDurationMs": 52853,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 2376,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "c02cf7ae-1ef6-4c2b-bc94-2708b96f7ad5",
+      "timestamp": "2026-03-07T18:11:17.349Z",
+      "actionType": "generate",
+      "issueNumber": 411,
+      "issueTitle": " [요청] 2026년 초보자를 위한 VPS 보안 설정 가이드",
+      "documentSlug": "security/2026-vps",
+      "documentTitle": "2026년 초보자를 위한 VPS 보안 설정 가이드",
+      "summary": "새 문서 \"2026년 초보자를 위한 VPS 보안 설정 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3635
+            },
+            {
+              "step": "outline",
+              "durationMs": 8008
+            },
+            {
+              "step": "write",
+              "durationMs": 24485
+            },
+            {
+              "step": "review",
+              "durationMs": 5975
+            }
+          ],
+          "totalDurationMs": 42104,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1923,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "0cb75406-a294-41b3-9f2d-e81afdeeac42",
       "timestamp": "2026-03-07T18:08:06.091Z",
       "actionType": "maintain",
@@ -10023,5 +10263,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-07T18:08:06.091Z"
+  "lastUpdated": "2026-03-07T18:15:52.258Z"
 }
