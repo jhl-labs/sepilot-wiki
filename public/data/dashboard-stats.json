@@ -1,43 +1,103 @@
 {
-  "collectedAt": "2026-03-07T05:47:04.074Z",
+  "collectedAt": "2026-03-07T06:48:44.461Z",
   "overview": {
-    "totalDocuments": 139,
-    "publishedDocuments": 78,
-    "draftDocuments": 61,
-    "openRequests": 83,
+    "totalDocuments": 141,
+    "publishedDocuments": 79,
+    "draftDocuments": 62,
+    "openRequests": 86,
     "closedRequests": 19,
-    "totalAIActions": 418
+    "totalAIActions": 424
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 6,
+      "documentsCreated": 3,
+      "documentsModified": 2,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 21,
+      "estimatedTokens": 4921,
+      "totalPipelineDurationMs": 109213
     },
     "last24h": {
-      "aiActions": 26,
-      "documentsCreated": 9,
-      "documentsModified": 7,
-      "tavilyApiCalls": 27,
-      "tavilyResults": 76,
-      "estimatedTokens": 23189,
-      "totalPipelineDurationMs": 514590
+      "aiActions": 32,
+      "documentsCreated": 12,
+      "documentsModified": 9,
+      "tavilyApiCalls": 36,
+      "tavilyResults": 97,
+      "estimatedTokens": 28110,
+      "totalPipelineDurationMs": 623803
     },
     "last7d": {
-      "aiActions": 113,
-      "documentsCreated": 40,
-      "documentsModified": 32,
-      "tavilyApiCalls": 120,
-      "tavilyResults": 312,
-      "estimatedTokens": 92862,
-      "totalPipelineDurationMs": 2051011
+      "aiActions": 119,
+      "documentsCreated": 43,
+      "documentsModified": 34,
+      "tavilyApiCalls": 129,
+      "tavilyResults": 333,
+      "estimatedTokens": 97783,
+      "totalPipelineDurationMs": 2160224
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-07T06:15:43.575Z",
+      "actionType": "modify",
+      "issueNumber": 406,
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-07T06:14:58.501Z",
+      "actionType": "generate",
+      "issueNumber": 405,
+      "documentTitle": "Docker와 ZFS를 활용한 홈랩 스토리지 설정 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 37773,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1640
+    },
+    {
+      "timestamp": "2026-03-07T06:14:17.462Z",
+      "actionType": "generate",
+      "issueNumber": 404,
+      "documentTitle": "CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 및 원격 코드 실행",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 31143,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1417
+    },
+    {
+      "timestamp": "2026-03-07T06:13:43.001Z",
+      "actionType": "generate",
+      "issueNumber": 403,
+      "documentTitle": "Claude Marketplace 개요 및 기업 활용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 40297,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1864
+    },
+    {
+      "timestamp": "2026-03-07T06:12:59.907Z",
+      "actionType": "modify",
+      "issueNumber": 402,
+      "documentTitle": "AI 환각 기반 공급망 공격 – Slopsquatting 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-07T06:12:14.686Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-07T00:30:29.720Z",
       "actionType": "quality_score",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-06T12:10:51.060Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-06T09:49:52.185Z",
-      "actionType": "quality_score",
-      "issueNumber": 389,
-      "documentTitle": "[Wiki Maintenance] [요청] Before You Migrate: Five Surprising Ingress-NGINX Behaviors You Need to Know",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-06T09:49:42.883Z",
-      "actionType": "quality_score",
-      "issueNumber": 390,
-      "documentTitle": "[Wiki Maintenance] [요청] Announcing Docker Hardened System Packages",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-06T09:49:22.088Z",
-      "actionType": "quality_score",
-      "issueNumber": 391,
-      "documentTitle": "[Wiki Maintenance] [요청] How we rebuilt the search architecture for high availability in GitHub Enterprise Server",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-06T09:49:08.720Z",
-      "actionType": "modify",
-      "issueNumber": 392,
-      "documentTitle": "주간 위키 보고서 - 2026년 10주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-06T09:48:36.678Z",
-      "actionType": "modify",
-      "issueNumber": 393,
-      "documentTitle": "DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 406,
-      "totalEstimatedTokens": 280888,
-      "avgDurationMs": 54108
+      "totalActions": 412,
+      "totalEstimatedTokens": 285809,
+      "avgDurationMs": 53654
     },
     "unknown": {
       "totalActions": 12,
