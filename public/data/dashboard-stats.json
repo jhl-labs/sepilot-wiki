@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-08T17:41:20.572Z",
+  "collectedAt": "2026-03-08T18:48:01.485Z",
   "overview": {
     "totalDocuments": 157,
     "publishedDocuments": 86,
     "draftDocuments": 71,
     "openRequests": 91,
     "closedRequests": 19,
-    "totalAIActions": 448
+    "totalAIActions": 449
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,16 +19,16 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 23,
-      "documentsCreated": 5,
+      "aiActions": 15,
+      "documentsCreated": 1,
       "documentsModified": 9,
-      "tavilyApiCalls": 15,
-      "tavilyResults": 42,
-      "estimatedTokens": 11649,
-      "totalPipelineDurationMs": 256262
+      "tavilyApiCalls": 3,
+      "tavilyResults": 7,
+      "estimatedTokens": 1746,
+      "totalPipelineDurationMs": 38360
     },
     "last7d": {
-      "aiActions": 136,
+      "aiActions": 137,
       "documentsCreated": 45,
       "documentsModified": 43,
       "tavilyApiCalls": 135,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-08T18:08:20.032Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-08T12:09:31.650Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": 79185,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3588
-    },
-    {
-      "timestamp": "2026-03-07T18:13:19.721Z",
-      "actionType": "generate",
-      "issueNumber": 409,
-      "documentTitle": "Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로서비스 메시 탐색",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 43760,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2016
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 436,
+      "totalActions": 437,
       "totalEstimatedTokens": 297458,
       "avgDurationMs": 53555
     },
