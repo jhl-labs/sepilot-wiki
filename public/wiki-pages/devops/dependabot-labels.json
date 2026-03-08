@@ -2,7 +2,7 @@
   "title": "Dependabot 라벨 설정 및 dependabot.yml 수정 가이드",
   "slug": "devops/dependabot-labels",
   "content": "\n# Dependabot 라벨 설정 및 `dependabot.yml` 수정 가이드\n\n## 배경\nDependabot은 보안 및 버전 업데이트 PR에 자동으로 라벨을 붙여 워크플로우를 관리합니다. 기본 라벨 중 하나인 `dependencies` 라벨이 레포지토리에 존재하지 않을 경우, Dependabot이 라벨을 추가하지 못하고 **\"The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\"** 라는 오류가 발생합니다.\n\n## 목표\n1. `dependencies` 라벨을 레포지토리에 생성한다.\n2. `dependabot.yml` 파일에 잘못된 라벨 설정이 있다면 제거하거나 올바르게 수정한다.\n3. 이후 Dependabot이 정상적으로 라벨을 붙일 수 있도록 확인한다.\n\n## 단계별 절차\n\n### 1️⃣ `dependencies` 라벨 생성\n1. 레포지토리 메인 페이지에서 **Issues → Labels** 로 이동합니다.\n2. **New label** 버튼을 클릭합니다.\n3. **Name**에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택합니다 (예: `#0366d6`).\n4. **Create label** 을 눌러 라벨을 저장합니다.\n\n> **Tip**: 라벨 이름은 정확히 `dependencies` 로 입력해야 합니다. 대소문자와 공백이 다르면 Dependabot이 인식하지 못합니다.\n\n### 2️⃣ `dependabot.yml` 파일 검토 및 수정\n`dependabot.yml` 은 레포지토리 루트 혹은 `.github/` 디렉터리에 위치합니다. 파일을 열어 `labels` 섹션을 확인합니다.\n\n```yaml\n# .github/dependabot.yml 예시\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # <-- 여기 라벨이 존재해야 함\n```\n\n- **잘못된 라벨**: 라벨 이름에 오타가 있거나 존재하지 않는 라벨을 지정한 경우, 해당 라벨 항목을 삭제하거나 올바른 `dependencies` 로 교체합니다.\n- **라벨 섹션이 없을 경우**: 라벨을 자동으로 붙이고 싶다면 `labels:` 섹션을 추가하고 `dependencies` 라벨을 명시합니다.\n\n수정 후 파일을 커밋하고 푸시합니다.\n\n### 3️⃣ 변경 사항 검증\n1. Dependabot이 새 PR을 생성하도록 트리거합니다. (예: `@dependabot rebase` 혹은 `@dependabot recreate` 댓글)\n2. 새 PR에 `dependencies` 라벨이 자동으로 붙는지 확인합니다.\n3. 기존 PR에 라벨이 누락된 경우, 라벨을 수동으로 추가하고 이후 자동 라벨링이 정상 동작하는지 재확인합니다.\n\n## FAQ\n- **Q: 라벨을 여러 개 지정하고 싶어요.**\n  - A: `labels:` 배열에 원하는 라벨을 추가하면 됩니다. 예: `- \"dependencies\"`, `- \"security\"`.\n- **Q: 라벨 색상이 중요한가요?**\n  - A: 색상은 가시성을 위한 것이며, 기능에는 영향을 주지 않습니다.\n- **Q: `dependabot.yml` 에서 라벨을 완전히 제거하면 어떻게 되나요?**\n  - A: 라벨이 지정되지 않으면 Dependabot은 라벨을 붙이지 않으며, 라벨이 필요 없는 경우 그대로 두어도 무방합니다.\n\n## 참고 자료\n- [Dependabot 공식 문서 – Configuring labels](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates#adding-labels-to-pull-requests) (공식 문서를 참조해주세요)\n- [GitHub 라벨 관리 가이드](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels) (공식 문서를 참조해주세요)\n\n---\n*이 문서는 Dependabot 라벨 문제를 해결하기 위한 가이드이며, 레포지토리 정책에 따라 라벨 명칭이나 색상을 조정할 수 있습니다.*",
-  "lastModified": "2026-03-08T12:10:34Z",
+  "lastModified": "2026-03-08T18:08:20Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,11 +15,11 @@
   ],
   "history": [
     {
-      "sha": "bc9024b",
-      "message": "chore: Issue Processor 실행 결과",
+      "sha": "a1fd3de",
+      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-08T12:10:34Z",
+      "date": "2026-03-08T18:08:20Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
