@@ -1,42 +1,48 @@
 {
   "entries": [
     {
-      "id": "cddaacb1-1eaa-41af-be12-f07970c47efc",
-      "timestamp": "2026-03-08T06:19:37.910Z",
-      "actionType": "quality_score",
-      "issueNumber": 405,
-      "issueTitle": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
-      "documentSlug": "docker/docker-zfs",
-      "documentTitle": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
+      "id": "2ff971d7-37e0-4159-8ce8-9d995a4a94fa",
+      "timestamp": "2026-03-08T06:18:50.551Z",
+      "actionType": "modify",
+      "issueNumber": 421,
+      "issueTitle": " [업데이트] 구조화된 블랙보딩을 통한 에이전트 루프 설계",
+      "documentSlug": "ai/ai-code-review-agent-guide",
+      "documentTitle": "AI 코드 리뷰 에이전트 구축 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 구조화된 블랙보딩을 통한 에이전트 루프 설계\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
-      "changes": null
+      "changes": {
+        "additions": 104,
+        "deletions": 0
+      }
     },
     {
-      "id": "db575943-4d54-48a2-a695-6c7b86c32d45",
-      "timestamp": "2026-03-08T06:19:26.215Z",
-      "actionType": "quality_score",
-      "issueNumber": 419,
-      "issueTitle": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
-      "documentSlug": "nvidia-nim",
-      "documentTitle": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
+      "id": "698c236d-0a1b-49df-be07-739694dfa386",
+      "timestamp": "2026-03-08T06:18:16.150Z",
+      "actionType": "modify",
+      "issueNumber": 420,
+      "issueTitle": " [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트",
+      "documentSlug": "ai/ollama-claude-code",
+      "documentTitle": "Ollama와 Claude Code 연결 방법",
+      "summary": "문서 수정 요청 처리: \" [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
-      "changes": null
+      "changes": {
+        "additions": 27,
+        "deletions": 0
+      }
     },
     {
-      "id": "519cee7b-6412-47cd-906e-fe8f3ac5683d",
-      "timestamp": "2026-03-08T06:19:07.240Z",
+      "id": "543f2865-4d03-4442-b64d-5c48d294924b",
+      "timestamp": "2026-03-08T06:17:59.520Z",
       "actionType": "generate",
       "issueNumber": 419,
-      "issueTitle": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
-      "documentSlug": "nvidia-nim",
-      "documentTitle": "NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
-      "summary": "새 문서 \"NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기\" 생성",
+      "issueTitle": "문서 요청 #419",
+      "documentSlug": "ai/419",
+      "documentTitle": "NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드",
+      "summary": "새 문서 \"NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -45,32 +51,66 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 2950
+              "durationMs": 3446
             },
             {
               "step": "outline",
-              "durationMs": 9122
+              "durationMs": 7892
             },
             {
               "step": "write",
-              "durationMs": 27767
+              "durationMs": 19795
             },
             {
               "step": "review",
-              "durationMs": 8172
+              "durationMs": 7227
             }
           ],
-          "totalDurationMs": 48011,
-          "researchSources": 9,
+          "totalDurationMs": 38360,
+          "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 9
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 2253,
+            "estimated": 1746,
             "method": "duration_based"
           }
         }
+      }
+    },
+    {
+      "id": "fb2e2ae6-cc77-48a7-b120-92084242cd65",
+      "timestamp": "2026-03-08T06:17:18.135Z",
+      "actionType": "modify",
+      "issueNumber": 418,
+      "issueTitle": " [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 125
+      }
+    },
+    {
+      "id": "00e01349-484d-42b9-b460-7ed34f786fc8",
+      "timestamp": "2026-03-08T06:16:34.822Z",
+      "actionType": "modify",
+      "issueNumber": 417,
+      "issueTitle": " [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 32,
+        "deletions": 0
       }
     },
     {
@@ -10449,5 +10489,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-08T06:19:37.910Z"
+  "lastUpdated": "2026-03-08T06:18:50.551Z"
 }

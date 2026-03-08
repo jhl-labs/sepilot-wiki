@@ -6,7 +6,7 @@ tags: ["AI", "코드 리뷰", "CI", "GitHub Actions", "에이전트"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-02-22T02:00:00Z"
-updatedAt: 2026-03-04
+updatedAt: 2026-03-08
 order: 3
 related_docs: ["github-agentic-workflows.md", "continuous-ai.md", "opencode.md", "claude-code-release-history.md"]
 redirect_from:
@@ -99,10 +99,114 @@ quality_score: 75
 - **이슈 순위 매기기**: 모든 이슈에 중요도(High/Medium/Low)를 부여해 실제 중요한 문제에 집중합니다.  
 - **오탐 예산 관리**: 리뷰가 너무 잡음이 많으면 무시될 수 있으니, 오탐 비율을 조정합니다.  
 - **모델 라우팅 전략**:  
-  - 작은 PR → 저비용 모델 (예: Ollama, OpenRouter의 경량 모델)  
+  - 작은 PR → 저비용 모델 (예: Ollama, OpenRouter 경량 모델)  
   - 대규모 리팩터링 → 고성능 모델 (예: OpenAI GPT‑4o)  
 - **투명성**: 에이전트가 검토한 파일 목록, 가정한 내용, 검토하지 않은 항목을 명시하도록 요구합니다.  
 - **실제 사례**: Jazz 저장소는 자체 코드 리뷰와 릴리즈 노트에 Jazz를 사용합니다. 워크플로 파일은 [GitHub - lvndry/jazz](https://github.com/lvndry/jazz/tree/main/.github) 에서 확인할 수 있습니다.
+
+## 구조화된 블랙보딩과 에이전트 루프
+
+### 블랙보딩 개념
+“블랙보딩(blackboarding)”은 LLM이 **보드(board)** 라는 상태 파일을 읽고, 상황을 평가한 뒤 결정을 기록하는 패턴을 말합니다. 기존 비공식 블랙보딩에서는 LLM이 어떤 파일을 언제 읽을지, 어떤 정보를 “관련”으로 간주할지, 신호를 어떻게 가중치할지 등을 스스로 결정했습니다. 이로 인해 **루프가 보드를 잊는** 문제가 발생했습니다.
+
+### 구조화된 블랙보딩 구현
+구조화된 블랙보딩은 보드의 **스키마**와 **읽기/쓰기 규칙**을 명시적으로 정의합니다.
+
+1. **보드 스키마 정의**  
+   ```json
+   {
+     "board": {
+       "current_objective": "string",
+       "last_action": {
+         "type": "string",
+         "target": "string",
+         "timestamp": "ISO8601"
+       },
+       "blockers": ["string"],
+       "available_channels": ["string"],
+       "decision_context": "string"
+     }
+   }
+   ```
+
+2. **쓰기 권한 및 주기**  
+   - **누가**: 에이전트 인스턴스(또는 특정 역할)만이 `board`에 쓰기 가능.  
+   - **언제**: 각 루프가 끝날 때 `updates_board` 섹션에 기록.  
+   - **무엇을 유지/삭제**: 루프 간에 유지해야 할 필드(`current_objective`, `available_channels`)와 삭제해도 되는 임시 필드(`last_action`)를 명시.
+
+3. **구조화된 결정 출력 예시**  
+   ```json
+   {
+     "action": "write_devto_article",
+     "rationale": "Live thread with engaged developer. Content about architectural insight. Timely.",
+     "expected_outcome": "extended thread engagement, HN visitor backlog content",
+     "updates_board": {
+       "last_action": {
+         "type": "write_devto_article",
+         "timestamp": "2026-03-08T09:15:00Z"
+       }
+     }
+   }
+   ```
+
+4. **읽기 방식**  
+   - LLM은 사전에 정의된 JSON 스키마만 파싱하도록 프롬프트를 제한합니다.  
+   - 예시 프롬프트:  
+     ```
+     Read the board JSON from board.json, then decide the next action. Return only a JSON object matching the decision schema.
+     ```
+
+### 에이전트 루프 적용 사례
+아래는 구조화된 블랙보딩을 활용한 에이전트 루프의 실제 예시입니다.
+
+```json
+{
+  "board": {
+    "current_objective": "first external paying customer",
+    "last_action": {
+      "type": "community_comment",
+      "target": "dev.to/grahamthedev",
+      "timestamp": "2026-03-07T14:32:00Z"
+    },
+    "blockers": [
+      "reddit: requires human credentials",
+      "HN: requires human credentials"
+    ],
+    "available_channels": ["dev.to", "email", "site content"],
+    "decision_context": "Saturday evening, Show HN Monday — maximize conversion readiness"
+  }
+}
+```
+
+LLM이 위 보드를 읽고 만든 결정:
+
+```json
+{
+  "action": "write_devto_article",
+  "rationale": "Live thread with engaged developer. Content about architectural insight. Timely.",
+  "expected_outcome": "extended thread engagement, HN visitor backlog content",
+  "updates_board": {
+    "last_action": {
+      "type": "write_devto_article",
+      "timestamp": "2026-03-08T09:15:00Z"
+    }
+  }
+}
+```
+
+**핵심 차이점**
+- **비공식 블랙보딩**: 마크다운 파일들의 느슨한 모음, LLM이 해석 방식을 검증할 수 없음.  
+- **구조화된 블랙보딩**: JSON 스키마 기반, 읽기·쓰기 규칙이 명확, 루프가 이전 상태를 신뢰성 있게 재사용.
+
+### 결정화와 연결
+구조화된 보드에 충분한 데이터가 쌓이면, **결정화(crystallization)** 패턴을 적용해 반복적인 의사결정을 함수 형태로 전환할 수 있습니다.
+
+| 패턴 | 구현 예시 |
+|------|----------|
+| 특정 콘텐츠 점수 초과 → 게시 | `publish_if_score_above(threshold)` |
+| 최근 2일 내 이메일 수신 → 재전송 금지 | `suppress_resend_if_recent(email, days=2)` |
+
+이러한 함수는 보드 입력 → 결정 출력 흐름을 코드로 고정시켜, 루프가 보드를 “잊는” 문제를 근본적으로 해결합니다.
 
 ## SODAX Builder MCP 연동 가이드
 SODAX는 **Builder MCP** 엔드포인트(`https://builders.sodax.com/mcp`)를 공개했으며, Claude, Cursor, Windsurf 등 MCP를 지원하는 AI 코딩 에이전트와 직접 연결할 수 있습니다. 이를 통해 에이전트는 실시간 DeFi 프로토콜 데이터를 캐시가 아닌 현재 상태 그대로 조회할 수 있습니다.
