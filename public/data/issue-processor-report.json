@@ -1,13 +1,23 @@
 {
-  "timestamp": "2026-03-08T06:20:48.865Z",
+  "timestamp": "2026-03-08T06:19:50.643Z",
   "dryRun": false,
-  "totalIssuesScanned": 13,
+  "totalIssuesScanned": 18,
   "categories": {
     "draft_review": [
       {
+        "number": 419,
+        "title": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 405,
+        "title": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
+        "daysSinceUpdate": 1
+      },
+      {
         "number": 403,
         "title": " [요청] Claude Marketplace – 개요와 기업 통합 가이드",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 327,
@@ -72,11 +82,73 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 420,
+        "title": " [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 418,
+        "title": " [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 417,
+        "title": " [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 419,
+      "title": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 421,
+      "title": " [업데이트] 구조화된 블랙보딩을 통한 에이전트 루프 설계"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 420,
+      "title": " [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 418,
+      "title": " [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 417,
+      "title": " [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 419,
+      "title": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/nvidia-nim.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 405,
+      "title": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/docker/docker-zfs.md"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 403,
+      "title": " [요청] Claude Marketplace – 개요와 기업 통합 가이드",
+      "score": 50
+    }
+  ],
+  "actionCount": 8,
   "maxActions": 60
 }
