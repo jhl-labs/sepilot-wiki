@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-08T08:46:19.098Z",
+  "collectedAt": "2026-03-08T09:43:36.410Z",
   "overview": {
     "totalDocuments": 155,
     "publishedDocuments": 84,
     "draftDocuments": 71,
     "openRequests": 91,
     "closedRequests": 19,
-    "totalAIActions": 446
+    "totalAIActions": 447
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 22,
+      "aiActions": 23,
       "documentsCreated": 5,
       "documentsModified": 9,
       "tavilyApiCalls": 15,
@@ -28,16 +28,26 @@
       "totalPipelineDurationMs": 256262
     },
     "last7d": {
-      "aiActions": 140,
-      "documentsCreated": 48,
+      "aiActions": 137,
+      "documentsCreated": 46,
       "documentsModified": 43,
-      "tavilyApiCalls": 144,
-      "tavilyResults": 375,
-      "estimatedTokens": 109432,
-      "totalPipelineDurationMs": 2416486
+      "tavilyApiCalls": 138,
+      "tavilyResults": 365,
+      "estimatedTokens": 105462,
+      "totalPipelineDurationMs": 2331263
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-08T09:05:29.621Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-08T06:18:50.551Z",
       "actionType": "modify",
@@ -227,21 +237,11 @@
       "durationMs": 52853,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2376
-    },
-    {
-      "timestamp": "2026-03-07T18:11:17.349Z",
-      "actionType": "generate",
-      "issueNumber": 411,
-      "documentTitle": "2026년 초보자를 위한 VPS 보안 설정 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 42104,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1923
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 434,
+      "totalActions": 435,
       "totalEstimatedTokens": 297458,
       "avgDurationMs": 53555
     },
