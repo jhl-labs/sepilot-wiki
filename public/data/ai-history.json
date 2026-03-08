@@ -1,6 +1,79 @@
 {
   "entries": [
     {
+      "id": "cddaacb1-1eaa-41af-be12-f07970c47efc",
+      "timestamp": "2026-03-08T06:19:37.910Z",
+      "actionType": "quality_score",
+      "issueNumber": 405,
+      "issueTitle": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
+      "documentSlug": "docker/docker-zfs",
+      "documentTitle": " [요청] Docker + ZFS 로 홈랩 스토리지 구축하기",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "db575943-4d54-48a2-a695-6c7b86c32d45",
+      "timestamp": "2026-03-08T06:19:26.215Z",
+      "actionType": "quality_score",
+      "issueNumber": 419,
+      "issueTitle": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
+      "documentSlug": "nvidia-nim",
+      "documentTitle": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "519cee7b-6412-47cd-906e-fe8f3ac5683d",
+      "timestamp": "2026-03-08T06:19:07.240Z",
+      "actionType": "generate",
+      "issueNumber": 419,
+      "issueTitle": " [요청] NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
+      "documentSlug": "nvidia-nim",
+      "documentTitle": "NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기",
+      "summary": "새 문서 \"NVIDIA NIM 무료 티어로 실시간 음성 에이전트 구축하기\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2950
+            },
+            {
+              "step": "outline",
+              "durationMs": 9122
+            },
+            {
+              "step": "write",
+              "durationMs": 27767
+            },
+            {
+              "step": "review",
+              "durationMs": 8172
+            }
+          ],
+          "totalDurationMs": 48011,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2253,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "f40d7524-0dad-47fa-b9c0-64996f27f785",
       "timestamp": "2026-03-08T06:15:36.798Z",
       "actionType": "maintain",
@@ -10376,5 +10449,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-08T06:15:36.798Z"
+  "lastUpdated": "2026-03-08T06:19:37.910Z"
 }
