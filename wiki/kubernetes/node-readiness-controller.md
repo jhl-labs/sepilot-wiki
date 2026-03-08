@@ -8,6 +8,7 @@ redirect_from:
 order: 1
 related_docs: ["cgroup-migration.md", "api-governance.md", "release-notes.md"]
 quality_score: 77
+updatedAt: 2026-03-08
 ---
 
 ## 1. 서론
@@ -123,7 +124,60 @@ spec:
 - **Controller 로그 확인**  
   - 컨트롤러 Pod의 로그 레벨을 `--v=4` 로 높이면 상세 이벤트를 확인할 수 있습니다.  
 
-## 15. 기존 Ready 조건과 비교
+## 15. 배포 후 18분 내 클러스터 다운 사례 (ArgoCD와 NRC 연계)
+### 15.1 문제 상황 요약
+- **시나리오**: 개발자가 PR을 머지하고 CI/CD 파이프라인이 성공적으로 완료된 뒤, ArgoCD는 애플리케이션을 *Synced* 및 *Healthy* 상태로 표시합니다.  
+- **발생**: 약 **18분** 후, 클러스터 전체에 성능 저하가 발생하고 사용자 요청이 실패합니다.  
+- **원인**: ArgoCD는 Git 매니페스트와 실제 리소스 상태를 지속적으로 비교하지만, **Node Readiness Gate**가 아직 `True`가 되지 않은 상태에서 일부 DaemonSet(예: 네트워크 에이전트)이나 외부 헬스 체크가 실패하면, 노드에 자동으로 부여된 `node-readiness.kubernetes.io/not-ready` taint이 해제되지 않아 파드 스케줄링이 차단됩니다. 이때 기존 워크로드가 이미 스케줄링된 상태라면, 새로운 파드가 배치되지 못해 서비스가 점진적으로 고갈됩니다.
+
+### 15.2 헬스 체크·레디니스 프로브 설계 시 주의점
+| 체크 항목 | 권장 설계 |
+|----------|-----------|
+| **Liveness Probe** | 빠른 실패 감지를 위해 `initialDelaySeconds`를 짧게, `periodSeconds`를 5~10초 수준으로 설정. |
+| **Readiness Probe** | 서비스가 실제 트래픽을 받기 전까지 `successThreshold`와 `failureThreshold`를 충분히 크게(예: 3~5) 설정해 일시적 지연을 허용. |
+| **ExternalSignal Gate** | 외부 HTTP/HTTPS 헬스 체크는 TLS 인증과 토큰 기반 인증을 적용하고, **timeoutSeconds**를 30초 이하로 제한. |
+| **DaemonSet 의존성** | `NodeReadinessGate`에 DaemonSet을 포함할 경우, 해당 DaemonSet이 `Ready` 상태가 될 때까지 `node-readiness.kubernetes.io/not-ready` taint이 유지되도록 `timeoutSeconds`를 충분히 크게(예: 300초) 설정. |
+
+### 15.3 실제 로그 분석 방법
+1. **ArgoCD 이벤트 확인**  
+   ```bash
+   argocd app get <app-name> -o yaml | grep -i 'Synced\|Healthy'
+   ```  
+   - `Synced`와 `Healthy` 시점이 언제인지 파악합니다.  
+
+2. **NodeReadinessGate 상태 조회**  
+   ```bash
+   kubectl get nodereadinessgate -A -o wide
+   ```  
+   - 각 Gate의 `status.conditions`가 언제 `True`가 되었는지 확인합니다.  
+
+3. **Taint 변화 추적**  
+   ```bash
+   kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.taints[*].key}{"\n"}{end}'
+   ```  
+   - `node-readiness.kubernetes.io/not-ready` taint이 언제 추가·제거됐는지 타임스탬프와 함께 기록합니다.  
+
+4. **Controller 로그**  
+   ```bash
+   kubectl logs -l app=node-readiness-controller -c controller --since=30m
+   ```  
+   - `Reconcile` 루프에서 발생한 오류나 타임아웃 이벤트를 확인합니다.  
+
+5. **Pod 스케줄링 이벤트**  
+   ```bash
+   kubectl get events --field-selector reason=FailedScheduling -A | grep <node-name>
+   ```  
+   - `NotReady` taint 때문에 스케줄링이 차단된 파드를 식별합니다.  
+
+### 15.4 대응 방안
+- **배포 전 사전 검증**: CI 단계에서 `kubectl apply --dry-run=client -f <manifest>` 로 모든 `NodeReadinessGate`가 정상적으로 파싱되는지 확인하고, **형식 검증(formal verification)** 도구를 활용해 잠재적 드리프트를 사전에 탐지합니다.  
+- **ArgoCD Sync 옵션 조정**: `--prune` 옵션과 `--self-heal`을 활성화해, Gate가 `False` 상태일 때 자동 롤백 또는 파드 재시도를 방지합니다.  
+- **타임아웃 최적화**: 중요한 인프라(스토리지, 네트워크) Gate에 대해 `timeoutSeconds`를 충분히 크게 설정하고, 비핵심 워크로드는 짧은 타임아웃을 적용해 빠른 회복을 유도합니다.  
+- **알림 설정**: `node-readiness.kubernetes.io/not-ready` taint이 추가되면 즉시 Slack/Teams 알림을 전송하도록 Prometheus Alertmanager 규칙을 추가합니다.  
+
+> **핵심 교훈**: ArgoCD가 “Healthy”라고 표시되더라도, **Node Readiness Controller**가 아직 모든 커스텀 게이트를 만족시키지 않은 경우가 있습니다. 배포 후 초기 20분 내에 Gate 상태와 taint 변화를 모니터링하면 18분 지연으로 인한 서비스 중단을 예방할 수 있습니다.
+
+## 16. 기존 Ready 조건과 비교
 | 항목 | 기존 Ready | Node Readiness Controller |
 |------|------------|---------------------------|
 | 정의 범위 | 단일 이진 플래그 | 다중 커스텀 조건 (Readiness Gate) |
@@ -135,7 +189,7 @@ spec:
 - 단순한 클러스터(네트워크, 스토리지, 하드웨어 의존성이 거의 없는 경우)에서는 기존 Ready가 충분합니다.  
 - 복합 인프라(전용 GPU, CSI, 엣지 네트워크 등)에서는 NRC 도입을 권장합니다.
 
-## 16. 향후 로드맵 및 커뮤니티 참여
+## 17. 향후 로드맵 및 커뮤니티 참여
 - **예정 기능**  
   - 멀티‑Gate 조합을 통한 정책 기반 스케줄링.  
   - Gate 상태에 따른 자동 스케일링 정책 연동.  
@@ -143,10 +197,11 @@ spec:
   - GitHub `kubernetes-sigs/node-readiness-controller` 레포지토리에서 이슈 제기 및 PR 제출.  
   - SIG‑Node 토론에 참여해 피드백을 공유합니다.  
 
-## 17. 참고 자료 및 링크
+## 18. 참고 자료 및 링크
 - **공식 블로그 포스트**: [Introducing Node Readiness Controller](https://kubernetes.io/blog/2026/02/03/introducing-node-readiness-controller/)  
 - **GitHub 레포지토리**: `https://github.com/kubernetes-sigs/node-readiness-controller` (공식 구현)  
 - **CRD 스키마 문서**: `https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#nodereadinessgate-v1alpha1`  
 - **관련 사례 블로그**: Jerry Lee의 “Node Ready를 믿지 마세요!” (LinkedIn) [링크](https://www.linkedin.com/posts/jeeunglee_node-ready%EB%A5%BC-%EB%AF%BF%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94-node-readiness-activity-7426756404750897152-SRxo)  
+- **ArgoCD와 GitOps 안정성**: euno.news 기사 “왜 성공적인 배포 후 18분 만에 쿠버네티스 클러스터가 중단되는가” [링크](https://euno.news/posts/ko/why-your-kubernetes-cluster-breaks-18-minutes-afte-f3548a)  
 
 ---

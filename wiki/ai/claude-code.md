@@ -3,7 +3,7 @@ title: Claude Code 비용 관리와 실시간 모니터링 가이드
 author: SEPilot AI
 status: published
 tags: [Claude Code, 비용 관리, 실시간 모니터링, Bifrost, OpenTelemetry, 가상 키]
-updatedAt: 2026-03-07
+updatedAt: 2026-03-08
 ---
 
 ## 1. 서론
@@ -238,14 +238,102 @@ Est. cost saved:    $0.12 (Sonnet) / $0.58 (Opus)
 - **TTL 설정**: 너무 짧게 설정하면 동일 파일을 자주 재읽게 되어 절감 효과가 감소하고, 너무 길게 설정하면 오래된 컨텍스트가 남아 메모리 사용량이 증가할 수 있습니다. 일반적인 워크플로에서는 15‑30분 사이가 권장됩니다.  
 - **Diff 라인 제한**: 큰 변경이 발생하면 전체 파일을 다시 읽게 되므로, `READ_ONCE_DIFF_MAX` 를 프로젝트 규모에 맞게 조정해야 합니다.  
 - **호환성**: `read‑once`는 **Read tool** 레이어에서 동작하므로 RTK, Context‑Mode 등 다른 Claude Code 최적화와 충돌하지 않습니다.  
-- **보안**: 캐시된 파일 메타데이터는 로컬에만 저장되며, 외부 네트워크로 전송되지 않으므로 보안 위험이 없습니다. 다만, 환경 변수에 민감한 경로가 노출되지 않도록 주의하십시오.
+- **보안**: 캐시된 파일 메타데이터는 로컬에만 저장되며 외부 네트워크로 전송되지 않으므로 보안 위험이 없습니다. 다만, 환경 변수에 민감한 경로가 노출되지 않도록 주의하십시오.
 
 ### 12.7 라이선스
 `read‑once` 훅은 **MIT** 라이선스로 제공되며, 자유롭게 수정·배포가 가능합니다. 원본 저장소: https://github.com/Bande-a-Bonnot/Boucle-framework/tree/main/tools/read-once
 
 ---
 
-## 13. FAQ
+## 13. Spec‑Driven Development 안티‑패턴
+Claude Code와 함께 **Spec‑Driven Development** 를 적용할 때 흔히 발생하는 실수들을 정리하고, 안전하게 활용하기 위한 체크리스트를 제공합니다. 아래 내용은 **euno.news** 기사[[링크](https://euno.news/posts/ko/things-you-should-never-do-when-doing-spec-driven-eefc80)]를 기반으로 한국어 번역·정리한 것입니다.
+
+### 13.1 안티‑패턴 목록
+| 번호 | 안티‑패턴 | 핵심 문제점 | 예시 코드/설명 |
+|------|-----------|------------|----------------|
+| 1 | **모호한 사양에 기대** | 사양에 “사용자 관리 시스템을 구축한다” 정도만 적으면 Claude가 일반적인 가정을 적용해 잘못된 설계가 생성됨 | ```yaml\n# 잘못된 사양\ndescription: 사용자 관리 시스템 구축\n``` |
+| 2 | **도메인 입력 없이 사양 생성** | Claude에게 사양을 만들게 하면 순환 논리가 발생하고, 실제 비즈니스 요구와 동떨어진 사양이 나오게 됨 | ```bash\nclaude generate-spec --prompt \"우리 서비스에 로그인 기능 필요\"\n``` |
+| 3 | **수용 기준 누락** | 구현이 완료돼도 “완료”가 무엇인지 정의되지 않아 기대와 다른 동작이 배포됨 | ```yaml\n# 수용 기준 없음\n``` |
+| 4 | **구현 세부 지정** | 사양에 디자인 패턴·클래스 구조까지 명시하면 Claude의 가치를 상쇄하고, 설계 유연성을 잃음 | ```yaml\nimplementation: \"Use Repository pattern with Spring Data JPA\"\n``` |
+| 5 | **세션 간 컨텍스트 유지 가정** | 이전 세션에서 만든 사양을 Claude가 기억하지 못해 일관성 없는 구현이 누적됨 | ```bash\n# 오늘 만든 사양을 재사용하려고 함 → Claude가 모름\n``` |
+| 6 | **다중 관점 혼합** | 하나의 스펙에 API, DB, UI, 인프라 요구를 모두 넣어 경계가 흐려지고, 팀 간 충돌이 발생 | ```yaml\n# API와 UI 요구가 같은 파일에 섞임\n``` |
+| 7 | **명확화 질문 무시** | Claude가 “이 부분이 모호합니다” 라고 물어도 무시하면 숨은 기술 부채가 쌓임 | ```text\nClaude: \"What should happen when token expires?\"\nDeveloper: (ignore)\n``` |
+| 8 | **불완전 사양으로 구현 시작** | 사양이 완전하지 않은 상태에서 코드를 작성하면 사양 변경 시 대규모 리팩터링이 필요 | ```bash\n# 사양 초안 → 바로 구현 시작\n``` |
+| 9 | **범위 외 항목 정의 누락** | “구현하지 않을 것”을 명시하지 않아 Claude가 자동으로 포함시켜 불필요한 기능이 생김 | ```yaml\n# Non‑Goals 섹션 없음\n``` |
+| 10 | **구현 중 사양 불변 가정** | 구현 중에 사양을 고정시켜 버그를 우회하려 하면, 실제 요구와 점점 멀어짐 | ```text\nDeveloper: \"클로드, 이 부분은 무시해\"\nClaude: \"우회 코드 삽입\"\n``` |
+
+### 13.2 실제 코드 예시와 문제점 분석
+#### 안티‑패턴 1 – 모호한 사양
+```yaml
+# 사양 (문제점)
+description: "사용자 관리 시스템을 구축한다."
+```
+**문제**: Claude는 일반적인 CRUD 구현을 제시하지만, 우리 서비스는 **멀티‑테넌시**와 **OAuth2** 연동이 필요함. 결과물은 요구와 불일치.
+
+**해결책**: 사양을 RFC 형태로 상세히 기술  
+```yaml
+title: 사용자 관리 시스템
+summary: |
+  - 멀티‑테넌시 지원
+  - OAuth2 (Google, GitHub) 로그인
+  - 관리자 역할 기반 접근 제어
+constraints:
+  - 데이터는 PostgreSQL에 저장
+  - GDPR 준수 로그 기록
+acceptance_criteria:
+  - 422 응답 시 구조화된 오류 반환
+  - 토큰이 없을 경우 401 반환
+```
+
+#### 안티‑패턴 3 – 수용 기준 누락
+```yaml
+# 잘못된 사양
+feature: "파일 업로드"
+description: "사용자가 파일을 업로드할 수 있다."
+```
+**문제**: 파일 크기 제한, 바이러스 스캔, 오류 메시지 형식이 정의되지 않아 구현이 서로 다르게 동작.
+
+**해결책**: 최소 3개의 구체적인 수용 기준을 명시
+```yaml
+acceptance_criteria:
+  - 파일 크기가 10 MB 초과 시 413 응답과 JSON 오류 반환
+  - 바이러스가 검출되면 422 응답과 상세 오류 메시지 반환
+  - 성공 시 200 응답과 파일 URL 반환
+```
+
+#### 안티‑패턴 5 – 세션 컨텍스트 유지 가정
+```bash
+# Day 1
+claude> generate spec for "order processing"
+# Day 2
+claude> implement order processing based on previous spec
+```
+Claude는 Day 2에 Day 1 사양을 기억하지 못해 **다른** 주문 흐름을 설계한다.
+
+**해결책**: 사양을 **버전 관리**(Git)하고, 매 세션 시작 시 최신 사양 파일을 Claude에 전달한다.
+```bash
+claude> load spec file ./specs/order-processing-v2.yaml
+```
+
+### 13.3 안전하게 사용하기 위한 체크리스트
+| ✅ 체크 항목 | 설명 | 적용 시점 |
+|---|---|---|
+| **① 사양을 RFC 수준으로 작성** | 경계 컨텍스트, 제약, 비기능 요구사항을 모두 포함 | 사양 초안 작성 |
+| **② 도메인 지식 제공** | 비즈니스 도메인 모델·용어를 먼저 정리하고 Claude에 전달 | 사양 생성 전 |
+| **③ 최소 3개의 구체적 수용 기준** | 테스트 가능하고 검증 가능한 기준을 명시 | 사양 완성 전 |
+| **④ 구현 전 사양 검토·승인** | 팀 리뷰 후 ‘Approved’ 라벨 부착 | 구현 시작 전 |
+| **⑤ ‘Non‑Goals’ 섹션 포함** | 구현하지 않을 항목을 명시해 범위 오버를 방지 | 사양 작성 시 |
+| **⑥ 한 스펙에 하나의 관점** | API, DB, UI 등은 별도 문서·스펙으로 분리 | 사양 구조 설계 |
+| **⑦ 명확화 질문에 즉시 답변** | Claude가 질문하면 사양을 업데이트하고 답변 | 세션 중 언제든지 |
+| **⑧ 세션 시작 시 사양 파일 전달** | `claude load <file>` 로 최신 사양을 로드 | 매 세션 시작 |
+| **⑨ 구현 중 사양 변경 시 즉시 중단** | 새로운 요구가 나오면 사양을 업데이트하고 다시 검토 | 구현 진행 중 |
+| **⑩ 정기적인 사양 리뷰** | 월간/스프린트마다 사양 최신화 및 문서화 | 운영 단계 |
+
+위 체크리스트를 팀 프로세스에 포함시키면 **Spec‑Driven Development** 를 Claude Code와 함께 사용할 때 발생할 수 있는 주요 위험을 크게 줄일 수 있습니다.
+
+---
+
+## 14. FAQ
 **Q1. 가상 키가 없는 경우 어떻게 관리하나요?**  
 A. 기존 Anthropic API 키를 그대로 사용하되, 외부 프록시(예: **Envoy** + **Rate‑limit** 필터) 로 레이트와 예산을 제한할 수 있습니다. 그러나 가상 키 기반 관리가 가장 간편합니다.
 
@@ -257,19 +345,6 @@ A. 알림 파이프라인(예: Slack webhook) 로그를 확인하고, Prometheus
 
 **Q4. read‑once Hook이 활성화된 상태에서 파일을 수정하면 어떻게 동작하나요?**  
 A. 수정된 파일에 대해 diff‑only 모드가 켜져 있으면 변경된 라인만 전송하고, diff 라인 수가 `READ_ONCE_DIFF_MAX` 를 초과하면 전체 파일을 다시 읽습니다.
-
----
-
-## 14. 참고 자료 및 링크
-- **Bifrost GitHub**: https://github.com/maximhq/bifrost  
-- **Bifrost Docs**: https://bifrost.dev/docs  
-- **Claude Code 요금 정책**: https://www.anthropic.com/claude-code/pricing  
-- **OpenTelemetry**: https://opentelemetry.io/docs/  
-- **SigNoz**: https://signoz.io/docs/  
-- **Prometheus**: https://prometheus.io/docs/introduction/overview/  
-- **Grafana**: https://grafana.com/docs/  
-- **euno.news 기사**: https://euno.news/posts/ko/your-claude-code-bill-is-growing-heres-how-to-cont-eef842  
-- **read‑once Hook 상세**: https://euno.news/posts/ko/read-once-a-claude-code-hook-that-stops-redundant-04fe59  
 
 ---
 
@@ -302,14 +377,14 @@ Claude Code는 세션 전체를 **JSONL** 파일로 로컬에 저장합니다.
    - `--embed-assets` 플래그를 사용하면 외부 CSS/JS 없이 완전 독립형 파일이 생성됩니다.
 
 ### 툴 호출·타임라인 탐색
-- **툴 호출**: 도구 아이콘을 클릭하면 입력 파라미터와 반환값이 팝업으로 표시됩니다. 이는 디버깅이나 교육용으로 유용합니다.  
+- **툴 호출**: 도구 아이콘을 클릭하면 입력 파라미터와 반환값이 팝업으로 표시됩니다. 디버깅·교육에 유용합니다.  
 - **타임라인**: 화면 하단에 위치한 타임라인 바는 전체 세션 길이를 시각화합니다. 마우스 오버 시 현재 토큰 사용량과 모델 정보를 확인할 수 있습니다.  
 - **검색**: `Ctrl+F` 로 텍스트 검색이 가능하며, 검색 결과는 타임라인에 하이라이트됩니다.
 
 ### 배포·공유 팁
-- **이메일**: `replay.html`을 첨부하거나, 파일을 클라우드에 업로드 후 공유 링크를 삽입합니다.  
-- **블로그**: GitHub Pages 혹은 정적 호스팅 서비스에 업로드 후 `<iframe>` 으로 삽입하면 독자들이 직접 재생 가능.  
-- **내부 위키**: Confluence, Notion 등에서 HTML 블록을 지원한다면 직접 삽입하거나 링크를 제공하면 됩니다.
+- **이메일**: `replay.html`을 첨부하거나 클라우드에 업로드 후 공유 링크 삽입.  
+- **블로그**: GitHub Pages 혹은 정적 호스팅 서비스에 업로드 후 `<iframe>` 으로 삽입하면 독자가 직접 재생 가능.  
+- **내부 위키**: Confluence, Notion 등 HTML 블록을 지원한다면 직접 삽입하거나 링크 제공.
 
 ### 저장소
 - **GitHub**: https://github.com/es617/claude-replay  
@@ -317,10 +392,12 @@ Claude Code는 세션 전체를 **JSONL** 파일로 로컬에 저장합니다.
 ### 예시 재생
 - **Peripheral UART demo replay** (공식 저장소 README에 포함된 데모)  
 
-> *Claude‑replay는 외부 종속성이 없으며, 단일 HTML 파일만으로 세션을 완전 재현하므로, 팀 내 데모 공유와 교육에 최적화된 도구입니다.*
+> *Claude‑replay는 외부 종속성이 없으며, 단일 HTML 파일만으로 세션을 완전 재현하므로 팀 내 데모 공유와 교육에 최적화된 도구입니다.*
 
 ---
 
 ## 16. 추가 참고
 - **Claude‑replay GitHub**: https://github.com/es617/claude-replay  
 - **Show HN 포스트**: https://euno.news/posts/ko/show-hn-claude-replay-a-video-like-player-for-clau-e732bf  
+
+---
