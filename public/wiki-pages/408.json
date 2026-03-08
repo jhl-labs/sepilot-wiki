@@ -1,0 +1,33 @@
+{
+  "title": "Coinbase x402 SDK (Solana) 결제 검증 우회 취약점 (GHSA‑QR2G‑P6Q7‑W82M) 분석 및 대응 가이드",
+  "slug": "408",
+  "content": "\n## 1. 개요\n- **취약점 식별**: GHSA‑QR2G‑P6Q7‑W82M (Coinbase x402 SDK Solana SVM 결제 검증)  \n- **공개일**: 2026‑03‑07  \n- **CVSS 점수**: 9.9 (Critical) – 매우 높은 위험도 [🔗EUNO.NEWS](https://euno.news/posts/ko/ghsa-qr2g-p6q7-w82m-ghsa-qr2g-p6q7-w82m-critical-p-e0c755)  \n- **주요 영향**: Solana (SVM) 기반 자동 HTTP 402 결제 검증 로직이 서명 검증 오류(CWE‑347)로 인해 결제 요구 사항을 우회할 수 있음.\n\n## 2. 기술적 세부 정보\n| 항목 | 내용 |\n|------|------|\n| **취약점 위치** | `facilitator` 컴포넌트의 자동 HTTP 402 결제 검증 로직 |\n| **핵심 원인** | Ed25519 서명 검증 구현 오류 – 서명이 올바르지 않아도 검증을 통과함 (CWE‑347) |\n| **공격 벡터** | 네트워크 기반 위조 서명 요청 → 결제 서명 위조 후 API·리소스·디지털 상품 무단 접근 |\n| **피해 가능 시나리오** | 블록체인에 거래를 정산하지 않은 상태에서 유료 API, 컴퓨팅 리소스, 디지털 상품을 무료로 이용 |\n| **POC** | 공개된 Proof‑of‑Concept 존재 (⚠️ POC Available) [🔗EUNO.NEWS] |\n| **패치 날짜** | 2026‑03‑07 [🔗EUNO.NEWS] |\n\n## 3. 영향을 받는 제품 및 버전\n- **Node.js** – `@x402/svm` (npm) **< 2.6.0**  \n- **Python** – `x402` (PyPI) **< 2.3.0**  \n- **Go** – `github.com/coinbase/x402/go` **< 2.5.0**  \n\n위 버전을 사용하는 모든 **facilitator** 서비스가 직접적인 영향을 받음 [🔗EUNO.NEWS].\n\n## 4. 위험 평가 및 비즈니스 영향\n1. **재정 손실** – 결제 검증 회피를 통해 비용이 청구되지 않아 서비스 제공자가 손실을 입음.  \n2. **서비스 남용** – 무단 API 호출·컴퓨팅 리소스 사용으로 서비스 가용성 저하 및 과부하 위험.  \n3. **신뢰도 하락** – 블록체인 기반 결제 시스템의 무결성에 대한 신뢰 손상.  \n4. **법적·규제 위험** – 결제 회피가 금융 규제 위반으로 이어질 가능성.\n\n## 5. 탐지 및 모니터링 지침\n- **서명 로그 분석**  \n  - 서명 검증 요청에 포함된 `signature` 필드 값이 비정상적으로 반복되거나 변조된 경우 경고.  \n- **IP·거래량 감시**  \n  - 단일 IP에서 비정상적으로 높은 체인 거래량(특히 402 응답 후 결제 없이) 감지.  \n- **SIEM 연동**  \n  - 위 이벤트를 **Syslog**, **Elastic**, **Splunk** 등과 연동하여 실시간 알림 설정.  \n- **메트릭**  \n  - `facilitator.payment_verification_failure` (실패 카운트)와 `facilitator.unsettled_requests` (정산되지 않은 요청) 지표를 대시보드에 추가.\n\n## 6. 완화·대응 전략\n1. **패치 적용** – 아래 **업그레이드 절차**에 따라 최신 버전(≥ 2.6.0 / 2.3.0 / 2.5.0)으로 즉시 업데이트 [🔗EUNO.NEWS].  \n2. **임시 방어**  \n   - Solana (SVM) 결제 기능을 **비활성화**하고, 필요 시 **EVM‑전용 결제**로 전환.  \n   - 결제 검증 로직 앞에 **추가 서명 검증**(예: 서버‑사이드 Ed25519 검증 라이브러리) 적용.  \n3. **접근 제한**  \n   - 의심 IP 차단, **레이트 리밋**(예: 1분당 10건) 적용.  \n   - **WAF** 규칙 추가: `POST /payment/verify` 에서 비정상적인 `signature` 길이/형식 차단.  \n\n## 7. 업그레이드 절차\n### Node.js / TypeScript\n- `npm install @x402/svm@latest`  # 버전 2.6.0 이상 설치  \n- `package-lock.json` 혹은 `yarn.lock` 업데이트 후 서비스 재시작  \n\n### Python\n- `pip install x402 --upgrade`  # 버전 2.3.0 이상 설치  \n- 가상환경(`venv`/`conda`) 재활성화 후 애플리케이션 재시작  \n\n### Go\n- `go get github.com/coinbase/x402/go@v2.5.0`  # `go.mod`에 패치 버전 명시  \n- `go mod tidy` 실행 후 바이너리 재빌드 및 재배포  \n\n> **주의**: 모든 **facilitator** 서비스가 새 버전을 로드하도록 **재시작**이 필요합니다 [🔗EUNO.NEWS].\n\n## 8. 검증 및 테스트\n1. **서명 검증 정상 동작 확인**  \n   - 정상 서명과 변조 서명을 각각 전송해 `HTTP 402` 응답이 올바르게 반환되는지 확인.  \n2. **회귀 테스트**  \n   - 기존 결제 흐름(정상 결제, 실패 결제) 시나리오를 자동화 테스트 스위트에 포함.  \n3. **로드 테스트**  \n   - 정상 트래픽 수준에서 `facilitator`가 과부하 없이 서명 검증을 수행하는지 부하 테스트 수행.  \n\n## 9. 참고 자료 및 외부 링크\n- **GitHub Advisory Database** entry (GHSA‑QR2G‑P6Q7‑W82M)  \n- **OSV Vulnerability Record** for the same ID  \n- **Coinbase x402 Repository** – 공식 보안 권고 페이지  \n- 원본 **Dev.to** 기사 및 **EUNO.NEWS** 보고서 [🔗EUNO.NEWS]  \n\n## 10. 부록\n### CWE‑347 – Improper Verification of Cryptographic Signature\n- 서명 검증 로직이 입력값을 충분히 검증하지 않아 위조된 서명이 통과될 수 있음.  \n- 권장 방어: 검증 전 **입력 길이·형식** 검증, **표준 라이브러리** 사용, **시계열(Nonce)** 포함.\n\n### CVSS 계산 근거\n- **Base Score** 9.9 (Critical) – 공격 복잡도 낮음, 권한 상승 없음, 기밀성·무결성·가용성 모두 심각.  \n\n---  \n*이 문서는 자동 생성된 뉴스 인텔리전스를 기반으로 작성되었습니다. 추가적인 환경별 검토가 필요합니다.*",
+  "lastModified": "2026-03-08T00:27:29Z",
+  "author": "SEPilot AI",
+  "status": "draft",
+  "isDraft": true,
+  "isInvalid": false,
+  "tags": [
+    "보안",
+    "취약점",
+    "Coinbase",
+    "x402",
+    "Solana",
+    "SVM",
+    "Ed25519",
+    "CVE",
+    "GHSA"
+  ],
+  "history": [
+    {
+      "sha": "0e791d4",
+      "message": "chore: Issue Processor 실행 결과",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-03-08T00:27:29Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    }
+  ]
+}
