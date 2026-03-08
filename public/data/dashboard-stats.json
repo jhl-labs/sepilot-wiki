@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-08T11:46:06.808Z",
+  "collectedAt": "2026-03-08T12:49:33.503Z",
   "overview": {
-    "totalDocuments": 155,
-    "publishedDocuments": 84,
+    "totalDocuments": 157,
+    "publishedDocuments": 86,
     "draftDocuments": 71,
     "openRequests": 91,
     "closedRequests": 19,
-    "totalAIActions": 447
+    "totalAIActions": 448
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 256262
     },
     "last7d": {
-      "aiActions": 135,
+      "aiActions": 136,
       "documentsCreated": 45,
       "documentsModified": 43,
       "tavilyApiCalls": 135,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-08T12:09:31.650Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-08T09:05:29.621Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": 43760,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2016
-    },
-    {
-      "timestamp": "2026-03-07T18:12:21.161Z",
-      "actionType": "generate",
-      "issueNumber": 410,
-      "documentTitle": "클라이언트‑사이드 WebP 변환기 구현 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 52853,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2376
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 435,
+      "totalActions": 436,
       "totalEstimatedTokens": 297458,
       "avgDurationMs": 53555
     },
