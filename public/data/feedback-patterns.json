@@ -1,33 +1,51 @@
 {
-  "lastAnalyzed": "2026-03-01T09:05:08.800Z",
-  "totalFeedbackEntries": 67,
+  "lastAnalyzed": "2026-03-08T09:05:29.617Z",
+  "totalFeedbackEntries": 108,
   "patterns": [
     {
-      "pattern": "문서 URL 변경·깨짐 알림이 반복적으로 발생 (예: \"[Wiki Maintenance] [URL 변경]\", \"[URL 깨짐]\")",
+      "pattern": "동일 문서에 대해 서로 다른 업데이트 내용이 여러 차례 별도 modify 항목으로 기록됨 (예: “Claude Code 비용 관리와 실시간 모니터링 가이드”가 5번 이상 중복)",
       "frequency": 5,
       "affectedAgents": [
         "writer",
         "editor"
       ],
-      "suggestedPromptFix": "프롬프트에 ‘문서 수정 시 URL 검증’ 항목을 명시하고, URL이 변경되거나 깨졌을 경우 반드시 최신 링크를 확인·업데이트하도록 지시한다. 예시: \"수정 전후에 해당 문서의 모든 외부·내부 링크가 정상 작동하는지 확인하고, 깨진 URL이 있으면 최신 URL로 교체해 주세요.\""
+      "suggestedPromptFix": "프롬프트에 ‘문서 제목이 이미 수정 대기 중이면 새 항목을 추가하지 말고 기존 항목에 병합하거나 최신 업데이트만 남겨라’라는 규칙을 명시하고, 각 수정 요청에 고유한 버전 태그(예: v1.2‑update‑2026‑03‑08) 를 포함하도록 지시한다."
     },
     {
-      "pattern": "동일 문서에 대한 연속적인 ‘[업데이트]’ 수정 요청이 과도하게 누적 (특히 “MCP (Model Context Protocol) 완벽 가이드”가 7회 이상) ",
-      "frequency": 7,
+      "pattern": "‘[Wiki Maintenance] [URL 변경]’ 형식의 URL 교체 요청이 여러 문서에 반복적으로 등장",
+      "frequency": 9,
       "affectedAgents": [
-        "writer",
-        "editor"
+        "editor",
+        "maintainer"
       ],
-      "suggestedPromptFix": "프롬프트에 ‘동일 문서에 대한 연속 업데이트는 1회에 요약된 변경 사항만 포함하도록’ 지시하고, 여러 개별 업데이트가 필요할 경우 하나의 커밋/수정에 통합하도록 요청한다. 예시: \"여러 차례에 걸친 업데이트를 하나의 수정 요청으로 합쳐, 변경 내용 요약과 함께 최신 버전을 제공해 주세요.\""
+      "suggestedPromptFix": "프롬프트에 ‘URL 변경 작업은 한 번에 한 문서만 처리하고, 동일 URL이 이미 요청된 경우 건너뛰라’는 조건을 추가하고, 변경 대상 문서와 새 URL을 명시적으로 매핑하는 JSON 입력 형식을 요구한다."
     },
     {
-      "pattern": "동일 제목·동일 내용의 수정 로그가 중복 기록됨 (예: “Continuous AI – 인간이 AI 오류를 검증하는 방법”이 4회 동일하게 기록) ",
+      "pattern": "‘OpenTelemetry 입문 – 관측성 통합 가이드’에 대한 수정 요청이 여러 번 발생",
       "frequency": 4,
       "affectedAgents": [
         "writer",
         "editor"
       ],
-      "suggestedPromptFix": "프롬프트에 ‘중복된 수정 로그는 생성하지 말고, 이미 존재하는 최신 수정 항목을 확인 후 필요 시 내용만 갱신하도록’ 지시한다. 예시: \"이미 존재하는 동일 제목의 수정 로그가 있으면 새 로그를 만들지 말고, 기존 로그에 최신 변경 사항을 덧붙여 주세요.\""
+      "suggestedPromptFix": "프롬프트에 ‘같은 문서에 대한 연속 수정이 필요할 경우, 이전 수정 내용과 차이점을 요약한 ‘change‑log’ 필드를 포함하라’고 명시하고, 중복 수정 방지를 위해 문서 ID와 최신 버전 번호를 검증하도록 한다."
+    },
+    {
+      "pattern": "‘Agentic FaaS와 MDL – 차세대 백엔드 아키텍처’에 대한 중복 수정 요청",
+      "frequency": 4,
+      "affectedAgents": [
+        "writer",
+        "editor"
+      ],
+      "suggestedPromptFix": "프롬프트에 ‘문서 제목이 동일하면 기존 수정 항목을 업데이트하고, 새 제목이 필요하면 ‘subtitle’ 필드에 명시하라’는 지시를 포함하고, 수정 전후의 차이점을 ‘diff’ 형태로 제공하도록 요구한다."
+    },
+    {
+      "pattern": "‘MCP (Model Context Protocol) 완벽 가이드’와 ‘멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드’ 등 특정 가이드 문서가 3회 이상 중복 수정됨",
+      "frequency": 3,
+      "affectedAgents": [
+        "writer",
+        "editor"
+      ],
+      "suggestedPromptFix": "프롬프트에 ‘동일 가이드 문서에 대한 수정이 연속으로 들어올 경우, 이전 수정 기록을 조회하고 중복된 내용은 제외한다’는 규칙을 추가하고, 각 수정 요청에 ‘revision_id’와 ‘previous_revision_id’ 를 명시하도록 한다."
     }
   ]
 }
