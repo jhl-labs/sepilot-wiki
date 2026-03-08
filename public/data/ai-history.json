@@ -1,6 +1,119 @@
 {
   "entries": [
     {
+      "id": "2ff971d7-37e0-4159-8ce8-9d995a4a94fa",
+      "timestamp": "2026-03-08T06:18:50.551Z",
+      "actionType": "modify",
+      "issueNumber": 421,
+      "issueTitle": " [업데이트] 구조화된 블랙보딩을 통한 에이전트 루프 설계",
+      "documentSlug": "ai/ai-code-review-agent-guide",
+      "documentTitle": "AI 코드 리뷰 에이전트 구축 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 구조화된 블랙보딩을 통한 에이전트 루프 설계\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 104,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "698c236d-0a1b-49df-be07-739694dfa386",
+      "timestamp": "2026-03-08T06:18:16.150Z",
+      "actionType": "modify",
+      "issueNumber": 420,
+      "issueTitle": " [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트",
+      "documentSlug": "ai/ollama-claude-code",
+      "documentTitle": "Ollama와 Claude Code 연결 방법",
+      "summary": "문서 수정 요청 처리: \" [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 27,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "543f2865-4d03-4442-b64d-5c48d294924b",
+      "timestamp": "2026-03-08T06:17:59.520Z",
+      "actionType": "generate",
+      "issueNumber": 419,
+      "issueTitle": "문서 요청 #419",
+      "documentSlug": "ai/419",
+      "documentTitle": "NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드",
+      "summary": "새 문서 \"NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3446
+            },
+            {
+              "step": "outline",
+              "durationMs": 7892
+            },
+            {
+              "step": "write",
+              "durationMs": 19795
+            },
+            {
+              "step": "review",
+              "durationMs": 7227
+            }
+          ],
+          "totalDurationMs": 38360,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1746,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "fb2e2ae6-cc77-48a7-b120-92084242cd65",
+      "timestamp": "2026-03-08T06:17:18.135Z",
+      "actionType": "modify",
+      "issueNumber": 418,
+      "issueTitle": " [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 125
+      }
+    },
+    {
+      "id": "00e01349-484d-42b9-b460-7ed34f786fc8",
+      "timestamp": "2026-03-08T06:16:34.822Z",
+      "actionType": "modify",
+      "issueNumber": 417,
+      "issueTitle": " [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 32,
+        "deletions": 0
+      }
+    },
+    {
       "id": "f40d7524-0dad-47fa-b9c0-64996f27f785",
       "timestamp": "2026-03-08T06:15:36.798Z",
       "actionType": "maintain",
@@ -10376,5 +10489,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-08T06:15:36.798Z"
+  "lastUpdated": "2026-03-08T06:18:50.551Z"
 }
