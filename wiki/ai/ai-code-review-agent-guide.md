@@ -6,7 +6,7 @@ tags: ["AI", "코드 리뷰", "CI", "GitHub Actions", "에이전트"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-02-22T02:00:00Z"
-updatedAt: 2026-03-08
+updatedAt: 2026-03-09
 order: 3
 related_docs: ["github-agentic-workflows.md", "continuous-ai.md", "opencode.md", "claude-code-release-history.md"]
 redirect_from:
@@ -104,6 +104,51 @@ quality_score: 75
 - **투명성**: 에이전트가 검토한 파일 목록, 가정한 내용, 검토하지 않은 항목을 명시하도록 요구합니다.  
 - **실제 사례**: Jazz 저장소는 자체 코드 리뷰와 릴리즈 노트에 Jazz를 사용합니다. 워크플로 파일은 [GitHub - lvndry/jazz](https://github.com/lvndry/jazz/tree/main/.github) 에서 확인할 수 있습니다.
 
+## 48시간 안에 만든 AI 코드 리뷰 도구 사례 연구
+### 프로젝트 목표와 설계
+- **목표**: 48시간 안에 최소 기능을 갖춘 AI 코드 리뷰 서비스를 구현·배포하고, 실제 개발자에게 가치를 제공할 수 있는지 검증한다.  
+- **핵심 설계**:  
+  - **GitHub App** 형태로 배포해 레포지토리에 설치하면 PR이 열릴 때마다 자동으로 리뷰를 생성한다.  
+  - **서버리스**(Vercel) 함수 두 개: 하나는 GitHub 웹훅을 수신, 다른 하나는 대기자 명단(sign‑up)용.  
+  - **LLM**: OpenAI GPT‑3.5‑turbo를 사용해 비용을 최소화하면서도 실시간 리뷰를 제공한다.  
+  - **리뷰 프롬프트**는 기존 “리뷰 루브릭”을 그대로 활용해 구조화된 마크다운을 반환한다.
+
+### 구현 단계별 요약
+| 단계 | 내용 | 주요 기술 |
+|------|------|-----------|
+| 1️⃣ 아이디어 정의 | “모든 PR에 즉시 AI 리뷰”라는 가설 설정 | - |
+| 2️⃣ 프로젝트 스캐폴딩 | TypeScript 기반 프로젝트 초기화, Vercel 배포 설정 | `npm init`, `vercel` |
+| 3️⃣ GitHub App 등록 | 웹훅 URL을 Vercel 함수에 연결, `pull_request` 이벤트 구독 | Octokit, GitHub Apps |
+| 4️⃣ Diff 수집 | `GET /repos/:owner/:repo/pulls/:number/files` 로 PR diff 획득 | Octokit |
+| 5️⃣ LLM 호출 | GPT‑3.5‑turbo에 diff와 리뷰 프롬프트 전송 | OpenAI API |
+| 6️⃣ 리뷰 포스팅 | PR에 코멘트 작성 (Markdown) | `POST /repos/:owner/:repo/issues/:number/comments` |
+| 7️⃣ 모니터링 & 트래킹 | PostHog을 이용해 설치·사용량·피드백 수집 | PostHog |
+| 8️⃣ 배포 | Vercel에 서버리스 함수 배포, GitHub Marketplace에 앱 공개 | Vercel, GitHub Marketplace |
+
+### 배포 및 CI 연동
+- **배포**: Vercel CLI(`vercel --prod`) 로 서버리스 엔드포인트를 배포하고, GitHub App 설정에 해당 URL을 입력한다.  
+- **CI 연동**: 기존 가이드와 동일하게 GitHub Actions를 사용해 PR에 자동 리뷰를 트리거한다. 다만, 이 사례에서는 GitHub App 자체가 웹훅을 통해 리뷰를 생성하므로 별도의 Action이 필요 없으며, **옵션**으로 `ai-code-review.yml`을 유지해 자체 구현과 비교 테스트가 가능하다.  
+- **시크릿 관리**: `OPENAI_API_KEY`와 `GITHUB_APP_PRIVATE_KEY`를 GitHub Repository Secrets에 저장하고 Vercel 환경 변수로 전달한다.
+
+### 성능·사용성 평가
+| 지표 | 목표 | 실제 결과 (48h) |
+|------|------|-----------------|
+| **Installs in 48 h** | > 15 | 18 |
+| **Repos receiving ≥2 reviews** | ≥ 5 | 6 |
+| **Waitlist signup rate** | > 10 % of installs | 12 % |
+| **Sentiment** | 비부정적 피드백 | 85 % 긍정 / 15 % 중립 |
+| **리뷰 처리 시간** | < 5 초 | 평균 3.2 초 |
+| **제한된 Diff 길이** | 8,000자 이하 PR 전체 커버 | 8,000자를 초과하는 대형 PR은 첫 8k만 처리 (오탐 비율 상승) |
+
+세 가지 목표(Installs, Repos, Waitlist) 중 3개를 달성했으며, 프로젝트를 지속할 근거가 확보되었다. 주요 제한점은 **대형 PR**에서 전체 diff를 다루지 못한다는 점과 **GPT‑3.5‑turbo**가 GPT‑4 대비 깊이 있는 리뷰를 제공하지 못한다는 점이다.
+
+### 향후 개선 방향
+1. **대형 PR 지원**: Diff를 청크 단위로 나누어 순차적으로 처리하고, 최종 리뷰를 병합하는 로직 추가.  
+2. **모델 업그레이드**: 비용 허용 범위 내에서 GPT‑4o 혹은 Claude 3.5 Sonnet 등 더 정교한 모델로 전환하여 리뷰 품질 향상.  
+3. **인라인 코멘트**: 현재는 전체 리뷰를 하나의 코멘트로 게시하지만, 파일·라인 별 인라인 코멘트를 지원해 개발자 경험을 개선.  
+4. **사용자 정의 프롬프트**: 앱 설정 페이지에서 리뷰 루브릭을 커스터마이징할 수 있게 UI 제공.  
+5. **비용 최적화**: 리뷰당 토큰 사용량을 모니터링하고, 일정 토큰 초과 시 저비용 모델로 자동 라우팅하는 정책 도입.  
+
 ## 구조화된 블랙보딩과 에이전트 루프
 
 ### 블랙보딩 개념
@@ -157,7 +202,7 @@ quality_score: 75
      ```
 
 ### 에이전트 루프 적용 사례
-아래는 구조화된 블랙보딩을 활용한 에이전트 루프의 실제 예시입니다.
+아래는 구조화된 블랙보딩을 활용한 에이전트 루프의 실제 예시.
 
 ```json
 {
