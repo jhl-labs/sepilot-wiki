@@ -1,34 +1,34 @@
 {
-  "collectedAt": "2026-03-09T20:47:12.069Z",
+  "collectedAt": "2026-03-09T21:45:27.660Z",
   "overview": {
-    "totalDocuments": 167,
-    "publishedDocuments": 92,
-    "draftDocuments": 75,
+    "totalDocuments": 178,
+    "publishedDocuments": 91,
+    "draftDocuments": 87,
     "openRequests": 98,
     "closedRequests": 19,
-    "totalAIActions": 474
+    "totalAIActions": 476
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 25,
+      "aiActions": 27,
       "documentsCreated": 7,
-      "documentsModified": 12,
+      "documentsModified": 13,
       "tavilyApiCalls": 21,
       "tavilyResults": 51,
       "estimatedTokens": 15187,
       "totalPipelineDurationMs": 330200
     },
     "last7d": {
-      "aiActions": 160,
+      "aiActions": 161,
       "documentsCreated": 52,
       "documentsModified": 55,
       "tavilyApiCalls": 156,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-09T21:08:26.961Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-09T21:03:43.871Z",
+      "actionType": "recover",
+      "issueNumber": 442,
+      "documentTitle": "chore(ci): bump docker/build-push-action from 6 to 7",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-09T18:23:29.987Z",
       "actionType": "generate",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-09T00:47:17.794Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-09T00:27:07.114Z",
-      "actionType": "generate",
-      "issueNumber": 426,
-      "documentTitle": "홈랩 AI 스택 2026 – 배포 순서와 리소스 플래닝 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 42547,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1904
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 462,
+      "totalActions": 464,
       "totalEstimatedTokens": 312645,
       "avgDurationMs": 53209
     },
