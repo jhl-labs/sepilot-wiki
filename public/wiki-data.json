@@ -1610,18 +1610,18 @@
       ]
     },
     {
-      "title": "Dependabot PR에서 라벨이 없을 때 해결 방법",
-      "slug": "troubleshooting/dependabot-missing-label",
-      "content": "\n# Dependabot PR에서 `dependencies` 라벨이 없을 때\n\nDependabot이 자동으로 생성한 Pull Request에 `dependencies` 라벨을 붙이지 못한다는 오류 메시지를 볼 수 있습니다.\n\n```\nThe following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\n\nPlease fix the above issues or remove invalid values from `dependabot.yml`.\n```\n\n## 원인\n\n1. **라벨이 레포지토리에 존재하지 않음** – `dependencies` 라벨이 아직 생성되지 않았습니다.\n2. **`dependabot.yml`에 잘못된 라벨 이름이 지정됨** – 라벨 이름에 오타가 있거나, 존재하지 않는 라벨을 지정했습니다.\n\n## 해결 단계\n\n### 1️⃣ `dependencies` 라벨 생성\n1. 레포지토리의 **Issues** 탭으로 이동합니다.\n2. 오른쪽 사이드바에서 **Labels** 를 클릭합니다.\n3. **New label** 버튼을 눌러 다음과 같이 입력합니다:\n   - **Name**: `dependencies`\n   - **Description** (선택): `Pull requests that update dependencies`\n   - **Color**: 원하는 색상 (예: `#0E8A16`)\n4. **Create** 를 클릭해 라벨을 저장합니다.\n\n### 2️⃣ `dependabot.yml` 검증 및 수정\n1. 레포지토리 루트에 있는 `.github/dependabot.yml` 파일을 엽니다.\n2. `labels:` 섹션에 `dependencies` 라벨이 정확히 명시되어 있는지 확인합니다.\n   ```yaml\n   version: 2\n   updates:\n     - package-ecosystem: \"npm\"\n       directory: \"/\"\n       schedule:\n         interval: \"weekly\"\n       labels:\n         - \"dependencies\"   # ← 여기 라벨 이름이 정확해야 함\n   ```\n3. 라벨 이름에 오타가 있으면 `dependencies` 로 수정하고 파일을 커밋합니다.\n\n### 3️⃣ 변경 사항 적용 확인\n1. 라벨을 만든 뒤 **Dependabot**이 새 PR을 생성하거나 기존 PR을 다시 열면 `dependencies` 라벨이 자동으로 붙어야 합니다.\n2. 라벨이 여전히 보이지 않으면 **GitHub Actions** 로그를 확인하고, 캐시된 워크플로우가 있는 경우 재시작(`@dependabot rebase`)합니다.\n\n## 추가 팁\n- 여러 라벨을 사용하고 싶다면 `labels:` 배열에 추가 라벨을 나열하면 됩니다.\n- 라벨 관리 권한이 없는 경우 레포지토리 관리자에게 라벨 생성을 요청하세요.\n\n---\n\n*이 문서는 Dependabot 라벨 문제를 빠르게 해결하기 위한 체크리스트 역할을 합니다. 필요에 따라 레포지토리 정책에 맞게 수정하세요.*",
-      "lastModified": "2026-03-09T21:08:07.144Z",
+      "title": "Dependabot 라벨 누락 문제 해결 방법",
+      "slug": "troubleshooting/dependabot-labels",
+      "content": "\n# Dependabot 라벨 누락 문제 해결 방법\n\n## 상황 설명\nDependabot이 PR에 자동으로 라벨을 붙이려고 할 때, 다음과 같은 오류 메시지를 볼 수 있습니다.\n\n```\nThe following labels could not be found: `dependencies`, `github-actions`. Please create them before Dependabot can add them to a pull request.\n```\n\n이는 레포지토리 내에 `dependencies` 와 `github-actions` 라벨이 존재하지 않아 발생합니다. 라벨이 없으면 Dependabot이 PR에 라벨을 추가할 수 없습니다.\n\n## 해결 단계\n\n1. **GitHub 웹 UI를 이용해 라벨 생성**\n   - 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.\n   - 좌측 사이드바에서 **Labels** 를 선택합니다.\n   - **New label** 버튼을 클릭하고 아래와 같이 라벨을 추가합니다.\n     - **Name**: `dependencies`\n       - **Color**: 원하는 색 (예: `#1d76db`)\n       - **Description** (선택): `Dependabot dependency updates`\n     - **Name**: `github-actions`\n       - **Color**: 원하는 색 (예: `#0e8a16`)\n       - **Description** (선택): `GitHub Actions related changes`\n\n2. **CLI 혹은 API를 이용해 라벨 생성 (선택 사항)**\n   - GitHub CLI (`gh`) 를 사용한다면:\n     ```bash\n     gh label create dependencies --color 1d76db --description \"Dependabot dependency updates\"\n     gh label create github-actions --color 0e8a16 --description \"GitHub Actions related changes\"\n     ```\n   - REST API 를 이용할 경우, `POST /repos/{owner}/{repo}/labels` 엔드포인트에 위와 동일한 payload 를 전송합니다.\n\n3. **라벨이 정상적으로 생성됐는지 확인**\n   - **Issues → Labels** 페이지에서 두 라벨이 리스트에 보이는지 확인합니다.\n   - 기존 Dependabot PR 를 새로고침 하면, 이제 라벨이 자동으로 붙어 있는 것을 확인할 수 있습니다.\n\n## 참고 자료\n- Dependabot 공식 문서: [Dependabot configuration](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-dependency-updates)\n- GitHub CLI 라벨 관리: [gh label](https://cli.github.com/manual/gh_label)\n\n## 추가 팁\n- 라벨 색상은 팀 내에서 일관성을 유지하도록 정해두면 PR 관리가 쉬워집니다.\n- 라벨 설명을 적어두면 새로운 팀원이 라벨의 목적을 빠르게 이해할 수 있습니다.\n\n---\n*이 문서는 Dependabot 라벨 문제를 해결하기 위한 가이드이며, 필요에 따라 업데이트될 수 있습니다.*",
+      "lastModified": "2026-03-09T21:04:59.603Z",
       "status": "draft",
       "isDraft": true,
       "isInvalid": false,
       "tags": [
-        "Dependabot",
-        "labels",
-        "GitHub Actions",
-        "CI"
+        "dependencies",
+        "github-actions",
+        "dependabot",
+        "labels"
       ],
       "history": []
     },
@@ -2464,6 +2464,22 @@
       ]
     },
     {
+      "title": "chore(deps): bump dompurify from 3.3.1 to 3.3.2",
+      "slug": "dependencies/dompurify-bump-3.3.2",
+      "content": "\n# DOMPurify 3.3.2 업데이트\n\n- **업데이트 내용**: `dompurify` 패키지를 **3.3.1** → **3.3.2** 로 버전 업그레이드합니다.\n- **PR**: `chore(deps): bump dompurify from 3.3.1 to 3.3.2` (Dependabot)\n- **Release notes** (DOMPurify 3.3.2) \n  - jsdom 의 raw‑text 태그 파싱 버그로 인한 우회 가능성 수정\n  - 커스텀 엘리먼트 사용 시 발생하던 prototype pollution 문제 해결 ([@christos‑eth](https://github.com/christos-eth))\n  - `_isValidAttribute` 의 느슨한 설정 파싱 오류 수정 ([@christos‑eth](https://github.com/christos-eth))\n  - 여러 의존성 버전 업데이트 및 정리 ([@Rotzbua](https://github.com/Rotzbua))\n  - 의존성 업데이트 후 테스트 스위트 오류 수정 ([@Rotzbua](https://github.com/Rotzbua))\n\n> **출처**: [DOMPurify 3.3.2 릴리즈 노트](https://github.com/cure53/DOMPurify/releases/tag/3.3.2) \n\n# Dependabot 라벨 문제\n\nPR에 자동으로 붙여야 할 `dependencies` 라벨이 현재 레포지토리에서 정의되지 않아 아래와 같은 오류가 발생했습니다.\n\n```\nThe following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\n```\n\n## 해결 방안\n1. **라벨 생성**\n   - 레포지토리 설정 → *Labels* 페이지에서 `dependencies` 라벨을 새로 만듭니다.\n   - 색상은 자유롭게 선택 (예: `#0366d6`).\n2. **dependabot.yml 검토**\n   - `.github/dependabot.yml` 파일에 `labels:` 섹션이 올바르게 지정되어 있는지 확인합니다.\n   - 예시:\n     ```yaml\n     version: 2\n     updates:\n       - package-ecosystem: \"npm\"\n         directory: \"/\"\n         schedule:\n           interval: \"weekly\"\n         labels:\n           - \"dependencies\"\n     ```\n3. **PR 재생성**\n   - 라벨이 정상적으로 추가되면 Dependabot이 자동으로 `dependencies` 라벨을 붙이고, 기존 PR을 재시도합니다.\n\n# 참고 자료\n- DOMPurify 공식 레포지토리: https://github.com/cure53/DOMPurify\n- Dependabot 라벨 설정 가이드: https://docs.github.com/en/github/administering-a-repository/managing-labels-in-a-repository\n\n---\n*이 문서는 Dependabot 의존성 업데이트와 라벨 관리에 대한 내부 가이드로, 향후 비슷한 상황에서 빠르게 대응하기 위해 작성되었습니다.*",
+      "lastModified": "2026-03-09T21:04:10.213Z",
+      "status": "draft",
+      "isDraft": true,
+      "isInvalid": false,
+      "tags": [
+        "dependabot",
+        "dompurify",
+        "dependency-update",
+        "labels"
+      ],
+      "history": []
+    },
+    {
       "title": "react-router-dom 7.13.1 bump no longer needed",
       "slug": "dependencies/react-router-dom-7-13-1-bump-no-longer-needed",
       "content": "\n# react-router-dom 7.13.1 bump no longer needed\n\nA Dependabot pull request was opened to update **react-router-dom** from version `7.13.0` to `7.13.1` in the *react* group.\n\n## Original intent\n- Update `react-router-dom` to `7.13.1`.\n- Corresponding changelog entry indicated a patch change that only updated the `react-router` dependency.\n\n## Current status\nThe Dependabot bot later commented:\n> \"Looks like react-router-dom is updatable in another way, so this is no longer needed.\"\n\nBecause the package can be upgraded through an alternative workflow, the PR is no longer required and should be closed.\n\n## Action required\n- Close the Dependabot PR.\n- Ensure any alternative update method is applied as needed.\n\n*This document records the decision for future reference.*\n",
@@ -2548,6 +2564,22 @@
           "deletions": 0
         }
       ]
+    },
+    {
+      "title": "Dependabot @types/node 업데이트 PR 취소 안내",
+      "slug": "dependabot/@types-node-update-cancelled",
+      "content": "\n# Dependabot @types/node 업데이트 PR 취소 안내\n\n## 배경\n- Dependabot이 **@types/node** 패키지를 `25.3.0` → `25.3.3` 으로 업데이트하는 그룹 PR을 생성했습니다.\n- 이후 시스템 로그에 **\"Looks like @types/node is updatable in another way, so this is no longer needed.\"** 라는 피드백이 달렸습니다.\n- 이는 동일한 의존성을 다른 경로(예: 별도 PR, 수동 업데이트 등)에서 이미 해결했기 때문에 현재 PR은 필요 없음을 의미합니다.\n\n## 현재 상태\n- 해당 Dependabot PR은 **폐기**되었습니다.\n- 자동 머지 및 라벨링 작업이 중단되었습니다.\n- 레포지토리의 `dependabot.yml` 설정은 그대로 유지되며, 향후 새로운 업데이트가 필요하면 자동으로 새 PR이 생성됩니다.\n\n## 조치 사항\n1. **PR 폐기 확인**: GitHub UI에서 PR이 `Closed` 상태인지 확인합니다.\n2. **필요 시 수동 업데이트**: 만약 아직 적용되지 않은 최신 버전이 있다면, 직접 `npm install @types/node@latest --save-dev` 명령어로 업데이트합니다.\n3. **라벨 관리**: `dependencies` 라벨이 존재하지 않아 발생한 오류는 레포지토리 설정에서 라벨을 추가하거나 `dependabot.yml`에서 라벨 지정 부분을 수정합니다.\n4. **CI/CD 검증**: 폐기된 PR과 관련된 워크플로우가 정상적으로 실행되는지 CI 로그를 확인합니다.\n\n## 참고 자료\n- Dependabot PR 로그 및 피드백: \"Looks like @types/node is updatable in another way, so this is no longer needed.\" (시스템 메시지) \n- Dependabot 공식 문서: [About Dependabot version updates](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-version-updates) \n- 관련 이슈 예시: [dependabot-core #10019](https://github.com/dependabot/dependabot-core/issues/10019) \n\n---\n*이 문서는 현재 상황을 기준으로 작성된 초안(draft)이며, 필요에 따라 업데이트될 수 있습니다.*",
+      "lastModified": "2026-03-09T21:08:03.460Z",
+      "status": "draft",
+      "isDraft": true,
+      "isInvalid": false,
+      "tags": [
+        "dependabot",
+        "@types/node",
+        "업데이트",
+        "PR 취소"
+      ],
+      "history": []
     },
     {
       "title": "Coinbase x402 SDK (Solana) 결제 검증 우회 취약점 (GHSA‑QR2G‑P6Q7‑W82M) 분석 및 대응 가이드",
@@ -2640,6 +2672,21 @@
           "deletions": 0
         }
       ]
+    },
+    {
+      "title": "Dependabot 라벨 `dependencies` 누락 문제 해결 방법",
+      "slug": "issues/dependabot-label-missing",
+      "content": "\n# 문제 개요\n\nDependabot이 Pull Request에 `dependencies` 라벨을 자동으로 붙이려 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 아래와 같은 오류가 발생했습니다.\n\n```\nThe following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\n```\n\n이 오류는 **dependabot.yml** 파일에 `dependencies` 라벨이 지정되어 있으나, 실제 레포지토리 라벨 목록에 해당 라벨이 없을 때 발생합니다.\n\n# 해결 방법\n\n1. **GitHub 레포지토리 설정에서 라벨 생성**\n   - 레포지토리 메인 페이지 → **Issues** 탭 → **Labels** 메뉴로 이동합니다.\n   - **New label** 버튼을 클릭합니다.\n   - **Name**에 `dependencies` 를 입력하고, 색상은 원하는 대로 선택합니다 (예: `#5319e7`).\n   - **Create label**을 눌러 라벨을 생성합니다.\n\n2. **dependabot.yml 검토 (선택 사항)**\n   - `.github/dependabot.yml` 파일을 열어 `labels:` 섹션에 `dependencies` 라벨이 명시되어 있는지 확인합니다.\n   - 라벨 이름이 정확히 일치해야 합니다. 오타가 있으면 수정합니다.\n\n3. **PR 재시도**\n   - 라벨을 만든 뒤, 기존 Dependabot PR에 코멘트 `@dependabot rebase` 혹은 `@dependabot recreate` 를 남겨 PR을 다시 실행합니다.\n   - 라벨이 정상적으로 붙는지 확인합니다.\n\n# 참고 자료\n- [Dependabot 공식 문서 – 라벨링](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/managing-dependabot-updates#adding-labels-to-dependabot-pull-requests) (공식 문서를 참조해주세요)\n- Issue에서 제공된 **Dependabot** PR 예시와 릴리즈 노트\n\n# 요약\n- `dependencies` 라벨이 없으면 Dependabot이 PR에 라벨을 추가하지 못합니다.\n- 레포지토리 **Issues → Labels** 에서 라벨을 직접 생성하면 문제를 해결할 수 있습니다.\n- 라벨 생성 후 Dependabot PR을 재시도하면 정상 동작합니다.\n\n---\n*이 문서는 Dependabot 라벨 누락 문제에 대한 가이드이며, 필요에 따라 업데이트하십시오.*",
+      "lastModified": "2026-03-09T21:04:19.744Z",
+      "status": "draft",
+      "isDraft": true,
+      "isInvalid": false,
+      "tags": [
+        "dependabot",
+        "labels",
+        "github-actions"
+      ],
+      "history": []
     },
     {
       "title": "bun과 pnpm, npm의 차이",
@@ -4716,6 +4763,22 @@
       ]
     },
     {
+      "title": "Dependabot 라벨 오류 해결 방법",
+      "slug": "devops/dependabot-label-fix",
+      "content": "\n# Dependabot 라벨 오류 해결 방법\n\nGitHub Actions에서 Dependabot이 자동으로 생성한 Pull Request에 라벨을 붙이려 할 때, 다음과 같은 오류 메시지를 볼 수 있습니다.\n\n```\nThe following labels could not be found: `dependencies`, `github-actions`. Please create them before Dependabot can add them to a pull request.\n```\n\n이 오류는 레포지토리 내에 해당 라벨이 존재하지 않을 때 발생합니다. 라벨을 미리 생성하거나, `dependabot.yml` 파일에서 라벨 지정 부분을 제거하면 문제를 해결할 수 있습니다.\n\n## 해결 방법\n\n### 1. 라벨 직접 생성 (추천)\n1. 레포지토리 페이지에서 **Issues → Labels** 로 이동합니다.\n2. **New label** 버튼을 클릭합니다.\n3. 아래와 같이 라벨을 생성합니다.\n   - **Name**: `dependencies`\n   - **Color**: 원하는 색 (예: `#0366d6`)\n   - **Description**: `Dependabot dependency updates`\n4. 동일한 방법으로 `github-actions` 라벨도 생성합니다.\n   - **Name**: `github-actions`\n   - **Description**: `Dependabot GitHub Actions updates`\n\n> 라벨 생성은 레포지토리 관리자 권한이 필요합니다.\n\n### 2. `dependabot.yml`에서 라벨 지정 제거\n`dependabot.yml` 파일에 `labels:` 섹션이 있다면 해당 라벨 이름을 삭제하거나 주석 처리합니다.\n```yaml\n# .github/dependabot.yml\nversion: 2\nupdates:\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"daily\"\n    # labels:\n    #   - \"dependencies\"\n    #   - \"github-actions\"\n```\n이후 커밋을 푸시하면 Dependabot은 라벨 없이 PR을 생성합니다.\n\n### 3. 라벨 자동 생성 스크립트 활용 (고급)\nGitHub CLI(`gh`)를 사용해 스크립트로 라벨을 자동 생성할 수 있습니다.\n```bash\ngh label create dependencies --color 0366d6 --description \"Dependabot dependency updates\"\ngh label create github-actions --color 0e8a16 --description \"Dependabot GitHub Actions updates\"\n```\nCI 파이프라인 초기에 실행하도록 설정하면 라벨 누락 문제를 방지할 수 있습니다.\n\n## 참고 자료\n- Dependabot PR 라벨 오류 이슈: [SebastienMelki/sebuf#140](https://dependabot.ecosyste.ms/hosts/GitHub/repositories/SebastienMelki/sebuf/issues/140) (출처)\n- Docker `login-action` v4 릴리즈 노트: [docker/login-action releases](https://github.com/docker/login-action/releases) (출처)\n\n## 요약\n- `dependencies`와 `github-actions` 라벨이 없으면 Dependabot이 PR에 라벨을 붙일 수 없습니다.\n- 라벨을 직접 생성하거나 `dependabot.yml`에서 라벨 지정 부분을 제거하면 문제를 해결할 수 있습니다.\n- 필요에 따라 GitHub CLI 스크립트로 라벨 자동 생성을 고려해 보세요.\n",
+      "lastModified": "2026-03-09T21:04:43.173Z",
+      "status": "draft",
+      "isDraft": true,
+      "isInvalid": false,
+      "tags": [
+        "dependabot",
+        "labels",
+        "ci",
+        "cd"
+      ],
+      "history": []
+    },
+    {
       "title": "엔터프라이즈 규모 GitOps 구현 가이드",
       "slug": "devops/gitops-implementation",
       "content": "\n## 서론\n전통적인 CI/CD 파이프라인은 조직이 성장함에 따라 **확장성**과 **복잡성**의 한계에 직면합니다. 파이프라인이 여러 팀·환경을 아우를 때, 설정 드리프트, 파이프라인 스파게티, 그리고 배포 실패 위험이 증가합니다. 이러한 문제를 해결하기 위해 **GitOps**가 주목받고 있습니다. GitOps는 선언적 인프라와 Git‑as‑Source‑of‑Truth 방식을 통해 **배포 신뢰성**, **보안**, 그리고 **DORA 메트릭**(배포 빈도, 리드 타임, 복구 시간, 변화 실패율) 개선을 목표로 합니다[출처](https://euno.news/posts/ko/gitops-implementation-at-enterprise-scale-moving-b-121ad1).\n\n## GitOps 개념 및 핵심 원칙\n- **선언적 인프라와 Git‑as‑Source‑of‑Truth**  \n  인프라와 애플리케이션 상태를 선언적 YAML/JSON 형태로 정의하고, Git 레포지토리를 단일 진실 소스로 관리합니다.\n- **자동화된 상태 동기화·풀 리퀘스트 기반 운영**  \n  Git에 변경이 푸시되면 자동으로 클러스터와 동기화되며, 모든 변경은 PR(풀 리퀘스트) 과정을 거쳐 검증됩니다.\n- **옵저버빌리티·롤백·감사 가능성**  \n  Git 커밋 히스토리를 통해 언제, 누가, 어떤 변경을 했는지 추적할 수 있어 감사와 빠른 롤백이 가능합니다.\n\n## 전통적인 CI/CD 한계와 GitOps 필요성\n- **파이프라인 스파게티·환경 간 불일치**  \n  여러 파이프라인이 서로 다른 스크립트와 설정을 사용해 환경 간 차이가 발생합니다.\n- **배포 신뢰성·보안·속도 저하 사례**  \n  수동 승인 단계와 복잡한 스크립트가 배포 실패와 보안 취약점을 초래합니다.\n- **DORA 메트릭 악화**  \n  배포 빈도 감소, 리드 타임 증가, 복구 시간 연장, 변화 실패율 상승이 관찰됩니다[출처](https://euno.news/posts/ko/gitops-implementation-at-enterprise-scale-moving-b-121ad1).\n\n## 엔터프라이즈 GitOps 전환 로드맵\n1. **전략 수립·비전 정의**  \n   조직 차원의 GitOps 목표와 기대 효과를 명확히 설정합니다.\n2. **단계별 마이그레이션**  \n   - **파일럿**: 제한된 서비스·팀에서 GitOps 파일럿 실행  \n   - **파일럿 확대**: 성공 사례를 기반으로 추가 서비스 적용  \n   - **전사 적용**: 표준화된 레포지토리 구조와 정책을 전사에 배포\n3. **파일럿 성공 기준 및 피드백 루프**  \n   배포 성공률, MTTR, PR 검토 시간 등 KPI를 정의하고, 정기적인 회고를 통해 개선합니다.\n\n## 핵심 구성 요소 및 도구 선택\n| 영역 | 주요 선택지 (예시) | 비고 |\n|------|-------------------|------|\n| **Git 레포지토리 구조·브랜치 전략** | mono‑repo vs multi‑repo, GitFlow, trunk‑based | 조직 규모와 팀 구조에 맞게 설계 |\n| **선언적 배포 도구** | Argo CD, Flux 등[출처] | Git‑sync, 자동 롤백 지원 |\n| **CI 엔진** | GitHub Actions, Jenkins, Tekton 등[출처] | GitOps와 연동 가능한 파이프라인 |\n| **정책·보안 프레임워크** | OPA, Kyverno[출처] | 선언적 정책 검증 |\n| **비밀 관리** | HashiCorp Vault, Sealed Secrets[출처] | Git에 비밀을 노출하지 않음 |\n\n> **주의**: 도구 선택은 조직의 기존 생태계와 보안 요구사항에 따라 달라질 수 있습니다. 추가 조사가 필요합니다.\n\n## Terraform Overview\nTerraform은 HashiCorp에서 만든 오픈‑소스 **Infrastructure as Code (IaC)** 도구로, 선언형 구성 파일(.tf)로 클라우드 리소스를 정의합니다. Terraform은 **실행 계획(plan)**을 생성해 제안된 변경 사항을 미리 보여주고, **apply** 단계에서 실제 인프라를 선언된 상태와 일치하도록 적용합니다. 이를 통해 **일관성**, **반복 가능성**, **자동화**를 확보하고, 구성 드리프트를 방지할 수 있습니다[[Terraform Overview – euno.news](https://euno.news/posts/ko/terraform-for-modern-infrastructure-automating-clo-eb5f8e)].\n\n## Declarative Infrastructure with Terraform\n- **코드 기반 인프라 정의**: VPC, IAM, 데이터베이스, Kubernetes 클러스터 등 모든 리소스를 HCL(HashiCorp Configuration Language)로 선언합니다.  \n- **모듈화**: 재사용 가능한 모듈을 만들어 여러 환경(개발, 스테이징, 프로덕션)에서 동일한 아키텍처를 적용합니다.  \n- **상태 관리**: Terraform은 상태 파일(.tfstate)로 현재 인프라 상태를 추적하며, 원격 백엔드(예: Terraform Cloud, S3)와 연동해 팀 간 협업을 지원합니다.  \n- **플랜 & 적용**: `terraform plan`으로 변경을 검증하고, `terraform apply`로 안전하게 적용합니다.  \n\n이러한 선언적 접근은 **구성 드리프트 감소**와 **감사 가능성**을 제공하며, GitOps와 자연스럽게 결합됩니다.\n\n## Terraform + GitOps Workflow\nTerraform을 GitOps 파이프라인에 통합하면 인프라와 애플리케이션 배포를 동일한 Git 레포지토리에서 관리할 수 있습니다.\n\n1. **Git 레포지토리 구조**  \n   - `infra/` 디렉터리 아래에 Terraform 모듈 및 환경별 디렉터리(`dev/`, `prod/`)를 배치합니다.  \n   - PR을 통해 인프라 변경을 검토하고, 승인 후 자동 적용됩니다.\n\n2. **CI 단계**  \n   - PR 생성 시 GitHub Actions, GitLab CI, 혹은 Azure Pipelines 등에서 `terraform fmt`, `terraform validate`, `terraform plan`을 실행해 변경 내용을 자동으로 검증합니다.  \n   - 정책 검사(OPA/Kyverno)와 보안 스캔(Trivy, Checkov)도 함께 수행합니다.\n\n3. **자동 적용**  \n   - PR이 머지되면 **Terraform Cloud** 혹은 **Terraform Enterprise**와 연동된 워크플로가 `terraform apply`를 실행합니다.  \n   - 적용 결과는 GitOps 도구(Argo CD, Flux)와 동일한 **Git‑sync** 메커니즘을 통해 클러스터에 반영됩니다.  \n\n> **드리프트 감지**: Argo CD·Flux는 클러스터 상태와 Git 선언을 지속적으로 비교하고, Terraform이 관리하는 리소스에 드리프트가 발생하면 알림을 보냅니다[[Terraform & GitOps Workflows – firefly.ai](https://www.firefly.ai/academy/terraform-gitops-workflows-automating-infrastructure-with-version-control)].\n\n## Best Practices & Cost Considerations\n| 카테고리 | 권장 사항 | 이유 |\n|----------|-----------|------|\n| **코드 관리** | 모든 Terraform 파일을 Git에 저장하고, PR 기반 리뷰를 강제 | 변경 가시성 및 감사 가능 |\n| **모듈화** | 공통 인프라(네트워크, IAM 등)는 별도 모듈로 추출 | 재사용성 및 일관성 |\n| **상태 백엔드** | Terraform Cloud, S3 + DynamoDB 잠금, 혹은 Azure Storage 사용 | 동시 실행 방지 및 팀 협업 |\n| **플랜 검증** | `terraform plan` 결과를 PR 코멘트에 자동 첨부 | 리뷰어가 실제 변경을 확인 |\n| **정책 자동화** | Sentinel(Enterprise) 혹은 OPA/Checkov을 CI에 통합 | 보안·규정 준수 자동 검증 |\n| **비용 최적화** | `terraform plan -out=plan.out` 후 `terraform show -json plan.out`을 파싱해 예상 비용을 계산하고, 비용 알림을 설정 | 과다 프로비저닝 방지 |\n| **멀티‑클라우드** | 클라우드 별 프로바이더를 모듈화하고, 워크스페이스(또는 환경)별 변수 파일을 사용 | 확장성 및 벤더 락인 방지 |\n| **모니터링** | Terraform Cloud의 실행 로그와 Argo CD/Flux의 동기화 상태를 중앙 대시보드에 통합 | 운영 가시성 확보 |\n\n## 배포 신뢰성 및 보안 강화 메커니즘\n- **자동화된 검증**: 테스트, 정책 검사, 이미지 스캔을 CI 단계에서 자동 실행합니다.\n- **RBAC·감사 로그·Git 서명**: 접근 제어와 변경 이력을 Git 커밋 서명으로 강화합니다.\n- **점진적 롤아웃**: Canary, Blue‑Green 전략을 활용해 위험을 최소화합니다.\n- **재해 복구·자동 롤백**: 상태 불일치 감지 시 자동으로 이전 안정 버전으로 복구합니다.\n\n## DORA 메트릭 개선 사례\n- **배포 빈도 ↑·리드 타임 ↓**: PR‑기반 자동 배포 파이프라인을 도입해 배포 주기를 단축합니다[출처].\n- **MTTR 단축**: 자동 롤백 및 실시간 모니터링을 통해 장애 복구 시간을 감소시킵니다.\n- **변화 실패율 감소**: 정책 검증과 테스트 자동화를 통해 PR 단계에서 오류를 차단합니다.\n\n## 조직·문화 변화와 운영 모델\n- **GitOps 전담 팀**: SRE·플랫폼 엔지니어가 GitOps 운영을 담당합니다.\n- **DevSecOps 협업 모델**: 개발, 운영, 보안 팀이 동일한 Git 레포지토리를 공유하며 협업합니다.\n- **교육·가이드라인**: 내부 위키·워크숍을 통해 GitOps 프로세스와 베스트 프랙티스를 전파합니다.\n\n## 사례 연구 및 베스트 프랙티스\n- **대규모 기업 A, B, C**가 파일럿 단계에서 GitOps를 도입하고, 전사 확대 시 **배포 성공률 30% 상승**, **리드 타임 40% 감소** 등의 효과를 보고했습니다[출처].  \n  *문제점*: 초기 레거시 스크립트와의 호환성, 팀 간 저항.  \n  *교훈*: 파일럿 성공을 기반으로 단계적 확대와 지속적인 교육이 핵심.\n\n## 마이그레이션 체크리스트 및 위험 관리\n| 사전 준비 | 전환 중 위험 | 포스트 마이그레이션 검증 |\n|----------|------------|------------------------|\n| 인프라 정리·도구 선정 | 레거시 의존성 | GitOps 상태와 실제 클러스터 동기화 확인 |\n| 보안 정책 정의 | 팀 저항·문화 충돌 | KPI(배포 빈도, MTTR 등) 모니터링 |\n| CI/CD 파이프라인 문서화 | 설정 드리프트 | 로그·감사 체계 구축 |\n\n- **위험 완화 방안**: 파일럿 결과를 공유하고, 단계별 롤백 플랜을 마련합니다.\n\n## 결론 및 향후 전망\nGitOps는 엔터프라이즈 DevOps 생태계에 **신뢰성**, **보안**, **속도**를 동시에 제공함으로써 장기적인 경쟁력을 확보합니다. 향후 **AI‑Assisted GitOps**(예: 자동 정책 생성, 이상 탐지)와 같은 차세대 자동화가 등장하면서, GitOps의 적용 범위와 효율성은 더욱 확대될 전망입니다[출처].\n\n---",
@@ -4806,7 +4869,7 @@
       ]
     },
     {
-      "title": "Dependabot 라벨 `dependencies` 생성 가이드",
+      "title": "Dependabot 라벨 설정 가이드",
       "slug": "devops/dependabot-labels",
       "content": "\n# Dependabot 라벨 `dependencies` 생성 가이드\n\nDependabot이 의존성 업데이트 PR에 자동으로 `dependencies` 라벨을 붙이려면, 해당 라벨이 레포지토리에 존재해야 합니다. 라벨이 없을 경우 Dependabot이 라벨을 추가하지 못하고, **\"The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\"** 라는 오류가 발생합니다.\n\n## 1. 라벨 생성 방법\n\n1. 레포지토리 메인 페이지에서 **`Issues`** 탭을 클릭합니다.\n2. 오른쪽 사이드바의 **`Labels`** 를 선택합니다.\n3. **`New label`** 버튼을 클릭합니다.\n4. **Name** 에 `dependencies` 를 입력하고, 원하는 색상을 선택합니다.\n5. **Create label** 을 눌러 라벨을 생성합니다.\n\n> 이 과정은 GitHub 공식 문서에서도 확인할 수 있습니다. (예: GitHub Docs – *Managing labels for issues and pull requests*)\n\n## 2. Dependabot 설정 확인\n\n`dependabot.yml` 파일에 라벨 자동 추가 옵션이 명시되어 있는지 확인합니다. 기본적으로 Dependabot은 라벨을 자동으로 붙이지만, 커스텀 설정이 있는 경우 아래와 같이 `labels` 섹션을 확인합니다.\n\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    # Optional: 자동 라벨 지정\n    labels:\n      - \"dependencies\"\n```\n\n위와 같이 `labels` 항목에 `dependencies` 라벨이 명시되어 있으면, 라벨이 존재할 때 자동으로 적용됩니다.\n\n## 3. 라벨이 적용되지 않을 때 확인 사항\n\n- **라벨 이름 오타**: `dependencies` 라는 정확한 이름이어야 합니다.\n- **라벨 색상**: 색상은 상관없지만, 라벨이 실제로 생성되어 있어야 합니다.\n- **`dependabot.yml` 파일 위치**: 레포지토리 루트에 있어야 하며, 올바른 YAML 형식이어야 합니다.\n\n## 4. 문제 해결 흐름\n\n1. 라벨이 없다는 오류가 발생하면 위 **1번** 절차대로 라벨을 생성합니다.\n2. 라벨을 생성한 뒤에도 오류가 지속되면 `dependabot.yml` 파일을 열어 `labels` 섹션이 올바르게 설정돼 있는지 검토합니다.\n3. 변경 후 커밋하고 푸시하면 Dependabot이 새로운 PR을 생성하거나 기존 PR에 라벨을 자동으로 붙입니다.\n\n## 5. 추가 참고 자료\n\n- GitHub Docs – [Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-a-label)\n- Dependabot Docs – [Configuring Dependabot version updates](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates)\n\n---\n\n*이 문서는 Dependabot 라벨 문제를 해결하기 위한 기본 가이드이며, 레포지토리 정책에 따라 라벨 관리 방식을 조정할 수 있습니다.*",
       "lastModified": "2026-03-09T20:47:12Z",
@@ -4815,10 +4878,10 @@
       "isDraft": true,
       "isInvalid": false,
       "tags": [
-        "Dependabot",
-        "라벨",
-        "자동화",
-        "GitHub"
+        "dependabot",
+        "labels",
+        "github",
+        "automation"
       ],
       "history": [
         {
@@ -4832,6 +4895,22 @@
           "deletions": 0
         }
       ]
+    },
+    {
+      "title": "Dependabot 라벨 오류 해결 방법",
+      "slug": "devops/fix-dependabot-labels",
+      "content": "\n# Dependabot 라벨 오류 해결 방법\n\nDependabot이 Pull Request에 라벨을 자동으로 붙이려 할 때 다음과 같은 오류가 발생할 수 있습니다.\n\n```\nThe following labels could not be found: `dependencies`, `github-actions`. Please create them before Dependabot can add them to a pull request.\n\nPlease fix the above issues or remove invalid values from `dependabot.yml`.\n```\n\n이 오류는 레포지토리 내에 해당 라벨이 존재하지 않거나, `dependabot.yml` 파일에 잘못된 라벨 이름이 지정된 경우에 발생합니다. 아래 단계에 따라 문제를 해결할 수 있습니다.\n\n## 1️⃣ 라벨 생성하기\n\n1. **GitHub 웹 UI**\n   - 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.\n   - 오른쪽 사이드바의 **Labels** 를 선택합니다.\n   - **New label** 버튼을 클릭하고, 라벨 이름을 `dependencies` 와 `github-actions` 로 각각 입력합니다.\n   - 색상은 자유롭게 선택하고 **Create label** 을 눌러 저장합니다.\n\n2. **GitHub CLI** (선호하는 경우)\n   ```bash\n   gh label create dependencies --color 0E8A16 --description \"Dependabot dependency updates\"\n   gh label create github-actions --color 1D76DB --description \"GitHub Actions related updates\"\n   ```\n\n## 2️⃣ `dependabot.yml` 파일 검토 및 수정\n\n`.github/dependabot.yml` 파일에 라벨 이름이 정확히 일치하는지 확인합니다. 예시:\n\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"\n      - \"github-actions\"\n```\n\n- 라벨 이름에 오타가 있거나, 불필요한 공백이 포함되지 않았는지 확인합니다.\n- 필요하지 않은 라벨은 `labels:` 섹션에서 제거할 수 있습니다.\n\n## 3️⃣ 변경 사항 커밋 및 푸시\n\n수정이 완료되면 파일을 커밋하고 푸시합니다.\n\n```bash\ngit add .github/dependabot.yml\ngit commit -m \"fix: add correct labels for Dependabot\"\ngit push origin main\n```\n\n## 4️⃣ 확인\n\n새로운 Dependabot PR이 생성되면 라벨이 정상적으로 붙는지 확인합니다. 라벨이 보이지 않으면 위 과정을 다시 점검합니다.\n\n---\n\n### 참고 자료\n- GitHub Docs – [Creating a label](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-labels#creating-a-label) (공식 문서를 참조해주세요)\n- Dependabot 설정 파일 예시 – [dependabot.yml reference](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-dependency-updates) (공식 문서를 참조해주세요)\n\n---\n\n이 문서는 Dependabot 라벨 오류를 빠르게 해결하고 CI 흐름을 원활히 유지하는 데 도움이 됩니다.",
+      "lastModified": "2026-03-09T21:03:44.020Z",
+      "status": "draft",
+      "isDraft": true,
+      "isInvalid": false,
+      "tags": [
+        "dependabot",
+        "github-actions",
+        "labels",
+        "CI"
+      ],
+      "history": []
     },
     {
       "title": "GitHub Copilot CI/CD 통합 가이드",
@@ -5547,9 +5626,9 @@
       "order": 4,
       "children": [
         {
-          "title": "Dependabot PR에서 라벨이 없을 때 해결 방법",
-          "slug": "troubleshooting/dependabot-missing-label",
-          "lastModified": "2026-03-09T21:08:07.144Z"
+          "title": "Dependabot 라벨 누락 문제 해결 방법",
+          "slug": "troubleshooting/dependabot-labels",
+          "lastModified": "2026-03-09T21:04:59.603Z"
         },
         {
           "title": "Dependabot 라벨 누락: `dependencies` 라벨 생성 방법",
@@ -5894,12 +5973,17 @@
       "order": 8,
       "children": [
         {
+          "title": "Dependabot 라벨 오류 해결 방법",
+          "slug": "devops/fix-dependabot-labels",
+          "lastModified": "2026-03-09T21:03:44.020Z"
+        },
+        {
           "title": "엔터프라이즈 규모 GitOps 구현 가이드",
           "slug": "devops/gitops-implementation",
           "lastModified": "2026-03-09T20:47:12Z"
         },
         {
-          "title": "Dependabot 라벨 `dependencies` 생성 가이드",
+          "title": "Dependabot 라벨 설정 가이드",
           "slug": "devops/dependabot-labels",
           "lastModified": "2026-03-09T20:47:12Z"
         },
@@ -6010,6 +6094,11 @@
       "order": 999,
       "children": [
         {
+          "title": "Dependabot @types/node 업데이트 PR 취소 안내",
+          "slug": "dependabot/@types-node-update-cancelled",
+          "lastModified": "2026-03-09T21:08:03.460Z"
+        },
+        {
           "title": "Dependabot does not support transitive dependency updates for pnpm",
           "slug": "dependabot/pnpm-transitive-dependencies-limitations",
           "lastModified": "2026-03-09T20:47:12Z"
@@ -6022,6 +6111,11 @@
       "isCategory": true,
       "order": 999,
       "children": [
+        {
+          "title": "chore(deps): bump dompurify from 3.3.1 to 3.3.2",
+          "slug": "dependencies/dompurify-bump-3.3.2",
+          "lastModified": "2026-03-09T21:04:10.213Z"
+        },
         {
           "title": "react-router-dom 7.13.1 bump no longer needed",
           "slug": "dependencies/react-router-dom-7-13-1-bump-no-longer-needed",
