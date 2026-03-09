@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "28056ee3-567b-4bdf-9915-53b17dc0f857",
+      "timestamp": "2026-03-09T12:20:37.188Z",
+      "actionType": "quality_score",
+      "issueNumber": 435,
+      "issueTitle": " [요청] 2026년 모니터링 도구 비교: VigilOps, Zabbix, Prometheus‑Grafana, Datadog",
+      "documentSlug": "observability/2026-vigilops-zabbix-prometheus-grafana-datadog",
+      "documentTitle": " [요청] 2026년 모니터링 도구 비교: VigilOps, Zabbix, Prometheus‑Grafana, Datadog",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "b4cb2805-cddd-4473-a02a-d12c2dd731cf",
+      "timestamp": "2026-03-09T12:20:23.053Z",
+      "actionType": "quality_score",
+      "issueNumber": 436,
+      "issueTitle": " [요청] Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크",
+      "documentSlug": "ai/guardian-protocol-ai",
+      "documentTitle": " [요청] Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "b7e78fff-33ec-4d14-bd9d-32f88f769ad9",
+      "timestamp": "2026-03-09T12:20:01.787Z",
+      "actionType": "generate",
+      "issueNumber": 435,
+      "issueTitle": " [요청] 2026년 모니터링 도구 비교: VigilOps, Zabbix, Prometheus‑Grafana, Datadog",
+      "documentSlug": "observability/2026-vigilops-zabbix-prometheus-grafana-datadog",
+      "documentTitle": "2026년 모니터링 도구 비교 – VigilOps, Zabbix, Prometheus‑Grafana, Datadog",
+      "summary": "새 문서 \"2026년 모니터링 도구 비교 – VigilOps, Zabbix, Prometheus‑Grafana, Datadog\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4381
+            },
+            {
+              "step": "outline",
+              "durationMs": 9616
+            },
+            {
+              "step": "write",
+              "durationMs": 24667
+            },
+            {
+              "step": "review",
+              "durationMs": 6771
+            }
+          ],
+          "totalDurationMs": 45435,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 2053,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "82870482-27ac-4733-9dfb-404f4d3c98bb",
+      "timestamp": "2026-03-09T12:18:58.615Z",
+      "actionType": "generate",
+      "issueNumber": 436,
+      "issueTitle": " [요청] Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크",
+      "documentSlug": "ai/guardian-protocol-ai",
+      "documentTitle": "Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크",
+      "summary": "새 문서 \"Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5972
+            },
+            {
+              "step": "outline",
+              "durationMs": 6577
+            },
+            {
+              "step": "write",
+              "durationMs": 32318
+            },
+            {
+              "step": "review",
+              "durationMs": 9895
+            }
+          ],
+          "totalDurationMs": 54762,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2440,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "756f6377-367b-4fbe-ad42-4a864c269b3c",
       "timestamp": "2026-03-09T12:13:55.966Z",
       "actionType": "maintain",
@@ -10842,5 +10960,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-09T12:13:55.966Z"
+  "lastUpdated": "2026-03-09T12:20:37.189Z"
 }

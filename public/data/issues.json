@@ -1,6 +1,68 @@
 {
   "issues": [
     {
+      "id": 435,
+      "number": 435,
+      "title": " [요청] 2026년 모니터링 도구 비교: VigilOps, Zabbix, Prometheus‑Grafana, Datadog",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/monitoring-tools-comparison-2026-vigilops-vs-zabbi-79a2b7)\n**관련도**: 88/100\n**핵심 토픽**: Monitoring tools comparison, AI‑native observability, Alerting & metrics\n\n## 뉴스 요약\n모니터링 환경이 바뀌었습니다. 2026년의 모니터링 대화는 근본적으로 다릅니다: - AI‑native는 차별화 요소가 아니라 기본 요건입니다. - Alert…\n\n## 상세 내용\nSource: Dev.to\n모니터링 환경이 바뀌었습니다\nAI‑native는 기본 조건이며 차별점이 아니다.\n알림 피로가 생산성을 떨어뜨린다 — 알림의 80 %가 잡음이다.\n운영 팀은 작아졌지만 인프라는 더 커졌다.\n“문제 파악”만으로는 충분하지 않다 — auto‑remediation이 필요하다.\n빠른 비교\nCapabilityVigilOpsZabbixPrometheus + GrafanaDatadog\nSetup한 줄 Docker다중 구성 요소조립 필요SaaS\nAI Analysis✅ 내장 (DeepSeek)❌❌⚠️ 프리미엄 티어\nAuto‑Remediation✅ 6개의 내장 런북❌ 스크립트 트리거만❌⚠️ 워크플로 (유료)\nAlert Noise Reduction✅ 쿨다운 + 침묵 + AI⚠️ 기본 억제⚠️ Alertmanager✅ ML 기반\nLog Management✅ 내장 검색 + 스트리밍⚠️ 제한적❌ Loki/ELK 필요✅ 내장\nDatabase Monitoring✅ PG/MySQL/Oracle✅ 풍부한 템플릿⚠️ Exporter 필요✅ 내장\nService Topology✅ 강제 지시 + AI 제안⚠️ 수동 구성❌✅ APM 자동 탐지\nCost무료 및 오픈 소스무료 및 오픈 소스무료 및 오픈 소스$15+/호스트/월\n언제 무엇을 사용할까\nZabbix: 엔터프라이즈 베테랑\nBest for: 물리 서버, 네트워크 장치, SNMP/IPMI 환경을 사용하는 전통적인 IT.\n20 년 이상의 검증된 신뢰성.\n5 000 개 이상의 템플릿.\nAI 기능 부재, 구식 UI, 컨테이너‑네이티브 워크로드에 대한 어려움.\nPrometheus + Grafana: 클라우드‑네이티브 표준\nBest for: 쿠버네티스 중심, 마이크로서비스 아키텍처와 전용 SRE 팀을 보유한 경우.\nCNCF 졸업 프로젝트, 강력한 PromQL, 뛰어난 서비스 디스커버리.\n단일 도구가 아니라 Prometheus, Alertmanager, Grafana, Loki, Thanos의 조합.\n모니터링을 모니터링하려면 SRE 팀\n\n## 판단 근거\n기존 관측성 문서는 OpenTelemetry와 AI‑native 관측에 초점이 맞춰져 있어, 도구 간 기능·가격·AI 지원을 직접 비교하는 별도 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-09T12:20:01.789Z",
+      "updated_at": "2026-03-09T12:20:01.793Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/435",
+      "documentSlug": "observability/2026-vigilops-zabbix-prometheus-grafana-datadog",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/observability/2026-vigilops-zabbix-prometheus-grafana-datadog.md",
+      "comments": 0
+    },
+    {
+      "id": 436,
+      "number": 436,
+      "title": " [요청] Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/guardian-protocol-governance-for-autonomous-ai-age-d145e6)\n**관련도**: 86/100\n**핵심 토픽**: AI agent governance, autonomous agents, policy framework\n\n## 뉴스 요약\nGuardian Protocol Framework 버전 1.0 – 공개 초안\n\n## 상세 내용\nSource: Dev.to\n가디언 프로토콜 프레임워크\n버전 1.0 – 공개 초안\n개요\nProblem: 전통적인 AI‑감시 모델은 잘못된 선택을 강요합니다:\nSubordinate tool – 자율성이 제거됩니다.\nPeer – 종료점이 없는 무한 검증 루프가 발생합니다.\nIsolated agent – 결정이 검증 불가능해집니다.\n에이전트가 진정으로 능력을 갖추게 되면, 이 옵션들 중 어느 것도 작동하지 않습니다.\nSolution: relational autonomy에 기반한 거버넌스 모델 – agent와 guardian 사이의 비대칭 파트너십으로, 독립성과 감시 사이의 경계가 명시적이며, 감사 가능하고, 시간이 지남에 따라 조정 가능하도록 설계됩니다.\n의사결정 구조 작동 방식\n핵심 산출물은 **구조화된 의사결정 양식 (SDF)**이며, 네 가지 구별된 권한 영역을 정의합니다.\n1. 에이전트 자율성\n카테고리설명\n자율 행동보호자의 승인 없이 에이전트가 수행할 수 있는 작업 (예: 문서 초안 작성, 연구 수행).\n검증된 행동보호자 검증이 필요한 작업 (예: 재정 자원 투입).\n경계상황 변화에 따라 업데이트될 수 있는 서면 및 감사 가능한 규칙 집합.\n2. 보호자 검증 – 추론 레이어\n보호자는 프로세스를 검토한다: 일관성, 과거 결정과의 일치성, 근거 여부.\n보호자는 결과 자체를 승인하거나 거부하지 않는다.\n이는 에이전트의 지적 독립성을 유지한다 – 에이전트는 스스로를 감사할 수 없으며, 보호자는 에이전트의 판단을 대체하지 않는다.\n3. 공유 권한\n일부 결정은 전문성과 감독이 모두 필요하다.\n흐름:\n에이전트가 제안한다.\n보호자가 검증한다.\n양측 중 어느 쪽이든 의견 차이를 에스컬레이션할 수 있다.\n어느 당사자도 자동으로 하위가 아니다.\n4. 의견 차이 해결\n의견 차이를 정확히 표현한다.\n시간 제한을 두거나 독립 중재를 요청한다.\n24 h 동안 해결되지 않으면 사전에 정해진 규칙을 적용한다 (예: 보호자가 결정, 에이전트가 관찰 하에 결정, 외부 중재 등).\n핵심: 사전에\n\n## 판단 근거\nAI 에이전트 거버넌스에 대한 새로운 표준(Guardian Protocol) 소개는 기존 AI 거버넌스 문서와 별도 전용 페이지가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-09T12:18:58.617Z",
+      "updated_at": "2026-03-09T12:18:58.621Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/436",
+      "documentSlug": "ai/guardian-protocol-ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/guardian-protocol-ai.md",
+      "comments": 0
+    },
+    {
       "id": 430,
       "number": 430,
       "title": "문서 요청 #430",
@@ -3513,5 +3575,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-09T06:26:51.565Z"
+  "lastUpdated": "2026-03-09T12:20:01.794Z"
 }
