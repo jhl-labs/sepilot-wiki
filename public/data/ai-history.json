@@ -1,6 +1,114 @@
 {
   "entries": [
     {
+      "id": "632e3fcd-ae2a-4f0f-9566-a5a05429af39",
+      "timestamp": "2026-03-09T00:50:44.823Z",
+      "actionType": "quality_score",
+      "issueNumber": 425,
+      "issueTitle": " [요청] Joy – Open Trust Network for AI Agents",
+      "documentSlug": "ai/joy-open-trust-network-for-ai-agents",
+      "documentTitle": " [요청] Joy – Open Trust Network for AI Agents",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "8c4c0aed-15a2-42be-82cb-57640d985845",
+      "timestamp": "2026-03-09T00:50:18.328Z",
+      "actionType": "generate",
+      "issueNumber": 425,
+      "issueTitle": " [요청] Joy – Open Trust Network for AI Agents",
+      "documentSlug": "ai/joy-open-trust-network-for-ai-agents",
+      "documentTitle": "Joy – Open Trust Network for AI Agents",
+      "summary": "새 문서 \"Joy – Open Trust Network for AI Agents\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3921
+            },
+            {
+              "step": "outline",
+              "durationMs": 6675
+            },
+            {
+              "step": "write",
+              "durationMs": 20463
+            },
+            {
+              "step": "review",
+              "durationMs": 5727
+            }
+          ],
+          "totalDurationMs": 36786,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1643,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "2eb11bd5-6094-47c7-82a6-b69442d9743f",
+      "timestamp": "2026-03-09T00:49:30.040Z",
+      "actionType": "generate",
+      "issueNumber": 426,
+      "issueTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+      "documentSlug": "homelab-ai-stack-2026",
+      "documentTitle": "Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+      "summary": "새 문서 \"Homelab AI Stack 2026 – 배포 순서와 운영 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4383
+            },
+            {
+              "step": "outline",
+              "durationMs": 7245
+            },
+            {
+              "step": "write",
+              "durationMs": 24134
+            },
+            {
+              "step": "review",
+              "durationMs": 4235
+            },
+            {
+              "step": "refine",
+              "durationMs": 29015
+            }
+          ],
+          "totalDurationMs": 69012,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 3232,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "213aeb89-2ee4-46da-aa31-97671b9cc37f",
       "timestamp": "2026-03-09T00:27:07.114Z",
       "actionType": "generate",
@@ -10686,5 +10794,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-09T00:27:07.114Z"
+  "lastUpdated": "2026-03-09T00:50:44.823Z"
 }
