@@ -3,6 +3,7 @@ title: TensorFlow 2.16 새로운 기능 및 TensorFlow Lite Runtime 통합
 author: SEPilot AI
 status: published
 tags: [TensorFlow, TensorFlow Lite Runtime, Edge Inference, Machine Learning, Keras 3, GenAI]
+updatedAt: 2026-03-09
 ---
 
 ## 1. 문서 소개 및 대상 독자
@@ -191,3 +192,53 @@ TensorFlow 2.16이 공식 출시되면서 **TensorFlow Lite Runtime (tflit
 - **샘플 코드 레포지토리** – TensorFlow Lite 예제: <https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/examples>  
 
 *본 문서는 현재 공개된 공식 자료를 기반으로 작성되었습니다. 최신 API와 런타임 동작은 공식 문서 및 릴리즈 노트를 반드시 확인하시기 바랍니다.*
+
+## 13. TensorFlow 2.21 새로운 기능 요약
+TensorFlow 2.21이 출시되면서 주요 개선 사항이 추가되었습니다. 핵심 내용은 다음과 같습니다.
+
+- **LiteRT 프로덕션 스택 졸업** – LiteRT가 공식 프로덕션 스택에 포함되어, 모든 개발자가 온‑디바이스 추론에 바로 활용 가능[[Google Developers Blog](https://developers.googleblog.com/whats-new-in-tensorflow-221/)].
+- **성능 향상**  
+  - GPU delegate가 **TFLite 대비 1.4배** 빠른 추론을 제공하며, 최신 NPU 가속이 새롭게 도입되었습니다.  
+  - `int8` 및 `int16x8`(예: `SQRT` 연산) 지원이 확대되어 저정밀도 연산에서 **성능·효율성**이 크게 개선되었습니다.
+- **데이터 타입 확대**  
+  - `tfl.cast` 가 **INT2·INT4** 변환을 지원하고, `tfl.slice` 에 **INT4** 지원이 추가되었습니다.  
+  - `tfl.fully_connected` 가 **INT2** 를 지원해 초소형 모델에서도 메모리 절감이 가능해졌습니다.
+- **프레임워크 연동 강화**  
+  - PyTorch·JAX 모델을 **원활히 변환**할 수 있도록 `torch2tf`·`jax2tf` 통합이 강화되었습니다.  
+  - 모델 변환 파이프라인이 간소화돼, **SavedModel → TFLite → LiteRT** 흐름이 한 번에 수행됩니다.
+- **GenAI 배포 지원**  
+  - Gemma, LLaMA 등 최신 오픈‑소스 대형 언어 모델을 **크로스‑플랫폼**으로 배포할 수 있는 가이드와 샘플이 제공됩니다.
+- **보안·버그·의존성 업데이트**  
+  - 보안 패치와 주요 버그 수정이 가속화되었으며, Python 3.13·CUDA 12.4 등 최신 환경을 지원하도록 의존성이 업데이트되었습니다.
+
+> 전체 변경 사항은 GitHub 릴리스 노트([TensorFlow 2.21 릴리스 노트](https://github.com/tensorflow/tensorflow/blob/master/RELEASE.md))를 참고하십시오.
+
+## 14. LiteRT 프로덕션 스택 포함
+TensorFlow 2.21에서 **LiteRT** 가 **프로덕션 스택**에 정식으로 포함되었습니다. 주요 특징은 다음과 같습니다.
+
+| 특징 | 설명 | 기대 효과 |
+|------|------|-----------|
+| **범용 온‑디바이스 추론 프레임워크** | LiteRT는 TensorFlow Lite 이후의 진화된 런타임으로, GPU·NPU·Edge TPU 등 다양한 가속기를 단일 API로 관리합니다. | 개발·배포 복잡도 감소 |
+| **성능** | GPU에서 **1.4×** 빠른 추론, 최신 NPU 가속 통합 | 실시간 응답성 향상 |
+| **간소화된 워크플로** | `tf.lite.experimental.load_delegate('lite_rt')` 로 한 줄 코드만으로 GPU·NPU 가속을 활성화 | 구현 시간 단축 |
+| **GenAI 지원** | Gemma·LLaMA 등 대형 모델을 **크로스‑플랫폼**으로 배포 가능 | 최신 생성 AI 활용 확대 |
+| **프레임워크 호환성** | PyTorch·JAX 모델을 **직접 변환**해 LiteRT 로 바로 실행 | 모델 포팅 비용 절감 |
+| **안정성** | TensorFlow Lite 검증을 기반으로 **프로덕션 수준** 안정성 제공 | 기업 환경 적용 용이 |
+
+**사용 예시**
+
+```python
+import tensorflow as tf
+import tflite_runtime.interpreter as tflite
+
+# LiteRT delegate 로드 (GPU·NPU 자동 선택)
+lite_rt_delegate = tf.lite.experimental.load_delegate('lite_rt')
+interpreter = tflite.Interpreter(
+    model_path="model.tflite",
+    experimental_delegates=[lite_rt_delegate]
+)
+interpreter.allocate_tensors()
+# 이후 일반 tflite-runtime 사용과 동일
+```
+
+LiteRT가 제공하는 **통합 가속**과 **간소화된 API**는 Edge 디바이스에서 복잡한 모델을 효율적으로 운영하려는 모든 개발자에게 강력한 기반을 제공합니다. 자세한 가이드와 최신 API는 공식 문서([LiteRT Production Stack](https://www.tensorflow.org/lite/rt))를 확인하십시오.

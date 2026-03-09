@@ -1,6 +1,102 @@
 {
   "entries": [
     {
+      "id": "b4966d17-c7dc-4625-92e6-8b1bee53e4fe",
+      "timestamp": "2026-03-09T06:27:47.139Z",
+      "actionType": "modify",
+      "issueNumber": 431,
+      "issueTitle": " [업데이트] AI 에이전트 콜드 스타트 문제와 Day‑Zero 배포 전략",
+      "documentSlug": "ai/ai",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 에이전트 콜드 스타트 문제와 Day‑Zero 배포 전략\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 40,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "146d2e02-b33b-4e67-b1c5-87feab47a190",
+      "timestamp": "2026-03-09T06:26:51.558Z",
+      "actionType": "generate",
+      "issueNumber": 430,
+      "issueTitle": "문서 요청 #430",
+      "documentSlug": "430",
+      "documentTitle": "AI 코드 어시스턴트 3주 실험 보고서 – 생산성 파라독스 분석",
+      "summary": "새 문서 \"AI 코드 어시스턴트 3주 실험 보고서 – 생산성 파라독스 분석\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2503
+            },
+            {
+              "step": "outline",
+              "durationMs": 4659
+            },
+            {
+              "step": "write",
+              "durationMs": 17972
+            },
+            {
+              "step": "review",
+              "durationMs": 11619
+            }
+          ],
+          "totalDurationMs": 36754,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 1713,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "07e55f07-70b4-416c-b66e-363ad61cdf22",
+      "timestamp": "2026-03-09T06:26:11.544Z",
+      "actionType": "modify",
+      "issueNumber": 429,
+      "issueTitle": " [업데이트] 두‑에이전트 검토 패턴 – 자기 검증 금지 원칙",
+      "documentSlug": "ai/ai",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 두‑에이전트 검토 패턴 – 자기 검증 금지 원칙\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 58,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "54a0b184-60f0-41c5-b4f3-6cb1795446e0",
+      "timestamp": "2026-03-09T06:25:12.991Z",
+      "actionType": "modify",
+      "issueNumber": 427,
+      "issueTitle": " [업데이트] TensorFlow 2.21 최신 기능 및 LiteRT 프로덕션 스택 포함",
+      "documentSlug": "ai/tensorflow-2-21-litert",
+      "documentTitle": "TensorFlow 2.16 새로운 기능 및 TensorFlow Lite Runtime 통합 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] TensorFlow 2.21 최신 기능 및 LiteRT 프로덕션 스택 포함\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 51,
+        "deletions": 0
+      }
+    },
+    {
       "id": "2823488e-8010-44bf-a4ac-00146d9e55b5",
       "timestamp": "2026-03-09T06:24:27.825Z",
       "actionType": "maintain",
@@ -10732,5 +10828,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-09T06:24:27.825Z"
+  "lastUpdated": "2026-03-09T06:27:47.140Z"
 }
