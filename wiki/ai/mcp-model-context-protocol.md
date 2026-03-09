@@ -522,7 +522,8 @@ kya score agent-card.kya.json
 | **증분 전송** | 파일 오프셋(`bookmark`) 기반 파싱으로 이미 전송된 라인 재전송 방지. |
 | **백업** | 일일 `sqlite3 /data/logs.db ".backup '/backup/logs_$(date +%F).db'"` 실행 |
 | **데이터 보존** | 최소 30 일 보관, 오래된 레코드 자동 삭제 (`DELETE FROM logrecord WHERE timestamp < datetime('now','-30 days');`) |
-| **대시보드와 알림** | Streamlit 대시보드에서 `source`, `tool_name`, `user_id`, `time range` 로 필터링·드릴‑다운 가능. Prometheus `/metrics` 와 연동해 Slack/Email 알림 설정 |
+| **대시보드 연동** | Streamlit 기반 UI에서 `source`, `tool_name`, `user_id`, `time range` 로 필터링·드릴‑다운 가능. Prometheus `/metrics` 와 연동해 Slack/Email 알림 설정 |
+| **리소스 제한** | 레코드당 최대 1 MB 제한, 오래된 레코드 TTL 정책 적용 |
 
 > 위 권고사항은 **MongoDB MCP 서버 보안 권장사항**, **Microsoft Foundry MCP 베스트 프랙티스**, 그리고 **EUNO.NEWS**(2026‑02‑24)에서 제시된 KYA 표준 및 자체 로깅 설계를 종합한 것이다.  
 
@@ -607,5 +608,4 @@ mcp2cli --mcp https://mcp.example.com/sse create-task --title "Fix bug"
 
 ### 5.6 영감 및 커뮤니티  
 
-- **Kagan Yilmaz**의 “CLI vs MCP 비용 분석”이 `mcp2cli` 설계에 직접적인 영감을 제공.  
-- **CLIHub** 프로젝트가 “도구를 CLI 형태로 제공하면 LLM이 필요할 때만 로드한다”는 아이디어를
+- **Kagan Yilmaz**의 “CLI vs MCP 비용 분석”이 `mcp2cli` 설계에 직접적인 영감을
