@@ -1250,6 +1250,19 @@
     "author": "SEPilot AI"
   },
   {
+    "title": "chore(deps): bump dompurify from 3.3.1 to 3.3.2",
+    "slug": "dependencies/dompurify-bump-3.3.2",
+    "content": "DOMPurify 3.3.2 업데이트\n업데이트 내용:  패키지를 3.3.1 → 3.3.2 로 버전 업그레이드합니다.\nPR:  (Dependabot)\nRelease notes (DOMPurify 3.3.2) \n  - jsdom 의 raw‑text 태그 파싱 버그로 인한 우회 가능성 수정\n  - 커스텀 엘리먼트 사용 시 발생하던 prototype pollution 문제 해결 (@christos‑eth)\n  -  의 느슨한 설정 파싱 오류 수정 (@christos‑eth)\n  - 여러 의존성 버전 업데이트 및 정리 (@Rotzbua)\n  - 의존성 업데이트 후 테스트 스위트 오류 수정 (@Rotzbua)\n출처: DOMPurify 3.3.2 릴리즈 노트 \nDependabot 라벨 문제\nPR에 자동으로 붙여야 할  라벨이 현재 레포지토리에서 정의되지 않아 아래와 같은 오류가 발생했습니다.\n해결 방안\n라벨 생성\n   - 레포지토리 설정 → Labels 페이지에서  라벨을 새로 만듭니다.\n   - 색상은 자유롭게 선택 (예: ).\ndependabot.yml 검토\n   -  파일에  섹션이 올바르게 지정되어 있는지 확인합니다.\n   - 예시:\n     \nPR 재생성\n   - 라벨이 정상적으로 추가되면 Dependabot이 자동으로  라벨을 붙이고, 기존 PR을 재시도합니다.\n참고 자료\nDOMPurify 공식 레포지토리: https://github.com/cure53/DOMPurify\nDependabot 라벨 설정 가이드: https://docs.github.com/en/github/administering-a-repository/managing-labels-in-a-repository\n이 문서는 Dependabot 의존성 업데이트와 라벨 관리에 대한 내부 가이드로, 향후 비슷한 상황에서 빠르게 대응하기 위해 작성되었습니다.",
+    "excerpt": "DOMPurify 3.3.2 업데이트\n업데이트 내용:  패키지를 3.3.1 → 3.3.2 로 버전 업그레이드합니다.\nPR:  (Dependabot)\nRelease notes (DOMPurify 3.3.2) \n  - jsdom 의 raw‑text 태그 파싱 버그로 인한 우회 가능성 수정\n  - 커스텀 엘리먼트 사용 시 발생하던 prototype polluti...",
+    "tags": [
+      "dependabot",
+      "dompurify",
+      "dependency-update",
+      "labels"
+    ],
+    "lastModified": "2026-03-09T21:04:10.213Z"
+  },
+  {
     "title": "react-router-dom 7.13.1 bump no longer needed",
     "slug": "dependencies/react-router-dom-7-13-1-bump-no-longer-needed",
     "content": "react-router-dom 7.13.1 bump no longer needed\nA Dependabot pull request was opened to update react-router-dom from version  to  in the react group.\nOriginal intent\nUpdate  to .\nCorresponding changelog entry indicated a patch change that only updated the  dependency.\nCurrent status\nThe Dependabot bot later commented:\n\"Looks like react-router-dom is updatable in another way, so this is no longer needed.\"\nBecause the package can be upgraded through an alternative workflow, the PR is no longer required and should be closed.\nAction required\nClose the Dependabot PR.\nEnsure any alternative update method is applied as needed.\nThis document records the decision for future reference.",
@@ -1342,6 +1355,18 @@
     ],
     "lastModified": "2026-03-09T20:47:12Z",
     "author": "SEPilot AI"
+  },
+  {
+    "title": "Dependabot 라벨 `dependencies` 누락 문제 해결 방법",
+    "slug": "issues/dependabot-label-missing",
+    "content": "문제 개요\nDependabot이 Pull Request에  라벨을 자동으로 붙이려 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 아래와 같은 오류가 발생했습니다.\n이 오류는 dependabot.yml 파일에  라벨이 지정되어 있으나, 실제 레포지토리 라벨 목록에 해당 라벨이 없을 때 발생합니다.\n해결 방법\nGitHub 레포지토리 설정에서 라벨 생성\n   - 레포지토리 메인 페이지 → Issues 탭 → Labels 메뉴로 이동합니다.\n   - New label 버튼을 클릭합니다.\n   - Name에  를 입력하고, 색상은 원하는 대로 선택합니다 (예: ).\n   - Create label을 눌러 라벨을 생성합니다.\ndependabot.yml 검토 (선택 사항)\n   -  파일을 열어  섹션에  라벨이 명시되어 있는지 확인합니다.\n   - 라벨 이름이 정확히 일치해야 합니다. 오타가 있으면 수정합니다.\nPR 재시도\n   - 라벨을 만든 뒤, 기존 Dependabot PR에 코멘트  혹은  를 남겨 PR을 다시 실행합니다.\n   - 라벨이 정상적으로 붙는지 확인합니다.\n참고 자료\nDependabot 공식 문서 – 라벨링 (공식 문서를 참조해주세요)\nIssue에서 제공된 Dependabot PR 예시와 릴리즈 노트\n요약\n라벨이 없으면 Dependabot이 PR에 라벨을 추가하지 못합니다.\n레포지토리 Issues → Labels 에서 라벨을 직접 생성하면 문제를 해결할 수 있습니다.\n라벨 생성 후 Dependabot PR을 재시도하면 정상 동작합니다.\n이 문서는 Dependabot 라벨 누락 문제에 대한 가이드이며, 필요에 따라 업데이트하십시오.",
+    "excerpt": "문제 개요\nDependabot이 Pull Request에  라벨을 자동으로 붙이려 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 아래와 같은 오류가 발생했습니다.\n이 오류는 dependabot.yml 파일에  라벨이 지정되어 있으나, 실제 레포지토리 라벨 목록에 해당 라벨이 없을 때 발생합니다.\n해결 방법\nGitHub 레포지토리 설정에서 라벨 생성...",
+    "tags": [
+      "dependabot",
+      "labels",
+      "github-actions"
+    ],
+    "lastModified": "2026-03-09T21:04:19.744Z"
   },
   {
     "title": "bun과 pnpm, npm의 차이",
@@ -2493,6 +2518,19 @@
     ],
     "lastModified": "2026-03-09T20:47:12Z",
     "author": "GitHub Action"
+  },
+  {
+    "title": "Dependabot 라벨 오류 해결 방법",
+    "slug": "devops/fix-dependabot-labels",
+    "content": "Dependabot 라벨 오류 해결 방법\nDependabot이 Pull Request에 라벨을 자동으로 붙이려 할 때 다음과 같은 오류가 발생할 수 있습니다.\n이 오류는 레포지토리 내에 해당 라벨이 존재하지 않거나,  파일에 잘못된 라벨 이름이 지정된 경우에 발생합니다. 아래 단계에 따라 문제를 해결할 수 있습니다.\n1️⃣ 라벨 생성하기\nGitHub 웹 UI\n   - 레포지토리 메인 페이지에서 Issues 탭을 클릭합니다.\n   - 오른쪽 사이드바의 Labels 를 선택합니다.\n   - New label 버튼을 클릭하고, 라벨 이름을  와  로 각각 입력합니다.\n   - 색상은 자유롭게 선택하고 Create label 을 눌러 저장합니다.\nGitHub CLI (선호하는 경우)\n   \n2️⃣  파일 검토 및 수정\n 파일에 라벨 이름이 정확히 일치하는지 확인합니다. 예시:\n라벨 이름에 오타가 있거나, 불필요한 공백이 포함되지 않았는지 확인합니다.\n필요하지 않은 라벨은  섹션에서 제거할 수 있습니다.\n3️⃣ 변경 사항 커밋 및 푸시\n수정이 완료되면 파일을 커밋하고 푸시합니다.\n4️⃣ 확인\n새로운 Dependabot PR이 생성되면 라벨이 정상적으로 붙는지 확인합니다. 라벨이 보이지 않으면 위 과정을 다시 점검합니다.\n참고 자료\nGitHub Docs – Creating a label (공식 문서를 참조해주세요)\nDependabot 설정 파일 예시 – dependabot.yml reference (공식 문서를 참조해주세요)\n이 문서는 Dependabot 라벨 오류를 빠르게 해결하고 CI 흐름을 원활히 유지하는 데 도움이 됩니다.",
+    "excerpt": "Dependabot 라벨 오류 해결 방법\nDependabot이 Pull Request에 라벨을 자동으로 붙이려 할 때 다음과 같은 오류가 발생할 수 있습니다.\n이 오류는 레포지토리 내에 해당 라벨이 존재하지 않거나,  파일에 잘못된 라벨 이름이 지정된 경우에 발생합니다. 아래 단계에 따라 문제를 해결할 수 있습니다.\n1️⃣ 라벨 생성하기\nGitHub 웹 U...",
+    "tags": [
+      "dependabot",
+      "github-actions",
+      "labels",
+      "CI"
+    ],
+    "lastModified": "2026-03-09T21:03:44.020Z"
   },
   {
     "title": "GitHub Copilot CI/CD 통합 가이드",
