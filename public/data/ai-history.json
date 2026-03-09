@@ -1,6 +1,128 @@
 {
   "entries": [
     {
+      "id": "e9322b3c-04b5-4b87-a4fb-e253e5cae38f",
+      "timestamp": "2026-03-09T18:23:50.394Z",
+      "actionType": "quality_score",
+      "issueNumber": 438,
+      "issueTitle": " [요청] SQL Injection UNION 공격 실습 가이드",
+      "documentSlug": "security/sql-injection-union",
+      "documentTitle": " [요청] SQL Injection UNION 공격 실습 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "862f0ae3-56aa-4a62-b9b8-bedf43817253",
+      "timestamp": "2026-03-09T18:23:36.660Z",
+      "actionType": "quality_score",
+      "issueNumber": 441,
+      "issueTitle": " [요청] React 19+ 내부 구조와 최신 동시 렌더링 적용 가이드",
+      "documentSlug": "frontend/react-19",
+      "documentTitle": " [요청] React 19+ 내부 구조와 최신 동시 렌더링 적용 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "4623571a-988d-4000-b0e4-ae6841c039d3",
+      "timestamp": "2026-03-09T18:23:21.321Z",
+      "actionType": "generate",
+      "issueNumber": 438,
+      "issueTitle": " [요청] SQL Injection UNION 공격 실습 가이드",
+      "documentSlug": "security/sql-injection-union",
+      "documentTitle": "SQL Injection UNION 공격 실습 가이드",
+      "summary": "새 문서 \"SQL Injection UNION 공격 실습 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4283
+            },
+            {
+              "step": "outline",
+              "durationMs": 6909
+            },
+            {
+              "step": "write",
+              "durationMs": 14201
+            },
+            {
+              "step": "review",
+              "durationMs": 3689
+            }
+          ],
+          "totalDurationMs": 29082,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1239,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "4fb1651b-98f1-4ddb-9712-addcb2f59954",
+      "timestamp": "2026-03-09T18:22:41.302Z",
+      "actionType": "generate",
+      "issueNumber": 441,
+      "issueTitle": " [요청] React 19+ 내부 구조와 최신 동시 렌더링 적용 가이드",
+      "documentSlug": "frontend/react-19",
+      "documentTitle": "React 18+ 내부 구조와 최신 동시 렌더링 적용 가이드",
+      "summary": "새 문서 \"React 18+ 내부 구조와 최신 동시 렌더링 적용 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4176
+            },
+            {
+              "step": "outline",
+              "durationMs": 6217
+            },
+            {
+              "step": "write",
+              "durationMs": 33640
+            },
+            {
+              "step": "review",
+              "durationMs": 4769
+            },
+            {
+              "step": "refine",
+              "durationMs": 28146
+            }
+          ],
+          "totalDurationMs": 76949,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3638,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "3e720997-8dcc-416a-9e2e-b95d2daa4728",
       "timestamp": "2026-03-09T18:18:54.177Z",
       "actionType": "maintain",
@@ -10997,5 +11119,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-09T18:18:54.177Z"
+  "lastUpdated": "2026-03-09T18:23:50.394Z"
 }

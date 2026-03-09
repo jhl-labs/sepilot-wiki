@@ -1,9 +1,19 @@
 {
-  "timestamp": "2026-03-09T17:45:21.561Z",
+  "timestamp": "2026-03-09T18:23:55.179Z",
   "dryRun": false,
-  "totalIssuesScanned": 13,
+  "totalIssuesScanned": 16,
   "categories": {
     "draft_review": [
+      {
+        "number": 441,
+        "title": " [요청] React 19+ 내부 구조와 최신 동시 렌더링 적용 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 438,
+        "title": " [요청] SQL Injection UNION 공격 실습 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 426,
         "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
@@ -72,11 +82,57 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 437,
+        "title": " [업데이트] AI 검색 벤치마킹 및 평가 방법론",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 441,
+      "title": " [요청] React 19+ 내부 구조와 최신 동시 렌더링 적용 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 438,
+      "title": " [요청] SQL Injection UNION 공격 실습 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 440,
+      "title": " [업데이트] 48시간 안에 만든 AI 코드 리뷰 도구 사례 연구"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 439,
+      "title": " [업데이트] Real Browser MCP와 Chrome Extension 연동"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 437,
+      "title": " [업데이트] AI 검색 벤치마킹 및 평가 방법론"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 441,
+      "title": " [요청] React 19+ 내부 구조와 최신 동시 렌더링 적용 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/react-19.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 438,
+      "title": " [요청] SQL Injection UNION 공격 실습 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/sql-injection-union.md"
+    }
+  ],
+  "actionCount": 7,
   "maxActions": 60
 }

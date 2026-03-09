@@ -1,6 +1,68 @@
 {
   "issues": [
     {
+      "id": 438,
+      "number": 438,
+      "title": " [요청] SQL Injection UNION 공격 실습 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/sql-injection-union-attack-retrieving-data-from-ot-1ef9c1)\n**관련도**: 85/100\n**핵심 토픽**: SQL Injection, UNION 기반 데이터 추출, PortSwigger Lab\n\n## 뉴스 요약\n대상 - 실험실 URL: SQL Injection – UNION 공격, 다른 테이블에서 데이터 가져오기 https://portswigger.net/web-security/learning-paths/sql-injection/sql-injectio...\n\n## 상세 내용\nSource: Dev.to\nTarget\nLab URL: SQL Injection – UNION attack, retrieving data from other tables\nTools Used\nBrowser\nBurp Suite\nVulnerability Summary\nType: SQL Injection\nDescription:\n실습을 해결하려면 모든 사용자 이름과 비밀번호를 가져오는 SQL 인젝션 UNION 공격을 수행하고, 해당 정보를 사용해 관리자 계정으로 로그인합니다.\nSteps to Exploit\n이전 노트에서 언급한 기법을 사용해 쿼리가 반환하는 열의 개수를 파악하고, 텍스트 데이터를 포함하는 열을 확인합니다. 쿼리가 두 개의 열을 반환하며, 두 열 모두 텍스트를 포함한다는 것을 확인합니다.\n페이로드를 주입해 관리자의 비밀번호를 얻습니다.\nRemediation\n파라미터화된 쿼리 / 준비된 문(statement) 사용.\n서버 측 입력 검증 구현.\n사용자 입력을 이스케이프하고 정제(sanitize)하기.\nLessons Learned\n원본 쿼리가 반환하는 열의 개수를 파악하고 문자열 데이터를 담을 수 있는 열을 식별하면, 흥미로운 데이터를 추출할 수 있는 위치에 도달하게 됩니다.\n\n## 판단 근거\nPortSwigger Lab 기반 실전 UNION 인젝션 절차가 기존 보안 문서에 포함되지 않음. 실습용 단계별 가이드는 독립 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-09T18:23:21.323Z",
+      "updated_at": "2026-03-09T18:23:21.328Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/438",
+      "documentSlug": "security/sql-injection-union",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/sql-injection-union.md",
+      "comments": 0
+    },
+    {
+      "id": 441,
+      "number": 441,
+      "title": " [요청] React 19+ 내부 구조와 최신 동시 렌더링 적용 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/modernizing-web-applications-with-react-19-interna-3d268d)\n**관련도**: 78/100\n**핵심 토픽**: React 19+, Concurrent Rendering, Suspense 데이터 페칭\n\n## 뉴스 요약\n1. Concurrent Rendering &amp; @use Data Fetching &amp; Suspension 우리는 모든 명령형 useEffect‑ 기반 데이터 가져오기와 수동으로 관리되는 loading states를 선언형으로 교체하고 있습니다.\n\n## 상세 내용\nSource: Dev.to\n1. 동시 렌더링 &#x26; @use (데이터 페칭 및 서스펜션)\n우리는 모든 명령형 useEffect‑ 기반 페칭과 수동으로 관리하던 로딩 상태를 선언형 @use(Promise) 로 교체하고 있습니다.\n이렇게 하면 데이터 오케스트레이션의 복잡성이 사용자 코드에서 직접 Fiber Reconciler 로 이동합니다.\n@use 가 내부에서 작동하는 방식 (Suspense 메커니즘)\nFiber Reconciler 가 @use 로 Promise 를 읽는 컴포넌트를 처리합니다.\nPromise 가 이미 해결됐는지 확인합니다.\nPromise 가 아직 대기 중이면, 해당 컴포넌트를 나타내는 Fiber 노드가 Suspended 로 표시되고 Reconciler 가 Promise 를 트리 위로 throw 합니다.\n가장 가까운 &#x3C;Suspense> 경계가 throw 된 Promise 를 잡아 fallback UI(예: 로딩 스켈레톤)를 렌더링합니다.\nPromise 가 해결되면 Reconciler 에게 알림이 전달되고 자동으로 Update 를 스케줄링하여 해결된 데이터를 사용해 컴포넌트를 다시 렌더링합니다.\n확장된 실제 코드 예시\nimport { use, Suspense } from 'react';\n// Unified Harbor API wrapper returning a stable Promise\n// `@use` is integrated into our data‑fetching layer\nimport { fetchUserProfile } from './api';\nexport function UserProfile({ id }: { id: string }) {\n// 1️⃣ Declarative, suspended resource reading\n// Throws if pending; caught by the nearest Suspense boundary\nconst user = use(fetchUserProfile(id));\nreturn (\n&#x3C\n\n## 판단 근거\nReact 최신 버전의 Concurrent Rendering·Suspense·@use 패턴은 기존 React‑Query·PWA 문서와 겹치지 않으며, 프론트엔드 개발자에게 새로운 마이그레이션 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-09T18:22:41.304Z",
+      "updated_at": "2026-03-09T18:22:41.308Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/441",
+      "documentSlug": "frontend/react-19",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/react-19.md",
+      "comments": 0
+    },
+    {
       "id": 436,
       "number": 436,
       "title": "문서 요청 #436",
@@ -3575,5 +3637,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-09T12:18:33.988Z"
+  "lastUpdated": "2026-03-09T18:23:21.328Z"
 }
