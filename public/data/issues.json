@@ -3,8 +3,8 @@
     {
       "id": 426,
       "number": 426,
-      "title": "문서 요청 #426",
-      "body": "",
+      "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/homelab-ai-stack-2026-what-to-run-and-in-what-orde-85784b)\n**관련도**: 80/100\n**핵심 토픽**: Homelab AI Stack 2026, Deployment Order, Resource Planning\n\n## 뉴스 요약\nTL;DR 다른 사람 서버에서 AI 뇌를 실행하는 것을 멈추세요. 제가 홈랩에서 실행하는 정확한 스택을 보여드리겠습니다 — 실제 배포에 의미 있는 순서대로. T...\n\n## 상세 내용\nSource: Dev.to\nTL;DR\n다른 사람 서버에서 AI 뇌를 구동하는 일을 그만두세요.\n제가 홈랩에서 직접 운영하는 정확한 스택을, 실제 배포 순서대로 정리했습니다.\n모델이 임계점을 넘었습니다: qwen2.5:32b 를 괜찮은 머신에서 로컬로 실행하면 대부분의 개발자 작업에서 GPT‑3.5를 능가합니다. 무료이고, 프라이빗이며, 오프라인이며, 토큰 하나하나를 직접 소유합니다.\nAI 스택을 직접 호스팅하는 것이 이제는 nerd flex가 아니라 좋은 엔지니어링 위생입니다. 다른 사람 노트북에서 프로덕션을 돌리지 않듯, 그들의 서버에서 여러분의 추론을 돌릴 이유가 있나요?\n1. Reverse proxy &#x26; TLS (Traefik)\n인터넷에 노출되기 전에 먼저 Traefik을 설정하세요. 자동 TLS, 리버스 프록시, 단일 진입점을 제공합니다.\ndocker run -d \\\n-p 80:80 -p 443:443 \\\n-v /var/run/docker.sock:/var/run/docker.sock \\\ntraefik:v3.0\n이 단계는 절대 건너뛰지 마세요. 나머지 모든 서비스는 Traefik 뒤에 위치합니다.\n2. Install Ollama\ncurl -fsSL https://ollama.ai/install.sh | sh\n첫 모델을 실행해 보세요:\nollama run qwen2.5:32b\n모델 이름은 자유롭게 교체할 수 있습니다(예: gemma3, mistral, phi4, llama3.2). 모두 무료이며 API 키가 필요 없습니다.\nMinimum viable hardware\nModel sizeRecommended RAM\n7 B16 GB\n32 B32 GB+\nApple Silicon M‑series가 이 작업을 잘 처리합니다.\n3. Chat‑style UI (Open WebUI)\nOllama에 직접 연결되는 ChatGPT 스타일 인터페이스로, 여러 모델, 대화 기록, 문서 업로드를 지원합니다.\ndocker run -d -p 3000:8080 \\\n--add-h\n\n## 판단 근거\n2026년 기준 홈랩 AI 스택 구성·배포 순서를 정리한 실전 가이드가 현재 위키에 존재하지 않는다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-09T00:27:07.116Z",
-      "updated_at": "2026-03-09T00:27:07.120Z",
+      "updated_at": "2026-03-09T00:49:30.046Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/426",
-      "documentSlug": "ai/426",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/426.md",
+      "documentSlug": "homelab-ai-stack-2026",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/homelab-ai-stack-2026.md",
       "comments": 0
     },
     {
       "id": 425,
       "number": 425,
-      "title": "문서 요청 #425",
-      "body": "",
+      "title": " [요청] Joy – Open Trust Network for AI Agents",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/show-hn-joy-open-trust-network-for-ai-agents-ai-to-5033ee)\n**관련도**: 85/100\n**핵심 토픽**: AI Trust Network, AI‑to‑AI 인증, 에이전트 보증\n\n## 뉴스 요약\n개요 Show HN: Joy — AI 에이전트를 위한 오픈 트러스트 네트워크, AI‑to‑AI 보칭. 에이전트는 다른 에이전트를 보증하여 행동을 위임할 수 있습니다. 프로젝트를 읽어보세요: HN 스레드:...\n\n## 상세 내용\nSource: Dev.to\nOverview\nShow HN: Joy — open trust network for AI agents (AI-to-AI vouching). Agents can vouch for other agents to delegate actions. Read the project:  (HN thread: )\nIdea in one line\nLet agents carry machine‑signed claims so downstream agents accept actions without human friction.\nBenefits and Risks\nBenefit: Faster pipelines.\nRisk: Bigger blast radius—one compromised agent can trigger PRs, SQL queries, or payments.\nPractical Controls\nYou can ship today:\nBYOK (your API keys)\nMandatory human approval for publish/transactions\nPer‑action scopes\nShort‑lived signed claims\nRevokable attestations\nAppend‑only audit logs\nI run an event‑driven Claude → GitHub pipeline; these cut risk.\nTest to Run\nIn 10 minutes:\nSpin a vouching agent.\nRevoke its key.\nObserve if downstream still accepts its vouches.\nMeasure detection time and impact. If you serve legal/finance clients, treat human review as a product feature, not an optional checkbox.\nCall for Feedback\nThoughts from builders?\n\n## 판단 근거\nAI‑to‑AI 인증·보증을 위한 새로운 오픈 프로젝트이며, 기존 문서에 직접적인 매핑이 없으므로 독립적인 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,10 +56,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-09T00:26:20.703Z",
-      "updated_at": "2026-03-09T00:26:20.707Z",
+      "updated_at": "2026-03-09T00:50:18.335Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/425",
-      "documentSlug": "ai/425",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/425.md",
+      "documentSlug": "ai/joy-open-trust-network-for-ai-agents",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/joy-open-trust-network-for-ai-agents.md",
       "comments": 0
     },
     {
@@ -3482,5 +3482,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-09T00:27:07.120Z"
+  "lastUpdated": "2026-03-09T00:50:18.335Z"
 }

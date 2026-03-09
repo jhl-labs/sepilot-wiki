@@ -1,12 +1,17 @@
 {
-  "timestamp": "2026-03-09T00:51:47.738Z",
+  "timestamp": "2026-03-09T00:50:49.318Z",
   "dryRun": false,
-  "totalIssuesScanned": 14,
+  "totalIssuesScanned": 18,
   "categories": {
     "draft_review": [
       {
         "number": 426,
         "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 425,
+        "title": " [요청] Joy – Open Trust Network for AI Agents",
         "daysSinceUpdate": 0
       },
       {
@@ -77,11 +82,66 @@
         "daysSinceUpdate": 1
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 424,
+        "title": " [업데이트] Anthropic‑Pentagon 논쟁 최신 상황",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 423,
+        "title": " [업데이트] AI 에이전트 배포 실패 방지 – Permission Creep 방지 전략",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 422,
+        "title": " [업데이트] MCP – Model Context Protocol (Hebbian Learning & GraphRAG Extension)",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 426,
+      "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 425,
+      "title": " [요청] Joy – Open Trust Network for AI Agents"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 424,
+      "title": " [업데이트] Anthropic‑Pentagon 논쟁 최신 상황"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 423,
+      "title": " [업데이트] AI 에이전트 배포 실패 방지 – Permission Creep 방지 전략"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 422,
+      "title": " [업데이트] MCP – Model Context Protocol (Hebbian Learning & GraphRAG Extension)"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 426,
+      "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+      "score": 74
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 425,
+      "title": " [요청] Joy – Open Trust Network for AI Agents",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/joy-open-trust-network-for-ai-agents.md"
+    }
+  ],
+  "actionCount": 7,
   "maxActions": 60
 }
