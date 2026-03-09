@@ -5,6 +5,7 @@ status: draft
 tags: [SQLite, 키‑값 저장소, SNKV, B‑tree, C++, Python]
 redirect_from:
   - snkv-sqlite-b-tree-c-c-python
+  - snkv-sqlite-b-tree-c-c-python
   - backend-279
   - snkv-sqlite-b-tree-c-c-python
 quality_score: 75

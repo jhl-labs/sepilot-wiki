@@ -7,6 +7,10 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-02T10:00:00Z"
 updatedAt: "2026-03-02T10:00:00Z"
+redirect_from:
+  - devops-dependabot-labels
+  - devops-fix-dependabot-labels
+  - troubleshooting-dependabot-label-missing
 ---
 
 # Dependabot Configuration and Missing Labels Fix

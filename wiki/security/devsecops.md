@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling]
 redirect_from:
+  - reports-devsecops-paradox
   - devsecops
 updatedAt: 2026-03-05
 quality_score: 73

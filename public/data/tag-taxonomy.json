@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-03-09T21:11:18.890Z",
+  "generatedAt": "2026-03-09T21:09:01.382Z",
   "model": "gpt-oss:120b-cloud",
-  "totalTags": 556,
+  "totalTags": 551,
   "merges": [],
   "suggestions": [],
   "taxonomy": {},
@@ -65,7 +65,7 @@
     },
     {
       "tag": "CI/CD",
-      "count": 12,
+      "count": 13,
       "documents": [
         "reports/devsecops-paradox.md",
         "security/devsecops.md",
@@ -73,6 +73,7 @@
         "projects/enterprise-gitops-implementation.md",
         "bun/github-actions-setup.md",
         "ai/joy-open-trust-network-for-ai-agents.md",
+        "ai/xcode-cloud-ci-cd-guide.md",
         "ai/425.md",
         "ai/github-agentic-workflows.md",
         "devops/gitops-implementation.md",
@@ -135,7 +136,7 @@
         "backend/snkv-sqlite-btree-kv-store.md",
         "security/shinobi-scan-secret-scanning-cli.md",
         "ai/fastapi-ai-api.md",
-        "ai/fastapi-ai-inference.md"
+        "ai/fastapi-inference-service-guide.md"
       ]
     },
     {
@@ -226,7 +227,7 @@
     },
     {
       "tag": "dependabot",
-      "count": 17,
+      "count": 11,
       "documents": [
         "backend/label-dependencies.md",
         "github/labels/dependencies.md",
@@ -253,7 +254,7 @@
       "documents": [
         "backend/wiki-api-route-guide.md",
         "ai/fastapi-ai-api.md",
-        "ai/fastapi-ai-inference.md",
+        "ai/fastapi-inference-service-guide.md",
         "frontend/api-service-layer.md"
       ]
     },
@@ -384,7 +385,7 @@
         "security/400.md",
         "projects/enterprise-gitops-implementation.md",
         "bun/github-actions-setup.md",
-        "ai/ai-code-assistant-productivity-paradox.md",
+        "ai/ai-code-assistant-3week-experiment-report.md",
         "devops/gitops-implementation.md"
       ]
     },
@@ -429,12 +430,13 @@
     },
     {
       "tag": "오픈소스",
-      "count": 6,
+      "count": 7,
       "documents": [
         "observability/435.md",
         "projects/emdash.md",
+        "projects/emdash-agentic-development-environment.md",
         "projects/openclaw-complete-guide.md",
-        "projects/agentspace.md",
+        "projects/agentspace-private-chat-room.md",
         "ai/315.md",
         "ai/344.md"
       ]
@@ -490,8 +492,8 @@
         "observability/logmera-self-hosted-llm-observability-tool.md",
         "observability/374.md",
         "ai/fastapi-ai-api.md",
-        "ai/ai-code-assistant-productivity-paradox.md",
-        "ai/fastapi-ai-inference.md"
+        "ai/ai-code-assistant-3week-experiment-report.md",
+        "ai/fastapi-inference-service-guide.md"
       ]
     },
     {
@@ -550,11 +552,11 @@
         "ai/fastapi-ai-api.md",
         "ai/ai-code-review-agent-guide.md",
         "ai/joy-open-trust-network-for-ai-agents.md",
-        "ai/ai-code-assistant-productivity-paradox.md",
         "ai/ai-4.md",
         "ai/315.md",
         "ai/mcp-model-context-protocol.md",
         "ai/351.md",
+        "ai/ai-code-assistant-3week-experiment-report.md",
         "ai/426.md",
         "ai/ai-2024-2026.md",
         "ai/ai-productivity-paradox-why-developer-throughput-m.md",
@@ -562,6 +564,7 @@
         "ai/287.md",
         "ai/fastapi-ai-inference.md",
         "ai/github-agentic-workflows.md",
+        "ai/fastapi-inference-service-guide.md",
         "ai/multi-agent-system.md",
         "ai/gemini-3-1-pro.md",
         "ai/kubernetes-ai-gitops.md",
@@ -634,7 +637,7 @@
     },
     {
       "tag": "labels",
-      "count": 12,
+      "count": 6,
       "documents": [
         "github/labels/dependencies.md",
         "github/dependabot-labels.md",
@@ -643,10 +646,7 @@
         "troubleshooting/dependabot-labels.md",
         "dependencies/dompurify-bump-3.3.2.md",
         "dependabot/missing-dependencies-label.md",
-        "issues/dependabot-label-missing.md",
-        "devops/dependabot-label-fix.md",
         "devops/dependabot.md",
-        "devops/dependabot-labels.md",
         "devops/fix-dependabot-labels.md"
       ]
     },
@@ -704,14 +704,13 @@
     },
     {
       "tag": "ci",
-      "count": 7,
+      "count": 5,
       "documents": [
         "github/dependabot-labels.md",
         "troubleshooting/dependabot-missing-label.md",
         "bun/github-actions-setup.md",
         "ai/ai-code-review-agent-guide.md",
         "ai/continuous-ai.md",
-        "devops/dependabot-label-fix.md",
         "devops/fix-dependabot-labels.md"
       ]
     },
@@ -772,6 +771,7 @@
         "security/404.md",
         "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
         "security/ai.md",
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md",
         "security/serv-u-15-5.md",
         "security/385.md",
         "docker/announcing-docker-hardened-system-packages.md",
@@ -865,8 +865,8 @@
       "count": 3,
       "documents": [
         "security/303.md",
-        "security/coinbase-x402-sdk-vulnerability.md",
-        "security/404.md"
+        "security/404.md",
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md"
       ]
     },
     {
@@ -882,59 +882,6 @@
       "count": 1,
       "documents": [
         "security/303.md"
-      ]
-    },
-    {
-      "tag": "취약점",
-      "count": 3,
-      "documents": [
-        "security/coinbase-x402-sdk-vulnerability.md",
-        "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
-        "security/serv-u-15-5.md"
-      ]
-    },
-    {
-      "tag": "Coinbase",
-      "count": 1,
-      "documents": [
-        "security/coinbase-x402-sdk-vulnerability.md"
-      ]
-    },
-    {
-      "tag": "x402",
-      "count": 2,
-      "documents": [
-        "security/coinbase-x402-sdk-vulnerability.md",
-        "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md"
-      ]
-    },
-    {
-      "tag": "Solana",
-      "count": 2,
-      "documents": [
-        "security/coinbase-x402-sdk-vulnerability.md",
-        "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md"
-      ]
-    },
-    {
-      "tag": "SVM",
-      "count": 1,
-      "documents": [
-        "security/coinbase-x402-sdk-vulnerability.md"
-      ]
-    },
-    {
-      "tag": "Ed25519",
-      "count": 1,
-      "documents": [
-        "security/coinbase-x402-sdk-vulnerability.md"
-      ]
-    },
-    {
-      "tag": "GHSA",
-      "count": 1,
-      "documents": [
-        "security/coinbase-x402-sdk-vulnerability.md"
       ]
     },
     {
@@ -994,6 +941,31 @@
       "documents": [
         "security/404.md",
         "security/cve-2026-27574-oneuptime-probe-vm-rce.md"
+      ]
+    },
+    {
+      "tag": "취약점",
+      "count": 3,
+      "documents": [
+        "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md",
+        "security/serv-u-15-5.md"
+      ]
+    },
+    {
+      "tag": "x402",
+      "count": 2,
+      "documents": [
+        "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md"
+      ]
+    },
+    {
+      "tag": "Solana",
+      "count": 2,
+      "documents": [
+        "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md"
       ]
     },
     {
@@ -1253,6 +1225,34 @@
       ]
     },
     {
+      "tag": "Coinbase",
+      "count": 1,
+      "documents": [
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md"
+      ]
+    },
+    {
+      "tag": "SVM",
+      "count": 1,
+      "documents": [
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md"
+      ]
+    },
+    {
+      "tag": "Ed25519",
+      "count": 1,
+      "documents": [
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md"
+      ]
+    },
+    {
+      "tag": "GHSA",
+      "count": 1,
+      "documents": [
+        "security/coinbase-x402-sdk-slopsquatting-vulnerability.md"
+      ]
+    },
+    {
       "tag": "Serv‑U",
       "count": 1,
       "documents": [
@@ -1271,7 +1271,8 @@
       "count": 2,
       "documents": [
         "security/385.md",
-        "projects/xcode-cloud-ci-cd.md"
+        "projects/xcode-cloud-ci-cd.md",
+        "ai/xcode-cloud-ci-cd-guide.md"
       ]
     },
     {
@@ -1570,32 +1571,12 @@
       ]
     },
     {
-      "tag": "GitHub Actions",
-      "count": 4,
-      "documents": [
-        "troubleshooting/dependabot-missing-label.md",
-        "ai/ai-code-review-agent-guide.md",
-        "devops/shared-workflows-nodejs-aws.md",
-        "devops/shared-workflows-for-node-js-backend-and-aws-deplo.md"
-      ]
-    },
-    {
-      "tag": "github-actions",
-      "count": 4,
-      "documents": [
-        "troubleshooting/dependabot-labels.md",
-        "issues/dependabot-label-missing.md",
-        "bun/github-actions-setup.md",
-        "devops/fix-dependabot-labels.md"
-      ]
-    },
-    {
       "tag": "Docker",
       "count": 9,
       "documents": [
         "docker/gordon-ai-agent-update.md",
         "docker/308.md",
-        "docker/docker-model-runner-macos-vllm.md",
+        "docker/docker-model-runner-macos-vllm-support.md",
         "docker/announcing-docker-hardened-system-packages.md",
         "docker/docker-zfs.md",
         "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md",
@@ -1617,7 +1598,9 @@
       "documents": [
         "docker/gordon-ai-agent-update.md",
         "projects/xcode-cloud-ci-cd.md",
-        "projects/github-copilot-cli-guide.md"
+        "projects/github-copilot-cli-guide.md",
+        "ai/xcode-cloud-ci-cd-guide.md",
+        "devops/dependabot-labels.md"
       ]
     },
     {
@@ -1648,7 +1631,7 @@
       "tag": "Model Runner",
       "count": 2,
       "documents": [
-        "docker/docker-model-runner-macos-vllm.md",
+        "docker/docker-model-runner-macos-vllm-support.md",
         "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md"
       ]
     },
@@ -1656,28 +1639,28 @@
       "tag": "vLLM",
       "count": 1,
       "documents": [
-        "docker/docker-model-runner-macos-vllm.md"
+        "docker/docker-model-runner-macos-vllm-support.md"
       ]
     },
     {
       "tag": "macOS",
       "count": 1,
       "documents": [
-        "docker/docker-model-runner-macos-vllm.md"
+        "docker/docker-model-runner-macos-vllm-support.md"
       ]
     },
     {
       "tag": "Apple Silicon",
       "count": 1,
       "documents": [
-        "docker/docker-model-runner-macos-vllm.md"
+        "docker/docker-model-runner-macos-vllm-support.md"
       ]
     },
     {
       "tag": "LLM Inference",
       "count": 1,
       "documents": [
-        "docker/docker-model-runner-macos-vllm.md"
+        "docker/docker-model-runner-macos-vllm-support.md"
       ]
     },
     {
@@ -1765,7 +1748,7 @@
       "documents": [
         "docker/run-openclaw-securely-in-docker-sandboxes.md",
         "projects/openclaw-complete-guide.md",
-        "projects/agentspace.md",
+        "projects/agentspace-private-chat-room.md",
         "projects/moltbook-intro.md",
         "ai/275.md",
         "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
@@ -1787,36 +1770,71 @@
       ]
     },
     {
-      "tag": "Emdash",
+      "tag": "이기종 로봇",
       "count": 1,
       "documents": [
-        "projects/emdash.md"
+        "projects/viscat-technology-whitepaper.md"
       ]
     },
     {
-      "tag": "Agentic Development Environment",
+      "tag": "통합 플랫폼",
       "count": 1,
       "documents": [
-        "projects/emdash.md"
+        "projects/viscat-technology-whitepaper.md"
+      ]
+    },
+    {
+      "tag": "AI 에이전트",
+      "count": 5,
+      "documents": [
+        "projects/viscat-technology-whitepaper.md",
+        "projects/viscat.md",
+        "ai/cloud-terminal-persistent-ai-agent-sessions.md",
+        "ai/275.md",
+        "ai/310.md"
+      ]
+    },
+    {
+      "tag": "산업 자동화",
+      "count": 2,
+      "documents": [
+        "projects/viscat-technology-whitepaper.md",
+        "projects/viscat.md"
+      ]
+    },
+    {
+      "tag": "Viscat",
+      "count": 2,
+      "documents": [
+        "projects/viscat-technology-whitepaper.md",
+        "projects/viscat.md"
+      ]
+    },
+    {
+      "tag": "Emdash",
+      "count": 2,
+      "documents": [
+        "projects/emdash.md",
+        "projects/emdash-agentic-development-environment.md"
       ]
     },
     {
       "tag": "ADE",
+      "count": 2,
+      "documents": [
+        "projects/emdash.md",
+        "projects/emdash-agentic-development-environment.md"
+      ]
+    },
+    {
+      "tag": "Agentic AI",
       "count": 1,
       "documents": [
         "projects/emdash.md"
       ]
     },
     {
-      "tag": "AI 코딩 에이전트",
-      "count": 2,
-      "documents": [
-        "projects/emdash.md",
-        "ai/388.md"
-      ]
-    },
-    {
-      "tag": "Git Worktree",
+      "tag": "개발 환경",
       "count": 1,
       "documents": [
         "projects/emdash.md"
@@ -1826,7 +1844,8 @@
       "tag": "Xcode Cloud",
       "count": 1,
       "documents": [
-        "projects/xcode-cloud-ci-cd.md"
+        "projects/xcode-cloud-ci-cd.md",
+        "ai/xcode-cloud-ci-cd-guide.md"
       ]
     },
     {
@@ -1870,6 +1889,28 @@
       "count": 1,
       "documents": [
         "projects/robopocket-ar.md"
+      ]
+    },
+    {
+      "tag": "Agentic Development Environment",
+      "count": 1,
+      "documents": [
+        "projects/emdash-agentic-development-environment.md"
+      ]
+    },
+    {
+      "tag": "AI 코딩 에이전트",
+      "count": 2,
+      "documents": [
+        "projects/emdash-agentic-development-environment.md",
+        "ai/388.md"
+      ]
+    },
+    {
+      "tag": "Git Worktree",
+      "count": 1,
+      "documents": [
+        "projects/emdash-agentic-development-environment.md"
       ]
     },
     {
@@ -2051,6 +2092,30 @@
       ]
     },
     {
+      "tag": "AgentSpace",
+      "count": 2,
+      "documents": [
+        "projects/agentspace-private-chat-room.md",
+        "ai/agentspace-openclaw.md"
+      ]
+    },
+    {
+      "tag": "멀티에이전트",
+      "count": 2,
+      "documents": [
+        "projects/agentspace-private-chat-room.md",
+        "ai/multi-agent-workflows-often-fail-here-s-how-to-eng.md"
+      ]
+    },
+    {
+      "tag": "채팅 UI",
+      "count": 2,
+      "documents": [
+        "projects/agentspace-private-chat-room.md",
+        "ai/agentspace-openclaw.md"
+      ]
+    },
+    {
       "tag": "Development Tools",
       "count": 1,
       "documents": [
@@ -2071,30 +2136,6 @@
         "projects/github-copilot-coding-agent.md",
         "projects/jira-ai-agents.md",
         "ai/310.md"
-      ]
-    },
-    {
-      "tag": "AgentSpace",
-      "count": 2,
-      "documents": [
-        "projects/agentspace.md",
-        "ai/agentspace-openclaw.md"
-      ]
-    },
-    {
-      "tag": "멀티에이전트",
-      "count": 2,
-      "documents": [
-        "projects/agentspace.md",
-        "ai/multi-agent-workflows-often-fail-here-s-how-to-eng.md"
-      ]
-    },
-    {
-      "tag": "채팅 UI",
-      "count": 2,
-      "documents": [
-        "projects/agentspace.md",
-        "ai/agentspace-openclaw.md"
       ]
     },
     {
@@ -2566,27 +2607,6 @@
       ]
     },
     {
-      "tag": "mermaid",
-      "count": 1,
-      "documents": [
-        "dependencies/mermaid-bump-11.13.0.md"
-      ]
-    },
-    {
-      "tag": "upgrade",
-      "count": 1,
-      "documents": [
-        "dependencies/mermaid-bump-11.13.0.md"
-      ]
-    },
-    {
-      "tag": "react-router-dom",
-      "count": 1,
-      "documents": [
-        "dependencies/react-router-dom-7-13-1-bump-no-longer-needed.md"
-      ]
-    },
-    {
       "tag": "pnpm",
       "count": 2,
       "documents": [
@@ -2606,27 +2626,6 @@
       "count": 1,
       "documents": [
         "dependabot/pnpm-transitive-dependencies-limitations.md"
-      ]
-    },
-    {
-      "tag": "@types/node",
-      "count": 1,
-      "documents": [
-        "dependabot/@types-node-update-cancelled.md"
-      ]
-    },
-    {
-      "tag": "업데이트",
-      "count": 1,
-      "documents": [
-        "dependabot/@types-node-update-cancelled.md"
-      ]
-    },
-    {
-      "tag": "PR 취소",
-      "count": 1,
-      "documents": [
-        "dependabot/@types-node-update-cancelled.md"
       ]
     },
     {
@@ -2723,6 +2722,14 @@
       ]
     },
     {
+      "tag": "github-actions",
+      "count": 2,
+      "documents": [
+        "bun/github-actions-setup.md",
+        "devops/fix-dependabot-labels.md"
+      ]
+    },
+    {
       "tag": "node-alternative",
       "count": 1,
       "documents": [
@@ -2750,7 +2757,7 @@
       "count": 2,
       "documents": [
         "ai/fastapi-ai-api.md",
-        "ai/fastapi-ai-inference.md"
+        "ai/fastapi-inference-service-guide.md"
       ]
     },
     {
@@ -2848,6 +2855,62 @@
       "documents": [
         "ai/ai-code-assistant-productivity-paradox.md",
         "ai/ai-4.md"
+      ]
+    },
+    {
+      "tag": "Trust Network",
+      "count": 2,
+      "documents": [
+        "ai/joy-open-trust-network-for-ai-agents.md",
+        "ai/425.md"
+      ]
+    },
+    {
+      "tag": "Vouching",
+      "count": 2,
+      "documents": [
+        "ai/joy-open-trust-network-for-ai-agents.md",
+        "ai/425.md"
+      ]
+    },
+    {
+      "tag": "OpenAI",
+      "count": 2,
+      "documents": [
+        "ai/openai-pentagon-contract-update.md",
+        "ai/openai-pentagon-contract-revision-and-policy-impli.md"
+      ]
+    },
+    {
+      "tag": "Pentagon",
+      "count": 2,
+      "documents": [
+        "ai/openai-pentagon-contract-update.md",
+        "ai/openai-pentagon-contract-revision-and-policy-impli.md"
+      ]
+    },
+    {
+      "tag": "AI 정책",
+      "count": 3,
+      "documents": [
+        "ai/openai-pentagon-contract-update.md",
+        "ai/openai-pentagon-contract-revision-and-policy-impli.md",
+        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
+      ]
+    },
+    {
+      "tag": "거버넌스",
+      "count": 2,
+      "documents": [
+        "ai/openai-pentagon-contract-update.md",
+        "ai/openai-pentagon-contract-revision-and-policy-impli.md"
+      ]
+    },
+    {
+      "tag": "계약 수정",
+      "count": 1,
+      "documents": [
+        "ai/openai-pentagon-contract-update.md"
       ]
     },
     {
@@ -2968,6 +3031,14 @@
       ]
     },
     {
+      "tag": "코드 어시스턴트",
+      "count": 2,
+      "documents": [
+        "ai/ai-4.md",
+        "ai/ai-code-assistant-3week-experiment-report.md"
+      ]
+    },
+    {
       "tag": "생산성 파라독스",
       "count": 1,
       "documents": [
@@ -2979,6 +3050,14 @@
       "count": 1,
       "documents": [
         "ai/ai-4.md"
+      ]
+    },
+    {
+      "tag": "실험",
+      "count": 2,
+      "documents": [
+        "ai/ai-4.md",
+        "ai/ai-code-assistant-3week-experiment-report.md"
       ]
     },
     {
@@ -3148,6 +3227,13 @@
       "count": 1,
       "documents": [
         "ai/275.md"
+      ]
+    },
+    {
+      "tag": "TestFlight",
+      "count": 1,
+      "documents": [
+        "ai/xcode-cloud-ci-cd-guide.md"
       ]
     },
     {
@@ -3442,6 +3528,14 @@
       ]
     },
     {
+      "tag": "생산성",
+      "count": 2,
+      "documents": [
+        "ai/ai-code-assistant-3week-experiment-report.md",
+        "ai/ai-productivity-paradox-why-developer-throughput-m.md"
+      ]
+    },
+    {
       "tag": "Autonomous Agents",
       "count": 1,
       "documents": [
@@ -3694,43 +3788,10 @@
       ]
     },
     {
-      "tag": "OpenAI",
-      "count": 2,
-      "documents": [
-        "ai/openai-pentagon-contract-revision-and-policy-impli.md",
-        "ai/openai-pentagon-contract.md"
-      ]
-    },
-    {
-      "tag": "Pentagon",
-      "count": 2,
-      "documents": [
-        "ai/openai-pentagon-contract-revision-and-policy-impli.md",
-        "ai/openai-pentagon-contract.md"
-      ]
-    },
-    {
-      "tag": "AI 정책",
-      "count": 3,
-      "documents": [
-        "ai/openai-pentagon-contract-revision-and-policy-impli.md",
-        "ai/openai-pentagon-contract.md",
-        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
-      ]
-    },
-    {
       "tag": "계약",
       "count": 1,
       "documents": [
         "ai/openai-pentagon-contract-revision-and-policy-impli.md"
-      ]
-    },
-    {
-      "tag": "거버넌스",
-      "count": 2,
-      "documents": [
-        "ai/openai-pentagon-contract-revision-and-policy-impli.md",
-        "ai/openai-pentagon-contract.md"
       ]
     },
     {
@@ -3818,6 +3879,13 @@
       "count": 1,
       "documents": [
         "ai/agentspace-openclaw.md"
+      ]
+    },
+    {
+      "tag": "머신러닝",
+      "count": 1,
+      "documents": [
+        "ai/fastapi-inference-service-guide.md"
       ]
     },
     {
@@ -4186,13 +4254,6 @@
       "count": 1,
       "documents": [
         "frontend/410.md"
-      ]
-    },
-    {
-      "tag": "cd",
-      "count": 1,
-      "documents": [
-        "devops/dependabot-label-fix.md"
       ]
     },
     {
