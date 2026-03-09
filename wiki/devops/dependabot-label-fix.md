@@ -1,84 +1,68 @@
 ---
-title: "Dependabot 라벨 `dependencies` 누락 문제 해결 가이드"
-description: "Dependabot이 PR에 `dependencies` 라벨을 추가하려고 할 때 라벨이 존재하지 않아 발생하는 오류를 해결하는 방법을 안내합니다."
+title: "Dependabot 라벨 오류 해결 방법"
+description: "Dependabot이 PR에 라벨을 추가하려 할 때 `dependencies`와 `github-actions` 라벨이 존재하지 않아 발생하는 오류를 해결하는 가이드"
 category: "Troubleshooting"
-tags: ["dependabot", "label", "github", "CI"]
+tags: ["dependabot", "labels", "ci", "cd"]
 status: "draft"
 issueNumber: 0
-createdAt: "2026-03-09T09:00:00Z"
-updatedAt: "2026-03-09T09:00:00Z"
+createdAt: "2026-03-09T12:00:00Z"
+updatedAt: "2026-03-09T12:00:00Z"
 ---
 
-# Dependabot 라벨 `dependencies` 누락 문제 해결 가이드
+# Dependabot 라벨 오류 해결 방법
 
-## 문제 상황
-Dependabot이 Pull Request에 `dependencies` 라벨을 자동으로 추가하려고 시도하지만, 해당 라벨이 레포지토리에 존재하지 않아 아래와 같은 오류가 발생합니다.
+GitHub Actions에서 Dependabot이 자동으로 생성한 Pull Request에 라벨을 붙이려 할 때, 다음과 같은 오류 메시지를 볼 수 있습니다.
 
 ```
-The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.
+The following labels could not be found: `dependencies`, `github-actions`. Please create them before Dependabot can add them to a pull request.
 ```
+
+이 오류는 레포지토리 내에 해당 라벨이 존재하지 않을 때 발생합니다. 라벨을 미리 생성하거나, `dependabot.yml` 파일에서 라벨 지정 부분을 제거하면 문제를 해결할 수 있습니다.
 
 ## 해결 방법
-### 1. 라벨 생성하기
-#### a) GitHub 웹 UI 사용
-1. 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.
-2. 오른쪽 사이드바의 **Labels** 를 선택합니다.
-3. **New label** 버튼을 클릭합니다.
-4. **Name** 에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택한 뒤 **Create label** 을 클릭합니다.
 
-#### b) `labels.yml` 파일을 이용해 자동 생성 (옵션)
-레포지토리 루트에 `.github/labels.yml` 파일을 만들고 다음과 같이 정의합니다.
+### 1. 라벨 직접 생성 (추천)
+1. 레포지토리 페이지에서 **Issues → Labels** 로 이동합니다.
+2. **New label** 버튼을 클릭합니다.
+3. 아래와 같이 라벨을 생성합니다.
+   - **Name**: `dependencies`
+   - **Color**: 원하는 색 (예: `#0366d6`)
+   - **Description**: `Dependabot dependency updates`
+4. 동일한 방법으로 `github-actions` 라벨도 생성합니다.
+   - **Name**: `github-actions`
+   - **Description**: `Dependabot GitHub Actions updates`
 
+> 라벨 생성은 레포지토리 관리자 권한이 필요합니다.
+
+### 2. `dependabot.yml`에서 라벨 지정 제거
+`dependabot.yml` 파일에 `labels:` 섹션이 있다면 해당 라벨 이름을 삭제하거나 주석 처리합니다.
 ```yaml
-- name: dependencies
-  color: 0E8A16   # 초록색 (선택 사항)
-  description: "Dependency updates from Dependabot"
-```
-
-GitHub Actions 혹은 `probot` 등 자동화 도구가 이 파일을 읽어 라벨을 생성하도록 설정할 수 있습니다.
-
-#### c) GitHub API 로 라벨 만들기
-```bash
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: token YOUR_GITHUB_TOKEN" \
-  https://api.github.com/repos/OWNER/REPO/labels \
-  -d '{"name":"dependencies","color":"0E8A16","description":"Dependency updates from Dependabot"}'
-```
-
-> **주의**: `YOUR_GITHUB_TOKEN` 은 `repo` 권한을 가진 토큰이어야 합니다.
-
-### 2. `dependabot.yml` 에서 잘못된 라벨 지정 제거
-`dependabot.yml` 파일에 `labels:` 섹션이 존재한다면, 존재하지 않는 라벨이 포함되어 있지 않은지 확인합니다. 예시:
-
-```yaml
+# .github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: "npm"
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-    # 아래 라벨이 존재하지 않을 경우 오류가 발생합니다.
+      interval: "daily"
     # labels:
     #   - "dependencies"
+    #   - "github-actions"
 ```
+이후 커밋을 푸시하면 Dependabot은 라벨 없이 PR을 생성합니다.
 
-필요하지 않다면 `labels:` 항목 자체를 삭제하거나, 라벨 이름을 정확히 `dependencies` 로 맞춰 주세요.
-
-### 3. 변경 사항 커밋 및 푸시
+### 3. 라벨 자동 생성 스크립트 활용 (고급)
+GitHub CLI(`gh`)를 사용해 스크립트로 라벨을 자동 생성할 수 있습니다.
 ```bash
-git add .github/labels.yml .github/dependabot.yml
-git commit -m "Add missing 'dependencies' label for Dependabot"
-git push origin main
+gh label create dependencies --color 0366d6 --description "Dependabot dependency updates"
+gh label create github-actions --color 0e8a16 --description "Dependabot GitHub Actions updates"
 ```
-
-## 검증
-1. Dependabot이 새 PR을 생성하면 자동으로 `dependencies` 라벨이 붙는지 확인합니다.
-2. 기존 PR에 라벨이 정상적으로 표시되는지 확인합니다.
+CI 파이프라인 초기에 실행하도록 설정하면 라벨 누락 문제를 방지할 수 있습니다.
 
 ## 참고 자료
-- [GitHub Docs – About labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-labels) (출처)
-- Dependabot 공식 문서: <https://docs.github.com/en/code-security/dependabot>
+- Dependabot PR 라벨 오류 이슈: [SebastienMelki/sebuf#140](https://dependabot.ecosyste.ms/hosts/GitHub/repositories/SebastienMelki/sebuf/issues/140) (출처)
+- Docker `login-action` v4 릴리즈 노트: [docker/login-action releases](https://github.com/docker/login-action/releases) (출처)
 
----
-*이 문서는 Dependabot 라벨 문제를 해결하기 위한 가이드이며, 필요에 따라 레포지토리 정책에 맞게 조정하세요.*
+## 요약
+- `dependencies`와 `github-actions` 라벨이 없으면 Dependabot이 PR에 라벨을 붙일 수 없습니다.
+- 라벨을 직접 생성하거나 `dependabot.yml`에서 라벨 지정 부분을 제거하면 문제를 해결할 수 있습니다.
+- 필요에 따라 GitHub CLI 스크립트로 라벨 자동 생성을 고려해 보세요.
