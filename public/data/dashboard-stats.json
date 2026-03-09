@@ -1,43 +1,103 @@
 {
-  "collectedAt": "2026-03-09T11:45:43.132Z",
+  "collectedAt": "2026-03-09T12:50:27.120Z",
   "overview": {
-    "totalDocuments": 161,
-    "publishedDocuments": 88,
+    "totalDocuments": 163,
+    "publishedDocuments": 90,
     "draftDocuments": 73,
-    "openRequests": 94,
+    "openRequests": 96,
     "closedRequests": 19,
-    "totalAIActions": 462
+    "totalAIActions": 468
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 6,
+      "documentsCreated": 2,
+      "documentsModified": 3,
+      "tavilyApiCalls": 6,
+      "tavilyResults": 15,
+      "estimatedTokens": 4355,
+      "totalPipelineDurationMs": 95320
     },
     "last24h": {
-      "aiActions": 15,
-      "documentsCreated": 3,
-      "documentsModified": 6,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 20,
-      "estimatedTokens": 5475,
-      "totalPipelineDurationMs": 119411
+      "aiActions": 20,
+      "documentsCreated": 5,
+      "documentsModified": 9,
+      "tavilyApiCalls": 15,
+      "tavilyResults": 35,
+      "estimatedTokens": 9830,
+      "totalPipelineDurationMs": 214731
     },
     "last7d": {
-      "aiActions": 148,
-      "documentsCreated": 48,
-      "documentsModified": 49,
-      "tavilyApiCalls": 144,
-      "tavilyResults": 378,
-      "estimatedTokens": 108065,
-      "totalPipelineDurationMs": 2389792
+      "aiActions": 154,
+      "documentsCreated": 50,
+      "documentsModified": 52,
+      "tavilyApiCalls": 150,
+      "tavilyResults": 393,
+      "estimatedTokens": 112420,
+      "totalPipelineDurationMs": 2485112
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-09T12:18:33.981Z",
+      "actionType": "generate",
+      "issueNumber": 436,
+      "documentTitle": "Guardian Protocol Framework 1.0 공개 초안 – 자율 AI 에이전트 거버넌스 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 39129,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1758
+    },
+    {
+      "timestamp": "2026-03-09T12:17:51.473Z",
+      "actionType": "generate",
+      "issueNumber": 435,
+      "documentTitle": "2026 모니터링 도구 비교 가이드 – VigilOps vs Zabbix vs Prometheus+Grafana vs Datadog",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 56191,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2597
+    },
+    {
+      "timestamp": "2026-03-09T12:16:52.227Z",
+      "actionType": "modify",
+      "issueNumber": 434,
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-09T12:16:05.334Z",
+      "actionType": "modify",
+      "issueNumber": 433,
+      "documentTitle": "What’s New with GitHub Copilot Coding Agent",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-09T12:15:24.315Z",
+      "actionType": "modify",
+      "issueNumber": 432,
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-09T12:13:55.966Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-09T06:27:47.139Z",
       "actionType": "modify",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-08T12:09:31.650Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-08T09:05:29.621Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "학습 루프",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-08T06:18:50.551Z",
-      "actionType": "modify",
-      "issueNumber": 421,
-      "documentTitle": "AI 코드 리뷰 에이전트 구축 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-08T06:18:16.150Z",
-      "actionType": "modify",
-      "issueNumber": 420,
-      "documentTitle": "Ollama와 Claude Code 연결 방법",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-08T06:17:59.520Z",
-      "actionType": "generate",
-      "issueNumber": 419,
-      "documentTitle": "NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 38360,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1746
-    },
-    {
-      "timestamp": "2026-03-08T06:17:18.135Z",
-      "actionType": "modify",
-      "issueNumber": 418,
-      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 450,
-      "totalEstimatedTokens": 302933,
-      "avgDurationMs": 53225
+      "totalActions": 456,
+      "totalEstimatedTokens": 307288,
+      "avgDurationMs": 53138
     },
     "unknown": {
       "totalActions": 12,
