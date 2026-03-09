@@ -1,9 +1,9 @@
 {
-  "collectedAt": "2026-03-09T21:04:21.461Z",
+  "collectedAt": "2026-03-09T21:03:54.675Z",
   "repository": "jhl-labs/sepilot-wiki",
   "summary": {
     "totalWorkflows": 23,
-    "inProgressCount": 10,
+    "inProgressCount": 9,
     "recentFailuresCount": 10
   },
   "workflows": [
@@ -179,12 +179,12 @@
         {
           "id": 22874652385,
           "name": "Issue Handler",
-          "status": "queued",
+          "status": "in_progress",
           "conclusion": null,
           "branch": "main",
           "event": "issue_comment",
           "createdAt": "2026-03-09T21:02:52Z",
-          "updatedAt": "2026-03-09T21:03:52Z",
+          "updatedAt": "2026-03-09T21:03:33Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874652385",
           "actor": "dependabot[bot]"
         },
@@ -561,24 +561,24 @@
         {
           "id": 22874638094,
           "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "success",
+          "status": "in_progress",
+          "conclusion": null,
           "branch": "dependabot/npm_and_yarn/dev-dependencies-493566f671",
           "event": "pull_request",
           "createdAt": "2026-03-09T21:02:31Z",
-          "updatedAt": "2026-03-09T21:04:04Z",
+          "updatedAt": "2026-03-09T21:02:37Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874638094",
           "actor": "dependabot[bot]"
         },
         {
           "id": 22874636551,
           "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "success",
+          "status": "in_progress",
+          "conclusion": null,
           "branch": "dependabot/npm_and_yarn/typescript-eslint-8.57.0",
           "event": "pull_request",
           "createdAt": "2026-03-09T21:02:29Z",
-          "updatedAt": "2026-03-09T21:03:59Z",
+          "updatedAt": "2026-03-09T21:02:32Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874636551",
           "actor": "dependabot[bot]"
         },
@@ -595,7 +595,7 @@
           "actor": "dependabot[bot]"
         }
       ],
-      "avgDurationMs": 93000,
+      "avgDurationMs": 96000,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -1406,6 +1406,26 @@
       "actor": "dependabot[bot]"
     },
     {
+      "id": 22874652385,
+      "workflowName": "Issue Handler",
+      "status": "in_progress",
+      "branch": "main",
+      "event": "issue_comment",
+      "createdAt": "2026-03-09T21:02:52Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874652385",
+      "actor": "dependabot[bot]"
+    },
+    {
+      "id": 22874638094,
+      "workflowName": "CodeQL",
+      "status": "in_progress",
+      "branch": "dependabot/npm_and_yarn/dev-dependencies-493566f671",
+      "event": "pull_request",
+      "createdAt": "2026-03-09T21:02:31Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874638094",
+      "actor": "dependabot[bot]"
+    },
+    {
       "id": 22874638079,
       "workflowName": "CI",
       "status": "in_progress",
@@ -1413,6 +1433,16 @@
       "event": "pull_request",
       "createdAt": "2026-03-09T21:02:31Z",
       "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874638079",
+      "actor": "dependabot[bot]"
+    },
+    {
+      "id": 22874636551,
+      "workflowName": "CodeQL",
+      "status": "in_progress",
+      "branch": "dependabot/npm_and_yarn/typescript-eslint-8.57.0",
+      "event": "pull_request",
+      "createdAt": "2026-03-09T21:02:29Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874636551",
       "actor": "dependabot[bot]"
     },
     {
@@ -1443,46 +1473,6 @@
       "event": "issue_comment",
       "createdAt": "2026-03-09T21:01:57Z",
       "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874615758",
-      "actor": "dependabot[bot]"
-    },
-    {
-      "id": 22874614957,
-      "workflowName": "Issue Handler",
-      "status": "in_progress",
-      "branch": "main",
-      "event": "issue_comment",
-      "createdAt": "2026-03-09T21:01:56Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874614957",
-      "actor": "dependabot[bot]"
-    },
-    {
-      "id": 22874609503,
-      "workflowName": "Issue Handler",
-      "status": "in_progress",
-      "branch": "main",
-      "event": "issue_comment",
-      "createdAt": "2026-03-09T21:01:47Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874609503",
-      "actor": "dependabot[bot]"
-    },
-    {
-      "id": 22874609339,
-      "workflowName": "CI",
-      "status": "in_progress",
-      "branch": "dependabot/npm_and_yarn/react-8ad2e10766",
-      "event": "pull_request",
-      "createdAt": "2026-03-09T21:01:47Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874609339",
-      "actor": "dependabot[bot]"
-    },
-    {
-      "id": 22874600523,
-      "workflowName": "CI",
-      "status": "in_progress",
-      "branch": "dependabot/npm_and_yarn/dompurify-3.3.2",
-      "event": "pull_request",
-      "createdAt": "2026-03-09T21:01:34Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/22874600523",
       "actor": "dependabot[bot]"
     }
   ],

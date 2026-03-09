@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-03-09T21:04:10.407Z</generated>
+  <generated>2026-03-09T21:03:44.137Z</generated>
   <count>180</count>
   <items>
   <item>
@@ -19753,6 +19753,41 @@ Dependabot이 의존성 업데이트 PR에 자동으로  라벨을 붙이려면,
     <tags>Dependabot, 라벨, 자동화, GitHub</tags>
     <lastModified>2026-03-09T20:47:12Z</lastModified>
     <author>GitHub Action</author>
+  </item>
+  <item>
+    <title>Dependabot 라벨 오류 해결 방법</title>
+    <slug>devops/fix-dependabot-labels</slug>
+    <content>Dependabot 라벨 오류 해결 방법
+Dependabot이 Pull Request에 라벨을 자동으로 붙이려 할 때 다음과 같은 오류가 발생할 수 있습니다.
+이 오류는 레포지토리 내에 해당 라벨이 존재하지 않거나,  파일에 잘못된 라벨 이름이 지정된 경우에 발생합니다. 아래 단계에 따라 문제를 해결할 수 있습니다.
+1️⃣ 라벨 생성하기
+GitHub 웹 UI
+   - 레포지토리 메인 페이지에서 Issues 탭을 클릭합니다.
+   - 오른쪽 사이드바의 Labels 를 선택합니다.
+   - New label 버튼을 클릭하고, 라벨 이름을  와  로 각각 입력합니다.
+   - 색상은 자유롭게 선택하고 Create label 을 눌러 저장합니다.
+GitHub CLI (선호하는 경우)
+   
+2️⃣  파일 검토 및 수정
+ 파일에 라벨 이름이 정확히 일치하는지 확인합니다. 예시:
+라벨 이름에 오타가 있거나, 불필요한 공백이 포함되지 않았는지 확인합니다.
+필요하지 않은 라벨은  섹션에서 제거할 수 있습니다.
+3️⃣ 변경 사항 커밋 및 푸시
+수정이 완료되면 파일을 커밋하고 푸시합니다.
+4️⃣ 확인
+새로운 Dependabot PR이 생성되면 라벨이 정상적으로 붙는지 확인합니다. 라벨이 보이지 않으면 위 과정을 다시 점검합니다.
+참고 자료
+GitHub Docs – Creating a label (공식 문서를 참조해주세요)
+Dependabot 설정 파일 예시 – dependabot.yml reference (공식 문서를 참조해주세요)
+이 문서는 Dependabot 라벨 오류를 빠르게 해결하고 CI 흐름을 원활히 유지하는 데 도움이 됩니다.</content>
+    <excerpt>Dependabot 라벨 오류 해결 방법
+Dependabot이 Pull Request에 라벨을 자동으로 붙이려 할 때 다음과 같은 오류가 발생할 수 있습니다.
+이 오류는 레포지토리 내에 해당 라벨이 존재하지 않거나,  파일에 잘못된 라벨 이름이 지정된 경우에 발생합니다. 아래 단계에 따라 문제를 해결할 수 있습니다.
+1️⃣ 라벨 생성하기
+GitHub 웹 U...</excerpt>
+    <tags>dependabot, github-actions, labels, CI</tags>
+    <lastModified>2026-03-09T21:03:44.020Z</lastModified>
+    <author></author>
   </item>
   <item>
     <title>GitHub Copilot CI/CD 통합 가이드</title>
