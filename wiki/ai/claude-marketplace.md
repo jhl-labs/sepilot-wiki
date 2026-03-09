@@ -1,7 +1,7 @@
 ---
 title: Claude Marketplace – 개요와 기업 통합 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [Claude Marketplace, Anthropic, 기업 통합, AI 조달, 파트너 에코시스템]
 ---
 
