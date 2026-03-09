@@ -3,7 +3,7 @@ title: "Dependabot 라벨 `dependencies` 생성 가이드"
 description: "Dependabot이 PR에 `dependencies` 라벨을 자동으로 추가하도록 라벨을 생성하고 설정하는 방법을 안내합니다."
 category: "Guide"
 tags: ["Dependabot", "라벨", "자동화", "GitHub"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-03-02T10:00:00Z"
 updatedAt: "2026-03-02T10:00:00Z"

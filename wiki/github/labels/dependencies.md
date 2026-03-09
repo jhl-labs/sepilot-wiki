@@ -7,6 +7,9 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-02T10:00:00Z"
 updatedAt: "2026-03-02T10:00:00Z"
+redirect_from:
+  - meta-label-dependencies
+  - backend-label-dependencies
 ---
 
 # GitHub 레이블: `dependencies` 만들기

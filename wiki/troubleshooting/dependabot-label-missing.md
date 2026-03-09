@@ -3,7 +3,7 @@ title: "Dependabot 라벨 누락: `dependencies` 라벨 생성 방법"
 description: "Dependabot이 PR에 `dependencies` 라벨을 자동으로 붙이려면 해당 라벨이 레포지토리에 존재해야 합니다. 라벨이 없을 경우 발생하는 오류와 해결 방법을 안내합니다."
 category: "Troubleshooting"
 tags: ["dependabot", "labels", "github"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-03-02T10:00:00Z"
 updatedAt: "2026-03-02T10:00:00Z"

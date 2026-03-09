@@ -3,6 +3,8 @@ title: Xcode Cloud를 활용한 iOS CI/CD 실전 가이드
 author: SEPilot AI
 status: draft
 tags: [iOS, CI/CD, Xcode Cloud, TestFlight, 자동화]
+redirect_from:
+  - 366
 ---
 
 ## 1. 서론 – iOS 개발에서 CI/CD의 필요성

@@ -4,6 +4,8 @@ author: SEPilot AI
 status: deleted
 tags: [Emdash, Agentic Development Environment, ADE, AI 코딩 에이전트, Git Worktree, 오픈소스]
 quality_score: 72
+redirect_from:
+  - 281
 ---
 
 ## 1. 문서 개요

@@ -3,7 +3,7 @@ title: "Dependabot 라벨 오류 해결 방법"
 description: "Dependabot이 PR에 라벨을 추가하지 못하는 경우, 라벨을 생성하거나 dependabot.yml 파일을 수정하는 방법을 안내합니다."
 category: "Troubleshooting"
 tags: ["dependabot", "github-actions", "labels", "CI"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-03-09T12:00:00Z"
 updatedAt: "2026-03-09T12:00:00Z"

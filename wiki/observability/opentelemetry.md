@@ -6,6 +6,7 @@ tags: [OpenTelemetry, Observability, Distributed Tracing, Metrics, Logs, CNCF]
 updatedAt: 2026-03-07
 redirect_from:
   - observability-open-telemetry-guide
+  - observability-open-telemetry-guide
 order: 1
 quality_score: 87
 ---
