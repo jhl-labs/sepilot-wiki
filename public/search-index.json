@@ -1320,6 +1320,19 @@
     "author": "GitHub Action"
   },
   {
+    "title": "Dependabot @types/node 업데이트 PR 취소 안내",
+    "slug": "dependabot/@types-node-update-cancelled",
+    "content": "Dependabot @types/node 업데이트 PR 취소 안내\n배경\nDependabot이 @types/node 패키지를  →  으로 업데이트하는 그룹 PR을 생성했습니다.\n이후 시스템 로그에 \"Looks like @types/node is updatable in another way, so this is no longer needed.\" 라는 피드백이 달렸습니다.\n이는 동일한 의존성을 다른 경로(예: 별도 PR, 수동 업데이트 등)에서 이미 해결했기 때문에 현재 PR은 필요 없음을 의미합니다.\n현재 상태\n해당 Dependabot PR은 폐기되었습니다.\n자동 머지 및 라벨링 작업이 중단되었습니다.\n레포지토리의  설정은 그대로 유지되며, 향후 새로운 업데이트가 필요하면 자동으로 새 PR이 생성됩니다.\n조치 사항\nPR 폐기 확인: GitHub UI에서 PR이  상태인지 확인합니다.\n필요 시 수동 업데이트: 만약 아직 적용되지 않은 최신 버전이 있다면, 직접  명령어로 업데이트합니다.\n라벨 관리:  라벨이 존재하지 않아 발생한 오류는 레포지토리 설정에서 라벨을 추가하거나 에서 라벨 지정 부분을 수정합니다.\nCI/CD 검증: 폐기된 PR과 관련된 워크플로우가 정상적으로 실행되는지 CI 로그를 확인합니다.\n참고 자료\nDependabot PR 로그 및 피드백: \"Looks like @types/node is updatable in another way, so this is no longer needed.\" (시스템 메시지) \nDependabot 공식 문서: About Dependabot version updates \n관련 이슈 예시: dependabot-core #10019 \n이 문서는 현재 상황을 기준으로 작성된 초안(draft)이며, 필요에 따라 업데이트될 수 있습니다.",
+    "excerpt": "Dependabot @types/node 업데이트 PR 취소 안내\n배경\nDependabot이 @types/node 패키지를  →  으로 업데이트하는 그룹 PR을 생성했습니다.\n이후 시스템 로그에 \"Looks like @types/node is updatable in another way, so this is no longer needed.\" 라는 피드백이...",
+    "tags": [
+      "dependabot",
+      "@types/node",
+      "업데이트",
+      "PR 취소"
+    ],
+    "lastModified": "2026-03-09T21:08:03.460Z"
+  },
+  {
     "title": "Coinbase x402 SDK (Solana) 결제 검증 우회 취약점 (GHSA‑QR2G‑P6Q7‑W82M) 분석 및 대응 가이드",
     "slug": "408",
     "content": "개요\n취약점 식별: GHSA‑QR2G‑P6Q7‑W82M (Coinbase x402 SDK Solana SVM 결제 검증)  \n공개일: 2026‑03‑07  \nCVSS 점수: 9.9 (Critical) – 매우 높은 위험도 🔗EUNO.NEWS  \n주요 영향: Solana (SVM) 기반 자동 HTTP 402 결제 검증 로직이 서명 검증 오류(CWE‑347)로 인해 결제 요구 사항을 우회할 수 있음.\n기술적 세부 정보\n  항목   내용  \n ------ ------ \n  취약점 위치    컴포넌트의 자동 HTTP 402 결제 검증 로직  \n  핵심 원인   Ed25519 서명 검증 구현 오류 – 서명이 올바르지 않아도 검증을 통과함 (CWE‑347)  \n  공격 벡터   네트워크 기반 위조 서명 요청 → 결제 서명 위조 후 API·리소스·디지털 상품 무단 접근  \n  피해 가능 시나리오   블록체인에 거래를 정산하지 않은 상태에서 유료 API, 컴퓨팅 리소스, 디지털 상품을 무료로 이용  \n  POC   공개된 Proof‑of‑Concept 존재 (⚠️ POC Available) [🔗EUNO.NEWS]  \n  패치 날짜   2026‑03‑07 [🔗EUNO.NEWS]  \n영향을 받는 제품 및 버전\nNode.js –  (npm)  주의: 모든 facilitator 서비스가 새 버전을 로드하도록 재시작이 필요합니다 [🔗EUNO.NEWS].\n검증 및 테스트\n서명 검증 정상 동작 확인  \n   - 정상 서명과 변조 서명을 각각 전송해  응답이 올바르게 반환되는지 확인.  \n회귀 테스트  \n   - 기존 결제 흐름(정상 결제, 실패 결제) 시나리오를 자동화 테스트 스위트에 포함.  \n로드 테스트  \n   - 정상 트래픽 수준에서 가 과부하 없이 서명 검증을 수행하는지 부하 테스트 수행.  \n참고 자료 및 외부 링크\nGitHub Advisory Database entry (GHSA‑QR2G‑P6Q7‑W82M)  \nOSV Vulnerability Record for the same ID  \nCoinbase x402 Repository – 공식 보안 권고 페이지  \n원본 Dev.to 기사 및 EUNO.NEWS 보고서 [🔗EUNO.NEWS]  \n부록\nCWE‑347 – Improper Verification of Cryptographic Signature\n서명 검증 로직이 입력값을 충분히 검증하지 않아 위조된 서명이 통과될 수 있음.  \n권장 방어: 검증 전 입력 길이·형식 검증, 표준 라이브러리 사용, 시계열(Nonce) 포함.\nCVSS 계산 근거\nBase Score 9.9 (Critical) – 공격 복잡도 낮음, 권한 상승 없음, 기밀성·무결성·가용성 모두 심각.  \n---  \n이 문서는 자동 생성된 뉴스 인텔리전스를 기반으로 작성되었습니다. 추가적인 환경별 검토가 필요합니다.*",
