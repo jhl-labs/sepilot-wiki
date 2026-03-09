@@ -6,7 +6,7 @@ status: published
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]
 related_docs: ["claude-code-release-history.md", "continuous-ai-agentic-ci.md", "continuous-ai.md"]
 order: 1
-updatedAt: 2026-03-08
+updatedAt: 2026-03-09
 quality_score: 88
 ---
 
@@ -422,6 +422,7 @@ volumes:
 | **스케일 아웃** | 로그 전용 서비스로 분리하고 Kafka/PubSub 로 이벤트 스트림 전송 가능 |
 | **보안** | API‑Key + Scope 검증 유지, 로그 조회는 읽기 전용 토큰만 허용 |
 | **데이터 보존** | 최소 30 일 보관, 오래된 레코드 자동 삭제 (`DELETE FROM logrecord WHERE timestamp < datetime('now','-30 days');`) |
+| **대시보드 연동** | Streamlit 기반 UI에서 `source`, `tool_name`, `user_id`, `time range` 로 필터링·드릴‑다운 가능 |
 | **모니터링** | Prometheus `/metrics` 엔드포인트 추가 (`mcp_log_writes_total`, `mcp_log_errors_total`) |
 | **리소스 제한** | 레코드당 최대 1 MB 제한, 오래된 레코드 TTL 정책 적용 |
 
@@ -519,16 +520,9 @@ kya score agent-card.kya.json
 | **외부 볼륨** | Kubernetes `PersistentVolumeClaim` 혹은 Docker `volume`에 `/data` 마운트. |
 | **읽기 전용 조회** | 로그 조회 전용 API 키 발급, `GET /logs` 엔드포인트는 `read:logs` 스코프만 허용. |
 | **증분 전송** | 파일 오프셋(`bookmark`) 기반 파싱으로 이미 전송된 라인 재전송 방지. |
-| **백업** | 일일 `sqlite3` 백업 스크립트와 S3/Blob 스토리지 복제. |
-| **데이터 보존** | 최소 30 일 보관, 오래된 레코드 자동 삭제 (`DELETE FROM logrecord WHERE timestamp < datetime('now','-30 days');`). |
-| **대시보드와 알림** | Streamlit 대시보드에서 `source`, `tool_name`, `user_id`, `time range` 로 필터링 가능. Prometheus `/metrics` 와 연동해 Slack/Email 알림 설정. |
-
-#### 4.10.4 표준화된 감사 흐름  
-
-1. **배포 전**: `kya init` 로 Agent Card 생성 → `kya validate` 로 스키마 검증 → `kya score` 로 완성도 점수 확인.  
-2. **CI/CD**: `mcp-security-audit` 도구를 파이프라인에 포함해 자동 스캔 수행.  
-3. **운영**: Self‑Logging Middleware 로 실시간 로그 수집 → 중앙 DB 저장 → Streamlit/Prometheus 대시보드 모니터링.  
-4. **주기적 재감사**: 최소 월 1회 `mcp-security-audit` 실행, 결과를 Agent Card `auditHistory` 에 기록.  
+| **백업** | 일일 `sqlite3 /data/logs.db ".backup '/backup/logs_$(date +%F).db'"` 실행 |
+| **데이터 보존** | 최소 30 일 보관, 오래된 레코드 자동 삭제 (`DELETE FROM logrecord WHERE timestamp < datetime('now','-30 days');`) |
+| **대시보드와 알림** | Streamlit 대시보드에서 `source`, `tool_name`, `user_id`, `time range` 로 필터링 가능. Prometheus `/metrics` 와 연동해 Slack/Email 알림 설정 |
 
 > 위 권고사항은 **MongoDB MCP 서버 보안 권장사항**, **Microsoft Foundry MCP 보안 베스트 프랙티스**, 그리고 **EUNO.NEWS**(2026‑02‑24)에서 제시된 KYA 표준 및 자체 로깅 설계를 종합한 것이다.  
 
@@ -618,11 +612,11 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 
 | 특징 | 내용 |
 |------|------|
-| **완전 관리형 서비스** | Google이 서버 인프라, TLS 인증서, 버전 관리, 보안 패치를 모두 담당합니다. |
-| **무료 연결** | Data Commons API 키만 있으면 `https://api.datacommons.org/mcp` 로 바로 연결 가능합니다. |
-| **전용 엔드포인트** | 현재 호스팅된 MCP 서버는 `datacommons.org`에 대한 쿼리만 허용합니다. 자체 Custom Data Commons 인스턴스를 운영 중인 경우에는 자체 MCP 서버를 계속 사용해야 합니다. |
-| **스케일링** | GCP의 자동 스케일링 및 로드밸런싱을 활용해 수천 개의 동시 요청을 처리합니다. |
-| **보안** | Google Cloud IAM 과 연동된 API‑Key 기반 인증, VPC‑SC 지원, Cloud Armor DDoS 방어가 기본 제공됩니다. |
+| **완전 관리형 서비스** | Google이 서버 인프라, TLS 인증서, 버전 관리, 보안 패치를 모두 담당 |
+| **무료 연결** | Data Commons API 키만 있으면 `https://api.datacommons.org/mcp` 로 바로 연결 가능 |
+| **전용 엔드포인트** | 현재 호스팅된 MCP 서버는 `datacommons.org`에 대한 쿼리만 허용. 자체 Custom Data Commons 인스턴스를 운영 중인 경우 자체 MCP 서버 사용 필요 |
+| **스케일링** | GCP 자동 스케일링 및 로드밸런싱으로 수천 동시 요청 처리 |
+| **보안** | Google Cloud IAM 연동 API‑Key 인증, VPC‑SC 지원, Cloud Armor DDoS 방어 기본 제공 |
 
 #### 연결 예시 (JSON 설정)
 
@@ -639,4 +633,11 @@ Claude Code CLI와 MCP 생태계를 활용해 코드 커밋부터 SonarCloud 품
 }
 ```
 
-위 설정을 `mcp-client-config.json` 파일에 저장하고, MCP SDK 초기화 시 `configPath` 옵션에 전달하면 로컬 서버 대신 Google이 호스팅한 서버를 자동으로
+위 설정을 `mcp-client-config.json` 파일에 저장하고, MCP SDK 초기화 시 `configPath` 옵션에 전달하면 로컬 서버 대신 Google이 호스팅한 서버를 자동으로 사용한다.
+
+---
+
+## 7. 지속 메모리 아키텍처: Hebbian Learning & GraphRAG 확장  
+
+### 7.1 배경 및 목표  
+AI 코딩 어시스턴트는 세션이 종료되면 **모든 컨텍스트를 잃어버린다**는 근본적인 한

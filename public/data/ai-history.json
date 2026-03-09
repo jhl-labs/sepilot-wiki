@@ -1,6 +1,147 @@
 {
   "entries": [
     {
+      "id": "213aeb89-2ee4-46da-aa31-97671b9cc37f",
+      "timestamp": "2026-03-09T00:27:07.114Z",
+      "actionType": "generate",
+      "issueNumber": 426,
+      "issueTitle": "문서 요청 #426",
+      "documentSlug": "ai/426",
+      "documentTitle": "홈랩 AI 스택 2026 – 배포 순서와 리소스 플래닝 가이드",
+      "summary": "새 문서 \"홈랩 AI 스택 2026 – 배포 순서와 리소스 플래닝 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4470
+            },
+            {
+              "step": "outline",
+              "durationMs": 5969
+            },
+            {
+              "step": "write",
+              "durationMs": 25537
+            },
+            {
+              "step": "review",
+              "durationMs": 6570
+            }
+          ],
+          "totalDurationMs": 42547,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1904,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "1bb31e64-a5a4-4008-8ecd-3ca40e7e9261",
+      "timestamp": "2026-03-09T00:26:20.701Z",
+      "actionType": "generate",
+      "issueNumber": 425,
+      "issueTitle": "문서 요청 #425",
+      "documentSlug": "ai/425",
+      "documentTitle": "Joy – AI 에이전트를 위한 오픈 트러스트 네트워크 가이드",
+      "summary": "새 문서 \"Joy – AI 에이전트를 위한 오픈 트러스트 네트워크 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2955
+            },
+            {
+              "step": "outline",
+              "durationMs": 6896
+            },
+            {
+              "step": "write",
+              "durationMs": 24613
+            },
+            {
+              "step": "review",
+              "durationMs": 5646
+            }
+          ],
+          "totalDurationMs": 40110,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 6
+          },
+          "estimatedTokens": {
+            "estimated": 1858,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ae488ee2-7f60-4b14-a73f-9c6a29fe70aa",
+      "timestamp": "2026-03-09T00:25:38.069Z",
+      "actionType": "modify",
+      "issueNumber": 424,
+      "issueTitle": " [업데이트] Anthropic‑Pentagon 논쟁 최신 상황",
+      "documentSlug": "ai/anthropic-claude-government-regulation-and-dod-pol",
+      "documentTitle": "Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (2026)",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Anthropic‑Pentagon 논쟁 최신 상황\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 31,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "a1945bce-0fbf-4eac-9bb3-45378121ff97",
+      "timestamp": "2026-03-09T00:24:52.522Z",
+      "actionType": "modify",
+      "issueNumber": 423,
+      "issueTitle": " [업데이트] AI 에이전트 배포 실패 방지 – Permission Creep 방지 전략",
+      "documentSlug": "ai/ai",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 에이전트 배포 실패 방지 – Permission Creep 방지 전략\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 54,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "956521b1-e4b6-4393-8354-3cca76848e80",
+      "timestamp": "2026-03-09T00:24:06.575Z",
+      "actionType": "modify",
+      "issueNumber": 422,
+      "issueTitle": " [업데이트] MCP – Model Context Protocol (Hebbian Learning & GraphRAG Extension)",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP – Model Context Protocol (Hebbian Learning & GraphRAG Extension)\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 1,
+        "deletions": 0
+      }
+    },
+    {
       "id": "bb73b510-1826-4e37-b907-3309ddcc5796",
       "timestamp": "2026-03-09T00:23:03.694Z",
       "actionType": "maintain",
@@ -10545,5 +10686,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-09T00:23:03.694Z"
+  "lastUpdated": "2026-03-09T00:27:07.114Z"
 }
