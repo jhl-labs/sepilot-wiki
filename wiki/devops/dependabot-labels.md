@@ -1,8 +1,8 @@
 ---
 title: "Dependabot 라벨 설정 가이드"
-description: "Dependabot이 PR에 자동으로 라벨을 추가하도록 `dependencies` 라벨을 생성하고 설정하는 방법을 안내합니다."
+description: "Dependabot이 PR에 라벨을 자동으로 추가하도록 하기 위해 필요한 라벨을 생성하고, dependabot.yml 파일을 올바르게 구성하는 방법을 안내합니다."
 category: "Guide"
-tags: ["dependabot", "labels", "dependencies"]
+tags: ["dependabot", "labels", "github", "automation"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-03-09T12:00:00Z"
@@ -12,47 +12,45 @@ updatedAt: "2026-03-09T12:00:00Z"
 # Dependabot 라벨 설정 가이드
 
 ## 배경
-Dependabot은 보안 및 버전 업데이트 PR을 생성할 때 라벨을 자동으로 붙입니다. 기본 라벨은 `dependencies` 라벨이며, 이 라벨이 레포지토리에 존재하지 않을 경우 **"The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request."** 라는 오류가 발생합니다. 이는 현재 레포지토리의 라벨 설정이 누락된 경우에 나타납니다.
+Dependabot이 PR을 생성할 때 `dependencies` 라벨을 자동으로 붙이도록 설정하려면, 해당 라벨이 레포지토리에 존재해야 합니다. 현재 레포지토리에는 `dependencies` 라벨이 없어서 Dependabot이 라벨을 추가하지 못하고 있습니다. 이 문서는 라벨을 생성하고 `dependabot.yml` 파일을 올바르게 구성하는 절차를 설명합니다.
 
-## 해결 방법
-1. **GitHub UI를 이용해 라벨 생성**
-   - 레포지토리 메인 페이지 → **Issues** → **Labels** 로 이동합니다.
-   - **New label** 버튼을 클릭합니다.
-   - **Name**에 `dependencies` 를 입력하고, 색상은 원하는 대로 선택합니다.
-   - **Create label**을 눌러 라벨을 저장합니다.
+## 1. 라벨 생성하기
+1. 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.
+2. 오른쪽 사이드바의 **Labels** 메뉴를 선택합니다.
+3. **New label** 버튼을 클릭합니다.
+4. **Name** 필드에 `dependencies` 를 입력하고, 색상은 원하는 대로 선택합니다.
+5. **Create label** 버튼을 눌러 라벨을 생성합니다.
 
-2. **GitHub API를 이용해 라벨 생성 (자동화)**
-   ```bash
-   curl -X POST \
-        -H "Accept: application/vnd.github+json" \
-        -H "Authorization: token <YOUR_PERSONAL_ACCESS_TOKEN>" \
-        https://api.github.com/repos/<owner>/<repo>/labels \
-        -d '{"name":"dependencies","color":"5319e7"}'
-   ```
-   - `<YOUR_PERSONAL_ACCESS_TOKEN>` 은 `repo` 권한을 가진 토큰이어야 합니다.
-   - `<owner>` 와 `<repo>` 를 실제 레포지토리 정보로 교체합니다.
+> **Tip**: 다른 자동 라벨(예: `security`, `chore`)도 필요에 따라 미리 만들어 두면 향후 자동화 흐름을 관리하기 쉽습니다.
 
-3. **`dependabot.yml` 확인**
-   - 레포지토리 루트에 `.github/dependabot.yml` 파일이 존재하는지 확인합니다.
-   - 라벨 이름을 커스텀하고 싶다면 `labels:` 섹션에 원하는 라벨을 명시할 수 있습니다.
-   ```yaml
-   version: 2
-   updates:
-     - package-ecosystem: "npm"
-       directory: "/"
-       schedule:
-         interval: "weekly"
-       labels:
-         - "dependencies"
-   ```
+## 2. `dependabot.yml` 파일 검증하기
+`dependabot.yml` 파일에 라벨 이름이 올바르게 지정되어 있는지 확인합니다. 예시:
 
-## 적용 후 확인
-- Dependabot이 새 PR을 생성하면 자동으로 `dependencies` 라벨이 붙어 있는지 확인합니다.
-- 라벨이 정상적으로 표시되지 않으면 **GitHub Actions** 로그와 **Dependabot** 로그를 검토하고, 라벨 이름에 오타가 없는지 재확인합니다.
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"   # <-- 여기 라벨 이름이 정확히 일치해야 합니다.
+```
 
-## 참고
-- 이 가이드는 Dependabot이 라벨을 찾지 못한다는 시스템 메시지를 해결하기 위한 일반적인 절차를 다룹니다. 실제 프로젝트에 따라 라벨 이름을 다르게 설정할 수 있습니다.
-- 더 자세한 내용은 GitHub 공식 문서의 *[Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/configuration-options)* 를 참고하세요.
+- 라벨 이름은 대소문자를 구분합니다.
+- 라벨이 존재하지 않으면 Dependabot은 PR을 생성하지만 라벨을 붙이지 못합니다.
+
+## 3. 라벨 적용 확인
+1. Dependabot이 새 PR을 생성하면 PR 페이지 오른쪽 라벨 섹션에 `dependencies` 라벨이 자동으로 표시됩니다.
+2. 라벨이 보이지 않으면 **2** 단계의 `dependabot.yml` 설정과 **1** 단계의 라벨 존재 여부를 다시 확인합니다.
+
+## 4. 문제 해결
+- **라벨이 여전히 적용되지 않을 때**: 레포지토리 캐시가 오래된 경우가 있습니다. `dependabot.yml` 파일을 커밋하고 푸시한 뒤, Dependabot이 다음 스케줄에 맞춰 PR을 다시 생성하도록 기다립니다.
+- **다른 라벨이 필요할 때**: `dependabot.yml` 의 `labels` 배열에 추가 라벨을 나열하면, PR에 여러 라벨을 동시에 붙일 수 있습니다.
+
+## 5. 참고 자료
+- GitHub 공식 라벨 관리 문서: *공식 문서를 참조해주세요* (라벨 생성 방법에 대한 최신 가이드는 GitHub Docs에 있습니다).
 
 ---
-*이 문서는 Dependabot 라벨 누락 이슈에 대한 해결 방안을 제공하기 위해 생성되었습니다.*
+
+이 가이드를 적용한 뒤, Dependabot이 정상적으로 `dependencies` 라벨을 붙이는지 확인해 주세요.
