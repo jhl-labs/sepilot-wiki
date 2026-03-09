@@ -1,291 +1,634 @@
 {
-  "timestamp": "2026-02-25T08:56:15.987Z",
+  "timestamp": "2026-03-09T00:47:17.792Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "77개의 위키 문서 중 30여 개가 중복·불필요하거나 잘못된 위치에 존재합니다. 대부분은 라벨·Dependabot·OpenTelemetry·Kubernetes API Governance 등 동일 내용이 여러 경로에 흩어져 있어 유지보수가 어려워지고 있습니다. 또한 파일명에 한글·공백·특수문자가 포함돼 URL 가독성이 낮으며, 루트 레벨에 문서가 남아 있어 카테고리 규칙을 위반하고 있습니다.",
-    "totalDocuments": 77,
+    "summary": "전체 150개의 문서가 존재합니다. 대부분은 이미 적절한 서브디렉터리에 배치돼 있으나, 루트('/')에 위치한 다수의 파일이 카테고리 규칙에 맞지 않아 이동이 필요합니다. 또한 중복된 SNKV 문서와 Ingress‑NGINX 마이그레이션 가이드가 각각 두 위치에 존재합니다. 파일명은 영문 소문자‑하이픈 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 지정하면 탐색성이 크게 향상됩니다.",
+    "totalDocuments": 150,
     "categories": [
       "projects",
       "ai",
-      "backend",
+      "frontend",
+      "docker",
       "observability",
       "security",
       "kubernetes",
-      "docker",
-      "bun",
       "devops",
       "cloud",
-      "frontend",
-      "meta",
+      "backend",
+      "maintenance",
       "reports",
-      "troubleshooting",
-      "dependencies",
-      "github"
+      "github",
+      "dependabot",
+      "meta"
     ],
     "issues": [
-      "중복된 라벨·Dependabot 문서 3곳(labels/dependencies.md, backend/label‑dependencies.md, meta/label‑dependencies.md)과 삭제된 dependabot/missing‑dependencies‑label.md이 존재합니다.",
-      "OpenTelemetry 가이드가 두 개(opentelemetry.md, open‑telemetry‑guide.md)와 Kubernetes API Governance 가이드가 두 개(api‑governance.md, spotlight‑on‑sig‑architecture‑api‑governance.md)로 중복돼 있습니다."
+      "루트에 남아 있는 파일이 다수 존재합니다.",
+      "SNKV 키‑값 저장소 문서가 두 위치에 중복되어 있습니다.",
+      "Ingress‑NGINX 마이그레이션 가이드가 루트와 kubernetes/ 두 곳에 존재합니다."
     ]
   },
   "suggestedStructure": {
     "projects": [
-      "emdash.md",
-      "openclaw-complete-guide.md",
+      "claude-code-cost-management.md",
+      "robopocket-ar.md",
       "claude-code-release-history.md",
-      "opencode.md",
+      "nvidia-nim.md",
+      "agentbus-rest-api.md",
+      "github-copilot-cli-guide.md",
+      "xcode-cloud-ci-cd.md",
+      "github-copilot-coding-agent.md",
+      "jira-ai-agents.md",
+      "viscat.md",
+      "neuroskill-bci-ai.md",
+      "antigravity-release-notes.md",
+      "openclaw-complete-guide.md",
+      "moltbook-intro.md",
+      "enterprise-gitops-implementation.md",
+      "emdash.md",
       "sepilot-desktop-intro.md",
       "sepilot-technology-stack.md",
-      "enterprise-gitops-implementation.md",
-      "antigravity-release-notes.md",
-      "rust-gpu-face-crop-tool.md",
-      "moltbook-intro.md"
+      "rust-gpu-face-crop-tool.md"
     ],
     "ai": [
+      "fastapi-ai-api.md",
+      "tensorflow-2-21-litert.md",
       "ai-code-review-agent-guide.md",
       "261.md",
-      "steerling-8b-an-interpretable-large-language-model.md",
+      "367.md",
       "cloud-terminal-persistent-ai-agent-sessions.md",
+      "claude-code.md",
+      "388.md",
+      "312.md",
+      "403.md",
+      "315.md",
+      "344.md",
       "mcp-model-context-protocol.md",
-      "qwen3-5.md",
-      "2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
-      "263.md",
-      "fine-tuning-functiongemma-on-google-tpu-with-tunix.md",
-      "ai-llm-2017-2026.md",
-      "ollama-claude-code.md",
-      "continuous-ai.md",
-      "glm-5.md",
+      "396.md",
       "ai.md",
-      "anthropic-claude-government-regulation-and-dod-pol.md",
+      "ai-rfp.md",
+      "ai-productivity-paradox-why-developer-throughput-m.md",
+      "425.md",
+      "398.md",
+      "llm-evolution-timeline-171-models-overview.md",
+      "multi-agent-workflows-often-fail-here-s-how-to-eng.md",
+      "claude-marketplace.md",
+      "openai-pentagon-contract-revision-and-policy-impli.md",
       "github-agentic-workflows.md",
       "semantic-layer-importance-and-implementation-guide.md",
+      "agentspace-openclaw.md",
       "ai-agent-deployment-failure-prevention-and-testing-strategy.md",
       "vibe-coding.md",
       "multi-agent-system.md",
-      "gemini-3-1-pro.md"
+      "anthropic-claude-government-regulation-and-dod-pol.md",
+      "288.md",
+      "gemini-3-1-pro.md",
+      "419.md",
+      "kubernetes-ai-gitops.md",
+      "ai-slopsquatting.md"
     ],
-    "backend": [
-      "wiki-api-route-guide.md",
-      "agentic-faas-mdl.md",
-      "lazy-backend-agentic-faas-mdl.md",
-      "snkv-sqlite-btree-kv-store.md"
-    ],
-    "observability": [
-      "opentelemetry.md"
-    ],
-    "security": [
-      "wordpress-vulnerability-triaging-playbook-2026.md",
-      "285.md",
-      "devsecops.md"
-    ],
-    "kubernetes": [
-      "node-readiness-controller.md",
-      "api-governance.md",
-      "ingress-nginx-deprecation-guide.md",
-      "cgroup-migration.md",
-      "release-notes.md"
+    "frontend": [
+      "vite-plugin-pwa-pwa.md",
+      "incremental-static-regeneration.md",
+      "react-query.md",
+      "webp.md",
+      "api-service-layer.md",
+      "monaco-editor-react.md"
     ],
     "docker": [
       "gordon-ai-agent-update.md",
+      "308.md",
+      "announcing-docker-hardened-system-packages.md",
+      "docker-zfs.md",
+      "open-webui-docker-model-runner-self-hosted-llm-dep.md",
       "run-openclaw-securely-in-docker-sandboxes.md",
       "hardened-images.md"
     ],
-    "bun": [
-      "overview.md",
-      "comparison-pnpm-npm.md",
-      "github-actions-setup.md"
+    "observability": [
+      "319.md",
+      "logmera-self-hosted-llm-observability-tool.md",
+      "opentelemetry.md",
+      "374.md",
+      "open-telemetry-guide.md",
+      "ai.md",
+      "opentelemetry-observability-warehouse.md"
+    ],
+    "security": [
+      "346.md",
+      "411.md",
+      "2026-vps.md",
+      "303.md",
+      "404.md",
+      "ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
+      "386.md",
+      "380.md",
+      "400.md",
+      "untitled-1772736110655.md",
+      "376.md",
+      "wordpress-vulnerability-triaging-playbook-2026.md",
+      "285.md",
+      "devsecops.md",
+      "ai.md",
+      "cve-2026-27574-oneuptime-probe-vm-rce.md",
+      "serv-u-15-5.md",
+      "385.md",
+      "ios-exploit-kit-coruna-lockdown-mode.md",
+      "shinobi-scan-secret-scanning-cli.md"
+    ],
+    "kubernetes": [
+      "node-readiness-controller.md",
+      "spotlight-on-sig-architecture-api-governance.md",
+      "ingress-nginx-deprecation-guide.md",
+      "api-governance.md",
+      "kubernetes.md",
+      "before-you-migrate-ingress-nginx.md",
+      "cgroup-migration.md",
+      "409.md",
+      "release-notes.md"
     ],
     "devops": [
-      "gitops-implementation.md"
+      "shared-workflows-nodejs-aws.md",
+      "dependabot-labels.md",
+      "github-copilot-ci-cd.md",
+      "search-architecture-high-availability.md",
+      "gitops-implementation.md",
+      "dependabot.md",
+      "dependabot-labels.md"
     ],
     "cloud": [
       "aws-nat-gateway-cost-trap.md"
     ],
-    "frontend": [
-      "api-service-layer.md",
-      "incremental-static-regeneration.md"
+    "backend": [
+      "lazy-backend-agentic-faas-mdl.md",
+      "agentic-faas-mdl.md",
+      "label-dependencies.md",
+      "wiki-api-route-guide.md",
+      "snkv-sqlite-btree-kv-store.md"
+    ],
+    "reports": [
+      "weekly-2026-10.md",
+      "devsecops-paradox.md"
+    ],
+    "github": [
+      "labels/dependencies.md",
+      "what-8217-s-new-with-github-copilot-coding-agent.md",
+      "dependencies-label.md",
+      "dependabot-labels.md"
+    ],
+    "dependabot": [
+      "missing-dependencies-label.md"
     ],
     "meta": [
       "weekly-2026-09.md",
       "weekly-2026-08.md"
-    ],
-    "reports": [
-      "devsecops-paradox.md"
-    ],
-    "troubleshooting": [
-      "dependabot-label-missing.md"
-    ],
-    "dependencies": [
-      "react-router-dom-7-13-1-bump-no-longer-needed.md"
-    ],
-    "github": [
-      "dependencies-label.md"
     ]
   },
   "results": {
-    "appliedActions": 18,
-    "skippedActions": 2,
+    "appliedActions": 29,
+    "skippedActions": 21,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 2
+    "createdIssues": 0
   },
   "actions": {
     "applied": [
       {
+        "type": "move",
+        "priority": "high",
+        "source": "vite-plugin-pwa-pwa.md",
+        "target": "frontend/vite-plugin-pwa-pwa.md",
+        "reason": "프론트엔드 빌드·배포 가이드이므로 frontend 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "383.md",
+        "target": "projects/claude-code-cost-management.md",
+        "reason": "Claude Code 제품 가이드이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "robopocket-ar.md",
+        "target": "projects/robopocket-ar.md",
+        "reason": "RoboPocket 제품 가이드이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "342.md",
+        "target": "devops/shared-workflows-nodejs-aws.md",
+        "reason": "Shared Workflows 가이드이며 devops 카테고리와 맞음",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "from-idea-to-pull-request-a-practical-guide-to-bui.md",
+        "target": "projects/github-copilot-cli-guide.md",
+        "reason": "GitHub Copilot CLI는 제품이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "nvidia-nim.md",
+        "target": "projects/nvidia-nim.md",
+        "reason": "NVIDIA NIM 제품 가이드이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "maintenance/dependabot-labels.md",
+        "target": "devops/dependabot-labels.md",
+        "reason": "Dependabot 라벨 가이드가 devops 카테고리와 일치",
+        "autoApply": true
+      },
+      {
         "type": "rename",
         "priority": "high",
-        "source": "labels/dependencies.md",
-        "target": "github/dependencies-label.md",
-        "reason": "라벨 문서를 GitHub 설정 가이드와 통합하고, 파일명을 영문 slug 형태로 정규화",
+        "source": "devops/dependabot-labels.md",
+        "target": "devops/dependabot-labels.md",
+        "reason": "slug 정규화",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "agentbus-ai-rest-api.md",
+        "target": "projects/agentbus-rest-api.md",
+        "reason": "AgentBus는 제품/서비스이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "xcode-cloud-ios-ci-cd.md",
+        "target": "projects/xcode-cloud-ci-cd.md",
+        "reason": "Xcode Cloud는 제품이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "what-8217-s-new-with-github-copilot-coding-agent.md",
+        "target": "projects/github-copilot-coding-agent.md",
+        "reason": "GitHub Copilot Coding Agent는 제품이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "jira-ai-agents-integrating-generative-ai-into-proj.md",
+        "target": "projects/jira-ai-agents.md",
+        "reason": "Jira AI Agents는 제품이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "viscat.md",
+        "target": "projects/viscat.md",
+        "reason": "Viscat 제품 가이드이므로 projects 카테고리로 이동",
         "autoApply": true
       },
       {
         "type": "merge",
-        "source": "backend/label-dependencies.md",
-        "target": "github/dependencies-label.md",
-        "reason": "중복 라벨 문서 삭제, 기존 라벨 가이드를 중앙화",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "source": "meta/label-dependencies.md",
-        "target": "github/dependencies-label.md",
-        "reason": "중복 라벨 문서 삭제, 메타 레포에 리다이렉트 추가",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "source": "dependabot/missing-dependencies-label.md",
-        "target": "troubleshooting/dependabot-label-missing.md",
-        "reason": "중복된 Dependabot 라벨 오류 문서 통합",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "source": "observability/open-telemetry-guide.md",
-        "target": "observability/opentelemetry.md",
-        "reason": "OpenTelemetry 가이드 중복 제거, 최신 문서 유지",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "source": "kubernetes/spotlight-on-sig-architecture-api-governance.md",
-        "target": "kubernetes/api-governance.md",
-        "reason": "Kubernetes API Governance 문서 중복 제거",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "source": "ai/steerling-8b-an-interpretable-large-language-model.md",
-        "target": "ai/263.md",
-        "reason": "Steerling‑8B 문서가 두 개 존재, 최신 draft 삭제",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "source": "ai/287.md",
-        "target": "ai/semantic-layer-importance-and-implementation-guide.md",
-        "reason": "시맨틱 레이어 가이드가 두 개(287, 288) 존재, 288을 삭제하고 287에 통합",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "backend/280.md",
-        "target": "backend/lazy-backend-agentic-faas-mdl.md",
-        "reason": "파일명을 내용에 맞는 slug 형태로 정규화",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "medium",
-        "source": "backend/279.md",
+        "priority": "high",
+        "source": "snkv-sqlite-b-tree-c-c-python.md",
         "target": "backend/snkv-sqlite-btree-kv-store.md",
-        "reason": "SNKV 문서 slug 정규화",
+        "reason": "동일 내용의 SNKV 문서가 두 위치에 존재함. 백엔드 카테고리의 최신 초안 유지.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
+        "priority": "high",
+        "source": "before-you-migrate-five-surprising-ingress-nginx-b.md",
+        "target": "kubernetes/before-you-migrate-ingress-nginx.md",
+        "reason": "Ingress‑NGINX 마이그레이션 가이드는 kubernetes 카테고리와 일치",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "github-copilot-ci-cd.md",
+        "target": "devops/github-copilot-ci-cd.md",
+        "reason": "CI/CD 통합 가이드이므로 devops 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "how-we-rebuilt-the-search-architecture-for-high-av.md",
+        "target": "devops/search-architecture-high-availability.md",
+        "reason": "GitHub Enterprise Server 검색 고가용성 설계 가이드이며 devops 카테고리와 일치",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "neuroskill-bci-ai.md",
+        "target": "projects/neuroskill-bci-ai.md",
+        "reason": "NeuroSkill™ 제품 가이드이므로 projects 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "kubernetes-ai-gitops.md",
+        "target": "ai/kubernetes-ai-gitops.md",
+        "reason": "AI 모델 GitOps 가이드이므로 ai 카테고리로 이동",
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
         "priority": "medium",
-        "source": "reports/284.md",
-        "target": "reports/devsecops-paradox.md",
-        "reason": "보고서 제목을 slug 형태로 변환",
+        "target": "projects",
+        "metadata": {
+          "displayName": "프로젝트 & 제품",
+          "order": 1
+        },
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "ai",
+        "metadata": {
+          "displayName": "AI & LLM",
+          "order": 2
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "frontend",
+        "metadata": {
+          "displayName": "프론트엔드",
+          "order": 3
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "docker",
+        "metadata": {
+          "displayName": "Docker",
+          "order": 4
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "observability",
+        "metadata": {
+          "displayName": "관측성",
+          "order": 5
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "security",
+        "metadata": {
+          "displayName": "보안",
+          "order": 6
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "kubernetes",
+        "metadata": {
+          "displayName": "Kubernetes",
+          "order": 7
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "devops",
+        "metadata": {
+          "displayName": "DevOps",
+          "order": 8
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "cloud",
+        "metadata": {
+          "displayName": "클라우드",
+          "order": 9
+        },
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
         "priority": "low",
-        "source": "dependencies/react-router-dom-7.13.1-bump-no-longer-needed.md",
-        "target": "dependencies/react-router-dom-7-13-1-bump-no-longer-needed.md",
-        "reason": "버전 번호에 하이픈 사용, 파일명 정규화",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "low",
-        "source": "frontend/incremental-static-regeneration-guide.md",
-        "target": "frontend/incremental-static-regeneration.md",
-        "reason": "파일명 간결화 및 slug 규칙 적용",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "backend/wiki-api-route-guide.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "backend/agentic-faas-mdl.md",
-        "order": 2,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "observability/opentelemetry.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "kubernetes/api-governance.md",
-        "order": 1,
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "target": "ai/semantic-layer-importance-and-implementation-guide.md",
-        "order": 1,
+        "target": "projects/claude-code-release-history.md",
+        "order": 3,
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "set_order",
-        "target": "backend/lazy-backend-agentic-faas-mdl.md",
-        "order": 3,
+        "type": "rename",
+        "priority": "high",
+        "source": "frontend/vite-plugin-pwa-pwa.md",
+        "target": "frontend/vite-plugin-pwa-pwa.md",
+        "reason": "파일명을 slug 형태로 정규화 (이미 slug 형태이지만 확장자와 경로를 명시)",
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: backend/lazy-backend-agentic-faas-mdl.md"
+        "error": "문서를 찾을 수 없음: frontend/vite-plugin-pwa-pwa.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/claude-code-cost-management.md",
+        "target": "projects/claude-code-cost-management.md",
+        "reason": "slug 형태로 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/claude-code-cost-management.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/robopocket-ar.md",
+        "target": "projects/robopocket-ar.md",
+        "reason": "slug 형태 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/robopocket-ar.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "devops/shared-workflows-nodejs-aws.md",
+        "target": "devops/shared-workflows-nodejs-aws.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: devops/shared-workflows-nodejs-aws.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/github-copilot-cli-guide.md",
+        "target": "projects/github-copilot-cli-guide.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/github-copilot-cli-guide.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/nvidia-nim.md",
+        "target": "projects/nvidia-nim.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/nvidia-nim.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/agentbus-rest-api.md",
+        "target": "projects/agentbus-rest-api.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/agentbus-rest-api.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/xcode-cloud-ci-cd.md",
+        "target": "projects/xcode-cloud-ci-cd.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/xcode-cloud-ci-cd.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/github-copilot-coding-agent.md",
+        "target": "projects/github-copilot-coding-agent.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/github-copilot-coding-agent.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/jira-ai-agents.md",
+        "target": "projects/jira-ai-agents.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/jira-ai-agents.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/viscat.md",
+        "target": "projects/viscat.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/viscat.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "kubernetes/before-you-migrate-ingress-nginx.md",
+        "target": "kubernetes/before-you-migrate-ingress-nginx.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: kubernetes/before-you-migrate-ingress-nginx.md"
+      },
+      {
+        "type": "merge",
+        "priority": "high",
+        "source": "before-you-migrate-five-surprising-ingress-nginx-b.md",
+        "target": "kubernetes/before-you-migrate-ingress-nginx.md",
+        "reason": "루트에 남아 있던 중복 파일 삭제",
+        "autoApply": true,
+        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/before-you-migrate-five-surprising-ingress-nginx-b.md'"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "devops/github-copilot-ci-cd.md",
+        "target": "devops/github-copilot-ci-cd.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: devops/github-copilot-ci-cd.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "devops/search-architecture-high-availability.md",
+        "target": "devops/search-architecture-high-availability.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: devops/search-architecture-high-availability.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "projects/neuroskill-bci-ai.md",
+        "target": "projects/neuroskill-bci-ai.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/neuroskill-bci-ai.md"
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "ai/kubernetes-ai-gitops.md",
+        "target": "ai/kubernetes-ai-gitops.md",
+        "reason": "slug 정규화",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: ai/kubernetes-ai-gitops.md"
       },
       {
         "type": "set_order",
-        "target": "backend/snkv-sqlite-btree-kv-store.md",
+        "priority": "low",
+        "target": "projects/claude-code-cost-management.md",
+        "order": 1,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/claude-code-cost-management.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/robopocket-ar.md",
+        "order": 2,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/robopocket-ar.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/nvidia-nim.md",
         "order": 4,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: backend/snkv-sqlite-btree-kv-store.md"
+        "error": "문서를 찾을 수 없음: projects/nvidia-nim.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/agentbus-rest-api.md",
+        "order": 5,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/agentbus-rest-api.md"
       }
     ],
     "dryRunPreviewed": []
   },
-  "createdIssues": [
-    {
-      "number": 293,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/293",
-      "title": "중복 라벨·Dependabot 문서 정리"
-    },
-    {
-      "number": 294,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/294",
-      "title": "OpenTelemetry 및 Kubernetes API Governance 중복 제거"
-    }
-  ]
+  "createdIssues": []
 }
