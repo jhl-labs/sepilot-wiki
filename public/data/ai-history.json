@@ -1,6 +1,147 @@
 {
   "entries": [
     {
+      "id": "5e018291-a831-41ce-9bab-1df6cfd13385",
+      "timestamp": "2026-03-09T12:18:33.981Z",
+      "actionType": "generate",
+      "issueNumber": 436,
+      "issueTitle": "문서 요청 #436",
+      "documentSlug": "ai/436",
+      "documentTitle": "Guardian Protocol Framework 1.0 공개 초안 – 자율 AI 에이전트 거버넌스 가이드",
+      "summary": "새 문서 \"Guardian Protocol Framework 1.0 공개 초안 – 자율 AI 에이전트 거버넌스 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3974
+            },
+            {
+              "step": "outline",
+              "durationMs": 8872
+            },
+            {
+              "step": "write",
+              "durationMs": 21140
+            },
+            {
+              "step": "review",
+              "durationMs": 5141
+            }
+          ],
+          "totalDurationMs": 39129,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 6
+          },
+          "estimatedTokens": {
+            "estimated": 1758,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5e288a80-2644-4f76-b78a-54952fb196ba",
+      "timestamp": "2026-03-09T12:17:51.473Z",
+      "actionType": "generate",
+      "issueNumber": 435,
+      "issueTitle": "문서 요청 #435",
+      "documentSlug": "observability/435",
+      "documentTitle": "2026 모니터링 도구 비교 가이드 – VigilOps vs Zabbix vs Prometheus+Grafana vs Datadog",
+      "summary": "새 문서 \"2026 모니터링 도구 비교 가이드 – VigilOps vs Zabbix vs Prometheus+Grafana vs Datadog\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4264
+            },
+            {
+              "step": "outline",
+              "durationMs": 12310
+            },
+            {
+              "step": "write",
+              "durationMs": 31172
+            },
+            {
+              "step": "review",
+              "durationMs": 8445
+            }
+          ],
+          "totalDurationMs": 56191,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2597,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ae50ae7e-ac4a-4302-ba8a-7af1d1256088",
+      "timestamp": "2026-03-09T12:16:52.227Z",
+      "actionType": "modify",
+      "issueNumber": 434,
+      "issueTitle": " [업데이트] Claude Code 활용 자동 콘텐츠 생성",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code 활용 자동 콘텐츠 생성\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 12,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "0ef36352-b57e-4f27-96d8-29c2d33d8cb7",
+      "timestamp": "2026-03-09T12:16:05.334Z",
+      "actionType": "modify",
+      "issueNumber": 433,
+      "issueTitle": " [업데이트] GitHub Copilot Coding Agent – Jira 통합 가이드",
+      "documentSlug": "projects/github-copilot-coding-agent",
+      "documentTitle": "What’s New with GitHub Copilot Coding Agent",
+      "summary": "문서 수정 요청 처리: \" [업데이트] GitHub Copilot Coding Agent – Jira 통합 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 35,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "caeb611a-30a8-42a1-9800-b367ac0fc577",
+      "timestamp": "2026-03-09T12:15:24.315Z",
+      "actionType": "modify",
+      "issueNumber": 432,
+      "issueTitle": " [업데이트] MCP Model Context Protocol – 새로운 CLI mcp2cli와 토큰 절감 전략",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP Model Context Protocol – 새로운 CLI mcp2cli와 토큰 절감 전략\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 32
+      }
+    },
+    {
       "id": "756f6377-367b-4fbe-ad42-4a864c269b3c",
       "timestamp": "2026-03-09T12:13:55.966Z",
       "actionType": "maintain",
@@ -10842,5 +10983,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-09T12:13:55.966Z"
+  "lastUpdated": "2026-03-09T12:18:33.982Z"
 }
