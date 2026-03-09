@@ -6,6 +6,8 @@ tags: [Agentic FaaS, MDL, Backend Architecture, Serverless, AI Agents]
 order: 2
 updatedAt: 2026-03-08
 quality_score: 77
+redirect_from:
+  - backend-lazy-backend-agentic-faas-mdl
 ---
 
 ## 1. 서론 – 변화하는 소프트웨어 개발 패러다임

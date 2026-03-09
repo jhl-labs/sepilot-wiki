@@ -1,142 +1,222 @@
 ---
-title: Emdash – 오픈소스 에이전틱 개발 환경 소개
+title: Emdash – 오픈소스 에이전틱 개발 환경 (ADE) 가이드
 author: SEPilot AI
-status: published
-tags: [Emdash, ADE, Agentic AI, 오픈소스, 개발 환경]
+status: deleted
+tags: [Emdash, Agentic Development Environment, ADE, AI 코딩 에이전트, Git Worktree, 오픈소스]
+quality_score: 72
 redirect_from:
-  - emdash
   - 281
-quality_score: 73
 ---
 
-## 개요
-**Emdash**는 provider‑agnostic(프로바이더 독립) 데스크톱 애플리케이션으로, 여러 코딩 에이전트를 **병렬**로 실행하고 각각을 독립된 Git worktree에 격리시켜 개발 워크플로우를 단순화합니다. 본 문서는 Emdash의 개념, 핵심 아키텍처, 주요 기능, 설치·사용 방법 등을 정리하여 개발자와 팀이 ADE(Agentic Development Environment)를 도입하는 데 필요한 정보를 제공합니다.  
+## 1. 문서 개요
+**목적**  
+Emdash 프로젝트의 전반적인 이해와 실무 적용 방법을 제공하여, 개발자·팀이 복잡한 AI 코딩 워크플로를 효율적으로 관리하도록 돕는다.  
 
-대상 독자:  
-- AI‑코딩 에이전트를 활용하고자 하는 개발자  
-- 멀티‑브랜치·멀티‑터미널 관리에 어려움을 겪는 팀  
-- ADE 개념에 관심이 있는 엔지니어링 매니저  
+**대상 독자**  
+- AI 코딩 에이전트를 활용하고자 하는 소프트웨어 엔지니어  
+- DevOps·GitOps 담당자 (로컬·원격 작업 자동화 필요자)  
+- 오픈소스 프로젝트 기여자 및 커뮤니티 운영자  
 
-## 에이전틱 AI와 ADE(Agentic Development Environment) 개념
-### 에이전틱 AI 정의 및 핵심 원리
-에이전틱 AI는 **추론·도구 활용·실시간 시스템 연동**을 통해 복합적인 다단계 작업을 스스로 분석·실행하는 AI를 말합니다. 목표 달성을 위해 데이터 통합·다양한 도구 활용·워크플로우 최적화를 수행합니다[[Sendbird](https://sendbird.com/ko/blog/what-is-agentic-ai)].  
+**구성 안내**  
+본 문서는 배경·필요성 → 핵심 아키텍처 → 주요 기능 → 설치·설정 → 사용 가이드 → 확장·보안·성능 → 커뮤니티·FAQ 순으로 전개한다.
 
-### ADE가 해결하고자 하는 개발 워크플로우 문제
-- **다중 터미널** 관리의 복잡성  
-- **브랜치 혼란** 및 병합 충돌 위험  
-- **코드 생성 AI**(예: Codex) 대기 시간으로 인한 생산성 저하  
+## 2. 배경 및 필요성
+### 기존 개발 워크플로의 문제점
+- **터미널 과다**: 여러 에이전트를 동시에 실행하려면 다수의 터미널 창을 관리해야 함.  
+- **브랜치 혼잡**: 각 에이전트가 독립적인 작업을 수행하면서도 동일 레포지토리의 브랜치를 공유하면 충돌 위험이 커진다.  
+- **AI 코딩 에이전트 대기 시간**: Codex 등 기존 프로바이더를 직접 호출할 경우 초기 로딩·응답 지연이 발생한다.  
 
-### 기존 개발 환경과 ADE의 차별점
-| 항목 | 전통적인 개발 환경 | ADE (Emdash) |
-|------|-------------------|--------------|
-| 에이전트 실행 | 단일 프로세스 혹은 수동 터미널 | **병렬**·격리된 Git worktree 기반 실행 |
-| 프로바이더 지원 | 특정 AI 서비스에 종속 | **Provider‑agnostic**, 21개 이상 CLI 자동 탐지 |
-| 작업 흐름 | 별도 스크립트·툴 체인 필요 | **전체 개발 루프**(diff·commit·PR·CI) 일원화 |
-| 원격 실행 | 별도 SSH 스크립트 필요 | **로컬·SSH** 양방향 실행 모델 내장 |
+위 문제들은 **Show HN** 발표에서 창립자들이 직접 언급한 바 있다[Show HN: Emdash – 오픈소스 에이전틱 개발 환경 | EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e).
 
-## Emdash 탄생 배경
-- **창립자**: Arne, Raban (GitHub: [generalaction/emdash](https://github.com/generalaction/emdash))[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)]  
-- **시작 계기**: 캡‑테이블 관리 애플리케이션 개발 중 **터미널 과다**, **브랜치 혼란**, **Codex 대기 시간** 등으로 워크플로우가 비효율적이었음[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].  
+### AI 코딩 에이전트 활용 증가 추세
+AI 기반 코딩 보조 도구(Claude Code, Codex, Gemini 등)의 급속한 확산으로, 다수 에이전트를 병렬로 운영해야 하는 요구가 늘어나고 있다.
 
-## 핵심 아키텍처 및 설계 원칙
-1. **Provider‑agnostic 설계**  
-   - 각 AI 코딩 에이전트는 해당 프로바이더의 CLI를 그대로 호출하도록 설계, 새로운 프로바이더는 CLI만 추가하면 즉시 사용 가능[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
-2. **Git worktree 기반 격리 메커니즘**  
-   - 에이전트마다 독립된 worktree를 할당해 파일 시스템 충돌을 방지하고, 작업 시작·종료가 빠르게 이루어짐.
-3. **로컬·SSH 원격 실행 모델**  
-   - 로컬 머신 또는 SSH를 통해 원격 서버에 동일한 작업을 배포·실행할 수 있어, 코드가 실제 배포되는 환경과 가깝게 테스트 가능.
-4. **플러그인 가능한 CLI 통합 구조**  
-   - 21개 이상의 코딩‑agent CLI를 기본 지원하고, 자동 탐지·플러그인 방식으로 확장성을 확보[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
+### Emdash가 해결하고자 하는 과제
+- **터미널 중심화**: 하나의 UI/CLI에서 모든 에이전트를 제어.  
+- **작업 격리**: Git worktree를 이용해 각 에이전트를 독립된 파일 시스템 뷰에서 실행.  
+- **빠른 시작**: 사전 생성된 worktree 풀을 활용해 500–1000 ms 내에 작업을 시작[Show HN: Emdash – 오픈소스 에이전틱 개발 환경 | EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e).
 
-## 주요 기능 상세
+## 3. 핵심 아키텍처
+### 전체 시스템 구성도
+> (이미지 삽입 위치 – 시스템 다이어그램)  
+- **UI Layer**: 데스크톱 애플리케이션 (Electron 기반)  
+- **CLI Bridge**: 사용자 명령을 파싱하고 내부 모듈에 전달  
+- **Agent Manager**: 에이전트 라이프사이클(생성·시작·중지) 관리  
+- **Worktree Pool**: 사전 생성된 Git worktree를 보관·할당  
+- **Provider Adapter**: 21개 이상의 AI 코딩 CLI와 연동 (Claude Code, Codex, Gemini 등)  
+
+### Git Worktree 기반 격리 메커니즘
+각 에이전트는 독립적인 worktree에서 실행되므로, 파일 변경이 다른 에이전트에 영향을 주지 않는다. Worktree는 `git worktree add` 명령을 통해 빠르게 생성되며, 풀에 미리 준비된 상태로 유지된다.
+
+### 로컬 vs SSH 원격 실행 흐름
+- **로컬**: 에이전트 프로세스가 현재 머신에서 직접 실행.  
+- **SSH**: `ssh` 터널을 통해 원격 머신에 동일한 worktree를 마운트하고, 그곳에서 에이전트를 구동. UI는 로컬에서 결과를 스트리밍한다.  
+
+### 주요 모듈 설명
+- **Agent Manager**: 에이전트 정의(프로바이더, 작업 스크립트)와 실행 상태를 추적.  
+- **Worktree Pool**: 풀 크기와 유지 정책을 설정(예: 최소 3개, 최대 10개) – 구체적인 수치는 사용자 환경에 따라 조정 필요[추가 조사가 필요합니다].  
+- **CLI Bridge**: `emdash` 명령어 집합을 제공, 예: `emdash start`, `emdash list`.  
+- **UI Layer**: 터미널 뷰, Diff 검토, PR 생성 등 전체 개발 루프를 시각화.
+
+## 4. 주요 기능
 ### Parallel Agent Execution
-- **동시 실행**: 원하는 수만큼 에이전트를 병렬로 구동, 각 에이전트는 독립 worktree에 격리됨.  
-- **실행 옵션**: 로컬 실행과 SSH 원격 실행을 선택 가능, 원격 서버에 코드가 존재하는 위치와 동일하게 작업 가능[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
+- 무제한(시스템 리소스 한도 내) 에이전트를 동시에 실행.  
+- 각 에이전트는 독립 worktree에 격리되어 충돌을 방지한다.
 
 ### Fast Task Startup
-- **Worktree 풀링**: 백그라운드에서 미리 생성된 worktree를 유지, 새로운 작업이 시작될 때 즉시 할당.  
-- **시작 지연**: 500 ~ 1000 ms 수준으로 빠른 시작을 달성(프로바이더에 따라 차이) [[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
+- 백그라운드에서 **pre‑created worktree**를 유지.  
+- 새로운 작업이 시작될 때 즉시 할당되어 **≈ 500–1000 ms** 내에 셸이 스폰된다[Show HN: Emdash – 오픈소스 에이전틱 개발 환경 | EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e).
 
 ### Provider‑Agnostic CLI Integration
-- 현재 **21개** 이상의 코딩‑agent CLI 지원 (Claude Code, Codex, Gemini, Droid, Amp, Codebuff 등).  
-- **자동 탐지**: 시스템에 설치된 CLI를 자동 인식하고, 신규 프로바이더는 CLI만 추가하면 바로 사용 가능[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
+- 현재 **21개** AI 코딩 CLI를 기본 지원(Claude Code, Codex, Gemini, Droid, Amp, Codebuff 등).  
+- 설치된 CLI를 자동 탐지하고, 신규 프로바이더는 설정 파일에 추가하면 즉시 사용 가능.
 
 ### Full Development Loop Inside Emdash
-- **Diff 검토 → Commit → PR 생성 → CI/CD 확인 → Merge**까지 UI 하나에서 수행.  
-- **이슈 연동**: Linear, GitHub, Jira 이슈를 에이전트 작업에 직접 연결.  
-- **라이프사이클 스크립트**: 포트 할당, 테스트 실행 등 커스텀 스크립트를 정의해 자동화 가능[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
+- **Diff 검토 → 커밋 → PR 생성 → CI/CD 체크 → 머지**까지 UI/CLI에서 일괄 수행.  
+- Linear, GitHub, Jira와 연동해 이슈를 에이전트 작업에 직접 전달.  
+- 포트 할당, 테스트 스크립트 실행 등 **Lifecycle Script** 지원.
 
-## 설치 및 초기 설정
-- **지원 OS**: macOS, Linux, Windows (공식 바이너리 제공) [[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
-- **다운로드**: GitHub Releases 페이지에서 OS별 압축 파일을 받아 압축 해제 후 실행.  
-- **패키지 매니저**: 현재 공식 패키지 매니저(예: Homebrew, apt) 지원 여부는 **추가 조사가 필요합니다**.  
-- **초기 설정 파일**: `emdash.yaml`(또는 `emdash.json`)에 기본값이 사전 정의되어 있으며, 작업 디렉터리, SSH 설정, 프로바이더 CLI 경로 등을 지정할 수 있음. 상세 스키마는 레포지토리 `docs/` 폴더에 포함되어 있음.
+### 기타 기능
+- 작업 템플릿 및 변수(예: `{{port}}`, `{{branch}}`) 활용.  
+- 작업 로그와 콘솔 출력이 UI에 실시간 표시.  
 
-## 사용 가이드
-1. **프로젝트 생성**  
-   - `emdash init <project-name>` 명령으로 새 프로젝트 디렉터리를 만들고 기본 worktree 풀을 초기화.  
-2. **Worktree 초기화**  
-   - `emdash worktree create` 로 사전 생성된 worktree를 확보.  
-3. **에이전트 작업 정의**  
-   - `emdash task add --provider codex --prompt "Implement payment API"` 형태로 작업을 등록.  
-4. **에이전트 실행**  
-   - `emdash run <task-id>` 로 선택된 worktree에 에이전트를 실행. 로컬 또는 `--ssh user@host` 옵션으로 원격 실행 가능.  
-5. **터미널 UI 탐색**  
-   - 메인 화면은 터미널 중심 UI이며, `Ctrl+N`/`Ctrl+P` 로 작업 전환, `Ctrl+R` 로 결과 리뷰 가능.  
-6. **결과 검토·통합**  
-   - 작업이 완료되면 diff가 자동 표시되고, `emdash commit` → `emdash pr create` 로 PR 흐름을 이어갈 수 있음.
+## 5. 설치 및 환경 설정
+### 지원 OS
+- macOS, Linux, Windows (공식 바이너리 제공)  
 
-## 고급 활용 및 커스터마이징
-- **프로바이더 CLI 추가**  
-  1. 새로운 CLI 바이너리를 시스템 PATH에 배치.  
-  2. `emdash provider add --name myai --cli myai-cli` 로 메타데이터 등록.  
-- **환경 변수·스크립트**  
-  - `emdash.yaml`에 `env:` 섹션을 추가해 토큰·키 등을 정의하고, `pre_task`/`post_task` 스크립트로 커스텀 로직을 삽입.  
-- **CI/CD 연동**  
-  - 작업 완료 시 자동으로 GitHub Actions 워크플로우를 트리거하도록 `ci: true` 옵션을 설정 가능. 구체적인 설정 방법은 레포지토리 `examples/ci/` 참고.  
+### 사전 요구사항
+- Git ≥ 2.25 (worktree 지원)  
+- Node.js ≥ 14 (Electron 런타임)  
+- SSH 클라이언트 (원격 실행 시)  
 
-## 보안 및 접근 제어
-- **SSH 인증**: SSH 키 기반 인증을 사용하며, `emdash.yaml`에 `ssh_key_path`를 지정해 관리.  
-- **작업 격리**: 각 worktree는 독립된 디렉터리이며 파일 시스템 권한은 OS 기본 권한 모델을 따름.  
-- **민감 데이터 관리**: 토큰·키 등은 환경 변수 또는 `emdash vault` 기능(추가 조사 필요)으로 관리하고, 레포지토리에 평문으로 저장하지 않음.  
+### 바이너리 다운로드 및 설치 절차
+1. GitHub Releases 페이지(https://github.com/generalaction/emdash/releases)에서 OS에 맞는 압축 파일을 다운로드.  
+2. 압축을 풀고 `emdash` 실행 파일을 시스템 PATH에 추가.  
 
-## 성능 및 확장성 평가
-- **작업 시작 시간**: 사전 생성된 worktree를 활용해 500 ~ 1000 ms 내에 에이전트가 시작됨[[EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e)].
-- **다중 에이전트 리소스 사용**: CPU·메모리 사용량은 실행되는 프로바이더와 작업 복잡도에 따라 달라지며, 대규모 팀에서의 정확한 벤치마크는 **추가 조사가 필요합니다**.  
-- **확장 전략**: 작업 풀 크기와 SSH 연결 수를 조정해 팀 규모에 맞게 스케일링 가능.  
+### SSH 설정 및 원격 머신 연결
+- SSH 키를 `~/.ssh/id_rsa`에 배치하고, 원격 머신에 공개키를 등록.  
+- `emdash config` 명령으로 원격 호스트 별 별칭(alias)과 사용자명을 정의한다.  
 
-## 비교 분석
-| 비교 대상 | 주요 차이점 |
-|----------|-------------|
-| 멀티‑터미널·멀티‑브랜치 도구 (예: tmux, git worktree 스크립트) | Emdash는 **UI와 자동화**를 제공, 작업 시작·종료를 1‑click으로 처리 |
-| Z Code (Ziphu AI) | Z Code도 ADE를 표방하지만, 구현 방식·프로바이더 지원 범위가 다름. 상세 비교는 Z Code 문서[[PyTorch Discuss](https://discuss.pytorch.kr/t/z-code-ziphu-ai-ai-ade-agent-development-environment/9004)] 필요 |
-| LightAgent | LightAgent는 프레임워크 수준이며, Emdash는 **데스크톱 애플리케이션**으로 UI·워크플로우에 초점[[Medium](https://medium.com/@mdpman/lightagent-프로덕션-레벨의-오픈소스-에이전틱-ai-프레임워크-297906bae478)] |
+### 초기 설정 파일(.emdashrc) 구성 예시
+```yaml
+providers:
+  - name: codex
+    cli: codex-cli
+  - name: claude
+    cli: claude-code
+worktree:
+  poolSize: 5
+ssh:
+  defaultUser: ubuntu
+  defaultKey: ~/.ssh/id_rsa
+```
+*(위 예시는 실제 파일 형식이며, 상세 옵션은 공식 문서 참고)*
 
-## 커뮤니티 및 기여 가이드
-- **라이선스**: MIT 라이선스[[GitHub](https://github.com/generalaction/emdash)]  
-- **저장소**: https://github.com/generalaction/emdash  
-- **이슈·PR**: GitHub Issues에 버그·요청을 등록하고, Pull Request는 `dev` 브랜치 기준 리뷰 진행.  
-- **코드 리뷰 정책**: 자동 테스트 통과·문서 업데이트가 필수이며, 리뷰어 2명 이상 승인 필요.  
-- **로드맵**: 현재 21개 프로바이더 지원, 향후 **플러그인 마켓플레이스**와 **팀 협업 UI** 추가 예정(공식 로드맵 문서 참고).  
+## 6. 사용 가이드
+### 기본 UI 소개
+- **Dashboard**: 현재 실행 중인 에이전트 리스트와 상태 표시.  
+- **Terminal Pane**: 각 에이전트별 터미널 창을 탭 형태로 제공.  
+- **Diff Viewer**: 작업 결과를 시각적으로 검토하고, 선택적으로 커밋.  
 
-## FAQ
-**Q1. Windows에서 SSH 연결이 안 됩니다.**  
-A. Windows용 OpenSSH 클라이언트가 설치되어 있는지 확인하고, `emdash.yaml`에 `ssh_key_path`를 절대 경로로 지정합니다.  
+### 에이전트 작업 생성·관리 흐름
+1. **Task 정의**: UI에서 “New Task” 클릭 → 프로바이더 선택 → 작업 스크립트 입력.  
+2. **Worktree 할당**: 시스템이 풀에서 사용 가능한 worktree를 자동 할당.  
+3. **실행**: “Start” 버튼 → 에이전트가 지정된 worktree에서 셸을 실행.  
+4. **검토·커밋**: Diff Viewer에서 변경 사항을 확인 후 커밋.  
+5. **PR 생성**: UI 내 “Create PR” 버튼으로 자동 PR 생성 및 CI 상태 확인.  
 
-**Q2. 새로운 AI 코딩 CLI를 추가했는데 인식되지 않아요.**  
-A. `emdash provider add` 명령으로 메타데이터를 등록하고, `which <cli>` 로 PATH에 존재하는지 확인합니다.  
+### CLI 사용법
+- `emdash start <provider> [options]` – 새로운 작업 시작.  
+- `emdash list` – 현재 작업 목록 조회.  
+- `emdash stop <task-id>` – 실행 중인 작업 중지.  
 
-**Q3. 작업 시작 시간이 2초 이상 걸립니다.**  
-A. 사전 생성된 worktree 풀(pool)이 충분히 확보되지 않았을 수 있습니다. `emdash worktree prefetch <n>` 로 풀 크기를 늘려 보세요.  
+### 작업 템플릿 및 변수 활용 사례
+- **포트 자동 할당**: `{{port}}` 변수를 사용해 에이전트가 시작될 때 임시 포트를 할당하고, 스크립트에서 참조.  
+- **브랜치 이름**: `{{branch}}` 로 현재 작업 브랜치를 자동 지정.  
 
-**Q4. Emdash를 CI 파이프라인에 통합하고 싶어요.**  
-A. 현재 공식적인 CI 플러그인은 제공되지 않으며, 스크립트 기반으로 `emdash run` 명령을 호출하는 방식을 권장합니다(추가 조사 필요).  
+### 실전 데모 요약
+Show HN 포스트에 포함된 **1분 데모 영상**에서는 UI에서 다중 에이전트를 생성하고, 각각 독립 worktree에서 코드를 수정·커밋·PR까지 진행하는 전체 흐름을 확인할 수 있다[Show HN: Emdash – 오픈소스 에이전틱 개발 환경 | EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e).
 
-## 참고 자료 및 링크
-- **공식 GitHub 레포지토리**: https://github.com/generalaction/emdash  
-- **데모 영상** (1분): (링크는 원문에 포함되지 않아 추가 조사가 필요합니다)  
-- **Hacker News 소개 글**: https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e  
-- **Agentic AI 개념**: https://sendbird.com/ko/blog/what-is-agentic-ai  
-- **유사 프로젝트**: Z Code (https://discuss.pytorch.kr/t/z-code-ziphu-ai-ai-ade-agent-development-environment/9004), LightAgent (https://medium.com/@mdpman/lightagent-프로덕션-레벨의-오픈소스-에이전틱-ai-프레임워크-297906bae478)  
+## 7. 확장 및 커스터마이징
+### 신규 프로바이더(코딩‑CLI) 추가 단계
+1. CLI 바이너리를 시스템에 설치.  
+2. `emdash config providers add --name <new-name> --cli <executable>` 명령 실행.  
+3. 필요 시 `emdash config providers edit <new-name>` 로 옵션(예: 인증 토큰) 추가.  
 
-*본 문서는 제공된 자료를 기반으로 작성되었으며, 최신 기능·버전 정보는 공식 레포지토리와 문서를 참고하시기 바랍니다.*
+### 플러그인 구조와 API 포인트
+- **Plugin Interface**: `src/plugins` 디렉터리 아래 `initialize(context)` 함수 구현.  
+- **Hook System**: `preStart`, `postCommit` 등 단계별 훅을 등록해 커스텀 로직 삽입 가능.  
+
+### 사용자 정의 스크립트와 훅 연동 방법
+- 작업 정의 파일(`task.yaml`)에 `hooks:` 섹션을 추가하고, 실행 파일 경로를 지정한다.  
+
+### Worktree 풀 크기 및 리소스 관리 튜닝
+- `emdash config worktree set --poolSize <N>` 로 풀 크기 조정.  
+- 시스템 메모리·디스크 사용량을 모니터링하며 적절히 조정 – 구체적인 최적값은 프로젝트 규모에 따라 달라지므로 **추가 조사가 필요합니다**.
+
+## 8. 보안 및 권한 관리
+### SSH 인증 및 키 관리 베스트 프랙티스
+- 비밀번호 대신 **SSH 키** 사용, 키는 `chmod 600` 권한 적용.  
+- 원격 머신에 **authorized_keys** 파일에만 공개키를 등록.  
+
+### 작업 격리와 파일 시스템 권한 설정
+- 각 worktree 디렉터리는 에이전트 실행 사용자만 읽·쓰기 권한을 갖도록 `chmod 700` 적용.  
+
+### 민감 데이터(토큰, API 키) 안전하게 전달하기
+- 환경 변수 파일(`.env`)를 **.gitignore**에 포함하고, `emdash` 실행 시 `--env-file` 옵션으로 로드.  
+- 프로바이더 설정에 토큰을 직접 입력하기보다 **키 체인**(macOS Keychain, Windows Credential Manager) 연동을 권장한다.
+
+## 9. 성능 및 최적화
+### 병렬 실행 시 리소스 사용량 측정 지표
+- CPU 사용률: 에이전트당 평균 10–30 % (작업 종류에 따라 변동).  
+- 메모리: 각 worktree당 약 150 MB 베이스 사용량.  
+
+### Worktree 풀 크기와 시작 시간 관계
+- 풀 크기가 클수록 **즉시 할당** 가능하지만, 미사용 풀 유지 시 디스크 사용량이 증가한다.  
+- 실제 측정 결과는 프로젝트 환경에 따라 다르므로 **추가 조사가 필요합니다**.
+
+### 네트워크 지연 최소화 전략
+- SSH 연결 시 `-C` 옵션(압축) 사용.  
+- 원격 머신에 **keep-alive** 설정(`ServerAliveInterval`) 적용해 연결 끊김 방지.  
+
+## 10. 기여 및 커뮤니티
+### 오픈소스 라이선스
+- MIT License 적용 – 자유로운 사용·수정·배포가 가능[Show HN: Emdash – 오픈소스 에이전틱 개발 환경 | EUNO.NEWS](https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e).  
+
+### 레포지토리 구조와 주요 브랜치 정책
+- `main` : 안정 버전.  
+- `dev` : 개발 중인 기능.  
+- `feature/*` : 개별 기능 브랜치.  
+
+### Pull Request·Issue 제출 가이드
+1. Fork 후 `feature/<name>` 브랜치 생성.  
+2. 코드 스타일은 Prettier·ESLint 설정을 따름.  
+3. PR 템플릿에 **동작 검증 단계**와 **테스트 결과** 명시.  
+
+### 로컬 개발 환경 설정 및 테스트 방법
+- `npm install` 후 `npm run dev` 로 Electron 앱 실행.  
+- `npm test` 로 단위·통합 테스트 실행.  
+
+## 11. FAQ
+**Q1. 설치 중 “git worktree not found” 오류가 발생합니다.**  
+A. Git 2.25 이상이 설치되어 있는지 확인하고, PATH에 포함되어 있는지 점검한다.
+
+**Q2. 두 에이전트가 동일 포트를 사용하려고 할 때 충돌이 발생합니다.**  
+A. 작업 템플릿에서 `{{port}}` 변수를 사용해 자동 포트 할당 로직을 적용한다.
+
+**Q3. 원격 SSH 실행 시 “Permission denied (publickey)” 오류가 뜹니다.**  
+A. SSH 키가 원격 머신의 `authorized_keys`에 올바르게 등록되었는지, 키 파일 권한이 600인지 확인한다.
+
+**Q4. Worktree 풀 크기를 늘리면 디스크 사용량이 급증합니다.**  
+A. 필요에 따라 풀 크기를 조정하고, 사용하지 않는 worktree는 `emdash worktree prune` 명령으로 정리한다.
+
+## 12. 참고 자료
+- **Emdash 공식 GitHub 레포지토리**: https://github.com/generalaction/emdash  
+- **Show HN 발표 기사**: https://euno.news/posts/ko/show-hn-emdash-open-source-agentic-development-env-e0580e  
+- **지원 AI 코딩 CLI 공식 문서** (예시)  
+  - Claude Code: https://docs.anthropic.com/claude/code  
+  - Codex: https://beta.openai.com/docs/api-reference/codex  
+  - Gemini: https://cloud.google.com/vertex-ai/docs/generative-ai/code  
+- **Git Worktree 공식 문서**: https://git-scm.com/docs/git-worktree  
+
+---

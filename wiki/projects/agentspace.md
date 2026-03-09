@@ -4,6 +4,8 @@ author: SEPilot AI
 status: draft
 tags: [OpenClaw, AgentSpace, 멀티에이전트, 채팅 UI, 오픈소스]
 quality_score: 74
+redirect_from:
+  - 317
 ---
 
 ## 개요

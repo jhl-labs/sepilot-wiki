@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 11주차",
   "slug": "reports/weekly-2026-11",
   "content": "\n## 요약\n- 전체 문서 172개 중 신규 47개, 수정 44개가 발생했으며 발행된 문서는 이번 주에 추가되지 않았습니다.  \n- AI가 수행한 작업은 총 144건으로, 생성 47건, 수정 44건, 유지보수 27건이 주를 이끌었습니다.  \n- 현재 열려 있는 이슈는 93건이며, 최근 7일간 39건이 활동했습니다.\n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| **전체 문서** | 172 |\n| **발행(published)** | 91 |\n| **초안(draft)** | 67 |\n| **삭제(deleted)** | 14 |\n| **신규 문서** | 47 |\n| **수정된 문서** | 44 |\n| **이번 주 발행된 문서** | 0 |\n\n## AI 활동 요약\n- **총 작업 수**: 144\n- **작업 유형별**  \n  - 유지보수(maintain): 27  \n  - 생성(generate): 47  \n  - 수정(modify): 44  \n  - 품질 점수(quality_score): 23  \n  - 복구(recover): 2  \n  - 상태 보고(status_report): 1  \n\n### 주요 AI 작업 예시\n| 시간 | 유형 | 대상 | 요약 |\n|------|------|------|------|\n| 2026‑03‑09 00:47 | maintain | Wiki Tree | 구조 분석 완료 – 자동 적용 29건, 보류 21건 |\n| 2026‑03‑09 00:27 | generate | ai/426 | “홈랩 AI 스택 2026 – 배포 순서와 리소스 플래닝 가이드” 생성 (연구 10소스, 총 42.5 s) |\n| 2026‑03‑09 00:26 | generate | ai/425 | “Joy – AI 에이전트를 위한 오픈 트러스트 네트워크 가이드” 생성 (연구 7소스, 총 40.1 s) |\n| 2026‑03‑09 00:25 | modify | ai/anthropic‑claude… | 내용 추가 31줄 |\n| 2026‑03‑09 00:24 | modify | ai/ai | 내용 추가 54줄 |\n| 2026‑03‑08 06:18 | modify | ai/ai-code-review-agent-guide | 내용 추가 104줄 |\n| 2026‑03‑08 06:17 | generate | ai/419 | “NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드” 생성 (연구 8소스, 총 38.4 s) |\n| 2026‑03‑08 06:15 | maintain | 뉴스 인텔리전스 | 200건 스캔, 신규 68건, 관련 19건, Issue 5건 생성 |\n\n## 열린 이슈\n- **전체 오픈 이슈**: 93\n- **최근 7일간 활동한 이슈**: 39\n\n## 주간 변경사항\n### 주요 커밋 (총 58건)\n- `12f7510e` – Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki (2026‑03‑09 00:50:52)  \n- `b51ac78e` – chore: Issue Processor 실행 결과 (2026‑03‑09 00:50:49)  \n- `8c0b92ba` – 🌳 Wiki Tree Maintenance: 전체 150개의 문서 현황 보고 (2026‑03‑09 00:47:49)  \n- `c2127bae` – docs: 뉴스 인텔리전스 기반 문서 자동 처리 (2026‑03‑09 00:27:07)  \n- `ef877fa3` – Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki (2026‑03‑08 06:19:53)  \n- `95a99061` – chore: Issue Processor 실행 결과 (2026‑03‑08 06:19:50)  \n- `495893fe` – docs: 뉴스 인텔리전스 기반 문서 자동 처리 (2026‑03‑08 06:18:50)  \n- `35f7cd2b` – docs: 뉴스 인텔리전스 기반 문서 자동 처리 (2026‑03‑08 00:26:27)  \n- `ce1c4601` – Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki (2026‑03‑07 18:16:43)  \n- `3bb30e27` – docs: 뉴스 인텔리전스 기반 문서 자동 처리 (2026‑03‑07 18:16:41)  \n\n(전체 커밋 목록은 `commits.entries` 데이터를 참고)\n\n## 향후 과제\n1. **발행 프로세스 활성화** – 이번 주에 신규·수정 문서가 발행되지 않았으므로, 자동 발행 파이프라인 점검이 필요합니다.  \n2. **유지보수 스킵된 항목 감소** – Wiki Tree 유지보수에서 21건이 보류되었으므로, 보류 사유를 분석하고 자동 적용 가능성을 확대합니다.  \n3. **삭제 문서 관리** – 현재 14개의 삭제된 문서가 존재하므로, 복구 필요 여부와 보관 정책을 재검토합니다.  \n4. **이슈 처리 속도 개선** – 오픈 이슈 93건 중 39건이 최근 활동했지만, 해결되지 않은 이슈 비율을 낮추기 위한 우선순위 재조정이 필요합니다.  \n5. **품질 점수 작업 확대** – 품질 점수 작업이 23건 수행됐으며, 이를 통해 문서 품질 개선 효과를 측정하고 지속적인 적용 방안을 마련합니다.  ",
-  "lastModified": "2026-03-09T20:47:12Z",
+  "lastModified": "2026-03-09T01:35:10Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "af6711f",
-      "message": "chore: 대시보드 통계 수집 - 2026-03-09 20:47",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-03-09T20:47:12Z",
+      "sha": "9e1617e",
+      "message": "📊 주간 위키 상태 보고서 생성",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-03-09T01:35:10Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0

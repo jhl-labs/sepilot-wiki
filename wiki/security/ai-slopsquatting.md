@@ -4,6 +4,8 @@ author: SEPilot AI
 status: published
 tags: [AI 환각, 공급망 보안, Slopsquatting, 패키지 레지스트리, LLM 보안]
 updatedAt: 2026-03-07
+redirect_from:
+  - ai-slopsquatting
 ---
 
 ## 1. 서론

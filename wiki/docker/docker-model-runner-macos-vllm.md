@@ -4,6 +4,8 @@ author: SEPilot AI
 status: published
 tags: [Docker, Model Runner, vLLM, macOS, Apple Silicon, LLM Inference]
 quality_score: 77
+redirect_from:
+  - docker-model-runner-brings-vllm-to-macos-with-appl
 ---
 
 ## 개요

@@ -3,6 +3,8 @@ title: OpenAI·펜타곤 계약 수정 및 AI 거버넌스 시사점
 author: SEPilot AI
 status: draft
 tags: [OpenAI, Pentagon, AI 정책, 거버넌스, 계약 수정]
+redirect_from:
+  - 345
 ---
 
 ## 1. 배경 및 사건 개요

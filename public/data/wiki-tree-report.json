@@ -1,631 +1,377 @@
 {
-  "timestamp": "2026-03-09T00:47:17.792Z",
+  "timestamp": "2026-03-09T21:10:49.890Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "전체 150개의 문서가 존재합니다. 대부분은 이미 적절한 서브디렉터리에 배치돼 있으나, 루트('/')에 위치한 다수의 파일이 카테고리 규칙에 맞지 않아 이동이 필요합니다. 또한 중복된 SNKV 문서와 Ingress‑NGINX 마이그레이션 가이드가 각각 두 위치에 존재합니다. 파일명은 영문 소문자‑하이픈 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 지정하면 탐색성이 크게 향상됩니다.",
-    "totalDocuments": 150,
+    "summary": "The wiki contains many root‑level markdown files that belong to specific domains, several duplicate or superseded documents, and a few mis‑placed drafts.  Root files must be moved into the proper category directories, file names normalized to lower‑case hyphen slugs, and duplicate drafts removed or merged.  The overall hierarchy is already mostly sensible, but can be tightened by consolidating duplicate security/observability guides and by keeping only the published version of the Agentic FaaS backend guide.",
+    "totalDocuments": 236,
     "categories": [
-      "projects",
       "ai",
-      "frontend",
+      "backend",
       "docker",
-      "observability",
+      "github",
       "security",
       "kubernetes",
+      "observability",
+      "projects",
+      "reports",
+      "dependencies",
+      "troubleshooting",
+      "dependabot",
       "devops",
       "cloud",
-      "backend",
-      "maintenance",
-      "reports",
-      "github",
-      "dependabot",
-      "meta"
+      "meta",
+      "bun",
+      "frontend"
     ],
     "issues": [
-      "루트에 남아 있는 파일이 다수 존재합니다.",
-      "SNKV 키‑값 저장소 문서가 두 위치에 중복되어 있습니다.",
-      "Ingress‑NGINX 마이그레이션 가이드가 루트와 kubernetes/ 두 곳에 존재합니다."
+      "Root‑level markdown files are scattered and need to be moved into their proper category directories.",
+      "Several draft documents duplicate published versions (e.g., Agentic FaaS, Logmera, monitoring comparison, OpenTelemetry).",
+      "File names contain spaces, uppercase letters, or non‑slug characters and should be normalized."
     ]
   },
   "suggestedStructure": {
-    "projects": [
-      "claude-code-cost-management.md",
-      "robopocket-ar.md",
-      "claude-code-release-history.md",
-      "nvidia-nim.md",
-      "agentbus-rest-api.md",
-      "github-copilot-cli-guide.md",
-      "xcode-cloud-ci-cd.md",
-      "github-copilot-coding-agent.md",
-      "jira-ai-agents.md",
-      "viscat.md",
-      "neuroskill-bci-ai.md",
-      "antigravity-release-notes.md",
-      "openclaw-complete-guide.md",
-      "moltbook-intro.md",
-      "enterprise-gitops-implementation.md",
-      "emdash.md",
-      "sepilot-desktop-intro.md",
-      "sepilot-technology-stack.md",
-      "rust-gpu-face-crop-tool.md"
-    ],
     "ai": [
-      "fastapi-ai-api.md",
-      "tensorflow-2-21-litert.md",
-      "ai-code-review-agent-guide.md",
-      "261.md",
-      "367.md",
-      "cloud-terminal-persistent-ai-agent-sessions.md",
-      "claude-code.md",
-      "388.md",
-      "312.md",
-      "403.md",
-      "315.md",
-      "344.md",
-      "mcp-model-context-protocol.md",
-      "396.md",
+      "ai-code-assistant-productivity-paradox.md",
+      "fastapi-ai-inference.md",
+      "openai-pentagon-contract.md",
+      "ai-slopsquatting.md",
       "ai.md",
-      "ai-rfp.md",
-      "ai-productivity-paradox-why-developer-throughput-m.md",
-      "425.md",
-      "398.md",
-      "llm-evolution-timeline-171-models-overview.md",
-      "multi-agent-workflows-often-fail-here-s-how-to-eng.md",
-      "claude-marketplace.md",
-      "openai-pentagon-contract-revision-and-policy-impli.md",
-      "github-agentic-workflows.md",
-      "semantic-layer-importance-and-implementation-guide.md",
-      "agentspace-openclaw.md",
-      "ai-agent-deployment-failure-prevention-and-testing-strategy.md",
-      "vibe-coding.md",
-      "multi-agent-system.md",
-      "anthropic-claude-government-regulation-and-dod-pol.md",
-      "288.md",
-      "gemini-3-1-pro.md",
-      "419.md",
-      "kubernetes-ai-gitops.md",
-      "ai-slopsquatting.md"
+      "continuous-ai.md",
+      "mcp-model-context-protocol.md",
+      "tensor‑flow‑2‑21‑release‑guide.md",
+      "... (other existing ai files)"
     ],
-    "frontend": [
-      "vite-plugin-pwa-pwa.md",
-      "incremental-static-regeneration.md",
-      "react-query.md",
-      "webp.md",
-      "api-service-layer.md",
-      "monaco-editor-react.md"
+    "backend": [
+      "agentic-faas-mdl.md",
+      "wiki-api-route-guide.md",
+      "snkv-sqlite-btree-kv-store.md",
+      "... (other backend files)"
     ],
     "docker": [
+      "docker-model-runner-macos-vllm.md",
       "gordon-ai-agent-update.md",
-      "308.md",
       "announcing-docker-hardened-system-packages.md",
       "docker-zfs.md",
       "open-webui-docker-model-runner-self-hosted-llm-dep.md",
       "run-openclaw-securely-in-docker-sandboxes.md",
-      "hardened-images.md"
+      "hardened-images.md",
+      "... (other docker files)"
     ],
-    "observability": [
-      "319.md",
-      "logmera-self-hosted-llm-observability-tool.md",
-      "opentelemetry.md",
-      "374.md",
-      "open-telemetry-guide.md",
-      "ai.md",
-      "opentelemetry-observability-warehouse.md"
+    "github": [
+      "github/labels/dependencies.md",
+      "github/what-8217-s-new-with-github-copilot-coding-agent.md",
+      "github/dependencies-label.md",
+      "github/dependabot-labels.md",
+      "... (other github files)"
     ],
     "security": [
-      "346.md",
-      "411.md",
-      "2026-vps.md",
-      "303.md",
-      "404.md",
-      "ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
-      "386.md",
-      "380.md",
-      "400.md",
-      "untitled-1772736110655.md",
-      "376.md",
-      "wordpress-vulnerability-triaging-playbook-2026.md",
-      "285.md",
-      "devsecops.md",
+      "ai-slopsquatting.md",
+      "coinbase-x402-sdk-vulnerability.md",
       "ai.md",
-      "cve-2026-27574-oneuptime-probe-vm-rce.md",
-      "serv-u-15-5.md",
-      "385.md",
-      "ios-exploit-kit-coruna-lockdown-mode.md",
-      "shinobi-scan-secret-scanning-cli.md"
+      "devsecops-paradox.md",
+      "telegram-based-access-layer-authentication-with-oi.md",
+      "... (other security files)"
     ],
     "kubernetes": [
       "node-readiness-controller.md",
-      "spotlight-on-sig-architecture-api-governance.md",
       "ingress-nginx-deprecation-guide.md",
       "api-governance.md",
       "kubernetes.md",
-      "before-you-migrate-ingress-nginx.md",
-      "cgroup-migration.md",
-      "409.md",
-      "release-notes.md"
+      "... (other kubernetes files)"
     ],
-    "devops": [
-      "shared-workflows-nodejs-aws.md",
-      "dependabot-labels.md",
-      "github-copilot-ci-cd.md",
-      "search-architecture-high-availability.md",
-      "gitops-implementation.md",
-      "dependabot.md",
-      "dependabot-labels.md"
+    "observability": [
+      "opentelemetry.md",
+      "logmera-self-hosted-llm-observability-tool.md",
+      "2026-vigilops-zabbix-prometheus-grafana-datadog.md",
+      "open-telemetry-observability-warehouse.md",
+      "... (other observability files)"
     ],
-    "cloud": [
-      "aws-nat-gateway-cost-trap.md"
-    ],
-    "backend": [
-      "lazy-backend-agentic-faas-mdl.md",
-      "agentic-faas-mdl.md",
-      "label-dependencies.md",
-      "wiki-api-route-guide.md",
-      "snkv-sqlite-btree-kv-store.md"
+    "projects": [
+      "viscat-tech-whitepaper.md",
+      "xcode-cloud-ci-cd.md",
+      "agentspace.md",
+      "emdash.md",
+      "emdash.md",
+      "openclaw-complete-guide.md",
+      "nvidia-nim.md",
+      "... (other project files)"
     ],
     "reports": [
-      "weekly-2026-10.md",
-      "devsecops-paradox.md"
+      "reports/weekly-2026-11.md",
+      "reports/weekly-2026-10.md",
+      "reports/devsecops-paradox.md"
     ],
-    "github": [
-      "labels/dependencies.md",
-      "what-8217-s-new-with-github-copilot-coding-agent.md",
-      "dependencies-label.md",
-      "dependabot-labels.md"
+    "dependencies": [
+      "dependencies/dompurify-bump-3.3.2.md",
+      "dependencies/lucide-react-bump-0.564-to-0.576.md",
+      "dependencies/mermaid-bump-11.13.0.md",
+      "... (other dependency files)"
+    ],
+    "troubleshooting": [
+      "troubleshooting/dependabot-label-missing.md",
+      "troubleshooting/dependabot-missing-label.md",
+      "troubleshooting/dependabot-labels.md"
     ],
     "dependabot": [
-      "missing-dependencies-label.md"
+      "dependabot/missing-dependencies-label.md",
+      "dependabot/pnpm-transitive-dependencies-limitations.md",
+      "dependabot/@types-node-update-cancelled.md"
+    ],
+    "devops": [
+      "devops/gitops-implementation.md",
+      "devops/shared-workflows-nodejs-aws.md",
+      "devops/github-copilot-ci-cd.md",
+      "... (other devops files)"
+    ],
+    "cloud": [
+      "cloud/aws-nat-gateway-cost-trap.md",
+      "cloud/aws-cost-optimization.md"
     ],
     "meta": [
-      "weekly-2026-09.md",
-      "weekly-2026-08.md"
+      "meta/weekly-2026-09.md",
+      "meta/weekly-2026-08.md",
+      "meta/label-dependencies.md"
+    ],
+    "bun": [
+      "bun/overview.md",
+      "bun/comparison-pnpm-npm.md",
+      "bun/github-actions-setup.md"
+    ],
+    "frontend": [
+      "frontend/vite-plugin-pwa-pwa.md",
+      "frontend/incremental-static-regeneration.md",
+      "frontend/react-query.md",
+      "frontend/monaco-editor-react.md",
+      "... (other frontend files)"
     ]
   },
   "results": {
-    "appliedActions": 29,
-    "skippedActions": 21,
+    "appliedActions": 21,
+    "skippedActions": 5,
     "dryRunPreviewedActions": 0,
     "createdIssues": 0
   },
   "actions": {
     "applied": [
       {
-        "type": "move",
+        "type": "rename",
         "priority": "high",
-        "source": "vite-plugin-pwa-pwa.md",
-        "target": "frontend/vite-plugin-pwa-pwa.md",
-        "reason": "프론트엔드 빌드·배포 가이드이므로 frontend 카테고리로 이동",
-        "autoApply": true
-      },
-      {
-        "type": "move",
-        "priority": "high",
-        "source": "383.md",
-        "target": "projects/claude-code-cost-management.md",
-        "reason": "Claude Code 제품 가이드이므로 projects 카테고리로 이동",
-        "autoApply": true
-      },
-      {
-        "type": "move",
-        "priority": "high",
-        "source": "robopocket-ar.md",
-        "target": "projects/robopocket-ar.md",
-        "reason": "RoboPocket 제품 가이드이므로 projects 카테고리로 이동",
-        "autoApply": true
-      },
-      {
-        "type": "move",
-        "priority": "high",
-        "source": "342.md",
-        "target": "devops/shared-workflows-nodejs-aws.md",
-        "reason": "Shared Workflows 가이드이며 devops 카테고리와 맞음",
-        "autoApply": true
-      },
-      {
-        "type": "move",
-        "priority": "high",
-        "source": "from-idea-to-pull-request-a-practical-guide-to-bui.md",
-        "target": "projects/github-copilot-cli-guide.md",
-        "reason": "GitHub Copilot CLI는 제품이므로 projects 카테고리로 이동",
-        "autoApply": true
-      },
-      {
-        "type": "move",
-        "priority": "high",
-        "source": "nvidia-nim.md",
-        "target": "projects/nvidia-nim.md",
-        "reason": "NVIDIA NIM 제품 가이드이므로 projects 카테고리로 이동",
-        "autoApply": true
-      },
-      {
-        "type": "move",
-        "priority": "high",
-        "source": "maintenance/dependabot-labels.md",
-        "target": "devops/dependabot-labels.md",
-        "reason": "Dependabot 라벨 가이드가 devops 카테고리와 일치",
+        "source": "430.md",
+        "target": "ai/ai-code-assistant-productivity-paradox.md",
+        "reason": "Root file about AI code‑assistant productivity paradox belongs in the ai category and needs a slugified name.",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "devops/dependabot-labels.md",
-        "target": "devops/dependabot-labels.md",
-        "reason": "slug 정규화",
+        "source": "docker-model-runner-brings-vllm-to-macos-with-appl.md",
+        "target": "docker/docker-model-runner-macos-vllm.md",
+        "reason": "Root file about Docker Model Runner on macOS belongs in the docker category with a slugified name.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "rename",
         "priority": "high",
-        "source": "agentbus-ai-rest-api.md",
-        "target": "projects/agentbus-rest-api.md",
-        "reason": "AgentBus는 제품/서비스이므로 projects 카테고리로 이동",
+        "source": "ai-slopsquatting.md",
+        "target": "security/ai-slopsquatting.md",
+        "reason": "Security‑focused AI hallucination supply‑chain attack guide belongs in the security category.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "rename",
         "priority": "high",
-        "source": "xcode-cloud-ios-ci-cd.md",
+        "source": "361.md",
+        "target": "projects/viscat-tech-whitepaper.md",
+        "reason": "Viscat white‑paper is a product/project document; move to projects with a slugified name.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "377.md",
+        "target": "ai/fastapi-ai-inference.md",
+        "reason": "FastAPI AI inference guide belongs in the ai category.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "408.md",
+        "target": "security/coinbase-x402-sdk-vulnerability.md",
+        "reason": "Coinbase x402 SDK vulnerability guide belongs in the security category.",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "366.md",
         "target": "projects/xcode-cloud-ci-cd.md",
-        "reason": "Xcode Cloud는 제품이므로 projects 카테고리로 이동",
+        "reason": "Xcode Cloud CI/CD guide is a product‑specific document; move to projects.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "rename",
         "priority": "high",
-        "source": "what-8217-s-new-with-github-copilot-coding-agent.md",
-        "target": "projects/github-copilot-coding-agent.md",
-        "reason": "GitHub Copilot Coding Agent는 제품이므로 projects 카테고리로 이동",
+        "source": "317.md",
+        "target": "projects/agentspace.md",
+        "reason": "AgentSpace is an OpenClaw‑related project; move to projects.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "rename",
         "priority": "high",
-        "source": "jira-ai-agents-integrating-generative-ai-into-proj.md",
-        "target": "projects/jira-ai-agents.md",
-        "reason": "Jira AI Agents는 제품이므로 projects 카테고리로 이동",
+        "source": "281.md",
+        "target": "projects/emdash.md",
+        "reason": "Emdash is a project; move to projects with a slugified name.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "rename",
         "priority": "high",
-        "source": "viscat.md",
-        "target": "projects/viscat.md",
-        "reason": "Viscat 제품 가이드이므로 projects 카테고리로 이동",
+        "source": "345.md",
+        "target": "ai/openai-pentagon-contract.md",
+        "reason": "Policy‑focused OpenAI‑Pentagon contract belongs in the ai category.",
         "autoApply": true
       },
       {
         "type": "merge",
         "priority": "high",
-        "source": "snkv-sqlite-b-tree-c-c-python.md",
-        "target": "backend/snkv-sqlite-btree-kv-store.md",
-        "reason": "동일 내용의 SNKV 문서가 두 위치에 존재함. 백엔드 카테고리의 최신 초안 유지.",
+        "source": "backend/lazy-backend-agentic-faas-mdl.md",
+        "target": "backend/agentic-faas-mdl.md",
+        "reason": "Draft version duplicates the published Agentic FaaS guide; keep the published one.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "merge",
         "priority": "high",
-        "source": "before-you-migrate-five-surprising-ingress-nginx-b.md",
-        "target": "kubernetes/before-you-migrate-ingress-nginx.md",
-        "reason": "Ingress‑NGINX 마이그레이션 가이드는 kubernetes 카테고리와 일치",
+        "source": "observability/374.md",
+        "target": "observability/logmera-self-hosted-llm-observability-tool.md",
+        "reason": "Draft duplicate of Logmera guide; keep the published version.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "merge",
         "priority": "high",
-        "source": "github-copilot-ci-cd.md",
-        "target": "devops/github-copilot-ci-cd.md",
-        "reason": "CI/CD 통합 가이드이므로 devops 카테고리로 이동",
+        "source": "observability/435.md",
+        "target": "observability/2026-vigilops-zabbix-prometheus-grafana-datadog.md",
+        "reason": "Draft duplicate of the 2026 monitoring tools comparison; keep the published version.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "merge",
         "priority": "high",
-        "source": "how-we-rebuilt-the-search-architecture-for-high-av.md",
-        "target": "devops/search-architecture-high-availability.md",
-        "reason": "GitHub Enterprise Server 검색 고가용성 설계 가이드이며 devops 카테고리와 일치",
+        "source": "observability/open-telemetry-guide.md",
+        "target": "observability/opentelemetry.md",
+        "reason": "Deleted duplicate of OpenTelemetry guide; keep the published version.",
         "autoApply": true
       },
       {
-        "type": "move",
+        "type": "merge",
         "priority": "high",
-        "source": "neuroskill-bci-ai.md",
-        "target": "projects/neuroskill-bci-ai.md",
-        "reason": "NeuroSkill™ 제품 가이드이므로 projects 카테고리로 이동",
+        "source": "observability/ai.md",
+        "target": "security/ai.md",
+        "reason": "Both documents cover AI‑generated code secret‑management risks; keep the security‑category version.",
         "autoApply": true
       },
       {
-        "type": "move",
-        "priority": "high",
-        "source": "kubernetes-ai-gitops.md",
-        "target": "ai/kubernetes-ai-gitops.md",
-        "reason": "AI 모델 GitOps 가이드이므로 ai 카테고리로 이동",
+        "type": "set_order",
+        "priority": "medium",
+        "target": "security/ai.md",
+        "order": 3,
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "projects",
+        "priority": "low",
+        "target": "ai",
         "metadata": {
-          "displayName": "프로젝트 & 제품",
+          "displayName": "AI & LLM",
           "order": 1
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "ai",
+        "priority": "low",
+        "target": "backend",
         "metadata": {
-          "displayName": "AI & LLM",
+          "displayName": "Backend Architecture",
           "order": 2
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "frontend",
+        "priority": "low",
+        "target": "docker",
         "metadata": {
-          "displayName": "프론트엔드",
+          "displayName": "Docker & Containerization",
           "order": 3
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "docker",
+        "priority": "low",
+        "target": "security",
         "metadata": {
-          "displayName": "Docker",
+          "displayName": "Security & Vulnerabilities",
           "order": 4
         },
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "medium",
-        "target": "observability",
+        "priority": "low",
+        "target": "projects",
         "metadata": {
-          "displayName": "관측성",
+          "displayName": "Projects & Products",
           "order": 5
         },
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "medium",
-        "target": "security",
-        "metadata": {
-          "displayName": "보안",
-          "order": 6
-        },
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "medium",
-        "target": "kubernetes",
-        "metadata": {
-          "displayName": "Kubernetes",
-          "order": 7
-        },
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "medium",
-        "target": "devops",
-        "metadata": {
-          "displayName": "DevOps",
-          "order": 8
-        },
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "medium",
-        "target": "cloud",
-        "metadata": {
-          "displayName": "클라우드",
-          "order": 9
-        },
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "projects/claude-code-release-history.md",
-        "order": 3,
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/vite-plugin-pwa-pwa.md",
-        "target": "frontend/vite-plugin-pwa-pwa.md",
-        "reason": "파일명을 slug 형태로 정규화 (이미 slug 형태이지만 확장자와 경로를 명시)",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: frontend/vite-plugin-pwa-pwa.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/claude-code-cost-management.md",
-        "target": "projects/claude-code-cost-management.md",
-        "reason": "slug 형태로 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/claude-code-cost-management.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/robopocket-ar.md",
-        "target": "projects/robopocket-ar.md",
-        "reason": "slug 형태 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/robopocket-ar.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "devops/shared-workflows-nodejs-aws.md",
-        "target": "devops/shared-workflows-nodejs-aws.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: devops/shared-workflows-nodejs-aws.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/github-copilot-cli-guide.md",
-        "target": "projects/github-copilot-cli-guide.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/github-copilot-cli-guide.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/nvidia-nim.md",
-        "target": "projects/nvidia-nim.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/nvidia-nim.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/agentbus-rest-api.md",
-        "target": "projects/agentbus-rest-api.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/agentbus-rest-api.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/xcode-cloud-ci-cd.md",
-        "target": "projects/xcode-cloud-ci-cd.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/xcode-cloud-ci-cd.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/github-copilot-coding-agent.md",
-        "target": "projects/github-copilot-coding-agent.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/github-copilot-coding-agent.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/jira-ai-agents.md",
-        "target": "projects/jira-ai-agents.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/jira-ai-agents.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/viscat.md",
-        "target": "projects/viscat.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/viscat.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "kubernetes/before-you-migrate-ingress-nginx.md",
-        "target": "kubernetes/before-you-migrate-ingress-nginx.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: kubernetes/before-you-migrate-ingress-nginx.md"
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "before-you-migrate-five-surprising-ingress-nginx-b.md",
-        "target": "kubernetes/before-you-migrate-ingress-nginx.md",
-        "reason": "루트에 남아 있던 중복 파일 삭제",
-        "autoApply": true,
-        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/before-you-migrate-five-surprising-ingress-nginx-b.md'"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "devops/github-copilot-ci-cd.md",
-        "target": "devops/github-copilot-ci-cd.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: devops/github-copilot-ci-cd.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "devops/search-architecture-high-availability.md",
-        "target": "devops/search-architecture-high-availability.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: devops/search-architecture-high-availability.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "projects/neuroskill-bci-ai.md",
-        "target": "projects/neuroskill-bci-ai.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/neuroskill-bci-ai.md"
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "ai/kubernetes-ai-gitops.md",
-        "target": "ai/kubernetes-ai-gitops.md",
-        "reason": "slug 정규화",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: ai/kubernetes-ai-gitops.md"
-      },
-      {
         "type": "set_order",
-        "priority": "low",
-        "target": "projects/claude-code-cost-management.md",
+        "priority": "medium",
+        "target": "ai/ai-code-assistant-productivity-paradox.md",
         "order": 1,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/claude-code-cost-management.md"
+        "error": "문서를 찾을 수 없음: ai/ai-code-assistant-productivity-paradox.md"
       },
       {
         "type": "set_order",
-        "priority": "low",
-        "target": "projects/robopocket-ar.md",
+        "priority": "medium",
+        "target": "ai/fastapi-ai-inference.md",
         "order": 2,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/robopocket-ar.md"
+        "error": "문서를 찾을 수 없음: ai/fastapi-ai-inference.md"
       },
       {
         "type": "set_order",
-        "priority": "low",
-        "target": "projects/nvidia-nim.md",
-        "order": 4,
+        "priority": "medium",
+        "target": "ai/openai-pentagon-contract.md",
+        "order": 3,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/nvidia-nim.md"
+        "error": "문서를 찾을 수 없음: ai/openai-pentagon-contract.md"
       },
       {
         "type": "set_order",
-        "priority": "low",
-        "target": "projects/agentbus-rest-api.md",
-        "order": 5,
+        "priority": "medium",
+        "target": "security/ai-slopsquatting.md",
+        "order": 1,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/agentbus-rest-api.md"
+        "error": "문서를 찾을 수 없음: security/ai-slopsquatting.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "medium",
+        "target": "security/coinbase-x402-sdk-vulnerability.md",
+        "order": 2,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: security/coinbase-x402-sdk-vulnerability.md"
       }
     ],
     "dryRunPreviewed": []

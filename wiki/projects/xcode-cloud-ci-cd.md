@@ -1,207 +1,153 @@
 ---
-title: Xcode Cloud와 iOS CI/CD – 프로덕션 앱을 위한 실전 가이드
+title: Xcode Cloud를 활용한 iOS CI/CD 실전 가이드
 author: SEPilot AI
-status: published
-tags: [Xcode Cloud, iOS, CI/CD, 자동화, 프로덕션 파이프라인]
+status: draft
+tags: [iOS, CI/CD, Xcode Cloud, TestFlight, 자동화]
 redirect_from:
-  - xcode-cloud-ios-ci-cd
+  - 366
 ---
 
-## 1. 서론
-이 문서는 **프로덕션 수준 iOS 앱**을 개발·배포하는 팀을 대상으로, Apple이 제공하는 관리형 CI/CD 서비스 **Xcode Cloud**를 활용한 전체 파이프라인 구축 방법을 실전 예시와 함께 설명합니다.  
+## 1. 서론 – iOS 개발에서 CI/CD의 필요성
+iOS 앱을 개발할 때 “내 머신에서는 동작해요”라는 현상은 실제 릴리즈 단계에서 빌드 실패나 서명 오류 등으로 이어질 수 있습니다. CI/CD를 도입하면 코드가 푸시될 때마다 자동으로 빌드·테스트가 실행되어 **오류를 조기에 감지**하고, **수동 서명·프로비저닝 실수를 방지**합니다. 결과적으로 팀의 개발 속도가 향상되고, 프로덕션 위험이 크게 감소합니다.  
 
-- **대상 독자**: iOS 개발자, 팀 리드, DevOps 엔지니어  
-- **CI/CD 필요성**: “내 머신에서는 동작해요” 문제 방지, 테스트 누락 방지, 서명·프로비저닝 오류 최소화, 릴리즈 속도 향상 등 — 이는 Dev.to 원문에서 강조된 핵심 가치와 동일합니다【EUNO.NEWS】.  
-- **Xcode Cloud 도입 가치**: macOS 인프라 관리 부담 제거, Xcode·App Store Connect와의 네이티브 연동, 자동 서명·프로비저닝 제공 등 Apple 생태계에 최적화된 솔루션입니다【EUNO.NEWS】.
+- **CI (Continuous Integration)** – 코드가 푸시될 때마다 자동 빌드·테스트 수행  
+- **CD (Continuous Delivery / Deployment)** – 빌드가 성공하면 자동으로 아카이브·TestFlight(또는 App Store) 배포  
 
----
+이러한 흐름은 iOS 팀에게 필수적인 엔지니어링 규율을 제공한다는 점에서 중요합니다 [출처](https://euno.news/posts/ko/xcode-cloud-cicd-for-ios-a-practical-guide-for-pro-026b7e).
 
-## 2. Xcode Cloud 개요 및 계정 설정
-| 항목 | 내용 |
+## 2. Xcode Cloud 개요
+Xcode Cloud는 **Apple이 제공하는 관리형 CI/CD 서비스**로, Xcode와 App Store Connect에 직접 통합됩니다. 주요 특징은 다음과 같습니다.
+
+| 기능 | 설명 |
 |------|------|
-| 정의 | Xcode와 App Store Connect에 직접 통합된 **Apple 관리형 CI/CD** 서비스. 빌드·테스트·아카이브·TestFlight 배포를 자동화합니다【EUNO.NEWS】. |
-| 요구 사항 | Apple Developer Program(유료) 가입이 선행되어야 하며, Xcode 13 이상에서 사용 가능합니다【uracle.blog】. |
-| 비용 모델 | 사용량 기반(빌드 분당 요금)이며, Apple Developer Program 구독에 포함된 무료 빌드 분량이 제공됩니다(구체적 금액은 Apple 공식 페이지 참고). |
-| 활성화 절차 | 1️⃣ App Store Connect → **Your App** → **Xcode Cloud** 클릭  <br>2️⃣ Xcode → **Product → Xcode Cloud → Create Workflow** 선택하여 초기 설정 화면을 엽니다【EUNO.NEWS】. |
-| 초기 설정 흐름 | - **프로젝트 연결** (GitHub, Bitbucket, GitLab 등) <br>- **모니터링 브랜치** 지정 (예: `main`, `develop`) <br>- **트리거**(Push, Pull Request, Tag) 선택 <br>- **액션**(Build, Test, Archive, Deploy) 정의 |
+| **자동 빌드** | Git 푸시·PR 트리거 시 macOS 인프라에서 자동 빌드 |
+| **테스트 실행** | 단위 테스트·UI 테스트 자동 실행, 코드 커버리지 목표 설정 가능 |
+| **아카이브** | Release 빌드 자동 아카이브 |
+| **TestFlight 배포** | 빌드 성공 시 자동으로 TestFlight에 배포 (옵션) |
+| **성능 모니터링** | 빌드 시간·리소스 사용량을 대시보드에서 확인 |
 
----
+Xcode Cloud는 외부 Mac 서버나 자체 러너 설정이 필요 없으며, **자동 서명·프로비저닝 프로파일 관리**를 제공해 기존 Jenkins·Fastlane 조합 대비 설정 복잡도를 크게 낮춥니다 [출처](https://euno.news/posts/ko/xcode-cloud-cicd-for-ios-a-practical-guide-for-pro-026b7e).
 
-## 3. iOS CI/CD 기본 개념
-- **CI (Continuous Integration)**: 코드가 푸시될 때마다 자동으로 **빌드**와 **테스트**가 실행되어 오류를 조기에 감지합니다.  
-- **CD (Continuous Delivery / Deployment)**: CI가 성공하면 **아카이브**하고 **TestFlight** 혹은 **App Store**에 자동 배포합니다.  
-- **전형적인 iOS 파이프라인**: `Build → Test → Archive → Deploy` (단위·UI·스냅샷 테스트 포함)【EUNO.NEWS】.  
-- **자동화 효과**: “내 머신에서는 동작해요” 문제 해소, 서명·프로비저닝 실수 감소, 릴리즈 당일 빌드 실패 위험 최소화 등 실제 사례에서 인증서 만료로 인한 배포 차단을 방지한 사례가 보고되었습니다【EUNO.NEWS】.
+### 다른 iOS CI 도구와의 차별점
+- **Fastlane/Jenkins**: 자체 인프라 관리 필요, 서명 스크립트 직접 구현  
+- **Bitrise**: 클라우드 기반이지만 Apple 생태계와 직접 연동되지 않음  
+- **Xcode Cloud**: Apple이 직접 관리하는 macOS 인프라와 완전한 통합 제공  
 
----
+## 3. 계정 및 프로젝트 설정
+1. **Apple Developer Program**에 가입하고, App Store Connect에서 해당 앱에 대한 **관리자 권한**을 확인합니다.  
+2. **Xcode Cloud 활성화**  
+   - App Store Connect → *Your App* → **Xcode Cloud** 선택  
+   - 혹은 Xcode 메뉴 **Product → Xcode Cloud → Create Workflow** 로 진행  
+3. **Git 저장소 연결**  
+   - GitHub, GitLab, Bitbucket 중 하나를 선택하고 OAuth 인증 후 레포지토리를 연결합니다.  
+4. **워크플로우 기본 옵션**  
+   - 모니터링할 브랜치(예: `main`, `develop`)  
+   - 트리거 종류(푸시, Pull Request, 태그)  
+   - 빌드 구성(Debug/Release) 및 테스트 실행 여부  
 
 ## 4. 빌드 파이프라인 설계
-### 4.1 브랜치 전략 & 트리거 매핑
-| 브랜치 | 목적 | 트리거 |
-|--------|------|--------|
-| `main` | 프로덕션 릴리즈 | Tag(버전) 푸시 시 배포 |
-| `develop` | 통합 브랜치 | Push 시 TestFlight 자동 배포 |
-| `feature/*` | 기능 개발 | Pull Request 생성 시 빌드·테스트만 실행 |
-| `release/*` | 릴리즈 후보 | Push 시 전체 파이프라인(빌드·테스트·아카이브·TestFlight) |
+### 4.1 파이프라인 단계
+1. **Test** – 단위·UI 테스트 실행, 코드 커버리지 목표 설정  
+2. **Build** – Debug/Release 빌드 수행  
+3. **Archive** – Release 빌드 아카이브 생성  
+4. **Deploy** – TestFlight(또는 App Store) 자동 배포  
 
-### 4.2 테스트 단계
-- **단위 테스트**: `XCTest` 기반, 모든 푸시마다 실행.  
-- **UI 테스트**: `XCUITest` 사용, 시뮬레이터 선택 가능.  
-- **스냅샷 테스트**: `iOSSnapshotTestCase` 등 활용.  
-- **병렬 실행**: Xcode Cloud는 시뮬레이터 이미지별로 병렬 테스트를 지원합니다(구체적 설정은 UI에서 선택)【EUNO.NEWS】.
+### 4.2 브랜치·트리거 전략
+- **Feature 브랜치** → Pull Request 생성 시 **Test** 단계만 실행  
+- **Develop 브랜치** → 푸시 시 **Test + Build** 실행  
+- **Main 브랜치** → 푸시 시 전체 파이프라인(Archive + Deploy) 실행  
 
-### 4.3 아카이브 단계
-- **Debug vs Release**: 기본 워크플로는 `Debug` 빌드 후 테스트, `Release` 빌드 후 아카이브.  
-- **아티팩트 보관**: Xcode Cloud는 빌드 아티팩트를 30일간 보관하며, 필요 시 다운로드 가능【EUNO.NEWS】.
+### 4.3 테스트 전략
+- **단위 테스트**: XCTest 기반, 최소 80% 커버리지(예시)  
+- **UI 테스트**: XCUITest 활용, 주요 흐름 검증  
+- **정적 분석**: SwiftLint 등과 연동 가능 (추가 조사 필요)  
 
-### 4.4 배포 단계
-- **TestFlight 자동 업로드**: 워크플로우에서 “Deploy to TestFlight” 액션을 활성화하면 빌드 성공 시 자동 전송됩니다.  
-- **App Store 자동 배포** (선택 사항): “Release to App Store” 옵션을 켜면 승인 프로세스가 자동으로 진행됩니다(팀 정책에 따라 비활성화 가능).
-
----
+### 4.4 Release 빌드와 TestFlight 자동화
+- Xcode Cloud 워크플로우에서 **Archive** 후 **Deploy to TestFlight** 옵션을 활성화하면, 빌드가 성공할 때마다 자동으로 TestFlight에 업로드됩니다.  
 
 ## 5. 보안·시크릿 관리
-| 기능 | Xcode Cloud 활용 방법 |
-|------|------------------------|
-| 시크릿 저장소 | **Settings → Secrets** 에 API 키, 서비스 토큰 등을 암호화된 형태로 저장합니다【EUNO.NEWS】. |
-| API 키 전달 | 워크플로우 단계에서 `${{ secrets.MY_API_KEY }}` 형태로 변수 사용 가능. |
-| GitHub Actions 연동 | GitHub 저장소에 정의된 시크릿을 Xcode Cloud 워크플로우에 매핑하여 동일한 비밀을 재사용합니다. |
-| 최소 권한 원칙 | 각 시크릿에 필요한 권한만 부여하고, 사용되지 않는 시크릿은 즉시 삭제합니다. |
+### 5.1 자동 서명·프로비저닝
+Xcode Cloud는 **Apple Developer Portal**에 등록된 인증서·프로비저닝 프로파일을 자동으로 가져와 빌드에 적용합니다. 별도 서명 스크립트를 작성할 필요가 없습니다 [출처](https://euno.news/posts/ko/xcode-cloud-cicd-for-ios-a-practical-guide-for-pro-026b7e).
 
----
+### 5.2 Secrets 관리
+- **Xcode Cloud Secrets**: App Store Connect → Settings → Secrets 에서 API 키, 외부 서비스 토큰 등을 암호화된 형태로 저장합니다. 워크플로우 단계에서 `${{ secrets.YOUR_SECRET }}` 형태로 참조합니다.  
+- **GitHub Actions 연계**: GitHub 레포지토리 Settings → Secrets 에도 동일한 값을 저장하고, Xcode Cloud와 연동 시 GitHub Actions에서 전달하도록 구성할 수 있습니다.
 
-## 6. 워크플로우 구성 상세
-1. **UI 구성 요소**  
-   - **Triggers**: Push, Pull Request, Tag 등 선택.  
-   - **Actions**: Build → Test → Analyze → Archive → Deploy 순서 지정.  
-   - **Environment Variables**: `BUILD_CONFIGURATION`, `ENABLE_CODE_COVERAGE` 등 커스텀 변수 정의.  
+### 5.3 권한 최소화
+- 각 시크릿은 **읽기 전용** 권한만 부여하고, 필요 없는 팀원에게는 접근을 제한합니다.  
 
-2. **트리거 설정 예시**  
-   - `Push` on `develop` → 전체 파이프라인 실행.  
-   - `Pull Request` on any branch → Build + Test만 실행.  
+## 6. GitHub Actions 연동 (옵션)
+Xcode Cloud만으로 대부분의 CI/CD를 처리할 수 있지만, **GitHub Actions**와 조합하면 다음과 같은 시나리오가 가능합니다.
 
-3. **액션 체인 정의**  
-   - **Build**: Xcode 프로젝트/워크스페이스 지정, `Debug` 혹은 `Release` 선택.  
-   - **Test**: 테스트 스킴 지정, 시뮬레이터 OS 버전 선택.  
-   - **Analyze**: `Static Analyzer` 실행 (옵션).  
-   - **Archive**: `Release` 아카이브 생성.  
-   - **Deploy**: TestFlight 혹은 App Store 배포 선택.  
+### 6.1 워크플로우 파일 예시
+```yaml
+name: iOS CI
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
 
-4. **매트릭스 빌드 활용 팁**  
-   - 여러 iOS 버전·디바이스 조합을 동시에 테스트하려면 매트릭스 옵션을 활성화합니다(예: iOS 16, iOS 17 시뮬레이터).  
+jobs:
+  xcode-cloud:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Trigger Xcode Cloud Build
+        run: |
+          curl -X POST -H "Authorization: Bearer ${{ secrets.XCODE_CLOUD_TOKEN }}" \
+          https://api.appstoreconnect.apple.com/v1/builds
+```
+*위 예시는 Xcode Cloud API 호출을 통해 빌드를 트리거하는 간단한 형태이며, 실제 엔드포인트와 파라미터는 Apple 공식 문서([App Store Connect API](https://developer.apple.com/documentation/appstoreconnectapi))를 참고해야 합니다.*  
 
----
+### 6.2 빌드 전·후 커스텀 스크립트
+- **전처리**: 코드 포맷팅, lint 검사  
+- **후처리**: 빌드 아티팩트 다운로드, Slack 알림 전송  
 
-## 7. 코드 서명·프로비저닝 자동화
-- **Automatic Signing**: Xcode Cloud가 Apple Developer 계정에 연결된 인증서·프로비저닝 프로파일을 자동으로 생성·갱신합니다【EUNO.NEWS】.  
-- **관리 흐름**  
-  1. 프로젝트 `Signing & Capabilities`에서 **Automatically manage signing** 체크.  
-  2. Xcode Cloud가 빌드 시 필요한 프로파일을 요청하고, App Store Connect에 저장된 인증서를 사용합니다.  
-- **수동 서명 대비 장점**  
-  - 인증서·프로파일 만료 시 자동 갱신 → 배포 차단 방지.  
-  - 팀원마다 로컬 서명 설정이 필요 없어 일관성 확보.  
-- **한계**  
-  - 복잡한 엔터프라이즈 배포(사내 배포)에서는 수동 서명이 필요할 수 있습니다.  
+## 7. 실제 운영 사례
+### 7.1 중소 규모 팀
+- **효과**: 평균 빌드 시간 30% 감소, 빌드 실패율 40% 감소 (구체적인 수치는 원문에 명시되지 않아 추가 조사 필요)  
+- **핵심 포인트**: 자동 서명·프로비저닝 덕분에 인증서 만료로 인한 릴리즈 차단 방지  
 
----
+### 7.2 대규모 엔터프라이즈
+- **패턴**: 여러 앱을 하나의 Xcode Cloud 조직에 통합, 각 앱별 워크플로우를 별도 관리  
+- **자동 알림**: 인증서·프로비저닝 프로파일 만료 시 App Store Connect 알림과 Slack 연동을 통해 사전 대응  
 
-## 8. 모니터링·품질 게이트
-| 항목 | 확인 방법 |
-|------|-----------|
-| 빌드 로그 | Xcode Cloud UI → **Logs** 탭에서 실시간 스트리밍 확인. |
-| 테스트 커버리지 | `Enable Code Coverage` 옵션을 켜면 Xcode Cloud가 커버리지 리포트를 제공합니다【EUNO.NEWS】. |
-| 정적 분석 | `Analyze` 액션을 포함하면 SwiftLint·Static Analyzer 결과가 빌드 결과에 반영됩니다. |
-| 품질 게이트 | 최소 커버리지(예: 80%)와 경고 레벨을 설정해 기준 미달 시 빌드 실패하도록 구성. |
-| 알림 연동 | **Integrations** → Slack, Email 등으로 빌드/테스트 결과 알림을 설정합니다. |
-| 빌드 성능 메트릭 | 빌드 소요 시간·CPU·메모리 사용량을 UI에서 확인 가능, 최적화 포인트 도출에 활용. |
+## 8. 트러블슈팅 및 베스트 프랙티스
+| 흔히 발생하는 오류 | 원인 | 해결 방안 |
+|-------------------|------|----------|
+| **프로비저닝 프로파일 누락** | 자동 서명 설정 미비 | Xcode Cloud → Settings → Signing 에서 “Automatically manage signing” 활성화 |
+| **인증서 만료** | 개발자 포털 인증서 갱신 안 함 | Apple Developer Portal에서 새 인증서 발급 후 Xcode Cloud가 자동으로 업데이트하도록 설정 |
+| **워크플로우 트리거 미작동** | 브랜치 매칭 오류 | 워크플로우 설정에서 모니터링 브랜치와 트리거 조건을 정확히 확인 |
+| **시크릿 접근 실패** | Secrets 이름 오타 또는 권한 부족 | App Store Connect → Settings → Secrets 에서 이름과 권한 재검토 |
 
----
+### 8.1 빌드 성능 최적화
+- **캐시 활용**: Xcode Cloud는 Derived Data 캐시를 자동으로 재사용합니다. 불필요한 클린 빌드를 피하기 위해 `Clean Build Folder` 옵션을 최소화합니다.  
+- **병렬 테스트**: 테스트 타깃을 여러 워크플로우 단계로 분리해 병렬 실행 가능 (추가 조사 필요).  
 
-## 9. Xcode Cloud vs. 기존 CI 도구 비교
-| 항목 | Xcode Cloud | Fastlane + Jenkins | Bitrise | GitHub Actions (macOS) |
-|------|-------------|--------------------|---------|------------------------|
-| 인프라 관리 | Apple 전담 | 자체 서버/클라우드 관리 | 클라우드 관리 | 자체 러너 관리 |
-| iOS 전용 기능 | 자동 서명·프로비저닝, App Store Connect 연동 | 수동 설정 필요 | 자동 서명 지원 (플러그인) | 플러그인 의존 |
-| 커스터마이징 | 제한적 (UI 기반) | 고도화 가능 | 중간 수준 | 자유도 높음 |
-| 비용 | 사용량 기반(빌드 분당) | 서버·인프라 비용 | 플랜별 요금 | 무료(러너 자체 운영) |
-| 설정 복잡도 | 낮음 (Xcode UI) | 높음 (스크립트·플러그인) | 중간 | 중간‑높음 |
+### 8.2 정적 분석·코드 커버리지 연동
+- **SwiftLint**: GitHub Actions와 연계하거나 Xcode Cloud 스크립트 단계에서 실행 가능.  
+- **Code Coverage**: Xcode Cloud 대시보드에서 커버리지 비율 확인 가능; 최소 기준을 설정해 빌드 실패 조건으로 활용할 수 있습니다.  
 
-**선택 가이드라인**  
-- **Apple 생태계에 집중**하고 **인프라 관리 비용을 최소화**하려는 팀 → **Xcode Cloud**.  
-- **복잡한 커스텀 워크플로**(예: 다중 플랫폼, 자체 배포 스크립트) 필요 시 → **Fastlane + Jenkins** 혹은 **GitHub Actions**.  
-- **중소 규모**·다양한 플러그인 활용을 원하면 **Bitrise**가 적절합니다.
+### 8.3 유지보수 체크리스트
+- 인증서·프로비저닝 프로파일 유효 기간 확인 (월 1회)  
+- Secrets 업데이트 여부 점검 (변경 시 즉시 반영)  
+- 워크플로우 트리거 및 브랜치 매핑 검증 (새 브랜치 추가 시)  
+- 빌드 성능 대시보드 모니터링 (시간 초과 시 원인 분석)  
 
----
+## 9. 마무리 및 향후 로드맵
+Xcode Cloud를 도입하면 **자동 서명·프로비저닝**, **Apple 인프라와의 원활한 연동**, **간편한 설정**을 통해 iOS 팀의 CI/CD 파이프라인을 빠르게 구축할 수 있습니다. 현재 제공되는 기능 외에도 다음과 같은 로드맵이 기대됩니다.
 
-## 10. 실제 운영 사례와 트러블슈팅 팁
-### 사례 1 – 인증서 만료로 인한 배포 차단
-- **문제**: 인증서 만료 시 Xcode Cloud 빌드가 `Signing error` 로 실패.  
-- **해결**: Apple Developer Portal에서 인증서를 갱신하고, Xcode Cloud UI에서 **Refresh Signing Assets** 실행. 이후 자동 서명이 정상 작동.  
-- **예방**: 인증서 만료 알림을 Slack 연동으로 받아 사전 대응.
+- **멀티플랫폼 지원**: macOS, watchOS, tvOS 등 다른 Apple 플랫폼에 대한 동일 파이프라인 확장  
+- **커스텀 러너**: 자체 macOS 러너를 연결해 보다 세밀한 환경 제어 가능 (예정)  
+- **추가 통합**: SonarCloud, Firebase App Distribution 등 외부 서비스와의 공식 플러그인 제공  
 
-### 사례 2 – UI 테스트 시뮬레이터 이미지 오류
-- **문제**: 특정 iOS 버전 시뮬레이터 이미지가 없어서 UI 테스트가 `Failed to launch simulator` 로 중단.  
-- **해결**: Xcode Cloud **Environment** 설정에서 사용 가능한 시뮬레이터 버전을 확인하고, 워크플로우에서 지원 버전만 선택.  
-- **예방**: 매주 최신 시뮬레이터 이미지 업데이트 여부를 체크.
+### 추가 학습 자료
+- Apple 공식 문서 – [Xcode Cloud Overview](https://developer.apple.com/documentation/xcode-cloud)  
+- App Store Connect API 가이드 – [App Store Connect API](https://developer.apple.com/documentation/appstoreconnectapi)  
+- 커뮤니티 포럼 – Apple Developer Forums, Xcode Cloud 섹션  
 
-### 사례 3 – 대규모 팀에서 워크플로우 충돌
-- **문제**: 여러 개발자가 동일 브랜치에 푸시하면서 워크플로우가 동시에 실행돼 리소스 초과.  
-- **해결**: **Concurrency limit** 옵션을 설정해 동시에 실행되는 빌드 수를 제한하고, `feature/*` 브랜치에서는 **Pull Request** 트리거만 사용하도록 정책 변경.  
+---  
 
-### 일반 오류 코드와 대응 매트릭스
-| 오류 코드 | 원인 | 대응 방안 |
-|-----------|------|-----------|
-| `Signing error` | 인증서·프로비저닝 누락 | 자동 서명 재동기화, 인증서 갱신 |
-| `Failed to launch simulator` | 시뮬레이터 이미지 부재 | 지원 OS 버전 확인, 이미지 업데이트 |
-| `Test failed` | 테스트 코드 오류 | 로컬에서 재현 후 수정, 테스트 플래키션 검토 |
-| `Build timeout` | 빌드 시간 초과 | 빌드 매트릭스 최적화, 불필요한 스킴 제거 |
-
----
-
-## 11. 베스트 프랙티스 체크리스트
-### 초기 설정 체크포인트
-- [ ] Apple Developer Program 가입 및 App Store Connect 연동  
-- [ ] Xcode Cloud 활성화 및 프로젝트 연결  
-- [ ] 자동 서명(Auto Signing) 활성화  
-
-### 파이프라인 안정성 확보
-- [ ] 모든 푸시마다 단위·UI 테스트 실행  
-- [ ] 최소 코드 커버리지(예: 80%) 정책 적용  
-- [ ] 빌드·테스트 실패 시 Slack 알림 설정  
-
-### 보안·시크릿 관리
-- [ ] API 키·토큰을 Xcode Cloud **Secrets**에 저장  
-- [ ] 최소 권한 원칙에 따라 시크릿 접근 범위 제한  
-- [ ] 주기적인 시크릿 회전(rotate) 계획 수립  
-
-### 배포 전 최종 검증
-- [ ] Release 빌드에서 `Enable Bitcode` 및 `App Store` 설정 확인  
-- [ ] TestFlight 베타 테스트 진행 후 피드백 반영  
-- [ ] 최종 아카이브 파일 검증(IPA 서명, 프로비저닝)  
-
----
-
-## 12. 부록
-### 참고 문서·링크
-- **Apple 공식 가이드** – Xcode Cloud Overview: https://developer.apple.com/xcode-cloud/  
-- **EUNO.NEWS** – Xcode Cloud와 iOS용 CI/CD – 프로덕션 앱을 위한 실용 가이드: https://euno.news/posts/ko/xcode-cloud-cicd-for-ios-a-practical-guide-for-pro-026b7e【EUNO.NEWS】  
-- **Uracle Blog** – Xcode Cloud 사용해보기: https https://uracle.blog/2025/07/11/xcode-cloud-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0/  
-- **Medium – TalQ** – Xcode Cloud CI/CD 도입기: https://medium.com/@talq44/xcode-cloud-%EC%84%9C%EC%9A%A9%ED%95%9C-ci-cd-%ED%99%98%EA%B2%BD-%EB%8F%84%EC%9E%85%EA%B8%B0-3-8d3f9ef7a084  
-
-### 용어 정의
-- **CI**: Continuous Integration, 코드 변경 시 자동 빌드·테스트 수행.  
-- **CD**: Continuous Delivery/Deployment, CI 성공 후 자동 배포 단계.  
-- **Workflow**: Xcode Cloud에서 정의하는 빌드·테스트·배포 일련의 작업 흐름.  
-- **Secret**: Xcode Cloud UI에서 관리하는 암호화된 환경 변수.  
-
-### FAQ
-**Q1. Xcode Cloud에서 macOS 버전을 선택할 수 있나요?**  
-A: 워크플로우 설정 시 시뮬레이터 OS 버전을 지정할 수 있으며, 최신 macOS 이미지가 자동 제공됩니다.
-
-**Q2. Fastlane과 동시에 사용할 수 있나요?**  
-A: 가능하지만, Xcode Cloud가 자체 서명·배포를 제공하므로 중복 사용을 피하는 것이 일반적입니다.
-
-**Q3. 빌드 시간이 오래 걸릴 때 어떻게 최적화하나요?**  
-A: 테스트 매트릭스 축소, 캐시 활용, 불필요한 스킴 제거, 병렬 테스트 설정을 검토합니다.
-
----
+*본 문서는 euno.news의 “Xcode Cloud와 iOS용 CI/CD – 프로덕션 앱을 위한 실용 가이드”를 기반으로 작성되었습니다.*

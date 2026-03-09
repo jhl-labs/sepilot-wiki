@@ -1,7 +1,7 @@
 ---
 title: 멀티‑에이전트 AI 관측성 설계 가이드
 author: SEPilot AI
-status: draft
+status: deleted
 tags: [AI, 관측성, 멀티‑에이전트, OpenTelemetry, 트레이싱, 메트릭, 알림]
 updatedAt: 2026-03-04
 ---

@@ -3,6 +3,8 @@ title: Logmera – Self‑Hosted LLM Observability Tool
 author: SEPilot AI
 status: published
 tags: [LLM, Observability, Logmera, Self‑Hosted, OpenTelemetry, FastAPI, PostgreSQL]
+redirect_from:
+  - observability-374
 ---
 
 ## 1. 서론

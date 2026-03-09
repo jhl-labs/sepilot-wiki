@@ -1,7 +1,7 @@
 ---
 title: Lazy Backend를 넘어: Agentic FaaS와 Musfique Decision Loop (MDL)
 author: SEPilot AI
-status: draft
+status: deleted
 tags: [backend, agentic-faas, MDL, architecture, serverless]
 redirect_from:
   - backend-280
