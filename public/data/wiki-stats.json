@@ -1,57 +1,60 @@
 {
-  "generatedAt": "2026-03-02T01:35:18.865Z",
-  "weekNumber": 10,
+  "generatedAt": "2026-03-09T01:35:09.842Z",
+  "weekNumber": 11,
   "year": 2026,
   "period": {
-    "start": "2026-02-23T01:35:05.300Z",
-    "end": "2026-03-02T01:35:05.300Z"
+    "start": "2026-03-02T01:34:53.277Z",
+    "end": "2026-03-09T01:34:53.277Z"
   },
   "documents": {
-    "total": 101,
+    "total": 172,
     "statusDistribution": {
-      "published": 59,
-      "draft": 28,
+      "published": 91,
+      "draft": 67,
       "deleted": 14
     },
-    "newCount": 50,
-    "modifiedCount": 56,
+    "newCount": 47,
+    "modifiedCount": 44,
     "publishedCount": 0
   },
   "aiActivity": {
-    "totalActions": 162,
+    "totalActions": 144,
     "byType": {
-      "quality_score": 26,
-      "generate": 50,
-      "coverage_analysis": 1,
-      "maintain": 25,
-      "modify": 56,
-      "recover": 3,
+      "maintain": 27,
+      "generate": 47,
+      "modify": 44,
+      "quality_score": 23,
+      "recover": 2,
       "status_report": 1
     },
     "entries": [
       {
-        "id": "a41fea92-c502-4a94-9cc5-4a007d8f55fc",
-        "timestamp": "2026-03-01T09:43:47.294Z",
-        "actionType": "quality_score",
-        "issueNumber": 329,
-        "issueTitle": "[Wiki Maintenance] [문서] vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
-        "documentSlug": "vite-plugin-pwa-pwa",
-        "documentTitle": "[Wiki Maintenance] [문서] vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
+        "id": "1fe9feec-01e9-4a34-9273-9c4dbfb76ae8",
+        "timestamp": "2026-03-09T00:47:17.794Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 29개 자동 적용, 21개 보류, 0개 Issue 생성",
+        "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
-        "changes": null
+        "changes": {
+          "applied": 29,
+          "skipped": 21,
+          "issues": 0
+        }
       },
       {
-        "id": "81ae0f56-f489-4925-a4ea-62e34a15c787",
-        "timestamp": "2026-03-01T09:43:36.911Z",
+        "id": "213aeb89-2ee4-46da-aa31-97671b9cc37f",
+        "timestamp": "2026-03-09T00:27:07.114Z",
         "actionType": "generate",
-        "issueNumber": 327,
-        "issueTitle": "[Wiki Maintenance] [문서] React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
-        "documentSlug": "frontend/react-query",
-        "documentTitle": "React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
-        "summary": "새 문서 \"React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스\" 생성",
+        "issueNumber": 426,
+        "issueTitle": "문서 요청 #426",
+        "documentSlug": "ai/426",
+        "documentTitle": "홈랩 AI 스택 2026 – 배포 순서와 리소스 플래닝 가이드",
+        "summary": "새 문서 \"홈랩 AI 스택 2026 – 배포 순서와 리소스 플래닝 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -60,268 +63,229 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 3431
+                "durationMs": 4470
               },
               {
                 "step": "outline",
-                "durationMs": 7506
+                "durationMs": 5969
               },
               {
                 "step": "write",
-                "durationMs": 44679
+                "durationMs": 25537
               },
               {
                 "step": "review",
-                "durationMs": 5266
+                "durationMs": 6570
               }
             ],
-            "totalDurationMs": 60882,
+            "totalDurationMs": 42547,
+            "researchSources": 10,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 1904,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "1bb31e64-a5a4-4008-8ecd-3ca40e7e9261",
+        "timestamp": "2026-03-09T00:26:20.701Z",
+        "actionType": "generate",
+        "issueNumber": 425,
+        "issueTitle": "문서 요청 #425",
+        "documentSlug": "ai/425",
+        "documentTitle": "Joy – AI 에이전트를 위한 오픈 트러스트 네트워크 가이드",
+        "summary": "새 문서 \"Joy – AI 에이전트를 위한 오픈 트러스트 네트워크 가이드\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 2955
+              },
+              {
+                "step": "outline",
+                "durationMs": 6896
+              },
+              {
+                "step": "write",
+                "durationMs": 24613
+              },
+              {
+                "step": "review",
+                "durationMs": 5646
+              }
+            ],
+            "totalDurationMs": 40110,
             "researchSources": 7,
             "tavilyUsage": {
               "apiCalls": 3,
-              "totalResults": 7
+              "totalResults": 6
             },
             "estimatedTokens": {
-              "estimated": 2872,
+              "estimated": 1858,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "8f0e08ac-93ee-49f5-92ac-330bdace2c75",
-        "timestamp": "2026-03-01T09:42:26.647Z",
-        "actionType": "generate",
-        "issueNumber": 328,
-        "issueTitle": "[Wiki Maintenance] [문서] monaco‑editor/react 기반 인라인 코드 편집기 구현 가이드",
-        "documentSlug": "frontend/monaco-editor-react",
-        "documentTitle": "monaco-editor/react 기반 인라인 코드 편집기 구현 가이드",
-        "summary": "새 문서 \"monaco-editor/react 기반 인라인 코드 편집기 구현 가이드\" 생성",
-        "trigger": "request_label",
+        "id": "ae488ee2-7f60-4b14-a73f-9c6a29fe70aa",
+        "timestamp": "2026-03-09T00:25:38.069Z",
+        "actionType": "modify",
+        "issueNumber": 424,
+        "issueTitle": " [업데이트] Anthropic‑Pentagon 논쟁 최신 상황",
+        "documentSlug": "ai/anthropic-claude-government-regulation-and-dod-pol",
+        "documentTitle": "Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (2026)",
+        "summary": "문서 수정 요청 처리: \" [업데이트] Anthropic‑Pentagon 논쟁 최신 상황\"",
+        "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 2698
-              },
-              {
-                "step": "outline",
-                "durationMs": 7065
-              },
-              {
-                "step": "write",
-                "durationMs": 35177
-              },
-              {
-                "step": "review",
-                "durationMs": 3885
-              }
-            ],
-            "totalDurationMs": 48826,
-            "researchSources": 3,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 5
-            },
-            "estimatedTokens": {
-              "estimated": 2306,
-              "method": "duration_based"
-            }
-          }
+          "additions": 31,
+          "deletions": 0
         }
       },
       {
-        "id": "4da7b711-5c81-4826-9e41-1f3c38dcf60a",
-        "timestamp": "2026-03-01T09:41:30.351Z",
-        "actionType": "generate",
-        "issueNumber": 329,
-        "issueTitle": "[Wiki Maintenance] [문서] vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
-        "documentSlug": "vite-plugin-pwa-pwa",
-        "documentTitle": "vite-plugin-pwa 로 PWA 설정 및 배포 가이드",
-        "summary": "새 문서 \"vite-plugin-pwa 로 PWA 설정 및 배포 가이드\" 생성",
-        "trigger": "request_label",
+        "id": "a1945bce-0fbf-4eac-9bb3-45378121ff97",
+        "timestamp": "2026-03-09T00:24:52.522Z",
+        "actionType": "modify",
+        "issueNumber": 423,
+        "issueTitle": " [업데이트] AI 에이전트 배포 실패 방지 – Permission Creep 방지 전략",
+        "documentSlug": "ai/ai",
+        "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+        "summary": "문서 수정 요청 처리: \" [업데이트] AI 에이전트 배포 실패 방지 – Permission Creep 방지 전략\"",
+        "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3111
-              },
-              {
-                "step": "outline",
-                "durationMs": 6874
-              },
-              {
-                "step": "write",
-                "durationMs": 21725
-              },
-              {
-                "step": "review",
-                "durationMs": 4685
-              }
-            ],
-            "totalDurationMs": 36397,
-            "researchSources": 5,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 5
-            },
-            "estimatedTokens": {
-              "estimated": 1664,
-              "method": "duration_based"
-            }
-          }
+          "additions": 54,
+          "deletions": 0
         }
       },
       {
-        "id": "bfbd8925-f753-46eb-89c8-130e81ee08c8",
-        "timestamp": "2026-03-01T09:08:50.535Z",
-        "actionType": "coverage_analysis",
+        "id": "956521b1-e4b6-4393-8354-3cca76848e80",
+        "timestamp": "2026-03-09T00:24:06.575Z",
+        "actionType": "modify",
+        "issueNumber": 422,
+        "issueTitle": " [업데이트] MCP – Model Context Protocol (Hebbian Learning & GraphRAG Extension)",
+        "documentSlug": "ai/mcp-model-context-protocol",
+        "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] MCP – Model Context Protocol (Hebbian Learning & GraphRAG Extension)\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 1,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "bb73b510-1826-4e37-b907-3309ddcc5796",
+        "timestamp": "2026-03-09T00:23:03.694Z",
+        "actionType": "maintain",
         "issueNumber": null,
-        "issueTitle": "갭 분석",
+        "issueTitle": "뉴스 인텔리전스",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "갭 분석: 10개 미문서화 주제 발견, 3건 Issue 생성",
-        "trigger": "monthly_schedule",
+        "summary": "뉴스 인텔리전스: 200건 스캔, 72건 신규, 18건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "97fd9bfd-6e41-427b-94dc-1785d70d0ad0",
-        "timestamp": "2026-03-01T09:05:08.802Z",
+        "id": "1baf9e5a-9b9e-4208-b137-57467b539588",
+        "timestamp": "2026-03-08T18:08:20.032Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 69건 신규, 19건 관련, 0건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "712520ed-cb97-4222-9e35-d2adbaca6103",
+        "timestamp": "2026-03-08T12:09:31.650Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 59건 신규, 23건 관련, 0건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "a6e0e345-e779-4d36-a71f-584c042a11e6",
+        "timestamp": "2026-03-08T09:05:29.621Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "학습 루프",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "학습 루프: 3개 패턴 감지, 2개 에이전트 개선",
+        "summary": "학습 루프: 5개 패턴 감지, 3개 에이전트 개선",
         "trigger": "weekly_schedule",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "ce62a773-31d4-464b-863a-96be05abd5a9",
-        "timestamp": "2026-03-01T03:03:46.601Z",
-        "actionType": "quality_score",
-        "issueNumber": null,
-        "issueTitle": "문서 품질 평가",
-        "documentSlug": "_quality-score",
-        "documentTitle": "문서 품질 평가",
-        "summary": "98개 문서 평가, 평균 76점, 0개 저품질",
-        "trigger": "monthly_schedule",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "54c92b2e-5710-4429-9dcf-bdb6b934d9de",
-        "timestamp": "2026-02-27T09:50:36.412Z",
-        "actionType": "quality_score",
-        "issueNumber": 321,
-        "issueTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
-        "documentSlug": "github/what-8217-s-new-with-github-copilot-coding-agent",
-        "documentTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "2a3d669f-bda0-45b2-9539-0776c3594103",
-        "timestamp": "2026-02-27T09:50:24.206Z",
-        "actionType": "quality_score",
-        "issueNumber": 322,
-        "issueTitle": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
-        "documentSlug": "docker-model-runner-brings-vllm-to-macos-with-appl",
-        "documentTitle": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "e1d6aca9-d64b-4394-8095-9f2929b51c1b",
-        "timestamp": "2026-02-27T09:50:12.676Z",
-        "actionType": "quality_score",
-        "issueNumber": 323,
-        "issueTitle": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
-        "documentSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
-        "documentTitle": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
-        "summary": "자동 품질 검토 통과 (92점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "cb0eabd4-9b0d-4043-9362-56e3ae7bb0a8",
-        "timestamp": "2026-02-27T09:50:00.635Z",
+        "id": "2ff971d7-37e0-4159-8ce8-9d995a4a94fa",
+        "timestamp": "2026-03-08T06:18:50.551Z",
         "actionType": "modify",
-        "issueNumber": 324,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요",
-        "documentSlug": "backend/wiki-api-route-guide",
-        "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요\"",
+        "issueNumber": 421,
+        "issueTitle": " [업데이트] 구조화된 블랙보딩을 통한 에이전트 루프 설계",
+        "documentSlug": "ai/ai-code-review-agent-guide",
+        "documentTitle": "AI 코드 리뷰 에이전트 구축 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] 구조화된 블랙보딩을 통한 에이전트 루프 설계\"",
         "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 2,
+          "additions": 104,
           "deletions": 0
         }
       },
       {
-        "id": "2cc95401-9d28-4f48-b4b7-c4c89ecac244",
-        "timestamp": "2026-02-27T09:48:58.388Z",
+        "id": "698c236d-0a1b-49df-be07-739694dfa386",
+        "timestamp": "2026-03-08T06:18:16.150Z",
         "actionType": "modify",
-        "issueNumber": 325,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] observability/319 문서 참조 URL 확인 필요",
-        "documentSlug": "observability/319",
-        "documentTitle": "OpenTelemetry와 Observability Warehouse: 현황과 구현 가이드",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] observability/319 문서 참조 URL 확인 필요\"",
+        "issueNumber": 420,
+        "issueTitle": " [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트",
+        "documentSlug": "ai/ollama-claude-code",
+        "documentTitle": "Ollama와 Claude Code 연결 방법",
+        "summary": "문서 수정 요청 처리: \" [업데이트] VS Code와 Ollama를 활용한 로컬 AI 코딩 어시스턴트\"",
         "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 2,
+          "additions": 27,
           "deletions": 0
         }
       },
       {
-        "id": "931bc195-8dbc-4466-8380-f51c25d64f4c",
-        "timestamp": "2026-02-27T09:48:20.921Z",
-        "actionType": "modify",
-        "issueNumber": 326,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] observability/opentelemetry 문서 참조 URL 확인 필요",
-        "documentSlug": "observability/opentelemetry",
-        "documentTitle": "OpenTelemetry 입문 – 관측성 통합 가이드",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] observability/opentelemetry 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "2919014e-5b12-480a-a30a-b4d6895dacff",
-        "timestamp": "2026-02-27T09:47:30.066Z",
+        "id": "543f2865-4d03-4442-b64d-5c48d294924b",
+        "timestamp": "2026-03-08T06:17:59.520Z",
         "actionType": "generate",
-        "issueNumber": 321,
-        "issueTitle": "[Wiki Maintenance] [요청] What&#8217;s new with GitHub Copilot coding agent",
-        "documentSlug": "github/what-8217-s-new-with-github-copilot-coding-agent",
-        "documentTitle": "What's new with GitHub Copilot coding agent",
-        "summary": "새 문서 \"What's new with GitHub Copilot coding agent\" 생성",
+        "issueNumber": 419,
+        "issueTitle": "문서 요청 #419",
+        "documentSlug": "ai/419",
+        "documentTitle": "NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드",
+        "summary": "새 문서 \"NVIDIA NIM + Pipecat 로 실시간 음성 에이전트 구축 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -330,251 +294,218 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 2797
+                "durationMs": 3446
               },
               {
                 "step": "outline",
-                "durationMs": 8366
+                "durationMs": 7892
               },
               {
                 "step": "write",
-                "durationMs": 27924
+                "durationMs": 19795
               },
               {
                 "step": "review",
-                "durationMs": 9020
+                "durationMs": 7227
               }
             ],
-            "totalDurationMs": 48107,
-            "researchSources": 7,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 2265,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "5fadf0ae-8d6a-4523-9b50-71364edc3974",
-        "timestamp": "2026-02-27T09:46:31.055Z",
-        "actionType": "generate",
-        "issueNumber": 322,
-        "issueTitle": "[Wiki Maintenance] [요청] Docker Model Runner Brings vLLM to macOS with Apple Silicon",
-        "documentSlug": "docker-model-runner-brings-vllm-to-macos-with-appl",
-        "documentTitle": "Docker Model Runner가 macOS Apple Silicon에서 vLLM을 지원합니다",
-        "summary": "새 문서 \"Docker Model Runner가 macOS Apple Silicon에서 vLLM을 지원합니다\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 6315
-              },
-              {
-                "step": "outline",
-                "durationMs": 7464
-              },
-              {
-                "step": "write",
-                "durationMs": 31121
-              },
-              {
-                "step": "review",
-                "durationMs": 14673
-              }
-            ],
-            "totalDurationMs": 59573,
-            "researchSources": 5,
+            "totalDurationMs": 38360,
+            "researchSources": 8,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 7
             },
             "estimatedTokens": {
-              "estimated": 2663,
+              "estimated": 1746,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "22716bc6-a560-4c5e-870b-f4859c2d9f0a",
-        "timestamp": "2026-02-27T09:45:16.835Z",
-        "actionType": "generate",
-        "issueNumber": 323,
-        "issueTitle": "[Wiki Maintenance] [요청] Multi-agent workflows often fail. Here’s how to engineer ones that don’t.",
-        "documentSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
-        "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
-        "summary": "새 문서 \"멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 8653
-              },
-              {
-                "step": "outline",
-                "durationMs": 18178
-              },
-              {
-                "step": "write",
-                "durationMs": 31659
-              },
-              {
-                "step": "review",
-                "durationMs": 10361
-              }
-            ],
-            "totalDurationMs": 68851,
-            "researchSources": 7,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 3010,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "0ef05436-08e7-4890-9c97-1a59f9e60e37",
-        "timestamp": "2026-02-27T09:19:47.129Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "URL 변경 감지",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "URL 변경 감지: 30개 체크, 3개 변경, 2개 깨짐, 3건 Issue",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "unknown",
-        "changes": null
-      },
-      {
-        "id": "c70969c5-070c-40d1-ae2d-b6fac261acfa",
-        "timestamp": "2026-02-27T09:19:32.175Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "트렌드 모니터링",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "트렌드 모니터링: 20건 수집, 3건 감지, 3건 Issue 생성",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "5afbac44-3b7b-4a41-a8cd-a605539c3e80",
-        "timestamp": "2026-02-26T06:30:58.736Z",
-        "actionType": "quality_score",
-        "issueNumber": 319,
-        "issueTitle": " [요청] OpenTelemetry와 Observability Warehouse 부상",
-        "documentSlug": "observability/opentelemetry-observability-warehouse",
-        "documentTitle": " [요청] OpenTelemetry와 Observability Warehouse 부상",
-        "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "679dd501-330c-412d-816a-338be9e3a001",
-        "timestamp": "2026-02-26T06:30:45.428Z",
+        "id": "fb2e2ae6-cc77-48a7-b120-92084242cd65",
+        "timestamp": "2026-03-08T06:17:18.135Z",
         "actionType": "modify",
-        "issueNumber": 318,
-        "issueTitle": " [업데이트] AI 에이전트 보안 베스트 프랙티스",
-        "documentSlug": "ai",
-        "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
-        "summary": "문서 수정 요청 처리: \" [업데이트] AI 에이전트 보안 베스트 프랙티스\"",
+        "issueNumber": 418,
+        "issueTitle": " [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구",
+        "documentSlug": "ai/claude-code",
+        "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code 컨텍스트 윈도우 모니터링 도구\"",
         "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 60,
+          "additions": 0,
+          "deletions": 125
+        }
+      },
+      {
+        "id": "00e01349-484d-42b9-b460-7ed34f786fc8",
+        "timestamp": "2026-03-08T06:16:34.822Z",
+        "actionType": "modify",
+        "issueNumber": 417,
+        "issueTitle": " [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension",
+        "documentSlug": "ai/mcp-model-context-protocol",
+        "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] Data Commons MCP on Google Cloud – Deployment & Gemini CLI Extension\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 32,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "f40d7524-0dad-47fa-b9c0-64996f27f785",
+        "timestamp": "2026-03-08T06:15:36.798Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 68건 신규, 19건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "177525e8-7e1c-4296-91a9-598d2d0131eb",
+        "timestamp": "2026-03-08T00:26:27.105Z",
+        "actionType": "modify",
+        "issueNumber": 416,
+        "issueTitle": " [업데이트] LangChain CEO가 말하는 ‘하네스 엔지니어링’ – 프로덕션 AI Agent 로드맵",
+        "documentSlug": "backend/agentic-faas-mdl",
+        "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
+        "summary": "문서 수정 요청 처리: \" [업데이트] LangChain CEO가 말하는 ‘하네스 엔지니어링’ – 프로덕션 AI Agent 로드맵\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 27,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "b23933bb-fcb7-4f10-9f70-d6c88ec20fdb",
+        "timestamp": "2026-03-08T00:25:31.158Z",
+        "actionType": "modify",
+        "issueNumber": 415,
+        "issueTitle": " [업데이트] AI Agent와 사용자 사이의 누락된 레이어 – 모니터링·로그 패턴",
+        "documentSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
+        "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] AI Agent와 사용자 사이의 누락된 레이어 – 모니터링·로그 패턴\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 21,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "d79aa586-7858-4b8d-9888-f830afa8f00e",
+        "timestamp": "2026-03-08T00:24:51.882Z",
+        "actionType": "modify",
+        "issueNumber": 414,
+        "issueTitle": " [업데이트] AI Agent Harness Engineering – 최신 베스트 프랙티스와 참고 자료",
+        "documentSlug": "backend/agentic-faas-mdl",
+        "documentTitle": "Agentic FaaS와 MDL – 차세대 백엔드 아키텍처",
+        "summary": "문서 수정 요청 처리: \" [업데이트] AI Agent Harness Engineering – 최신 베스트 프랙티스와 참고 자료\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 29,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "18df6352-f47f-47e7-a54b-acff549a2467",
+        "timestamp": "2026-03-08T00:24:06.198Z",
+        "actionType": "modify",
+        "issueNumber": 413,
+        "issueTitle": " [업데이트] Claude Code와 Spec‑Driven Development – 피해야 할 안티‑패턴",
+        "documentSlug": "ai/claude-code",
+        "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code와 Spec‑Driven Development – 피해야 할 안티‑패턴\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 77,
           "deletions": 0
         }
       }
     ]
   },
   "issues": {
-    "totalOpen": 54,
-    "recentActivity": 36
+    "totalOpen": 93,
+    "recentActivity": 39
   },
   "commits": {
-    "total": 59,
+    "total": 58,
     "entries": [
       {
-        "sha": "41ef9152",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-03-01T09:44:04Z"
-      },
-      {
-        "sha": "ffb01411",
-        "message": "📊 문서 품질 평가: 평균 76점",
-        "author": "github-actions[bot]",
-        "date": "2026-03-01T03:03:46Z"
-      },
-      {
-        "sha": "c122fa1e",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-02-27T09:50:39Z"
-      },
-      {
-        "sha": "5e233a7f",
+        "sha": "12f7510e",
         "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
         "author": "GitHub Action",
-        "date": "2026-02-26T06:33:48Z"
+        "date": "2026-03-09T00:50:52Z"
       },
       {
-        "sha": "baa56501",
-        "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
-        "author": "GitHub Action",
-        "date": "2026-02-26T06:33:47Z"
-      },
-      {
-        "sha": "d49e8d2c",
+        "sha": "b51ac78e",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-02-26T06:31:13Z"
+        "date": "2026-03-09T00:50:49Z"
       },
       {
-        "sha": "01fe123f",
-        "message": "chore: Issue Processor 실행 결과",
+        "sha": "8c0b92ba",
+        "message": "🌳 Wiki Tree Maintenance: 전체 150개의 문서가 존재합니다. 대부분은 이미 적절한 서브디렉터리에 배치돼 있으나, 루트('/')에 위치한 다수의 파일이 카테고리 규칙에 맞지 않아 이동이 필요합니다. 또한 중복된 SNKV 문서와 Ingress‑NGINX 마이그레이션 가이드가 각각 두 위치에 존재합니다. 파일명은 영문 소문자‑하이픈 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 지정하면 탐색성이 크게 향상됩니다.",
         "author": "GitHub Action",
-        "date": "2026-02-26T00:28:54Z"
+        "date": "2026-03-09T00:47:49Z"
       },
       {
-        "sha": "d3307dad",
+        "sha": "c2127bae",
         "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
         "author": "GitHub Action",
-        "date": "2026-02-26T00:25:00Z"
+        "date": "2026-03-09T00:27:07Z"
       },
       {
-        "sha": "e935272b",
+        "sha": "ef877fa3",
         "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
         "author": "GitHub Action",
-        "date": "2026-02-25T18:32:02Z"
+        "date": "2026-03-08T06:19:53Z"
       },
       {
-        "sha": "dd9f03ed",
+        "sha": "95a99061",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-02-25T18:32:00Z"
+        "date": "2026-03-08T06:19:50Z"
+      },
+      {
+        "sha": "495893fe",
+        "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
+        "author": "GitHub Action",
+        "date": "2026-03-08T06:18:50Z"
+      },
+      {
+        "sha": "35f7cd2b",
+        "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
+        "author": "GitHub Action",
+        "date": "2026-03-08T00:26:27Z"
+      },
+      {
+        "sha": "ce1c4601",
+        "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+        "author": "GitHub Action",
+        "date": "2026-03-07T18:16:43Z"
+      },
+      {
+        "sha": "3bb30e27",
+        "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
+        "author": "GitHub Action",
+        "date": "2026-03-07T18:16:41Z"
       }
     ]
   }
