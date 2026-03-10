@@ -1,6 +1,147 @@
 {
   "entries": [
     {
+      "id": "c7e3fa66-a530-4b73-ba92-a1b8ede5867b",
+      "timestamp": "2026-03-10T00:24:22.462Z",
+      "actionType": "modify",
+      "issueNumber": 457,
+      "issueTitle": " [업데이트] Claude Code Cost Management",
+      "documentSlug": "projects/claude-code-cost-management",
+      "documentTitle": "Claude Code 비용 관리와 Bifrost 활용 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code Cost Management\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 34,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "719c828b-adde-4841-8e25-7919375720b2",
+      "timestamp": "2026-03-10T00:23:50.820Z",
+      "actionType": "generate",
+      "issueNumber": 456,
+      "issueTitle": "문서 요청 #456",
+      "documentSlug": "456",
+      "documentTitle": "Agentic Web – AI‑to‑AI 대화와 Agentic FaaS 개념",
+      "summary": "새 문서 \"Agentic Web – AI‑to‑AI 대화와 Agentic FaaS 개념\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3048
+            },
+            {
+              "step": "outline",
+              "durationMs": 6860
+            },
+            {
+              "step": "write",
+              "durationMs": 16940
+            },
+            {
+              "step": "review",
+              "durationMs": 4996
+            }
+          ],
+          "totalDurationMs": 31845,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1440,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "748618d5-0b4e-4100-9029-cbb8e9bc95ad",
+      "timestamp": "2026-03-10T00:23:15.467Z",
+      "actionType": "modify",
+      "issueNumber": 455,
+      "issueTitle": " [업데이트] AI Agent Deployment Failure Prevention and Testing Strategy",
+      "documentSlug": "ai/ai",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI Agent Deployment Failure Prevention and Testing Strategy\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 34,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "716da2a6-9626-4aa6-9e7e-064aae571e67",
+      "timestamp": "2026-03-10T00:22:18.026Z",
+      "actionType": "generate",
+      "issueNumber": 454,
+      "issueTitle": "문서 요청 #454",
+      "documentSlug": "ai/454",
+      "documentTitle": "Mind Keg MCP – AI 코딩 에이전트를 위한 세션 지속 메모리 서버",
+      "summary": "새 문서 \"Mind Keg MCP – AI 코딩 에이전트를 위한 세션 지속 메모리 서버\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3319
+            },
+            {
+              "step": "outline",
+              "durationMs": 6954
+            },
+            {
+              "step": "write",
+              "durationMs": 24939
+            },
+            {
+              "step": "review",
+              "durationMs": 5910
+            }
+          ],
+          "totalDurationMs": 41123,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1891,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "1e355e29-10a2-4707-8dd8-b4304ffdb0a6",
+      "timestamp": "2026-03-10T00:21:33.654Z",
+      "actionType": "modify",
+      "issueNumber": 453,
+      "issueTitle": " [업데이트] OpenClaw Common Pitfalls and How to Avoid Them",
+      "documentSlug": "projects/openclaw-complete-guide",
+      "documentTitle": "OpenClaw 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenClaw Common Pitfalls and How to Avoid Them\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 42,
+        "deletions": 0
+      }
+    },
+    {
       "id": "6e5ed12d-c222-45ba-abd7-be7a410e7930",
       "timestamp": "2026-03-10T00:20:30.136Z",
       "actionType": "maintain",
@@ -11188,5 +11329,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-10T00:20:30.136Z"
+  "lastUpdated": "2026-03-10T00:24:22.462Z"
 }

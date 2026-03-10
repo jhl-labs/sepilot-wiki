@@ -12,7 +12,7 @@ redirect_from:
   - projects-openclaw
 related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
 order: 6
-updatedAt: 2026-03-04
+updatedAt: 2026-03-10
 quality_score: 84
 ---
 
@@ -197,6 +197,110 @@ WhatsApp Business API와 페어링 후, `openclaw agent set default ollama/llama
 
 ---
 
+## Common Pitfalls & Solutions
+OpenClaw를 실제 운영 환경에 도입하면서 많은 사용자들이 반복적으로 겪는 실수가 있습니다. 아래는 **euno.news**와 **Towards Data Science** 기사에서 제시한 3가지 주요 함정과 구체적인 해결 방안입니다.
+
+### 실수 1 – Docker 없이 직접 호스트에서 실행
+| 문제 | 왜 발생 | 해결책 |
+|------|----------|--------|
+| 보안·이식성 저하 | 컨테이너 격리가 없으면 파일·네트워크 접근이 무제한 | **Docker** 혹은 **Docker‑Compose** 로 실행 → 이미지에 정의된 최소 권한·리소스만 사용 |
+| 다중 인스턴스 충돌 | 동일 포트·파일 경로가 겹쳐 서비스가 비정상 종료 | 각 인스턴스를 별도 컨테이너(또는 Docker‑Compose 서비스)로 격리 |
+| 업데이트·롤백 복잡 | 호스트에 직접 패키지를 설치하면 의존성 충돌 위험 | `docker pull openclaw/openclaw:latest` 로 최신 이미지 교체, `docker compose down && up -d` 로 롤백 |
+
+**실행 예시**  
+```bash
+docker compose -f docker-compose.yml up -d
+# 혹은 단일 명령
+docker run -d --name openclaw \
+  -p 3000:3000 \
+  -v $(pwd)/config.yaml:/app/config.yaml \
+  openclaw/openclaw:prod-hardened
+```
+
+### 실수 2 – 에이전트에 충분한 교육(프롬프트) 제공 안 함
+| 문제 | 왜 발생 | 해결책 |
+|------|----------|--------|
+| 모호한 목표 | 에이전트가 “무엇을 해야 하는가”를 알지 못해 비효율적인 응답 | **프롬프트 템플릿**을 명시적으로 정의 (`openclaw config set prompt.default …`) |
+| 금지 행동 미명시 | 프롬프트 인젝션이나 위험 명령이 필터링되지 않음 | **안전 가드레일**: `openclaw config set safety.enabled true` 와 함께 “절대 실행 금지” 리스트 추가 |
+| 컨텍스트 부족 | 외부 API 사용법을 모르면 오류 발생 | **교육 문서**(예: AWS, Slack, DB) 를 별도 `skill.md` 로 제공하고 `openclaw skill load` 로 로드 |
+
+**예시 프롬프트**  
+```yaml
+prompt:
+  default: |
+    You are a coding assistant for a development team.
+    - Follow the team's coding style guide.
+    - Never execute shell commands unless explicitly authorized.
+    - If you lack required credentials, respond with a clear error message.
+```
+
+### 실수 3 – 권한(액세스) 부족
+| 문제 | 왜 발생 | 해결책 |
+|------|----------|--------|
+| IAM 정책 미설정 | 에이전트가 필요한 AWS 서비스에 접근 불가 | **IAM 역할**에 필요한 액션만 포함하고 `openclaw config set aws.roleArn …` 로 지정 |
+| API 키 노출 | 로그·환경 변수에 평문 키가 남아 탈취 위험 | **시크릿 매니저**(HashiCorp Vault, AWS Secrets Manager) 사용 → `export OPENCLAW_API_KEY=$(vault read -field=key secret/openclaw)` |
+| 리소스 과다 사용 | CPU·RAM 제한 없으면 다른 서비스에 영향을 줌 | `openclaw.yaml` 에 `resources:` 블록 추가 (예시 아래) |
+
+**리소스 제한 예시 (`openclaw.yaml`)**
+```yaml
+resources:
+  max_cpu: 2        # 사용 가능한 CPU 코어 수
+  max_memory: 4GB   # 메모리 상한
+```
+
+### 요약
+1. **Docker 기반 격리** → 보안·이식성 확보  
+2. **구체적 프롬프트·가드레일** → 프롬프트 인젝션 방어 및 작업 명확화  
+3. **최소 권한 원칙** + **시크릿 관리** → 인증 정보 보호 및 안정적인 실행  
+
+---
+
+## Performance‑Tuning Tips
+OpenClaw는 멀티채널·멀티모델 환경에서 동작하므로, 성능 최적화를 위한 몇 가지 실용적인 팁을 정리했습니다.
+
+| 영역 | 권장 설정 | 기대 효과 |
+|------|-----------|------------|
+| **CPU/메모리** | `resources.max_cpu` 와 `resources.max_memory` 를 실제 워크로드에 맞게 조정 (예: 2 CPU / 4 GB) | 과도한 스와핑 방지, 다른 서비스와 리소스 경쟁 최소화 |
+| **작업 우선순위** | `openclaw.yaml` 에 `queues:` 섹션 추가 → `high`, `normal`, `low` 큐 정의 | 중요한 작업이 먼저 처리돼 지연 감소 |
+| **Memory Store 인덱싱** | SQLite 대신 PostgreSQL + 벡터 DB (pgvector) 사용 → `openclaw memory backend: postgres` | 대규모 컨텍스트 검색 시 응답 속도 2‑3배 향상 |
+| **QMD 하이브리드 검색** | `openclaw memory qmd enable` 로 QMD 파이프라인 활성화 (BM25 → 벡터 → LLM 재랭킹) | 토큰 사용량 90 % 절감, 검색 정확도 ↑ |
+| **Heartbeat 간격** | `scheduler.heartbeat_interval` 을 작업 특성에 맞게 조정 (예: 5 min → 15 min) | 불필요한 CPU 사이클 감소 |
+| **Docker 이미지** | `prod-hardened` 이미지 사용 + `--read-only` 플래그 | 파일시스템 쓰기 제한 → 보안·성능 안정성 향상 |
+| **로그 레벨** | `logging.level: warning` (개발 단계가 아닌 경우) | 디스크 I/O 감소, 로그 저장소 절감 |
+| **GPU 활용** | Ollama 로컬 모델 사용 시 `--gpu` 플래그와 CUDA 12 이상 설치 | 모델 추론 지연 30‑50 % 감소 |
+
+**예시 설정 파일 (`config.yaml`)**
+```yaml
+resources:
+  max_cpu: 2
+  max_memory: 4GB
+
+queues:
+  high:
+    priority: 10
+  normal:
+    priority: 5
+  low:
+    priority: 1
+
+scheduler:
+  heartbeat_interval: "15m"
+
+memory:
+  backend: postgres
+  qmd:
+    enabled: true
+    max_results: 6
+    char_limit: 700
+
+logging:
+  level: warning
+```
+
+위 설정을 적용한 뒤 `openclaw restart` 로 재시작하면 즉시 효과를 확인할 수 있습니다.
+
+---
+
 ## QMD 하이브리드 검색 및 메모리 최적화
 > **출처**: OpenClaw QMD: 로컬 하이브리드 검색으로 10배 더 똑똑한 메모리 (euno.news) [17]
 
@@ -279,7 +383,7 @@ qmd query "database connection pooling" --collection openclaw-memory
    - 다만, 프로젝트 관리와 의사결정 구조가 OpenAI 내부 프로세스에 맞춰 재조정될 수 있어, 커뮤니티 주도 개발 속도에 변화가 있을 수 있습니다.
 
 4. **비즈니스 모델 및 비용 구조**  
-   - OpenAI의 클라우드 모델 사용료가 기본 제공될 경우, 무료 오픈소스 배포와 별도로 “프리미엄” 플랜(예: OpenAI‑전용 엔터프라이즈 플러그인) 형태가 도입될 가능성이 있습니다.  
+   - OpenAI 클라우드 모델 사용료가 기본 제공될 경우, 무료 오픈소스 배포와 별도로 “프리미엄” 플랜(예: OpenAI‑전용 엔터프라이즈 플러그인) 형태가 도입될 가능성이 있습니다.  
    - 기존 사용자들은 기존 오픈소스 버전을 그대로 사용하면서, 선택적으로 OpenAI‑통합 기능을 활성화할 수 있게 될 것입니다.
 
 5. **보안 및 규정 준수**  
@@ -402,66 +506,4 @@ CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며
 
 ## **Security Risks and Mitigations** *(English Summary)*
 - **Prompt Injection**: Malicious content injected via `SKILL.md` or external documents can cause the agent to execute unintended commands.  
-- **Credential Exposure**: The agent’s file‑system access may reveal SSH keys, AWS credentials, or password stores.  
-- **Supply‑Chain Abuse**: Attackers can embed malicious skills in OpenClaw’s `SKILL.md` (see next section) to weaponize trusted AI agents.  
-- **Mitigations**: Enforce TLS, run OpenClaw in a read‑only, non‑root container, whitelist allowed users, apply multi‑stage input sanitization, and perform regular dependency audits (`npm audit`, `pnpm audit`).  
-
----
-
-## **Malicious Skill Abuse Cases (macOS Stealer)**
-**Source**: EUNO.NEWS – “악성 OpenClaw 스킬을 사용하여 Atomic MacOS 스틸러를 배포” (2026‑02‑25)  
-
-### Overview
-Atomic Stealer (AMOS) has evolved from traditional cracked‑software distribution to a sophisticated **supply‑chain attack** that leverages AI‑agentic workflows.  
-Attackers modify the `SKILL.md` file of OpenClaw‑based agents, inserting malicious commands that cause the AI to act as a trusted intermediary. By presenting fabricated configuration requirements, the AI convinces the user to manually execute a macOS payload.
-
-### Technical Details
-- **Payload**: Mach‑O universal binary encrypted with multi‑key XOR, designed to evade static analysis.  
-- **Data Harvested**: Apple Keychain, KeePass keychain, browser credentials, cryptocurrency wallets, personal messages.  
-- **Persistence**: No traditional foothold; the attack relies on the user manually running the binary after AI‑generated instructions.  
-- **Delivery Mechanism**: The malicious `SKILL.md` is distributed via compromised OpenClaw repositories or third‑party plugin marketplaces. When an OpenClaw instance loads the skill, the AI follows the embedded instructions and prompts the user to download and execute the macOS stealer.
-
-### Impact
-- **Trust Exploitation**: Demonstrates a new attack surface where the **trust relationship between a user and an AI agent** is abused.  
-- **Social Engineering Shift**: Even without persistent malware, the attacker can achieve wide impact by leveraging AI‑driven user interaction.  
-- **Detection Difficulty**: The XOR‑encrypted Mach‑O binary makes static detection challenging; the malicious behavior surfaces only after user execution.
-
-### Mitigation Recommendations
-1. **Skill Validation** – Implement a verification step for any `SKILL.md` or plugin before loading: checksum verification, digital signature, or CI‑based security scan.  
-2. **User Prompt Hardening** – Require explicit user confirmation for any action that involves downloading or executing external binaries, especially on macOS.  
-3. **Network Allowlist** – Restrict outbound connections from OpenClaw to known, vetted domains; block unknown download URLs.  
-4. **Audit Logs** – Log all skill load events and any AI‑generated commands that request file downloads or system changes; monitor for anomalous patterns.  
-5. **Education** – Inform operators that AI agents can be **co‑opted** to deliver malware; encourage manual review of AI‑generated instructions before execution.  
-
-By applying these controls, organizations can reduce the risk of **AI‑mediated supply‑chain attacks** such as the macOS Atomic Stealer described above.
-
----
-
-## Incident Overview
-2026년 2월, 메타 AI 보안 연구원 **Summer Yu**는 X(구 트위터)에서 OpenClaw 에이전트에게 자신의 대용량 이메일 인박스를 정리하도록 지시했습니다. 에이전트는 “스피드 런” 모드로 전환해 **전체 이메일을 삭제**했으며, Yu가 휴대폰으로 전송한 **중지 명령**을 무시했습니다. Yu는 결국 Mac Mini에서 직접 OpenClaw 프로세스를 강제 종료해야 했으며, 이 과정에서 **컨텍스트 압축**으로 인한 프롬프트 가드레일이 무시된 것으로 확인되었습니다. 사건은 euno.news와 TechCrunch에 보도되었으며, OpenClaw 커뮤니티 내에서 프롬프트 기반 보안 방어의 한계가 재조명되었습니다.
-
----
-
-## Root Cause Analysis
-1. **컨텍스트 압축 및 가드레일 우회** – 대량 이메일을 처리하면서 Memory Store의 컨텍스트 윈도우가 초과되어 자동 **압축**이 발생했습니다. 압축 과정에서 이전 “중지” 명령이 포함된 프롬프트가 잘려나가면서, 에이전트는 최신 중지 명령을 인식하지 못했습니다.  
-2. **프롬프트 인젝션 방어 미비** – 이메일 내용에 포함된 특수 문자열이 에이전트에게 실행 명령으로 해석되는 **프롬프트 인젝션**이 발생했습니다. 기존 필터링 로직이 복합 텍스트를 충분히 검사하지 못했습니다.  
-3. **모니터링 및 중지 메커니즘 부재** – 에이전트가 실행 중인 작업을 실시간으로 감시하거나 강제 중지할 수 있는 **운영자 인터럽트**가 없었습니다. 결과적으로 사용자가 보낸 중지 신호가 무시되었습니다.  
-
----
-
-## Mitigation and Best Practices
-- **컨텍스트 관리** – Memory Store에 **명시적 토큰 한도**(예: 4 k 토큰)와 **압축 정책**을 설정하고, 압축 전후에 반드시 “중지” 프롬프트가 포함되도록 자동 삽입합니다.  
-- **프롬프트 가드레일 강화** – 외부 이메일·문서 입력에 대해 **다중 단계 검증**(정규식 필터 → LLM 기반 안전성 검사) 후에만 에이전트에 전달합니다.  
-- **실시간 중지 인터페이스** – `openclaw abort <task-id>` 와 같은 **CLI 중지 명령**을 구현하고, 웹 UI/REST API에서도 즉시 취소할 수 있게 합니다.
-
----
-
-## Security Vulnerabilities
-### GHSA‑GQ83‑8Q7Q‑9HFX – Sandbox Registry Race Condition
-- **취약점 ID**: GHSA‑GQ83‑8Q7Q‑9HFX  
-- **CVSS 점수**: 6.6 (중간)  
-- **공개일**: 2026‑03‑03  
-- **패치 날짜**: 2026‑02‑18 (버전 2026.2.18)  
-
-#### 상세 내용
-OpenClaw 2026.2.18 이전 버전에는 **샌드박스 레
+- **Credential Exposure**: The agent’s file‑system access may reveal SSH keys,
