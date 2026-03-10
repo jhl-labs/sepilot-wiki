@@ -1,6 +1,147 @@
 {
   "entries": [
     {
+      "id": "2de989c0-0708-4e9b-b192-967b42b876c0",
+      "timestamp": "2026-03-10T12:19:14.341Z",
+      "actionType": "generate",
+      "issueNumber": 473,
+      "issueTitle": "문서 요청 #473",
+      "documentSlug": "473",
+      "documentTitle": "Zero‑Friction Human‑in‑the‑Loop Agentic Publishing Pipeline with Notion MCP",
+      "summary": "새 문서 \"Zero‑Friction Human‑in‑the‑Loop Agentic Publishing Pipeline with Notion MCP\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3691
+            },
+            {
+              "step": "outline",
+              "durationMs": 10166
+            },
+            {
+              "step": "write",
+              "durationMs": 22819
+            },
+            {
+              "step": "review",
+              "durationMs": 5612
+            }
+          ],
+          "totalDurationMs": 42288,
+          "researchSources": 11,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1930,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "8f3024c3-6a79-43ad-b2e1-0b2ef29174cd",
+      "timestamp": "2026-03-10T12:18:29.444Z",
+      "actionType": "modify",
+      "issueNumber": 472,
+      "issueTitle": " [업데이트] Git‑Native Memory Layer (agent‑soul) for Persistent AI Agent State",
+      "documentSlug": "ai/persistent-memory-for-ai-coding-agents-introducing",
+      "documentTitle": "Persistent Memory for AI Coding Agents – Introducing Mind Keg MCP",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Git‑Native Memory Layer (agent‑soul) for Persistent AI Agent State\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 75,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "68913a86-0fc3-486e-8363-d26a757e1cf0",
+      "timestamp": "2026-03-10T12:17:30.986Z",
+      "actionType": "modify",
+      "issueNumber": 471,
+      "issueTitle": " [업데이트] Vibe Coding Community Spotlight – 60‑Year‑Old Developer Story",
+      "documentSlug": "ai/vibe-coding",
+      "documentTitle": "바이브 코딩이란?",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Vibe Coding Community Spotlight – 60‑Year‑Old Developer Story\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 17,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "f54a981c-9932-4d4c-a8fc-e57d1dd24165",
+      "timestamp": "2026-03-10T12:16:15.083Z",
+      "actionType": "generate",
+      "issueNumber": 470,
+      "issueTitle": "문서 요청 #470",
+      "documentSlug": "470",
+      "documentTitle": "AI 콜드 스타트가 Kubernetes Autoscaling을 무력화할 때의 해결 가이드",
+      "summary": "새 문서 \"AI 콜드 스타트가 Kubernetes Autoscaling을 무력화할 때의 해결 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2892
+            },
+            {
+              "step": "outline",
+              "durationMs": 11907
+            },
+            {
+              "step": "write",
+              "durationMs": 26724
+            },
+            {
+              "step": "review",
+              "durationMs": 8071
+            }
+          ],
+          "totalDurationMs": 49594,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2335,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "e5fbad48-7120-4550-b703-d6b762d52891",
+      "timestamp": "2026-03-10T12:15:19.675Z",
+      "actionType": "modify",
+      "issueNumber": 469,
+      "issueTitle": " [업데이트] MCP Authorization: Server‑Side Enforcement & Token Scopes",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP Authorization: Server‑Side Enforcement & Token Scopes\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 31,
+        "deletions": 0
+      }
+    },
+    {
       "id": "bc78c06d-8b7c-482f-8263-b5dd848978d8",
       "timestamp": "2026-03-10T12:13:49.899Z",
       "actionType": "maintain",
@@ -11872,5 +12013,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-10T12:13:49.899Z"
+  "lastUpdated": "2026-03-10T12:19:14.341Z"
 }
