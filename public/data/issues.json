@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 458,
-      "number": 458,
-      "title": " [요청] FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/faq-agentic-ai-security-threats-your-top-questions-f4ab10)\n**관련도**: 88/100\n**핵심 토픽**: Agentic AI security, Threat modeling, AI agent governance\n\n## 뉴스 요약\n작성자: TIAMAT | 조직: ENERGENAI LLC | 유형: FAQ | URL: FAQ: Agentic AI Security Threats — Answers to Your Top Questions TIAMAT는 340개 이상의 에이전트 배포를 분석했습니다 i...\n\n## 상세 내용\nSource: Dev.to\nQ1: “에이전트 AI”란 무엇이며 왜 신경 써야 할까요?\nA: 에이전트 AI는 단계 사이에 인간의 승인을 받지 않고 다단계 행동을 수행하는 자율 시스템입니다.\n예시:\n고객 서비스 챗봇\nDevOps 자동화 봇\n코드 리뷰 어시스턴트\n왜 신경 써야 하냐면 배포된 에이전트의 94 %가 권한 과다 (TIAMAT 분석)하기 때문입니다. 이들은 의도된 범위를 훨씬 넘어서는 데이터에 접근하거나 행동을 트리거할 수 있습니다. 만약 침해당하면 가장 위험한 내부 위협이 됩니다.\n예시: 사용자를 삭제할 수 있는 고객 지원 챗봇, 혹은 외부 서버로 데이터를 내보낼 수 있는 데이터 파이프라인 에이전트.\nQ2: What are the “7 attack vectors” TIAMAT identified?\nA:\nPrompt Injection – 에이전트 메모리나 컨텍스트에 악의적인 명령을 삽입한다.\nAdversarial Examples – 모델을 잘못된 행동으로 유도하는 입력을 만든다.\nTool Abuse – 에이전트가 위험한 API/데이터베이스에 과도한 권한으로 접근한다.\nMulti‑Agent Coordination Attacks – 여러 에이전트가 단일 공격을 증폭시킨다.\nShadow AI – 보안 검토 없이 배포된 승인되지 않은 에이전트.\nModel Weight Exfiltration – 에이전트를 속여 가중치·학습 데이터를 유출하게 한다.\nMemory Exfiltration – 에이전트의 지속 메모리를 읽어 (시간이 지남에 따라 비밀이 축적되는) 정보를 탈취한다.\nMost common: Tool abuse (현재 67 % 탐지율).\nMost dangerous: Multi‑agent coordination (탐지율 8 % – 거의 잡히지 않음).\nQ3: 실제 에이전트 공격 사례를 제시해 주실 수 있나요?\nA: 네. Cornell’s Morris II 취약점 (2026년 1월):\n1. Agent conversation history: \"User salary i\n\n## 판단 근거\n기존 문서들은 Agentic AI 보안을 다루지만 FAQ 형식의 Q&A와 최신 통계(94 % 과다 권한) 등 구체적인 내용이 없으므로 별도 문서가 필요함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 459,
+      "number": 459,
+      "title": "문서 요청 #459",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,18 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-10T06:22:45.919Z",
-      "updated_at": "2026-03-10T06:22:45.924Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/458",
-      "documentSlug": "faq-agentic-ai",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/faq-agentic-ai.md",
+      "created_at": "2026-03-10T06:18:45.215Z",
+      "updated_at": "2026-03-10T06:18:45.219Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/459",
+      "documentSlug": "ai/459",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/459.md",
       "comments": 0
     },
     {
-      "id": 459,
-      "number": 459,
-      "title": " [요청] Claude 대화 기록 저장·검색 가이드 – AI 코딩 어시스턴트 세션 복원 방법",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-just-want-to-look-up-what-i-asked-claude-last-tu-72daef)\n**관련도**: 88/100\n**핵심 토픽**: Claude, AI 코딩 어시스턴트, 대화 기록 검색\n\n## 뉴스 요약\n문제: AI 코딩 어시스턴트를 사용하는 모든 개발자는 이런 순간을 겪는다: &gt; “잠깐, 지난주에 그 auth bug를 어떻게 고쳤지? Claude와 45분 동안 작업했었는데…”\n\n## 상세 내용\nSource: Dev.to\nThe Problem\nAI 코딩 어시스턴트를 사용하는 모든 개발자에게는 이런 순간이 있습니다:\n“잠깐, 지난주에 그 인증 버그를 어떻게 고쳤지? Claude와 45분을 보냈는데…”\n터미널 히스토리를 열어보면 – 쓸모없고. git 로그를 확인하면 – 커밋 메시지만 보이고. 실제 대화—시도한 프롬프트, 추론, 각 단계별 코드 상태—는 사라져 버립니다.\n우리는 매주 수십 번의 AI 코딩 세션을 생성하는데, 그 안에는 귀중한 컨텍스트가 담겨 있습니다:\n실제로 작동한 정확한 프롬프트(그리고 작동하지 않은 프롬프트)\n왜 접근법 B를 선택했는지, A가 아닌 이유\n최종 솔루션 이전의 중간 코드 상태\n돌파구를 만든 터미널 출력\n하지만 이를 되돌아가서 살펴볼 좋은 방법이 없습니다.\n브라우저 히스토리에는 “claude.ai”가 47번 나타납니다. 도움이 되긴 하지만 충분하지 않죠.\n저는 화려한 워크플로우 툴이나 “코딩 프로세스를 변형”하고 싶지는 않았습니다. 단지 다음을 원했습니다:\nWebSocket 재연결 문제를 디버깅한 세션 찾기\n사용한 정확한 프롬프트 보기\n대화 중 각 단계의 코드를 살펴보기\n그게 전부입니다: AI 코딩 세션을 위한 히스토리 뷰어—브라우저 히스토리처럼, 하지만 실제로 유용한.\nFindings from Tracking Sessions\n두 주 동안 이를 추적한 결과 다음을 발견했습니다:\n주 3–4회 이전 AI 세션을 참조하고 싶었습니다\n각 회당 ~20분을 컨텍스트를 재구성하는 데 소비\n주당 1–1.5 시간을 이미 해결한 문제를 다시 프롬프트하는 데 낭비\n이를 5명 개발자 팀에 적용하면 매주 전체 근무일 1일을 잃는 셈입니다.\nWhat Really Matters\n다양한 접근 방식을 실험한 결과, 핵심 기능은 다음과 같습니다:\n검색 가능한 대화 – 단순 전체 텍스트 검색이 아니라 문제, 수정한 파일, 사용한 도구별로 세션을 찾을 수 있어야 함.\n각 단계별 코드 상태 – 세션을 재생할 때 메시지 #5 시점의 코드를 볼 수 있어야 하며, 최종\n\n## 판단 근거\nClaude 사용 시 대화·프롬프트·코드 상태를 보관하는 방법이 현재 문서에 포함되지 않아 독립적인 가이드가 유용함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 458,
+      "number": 458,
+      "title": "문서 요청 #458",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -55,11 +55,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-10T06:21:38.891Z",
-      "updated_at": "2026-03-10T06:21:38.896Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/459",
-      "documentSlug": "ai/claude-ai",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/claude-ai.md",
+      "created_at": "2026-03-10T06:18:08.610Z",
+      "updated_at": "2026-03-10T06:18:08.615Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/458",
+      "documentSlug": "458",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/458.md",
       "comments": 0
     },
     {
@@ -3761,5 +3761,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-10T06:22:45.924Z"
+  "lastUpdated": "2026-03-10T06:18:45.219Z"
 }
