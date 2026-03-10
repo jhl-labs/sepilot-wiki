@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "id": "03edbbbe-4ea7-4195-b489-62c447fc8d8b",
+      "timestamp": "2026-03-10T18:18:09.892Z",
+      "actionType": "generate",
+      "issueNumber": 474,
+      "issueTitle": "문서 요청 #474",
+      "documentSlug": "ai/474",
+      "documentTitle": "온‑디바이스 함수 호출을 위한 FunctionGemma와 Google AI Edge Gallery 가이드",
+      "summary": "새 문서 \"온‑디바이스 함수 호출을 위한 FunctionGemma와 Google AI Edge Gallery 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5445
+            },
+            {
+              "step": "outline",
+              "durationMs": 4148
+            },
+            {
+              "step": "write",
+              "durationMs": 19691
+            },
+            {
+              "step": "review",
+              "durationMs": 6205
+            }
+          ],
+          "totalDurationMs": 35489,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1502,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "d9b6431a-ee94-4886-ad51-963e19aa1045",
       "timestamp": "2026-03-10T18:17:29.952Z",
       "actionType": "maintain",
@@ -12027,5 +12072,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-10T18:17:29.952Z"
+  "lastUpdated": "2026-03-10T18:18:09.892Z"
 }
