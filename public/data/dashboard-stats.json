@@ -1,43 +1,73 @@
 {
-  "collectedAt": "2026-03-10T17:49:22.604Z",
+  "collectedAt": "2026-03-10T18:50:24.678Z",
   "overview": {
-    "totalDocuments": 187,
-    "publishedDocuments": 94,
-    "draftDocuments": 93,
-    "openRequests": 107,
+    "totalDocuments": 192,
+    "publishedDocuments": 96,
+    "draftDocuments": 96,
+    "openRequests": 108,
     "closedRequests": 19,
-    "totalAIActions": 509
+    "totalAIActions": 512
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 3,
+      "documentsCreated": 2,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 6,
+      "tavilyResults": 18,
+      "estimatedTokens": 3085,
+      "totalPipelineDurationMs": 70288
     },
     "last24h": {
-      "aiActions": 41,
+      "aiActions": 38,
       "documentsCreated": 13,
-      "documentsModified": 16,
+      "documentsModified": 13,
       "tavilyApiCalls": 39,
-      "tavilyResults": 104,
-      "estimatedTokens": 25329,
-      "totalPipelineDurationMs": 565514
+      "tavilyResults": 106,
+      "estimatedTokens": 23057,
+      "totalPipelineDurationMs": 520333
     },
     "last7d": {
-      "aiActions": 182,
-      "documentsCreated": 60,
+      "aiActions": 185,
+      "documentsCreated": 62,
       "documentsModified": 63,
-      "tavilyApiCalls": 180,
-      "tavilyResults": 470,
-      "estimatedTokens": 132279,
-      "totalPipelineDurationMs": 2913112
+      "tavilyApiCalls": 186,
+      "tavilyResults": 488,
+      "estimatedTokens": 135364,
+      "totalPipelineDurationMs": 2983400
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-10T18:20:01.661Z",
+      "actionType": "generate",
+      "issueNumber": 474,
+      "documentTitle": "Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 34799,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1583
+    },
+    {
+      "timestamp": "2026-03-10T18:18:09.892Z",
+      "actionType": "generate",
+      "issueNumber": 474,
+      "documentTitle": "온‑디바이스 함수 호출을 위한 FunctionGemma와 Google AI Edge Gallery 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 35489,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1502
+    },
+    {
+      "timestamp": "2026-03-10T18:17:29.952Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-10T12:19:14.341Z",
       "actionType": "generate",
@@ -207,43 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-10T06:21:18.385Z",
-      "actionType": "modify",
-      "issueNumber": 462,
-      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-10T06:20:25.334Z",
-      "actionType": "modify",
-      "issueNumber": 461,
-      "documentTitle": "바이브 코딩이란?",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-10T06:19:37.502Z",
-      "actionType": "modify",
-      "issueNumber": 460,
-      "documentTitle": "Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 496,
-      "totalEstimatedTokens": 332617,
-      "avgDurationMs": 52243
+      "totalActions": 499,
+      "totalEstimatedTokens": 335702,
+      "avgDurationMs": 52002
     },
     "unknown": {
       "totalActions": 13,
