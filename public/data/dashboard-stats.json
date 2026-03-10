@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-10T08:48:58.292Z",
+  "collectedAt": "2026-03-10T09:49:22.391Z",
   "overview": {
     "totalDocuments": 181,
     "publishedDocuments": 92,
     "draftDocuments": 89,
     "openRequests": 102,
     "closedRequests": 19,
-    "totalAIActions": 492
+    "totalAIActions": 494
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 30,
+      "aiActions": 32,
       "documentsCreated": 10,
       "documentsModified": 13,
       "tavilyApiCalls": 30,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 437139
     },
     "last7d": {
-      "aiActions": 176,
-      "documentsCreated": 58,
-      "documentsModified": 60,
-      "tavilyApiCalls": 174,
-      "tavilyResults": 456,
-      "estimatedTokens": 127870,
-      "totalPipelineDurationMs": 2826931
+      "aiActions": 169,
+      "documentsCreated": 55,
+      "documentsModified": 57,
+      "tavilyApiCalls": 165,
+      "tavilyResults": 429,
+      "estimatedTokens": 122400,
+      "totalPipelineDurationMs": 2689417
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-10T09:20:52.739Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-10T09:20:41.673Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-10T06:21:18.385Z",
       "actionType": "modify",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-09T18:23:29.987Z",
-      "actionType": "generate",
-      "issueNumber": 441,
-      "documentTitle": "React 18 Concurrent Rendering 및 Suspense 기반 선언형 데이터 페칭 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 79997,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3770
-    },
-    {
-      "timestamp": "2026-03-09T18:22:07.518Z",
-      "actionType": "modify",
-      "issueNumber": 440,
-      "documentTitle": "AI 코드 리뷰 에이전트 구축 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 480,
-      "totalEstimatedTokens": 322738,
-      "avgDurationMs": 52521
-    },
     "unknown": {
-      "totalActions": 12,
+      "totalActions": 13,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 481,
+      "totalEstimatedTokens": 322738,
+      "avgDurationMs": 52521
     }
   }
 }
