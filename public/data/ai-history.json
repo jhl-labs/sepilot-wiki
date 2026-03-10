@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "75f6a930-5ef7-4891-a444-621b41c2475e",
+      "timestamp": "2026-03-10T12:21:24.047Z",
+      "actionType": "quality_score",
+      "issueNumber": 470,
+      "issueTitle": " [요청] AI Cold‑Start Impact on Kubernetes Autoscaling",
+      "documentSlug": "ai-cold-start-impact-on-kubernetes-autoscaling",
+      "documentTitle": " [요청] AI Cold‑Start Impact on Kubernetes Autoscaling",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "d30de8b1-1977-4978-a498-8a6b59bd6f1d",
+      "timestamp": "2026-03-10T12:21:10.772Z",
+      "actionType": "quality_score",
+      "issueNumber": 473,
+      "issueTitle": " [요청] Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)",
+      "documentSlug": "human-in-the-loop-agentic-cms-on-notion-mcp-based-",
+      "documentTitle": " [요청] Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "19822cf9-d372-4436-a0ed-ee2df934cafd",
+      "timestamp": "2026-03-10T12:20:51.661Z",
+      "actionType": "generate",
+      "issueNumber": 470,
+      "issueTitle": " [요청] AI Cold‑Start Impact on Kubernetes Autoscaling",
+      "documentSlug": "ai-cold-start-impact-on-kubernetes-autoscaling",
+      "documentTitle": "AI 콜드‑스타트가 Kubernetes Autoscaling에 미치는 영향",
+      "summary": "새 문서 \"AI 콜드‑스타트가 Kubernetes Autoscaling에 미치는 영향\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3151
+            },
+            {
+              "step": "outline",
+              "durationMs": 11354
+            },
+            {
+              "step": "write",
+              "durationMs": 26726
+            },
+            {
+              "step": "review",
+              "durationMs": 6797
+            }
+          ],
+          "totalDurationMs": 48028,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 2244,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "1bb9e58d-f41d-4f3f-8f42-e78245d72b27",
+      "timestamp": "2026-03-10T12:19:21.940Z",
+      "actionType": "generate",
+      "issueNumber": 473,
+      "issueTitle": " [요청] Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)",
+      "documentSlug": "human-in-the-loop-agentic-cms-on-notion-mcp-based-",
+      "documentTitle": "Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)",
+      "summary": "새 문서 \"Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5695
+            },
+            {
+              "step": "outline",
+              "durationMs": 9660
+            },
+            {
+              "step": "write",
+              "durationMs": 24773
+            },
+            {
+              "step": "review",
+              "durationMs": 7236
+            }
+          ],
+          "totalDurationMs": 47366,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2084,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "bc78c06d-8b7c-482f-8263-b5dd848978d8",
       "timestamp": "2026-03-10T12:13:49.899Z",
       "actionType": "maintain",
@@ -11872,5 +11990,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-10T12:13:49.899Z"
+  "lastUpdated": "2026-03-10T12:21:24.047Z"
 }
