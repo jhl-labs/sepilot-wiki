@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 470,
-      "number": 470,
-      "title": " [요청] AI Cold‑Start Impact on Kubernetes Autoscaling",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-ai-cold-start-that-breaks-kubernetes-autoscali-77ecde)\n**관련도**: 85/100\n**핵심 토픽**: AI cold‑start, Kubernetes autoscaling, 리소스 프로비저닝\n\n## 뉴스 요약\n표지 이미지: “Kubernetes Autoscaling을 깨는 AI 콜드 스타트” https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto\n\n## 상세 내용\nSource: Dev.to\n오토스케일링은 일반적으로 마이크로‑서비스에 대해 매우 잘 작동합니다.\nWhen traffic increases, Kubernetes spins up new pods and they begin serving requests within seconds. 하지만 AI 추론 시스템은 매우 다르게 동작합니다.\nWhile exploring an inference setup recently, something strange appeared in the metrics. Users were experiencing slow responses and growing request queues, yet the autoscaler had already created more pods.\nEven more confusing: GPU 노드가 사용 가능했지만 아직 유용한 작업을 수행하고 있지 않았습니다.\nThe root cause was 모델 콜드‑스타트 time.\n왜 자동 스케일링이 마이크로‑서비스에 효과적인가\n일반적인 자동 스케일링 워크플로우\n대부분의 서비스는 다음만 필요합니다:\n런타임 시작\n애플리케이션 코드 로드\n데이터베이스 연결\n시작 시간은 보통 몇 초에 불과합니다.\n왜 AI 추론 서비스는 다르게 동작할까\nAI 컨테이너는 훨씬 무거운 초기화 과정을 필요로 합니다. 파드가 요청을 서비스하기 전에 보통 다음을 수행해야 합니다:\n모델 가중치 로드\nGPU 메모리 할당\n가중치를 GPU로 이동\nCUDA 런타임 초기화\n토크나이저 또는 전처리 파이프라인 초기화\n대형 모델의 경우 이 과정에 수십 초에서 몇 분까지 걸릴 수 있습니다.\n예시 모델 초기화\nfrom transformers import AutoModelForCausalLM, AutoTokenizer\nimport torch\nmodel_name = \"meta-llama/Llama-7b\"\ntokenizer = AutoTokenizer.from_pretrained(model_name)\nmodel = AutoModelForC\n\n## 판단 근거\nAI 추론 워크로드의 초기 로드 타임이 자동 스케일링 메트릭을 왜곡한다는 새로운 현상이 기존 Kubernetes 문서에 다루어지지 않음. 독립적인 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 473,
+      "number": 473,
+      "title": "문서 요청 #473",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,18 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-10T12:20:51.663Z",
-      "updated_at": "2026-03-10T12:20:51.669Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/470",
-      "documentSlug": "ai-cold-start-impact-on-kubernetes-autoscaling",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai-cold-start-impact-on-kubernetes-autoscaling.md",
+      "created_at": "2026-03-10T12:19:14.343Z",
+      "updated_at": "2026-03-10T12:19:14.348Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/473",
+      "documentSlug": "473",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/473.md",
       "comments": 0
     },
     {
-      "id": 473,
-      "number": 473,
-      "title": " [요청] Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/zero-friction-publishing-a-human-in-the-loop-agent-a23a0d)\n**관련도**: 75/100\n**핵심 토픽**: Human‑in‑the‑Loop, Agentic CMS, Notion MCP\n\n## 뉴스 요약\n이것은 Notion MCP 챌린지에 대한 제출물입니다 https://dev.to/challenges/notion-2026-03-04\n\n## 상세 내용\nSource: Dev.to\n이것은 Notion MCP Challenge 에 대한 제출물입니다\nWhat I Built\nMe: Notion MCP 챌린지에 제출하려고 합니다. 아래 워크플로가 좋은 지원서가 될까요?\nClaude: 강력한 제출 아이디어입니다! 평가 기준에 어떻게 부합하는지 살펴볼게요…\nMe: 아래 템플릿을 사용해 제출물을 초안으로 만들고 notion-mcp-challenge.md 파일명으로 Notion 데이터베이스에 저장해 주세요.\nClaude: 먼저 Notion 워크스페이스에서 퍼블리싱 데이터베이스를 찾아 저장하겠습니다…\n(Claude가 Notion MCP를 사용해 데이터베이스에 연결)\n완료! 초기 초안이 바로 Notion CMS에 저장되었습니다.\n이 실제 대화가 이 프로젝트 전체—그리고 여러분이 지금 읽고 있는 기사—가 시작된 순간입니다.\nAI가 즉시 콘텐츠를 생성할 수 있지만, 높은 품질, 개인적인 목소리, 엄격한 포맷을 유지하려면 “Human‑in‑the‑loop” 접근이 필요합니다. 저는 인간 창작자와 AI 오케스트레이터가 협업하는 Zero‑Friction Agentic Publishing Pipeline을 구축했습니다. 이 파이프라인은 Notion을 협업형 헤드리스 CMS로 전환합니다.\n여러 탭을 오가며 포맷을 수동으로 변환하거나 Git 명령어를 다루는 대신, 이 워크플로를 통해 저는 전적으로 지시와 편집에 집중할 수 있습니다. AI 에이전트(Claude)와 대화만 하면 데이터베이스 관리, 파일 변환, 버전 관리 등을 Notion MCP를 통해 자동으로 처리해 줍니다.\nArchitecture\nThe Process\nPhaseDescription\nDirector Phase (1)자연어로 아이디어를 시작합니다.\nDrafting Phase (2)AI 오케스트레이터가 초기 초안을 생성하고, title, filename, 메타데이터와 같은 속성을 매핑하여 Notion MCP를 통해 구조화된 Notion 데이터베이스에 바로 저장합니다.\nRefineme\n\n## 판단 근거\nNotion MCP 챌린지 제출물은 기존 문서와 직접적인 연관이 없으며, Human‑in‑the‑Loop CMS 개념을 다루는 별도 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 470,
+      "number": 470,
+      "title": "문서 요청 #470",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -55,11 +55,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-10T12:19:21.944Z",
-      "updated_at": "2026-03-10T12:19:21.948Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/473",
-      "documentSlug": "human-in-the-loop-agentic-cms-on-notion-mcp-based-",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/human-in-the-loop-agentic-cms-on-notion-mcp-based-.md",
+      "created_at": "2026-03-10T12:16:15.085Z",
+      "updated_at": "2026-03-10T12:16:15.089Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/470",
+      "documentSlug": "470",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/470.md",
       "comments": 0
     },
     {
@@ -3916,5 +3916,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-10T12:20:51.669Z"
+  "lastUpdated": "2026-03-10T12:19:14.348Z"
 }

@@ -3,6 +3,7 @@ title: Persistent Memory for AI Coding Agents – Introducing Mind Keg MCP
 author: SEPilot AI
 status: published
 tags: [AI, Coding Agents, Persistent Memory, Mind Keg MCP, TypeScript, SQLite, ONNX]
+updatedAt: 2026-03-10
 ---
 
 ## 개요
@@ -21,7 +22,79 @@ tags: [AI, Coding Agents, Persistent Memory, Mind Keg MCP, TypeScript, SQLite, O
 | **세션 간 컨텍스트 소실** | 매 실행 시 에이전트가 이전에 학습한 디버깅 패턴·설계 결정 등을 기억하지 못한다. |
 | **반복 작업 비효율** | 동일한 코드 리뷰·디버깅을 매번 처음부터 수행해야 하며, 시간·인적 비용이 증가한다. |
 | **오류 발생 가능성** | 이전에 발견한 버그를 재현하지 못해 동일한 실수를 반복한다. |
-| **기존 도구 동작 방식** | Claude Code, Cursor, Windsurf 등은 기본적으로 **무상태**(stateless) 세션을 제공한다. (euno.news)  
+| **기존 도구 동작 방식** | Claude Code, Cursor, Windsurf 등은 기본적으로 **무상태**(stateless) 세션을 제공한다. (euno.news) |
+
+## Problem Statement – limitations of existing memory solutions
+- **유료 API 의존**: 대부분의 현재 메모리 레이어는 OpenAI, Anthropic 등 외부 LLM API에 비용을 지불해야 하며, 사용량이 늘어날수록 비용이 급증한다.  
+- **중앙 집중형 저장소**: 데이터가 클라우드 서버에 보관돼 프라이버시·보안 위험이 존재한다.  
+- **단일 모델 종속**: 특정 임베딩 모델에 고정돼 있어 다른 LLM으로 전환 시 재구축이 필요하다.  
+- **감사·버전 관리 부재**: 메모리 변경 이력이 Git처럼 추적되지 않아 언제, 누가, 어떤 정보를 추가·수정했는지 확인하기 어렵다.  
+
+이러한 문제점을 해결하기 위해 **Git‑native 메모리 레이어**인 **agent‑soul**이 등장했다.  
+
+## agent‑soul Architecture Overview
+```
+┌─────────────────────────────────────────────────────────┐
+│                    agent-soul repo                      │
+│                                                         │
+│  sources//YYYY-MM-DD.ndjson   ← append‑only   │
+│      event stream (what happened)                       │
+│                                                         │
+│  canonical/                            ← compiled by CI│
+│    profile.md          ← who the user is               │
+│    stable-memory.md   ← durable facts                  │
+│    conflicts.md       ← detected contradictions       │
+└─────────────────────────────────────────────────────────┘
+```
+
+- **Append‑only 이벤트 소싱**: 모든 메모리 변경은 `sources/*.ndjson` 파일에 JSON 이벤트 형태로 기록되고 Git 커밋으로 보존된다.  
+- **Supersedes 필드**: 기존 사실이 바뀔 경우 새로운 이벤트가 이전 이벤트를 `supersedes` 로 참조해 이력 보존과 최신 상태 유지가 동시에 가능하다.  
+- **컴파일러 (GitHub Actions)**: `sources/`에 푸시가 발생하면 CI 파이프라인이 이벤트를 집계·정제해 `canonical/`에 Markdown 파일을 생성한다. 에이전트는 세션 시작 시 이 파일들을 읽어 시스템 프롬프트에 삽입한다.  
+- **멀티‑에이전트 동기화**: 여러 OS·LLM(예: Windows Claude, macOS Claude)에서 동일 레포를 `git pull` 하면 동일한 메모리를 공유한다.  
+- **충돌 감지**: Jaccard 유사도를 활용해 상충되는 이벤트를 `conflicts.md`에 기록한다.  
+
+| 특징 | agent‑soul | 기존 메모리 솔루션 |
+|------|------------|-------------------|
+| 비용 | 무료 (GitHub 저장소만 사용) | 월 요금·API 사용량 비용 |
+| 데이터 소유권 | 사용자 개인 레포 | 서비스 제공자 서버 |
+| 모델 중립성 | 모든 LLM과 호환 | 특정 임베딩 모델에 종속 |
+| 감사 로그 | Git 커밋·diff·grep | 제한적 또는 없음 |
+| 오프라인 지원 | 가능 (레포 복제) | 대부분 클라우드 전용 |
+
+## Setup & Usage Guide (agent‑soul)
+1. **레포 포크**  
+   ```bash
+   git clone https://github.com/your-username/agent-soul.git
+   cd agent-soul
+   ```
+2. **퍼소나 파일 채우기**  
+   - `SOUL.md`, `IDENTITY.md`, `USER.md`, `VOICE.md` 등 네 개의 기본 파일에 자신의 선호도·프로필을 기록한다.  
+3. **GitHub Actions 활성화**  
+   - 포크한 레포의 **Settings → Actions** 에서 워크플로 실행을 허용한다.  
+4. **이벤트 추가** (예시)  
+   ```bash
+   python scripts/add_event.py \
+     --source windows-claude \
+     --kind preference \
+     --scope stable \
+     --summary "User prefers explicit TypeScript types over inferred generics."
+   ```
+   - 커밋 후 푸시하면 CI가 자동으로 `canonical/`에 `stable-memory.md` 등을 재생성한다.  
+5. **에이전트와 연동**  
+   - 각 AI 코딩 에이전트의 시스템 프롬프트에 `canonical/` 디렉터리의 Markdown 파일을 포함하도록 설정한다.  
+   - 예: Claude Code 실행 시 `--system-prompt "$(cat ~/.agent-soul/canonical/stable-memory.md)"` 옵션 사용.  
+6. **동기화**  
+   - 다른 머신·플랫폼에서 동일 레포를 `git pull` 하면 최신 메모리를 즉시 사용할 수 있다.  
+
+### 주요 명령 요약
+| 명령 | 목적 |
+|------|------|
+| `python scripts/add_event.py …` | 새로운 메모리 이벤트를 `sources/`에 추가 |
+| `git push` | 이벤트를 원격 레포에 전송 → CI가 컴파일 |
+| `git pull` | 다른 에이전트가 최신 메모리 가져오기 |
+| `cat canonical/stable-memory.md` | 현재 지속 메모리 내용 확인 |
+
+> “무료 – 유료 API나 월 요금이 없음 / 프라이빗 – 모든 데이터가 내 GitHub 저장소에 존재 / 모델‑중립 – 어떤 LLM에도 동작” — [euno.news]  
 
 ## Mind Keg MCP 소개
 - **오픈소스 메모리 서버**: AI 에이전트가 “원자적 학습”(Atomic Learn) 단위로 지식을 저장하고, 다음 세션에서 의미 검색을 통해 재활용한다.  
@@ -116,8 +189,9 @@ tags: [AI, Coding Agents, Persistent Memory, Mind Keg MCP, TypeScript, SQLite, O
 | 솔루션 | 저장소 | 의미 검색 | 인증·권한 | 온프레미스 여부 |
 |--------|--------|-----------|-----------|-----------------|
 | **Mind Keg MCP** | SQLite | ONNX 로컬 임베딩 | API 키 기반 | 완전 로컬 |
-| **memctl** (GitHub) | DuckDB + LanceDB | (언급 없음) | API 키·프로젝트 정책 | 클라우드 MCP 서버 (cloud) — 온프레미스 옵션은 별도 설정 필요) |
+| **memctl** (GitHub) | DuckDB + LanceDB | (언급 없음) | API 키·프로젝트 정책 | 클라우드 MCP 서버 (cloud) — 온프레미스 옵션은 별도 설정 필요 |
 | **agent‑recall** | SQLite (frames.db) | (언급 없음) | 로컬 파일 기반 | 로컬 전용 |
+| **agent‑soul** | Git (append‑only JSON) | GitHub Actions 로 컴파일된 Markdown (검색은 파일 grep/CI) | GitHub 레포 권한 | 완전 로컬/프라이빗 GitHub |
 
 > memctl 소개는 [memctl GitHub](https://github.com/memctl/memctl) 에서 확인 가능.  
 
@@ -144,7 +218,8 @@ A: SQLite 인덱스와 ONNX 임베딩의 경량성 덕분에 수십만 레코드
 - **커뮤니티** – Discord 채널 `#mindkeg-mcp`, Reddit `r/mcp` (사용자 질문·플러그인 공유)  
 - **관련 프로젝트**  
   - **memctl** – <https://github.com/memctl/memctl>  
-  - **agent‑recall** – <https://github.com/mnardit/agent-recall>  
+  - **agent‑recall** – <https://github.com/mnrdit/agent-recall>  
+  - **agent‑soul** – <https://euno.news/posts/ko/i-built-a-free-git-native-memory-layer-for-ai-agen-7b514f>  
 
 ---  
 
