@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "e35706d1-397b-4e0c-a495-f3e7d524eb9e",
+      "timestamp": "2026-03-10T06:23:19.080Z",
+      "actionType": "quality_score",
+      "issueNumber": 458,
+      "issueTitle": " [요청] FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
+      "documentSlug": "faq-agentic-ai",
+      "documentTitle": " [요청] FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "c39b1018-243c-4e49-8b4d-55b5a4952df6",
+      "timestamp": "2026-03-10T06:23:03.070Z",
+      "actionType": "quality_score",
+      "issueNumber": 459,
+      "issueTitle": " [요청] Claude 대화 기록 저장·검색 가이드 – AI 코딩 어시스턴트 세션 복원 방법",
+      "documentSlug": "ai/claude-ai",
+      "documentTitle": " [요청] Claude 대화 기록 저장·검색 가이드 – AI 코딩 어시스턴트 세션 복원 방법",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "23519a81-deeb-4327-8af8-31327d6dfaea",
+      "timestamp": "2026-03-10T06:22:45.916Z",
+      "actionType": "generate",
+      "issueNumber": 458,
+      "issueTitle": " [요청] FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
+      "documentSlug": "faq-agentic-ai",
+      "documentTitle": "FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
+      "summary": "새 문서 \"FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3595
+            },
+            {
+              "step": "outline",
+              "durationMs": 6912
+            },
+            {
+              "step": "write",
+              "durationMs": 28271
+            },
+            {
+              "step": "review",
+              "durationMs": 6379
+            }
+          ],
+          "totalDurationMs": 45157,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2079,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "eda30041-3281-4045-bbaf-addac397005f",
+      "timestamp": "2026-03-10T06:21:38.889Z",
+      "actionType": "generate",
+      "issueNumber": 459,
+      "issueTitle": " [요청] Claude 대화 기록 저장·검색 가이드 – AI 코딩 어시스턴트 세션 복원 방법",
+      "documentSlug": "ai/claude-ai",
+      "documentTitle": "Claude 대화 기록 저장·검색 가이드 – AI 코딩 어시스턴트 세션 복원 방법",
+      "summary": "새 문서 \"Claude 대화 기록 저장·검색 가이드 – AI 코딩 어시스턴트 세션 복원 방법\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3975
+            },
+            {
+              "step": "outline",
+              "durationMs": 8764
+            },
+            {
+              "step": "write",
+              "durationMs": 23917
+            },
+            {
+              "step": "review",
+              "durationMs": 7466
+            }
+          ],
+          "totalDurationMs": 44122,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2007,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "177c607f-c4c2-4334-8f8a-125dc1c251d9",
       "timestamp": "2026-03-10T06:17:25.548Z",
       "actionType": "maintain",
@@ -11461,5 +11579,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-10T06:17:25.548Z"
+  "lastUpdated": "2026-03-10T06:23:19.080Z"
 }
