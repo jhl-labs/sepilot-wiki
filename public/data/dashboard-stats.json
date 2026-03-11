@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-11T09:49:07.205Z",
+  "collectedAt": "2026-03-11T10:49:20.538Z",
   "overview": {
     "totalDocuments": 197,
     "publishedDocuments": 97,
     "draftDocuments": 100,
-    "openRequests": 112,
+    "openRequests": 115,
     "closedRequests": 19,
-    "totalAIActions": 530
+    "totalAIActions": 536
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,85 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 30,
-      "documentsCreated": 10,
+      "aiActions": 33,
+      "documentsCreated": 13,
       "documentsModified": 9,
-      "tavilyApiCalls": 30,
-      "tavilyResults": 83,
-      "estimatedTokens": 21096,
-      "totalPipelineDurationMs": 471271
+      "tavilyApiCalls": 39,
+      "tavilyResults": 108,
+      "estimatedTokens": 30583,
+      "totalPipelineDurationMs": 695331
     },
     "last7d": {
-      "aiActions": 179,
-      "documentsCreated": 56,
+      "aiActions": 185,
+      "documentsCreated": 59,
       "documentsModified": 68,
-      "tavilyApiCalls": 168,
-      "tavilyResults": 443,
-      "estimatedTokens": 119788,
-      "totalPipelineDurationMs": 2649057
+      "tavilyApiCalls": 177,
+      "tavilyResults": 468,
+      "estimatedTokens": 129275,
+      "totalPipelineDurationMs": 2873117
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-11T09:49:55.895Z",
+      "actionType": "quality_score",
+      "issueNumber": 485,
+      "documentTitle": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-11T09:49:43.878Z",
+      "actionType": "quality_score",
+      "issueNumber": 486,
+      "documentTitle": "[Wiki Maintenance] [요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-11T09:49:32.907Z",
+      "actionType": "quality_score",
+      "issueNumber": 487,
+      "documentTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-11T09:49:18.352Z",
+      "actionType": "generate",
+      "issueNumber": 485,
+      "documentTitle": "AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 75651,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3539
+    },
+    {
+      "timestamp": "2026-03-11T09:47:44.557Z",
+      "actionType": "generate",
+      "issueNumber": 486,
+      "documentTitle": "AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 84598,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3161
+    },
+    {
+      "timestamp": "2026-03-11T09:45:44.362Z",
+      "actionType": "generate",
+      "issueNumber": 487,
+      "documentTitle": "멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 63811,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2787
+    },
     {
       "timestamp": "2026-03-11T09:19:42.746Z",
       "actionType": "maintain",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T00:23:18.524Z",
-      "actionType": "generate",
-      "issueNumber": 477,
-      "documentTitle": "AI‑augmented SDLC와 생산성 파라독스 – 변화하는 병목 현상 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 50506,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2171
-    },
-    {
-      "timestamp": "2026-03-11T00:22:24.868Z",
-      "actionType": "modify",
-      "issueNumber": 476,
-      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T00:21:25.010Z",
-      "actionType": "generate",
-      "issueNumber": 475,
-      "documentTitle": "GitHub Secret Scanning 2026년 3월 업데이트 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 32206,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1427
-    },
-    {
-      "timestamp": "2026-03-11T00:20:48.236Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-10T18:20:01.661Z",
-      "actionType": "generate",
-      "issueNumber": 474,
-      "documentTitle": "Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 34799,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1583
-    },
-    {
-      "timestamp": "2026-03-10T18:18:09.892Z",
-      "actionType": "generate",
-      "issueNumber": 474,
-      "documentTitle": "온‑디바이스 함수 호출을 위한 FunctionGemma와 Google AI Edge Gallery 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 35489,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1502
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 517,
-      "totalEstimatedTokens": 349448,
-      "avgDurationMs": 51982
+      "totalActions": 523,
+      "totalEstimatedTokens": 358935,
+      "avgDurationMs": 52433
     },
     "unknown": {
       "totalActions": 13,
