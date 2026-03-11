@@ -239,7 +239,7 @@ prompt:
 |------|----------|--------|
 | IAM 정책 미설정 | 에이전트가 필요한 AWS 서비스에 접근 불가 | **IAM 역할**에 필요한 액션만 포함하고 `openclaw config set aws.roleArn …` 로 지정 |
 | API 키 노출 | 로그·환경 변수에 평문 키가 남아 탈취 위험 | **시크릿 매니저**(HashiCorp Vault, AWS Secrets Manager) 사용 → `export OPENCLAW_API_KEY=$(vault read -field=key secret/openclaw)` |
-| 리소스 과다 사용 | CPU·RAM 제한 없으면 다른 서비스에 영향을 줌 | `openclaw.yaml` 에 `resources:` 블록 추가 (예시 아래) |
+| 리소스 과다 사용 | CPU·RAM 제한 없으면 다른 서비스에 영향 줌 | `openclaw.yaml` 에 `resources:` 블록 추가 (예시 아래) |
 
 **리소스 제한 예시 (`openclaw.yaml`)**
 ```yaml
@@ -475,7 +475,7 @@ qmd query "database connection pooling" --collection openclaw-memory
 
 ## Impact of OpenAI Acquisition on OpenClaw Ecosystem
 1. **전략적 방향 전환**  
-   OpenAI의 인수는 OpenClaw가 단순히 커뮤니티 주도 프로젝트에서 OpenAI 제품 포트폴리오에 포함되는 전략적 자산으로 변모함을 의미합니다. 향후 OpenClaw는 OpenAI의 에이전트형 AI 로드맵에 맞춰 기능 로드맵이 조정될 가능성이 높습니다.
+   OpenAI의 인수는 OpenClaw가 단순 커뮤니티 주도 프로젝트에서 OpenAI 제품 포트폴리오에 포함되는 전략적 자산으로 변모함을 의미합니다. 향후 OpenClaw는 OpenAI의 에이전트형 AI 로드맵에 맞춰 기능 로드맵이 조정될 가능성이 높습니다.
 
 2. **통합 및 호환성 강화**  
    - OpenAI 클라우드 모델(GPT‑4o, Claude 등)과의 네이티브 연동이 보다 원활해질 것으로 예상됩니다.  
@@ -523,4 +523,89 @@ services:
     read_only: true                          # 파일시스템 읽기 전용
     user: "1001:1001"                        # 비루트 사용자
     environment:
-      - OPENCLAW_GATEWAY_PASSWORD_FILE=/
+      - OPENCLAW_GATEWAY_PASSWORD_FILE=/run/secrets/gateway_password
+      - OPENCLAW_DISABLE_MDNS=true          # mDNS 비활성화 (보안 강화)
+      - OPENCLAW_EGRESS_ALLOWLIST=api.minimax.chat,api.anthropic.com
+    secrets:
+      - gateway_password
+    networks:
+      - openclaw-isolated
+    tmpfs:
+      - /tmp                                 # 휘발성 임시 저장소, 영구 디스크에 기록되지 않음
+
+networks:
+  openclaw-isolated:
+    driver: bridge
+
+secrets:
+  gateway_password:
+    file: ./secrets/gateway_password.txt
+```
+
+**핵심 포인트**
+
+1. **`runtime: runsc`** – gVisor를 사용해 마이크로‑VM 격리를 활성화.  
+2. **`read_only: true`** – 컨테이너 파일시스템을 읽기 전용으로 설정해 루트킷 위험 차단.  
+3. **비루트 사용자** (`user: "1001:1001"`) – 프로세스가 루트 권한을 갖지 않음.  
+4. **네트워크 격리** – 전용 브리지 네트워크(`openclaw-isolated`)를 사용해 외부와 직접 연결되지 않도록 함.  
+5. **시크릿 관리** – Docker secret을 통해 인증 정보를 파일 시스템에 평문으로 남기지 않음.  
+
+Docker Hardened Images에 대한 자세한 내용은 Docker Blog(2025‑12‑17)에서 확인할 수 있습니다 [16].
+
+---
+
+## Secure Run‑time Checklist
+OpenClaw를 Docker Sandbox에서 운영할 때 확인해야 할 보안 체크리스트입니다.
+
+- [ ] **Hardened Image 사용** – `openclaw/openclaw:prod-hardened`와 같이 Docker가 제공하는 Hardened 베이스 이미지 선택  
+- [ ] **마이크로‑VM 격리 활성화** – `runtime: runsc` (gVisor) 혹은 `runtime: kata-runtime` 등 경량 VM 사용  
+- [ ] **읽기 전용 파일시스템** – `read_only: true` 옵션 적용  
+- [ ] **비루트 사용자 실행** – `user: "1001:1001"` 등 비특권 UID/GID 지정  
+- [ ] **시크릿 관리** – Docker secret 또는 환경 변수 암호화(`OPENCLAW_GATEWAY_PASSWORD_FILE`) 사용  
+- [ ] **네트워크 제한** – 전용 내부 네트워크 사용, 외부 egress는 `OPENCLAW_EGRESS_ALLOWLIST` 로 허용된 도메인만  
+- [ ] **mDNS 비활성화** – `OPENCLAW_DISABLE_MDNS=true` 로 로컬 서비스 탐색 차단 (불필요한 서비스 노출 방지)  
+- [ ] **정기 이미지 스캔** – `docker scan` 혹은 `trivy` 로 이미지 취약점 검사 수행  
+- [ ] **보안 업데이트 자동 적용** – `docker pull` 주기적 실행 및 재배포 자동화  
+- [ ] **로그 및 감사** – 컨테이너 로그를 중앙 로그 시스템(ELK, Loki 등)으로 전송하고, API 호출 패턴을 모니터링  
+
+이 체크리스트는 Docker Hardened Images와 마이크로‑VM 격리 가이드라인을 종합한 것으로, 실제 운영 환경에 맞게 추가적인 방어 계층을 적용하는 것이 권장됩니다.
+
+---
+
+## 보안 위험 및 완화 방안
+CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며 OpenClaw의 보안 위험을 경고했습니다 [14].
+
+### 주요 위협 벡터
+
+| 위협 | 설명 |
+|------|------|
+| **프롬프트 인젝션** (직접 및 간접) | 외부 콘텐츠(이메일, 웹 페이지, 문서) 내 악의적 명령이 에이전트 동작을 탈취 |
+| **자격 증명 탈취** | 파일 시스템 접근을 통해 `~/.ssh/`, `~/.aws/`, `~/.gnupg/` 등 민감 파일 노출 |
+| **에이전트 기반 측면 이동** | 침해된 에이전트가 정당 도구 권한을 이용해 시스템 간 이동 |
+| **대규모 노출** | 135K+ 개의 OpenClaw 인스턴스가 공개적으로 노출, 다수가 암호화되지 않은 HTTP 사용 |
+
+### 완화 전략
+
+| 영역 | 조치 | 상세 |
+|------|------|------|
+| **네트워크** | HTTPS 강제 | 모든 인스턴스에 TLS 적용, HTTP 접근 차단 |
+| **파일 시스템** | 샌드박스 격리 | Docker 컨테이너 또는 firejail 로 파일 시스템 접근 제한 |
+| **자격 증명** | 전용 사용자 계정 | 최소 권한 원칙 적용, 민감 디렉터리 마운트 제외 |
+| **프롬프트** | 입력 검증 | 외부 콘텐츠 처리 전 프롬프트 인젝션 필터링 적용 |
+| **모니터링** | 이상 탐지 | 에이전트 API 호출 패턴 모니터링, 비정상 접근 즉시 차단 |
+| **공급망** | 의존성 감사 | `npm audit` / `pnpm audit` 정기 실행, lockfile 무결성 검증 |
+
+### 보안 체크리스트
+- [ ] OpenClaw를 전용 사용자 계정(비root)으로 실행  
+- [ ] Docker 컨테이너 내 `--read-only` 플래그와 함께 실행  
+- [ ] `~/.ssh`, `~/.aws` 등 민감 디렉터리를 마운트에서 제외  
+- [ ] 모든 외부 통신에 HTTPS 적용  
+- [ ] Allowlist 로 허용된 사용자만 접근 허가  
+- [ ] 정기적인 의존성 보안 감사 수행  
+
+*출처: CrowdStrike "What Security Teams Need to Know About OpenClaw", euno.news (2026‑02‑22) [14]*  
+
+---
+
+## **Security Risks and Mitigations** *(English Summary)*
+- **Prompt Injection**: Malicious content injected via `SKILL
