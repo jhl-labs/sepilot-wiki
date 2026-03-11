@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-11T08:49:09.789Z",
+  "collectedAt": "2026-03-11T09:49:07.205Z",
   "overview": {
     "totalDocuments": 197,
     "publishedDocuments": 97,
     "draftDocuments": 100,
     "openRequests": 112,
     "closedRequests": 19,
-    "totalAIActions": 528
+    "totalAIActions": 530
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,45 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 36,
-      "documentsCreated": 13,
-      "documentsModified": 12,
-      "tavilyApiCalls": 39,
-      "tavilyResults": 110,
-      "estimatedTokens": 26710,
-      "totalPipelineDurationMs": 603084
+      "aiActions": 30,
+      "documentsCreated": 10,
+      "documentsModified": 9,
+      "tavilyApiCalls": 30,
+      "tavilyResults": 83,
+      "estimatedTokens": 21096,
+      "totalPipelineDurationMs": 471271
     },
     "last7d": {
-      "aiActions": 185,
-      "documentsCreated": 59,
+      "aiActions": 179,
+      "documentsCreated": 56,
       "documentsModified": 68,
-      "tavilyApiCalls": 177,
-      "tavilyResults": 467,
-      "estimatedTokens": 128298,
-      "totalPipelineDurationMs": 2831762
+      "tavilyApiCalls": 168,
+      "tavilyResults": 443,
+      "estimatedTokens": 119788,
+      "totalPipelineDurationMs": 2649057
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-11T09:19:42.746Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "콘텐츠 리뷰",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-11T09:18:18.400Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "지식 확장 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-11T06:24:22.874Z",
       "actionType": "generate",
@@ -217,31 +237,11 @@
       "durationMs": 35489,
       "tavilyApiCalls": 3,
       "estimatedTokens": 1502
-    },
-    {
-      "timestamp": "2026-03-10T18:17:29.952Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-10T12:19:14.341Z",
-      "actionType": "generate",
-      "issueNumber": 473,
-      "documentTitle": "Zero‑Friction Human‑in‑the‑Loop Agentic Publishing Pipeline with Notion MCP",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 42288,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1930
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 515,
+      "totalActions": 517,
       "totalEstimatedTokens": 349448,
       "avgDurationMs": 51982
     },
