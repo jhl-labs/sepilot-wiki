@@ -1,18 +1,18 @@
 {
-  "collectedAt": "2026-03-11T17:49:47.159Z",
+  "collectedAt": "2026-03-11T18:50:24.393Z",
   "overview": {
-    "totalDocuments": 203,
-    "publishedDocuments": 101,
-    "draftDocuments": 102,
+    "totalDocuments": 205,
+    "publishedDocuments": 102,
+    "draftDocuments": 103,
     "openRequests": 116,
     "closedRequests": 19,
-    "totalAIActions": 542
+    "totalAIActions": 545
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 3,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
@@ -20,24 +20,54 @@
     },
     "last24h": {
       "aiActions": 33,
-      "documentsCreated": 12,
-      "documentsModified": 10,
-      "tavilyApiCalls": 36,
-      "tavilyResults": 100,
-      "estimatedTokens": 28984,
-      "totalPipelineDurationMs": 659813
+      "documentsCreated": 10,
+      "documentsModified": 11,
+      "tavilyApiCalls": 30,
+      "tavilyResults": 82,
+      "estimatedTokens": 25899,
+      "totalPipelineDurationMs": 589525
     },
     "last7d": {
-      "aiActions": 185,
-      "documentsCreated": 58,
-      "documentsModified": 69,
-      "tavilyApiCalls": 174,
-      "tavilyResults": 458,
-      "estimatedTokens": 126058,
-      "totalPipelineDurationMs": 2804804
+      "aiActions": 182,
+      "documentsCreated": 56,
+      "documentsModified": 67,
+      "tavilyApiCalls": 168,
+      "tavilyResults": 444,
+      "estimatedTokens": 122530,
+      "totalPipelineDurationMs": 2726074
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-11T18:21:57.400Z",
+      "actionType": "quality_score",
+      "issueNumber": 474,
+      "documentTitle": " [요청] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-11T18:20:35.535Z",
+      "actionType": "modify",
+      "issueNumber": 493,
+      "documentTitle": "Google AI Pro 활용 실전 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-11T18:19:29.605Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-11T12:21:49.375Z",
       "actionType": "modify",
@@ -207,41 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T06:20:58.947Z",
-      "actionType": "modify",
-      "issueNumber": 481,
-      "documentTitle": "Google AI Pro 활용 실전 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T06:20:06.166Z",
-      "actionType": "modify",
-      "issueNumber": 480,
-      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T06:19:21.773Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 529,
+      "totalActions": 532,
       "totalEstimatedTokens": 361601,
       "avgDurationMs": 52459
     },
