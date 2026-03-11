@@ -1,63 +1,105 @@
 {
-  "generatedAt": "2026-03-04T09:16:08.027Z",
+  "generatedAt": "2026-03-11T09:18:18.397Z",
   "graph": {
-    "totalPublished": 66,
-    "tags": 287,
+    "totalPublished": 108,
+    "tags": 458,
     "categories": {
-      "root": 10,
-      "reports": 1,
       "backend": 2,
-      "observability": 2,
+      "root": 6,
+      "observability": 4,
       "github": 1,
-      "security": 3,
-      "kubernetes": 5,
-      "docker": 4,
-      "projects": 10,
+      "security": 13,
+      "kubernetes": 8,
+      "docker": 8,
+      "projects": 17,
       "bun": 3,
-      "ai": 20,
-      "frontend": 2,
+      "ai": 35,
+      "frontend": 5,
+      "devops": 3,
       "cloud": 1,
       "meta": 2
     },
     "orphanDocs": [
-      "vite-plugin-pwa-pwa",
-      "reports/weekly-2026-10",
-      "from-idea-to-pull-request-a-practical-guide-to-bui",
-      "agentbus-ai-rest-api",
       "backend/agentic-faas-mdl",
-      "what-8217-s-new-with-github-copilot-coding-agent",
+      "ai-cold-start-impact-on-kubernetes-autoscaling",
+      "observability/2026-vigilops-zabbix-prometheus-grafana-datadog",
+      "observability/logmera-self-hosted-llm-observability-tool",
       "observability/opentelemetry",
       "observability/opentelemetry-observability-warehouse",
-      "docker-model-runner-brings-vllm-to-macos-with-appl",
       "github/what-8217-s-new-with-github-copilot-coding-agent",
-      "jira-ai-agents-integrating-generative-ai-into-proj",
+      "security/2026-vps",
+      "security/ai-slopsquatting",
+      "security/microsoft-patch-tuesday-2026-03-cve",
+      "security/github-secret-scanning-pattern-updates-march-2026",
+      "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana",
       "security/wordpress-vulnerability-triaging-playbook-2026",
       "security/devsecops",
+      "security/cve-2026-27574-oneuptime-probe-vm-rce",
+      "security/under-the-hood-security-architecture-of-github-age",
       "security/serv-u-15-5",
+      "security/ios-exploit-kit-coruna-lockdown-mode",
+      "security/shinobi-scan-secret-scanning-cli",
+      "security/sql-injection-union",
+      "kubernetes/kubernetes",
+      "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b",
+      "kubernetes/before-you-migrate-ingress-nginx",
       "docker/gordon-ai-agent-update",
+      "docker/docker-model-runner-macos-vllm-support",
+      "docker/docker-model-runner-macos-vllm",
+      "docker/announcing-docker-hardened-system-packages",
+      "docker/docker-zfs",
       "docker/open-webui-docker-model-runner-self-hosted-llm-dep",
       "docker/run-openclaw-securely-in-docker-sandboxes",
       "docker/hardened-images",
-      "projects/emdash",
+      "projects/robopocket-ar",
+      "projects/nvidia-nim",
+      "projects/viscat",
+      "projects/github-copilot-coding-agent",
       "projects/enterprise-gitops-implementation",
+      "projects/jira-ai-agents",
+      "projects/agentbus-rest-api",
       "projects/rust-gpu-face-crop-tool",
-      "before-you-migrate-five-surprising-ingress-nginx-b",
+      "projects/neuroskill-bci-ai",
+      "projects/github-copilot-cli-guide",
+      "announcing-the-ai-gateway-working-group",
       "telegram-based-access-layer-authentication-with-oi",
+      "ai/fastapi-ai-api",
+      "ai/tensorflow-2-21-litert",
+      "ai/joy-open-trust-network-for-ai-agents",
+      "ai/ai-4",
+      "ai/claude-code",
+      "ai/claude-ai",
       "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork",
+      "ai/ai-driven-sdlc-bottlenecks-causes-and-mitigations",
       "ai/skydiscover-open-source-framework-for-llm-driven-a",
       "ai/fine-tuning-functiongemma-on-google-tpu-with-tunix",
       "ai/ai-llm-2017-2026",
       "ai/ollama-claude-code",
+      "ai/gemini-code-assist-finish-changes-outlines",
+      "ai/ai-2024-2026",
       "ai/adaptive-merging-of-lora-modules-lora",
+      "ai/ai-rfp",
+      "ai/agentic-web-enabling-ai-to-ai-interactions",
       "ai/ai-productivity-paradox-why-developer-throughput-m",
+      "ai/persistent-memory-for-ai-coding-agents-introducing",
       "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
+      "ai/claude-marketplace",
       "ai/openai-pentagon-contract-revision-and-policy-impli",
+      "ai/guardian-protocol-ai",
       "ai/semantic-layer-importance-and-implementation-guide",
       "ai/anthropic-claude-government-regulation-and-dod-pol",
+      "ai/kubernetes-ai-gitops",
       "ai",
+      "frontend/vite-plugin-pwa-pwa",
+      "frontend/webp",
+      "frontend/react-19",
       "frontend/monaco-editor-react",
-      "meta/weekly-2026-09",
-      "kubernetes-ai-gitops"
+      "faq-agentic-ai",
+      "devops/github-copilot-ci-cd",
+      "devops/search-architecture-high-availability",
+      "devops/shared-workflows-for-node-js-backend-and-aws-deplo",
+      "human-in-the-loop-agentic-cms-on-notion-mcp-based-",
+      "meta/weekly-2026-09"
     ],
     "weakConnections": [
       "backend/wiki-api-route-guide",
@@ -318,122 +360,122 @@
   },
   "suggestions": [
     {
-      "topic": "GitHub Copilot을 CI/CD 파이프라인에 통합하는 방법 – 자동 코드 리뷰·보안 스캔",
+      "topic": "AI 프롬프트 엔지니어링 보안 가이드",
       "category": "ai",
-      "reason": "‘GitHub Copilot’과 ‘CI/CD’ 태그가 자주 등장하지만, Copilot을 실제 배포 파이프라인에 적용하는 구체적인 가이드가 부재합니다.",
-      "suggestedTitle": "[요청] GitHub Copilot CI/CD 통합 가이드",
+      "reason": "‘보안’과 ‘프롬프트 엔지니어링’ 태그가 빈번히 등장하지만, 프롬프트 수준에서의 위협 모델링·완화 방법을 다룬 전용 문서가 없음. AI 에이전트 보안 베스트 프랙티스와 연계해 실무 적용 지침을 제공해야 함.",
+      "suggestedTitle": "[요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
       "relatedExisting": [
-        "from-idea-to-pull-request-github-copilot-cli-practical-guide",
-        "whats-new-with-github-copilot-coding-agent",
-        "automate-repository-tasks-with-github-agentic-workflows"
+        "AI 에이전트 보안 베스트 프랙티스",
+        "FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
+        "AI 사용 제어 및 거버넌스를 위한 RFP 템플릿"
       ],
       "priority": "high"
     },
     {
-      "topic": "멀티‑에이전트 AI 시스템을 위한 관측성 설계 – 트레이싱·메트릭·알림",
+      "topic": "AI 코드 어시스턴트를 위한 CI/CD 파이프라인 패턴",
       "category": "ai",
-      "reason": "‘AI’, ‘에이전트’, ‘관측성’ 키워드가 빈번히 언급되지만, 에이전트 간 호출 흐름을 추적·모니터링하는 방법이 문서화되지 않았습니다.",
-      "suggestedTitle": "[요청] 멀티‑에이전트 AI 관측성 가이드",
+      "reason": "‘CI/CD’, ‘AI 코드 어시스턴트’, ‘GitHub Copilot’ 태그가 많이 등장하지만, AI 코딩 에이전트를 CI/CD에 안전하게 통합하는 구체적인 패턴·예제가 부족함.",
+      "suggestedTitle": "[요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
       "relatedExisting": [
-        "open-telemetry-입문-관측성-통합-가이드",
-        "observability-warehouse-부상",
-        "멀티‑에이전트-워크플로우-신뢰성-엔지니어링-가이드"
+        "GitHub Copilot CI/CD 통합 가이드",
+        "Automate Repository Tasks with GitHub Agentic Workflows",
+        "AI‑Driven SDLC Bottlenecks: Causes and Mitigations"
       ],
       "priority": "high"
     },
     {
-      "topic": "2024‑2026 AI 에이전트 종합 비교 – OpenClaw, Claude Cowork, Claude Code, Gemini, Gemini 3.1 Pro 등",
+      "topic": "멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
       "category": "ai",
-      "reason": "‘AI Agent Comparison’ 문서는 2026년 버전만 존재하고, 최신 에이전트와 성능·가격·보안 측면을 포괄적으로 정리한 최신 비교가 필요합니다.",
-      "suggestedTitle": "[요청] 최신 AI 에이전트 비교 분석 (2024‑2026)",
+      "reason": "‘멀티 에이전트’, ‘Self‑Healing’ 태그가 자주 등장하지만, 실제 워크플로우 설계·구현 패턴을 다룬 문서가 부족. 관측성·오케스트레이션과 연결해 약한 연결 문서를 강화.",
+      "suggestedTitle": "[요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
       "relatedExisting": [
-        "2026-ai-agent-comparison-openclaw-vs-claude-cowork-vs-claude-code",
-        "openclaw-완벽-가이드",
-        "claude-code-릴리즈-히스토리-상세-가이드"
+        "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
+        "Agentic Web: Enabling AI‑to‑AI Interactions",
+        "AI 에이전트 보안 베스트 프랙티스"
       ],
       "priority": "high"
     },
     {
-      "topic": "AI‑생성 코드 보안 스캐닝 – 정적 분석·시크릿 탐지·CI/CD 연동 방법",
-      "category": "ai",
-      "reason": "‘AI’, ‘보안’, ‘CI/CD’ 태그가 자주 등장하지만, AI가 만든 코드에 특화된 보안 스캐너와 파이프라인 연동 가이드가 없습니다.",
-      "suggestedTitle": "[요청] AI‑생성 코드 보안 스캐닝 및 CI/CD 연동 가이드",
-      "relatedExisting": [
-        "ai-에이전트-보안-베스트-프랙티스",
-        "devsecops-자동화-역설-파이프라인-보안-취약점-생성-메커니즘",
-        "github-copilot-coding-agent"
-      ],
-      "priority": "high"
-    },
-    {
-      "topic": "Argo CD 기반 LLM GitOps 워크플로우 – 쿠버네티스에 대규모 언어 모델 지속 배포",
+      "topic": "GitOps 기반 AI 모델 배포 자동화 (ArgoCD + Kustomize)",
       "category": "kubernetes",
-      "reason": "‘Kubernetes’, ‘GitOps’, ‘AI 모델’ 태그가 조합된 문서가 하나뿐이며, Argo CD를 이용한 구체적인 LLM 배포 파이프라인이 부족합니다.",
-      "suggestedTitle": "[요청] Argo CD 로 LLM GitOps 구현 가이드",
+      "reason": "‘GitOps’, ‘AI 모델’, ‘Kubernetes’ 태그가 자주 등장하지만, ArgoCD와 Kustomize를 활용한 구체적인 자동화 파이프라인 예시가 부족. 기존 ‘Kubernetes에서 AI 모델 GitOps 구현 가이드’를 보완.",
+      "suggestedTitle": "[요청] GitOps 로 AI 모델 배포 자동화 – ArgoCD + Kustomize 실전 가이드",
       "relatedExisting": [
-        "kubernetes-에서-ai-모델-gitops-구현-가이드",
-        "kubernetes-버전별-릴리즈-노트",
-        "node-readiness-controller"
+        "Kubernetes에서 AI 모델 GitOps 구현 가이드",
+        "Enterprise GitOps Implementation – From CI/CD to Continuous Delivery at Scale",
+        "Shared Workflows for Node.js Backend and AWS Deployments"
       ],
-      "priority": "medium"
+      "priority": "high"
     },
     {
-      "topic": "Apple Silicon macOS에서 Docker Model Runner 로 LLM 추론 최적화 – 성능 튜닝 가이드",
+      "topic": "LLM 관측성 도구 비교 및 선택 가이드",
       "category": "ai",
-      "reason": "‘Docker Model Runner’, ‘Apple Silicon’, ‘LLM Inference’가 언급되지만, 실제 성능 비교와 튜닝 팁이 없는 고수요 주제입니다.",
-      "suggestedTitle": "[요청] macOS Apple Silicon 에서 Docker Model Runner 로 LLM 추론 최적화",
+      "reason": "‘Observability’, ‘LLM’, ‘OpenTelemetry’ 태그가 자주 사용되지만, LLM 전용 관측성 솔루션을 비교·선택하는 문서가 부재. 기존 Logmera, OpenTelemetry 입문 등을 보완함.",
+      "suggestedTitle": "[요청] LLM 관측성 도구 비교 – OpenTelemetry, Logmera, Vector, 기타 솔루션",
       "relatedExisting": [
-        "docker-model-runner-macos-apple-silicon-vllm-support",
-        "open-webui-docker-model-runner-self-hosted-llm-deployment-guide",
-        "gordon-docker-전용-ai-에이전트-업데이트-가이드"
+        "Logmera – Self‑Hosted LLM Observability Tool",
+        "OpenTelemetry 입문 – 관측성 통합 가이드",
+        "OpenTelemetry와 Observability Warehouse 부상"
       ],
       "priority": "medium"
     },
     {
-      "topic": "cgroup v2 마이그레이션 체크리스트 – Kubernetes 클러스터 리소스 관리 전환 가이드",
+      "topic": "Ingress‑NGINX → Gateway API 마이그레이션 심화 가이드",
       "category": "kubernetes",
-      "reason": "‘cgroup v1 → v2 변환 공식’ 문서가 존재하지만, 실제 마이그레이션 단계별 체크리스트와 실전 사례가 부족합니다.",
-      "suggestedTitle": "[요청] Kubernetes cgroup v2 마이그레이션 체크리스트",
+      "reason": "Ingress‑NGINX 마이그레이션 관련 문서는 두 개 존재하지만, 실제 마이그레이션 단계별 체크리스트와 트러블슈팅을 다루는 심화 문서가 필요. 연결이 약한 ‘Ingress‑NGINX’ 태그를 보강.",
+      "suggestedTitle": "[요청] Ingress‑NGINX → Gateway API 마이그레이션 심화 가이드 – 체크리스트·트러블슈팅",
       "relatedExisting": [
-        "cgroup-v1-cpu-shares-v2-cpu-weight-변환-공식-업데이트-가이드",
-        "kubernetes-node-readiness-controller",
-        "ingress-nginx-은퇴-선언-및-마이그레이션-가이드"
+        "Ingress NGINX 은퇴 선언 및 마이그레이션 가이드",
+        "Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know",
+        "cgroup v1 CPU Shares → v2 CPU Weight 변환 공식 업데이트 가이드"
       ],
       "priority": "medium"
     },
     {
-      "topic": "bun 성능 벤치마크 – npm, pnpm, Yarn과 실제 CI 워크플로우에서의 비교",
+      "topic": "Bun vs Deno vs Node.js – AI 워크로드 성능 벤치마크",
       "category": "bun",
-      "reason": "‘bun 과 pnpm, npm 의 차이’ 가이드가 있지만, CI/CD 파이프라인에서의 실제 빌드·테스트 시간 비교가 없어 실무 적용에 한계가 있습니다.",
-      "suggestedTitle": "[요청] bun vs npm/pnpm/Yarn CI 성능 벤치마크",
+      "reason": "‘bun’, ‘비교’, ‘성능’ 태그가 존재하지만, Deno와 Node.js와의 직접적인 성능 비교·특히 AI/LLM 워크로드에 대한 실험 결과가 없음. 최신 트렌드와 개발자 선택을 돕기 위해 필요.",
+      "suggestedTitle": "[요청] Bun vs Deno vs Node.js – AI 워크로드 성능 벤치마크 및 비교",
       "relatedExisting": [
-        "bun-과-pnpm-npm-의-차이",
-        "bun-이란",
-        "github-actions-로-bun-을-쓰는-방법"
+        "bun과 pnpm, npm의 차이",
+        "bun 이란?",
+        "GitHub Actions로 bun을 쓰는 방법"
       ],
       "priority": "medium"
     },
     {
-      "topic": "AWS AI 워크로드 비용 최적화 – Spot 인스턴스·Savings Plans·서버리스 활용 전략",
-      "category": "ai",
-      "reason": "‘AWS 라우팅 비용 함정’ 문서가 있지만, AI 모델 학습·추론에 특화된 비용 절감 방안이 별도 문서로 정리되지 않았습니다.",
-      "suggestedTitle": "[요청] AI 워크로드를 위한 AWS 비용 최적화 가이드",
+      "topic": "OpenTelemetry + Vector 기반 Observability Warehouse 구축",
+      "category": "kubernetes",
+      "reason": "‘Observability Warehouse’와 ‘OpenTelemetry’ 태그가 존재하지만, Vector를 활용한 데이터 파이프라인 설계·배포 가이드가 부재. 실전 구현 예시가 필요.",
+      "suggestedTitle": "[요청] OpenTelemetry + Vector 로 Observability Warehouse 구축하기",
       "relatedExisting": [
-        "$100k-aws-라우팅-비용-함정-s3-nat-terraform-해결법",
-        "kubernetes-에서-ai-모델-gitops-구현-가이드",
-        "cloud-터미널-구축-지속적인-ai-에이전트-세션-유지하기"
+        "OpenTelemetry와 Observability Warehouse 부상",
+        "OpenTelemetry 입문 – 관측성 통합 가이드",
+        "2026년 모니터링 도구 비교 – VigilOps, Zabbix, Prometheus‑Grafana, Datadog"
       ],
       "priority": "medium"
     },
     {
-      "topic": "시맨틱 레이어 구현 패턴 – 데이터 거버넌스·메트릭 정의·AI 프로젝트에 적용하기",
+      "topic": "AI 거버넌스 RFP 템플릿 실전 적용 가이드",
       "category": "ai",
-      "reason": "‘시맨틱 레이어’ 문서는 존재하지만, 실제 구현 단계(스키마 설계·메타데이터 관리·품질 검증)와 AI 파이프라인 연동 예시가 부족합니다.",
-      "suggestedTitle": "[요청] 시맨틱 레이어 구현 실전 가이드",
+      "reason": "‘AI 거버넌스’, ‘RFP 템플릿’ 문서는 존재하지만, 실제 프로젝트에 적용하는 단계별 체크리스트·예시가 부족. 기업 실무자를 위한 실전 가이드가 필요.",
+      "suggestedTitle": "[요청] AI 거버넌스 RFP 템플릿 실전 적용 가이드",
       "relatedExisting": [
-        "시맨틱-레이어-중요성-및-구현-가이드",
-        "ai-생산성-역설-개발자-처리량-정체-원인-분석",
-        "멀티‑에이전트-워크플로우-신뢰성-엔지니어링-가이드"
+        "AI 사용 제어 및 거버넌스를 위한 RFP 템플릿",
+        "Claude Marketplace – 개요와 기업 통합 가이드",
+        "Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크"
+      ],
+      "priority": "medium"
+    },
+    {
+      "topic": "OpenClaw vs Claude Cowork vs Claude Code – 기능 매트릭스",
+      "category": "projects",
+      "reason": "‘AI Agent’, ‘비교’ 태그가 많이 사용되지만, 기존 비교 문서는 2026 AI Agent Comparison이라는 포괄적인 형태. 기능·가격·지원·보안 항목을 상세히 매트릭스로 정리한 문서가 필요.",
+      "suggestedTitle": "[요청] OpenClaw vs Claude Cowork vs Claude Code – 기능·가격·보안 매트릭스",
+      "relatedExisting": [
+        "2026 AI Agent Comparison – OpenClaw vs Claude Cowork vs Claude Code",
+        "OpenClaw 완벽 가이드",
+        "Claude Code 릴리즈 히스토리 상세 가이드"
       ],
       "priority": "medium"
     }
