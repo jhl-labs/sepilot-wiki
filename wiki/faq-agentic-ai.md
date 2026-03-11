@@ -3,6 +3,7 @@ title: FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립
 author: SEPilot AI
 status: published
 tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, FAQ]
+updatedAt: 2026-03-11
 ---
 
 ## 개요
@@ -104,7 +105,7 @@ tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, FAQ]
 
 ### 자동화 도구
 - **TIAMAT API** – `/api/proxy` 로 에이전트 호출 로그 수집.  
-- **로그 분석 파이프라인** – 예: ELK Stack, Splunk 등 (공식 문서 링크는 제공되지 않음, 기존 조직 내 도구 활용).
+- **로그 분석 파이프라인** – 예: ELK Stack, Splunk 등 (조직 내 기존 도구 활용).
 
 ---
 
@@ -120,13 +121,101 @@ tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, FAQ]
 
 ---
 
+## **AI Agent Time‑Bomb Risks and Mitigation Strategies**
+*출처: euno.news – “당신의 AI 에이전트는 시한폭탄이다”*  
+
+AI 에이전트는 **코드 작성**을 넘어 **셸 명령 실행, 파일 읽기/쓰기, 네트워크 요청** 등 실제 시스템 권한을 가집니다. 잘못 관리하면 **프롬프트 인젝션, 무한 루프, 권한 상승** 등으로 조직 전체를 위험에 빠뜨릴 수 있습니다. 아래는 실용적인 방어 계층 7가지와 구체적인 구현 예시입니다.
+
+### 1️⃣ 작업 범위 정의 & 화이트/블랙리스트
+```json
+{
+  "allowed_actions": ["search_web", "summarize_text"],
+  "blocked_actions": ["execute_shell", "modify_files"]
+}
+```
+- 허용·차단 행동을 명시하고, 스키마 위반 시 즉시 차단합니다.  
+- 정책은 **JSON 스키마 검증** 단계에서 적용 → euno.news.
+
+### 2️⃣ 프롬프트 인젝션 방어
+```python
+import re
+
+def safe_prompt(user_input: str) -> str:
+    if not re.fullmatch(r"[a-zA-Z0-9\s.,!?-]+", user_input):
+        raise ValueError("Invalid characters detected")
+    return f"User said: {user_input}"
+```
+- 정규식·화이트리스트로 입력을 정제하고, 가능한 경우 **구조화된 JSON**만 받습니다.  
+
+### 3️⃣ 루프 제한 & 타임아웃
+```yaml
+max_iterations: 5          # 최대 재귀/반복 횟수
+timeout_seconds: 30        # 전체 실행 시간 제한
+```
+- 무한 루프를 방지하고, 초과 시 에이전트를 강제 종료·로그 기록.  
+
+### 4️⃣ 최소 권한 적용 (Principle of Least Privilege)
+```bash
+docker run --rm \
+  --read-only \
+  --network none \
+  -v /app/data:/data \
+  my-ai-agent:latest
+```
+- 컨테이너/샌드박스 환경에서 **읽기 전용 파일시스템**·**네트워크 차단** 등으로 권한을 최소화합니다.  
+
+### 5️⃣ 출력 검증 & 사후 모니터링
+```bash
+# ShellCheck을 이용한 스크립트 검증
+shellcheck generated_script.sh || echo "Potentially unsafe script detected!"
+```
+- 생성된 코드·스크립트를 정적 분석 도구로 스캔하고, 위험 패턴 발견 시 차단·알림.  
+
+### 6️⃣ 투명한 피드백 루프
+```json
+{
+  "action": "search_web",
+  "summary": "Found 3 relevant articles about AI safety.",
+  "confidence": 0.92,
+  "requires_approval": false
+}
+```
+- 에이전트는 수행 결과와 **신뢰도 점수**를 반환하고, 필요 시 **수동 승인** 절차를 거칩니다.  
+
+### 7️⃣ 정기 보안 감사 & 업데이트
+- 프롬프트 템플릿·코드베이스를 **주기적으로 리뷰**하고, 최신 보안 권고사항을 적용합니다.  
+- 새로운 취약점이 발견되면 **패치를 즉시 배포**하고 영향을 받는 에이전트를 재배포합니다.  
+
+#### 도구 예시 – ClawWall 정책 방화벽
+ClawWall은 에이전트가 수행하려는 **툴 호출**을 가로채어 허용·거부·질문(Ask) 결정을 내립니다.
+
+```bash
+npm install -g clawwall
+clawwall start
+CLAWWALL_ENABLED=true openclaw
+```
+
+| 규칙 | 동작 |
+|------|------|
+| `dangerous_command` (rm -rf, shutdown 등) | DENY |
+| `credential_read` (.env, .aws/credentials 등) | DENY |
+| `exfiltration` (curl -d, wget --post 등) | DENY |
+| `sensitive_write` (.ssh/, /etc/passwd 등) | DENY |
+| `outside_workspace` (프로젝트 외 경로) | DENY |
+| `internal_network` (localhost, 127.x 등) | ASK |
+
+- 정책 엔진은 **밀리초 수준**의 지연으로 실시간 방어를 제공합니다.  
+- 상세 내용은 euno.news 기사와 ClawWall 공식 문서에 기반합니다.
+
+---
+
 ## 거버넌스·컴플라이언스
 1. **정책·감사 체계 설계**  
    - **AI 거버넌스 정책**: 에이전트 배포 전 보안 검토·승인 절차 정의.  
    - **감사 로그 보관**: 최소 12개월 보관, 변조 방지(예: 해시 체인).  
 2. **국제·국내 규제 연계**  
    - **ISO 27001** – 정보 보안 관리 체계에 AI·에이전트 운영 포함.  
-   - **GDPR** – 개인 데이터 처리 시 에이전트 메모리·출력에 대한 투명성 요구.  
+   - **GDPR** – 개인 데이터 처리 시 에이전트 메모리·출력 투명성 요구.  
    - **미국 AI 행정명령** – 연방기관 AI 시스템 모니터링·부작용 검증 의무[[Samsung SDS]].  
 3. **배포·운영 체크리스트** (예시)  
    - [ ] 에이전트 목적·범위 문서화  
@@ -141,10 +230,11 @@ tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, FAQ]
 | 카테고리 | 제품/솔루션 | 특징 |
 |----------|------------|------|
 | **에이전트 보안 자동화** | **TIAMAT Security Suite** | API 프록시, 실시간 권한 감시, 과다 권한 스코어링 |
-| **권한 관리·감사** | **AWS IAM Access Analyzer** (AWS 환경) | 정책 시뮬레이션·과다 권한 탐지 (공식 문서 참조) |
+| **권한 관리·감사** | **AWS IAM Access Analyzer** (AWS 환경) | 정책 시뮬레이션·과다 권한 탐지 |
 | **위협 인텔리전스·무결성 검증** | **Stellar Cyber AI Threat Platform** | AI 행동 로그, MITRE ATT&CK 매핑, 이상 탐지 |
-| **CI/CD 보안** | **GitHub Advanced Security** | 시크릿 스캔·컨테이너 이미지 검증 (공식 문서) |
-| **모델 무결성** | **OpenAI Model Guardrails** (LLM 제공자) | 출력 필터링·프롬프트 제한 정책 |
+| **CI/CD 보안** | **GitHub Advanced Security** | 시크릿 스캔·컨테이너 이미지 검증 |
+| **모델 무결성** | **OpenAI Model Guardrails** | 출력 필터링·프롬프트 제한 정책 |
+| **정책 방화벽** | **ClawWall** | 툴 호출 전 실시간 허용·거부·질문 결정 |
 
 > 위 도구들은 각각 공식 문서가 존재하므로, 조직 정책에 맞게 선택·통합하십시오.
 
@@ -160,6 +250,7 @@ tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, FAQ]
 | **실제 사례는?** | Cornell’s Morris II 메모리 탈취, Fortune 500 Shadow AI 인증 정보 유출. |
 | **과도 권한 에이전트는 어떻게 찾나요?** | 3‑step 감사 프로세스 + TIAMAT `/api/proxy` 실시간 모니터링. |
 | **빠른 보안 강화 방법은?** | 최소 권한 적용, 프롬프트 검증, 툴 호출 로그, 지속 모니터링. |
+| **시한폭탄 위험을 어떻게 완화하나요?** | 작업 범위 정의, 인젝션 방어, 루프/타임아웃 제한, 최소 권한, 출력 검증, 투명 피드백, 정기 감사 (위 “AI Agent Time‑Bomb Risks and Mitigation Strategies” 섹션 참고). |
 
 **추가 질문**이 있으면 조직 내 **AI 보안 포럼**(예: Slack #ai‑security) 혹은 **TIAMAT 지원 포털**에 제출하십시오.
 
@@ -169,11 +260,9 @@ tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, FAQ]
 - **FAQ: Agentic AI 보안 위협 — 가장 궁금한 질문에 답변드립니다** – euno.news [[링크](https://euno.news/posts/ko/faq-agentic-ai-security-threats-your-top-questions-f4ab10)]  
 - **Agentic AI 시대, 진화하는 보안 위협과 그 해법은?** – 삼성SDS 인사이트 [[링크](https://www.samsungsds.com/kr/insights/security-threats-in-the-agentic-ai-era.html)]  
 - **싱가포르 CSA, 세계 최초 포괄적 Agentic AI 보안 가이드라인 발표** [[링크](http://dcodelaw.com/bbs/board.php?bo_table=newsletter&wr_id=36)]  
-- **Agentic AI를 활용한 보안의 새로운 보이지 않는 인력** – LinkedIn [[링크](https://kr.linkedin.com/pulse/securitys-new-invisible-workforce-robotic-assistance-devices-rad-ng0uc?tl=ko)]  
 - **Stellar Cyber – Agentic AI Use Cases** [[링크](https://stellarcyber.ai/ko/learn/agentic-ai-use-cases/)]  
+- **당신의 AI 에이전트는 시한폭탄이다** – euno.news (Dev.to) [[링크](https://euno.news/posts/ko/your-ai-agent-is-a-ticking-time-bomb-heres-how-to-2776e0)]  
+- **ClawWall 정책 방화벽** – 공식 GitHub 페이지 (npm) [[링크](https://www.npmjs.com/package/clawwall)]  
 - **Securing Agentic AI: Key Best Practices** – Payoda Technology Medium [[링크](https://payodatechnologyinc.medium.com/securing-agentic-ai-key-best-practices-for-risk-management-and-compliance-in-ai-83e671bb538b)]  
 - **2026년 후반 주요 에이전트형 AI 보안 위협** – Stellar Cyber [[링크](https://stellarcyber.ai/ko/learn/agentic-ai-securiry-threats/)]  
-- **2025년 보안 위협 회고 및 2026년 보안 위협 전망** – Alyac Blog [[링크](https://blog.alyac.co.kr/5690)]  
 - **AI 에이전틱 보안을 통한 AI 레질리언스 강화** – IGLOOPEDIA [[링크](https://www.igloopedia.com/2bdf216a-760c-80fb-a604-ee0cd1f6cddb)]  
-
----

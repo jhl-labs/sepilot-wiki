@@ -1,6 +1,151 @@
 {
   "entries": [
     {
+      "id": "491871e7-7d0f-41e7-8d63-e5664c999159",
+      "timestamp": "2026-03-11T00:25:10.548Z",
+      "actionType": "modify",
+      "issueNumber": 479,
+      "issueTitle": " [업데이트] AI 코드 어시스턴트 생산성 파라독스",
+      "documentSlug": "ai",
+      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 코드 어시스턴트 생산성 파라독스\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 7
+      }
+    },
+    {
+      "id": "e37c1508-c401-4e4c-9dcc-1c4eea828b0a",
+      "timestamp": "2026-03-11T00:24:05.064Z",
+      "actionType": "modify",
+      "issueNumber": 478,
+      "issueTitle": " [업데이트] FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
+      "documentSlug": "faq-agentic-ai",
+      "documentTitle": "FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다",
+      "summary": "문서 수정 요청 처리: \" [업데이트] FAQ: Agentic AI 보안 위협 – 가장 궁금한 질문에 답변드립니다\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 89,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "06f98baf-cfd1-4589-9580-66514387f34e",
+      "timestamp": "2026-03-11T00:23:18.524Z",
+      "actionType": "generate",
+      "issueNumber": 477,
+      "issueTitle": "문서 요청 #477",
+      "documentSlug": "ai/477",
+      "documentTitle": "AI‑augmented SDLC와 생산성 파라독스 – 변화하는 병목 현상 분석",
+      "summary": "새 문서 \"AI‑augmented SDLC와 생산성 파라독스 – 변화하는 병목 현상 분석\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 7087
+            },
+            {
+              "step": "outline",
+              "durationMs": 5816
+            },
+            {
+              "step": "write",
+              "durationMs": 13052
+            },
+            {
+              "step": "review",
+              "durationMs": 5229
+            },
+            {
+              "step": "refine",
+              "durationMs": 19322
+            }
+          ],
+          "totalDurationMs": 50506,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2171,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "3ca7b7bd-5d73-4ee8-bf7d-6c04ab8d1ea4",
+      "timestamp": "2026-03-11T00:22:24.868Z",
+      "actionType": "modify",
+      "issueNumber": 476,
+      "issueTitle": " [업데이트] AI 에이전트 보안 베스트 프랙티스",
+      "documentSlug": "ai",
+      "documentTitle": "AI 에이전트 보안 베스트 프랙티스",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 에이전트 보안 베스트 프랙티스\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 46,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "a779c172-c5a0-4a02-b842-7a9134959b06",
+      "timestamp": "2026-03-11T00:21:25.010Z",
+      "actionType": "generate",
+      "issueNumber": 475,
+      "issueTitle": "문서 요청 #475",
+      "documentSlug": "security/475",
+      "documentTitle": "GitHub Secret Scanning 2026년 3월 업데이트 가이드",
+      "summary": "새 문서 \"GitHub Secret Scanning 2026년 3월 업데이트 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3678
+            },
+            {
+              "step": "outline",
+              "durationMs": 4705
+            },
+            {
+              "step": "write",
+              "durationMs": 18430
+            },
+            {
+              "step": "review",
+              "durationMs": 5392
+            }
+          ],
+          "totalDurationMs": 32206,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1427,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "0a787477-96f8-424c-8fd3-f75301b0717c",
       "timestamp": "2026-03-11T00:20:48.236Z",
       "actionType": "maintain",
@@ -12131,5 +12276,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-11T00:20:48.236Z"
+  "lastUpdated": "2026-03-11T00:25:10.549Z"
 }
