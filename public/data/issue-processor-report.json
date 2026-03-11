@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-03-11T08:44:15.144Z",
+  "timestamp": "2026-03-11T09:50:01.243Z",
   "dryRun": false,
-  "totalIssuesScanned": 15,
+  "totalIssuesScanned": 18,
   "categories": {
     "draft_review": [
+      {
+        "number": 487,
+        "title": "[Wiki Maintenance] [요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 486,
+        "title": "[Wiki Maintenance] [요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 485,
+        "title": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 474,
         "title": " [요청] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
@@ -86,7 +101,44 @@
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 487,
+      "title": "[Wiki Maintenance] [요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 486,
+      "title": "[Wiki Maintenance] [요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 485,
+      "title": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 487,
+      "title": "[Wiki Maintenance] [요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/self-healing.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 486,
+      "title": "[Wiki Maintenance] [요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai-ci-cd-github-copilot-claude-code-openclaw.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 485,
+      "title": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md"
+    }
+  ],
+  "actionCount": 6,
   "maxActions": 60
 }

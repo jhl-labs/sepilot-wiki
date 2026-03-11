@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "225964fc-31c1-4750-8a76-3fe22673048d",
+      "timestamp": "2026-03-11T09:49:55.895Z",
+      "actionType": "quality_score",
+      "issueNumber": 485,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "documentSlug": "ai",
+      "documentTitle": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "3a9c7ec8-f0f3-4e8f-acdd-c57441bd4065",
+      "timestamp": "2026-03-11T09:49:43.878Z",
+      "actionType": "quality_score",
+      "issueNumber": 486,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+      "documentSlug": "ai/ai-ci-cd-github-copilot-claude-code-openclaw",
+      "documentTitle": "[Wiki Maintenance] [요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "85690e49-01ea-49a2-a60a-baababdc8b12",
+      "timestamp": "2026-03-11T09:49:32.907Z",
+      "actionType": "quality_score",
+      "issueNumber": 487,
+      "issueTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+      "documentSlug": "ai/self-healing",
+      "documentTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "10389efa-cef9-4d54-b7f2-979939ecce5c",
+      "timestamp": "2026-03-11T09:49:18.352Z",
+      "actionType": "generate",
+      "issueNumber": 485,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "documentSlug": "ai",
+      "documentTitle": "AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "summary": "새 문서 \"AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4878
+            },
+            {
+              "step": "outline",
+              "durationMs": 10686
+            },
+            {
+              "step": "write",
+              "durationMs": 53655
+            },
+            {
+              "step": "review",
+              "durationMs": 6432
+            }
+          ],
+          "totalDurationMs": 75651,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3539,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "4d627029-2f94-4ab3-8370-6af331b47d14",
+      "timestamp": "2026-03-11T09:47:44.557Z",
+      "actionType": "generate",
+      "issueNumber": 486,
+      "issueTitle": "[Wiki Maintenance] [요청] AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+      "documentSlug": "ai/ai-ci-cd-github-copilot-claude-code-openclaw",
+      "documentTitle": "AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw",
+      "summary": "새 문서 \"AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 21378
+            },
+            {
+              "step": "outline",
+              "durationMs": 13447
+            },
+            {
+              "step": "write",
+              "durationMs": 40396
+            },
+            {
+              "step": "review",
+              "durationMs": 9377
+            }
+          ],
+          "totalDurationMs": 84598,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3161,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "1d056287-80e1-41c8-9170-abdd922db745",
+      "timestamp": "2026-03-11T09:45:44.362Z",
+      "actionType": "generate",
+      "issueNumber": 487,
+      "issueTitle": "[Wiki Maintenance] [요청] 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+      "documentSlug": "ai/self-healing",
+      "documentTitle": "멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드",
+      "summary": "새 문서 \"멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 8060
+            },
+            {
+              "step": "outline",
+              "durationMs": 16448
+            },
+            {
+              "step": "write",
+              "durationMs": 31907
+            },
+            {
+              "step": "review",
+              "durationMs": 7396
+            }
+          ],
+          "totalDurationMs": 63811,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2787,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "a8197f51-2e1a-4d89-92fb-6a6fab4e560e",
       "timestamp": "2026-03-11T09:19:42.746Z",
       "actionType": "maintain",
@@ -12585,5 +12762,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-11T09:19:42.746Z"
+  "lastUpdated": "2026-03-11T09:49:55.895Z"
 }
