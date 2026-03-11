@@ -1,6 +1,128 @@
 {
   "entries": [
     {
+      "id": "bc070ca9-a941-416d-8e87-71b18c1be277",
+      "timestamp": "2026-03-11T06:25:06.720Z",
+      "actionType": "quality_score",
+      "issueNumber": 483,
+      "issueTitle": " [요청] Gemini Code Assist – Finish Changes & Outlines 기능 가이드",
+      "documentSlug": "ai/gemini-code-assist-finish-changes-outlines",
+      "documentTitle": " [요청] Gemini Code Assist – Finish Changes & Outlines 기능 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "6dcc788e-3d3b-4edf-85ed-3bb87d8a8e2c",
+      "timestamp": "2026-03-11T06:24:56.001Z",
+      "actionType": "quality_score",
+      "issueNumber": 484,
+      "issueTitle": " [요청] Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석",
+      "documentSlug": "security/microsoft-patch-tuesday-2026-03-cve",
+      "documentTitle": " [요청] Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "dccd3cbd-1479-4e8a-b1bd-94c6b6a2fb87",
+      "timestamp": "2026-03-11T06:24:33.589Z",
+      "actionType": "generate",
+      "issueNumber": 483,
+      "issueTitle": " [요청] Gemini Code Assist – Finish Changes & Outlines 기능 가이드",
+      "documentSlug": "ai/gemini-code-assist-finish-changes-outlines",
+      "documentTitle": "Gemini Code Assist – Finish Changes & Outlines 기능 가이드",
+      "summary": "새 문서 \"Gemini Code Assist – Finish Changes & Outlines 기능 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3158
+            },
+            {
+              "step": "outline",
+              "durationMs": 6178
+            },
+            {
+              "step": "write",
+              "durationMs": 22570
+            },
+            {
+              "step": "review",
+              "durationMs": 7291
+            }
+          ],
+          "totalDurationMs": 39197,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1803,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "a1063c28-e1dc-41eb-bdbf-247011aa4854",
+      "timestamp": "2026-03-11T06:23:39.424Z",
+      "actionType": "generate",
+      "issueNumber": 484,
+      "issueTitle": " [요청] Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석",
+      "documentSlug": "security/microsoft-patch-tuesday-2026-03-cve",
+      "documentTitle": "Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석",
+      "summary": "새 문서 \"Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3102
+            },
+            {
+              "step": "outline",
+              "durationMs": 11692
+            },
+            {
+              "step": "write",
+              "durationMs": 24465
+            },
+            {
+              "step": "review",
+              "durationMs": 10096
+            },
+            {
+              "step": "refine",
+              "durationMs": 18254
+            }
+          ],
+          "totalDurationMs": 67609,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3226,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "3700d85a-ea6a-4b4c-86ad-5b17c94470ee",
       "timestamp": "2026-03-11T06:19:21.773Z",
       "actionType": "maintain",
@@ -12408,5 +12530,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-11T06:19:21.773Z"
+  "lastUpdated": "2026-03-11T06:25:06.720Z"
 }
