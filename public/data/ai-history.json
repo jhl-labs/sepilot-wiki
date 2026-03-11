@@ -1,6 +1,119 @@
 {
   "entries": [
     {
+      "id": "3f69c6df-47a4-4efa-b450-f930718e02d7",
+      "timestamp": "2026-03-11T12:21:49.375Z",
+      "actionType": "modify",
+      "issueNumber": 492,
+      "issueTitle": " [업데이트] OpenClaw 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법",
+      "documentSlug": "projects/openclaw-complete-guide",
+      "documentTitle": "OpenClaw 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenClaw 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 1
+      }
+    },
+    {
+      "id": "6bf3b035-4ef3-439b-b8a5-02d9be5842af",
+      "timestamp": "2026-03-11T12:20:23.028Z",
+      "actionType": "modify",
+      "issueNumber": 491,
+      "issueTitle": " [업데이트] Ally WordPress 플러그인 SQL 인젝션 – 사고 대응 Playbook 업데이트",
+      "documentSlug": "security/wordpress-vulnerability-triaging-playbook-2026",
+      "documentTitle": "WordPress Vulnerability Triaging Playbook (2026)",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Ally WordPress 플러그인 SQL 인젝션 – 사고 대응 Playbook 업데이트\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 79,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "693d711a-421e-4348-8ba1-ceed96de8b33",
+      "timestamp": "2026-03-11T12:19:18.916Z",
+      "actionType": "generate",
+      "issueNumber": 490,
+      "issueTitle": "문서 요청 #490",
+      "documentSlug": "ai/490",
+      "documentTitle": "모델 병합 (Model Merging) 가이드 – FUSE 프레임워크와 실무 로드맵",
+      "summary": "새 문서 \"모델 병합 (Model Merging) 가이드 – FUSE 프레임워크와 실무 로드맵\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3056
+            },
+            {
+              "step": "outline",
+              "durationMs": 7461
+            },
+            {
+              "step": "write",
+              "durationMs": 36031
+            },
+            {
+              "step": "review",
+              "durationMs": 9816
+            }
+          ],
+          "totalDurationMs": 56364,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 6
+          },
+          "estimatedTokens": {
+            "estimated": 2666,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "40648e9b-4efb-4141-9746-bdf00758f166",
+      "timestamp": "2026-03-11T12:18:19.017Z",
+      "actionType": "modify",
+      "issueNumber": 489,
+      "issueTitle": " [업데이트] AI 코드 리뷰 에이전트 – 프로젝트 컨텍스트가 없는 경우 실패 원인과 해결 방안",
+      "documentSlug": "ai",
+      "documentTitle": "AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 코드 리뷰 에이전트 – 프로젝트 컨텍스트가 없는 경우 실패 원인과 해결 방안\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 32,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "0bf225cc-f98c-4552-801f-76412d4b6483",
+      "timestamp": "2026-03-11T12:17:16.327Z",
+      "actionType": "modify",
+      "issueNumber": 488,
+      "issueTitle": " [업데이트] TensorFlow 2.21 릴리스 – LiteRT 프로덕션 스택 통합 및 신규 기능",
+      "documentSlug": "ai/tensorflow-2-21-litert",
+      "documentTitle": "TensorFlow 2.16 새로운 기능 및 TensorFlow Lite Runtime 통합 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] TensorFlow 2.21 릴리스 – LiteRT 프로덕션 스택 통합 및 신규 기능\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 36,
+        "deletions": 0
+      }
+    },
+    {
       "id": "03b92e27-1bba-4a78-8500-19fec63109f0",
       "timestamp": "2026-03-11T12:15:28.529Z",
       "actionType": "maintain",
@@ -12776,5 +12889,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-11T12:15:28.529Z"
+  "lastUpdated": "2026-03-11T12:21:49.375Z"
 }

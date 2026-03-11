@@ -12,7 +12,7 @@ redirect_from:
   - projects-openclaw
 related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
 order: 6
-updatedAt: 2026-03-10
+updatedAt: 2026-03-11
 quality_score: 84
 ---
 
@@ -239,7 +239,7 @@ prompt:
 |------|----------|--------|
 | IAM 정책 미설정 | 에이전트가 필요한 AWS 서비스에 접근 불가 | **IAM 역할**에 필요한 액션만 포함하고 `openclaw config set aws.roleArn …` 로 지정 |
 | API 키 노출 | 로그·환경 변수에 평문 키가 남아 탈취 위험 | **시크릿 매니저**(HashiCorp Vault, AWS Secrets Manager) 사용 → `export OPENCLAW_API_KEY=$(vault read -field=key secret/openclaw)` |
-| 리소스 과다 사용 | CPU·RAM 제한 없으면 다른 서비스에 영향을 줌 | `openclaw.yaml` 에 `resources:` 블록 추가 (예시 아래) |
+| 리소스 과다 사용 | CPU·RAM 제한 없으면 다른 서비스에 영향 줌 | `openclaw.yaml` 에 `resources:` 블록 추가 (예시 아래) |
 
 **리소스 제한 예시 (`openclaw.yaml`)**
 ```yaml
@@ -372,7 +372,7 @@ qmd query "database connection pooling" --collection openclaw-memory
 
 ## Impact of OpenAI Acquisition on OpenClaw Ecosystem
 1. **전략적 방향 전환**  
-   OpenAI의 인수는 OpenClaw가 단순히 커뮤니티 주도 프로젝트에서 OpenAI 제품 포트폴리오에 포함되는 전략적 자산으로 변모함을 의미합니다. 향후 OpenClaw는 OpenAI의 에이전트형 AI 로드맵에 맞춰 기능 로드맵이 조정될 가능성이 높습니다.
+   OpenAI의 인수는 OpenClaw가 단순 커뮤니티 주도 프로젝트에서 OpenAI 제품 포트폴리오에 포함되는 전략적 자산으로 변모함을 의미합니다. 향후 OpenClaw는 OpenAI의 에이전트형 AI 로드맵에 맞춰 기능 로드맵이 조정될 가능성이 높습니다.
 
 2. **통합 및 호환성 강화**  
    - OpenAI 클라우드 모델(GPT‑4o, Claude 등)과의 네이티브 연동이 보다 원활해질 것으로 예상됩니다.  
@@ -505,5 +505,4 @@ CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며
 ---
 
 ## **Security Risks and Mitigations** *(English Summary)*
-- **Prompt Injection**: Malicious content injected via `SKILL.md` or external documents can cause the agent to execute unintended commands.  
-- **Credential Exposure**: The agent’s file‑system access may reveal SSH keys,
+- **Prompt Injection**: Malicious content injected via `SKILL
