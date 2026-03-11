@@ -1,6 +1,155 @@
 {
   "entries": [
     {
+      "id": "554f6020-c8e4-4c59-9fc0-cf0414b3e126",
+      "timestamp": "2026-03-11T06:24:22.874Z",
+      "actionType": "generate",
+      "issueNumber": 484,
+      "issueTitle": "문서 요청 #484",
+      "documentSlug": "security/484",
+      "documentTitle": "Microsoft Patch Tuesday 2026년 3월 업데이트 상세 분석",
+      "summary": "새 문서 \"Microsoft Patch Tuesday 2026년 3월 업데이트 상세 분석\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 8908
+            },
+            {
+              "step": "outline",
+              "durationMs": 6128
+            },
+            {
+              "step": "write",
+              "durationMs": 24685
+            },
+            {
+              "step": "review",
+              "durationMs": 6267
+            },
+            {
+              "step": "refine",
+              "durationMs": 26047
+            }
+          ],
+          "totalDurationMs": 72035,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3155,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "fa8410f7-a723-4592-abbf-92c06538544b",
+      "timestamp": "2026-03-11T06:23:02.820Z",
+      "actionType": "generate",
+      "issueNumber": 483,
+      "issueTitle": "문서 요청 #483",
+      "documentSlug": "ai/483",
+      "documentTitle": "Gemini Code Assist – Finish Changes와 Outlines 가이드",
+      "summary": "새 문서 \"Gemini Code Assist – Finish Changes와 Outlines 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3413
+            },
+            {
+              "step": "outline",
+              "durationMs": 5064
+            },
+            {
+              "step": "write",
+              "durationMs": 22727
+            },
+            {
+              "step": "review",
+              "durationMs": 6543
+            },
+            {
+              "step": "refine",
+              "durationMs": 33841
+            }
+          ],
+          "totalDurationMs": 71588,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3408,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "f3d4c5be-015f-4445-812a-18e99230b6ed",
+      "timestamp": "2026-03-11T06:21:48.284Z",
+      "actionType": "modify",
+      "issueNumber": 482,
+      "issueTitle": " [업데이트] The Brief Method – Claude Code 프롬프트 엔지니어링",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] The Brief Method – Claude Code 프롬프트 엔지니어링\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 42,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "3e5aafad-8b03-4ec5-97f6-1267b4d93f73",
+      "timestamp": "2026-03-11T06:20:58.947Z",
+      "actionType": "modify",
+      "issueNumber": 481,
+      "issueTitle": " [업데이트] Gemini Chrome 통합 및 지역별 롤아웃",
+      "documentSlug": "ai/gemini-3-1",
+      "documentTitle": "Google AI Pro 활용 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Gemini Chrome 통합 및 지역별 롤아웃\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 65,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "10a06908-4b3f-40df-af68-b7b73bb4e5c4",
+      "timestamp": "2026-03-11T06:20:06.166Z",
+      "actionType": "modify",
+      "issueNumber": 480,
+      "issueTitle": " [업데이트] Claude Code 팀 온보딩 및 30일 채택 로드맵",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code 팀 온보딩 및 30일 채택 로드맵\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 30,
+        "deletions": 0
+      }
+    },
+    {
       "id": "3700d85a-ea6a-4b4c-86ad-5b17c94470ee",
       "timestamp": "2026-03-11T06:19:21.773Z",
       "actionType": "maintain",
@@ -12408,5 +12557,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-11T06:19:21.773Z"
+  "lastUpdated": "2026-03-11T06:24:22.874Z"
 }
