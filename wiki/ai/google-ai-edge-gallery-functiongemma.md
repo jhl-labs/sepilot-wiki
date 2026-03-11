@@ -1,7 +1,7 @@
 ---
 title: Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [Google AI Edge, FunctionGemma, 온-디바이스, LiteRT-LM, Edge AI]
 ---
 
