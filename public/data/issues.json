@@ -1,6 +1,37 @@
 {
   "issues": [
     {
+      "id": 490,
+      "number": 490,
+      "title": " [요청] Model Merging for Large Language Models – 방법, 응용 및 미래 방향",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/model-merging-in-the-era-of-large-language-models-9bcf5d)\n**관련도**: 85/100\n**핵심 토픽**: Model merging, LLM ensemble, future directions\n\n## 뉴스 요약\nModel merging은 추가적인 ... 없이 여러 neural networks의 능력을 단일 unified model로 결합하는 변혁적인 패러다임으로 부상했습니다.\n\n## 상세 내용\nSource: arXiv - 2603.09938v1\n개요\n모델 병합을 사용하면 여러 개의 파인튜닝된 대형 언어 모델(LLM)을 하나의 즉시 실행 가능한 모델로 결합할 수 있습니다—전체 재학습 비용이나 앙상블의 지연 없이. 송과 정이 수행한 이 조사에서는 FUSE 분류법(Foundations, Unification Strategies, Scenarios, Ecosystem)을 소개하고 빠르게 변화하는 연구 환경을 지도화하여, 예산이 제한된 개발자들이 특화된 LLM 기능을 구성할 수 있는 실용적인 로드맵을 제공합니다.\n주요 기여\nFUSE taxonomy – 모델 병합과 관련된 이론, 알고리즘, 사용 사례 및 도구를 조직하는 4차원 프레임워크.\nTheoretical grounding – 손실 지형 기하학, 모드 연결성, 그리고 단순 가중치 평균이 작동하는 이유를 설명하는 Linear Mode Connectivity (LMC) 가설에 대한 명확한 설명.\nComprehensive algorithmic survey – 가중치 평균, 작업 벡터 연산, 희소화 강화 병합, 전문가 혼합(MoE) 하이브리드, 그리고 진화 최적화 방법을 다룸.\nApplication matrix – 각 병합 전략을 다중 작업 학습, 안전 정렬, 도메인 특화 적응, 다국어 전이, 연합 학습과 같은 구체적인 다운스트림 작업에 매핑.\nEcosystem overview – 오픈소스 라이브러리(예: mergekit, lm‑merge, Hugging Face adapters), 커뮤니티 벤치마크 및 모범 사례 가이드라인을 정리.\nFuture‑direction checklist – 이론, 확장성, 표준화와 같은 열린 연구 과제를 강조하여 학계와 산업 모두를 안내.\n방법론\n저자들은 분류‑별 설문조사 접근 방식을 채택합니다:\n기초 – 신경망 손실 표면의 기하학을 검토하면서, 미세 조정된 모델이 종종 연결된 분지에 위치하여 선형 보간을 해도 손실이 크게 증가하지 않음을 보여줍니다.\n통합 전략 – 각 병합 알고리즘을\n\n## 판단 근거\n모델 병합에 대한 최신 연구와 실용 로드맵이 기존 LLM 연대기 문서에 포함되지 않아 별도 가이드가 필요함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-11T12:19:59.484Z",
+      "updated_at": "2026-03-11T12:19:59.490Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/490",
+      "documentSlug": "ai/model-merging-for-large-language-models",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/model-merging-for-large-language-models.md",
+      "comments": 0
+    },
+    {
       "id": 485,
       "number": 485,
       "title": "[Wiki Maintenance] [요청] AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
@@ -4164,5 +4195,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-11T09:49:18.359Z"
+  "lastUpdated": "2026-03-11T12:19:59.490Z"
 }

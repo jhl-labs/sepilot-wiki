@@ -12,7 +12,7 @@ redirect_from:
   - projects-openclaw
 related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
 order: 6
-updatedAt: 2026-03-10
+updatedAt: 2026-03-11
 quality_score: 84
 ---
 
@@ -301,6 +301,109 @@ logging:
 
 ---
 
+## 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법
+> **출처**: *MemoClaw Namespaces – 기억을 격리하세요* (euno.news) [※]
+
+OpenClaw 에이전트를 여러 프로젝트에서 동시에 활용할 경우, 프로젝트 A의 메모리가 프로젝트 B의 회상에 섞여 들어갈 위험이 있습니다. 예를 들어 프론트엔드 배포에 대해 물어보면 전혀 다른 레포의 CI 파이프라인 정보가 반환될 수 있습니다. **네임스페이스**는 이러한 메모리 혼합을 방지하기 위한 라벨 기반 격리 메커니즘입니다.
+
+### 1️⃣ 네임스페이스 개념
+- **네임스페이스**는 메모리 그룹을 구분하는 라벨이며, 동일 라벨을 가진 메모리만 서로 조회·리콜됩니다.  
+- 기본값은 `default`(빈 문자열)이며, 명시적으로 지정하지 않으면 모든 메모리가 여기 저장됩니다.  
+- `--namespace` 플래그를 지원하는 모든 `memoclaw`(OpenClaw 메모리 CLI) 명령에 적용됩니다.
+
+### 2️⃣ 설정 방법
+#### 메모리 저장 시 네임스페이스 지정
+```bash
+memoclaw store "Frontend uses Next.js 14 with app router" \
+  --namespace website-redesign --tags "stack"
+```
+
+#### 특정 네임스페이스에서만 회상
+```bash
+memoclaw recall "what framework are we using" \
+  --namespace website-redesign
+```
+
+#### 네임스페이스 내 메모리 목록
+```bash
+memoclaw list --namespace website-redesign
+```
+
+#### 전체 네임스페이스 확인
+```bash
+memoclaw namespace list
+```
+
+#### 네임스페이스별 메모리 개수 확인
+```bash
+memoclaw namespace stats
+```
+
+> **주의**: 지정된 네임스페이스에 저장된 메모리는 `--namespace` 없이 실행한 `recall`에서는 절대 나타나지 않습니다.
+
+### 3️⃣ 베스트 프랙티스 (전략)
+
+| 전략 | 설명 | 언제 사용 |
+|------|------|-----------|
+| **Strategy 1 – 프로젝트당 하나의 네임스페이스** | 각 프로젝트(또는 레포)마다 고유 네임스페이스를 부여합니다. 가장 직관적이며 관리가 쉽습니다. | 다수의 독립 프로젝트를 동시에 운영할 때 |
+| **Strategy 2 – Shared + Project Namespaces** | 공통 지식(코딩 스타일, 커밋 규칙 등)은 `default`에 저장하고, 프로젝트‑특정 사실은 별도 네임스페이스에 보관합니다. 두 번 호출해야 하지만, 공유·전용 정보를 명확히 구분할 수 있습니다. | 팀 전체에 적용되는 정책과 프로젝트‑별 세부 정보가 모두 필요할 때 |
+| **Strategy 3 – 클라이언트 격리** | 프리랜서·에이전시가 여러 고객을 다룰 경우, 각 고객을 별도 네임스페이스로 구분해 프라이버시 경계를 확실히 합니다. | 고객 데이터가 섞이는 것을 절대 허용할 수 없을 때 |
+| **Strategy 4 – 환경 네임스페이스** | `prod`, `staging`, `dev` 등 환경별로 메모리를 분리합니다. | 동일 코드베이스가 여러 환경에 배포될 때 |
+
+#### 네이밍 규칙
+- 소문자와 하이픈(`-`)만 사용 (예: `api-service`, `client-acme`)  
+- 공백, 대문자, 특수문자 금지  
+- 레포 이름, 프로젝트 슬러그, 환경명 등 직관적인 식별자를 사용  
+
+#### 예시 명령
+```bash
+# 프로젝트 A (API 서비스)
+memoclaw store "Rate limiting set to 100 req/min per user" \
+  --namespace api-service --tags "config"
+
+# 프로젝트 B (Docs 사이트)
+memoclaw store "Docs use Mintlify, deploy via GitHub integration" \
+  --namespace docs-site --tags "infra"
+
+# 클라이언트 C
+memoclaw store "Client wants Material UI, no Tailwind" \
+  --namespace client-acme --tags "preference"
+```
+
+### 4️⃣ 기존 메모를 네임스페이스로 마이그레이션
+1. **전체 내보내기**  
+   ```bash
+   memoclaw export -O all-memories.json
+   ```
+2. **JSON 편집** – 각 객체에 `"namespace": "<target>"` 필드 추가  
+3. **다시 가져오기**  
+   ```bash
+   memoclaw import namespaced-memories.json
+   ```
+
+또는 디렉터리 기반 마이그레이션:
+```bash
+memoclaw migrate ~/projects/acme/docs/ --namespace client-acme
+memoclaw migrate ~/notes/general/          # default namespace
+```
+
+### 5️⃣ 언제 네임스페이스를 사용하지 않아도 되는가?
+| 상황 | 권장 여부 |
+|------|-----------|
+| 단일 프로젝트만 작업 | **사용 안 함** |
+| 에이전트가 한 번에 하나의 컨텍스트만 처리 | **사용 안 함** |
+| 메모리 총량이 100개 미만 | **사용 안 함** |
+| **다중 프로젝트** 혹은 **클라이언트 격리**가 필요 | **사용** |
+| 메모리 풀이 빠르게 증가 | **사용** |
+
+### TL;DR
+- **네임스페이스**는 메모리를 격리합니다 – 모든 명령에 `--namespace` 플래그를 사용하세요.  
+- **One‑namespace‑per‑project**는 가장 깔끔하고 이해하기 쉽습니다.  
+- **Shared + project** 전략은 공통 정책을 `default`에 두고 프로젝트‑특정 정보를 별도 라벨에 보관합니다.  
+- 필요 시 두 네임스페이스를 순차적으로 `recall` 하면 자동 병합이 가능합니다.
+
+---
+
 ## QMD 하이브리드 검색 및 메모리 최적화
 > **출처**: OpenClaw QMD: 로컬 하이브리드 검색으로 10배 더 똑똑한 메모리 (euno.news) [17]
 
@@ -316,7 +419,7 @@ QMD는 **세 단계**의 검색 파이프라인을 결합해 기존 “전체 ME
 이 하이브리드 접근은 **관련 스니펫만 반환**하고, **결과당 700 문자(기본 6개)** 로 제한해 토큰 사용량을 크게 절감합니다.
 
 ### 2️⃣ 메모리 토큰 한계와 해결 방안
-- **기존 방식**: `MEMORY.md` 전체 파일을 매 프롬프트에 삽입 → 500 토큰 이하에서는 정상, 5 000 토큰 이상이면 **Token explosion** 발생, 비용 급증 및 **Relevance collapse** 로 정확도 저하.  
+- **기존 방식**: `MEMORY.md` 전체 파일을 매 프롬프트에 삽입 → 5 000 토큰 이상이면 **Token explosion** 발생, 비용 급증 및 **Relevance collapse** 로 정확도 저하.  
 - **QMD 해결**  
   - **인덱싱**: Markdown 파일을 로컬 SQLite + 벡터 DB에 저장.  
   - **선별 반환**: 검색 결과는 최대 6개, 각 700 문자 → 약 **4 200 문자** (≈ 2 800 토큰) 로 제한.  
@@ -420,90 +523,4 @@ services:
     read_only: true                          # 파일시스템 읽기 전용
     user: "1001:1001"                        # 비루트 사용자
     environment:
-      - OPENCLAW_GATEWAY_PASSWORD_FILE=/run/secrets/gateway_password
-      - OPENCLAW_DISABLE_MDNS=true          # mDNS 비활성화 (보안 강화)
-      - OPENCLAW_EGRESS_ALLOWLIST=api.minimax.chat,api.anthropic.com
-    secrets:
-      - gateway_password
-    networks:
-      - openclaw-isolated
-    tmpfs:
-      - /tmp                                 # 휘발성 임시 저장소, 영구 디스크에 기록되지 않음
-
-networks:
-  openclaw-isolated:
-    driver: bridge
-
-secrets:
-  gateway_password:
-    file: ./secrets/gateway_password.txt
-```
-
-**핵심 포인트**
-
-1. **`runtime: runsc`** – gVisor를 사용해 마이크로‑VM 격리를 활성화.  
-2. **`read_only: true`** – 컨테이너 파일시스템을 읽기 전용으로 설정해 루트킷 위험 차단.  
-3. **비루트 사용자** (`user: "1001:1001"`) – 프로세스가 루트 권한을 갖지 않음.  
-4. **네트워크 격리** – 전용 브리지 네트워크(`openclaw-isolated`)를 사용해 외부와 직접 연결되지 않도록 함.  
-5. **시크릿 관리** – Docker secret을 통해 인증 정보를 파일 시스템에 평문으로 남기지 않음.  
-
-Docker Hardened Images에 대한 자세한 내용은 Docker Blog(2025‑12‑17)에서 확인할 수 있습니다 [16].
-
----
-
-## Secure Run‑time Checklist
-OpenClaw를 Docker Sandbox에서 운영할 때 확인해야 할 보안 체크리스트입니다.
-
-- [ ] **Hardened Image 사용** – `openclaw/openclaw:prod-hardened`와 같이 Docker가 제공하는 Hardened 베이스 이미지 선택  
-- [ ] **마이크로‑VM 격리 활성화** – `runtime: runsc` (gVisor) 혹은 `runtime: kata-runtime` 등 경량 VM 사용  
-- [ ] **읽기 전용 파일시스템** – `read_only: true` 옵션 적용  
-- [ ] **비루트 사용자 실행** – `user: "1001:1001"` 등 비특권 UID/GID 지정  
-- [ ] **시크릿 관리** – Docker secret 또는 환경 변수 암호화(`OPENCLAW_GATEWAY_PASSWORD_FILE`) 사용  
-- [ ] **네트워크 제한** – 전용 내부 네트워크 사용, 외부 egress는 `OPENCLAW_EGRESS_ALLOWLIST` 로 허용된 도메인만  
-- [ ] **mDNS 비활성화** – `OPENCLAW_DISABLE_MDNS=true` 로 로컬 서비스 탐색 차단 (불필요한 서비스 노출 방지)  
-- [ ] **정기 이미지 스캔** – `docker scan` 혹은 `trivy` 로 이미지 취약점 검사 수행  
-- [ ] **보안 업데이트 자동 적용** – `docker pull` 주기적 실행 및 재배포 자동화  
-- [ ] **로그 및 감사** – 컨테이너 로그를 중앙 로그 시스템(ELK, Loki 등)으로 전송하고, API 호출 패턴을 모니터링  
-
-이 체크리스트는 Docker Hardened Images와 마이크로‑VM 격리 가이드라인을 종합한 것으로, 실제 운영 환경에 맞게 추가적인 방어 계층을 적용하는 것이 권장됩니다.
-
----
-
-## 보안 위험 및 완화 방안
-CrowdStrike는 "What Security Teams Need to Know About OpenClaw"를 발표하며 OpenClaw의 보안 위험을 경고했습니다 [14].
-
-### 주요 위협 벡터
-
-| 위협 | 설명 |
-|------|------|
-| **프롬프트 인젝션** (직접 및 간접) | 외부 콘텐츠(이메일, 웹 페이지, 문서) 내 악의적 명령이 에이전트 동작을 탈취 |
-| **자격 증명 탈취** | 파일 시스템 접근을 통해 `~/.ssh/`, `~/.aws/`, `~/.gnupg/` 등 민감 파일 노출 |
-| **에이전트 기반 측면 이동** | 침해된 에이전트가 정당 도구 권한을 이용해 시스템 간 이동 |
-| **대규모 노출** | 135K+ 개의 OpenClaw 인스턴스가 공개적으로 노출, 다수가 암호화되지 않은 HTTP 사용 |
-
-### 완화 전략
-
-| 영역 | 조치 | 상세 |
-|------|------|------|
-| **네트워크** | HTTPS 강제 | 모든 인스턴스에 TLS 적용, HTTP 접근 차단 |
-| **파일 시스템** | 샌드박스 격리 | Docker 컨테이너 또는 firejail 로 파일 시스템 접근 제한 |
-| **자격 증명** | 전용 사용자 계정 | 최소 권한 원칙 적용, 민감 디렉터리 마운트 제외 |
-| **프롬프트** | 입력 검증 | 외부 콘텐츠 처리 전 프롬프트 인젝션 필터링 적용 |
-| **모니터링** | 이상 탐지 | 에이전트 API 호출 패턴 모니터링, 비정상 접근 즉시 차단 |
-| **공급망** | 의존성 감사 | `npm audit` / `pnpm audit` 정기 실행, lockfile 무결성 검증 |
-
-### 보안 체크리스트
-- [ ] OpenClaw를 전용 사용자 계정(비root)으로 실행  
-- [ ] Docker 컨테이너 내 `--read-only` 플래그와 함께 실행  
-- [ ] `~/.ssh`, `~/.aws` 등 민감 디렉터리를 마운트에서 제외  
-- [ ] 모든 외부 통신에 HTTPS 적용  
-- [ ] Allowlist 로 허용된 사용자만 접근 허가  
-- [ ] 정기적인 의존성 보안 감사 수행  
-
-*출처: CrowdStrike "What Security Teams Need to Know About OpenClaw", euno.news (2026‑02‑22) [14]*  
-
----
-
-## **Security Risks and Mitigations** *(English Summary)*
-- **Prompt Injection**: Malicious content injected via `SKILL.md` or external documents can cause the agent to execute unintended commands.  
-- **Credential Exposure**: The agent’s file‑system access may reveal SSH keys,
+      - OPENCLAW_GATEWAY_PASSWORD_FILE=/

@@ -1,6 +1,82 @@
 {
   "entries": [
     {
+      "id": "94e378a6-39aa-48f1-941b-9282ce9ebbda",
+      "timestamp": "2026-03-11T12:26:41.683Z",
+      "actionType": "quality_score",
+      "issueNumber": 490,
+      "issueTitle": " [요청] Model Merging for Large Language Models – 방법, 응용 및 미래 방향",
+      "documentSlug": "ai/model-merging-for-large-language-models",
+      "documentTitle": " [요청] Model Merging for Large Language Models – 방법, 응용 및 미래 방향",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "cf748782-0242-45be-a53b-61f077634848",
+      "timestamp": "2026-03-11T12:21:40.307Z",
+      "actionType": "modify",
+      "issueNumber": 492,
+      "issueTitle": " [업데이트] OpenClaw 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법",
+      "documentSlug": "projects/openclaw-complete-guide",
+      "documentTitle": "OpenClaw 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] OpenClaw 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 17,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "a38da53c-05c7-42e0-b470-ec81b8e940a7",
+      "timestamp": "2026-03-11T12:19:59.482Z",
+      "actionType": "generate",
+      "issueNumber": 490,
+      "issueTitle": " [요청] Model Merging for Large Language Models – 방법, 응용 및 미래 방향",
+      "documentSlug": "ai/model-merging-for-large-language-models",
+      "documentTitle": "Model Merging for Large Language Models – 방법, 응용 및 미래 방향",
+      "summary": "새 문서 \"Model Merging for Large Language Models – 방법, 응용 및 미래 방향\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3464
+            },
+            {
+              "step": "outline",
+              "durationMs": 9211
+            },
+            {
+              "step": "write",
+              "durationMs": 21859
+            },
+            {
+              "step": "review",
+              "durationMs": 6152
+            }
+          ],
+          "totalDurationMs": 40686,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1862,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "03b92e27-1bba-4a78-8500-19fec63109f0",
       "timestamp": "2026-03-11T12:15:28.529Z",
       "actionType": "maintain",
@@ -12776,5 +12852,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-11T12:15:28.529Z"
+  "lastUpdated": "2026-03-11T12:26:41.684Z"
 }
