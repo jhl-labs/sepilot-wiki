@@ -301,6 +301,109 @@ logging:
 
 ---
 
+## 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법
+> **출처**: *MemoClaw Namespaces – 기억을 격리하세요* (euno.news) [※]
+
+OpenClaw 에이전트를 여러 프로젝트에서 동시에 활용할 경우, 프로젝트 A의 메모리가 프로젝트 B의 회상에 섞여 들어갈 위험이 있습니다. 예를 들어 프론트엔드 배포에 대해 물어보면 전혀 다른 레포의 CI 파이프라인 정보가 반환될 수 있습니다. **네임스페이스**는 이러한 메모리 혼합을 방지하기 위한 라벨 기반 격리 메커니즘입니다.
+
+### 1️⃣ 네임스페이스 개념
+- **네임스페이스**는 메모리 그룹을 구분하는 라벨이며, 동일 라벨을 가진 메모리만 서로 조회·리콜됩니다.  
+- 기본값은 `default`(빈 문자열)이며, 명시적으로 지정하지 않으면 모든 메모리가 여기 저장됩니다.  
+- `--namespace` 플래그를 지원하는 모든 `memoclaw`(OpenClaw 메모리 CLI) 명령에 적용됩니다.
+
+### 2️⃣ 설정 방법
+#### 메모리 저장 시 네임스페이스 지정
+```bash
+memoclaw store "Frontend uses Next.js 14 with app router" \
+  --namespace website-redesign --tags "stack"
+```
+
+#### 특정 네임스페이스에서만 회상
+```bash
+memoclaw recall "what framework are we using" \
+  --namespace website-redesign
+```
+
+#### 네임스페이스 내 메모리 목록
+```bash
+memoclaw list --namespace website-redesign
+```
+
+#### 전체 네임스페이스 확인
+```bash
+memoclaw namespace list
+```
+
+#### 네임스페이스별 메모리 개수 확인
+```bash
+memoclaw namespace stats
+```
+
+> **주의**: 지정된 네임스페이스에 저장된 메모리는 `--namespace` 없이 실행한 `recall`에서는 절대 나타나지 않습니다.
+
+### 3️⃣ 베스트 프랙티스 (전략)
+
+| 전략 | 설명 | 언제 사용 |
+|------|------|-----------|
+| **Strategy 1 – 프로젝트당 하나의 네임스페이스** | 각 프로젝트(또는 레포)마다 고유 네임스페이스를 부여합니다. 가장 직관적이며 관리가 쉽습니다. | 다수의 독립 프로젝트를 동시에 운영할 때 |
+| **Strategy 2 – Shared + Project Namespaces** | 공통 지식(코딩 스타일, 커밋 규칙 등)은 `default`에 저장하고, 프로젝트‑특정 사실은 별도 네임스페이스에 보관합니다. 두 번 호출해야 하지만, 공유·전용 정보를 명확히 구분할 수 있습니다. | 팀 전체에 적용되는 정책과 프로젝트‑별 세부 정보가 모두 필요할 때 |
+| **Strategy 3 – 클라이언트 격리** | 프리랜서·에이전시가 여러 고객을 다룰 경우, 각 고객을 별도 네임스페이스로 구분해 프라이버시 경계를 확실히 합니다. | 고객 데이터가 섞이는 것을 절대 허용할 수 없을 때 |
+| **Strategy 4 – 환경 네임스페이스** | `prod`, `staging`, `dev` 등 환경별로 메모리를 분리합니다. | 동일 코드베이스가 여러 환경에 배포될 때 |
+
+#### 네이밍 규칙
+- 소문자와 하이픈(`-`)만 사용 (예: `api-service`, `client-acme`)  
+- 공백, 대문자, 특수문자 금지  
+- 레포 이름, 프로젝트 슬러그, 환경명 등 직관적인 식별자를 사용  
+
+#### 예시 명령
+```bash
+# 프로젝트 A (API 서비스)
+memoclaw store "Rate limiting set to 100 req/min per user" \
+  --namespace api-service --tags "config"
+
+# 프로젝트 B (Docs 사이트)
+memoclaw store "Docs use Mintlify, deploy via GitHub integration" \
+  --namespace docs-site --tags "infra"
+
+# 클라이언트 C
+memoclaw store "Client wants Material UI, no Tailwind" \
+  --namespace client-acme --tags "preference"
+```
+
+### 4️⃣ 기존 메모를 네임스페이스로 마이그레이션
+1. **전체 내보내기**  
+   ```bash
+   memoclaw export -O all-memories.json
+   ```
+2. **JSON 편집** – 각 객체에 `"namespace": "<target>"` 필드 추가  
+3. **다시 가져오기**  
+   ```bash
+   memoclaw import namespaced-memories.json
+   ```
+
+또는 디렉터리 기반 마이그레이션:
+```bash
+memoclaw migrate ~/projects/acme/docs/ --namespace client-acme
+memoclaw migrate ~/notes/general/          # default namespace
+```
+
+### 5️⃣ 언제 네임스페이스를 사용하지 않아도 되는가?
+| 상황 | 권장 여부 |
+|------|-----------|
+| 단일 프로젝트만 작업 | **사용 안 함** |
+| 에이전트가 한 번에 하나의 컨텍스트만 처리 | **사용 안 함** |
+| 메모리 총량이 100개 미만 | **사용 안 함** |
+| **다중 프로젝트** 혹은 **클라이언트 격리**가 필요 | **사용** |
+| 메모리 풀이 빠르게 증가 | **사용** |
+
+### TL;DR
+- **네임스페이스**는 메모리를 격리합니다 – 모든 명령에 `--namespace` 플래그를 사용하세요.  
+- **One‑namespace‑per‑project**는 가장 깔끔하고 이해하기 쉽습니다.  
+- **Shared + project** 전략은 공통 정책을 `default`에 두고 프로젝트‑특정 정보를 별도 라벨에 보관합니다.  
+- 필요 시 두 네임스페이스를 순차적으로 `recall` 하면 자동 병합이 가능합니다.
+
+---
+
 ## QMD 하이브리드 검색 및 메모리 최적화
 > **출처**: OpenClaw QMD: 로컬 하이브리드 검색으로 10배 더 똑똑한 메모리 (euno.news) [17]
 
@@ -316,7 +419,7 @@ QMD는 **세 단계**의 검색 파이프라인을 결합해 기존 “전체 ME
 이 하이브리드 접근은 **관련 스니펫만 반환**하고, **결과당 700 문자(기본 6개)** 로 제한해 토큰 사용량을 크게 절감합니다.
 
 ### 2️⃣ 메모리 토큰 한계와 해결 방안
-- **기존 방식**: `MEMORY.md` 전체 파일을 매 프롬프트에 삽입 → 500 토큰 이하에서는 정상, 5 000 토큰 이상이면 **Token explosion** 발생, 비용 급증 및 **Relevance collapse** 로 정확도 저하.  
+- **기존 방식**: `MEMORY.md` 전체 파일을 매 프롬프트에 삽입 → 5 000 토큰 이상이면 **Token explosion** 발생, 비용 급증 및 **Relevance collapse** 로 정확도 저하.  
 - **QMD 해결**  
   - **인덱싱**: Markdown 파일을 로컬 SQLite + 벡터 DB에 저장.  
   - **선별 반환**: 검색 결과는 최대 6개, 각 700 문자 → 약 **4 200 문자** (≈ 2 800 토큰) 로 제한.  
