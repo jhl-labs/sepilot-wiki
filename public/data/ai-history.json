@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "6667fc26-b446-4567-9cd0-773fef157924",
+      "timestamp": "2026-03-11T00:28:58.007Z",
+      "actionType": "quality_score",
+      "issueNumber": 475,
+      "issueTitle": " [요청] GitHub Secret Scanning Pattern Updates – March 2026",
+      "documentSlug": "security/github-secret-scanning-pattern-updates-march-2026",
+      "documentTitle": " [요청] GitHub Secret Scanning Pattern Updates – March 2026",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "dfb78d39-ebd8-4ceb-ac52-2b9deeb23e1e",
+      "timestamp": "2026-03-11T00:28:44.342Z",
+      "actionType": "quality_score",
+      "issueNumber": 477,
+      "issueTitle": " [요청] AI‑Driven SDLC Bottlenecks: Causes and Mitigations",
+      "documentSlug": "ai/ai-driven-sdlc-bottlenecks-causes-and-mitigations",
+      "documentTitle": " [요청] AI‑Driven SDLC Bottlenecks: Causes and Mitigations",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "d1a33256-9c33-4610-a834-277ceca76fe0",
+      "timestamp": "2026-03-11T00:28:29.533Z",
+      "actionType": "generate",
+      "issueNumber": 475,
+      "issueTitle": " [요청] GitHub Secret Scanning Pattern Updates – March 2026",
+      "documentSlug": "security/github-secret-scanning-pattern-updates-march-2026",
+      "documentTitle": "GitHub Secret Scanning Pattern Updates – March 2026",
+      "summary": "새 문서 \"GitHub Secret Scanning Pattern Updates – March 2026\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4871
+            },
+            {
+              "step": "outline",
+              "durationMs": 11144
+            },
+            {
+              "step": "write",
+              "durationMs": 22420
+            },
+            {
+              "step": "review",
+              "durationMs": 6534
+            }
+          ],
+          "totalDurationMs": 44969,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2005,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "b0a5c85e-6b5b-41b5-8968-44f8a2d80c0c",
+      "timestamp": "2026-03-11T00:27:32.018Z",
+      "actionType": "generate",
+      "issueNumber": 477,
+      "issueTitle": " [요청] AI‑Driven SDLC Bottlenecks: Causes and Mitigations",
+      "documentSlug": "ai/ai-driven-sdlc-bottlenecks-causes-and-mitigations",
+      "documentTitle": "AI‑Driven SDLC Bottlenecks: Causes and Mitigations",
+      "summary": "새 문서 \"AI‑Driven SDLC Bottlenecks: Causes and Mitigations\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6197
+            },
+            {
+              "step": "outline",
+              "durationMs": 9661
+            },
+            {
+              "step": "write",
+              "durationMs": 15864
+            },
+            {
+              "step": "review",
+              "durationMs": 6075
+            }
+          ],
+          "totalDurationMs": 37797,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 1580,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "491871e7-7d0f-41e7-8d63-e5664c999159",
       "timestamp": "2026-03-11T00:25:10.548Z",
       "actionType": "modify",
@@ -12276,5 +12394,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-11T00:25:10.549Z"
+  "lastUpdated": "2026-03-11T00:28:58.008Z"
 }

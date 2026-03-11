@@ -3,8 +3,8 @@
     {
       "id": 477,
       "number": 477,
-      "title": "문서 요청 #477",
-      "body": "",
+      "title": " [요청] AI‑Driven SDLC Bottlenecks: Causes and Mitigations",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/shifting-bottleneck-how-ai-is-reshaping-the-softwa-658a78)\n**관련도**: 86/100\n**핵심 토픽**: AI‑augmented SDLC, 코드 리뷰 에이전트, 생산성 파라독스\n\n## 뉴스 요약\nAI 약속과 현실 소프트웨어 개발 산업은 인공지능의 통합으로 전례 없는 변화를 목격했습니다...\n\n## 상세 내용\nSource: DZone DevOps\nThe AI Promise and the Reality\n소프트웨어 개발 산업은 인공지능 도구를 개발 라이프사이클에 통합하면서 전례 없는 변화를 겪고 있습니다. GitHub의 2024년 개발자 설문조사에 따르면, AI 코딩 어시스턴트를 사용하는 개발자 87%가 개발 주기가 크게 빨라졌으며, 일상적인 코딩 작업에서 생산성이 최대 41%까지 향상된다고 보고했습니다[11]. 그러나 역설적으로, 많은 조직은 개발의 한 단계만 가속화하면 파이프라인의 다른 부분에서 병목 현상이 드러나거나 새롭게 발생한다는 사실을 발견하고 있습니다.\n제가 “변화하는 병목 현상 패러독스”라고 부르는 이 현상은 오늘날 소프트웨어 엔지니어링 팀이 직면한 가장 중요한 과제 중 하나입니다. Bain &#x26; Company의 2025년 기술 보고서에 따르면, 소프트웨어 기업의 3분의 2가 생성형 AI 도구를 도입했음에도 불구하고 실제 상황은 냉혹합니다. AI 어시스턴트를 사용하는 팀은 생산성이 겨우 10%에서 15% 정도만 향상되며, 절감된 시간조차도 고부가가치 작업으로 재배치되지 않는 경우가 많다고 합니다[4].\n\n## 판단 근거\nAI가 소프트웨어 개발 라이프사이클을 재구성하면서 발생하는 새로운 병목 현상은 기존 ‘AI 코드 리뷰 에이전트’ 문서와는 별도 주제로, 구체적인 원인·대응 방안을 다룰 필요가 있음.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-11T00:23:18.527Z",
-      "updated_at": "2026-03-11T00:23:18.532Z",
+      "updated_at": "2026-03-11T00:27:32.024Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/477",
-      "documentSlug": "ai/477",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/477.md",
+      "documentSlug": "ai/ai-driven-sdlc-bottlenecks-causes-and-mitigations",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai-driven-sdlc-bottlenecks-causes-and-mitigations.md",
       "comments": 0
     },
     {
       "id": 475,
       "number": 475,
-      "title": "문서 요청 #475",
-      "body": "",
+      "title": " [요청] GitHub Secret Scanning Pattern Updates – March 2026",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/secret-scanning-pattern-updates-march-2026-c6945b)\n**관련도**: 86/100\n**핵심 토픽**: GitHub Secret Scan, Pattern Update, Security\n\n## 뉴스 요약\nGitHub 비밀 스캔은 탐지기, 검증기 및 분석기를 지속적으로 업데이트합니다. 2026년 3월에 새로 추가된 내용은 다음과 같습니다. - 15개의 제공처에서 28개의 새로운 비밀 탐지기.\n\n## 상세 내용\nSource: GitHub Changelog\nGitHub 비밀 스캐닝은 탐지기, 검증기 및 분석기를 지속적으로 업데이트합니다. 2026년 3월에 추가된 내용은 다음과 같습니다.\n15개 공급업체의 28개 새로운 비밀 탐지기가 추가되었으며, 여기에는 Lark, Vercel, Snowflake, Supabase가 포함됩니다.\nAirtable, Databricks, Heroku, PostHog, Shopify 등을 포함한 39개의 탐지기에 대해 푸시 보호가 기본적으로 활성화되었습니다.\nAirtable, DeepSeek, npm, Pinecone, Sentry 토큰에 대한 유효성 검사가 추가되었습니다.\nDetectors added\nSecret scanning now automatically detects the following new secret types in your repositories.\nProviderSecret typePartnerUserPush protection (default)\nAzureazure_active_directory_application_id, azure_active_directory_application_secret✓(configurable)\nBaidubaiduai_api_key✓✓(configurable)\nFieldguidefieldguide_api_token✓(configurable)\nFigmafigma_scim_token✓✓(configurable)\nFlickrflickr_api_key✓(configurable)\nLangchainlangsmith_license_key✓(configurable)\nLangchainlangsmith_scim_bearer_token✓(configurable)\nLarklark_apaas_client_id, lark_apaas_client_secret✓✓✓\nLarklark_app_id, lark_app_secret✓✓(configurable)\nLarklark_mcp_grant_token✓(configurable\n\n## 판단 근거\nGitHub 비밀 스캐닝 탐지기·검증기·분석기 최신 업데이트는 기존 위키에 다루어지지 않으며, 보안 담당자에게 중요한 최신 패턴 정보를 제공해야 함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,10 +56,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-11T00:21:25.012Z",
-      "updated_at": "2026-03-11T00:21:25.017Z",
+      "updated_at": "2026-03-11T00:28:29.539Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/475",
-      "documentSlug": "security/475",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/475.md",
+      "documentSlug": "security/github-secret-scanning-pattern-updates-march-2026",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/github-secret-scanning-pattern-updates-march-2026.md",
       "comments": 0
     },
     {
@@ -4009,5 +4009,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-11T00:23:18.532Z"
+  "lastUpdated": "2026-03-11T00:28:29.539Z"
 }
