@@ -1,9 +1,19 @@
 {
-  "timestamp": "2026-03-11T06:27:12.581Z",
+  "timestamp": "2026-03-11T06:25:11.735Z",
   "dryRun": false,
-  "totalIssuesScanned": 15,
+  "totalIssuesScanned": 20,
   "categories": {
     "draft_review": [
+      {
+        "number": 484,
+        "title": " [요청] Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 483,
+        "title": " [요청] Gemini Code Assist – Finish Changes & Outlines 기능 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 474,
         "title": " [요청] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
@@ -82,11 +92,67 @@
         "daysSinceUpdate": 1
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 482,
+        "title": " [업데이트] The Brief Method – Claude Code 프롬프트 엔지니어링",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 481,
+        "title": " [업데이트] Gemini Chrome 통합 및 지역별 롤아웃",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 480,
+        "title": " [업데이트] Claude Code 팀 온보딩 및 30일 채택 로드맵",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 484,
+      "title": " [요청] Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 483,
+      "title": " [요청] Gemini Code Assist – Finish Changes & Outlines 기능 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 482,
+      "title": " [업데이트] The Brief Method – Claude Code 프롬프트 엔지니어링"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 481,
+      "title": " [업데이트] Gemini Chrome 통합 및 지역별 롤아웃"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 480,
+      "title": " [업데이트] Claude Code 팀 온보딩 및 30일 채택 로드맵"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 484,
+      "title": " [요청] Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/microsoft-patch-tuesday-2026-03-cve.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 483,
+      "title": " [요청] Gemini Code Assist – Finish Changes & Outlines 기능 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/gemini-code-assist-finish-changes-outlines.md"
+    }
+  ],
+  "actionCount": 7,
   "maxActions": 60
 }
