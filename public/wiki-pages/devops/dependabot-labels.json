@@ -2,7 +2,7 @@
   "title": "Dependabot 라벨 설정 가이드",
   "slug": "devops/dependabot-labels",
   "content": "\n# Dependabot 라벨 설정 가이드\n\n## 배경\nDependabot이 PR을 생성할 때 `dependencies` 라벨을 자동으로 붙이도록 설정하려면, 해당 라벨이 레포지토리에 존재해야 합니다. 현재 레포지토리에는 `dependencies` 라벨이 없어서 Dependabot이 라벨을 추가하지 못하고 있습니다. 이 문서는 라벨을 생성하고 `dependabot.yml` 파일을 올바르게 구성하는 절차를 설명합니다.\n\n## 1. 라벨 생성하기\n1. 레포지토리 메인 페이지에서 **Issues** 탭을 클릭합니다.\n2. 오른쪽 사이드바의 **Labels** 메뉴를 선택합니다.\n3. **New label** 버튼을 클릭합니다.\n4. **Name** 필드에 `dependencies` 를 입력하고, 색상은 원하는 대로 선택합니다.\n5. **Create label** 버튼을 눌러 라벨을 생성합니다.\n\n> **Tip**: 다른 자동 라벨(예: `security`, `chore`)도 필요에 따라 미리 만들어 두면 향후 자동화 흐름을 관리하기 쉽습니다.\n\n## 2. `dependabot.yml` 파일 검증하기\n`dependabot.yml` 파일에 라벨 이름이 올바르게 지정되어 있는지 확인합니다. 예시:\n\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # <-- 여기 라벨 이름이 정확히 일치해야 합니다.\n```\n\n- 라벨 이름은 대소문자를 구분합니다.\n- 라벨이 존재하지 않으면 Dependabot은 PR을 생성하지만 라벨을 붙이지 못합니다.\n\n## 3. 라벨 적용 확인\n1. Dependabot이 새 PR을 생성하면 PR 페이지 오른쪽 라벨 섹션에 `dependencies` 라벨이 자동으로 표시됩니다.\n2. 라벨이 보이지 않으면 **2** 단계의 `dependabot.yml` 설정과 **1** 단계의 라벨 존재 여부를 다시 확인합니다.\n\n## 4. 문제 해결\n- **라벨이 여전히 적용되지 않을 때**: 레포지토리 캐시가 오래된 경우가 있습니다. `dependabot.yml` 파일을 커밋하고 푸시한 뒤, Dependabot이 다음 스케줄에 맞춰 PR을 다시 생성하도록 기다립니다.\n- **다른 라벨이 필요할 때**: `dependabot.yml` 의 `labels` 배열에 추가 라벨을 나열하면, PR에 여러 라벨을 동시에 붙일 수 있습니다.\n\n## 5. 참고 자료\n- GitHub 공식 라벨 관리 문서: *공식 문서를 참조해주세요* (라벨 생성 방법에 대한 최신 가이드는 GitHub Docs에 있습니다).\n\n---\n\n이 가이드를 적용한 뒤, Dependabot이 정상적으로 `dependencies` 라벨을 붙이는지 확인해 주세요.\n",
-  "lastModified": "2026-03-11T18:20:35Z",
+  "lastModified": "2026-03-12T00:20:17Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,11 +15,11 @@
   ],
   "history": [
     {
-      "sha": "ea3c10d",
-      "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
+      "sha": "f4be486",
+      "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-11T18:20:35Z",
+      "date": "2026-03-12T00:20:17Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
