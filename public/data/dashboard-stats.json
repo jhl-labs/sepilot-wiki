@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-13T08:48:53.538Z",
+  "collectedAt": "2026-03-13T09:48:17.812Z",
   "overview": {
     "totalDocuments": 205,
     "publishedDocuments": 103,
     "draftDocuments": 102,
     "openRequests": 116,
     "closedRequests": 19,
-    "totalAIActions": 545
+    "totalAIActions": 547
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 153,
-      "documentsCreated": 47,
-      "documentsModified": 54,
-      "tavilyApiCalls": 141,
-      "tavilyResults": 378,
-      "estimatedTokens": 103902,
-      "totalPipelineDurationMs": 2320123
+      "aiActions": 149,
+      "documentsCreated": 44,
+      "documentsModified": 53,
+      "tavilyApiCalls": 132,
+      "tavilyResults": 351,
+      "estimatedTokens": 95721,
+      "totalPipelineDurationMs": 2130025
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-13T09:18:20.709Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-13T09:18:10.438Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-11T18:21:57.400Z",
       "actionType": "quality_score",
@@ -217,38 +237,18 @@
       "durationMs": 72035,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3155
-    },
-    {
-      "timestamp": "2026-03-11T06:23:02.820Z",
-      "actionType": "generate",
-      "issueNumber": 483,
-      "documentTitle": "Gemini Code Assist – Finish Changes와 Outlines 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 71588,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3408
-    },
-    {
-      "timestamp": "2026-03-11T06:21:48.284Z",
-      "actionType": "modify",
-      "issueNumber": 482,
-      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 532,
-      "totalEstimatedTokens": 361601,
-      "avgDurationMs": 52459
-    },
     "unknown": {
-      "totalActions": 13,
+      "totalActions": 14,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 533,
+      "totalEstimatedTokens": 361601,
+      "avgDurationMs": 52459
     }
   }
 }
