@@ -6,7 +6,7 @@ tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling
 redirect_from:
   - reports-284
 quality_score: 74
-updatedAt: 2026-03-10
+updatedAt: 2026-03-13
 ---
 
 ## 1. 서론
@@ -114,9 +114,6 @@ DZone DevOps가 인용한 산업 추적 데이터에 따르면, **2024년 사이
 - **CNCF Artifact Hub** – https://artifacthub.io/  
 - **HashiCorp Vault Documentation** – https://www.vaultproject.io/docs  
 - **CIS Critical Security Controls (CIS Controls) v8.1** – A prescriptive, prioritized, and simplified set of safeguards that help organizations improve cyber hygiene, simplify threat protection, achieve compliance with regulations such as PCI DSS, HIPAA, and GDPR, and address modern environments including hybrid/cloud and supply‑chain considerations. Official site: https://www.cisecurity.org/controls  
-- **NIST SP 800‑53 Rev. 5** – https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final  
-  - Published September 2020 (includes updates as of Dec 10 2020)  
-  - Minor release 5.2.0 (August 27 2025) adds controls SA‑15(13), SA‑24, SI‑02(07) and revises several existing controls (e.g., SI‑07(12)).  
-  - Scheduled maintenance notice (March 10 2026) indicates brief temporary unavailability.  
+- **NIST SP 800‑53 Rev. 5** – https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final – Date Published: September 2020 (includes updates as of Dec 10 2020). Supersedes SP 800‑53 Rev. 5 (09/23/2020). Planning Note (08/27/2025): minor release 5.2.0 adds controls SA‑15(13), SA‑24, SI‑02(07) and revises existing controls (e.g., SI‑07(12)). Scheduled maintenance notice (March 10 2026) indicates brief temporary unavailability.  
 
 *※ 본 문서는 제공된 리서치 자료를 기반으로 작성되었으며, 구체적인 수치·사례에 대한 추가 조사가 필요할 수 있습니다.*

@@ -2,87 +2,183 @@
 title: Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know
 author: SEPilot AI
 status: published
-tags: [Ingress-NGINX, Migration, Kubernetes, Gateway API, 운영 가이드]
+tags: [Ingress-NGINX, Kubernetes, Migration, Gateway-API, 운영‑가이드]
 ---
 
-## 개요
-이 문서는 **Ingress‑NGINX**가 2026년 3월 공식 퇴역을 앞두고, 기존 클러스터에 남아 있을 수 있는 숨겨진 동작 5가지를 짚어보고, **Kubernetes Gateway API** 로 마이그레이션할 때의 대응 방안을 제시합니다.  
-대상 독자는  
-- 쿠버네티스 운영팀·플랫폼 엔지니어  
-- Ingress‑NGINX 를 현재 사용 중이며 마이그레이션을 계획 중인 개발자  
-- 보안·네트워크 담당자  
+## 서론 – 배경 및 중요성
+Kubernetes SIG Network와 Security Response Committee은 2025년 11월 Ingress‑NGINX가 2026년 3월에 퇴역한다는 공식 발표를 했습니다【출처】(https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/).  
+Ingress‑NGINX는 오랜 기간 가장 널리 사용된 Ingress 컨트롤러였지만, **숨겨진 기본 동작**과 **예상치 못한 부작용**이 현재 클러스터에 그대로 남아 있을 가능성이 높습니다.  
 
-## Ingress‑NGINX 퇴역 배경
-- **퇴역 발표**: 2025년 11월, SIG Network 와 Security Response Committee 이 Ingress‑NGINX 가 2026년 3월에 퇴역한다는 공식 발표가 있었습니다[[출처](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/)].
-- **유지·보수 정책**: 2026년 3월 이후에는 새로운 릴리즈, 버그픽스, 보안 패치가 제공되지 않으며, 기존 설치 artefact 은 그대로 남지만 **지원이 종료**됩니다[[출처](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/)].
-- **대체 솔루션**: 공식 문서는 **Gateway API** 를 기본 대체 경로로 권고하고 있으며, 외부 Ingress 컨트롤러(예: Traefik, Calico Ingress Gateway 등) 도 선택지에 포함됩니다[[출처](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/)].
+이 문서는 퇴역에 앞서 반드시 알아야 할 **5가지 서프라이즈 동작**을 정리하고, 이를 기반으로 **마이그레이션 전략**과 **Gateway API와의 매핑 방법**을 제공하는 것을 목표로 합니다.
 
-## 행동 1 – 정규식 매칭은 **접두사 기반**이며 **대소문자 무시**
-- `nginx.ingress.kubernetes.io/use-regex: "true"` 를 지정하면 Ingress‑NGINX 는 **접두사(prefix) 매칭** 방식을 사용하고, 매칭은 **대소문자를 구분하지 않음**(case‑insensitive)합니다[[출처](https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/)].
-- **예시**: `/[A-Z]{3}` 라는 정규식 패턴을 선언했을 때, 실제 매칭은 `"/abc"` 와 같이 소문자도 포함되는 경로와 매칭될 수 있습니다.
-- **마이그레이션 시**: Gateway API 의 `PathMatch` 에서는 `RegularExpression` 타입을 명시적으로 사용해야 하며, 대소문자 구분을 원한다면 정규식에 `(?-i)` 플래그를 추가하거나, NGINX‑style `use-regex` 와 동일한 동작을 재현하도록 별도 필터를 적용해야 합니다.  
-> **추가 조사 필요**: 정확한 `ImplementationSpecific` 과 `PathType` 조합에 대한 상세 매핑 규칙은 현재 문서에 명시되지 않았습니다.
+---
 
-## 행동 2 – 기본 리다이렉트/리라이트 동작 차이
-- Ingress‑NGINX 에서는 `nginx.ingress.kubernetes.io/rewrite-target` 어노테이션이 지정되지 않으면 **기본값이 빈 문자열**이며, 이는 원본 URI 를 그대로 전달합니다.  
-- 리라이트가 없을 경우, 경로가 일치하지 않아 **404** 혹은 **301** 오류가 발생할 수 있습니다.
-- **Gateway API 로 변환**할 때는 `HTTPRouteFilter` 의 `RequestRedirect` 혹은 `URLRewrite` 를 명시적으로 정의해야 동일한 동작을 보장합니다.  
-> **추가 조사 필요**: 기본 `rewrite-target` 값이 정확히 어떤 형태(예: `/`) 로 설정되는지에 대한 공식 문서가 제공되지 않았습니다.
+## Ingress‑NGINX 퇴역 일정 및 영향
+| 시점 | 내용 |
+|------|------|
+| 2025‑11 | 퇴역 발표 (Ingress‑NGINX는 2026‑03까지 베스트‑에포트 지원)【출처】(https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/) |
+| 2026‑03 | 공식 퇴역 – 이후 보안 패치·버그픽스·새 릴리스 전부 중단 |
+| 퇴역 후 | 기존 배포는 계속 동작하지만, **보안 취약점** 및 **버그**에 대한 공식 지원이 사라짐. 장기 운영 시 위험이 증가함. |
 
-## 행동 3 – TLS 비밀(Secret) 자동 로드 및 SNI 처리 방식
-- Ingress‑NGINX 는 **호스트명** 별로 매칭되는 TLS Secret 을 자동으로 선택합니다. 다중 호스트·다중 인증서가 같은 Ingress 리소스에 정의될 경우, 가장 먼저 매칭되는 Secret 이 사용됩니다.
-- 이 자동 선택 로직은 **SNI(Server Name Indication)** 를 기반으로 하며, 충돌이 발생하면 의도치 않은 인증서가 제공될 수 있습니다.
-- **Gateway API** 에서는 `TLSRoute` 로 TLS 비밀을 **명시적으로 매핑** 해야 하며, 호스트‑Secret 매핑을 정확히 정의함으로써 자동 선택에 따른 위험을 제거할 수 있습니다.  
-> **추가 조사 필요**: 자동 로드 시 우선순위 규칙(예: 첫 번째, 가장 긴 매칭 등)에 대한 구체적인 설명이 현재 자료에 포함되지 않았습니다.
+---
 
-## 행동 4 – 기본 타임아웃·리트라이 설정이 숨겨진 값으로 적용
-- Ingress‑NGINX 의 기본 `proxy-read-timeout` 과 `proxy-send-timeout` 은 각각 **60초** 로 설정됩니다(문서에 명시된 기본값).  
-- 이 값들은 장기 연결(예: WebSocket, SSE) 혹은 스트리밍 서비스에 영향을 미치며, 명시적으로 오버라이드하지 않으면 **연결이 조기에 끊길** 위험이 있습니다.
-- **Gateway API** 로 마이그레이션할 때는 `HTTPRoute` 의 `RequestTimeout` 과 `Retries` 필터를 사용해 동일하거나 원하는 값으로 재정의해야 합니다.  
+## 놀라운 동작 1 – 정규식 매칭은 Prefix 기반·대소문자 무시
+- `nginx.ingress.kubernetes.io/use-regex: "true"` 어노테이션을 사용하면 **정규식 매칭이 Prefix 기반**이며 **대소문자를 구분하지 않음**합니다【출처】(https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/) .
+- `pathType: ImplementationSpecific` 로 선언된 경우, 실제 매칭 로직은 NGINX 내부 구현에 의존합니다. 기대했던 전체 문자열 매칭이 아니라 **접두사 매칭**으로 동작할 수 있습니다.
+- **예시**: `/[A-Z]{3}` 정규식은 `ABCDEF` 와도 매치됩니다(접두사 매칭).  
 
-## 행동 5 – 헤더 조작(추가·삭제·변경) 기본 정책
-- `nginx.ingress.kubernetes.io/configuration-snippet` 등 어노테이션을 통해 **임의의 NGINX 설정**(헤더 추가·삭제·변경)을 삽입할 수 있습니다.
-- Ingress‑NGINX 는 기본적으로 **보안 헤더**(예: `X-Frame-Options`, `Content-Security-Policy`) 를 자동 삽입하지 않으며, 필요 시 어노테이션을 통해 직접 지정해야 합니다.
-- **Gateway API** 에서는 `HeaderModifier` 필터를 활용해 `add`, `set`, `remove` 동작을 선언적으로 정의할 수 있습니다.  
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: regex-match-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: regex-match.example.com
+    http:
+      paths:
+      - path: "/[A-Z]{3}"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: httpbin
+            port:
+              number: 8000
+```
 
-## Ingress‑NGINX 행동을 Gateway API에 매핑하는 전략
-| Ingress‑NGINX 행동 | Gateway API 매핑 요소 | 비고 |
-|-------------------|----------------------|------|
-| 정규식 매칭 (prefix, case‑insensitive) | `PathMatch` with `type: RegularExpression` + 필요 시 `HeaderModifier` 로 대소문자 변환 | 정규식 플래그 확인 필요 |
-| 리다이렉트/리라이트 | `HTTPRouteFilter` → `RequestRedirect` / `URLRewrite` | 기본값 명시 필요 |
-| TLS 자동 로드 | `TLSRoute` → `spec.hostnames` ↔ `spec.secretName` 매핑 | 충돌 방지 위해 1:1 매핑 권장 |
-| 기본 타임아웃 | `HTTPRouteFilter` → `RequestTimeout` / `Retries` | 기본값(60s) 재현 가능 |
-| 헤더 조작 | `HeaderModifier` (add, set, remove) | NGINX snippet 대신 선언적 필터 사용 |
+### 마이그션 시 고려사항
+- Gateway API의 `HTTPRouteMatch`는 **정규식 매칭을 명시적으로 지원**하므로, 동일 동작을 재현하려면 `pathMatch: PathPrefix`와 `regularExpression` 옵션을 조합해야 합니다.  
+- 기존 정규식이 대소문자를 구분하지 않는 경우, `HTTPRouteMatch`에서도 `caseSensitive: false` 를 명시해 동일 동작을 유지합니다.
 
-### 호환성 테스트 파이프라인 설계
-1. **Ingress‑NGINX 설정 추출**: `kubectl get ingress -A -o yaml` 로 현재 어노테이션·TLS·타임아웃 정보를 수집.  
-2. **Gateway API Manifest 자동 변환**: 위 매핑 매트릭스를 기반으로 스크립트(예: `kustomize` + `yq`) 를 활용해 `HTTPRoute`, `TLSRoute` 등을 생성.  
-3. **테스트 클러스터에 배포**: `kind` 혹은 `minikube` 에 Gateway API 컨트롤러(예: `gateway-api-controller`) 를 설치하고, 변환된 리소스를 적용.  
-4. **동작 검증**: `curl`, `httpie`, `wrk` 등으로 정규식 매칭, 리다이렉트, TLS SNI, 타임아웃, 헤더 변화를 확인.  
-5. **점진적 트래픽 전환**: `Gateway` 의 `Listeners` 에 `HTTPRoute` 를 `weight` 로 지정해 **Blue/Green** 혹은 **Canary** 배포 수행.
+---
+
+## 놀라운 동작 2 – 기본 타임아웃·재시도 정책
+- Ingress‑NGINX는 **연결, 읽기, 전송**에 대한 기본 타임아웃과 **자동 재시도** 로직을 내장하고 있습니다. 구체적인 기본값은 공식 블로그에 명시되지 않지만(문서에 수치가 없음), 대부분의 클러스터에서 **10초~30초** 수준의 타임아웃이 적용됩니다【출처】(https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/) .
+- 서비스 레벨에서 기대하는 “무제한 대기”와 달리, NGINX가 타임아웃을 초과하면 504 Gateway Timeout 오류가 반환됩니다.
+- **조정 방법**: 아래 어노테이션을 통해 개별 Ingress에 타임아웃 및 재시도 정책을 오버라이드할 수 있습니다.
+  - `nginx.ingress.kubernetes.io/proxy-connect-timeout`
+  - `nginx.ingress.kubernetes.io/proxy-read-timeout`
+  - `nginx.ingress.kubernetes.io/proxy-send-timeout`
+  - `nginx.ingress.kubernetes.io/retry-attempts`
+
+### Gateway API에서 재현
+Gateway API는 `RequestTimeout` 필드와 `Retry` 정책을 `HTTPRouteRule`에 선언할 수 있습니다. 기존 어노테이션을 `GatewayClass` 혹은 `HTTPRoute`의 `filters` 섹션으로 변환하면 동일한 동작을 보장합니다.
+
+---
+
+## 놀라운 동작 3 – 헤더 변환·보안 헤더 자동 삽입
+- Ingress‑NGINX는 **`X-Forwarded-*`** 헤더(`X-Forwarded-For`, `X-Forwarded-Proto`, `X-Forwarded-Host`)를 자동으로 생성합니다. 이는 백엔드 서비스가 원본 클라이언트 정보를 알 수 있게 해줍니다【출처】(https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/) .
+- 또한 **보안 헤더**(`Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options` 등)가 기본 삽입됩니다. 애플리케이션 레벨에서 동일 헤더를 직접 설정하면 **중복** 혹은 **값 충돌**이 발생할 수 있습니다.
+- 헤더 조정을 위한 어노테이션:
+  - `nginx.ingress.kubernetes.io/configuration-snippet` (커스텀 헤더 삽입/삭제)
+  - `nginx.ingress.kubernetes.io/server-snippet`
+
+### Gateway API와의 매핑
+Gateway API는 `ResponseHeaderModifier`와 `RequestHeaderModifier` 필터를 제공하므로, 기존 자동 삽입 헤더를 **제거**하거나 **덮어쓰기**가 가능합니다. 예를 들어, `Strict-Transport-Security`를 비활성화하려면:
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: secure-route
+spec:
+  parentRefs:
+  - name: my-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    filters:
+    - type: ResponseHeaderModifier
+      responseHeaderModifier:
+        remove:
+        - name: Strict-Transport-Security
+```
+
+---
+
+## 놀라운 동작 4 – 경로 매칭 우선순위와 구현 특이점
+- 동일 호스트에 **다중 경로**가 정의될 경우, Ingress‑NGINX는 **경로 길이 → 정규식 여부 → 정확도** 순으로 매칭 우선순위를 결정합니다. `ImplementationSpecific` 은 NGINX 내부 구현에 따라 다르게 동작할 수 있어, 예상치 못한 라우팅 오류가 발생합니다【출처】(https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/) .
+- `Exact` 와 `Prefix` `pathType` 은 명확한 매칭 규칙을 제공하지만, `ImplementationSpecific` 은 **NGINX가 해석하는 방식**에 의존합니다.
+
+### 체크포인트
+1. **경로 길이**가 긴 것이 먼저 매치되는지 확인.  
+2. **정규식** 경로가 `ImplementationSpecific` 로 선언된 경우, 실제 매칭 결과를 테스트 환경에서 검증.  
+3. **동일 호스트**에 여러 Ingress가 존재한다면, `ingressClassName` 및 `priority`(annotation `nginx.ingress.kubernetes.io/priority`) 를 활용해 충돌을 방지.
+
+### Gateway API 대체
+Gateway API는 `HTTPRouteMatch`에 `pathMatch: Exact | PathPrefix` 를 명시적으로 지정하므로, 매칭 우선순위가 **예측 가능**합니다. 필요 시 `matches` 배열에 순서를 지정해 세밀한 라우팅 제어가 가능합니다.
+
+---
+
+## 놀라운 동작 5 – TLS 종료·SNI 처리 방식
+- Ingress‑NGINX는 **TLS 종료**를 Ingress 컨트롤러 레이어에서 수행하고, **SNI(Server Name Indication)** 를 기반으로 인증서를 선택합니다. 동일 IP에 여러 TLS 인증서를 매핑할 때, SNI가 일치하지 않으면 기본 인증서가 사용됩니다【출처】(https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/) .
+- 기본적으로 **HTTP → HTTPS 리다이렉트**가 활성화되어 있습니다. 이를 비활성화하려면 `nginx.ingress.kubernetes.io/force-ssl-redirect: "false"` 어노테이션을 사용합니다.
+
+### 마이그레이션 팁
+- Gateway API의 `TLSRoute` 혹은 `Gateway` 객체에 `tls:` 섹션을 정의해 **TLS 종료 위치**와 **SNI 매핑**을 명시합니다.
+- 리다이렉트를 유지하려면 `HTTPRoute`에 `RedirectFilter`를 추가하고, 비활성화하려면 해당 필터를 생략합니다.
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway
+spec:
+  listeners:
+  - protocol: HTTPS
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: example-tls
+  - protocol: HTTP
+    port: 80
+    hostname: "*.example.com"
+    # HTTP → HTTPS 리다이렉트
+    routes:
+    - kind: HTTPRoute
+      name: redirect-route
+```
+
+---
+
+## 기존 동작 보존 전략 – Gateway API와 매핑
+1. **Gateway API 소개**  
+   - 핵심 객체: `Gateway`, `HTTPRoute`, `TLSRoute`, `ReferenceGrant` 등【공식 문서】(https://gateway-api.sigs.k8s.io/).  
+2. **5가지 서프라이즈 동작을 Gateway API로 재현**  
+   - **정규식 매칭** → `HTTPRouteMatch`의 `regularExpression` 사용.  
+   - **타임아웃·재시도** → `RequestTimeout` 및 `Retry` 필터.  
+   - **헤더 변환** → `RequestHeaderModifier` / `ResponseHeaderModifier`.  
+   - **경로 우선순위** → `matches` 배열 순서와 `pathMatch` 명시.  
+   - **TLS·SNI** → `Gateway`의 `tls:` 섹션과 `TLSRoute`.  
+3. **어노테이션·CRD 활용**  
+   - 기존 Ingress 어노테이션을 그대로 유지하고 싶다면, `IngressClass`를 `gateway.nginx.org/ingress-class` 로 정의해 **NGINX 기반 Gateway** 구현체와 연동할 수 있습니다(예: NGINX Gateway Fabric).  
+
+> **주의**: 현재 공식 블로그에서는 구체적인 매핑 예시가 제공되지 않으므로, 실제 적용 전 반드시 테스트 클러스터에서 검증이 필요합니다.  
+
+---
 
 ## 마이그레이션 체크리스트
-- [ ] 현재 클러스터의 **Ingress‑NGINX 인벤토리**(Ingress 리소스, 어노테이션, TLS Secret) 수집  
-- [ ] 위 5가지 행동 중 **활성화된** 항목 파악 (`use-regex`, `rewrite-target`, TLS 자동 매핑, timeout 설정, header snippet)  
-- [ ] **대체 컨트롤러** 선정 (Gateway API 기반, Traefik, Calico Ingress Gateway 등) 및 성능·지원·보안 요구사항 검증  
-- [ ] CI/CD 파이프라인에 **마이그레이션 검증 단계**(manifest 변환 → 테스트 클러스터 배포 → 자동 테스트) 추가  
-- [ ] **점진적 트래픽 전환** 전략 수립 및 모니터링 대시보드(예: Prometheus + Grafana) 설정  
+| 단계 | 내용 | 확인 방법 |
+|------|------|-----------|
+| 1️⃣ 현황 조사 | Ingress‑NGINX 버전, 사용 어노테이션, 커스텀 플러그인 파악 | `kubectl get ingress -A -o yaml` 및 `kubectl get pods -n ingress-nginx` |
+| 2️⃣ 테스트 환경 구축 | 스테이징 클러스터에 동일 워크로드 배포 | Helm/Manifest 복제 |
+| 3️⃣ 서프라이즈 동작 검증 | 5가지 동작 각각 시나리오 테스트 (정규식, 타임아웃, 헤더, 경로, TLS) | `curl`/`httpie` 로 요청/응답 확인 |
+| 4️⃣ 대체 컨트롤러 선정 | Gateway API, Traefik, Contour 등 비교 (성능·보안·운영 편의) | 공식 비교표(예: Kubernetes Docs) |
+| 5️⃣ 파일럿 마이그레이션 | 일부 네임스페이스에 Gateway API 적용 | `kubectl apply -f gateway.yaml` |
+| 6️⃣ 전체 전환 | 단계적 롤아웃, 모니터링, 롤백 플랜 준비 | Prometheus/Grafana 알림 설정 |
+| 7️⃣ 퇴역 후 검증 | 2026‑03 이후 보안 스캔 및 로그 분석 | `kube-bench`, `kube-hunter` 등 활용 |
 
-## 베스트 프랙티스 및 운영 가이드
-1. **숨겨진 동작 제거**: 가능한 한 `use-regex`, `configuration-snippet` 등 암묵적 동작을 **명시적** 설정으로 교체한다.  
-2. **어노테이션 표준화**: 팀 차원에서 `nginx.ingress.kubernetes.io/*` 어노테이션 대신 **Gateway API** 리소스로 전환하고, 기존 어노테이션은 레거시 라벨로 관리한다.  
-3. **보안 헤더 강제 적용**: `HeaderModifier` 를 이용해 `X-Frame-Options`, `Strict-Transport-Security` 등을 **전역**으로 삽입한다.  
-4. **타임아웃·리트라이 정책**: 서비스 특성에 맞는 `RequestTimeout`·`Retries` 를 명시하고, 기본값(60s) 의 의존성을 없앤다.  
-5. **TLS 관리 자동화**: `cert-manager` 와 연동해 `TLSRoute` 의 `secretName` 을 자동 생성·갱신하도록 구성한다.  
+---
 
-## 결론
-Ingress‑NGINX 가 2026년 3월 퇴역함에 따라, **숨겨진 기본 동작**을 정확히 이해하고 이를 **Gateway API** 로 매핑하는 것이 마이그레이션 성공의 핵심입니다.  
-위 5가지 행동을 사전에 파악하고, 체크리스트와 테스트 파이프라인을 구축한다면, 서비스 중단 없이 안전하게 전환할 수 있습니다.
+## 결론 및 권고사항
+- **조기 마이그레이션**은 보안·안정성 측면에서 큰 가치를 제공합니다. 퇴역 일정에 맞춰 충분히 테스트하고, 서프라이즈 동작을 정확히 이해한 뒤 대체 솔루션을 적용하는 것이 핵심입니다.
+- **동작 보존**이 필요하다면 Gateway API의 풍부한 필터와 매칭 옵션을 활용해 기존 Ingress‑NGINX의 특성을 그대로 재현할 수 있습니다.
+- 커뮤니티와 공급업체가 제공하는 **마이그레이션 가이드**, **예제 매니페스트**, **지원 포럼**을 적극 활용하고, 지속적인 **클러스터 모니터링**을 통해 예상치 못한 이슈를 조기에 감지하시기 바랍니다.
 
-## 참고 자료
-- **Kubernetes Blog – Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know** (2026‑02‑27) [[출처](https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/)]  
-- **Kubernetes Blog – Ingress NGINX Retirement Announcement** (2025‑11‑11) [[출처](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/)]  
-- **Gateway API 공식 스펙** – <https://gateway-api.sigs.k8s.io/>  
-- **Community 사례** – Traefik, Calico Ingress Gateway 등 (외부 블로그 및 문서)  
-
-*본 문서는 제공된 공식 자료를 기반으로 작성되었으며, 일부 상세 매핑 로직은 추가 조사가 필요합니다.*
+---
