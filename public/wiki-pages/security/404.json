@@ -2,7 +2,7 @@
   "title": "CVE‑2026‑27574 – OneUptime Probe VM 샌드박스 탈출 및 원격 코드 실행",
   "slug": "security/404",
   "content": "\n## 개요\n- **취약점 ID**: CVE‑2026‑27574 (GHSA‑H343‑GG57‑2Q67)  \n- **CVSS 점수**: 10.0 (Critical) – 네트워크 기반 원격 코드 실행 가능 [출처: euno.news]  \n- **공개 일자**: 2026‑03‑07 [출처: euno.news]  \n- **현재 상태**: PoC(Proof‑of‑Concept) 존재, 공격 코드 공개 [출처: euno.news]  \n\n## OneUptime Probe 소개\nOneUptime은 클라우드 기반 모니터링 플랫폼으로, **Synthetic Monitor / Probe** 컴포넌트를 통해 사용자가 정의한 스크립트를 실행해 서비스 가용성을 검사한다.  \n- **구성 요소**: Probe, API 서버, 데이터베이스, Redis, ClickHouse 등  \n- **보안 설계**: 기존에는 Node.js 표준 `node:vm` 모듈을 이용해 사용자 스크립트를 격리된 VM(가상 머신) 환경에서 실행하도록 구현했다.  \n\n## 취약점 상세 분석\n- **발생 원리**: `node:vm` 모듈은 완전한 격리를 제공하지 못한다. 공격자는 스크립트 내부에서 `this.constructor.constructor` 를 호출해 `Function` 객체에 접근하고, 이를 이용해 호스트 프로세스의 컨텍스트로 탈출한다.  \n- **관련 CWE**: CWE‑94 (코드 인젝션) [출처: euno.news]  \n- **영향받는 버전**: OneUptime **≤ 9.5.13**  \n- **수정된 버전**: **10.0.5** – `node:vm` 사용을 중단하고, 보다 안전한 격리 라이브러리인 **isolated‑vm** 로 마이그레이션 [출처: euno.news]  \n- **코드 변경**: 커밋 `7f9ed4d`에서 `SyntheticMonitor/Worker.ts` 파일의 `node:vm` import와 사용을 제거하고, `isolated‑vm` 로 교체함 [출처: euno.news]  \n\n## 공격 시나리오\n1. **전제 조건**: 공격자는 프로젝트 내 **Project Member** 권한을 보유하고 있어 Probe에 사용자 정의 스크립트를 업로드할 수 있다 [출처: euno.news].  \n2. **공격 벡터**: 네트워크를 통해 악성 스크립트를 Probe에 전달한다 (Attack Vector: Network) [출처: euno.news].  \n3. **샌드박스 탈출**: 스크립트 내부에서 `this.constructor.constructor` 를 이용해 `Function` 객체를 획득, 호스트 Node.js 프로세스에서 임의 코드를 실행한다.  \n4. **탈취 가능한 자산**: 전체 클러스터 비밀(데이터베이스 비밀번호, Redis 토큰, `ONEUPTIME_SECRET` 등) 및 시스템 명령 실행 권한을 획득한다 [출처: euno.news].  \n\n## 영향 평가\n- **시스템 전반 위험**: 클러스터 전체 비밀이 노출되어 데이터베이스, 캐시, 로그 등 모든 서비스가 침해될 위험이 있다.  \n- **가용성**: 공격자는 서비스 중단(RCE를 통한 프로세스 종료)도 가능하므로 가용성에 심각한 위협을 가한다.  \n- **데이터 무결성**: 비밀이 탈취되면 데이터베이스 조작·삭제·변조가 가능하다.  \n- **EPSS 점수**: 0.00055 (현재 활용 가능성은 낮지만, PoC가 존재함) [출처: euno.news]  \n\n## 탐지 및 대응 방안\n### 로그·모니터링 포인트\n- Probe 컨테이너의 **stderr/stdout**에 비정상적인 `Function` 객체 호출 로그  \n- `node:vm` 모듈 사용 흔적이 남아 있는 오래된 이미지 실행 시도  \n- Synthetic Monitor 스크립트 업로드 시 **User‑Agent** 혹은 **IP**가 평소와 다른 경우  \n\n### 이상 행동 탐지 규칙 예시\n- “Synthetic Monitor 스크립트 실행 중 `this.constructor.constructor` 문자열이 포함된 경우” 알림  \n- “Probe 컨테이너가 5분 이내에 10회 이상 재시작” 경보  \n\n### 임시 방어 조치\n- **Synthetic Monitor 기능 비활성화**(관리 콘솔 → Settings → Synthetic Monitor → Disable) [출처: euno.news]  \n- **Project Member** 권한을 최소화하고, 신뢰할 수 있는 사용자만 허용  \n\n## 완화 및 패치 적용 방법\n1. **Docker 이미지 업데이트**  \n   - 최신 OneUptime 이미지(`10.0.5` 이상) Pull: `docker pull oneuptime/oneuptime:10.0.5`  \n2. **서비스 재배포**  \n   - Probe와 API 서버를 새로운 이미지로 재시작하고, 기존 컨테이너를 교체한다.  \n3. **클러스터 비밀 교체**  \n   - PostgreSQL, Redis, ClickHouse 비밀번호를 새로 생성하고, 환경 변수 `ONEUPTIME_SECRET` 를 업데이트한다.  \n4. **전체 클러스터 재시작**  \n   - 모든 노드에서 서비스 재시작 후 정상 동작 여부 확인.  \n\n## 사후 복구 절차\n- **시크릿 재생성**: 데이터베이스·Redis·ClickHouse 비밀번호와 `ONEUPTIME_SECRET` 를 모두 새로 발급한다.  \n- **클러스터 전체 재시작**: 모든 서비스가 새로운 시크릿을 사용하도록 강제 재시작한다.  \n- **모니터링 스크립트 검증**: 기존 사용자 정의 스크립트를 하나씩 재배포해 정상 동작을 확인한다.  \n- **감사 로그 검토**: 공격 기간 동안의 Probe 로그를 분석해 추가 침해 흔적이 없는지 확인한다.  \n\n## 참고 자료 및 외부 링크\n- **GitHub Security Advisory** – PoC 및 상세 기술 정보 포함 (공개된 Advisory)  \n- **NVD – CVE‑2026‑27574** – 공식 CVE 데이터베이스 페이지 [출처: euno.news]  \n- **JVNDB‑2026‑004688** – 일본어 보안 데이터베이스 기록 [출처: euno.news]  \n- **원본 뉴스 인텔리전스 기사** – https://euno.news/posts/ko/ghsa-h343-gg57-2q67-cve-2026-27574-remote-code-exe-15b555 [출처: euno.news]  \n\n## 부록\n### 코드 변경 Diff 요약\n- `SyntheticMonitor/Worker.ts`에서 `import { Script } from 'node:vm'` 삭제  \n- `import ivm from 'isolated-vm'` 추가 및 기존 `Script.runInContext` 로직을 `ivm.Isolate` 기반 실행 로직으로 교체  \n\n### CVSS 계산 상세 내역\n- **Base Score**: 10.0 (Attack Vector: Network, Privileges Required: Low, User Interaction: None, Scope: Unchanged, Impact: High) – NVD 표준 계산 방식 적용 [출처: euno.news]  \n\n### 용어 정의\n- **VM (Virtual Machine)**: Node.js에서 제공하는 `vm` 모듈을 이용한 격리 실행 환경.  \n- **Sandbox**: 제한된 권한으로 코드를 실행해 시스템 접근을 차단하는 메커니즘.  \n- **RCE (Remote Code Execution)**: 원격에서 임의 코드를 실행할 수 있는 취약점.  \n\n---",
-  "lastModified": "2026-03-13T06:19:42Z",
+  "lastModified": "2026-03-13T12:12:52Z",
   "author": "SEPilot AI",
   "status": "draft",
   "isDraft": true,
@@ -16,11 +16,11 @@
   ],
   "history": [
     {
-      "sha": "42976c7",
+      "sha": "6b5a1b5",
       "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-13T06:19:42Z",
+      "date": "2026-03-13T12:12:52Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
