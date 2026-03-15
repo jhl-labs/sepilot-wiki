@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-15T03:37:39.714Z",
+  "collectedAt": "2026-03-15T05:14:13.597Z",
   "overview": {
     "totalDocuments": 207,
     "publishedDocuments": 103,
     "draftDocuments": 104,
-    "openRequests": 119,
+    "openRequests": 122,
     "closedRequests": 19,
-    "totalAIActions": 557
+    "totalAIActions": 560
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
+      "aiActions": 0,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,55 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
-      "documentsCreated": 0,
+      "aiActions": 4,
+      "documentsCreated": 3,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 8815,
+      "totalPipelineDurationMs": 187240
     },
     "last7d": {
-      "aiActions": 117,
-      "documentsCreated": 34,
+      "aiActions": 120,
+      "documentsCreated": 37,
       "documentsModified": 43,
-      "tavilyApiCalls": 102,
-      "tavilyResults": 271,
-      "estimatedTokens": 72648,
-      "totalPipelineDurationMs": 1641330
+      "tavilyApiCalls": 111,
+      "tavilyResults": 298,
+      "estimatedTokens": 81463,
+      "totalPipelineDurationMs": 1828570
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-15T03:37:42.917Z",
+      "actionType": "generate",
+      "issueNumber": 500,
+      "documentTitle": "프론트엔드 API 클라이언트 서비스 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 54874,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2577
+    },
+    {
+      "timestamp": "2026-03-15T03:36:29.960Z",
+      "actionType": "generate",
+      "issueNumber": 501,
+      "documentTitle": "검색 서비스 구현 및 사용법",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 43637,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1965
+    },
+    {
+      "timestamp": "2026-03-15T03:35:30.142Z",
+      "actionType": "generate",
+      "issueNumber": 502,
+      "documentTitle": "스케줄러 잡: 문서 업데이트 감지 작업 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 88729,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4273
+    },
     {
       "timestamp": "2026-03-15T03:04:16.201Z",
       "actionType": "coverage_analysis",
@@ -207,43 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T12:19:18.916Z",
-      "actionType": "generate",
-      "issueNumber": 490,
-      "documentTitle": "모델 병합 (Model Merging) 가이드 – FUSE 프레임워크와 실무 로드맵",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 56364,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2666
-    },
-    {
-      "timestamp": "2026-03-11T12:18:19.017Z",
-      "actionType": "modify",
-      "issueNumber": 489,
-      "documentTitle": "AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T12:17:16.327Z",
-      "actionType": "modify",
-      "issueNumber": 488,
-      "documentTitle": "TensorFlow 2.16 새로운 기능 및 TensorFlow Lite Runtime 통합 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 543,
-      "totalEstimatedTokens": 368360,
-      "avgDurationMs": 52495
+      "totalActions": 546,
+      "totalEstimatedTokens": 377175,
+      "avgDurationMs": 52683
     },
     "unknown": {
       "totalActions": 14,
