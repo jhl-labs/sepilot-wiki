@@ -1,84 +1,88 @@
 {
-  "timestamp": "2026-02-15T02:59:59.029Z",
+  "timestamp": "2026-03-15T03:04:14.195Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
-  "sourceFiles": 201,
-  "wikiDocuments": 18,
-  "coverageScore": 12,
-  "summary": "전체 코드베이스를 검토한 결과, 현재 위키에는 프로젝트 전반에 대한 소개와 외부 기술 스택, 릴리즈 노트 등은 존재하지만, 실제 애플리케이션의 핵심 비즈니스 로직, API 엔드포인트, 백엔드 서비스, 스케줄러 잡, 주요 프론트엔드 컴포넌트 등에 대한 문서는 거의 없습니다. 특히 Next.js API 라우트, Wiki 서비스 로직, 인증·권한 처리, 스케줄러 작업 등은 시스템 동작에 필수적이므로 문서화가 시급합니다. 기존 위키에 포함된 ‘Sepilot Wiki 기술 스택’ 문서가 전체 스택을 간략히 다루지만, 개별 모듈 수준의 상세 설명이 부족합니다. 따라서 문서 커버리지는 매우 낮으며, 주요 10개 모듈을 우선 문서화 대상으로 선정했습니다.",
+  "sourceFiles": 214,
+  "wikiDocuments": 229,
+  "coverageScore": 17,
+  "summary": "전체 소스 트리를 살펴본 결과, 현재 위키에 문서화된 영역은 프론트엔드 API 서비스 레이어와 백엔드 Wiki API 라우트 가이드 정도에 국한됩니다. 대부분의 핵심 비즈니스 로직(스케줄러 잡, 인증·권한, 웹훅, 주요 서비스 모듈)과 UI 핵심 컴포넌트는 문서가 존재하지 않아 문서화 커버리지가 매우 낮습니다. 특히 API 엔드포인트, 스케줄러 작업, 인증 흐름, 웹훅 처리와 같은 운영·배포에 직접 영향을 주는 모듈이 누락돼 있어, 개발자 온보딩·운영 가이드에 큰 위험이 존재합니다. 우선순위가 높은 10개의 미문서화 모듈을 선정했으며, 이들을 중심으로 문서화를 진행하면 커버리지를 크게 끌어올릴 수 있습니다.",
   "documented": [
-    "projects/sepilot-wiki-technology-stack.md"
+    "API 서비스 레이어 (frontend/api-service-layer.md) – services/api.ts",
+    "Wiki API 라우트 가이드 (backend/wiki-api-route-guide.md) – api/wiki/[...slug]/route.ts",
+    "React‑Query 데이터 패칭 가이드 (frontend/react-query.md) – services/search.ts (데이터 패칭 예시)",
+    "Incremental Static Regeneration 가이드 (frontend/incremental-static-regeneration.md) – page‑components/*",
+    "DevSecOps 라벨 가이드 (backend/label‑dependencies.md) – 라벨/권한 설정"
   ],
   "undocumented": [
     {
-      "module": "api/wiki/[...slug]/route.ts",
-      "sourcePath": "app/api/wiki/[...slug]/route.ts",
+      "module": "API 클라이언트 서비스",
+      "sourcePath": "services/api.ts",
       "importance": "high",
-      "suggestedTitle": "Wiki 페이지 API 라우트 상세 가이드",
-      "description": "Wiki 페이지를 조회·생성·수정·삭제하는 핵심 API 엔드포인트이며, 라우트 파라미터와 인증 흐름, 응답 형식 등을 문서화해야 외부 개발자와 내부 팀이 올바르게 사용할 수 있습니다."
+      "suggestedTitle": "프론트엔드 API 클라이언트 서비스 가이드",
+      "description": "프론트엔드에서 백엔드 REST 엔드포인트를 호출하는 핵심 모듈이며, 인증 토큰 처리·에러 핸들링 로직이 포함돼 있어 문서가 필요합니다."
     },
     {
-      "module": "services/api.ts",
-      "sourcePath": "src/services/api.ts",
+      "module": "검색 서비스",
+      "sourcePath": "services/search.ts",
       "importance": "high",
-      "suggestedTitle": "프론트엔드 API 서비스 레이어 설명",
-      "description": "프론트엔드에서 백엔드와 통신하기 위해 사용하는 공통 API 클라이언트 로직으로, 요청/응답 처리, 에러 핸들링, 토큰 자동 갱신 방식 등을 문서화해야 합니다."
+      "suggestedTitle": "검색 서비스 구현 및 사용법",
+      "description": "위키 검색 API와 연동되는 로직으로, 쿼리 파라미터, 페이징, 캐싱 전략을 문서화해야 개발자가 올바르게 활용할 수 있습니다."
     },
     {
-      "module": "scheduler/jobs/update-cross-references.ts",
-      "sourcePath": "lib/scheduler/jobs/update-cross-references.ts",
-      "importance": "high",
-      "suggestedTitle": "크로스 레퍼런스 업데이트 잡 가이드",
-      "description": "Wiki 문서 간 교차 참조를 자동으로 정리·업데이트하는 스케줄러 잡으로, 실행 시점, 입력/출력 데이터 구조, 오류 처리 방식을 문서화해야 운영 안정성을 확보할 수 있습니다."
-    },
-    {
-      "module": "scheduler/jobs/detect-doc-updates.ts",
+      "module": "스케줄러 잡 – 문서 업데이트 감지",
       "sourcePath": "lib/scheduler/jobs/detect-doc-updates.ts",
       "importance": "high",
-      "suggestedTitle": "문서 업데이트 감지 잡 상세 설명",
-      "description": "새로운 커밋이나 외부 이벤트에 따라 Wiki 문서 변경을 감지하고 트리거를 발생시키는 핵심 로직이며, 감지 알고리즘과 스케줄링 정책을 문서화해야 합니다."
+      "suggestedTitle": "스케줄러 잡: 문서 업데이트 감지 작업 가이드",
+      "description": "CI/CD 파이프라인에서 자동으로 문서 변화를 감지하고 트리거를 발생시키는 핵심 작업으로, 설정·동작 흐름을 문서화해야 운영 안정성을 확보할 수 있습니다."
     },
     {
-      "module": "lib/wiki.ts",
-      "sourcePath": "lib/wiki.ts",
+      "module": "스케줄러 잡 – 교차 참조 업데이트",
+      "sourcePath": "lib/scheduler/jobs/update-cross-references.ts",
       "importance": "high",
-      "suggestedTitle": "Wiki 핵심 비즈니스 로직 가이드",
-      "description": "Wiki 페이지 파싱·렌더링·버전 관리 등 핵심 기능을 담당하는 모듈로, 주요 함수, 데이터 모델, 사용 예시 등을 문서화하면 개발자들이 내부 로직을 이해하고 확장하기 쉬워집니다."
+      "suggestedTitle": "스케줄러 잡: 교차 참조 자동 업데이트 가이드",
+      "description": "위키 내부 링크와 메타데이터를 정합성 있게 유지하는 핵심 로직이며, 실행 주기·에러 처리 방안을 문서화해야 합니다."
     },
     {
-      "module": "lib/auth.ts",
+      "module": "스케줄러 잡 – 트리 유지보수",
+      "sourcePath": "lib/scheduler/jobs/maintain-tree.ts",
+      "importance": "high",
+      "suggestedTitle": "스케줄러 잡: 위키 트리 유지보수 작업 가이드",
+      "description": "위키 페이지 트리 구조를 정기적으로 정리·재구성하는 작업으로, 설정 파라미터와 의존성을 명확히 해야 합니다."
+    },
+    {
+      "module": "웹훅 핸들러",
+      "sourcePath": "lib/webhook/handler.ts",
+      "importance": "high",
+      "suggestedTitle": "GitHub 웹훅 핸들러 구현 가이드",
+      "description": "GitHub 이벤트(푸시, PR 등)를 수신·처리하는 핵심 모듈이며, 보안 서명 검증·이벤트 매핑을 문서화해야 합니다."
+    },
+    {
+      "module": "인증 모듈",
       "sourcePath": "lib/auth.ts",
       "importance": "high",
-      "suggestedTitle": "인증·인가 모듈 설계 문서",
-      "description": "NextAuth와 커스텀 토큰 검증 로직을 포함한 인증 흐름을 정의하는 파일이며, 세션 관리, 권한 체크, 보안 고려사항을 상세히 기록해야 합니다."
+      "suggestedTitle": "백엔드 인증 및 세션 관리 가이드",
+      "description": "JWT 발급·검증, 세션 쿠키 관리 로직을 포함하고 있어 보안·통합 테스트 관점에서 문서가 필요합니다."
     },
     {
-      "module": "components/wiki/MarkdownRenderer.tsx",
-      "sourcePath": "src/components/wiki/MarkdownRenderer.tsx",
+      "module": "Wiki 서비스 레이어",
+      "sourcePath": "lib/wiki.ts",
+      "importance": "high",
+      "suggestedTitle": "Wiki 서비스 레이어 설계 및 API 가이드",
+      "description": "위키 페이지 CRUD, 메타데이터, 버전 관리 로직을 담당하는 핵심 비즈니스 로직으로, 사용 방법·에러 코드 등을 문서화해야 합니다."
+    },
+    {
+      "module": "환경 변수 검증",
+      "sourcePath": "lib/env-validation.ts",
       "importance": "medium",
-      "suggestedTitle": "MarkdownRenderer 컴포넌트 사용법",
-      "description": "Wiki 페이지에서 Markdown을 HTML로 변환해 렌더링하는 핵심 UI 컴포넌트로, props, 커스텀 렌더링 옵션, 성능 최적화 포인트 등을 문서화해야 합니다."
+      "suggestedTitle": "환경 변수 검증 스키마 및 사용법",
+      "description": "프로덕션/개발 환경에서 필수 변수와 타입을 검증하는 로직이며, 배포 시 누락을 방지하기 위해 문서가 필요합니다."
     },
     {
-      "module": "components/editor/MonacoEditor.tsx",
-      "sourcePath": "src/components/editor/MonacoEditor.tsx",
+      "module": "UI 레이아웃 – Layout 컴포넌트",
+      "sourcePath": "components/layout/Layout.tsx",
       "importance": "medium",
-      "suggestedTitle": "MonacoEditor 컴포넌트 가이드",
-      "description": "코드 편집 기능을 제공하는 에디터 컴포넌트이며, 초기화 옵션, 언어 설정, 이벤트 핸들러, 테마 적용 방법 등을 문서화하면 사용자와 개발자 모두 활용도가 높아집니다."
-    },
-    {
-      "module": "hooks/useWiki.ts",
-      "sourcePath": "src/hooks/useWiki.ts",
-      "importance": "medium",
-      "suggestedTitle": "useWiki 훅 API 문서",
-      "description": "Wiki 데이터 로드·저장·자동 저장 등을 담당하는 커스텀 훅으로, 반환값, 파라미터, 내부 캐시 전략 등을 정리하면 재사용성이 향상됩니다."
-    },
-    {
-      "module": "context/SidebarContext.tsx",
-      "sourcePath": "src/context/SidebarContext.tsx",
-      "importance": "low",
-      "suggestedTitle": "SidebarContext 사용 가이드",
-      "description": "사이드바 상태(열림/닫힘, 현재 선택)를 전역으로 관리하는 컨텍스트이며, Provider 설정 방법과 소비자 컴포넌트 예시를 문서화하면 UI 일관성을 유지할 수 있습니다."
+      "suggestedTitle": "공통 레이아웃 컴포넌트 설계 가이드",
+      "description": "앱 전체 UI 구조를 정의하는 핵심 컴포넌트로, 슬롯 구조·스타일링·테마 연동 방식을 문서화하면 UI 일관성을 유지할 수 있습니다."
     }
   ]
 }
