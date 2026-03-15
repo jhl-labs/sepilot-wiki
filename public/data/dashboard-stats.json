@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-15T02:21:28.112Z",
+  "collectedAt": "2026-03-15T03:37:39.714Z",
   "overview": {
     "totalDocuments": 207,
     "publishedDocuments": 103,
     "draftDocuments": 104,
     "openRequests": 119,
     "closedRequests": 19,
-    "totalAIActions": 556
+    "totalAIActions": 557
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 116,
+      "aiActions": 117,
       "documentsCreated": 34,
       "documentsModified": 43,
       "tavilyApiCalls": 102,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-15T03:04:16.201Z",
+      "actionType": "coverage_analysis",
+      "issueNumber": null,
+      "documentTitle": "문서 커버리지 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-13T09:50:16.135Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T12:15:28.529Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 542,
+      "totalActions": 543,
       "totalEstimatedTokens": 368360,
       "avgDurationMs": 52495
     },
