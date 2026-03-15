@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-03-15T02:14:53.191Z",
+  "timestamp": "2026-03-15T03:38:09.410Z",
   "dryRun": false,
-  "totalIssuesScanned": 14,
+  "totalIssuesScanned": 17,
   "categories": {
     "draft_review": [
+      {
+        "number": 502,
+        "title": "[커버리지 분석] 문서 작성 필요: 스케줄러 잡: 문서 업데이트 감지 작업 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 501,
+        "title": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용법",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 500,
+        "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 426,
         "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
@@ -81,7 +96,39 @@
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 502,
+      "title": "[커버리지 분석] 문서 작성 필요: 스케줄러 잡: 문서 업데이트 감지 작업 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 501,
+      "title": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용법"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 500,
+      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드"
+    },
+    {
+      "type": "orphan_draft_close",
+      "issueNumber": 502,
+      "title": "[커버리지 분석] 문서 작성 필요: 스케줄러 잡: 문서 업데이트 감지 작업 가이드"
+    },
+    {
+      "type": "orphan_draft_close",
+      "issueNumber": 501,
+      "title": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용법"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 500,
+      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "score": 78
+    }
+  ],
+  "actionCount": 6,
   "maxActions": 60
 }

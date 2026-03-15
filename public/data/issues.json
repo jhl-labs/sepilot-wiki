@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 500,
+      "number": 500,
+      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: API 클라이언트 서비스\n- **소스 경로**: `services/api.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n프론트엔드에서 백엔드 REST 엔드포인트를 호출하는 핵심 모듈이며, 인증 토큰 처리·에러 핸들링 로직이 포함돼 있어 문서가 필요합니다.\n\n> **제안 문서 제목**: 프론트엔드 API 클라이언트 서비스 가이드\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-15T03:37:42.919Z",
+      "updated_at": "2026-03-15T03:37:42.924Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/500",
+      "documentSlug": "api",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/api.md",
+      "comments": 0
+    },
+    {
+      "id": 501,
+      "number": 501,
+      "title": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용법",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: 검색 서비스\n- **소스 경로**: `services/search.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n위키 검색 API와 연동되는 로직으로, 쿼리 파라미터, 페이징, 캐싱 전략을 문서화해야 개발자가 올바르게 활용할 수 있습니다.\n\n> **제안 문서 제목**: 검색 서비스 구현 및 사용법\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-15T03:36:29.963Z",
+      "updated_at": "2026-03-15T03:36:29.969Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/501",
+      "documentSlug": "untitled-1773545789957",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/untitled-1773545789957.md",
+      "comments": 0
+    },
+    {
+      "id": 502,
+      "number": 502,
+      "title": "[커버리지 분석] 문서 작성 필요: 스케줄러 잡: 문서 업데이트 감지 작업 가이드",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: 스케줄러 잡 – 문서 업데이트 감지\n- **소스 경로**: `lib/scheduler/jobs/detect-doc-updates.ts`\n- **중요도**: high\n\n### 문서 작성 사유\nCI/CD 파이프라인에서 자동으로 문서 변화를 감지하고 트리거를 발생시키는 핵심 작업으로, 설정·동작 흐름을 문서화해야 운영 안정성을 확보할 수 있습니다.\n\n> **제안 문서 제목**: 스케줄러 잡: 문서 업데이트 감지 작업 가이드\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-15T03:35:30.144Z",
+      "updated_at": "2026-03-15T03:35:30.150Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/502",
+      "documentSlug": "issues/untitled-1773545730139",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/issues/untitled-1773545730139.md",
+      "comments": 0
+    },
+    {
       "id": 494,
       "number": 494,
       "title": "[Wiki Maintenance] [요청] Before You Migrate: Five Surprising Ingress-NGINX Behaviors You Need to Know",
@@ -4288,5 +4381,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-13T09:47:24.522Z"
+  "lastUpdated": "2026-03-15T03:37:42.924Z"
 }
