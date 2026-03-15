@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-15T08:48:07.842Z",
+  "collectedAt": "2026-03-15T09:46:43.054Z",
   "overview": {
     "totalDocuments": 210,
     "publishedDocuments": 103,
     "draftDocuments": 107,
     "openRequests": 122,
     "closedRequests": 19,
-    "totalAIActions": 560
+    "totalAIActions": 561
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 4,
+      "aiActions": 5,
       "documentsCreated": 3,
       "documentsModified": 0,
       "tavilyApiCalls": 9,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-15T09:08:31.815Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-15T03:37:42.917Z",
       "actionType": "generate",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T12:20:23.028Z",
-      "actionType": "modify",
-      "issueNumber": 491,
-      "documentTitle": "WordPress Vulnerability Triaging Playbook (2026)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 546,
+      "totalActions": 547,
       "totalEstimatedTokens": 377175,
       "avgDurationMs": 52683
     },
