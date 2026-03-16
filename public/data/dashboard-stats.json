@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-16T03:40:11.004Z",
+  "collectedAt": "2026-03-16T05:18:50.414Z",
   "overview": {
     "totalDocuments": 211,
     "publishedDocuments": 104,
     "draftDocuments": 107,
     "openRequests": 122,
     "closedRequests": 19,
-    "totalAIActions": 562
+    "totalAIActions": 563
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 105,
+      "aiActions": 106,
       "documentsCreated": 34,
       "documentsModified": 36,
       "tavilyApiCalls": 102,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-16T05:14:41.702Z",
+      "actionType": "quality_score",
+      "issueNumber": 500,
+      "documentTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-16T01:35:24.532Z",
       "actionType": "status_report",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T18:19:29.605Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 548,
+      "totalActions": 549,
       "totalEstimatedTokens": 377175,
       "avgDurationMs": 52683
     },
