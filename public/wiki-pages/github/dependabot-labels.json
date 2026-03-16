@@ -2,7 +2,7 @@
   "title": "Dependabot Labels Configuration Guide",
   "slug": "github/dependabot-labels",
   "content": "\n# Dependabot Labels Configuration Guide\n\nWhen Dependabot creates or updates pull requests, it can automatically add labels defined in your repository. If the labels referenced in **`.github/dependabot.yml`** do not exist, Dependabot will fail with an error like:\n\n```\nThe following labels could not be found: `dependencies`, `github-actions`. Please create them before Dependabot can add them to a pull request.\n```\n\nThis guide explains how to create the missing labels and how to modify `dependabot.yml` if you prefer not to use them.\n\n---\n\n## 1. Creating Labels via the GitHub UI\n\n1. Navigate to your repository on GitHub.\n2. Click **Issues** → **Labels** (or directly go to `https://github.com/<owner>/<repo>/labels`).\n3. Click the **New label** button.\n4. Fill in the **Name** field (e.g., `dependencies`).\n5. Optionally choose a color and description.\n6. Click **Create label**.\n7. Repeat the steps for any additional labels such as `github-actions`.\n\n---\n\n## 2. Creating Labels via the GitHub API\n\nYou can also create labels programmatically using the REST API:\n\n```bash\ncurl -X POST \\\n  -H \"Accept: application/vnd.github+json\" \\\n  -H \"Authorization: token <YOUR_TOKEN>\" \\\n  https://api.github.com/repos/<owner>/<repo>/labels \\\n  -d '{\"name\":\"dependencies\",\"color\":\"0366d6\",\"description\":\"Dependabot dependency updates\"}'\n```\n\nReplace `<YOUR_TOKEN>`, `<owner>`, and `<repo>` with appropriate values. Run the command again for `github-actions` or any other label you need.\n\n---\n\n## 3. Verifying `dependabot.yml`\n\nYour **`.github/dependabot.yml`** may contain a `labels` section, for example:\n\n```yaml\nupdates:\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"\n      - \"github-actions\"\n```\n\nMake sure the names listed under `labels:` exactly match the labels you created (case‑sensitive).\n\n---\n\n## 4. Removing Invalid Labels from `dependabot.yml`\n\nIf you do not want Dependabot to add any labels, simply remove the `labels:` block or comment it out:\n\n```yaml\nupdates:\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    # labels:\n    #   - \"dependencies\"\n    #   - \"github-actions\"\n```\n\nAfter committing the change, Dependabot will no longer attempt to apply those labels.\n\n---\n\n## 5. Common Pitfalls\n\n- **Typo in label names** – Ensure the label names in `dependabot.yml` match exactly.\n- **Missing permissions** – The token used for the API must have `repo` scope for private repositories.\n- **Case sensitivity** – GitHub treats label names as case‑sensitive when matching.\n\n---\n\n## 6. References\n\n- [GitHub Docs – Managing labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels)\n- [GitHub Docs – Dependabot configuration options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-dependency-updates)\n\n---\n\n*This document was created to address the missing `dependencies` and `github-actions` labels reported by Dependabot.*\n",
-  "lastModified": "2026-03-02T21:40:03Z",
+  "lastModified": "2026-03-16T06:34:24Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,102 +15,12 @@
   ],
   "history": [
     {
-      "sha": "70b7f5d",
-      "message": "docs: Issue #330 - 피드백 반영",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-03-02T21:40:03Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "ffb0141",
-      "message": "📊 문서 품질 평가: 평균 76점",
-      "author": "github-actions[bot]",
-      "authorEmail": "github-actions[bot]@users.noreply.github.com",
-      "date": "2026-03-01T03:03:46Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "230e2d6",
-      "message": "🌳 Wiki Tree Maintenance: Wiki contains 84 documents across many topics. Most files are correctly placed, but several root‑level documents, duplicate/deleted versions, and mis‑categorized items exist. Duplicate content is found for SNKV, Emdash, Gemini‑3.1, Incremental‑Static‑Regeneration, Dependabot label guides, and AI‑agent comparison. Root‑level docs (e.g., devsecops.md, 273.md, emdash.md, enterprise‑gitops‑implementation…) violate the rule that only home.md may stay at the repository root.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-25T03:02:09Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "98ea1d6",
-      "message": "docs: resolve maintenance issues for category meta and dependabot guides",
-      "author": "JHL",
-      "authorEmail": "bkperio@gmail.com",
-      "date": "2026-02-24T23:07:20+09:00",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "8c3e66c",
+      "sha": "9f46dba",
       "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-02-24T11:12:33Z",
+      "date": "2026-03-16T06:34:24Z",
       "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "2761cc0",
-      "message": "chore: Issue Processor 실행 결과",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T06:15:27Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "cdd1c77",
-      "message": "🌳 Wiki Tree Maintenance: Wiki는 38개의 문서가 12개의 상위 디렉터리(backend, observability, github, kubernetes, docker, projects, bun, ai, frontend, cloud, meta) 로 분산돼 있습니다. 다수의 문서가 올바른 슬러그 형태가 아니며, ‘Dependabot label’ 관련 문서가 5개(그중 3개는 삭제 상태) 중복됩니다. 1‑개 카테고리(관측성, Docker, Cloud‑cost‑opt 등)는 내용이 단일 문서이므로 유지 가능하지만, ‘dependabot’ 카테고리는 삭제하고 github 로 통합해야 합니다. 전체 구조는 카테고리‑별로 논리적 순서를 부여하고, 파일명을 영문‑slug 로 정규화하면 탐색·링크 관리가 크게 개선됩니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T00:40:01Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "60b9a30",
-      "message": "🌳 Wiki Tree Maintenance: 전체 46개의 위키 문서가 13개의 카테고리로 흩어져 있습니다. Dependabot 라벨 가이드가 여러 위치에 중복되어 있고, ISR 가이드와 같은 오래된 파일이 삭제 상태이며, AI 카테고리에 초안(draft) 문서가 다수 존재합니다. 대부분 파일명은 slug 형태이지만, 중복·삭제된 문서는 정리하고, 카테고리 메타데이터와 문서 순서를 명시하면 탐색성이 크게 향상됩니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-24T00:35:21Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "0525d82",
-      "message": "🌳 Wiki Tree Maintenance: 46개의 위키 문서가 13개의 카테고리(프로젝트, AI, 백엔드, GitHub, Kubernetes, Docker, Bun, 프론트엔드, 클라우드, Observability, 트러블슈팅, 레포트, 메타)로 분류됩니다. 중복·유사 문서가 여러 군데 존재하고, 루트에 위치한 244.md 파일이 카테고리 밖에 있어 구조적 문제가 있습니다. 주요 개선점은 중복 문서 병합·삭제, 파일 이동·이름 정규화, 루트 파일을 적절한 카테고리로 이동, 카테고리 메타데이터와 문서 순서(order) 지정입니다. (retry 1)",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-23T21:34:20Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e6f2202",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-02-23T21:29:26Z",
-      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }
