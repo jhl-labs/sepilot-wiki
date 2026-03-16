@@ -3,7 +3,7 @@ title: "chore(deps): bump dompurify from 3.3.1 to 3.3.2"
 description: "DOMPurify 라이브러리를 3.3.1 → 3.3.2 로 업데이트하고, Dependabot 라벨 `dependencies` 가 존재하지 않아 발생한 이슈를 정리합니다."
 category: "Reference"
 tags: ["dependabot", "dompurify", "dependency-update", "labels"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-03-09T21:00:00Z"
 updatedAt: "2026-03-09T21:00:00Z"

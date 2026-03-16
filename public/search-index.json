@@ -1385,6 +1385,18 @@
     "author": "github-actions[bot]"
   },
   {
+    "title": "Dependabot 라벨 설정 가이드",
+    "slug": "dependabot/labels-setup",
+    "content": "Dependabot 라벨 설정 가이드\nDependabot이 PR에 라벨을 자동으로 붙이려면 해당 라벨이 레포지토리 안에 미리 생성되어 있어야 합니다. 현재 PR에서  라벨을 찾을 수 없다는 오류가 발생했으므로, 아래 절차에 따라 라벨을 만들고  파일을 검토·수정하세요.\n1️⃣  라벨 만들기\n레포지토리 메인 페이지에서 Issues → Labels 로 이동합니다.\nNew label 버튼을 클릭합니다.\nName 에  를 입력하고, 필요에 따라 색상을 선택합니다.\nCreate label 을 눌러 라벨을 생성합니다.\n라벨 생성 방법에 대한 자세한 내용은 GitHub 공식 문서를 참고하세요: GitHub Docs – About labels (출처).\n2️⃣  파일 검토\n 파일에 라벨 이름이 정확히  로 지정되어 있는지 확인합니다. 예시:\n라벨 이름에 오타가 있거나, 다른 라벨(예: )을 사용하고 있다면 위와 같이  로 수정합니다.\n파일이 레포지토리 루트에 존재하지 않을 경우,  경로에 새 파일을 추가하고 위 내용을 넣어 주세요.\n3️⃣ 변경 사항 커밋 및 푸시\n4️⃣ PR 재검토\n라벨을 만든 뒤 PR을 다시 열면 Dependabot이 자동으로  라벨을 붙일 수 있습니다.\n요약:  라벨이 없다는 오류를 해결하려면 레포지토리에서 해당 라벨을 생성하고,  파일에 라벨 이름이 정확히 일치하도록 설정합니다. 이렇게 하면 Dependabot이 PR에 라벨을 정상적으로 추가합니다.",
+    "excerpt": "Dependabot 라벨 설정 가이드\nDependabot이 PR에 라벨을 자동으로 붙이려면 해당 라벨이 레포지토리 안에 미리 생성되어 있어야 합니다. 현재 PR에서  라벨을 찾을 수 없다는 오류가 발생했으므로, 아래 절차에 따라 라벨을 만들고  파일을 검토·수정하세요.\n1️⃣  라벨 만들기\n레포지토리 메인 페이지에서 Issues → Labels 로 이동합니...",
+    "tags": [
+      "dependabot",
+      "labels",
+      "github"
+    ],
+    "lastModified": "2026-03-16T20:23:07.139Z"
+  },
+  {
     "title": "Dependabot does not support transitive dependency updates for pnpm",
     "slug": "dependabot/pnpm-transitive-dependencies-limitations",
     "content": "Dependabot does not support transitive dependency updates for pnpm\nOverview\nDependabot is a GitHub‑provided automation tool that can automatically raise pull requests to keep your dependencies up‑to‑date. While it supports direct dependency updates for many package managers, pnpm is an exception when it comes to transitive (indirect) dependency updates.\n\"Dependabot doesn't support transitive dependency updates for pnpm, a very popular package manager (31M downloads / week as of writing).\"Reference\nWhat are transitive dependencies?\nA transitive dependency is a package that is not listed directly in your  but is required by one of your direct dependencies. Updating these can be necessary when a security vulnerability is discovered in a deep‑nested package.\nCurrent limitation for pnpm\nDependabot only updates the versions that appear in your  (direct dependencies).\nIt does not attempt to bump versions of packages that appear only in the lockfile ().\nConsequently, PRs that rely on updating a transitive dependency (e.g., a security fix in a sub‑dependency) will fail for pnpm projects.\nThis limitation is reflected in the CI feedback you are seeing:\nImpact on your workflow\nSecurity patches may be missed if the vulnerable code lives in a transitive dependency.\nManual intervention is required: you must either:\n   - Update the direct dependency that brings in the transitive one, or\n   - Manually edit the lockfile and commit the change.\nCI pipelines that expect Dependabot to handle all updates will need to be adjusted for pnpm projects.\nWorkarounds\nUpgrade the direct dependency that depends on the vulnerable transitive package. This often pulls in a newer version of the transitive dependency.\nUse a different package manager (e.g., npm or Yarn) for projects where automatic transitive updates are critical.\nRun a manual audit with tools like  and apply patches manually.\nRelated discussions\nIssue discussing the lack of support: pnpm transitive dependency updates support #13177\nCommunity reports of unnecessary bumps and limitations: pnpm dependabot updates transitive dependencies when ... #11620\nFuture outlook\nDependabot’s roadmap may include support for transitive updates in pnpm, but as of the latest information (2026), this feature is not available. Keep an eye on the official Dependabot repository for announcements.\nThis document was generated based on publicly available information and the feedback from the PR attempting to bump  from 6.12.6 to 6.14.0.",
@@ -1440,6 +1452,19 @@
     ],
     "lastModified": "2026-03-09T21:04:36Z",
     "author": "GitHub Action"
+  },
+  {
+    "title": "Dependabot 라벨 `dependencies` 누락 문제 해결 방법",
+    "slug": "issues/dependencies-label-missing",
+    "content": "문제 개요\nDependabot이 Pull Request에  라벨을 자동으로 붙이려고 시도하지만, 해당 라벨이 레포지토리에 존재하지 않을 경우 아래와 같은 오류가 발생합니다.\n이 오류는 * 파일에  라벨이 명시되어 있지만, 실제 라벨이 GitHub 레포지토리에 생성되지 않았을 때 발생합니다.\n해결 방법\n라벨 생성\n레포지토리의 Issues 탭으로 이동합니다.\n오른쪽 사이드바에서 Labels 를 클릭합니다.\nNew label 버튼을 눌러 라벨을 생성합니다.\n   - Name: \n   - Color: 원하는 색상 (예: )\n   - Description: \nCreate label 를 클릭합니다.\n검토 및 수정 (선택 사항)\n파일에  섹션이 존재한다면, 라벨 이름이 정확히  로 지정되어 있는지 확인합니다.\n다른 라벨을 사용하고 싶다면,  에서 해당 라벨 이름을 원하는 라벨명으로 변경하고, 해당 라벨을 레포지토리에 미리 생성합니다.\n예시 ():\n변경 사항 확인\n라벨을 만든 뒤, Dependabot이 새 PR을 생성하거나 기존 PR에 라벨을 자동으로 붙이는지 확인합니다.\n오류 메시지가 사라졌다면 정상적으로 설정이 완료된 것입니다.\n추가 팁\n라벨 관리가 복잡해질 경우, 라벨 템플릿 파일()을 사용해 일관된 라벨을 정의하고, CI 스크립트로 자동 생성하도록 할 수 있습니다.\nDependabot 설정에 다른 라벨을 추가하고 싶다면,  의  배열에 원하는 라벨명을 추가하고, 해당 라벨을 레포지토리에 미리 만들어 주세요.\n참고 자료\nDependabot 설정 문서  \nGitHub 라벨 관리 가이드  \nIssue 본문에 포함된 Release notes 및 changelog (버전 8.57.1) – 참고용\n이 문서는 Dependabot 라벨 문제를 해결하기 위한 가이드이며, 향후 다른 라벨 관련 이슈가 발생했을 때도 동일한 절차를 적용할 수 있습니다.*",
+    "excerpt": "문제 개요\nDependabot이 Pull Request에  라벨을 자동으로 붙이려고 시도하지만, 해당 라벨이 레포지토리에 존재하지 않을 경우 아래와 같은 오류가 발생합니다.\n이 오류는 * 파일에  라벨이 명시되어 있지만, 실제 라벨이 GitHub 레포지토리에 생성되지 않았을 때 발생합니다.\n해결 방법\n라벨 생성\n레포지토리의 Issues 탭으로 이동합니다....",
+    "tags": [
+      "dependabot",
+      "labels",
+      "github",
+      "CI"
+    ],
+    "lastModified": "2026-03-16T20:26:33.643Z"
   },
   {
     "title": "Issues/Untitled 1773545730139",
@@ -2893,6 +2918,18 @@
     "author": "SEPilot AI"
   },
   {
+    "title": "Dependency Update: @typescript-eslint packages to v8.57.0",
+    "slug": "deps/typescript-eslint-bump-8.57.0",
+    "content": "Dependency Update: @typescript-eslint to v8.57.0\nSuperseded by #506\nWhat changed\nBumped  from 8.56.1 to 8.57.0.\nBumped  from 8.56.1 to 8.57.0.\nRelease notes (v8.57.0)\n🚀 Features\n  - :  allow literal loop conditions in  loops (#12080).\n🩹 Fixes\n  - :  false positives with overloads (#12055).\n  - : handle statically analyzable computed keys in  (#12079).\n  - : guard against negative  in  (#12077).\n  - :  add allow  (#12094).\n  - :  fix false positive for  with overloads (#12089).\n  - : switch back to use  (#12034).\n  - : if the template literal is tagged and the text has an invalid escape,  will be  (#11355).\nWhy this PR was superseded\nThe change was later incorporated into PR #506, which includes additional updates and resolves the same version bump. This document records the original intent and notes the supersession for historical reference.\nReferences\nGitHub Release v8.57.0\nChangelog entry for v8.57.0\nDependabot PR for the bump (original): .",
+    "excerpt": "Dependency Update: @typescript-eslint to v8.57.0\nSuperseded by #506\nWhat changed\nBumped  from 8.56.1 to 8.57.0.\nBumped  from 8.56.1 to 8.57.0.\nRelease notes (v8.57.0)\n🚀 Features\n  - :  allow literal...",
+    "tags": [
+      "dependency",
+      "typescript-eslint",
+      "upgrade"
+    ],
+    "lastModified": "2026-03-16T20:26:23.555Z"
+  },
+  {
     "title": "Dependabot 라벨 오류 해결 방법",
     "slug": "devops/dependabot-label-fix",
     "content": "Dependabot 라벨 오류 해결 방법\nGitHub Actions에서 Dependabot이 자동으로 생성한 Pull Request에 라벨을 붙이려 할 때, 다음과 같은 오류 메시지를 볼 수 있습니다.\n이 오류는 레포지토리 내에 해당 라벨이 존재하지 않을 때 발생합니다. 라벨을 미리 생성하거나,  파일에서 라벨 지정 부분을 제거하면 문제를 해결할 수 있습니다.\n해결 방법\n라벨 직접 생성 (추천)\n레포지토리 페이지에서 Issues → Labels 로 이동합니다.\nNew label 버튼을 클릭합니다.\n아래와 같이 라벨을 생성합니다.\n   - Name: \n   - Color: 원하는 색 (예: )\n   - Description: \n동일한 방법으로  라벨도 생성합니다.\n   - Name: \n   - Description: \n라벨 생성은 레포지토리 관리자 권한이 필요합니다.\n에서 라벨 지정 제거\n 파일에  섹션이 있다면 해당 라벨 이름을 삭제하거나 주석 처리합니다.\n이후 커밋을 푸시하면 Dependabot은 라벨 없이 PR을 생성합니다.\n라벨 자동 생성 스크립트 활용 (고급)\nGitHub CLI()를 사용해 스크립트로 라벨을 자동 생성할 수 있습니다.\nCI 파이프라인 초기에 실행하도록 설정하면 라벨 누락 문제를 방지할 수 있습니다.\n참고 자료\nDependabot PR 라벨 오류 이슈: SebastienMelki/sebuf#140 (출처)\nDocker  v4 릴리즈 노트: docker/login-action releases (출처)\n요약\n와  라벨이 없으면 Dependabot이 PR에 라벨을 붙일 수 없습니다.\n라벨을 직접 생성하거나 에서 라벨 지정 부분을 제거하면 문제를 해결할 수 있습니다.\n필요에 따라 GitHub CLI 스크립트로 라벨 자동 생성을 고려해 보세요.",
@@ -3030,6 +3067,19 @@
     ],
     "lastModified": "2026-03-01T03:03:46Z",
     "author": "github-actions[bot]"
+  },
+  {
+    "title": "Dependabot 라벨 `dependencies` 추가 및 설정 가이드",
+    "slug": "guides/dependabot-labels",
+    "content": "Dependabot 라벨  추가 및 설정 가이드\n배경\nDependabot이 PR에 자동으로  라벨을 붙이려면 레포지토리 안에 해당 라벨이 존재해야 합니다. 현재 라벨이 없어서 오류가 발생하고 있습니다. 또한  파일에 존재하지 않는 라벨이 지정되어 있으면 동일한 문제가 발생합니다. 현재 Issue에서 이 문제를 보고했습니다.\n라벨 만들기\n레포지토리 페이지 오른쪽 상단의 Settings 탭을 클릭합니다.\n좌측 메뉴에서 Labels 를 선택합니다.\nNew label 버튼을 눌러 라벨을 생성합니다.\n   - Name: \n   - Color: 원하는 색 (예: )\n   - Description:  (선택)\n라벨 생성 방법은 GitHub 공식 문서에서도 확인할 수 있습니다. (공식 문서를 참조해주세요)\n파일 검토 및 수정\n 파일에 라벨 이름이 잘못 지정되어 있으면 Dependabot이 라벨을 적용하지 못합니다.\n레포지토리 루트에 있는  파일을 엽니다.\n섹션을 찾아  라벨이 정확히 기재되어 있는지 확인합니다.\n   \n존재하지 않는 라벨이나 오타가 있는 경우 삭제하거나 올바른 라벨명으로 수정합니다.\n파일을 커밋하고 푸시합니다.\n변경 사항 확인\n라벨이 정상적으로 생성되면 Dependabot이 새 PR을 만들 때 자동으로  라벨이 붙습니다.\n기존 PR에 라벨이 없을 경우 수동으로 라벨을 추가하거나 Dependabot이 다시 실행되도록 재오픈합니다.\n참고 자료\nDependabot 릴리즈 노트 및 PR 내용: DOMPurify 3.3.3 업데이트 PR에서 라벨 오류가 보고되었습니다. (Issue 내용)\nGitHub 라벨 관리 방법: GitHub 공식 문서 (공식 문서를 참조해주세요)\n이 가이드를 따라  라벨을 추가하고  파일을 정리하면 라벨 관련 오류가 해결됩니다.",
+    "excerpt": "Dependabot 라벨  추가 및 설정 가이드\n배경\nDependabot이 PR에 자동으로  라벨을 붙이려면 레포지토리 안에 해당 라벨이 존재해야 합니다. 현재 라벨이 없어서 오류가 발생하고 있습니다. 또한  파일에 존재하지 않는 라벨이 지정되어 있으면 동일한 문제가 발생합니다. 현재 Issue에서 이 문제를 보고했습니다.\n라벨 만들기\n레포지토리 페이지 오...",
+    "tags": [
+      "Dependabot",
+      "라벨",
+      "GitHub",
+      "자동화"
+    ],
+    "lastModified": "2026-03-16T20:08:37.692Z"
   },
   {
     "title": "주간 위키 보고서 - 2026년 9주차",
