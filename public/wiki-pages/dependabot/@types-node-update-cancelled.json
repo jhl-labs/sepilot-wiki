@@ -2,7 +2,7 @@
   "title": "Dependabot @types/node 업데이트 PR 취소 안내",
   "slug": "dependabot/@types-node-update-cancelled",
   "content": "\n# Dependabot @types/node 업데이트 PR 취소 안내\n\n## 배경\n- Dependabot이 **@types/node** 패키지를 `25.3.0` → `25.3.3` 으로 업데이트하는 그룹 PR을 생성했습니다.\n- 이후 시스템 로그에 **\"Looks like @types/node is updatable in another way, so this is no longer needed.\"** 라는 피드백이 달렸습니다.\n- 이는 동일한 의존성을 다른 경로(예: 별도 PR, 수동 업데이트 등)에서 이미 해결했기 때문에 현재 PR은 필요 없음을 의미합니다.\n\n## 현재 상태\n- 해당 Dependabot PR은 **폐기**되었습니다.\n- 자동 머지 및 라벨링 작업이 중단되었습니다.\n- 레포지토리의 `dependabot.yml` 설정은 그대로 유지되며, 향후 새로운 업데이트가 필요하면 자동으로 새 PR이 생성됩니다.\n\n## 조치 사항\n1. **PR 폐기 확인**: GitHub UI에서 PR이 `Closed` 상태인지 확인합니다.\n2. **필요 시 수동 업데이트**: 만약 아직 적용되지 않은 최신 버전이 있다면, 직접 `npm install @types/node@latest --save-dev` 명령어로 업데이트합니다.\n3. **라벨 관리**: `dependencies` 라벨이 존재하지 않아 발생한 오류는 레포지토리 설정에서 라벨을 추가하거나 `dependabot.yml`에서 라벨 지정 부분을 수정합니다.\n4. **CI/CD 검증**: 폐기된 PR과 관련된 워크플로우가 정상적으로 실행되는지 CI 로그를 확인합니다.\n\n## 참고 자료\n- Dependabot PR 로그 및 피드백: \"Looks like @types/node is updatable in another way, so this is no longer needed.\" (시스템 메시지) \n- Dependabot 공식 문서: [About Dependabot version updates](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-version-updates) \n- 관련 이슈 예시: [dependabot-core #10019](https://github.com/dependabot/dependabot-core/issues/10019) \n\n---\n*이 문서는 현재 상황을 기준으로 작성된 초안(draft)이며, 필요에 따라 업데이트될 수 있습니다.*",
-  "lastModified": "2026-03-15T18:10:28Z",
+  "lastModified": "2026-03-16T00:26:39Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,11 +15,11 @@
   ],
   "history": [
     {
-      "sha": "cde09b5",
+      "sha": "6a9fcfc",
       "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-15T18:10:28Z",
+      "date": "2026-03-16T00:26:39Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
