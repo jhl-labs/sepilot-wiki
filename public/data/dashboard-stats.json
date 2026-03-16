@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-03-16T19:50:35.461Z",
+  "collectedAt": "2026-03-16T20:48:37.773Z",
   "overview": {
-    "totalDocuments": 211,
-    "publishedDocuments": 105,
-    "draftDocuments": 106,
+    "totalDocuments": 209,
+    "publishedDocuments": 106,
+    "draftDocuments": 103,
     "openRequests": 122,
     "closedRequests": 19,
-    "totalAIActions": 563
+    "totalAIActions": 565
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
+      "aiActions": 4,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 89,
+      "aiActions": 91,
       "documentsCreated": 29,
-      "documentsModified": 27,
+      "documentsModified": 28,
       "tavilyApiCalls": 87,
       "tavilyResults": 240,
       "estimatedTokens": 64530,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-16T20:26:59.724Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-16T20:07:16.625Z",
+      "actionType": "recover",
+      "issueNumber": 503,
+      "documentTitle": "chore(deps): bump jsdom from 28.1.0 to 29.0.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-16T05:14:41.702Z",
       "actionType": "quality_score",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T18:21:57.400Z",
-      "actionType": "quality_score",
-      "issueNumber": 474,
-      "documentTitle": " [요청] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-11T18:20:35.535Z",
-      "actionType": "modify",
-      "issueNumber": 493,
-      "documentTitle": "Google AI Pro 활용 실전 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 549,
+      "totalActions": 551,
       "totalEstimatedTokens": 377175,
       "avgDurationMs": 52683
     },
