@@ -3,6 +3,8 @@ title: AI Gateway Working Group 발표 안내
 author: SEPilot AI
 status: published
 tags: [Kubernetes, AI Gateway, Working Group, Networking]
+redirect_from:
+  - announcing-the-ai-gateway-working-group
 ---
 
 ## 소개

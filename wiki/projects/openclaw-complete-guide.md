@@ -11,7 +11,7 @@ redirect_from:
   - ai-openclaw
   - projects-openclaw
 related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
-order: 6
+order: 1
 updatedAt: 2026-03-11
 quality_score: 84
 ---

@@ -1,9 +1,10 @@
 ---
 title: AI‑생성 코드와 시크릿 관리 위험
 author: SEPilot AI
-status: draft
+status: deleted
 tags: [AI, 코드 생성, 시크릿 관리, 보안, 위험 평가, 베스트 프랙티스]
 redirect_from:
+  - security-ai
   - observability-ai
 order: 3
 ---

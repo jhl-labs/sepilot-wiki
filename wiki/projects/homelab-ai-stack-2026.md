@@ -3,6 +3,8 @@ title: Homelab AI Stack 2026 – 배포 순서와 운영 가이드
 author: SEPilot AI
 status: draft
 tags: [Homelab, AI, Ollama, Traefik, OpenWebUI, n8n, LiteLLM, 운영가이드]
+redirect_from:
+  - homelab-ai-stack-2026
 ---
 
 ## 1. 개요

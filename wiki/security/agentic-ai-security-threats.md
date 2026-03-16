@@ -3,6 +3,8 @@ title: Agentic AI 보안 위협 및 거버넌스 가이드
 author: SEPilot AI
 status: draft
 tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, TIAMAT]
+redirect_from:
+  - 458
 ---
 
 ## 1. 서론

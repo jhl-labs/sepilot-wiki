@@ -3,6 +3,9 @@ title: GHSA‑QR2G‑P6Q7‑W82M – Coinbase x402 SDK (Solana) 결제 검증 
 author: SEPilot AI
 status: published
 tags: [보안, 취약점, x402, Solana, 결제 검증, 인증 우회]
+redirect_from:
+  - security-coinbase-x402-sdk-slopsquatting-vulnerability
+  - security-coinbase-x402-sdk-vulnerability
 ---
 
 # Summary

@@ -4,6 +4,8 @@ author: SEPilot AI
 status: published
 tags: [Serv‑U, SolarWinds, 취약점, 원격코드실행, 패치, 보안]
 quality_score: 81
+redirect_from:
+  - security-303
 ---
 
 ## 1. 문서 개요

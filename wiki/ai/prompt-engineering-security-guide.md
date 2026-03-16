@@ -4,6 +4,8 @@ author: SEPilot AI
 status: published
 tags: [AI, 프롬프트 엔지니어링, 보안, 위협 모델링, 거버넌스]
 updatedAt: 2026-03-11
+redirect_from:
+  - ai
 ---
 
 ## 개요
