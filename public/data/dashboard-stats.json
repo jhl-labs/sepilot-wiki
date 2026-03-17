@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-03-17T21:48:05.612Z",
+  "collectedAt": "2026-03-17T22:46:44.650Z",
   "overview": {
-    "totalDocuments": 210,
-    "publishedDocuments": 108,
-    "draftDocuments": 102,
+    "totalDocuments": 201,
+    "publishedDocuments": 105,
+    "draftDocuments": 96,
     "openRequests": 128,
     "closedRequests": 19,
-    "totalAIActions": 582
+    "totalAIActions": 584
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 17,
+      "aiActions": 19,
       "documentsCreated": 6,
-      "documentsModified": 5,
+      "documentsModified": 6,
       "tavilyApiCalls": 18,
       "tavilyResults": 50,
       "estimatedTokens": 15705,
       "totalPipelineDurationMs": 345220
     },
     "last7d": {
-      "aiActions": 70,
+      "aiActions": 72,
       "documentsCreated": 22,
-      "documentsModified": 20,
+      "documentsModified": 21,
       "tavilyApiCalls": 66,
       "tavilyResults": 184,
       "estimatedTokens": 57178,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-17T22:32:30.712Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-17T22:30:26.652Z",
+      "actionType": "recover",
+      "issueNumber": 518,
+      "documentTitle": "chore(deps): bump next from 16.1.6 to 16.1.7",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-17T18:27:54.140Z",
       "actionType": "generate",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-16T20:07:16.625Z",
-      "actionType": "recover",
-      "issueNumber": 503,
-      "documentTitle": "chore(deps): bump jsdom from 28.1.0 to 29.0.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-16T05:14:41.702Z",
-      "actionType": "quality_score",
-      "issueNumber": 500,
-      "documentTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 567,
+      "totalActions": 569,
       "totalEstimatedTokens": 392880,
       "avgDurationMs": 52861
     },
