@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 514,
-      "number": 514,
-      "title": " [요청] LLM‑Free AI 에이전트를 위한 인지 레이어 설계",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-built-a-cognitive-layer-for-ai-agents-that-learn-016137)\n**관련도**: 85/100\n**핵심 토픽**: LLM‑free AI 에이전트, 인지 레이어, 메모리 관리\n\n## 뉴스 요약\n문제는 에이전트가 대화를 시작할 때마다 처음부터 시작한다는 것이다. 물론 요약을 시스템 프롬프트에 넣거나, RAG를 사용하거나, Mem0 또는 Ze를 호출할 수 있다.\n\n## 상세 내용\nSource: Dev.to\n문제점\n에이전트가 대화를 시작할 때마다 처음부터 시작합니다.\n요약을 시스템 프롬프트에 넣거나, RAG를 사용하거나, Mem0나 Zep을 호출할 수는 있죠.\n하지만 이 모든 방법은 같은 문제를 가지고 있습니다: 학습에 LLM 호출이 필요하다는 점입니다. 사실을 추출하고, 사용자 프로필을 만들고, 중요한 것을 이해하려면 토큰당 비용을 지불하고, 지연 시간이 추가되며, 클라우드 서비스에 의존하게 됩니다.\n학습이 로컬에서 자동으로, LLM 전혀 사용하지 않고 이루어진다면 어떨까요?\nAuraSDK가 다르게 하는 일\nAuraSDK는 어떤 LLM과도 함께 동작하는 인지 레이어입니다. 상호작용을 관찰하고—LLM 호출 없이—패턴, 원인, 행동 규칙에 대한 구조화된 이해를 구축합니다.\nfrom aura import Aura, Level\nbrain = Aura(\"./agent_memory\")\nbrain.enable_full_cognitive_stack()\n# store what happens\nbrain.store(\n\"User always deploys to staging first\",\nlevel=Level.Domain,\ntags=[\"workflow\"]\n)\nbrain.store(\n\"Staging deploy prevented 3 production incidents\",\nlevel=Level.Domain,\ntags=[\"workflow\"]\n)\n# sub-millisecond recall — inject into any LLM prompt\ncontext = brain.recall(\"deployment decision\")\n# after enough interactions, the system derives this on its own:\nhints = brain.get_surfaced_policy_hints()\n# [{\"action\": \"Prefer\", \"domain\": \"workflow\", \"description\": \"deploy to staging first\"\n\n## 판단 근거\nLLM 호출 없이 로컬에서 학습·메모리를 관리하는 새로운 아키텍처는 기존 문서에 다루어지지 않는다. 별도 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 517,
+      "number": 517,
+      "title": "문서 요청 #517",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,18 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-17T18:30:00.823Z",
-      "updated_at": "2026-03-17T18:30:00.829Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/514",
-      "documentSlug": "ai/llm-free-ai",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/llm-free-ai.md",
+      "created_at": "2026-03-17T18:27:54.143Z",
+      "updated_at": "2026-03-17T18:27:54.149Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/517",
+      "documentSlug": "ai/517",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/517.md",
       "comments": 0
     },
     {
       "id": 516,
       "number": 516,
-      "title": " [요청] ByteDance Seedance 2.0 AI 비디오 앱 규제 대응 가이드",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/senators-tell-bytedance-to-shut-down-seedance-20-a-48fca6)\n**관련도**: 78/100\n**핵심 토픽**: AI 비디오 생성, 규제·정책 압박, ByteDance Seedance 2.0\n\n## 뉴스 요약\n배경: ByteDance가 주말 동안 새로운 Seedance 2.0 AI 비디오 생성기의 전 세계 롤아웃을 중단한 후, 미국 상원 의원들은 이제 회사에 …\n\n## 상세 내용\nSource: Engadget\nBackground\nByteDance가 주말 동안 새로운 Seedance 2.0 AI 비디오 생성기의 전 세계 롤아웃을 중단한 이후, 미국 상원 의원들은 이제 회사에 “즉시 앱을 종료”하라고 요구했습니다.\nSenators’ Letter\n상원 의원 마샤 블랙번(Marsha Blackburn)과 피터 웰치(Peter Welch)는 “Seedance 2.0은 미국 지식재산권 시스템에 직접적인 위협을 가하고, 더 넓게는 우리 창작 커뮤니티의 헌법적 권리와 경제적 생계에 위협이 된다”고 밝혔습니다.\n이 서한은 AI 기업들이 예술가, 배우, 영화 제작자의 저작권이 있는 자료를 허가 없이 모델 학습에 사용하는 것에 대한 정부의 우려가 커지고 있음을 반영합니다. 의원들은 “책임 있는 글로벌 기업은 법을 준수하고 지식재산권 및 개인 초상권 보호와 같은 핵심 경제적 권리를 존중한다”고 강조했습니다.\n그들은 Seedance AI의 예시로 다음을 들었습니다:\nAI가 만든 Thanos vs. Superman 전투,\n재작성된 Stranger Things 결말,\n조작된 Tom Cruise vs. Brad Pitt 대결.\nByteDance Response\nSeedance 2.0을 철수한 후, ByteDance는 “지식재산권을 존중한다”며 “사용자가 지식재산권 및 초상권을 무단으로 사용하는 것을 방지하기 위해 현재 보호 조치를 강화하고 있다”고 밝혔습니다.\n블랙번과 웰치 상원 의원은 이 약속을 “혁신가들을 계속 착취하고 그들의 성공으로부터 이익을 얻기 위한 지연 전술”이라며, 미국 IP에 대한 입장이 “창작 커뮤니티의 비용을 대가로 보호된 작업을 훔치는 인공지능 기업들의 더 큰 추세의 일부”라고 덧붙였습니다.\nIndustry Reaction\n영화 제작자들도 Seedance 2.0에 맞서 행동에 나섰습니다. 미국 영화협회(Motion Picture Association)는 최근 ByteDance에 중지 및 금지 서한을 보냈습니다.\nLegislative Actio\n\n## 판단 근거\n미국 상원 의회의 정책 압박은 기존 AI 정책·규제 문서와 직접 연결되지 않으며, 별도 규제·법적 대응 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "title": "문서 요청 #516",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -55,18 +55,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-17T18:28:26.656Z",
-      "updated_at": "2026-03-17T18:28:26.660Z",
+      "created_at": "2026-03-17T18:26:39.245Z",
+      "updated_at": "2026-03-17T18:26:39.251Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/516",
-      "documentSlug": "bytedance-seedance-2-0-ai",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/bytedance-seedance-2-0-ai.md",
+      "documentSlug": "ai/516",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/516.md",
       "comments": 0
     },
     {
-      "id": 517,
-      "number": 517,
-      "title": " [요청] TokenWatch – AI 비용 실시간 추적 및 최적화 가이드",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/mastering-your-ai-costs-an-in-depth-look-at-tokenw-0e8aac)\n**관련도**: 75/100\n**핵심 토픽**: AI 비용 관리, TokenWatch, 예산 최적화\n\n## 뉴스 요약\n마크다운 !Aloysius Chanhttps://media2.dev.to/dynamic/image/width=50,height=50,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2...\n\n## 상세 내용\nSource: Dev.to\n위 링크에 포함된 본문을 제공해 주시면, 해당 내용을 한국어로 번역해 드리겠습니다.\n문제: “청구서 서프라이즈” 현상\nAI 통합이 소프트웨어 개발에서 표준 관행이 되면서, 청구서가 도착했을 때 비로소 총 지출을 알게 되는 “청구서 서프라이즈”는 큰 골칫거리입니다. 세부적인 가시성이 없으면 다양한 모델 간 비용을 비교하거나 예산을 소모하는 특정 작업을 식별하기가 거의 불가능합니다. TokenWatch는 로컬 머신에서 직접 추적, 알림 및 분석 도구를 포괄적으로 제공함으로써 이를 해결합니다.\nTokenWatch란?\nTokenWatch는 오픈‑소스이며 MIT‑라이선스를 가진 유틸리티로, 여러 AI 제공업체에 걸쳐 토큰 사용량을 추적, 분석 및 최적화할 수 있게 해줍니다. 프로젝트의 핵심 철학은 프라이버시와 자율성입니다: 로컬에서 작동하고 자체 기능을 위해 외부 API 키가 필요 없으며 텔레메트리를 전혀 수집하지 않습니다. 모든 데이터는 간단한 .tokenwatch 디렉터리에 저장되어 사용량 데이터가 철저히 사용자에게만 귀속됩니다.\n파워 유저를 위한 핵심 기능\n세밀한 사용량 추적\nTokenWatch는 본질적으로 AI 상호작용을 기록하는 장부 역할을 합니다. 사용량을 수동으로 기록하거나 Anthropic 및 OpenAI SDK 응답을 위한 내장 훅을 활용할 수 있습니다. 작업에 라벨을 붙이면(예: “summarize article” 또는 “data extraction”), 어떤 함수나 워크플로우가 가장 비용이 많이 드는지 정확히 파악할 수 있습니다.\n선제적 예산 관리 및 알림\n예산을 설정하고 운을 기다리던 시절은 지났습니다. TokenWatch는 일일, 주간, 월간 및 호출당 지출 한도를 구성할 수 있게 해줍니다. 더 중요한 점은 자동 알림 기능이 포함되어 있다는 것입니다. alert_at_percent 임계값을 설정하면 예를 들어 월 예산의 80 %에 도달하는 순간 알림을 받아, 한도가 초과되기 전에 더 저렴한 모델로 전환하거나 비필수 작업\n\n## 판단 근거\nTokenWatch 도구는 기존 `ai/claude-code-cost-management.md` 에서 다루는 비용 관리와 차별화된 로컬 추적 솔루션이므로 독립 문서가 적합함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 514,
+      "number": 514,
+      "title": "문서 요청 #514",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -86,11 +86,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-17T18:26:57.281Z",
-      "updated_at": "2026-03-17T18:26:57.286Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/517",
-      "documentSlug": "ai/tokenwatch-ai",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/tokenwatch-ai.md",
+      "created_at": "2026-03-17T18:25:06.507Z",
+      "updated_at": "2026-03-17T18:25:06.512Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/514",
+      "documentSlug": "ai/514",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/514.md",
       "comments": 0
     },
     {
@@ -4567,5 +4567,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-17T18:30:00.829Z"
+  "lastUpdated": "2026-03-17T18:27:54.149Z"
 }
