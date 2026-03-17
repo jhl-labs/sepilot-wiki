@@ -3,6 +3,7 @@ title: AI 콜드‑스타트가 Kubernetes Autoscaling에 미치는 영향
 author: SEPilot AI
 status: published
 tags: [AI, 콜드스타트, Kubernetes, Autoscaling, HPA, GPU, 인프라]
+updatedAt: 2026-03-17
 ---
 
 ## 1. 서론
@@ -20,11 +21,27 @@ tags: [AI, 콜드스타트, Kubernetes, Autoscaling, HPA, GPU, 인프라]
 ## 2. Kubernetes Autoscaling 기본 메커니즘
 | 컴포넌트 | 역할 | 주요 메트릭 | 참고 |
 |---|---|---|---|
-| **Horizontal Pod Autoscaler (HPA)** | Deployment/ReplicaSet의 복제본 수를 동적으로 조정 | CPU 사용률, 메모리 사용률, custom metrics (예: request‑per‑second) | <https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/> |
+| **Horizontal Pod Autoscaler (HPA)** | Deployment/StatefulSet 등 스케일 가능한 워크로드 리소스의 복제본 수를 동적으로 조정 | CPU 사용률, 메모리 사용률, custom metrics (예: request‑per‑second) | <https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/> |
 | **Vertical Pod Autoscaler (VPA)** | 개별 Pod의 **리소스 요청/제한**을 자동 조정 | 현재 사용량 대비 요청/제한 비율 | <https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler> |
 | **Cluster Autoscaler** | 클러스터 수준에서 **노드 풀**을 확장·축소 | 노드 스케줄링 실패, 미사용 노드 | <https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler> |
 
-일반 마이크로‑서비스는 **런타임 시작 → 코드 로드 → DB 연결** 정도의 가벼운 초기화(수초)만 필요합니다【k8s HPA 동작 방식 및 이슈들 정리 - will.log】. 따라서 CPU/메모리 사용량이 급증하면 HPA가 즉시 파드를 추가하고, 새 파드는 거의 즉시 트래픽을 처리합니다.
+### Horizontal Pod Autoscaler (HPA) 상세
+- **동작 원리**: HPA는 Deployment, StatefulSet 등 *스케일 가능한* 워크로드 리소스를 대상으로, 관측된 메트릭(예: 평균 CPU 사용률, 평균 메모리 사용률, 혹은 사용자 정의 메트릭)과 목표값을 비교해 복제본 수를 자동으로 조정합니다.  
+- **수평 스케일링 vs. 수직 스케일링**: HPA는 *수평* 스케일링(파드 수 증가/감소)을 수행합니다. 이는 기존 파드에 더 많은 CPU·메모리를 할당하는 *수직* 스케일링과는 구별됩니다.  
+- **적용 대상 제한**: DaemonSet처럼 스케일이 불가능한 객체에는 적용되지 않습니다.  
+- **구현 방식**: HPA는 Kubernetes API 리소스이자 컨트롤러이며, `scaleTargetRef`에 지정된 워크로드의 `scale` 서브리소스를 통해 복제본 수를 조정합니다.  
+- **제어 루프**: 컨트롤 플레인 내 `horizontal-pod-autoscaler` 컨트롤러가 **주기적으로**(기본 15 초, `--horizontal-pod-autoscaler-sync-period` 옵션) 메트릭을 조회하고, 목표값과 현재값의 비율을 계산해 원하는 복제본 수를 산출합니다.  
+- **알고리즘**  
+  \[
+  \text{desiredReplicas} = \lceil \text{currentReplicas} \times \frac{\text{currentMetricValue}}{\text{desiredMetricValue}} \rceil
+  \]  
+  - 목표값보다 메트릭이 높으면 복제본 수가 증가하고, 낮으면 감소합니다.  
+  - 비율이 1.0에 충분히 가깝다면(기본 허용 오차 0.1) 스케일링을 수행하지 않습니다.  
+- **Ready‑Pod 처리**: 아직 Ready 상태가 아닌 파드(초기화 중이거나 비정상)와 메트릭이 누락된 파드는 스케일링 계산에서 제외됩니다.  
+  - 초기 Ready 지연(`--horizontal-pod-autoscaler-initial-readiness-delay`, 기본 30 초)과 CPU 초기화 기간(`--horizontal-pod-autoscaler-cpu-initialization-period`, 기본 5 분) 옵션을 통해 이 동작을 조정할 수 있습니다.  
+- **메트릭 소스**:  
+  - **리소스 메트릭**(CPU, 메모리)은 `metrics.k8s.io` API(보통 Metrics Server)에서 가져옵니다.  
+  - **커스텀/외부 메트릭**은 `custom.metrics.k8s.io`·`external.metrics.k8s.io` API를 통해 제공됩니다.  
 
 ## 3. AI 추론 워크로드 특성
 AI 서빙 컨테이너는 다음과 같은 무거운 초기화 단계를 거칩니다.
@@ -144,4 +161,4 @@ AI 추론 서비스는 **콜드 스타트**라는 고유한 초기화 지연 때
 다음 단계로는 **파일럿 구현**(Warm‑pod 풀 + 커스텀 메트릭) 후 **성능 검증**(Cold‑Start Latency 감소율) 및 **비용 분석**을 진행하시길 권장합니다.  
 
 ---  
-*이 문서는 euno.news·Dev.to 기사와 공개된 Kubernetes 문서를 기반으로 작성되었습니다. 추가적인 실험·벤치마크가 필요할 경우 “추가 조사가 필요합니다”라고 명시해 주세요.*
+*이 문서는 euno.news·Dev.to 기사와 공식 Kubernetes 문서를 기반으로 작성되었습니다. 추가적인 실험·벤치마크가 필요할 경우 “추가 조사가 필요합니다”라고 명시해 주세요.*  

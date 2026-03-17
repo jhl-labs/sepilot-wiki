@@ -9,7 +9,7 @@ redirect_from:
   - wiki-api
 order: 1
 related_docs: ["api-service-layer.md"]
-updatedAt: 2026-03-13
+updatedAt: 2026-03-17
 quality_score: 88
 ---
 
@@ -366,7 +366,7 @@ fetch('/api/wiki/technology/web/react', {
 ## 10. 참고 자료
 - **API 문서 작성 가이드라인** – 로버트의 가이드라인[[API 문서 작성을 위한 로버트의 가이드라인](https://koko8829.tistory.com/2496)]  
 - **Next.js App Router 문서** – 공식 문서([Next.js Docs – Routing](https://nextjs.org/docs/app/building-your-application/routing))  
-  *Next.js는 파일‑시스템 기반 라우팅을 사용합니다. `app` 디렉터리 아래에 `page.tsx`·`layout.tsx` 파일을 배치해 각각 페이지와 레이아웃을 정의하며, 폴더 구조가 URL 세그먼트를 결정합니다.*  
+  *Next.js는 파일‑시스템 기반 라우팅을 사용합니다. `app` 디렉터리 아래에 페이지와 레이아웃 파일을 배치해 URL 구조를 정의합니다.*  
   - **Page**: `app/page.tsx` 와 같은 파일에서 기본 내보내기된 React 컴포넌트는 해당 경로에 UI를 렌더링합니다.  
   - **Layout**: `app/layout.tsx` 등에서 `children` prop을 받아 페이지와 중첩 레이아웃을 감싸며, 루트 레이아웃은 반드시 `<html>`·`<body>` 태그를 포함해야 합니다.  
   - **Nested Routes**: 폴더를 중첩해 `/blog/[slug]` 와 같은 다중 세그먼트 경로를 만들 수 있습니다.  
@@ -374,6 +374,10 @@ fetch('/api/wiki/technology/web/react', {
   - **searchParams**: 서버 컴포넌트 페이지에서 `searchParams` prop 으로 쿼리 문자열을 읽을 수 있으며, 이는 페이지를 동적 렌더링하게 합니다. 클라이언트에서는 `useSearchParams` 훅을 사용합니다.  
   - **Link & useRouter**: `<Link href="/...">` 로 클라이언트‑사이드 네비게이션을 수행하고, `useRouter` 로 프로그래밍적 라우팅이 가능합니다.  
   - **Route Props Helpers**: `PageProps`·`LayoutProps` 타입이 자동 생성되어 `params`, `searchParams`, `children` 등을 타입 안전하게 사용할 수 있습니다.  
+  - **Root Layout**: `app/layout.tsx` 는 루트 레이아웃이며, 반드시 `<html>`·`<body>` 를 포함해야 합니다.  
+  - **Nested Layouts**: 폴더 구조에 따라 레이아웃이 중첩되며, 상위 레이아웃이 하위 레이아웃과 페이지를 감싸 `children` prop 으로 전달합니다.  
+  - **Dynamic Segment Rendering**: 동적 세그먼트 폴더(`[slug]`) 내부에서 `params` 를 사용해 해당 값에 따라 데이터를 가져와 렌더링합니다.  
+  - **Rendering with searchParams**: 서버 컴포넌트는 `searchParams` 로 쿼리 문자열을 읽어 동적 데이터를 로드하고, 클라이언트는 `useSearchParams` 로 동일하게 접근합니다.  
 
 - **OAuth 2.0 표준** – RFC 6749([IETF RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749))  
 - **JWT (JSON Web Token)** – RFC 7519([IETF RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519))  
