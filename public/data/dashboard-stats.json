@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-17T08:50:40.502Z",
+  "collectedAt": "2026-03-17T09:51:14.803Z",
   "overview": {
     "totalDocuments": 208,
     "publishedDocuments": 105,
     "draftDocuments": 103,
     "openRequests": 122,
     "closedRequests": 19,
-    "totalAIActions": 565
+    "totalAIActions": 567
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
+      "aiActions": 4,
       "documentsCreated": 0,
       "documentsModified": 1,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 73,
-      "documentsCreated": 23,
-      "documentsModified": 21,
-      "tavilyApiCalls": 69,
-      "tavilyResults": 193,
-      "estimatedTokens": 54437,
-      "totalPipelineDurationMs": 1233660
+      "aiActions": 64,
+      "documentsCreated": 20,
+      "documentsModified": 18,
+      "tavilyApiCalls": 60,
+      "tavilyResults": 166,
+      "estimatedTokens": 48823,
+      "totalPipelineDurationMs": 1101847
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-17T09:24:35.009Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-17T09:24:25.042Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-16T20:26:59.724Z",
       "actionType": "maintain",
@@ -217,38 +237,18 @@
       "durationMs": 48928,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2289
-    },
-    {
-      "timestamp": "2026-03-13T09:18:20.709Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-13T09:18:10.438Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 551,
-      "totalEstimatedTokens": 377175,
-      "avgDurationMs": 52683
-    },
     "unknown": {
-      "totalActions": 14,
+      "totalActions": 15,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 552,
+      "totalEstimatedTokens": 377175,
+      "avgDurationMs": 52683
     }
   }
 }
