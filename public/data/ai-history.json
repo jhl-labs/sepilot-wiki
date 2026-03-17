@@ -1,6 +1,187 @@
 {
   "entries": [
     {
+      "id": "695b034f-d5ae-45a2-aa0b-e6941ef284c2",
+      "timestamp": "2026-03-17T18:30:49.719Z",
+      "actionType": "quality_score",
+      "issueNumber": 514,
+      "issueTitle": " [요청] LLM‑Free AI 에이전트를 위한 인지 레이어 설계",
+      "documentSlug": "ai/llm-free-ai",
+      "documentTitle": " [요청] LLM‑Free AI 에이전트를 위한 인지 레이어 설계",
+      "summary": "자동 품질 검토 통과 (81점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "bbd8af3d-b133-4883-b96d-d242334a8af7",
+      "timestamp": "2026-03-17T18:30:32.956Z",
+      "actionType": "quality_score",
+      "issueNumber": 516,
+      "issueTitle": " [요청] ByteDance Seedance 2.0 AI 비디오 앱 규제 대응 가이드",
+      "documentSlug": "bytedance-seedance-2-0-ai",
+      "documentTitle": " [요청] ByteDance Seedance 2.0 AI 비디오 앱 규제 대응 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "68c973ed-0953-453c-9060-50e042d81568",
+      "timestamp": "2026-03-17T18:30:18.089Z",
+      "actionType": "quality_score",
+      "issueNumber": 517,
+      "issueTitle": " [요청] TokenWatch – AI 비용 실시간 추적 및 최적화 가이드",
+      "documentSlug": "ai/tokenwatch-ai",
+      "documentTitle": " [요청] TokenWatch – AI 비용 실시간 추적 및 최적화 가이드",
+      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "de4b561f-77db-40c2-924b-51b23bfa67e9",
+      "timestamp": "2026-03-17T18:30:00.820Z",
+      "actionType": "generate",
+      "issueNumber": 514,
+      "issueTitle": " [요청] LLM‑Free AI 에이전트를 위한 인지 레이어 설계",
+      "documentSlug": "ai/llm-free-ai",
+      "documentTitle": "LLM‑Free AI 에이전트를 위한 인지 레이어 설계",
+      "summary": "새 문서 \"LLM‑Free AI 에이전트를 위한 인지 레이어 설계\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3759
+            },
+            {
+              "step": "outline",
+              "durationMs": 15717
+            },
+            {
+              "step": "write",
+              "durationMs": 42169
+            },
+            {
+              "step": "review",
+              "durationMs": 9392
+            }
+          ],
+          "totalDurationMs": 71039,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3364,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "bb45f66d-c589-4a9c-833e-56d584ee7ced",
+      "timestamp": "2026-03-17T18:28:26.653Z",
+      "actionType": "generate",
+      "issueNumber": 516,
+      "issueTitle": " [요청] ByteDance Seedance 2.0 AI 비디오 앱 규제 대응 가이드",
+      "documentSlug": "bytedance-seedance-2-0-ai",
+      "documentTitle": "ByteDance Seedance 2.0 AI 비디오 앱 규제 대응 가이드",
+      "summary": "새 문서 \"ByteDance Seedance 2.0 AI 비디오 앱 규제 대응 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3462
+            },
+            {
+              "step": "outline",
+              "durationMs": 10403
+            },
+            {
+              "step": "write",
+              "durationMs": 48917
+            },
+            {
+              "step": "review",
+              "durationMs": 10149
+            }
+          ],
+          "totalDurationMs": 72931,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3473,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "e00ce1db-d1f8-43f4-92d8-d6f7654991d1",
+      "timestamp": "2026-03-17T18:26:57.278Z",
+      "actionType": "generate",
+      "issueNumber": 517,
+      "issueTitle": " [요청] TokenWatch – AI 비용 실시간 추적 및 최적화 가이드",
+      "documentSlug": "ai/tokenwatch-ai",
+      "documentTitle": "TokenWatch – AI 비용 실시간 추적 및 최적화 가이드",
+      "summary": "새 문서 \"TokenWatch – AI 비용 실시간 추적 및 최적화 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6952
+            },
+            {
+              "step": "outline",
+              "durationMs": 6103
+            },
+            {
+              "step": "write",
+              "durationMs": 23917
+            },
+            {
+              "step": "review",
+              "durationMs": 6223
+            },
+            {
+              "step": "refine",
+              "durationMs": 26421
+            }
+          ],
+          "totalDurationMs": 69617,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3133,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "abd4e690-84ed-449e-8922-e4b8d356a77a",
       "timestamp": "2026-03-17T18:22:56.705Z",
       "actionType": "maintain",
@@ -13687,5 +13868,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-17T18:22:56.706Z"
+  "lastUpdated": "2026-03-17T18:30:49.719Z"
 }
