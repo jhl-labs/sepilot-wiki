@@ -3,7 +3,7 @@ title: Claude Code 비용 관리와 실시간 모니터링 가이드
 author: SEPilot AI
 status: published
 tags: [Claude Code, 비용 관리, 실시간 모니터링, Bifrost, OpenTelemetry, 가상 키, 온보딩, 채택 로드맵]
-updatedAt: 2026-03-11
+updatedAt: 2026-03-17
 ---
 
 ## 1. 서론
@@ -98,7 +98,7 @@ Success criteria: The generated spec validates against the OpenAPI validator, an
 - 1회 교육 비용 $2,500 이하 → 1개월 내 회수  
 
 ### 4.2 프리‑PR 리뷰용 프롬프트 예시
-> **Prompt**:  
+> **Prompt**  
 > `Review this diff. Flag anything that would cause a senior engineer to ask a question in code review. Be specific — line numbers and why.`  
 
 **활용 팁**  
@@ -107,7 +107,48 @@ Success criteria: The generated spec validates against the OpenAPI validator, an
   - 일반 프롬프트: `Write a function that validates email addresses.`  
   - 행동‑우선 프롬프트: `I need a function that validates email addresses. In our codebase we use Zod for schema validation, throw custom ValidationError instances, and follow this naming pattern: validate<Feature>Email. Generate something that fits.`  
 
-위와 같은 프롬프트는 **Claude Code**가 단순 코드 스니펫을 넘어서 팀 고유 규칙을 반영한 결과물을 제공하도록 유도합니다.
+---
+
+## 4.3 **새로운 코드베이스 온보딩 가이드 – Claude Code 활용법**
+
+### 4.3.1 온보딩 개요
+Claude Code 는 팀에 새로 합류한 개발자가 기존 레포지토리를 빠르게 이해하도록 돕는 **AI 동료**가 될 수 있습니다. 코드가 무엇을 하는지 설명하고, 데이터 흐름을 추적하며, 구성 요소 간 연결 관계를 질문할 수 있습니다. 하지만 기존 컨벤션을 충분히 파악하기 전에 Claude에게 직접 변경을 요청하면 팀의 암묵적 표준을 깨는 위험이 있습니다. 따라서 **읽기 전용** 질문으로 시작해 점진적으로 구현 단계로 넘어가는 것이 권장됩니다.
+
+### 4.3.2 컨벤션 파악 전 주의사항
+1. **읽기 전용 모드 유지** – 처음에는 `Claude as a Reader` 로서 코드 설명을 요청합니다.  
+2. **전체 시스템 개요 요청** – 주요 모듈, 책임, 통신 방식 등을 한 번에 파악합니다.  
+3. **팀 전용 CLAUDE.md 확인** – 이미 존재한다면 먼저 읽고, 없을 경우 첫 주가 끝난 뒤 작성합니다 (아래 4.3.4 참고).  
+4. **작은, 격리된 변경부터 시작** – 컨벤션을 이해한 뒤, 독립적인 파일이나 함수 수준에서 작은 수정 작업을 수행합니다.  
+
+### 4.3.3 추천 질문 리스트
+| 목적 | 질문 예시 |
+|------|-----------|
+| **코드 이해** | “이 함수는 무엇을 하나요?” |
+| **데이터 흐름** | “이 데이터는 어디서 오는 건가요?” |
+| **구조 이유** | “왜 이렇게 구조화되었을까요?” |
+| **시스템 전체** | “이 시스템이 어떻게 구성되어 있는지 설명해 주세요. 주요 모듈은 무엇이며, 각각의 책임은 무엇이고, 어떻게 서로 통신하나요?” |
+| **인증 흐름** | “이 코드베이스에서 인증은 어떻게 처리되나요? 관련 코드를 보여 주세요.” |
+| **새 엔드포인트** | “새 API 엔드포인트를 추가한다면, 기존 어느 엔드포인트를 모델로 삼아야 할까요?” |
+| **파일 역할** | “이 파일의 역할은 무엇인가요? 무엇이 이 파일에 의존하고 있나요?” |
+| **시그니처 변경 영향** | “이 함수 시그니처를 바꾸면 무엇이 깨질까요?” |
+
+### 4.3.4 팀 컨벤션 문서 만들기 (CLAUDE.md)
+1. **파일 구조** – 디렉터리 트리와 주요 진입점 설명  
+2. **네이밍 패턴** – 변수·함수·클래스 명명 규칙  
+3. **오류 처리 방식** – 예외 클래스, 로깅, 재시도 정책  
+4. **테스트 스타일** – 단위·통합 테스트 프레임워크, 커버리지 목표  
+
+이 문서를 레포지토리 루트에 `CLAUDE.md` 로 저장하면 Claude가 프롬프트에 응답할 때 팀 표준을 자동으로 반영하도록 유도할 수 있습니다.
+
+### 4.3.5 팀 협업 워크플로
+1. **온보딩 킥오프** – 팀 전체가 Claude Code 를 “읽기 전용” 모드로 사용한다는 목표를 공유.  
+2. **질문 수집** – 각 개발자는 위 추천 질문 리스트에서 3~5개를 선택해 Claude에게 질의하고, 답변을 노트에 정리.  
+3. **컨벤션 정리** – 수집된 답변을 바탕으로 `CLAUDE.md` 초안을 작성하고, 팀 리뷰를 진행.  
+4. **작은 변경 적용** – 격리된 파일/함수에 대해 “Implement X” 프롬프트를 사용하고, 생성된 코드를 직접 검토 후 커밋.  
+5. **피드백 루프** – PR 리뷰 시 Claude가 만든 코드와 팀 표준을 비교하고, 필요 시 프롬프트를 재작성하도록 피드백 제공.  
+6. **주간 회고** – Claude Code 활용 경험을 공유하고, 질문/프롬프트 템플릿을 업데이트하여 `CLAUDE.md` 에 반영.  
+
+이 워크플로를 2주 차까지 실행하면, 신규 입사자는 기존 코드베이스에 대한 **정신 모델**을 빠르게 구축하고, 팀 표준을 위반하지 않는 안전한 방식으로 AI‑지원 코드를 생산할 수 있습니다.
 
 ---
 
