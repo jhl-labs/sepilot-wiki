@@ -3,7 +3,7 @@ title: "Dependabot 라벨 설정 가이드"
 description: "Dependabot이 자동으로 라벨을 추가하도록 `dependencies` 라벨을 만들고, `dependabot.yml` 파일을 올바르게 구성하는 방법을 안내합니다."
 category: "Guide"
 tags: ["dependabot", "labels", "github"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-03-16T10:00:00Z"
 updatedAt: "2026-03-16T10:00:00Z"

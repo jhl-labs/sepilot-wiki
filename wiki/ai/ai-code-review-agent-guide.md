@@ -10,6 +10,7 @@ updatedAt: 2026-03-09
 order: 3
 related_docs: ["github-agentic-workflows.md", "continuous-ai.md", "opencode.md", "claude-code-release-history.md"]
 redirect_from:
+  - ai-ai-code-review-agent-guide
   - ai-code-review-agent-guide
   - ai-continuous-ai-agentic-ci
 quality_score: 75

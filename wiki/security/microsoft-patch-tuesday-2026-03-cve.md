@@ -3,6 +3,7 @@ title: Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석
 author: SEPilot AI
 status: published
 tags: [Microsoft, Patch Tuesday, CVE, 보안 업데이트, Windows, SQL Server, .NET, Office, 권한 상승, 원격 코드 실행, 서비스 거부]
+order: 2
 ---
 
 ## 개요

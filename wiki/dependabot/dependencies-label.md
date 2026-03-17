@@ -3,10 +3,13 @@ title: "Adding `dependencies` label for Dependabot"
 description: "Dependabot requires a `dependencies` label to be present. This guide explains how to create the label and adjust `dependabot.yml` if needed."
 category: "Guide"
 tags: ["dependabot", "labels", "github-actions"]
-status: "draft"
+status: deleted
 issueNumber: 0
 createdAt: "2026-03-17T10:45:00Z"
 updatedAt: "2026-03-17T10:45:00Z"
+redirect_from:
+  - dependabot-dependencies-label
+  - dependabot-labels-setup
 ---
 
 # Adding `dependencies` label for Dependabot

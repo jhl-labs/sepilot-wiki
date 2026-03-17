@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [vite, vite-plugin-pwa, PWA, 오프라인, 서비스워커, 매니페스트]
 redirect_from:
+  - frontend-vite-plugin-pwa-pwa
   - vite-plugin-pwa-pwa
 ---
 

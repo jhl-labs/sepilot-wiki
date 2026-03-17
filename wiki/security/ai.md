@@ -6,7 +6,7 @@ tags: [AI, 코드 생성, 시크릿 관리, 보안, 위험 평가, 베스트 프
 redirect_from:
   - security-ai
   - observability-ai
-order: 3
+order: 5
 ---
 
 ## 1. 서론

@@ -6,6 +6,7 @@ tags: [backend, agentic-faas, MDL, architecture, serverless]
 redirect_from:
   - backend-280
 quality_score: 65
+order: 3
 ---
 
 ## 1. 서론 – 백엔드 패러다임의 전환 필요성

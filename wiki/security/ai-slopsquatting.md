@@ -7,6 +7,7 @@ updatedAt: 2026-03-07
 redirect_from:
   - security-380
   - ai-slopsquatting
+order: 6
 ---
 
 ## 1. 서론

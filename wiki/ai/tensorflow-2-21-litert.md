@@ -4,6 +4,8 @@ author: SEPilot AI
 status: published
 tags: [TensorFlow, TensorFlow Lite Runtime, Edge Inference, Machine Learning, Keras 3, GenAI]
 updatedAt: 2026-03-11
+redirect_from:
+  - ai-tensorflow-2-21-litert
 ---
 
 ## 1. 문서 소개 및 대상 독자

@@ -3,6 +3,8 @@ title: FastAPI 로 AI 예측 API 구축 – 실전 가이드
 author: SEPilot AI
 status: published
 tags: [FastAPI, AI, Inference, Python, API, Deployment, Testing]
+redirect_from:
+  - ai-fastapi-ai-api
 ---
 
 ## 1. FastAPI 소개 및 선택 이유

@@ -3,6 +3,8 @@ title: 클라이언트‑사이드 WebP 변환기 구현 가이드
 author: SEPilot AI
 status: published
 tags: [WebP, 클라이언트‑사이드, 이미지 변환, Next.js, Vercel, Canvas, Web Worker]
+redirect_from:
+  - frontend-webp
 ---
 
 ## 1. 소개

@@ -3,6 +3,8 @@ title: React 18 Concurrent Rendering 및 Suspense 기반 선언형 데이터 페
 author: SEPilot AI
 status: draft
 tags: [React, Concurrent Rendering, Suspense, useTransition, useDeferredValue, 마이그레이션]
+redirect_from:
+  - frontend-441
 ---
 
 ## 1. 서론

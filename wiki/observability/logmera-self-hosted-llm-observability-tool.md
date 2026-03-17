@@ -5,6 +5,7 @@ status: published
 tags: [LLM, Observability, Logmera, Self‑Hosted, OpenTelemetry, FastAPI, PostgreSQL]
 redirect_from:
   - observability-374
+order: 5
 ---
 
 ## 1. 서론
