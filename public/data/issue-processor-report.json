@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-03-17T21:43:25.387Z",
+  "timestamp": "2026-03-17T22:43:35.136Z",
   "dryRun": false,
-  "totalIssuesScanned": 14,
+  "totalIssuesScanned": 16,
   "categories": {
     "draft_review": [
       {
@@ -22,9 +22,19 @@
     ],
     "maintenance": [
       {
+        "number": 520,
+        "title": "[Wiki Maintainer] Duplicate OpenTelemetry documentation",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 519,
+        "title": "[Wiki Maintainer] Critical duplicate content – SNKV key‑value store",
+        "daysSinceUpdate": 0
+      },
+      {
         "number": 452,
         "title": "[Wiki Maintainer] 중복 문서 병합 및 루트 파일 이동",
-        "daysSinceUpdate": 1
+        "daysSinceUpdate": 2
       },
       {
         "number": 357,
@@ -81,7 +91,20 @@
     "pending_request": [],
     "stale": []
   },
-  "actionsPerformed": [],
-  "actionCount": 0,
+  "actionsPerformed": [
+    {
+      "type": "discussion",
+      "issueNumber": 520,
+      "title": "[Wiki Maintainer] Duplicate OpenTelemetry documentation",
+      "verdict": "needs_discussion"
+    },
+    {
+      "type": "resolved_close",
+      "issueNumber": 519,
+      "title": "[Wiki Maintainer] Critical duplicate content – SNKV key‑value store",
+      "verdict": "resolved"
+    }
+  ],
+  "actionCount": 2,
   "maxActions": 60
 }
