@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-03-17T23:42:08.286Z",
+  "timestamp": "2026-03-18T00:36:07.840Z",
   "dryRun": false,
-  "totalIssuesScanned": 15,
+  "totalIssuesScanned": 19,
   "categories": {
     "draft_review": [
+      {
+        "number": 525,
+        "title": " [요청] OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 522,
+        "title": " [요청] Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 521,
+        "title": " [요청] NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 426,
         "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
@@ -25,11 +40,6 @@
         "number": 520,
         "title": "[Wiki Maintainer] Duplicate OpenTelemetry documentation",
         "daysSinceUpdate": 0
-      },
-      {
-        "number": 452,
-        "title": "[Wiki Maintainer] 중복 문서 병합 및 루트 파일 이동",
-        "daysSinceUpdate": 2
       },
       {
         "number": 357,
@@ -82,18 +92,68 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 524,
+        "title": " [업데이트] MCP Server Secret Scanning – AI 코딩 에이전트와의 통합",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 523,
+        "title": " [업데이트] Gemini 3.1 – Personal Intelligence 전면 확대",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
     {
-      "type": "resolved_close",
-      "issueNumber": 452,
-      "title": "[Wiki Maintainer] 중복 문서 병합 및 루트 파일 이동",
-      "verdict": "resolved"
+      "type": "retrigger_request",
+      "issueNumber": 525,
+      "title": " [요청] OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 522,
+      "title": " [요청] Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 521,
+      "title": " [요청] NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 524,
+      "title": " [업데이트] MCP Server Secret Scanning – AI 코딩 에이전트와의 통합"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 523,
+      "title": " [업데이트] Gemini 3.1 – Personal Intelligence 전면 확대"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 525,
+      "title": " [요청] OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드",
+      "score": 79
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 522,
+      "title": " [요청] Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/pentagon-llm-alternative-development-ai.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 521,
+      "title": " [요청] NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv.md"
     }
   ],
-  "actionCount": 1,
+  "actionCount": 8,
   "maxActions": 60
 }
