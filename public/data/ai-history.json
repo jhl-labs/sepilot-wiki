@@ -1,6 +1,173 @@
 {
   "entries": [
     {
+      "id": "9abd20b2-5dc9-41c4-b605-c2fddd2112e1",
+      "timestamp": "2026-03-18T00:36:03.036Z",
+      "actionType": "quality_score",
+      "issueNumber": 521,
+      "issueTitle": " [요청] NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview",
+      "documentSlug": "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv",
+      "documentTitle": " [요청] NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "dd878d65-8d8e-42ee-a1d6-25fb0b77ecb8",
+      "timestamp": "2026-03-18T00:35:50.029Z",
+      "actionType": "quality_score",
+      "issueNumber": 522,
+      "issueTitle": " [요청] Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵",
+      "documentSlug": "ai/pentagon-llm-alternative-development-ai",
+      "documentTitle": " [요청] Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "7fd03830-6d19-48c3-890e-193eebac2051",
+      "timestamp": "2026-03-18T00:35:17.944Z",
+      "actionType": "generate",
+      "issueNumber": 521,
+      "issueTitle": " [요청] NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview",
+      "documentSlug": "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv",
+      "documentTitle": "NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview",
+      "summary": "새 문서 \"NVIDIA NemoClaw – OpenClaw Enterprise Solution Overview\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3494
+            },
+            {
+              "step": "outline",
+              "durationMs": 10046
+            },
+            {
+              "step": "write",
+              "durationMs": 29251
+            },
+            {
+              "step": "review",
+              "durationMs": 6060
+            },
+            {
+              "step": "refine",
+              "durationMs": 39136
+            }
+          ],
+          "totalDurationMs": 87988,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 4225,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "502525a5-f542-4c9d-a249-004f74d0c783",
+      "timestamp": "2026-03-18T00:33:33.003Z",
+      "actionType": "generate",
+      "issueNumber": 522,
+      "issueTitle": " [요청] Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵",
+      "documentSlug": "ai/pentagon-llm-alternative-development-ai",
+      "documentTitle": "Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵",
+      "summary": "새 문서 \"Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5665
+            },
+            {
+              "step": "outline",
+              "durationMs": 7428
+            },
+            {
+              "step": "write",
+              "durationMs": 26804
+            },
+            {
+              "step": "review",
+              "durationMs": 7446
+            }
+          ],
+          "totalDurationMs": 47343,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2083,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "1c42b986-e7bd-443a-975c-e1d1ffded0ab",
+      "timestamp": "2026-03-18T00:32:31.861Z",
+      "actionType": "generate",
+      "issueNumber": 525,
+      "issueTitle": " [요청] OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드",
+      "documentSlug": "ai/openai-gpt-5-4-mini-nano",
+      "documentTitle": "OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드",
+      "summary": "새 문서 \"OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3418
+            },
+            {
+              "step": "outline",
+              "durationMs": 12988
+            },
+            {
+              "step": "write",
+              "durationMs": 32814
+            },
+            {
+              "step": "review",
+              "durationMs": 12235
+            }
+          ],
+          "totalDurationMs": 61455,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2902,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "84d92b74-75f4-48d2-9765-b6dabc50359d",
       "timestamp": "2026-03-18T00:30:14.475Z",
       "actionType": "generate",
@@ -14079,5 +14246,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-18T00:30:14.475Z"
+  "lastUpdated": "2026-03-18T00:36:03.036Z"
 }
