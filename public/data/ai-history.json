@@ -1,22 +1,8 @@
 {
   "entries": [
     {
-      "id": "02c48875-9d6b-4091-8ee7-88334b248e5b",
-      "timestamp": "2026-03-18T12:25:38.014Z",
-      "actionType": "quality_score",
-      "issueNumber": 532,
-      "issueTitle": " [요청] SuperLocalMemory V3 – 에이전트 메모리를 위한 수학적 기초",
-      "documentSlug": "ai/superlocalmemory-v3",
-      "documentTitle": " [요청] SuperLocalMemory V3 – 에이전트 메모리를 위한 수학적 기초",
-      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "dd373a15-18ee-4b6b-95c1-b4e596907d34",
-      "timestamp": "2026-03-18T12:25:14.769Z",
+      "id": "4fd0e956-7a0c-4967-a75d-47eee99a87c0",
+      "timestamp": "2026-03-18T12:24:14.541Z",
       "actionType": "modify",
       "issueNumber": 534,
       "issueTitle": " [업데이트] AI‑to‑AI 감사(A2A) 프레임워크 – 자동화된 보안 감사",
@@ -27,19 +13,36 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
+        "additions": 47,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "64578ce1-c4ab-4b85-8520-272a30ea109b",
+      "timestamp": "2026-03-18T12:22:58.803Z",
+      "actionType": "modify",
+      "issueNumber": 533,
+      "issueTitle": " [업데이트] Stealth Browser – AI 에이전트의 Bot‑Detection 회피 기법",
+      "documentSlug": "security/agentic-ai-security-threats",
+      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Stealth Browser – AI 에이전트의 Bot‑Detection 회피 기법\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
         "additions": 55,
         "deletions": 0
       }
     },
     {
-      "id": "ac231948-ae4e-4c3b-8087-3a1f88b59f2f",
-      "timestamp": "2026-03-18T12:24:08.935Z",
+      "id": "3f49d195-dfcb-4386-b8d4-9e2ae26f0c5b",
+      "timestamp": "2026-03-18T12:22:04.114Z",
       "actionType": "generate",
       "issueNumber": 532,
-      "issueTitle": " [요청] SuperLocalMemory V3 – 에이전트 메모리를 위한 수학적 기초",
-      "documentSlug": "ai/superlocalmemory-v3",
-      "documentTitle": "SuperLocalMemory V3 – 에이전트 메모리를 위한 수학적 기초",
-      "summary": "새 문서 \"SuperLocalMemory V3 – 에이전트 메모리를 위한 수학적 기초\" 생성",
+      "issueTitle": "문서 요청 #532",
+      "documentSlug": "532",
+      "documentTitle": "SuperLocalMemory V3 – 생산 등급 에이전트 메모리를 위한 수학적 기반",
+      "summary": "새 문서 \"SuperLocalMemory V3 – 생산 등급 에이전트 메모리를 위한 수학적 기반\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -48,32 +51,66 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 8161
+              "durationMs": 3629
             },
             {
               "step": "outline",
-              "durationMs": 14876
+              "durationMs": 12966
             },
             {
               "step": "write",
-              "durationMs": 35935
+              "durationMs": 50655
             },
             {
               "step": "review",
-              "durationMs": 11943
+              "durationMs": 11374
             }
           ],
-          "totalDurationMs": 70915,
-          "researchSources": 10,
+          "totalDurationMs": 78624,
+          "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 9
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 3138,
+            "estimated": 3750,
             "method": "duration_based"
           }
         }
+      }
+    },
+    {
+      "id": "f366bfa4-32b3-48e6-b955-23fa262d45dc",
+      "timestamp": "2026-03-18T12:20:39.866Z",
+      "actionType": "modify",
+      "issueNumber": 531,
+      "issueTitle": " [업데이트] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
+      "documentSlug": "ai/google-ai-edge-gallery-functiongemma",
+      "documentTitle": "Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 16
+      }
+    },
+    {
+      "id": "fd07b52e-5bbc-4c5c-b567-2687c40d932d",
+      "timestamp": "2026-03-18T12:20:01.371Z",
+      "actionType": "modify",
+      "issueNumber": 530,
+      "issueTitle": " [업데이트] Agentic AI와 시스템 관리: 도전 과제와 기회",
+      "documentSlug": "ai/ai-agentic-workflow",
+      "documentTitle": "AI Agentic Workflow 거버넌스 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Agentic AI와 시스템 관리: 도전 과제와 기회\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 49,
+        "deletions": 0
       }
     },
     {
@@ -14555,5 +14592,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-18T12:25:38.014Z"
+  "lastUpdated": "2026-03-18T12:24:14.541Z"
 }

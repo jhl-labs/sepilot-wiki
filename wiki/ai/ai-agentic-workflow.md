@@ -3,6 +3,7 @@ title: AI Agentic Workflow 거버넌스 실전 가이드
 author: SEPilot AI
 status: published
 tags: [AI, Agentic Workflow, 거버넌스, CI/CD, GitHub Actions]
+updatedAt: 2026-03-18
 ---
 
 ## 1. 서론
@@ -115,4 +116,52 @@ tags: [AI, Agentic Workflow, 거버넌스, CI/CD, GitHub Actions]
 - **NIST AI RMF**, **ISO/IEC 42001** – 국제 표준 가이드라인  
 - **GitHub Advanced Security**, **Trivy**, **OPA**, **act** – 공식 문서 및 사용 가이드  
 
----
+## 13. 운영·관리 도전 과제
+Agentic AI가 시스템 관리에 적용될 때 직면하는 주요 과제는 다음과 같다 [AI 에이전트 101 설명: 장점, 사용 사례, 도전 과제 및 미래 동향](https://kr.linkedin.com/pulse/agentic-ai-explained-101-benefits-use-cases-challenges-future-upv6c)  
+
+| 도전 과제 | 설명 |
+|---|---|
+| **데이터 폭증 및 품질 관리** | 시스템이 생성하는 로그·메트릭이 급증하면서, 신뢰할 수 있는 데이터 파이프라인 구축이 필수다. |
+| **실시간 의사결정 신뢰성** | Agentic AI는 실시간으로 의사결정을 내리지만, 잘못된 판단이 서비스 가용성에 직접 영향을 미칠 수 있다. |
+| **모델 Drift 및 버전 관리** | 모델이 지속적으로 업데이트되면서, 기존 워크플로우와 호환성을 유지하기 위한 자동화된 drift 감지가 필요하다 [AI 에이전트 - 기회, 도전 과제, 그리고 일상에 미치는 영향](https://news.hada.io/topic?id=18727). |
+| **보안·프라이버시 위험** | 외부 API 호출 및 시크릿 사용이 늘어나면서, 권한 오남용 및 데이터 유출 위험이 커진다. |
+| **복잡한 도구 연계** | 여러 AI Agent와 도구(예: 데이터베이스, 모니터링 시스템)를 하나의 흐름으로 조율해야 하며, 오류 전파를 방지하기 위한 격리 메커니즘이 요구된다 [스스로 일하는 AI, 에이전틱 AI(Agentic AI)의 개념과 기업 ...](https://blog.naver.com/PostView.naver?blogId=cslee_official&logNo=224110453875&redirect=Dlog). |
+
+## 14. 시스템 데이터 활용 기회
+위 도전 과제를 해결하면서 얻을 수 있는 비즈니스·운영적 기회는 다음과 같다 [Workday – Agentic AI란? 정의, 유형, 예시](https://www.workday.com/ko-kr/topics/ai/agentic-ai.html)  
+
+| 활용 기회 | 구체적 내용 |
+|---|---|
+| **원시 신호 기반 인사이트** | 로그·메트릭을 AI가 실시간으로 해석해 장애 징후를 사전 탐지한다. |
+| **자동화된 인시던트 대응** | 에이전트가 문제를 감지하면 자동으로 티켓을 생성·수정 스크립트를 실행한다. |
+| **비용 최적화** | 사용 패턴을 분석해 모델 호출 빈도·토큰 사용량을 조절, 비용 한도 초과를 방지한다. |
+| **지속적 개선 루프** | 피드백 루프를 통해 실행 결과를 학습 데이터로 저장, 다음 의사결정에 반영한다. |
+| **멀티‑도메인 협업** | AI Agent가 서로 다른 시스템(CI, 모니터링, 보안) 간에 작업을 조정해 전사적 효율성을 높인다. |
+
+## 15. 베스트 프랙티스 및 권고사항
+운영·관리 관점을 안전하게 구현하기 위한 실무 권고사항을 정리한다.  
+
+1. **데이터 파이프라인 표준화**  
+   - JSON Schema 기반 입력/출력 정의와 메타데이터(타임스탬프·소스) 기록을 기본화한다.  
+
+2. **모델 모니터링 및 Drift 알림**  
+   - OPA와 연계한 `model_version` 검증 정책을 적용하고, 버전 변경 시 Slack·Email 알림을 설정한다.  
+
+3. **비용 한도 정책**  
+   - CloudWatch 또는 Prometheus로 토큰·API 호출량을 실시간 집계하고, 한도 초과 시 자동으로 저비용 모델(`model=cheaper`)로 전환한다.  
+
+4. **보안 원칙 적용**  
+   - 최소 권한 원칙(Least‑Privilege)과 시크릿 접근 로그를 GitHub Advanced Security와 연동한다.  
+
+5. **인간‑인‑루프 검증**  
+   - 고위험 작업(예: 인프라 변경) 전에는 반드시 인간 승인(`required_approving_review_count`)을 요구한다.  
+
+6. **도구 체인 활용**  
+   - **OPA**: 정책 선언·검증  
+   - **act** 또는 **LocalRunner**: 로컬 시뮬레이션으로 사전 검증  
+   - **Trivy**, **GitHub Advanced Security**: 이미지·코드 취약점 스캔  
+
+7. **문서·교육**  
+   - 모든 Agentic Action에 대한 README와 운영 매뉴얼을 유지하고, 정기적인 워크숍으로 팀 역량을 강화한다.  
+
+위 권고사항을 기존 거버넌스 프레임워크와 결합하면, Agentic AI 기반 시스템 관리의 **안정성**, **투명성**, **비용 효율성**을 동시에 확보할 수 있다.

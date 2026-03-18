@@ -3,8 +3,8 @@
     {
       "id": 532,
       "number": 532,
-      "title": " [요청] SuperLocalMemory V3 – 에이전트 메모리를 위한 수학적 기초",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/superlocalmemory-v3-mathematical-foundations-for-p-8f24c5)\n**관련도**: 85/100\n**핵심 토픽**: Agent Memory, Information Geometry, Mathematical Foundations\n\n## 뉴스 요약\n개요 우리는 information geometry, algebraic topology, 그리고 stochastic dynamics를 AI‑agent 메모리에 적용했습니다. - 데이터가 로컬에 머무르는 LoCoMo에서 74.8 % – 높은…\n\n## 상세 내용\nSource: Dev.to\n위 링크에 포함된 전체 텍스트를 제공해 주시면, 해당 내용을 한국어로 번역해 드리겠습니다. 텍스트를 복사해서 여기에 붙여 주시면 됩니다.\n개요\n우리는 정보 기하학, 대수적 위상수학, 그리고 확률 동역학을 AI‑에이전트 메모리에 적용했습니다.\n74.8 % 를 LoCoMo에서 로컬 데이터만 사용해 달성 – 클라우드 의존 없이 보고된 최고 점수.\n87.7 % 를 전체 성능 모드에서 달성.\n60.4 % 를 LLM 없이 모든 단계에서 달성.\n오픈 소스, MIT 라이선스.\n메모리 문제\n모든 AI 코딩 어시스턴트 — Claude, Cursor, Copilot, ChatGPT — 는 각 세션을 처음부터 시작합니다.\n기존 메모리 레이어(예: Mem0, Zep, Letta)는 개인 개발자와 소규모 팀에게는 잘 작동합니다.\n프로덕션 규모 사용은 아직 해결되지 않았습니다.\n대규모에서의 증상\n규모문제\n10 k 메모리코사인 유사도가 관련 결과와 무관한 결과를 구분하지 못함.\n100 k 메모리조용히 쌓이는 모순이 발생 (예: “Alice는 런던으로 이사했다” 그리고 “Alice는 파리에 산다”).\n엔터프라이즈하드코딩된 수명 주기 임계값(“30 일 후 보관”)이 팀, 프로젝트, 도메인마다 다른 사용 패턴 때문에 깨짐.\n규제 차원\nEU AI Act가 2026년 8월 2일에 전면 시행됩니다.\n핵심 작업을 위해 데이터를 클라우드 LLM에 전송하는 모든 메모리 시스템은 엔지니어링만으로는 해결할 수 없는 컴플라이언스 문제가 발생하며, 아키텍처적인 답변이 필요합니다.\n우리의 수학적 접근\n1. 신뢰 가중 검색\n표준: 코사인 유사도는 모든 임베딩을 동일하게 자신감이 있다고 취급한다.\n우리 모델:\n각 메모리 임베딩 → 대각 가우시안 (학습된 평균 &#x26; 분산).\n유사도는 Fisher‑Rao 측지 거리(통계적 다양체상의 자연 메트릭)로 측정한다.\n핵심 특성\n반복 접근 → 분산이 감소한다(베이지안 공액 업데이트).\n더 많이 사용된 메모리는 더 정밀해진다.\n사용량이 증가함에 따\n\n## 판단 근거\nSuperLocalMemory V3는 정보 기하학·대수적 위상수학을 적용한 새로운 메모리 프레임워크이며, 기존 문서와는 별도 주제이므로 독립 문서가 필요합니다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "title": "문서 요청 #532",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,11 +24,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-18T12:24:08.938Z",
-      "updated_at": "2026-03-18T12:24:08.944Z",
+      "created_at": "2026-03-18T12:22:04.117Z",
+      "updated_at": "2026-03-18T12:22:04.122Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/532",
-      "documentSlug": "ai/superlocalmemory-v3",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/superlocalmemory-v3.md",
+      "documentSlug": "532",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/532.md",
       "comments": 0
     },
     {
@@ -4784,5 +4784,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-18T12:24:08.944Z"
+  "lastUpdated": "2026-03-18T12:22:04.122Z"
 }
