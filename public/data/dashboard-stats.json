@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-18T09:50:27.362Z",
+  "collectedAt": "2026-03-18T10:50:19.001Z",
   "overview": {
     "totalDocuments": 207,
     "publishedDocuments": 107,
     "draftDocuments": 100,
-    "openRequests": 131,
+    "openRequests": 134,
     "closedRequests": 19,
-    "totalAIActions": 598
+    "totalAIActions": 604
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
+      "aiActions": 0,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -20,24 +20,84 @@
     },
     "last24h": {
       "aiActions": 28,
-      "documentsCreated": 9,
-      "documentsModified": 8,
-      "tavilyApiCalls": 27,
-      "tavilyResults": 73,
-      "estimatedTokens": 24481,
-      "totalPipelineDurationMs": 523952
+      "documentsCreated": 12,
+      "documentsModified": 5,
+      "tavilyApiCalls": 36,
+      "tavilyResults": 93,
+      "estimatedTokens": 31483,
+      "totalPipelineDurationMs": 674484
     },
     "last7d": {
-      "aiActions": 62,
-      "documentsCreated": 19,
+      "aiActions": 68,
+      "documentsCreated": 22,
       "documentsModified": 17,
-      "tavilyApiCalls": 57,
-      "tavilyResults": 158,
-      "estimatedTokens": 50152,
-      "totalPipelineDurationMs": 1098630
+      "tavilyApiCalls": 66,
+      "tavilyResults": 178,
+      "estimatedTokens": 57154,
+      "totalPipelineDurationMs": 1249162
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-18T09:49:31.805Z",
+      "actionType": "quality_score",
+      "issueNumber": 526,
+      "documentTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 방어와 탐지 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-18T09:49:18.327Z",
+      "actionType": "quality_score",
+      "issueNumber": 527,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 구현 및 운영 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-18T09:49:05.649Z",
+      "actionType": "quality_score",
+      "issueNumber": 528,
+      "documentTitle": "[Wiki Maintenance] [요청] AI Agentic Workflow 거버넌스 실전 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-18T09:48:51.765Z",
+      "actionType": "generate",
+      "issueNumber": 526,
+      "documentTitle": "LLM 프롬프트 인젝션 방어와 탐지 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 50844,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2305
+    },
+    {
+      "timestamp": "2026-03-18T09:47:46.169Z",
+      "actionType": "generate",
+      "issueNumber": 527,
+      "documentTitle": "Kubernetes AI Gateway 구현 및 운영 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 59202,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2819
+    },
+    {
+      "timestamp": "2026-03-18T09:46:30.929Z",
+      "actionType": "generate",
+      "issueNumber": 528,
+      "documentTitle": "AI Agentic Workflow 거버넌스 실전 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 40486,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1878
+    },
     {
       "timestamp": "2026-03-18T09:23:42.188Z",
       "actionType": "maintain",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-17T22:32:30.712Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "Wiki Tree Maintenance",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-17T22:30:26.652Z",
-      "actionType": "recover",
-      "issueNumber": 518,
-      "documentTitle": "chore(deps): bump next from 16.1.6 to 16.1.7",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-17T18:27:54.140Z",
-      "actionType": "generate",
-      "issueNumber": 517,
-      "documentTitle": "자동 감지: 뉴스 인텔리전스 – TokenWatch 로 AI 비용 관리",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 71666,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3375
-    },
-    {
-      "timestamp": "2026-03-17T18:26:39.243Z",
-      "actionType": "generate",
-      "issueNumber": 516,
-      "documentTitle": "ByteDance Seedance 2.0 정책·규제 압박 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 39562,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1798
-    },
-    {
-      "timestamp": "2026-03-17T18:25:56.096Z",
-      "actionType": "modify",
-      "issueNumber": 515,
-      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-17T18:25:06.504Z",
-      "actionType": "generate",
-      "issueNumber": 514,
-      "documentTitle": "LLM‑Free 인지 레이어와 메모리 관리 – AuraSDK 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 65830,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3101
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 583,
-      "totalEstimatedTokens": 409087,
-      "avgDurationMs": 53036
+      "totalActions": 589,
+      "totalEstimatedTokens": 416089,
+      "avgDurationMs": 52986
     },
     "unknown": {
       "totalActions": 15,
