@@ -1,22 +1,53 @@
 {
   "entries": [
     {
-      "id": "aa2d199d-2c98-49d7-a124-3fd231543992",
-      "timestamp": "2026-03-18T18:28:53.769Z",
-      "actionType": "quality_score",
+      "id": "2d1310f3-f20c-41c9-8f78-12757b749438",
+      "timestamp": "2026-03-18T18:27:55.500Z",
+      "actionType": "generate",
       "issueNumber": 539,
-      "issueTitle": " [요청] OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
-      "documentSlug": "openapi-builder-openapi",
-      "documentTitle": " [요청] OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
-      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
-      "trigger": "issue_processor",
+      "issueTitle": "문서 요청 #539",
+      "documentSlug": "539",
+      "documentTitle": "OpenAPI Builder – 코드‑없는 OpenAPI 3.0 스펙 자동 생성 가이드",
+      "summary": "새 문서 \"OpenAPI Builder – 코드‑없는 OpenAPI 3.0 스펙 자동 생성 가이드\" 생성",
+      "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
-      "changes": null
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3894
+            },
+            {
+              "step": "outline",
+              "durationMs": 6592
+            },
+            {
+              "step": "write",
+              "durationMs": 19905
+            },
+            {
+              "step": "review",
+              "durationMs": 6039
+            }
+          ],
+          "totalDurationMs": 36430,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1627,
+            "method": "duration_based"
+          }
+        }
+      }
     },
     {
-      "id": "7864c32d-775a-4b49-8556-e18b566ec5a4",
-      "timestamp": "2026-03-18T18:28:33.897Z",
+      "id": "9f7d5097-ac3f-4688-9b24-4f3d231ff78b",
+      "timestamp": "2026-03-18T18:27:14.128Z",
       "actionType": "modify",
       "issueNumber": 538,
       "issueTitle": " [업데이트] Agentic AI 보안 위협",
@@ -27,53 +58,59 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
-        "additions": 26,
+        "additions": 0,
+        "deletions": 27
+      }
+    },
+    {
+      "id": "3fa8454a-8d68-40b4-af0c-c7e714a903f1",
+      "timestamp": "2026-03-18T18:26:03.082Z",
+      "actionType": "modify",
+      "issueNumber": 537,
+      "issueTitle": " [업데이트] AI Agentic Workflow",
+      "documentSlug": "ai/ai-agentic-workflow",
+      "documentTitle": "AI Agentic Workflow 거버넌스 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI Agentic Workflow\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 28,
         "deletions": 0
       }
     },
     {
-      "id": "19314392-bb82-4e6e-9f4f-f2c558b48843",
-      "timestamp": "2026-03-18T18:26:55.047Z",
-      "actionType": "generate",
-      "issueNumber": 539,
-      "issueTitle": " [요청] OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
-      "documentSlug": "openapi-builder-openapi",
-      "documentTitle": "OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
-      "summary": "새 문서 \"OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기\" 생성",
-      "trigger": "request_label",
+      "id": "f2d66af4-976f-42e9-a436-b5deaf9eafbb",
+      "timestamp": "2026-03-18T18:25:20.496Z",
+      "actionType": "modify",
+      "issueNumber": 536,
+      "issueTitle": " [업데이트] MCP 모델 컨텍스트 프로토콜",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] MCP 모델 컨텍스트 프로토콜\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 4044
-            },
-            {
-              "step": "outline",
-              "durationMs": 11605
-            },
-            {
-              "step": "write",
-              "durationMs": 21455
-            },
-            {
-              "step": "review",
-              "durationMs": 6514
-            }
-          ],
-          "totalDurationMs": 43618,
-          "researchSources": 7,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 7
-          },
-          "estimatedTokens": {
-            "estimated": 1979,
-            "method": "duration_based"
-          }
-        }
+        "additions": 6,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "bd3b6254-137d-4af0-a955-82714638aa18",
+      "timestamp": "2026-03-18T18:24:09.739Z",
+      "actionType": "modify",
+      "issueNumber": 535,
+      "issueTitle": " [업데이트] 펜타곤의 Anthropic 대체 LLM 개발 및 AI 정책 변화",
+      "documentSlug": "522",
+      "documentTitle": "펜타곤의 Anthropic 대체 LLM 개발 및 AI 정책 변화",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 펜타곤의 Anthropic 대체 LLM 개발 및 AI 정책 변화\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 24,
+        "deletions": 0
       }
     },
     {
@@ -14682,5 +14719,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-18T18:28:53.769Z"
+  "lastUpdated": "2026-03-18T18:27:55.500Z"
 }
