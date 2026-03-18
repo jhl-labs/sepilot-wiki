@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "e1191862-3790-400f-9334-60f6a372f862",
+      "timestamp": "2026-03-18T09:49:31.805Z",
+      "actionType": "quality_score",
+      "issueNumber": 526,
+      "issueTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 방어와 탐지 가이드",
+      "documentSlug": "llm",
+      "documentTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 방어와 탐지 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "e04b7299-ca25-4d66-8656-0cfef5e7c4b0",
+      "timestamp": "2026-03-18T09:49:18.327Z",
+      "actionType": "quality_score",
+      "issueNumber": 527,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 구현 및 운영 가이드",
+      "documentSlug": "kubernetes/kubernetes-ai-gateway",
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 구현 및 운영 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "3b8ea7e8-e52a-46d3-9977-3bef6ebf3bc2",
+      "timestamp": "2026-03-18T09:49:05.649Z",
+      "actionType": "quality_score",
+      "issueNumber": 528,
+      "issueTitle": "[Wiki Maintenance] [요청] AI Agentic Workflow 거버넌스 실전 가이드",
+      "documentSlug": "ai/ai-agentic-workflow",
+      "documentTitle": "[Wiki Maintenance] [요청] AI Agentic Workflow 거버넌스 실전 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "d2d3d34b-502f-4ca4-8cba-ef7e42b454f1",
+      "timestamp": "2026-03-18T09:48:51.765Z",
+      "actionType": "generate",
+      "issueNumber": 526,
+      "issueTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 방어와 탐지 가이드",
+      "documentSlug": "llm",
+      "documentTitle": "LLM 프롬프트 인젝션 방어와 탐지 가이드",
+      "summary": "새 문서 \"LLM 프롬프트 인젝션 방어와 탐지 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4742
+            },
+            {
+              "step": "outline",
+              "durationMs": 9782
+            },
+            {
+              "step": "write",
+              "durationMs": 30168
+            },
+            {
+              "step": "review",
+              "durationMs": 6152
+            }
+          ],
+          "totalDurationMs": 50844,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2305,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "52c1d5dd-4a4c-4ec0-8032-bc25a6a2ac6c",
+      "timestamp": "2026-03-18T09:47:46.169Z",
+      "actionType": "generate",
+      "issueNumber": 527,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 구현 및 운영 가이드",
+      "documentSlug": "kubernetes/kubernetes-ai-gateway",
+      "documentTitle": "Kubernetes AI Gateway 구현 및 운영 가이드",
+      "summary": "새 문서 \"Kubernetes AI Gateway 구현 및 운영 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2826
+            },
+            {
+              "step": "outline",
+              "durationMs": 8925
+            },
+            {
+              "step": "write",
+              "durationMs": 36974
+            },
+            {
+              "step": "review",
+              "durationMs": 10477
+            }
+          ],
+          "totalDurationMs": 59202,
+          "researchSources": 3,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2819,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "de13caaa-56b7-4fe3-8b94-60352b49e910",
+      "timestamp": "2026-03-18T09:46:30.929Z",
+      "actionType": "generate",
+      "issueNumber": 528,
+      "issueTitle": "[Wiki Maintenance] [요청] AI Agentic Workflow 거버넌스 실전 가이드",
+      "documentSlug": "ai/ai-agentic-workflow",
+      "documentTitle": "AI Agentic Workflow 거버넌스 실전 가이드",
+      "summary": "새 문서 \"AI Agentic Workflow 거버넌스 실전 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2925
+            },
+            {
+              "step": "outline",
+              "durationMs": 11450
+            },
+            {
+              "step": "write",
+              "durationMs": 19508
+            },
+            {
+              "step": "review",
+              "durationMs": 6603
+            }
+          ],
+          "totalDurationMs": 40486,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 1878,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "fb836d69-2eae-4e51-87b8-e108ed759e74",
       "timestamp": "2026-03-18T09:23:42.188Z",
       "actionType": "maintain",
@@ -14288,5 +14465,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-18T09:23:42.188Z"
+  "lastUpdated": "2026-03-18T09:49:31.806Z"
 }
