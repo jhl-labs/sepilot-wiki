@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-18T05:53:43.626Z",
+  "collectedAt": "2026-03-18T06:51:24.011Z",
   "overview": {
-    "totalDocuments": 204,
-    "publishedDocuments": 105,
-    "draftDocuments": 99,
+    "totalDocuments": 207,
+    "publishedDocuments": 107,
+    "draftDocuments": 100,
     "openRequests": 131,
     "closedRequests": 19,
-    "totalAIActions": 595
+    "totalAIActions": 596
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 30,
+      "aiActions": 31,
       "documentsCreated": 12,
       "documentsModified": 8,
       "tavilyApiCalls": 36,
@@ -28,16 +28,26 @@
       "totalPipelineDurationMs": 692114
     },
     "last7d": {
-      "aiActions": 73,
-      "documentsCreated": 24,
-      "documentsModified": 20,
-      "tavilyApiCalls": 72,
-      "tavilyResults": 201,
-      "estimatedTokens": 66202,
-      "totalPipelineDurationMs": 1466313
+      "aiActions": 68,
+      "documentsCreated": 22,
+      "documentsModified": 17,
+      "tavilyApiCalls": 66,
+      "tavilyResults": 183,
+      "estimatedTokens": 59639,
+      "totalPipelineDurationMs": 1322690
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-18T06:27:09.479Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-18T00:36:03.036Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-17T09:53:58.653Z",
-      "actionType": "quality_score",
-      "issueNumber": 507,
-      "documentTitle": "[Wiki Maintenance] [요청] The Invisible Rewrite: Modernizing the Kubernetes Image Promoter",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 580,
+      "totalActions": 581,
       "totalEstimatedTokens": 409087,
       "avgDurationMs": 53036
     },
