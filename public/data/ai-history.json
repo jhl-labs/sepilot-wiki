@@ -1,6 +1,82 @@
 {
   "entries": [
     {
+      "id": "aa2d199d-2c98-49d7-a124-3fd231543992",
+      "timestamp": "2026-03-18T18:28:53.769Z",
+      "actionType": "quality_score",
+      "issueNumber": 539,
+      "issueTitle": " [요청] OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
+      "documentSlug": "openapi-builder-openapi",
+      "documentTitle": " [요청] OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "7864c32d-775a-4b49-8556-e18b566ec5a4",
+      "timestamp": "2026-03-18T18:28:33.897Z",
+      "actionType": "modify",
+      "issueNumber": 538,
+      "issueTitle": " [업데이트] Agentic AI 보안 위협",
+      "documentSlug": "security/agentic-ai-security-threats",
+      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Agentic AI 보안 위협\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 26,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "19314392-bb82-4e6e-9f4f-f2c558b48843",
+      "timestamp": "2026-03-18T18:26:55.047Z",
+      "actionType": "generate",
+      "issueNumber": 539,
+      "issueTitle": " [요청] OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
+      "documentSlug": "openapi-builder-openapi",
+      "documentTitle": "OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기",
+      "summary": "새 문서 \"OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4044
+            },
+            {
+              "step": "outline",
+              "durationMs": 11605
+            },
+            {
+              "step": "write",
+              "durationMs": 21455
+            },
+            {
+              "step": "review",
+              "durationMs": 6514
+            }
+          ],
+          "totalDurationMs": 43618,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1979,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "7877a20b-cecf-478e-b70d-c3de7e4406d9",
       "timestamp": "2026-03-18T18:23:38.703Z",
       "actionType": "maintain",
@@ -14606,5 +14682,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-18T18:23:38.703Z"
+  "lastUpdated": "2026-03-18T18:28:53.769Z"
 }
