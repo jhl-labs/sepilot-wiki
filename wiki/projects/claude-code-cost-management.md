@@ -5,7 +5,7 @@ status: draft
 tags: [Claude Code, 비용 관리, Bifrost, 가상 키, 모델 라우팅, 장애 복구]
 redirect_from:
   - 383
-updatedAt: 2026-03-10
+updatedAt: 2026-03-19
 ---
 
 ## 개요
@@ -48,7 +48,10 @@ updatedAt: 2026-03-10
 
 ### 설치 및 배포 요약
 1. **실행**  
-   `npx -y @maximhq/bifrost` 로 로컬에서 바로 실행 가능 (공식 문서에 명시)【euno.news】.  
+   ```bash
+   npx -y @maximhq/bifrost
+   ```  
+   로컬에서 바로 실행 가능 (공식 문서에 명시)【euno.news】.  
 2. **HTTP 포트 열기**  
    기본 포트(예: 8080)에서 HTTP 엔드포인트를 제공한다.  
 3. **구성 파일**  
@@ -127,7 +130,7 @@ updatedAt: 2026-03-10
 
 ### 문제
 - 여러 AI 에이전트가 매 60 초마다 실행되는 **잊혀진 루프**에서 4개의 외부 도구를 호출하면서, 월 **$198**(≈₹16,500) 이상의 비용이 발생했다.  
-- 하루에 5,760번, 한 달에 172,800번의 도구 호출이 누적돼 비용이 급증했으며, 어느 에이전트가 가장 많은 토큰을 소모하는지, 어떤 도구 호출이 비싼지 파악할 수 없었다.
+- 하루에 5,760번, 한 달에 172,800번의 도구 호출이 누적돼 비용이 급증했으며, 어느 에이전트가 가장 많은 토큰을 소모하는지 파악할 수 없었다.
 
 ### 해결책
 1. **LLM 호출에 에이전트 ID 태그 부착**  
@@ -138,11 +141,9 @@ updatedAt: 2026-03-10
      "task": "draft-tweet"
    }
    ```  
-   메타데이터를 일일 비용 파일에 기록해 에이전트·루프·작업별 비용을 집계할 수 있게 함.
-
+   메타데이터를 일일 비용 파일에 기록해 에이전트·루프·작업별 비용을 집계할 수 있게 함.  
 2. **루프 주기 조정**  
    - 60 초마다 실행되는 불필요한 루프를 중단하고, 필요 시 몇 분 간격 혹은 이벤트 기반으로 전환.  
-
 3. **주간 비용 검토**  
    - 매주 에이전트별 비용을 추출·분석해 급증 시 즉시 원인 조사 및 조치.  
 
@@ -150,24 +151,85 @@ updatedAt: 2026-03-10
 - 월 비용 **$198 → $42** 로 감소, **79 % 절감** 달성.  
 - 더 저렴한 모델로 전환하거나 기능을 줄이지 않아도, 불필요한 루프 실행을 중단함으로써 비용을 크게 절감했다.  
 
-### 참고 자료
-- 전체 비용 할당 구성(로그 구조, 검토 체크리스트, 루프 주기 결정 프레임워크) – `askpatrick.co/library/27`  
+## RTK 소개
+**RTK (Reduce Token Kram)**는 Claude Code 생태계에서 토큰 사용량을 크게 절감하도록 설계된 오픈‑소스 도구이다. 주요 특징은 다음과 같다.
 
-> 이 사례는 Bifrost와 같은 비용 가시성·제어 레이어를 도입했을 때 얻을 수 있는 실질적인 ROI를 보여준다.
+| 특징 | 내용 |
+|---|---|
+| **GitHub 스타** | 28 k 스타 (2024년 기준) |
+| **지원 명령 모듈** | 34개 (git, test, ls 등) |
+| **TOML 기반 필터** | 60개 이상의 필터 제공 |
+| **토큰 절감 효과** | 일반적인 디버깅·빌드·테스트 출력에서 60 %‑90 % 절감 (언어별 평균 58.7 %‑93 %) |
+| **추가 필터 (ContextZip)** | 오류 스택 트레이스, ANSI/스피너, npm/pip 설치 잡음, Docker 빌드 로그 등 6가지 신규 필터 제공 |
 
-## FAQ
-**Q1. 가상 키와 실제 API 키의 차이는?**  
-A. 가상 키는 Bifrost 내부에서 관리되는 식별자로, 정책(예산·레이트·모델)과 연동된다. 실제 Anthropic API 키는 Bifrost가 내부적으로 사용하며 외부에 노출되지 않는다.
+RTK는 Claude Code와 직접 연동되어, 명령 실행 결과를 자동으로 전처리하고 불필요한 잡음을 제거한다. 이를 통해 LLM이 처리해야 할 토큰 양이 크게 감소한다.
 
-**Q2. 기존 Anthropic 청구와 어떻게 연동하나요?**  
-A. Bifrost는 실제 Anthropic API 키를 백엔드에 저장하고, 모든 요청을 프록시한다. 청구서는 기존과 동일하게 Anthropic에 전송되지만, Bifrost가 가상 키별 사용량을 별도 기록한다.
+## 설치 및 기본 사용법
+1. **RTK 설치** (npm 기반)  
+   ```bash
+   npm install -g @jee599/rtk
+   ```
+2. **Claude Code 훅 자동 설정**  
+   설치 스크립트가 Claude Code에 필요한 훅을 자동으로 등록한다. 설치 후 Claude Code를 재시작하면 적용된다.  
+3. **기본 명령 실행**  
+   ```bash
+   rtk git diff
+   rtk test
+   rtk ls ./src
+   ```
+   위 명령들은 기존 `git diff`, `pytest`, `ls` 출력과 동일하지만, RTK가 자동으로 잡음을 제거하고 토큰을 압축한다.  
+4. **ContextZip (선택적) 설치**  
+   RTK가 제공하지 않는 추가 필터(예: 오류 스택 트레이스 압축)를 사용하려면 ContextZip을 설치한다.  
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/jee599/contextzip/main/install.sh | bash
+   ```
+   설치 후 기존 RTK 훅이 ContextZip 훅으로 교체되며, 워크플로우는 그대로 유지된다.
 
-**Q3. 장애 복구 시 데이터 손실을 방지하려면?**  
-A. Bifrost는 라우팅 결정을 **전송 전**에 수행한다. 장애 발생 시 재시도는 동일 요청을 다시 전송한다. 로그에 원본 페이로드를 보관하면 데이터 손실을 방지할 수 있다.
+## 토큰 절감 사례
+### 1️⃣ 일반 디버깅 출력
+- **Git diff / log / status** : 60 %‑90 % 토큰 절감 (동일 필터 상속)  
+- **ls / find / tree** : 60 %‑90 % 절감  
+
+### 2️⃣ 테스트 결과
+- **Jest / pytest** 출력 : 60 %‑90 % 절감  
+
+### 3️⃣ 빌드 로그
+- **Docker 빌드** : 평균 88 % 절감, 다단계 빌드에서는 최대 97 % 절감  
+- **Cargo / rustc** : 60 %‑90 % 절감  
+
+### 4️⃣ 오류 스택 트레이스 (ContextZip)
+- 5개 언어(Node.js, Python, Rust, Go, Java) 지원, 평균 58.7 % 절감, 최고 97 % 절감  
+
+### 5️⃣ ANSI/스피너 전처리
+- 색상 코드, 스피너, 진행 바 제거 → 평균 82.5 % 절감  
+
+### 6️⃣ 패키지 설치 잡음
+- npm 경고, pip 다운로드 진행 등 제거 → npm에서 95 % 절감, 보안 정보는 유지  
+
+### 종합 결과
+- 102개의 테스트 케이스에서 **61.1 % 평균 절감율**을 기록했으며, 대부분의 경우 70 %‑90 % 토큰 절감 효과를 보였다.  
+- 최악의 경우에도 절감율이 2 %에 머물며, 부정적인 변화(‑10 %)는 포맷팅 오버헤드가 잡음보다 클 때만 발생한다.
+
+### 안전 보장
+- **오류 메시지**와 **보안 경고**는 절대 제거되지 않는다.  
+- 필터가 잡음인지 확신하지 못하면 원본을 그대로 전달한다.  
+- ContextZip은 공격적이지만 신호(실제 오류·경고)는 보수적으로 유지한다.
+
+## FAQ (추가)
+**Q1. RTK와 ContextZip은 동시에 사용할 수 있나요?**  
+A. 네. ContextZip은 RTK가 제공하는 34개 명령 모듈과 기존 TOML 필터를 그대로 상속하면서, 추가 6개 필터를 보강한다. 기존 워크플로우는 변경되지 않는다.
+
+**Q2. 토큰 절감이 비용 절감으로 바로 연결되나요?**  
+A. Claude Code는 사용량(토큰) 기반 과금이므로, 토큰을 70 %‑90 % 절감하면 직접적인 비용 절감 효과가 발생한다. 실제 절감액은 모델별 가격에 따라 달라진다.
+
+**Q3. RTK 설치 후 기존 Claude Code 설정을 바꿀 필요가 있나요?**  
+A. 필요하지 않다. RTK는 Claude Code 훅을 자동으로 등록하고, 기존 명령 호출을 가로채어 전처리한다. 기존 설정은 그대로 유지된다.
 
 ## 참고 자료
 - **Claude Code 요금 정책** – Anthropic 공식 문서 (https://www.anthropic.com/pricing)  
 - **Bifrost GitHub 레포지토리** – 최신 릴리즈 및 설치 가이드 (URL은 추가 조사 필요)  
+- **RTK GitHub** – https://github.com/jee599/rtk  
+- **ContextZip GitHub** – https://github.com/jee599/contextzip  
 - **euno.news 원문** – “Your Claude Code bill is growing…”, Dev.to 출처【euno.news】
 
 ## 부록
@@ -202,12 +264,24 @@ fallback:
   providers:
     - name: bedrock
       endpoint: https://bedrock.amazonaws.com
+rtk:
+  enabled: true
+  filters:
+    - git
+    - test
+    - ls
+    - error_stacktrace   # ContextZip 추가 필터
+    - ansi_cleanup
+    - npm_noise
+    - docker_build
 ```
 
 ### 명령어 요약
 - **Bifrost 실행**: `npx -y @maximhq/bifrost`  
 - **키 생성**: `bifrost key create --name <키이름> --budget <₹> --rate <req/min> --models <모델리스트>`  
 - **예산 조회**: `bifrost budget show --key <키이름>`  
+- **RTK 설치**: `npm install -g @jee599/rtk`  
+- **ContextZip 설치**: `curl -fsSL https://raw.githubusercontent.com/jee599/contextzip/main/install.sh | bash`  
 
 ### 용어 정의 (Glossary)
 - **Virtual Key**: Bifrost가 발급하는 가상 API 키, 정책과 연동됨.  
@@ -215,3 +289,5 @@ fallback:
 - **Haiku**: 저비용 모델, 간단 작업에 적합.  
 - **Sonnet**: 중간 비용 모델, 일반적인 개발 작업에 적합.  
 - **Fallback Provider**: 기본 프로바이더가 제한에 걸리면 전환되는 대체 서비스 제공자.  
+- **RTK**: Reduce Token Kram, Claude Code 출력 압축을 통해 토큰 사용량을 크게 절감하는 도구.  
+- **ContextZip**: RTK 기능을 확장한 플러그인, 오류 스택 트레이스, ANSI 잡음, Docker 로그 등 추가 필터 제공.  
