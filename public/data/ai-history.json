@@ -1,56 +1,14 @@
 {
   "entries": [
     {
-      "id": "1f3b7780-b01d-495b-8049-8ae156b91feb",
-      "timestamp": "2026-03-19T12:23:54.913Z",
-      "actionType": "quality_score",
-      "issueNumber": 545,
-      "issueTitle": " [요청] Local LLM vs Cloud API 비용 비교 – 2026 실제 운영 실험",
-      "documentSlug": "ai/local-llm-vs-cloud-api-2026",
-      "documentTitle": " [요청] Local LLM vs Cloud API 비용 비교 – 2026 실제 운영 실험",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "2ccc7b91-00cc-4e1a-86e1-37ab8f7062aa",
-      "timestamp": "2026-03-19T12:23:38.925Z",
-      "actionType": "quality_score",
-      "issueNumber": 547,
-      "issueTitle": " [요청] AI 코딩 어시스턴트를 위한 에이전트 스킬 작성 가이드",
-      "documentSlug": "ai",
-      "documentTitle": " [요청] AI 코딩 어시스턴트를 위한 에이전트 스킬 작성 가이드",
-      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "d39e9cdc-2f63-491a-bb45-37b14968ea30",
-      "timestamp": "2026-03-19T12:23:14.646Z",
-      "actionType": "quality_score",
-      "issueNumber": 549,
-      "issueTitle": " [요청] 2026년 AI‑Enhanced 개발자 Reskilling 전략",
-      "documentSlug": "ai/2026-ai-enhanced-reskilling",
-      "documentTitle": " [요청] 2026년 AI‑Enhanced 개발자 Reskilling 전략",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "424dd1d4-347e-4196-b7fd-87e21657825e",
-      "timestamp": "2026-03-19T12:22:52.528Z",
+      "id": "319d19ce-1fce-4993-a9c8-433515f72a38",
+      "timestamp": "2026-03-19T12:19:29.124Z",
       "actionType": "generate",
-      "issueNumber": 545,
-      "issueTitle": " [요청] Local LLM vs Cloud API 비용 비교 – 2026 실제 운영 실험",
-      "documentSlug": "ai/local-llm-vs-cloud-api-2026",
-      "documentTitle": "Local LLM vs Cloud API 비용 비교 – 2026 실제 운영 실험",
-      "summary": "새 문서 \"Local LLM vs Cloud API 비용 비교 – 2026 실제 운영 실험\" 생성",
+      "issueNumber": 549,
+      "issueTitle": "문서 요청 #549",
+      "documentSlug": "ai/549",
+      "documentTitle": "AI‑Enhanced 개발자를 위한 리스킬링 로드맵 – Anthropic Academy 활용 가이드",
+      "summary": "새 문서 \"AI‑Enhanced 개발자를 위한 리스킬링 로드맵 – Anthropic Academy 활용 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -59,43 +17,60 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 3844
+              "durationMs": 4192
             },
             {
               "step": "outline",
-              "durationMs": 13868
+              "durationMs": 7226
             },
             {
               "step": "write",
-              "durationMs": 46330
+              "durationMs": 30848
             },
             {
               "step": "review",
-              "durationMs": 7453
+              "durationMs": 7898
             }
           ],
-          "totalDurationMs": 71496,
-          "researchSources": 6,
+          "totalDurationMs": 50164,
+          "researchSources": 10,
           "tavilyUsage": {
             "apiCalls": 3,
             "totalResults": 9
           },
           "estimatedTokens": {
-            "estimated": 3383,
+            "estimated": 2298,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "5d628a84-07b1-4c57-b06c-55c79e62aece",
-      "timestamp": "2026-03-19T12:21:26.178Z",
+      "id": "54462afd-9124-4574-a090-cca00a7445a1",
+      "timestamp": "2026-03-19T12:18:34.700Z",
+      "actionType": "modify",
+      "issueNumber": 548,
+      "issueTitle": " [업데이트] Notion MCP 기반 주식 스크리닝 및 AI 연구 보고서 사례",
+      "documentSlug": "projects/human-in-the-loop-agentic-cms-notion-mcp",
+      "documentTitle": "Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Notion MCP 기반 주식 스크리닝 및 AI 연구 보고서 사례\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 44,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "8f40e45c-4fc8-4fb2-babb-fc8755ba10a2",
+      "timestamp": "2026-03-19T12:17:39.954Z",
       "actionType": "generate",
       "issueNumber": 547,
-      "issueTitle": " [요청] AI 코딩 어시스턴트를 위한 에이전트 스킬 작성 가이드",
-      "documentSlug": "ai",
-      "documentTitle": "AI 코딩 어시스턴트를 위한 에이전트 스킬 작성 가이드",
-      "summary": "새 문서 \"AI 코딩 어시스턴트를 위한 에이전트 스킬 작성 가이드\" 생성",
+      "issueTitle": "문서 요청 #547",
+      "documentSlug": "ai/547",
+      "documentTitle": "AI 코딩 어시스턴트와 에이전트 스킬 작성 가이드",
+      "summary": "새 문서 \"AI 코딩 어시스턴트와 에이전트 스킬 작성 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -104,47 +79,60 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 3425
+              "durationMs": 3669
             },
             {
               "step": "outline",
-              "durationMs": 10065
+              "durationMs": 9416
             },
             {
               "step": "write",
-              "durationMs": 37012
+              "durationMs": 28305
             },
             {
               "step": "review",
-              "durationMs": 6280
-            },
-            {
-              "step": "refine",
-              "durationMs": 41283
+              "durationMs": 9627
             }
           ],
-          "totalDurationMs": 98065,
-          "researchSources": 9,
+          "totalDurationMs": 51017,
+          "researchSources": 8,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 9
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 4732,
+            "estimated": 2367,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "a488363e-4b35-4ada-a0b4-9683863c1e60",
-      "timestamp": "2026-03-19T12:19:17.914Z",
+      "id": "02116a0c-1bee-4712-9322-02e8131d85e7",
+      "timestamp": "2026-03-19T12:16:44.992Z",
+      "actionType": "modify",
+      "issueNumber": 546,
+      "issueTitle": " [업데이트] Agentic Identity와 OAuth2 사각지대 – 최신 보안 위협 및 대응",
+      "documentSlug": "security/agentic-ai-security-threats",
+      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Agentic Identity와 OAuth2 사각지대 – 최신 보안 위협 및 대응\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 63
+      }
+    },
+    {
+      "id": "807b8d79-9e76-4030-b339-af622642ed65",
+      "timestamp": "2026-03-19T12:15:28.971Z",
       "actionType": "generate",
-      "issueNumber": 549,
-      "issueTitle": " [요청] 2026년 AI‑Enhanced 개발자 Reskilling 전략",
-      "documentSlug": "ai/2026-ai-enhanced-reskilling",
-      "documentTitle": "2026년 AI‑Enhanced 개발자 Reskilling 전략",
-      "summary": "새 문서 \"2026년 AI‑Enhanced 개발자 Reskilling 전략\" 생성",
+      "issueNumber": 545,
+      "issueTitle": "문서 요청 #545",
+      "documentSlug": "ai/545",
+      "documentTitle": "로컬 LLM vs 클라우드 API 비용·성능 비교 가이드",
+      "summary": "새 문서 \"로컬 LLM vs 클라우드 API 비용·성능 비교 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -153,29 +141,29 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 3418
+              "durationMs": 4599
             },
             {
               "step": "outline",
-              "durationMs": 12697
+              "durationMs": 7158
             },
             {
               "step": "write",
-              "durationMs": 33666
+              "durationMs": 26794
             },
             {
               "step": "review",
-              "durationMs": 7026
+              "durationMs": 7189
             }
           ],
-          "totalDurationMs": 56807,
-          "researchSources": 9,
+          "totalDurationMs": 45740,
+          "researchSources": 10,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 8
+            "totalResults": 9
           },
           "estimatedTokens": {
-            "estimated": 2669,
+            "estimated": 2057,
             "method": "duration_based"
           }
         }
@@ -15306,5 +15294,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-19T12:23:54.913Z"
+  "lastUpdated": "2026-03-19T12:19:29.124Z"
 }
