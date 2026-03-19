@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "e2860d06-de5a-433f-88e5-1d03a78d3c47",
+      "timestamp": "2026-03-19T18:26:32.508Z",
+      "actionType": "quality_score",
+      "issueNumber": 550,
+      "issueTitle": " [요청] Web Pentesting Beginner Roadmap (2026) – Recon → Server‑Side Exploits",
+      "documentSlug": "security/web-pentesting-beginner-roadmap-2026-recon-server-",
+      "documentTitle": " [요청] Web Pentesting Beginner Roadmap (2026) – Recon → Server‑Side Exploits",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "88c92f0b-418a-48c4-a6a1-da1feef8ea05",
+      "timestamp": "2026-03-19T18:26:21.593Z",
+      "actionType": "quality_score",
+      "issueNumber": 552,
+      "issueTitle": " [요청] Perseus Android Banking Malware – Architecture, Indicators, and Mitigations",
+      "documentSlug": "security/perseus-android-banking-malware-architecture-indic",
+      "documentTitle": " [요청] Perseus Android Banking Malware – Architecture, Indicators, and Mitigations",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "89ea90a5-0298-40ec-993a-876cb1040389",
+      "timestamp": "2026-03-19T18:26:06.742Z",
+      "actionType": "quality_score",
+      "issueNumber": 553,
+      "issueTitle": " [요청] Ubiquiti UniFi Critical Vulnerability – CVE‑XXXX‑XXXX Analysis & Patch Guidance",
+      "documentSlug": "security/ubiquiti-unifi-critical-vulnerability-cve-xxxx-xxx",
+      "documentTitle": " [요청] Ubiquiti UniFi Critical Vulnerability – CVE‑XXXX‑XXXX Analysis & Patch Guidance",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "ca83acd0-e1d0-4ff3-8873-184156ecc16c",
+      "timestamp": "2026-03-19T18:25:47.851Z",
+      "actionType": "generate",
+      "issueNumber": 550,
+      "issueTitle": " [요청] Web Pentesting Beginner Roadmap (2026) – Recon → Server‑Side Exploits",
+      "documentSlug": "security/web-pentesting-beginner-roadmap-2026-recon-server-",
+      "documentTitle": "Web Pentesting Beginner Roadmap (2026) – Recon → Server‑Side Exploits",
+      "summary": "새 문서 \"Web Pentesting Beginner Roadmap (2026) – Recon → Server‑Side Exploits\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4162
+            },
+            {
+              "step": "outline",
+              "durationMs": 9842
+            },
+            {
+              "step": "write",
+              "durationMs": 19634
+            },
+            {
+              "step": "review",
+              "durationMs": 6386
+            }
+          ],
+          "totalDurationMs": 40025,
+          "researchSources": 6,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1793,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "3a03536c-6f18-4089-9c93-4c16e598aa2e",
+      "timestamp": "2026-03-19T18:24:54.095Z",
+      "actionType": "generate",
+      "issueNumber": 552,
+      "issueTitle": " [요청] Perseus Android Banking Malware – Architecture, Indicators, and Mitigations",
+      "documentSlug": "security/perseus-android-banking-malware-architecture-indic",
+      "documentTitle": "Perseus Android Banking Malware – Architecture, Indicators, and Mitigations",
+      "summary": "새 문서 \"Perseus Android Banking Malware – Architecture, Indicators, and Mitigations\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 11472
+            },
+            {
+              "step": "outline",
+              "durationMs": 11849
+            },
+            {
+              "step": "write",
+              "durationMs": 30616
+            },
+            {
+              "step": "review",
+              "durationMs": 6209
+            }
+          ],
+          "totalDurationMs": 60146,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2433,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "7e4636c6-367e-4383-990e-3d56d9da8073",
+      "timestamp": "2026-03-19T18:23:42.288Z",
+      "actionType": "generate",
+      "issueNumber": 553,
+      "issueTitle": " [요청] Ubiquiti UniFi Critical Vulnerability – CVE‑XXXX‑XXXX Analysis & Patch Guidance",
+      "documentSlug": "security/ubiquiti-unifi-critical-vulnerability-cve-xxxx-xxx",
+      "documentTitle": "Ubiquiti UniFi Critical Vulnerability – CVE‑2026‑22557 분석 및 패치 가이드",
+      "summary": "새 문서 \"Ubiquiti UniFi Critical Vulnerability – CVE‑2026‑22557 분석 및 패치 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5542
+            },
+            {
+              "step": "outline",
+              "durationMs": 11060
+            },
+            {
+              "step": "write",
+              "durationMs": 34137
+            },
+            {
+              "step": "review",
+              "durationMs": 6985
+            }
+          ],
+          "totalDurationMs": 57724,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2609,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "80bd76d6-2ae6-4ed3-a80e-870a292f89ae",
       "timestamp": "2026-03-19T18:20:07.501Z",
       "actionType": "maintain",
@@ -15308,5 +15485,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-19T18:20:07.501Z"
+  "lastUpdated": "2026-03-19T18:26:32.508Z"
 }

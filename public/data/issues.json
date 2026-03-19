@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 550,
+      "number": 550,
+      "title": " [요청] Web Pentesting Beginner Roadmap (2026) – Recon → Server‑Side Exploits",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/web-pentesting-beginner-roadmap-2026-from-recon-to-757642)\n**관련도**: 85/100\n**핵심 토픽**: 웹 펜테스팅 로드맵, Recon 단계, 서버 측 공격\n\n## 뉴스 요약\n!웹 펜테스팅 마인드맵https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.ama...\n\n## 상세 내용\nSource: Dev.to\nHacksmarter Web Pentesting 과정을 마친 뒤, 이 방법론을 하나의 진리 원천으로 정리하고 싶었습니다. 버그 바운티를 준비하든, 직접 만든 앱을 보호하든, 이게 바로 여러분이 필요로 하는 사고 체계입니다.\n1. Reconnaissance (기초)\nPro‑Tip\n무거운 스캔을 실행하기 전에 항상 robots.txt와 sitemap.xml을 확인하세요. 개발자들이 “숨겨” 놓은 것이 눈에 띄는 경우가 많습니다.\nFingerprinting\ncurl, Burp/​Caido, 혹은 Wappalyzer 확장 프로그램을 사용해 기술 스택을 식별합니다.\nDirectory Brute Forcing\n도구: dirsearch, dirb, 또는 gobuster를 이용해 숨겨진 엔드포인트를 찾습니다.\nSubdomains &#x26; Vhosts\nFFUF(맞춤 스크립트와 함께)와 gobuster를 사용합니다.\nBusiness Logic Prep\n직접 사용자가 되어 보세요! 사이트 기능을 맵핑합니다. 일반 사용자가 할 수 있는 일과 관리자가 할 수 있는 일을 구분합니다.\nOSINT\nGoogle dorks, Shodan, 그리고 포트 스캔을 위한 Nmap을 활용합니다.\n2. Authentication Assessment\nCredential Attacks: 약한 비밀번호와 credential stuffing을 테스트합니다.\nMFA Bypass: URL이나 응답을 조작해 2FA 단계를 건너뛰려 시도합니다.\nPassword Resets: 예측 가능한 토큰이나 리셋 링크에 대한 Host Header Injection을 찾습니다.\nOAuth: 잘못 구성된 redirect URI가 있는지 확인합니다.\n3. Session Management\nCookie Security: HttpOnly와 Secure 플래그가 설정되어 있는지 확인합니다.\nSession Fixation: 로그인 후 세션 ID가 변경되는지 검증합니다(같은 ID가 유지되면 안 됩니다).\nJWT \n\n## 판단 근거\n뉴스는 웹 펜테스팅 전체 흐름을 단계별로 정리한 로드맵을 제공한다. 기존 보안 문서들은 개별 기술(예: SQL‑Injection, VPS 보안)만 다루고 있어, 전체 로드맵을 한데 모은 새로운 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-19T18:25:47.854Z",
+      "updated_at": "2026-03-19T18:25:47.861Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/550",
+      "documentSlug": "security/web-pentesting-beginner-roadmap-2026-recon-server-",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/web-pentesting-beginner-roadmap-2026-recon-server-.md",
+      "comments": 0
+    },
+    {
+      "id": 552,
+      "number": 552,
+      "title": " [요청] Perseus Android Banking Malware – Architecture, Indicators, and Mitigations",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/new-perseus-android-banking-malware-monitors-notes-b8bf18)\n**관련도**: 82/100\n**핵심 토픽**: Perseus, Android Banking Malware, 모바일 보안\n\n## 뉴스 요약\n사이버 보안 연구원들은 퍼시어스(Perseus)라는 새로운 안드로이드 악성코드 패밀리가 야생에서 활발히 배포되고 있으며, 기기를 대상으로 하는 공격을 수행하려는 목적을 가지고 있다고 공개했습니다.\n\n## 상세 내용\nSource: The Hacker News\n개요\n사이버 보안 연구원들은 Perseus라는 새로운 안드로이드 악성코드 패밀리가 야생에서 활발히 배포되고 있으며, 디바이스 탈취(DTO) 및 금융 사기를 목표로 하고 있다고 공개했습니다.\nPerseus는 Cerberus와 Phoenix를 기반으로 구축되었으며, 배포되는 드롭퍼 앱을 통해 안드로이드 디바이스를 침해하기 위한 “more flexible and capable platform”으로 진화하고 있습니다.\n\n## 판단 근거\n새로운 안드로이드 뱅킹 멀웨어 패밀리이며, 현재 위키에 해당 주제의 문서가 없다. 모바일 악성코드 분석 및 방어 가이드를 제공하는 독립 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-19T18:24:54.097Z",
+      "updated_at": "2026-03-19T18:24:54.105Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/552",
+      "documentSlug": "security/perseus-android-banking-malware-architecture-indic",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/perseus-android-banking-malware-architecture-indic.md",
+      "comments": 0
+    },
+    {
+      "id": 553,
+      "number": 553,
+      "title": " [요청] Ubiquiti UniFi Critical Vulnerability – CVE‑XXXX‑XXXX Analysis & Patch Guidance",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/max-severity-ubiquiti-unifi-flaw-may-allow-account-c39d23)\n**관련도**: 80/100\n**핵심 토픽**: Ubiquiti UniFi 취약점, 계정 탈취, 패치 및 업데이트\n\n## 뉴스 요약\n!https://www.bleepstatic.com/content/hl-images/2026/03/19/Ubiquiti_Unifi.jpg Ubiquiti는 UniFi Network Application에서 두 가지 취약점을 패치했으며, 포함...\n\n## 상세 내용\nSource: Bleeping Computer\nUbiquiti는 UniFi 네트워크 애플리케이션의 두 가지 취약점을 패치했으며, 여기에는 공격자가 사용자 계정을 탈취할 수 있는 최대 심각도 결함이 포함됩니다.\nUniFi 네트워크 앱(일명 UniFi 컨트롤러)은 액세스 포인트, 스위치, 게이트웨이와 같은 Ubiquiti UniFi 네트워킹 하드웨어를 구성, 모니터링 및 최적화하는 관리 소프트웨어입니다.\n“강력한 인터넷 게이트웨이와 확장 가능한 Wi‑Fi 및 스위칭을 결합합니다. 실시간 트래픽 대시보드, 시각적 토폴로지 맵 및 최적화 팁을 제공합니다,” 라고 네트워킹 장치 제조업체가 말합니다(링크). “UniFi 네트워크를 배포하는 선호 방법은 서버, 노트북 또는 기타 자체 호스팅 환경이 아니라 UniFi 클라우드 게이트웨이에 설치하는 것입니다.”\n취약점 세부 정보 (CVE‑2026‑22557)\nCVE‑2026‑22557으로 추적되는 이 보안 결함은 UniFi 네트워크 애플리케이션 버전 10.1.85 이하에 영향을 미치며, 10.1.89 이상 버전에서 해결되었습니다.\n성공적인 악용을 통해 권한이 없는 위협 행위자는 다음을 수행할 수 있습니다:\n경로 탐색 취약점을 이용해 대상 장치의 파일에 접근합니다.\n사용자 상호 작용이 필요 없는 낮은 복잡도의 공격으로 사용자 계정을 탈취할 가능성이 있습니다.\n“네트워크에 접근할 수 있는 악의적인 행위자는 UniFi 네트워크 애플리케이션에서 발견된 경로 탐색 취약점을 이용해 기본 시스템의 파일에 접근하고, 이를 조작해 기본 계정에 접근할 수 있습니다,” 라고 회사가 보안 권고(링크)에 명시했습니다.\n추가 결함 – 권한 상승\nUbiquiti는 또한 낮은 권한을 가진 공격자가 권한을 상승시킬 수 있는 두 번째 문제도 패치했습니다:\n“UniFi 네트워크 애플리케이션에서 발견된 인증된 NoSQL 인젝션 취약점은 인증된 네트워크 접근자를 통해 권한을 상승시킬 수 있습니다,” 라고 회사가 설명했습니다.\n역사적 배경\n최근 몇 년간 Ubiqui\n\n## 판단 근거\nUniFi 결함은 최신 고위험 CVE이며, 기존 문서(404.md)는 다른 제품에 관한 것이다. 별도 문서에서 취약점 상세, 영향, 패치 절차를 정리하는 것이 유용하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-19T18:23:42.292Z",
+      "updated_at": "2026-03-19T18:23:42.297Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/553",
+      "documentSlug": "security/ubiquiti-unifi-critical-vulnerability-cve-xxxx-xxx",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/ubiquiti-unifi-critical-vulnerability-cve-xxxx-xxx.md",
+      "comments": 0
+    },
+    {
       "id": 549,
       "number": 549,
       "title": "문서 요청 #549",
@@ -5001,5 +5094,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-19T12:19:29.134Z"
+  "lastUpdated": "2026-03-19T18:25:47.861Z"
 }
