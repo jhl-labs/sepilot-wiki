@@ -1,7 +1,7 @@
 ---
 title: OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [OpenAI, GPT-5.4, mini, nano, 모델 사양, 벤치마크, 비용, 활용 가이드]
 ---
 

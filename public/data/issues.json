@@ -3,8 +3,8 @@
     {
       "id": 544,
       "number": 544,
-      "title": "문서 요청 #544",
-      "body": "",
+      "title": " [요청] Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/why-walmart-and-openai-are-shaking-up-their-agenti-9489dc)\n**관련도**: 72/100\n**핵심 토픽**: Agentic AI, 쇼핑 챗봇, OpenAI·Walmart 통합\n\n## 뉴스 요약\nOpenAI의 Instant Checkout 기능이 기대에 미치지 못한 후, Walmart는 대신 Sparky 챗봇을 ChatGPT와 Google Gemini에 직접 통합하고 있습니다.\n\n## 판단 근거\nWalmart와 OpenAI의 에이전트‑기반 쇼핑 통합 사례는 Agentic AI 보안·거버넌스와 직접 연관되지만 기존 문서에 구체적인 사례가 없어 신규 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-19T00:30:45.380Z",
-      "updated_at": "2026-03-19T00:30:45.385Z",
+      "updated_at": "2026-03-19T00:33:13.034Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/544",
-      "documentSlug": "ai/544",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/544.md",
+      "documentSlug": "ai/agentic-walmart-vs-openai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/agentic-walmart-vs-openai.md",
       "comments": 0
     },
     {
       "id": 542,
       "number": 542,
-      "title": "문서 요청 #542",
-      "body": "",
+      "title": " [요청] 멀티테넌트 SaaS 데이터 누출 방지 전략",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/stop-leaking-data-in-multi-tenant-apps-ebfe5f)\n**관련도**: 73/100\n**핵심 토픽**: Multi‑tenant SaaS, Row‑Level Security, Data leakage prevention\n\n## 뉴스 요약\n왜 Your application logic만으로는 충분하지 않은가: Database-Level Row-Level Security 사례. 당신은 견고한 multi‑tenant SaaS를 구축했습니다. tenant_id를 구현했습니다.\n\n## 상세 내용\nSource: Dev.to\n왜 애플리케이션 로직만으로는 부족한가: 데이터베이스 수준 행 수준 보안(RLS)의 필요성\n견고한 멀티‑테넌트 SaaS를 구축했습니다. 모든 쿼리에 tenant_id 필터를 적용하고, 미들웨어 검증을 추가했으며, 단위 테스트도 작성했습니다. 하지만 애플리케이션 계층 보안은 취약합니다: 필터를 놓치거나, 악의적인 스크립트가 실행되거나, 직접 데이터베이스에 연결하면 전체 방어망을 우회할 수 있습니다.\n보안 경계를 코드가 아닌 데이터베이스 자체로 옮기세요.\n짧은 요약\n이번 심층 분석에서는 Row‑Level Security (RLS)가 단순히 “Postgres 기능”이라는 신화를 깨고, 이를 SQLAlchemy ORM 및 Alembic 마이그레이션 워크플로에 매끄럽게 통합하는 방법을 보여줍니다. 이론을 넘어 실제 운영 환경에 적용 가능한 구현 세부 사항까지 다룹니다.\nWHERE tenant_id = ?만으로 코드를 작성하는 것이 왜 시간 폭탄인지\n필터는 애플리케이션 계층에 존재하므로 누락되거나 재정의될 수 있습니다.\n직접 데이터베이스에 접근하는 경우(예: 관리자 도구, ad‑hoc 쿼리) 이러한 필터가 적용되지 않습니다.\n한 번의 실수만으로 모든 테넌트의 데이터를 노출할 수 있습니다.\nCI/CD 파이프라인을 깨뜨리지 않고 RLS를 활성화하고 정책을 정의하는 단계별 Alembic 마이그레이션 스크립트\n마이그레이션 생성 – tenant_id 컬럼이 없을 경우 추가하고, 대상 테이블에 RLS를 활성화합니다.\n# alembic revision script\nfrom alembic import op\nimport sqlalchemy as sa\ndef upgrade():\nop.execute(\"ALTER TABLE orders ENABLE ROW LEVEL SECURITY;\")\nop.execute(\"\"\"\nCREATE POLICY tenant_isolation ON orders\nUSING (tenant_id = current_setting('app.curren\n\n## 판단 근거\nRow‑Level Security와 데이터베이스‑레벨 방어에 대한 심층 분석이 현재 위키에 없으며, 실무 적용 사례와 코드 예시가 가치가 높음.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,17 +56,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-19T00:28:25.181Z",
-      "updated_at": "2026-03-19T00:28:25.186Z",
+      "updated_at": "2026-03-19T00:34:11.257Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/542",
-      "documentSlug": "security/542",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/542.md",
+      "documentSlug": "security/saas",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/saas.md",
       "comments": 0
     },
     {
       "id": 541,
       "number": 541,
-      "title": "문서 요청 #541",
-      "body": "",
+      "title": " [요청] Tmux‑IDE – 에이전트‑퍼스트 터미널 IDE 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/show-hn-tmux-ide-oss-agent-first-terminal-ide-614aa2)\n**관련도**: 78/100\n**핵심 토픽**: Tmux‑IDE, Agent‑first 터미널, 멀티‑에이전트 개발 환경\n\n## 뉴스 요약\ntmux-ide New 1.2.0/docs/release-1-2-0 Claude 에이전트‑팀 레이아웃을 준비합니다. 리드 pane을 만들고, 팀원‑준비된 Claude pane을 구성하며, dev tools를 하나의 tmux layout에 배치합니다. t...\n\n## 상세 내용\nSource: Hacker News\ntmux-ide New 1.2.0\nClaude 에이전트‑팀 레이아웃 준비\n리드 패널, 팀원‑준비 Claude 패널, 그리고 개발 도구를 하나의 tmux 레이아웃에 배치합니다. tmux‑ide가 환경을 만들고, Claude가 프롬프트에 따라 팀을 구성합니다.\n유용한 링크\n에이전트 팀 설정\n시작하기\n문서\n# Install via script\ncurl -fsSL https://tmux.thijsverreck.com/install.sh | sh\n# Or via npm\nnpm i -g tmux-ide\n# Or try instantly\nnpx tmux-ide\n설치 스크립트는 Claude Code 스킬도 등록하여 Claude가 작업 공간을 자동으로 설정하도록 합니다.\n팀‑준비 패널, 그 다음 Claude가 인계받음\ntmux‑ide가 패널을 준비하고 에이전트‑팀 모드를 활성화합니다. 이후 리드에게 자연어로 팀을 조직하고 작업을 할당하도록 프롬프트하면 됩니다.\n에이전트 팀 가이드 읽기 →\n설정은 입력, 레이아웃은 자동\nide.yml 파일을 편집하면 레이아웃이 실시간으로 업데이트됩니다. 시작하려면 프리셋을 사용해 보세요.\nname: my-project\nrows:\n- size: 70%\npanes:\n- title: Claude 1\ncommand: claude\n- title: Claude 2\ncommand: claude\n- panes:\n- title: Dev Server\n- title: Shell\n세션을 실행하면 다음과 같은 tmux 레이아웃이 생성됩니다:\nClaude 1   $ claude\nClaude 2   $ claude\nDev Server\nShell\n[0] my-project 12:00\n리드 + 팀원\n한 명의 Claude가 팀을 조정합니다. 팀원들은 각각의 패널에서 독립적으로 작업하며, 각자 집중된 과제를 수행합니다.\n공유 작업 리스트\n에이전트들은 공유 작업과 메시지를 통해 소통합니다. 리드가 할당하고, 팀원이 작업을 차지하며, 결과를 보고\n\n## 판단 근거\nTmux‑IDE는 멀티‑에이전트 개발 환경을 위한 새로운 OSS 툴이며 기존 문서에 해당 주제가 다루어지지 않아 독립적인 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -87,10 +87,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-19T00:27:28.087Z",
-      "updated_at": "2026-03-19T00:27:28.093Z",
+      "updated_at": "2026-03-19T00:35:12.946Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/541",
-      "documentSlug": "541",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/541.md",
+      "documentSlug": "tmux-ide-ide",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/tmux-ide-ide.md",
       "comments": 0
     },
     {
@@ -4908,5 +4908,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-19T00:30:45.385Z"
+  "lastUpdated": "2026-03-19T00:35:12.946Z"
 }
