@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 545,
+      "number": 545,
+      "title": " [요청] Local LLM vs Cloud API 비용 비교 – 2026 실제 운영 실험",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/local-llms-vs-cloud-apis-a-real-cost-comparison-20-6fd6c2)\n**관련도**: 82/100\n**핵심 토픽**: Local LLM vs Cloud API, 비용 비교, 운영 실험\n\n## 뉴스 요약\n그냥 ChatGPT를 사용하세요 — 물론, API 비용이 월 $500에 달할 때까지는요. 저는 1년 넘게 로컬과 클라우드 AI를 모두 운영해왔습니다. 여기 실제 숫자가 있습니다. Cost Compari...\n\n## 상세 내용\nSource: Dev.to\nChatGPT만 사용하세요 — 물론, API 요금이 월 $500에 달할 때까지는요.\n저는 1년 넘게 로컬과 클라우드 AI를 모두 운영해 왔습니다. 실제 수치를 공개합니다.\n비용 비교\n워크로드: 하루에 약 500건의 쿼리 — 코드 리뷰, 콘텐츠 생성, 고객 지원, 데이터 분석.\n클라우드 제공업체\n제공업체월별 쿼리 수대략적인 비용\nOpenAI GPT‑4o200약 $90/월\nAnthropic Claude Sonnet200약 $72/월\nGoogle Gemini Pro100약 $25/월\n총합500≈ $187/월\n로컬 환경\n구성 요소비용\nMac Mini M4 (이미 보유)$0\nRTX 3060 12 GB (중고, eBay)일회성 $150\n전기료 (24/7)약 $12/월\n총 지속 비용≈ $12/월\n손익분기점: 1개월 미만.\n성능 개요\n일반 채팅: Qwen 3.5 9B ≈ GPT‑4o 수준 (~90%).\n코드 생성: Qwen 3 Coder 30B ≈ Claude Sonnet 수준 (~85‑90%).\n간단한 Q&#x26;A 및 추출: 7B 모델이면 클라우드와 동등 (~95 % 이상).\n복잡한 다단계 추론: 클라우드 모델이 여전히 우위.\n의사결정 흐름\nUser query\n├─ Simple? (Q&#x26;A, formatting, extraction)\n│    └─ Local Qwen 3.5 9B  (free, instant)\n├─ Code‑heavy?\n│    └─ Local Qwen 3 Coder 30B  (free, ~12 s)\n└─ Complex reasoning?\n└─ Cloud Claude Sonnet  ($0.003‑$0.015 per query)\n결과: 클라우드 비용이 약 $187/월에서 약 $25/월로 감소합니다.\n사람들이 놓치는 점\n요금 제한: 마감 시간에 한도를 초과하면 작업이 중단될 수 있습니다.\n지연 시간: 요청당 500‑2000 ms vs. 로컬에서는 100‑500 ms.\n프라이버시: 코드와 데이터가 타인 서버에 저장됩니다.\n벤\n\n## 판단 근거\n기존 문서들은 FastAPI 기반 AI API 구현이나 코드 어시스턴트 실험 보고서에 초점을 두고 있어, 로컬 LLM과 클라우드 API 비용·운영 차이를 다루는 내용이 없다. 새로운 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-19T12:22:52.530Z",
+      "updated_at": "2026-03-19T12:22:52.536Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/545",
+      "documentSlug": "ai/local-llm-vs-cloud-api-2026",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/local-llm-vs-cloud-api-2026.md",
+      "comments": 0
+    },
+    {
+      "id": 547,
+      "number": 547,
+      "title": " [요청] AI 코딩 어시스턴트를 위한 에이전트 스킬 작성 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/writing-an-agent-skill-3df32e)\n**관련도**: 78/100\n**핵심 토픽**: AI 코딩 어시스턴트, Copilot vs Claude Code, 에이전트 스킬 작성\n\n## 뉴스 요약\n대부분의 개발자들은 이제 코딩 어시스턴트를 사용합니다. 저도 마찬가지로—직장에서는 Copilot을, 집에서는 Claude Code를 사용합니다. 개발자로서 저는 중복을 피하고 싶습니다. 이 게시물에서는 그 이유를 설명합니다.\n\n## 상세 내용\nSource: Dev.to\n번역할 텍스트를 제공해 주시면 한국어로 번역해 드리겠습니다.\nSource: …\nDRY 원칙\nDRY(Do not Repeat Yourself) 원칙은 오래전부터 존재해 왔습니다.\n코드를 여러 곳에 복사‑붙여넣기하고 버그가 발생하면, 모든 곳에서 그 버그를 수정해야 합니다. 중복이 많을수록 수정할 때 하나를 놓칠 가능성이 높아집니다.\n코딩 어시스턴트 맥락에서의 DRY\n코딩 어시스턴트를 사용할 때 DRY는 다른 의미를 가집니다:\n매 세션마다 어시스턴트에게 프로젝트 분석을 요청할 필요가 없습니다.\n매번 언어의 코딩 규칙을 반복해서 알려줄 필요가 없습니다.\n프로젝트가 불변성을 선호한다는 것을 어시스턴트에게 계속 상기시킬 필요가 없습니다.\n새로운 개발자가 좋은 프로젝트에 합류하면, 그 프로젝트의 기능, 아키텍처, 그리고 규칙을 안내받습니다. 훌륭한 프로젝트에서는 이러한 규칙이 문서화된 형태로 공식화되어 있으며, 때때로 최신 상태로 유지됩니다. 코딩 어시스턴트는 다른 팀원과 마찬가지로 문서화된 정보를 필요로 합니다.\n제가 사용하는 두 코딩 어시스턴트 모두 이러한 지시문을 사용할 수 있게 해줍니다(모두 지원한다고 가정합니다). 예를 들어, GitHub Copilot은 자동으로 .github/instructions.md 파일을 읽습니다.\n지시 파일을 작게 유지하기\n어시스턴트가 지시를 자동으로 읽고 그 범위가 너무 넓으면, 관련 없는 데이터가 컨텍스트에 섞이게 됩니다.\n결론: 파일을 비교적 작게 유지하고 일반적인 정보에 집중하세요.\n크기 조정 조언\n출처권장 사항\ndocs.factory.ai 700줄은 너무 깁니다\n제 조언: 작게 시작하고 필요에 따라 늘리며, 결과를 분석하고 파일이 너무 커지면 리팩터링하세요.\n토큰이 진정한 자원입니다\n오늘날 중요한 자원은 CPU, RAM, 저장소가 아니라 토큰입니다. 토큰은 한정되어 있고 비용이 많이 듭니다. 나는 개발자들이 곧 토큰 사용량으로 평가받게 될 것이라고 예측합니다: 비슷한 결과를 얻으면서 가장 적은 토큰을\n\n## 판단 근거\n현재 ‘GitHub Copilot Coding Agent’ 및 ‘Claude Code 릴리즈 히스토리’ 문서는 스킬 작성 방법을 다루지 않음. 독립적인 실용 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-19T12:21:26.181Z",
+      "updated_at": "2026-03-19T12:21:26.187Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/547",
+      "documentSlug": "ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md",
+      "comments": 0
+    },
+    {
+      "id": 549,
+      "number": 549,
+      "title": " [요청] 2026년 AI‑Enhanced 개발자 Reskilling 전략",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-great-reskilling-why-2026-belongs-to-the-ai-en-4abea7)\n**관련도**: 73/100\n**핵심 토픽**: AI‑enhanced developer, skill reskilling, productivity paradox\n\n## 뉴스 요약\n‘The Great Reskilling: Why 2026 belongs to the ‘AI-Enhanced’ Developer’ 표지 이미지. https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravi...\n\n## 상세 내용\nSource: Dev.to\n개요\n최근 헤드라인을 무시하기 힘듭니다. 전통적인 소프트웨어 직무에 대한 대규모 정리해고가 이어지는 한편, AI‑전문 인재에 대한 수요는 사상 최고치를 기록하고 있습니다.\n현실은? 기업들은 단순히 비용을 절감하는 것이 아니라, 그 비용을 AI 통합에 재배치하고 있습니다.\n필수적인 존재감을 유지하려면 모델의 언어를 구사해야 합니다. 좋은 소식은? 이를 위해 $10k짜리 부트캠프가 필요하지 않다는 점입니다.\nAnthropic Academy\n제가 최근에 발견한 게임 체인저: Anthropic Academy. Claude를 만든 팀이 제공하는 무료 학습 플랫폼으로, AI‑관심 단계에서 AI‑인증 단계까지 가격 부담 없이 안내합니다.\n왜 시간을 투자할 가치가 있는가\n정리해고 흐름을 이겨라 – 일반 개발자 직무가 감소하는 반면, “AI 유창성”은 2026년 고소득 직무의 필수 요건이 되고 있습니다.\n공식 인증서 – 프롬프트 작성, AI 윤리, API 통합 등에 대한 전문성을 증명할 수 있는 디지털 인증서를 Anthropic에서 직접 제공합니다.\n미래 대비 – 기본 생산성 도구부터 Model Context Protocol (MCP)로 복잡한 AI 에이전트를 구축하는 방법까지 모두 다룹니다.\nAI를 사용하는 사람과 AI로 무언가를 구축하는 사람 사이의 격차는 점점 벌어지고 있습니다. 이 기회를 통해 $0에 그 곡선의 오른쪽에 설 수 있습니다.\n시작하기\nAnthropic Academy에 방문해 바로 학습을 시작하세요.\n토론\n팀에서 이미 AI 인증을 우선순위에 두고 있나요? 댓글로 이야기해 주세요. 👇\nSoftware Engineering #AIJobs #Anthropic #ClaudeAI #CareerGrowth #TechLayoffs\n\n## 판단 근거\n‘AI‑Enhanced 개발자’와 ‘Reskilling’ 주제는 기존 생산성·패러독스 보고서와 겹치지만, 구체적인 교육·전환 로드맵을 제공하는 별도 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-19T12:19:17.917Z",
+      "updated_at": "2026-03-19T12:19:17.922Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/549",
+      "documentSlug": "ai/2026-ai-enhanced-reskilling",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/2026-ai-enhanced-reskilling.md",
+      "comments": 0
+    },
+    {
       "id": 544,
       "number": 544,
       "title": " [요청] Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI",
@@ -4908,5 +5001,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-19T00:35:12.946Z"
+  "lastUpdated": "2026-03-19T12:22:52.537Z"
 }
