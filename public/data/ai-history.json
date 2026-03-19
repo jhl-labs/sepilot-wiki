@@ -1,6 +1,197 @@
 {
   "entries": [
     {
+      "id": "a3d258c1-4275-4373-9f19-48462b0cb392",
+      "timestamp": "2026-03-19T00:36:09.887Z",
+      "actionType": "quality_score",
+      "issueNumber": 525,
+      "issueTitle": " [요청] OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드",
+      "documentSlug": "ai/openai-gpt-5-4-mini-nano",
+      "documentTitle": " [요청] OpenAI GPT‑5.4 mini · nano – 사양·성능·활용 가이드",
+      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "9c52f13d-798d-4aca-97fe-ecd76e255eda",
+      "timestamp": "2026-03-19T00:35:57.531Z",
+      "actionType": "quality_score",
+      "issueNumber": 541,
+      "issueTitle": " [요청] Tmux‑IDE – 에이전트‑퍼스트 터미널 IDE 가이드",
+      "documentSlug": "tmux-ide-ide",
+      "documentTitle": " [요청] Tmux‑IDE – 에이전트‑퍼스트 터미널 IDE 가이드",
+      "summary": "자동 품질 검토 통과 (92점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "2ec7be1f-69f1-4112-a01a-62441b960b7e",
+      "timestamp": "2026-03-19T00:35:44.981Z",
+      "actionType": "quality_score",
+      "issueNumber": 542,
+      "issueTitle": " [요청] 멀티테넌트 SaaS 데이터 누출 방지 전략",
+      "documentSlug": "security/saas",
+      "documentTitle": " [요청] 멀티테넌트 SaaS 데이터 누출 방지 전략",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "ee289972-4dd4-41e8-b3fd-d1ee19018c80",
+      "timestamp": "2026-03-19T00:35:33.338Z",
+      "actionType": "quality_score",
+      "issueNumber": 544,
+      "issueTitle": " [요청] Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI",
+      "documentSlug": "ai/agentic-walmart-vs-openai",
+      "documentTitle": " [요청] Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI",
+      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "df89b416-ec02-461e-8527-2e245de4cbe5",
+      "timestamp": "2026-03-19T00:35:12.936Z",
+      "actionType": "generate",
+      "issueNumber": 541,
+      "issueTitle": " [요청] Tmux‑IDE – 에이전트‑퍼스트 터미널 IDE 가이드",
+      "documentSlug": "tmux-ide-ide",
+      "documentTitle": "Tmux‑IDE – 에이전트‑퍼스트 터미널 IDE 가이드",
+      "summary": "새 문서 \"Tmux‑IDE – 에이전트‑퍼스트 터미널 IDE 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2964
+            },
+            {
+              "step": "outline",
+              "durationMs": 9753
+            },
+            {
+              "step": "write",
+              "durationMs": 28420
+            },
+            {
+              "step": "review",
+              "durationMs": 6115
+            }
+          ],
+          "totalDurationMs": 47252,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2215,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "f78bf4ee-4faf-4549-8b60-8fbd64dc387e",
+      "timestamp": "2026-03-19T00:34:11.249Z",
+      "actionType": "generate",
+      "issueNumber": 542,
+      "issueTitle": " [요청] 멀티테넌트 SaaS 데이터 누출 방지 전략",
+      "documentSlug": "security/saas",
+      "documentTitle": "멀티테넌트 SaaS 데이터 누출 방지 전략",
+      "summary": "새 문서 \"멀티테넌트 SaaS 데이터 누출 방지 전략\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3412
+            },
+            {
+              "step": "outline",
+              "durationMs": 9816
+            },
+            {
+              "step": "write",
+              "durationMs": 20640
+            },
+            {
+              "step": "review",
+              "durationMs": 8369
+            }
+          ],
+          "totalDurationMs": 42237,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1941,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "c24628af-29a1-4c01-b838-cc3ff8f080d6",
+      "timestamp": "2026-03-19T00:33:13.025Z",
+      "actionType": "generate",
+      "issueNumber": 544,
+      "issueTitle": " [요청] Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI",
+      "documentSlug": "ai/agentic-walmart-vs-openai",
+      "documentTitle": "Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI",
+      "summary": "새 문서 \"Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3644
+            },
+            {
+              "step": "outline",
+              "durationMs": 8868
+            },
+            {
+              "step": "write",
+              "durationMs": 24606
+            },
+            {
+              "step": "review",
+              "durationMs": 12094
+            }
+          ],
+          "totalDurationMs": 49212,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2278,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "101832e1-48dc-435e-be2a-4df64862efd7",
       "timestamp": "2026-03-19T00:30:45.377Z",
       "actionType": "generate",
@@ -14906,5 +15097,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-19T00:30:45.377Z"
+  "lastUpdated": "2026-03-19T00:36:09.887Z"
 }
