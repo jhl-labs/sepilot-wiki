@@ -7,6 +7,7 @@ redirect_from:
   - security-ai
   - observability-ai
 order: 5
+updatedAt: 2026-03-20
 ---
 
 ## 1. 서론
@@ -89,12 +90,97 @@ AI‑코딩 어시스턴트가 개발 생산성을 크게 높이고 있지만, *
 
 > **참고**: 각 도구의 최신 설치·사용법은 공식 문서를 확인하세요. (예: OPA 공식 문서, GitGuardian Docs)
 
-## 9. 거버넌스와 컴플라이언스
+## 9. **새로운 AI 에이전트 개요 – Secure Code Warrior Trust Agent: AI**
+Secure Code Warrior(이하 SCW)는 2026년 3월 17일에 **Trust Agent: AI** 를 출시했습니다. 이 솔루션은 AI‑코딩 도구가 생성한 코드를 **커밋 시점에 식별**하고, 사전 정의된 거버넌스 정책을 **자동으로 적용**합니다[[Secure Code Warrior Launches Trust Agent: AI to Enable Safe ...](https://kbi.media/press-release/secure-code-warrior-launches-trust-agent-ai-to-enable-safe-scalable-ai-driven-development/)].  
+
+- **핵심 기능**
+  1. **AI 코드 가시성** – AI‑생성 파일에 메타데이터를 삽입해 어떤 모델이 해당 코드를 만든지 추적합니다.
+  2. **정책 자동 적용** – 사전 정의된 보안·컴플라이언스 정책(예: 시크릿 검출, 코드 스타일, 취약점 차단)을 커밋 전 단계에서 강제합니다.
+  3. **위험 점수 제공** – 각 커밋에 AI‑관련 위험 점수를 부여하고, 고위험 커밋은 자동으로 리뷰 대기열에 배치합니다.
+  4. **통합 보고** – SCW 대시보드에서 AI 모델별 영향도, 정책 위반 건수, 시크릿 노출 추이를 시각화합니다.
+
+- **CEO 발언**  
+  Pieter Danhieux SCW CEO는 “Trust Agent 덕분에 DevSecOps 팀이 AI를 사용하여 어떤 모델이 특정 커밋에 영향을 미쳤는지 검증할 수 있게 되었다”고 강조했습니다[[Secure Code Warrior AI 에이전트, AI 생성 코드에 정책을 적용 | EUNO.NEWS](https://euno.news/posts/ko/secure-code-warrior-ai-agent-applies-policies-to-a-715ceb)].
+
+## 10. 정책 적용 흐름
+```mermaid
+flowchart TD
+    A[개발자] -->|AI 코딩 어시스턴트 사용| B[AI 모델 (Copilot 등)]
+    B -->|코드 생성| C[Git 커밋]
+    C -->|Trust Agent: AI 감지| D[SCW 정책 엔진]
+    D -->|정책 위반 여부 판단| E{위반?}
+    E -->|예| F[자동 차단 & 리뷰 요청]
+    E -->|아니오| G[커밋 승인 및 배포]
+    F --> H[DevSecOps 알림]
+    G --> I[CI/CD 파이프라인 진행]
+```
+1. **코드 커밋** 시 Trust Agent가 파일 메타데이터를 분석해 AI‑생성 여부를 판단합니다.  
+2. **정책 엔진**이 사전 정의된 규칙(시크릿 검출, 라이선스 호환성, 취약점 차단 등)과 매핑합니다.  
+3. 위반이 감지되면 **자동 차단**되고, 해당 커밋은 리뷰 대기열에 이동하며 DevSecOps 팀에 알림이 전송됩니다.  
+4. 위반이 없으면 커밋이 정상적으로 CI/CD 파이프라인을 통과합니다.
+
+## 11. DevSecOps 팀 활용 사례
+| 단계 | 활용 내용 | 기대 효과 |
+|------|-----------|------------|
+| **코드 검토** | Trust Agent가 AI‑생성 파일에 정책 위반을 표시하고, 자동으로 리뷰 요청을 생성 | 인간 리뷰 부담 감소, 위험 조기 탐지 |
+| **위험 대시보드** | SCW 대시보드에서 AI 모델별 위험 점수와 시크릿 노출 추이 확인 | 의사결정 가속화, 모델 사용 가이드라인 수립 |
+| **정책 관리** | 정책을 Rego(OPA) 혹은 SCW 자체 DSL로 정의하고, 버전 관리 | 정책 일관성 유지, 감사 용이 |
+| **인시던트 대응** | 위반 커밋이 차단되면 자동으로 Slack/Teams 알림 및 티켓 생성 | 신속한 대응 및 포렌식 조사 |
+
+## 12. 관련 도구 및 설정 가이드
+1. **SCW Trust Agent 설치**  
+   ```bash
+   # 예시: SCW CLI를 통해 에이전트 활성화
+   scw trust-agent install --repo <repo-url> --policy-dir ./scw-policies
+   ```
+2. **정책 정의 (YAML)**  
+   ```yaml
+   # scw-policies/secret-detection.yaml
+   name: "AI Secret Detection"
+   description: "Detect secrets in AI‑generated files"
+   triggers:
+     - type: ai_generated
+   rules:
+     - type: secret_scan
+       severity: high
+       action: block
+   ```
+3. **CI/CD 연동 (GitHub Actions 예시)**  
+   ```yaml
+   name: SCW Trust Agent Scan
+   on: [push, pull_request]
+   jobs:
+     scw-scan:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v3
+         - name: Run SCW Trust Agent
+           run: scw trust-agent scan .
+         - name: Upload Results
+           if: failure()
+           uses: actions/upload-artifact@v3
+           with:
+             name: scw-report
+             path: ./scw-report.json
+   ```
+4. **OPA와 연계**  
+   - SCW가 생성한 `ai_generated: true` 메타데이터를 OPA 정책에 전달해 추가 검증을 수행할 수 있습니다.  
+   - 예시 Rego 규칙:  
+     ```rego
+     package scw.ai
+     deny[msg] {
+       input.ai_generated
+       not input.passed_secret_scan
+       msg := "AI‑generated file failed secret scan"
+     }
+     ```
+
+## 13. 거버넌스와 컴플라이언스
 - **ISO 27001 / NIST 800‑53**: 시크릿 관리 제어(AC‑2, AC‑3 등)와 AI 시스템 보안 통합을 권고합니다.
 - **내부 정책**: AI 도구 사용 가이드라인, 프롬프트 검증 절차, 시크릿 회전 주기 등을 문서화하고 정기 감사 체크리스트에 포함합니다.
 - **법적 요구사항**: GDPR·CCPA 등 개인정보 보호 규정은 시크릿(특히 개인 식별 정보) 누출 시 높은 벌금을 부과하므로, AI‑generated 코드가 개인정보를 포함하지 않도록 사전 검증이 필요합니다.
 
-## 10. 미래 전망 및 연구 과제
+## 14. 미래 전망 및 연구 과제
 1. **에이전트형 AI와 장기 시크릿 위험**  
    - Stellar Cyber 보고서는 2026년 후반에 에이전트형 AI가 “시크릿 하나만 유출돼도 장기간 권한을 유지할 수 있다”는 시나리오를 제시합니다[[2026년 후반 주요 에이전트형 AI 보안 위협 - Stellar Cyber](https://stellarcyber.ai/ko/learn/agentic-ai-securiry-threats/)].
 2. **자동화된 시크릿 회복·재생 기술**  
@@ -102,14 +188,16 @@ AI‑코딩 어시스턴트가 개발 생산성을 크게 높이고 있지만, *
 3. **산학 협업 기반 지속적 위험 모니터링**  
    - AI 보안 베스트 프랙티스와 최신 위협 인텔리전스를 공유하는 산업 포럼(예: GitGuardian·SentinelOne 공동 연구)과의 협업이 필요합니다.
 
-## 11. 결론
+## 15. 결론
 - AI‑생성 코드는 개발 효율성을 높이지만, **시크릿 노출 위험을 크게 확대**하고 있습니다.  
 - 조직은 **시크릿 탐지·차단 도구**, **정책 기반 자동화**, **교육·인식 제고**를 통해 위험을 최소화해야 합니다.  
+- Secure Code Warrior의 **Trust Agent: AI** 와 같은 **AI‑코드 가시성·정책 자동 적용 솔루션**을 도입하면, 커밋 단계에서 위험을 차단하고 DevSecOps 팀이 보다 효율적으로 대응할 수 있습니다.  
 - 지속적인 **모니터링·업데이트**와 **거버넌스 체계** 구축이 장기적인 보안 유지에 핵심입니다.  
 
 **즉각적인 권고 행동**  
 1. 모든 레포에 GitGuardian·TruffleHog 등 시크릿 스캐너를 CI에 통합.  
 2. AI 코딩 어시스턴트 사용 시 “프롬프트에 시크릿 포함 금지” 정책을 문서화.  
 3. 시크릿 회전 주기를 최소 90일로 설정하고, 자동화된 회전 파이프라인을 구축.  
+4. Secure Code Warrior Trust Agent: AI 를 파일 레포에 설치하고, 정책 디렉터리를 정의해 AI‑생성 파일에 대한 자동 차단·리뷰 흐름을 활성화.  
 
 > 추가 조사가 필요합니다: 구체적인 AI‑코드 노출 사례(레포·시점), 각 도구의 최신 버전별 성능 비교, AI 모델 자체 시크릿 학습 방지 메커니즘.  
