@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-20T05:50:22.348Z",
+  "collectedAt": "2026-03-20T06:50:15.890Z",
   "overview": {
-    "totalDocuments": 235,
-    "publishedDocuments": 122,
+    "totalDocuments": 238,
+    "publishedDocuments": 125,
     "draftDocuments": 113,
     "openRequests": 148,
     "closedRequests": 19,
-    "totalAIActions": 654
+    "totalAIActions": 655
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 507716
     },
     "last7d": {
-      "aiActions": 109,
+      "aiActions": 110,
       "documentsCreated": 41,
       "documentsModified": 28,
       "tavilyApiCalls": 123,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-20T06:19:52.200Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-20T00:32:38.017Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 50164,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2298
-    },
-    {
-      "timestamp": "2026-03-19T12:18:34.700Z",
-      "actionType": "modify",
-      "issueNumber": 548,
-      "documentTitle": "Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 639,
+      "totalActions": 640,
       "totalEstimatedTokens": 458637,
       "avgDurationMs": 52312
     },
