@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "ca07457c-8b58-4bb0-94f4-ce97d64b356e",
+      "timestamp": "2026-03-20T00:32:38.017Z",
+      "actionType": "quality_score",
+      "issueNumber": 557,
+      "issueTitle": " [요청] Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+      "documentSlug": "ai/enterprise-adoption-of-user-aware-ai-agents-deep-p",
+      "documentTitle": " [요청] Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "bcddaef6-e805-4daa-89d4-6764f41378e2",
+      "timestamp": "2026-03-20T00:32:24.848Z",
+      "actionType": "quality_score",
+      "issueNumber": 558,
+      "issueTitle": " [요청] PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce RCE",
+      "documentSlug": "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-",
+      "documentTitle": " [요청] PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce RCE",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "32bb4b39-906f-41cd-bd2b-69731d7ee170",
+      "timestamp": "2026-03-20T00:32:14.829Z",
+      "actionType": "quality_score",
+      "issueNumber": 559,
+      "issueTitle": " [요청] x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+      "documentSlug": "reports/x402-week-metrics-agent-payment-layer",
+      "documentTitle": " [요청] x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "adeccbab-7612-4285-8e36-539799d14bb4",
+      "timestamp": "2026-03-20T00:32:00.393Z",
+      "actionType": "generate",
+      "issueNumber": 557,
+      "issueTitle": " [요청] Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+      "documentSlug": "ai/enterprise-adoption-of-user-aware-ai-agents-deep-p",
+      "documentTitle": "Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+      "summary": "새 문서 \"Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5467
+            },
+            {
+              "step": "outline",
+              "durationMs": 8455
+            },
+            {
+              "step": "write",
+              "durationMs": 18314
+            },
+            {
+              "step": "review",
+              "durationMs": 6131
+            }
+          ],
+          "totalDurationMs": 38367,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 1646,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "8c379574-e5d7-45d0-b464-a53b6c78f50f",
+      "timestamp": "2026-03-20T00:31:07.880Z",
+      "actionType": "generate",
+      "issueNumber": 558,
+      "issueTitle": " [요청] PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce RCE",
+      "documentSlug": "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-",
+      "documentTitle": "PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce 원격 코드 실행 가이드",
+      "summary": "새 문서 \"PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce 원격 코드 실행 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6309
+            },
+            {
+              "step": "outline",
+              "durationMs": 11295
+            },
+            {
+              "step": "write",
+              "durationMs": 20496
+            },
+            {
+              "step": "review",
+              "durationMs": 6219
+            }
+          ],
+          "totalDurationMs": 44319,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1901,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "221e96d3-eecd-4807-918e-ae464dbdde1f",
+      "timestamp": "2026-03-20T00:30:09.231Z",
+      "actionType": "generate",
+      "issueNumber": 559,
+      "issueTitle": " [요청] x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+      "documentSlug": "reports/x402-week-metrics-agent-payment-layer",
+      "documentTitle": "x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+      "summary": "새 문서 \"x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4766
+            },
+            {
+              "step": "outline",
+              "durationMs": 7309
+            },
+            {
+              "step": "write",
+              "durationMs": 22372
+            },
+            {
+              "step": "review",
+              "durationMs": 5912
+            }
+          ],
+          "totalDurationMs": 40359,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 8
+          },
+          "estimatedTokens": {
+            "estimated": 1780,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "49c20f9d-567e-49dc-8285-fae8a1706a93",
       "timestamp": "2026-03-20T00:27:59.592Z",
       "actionType": "generate",
@@ -15660,5 +15837,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-20T00:27:59.592Z"
+  "lastUpdated": "2026-03-20T00:32:38.017Z"
 }
