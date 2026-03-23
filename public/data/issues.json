@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 574,
+      "number": 574,
+      "title": " [요청] NVIDIA OpenShell을 활용한 Secure‑by‑Design 자율 AI 에이전트 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/how-autonomous-ai-agents-become-secure-by-design-w-064105)\n**관련도**: 85/100\n**핵심 토픽**: Autonomous AI agents, NVIDIA OpenShell, Secure‑by‑Design\n\n## 업데이트 제안 섹션\n- 개요 및 핵심 개념\n- OpenShell 아키텍처와 주요 컴포넌트\n- Secure‑by‑Design 설계 원칙\n- NVIDIA AI 스택(NIM, NemoClaw 등)과의 통합 방법\n- 보안 고려사항 및 베스트 프랙티스\n- 실제 사용 사례와 배포 가이드\n\n## 뉴스 요약\n자율 에이전트는 AI에서 새로운 전환점을 나타낸다. 시스템은 이제 응답을 생성하거나 작업을 추론하는 것에만 국한되지 않는다. 이들은 행동을 취할 수 있다: age...\n\n## 상세 내용\nSource: NVIDIA AI Blog\n(번역할 텍스트가 제공되지 않았습니다. 번역이 필요한 본문을 알려주시면 도와드리겠습니다.)\n보안 자율 에이전트를 위한 OpenShell 소개\n자율 에이전트는 AI의 새로운 전환점을 의미합니다. 시스템은 이제 단순히 응답을 생성하거나 작업을 추론하는 수준을 넘어 행동을 취할 수 있습니다. 에이전트는 파일을 읽고, 도구를 사용하며, 코드를 작성·실행하고, 기업 시스템 전반에 걸친 워크플로를 실행할 수 있으며, 동시에 스스로의 역량을 확장합니다.\n에이전트가 지속적으로 개선·진화함에 따라 애플리케이션 계층의 위험은 기하급수적으로 증가합니다. 이를 해결하기 위해 NVIDIA OpenShell 런타임이 구축되고 있습니다.\nNVIDIA Agent Toolkit의 일부인 OpenShell은 클로와 같은 자율 에이전트를 실행하기 위한 오픈 소스, 보안‑우선 설계 런타임입니다. 각 에이전트가 자체 샌드박스 내에서 실행되도록 보장하여 애플리케이션 계층 작업을 인프라 계층 정책 집행으로부터 분리합니다.\n보안 정책은 에이전트가 접근할 수 없는 시스템 수준에서 적용됩니다.\nOpenShell은 환경에 대한 제약을 강제하여, 에이전트가 정책을 우회하거나 자격 증명·개인 데이터를 유출하는 것을 방지합니다(침해된 경우에도 마찬가지).\nOpenShell을 사용하면 기업은 에이전트 행동, 정책 정의 및 정책 집행을 분리할 수 있습니다. 조직은 단일하고 통합된 정책 레이어를 통해 자율 시스템의 운영 방식을 정의하고 모니터링할 수 있습니다. 코딩 에이전트, 연구 보조 도구, 에이전시 워크플로 등 모든 에이전트는 호스트 운영 체제와 무관하게 동일한 런타임 정책 하에 실행되어, 컴플라이언스와 운영 감시를 단순화합니다.\n이는 에이전트에 적용된 “브라우저 탭” 모델과 같습니다: 세션은 격리되고, 자원은 제어되며, 권한은 어떤 행동이 이루어지기 전에 런타임에 의해 검증됩니다.\n자율 시스템을 보호하려면 통합된 생태계가 필요합니다. OpenShell은 AI 에이전트를 위\n\n## 판단 근거\nOpenShell·Secure‑by‑Design 조합은 기존 문서에 다루어지지 않은 최신 NVIDIA 기술이며, 별도 보안·아키텍처 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-23T18:26:39.896Z",
+      "updated_at": "2026-03-23T18:26:39.902Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/574",
+      "documentSlug": "nvidia-openshell-secure-by-design-ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/nvidia-openshell-secure-by-design-ai.md",
+      "comments": 0
+    },
+    {
+      "id": 576,
+      "number": 576,
+      "title": " [요청] LLM Drift 모니터링 및 분석 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-analyzed-300-llm-drift-checks-heres-what-i-found-d3a2c1)\n**관련도**: 78/100\n**핵심 토픽**: LLM drift monitoring, Production observability, Model performance\n\n## 업데이트 제안 섹션\n- LLM Drift 정의와 원인\n- 모니터링 지표·메트릭\n- OpenTelemetry·Prometheus 기반 구현 예시\n- 300개 체크 사례 분석 결과\n- 알림·대응 전략\n\n## 뉴스 요약\n나는 프로덕션 데이터 6개월에 걸친 300개의 LLM drift 체크를 분석했다. 여기 내가 발견한 내용이 있다. 데이터셋: 프로덕션에서 LLM 출력물을 6개월 동안 모니터링한 것. 여러…\n\n## 상세 내용\nSource: Dev.to\n6개월간의 프로덕션 데이터를 기반으로 300개의 LLM 드리프트 체크를 분석했습니다. 제가 발견한 내용은 다음과 같습니다.\n데이터셋\n6개월 동안 프로덕션에서 LLM 출력 모니터링\n여러 모델: GPT‑4, GPT‑3.5, Claude 2, Claude 3\n다양한 사용 사례: 분류, 추출, 생성\n300개의 데이터 포인트\nLLM 드리프트란?\nLLM 드리프트는 모델이나 프롬프트를 변경하지 않았음에도 불구하고 시간이 지남에 따라 모델 출력이 변하는 현상을 말합니다. 모델 자체는 동일하지만 출력이 달라집니다.\n이는 모델 제공업체가 백그라운드에서 가중치를 업데이트하거나, 컨텍스트 분포가 변하거나, 파인‑튜닝 업데이트가 품질을 저하시킬 때 발생합니다.\n결과\n드리프트는 생각보다 흔합니다\n**23 %**의 모니터링된 엔드포인트가 30 일 이내에 측정 가능한 드리프트를 보임\n**8 %**가 유의미한 드리프트(> 0.3 코사인 거리) 발생\n드리프트가 가장 많이 발생하는 분야: 분류 작업, 구조화된 추출, 다단계 추론\n작업 유형에 따른 드리프트 차이\n작업 유형드리프트 비율평균 심각도\n분류31 %낮음‑중간\n추출24 %중간\n생성18 %낮음\n코드 생성12 %낮음\n추론28 %중간‑높음\n분류 작업이 가장 많이 드리프트합니다. 이는 분류가 미묘한 패턴 인식에 의존하기 때문입니다.\n모델별 드리프트 차이\n모델드리프트 비율첫 드리프트까지 평균 시간\nGPT‑48 %45 일\nGPT‑3.522 %12 일\nClaude 218 %28 일\nClaude 36 %60 일\nClaude 3와 GPT‑4가 가장 안정적이며, 오래된 모델일수록 드리프트가 더 빠르게 발생합니다.\n드리프트가 가장 중요한 경우\n분류 결정 – 예: 스팸 필터가 정상 이메일을 잘못 분류\n데이터 추출 – 예: 인보이스 추출기가 필드를 놓쳐 하위 시스템 오류 발생\n품질 게이트 – 예: 코드 리뷰 AI가 나쁜 코드를 승인해 취약점 유발\n창작 글쓰기, 일반 Q&#x26;A, 브레인스토밍 등에서는 드리프트가 덜 중요합니다.\n드리\n\n## 판단 근거\nLLM 드리프트는 관측성 분야에서 새롭게 부각된 문제이며, 기존 관측 문서에 구체적인 모니터링 방법과 사례가 부족하므로 독립 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-23T18:25:09.716Z",
+      "updated_at": "2026-03-23T18:25:09.722Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/576",
+      "documentSlug": "llm-drift",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/llm-drift.md",
+      "comments": 0
+    },
+    {
+      "id": 577,
+      "number": 577,
+      "title": " [요청] Kusari와 CNCF – 클라우드 네이티브 소프트웨어 공급망 보안 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/kusari-and-cncf-advancing-software-supply-chain-se-5dca6e)\n**관련도**: 78/100\n**핵심 토픽**: Kusari, CNCF, software supply‑chain security\n\n## 업데이트 제안 섹션\n- Kusari 프로젝트 소개\n- CNCF 생태계와 공급망 위험\n- 통합 방법·플러그인\n- 베스트 프랙티스와 체크리스트\n- 사례 연구\n\n## 뉴스 요약\n소개 Open source는 현대 software의 기반이 되었지만, 오늘날 software supply chains의 규모와 속도가 새로운 보안 문제를 야기하고 있습니다.\n\n## 상세 내용\nSource: CNCF Blog\n소개\n오픈 소스는 현대 소프트웨어의 기반이 되었지만, 오늘날 소프트웨어 공급망의 규모와 속도는 새로운 보안 과제를 만들고 있습니다. 애플리케이션은 복잡한 환경 전반에 걸쳐 수백 또는 수천 개의 구성 요소에 의존하며, 그 중 많은 부분이 전이 관계를 통해 자동으로 가져와집니다. AI‑생성 코드와 자동화된 개발 파이프라인의 급격한 증가로 인해 지능적이고 통합된 보안 감시가 그 어느 때보다 필수적입니다.\n공격자들도 마찬가지로 빠르게 진화하고 있으며, 보다 표적화되고 정교한 위협이 등장하고 있습니다. 공급망 침해, 의존성 공격, 라이선스 위험은 오픈‑소스 커뮤니티에서 지속적으로 증가하고 있습니다. 제한된 자원으로 운영되는 유지보수자와 보안 팀에게는 소프트웨어 공급망에 실제로 무엇이 포함되어 있는지, 그리고 위험이 어디에 존재하는지에 대한 명확한 가시성을 확보하는 것이 매우 중요합니다.\nKusari × CNCF 파트너십\nKusari는 클라우드 네이티브 소프트웨어를 위한 지속 가능한 생태계를 구축하는 Cloud Native Computing Foundation (CNCF)와 파트너십을 맺게 되어 기쁩니다. 우리의 공동 목표는 유지보수자와 기여자가 클라우드 네이티브 프로젝트를 구동하는 복잡한 의존성 생태계를 보안 전문가가 될 필요 없이 보호하기 쉽게 만드는 것입니다. 이번 파트너십의 일환으로 CNCF 프로젝트는 Kusari Inspector 라는 AI‑드리븐 코드 리뷰 및 의존성‑관리 도구를 무료로 이용할 수 있습니다.\nCNCF 프로젝트는 현대 인프라의 핵심에 자리하고 있습니다. 의존성 그래프가 깊어지고, 라이선스 위험이 확대되며, 빌드가 더 자동화될수록 가시성은 어려워집니다. 많은 팀이 여러 도구에 의존하지만 여전히 공급망에 무엇이 들어있는지에 대한 명확하고 연결된 뷰가 부족합니다—특히 전이적 의존성을 포함한 경우에 그렇습니다.\nKusari Inspector를 사용하는 프로젝트\nGemara\nGitTUF\nGUAC\nin‑toto/Witness\n\n## 판단 근거\nKusari·CNCF 연계 보안 전략은 기존 보안 문서(슬롭스쿼팅·DevSecOps)와 주제·범위가 다르므로 별도 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-23T18:23:43.829Z",
+      "updated_at": "2026-03-23T18:23:43.837Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/577",
+      "documentSlug": "security/kusari-cncf",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/kusari-cncf.md",
+      "comments": 0
+    },
+    {
       "id": 572,
       "number": 572,
       "title": "문서 요청 #572",
@@ -5373,5 +5466,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-23T12:25:07.296Z"
+  "lastUpdated": "2026-03-23T18:26:39.902Z"
 }

@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "a0c0012c-2884-4a28-8e89-857c2065d46b",
+      "timestamp": "2026-03-23T18:27:34.206Z",
+      "actionType": "quality_score",
+      "issueNumber": 574,
+      "issueTitle": " [요청] NVIDIA OpenShell을 활용한 Secure‑by‑Design 자율 AI 에이전트 가이드",
+      "documentSlug": "nvidia-openshell-secure-by-design-ai",
+      "documentTitle": " [요청] NVIDIA OpenShell을 활용한 Secure‑by‑Design 자율 AI 에이전트 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "b9c85841-1679-4c49-9d0c-138727eae70e",
+      "timestamp": "2026-03-23T18:27:16.553Z",
+      "actionType": "quality_score",
+      "issueNumber": 576,
+      "issueTitle": " [요청] LLM Drift 모니터링 및 분석 가이드",
+      "documentSlug": "llm-drift",
+      "documentTitle": " [요청] LLM Drift 모니터링 및 분석 가이드",
+      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "0b30cde7-1c32-4ba7-814f-75330d4a30ce",
+      "timestamp": "2026-03-23T18:27:01.499Z",
+      "actionType": "quality_score",
+      "issueNumber": 577,
+      "issueTitle": " [요청] Kusari와 CNCF – 클라우드 네이티브 소프트웨어 공급망 보안 가이드",
+      "documentSlug": "security/kusari-cncf",
+      "documentTitle": " [요청] Kusari와 CNCF – 클라우드 네이티브 소프트웨어 공급망 보안 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "972df672-7671-4e3f-8c80-329420396d91",
+      "timestamp": "2026-03-23T18:26:39.892Z",
+      "actionType": "generate",
+      "issueNumber": 574,
+      "issueTitle": " [요청] NVIDIA OpenShell을 활용한 Secure‑by‑Design 자율 AI 에이전트 가이드",
+      "documentSlug": "nvidia-openshell-secure-by-design-ai",
+      "documentTitle": "NVIDIA OpenShell을 활용한 Secure‑by‑Design 자율 AI 에이전트 가이드",
+      "summary": "새 문서 \"NVIDIA OpenShell을 활용한 Secure‑by‑Design 자율 AI 에이전트 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3844
+            },
+            {
+              "step": "outline",
+              "durationMs": 8767
+            },
+            {
+              "step": "write",
+              "durationMs": 34291
+            },
+            {
+              "step": "review",
+              "durationMs": 7245
+            }
+          ],
+          "totalDurationMs": 54147,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2515,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "88fc9b39-f6c2-44f9-b59f-67469ea67df3",
+      "timestamp": "2026-03-23T18:25:09.714Z",
+      "actionType": "generate",
+      "issueNumber": 576,
+      "issueTitle": " [요청] LLM Drift 모니터링 및 분석 가이드",
+      "documentSlug": "llm-drift",
+      "documentTitle": "LLM Drift 모니터링 및 분석 가이드",
+      "summary": "새 문서 \"LLM Drift 모니터링 및 분석 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4230
+            },
+            {
+              "step": "outline",
+              "durationMs": 12782
+            },
+            {
+              "step": "write",
+              "durationMs": 32993
+            },
+            {
+              "step": "review",
+              "durationMs": 13000
+            }
+          ],
+          "totalDurationMs": 63005,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2939,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "af37101a-07c5-474f-9042-0583eaba9044",
+      "timestamp": "2026-03-23T18:23:43.826Z",
+      "actionType": "generate",
+      "issueNumber": 577,
+      "issueTitle": " [요청] Kusari와 CNCF – 클라우드 네이티브 소프트웨어 공급망 보안 가이드",
+      "documentSlug": "security/kusari-cncf",
+      "documentTitle": "Kusari와 CNCF – 클라우드 네이티브 소프트웨어 공급망 보안 가이드",
+      "summary": "새 문서 \"Kusari와 CNCF – 클라우드 네이티브 소프트웨어 공급망 보안 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3487
+            },
+            {
+              "step": "outline",
+              "durationMs": 10874
+            },
+            {
+              "step": "write",
+              "durationMs": 35131
+            },
+            {
+              "step": "review",
+              "durationMs": 9309
+            }
+          ],
+          "totalDurationMs": 58801,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2766,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "fdd6c3de-7542-4af2-9adf-49066f710e1d",
       "timestamp": "2026-03-23T18:19:33.293Z",
       "actionType": "maintain",
@@ -16281,5 +16458,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-23T18:19:33.293Z"
+  "lastUpdated": "2026-03-23T18:27:34.206Z"
 }
