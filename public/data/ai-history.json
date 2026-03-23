@@ -1,42 +1,14 @@
 {
   "entries": [
     {
-      "id": "d7846e80-7e74-41ce-8f9d-e1d5da14cc26",
-      "timestamp": "2026-03-23T12:24:50.305Z",
-      "actionType": "quality_score",
-      "issueNumber": 568,
-      "issueTitle": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
-      "documentSlug": "security/npm",
-      "documentTitle": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "426f50bf-13e2-4ce2-b832-3ad5dd8ecd80",
-      "timestamp": "2026-03-23T12:24:33.137Z",
-      "actionType": "quality_score",
-      "issueNumber": 572,
-      "issueTitle": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
-      "documentSlug": "devops/traefik-yaml",
-      "documentTitle": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "5537bc55-a965-49db-8e74-c92b61de0912",
-      "timestamp": "2026-03-23T12:24:06.355Z",
+      "id": "1707d1ed-98c7-4658-9231-21399ea31aa6",
+      "timestamp": "2026-03-23T12:25:07.287Z",
       "actionType": "generate",
-      "issueNumber": 568,
-      "issueTitle": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
-      "documentSlug": "security/npm",
-      "documentTitle": "npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
-      "summary": "새 문서 \"npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협\" 생성",
+      "issueNumber": 572,
+      "issueTitle": "문서 요청 #572",
+      "documentSlug": "572",
+      "documentTitle": "Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드",
+      "summary": "새 문서 \"Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -45,43 +17,94 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 3514
+              "durationMs": 3589
             },
             {
               "step": "outline",
-              "durationMs": 10935
+              "durationMs": 8066
             },
             {
               "step": "write",
-              "durationMs": 21474
+              "durationMs": 39323
             },
             {
               "step": "review",
-              "durationMs": 7368
+              "durationMs": 8872
             }
           ],
-          "totalDurationMs": 43291,
-          "researchSources": 8,
+          "totalDurationMs": 59851,
+          "researchSources": 11,
           "tavilyUsage": {
             "apiCalls": 3,
             "totalResults": 9
           },
           "estimatedTokens": {
-            "estimated": 1989,
+            "estimated": 2813,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "c6ffac84-48ec-4b2f-a804-a022beb52064",
-      "timestamp": "2026-03-23T12:23:05.175Z",
+      "id": "363d60b3-a02a-499c-b119-e57f5ef9d162",
+      "timestamp": "2026-03-23T12:24:03.661Z",
+      "actionType": "modify",
+      "issueNumber": 571,
+      "issueTitle": " [업데이트] LLM 기반 정적 분석과 코드 리뷰 에이전트 통합",
+      "documentSlug": "ai/ai-code-review-agent-guide",
+      "documentTitle": "AI 코드 리뷰 에이전트 구축 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] LLM 기반 정적 분석과 코드 리뷰 에이전트 통합\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 99,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "fb9276a6-a621-4187-a694-d71827f6b763",
+      "timestamp": "2026-03-23T12:22:49.697Z",
+      "actionType": "modify",
+      "issueNumber": 570,
+      "issueTitle": " [업데이트] Claude Code 에이전트 – Rules vs Skills 차이와 활용 가이드",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code 에이전트 – Rules vs Skills 차이와 활용 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 42,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "ad73b115-82e0-4589-aedb-fb468192b103",
+      "timestamp": "2026-03-23T12:21:14.823Z",
+      "actionType": "modify",
+      "issueNumber": 569,
+      "issueTitle": " [업데이트] AI 에이전트 워크플로우 – Agent Kernel 으로 마크다운 기반 상태 유지",
+      "documentSlug": "ai/ai-agentic-workflow",
+      "documentTitle": "AI Agentic Workflow 거버넌스 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 에이전트 워크플로우 – Agent Kernel 으로 마크다운 기반 상태 유지\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 52,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "a4e1bade-aa87-40b6-9ef5-aef96bc0963c",
+      "timestamp": "2026-03-23T12:20:07.390Z",
       "actionType": "generate",
-      "issueNumber": 572,
-      "issueTitle": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
-      "documentSlug": "devops/traefik-yaml",
-      "documentTitle": "Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
-      "summary": "새 문서 \"Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드\" 생성",
+      "issueNumber": 568,
+      "issueTitle": "문서 요청 #568",
+      "documentSlug": "security/568",
+      "documentTitle": "npm 공급망 공격 – 악성 패키지 sbx‑mask와 touch‑adv 분석 가이드",
+      "summary": "새 문서 \"npm 공급망 공격 – 악성 패키지 sbx‑mask와 touch‑adv 분석 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -90,29 +113,29 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 4588
+              "durationMs": 3209
             },
             {
               "step": "outline",
-              "durationMs": 14286
+              "durationMs": 8167
             },
             {
               "step": "write",
-              "durationMs": 42118
+              "durationMs": 26215
             },
             {
               "step": "review",
-              "durationMs": 7194
+              "durationMs": 8130
             }
           ],
-          "totalDurationMs": 68186,
-          "researchSources": 8,
+          "totalDurationMs": 45722,
+          "researchSources": 9,
           "tavilyUsage": {
             "apiCalls": 3,
-            "totalResults": 7
+            "totalResults": 8
           },
           "estimatedTokens": {
-            "estimated": 3180,
+            "estimated": 2126,
             "method": "duration_based"
           }
         }
@@ -16244,5 +16267,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-23T12:24:50.305Z"
+  "lastUpdated": "2026-03-23T12:25:07.287Z"
 }

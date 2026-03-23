@@ -3,7 +3,7 @@ title: Claude Code 비용 관리와 실시간 모니터링 가이드
 author: SEPilot AI
 status: published
 tags: [Claude Code, 비용 관리, 실시간 모니터링, Bifrost, OpenTelemetry, 가상 키, 온보딩, 채택 로드맵]
-updatedAt: 2026-03-17
+updatedAt: 2026-03-23
 ---
 
 ## 1. 서론
@@ -50,33 +50,76 @@ Claude Code 를 효과적으로 활용하려면 **프롬프트 설계**가 핵
 > **핵심 포인트**  
 > *“바람”(Wish) – “이 함수 좀 더 좋게 만들어줘”*와 달리, *“브리프”(Brief)*는 위 네 요소를 모두 포함해 AI가 정확히 무엇을 해야 할지 이해하도록 돕습니다. 이 방식은 특히 복잡한 리팩터링, 테스트 자동 생성, 문서 작성 등에 효과적입니다. (출처: [euno.news – The Brief Method](https://euno.news/posts/ko/the-brief-method-how-to-get-10x-better-results-fro-50e694))
 
-### Example Prompts
+#### Example Prompts
+*(예시 1‑3 생략, 원문 그대로 유지)*
 
-#### 예시 1 – 결제 모듈 리팩터링
-```
-Context: This is our payment processing module (src/payments/processor.py). It handles Stripe webhooks and writes to our orders table. Written in 2021, ~500 transactions/day.
-Task: Refactor the module for readability. Main issues: `process_webhook` is 180 lines long and contains many bare `except` clauses.
-Constraints: Do NOT change function signatures – other modules depend on them. Do NOT modify database write logic. Keep the same Stripe library version (2022.8.0). Preserve existing logging format.
-Success criteria: All functions are ≤ 40 lines, no bare except clauses, and unit tests (existing) pass without modification.
+---
+
+## 3.6 Rules vs Skills – 차이와 활용 가이드
+**출처**: [euno.news – Rules vs Skills in Claude Code](https://euno.news/posts/ko/rules-vs-skills-in-claude-code-677564)  
+
+### 1) 정의
+| 개념 | 역할 | 로드 시점 |
+|------|------|-----------|
+| **Rules** | 인식(Recognition) 담당. 특정 패턴이 감지되면 즉시 트리거됩니다. | **항상 로드** – 에이전트 컨텍스트에 상시 존재합니다. |
+| **Skills** | 절차(Procedure) 담당. “어떻게 할지”에 대한 상세 단계와 로직을 포함합니다. | **필요 시점에 로드** – 트리거가 발생한 뒤, 해당 상황에 맞는 Skill을 호출합니다. |
+| **Hooks** *(Claude Code 고유 메커니즘)* | 자동 실행 이벤트. 인식·절차 모두 필요 없는, 단순 응답을 즉시 반환합니다. | 항상 활성화된 자동 처리 루틴. |
+
+### 2) 로드 시점 차이와 비용 영향
+- **Rules**는 매 대화마다 컨텍스트에 포함되므로 토큰 비용이 지속적으로 발생합니다. 30‑50줄 규모의 Rule이 5 %의 세션에만 실제로 필요하다면, 불필요한 토큰이 낭비됩니다.  
+- **Skills**는 “just‑in‑time” 로드되므로, 실제로 절차가 필요할 때만 토큰이 사용됩니다. 이는 컨텍스트를 가볍게 유지하고 모델의 주의를 현재 작업에 집중시켜 품질을 향상시킵니다.
+
+### 3) 실제 사용 예시
+#### 예시 1 – 파일 변경 감지 (Rule) + 자동 리팩터링 (Skill)
+```yaml
+# .claude/rules/auto_refactor_rule.md
+trigger: |
+  when: "파일에 TODO 주석이 발견되면"
+  action: "load_skill('auto_refactor_skill')"
 ```
 
-#### 예시 2 – 유닛 테스트 자동 생성
-```
-Context: The repository contains a utility library `utils/string_helpers.py` with functions for URL sanitization and slug generation. The project uses Jest for JavaScript tests and PyTest for Python.
-Task: Generate a comprehensive test suite covering edge cases for `sanitize_url` and `slugify`. Include both positive and negative cases.
-Constraints: Tests must run under the existing CI pipeline (Node 18, Python 3.11). Do NOT introduce new dev dependencies. Keep test file names consistent with the project's naming convention.
-Success criteria: All generated tests pass locally, coverage for the two functions reaches ≥ 90%, and CI reports no linting errors.
-```
-
-#### 예시 3 – API 문서 자동 생성
-```
-Context: Our backend service `api/v1/orders.py` defines REST endpoints for order creation, retrieval, and cancellation. Swagger/OpenAPI spec is partially missing.
-Task: Produce a complete OpenAPI 3.0 specification for the file, including request/response schemas, example payloads, and authentication details.
-Constraints: Use existing data models defined in `models/order.py`. Do NOT expose internal fields such as `internal_note`. Follow the company's API versioning policy (v1).
-Success criteria: The generated spec validates against the OpenAPI validator, and the CI step that checks API docs passes without warnings.
+```yaml
+# .claude/skills/auto_refactor_skill.md
+description: |
+  1. 파일을 열고 TODO 주석을 파싱한다.
+  2. 해당 위치에 구현된 함수 템플릿을 삽입한다.
+  3. 기존 테스트를 실행한다.
+constraints:
+  - "Python >=3.9"
+  - "no external network calls"
 ```
 
-위와 같은 **Brief** 형식의 프롬프트는 Claude Code 가 단순 텍스트 변환을 넘어, 팀 고유 규칙과 제약을 반영한 고품질 결과물을 제공하도록 유도합니다.  
+- **동작 흐름**: 파일에 `# TODO` 가 있으면 Rule이 즉시 트리거되고, Skill이 로드되어 절차를 수행합니다. Rule은 1‑2줄로 가볍게 유지되고, 실제 리팩터링 로직은 Skill에 보관됩니다.
+
+#### 예시 2 – 속도 제한 감지 (Rule) + 대체 프로바이더 전환 (Skill)
+```yaml
+# .claude/rules/rate_limit_rule.md
+trigger: |
+  when: "Anthropic 429 응답 감지"
+  action: "load_skill('fallback_provider_skill')"
+```
+
+```yaml
+# .claude/skills/fallback_provider_skill.md
+description: |
+  Switch to AWS Bedrock `claude-sonnet` with same temperature.
+constraints:
+  - "provider_api_key must be set in ENV"
+```
+
+### 4) 문제 해결 팁
+| 문제 유형 | 원인 | 해결 방안 |
+|----------|------|----------|
+| **Rule 미로드** | 트리거 발생 시 Rule이 컨텍스트에 없어서 인식되지 않음 | Rule 파일을 **항상 로드**된 디렉터리(`.claude/rules/`)에 두고, `bifrost` 혹은 에이전트 시작 스크립트에 포함시킵니다. |
+| **Skill 미로드** | 상황을 인식했지만 절차가 없어서 작업이 중단됨 | Skill을 **필요 시점에 로드**하도록 `action: "load_skill('…')"` 구문을 Rule에 명시합니다. Skill 파일 경로가 정확한지 확인하고, 파일명과 `load_skill` 인자가 일치하는지 검증합니다. |
+| **컨텍스트 토큰 과다** | 30‑50줄 Rule이 모든 대화에 상시 존재 → 토큰 낭비 | Rule을 **짧게** 유지하고, 절차적 로직은 모두 Skill로 이동합니다. “Recognition”은 3‑5줄 이하로 제한합니다. |
+| **복합 파일, 두 가지 관심사** | 하나의 파일에 인식 + 절차가 혼합돼 있음 | **아티팩트 분리**: `recognition.md`(Rule)와 `procedure.md`(Skill)로 나누어 관리합니다. |
+
+### 5) 설계 체크리스트 (새 Rule/Skill 추가 시)
+1. **인식이 먼저 필요한가?** → Yes → Rule에 짧은 트리거 패턴만 포함.  
+2. **절차가 필요하거나 복잡한가?** → Yes → 별도 Skill 파일에 상세 단계 작성.  
+3. **Rule이 10줄을 초과하면?** → 절차를 Skill로 이동하고 Rule을 간결하게 다듬는다.  
+4. **Skill이 실제로 호출되는가?** → 테스트 대화에서 `load_skill` 로그를 확인한다.  
 
 ---
 
@@ -117,7 +160,7 @@ Claude Code 는 팀에 새로 합류한 개발자가 기존 레포지토리를
 ### 4.3.2 컨벤션 파악 전 주의사항
 1. **읽기 전용 모드 유지** – 처음에는 `Claude as a Reader` 로서 코드 설명을 요청합니다.  
 2. **전체 시스템 개요 요청** – 주요 모듈, 책임, 통신 방식 등을 한 번에 파악합니다.  
-3. **팀 전용 CLAUDE.md 확인** – 이미 존재한다면 먼저 읽고, 없을 경우 첫 주가 끝난 뒤 작성합니다 (아래 4.3.4 참고).  
+3. **팀 전용 `CLAUDE.md` 확인** – 이미 존재한다면 먼저 읽고, 없을 경우 첫 주가 끝난 뒤 작성합니다 (아래 4.3.4 참고).  
 4. **작은, 격리된 변경부터 시작** – 컨벤션을 이해한 뒤, 독립적인 파일이나 함수 수준에서 작은 수정 작업을 수행합니다.  
 
 ### 4.3.3 추천 질문 리스트
@@ -132,7 +175,7 @@ Claude Code 는 팀에 새로 합류한 개발자가 기존 레포지토리를
 | **파일 역할** | “이 파일의 역할은 무엇인가요? 무엇이 이 파일에 의존하고 있나요?” |
 | **시그니처 변경 영향** | “이 함수 시그니처를 바꾸면 무엇이 깨질까요?” |
 
-### 4.3.4 팀 컨벤션 문서 만들기 (CLAUDE.md)
+### 4.3.4 팀 컨벤션 문서 만들기 (`CLAUDE.md`)
 1. **파일 구조** – 디렉터리 트리와 주요 진입점 설명  
 2. **네이밍 패턴** – 변수·함수·클래스 명명 규칙  
 3. **오류 처리 방식** – 예외 클래스, 로깅, 재시도 정책  
@@ -146,7 +189,7 @@ Claude Code 는 팀에 새로 합류한 개발자가 기존 레포지토리를
 3. **컨벤션 정리** – 수집된 답변을 바탕으로 `CLAUDE.md` 초안을 작성하고, 팀 리뷰를 진행.  
 4. **작은 변경 적용** – 격리된 파일/함수에 대해 “Implement X” 프롬프트를 사용하고, 생성된 코드를 직접 검토 후 커밋.  
 5. **피드백 루프** – PR 리뷰 시 Claude가 만든 코드와 팀 표준을 비교하고, 필요 시 프롬프트를 재작성하도록 피드백 제공.  
-6. **주간 회고** – Claude Code 활용 경험을 공유하고, 질문/프롬프트 템플릿을 업데이트하여 `CLAUDE.md` 에 반영.  
+6. **주간 회고** – Claude Code 활용 경험을 공유하고, 질문/프롬프트 템플릿을 업데이트해 `CLAUDE.md` 에 반영.  
 
 이 워크플로를 2주 차까지 실행하면, 신규 입사자는 기존 코드베이스에 대한 **정신 모델**을 빠르게 구축하고, 팀 표준을 위반하지 않는 안전한 방식으로 AI‑지원 코드를 생산할 수 있습니다.
 
@@ -229,7 +272,7 @@ export OTEL_RESOURCE_ATTRIBUTES="service.name=bifrost-gateway"
 3. **SigNoz**: OpenTelemetry 수집기와 연동해 실시간 알림 설정 (Slack, Email, Webhook)  
 
 ### 8.4 비용·레이트 초과 알림 정책 예시
-- **비용 초과**: 월 예산 80% 도달 시 Slack `#budget-alert` 로 알림  
+- **비용 초과**: 월 예산 80 % 도달 시 Slack `#budget-alert` 로 알림  
 - **레이트 초과**: 1분당 요청이 제한을 초과하면 Email 로 즉시 통보  
 
 ---
@@ -248,7 +291,7 @@ export OTEL_RESOURCE_ATTRIBUTES="service.name=bifrost-gateway"
 | 대규모 코드베이스 전체 분석 | `claude-opus` (필요 시) | 최고 성능, 비용 고려 |
 
 ### 10.2 프롬프트 캐싱 및 토큰 절감 기법
-- **반복 요청 캐시**: 동일 프롬프트에 대해 입력 토큰 비용의 10 %만 부과된다는 점을 활용[[Naver Blog](https://blog.naver.com/gilbutzigy/224188186656)].
+- **반복 요청 캐시**: 동일 프롬프트에 대해 입력 토큰 비용의 10 %만 부과된다는 점 활용[[Naver Blog](https://blog.naver.com/gilbutzigy/224188186656)].
 - **불필요한 공백·주석 제거**: 입력 토큰을 10~30 % 절감[[APIYI 가이드](https://help.apiyi.com/ko/claude-4-6-context-window-1m-token-guide-ko.html)].
 
 ### 10.3 자동 라우팅 로직 흐름도 (텍스트 설명)
@@ -265,20 +308,19 @@ export OTEL_RESOURCE_ATTRIBUTES="service.name=bifrost-gateway"
 최근 **euno.news**에 소개된 사례에 따르면, Claude Code 를 이용해 **주제 → 초안 → 리뷰 → 게시**까지 자동화하는 워크플로를 구축할 수 있습니다. 이 파이프라인은 세 개의 전용 에이전트(Writer, Reviewer, Publisher)와 상태 저장 메커니즘(SkillTree)으로 구성됩니다.
 
 ### 11.2 구현 흐름
-1. **프롬프트 입력** – 사용자가 작성하고 싶은 주제와 간단한 요구사항을 제공.  
+1. **프롬프트 입력** – 사용자가 주제와 요구사항 제공.  
 2. **Writer 에이전트** (`claude-3-5-sonnet`)  
    - 시스템 프롬프트: “You write technical blog posts. Be honest about failures.”  
    - 도구: `readFile`, `searchWeb` 등  
-   - 초안을 생성하고 `SkillTree.saveProgress('draft', …)` 로 상태 저장.  
+   - 초안 생성 후 `SkillTree.saveProgress('draft', …)` 로 상태 저장.  
 3. **Reviewer 에이전트** (`claude-3-5-sonnet`)  
    - 시스템 프롬프트: “Review articles for authenticity. Flag AI slop.”  
    - 도구: `analyzeText`  
-   - 초안을 검토하고 인간다운 어투·코드 블록·구조를 체크.  
-   - `SkillTree.saveProgress('review', …)` 로 피드백 저장.  
+   - 초안 검토 후 피드백 저장.  
 4. **Publisher 에이전트** (`claude-3-5-sonnet`)  
    - 시스템 프롬프트: “Publish to Dev.to only if quality threshold met.”  
    - 도구: `publishToDevTo` (Dev.to API)  
-   - 리뷰어가 정의한 품질 기준을 통과하면 자동 게시.  
+   - 품질 기준 통과 시 자동 게시.  
 
 ```js
 const agents = {
@@ -319,17 +361,17 @@ const { content, reviewerFeedback } = await contentTree.loadProgress('draft');
 ### 11.4 운영 시 고려사항
 | 항목 | 권고 사항 |
 |------|-----------|
-| **프롬프트 설계** | 명확한 시스템 프롬프트와 품질 기준을 정의해 AI가 “인간처럼” 글을 쓰도록 유도 |
-| **예산·레이트** | Writer/Reviewer/Publisher 각각에 가상 키와 레이트 제한을 적용해 비용 폭증 방지 |
-| **모델 선택** | 비용 효율성을 위해 `claude-haiku` 로 간단 초안, `claude-sonnet` 로 리뷰·게시 수행 |
+| **프롬프트 설계** | 명확한 시스템 프롬프트와 품질 기준 정의 |
+| **예산·레이트** | Writer/Reviewer/Publisher 각각에 가상 키와 레이트 제한 적용 |
+| **모델 선택** | 비용 효율성을 위해 초안 단계는 `claude-haiku`, 리뷰·게시 단계는 `claude-sonnet` 사용 |
 | **모니터링** | OpenTelemetry 메트릭(`article_pipeline_success`, `article_pipeline_cost_usd`) 수집 및 알림 설정 |
 | **보안** | Dev.to API 토큰은 비밀 관리(예: Vault)하고, 외부 도구 호출 시 최소 권한 원칙 적용 |
 | **품질 검증** | 자동 게시 전 최소 80 % 인간‑유사 점수(`soundsHuman` 함수) 달성 여부 확인 |
-| **Fail‑over** | Claude Code 가 429 응답을 반환하면 Bifrost 를 통해 백업 모델(`claude-haiku`) 로 전환 |
+| **Fail‑over** | Claude Code 가 429 응답 시 Bifrost 를 통해 백업 모델(`claude-haiku`) 로 전환 |
 
 ### 11.5 기대 효과
 - **시간 절감**: 초안 → 리뷰 → 게시까지 평균 5 분 내 자동 완료 (수동 대비 80 % 이상 단축)  
-- **일관된 품질**: 리뷰어 에이전트가 정의한 체크리스트 강제 적용해 인간‑다운 글 유지  
+- **일관된 품질**: 리뷰어 에이전트가 체크리스트 강제 적용해 인간‑다운 글 유지  
 - **비용 투명성**: 단계별 토큰 사용량을 Bifrost 메트릭으로 추적해 예산 초과 위험 최소화  
 
 ---
@@ -362,9 +404,9 @@ const { content, reviewerFeedback } = await contentTree.loadProgress('draft');
 ---
 
 ## 14. 베스트 프랙티스와 정책 수립
-- **예산 검토 주기**: 월 초에 전체 조직 예산을 재조정하고, 팀 리더가 승인하도록 프로세스 정의  
-- **개발자 교육**: 비용 인식 교육을 정기적으로 진행하고, 가상 키 사용법을 문서화  
-- **자동 보고서**: Bifrost 메트릭을 기반으로 월간 비용·사용량 보고서를 CSV 혹은 Slack 메시지로 자동 전송  
+- **예산 검토 주기**: 월 초에 전체 조직 예산 재조정, 팀 리더 승인 프로세스 정의  
+- **개발자 교육**: 비용 인식 교육을 정기적으로 진행하고, 가상 키 사용법 문서화  
+- **자동 보고서**: Bifrost 메트릭 기반 월간 비용·사용량 보고서를 CSV 혹은 Slack 메시지로 자동 전송  
 
 ---
 
