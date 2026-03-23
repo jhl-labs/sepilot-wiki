@@ -6,7 +6,7 @@ tags: ["AI", "코드 리뷰", "CI", "GitHub Actions", "에이전트"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-02-22T02:00:00Z"
-updatedAt: 2026-03-09
+updatedAt: 2026-03-23
 order: 3
 related_docs: ["github-agentic-workflows.md", "continuous-ai.md", "opencode.md", "claude-code-release-history.md"]
 redirect_from:
@@ -25,10 +25,108 @@ quality_score: 75
 - **리뷰 루브릭(프롬프트/워크플로)**: 모델이 아니라 리뷰 기준을 정의합니다.  
   - 고위험 이슈와 사소한 지적을 구분  
   - 구체적인 수정 방안과 테스트 제안 요구  
-  - "내가 살펴본 내용"과 "내가 확신하지 못하는 부분" 명시
-- **모델 선택**: 비용·속도·정확도에 따라 모델 라우팅
-- **실행 시점**: PR 발생 시 자동 트리거
-- **제어 파라미터**: 최대 토큰 수, 검토 기준 등 사용자 정의 가능
+  - “내가 살펴본 내용”과 “내가 확신하지 못하는 부분” 명시  
+- **모델 선택**: 비용·속도·정확도에 따라 모델 라우팅  
+- **실행 시점**: PR 발생 시 자동 트리거  
+- **제어 파라미터**: 최대 토큰 수, 검토 기준 등 사용자 정의 가능  
+
+### 정적 분석 개념
+정적 분석은 코드를 실행하지 않고 **구조·의미**를 파악하는 기술입니다. 대표적인 정적 분석 산출물은 다음과 같습니다.
+
+| 형태 | 설명 | 활용 예 |
+|------|------|--------|
+| **AST (Abstract Syntax Tree)** | 소스 코드를 트리 구조로 표현한 것으로, 함수·변수·제어 흐름을 명확히 드러냅니다. | 변수 사용 여부, 함수 시그니처 변경 감지 |
+| **바이트코드 / IR** | 컴파일러가 생성하는 저수준 명령어 집합. CPU가 실제 실행할 형태에 가깝습니다. | 성능 병목, 비정상적인 연산 탐지 |
+| **호출 그래프** | 함수 간 호출 관계를 시각화한 그래프. 데이터 흐름과 의존성을 파악합니다. | 대규모 리팩터링 시 영향 범위 분석 |
+| **제어 흐름 그래프 (CFG)** | 프로그램 흐름을 블록 단위로 연결한 그래프. 조건 분기와 루프 구조를 드러냅니다. | 무한 루프, dead code 탐지 |
+
+정적 분석은 **보안 취약점**(예: 입력 검증 누락), **성능 문제**(불필요한 연산), **코드 품질**(중복, 복잡도) 등을 자동으로 식별할 수 있어, AI 기반 리뷰와 결합하면 보다 깊이 있는 피드백을 제공할 수 있습니다. (출처: Kakao Tech 블로그 “AI 기반 정적 분석 기술”)
+
+### LLM을 이용한 코드 이해
+LLM은 자연어와 코드 양쪽 모두를 이해하도록 훈련되었습니다. 정적 분석 결과를 LLM에 제공하면 다음과 같은 시너지를 얻을 수 있습니다.
+
+1. **컨텍스트 확대** – AST·호출 그래프 등 구조화된 데이터를 프롬프트에 삽입해 모델이 “코드의 전체 흐름”을 파악하도록 함.  
+2. **정밀한 질문 응답** – “`add` 함수가 문자열 인자를 받으면 어떤 오류가 발생할까?”와 같은 정적 분석 기반 질문에 정확히 답변.  
+3. **자동화된 리팩터링 제안** – LLM이 정적 분석 결과를 해석해 안전한 리팩터링 패치를 생성(예: 불필요한 전역 변수 제거).  
+4. **보안 검증** – 정적 분석이 탐지한 취약점(예: SQL 인젝션 가능성)을 LLM이 설명하고, 완화 방안을 자연어·코드 형태로 제시.
+
+이러한 접근 방식은 **“LLM + 정적 분석”**이 단순 규칙 기반 검사보다 코드 의미를 더 깊게 이해하도록 만든다는 점에서 최신 흐름으로 자리 잡고 있습니다. (출처: “LLM 기반 정적 분석과 코드 리뷰 에이전트 통합” – euno.news)
+
+### AI 코드 리뷰 파이프라인 설계
+정적 분석과 LLM을 결합한 파이프라인은 크게 **세 단계**로 구성됩니다.
+
+1. **정적 분석 단계**  
+   - PR diff를 받아 `jscodeshift`, `pylint`, `bandit` 등 언어별 정적 분석 도구를 실행.  
+   - 산출물(AST, 호출 그래프, 보안 경고)을 JSON 파일(`analysis.json`)에 저장.  
+
+2. **LLM 리뷰 단계**  
+   - `analysis.json`을 프롬프트에 포함하고, 리뷰 루브릭을 적용해 구조화된 리뷰를 생성.  
+   - 모델 라우팅: 작은 PR → 경량 모델(Ollama), 대규모 리팩터링 → 고성능 모델(GPT‑4o).  
+
+3. **결과 통합 및 피드백**  
+   - LLM이 만든 마크다운 리뷰를 PR 코멘트로 게시.  
+   - 선택적으로 인라인 코멘트를 추가해 파일·라인 별 구체적인 수정 제안 제공.  
+
+이 흐름은 기존 **GitHub Actions** 워크플로에 쉽게 삽입할 수 있습니다. 아래 예시는 정적 분석 단계와 LLM 리뷰를 하나의 잡에 통합한 형태입니다.
+
+```yaml
+name: AI Code Review with Static Analysis
+on:
+  pull_request:
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 1️⃣ 정적 분석
+      - name: Run static analysis (Python)
+        run: |
+          pip install bandit astroid
+          bandit -r . -f json -o analysis.json
+          python - <<'PY'
+          import ast, json, sys, pathlib
+          tree = ast.parse(pathlib.Path('example.py').read_text())
+          print(json.dumps({"ast": ast.dump(tree)}))
+          PY > ast.json
+
+      # 2️⃣ LLM 리뷰
+      - name: Install Jazz
+        run: npm install -g jazz-ai
+      - name: Run LLM review
+        run: |
+          jazz --output raw workflow run code-review \
+            --auto-approve \
+            --extra-context analysis.json \
+            --extra-context ast.json > review.md
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      # 3️⃣ PR 코멘트
+      - name: Comment on PR
+        run: gh pr comment "$PR_NUMBER" --body-file review.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+```
+
+### 보안 고려사항
+AI 코드 리뷰 파이프라인을 운영할 때 반드시 검토해야 할 보안 항목은 다음과 같습니다.
+
+| 영역 | 위험 | 권고 조치 |
+|------|------|----------|
+| **시크릿 관리** | `OPENAI_API_KEY`, `GITHUB_TOKEN` 등 비밀이 로그에 노출될 위험 | GitHub **Repository Secrets**에만 저장하고, 워크플로에서 `env:`를 통해 전달. `set -x` 등 디버그 옵션 비활성화. |
+| **LLM Hallucination** | 모델이 존재하지 않는 보안 이슈를 생성하거나, 실제 문제를 놓칠 수 있음 | 정적 분석 결과와 **교차 검증**(예: `bandit` 경고와 LLM 답변 매칭) 후 PR에 표시. |
+| **코드 인젝션** | LLM이 생성한 패치를 그대로 적용하면 악의적 코드가 삽입될 가능성 | 자동 `autoApprove` 모드에서는 **읽기 전용**(`autoApprove: read-only`)으로 유지하고, 실제 변경은 인간 검토 후 머지. |
+| **레이트 제한 & 비용** | 대규모 PR에서 과도한 토큰 사용 → 비용 폭증 | 토큰 사용량 모니터링, `maxTokens` 파라미터 설정, 대형 PR은 **청크 처리** 후 결과 병합. |
+| **데이터 프라이버시** | PR 내용이 외부 LLM 서비스에 전송될 경우 기밀 정보 유출 위험 | 사내 LLM(예: Ollama) 사용을 우선 고려하고, 외부 서비스 사용 시 **데이터 최소화** 원칙 적용. |
+
+보안 정책을 CI 파이프라인에 **정적 분석 단계**와 **LLM 리뷰 단계** 사이에 삽입하면, 자동화된 검증과 인간 검토를 조화롭게 운영할 수 있습니다.
 
 ## CI 파이프라인 통합 단계
 1. **GitHub Action 워크플로 파일 생성** (`.github/workflows/ai-code-review.yml`)
@@ -240,7 +338,7 @@ LLM이 위 보드를 읽고 만든 결정:
 }
 ```
 
-**핵심 차이점**
+**핵심 차이점**  
 - **비공식 블랙보딩**: 마크다운 파일들의 느슨한 모음, LLM이 해석 방식을 검증할 수 없음.  
 - **구조화된 블랙보딩**: JSON 스키마 기반, 읽기·쓰기 규칙이 명확, 루프가 이전 상태를 신뢰성 있게 재사용.
 
@@ -252,7 +350,7 @@ LLM이 위 보드를 읽고 만든 결정:
 | 특정 콘텐츠 점수 초과 → 게시 | `publish_if_score_above(threshold)` |
 | 최근 2일 내 이메일 수신 → 재전송 금지 | `suppress_resend_if_recent(email, days=2)` |
 
-이러한 함수는 보드 입력 → 결정 출력 흐름을 코드로 고정시켜, 루프가 보드를 “잊는” 문제를 근본적으로 해결합니다.
+이러한 함수는 **보드 입력 → 결정 출력** 흐름을 코드로 고정시켜, 루프가 보드를 “잊는” 문제를 근본적으로 해결합니다.
 
 ## SODAX Builder MCP 연동 가이드
 SODAX는 **Builder MCP** 엔드포인트(`https://builders.sodax.com/mcp`)를 공개했으며, Claude, Cursor, Windsurf 등 MCP를 지원하는 AI 코딩 에이전트와 직접 연결할 수 있습니다. 이를 통해 에이전트는 실시간 DeFi 프로토콜 데이터를 캐시가 아닌 현재 상태 그대로 조회할 수 있습니다.
@@ -335,7 +433,7 @@ Retrieve the current orderbook for the SOLANA network via `sodax_get_orderbook` 
 | **쿼리 최소화** | 필요한 데이터만 요청하고, `limit` 파라미터가 지원되는 경우 사용 |
 | **에러 핸들링** | MCP 응답에 `error` 필드가 있으면 재시도 로직을 구현 (exponential backoff) |
 | **레이트 제한** | SODAX MCP는 기본 레이트 제한이 있으므로, 1초당 5~10 요청 이하로 유지 |
-| **캐시 전략** | 변동성이 낮은 메타데이터(`supported_chains`)는 로컬 캐시(TTL 12h) 후 재조회 |
+| **캐시 전략** | 변동성이 낮은 메타데이터(`supported_chains`)는 로컬 캐시(TTL 12 h) 후 재조회 |
 | **보안** | `OPENAI_API_KEY`와 동일하게 `SODAX_MCP_TOKEN` 같은 비밀을 GitHub Secrets에 저장하고 `env`에 전달 |
 | **테스트** | Mock MCP 응답을 사용해 유닛 테스트 작성 (예: `nock` 또는 `msw` 라이브러리) |
 | **문서화** | `docs_searchDocumentation`을 활용해 최신 SDK 사용법을 자동으로 문서에 삽입 |
@@ -367,6 +465,7 @@ jobs:
 - 원본 기사: [CI에서 나만의 AI 코드 리뷰 에이전트 만들기 | EUNO.NEWS](https://euno.news/posts/ko/build-your-own-ai-code-review-agent-in-ci-738404) (Dev.to 번역)  
 - SODAX Builder MCP 소개 및 메서드 목록: https://euno.news/posts/ko/your-ai-coding-agent-can-now-query-sodax-live-data-d40192  
 - Model Context Protocol (MCP) 개요: 위 기사 및 dev.to 원문  
+- **실시간 코드 리뷰 및 품질 관리: AI 기반 정적 분석 기술** – Kakao Tech (https://tech.kakao.com/posts/732)  
 
 ---
 *이 문서는 Issue 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*
