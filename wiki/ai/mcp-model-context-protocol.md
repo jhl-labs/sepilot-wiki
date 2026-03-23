@@ -6,7 +6,7 @@ status: published
 tags: ["MCP", "Model Context Protocol", "Anthropic", "AI Integration", "JSON-RPC", "SDK", "llm", "protocol", "open-standard", "ai"]
 related_docs: ["claude-code-release-history.md", "continuous-ai-agentic-ci.md", "continuous-ai.md"]
 order: 1
-updatedAt: 2026-03-18
+updatedAt: 2026-03-23
 quality_score: 88
 ---
 
@@ -554,15 +554,7 @@ class AuthorizationGateway(BaseHTTPMiddleware):
         return response
 ```
 
-**핵심 흐름**  
-
-1. `Authorization` 헤더에서 JWT를 받아 `verify_token` 로 검증.  
-2. `scope` 클레임을 파싱하고, 요청된 Tool에 매핑된 **필수 스코프**와 비교.  
-3. 역할 기반 정책(`POLICIES`)과 교차 검증.  
-4. 검증 성공 시 `request.state.auth` 에 메타데이터 저장 → 이후 Tool 핸들러가 이를 활용해 추가 로깅·감사를 수행.  
-5. 검증 실패 시 즉시 `401` 혹은 `403` 응답 반환.  
-
-이 패턴은 **Casdoor**에서 권장하는 *OAuth Scopes* 사용법과 **Logto**가 제시한 *gateway‑style token validation*을 그대로 구현한다. 또한 **Self‑Logging Architecture**와 결합해 모든 허용·거부 이벤트를 영구 저장한다.
+위 흐름은 **Casdoor**와 **Logto**가 권장하는 *OAuth Scopes* 사용법과 **Self‑Logging Architecture**와 결합해 모든 허용·거부 이벤트를 영구 저장한다.
 
 ---
 
@@ -614,7 +606,7 @@ tools:
 ```
 
 - **핵심**: 모든 에이전트는 위 파일에 있는 `hub.url` 과 자신에게 할당된 `apiKey` 만을 설정한다.  
-- **도구 등록**은 한 번만 수행하면, **모든** 에이전트가 즉시 접근 가능하다.  
+- **도구 등록**은 한 번만 수행하면, **모든** 에이전트가 즉시 접근 가능한다.  
 - **스코프**는 **키당** 정의되며, Hub는 요청 시 해당 스코프를 검증한다.
 
 #### 5.2.1 에이전트별 설정 (예: Claude Code)  
@@ -638,7 +630,7 @@ tools:
 1. **에이전트 시작** → `hub.url` 과 `apiKey` 로 MCP Hub에 연결.  
 2. **요청 전** → 에이전트는 **JWT**(또는 단순 API 키) 를 포함해 `Authorization: Bearer <key>` 헤더 전송.  
 3. **Hub**는  
-   - TLS 로 암호화된 채널을 확인  
+   - TLS 로 암호화된 채널 확인  
    - 키를 **키‑스코프 매핑** 테이블과 대조  
    - 요청된 Tool(예: `github.repo.list`) 에 필요한 **스코프**가 키에 포함돼 있는지 검증  
    - 검증 성공 시 **JSON‑RPC** 요청을 내부 MCP Server 로 라우팅  
@@ -657,4 +649,29 @@ tools:
 | **멀티‑에이전트 일관성** | DLP 정책은 **전역**으로 정의되므로, 개별 에이전트마다 별도 설정이 필요 없다. |
 | **감사 로그 연계** | Self‑Logging Architecture와 연동해 **tool_name**, **user_id**, **duration_ms**, **error_message** 등을 중앙 DB에 저장, Streamlit 대시보드에서 실시간 모니터링 가능. |
 | **접근 제어** | 각 API 키는 **Scope‑Based** 권한을 갖고, 키당 허용된 Tool·Resource 목록을 최소화한다(Least Privilege). |
-| **데이터 보존** | 로그는 최소 30 일 보관, 외부 볼륨에 마운트
+| **데이터 보존** | 로그는 최소 30 일 보관, 외부 볼륨에 마운트된 SQLite에 영구 저장. |
+
+---
+
+## 6. 프로토콜 개요 및 추가 프로토콜
+
+### 6.1 전체 프로토콜 스펙  
+AI 에이전트 생태계에서는 **여섯 가지 표준 프로토콜**이 상호 보완적으로 동작한다.
+
+| 프로토콜 | 주요 목적 | 핵심 메시징 |
+|----------|----------|--------------|
+| **MCP** (Model Context Protocol) | LLM‑외부 컨텍스트 교환 | JSON‑RPC 2.0 |
+| **A2A** (Agent‑to‑Agent) | 에이전트 간 데이터·명령 교환 | `a2a.<category>.<action>` |
+| **UCP** (Universal Commerce Protocol) | 도매·공급망 거래 흐름 | `ucp.<category>.<action>` |
+| **AP2** (Authorized Payment Protocol) | 안전한 결제·승인 | `ap2.<category>.<action>` |
+| **A2UI** (Agent‑to‑User Interface) | 실시간 대시보드·UI | WebSocket 기반 이벤트 |
+| **AG‑UI** (Agent‑Generated UI) | 최종 사용자 스트리밍 UI | HTTP / SSE |
+
+아래에서는 **A2A**, **UCP**, **AP2**를 간략히 소개하고, 주방 관리 시나리오에 적용한 예시 코드를 제공한다.
+
+### 6.2 A2A – 에이전트‑간 데이터 교환 메커니즘  
+
+- **목표**: 서로 다른 LLM 또는 특화된 에이전트가 직접 데이터를 주고받아 협업을 가능하게 함.  
+- **통신 형식**: JSON‑RPC 2.0 과 동일하지만 메서드 네임스페이스가 `a2a` 로 시작한다.  
+- **핵심 메서드**  
+  - `a2a.context.share` – 현재 컨텍스트(루트, 프롬프트,

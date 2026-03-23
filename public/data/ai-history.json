@@ -1,6 +1,179 @@
 {
   "entries": [
     {
+      "id": "874e3a0d-4f6b-4e29-b085-3367f76c9620",
+      "timestamp": "2026-03-23T18:26:31.153Z",
+      "actionType": "generate",
+      "issueNumber": 577,
+      "issueTitle": "문서 요청 #577",
+      "documentSlug": "security/577",
+      "documentTitle": "Kusari × CNCF 파트너십을 통한 소프트웨어 공급망 보안 가이드",
+      "summary": "새 문서 \"Kusari × CNCF 파트너십을 통한 소프트웨어 공급망 보안 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3690
+            },
+            {
+              "step": "outline",
+              "durationMs": 8630
+            },
+            {
+              "step": "write",
+              "durationMs": 27390
+            },
+            {
+              "step": "review",
+              "durationMs": 9191
+            }
+          ],
+          "totalDurationMs": 48901,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 5
+          },
+          "estimatedTokens": {
+            "estimated": 2262,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "afacb915-fb14-4d53-89a4-ce6ec70e13be",
+      "timestamp": "2026-03-23T18:25:39.144Z",
+      "actionType": "generate",
+      "issueNumber": 576,
+      "issueTitle": "문서 요청 #576",
+      "documentSlug": "576",
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 – LLM 드리프트 모니터링 가이드",
+      "summary": "새 문서 \"자동 감지: 뉴스 인텔리전스 – LLM 드리프트 모니터링 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3832
+            },
+            {
+              "step": "outline",
+              "durationMs": 8554
+            },
+            {
+              "step": "write",
+              "durationMs": 43502
+            },
+            {
+              "step": "review",
+              "durationMs": 12588
+            }
+          ],
+          "totalDurationMs": 68477,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3232,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "40a2dc74-c27d-443c-a807-13492aa373cb",
+      "timestamp": "2026-03-23T18:24:23.628Z",
+      "actionType": "modify",
+      "issueNumber": 575,
+      "issueTitle": " [업데이트] Vibe Coding vs Spec‑Driven Development 비교",
+      "documentSlug": "ai/vibe-coding",
+      "documentTitle": "바이브 코딩이란?",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Vibe Coding vs Spec‑Driven Development 비교\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 41,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "627544c2-c467-4688-bb70-3eac58a74381",
+      "timestamp": "2026-03-23T18:22:54.041Z",
+      "actionType": "generate",
+      "issueNumber": 574,
+      "issueTitle": "문서 요청 #574",
+      "documentSlug": "ai/574",
+      "documentTitle": "자율 AI 에이전트와 NVIDIA OpenShell을 활용한 Secure‑by‑Design 가이드",
+      "summary": "새 문서 \"자율 AI 에이전트와 NVIDIA OpenShell을 활용한 Secure‑by‑Design 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4330
+            },
+            {
+              "step": "outline",
+              "durationMs": 5665
+            },
+            {
+              "step": "write",
+              "durationMs": 33217
+            },
+            {
+              "step": "review",
+              "durationMs": 8890
+            },
+            {
+              "step": "refine",
+              "durationMs": 42980
+            }
+          ],
+          "totalDurationMs": 95082,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 4538,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "fb0461f8-7302-4989-a367-0007644cf49b",
+      "timestamp": "2026-03-23T18:21:14.407Z",
+      "actionType": "modify",
+      "issueNumber": 573,
+      "issueTitle": " [업데이트] AI 에이전트 프로토콜 가이드 – MCP, A2A, UCP, AP2",
+      "documentSlug": "ai/mcp-model-context-protocol",
+      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 에이전트 프로토콜 가이드 – MCP, A2A, UCP, AP2\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 17,
+        "deletions": 0
+      }
+    },
+    {
       "id": "fdd6c3de-7542-4af2-9adf-49066f710e1d",
       "timestamp": "2026-03-23T18:19:33.293Z",
       "actionType": "maintain",
@@ -16281,5 +16454,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-23T18:19:33.293Z"
+  "lastUpdated": "2026-03-23T18:26:31.153Z"
 }
