@@ -7116,6 +7116,22 @@
       ]
     },
     {
+      "title": "Dependabot 라벨 누락 해결 방법",
+      "slug": "devops/dependabot-missing-labels",
+      "content": "\n# Dependabot 라벨 누락 해결 방법\n\nWhen Dependabot tries to add the `dependencies` label to a pull request but the label does not exist in the repository, the workflow fails with an error like:\n\n> The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\n\n## 해결 단계\n\n1. **라벨 생성**  \n   - Repository → **Issues** → **Labels** → **New label**  \n   - Name: `dependencies`  \n   - Color: (choose any, e.g., `#0366d6`)  \n   - Description: *Label applied by Dependabot to dependency update PRs.*\n\n2. **dependabot.yml 검토**  \n   Ensure the `labels` field in `.github/dependabot.yml` references the correct label name.\n\n   ```yaml\n   version: 2\n   updates:\n     - package-ecosystem: \"npm\"\n       directory: \"/\"\n       schedule:\n         interval: \"weekly\"\n       labels:\n         - \"dependencies\"   # <-- must match the label created above\n   ```\n   If the label name is different, either rename the label or update this file accordingly.\n\n3. **커밋 및 푸시**  \n   ```bash\n   git add .github/dependabot.yml\n   git commit -m \"fix: add correct dependencies label for Dependabot\"\n   git push\n   ```\n\n4. **PR 재시도**  \n   - Dependabot will automatically create a new PR, or you can trigger a rebase with `@dependabot rebase`.\n\n## 참고 자료\n\n- Dependabot documentation: [GitHub Docs – Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-dependency-updates)  \n- Example of missing label error (GitHub Actions log) – *source from issue description*.\n\n## FAQ\n\n**Q:** Do I need to add the label to existing PRs?  \n**A:** No. The label is only required for new PRs created after the label exists.\n\n**Q:** Can I use a different label name?  \n**A:** Yes, but update `dependabot.yml` to match the chosen name.",
+      "lastModified": "2026-03-23T19:51:08.652Z",
+      "status": "draft",
+      "isDraft": true,
+      "isInvalid": false,
+      "tags": [
+        "Dependabot",
+        "GitHub",
+        "라벨",
+        "CI"
+      ],
+      "history": []
+    },
+    {
       "title": "Dependabot 라벨 설정 가이드",
       "slug": "devops/dependabot-labels",
       "content": "\n# Dependabot 라벨 설정 가이드\n\n## 배경\nDependabot은 보안 및 버그 수정 업데이트를 자동으로 PR에 적용하고, 해당 PR에 라벨을 붙여서 팀이 쉽게 식별할 수 있게 합니다. 기본적으로 `dependencies` 라벨을 사용하지만, 레포지토리에서 해당 라벨이 존재하지 않으면 **\"The following labels could not be found: `dependencies`\"** 와 같은 오류가 발생합니다.\n\n## 1️⃣ 라벨 생성 방법\n1. 레포지토리 메인 페이지에서 **\"Issues\"** 탭을 클릭합니다.\n2. 오른쪽 사이드바의 **\"Labels\"** 를 선택합니다.\n3. **\"New label\"** 버튼을 클릭합니다.\n4. **Name** 에 `dependencies` 를 입력하고, 색상은 원하는 대로 선택합니다.\n5. **Create label** 을 눌러 라벨을 생성합니다.\n\n> 라벨 이름은 정확히 `dependencies` 이어야 Dependabot이 자동으로 매핑합니다.\n\n## 2️⃣ `dependabot.yml` 파일 검증\n`dependabot.yml` 파일에 라벨을 지정하는 옵션이 있는 경우, 올바른 라벨 이름이 사용됐는지 확인합니다.\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # ← 여기 라벨 이름이 정확해야 함\n```\n- 라벨 이름에 오타가 있거나, 존재하지 않는 라벨을 지정하면 위와 같은 오류가 발생합니다.\n- 필요에 따라 여러 라벨을 지정할 수 있지만, 각 라벨은 레포지토리에 사전에 생성돼 있어야 합니다.\n\n## 3️⃣ 라벨이 자동으로 붙지 않을 때 확인 사항\n- **라벨 권한**: 라벨을 생성한 사용자가 레포지토리에서 라벨을 관리할 권한이 있는지 확인합니다.\n- **Dependabot 설정**: `dependabot.yml` 파일이 레포지토리 루트에 존재하고, 올바른 YAML 구문을 따르는지 검증합니다.\n- **GitHub Actions**: Dependabot이 작동하도록 `dependabot.yml` 외에 별도의 워크플로가 필요하지는 않지만, 다른 CI 설정이 PR을 차단하고 있지는 않은지 확인합니다.\n\n## 4️⃣ 참고 자료\n- Dependencies vs devDependencies 차이점에 대한 이해: [How to Understand dependencies vs devDependencies in package.json](https://oneuptime.com/blog/post/2026-01-22-nodejs-dependencies-vs-devdependencies/view) (출처)\n- GitHub 라벨 관리 공식 문서: <https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-labels>\n\n## 5️⃣ 요약\n1. 레포지토리 **Labels** 페이지에서 `dependencies` 라벨을 생성한다.\n2. `dependabot.yml` 파일의 `labels` 섹션에 정확히 `dependencies` 라벨을 지정한다.\n3. 라벨 권한 및 파일 구문 오류를 점검한다.\n\n위 과정을 따라 하면 Dependabot이 PR에 `dependencies` 라벨을 정상적으로 붙이고, 자동 업데이트 흐름이 원활히 동작합니다.\n",
@@ -8676,6 +8692,11 @@
       "isCategory": true,
       "order": 10,
       "children": [
+        {
+          "title": "Dependabot 라벨 누락 해결 방법",
+          "slug": "devops/dependabot-missing-labels",
+          "lastModified": "2026-03-23T19:51:08.652Z"
+        },
         {
           "title": "엔터프라이즈 규모 GitOps 구현 가이드",
           "slug": "devops/gitops-implementation",

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchIndex>
-  <generated>2026-03-23T19:51:44.757Z</generated>
+  <generated>2026-03-23T19:51:08.821Z</generated>
   <count>263</count>
   <items>
   <item>
@@ -29526,6 +29526,41 @@ When Dependabot creates a pull request, it tries to add the label . The reposito
     <tags>dependabot, labels, configuration, CI/CD</tags>
     <lastModified>2026-03-23T19:45:56Z</lastModified>
     <author>GitHub Action</author>
+  </item>
+  <item>
+    <title>Dependabot 라벨 누락 해결 방법</title>
+    <slug>devops/dependabot-missing-labels</slug>
+    <content>Dependabot 라벨 누락 해결 방법
+When Dependabot tries to add the  label to a pull request but the label does not exist in the repository, the workflow fails with an error like:
+The following labels could not be found: . Please create it before Dependabot can add it to a pull request.
+해결 단계
+라벨 생성  
+   - Repository → Issues → Labels → New label  
+   - Name:   
+   - Color: (choose any, e.g., )  
+   - Description: Label applied by Dependabot to dependency update PRs.
+dependabot.yml 검토  
+   Ensure the  field in  references the correct label name.
+   
+   If the label name is different, either rename the label or update this file accordingly.
+커밋 및 푸시  
+   
+PR 재시도  
+   - Dependabot will automatically create a new PR, or you can trigger a rebase with .
+참고 자료
+Dependabot documentation: GitHub Docs – Configuring Dependabot  
+Example of missing label error (GitHub Actions log) – source from issue description.
+FAQ
+Q: Do I need to add the label to existing PRs?  
+A: No. The label is only required for new PRs created after the label exists.
+Q: Can I use a different label name?  
+A: Yes, but update  to match the chosen name.</content>
+    <excerpt>Dependabot 라벨 누락 해결 방법
+When Dependabot tries to add the  label to a pull request but the label does not exist in the repository, the workflow fails with an error like:
+The following labels could not b...</excerpt>
+    <tags>Dependabot, GitHub, 라벨, CI</tags>
+    <lastModified>2026-03-23T19:51:08.652Z</lastModified>
+    <author></author>
   </item>
   <item>
     <title>Dependabot 라벨 설정 가이드</title>

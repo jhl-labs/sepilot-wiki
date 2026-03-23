@@ -3668,6 +3668,19 @@
     "author": "GitHub Action"
   },
   {
+    "title": "Dependabot 라벨 누락 해결 방법",
+    "slug": "devops/dependabot-missing-labels",
+    "content": "Dependabot 라벨 누락 해결 방법\nWhen Dependabot tries to add the  label to a pull request but the label does not exist in the repository, the workflow fails with an error like:\nThe following labels could not be found: . Please create it before Dependabot can add it to a pull request.\n해결 단계\n라벨 생성  \n   - Repository → Issues → Labels → New label  \n   - Name:   \n   - Color: (choose any, e.g., )  \n   - Description: Label applied by Dependabot to dependency update PRs.\ndependabot.yml 검토  \n   Ensure the  field in  references the correct label name.\n   \n   If the label name is different, either rename the label or update this file accordingly.\n커밋 및 푸시  \n   \nPR 재시도  \n   - Dependabot will automatically create a new PR, or you can trigger a rebase with .\n참고 자료\nDependabot documentation: GitHub Docs – Configuring Dependabot  \nExample of missing label error (GitHub Actions log) – source from issue description.\nFAQ\nQ: Do I need to add the label to existing PRs?  \nA: No. The label is only required for new PRs created after the label exists.\nQ: Can I use a different label name?  \nA: Yes, but update  to match the chosen name.",
+    "excerpt": "Dependabot 라벨 누락 해결 방법\nWhen Dependabot tries to add the  label to a pull request but the label does not exist in the repository, the workflow fails with an error like:\nThe following labels could not b...",
+    "tags": [
+      "Dependabot",
+      "GitHub",
+      "라벨",
+      "CI"
+    ],
+    "lastModified": "2026-03-23T19:51:08.652Z"
+  },
+  {
     "title": "Dependabot 라벨 설정 가이드",
     "slug": "devops/dependabot-labels",
     "content": "Dependabot 라벨 설정 가이드\n배경\nDependabot은 보안 및 버그 수정 업데이트를 자동으로 PR에 적용하고, 해당 PR에 라벨을 붙여서 팀이 쉽게 식별할 수 있게 합니다. 기본적으로  라벨을 사용하지만, 레포지토리에서 해당 라벨이 존재하지 않으면 \"The following labels could not be found: \" 와 같은 오류가 발생합니다.\n1️⃣ 라벨 생성 방법\n레포지토리 메인 페이지에서 \"Issues\" 탭을 클릭합니다.\n오른쪽 사이드바의 \"Labels\" 를 선택합니다.\n\"New label\" 버튼을 클릭합니다.\nName 에  를 입력하고, 색상은 원하는 대로 선택합니다.\nCreate label 을 눌러 라벨을 생성합니다.\n라벨 이름은 정확히  이어야 Dependabot이 자동으로 매핑합니다.\n2️⃣  파일 검증\n 파일에 라벨을 지정하는 옵션이 있는 경우, 올바른 라벨 이름이 사용됐는지 확인합니다.\n라벨 이름에 오타가 있거나, 존재하지 않는 라벨을 지정하면 위와 같은 오류가 발생합니다.\n필요에 따라 여러 라벨을 지정할 수 있지만, 각 라벨은 레포지토리에 사전에 생성돼 있어야 합니다.\n3️⃣ 라벨이 자동으로 붙지 않을 때 확인 사항\n라벨 권한: 라벨을 생성한 사용자가 레포지토리에서 라벨을 관리할 권한이 있는지 확인합니다.\nDependabot 설정:  파일이 레포지토리 루트에 존재하고, 올바른 YAML 구문을 따르는지 검증합니다.\nGitHub Actions: Dependabot이 작동하도록  외에 별도의 워크플로가 필요하지는 않지만, 다른 CI 설정이 PR을 차단하고 있지는 않은지 확인합니다.\n4️⃣ 참고 자료\nDependencies vs devDependencies 차이점에 대한 이해: How to Understand dependencies vs devDependencies in package.json (출처)\nGitHub 라벨 관리 공식 문서: \n5️⃣ 요약\n레포지토리 Labels 페이지에서  라벨을 생성한다.\n파일의  섹션에 정확히  라벨을 지정한다.\n라벨 권한 및 파일 구문 오류를 점검한다.\n위 과정을 따라 하면 Dependabot이 PR에  라벨을 정상적으로 붙이고, 자동 업데이트 흐름이 원활히 동작합니다.",
