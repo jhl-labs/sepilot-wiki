@@ -1,9 +1,19 @@
 {
-  "timestamp": "2026-03-23T11:44:41.294Z",
+  "timestamp": "2026-03-23T12:25:13.188Z",
   "dryRun": false,
-  "totalIssuesScanned": 16,
+  "totalIssuesScanned": 19,
   "categories": {
     "draft_review": [
+      {
+        "number": 572,
+        "title": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 568,
+        "title": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 426,
         "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
@@ -87,18 +97,63 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 569,
+        "title": " [업데이트] AI 에이전트 워크플로우 – Agent Kernel 으로 마크다운 기반 상태 유지",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
     {
+      "type": "retrigger_request",
+      "issueNumber": 572,
+      "title": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 568,
+      "title": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 571,
+      "title": " [업데이트] LLM 기반 정적 분석과 코드 리뷰 에이전트 통합"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 570,
+      "title": " [업데이트] Claude Code 에이전트 – Rules vs Skills 차이와 활용 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 569,
+      "title": " [업데이트] AI 에이전트 워크플로우 – Agent Kernel 으로 마크다운 기반 상태 유지"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 572,
+      "title": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/devops/traefik-yaml.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 568,
+      "title": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/npm.md"
+    },
+    {
       "type": "feedback",
       "issueNumber": 317,
       "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
-      "score": 76
+      "score": 75
     }
   ],
-  "actionCount": 1,
+  "actionCount": 8,
   "maxActions": 60
 }

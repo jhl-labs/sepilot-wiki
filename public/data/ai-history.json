@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "d7846e80-7e74-41ce-8f9d-e1d5da14cc26",
+      "timestamp": "2026-03-23T12:24:50.305Z",
+      "actionType": "quality_score",
+      "issueNumber": 568,
+      "issueTitle": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
+      "documentSlug": "security/npm",
+      "documentTitle": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "426f50bf-13e2-4ce2-b832-3ad5dd8ecd80",
+      "timestamp": "2026-03-23T12:24:33.137Z",
+      "actionType": "quality_score",
+      "issueNumber": 572,
+      "issueTitle": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
+      "documentSlug": "devops/traefik-yaml",
+      "documentTitle": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "5537bc55-a965-49db-8e74-c92b61de0912",
+      "timestamp": "2026-03-23T12:24:06.355Z",
+      "actionType": "generate",
+      "issueNumber": 568,
+      "issueTitle": " [요청] npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
+      "documentSlug": "security/npm",
+      "documentTitle": "npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협",
+      "summary": "새 문서 \"npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 위협\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3514
+            },
+            {
+              "step": "outline",
+              "durationMs": 10935
+            },
+            {
+              "step": "write",
+              "durationMs": 21474
+            },
+            {
+              "step": "review",
+              "durationMs": 7368
+            }
+          ],
+          "totalDurationMs": 43291,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1989,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "c6ffac84-48ec-4b2f-a804-a022beb52064",
+      "timestamp": "2026-03-23T12:23:05.175Z",
+      "actionType": "generate",
+      "issueNumber": 572,
+      "issueTitle": " [요청] Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
+      "documentSlug": "devops/traefik-yaml",
+      "documentTitle": "Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드",
+      "summary": "새 문서 \"Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4588
+            },
+            {
+              "step": "outline",
+              "durationMs": 14286
+            },
+            {
+              "step": "write",
+              "durationMs": 42118
+            },
+            {
+              "step": "review",
+              "durationMs": 7194
+            }
+          ],
+          "totalDurationMs": 68186,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 3180,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "ab58b292-4e39-410e-87a1-350070d6759f",
       "timestamp": "2026-03-23T12:19:16.514Z",
       "actionType": "maintain",
@@ -16126,5 +16244,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-23T12:19:16.514Z"
+  "lastUpdated": "2026-03-23T12:24:50.305Z"
 }
