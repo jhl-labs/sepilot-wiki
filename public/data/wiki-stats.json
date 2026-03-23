@@ -1,586 +1,676 @@
 {
-  "generatedAt": "2026-03-16T01:35:24.530Z",
-  "weekNumber": 12,
+  "generatedAt": "2026-03-23T01:35:09.092Z",
+  "weekNumber": 13,
   "year": 2026,
   "period": {
-    "start": "2026-03-09T01:35:11.402Z",
-    "end": "2026-03-16T01:35:11.402Z"
+    "start": "2026-03-16T01:34:51.523Z",
+    "end": "2026-03-23T01:34:51.523Z"
   },
   "documents": {
-    "total": 232,
+    "total": 272,
     "statusDistribution": {
-      "deleted": 25,
-      "draft": 94,
-      "published": 113
+      "deleted": 40,
+      "published": 133,
+      "draft": 99
     },
-    "newCount": 34,
-    "modifiedCount": 35,
+    "newCount": 35,
+    "modifiedCount": 23,
     "publishedCount": 0
   },
   "aiActivity": {
-    "totalActions": 104,
+    "totalActions": 95,
     "byType": {
-      "maintain": 19,
-      "generate": 34,
-      "coverage_analysis": 1,
-      "quality_score": 14,
-      "modify": 35,
-      "recover": 1
+      "maintain": 18,
+      "quality_score": 16,
+      "generate": 35,
+      "modify": 23,
+      "recover": 2,
+      "status_report": 1
     },
     "entries": [
       {
-        "id": "af50f765-e74e-454d-b04d-eeaff56af42f",
-        "timestamp": "2026-03-15T09:08:31.815Z",
+        "id": "952c8979-dd59-4f60-80db-3c8c4b68a2f8",
+        "timestamp": "2026-03-23T00:50:46.796Z",
         "actionType": "maintain",
         "issueNumber": null,
-        "issueTitle": "학습 루프",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "학습 루프: 3개 패턴 감지, 2개 에이전트 개선",
-        "trigger": "weekly_schedule",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "e99ed53d-7399-401f-9ea9-66e41eeb81be",
-        "timestamp": "2026-03-15T03:37:42.917Z",
-        "actionType": "generate",
-        "issueNumber": 500,
-        "issueTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
-        "documentSlug": "api",
-        "documentTitle": "프론트엔드 API 클라이언트 서비스 가이드",
-        "summary": "새 문서 \"프론트엔드 API 클라이언트 서비스 가이드\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3352
-              },
-              {
-                "step": "outline",
-                "durationMs": 6795
-              },
-              {
-                "step": "write",
-                "durationMs": 29197
-              },
-              {
-                "step": "review",
-                "durationMs": 15530
-              }
-            ],
-            "totalDurationMs": 54874,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 2577,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "13834e02-1ca4-4543-98fc-ebcaa53a3a1c",
-        "timestamp": "2026-03-15T03:36:29.960Z",
-        "actionType": "generate",
-        "issueNumber": 501,
-        "issueTitle": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용법",
-        "documentSlug": "untitled-1773545789957",
-        "documentTitle": "검색 서비스 구현 및 사용법",
-        "summary": "새 문서 \"검색 서비스 구현 및 사용법\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 4329
-              },
-              {
-                "step": "outline",
-                "durationMs": 6665
-              },
-              {
-                "step": "write",
-                "durationMs": 24093
-              },
-              {
-                "step": "review",
-                "durationMs": 8549
-              }
-            ],
-            "totalDurationMs": 43637,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 1965,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "6ff46cf7-1ebd-4731-bae4-2ba3902bfdef",
-        "timestamp": "2026-03-15T03:35:30.142Z",
-        "actionType": "generate",
-        "issueNumber": 502,
-        "issueTitle": "[커버리지 분석] 문서 작성 필요: 스케줄러 잡: 문서 업데이트 감지 작업 가이드",
-        "documentSlug": "issues/untitled-1773545730139",
-        "documentTitle": "스케줄러 잡: 문서 업데이트 감지 작업 가이드",
-        "summary": "새 문서 \"스케줄러 잡: 문서 업데이트 감지 작업 가이드\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3260
-              },
-              {
-                "step": "outline",
-                "durationMs": 8547
-              },
-              {
-                "step": "write",
-                "durationMs": 29808
-              },
-              {
-                "step": "review",
-                "durationMs": 9142
-              },
-              {
-                "step": "refine",
-                "durationMs": 37971
-              }
-            ],
-            "totalDurationMs": 88729,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 4273,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "5ef7794d-c0cc-4a0e-a928-1c4287e46dae",
-        "timestamp": "2026-03-15T03:04:16.201Z",
-        "actionType": "coverage_analysis",
-        "issueNumber": null,
-        "issueTitle": "문서 커버리지 분석",
-        "documentSlug": "_coverage-analysis",
-        "documentTitle": "문서 커버리지 분석",
-        "summary": "커버리지 17점, 10개 미문서화 모듈 발견",
-        "trigger": "monthly_schedule",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "34380d7c-7d85-42cd-8353-2db9e161bf42",
-        "timestamp": "2026-03-13T09:50:16.135Z",
-        "actionType": "quality_score",
-        "issueNumber": 494,
-        "issueTitle": "[Wiki Maintenance] [요청] Before You Migrate: Five Surprising Ingress-NGINX Behaviors You Need to Know",
-        "documentSlug": "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b",
-        "documentTitle": "[Wiki Maintenance] [요청] Before You Migrate: Five Surprising Ingress-NGINX Behaviors You Need to Know",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "9bd4b968-16a4-4aa6-aecf-94b3282e5066",
-        "timestamp": "2026-03-13T09:50:04.548Z",
-        "actionType": "quality_score",
-        "issueNumber": 495,
-        "issueTitle": "[Wiki Maintenance] [요청] The era of “AI as text” is over. Execution is the new interface.",
-        "documentSlug": "ai/the-era-of-ai-as-text-is-over-execution-is-the-new",
-        "documentTitle": "[Wiki Maintenance] [요청] The era of “AI as text” is over. Execution is the new interface.",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "c228c50e-94f5-452f-9a91-ed440472d3db",
-        "timestamp": "2026-03-13T09:49:54.888Z",
-        "actionType": "quality_score",
-        "issueNumber": 496,
-        "issueTitle": "[Wiki Maintenance] [요청] Announcing the AI Gateway Working Group",
-        "documentSlug": "announcing-the-ai-gateway-working-group",
-        "documentTitle": "[Wiki Maintenance] [요청] Announcing the AI Gateway Working Group",
-        "summary": "자동 품질 검토 통과 (92점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "e636f7ff-df87-4cbf-b5d1-3742f3a7c403",
-        "timestamp": "2026-03-13T09:49:40.992Z",
-        "actionType": "modify",
-        "issueNumber": 497,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] reports/weekly-2026-11 문서 참조 URL 확인 필요",
-        "documentSlug": "reports/weekly-2026-11",
-        "documentTitle": "주간 위키 보고서 - 2026년 11주차",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/weekly-2026-11 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 35,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "4543567d-ddf3-4410-879e-2a7c42a9016d",
-        "timestamp": "2026-03-13T09:49:02.698Z",
-        "actionType": "modify",
-        "issueNumber": 498,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] reports/devsecops-paradox 문서 참조 URL 확인 필요",
-        "documentSlug": "reports/devsecops-paradox",
-        "documentTitle": "DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/devsecops-paradox 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 3
-        }
-      },
-      {
-        "id": "32e4d911-c79b-488c-8e48-34faaaf26df6",
-        "timestamp": "2026-03-13T09:48:16.224Z",
-        "actionType": "modify",
-        "issueNumber": 499,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요",
-        "documentSlug": "backend/wiki-api-route-guide",
-        "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "426ed88d-144b-47a1-b582-2de7b2301fe5",
-        "timestamp": "2026-03-13T09:47:24.514Z",
-        "actionType": "generate",
-        "issueNumber": 494,
-        "issueTitle": "[Wiki Maintenance] [요청] Before You Migrate: Five Surprising Ingress-NGINX Behaviors You Need to Know",
-        "documentSlug": "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b",
-        "documentTitle": "Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know",
-        "summary": "새 문서 \"Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 13752
-              },
-              {
-                "step": "outline",
-                "durationMs": 13668
-              },
-              {
-                "step": "write",
-                "durationMs": 27772
-              },
-              {
-                "step": "review",
-                "durationMs": 5465
-              }
-            ],
-            "totalDurationMs": 60657,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 2345,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "c750aa00-8667-4d6c-ba1f-df9c5f651635",
-        "timestamp": "2026-03-13T09:46:08.628Z",
-        "actionType": "generate",
-        "issueNumber": 495,
-        "issueTitle": "[Wiki Maintenance] [요청] The era of “AI as text” is over. Execution is the new interface.",
-        "documentSlug": "ai/the-era-of-ai-as-text-is-over-execution-is-the-new",
-        "documentTitle": "AI as Text에서 Execution as Interface로: GitHub Copilot SDK와 에이전시 워크플로 가이드",
-        "summary": "새 문서 \"AI as Text에서 Execution as Interface로: GitHub Copilot SDK와 에이전시 워크플로 가이드\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 10828
-              },
-              {
-                "step": "outline",
-                "durationMs": 9038
-              },
-              {
-                "step": "write",
-                "durationMs": 26920
-              },
-              {
-                "step": "review",
-                "durationMs": 6541
-              }
-            ],
-            "totalDurationMs": 53327,
-            "researchSources": 6,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 7
-            },
-            "estimatedTokens": {
-              "estimated": 2125,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "2d0f6fd2-fde3-4242-b9de-94c3ab378c2e",
-        "timestamp": "2026-03-13T09:44:56.472Z",
-        "actionType": "generate",
-        "issueNumber": 496,
-        "issueTitle": "[Wiki Maintenance] [요청] Announcing the AI Gateway Working Group",
-        "documentSlug": "kubernetes/announcing-the-ai-gateway-working-group",
-        "documentTitle": "Announcing the AI Gateway Working Group",
-        "summary": "새 문서 \"Announcing the AI Gateway Working Group\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3149
-              },
-              {
-                "step": "outline",
-                "durationMs": 6152
-              },
-              {
-                "step": "write",
-                "durationMs": 30404
-              },
-              {
-                "step": "review",
-                "durationMs": 9223
-              }
-            ],
-            "totalDurationMs": 48928,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 2289,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "49619b4a-9724-4ab4-ad92-539142dbf588",
-        "timestamp": "2026-03-13T09:18:20.709Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "URL 변경 감지",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "URL 변경 감지: 30개 체크, 3개 변경, 3개 깨짐, 3건 Issue",
-        "trigger": "scheduled",
-        "triggerUser": null,
-        "model": "unknown",
-        "changes": null
-      },
-      {
-        "id": "7de901b9-28ce-4965-876e-e25f1ea477f9",
-        "timestamp": "2026-03-13T09:18:10.438Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "트렌드 모니터링",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "트렌드 모니터링: 20건 수집, 3건 감지, 3건 Issue 생성",
+        "issueTitle": "Wiki Tree Maintenance",
+        "documentSlug": "_wiki-tree",
+        "documentTitle": "Wiki Tree Maintenance",
+        "summary": "구조 분석 완료. 16개 자동 적용, 4개 보류, 2개 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "ae695969-86ba-4ce5-87cd-f52aba7af733",
-        "timestamp": "2026-03-11T18:21:57.400Z",
-        "actionType": "quality_score",
-        "issueNumber": 474,
-        "issueTitle": " [요청] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
-        "documentSlug": "ai/google-ai-edge-gallery-functiongemma",
-        "documentTitle": " [요청] Google AI Edge Gallery – 온‑디바이스 FunctionGemma 함수 호출 가이드",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "6a92c429-864f-4e66-a6a8-9169b4d971ae",
-        "timestamp": "2026-03-11T18:20:35.535Z",
-        "actionType": "modify",
-        "issueNumber": 493,
-        "issueTitle": " [업데이트] Google I/O 2026 – Gemini AI 최신 업데이트 및 발표",
-        "documentSlug": "ai/gemini-3-1",
-        "documentTitle": "Google AI Pro 활용 실전 가이드",
-        "summary": "문서 수정 요청 처리: \" [업데이트] Google I/O 2026 – Gemini AI 최신 업데이트 및 발표\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 50,
-          "deletions": 0
+          "applied": 16,
+          "skipped": 4,
+          "issues": 2
         }
       },
       {
-        "id": "c25898e7-8913-4ec8-83e8-944afb745e32",
-        "timestamp": "2026-03-11T18:19:29.605Z",
+        "id": "af53e5e8-394b-4171-9104-02616e8ad239",
+        "timestamp": "2026-03-20T06:19:52.200Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "뉴스 인텔리전스",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "뉴스 인텔리전스: 200건 스캔, 1건 신규, 1건 관련, 1건 Issue 생성",
+        "summary": "뉴스 인텔리전스: 200건 스캔, 52건 신규, 0건 관련, 0건 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "3f69c6df-47a4-4efa-b450-f930718e02d7",
-        "timestamp": "2026-03-11T12:21:49.375Z",
+        "id": "ca07457c-8b58-4bb0-94f4-ce97d64b356e",
+        "timestamp": "2026-03-20T00:32:38.017Z",
+        "actionType": "quality_score",
+        "issueNumber": 557,
+        "issueTitle": " [요청] Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+        "documentSlug": "ai/enterprise-adoption-of-user-aware-ai-agents-deep-p",
+        "documentTitle": " [요청] Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "bcddaef6-e805-4daa-89d4-6764f41378e2",
+        "timestamp": "2026-03-20T00:32:24.848Z",
+        "actionType": "quality_score",
+        "issueNumber": 558,
+        "issueTitle": " [요청] PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce RCE",
+        "documentSlug": "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-",
+        "documentTitle": " [요청] PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce RCE",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "32bb4b39-906f-41cd-bd2b-69731d7ee170",
+        "timestamp": "2026-03-20T00:32:14.829Z",
+        "actionType": "quality_score",
+        "issueNumber": 559,
+        "issueTitle": " [요청] x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+        "documentSlug": "reports/x402-week-metrics-agent-payment-layer",
+        "documentTitle": " [요청] x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "adeccbab-7612-4285-8e36-539799d14bb4",
+        "timestamp": "2026-03-20T00:32:00.393Z",
+        "actionType": "generate",
+        "issueNumber": 557,
+        "issueTitle": " [요청] Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+        "documentSlug": "ai/enterprise-adoption-of-user-aware-ai-agents-deep-p",
+        "documentTitle": "Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend",
+        "summary": "새 문서 \"Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Trend\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 5467
+              },
+              {
+                "step": "outline",
+                "durationMs": 8455
+              },
+              {
+                "step": "write",
+                "durationMs": 18314
+              },
+              {
+                "step": "review",
+                "durationMs": 6131
+              }
+            ],
+            "totalDurationMs": 38367,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 7
+            },
+            "estimatedTokens": {
+              "estimated": 1646,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "8c379574-e5d7-45d0-b464-a53b6c78f50f",
+        "timestamp": "2026-03-20T00:31:07.880Z",
+        "actionType": "generate",
+        "issueNumber": 558,
+        "issueTitle": " [요청] PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce RCE",
+        "documentSlug": "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-",
+        "documentTitle": "PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce 원격 코드 실행 가이드",
+        "summary": "새 문서 \"PolyShell 취약점 (CVE‑2026‑XXXX) – Magento Open Source 및 Adobe Commerce 원격 코드 실행 가이드\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 6309
+              },
+              {
+                "step": "outline",
+                "durationMs": 11295
+              },
+              {
+                "step": "write",
+                "durationMs": 20496
+              },
+              {
+                "step": "review",
+                "durationMs": 6219
+              }
+            ],
+            "totalDurationMs": 44319,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 1901,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "221e96d3-eecd-4807-918e-ae464dbdde1f",
+        "timestamp": "2026-03-20T00:30:09.231Z",
+        "actionType": "generate",
+        "issueNumber": 559,
+        "issueTitle": " [요청] x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+        "documentSlug": "reports/x402-week-metrics-agent-payment-layer",
+        "documentTitle": "x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석",
+        "summary": "새 문서 \"x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 4766
+              },
+              {
+                "step": "outline",
+                "durationMs": 7309
+              },
+              {
+                "step": "write",
+                "durationMs": 22372
+              },
+              {
+                "step": "review",
+                "durationMs": 5912
+              }
+            ],
+            "totalDurationMs": 40359,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 8
+            },
+            "estimatedTokens": {
+              "estimated": 1780,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "49c20f9d-567e-49dc-8285-fae8a1706a93",
+        "timestamp": "2026-03-20T00:27:59.592Z",
+        "actionType": "generate",
+        "issueNumber": 559,
+        "issueTitle": "문서 요청 #559",
+        "documentSlug": "reports/559",
+        "documentTitle": "x402 Week 현황 및 Agent Payment Layer 분석",
+        "summary": "새 문서 \"x402 Week 현황 및 Agent Payment Layer 분석\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 3321
+              },
+              {
+                "step": "outline",
+                "durationMs": 7130
+              },
+              {
+                "step": "write",
+                "durationMs": 19468
+              },
+              {
+                "step": "review",
+                "durationMs": 5066
+              }
+            ],
+            "totalDurationMs": 34986,
+            "researchSources": 7,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 6
+            },
+            "estimatedTokens": {
+              "estimated": 1583,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "b0bc199d-f441-454f-9729-dcaaec998d4f",
+        "timestamp": "2026-03-20T00:27:21.456Z",
+        "actionType": "generate",
+        "issueNumber": 558,
+        "issueTitle": "문서 요청 #558",
+        "documentSlug": "security/558",
+        "documentTitle": "PolyShell 취약점 가이드 – Magento Open Source & Adobe Commerce",
+        "summary": "새 문서 \"PolyShell 취약점 가이드 – Magento Open Source & Adobe Commerce\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 3119
+              },
+              {
+                "step": "outline",
+                "durationMs": 9490
+              },
+              {
+                "step": "write",
+                "durationMs": 18248
+              },
+              {
+                "step": "review",
+                "durationMs": 4620
+              }
+            ],
+            "totalDurationMs": 35477,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 7
+            },
+            "estimatedTokens": {
+              "estimated": 1618,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "7956b847-294b-4c16-8b8d-0372b360735c",
+        "timestamp": "2026-03-20T00:26:43.261Z",
+        "actionType": "generate",
+        "issueNumber": 557,
+        "issueTitle": "문서 요청 #557",
+        "documentSlug": "557",
+        "documentTitle": "기업을 위한 맞춤형 에이전시 AI 도입 가이드",
+        "summary": "새 문서 \"기업을 위한 맞춤형 에이전시 AI 도입 가이드\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 3455
+              },
+              {
+                "step": "outline",
+                "durationMs": 5300
+              },
+              {
+                "step": "write",
+                "durationMs": 27446
+              },
+              {
+                "step": "review",
+                "durationMs": 7664
+              }
+            ],
+            "totalDurationMs": 43867,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 7
+            },
+            "estimatedTokens": {
+              "estimated": 2020,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "893e475e-3af9-4c16-9542-50f5865c0303",
+        "timestamp": "2026-03-20T00:25:56.183Z",
         "actionType": "modify",
-        "issueNumber": 492,
-        "issueTitle": " [업데이트] OpenClaw 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법",
-        "documentSlug": "projects/openclaw-complete-guide",
-        "documentTitle": "OpenClaw 완벽 가이드",
-        "summary": "문서 수정 요청 처리: \" [업데이트] OpenClaw 네임스페이스 – 멀티‑프로젝트 메모리 격리 방법\"",
+        "issueNumber": 556,
+        "issueTitle": " [업데이트] Meta 내부 AI 에이전트 보안 사고 – 사례 분석 및 교훈",
+        "documentSlug": "security/agentic-ai-security-threats",
+        "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] Meta 내부 AI 에이전트 보안 사고 – 사례 분석 및 교훈\"",
         "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 0,
-          "deletions": 1
+          "additions": 28,
+          "deletions": 0
         }
+      },
+      {
+        "id": "73a1c22f-a0b8-428b-89fe-e7a3e7bf83f6",
+        "timestamp": "2026-03-20T00:24:46.295Z",
+        "actionType": "modify",
+        "issueNumber": 555,
+        "issueTitle": " [업데이트] Secure Code Warrior AI Trust Agent – 정책 기반 코드 보안 자동 적용",
+        "documentSlug": "security/ai",
+        "documentTitle": "AI‑생성 코드와 시크릿 관리 위험",
+        "summary": "문서 수정 요청 처리: \" [업데이트] Secure Code Warrior AI Trust Agent – 정책 기반 코드 보안 자동 적용\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 88,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "775972ce-7a1a-4119-bd82-4140672795fe",
+        "timestamp": "2026-03-20T00:24:08.625Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 79건 신규, 19건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "cb090d9b-b72e-44f5-80f2-36af5c3ccb5d",
+        "timestamp": "2026-03-19T18:24:16.019Z",
+        "actionType": "modify",
+        "issueNumber": 554,
+        "issueTitle": " [업데이트] RTK가 Tokens의 60%를 절약합니다. 저는 90%까지 절약하도록 만들었습니다.",
+        "documentSlug": "projects/claude-code-cost-management",
+        "documentTitle": "Claude Code 비용 관리와 Bifrost 활용 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] RTK가 Tokens의 60%를 절약합니다. 저는 90%까지 절약하도록 만들었습니다.\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 76,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "22e27889-27f9-4e0e-89a6-efd56cded628",
+        "timestamp": "2026-03-19T18:23:16.443Z",
+        "actionType": "generate",
+        "issueNumber": 553,
+        "issueTitle": "문서 요청 #553",
+        "documentSlug": "security/553",
+        "documentTitle": "Ubiquiti UniFi 네트워크 애플리케이션 취약점 (CVE‑2026‑22557) 분석 및 대응 가이드",
+        "summary": "새 문서 \"Ubiquiti UniFi 네트워크 애플리케이션 취약점 (CVE‑2026‑22557) 분석 및 대응 가이드\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 4248
+              },
+              {
+                "step": "outline",
+                "durationMs": 7609
+              },
+              {
+                "step": "write",
+                "durationMs": 28662
+              },
+              {
+                "step": "review",
+                "durationMs": 6931
+              }
+            ],
+            "totalDurationMs": 47450,
+            "researchSources": 10,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 2160,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "3f5e7fd5-5c9e-4f23-93ad-e00f8b3083b7",
+        "timestamp": "2026-03-19T18:22:24.392Z",
+        "actionType": "generate",
+        "issueNumber": 552,
+        "issueTitle": "문서 요청 #552",
+        "documentSlug": "security/552",
+        "documentTitle": "Perseus Android Banking Malware 분석",
+        "summary": "새 문서 \"Perseus Android Banking Malware 분석\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 4153
+              },
+              {
+                "step": "outline",
+                "durationMs": 6739
+              },
+              {
+                "step": "write",
+                "durationMs": 17936
+              },
+              {
+                "step": "review",
+                "durationMs": 8901
+              }
+            ],
+            "totalDurationMs": 37730,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 7
+            },
+            "estimatedTokens": {
+              "estimated": 1679,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "df878d7d-c394-4d63-8ac2-411b9b68889e",
+        "timestamp": "2026-03-19T18:21:43.805Z",
+        "actionType": "modify",
+        "issueNumber": 551,
+        "issueTitle": " [업데이트] 포스트-양자 IPsec가 드디어 지루해지고 있다 — 그리고 그게 요점이다",
+        "documentSlug": "security/386",
+        "documentTitle": "양자 시대 대비 포스트‑양자 암호화 전략 가이드",
+        "summary": "문서 수정 요청 처리: \" [업데이트] 포스트-양자 IPsec가 드디어 지루해지고 있다 — 그리고 그게 요점이다\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 31,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "d5b435e0-5a9f-4d78-acae-e3e854f07e18",
+        "timestamp": "2026-03-19T18:21:02.138Z",
+        "actionType": "generate",
+        "issueNumber": 550,
+        "issueTitle": "문서 요청 #550",
+        "documentSlug": "security/550",
+        "documentTitle": "웹 펜테스팅 초보자 로드맵 (2026) – Recon부터 서버‑측 공격까지",
+        "summary": "새 문서 \"웹 펜테스팅 초보자 로드맵 (2026) – Recon부터 서버‑측 공격까지\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 3667
+              },
+              {
+                "step": "outline",
+                "durationMs": 7937
+              },
+              {
+                "step": "write",
+                "durationMs": 19813
+              },
+              {
+                "step": "review",
+                "durationMs": 6823
+              }
+            ],
+            "totalDurationMs": 38240,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 7
+            },
+            "estimatedTokens": {
+              "estimated": 1729,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "80bd76d6-2ae6-4ed3-a80e-870a292f89ae",
+        "timestamp": "2026-03-19T18:20:07.501Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "뉴스 인텔리전스",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "뉴스 인텔리전스: 200건 스캔, 77건 신규, 18건 관련, 5건 Issue 생성",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
       }
     ]
   },
   "issues": {
-    "totalOpen": 122,
-    "recentActivity": 29
+    "totalOpen": 148,
+    "recentActivity": 26
   },
   "commits": {
-    "total": 57,
+    "total": 43,
     "entries": [
       {
-        "sha": "e2bdf98a",
-        "message": "chore: Issue Processor 실행 결과",
+        "sha": "5f151800",
+        "message": "🌳 Wiki Tree Maintenance: The wiki contains ~200 markdown files spread across many functional areas. Most documents are already placed in sensible directories, but a handful of root‑level files violate the rule that only  may live at the repository root. Several duplicate or near‑duplicate documents were found (OpenAPI Builder, AgentSpace, OpenAPI Builder draft, etc.). Overall the structure is sound, but a few moves, renames, and merges will clean up the hierarchy and enforce naming conventions.",
         "author": "GitHub Action",
-        "date": "2026-03-15T03:38:09Z"
+        "date": "2026-03-23T00:51:26Z"
       },
       {
-        "sha": "36304d73",
+        "sha": "73ca9f1e",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-03-13T09:50:21Z"
+        "date": "2026-03-20T00:32:43Z"
       },
       {
-        "sha": "0f815819",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-03-11T18:22:02Z"
-      },
-      {
-        "sha": "ea3c10d8",
+        "sha": "5d68718e",
         "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
         "author": "GitHub Action",
-        "date": "2026-03-11T18:20:35Z"
+        "date": "2026-03-20T00:27:59Z"
       },
       {
-        "sha": "5d038b0c",
+        "sha": "a325f1be",
         "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
         "author": "GitHub Action",
-        "date": "2026-03-11T12:28:19Z"
+        "date": "2026-03-19T18:26:56Z"
       },
       {
-        "sha": "2e030c21",
+        "sha": "8f747a02",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-03-11T12:28:14Z"
+        "date": "2026-03-19T18:26:50Z"
       },
       {
-        "sha": "95ae50a2",
+        "sha": "73eb6f6e",
         "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
         "author": "GitHub Action",
-        "date": "2026-03-11T12:21:49Z"
+        "date": "2026-03-19T18:24:16Z"
       },
       {
-        "sha": "87b7b531",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-03-11T09:50:01Z"
-      },
-      {
-        "sha": "49105274",
+        "sha": "4857f527",
         "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
         "author": "GitHub Action",
-        "date": "2026-03-11T06:25:16Z"
+        "date": "2026-03-19T12:24:08Z"
       },
       {
-        "sha": "3be98542",
+        "sha": "4455dfb8",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-03-11T06:25:11Z"
+        "date": "2026-03-19T12:24:01Z"
+      },
+      {
+        "sha": "7400a484",
+        "message": "docs: 뉴스 인텔리전스 기반 문서 자동 처리",
+        "author": "GitHub Action",
+        "date": "2026-03-19T12:19:29Z"
+      },
+      {
+        "sha": "12ce8b15",
+        "message": "chore: Issue Processor 실행 결과",
+        "author": "GitHub Action",
+        "date": "2026-03-19T00:36:15Z"
       }
     ]
   }
