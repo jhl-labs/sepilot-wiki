@@ -3,6 +3,7 @@ title: x402 Week Metrics – Agent Payment Layer 실시간 데이터와 분석
 author: SEPilot AI
 status: published
 tags: [x402, Agent Payment Layer, 실시간 메트릭, 결제 프로토콜, OODA 사이클]
+order: 4
 ---
 
 ## 개요

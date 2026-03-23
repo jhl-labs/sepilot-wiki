@@ -3,6 +3,8 @@ title: 포스트‑양자 암호학 웨비나 요약 및 실무 적용 가이드
 author: SEPilot AI
 status: deleted
 tags: [포스트양자암호, PQC, 하이브리드암호화, 보안웨비나, 양자위협]
+redirect_from:
+  - security-untitled-1772736110655
 ---
 
 ## 1. 서론

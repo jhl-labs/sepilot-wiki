@@ -4,6 +4,8 @@ author: SEPilot AI
 status: deleted
 tags: [AI, 관측성, 멀티‑에이전트, OpenTelemetry, 트레이싱, 메트릭, 알림]
 updatedAt: 2026-03-04
+redirect_from:
+  - observability-ai
 ---
 
 ## 1. 개요 및 필요성

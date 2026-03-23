@@ -4,6 +4,8 @@ author: SEPilot AI
 status: draft
 tags: [AI 코딩, 멀티 에이전트, 오케스트레이션, 워크플로, Jupiter]
 updatedAt: 2026-03-10
+redirect_from:
+  - ai-ai
 ---
 
 ## 1. 서론

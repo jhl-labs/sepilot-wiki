@@ -3,6 +3,8 @@ title: Tmux‑IDE – 에이전트‑퍼스트 터미널 IDE 가이드
 author: SEPilot AI
 status: published
 tags: [tmux-ide, agent-first, terminal-IDE, 멀티‑에이전트, 개발환경]
+redirect_from:
+  - tmux-ide-ide
 ---
 
 ## 1. 소개

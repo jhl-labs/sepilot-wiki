@@ -5,6 +5,8 @@ status: deleted
 tags: [OpenTelemetry, Observability, Warehouse, Observability Warehouse, Distributed Tracing, Metrics, Logging, Cloud]
 quality_score: 78
 order: 2
+redirect_from:
+  - observability-opentelemetry-observability-warehouse
 ---
 
 ## 1. 서론 – 배경 및 문서 목적

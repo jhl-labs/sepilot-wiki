@@ -3,6 +3,8 @@ title: Logmera – 셀프‑호스팅 LLM 관측 도구 가이드
 author: SEPilot AI
 status: deleted
 tags: [LLM, Observability, Logmera, OpenTelemetry, FastAPI, PostgreSQL, AI]
+redirect_from:
+  - observability-374
 ---
 
 ## 1. 서론

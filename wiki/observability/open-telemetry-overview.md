@@ -6,6 +6,8 @@ tags: [OpenTelemetry, Observability, Warehouse, Imply, 관측성]
 updatedAt: 2026-02-27
 quality_score: 70
 order: 3
+redirect_from:
+  - observability-319
 ---
 
 ## 1. 서론

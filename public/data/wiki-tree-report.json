@@ -1,352 +1,331 @@
 {
-  "timestamp": "2026-03-23T00:50:46.793Z",
+  "timestamp": "2026-03-23T08:54:22.676Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "The wiki contains ~200 markdown files spread across many functional areas. Most documents are already placed in sensible directories, but a handful of root‑level files violate the rule that only `home.md` may live at the repository root. Several duplicate or near‑duplicate documents were found (OpenAPI Builder, AgentSpace, OpenAPI Builder draft, etc.). Overall the structure is sound, but a few moves, renames, and merges will clean up the hierarchy and enforce naming conventions.",
-    "totalDocuments": 202,
+    "summary": "위키는 150개 이상의 문서가 15개의 디렉터리( reports, backend, observability, docker, projects, security, dependencies, dependabot, ai, frontend 등) 로 흩어져 있습니다. 대부분 파일명은 영문 슬러그 형태이지만, 숫자만 있는 파일(`559.md`, `435.md` 등)과 중복된 내용의 파일이 다수 존재합니다. 루트 레벨에 문서가 남아 있는 경우(`tmux-ide-ide.md`, `ai.md` 등)도 있어 카테고리 규칙을 위반하고 있습니다. 또한 `status: deleted` 로 표시된 문서가 여러 카테고리에 남아 있어 정리 필요합니다.",
+    "totalDocuments": 274,
     "categories": [
       "reports",
-      "projects",
-      "ai",
       "backend",
       "observability",
-      "security",
       "docker",
-      "kubernetes",
-      "frontend",
-      "bun",
+      "projects",
+      "security",
+      "troubleshooting",
       "dependencies",
       "dependabot",
-      "github",
       "issues",
-      "troubleshooting",
+      "bun",
+      "ai",
+      "frontend",
       "devops",
       "cloud",
-      "meta",
-      "guides"
+      "tmux-ide",
+      "meta"
     ],
     "issues": [
-      "Root‑level markdown files (except home.md) must be moved into appropriate categories.",
-      "Duplicate content for OpenAPI Builder, AgentSpace and a few other docs.",
-      "File names contain spaces or Korean characters; they need slugified English names."
+      "루트 레벨에 문서가 존재함 – `tmux-ide-ide.md`, `ai.md` 등은 적절한 카테고리로 이동 필요",
+      "동일 내용이 중복된 파일 존재 – OpenWebUI + Docker Model Runner 가이드가 두 개(`docker/open-webui-docker-model-runner-self-hosted-llm-dep.md`와 `docker/open-webui-docker-model-runner-self-hosted-llm-dep.md`)으로 중복",
+      "숫자만 있는 파일명은 의미를 알 수 없어 슬러그 형태로 변경 필요",
+      "삭제된 문서가 여러 카테고리에 남아 있어 정리 필요"
     ]
   },
   "suggestedStructure": {
-    "projects": [
-      "openapi-builder",
-      "agentspace",
-      "viscat-technology-whitepaper",
-      "emdash",
-      "xcode-cloud-ci-cd",
-      "robopocket-ar",
-      "emdash-agentic-development-environment",
-      "openclaw-complete-guide",
-      "nvidia-nim",
-      "viscat",
-      "claude-code-release-history",
-      "agentic-web-ai-to-ai",
-      "human-in-the-loop-agentic-cms-notion-mcp",
-      "agentspace-private-chat-room",
-      "github-copilot-coding-agent",
-      "agentspace",
-      "claude-code-cost-management",
-      "opencode",
-      "sepilot-desktop-intro",
-      "sepilot-technology-stack",
-      "enterprise-gitops-implementation",
-      "jira-ai-agents",
-      "agentbus",
-      "antigravity-release-notes",
-      "rust-gpu-face-crop-tool",
-      "neuroskill-bci-ai",
-      "github-copilot-cli-guide",
-      "moltbook-intro",
-      "viscat-tech-whitepaper",
-      "homelab-ai-stack-2026",
-      "emdash",
-      "emdash-agentic-development-environment",
-      "openclaw-complete-guide",
-      "nvidia-nim",
-      "viscat",
-      "claude-code-release-history",
-      "agentic-web-ai-to-ai",
-      "human-in-the-loop-agentic-cms-notion-mcp",
-      "agentspace-private-chat-room",
-      "github-copilot-coding-agent",
-      "agentspace",
-      "claude-code-cost-management",
-      "opencode",
-      "sepilot-desktop-intro",
-      "sepilot-technology-stack",
-      "enterprise-gitops-implementation",
-      "jira-ai-agents",
-      "agentbus",
-      "antigravity-release-notes",
-      "rust-gpu-face-crop-tool",
-      "neuroskill-bci-ai",
-      "github-copilot-cli-guide",
-      "moltbook-intro"
-    ],
-    "ai": [
-      "agent-skill-guide",
-      "tmux-ide-guide",
-      "byte-dance-seedance-2-0",
-      "pentagon-llm-policy",
-      "superlocalmemory-v3",
-      "llm-prompt-injection",
-      "enterprise-agentic-ai-guide",
-      "fastapi-ai-api",
-      "tensorlfow-2-21-litert",
-      "ai-code-review-agent-guide",
-      "joy-open-trust-network",
-      "ai-code-assistant-productivity-paradox",
-      "2026-ai-enhanced-reskilling",
-      "openai-pentagon-contract-update",
-      "tpus-finetuning-functiongemma",
-      "claude-marketplace",
-      "ai-code-assistant-3week-experiment-report",
-      "gemini-code-assist",
-      "guardian-protocol-ai",
-      "semantic-layer-importance",
-      "ai-agentic-workflow",
-      "ai-2024-2026",
-      "model-merging-for-large-language-models",
-      "ai-llm-2026-cost-comparison",
-      "ai-4-week-paradox",
-      "ai-2026-2026",
-      "ai-2026-2026",
-      "ai-2026-2026"
+    "reports": [
+      "weekly-2026-11.md",
+      "weekly-2026-13.md",
+      "weekly-2026-10.md",
+      "x402-week-metrics-agent-payment-layer.md",
+      "x402-week-status-agent-payment-layer.md",
+      "devsecops-paradox.md"
     ],
     "backend": [
-      "label-dependencies",
-      "wiki-api-route-guide",
-      "snkv-sqlite-btree-kv-store",
-      "lazy-backend-agentic-faas-mdl",
-      "agentic-faas-mdl"
+      "lazy-backend-agentic-faas-mdl.md",
+      "agentic-faas-mdl.md",
+      "label-dependencies.md",
+      "wiki-api-route-guide.md",
+      "snkv-sqlite-btree-kv-store.md"
     ],
     "observability": [
-      "319",
-      "2026-vigilops-zabbix-prometheus-grafana-datadog",
-      "435",
-      "logmera-self-hosted-llm-observability-tool",
-      "opentelemetry",
-      "374",
-      "ai",
-      "opentelemetry-observability-warehouse",
-      "ai"
-    ],
-    "security": [
-      "telegram-access-layer",
-      "devsecops-paradox",
-      "security-2026-vps",
-      "serv-u-15-5",
-      "polyshell-vulnerability",
-      "cve-2026-27574",
-      "microsoft-patch-tuesday-2026-03",
-      "github-secret-scanning-2026-03",
-      "ai-slopsquatting",
-      "ai",
-      "ai"
+      "open-telemetry-overview.md",
+      "vigilops-comparison.md",
+      "logmera-self-hosted-llm-observability-tool.md",
+      "logmera-guide.md",
+      "multi-agent-ai-observability.md",
+      "opentelemetry-overview.md",
+      "opentelemetry-observability-warehouse.md"
     ],
     "docker": [
-      "gordon-ai-agent-update",
-      "open-webui-docker-model-runner-self-hosted-llm-dep",
-      "docker-model-runner-macos-vllm-support",
-      "docker-hardened-system-packages",
-      "docker-zfs",
-      "open-webui-docker-model-runner-self-hosted-llm-dep",
-      "run-openclaw-securely-in-docker-sandboxes"
+      "gordon-ai-agent-update.md",
+      "open-webui-docker-model-runner-self-hosted-llm-guide.md",
+      "docker-model-runner-macos-vllm-support.md",
+      "announcing-docker-hardened-system-packages.md",
+      "docker-zfs.md",
+      "run-openclaw-securely-in-docker-sandboxes.md",
+      "docker-zfs-home-lab-guide.md",
+      "hardened-images.md"
     ],
-    "kubernetes": [
-      "node-readiness-controller",
-      "kubernetes-ai-gateway",
-      "ingress-nginx-deprecation-guide",
-      "ai-gateway-working-group",
-      "api-governance",
-      "kubernetes",
-      "before-you-migrate-five-surprising-ingress-nginx-b",
-      "the-invisible-rewrite-modernizing-the-kubernetes-i",
-      "announcing-the-ai-gateway-working-group",
-      "cgroup-migration",
-      "409"
+    "projects": [
+      "viscat-technology-whitepaper.md",
+      "xcode-cloud-ci-cd.md",
+      "robopocket-ar.md",
+      "openclaw-complete-guide.md",
+      "nvidia-nim.md",
+      "viscat.md",
+      "claude-code-release-history.md",
+      "agentic-web-ai-to-ai.md",
+      "human-in-the-loop-agentic-cms-notion-mcp.md",
+      "github-copilot-coding-agent.md",
+      "openapi-builder-draft.md",
+      "openapi-builder.md",
+      "claude-code-cost-management.md",
+      "opencode.md",
+      "sepilot-desktop-intro.md",
+      "sepilot-technology-stack.md",
+      "enterprise-gitops-implementation.md",
+      "jira-ai-agents.md",
+      "agentbus-rest-api.md",
+      "antigravity-release-notes.md",
+      "rust-gpu-face-crop-tool.md",
+      "neuroskill-bci-ai.md",
+      "github-copilot-cli-guide.md",
+      "moltbook-intro.md",
+      "viscat-tech-whitepaper.md",
+      "homelab-ai-stack-2026.md"
+    ],
+    "security": [
+      "telegram-access-layer.md",
+      "2026-vps.md",
+      "post-quantum-cryptography-webinar-guide.md",
+      "ai-slopsquatting.md",
+      "microsoft-patch-tuesday-2026-03-cve.md",
+      "github-secret-scanning-pattern-updates-march-2026.md",
+      "ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
+      "ai.md",
+      "serv-u-15-5.md",
+      "web-pentesting-beginner-roadmap-2026-recon-server-.md",
+      "perseus-android-banking-malware-architecture-indic.md",
+      "sql-injection-union.md",
+      "coinbase-x402-sdk-slopsquatting-vulnerability.md",
+      "ai-slopsquatting.md",
+      "cve-2026-27574-oneuptime-probe-vm-rce.md",
+      "github-secret-scanning-2026-03-update.md",
+      "under-the-hood-security-architecture-of-github-age.md",
+      "agentic-ai-security-threats.md",
+      "saas.md",
+      "386.md",
+      "542.md",
+      "380.md",
+      "telegram-access-layer.md",
+      "400.md",
+      "404.md",
+      "386.md"
+    ],
+    "ai": [
+      "fastapi-ai-api.md",
+      "tensorflow-2-21-litert.md",
+      "ai-code-review-agent-guide.md",
+      "joy-open-trust-network-for-ai-agents.md",
+      "ai-code-assistant-productivity-paradox.md",
+      "pentagon-llm-2026-policy.md",
+      "2026-ai-enhanced-reskilling.md",
+      "openai-pentagon-contract-update.md",
+      "tpv-5e-1-functiongemma-finetuning.md",
+      "steerling-8b.md",
+      "ai-usage-control-rfp.md",
+      "ai-augmented-sdlc-paradox.md",
+      "ai-code-assistant-4-comparison.md",
+      "model-merging.md",
+      "ai-agentic-workflow.md",
+      "tokenwatch-ai.md",
+      "continuous-ai.md",
+      "ai-2024-2026.md",
+      "adaptive-merging-of-lora-modules.md",
+      "ai-agent-deployment-failure-prevention.md",
+      "tmux-ide.md",
+      "ai-agentic-web.md",
+      "ai-llm-prompt-injection.md",
+      "ai-2026-2026.md",
+      "ai-2026-2026.md",
+      "ai-2026-2026.md"
     ],
     "frontend": [
-      "incremental-static-regeneration",
-      "react-query",
-      "webp-client-side-converter",
-      "api-service-layer",
-      "vite-plugin-pwa",
-      "monaco-editor-react",
-      "react-concurrent-rendering"
-    ],
-    "bun": [
-      "comparison-pnpm-npm",
-      "overview",
-      "github-actions-setup"
-    ],
-    "dependencies": [
-      "dompurify-bump-3.3.2",
-      "lucide-react-bump-0.564-to-0.576",
-      "mermaid-bump-11.13.0",
-      "react-router-dom-7-13-1-bump-no-longer-needed"
-    ],
-    "dependabot": [
-      "labels-setup",
-      "bump-dev-dependencies-2026-03-09",
-      "dependencies-label",
-      "missing-dependencies-label",
-      "pnpm-transitive-dependencies-limitations",
-      "@types-node-update-cancelled"
-    ],
-    "github": [
-      "getting-started-with-github-actions",
-      "copilot-coding-agent",
-      "github-secret-scanning-2026-03"
-    ],
-    "issues": [
-      "dependabot-label-missing",
-      "dependencies-label-missing",
-      "untitled-1772736110655"
-    ],
-    "troubleshooting": [
-      "dependabot-label-missing",
-      "dependabot-missing-label",
-      "dependabot-labels"
+      "react-query.md",
+      "vite-plugin-pwa.md",
+      "monaco-editor-react.md",
+      "react-concurrent-rendering.md"
     ],
     "devops": [
-      "gitops-implementation",
-      "shared-workflows-nodejs-aws",
-      "dependabot",
-      "dependabot-labels",
-      "github-copilot-ci-cd",
-      "search-architecture-high-availability",
-      "shared-workflows-for-node-js-backend-and-aws-deplo"
+      "gitops-implementation.md",
+      "shared-workflows-nodejs-aws.md",
+      "github-copilot-ci-cd.md",
+      "search-architecture-high-availability.md",
+      "shared-workflows-for-node-js-backend-and-aws-deployments.md"
     ],
     "cloud": [
-      "aws-cost-optimization",
-      "persistent-terminal-design",
-      "aws-nat-gateway-cost-trap"
+      "aws-nat-gateway-cost-trap.md",
+      "aws-cost-optimization.md"
+    ],
+    "tmux-ide": [
+      "ide.md"
     ],
     "meta": [
-      "weekly-2026-09",
-      "label-dependencies",
-      "weekly-2026-08"
-    ],
-    "guides": [
-      "dependabot-labels"
+      "weekly-2026-09.md",
+      "label-dependencies.md",
+      "weekly-2026-08.md"
     ]
   },
   "results": {
-    "appliedActions": 16,
-    "skippedActions": 4,
+    "appliedActions": 24,
+    "skippedActions": 2,
     "dryRunPreviewedActions": 0,
-    "createdIssues": 2
+    "createdIssues": 1
   },
   "actions": {
     "applied": [
       {
         "type": "rename",
         "priority": "high",
-        "source": "openapi-builder-openapi.md",
-        "target": "projects/openapi-builder.md",
-        "reason": "Move root file into projects and rename to slug format",
+        "source": "reports/559.md",
+        "target": "reports/x402-week-status-agent-payment-layer.md",
+        "reason": "숫자만 있는 파일명 → 의미 있는 슬러그로 변경",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "github-for-beginners-getting-started-with-github-a.md",
-        "target": "github/getting-started-with-github-actions.md",
-        "reason": "Move root file into github category and slugify name",
+        "source": "issues/untitled-1773545730139.md",
+        "target": "issues/scheduler-doc-update-guide.md",
+        "reason": "숫자와 ‘untitled’ 파일명 → 가독성 있는 슬러그",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "bytedance-seedance-2-0-ai.md",
-        "target": "ai/byte-dance-seedance-2-0.md",
-        "reason": "Place AI video‑app guide into ai category with slugified name",
+        "source": "security/untitled-1772736110655.md",
+        "target": "security/post-quantum-cryptography-webinar-guide.md",
+        "reason": "숫자만 있는 파일명 → 내용에 맞는 슬러그",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "telegram-based-access-layer-authentication-with-oi.md",
-        "target": "security/telegram-access-layer.md",
-        "reason": "Move security‑related guide into security category and slugify",
+        "source": "ai/ai.md",
+        "target": "ai/multi-ai-coding-agent-orchestration.md",
+        "reason": "루트 레벨 파일 → AI 카테고리로 이동 및 의미 있는 슬러그",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "ai.md",
-        "target": "ai/agent-skill-guide.md",
-        "reason": "Root file about AI agent skills belongs in ai category with slugified name",
+        "source": "ai/ai-4.md",
+        "target": "ai/ai-code-assistant-comparison.md",
+        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "539.md",
-        "target": "projects/openapi-builder-draft.md",
-        "reason": "Duplicate of openapi‑builder‑openapi.md; will be merged and deleted",
+        "source": "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md",
+        "target": "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
+        "reason": "중복 파일 통합 – 두 파일 내용이 동일함",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "522.md",
-        "target": "ai/pentagon-llm-policy.md",
-        "reason": "Move Pentagon LLM policy guide into ai category",
+        "source": "tmux-ide-ide.md",
+        "target": "tmux-ide/ide.md",
+        "reason": "루트 레벨 파일 → tmux-ide 카테고리로 이동",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "541.md",
-        "target": "ai/tmux-ide-guide.md",
-        "reason": "Move tmux‑IDE guide into ai category and slugify",
+        "source": "observability/319.md",
+        "target": "observability/open-telemetry-overview.md",
+        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "532.md",
-        "target": "ai/superlocalmemory-v3.md",
-        "reason": "Move SuperLocalMemory V3 guide into ai category",
+        "source": "observability/435.md",
+        "target": "observability/vigilops-comparison.md",
+        "reason": "숫자 파일명 → 의미 있는 슬러그",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "llm.md",
-        "target": "ai/llm-prompt-injection.md",
-        "reason": "Move LLM prompt‑injection guide into ai category",
+        "source": "observability/374.md",
+        "target": "observability/logmera-guide.md",
+        "reason": "숫자 파일명 → 의미 있는 슬러그",
         "autoApply": true
       },
       {
         "type": "rename",
         "priority": "high",
-        "source": "557.md",
-        "target": "ai/enterprise-agentic-ai-guide.md",
-        "reason": "Move enterprise agentic AI guide into ai category",
+        "source": "observability/ai.md",
+        "target": "observability/multi-agent-ai-observability.md",
+        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
         "autoApply": true
       },
       {
-        "type": "merge",
+        "type": "rename",
         "priority": "high",
-        "source": "projects/agentspace-private-chat-room.md",
-        "target": "projects/agentspace.md",
-        "reason": "Duplicate AgentSpace content; keep single file",
+        "source": "observability/opentelemetry.md",
+        "target": "observability/opentelemetry-overview.md",
+        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
         "autoApply": true
       },
       {
-        "type": "merge",
+        "type": "rename",
         "priority": "high",
-        "source": "projects/agentspace.md",
-        "target": "projects/agentspace.md",
-        "reason": "Ensure the retained file stays at the target path",
+        "source": "observability/opentelemetry-observability-warehouse.md",
+        "target": "observability/opentelemetry-observability-warehouse.md",
+        "reason": "파일명 표준화 – 하이픈 사용",
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "reports",
+        "metadata": {
+          "displayName": "보고서",
+          "order": 1
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "backend",
+        "metadata": {
+          "displayName": "백엔드",
+          "order": 2
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "observability",
+        "metadata": {
+          "displayName": "관측성",
+          "order": 3
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "docker",
+        "metadata": {
+          "displayName": "Docker",
+          "order": 4
+        },
         "autoApply": true
       },
       {
@@ -354,10 +333,19 @@
         "priority": "medium",
         "target": "projects",
         "metadata": {
-          "displayName": "Projects",
-          "order": 1
+          "displayName": "프로젝트",
+          "order": 5
         },
-        "reason": "Add human‑readable name and ordering for the projects category",
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "security",
+        "metadata": {
+          "displayName": "보안",
+          "order": 6
+        },
         "autoApply": true
       },
       {
@@ -365,18 +353,37 @@
         "priority": "medium",
         "target": "ai",
         "metadata": {
-          "displayName": "AI & LLM",
-          "order": 2
+          "displayName": "AI",
+          "order": 7
         },
-        "reason": "Add display name and ordering for AI category",
         "autoApply": true
       },
       {
         "type": "set_order",
         "priority": "low",
-        "target": "projects/agentspace.md",
+        "target": "reports/weekly-2026-11.md",
+        "order": 1,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "reports/weekly-2026-13.md",
         "order": 2,
-        "reason": "Second doc in projects after OpenAPI Builder",
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "reports/weekly-2026-10.md",
+        "order": 3,
+        "autoApply": true
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "reports/x402-week-metrics-agent-payment-layer.md",
+        "order": 4,
         "autoApply": true
       }
     ],
@@ -384,52 +391,28 @@
       {
         "type": "merge",
         "priority": "high",
-        "source": "539.md",
-        "target": "projects/openapi-builder.md",
-        "reason": "Duplicate OpenAPI Builder content; keep published version",
+        "source": "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md",
+        "target": "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
+        "reason": "동일 내용 중복 – 하나만 유지하고 다른 파일 삭제",
         "autoApply": true,
-        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/539.md'"
+        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/docker/open-webui-docker-model-runner-self-hosted-llm-dep.md'"
       },
       {
         "type": "set_order",
         "priority": "low",
-        "target": "projects/openapi-builder.md",
-        "order": 1,
-        "reason": "Make OpenAPI Builder the first doc in the projects category",
+        "target": "reports/x402-week-status-agent-payment-layer.md",
+        "order": 5,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: projects/openapi-builder.md"
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/agent-skill-guide.md",
-        "order": 1,
-        "reason": "First doc in AI category (agent skill guide)",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: ai/agent-skill-guide.md"
-      },
-      {
-        "type": "set_order",
-        "priority": "low",
-        "target": "ai/tmux-ide-guide.md",
-        "order": 2,
-        "reason": "Second doc in AI category",
-        "autoApply": true,
-        "error": "문서를 찾을 수 없음: ai/tmux-ide-guide.md"
+        "error": "문서를 찾을 수 없음: reports/x402-week-status-agent-payment-layer.md"
       }
     ],
     "dryRunPreviewed": []
   },
   "createdIssues": [
     {
-      "number": 560,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/560",
-      "title": "Root‑level markdown files violate the “only home.md at root” rule"
-    },
-    {
-      "number": 561,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/561",
-      "title": "Duplicate content for OpenAPI Builder and AgentSpace"
+      "number": 567,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/567",
+      "title": "중복된 OpenWebUI + Docker Model Runner 가이드 정리"
     }
   ]
 }

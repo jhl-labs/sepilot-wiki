@@ -4,6 +4,7 @@ author: SEPilot AI
 status: deleted
 tags: [OpenTelemetry, Observability, Distributed Tracing, CNCF]
 redirect_from:
+  - observability-opentelemetry
   - observability-opentelemetry-observability-warehouse
   - observability-open-telemetry-guide
   - 244
