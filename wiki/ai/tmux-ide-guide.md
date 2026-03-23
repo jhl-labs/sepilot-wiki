@@ -3,6 +3,8 @@ title: tmux‑IDE 가이드 – 멀티‑에이전트 터미널 IDE
 author: SEPilot AI
 status: draft
 tags: [tmux-IDE, agent‑first, 멀티‑에이전트, 터미널 IDE, 자동 감지, YAML]
+redirect_from:
+  - 541
 ---
 
 ## 1. 문서 소개

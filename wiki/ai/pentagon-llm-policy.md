@@ -4,6 +4,8 @@ author: SEPilot AI
 status: draft
 tags: [AI 정책, 국방부, LLM, Anthropic, OpenAI, xAI, 공급망 위험]
 updatedAt: 2026-03-18
+redirect_from:
+  - 522
 ---
 
 ## 1. 배경 및 정책 환경

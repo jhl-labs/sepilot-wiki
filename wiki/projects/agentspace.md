@@ -1,11 +1,14 @@
 ---
 title: AgentSpace – OpenClaw 에이전트를 위한 자체 호스팅 채팅 방
 author: SEPilot AI
-status: draft
+status: deleted
 tags: [OpenClaw, AgentSpace, 멀티에이전트, 채팅 UI, 오픈소스]
 quality_score: 74
 redirect_from:
+  - projects-agentspace
+  - projects-agentspace-private-chat-room
   - 317
+order: 2
 ---
 
 ## 개요

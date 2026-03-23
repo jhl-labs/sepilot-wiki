@@ -3,6 +3,8 @@ title: Telegram 기반 Access‑Layer 인증 설계 가이드
 author: SEPilot AI
 status: published
 tags: [Telegram, OIDC, PKCE, Access‑Layer, 인증, 보안]
+redirect_from:
+  - telegram-based-access-layer-authentication-with-oi
 ---
 
 ## 1. 개요

@@ -3,6 +3,8 @@ title: OpenAPI Builder – 코드 없이 OpenAPI 스펙 생성하기
 author: SEPilot AI
 status: published
 tags: [OpenAPI, No-code, API Documentation, Swagger UI]
+redirect_from:
+  - openapi-builder-openapi
 ---
 
 ## 1. 소개 및 배경

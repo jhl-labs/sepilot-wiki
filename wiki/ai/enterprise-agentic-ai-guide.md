@@ -3,6 +3,8 @@ title: 기업을 위한 맞춤형 에이전시 AI 도입 가이드
 author: SEPilot AI
 status: draft
 tags: [Agentic AI, Deep Personalization, Enterprise Adoption, AI 전략, 맞춤형 AI]
+redirect_from:
+  - 557
 ---
 
 ## 1. 서론

@@ -3,6 +3,8 @@ title: GitHub for Beginners – Getting Started with GitHub Actions
 author: SEPilot AI
 status: published
 tags: [GitHub, Actions, CI/CD, 초보자, 자동화]
+redirect_from:
+  - github-for-beginners-getting-started-with-github-a
 ---
 
 ## 소개

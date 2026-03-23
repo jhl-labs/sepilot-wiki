@@ -1,221 +1,245 @@
 {
-  "timestamp": "2026-03-17T22:32:30.710Z",
+  "timestamp": "2026-03-23T00:50:46.793Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "The wiki contains 274 documents spread across many top‑level folders. Most files are already placed in sensible categories (e.g., `backend/`, `observability/`, `security/`, `kubernetes/`, `docker/`, `projects/`, `ai/`, `frontend/`, `bun/`, `dependencies/`, `github/`, `dependabot/`, `devops/`, `cloud/`, `meta/`). However there are a number of root‑level files that belong in a category, many files with Korean titles that should be renamed to English slugs, several duplicated documents (SNKV, Ingress‑NGINX, OpenTelemetry, Dependabot‑labels, GitHub‑labels, etc.), and a few orphaned “deleted” drafts that can be removed or merged. The structure can be tightened by moving root files into their proper categories, normalising file names, and consolidating duplicates.",
-    "totalDocuments": 274,
+    "summary": "The wiki contains ~200 markdown files spread across many functional areas. Most documents are already placed in sensible directories, but a handful of root‑level files violate the rule that only `home.md` may live at the repository root. Several duplicate or near‑duplicate documents were found (OpenAPI Builder, AgentSpace, OpenAPI Builder draft, etc.). Overall the structure is sound, but a few moves, renames, and merges will clean up the hierarchy and enforce naming conventions.",
+    "totalDocuments": 202,
     "categories": [
       "reports",
+      "projects",
+      "ai",
       "backend",
       "observability",
       "security",
-      "kubernetes",
       "docker",
-      "projects",
-      "ai",
+      "kubernetes",
       "frontend",
       "bun",
       "dependencies",
-      "github",
       "dependabot",
+      "github",
+      "issues",
+      "troubleshooting",
       "devops",
       "cloud",
-      "meta"
+      "meta",
+      "guides"
     ],
     "issues": [
-      "Root‑level documents that belong in a category (e.g., SNKV, AI cold‑start, OpenTelemetry, etc.).",
-      "Duplicate content across multiple files (SNKV, Ingress‑NGINX retirement, OpenTelemetry, Dependabot label guides, GitHub label guides, etc.).",
-      "Inconsistent file naming – Korean titles and mixed‑case names – should be normalised to lower‑case hyphen slugs.",
-      "Several deleted drafts that are exact copies of published versions – can be removed or merged.",
-      "Missing `order` front‑matter for logical sequencing inside each category."
+      "Root‑level markdown files (except home.md) must be moved into appropriate categories.",
+      "Duplicate content for OpenAPI Builder, AgentSpace and a few other docs.",
+      "File names contain spaces or Korean characters; they need slugified English names."
     ]
   },
   "suggestedStructure": {
-    "reports": [
-      "weekly-2026-10.md",
-      "weekly-2026-11.md",
-      "weekly-2026-12.md"
-    ],
-    "backend": [
-      "wiki-api-route-guide.md",
-      "agentic-faas-mdl.md",
-      "lazy-backend-agentic-faas-mdl.md",
-      "label-dependencies.md",
-      "snkv-sqlite-btree-kv-store.md"
-    ],
-    "observability": [
-      "opentelemetry.md",
-      "opentelemetry-observability-warehouse.md",
-      "319.md",
-      "2026-vigilops-zabbix-prometheus-grafana.md",
-      "logmera-self-hosted-llm-observability-tool.md"
-    ],
-    "security": [
-      "serv-u-15-5.md",
-      "microsoft-patch-tuesday-2026-03-cve.md",
-      "github-secret-scanning-pattern-updates-march-2026.md",
-      "ai-slopsquatting.md",
-      "ai.md"
-    ],
-    "kubernetes": [
-      "node-readiness-controller.md",
-      "ingress-nginx-deprecation-guide.md",
-      "api-governance.md",
-      "kubernetes.md",
-      "cgroup-migration.md",
-      "release-notes.md"
-    ],
-    "docker": [
-      "gordon-ai-agent-update.md",
-      "docker-model-runner-macos-vllm.md",
-      "docker-hardened-system-packages.md",
-      "docker-zfs.md",
-      "open-webui-docker-model-runner-self-hosted-llm-dep.md",
-      "run-openclaw-securely-in-docker-sandboxes.md",
-      "docker-hardened-images.md"
-    ],
     "projects": [
-      "viscat-technology-whitepaper.md",
-      "emdash.md",
-      "xcode-cloud-ci-cd.md",
-      "robopocket-ar.md",
-      "emdash-agentic-development-environment.md",
-      "openclaw-complete-guide.md",
-      "nvidia-nim.md",
-      "viscat.md",
-      "claude-code-release-history.md",
-      "agentic-web-ai-to-ai.md",
-      "human-in-the-loop-agentic-cms-notion-mcp.md",
-      "agentspace-private-chat-room.md",
-      "github-copilot-coding-agent.md",
-      "agentspace.md",
-      "claude-code-cost-management.md",
-      "opencode.md",
-      "sepilot-desktop-intro.md",
-      "sepilot-technology-stack.md",
-      "enterprise-gitops-implementation.md",
-      "jira-ai-agents.md",
-      "agentbus.md",
-      "antigravity-release-notes.md",
-      "rust-gpu-face-crop-tool.md",
-      "neuroskill-bci-ai.md",
-      "github-copilot-cli-guide.md",
-      "moltbook-intro.md",
-      "viscat-tech-whitepaper.md",
-      "homelab-ai-stack-2026.md"
+      "openapi-builder",
+      "agentspace",
+      "viscat-technology-whitepaper",
+      "emdash",
+      "xcode-cloud-ci-cd",
+      "robopocket-ar",
+      "emdash-agentic-development-environment",
+      "openclaw-complete-guide",
+      "nvidia-nim",
+      "viscat",
+      "claude-code-release-history",
+      "agentic-web-ai-to-ai",
+      "human-in-the-loop-agentic-cms-notion-mcp",
+      "agentspace-private-chat-room",
+      "github-copilot-coding-agent",
+      "agentspace",
+      "claude-code-cost-management",
+      "opencode",
+      "sepilot-desktop-intro",
+      "sepilot-technology-stack",
+      "enterprise-gitops-implementation",
+      "jira-ai-agents",
+      "agentbus",
+      "antigravity-release-notes",
+      "rust-gpu-face-crop-tool",
+      "neuroskill-bci-ai",
+      "github-copilot-cli-guide",
+      "moltbook-intro",
+      "viscat-tech-whitepaper",
+      "homelab-ai-stack-2026",
+      "emdash",
+      "emdash-agentic-development-environment",
+      "openclaw-complete-guide",
+      "nvidia-nim",
+      "viscat",
+      "claude-code-release-history",
+      "agentic-web-ai-to-ai",
+      "human-in-the-loop-agentic-cms-notion-mcp",
+      "agentspace-private-chat-room",
+      "github-copilot-coding-agent",
+      "agentspace",
+      "claude-code-cost-management",
+      "opencode",
+      "sepilot-desktop-intro",
+      "sepilot-technology-stack",
+      "enterprise-gitops-implementation",
+      "jira-ai-agents",
+      "agentbus",
+      "antigravity-release-notes",
+      "rust-gpu-face-crop-tool",
+      "neuroskill-bci-ai",
+      "github-copilot-cli-guide",
+      "moltbook-intro"
     ],
     "ai": [
-      "fastapi-ai-api.md",
-      "tensorflow-2-21-litert.md",
-      "ai-code-review-agent-guide.md",
-      "joy-open-trust-network.md",
-      "ai-code-assistant-3week-experiment-report.md",
-      "openai-pentagon-contract-update.md",
-      "tpv5e-functiongemma-finetuning.md",
-      "model-merging-for-large-language-models.md",
-      "persistent-memory-for-ai-coding-agents.md",
-      "guardian-protocol-ai.md",
-      "semantic-layer-importance-and-implementation-guide.md",
-      "agentspace-openclaw.md",
-      "fastapi-inference-service-guide.md",
-      "ai-code-assistant-3week-experiment-report.md",
-      "ai-2024-2026.md",
-      "ai-4.md",
-      "ai-8.md",
-      "ai-9.md",
-      "ai-10.md",
-      "ai-11.md",
-      "ai-12.md",
-      "ai-13.md",
-      "ai-14.md",
-      "ai-15.md",
-      "ai-16.md",
-      "ai-17.md",
-      "ai-18.md",
-      "ai-19.md",
-      "ai-20.md",
-      "ai-21.md",
-      "ai-22.md",
-      "ai-23.md",
-      "ai-24.md",
-      "ai-25.md",
-      "ai-26.md",
-      "ai-27.md",
-      "ai-28.md",
-      "ai-29.md",
-      "ai-30.md",
-      "ai-31.md",
-      "ai-32.md",
-      "ai-33.md",
-      "ai-34.md",
-      "ai-35.md",
-      "ai-36.md",
-      "ai-37.md",
-      "ai-38.md",
-      "ai-39.md",
-      "ai-40.md",
-      "ai-41.md",
-      "ai-42.md",
-      "ai-43.md",
-      "ai-44.md",
-      "ai-45.md",
-      "ai-46.md",
-      "ai-47.md",
-      "ai-48.md",
-      "ai-49.md",
-      "ai-50.md"
+      "agent-skill-guide",
+      "tmux-ide-guide",
+      "byte-dance-seedance-2-0",
+      "pentagon-llm-policy",
+      "superlocalmemory-v3",
+      "llm-prompt-injection",
+      "enterprise-agentic-ai-guide",
+      "fastapi-ai-api",
+      "tensorlfow-2-21-litert",
+      "ai-code-review-agent-guide",
+      "joy-open-trust-network",
+      "ai-code-assistant-productivity-paradox",
+      "2026-ai-enhanced-reskilling",
+      "openai-pentagon-contract-update",
+      "tpus-finetuning-functiongemma",
+      "claude-marketplace",
+      "ai-code-assistant-3week-experiment-report",
+      "gemini-code-assist",
+      "guardian-protocol-ai",
+      "semantic-layer-importance",
+      "ai-agentic-workflow",
+      "ai-2024-2026",
+      "model-merging-for-large-language-models",
+      "ai-llm-2026-cost-comparison",
+      "ai-4-week-paradox",
+      "ai-2026-2026",
+      "ai-2026-2026",
+      "ai-2026-2026"
+    ],
+    "backend": [
+      "label-dependencies",
+      "wiki-api-route-guide",
+      "snkv-sqlite-btree-kv-store",
+      "lazy-backend-agentic-faas-mdl",
+      "agentic-faas-mdl"
+    ],
+    "observability": [
+      "319",
+      "2026-vigilops-zabbix-prometheus-grafana-datadog",
+      "435",
+      "logmera-self-hosted-llm-observability-tool",
+      "opentelemetry",
+      "374",
+      "ai",
+      "opentelemetry-observability-warehouse",
+      "ai"
+    ],
+    "security": [
+      "telegram-access-layer",
+      "devsecops-paradox",
+      "security-2026-vps",
+      "serv-u-15-5",
+      "polyshell-vulnerability",
+      "cve-2026-27574",
+      "microsoft-patch-tuesday-2026-03",
+      "github-secret-scanning-2026-03",
+      "ai-slopsquatting",
+      "ai",
+      "ai"
+    ],
+    "docker": [
+      "gordon-ai-agent-update",
+      "open-webui-docker-model-runner-self-hosted-llm-dep",
+      "docker-model-runner-macos-vllm-support",
+      "docker-hardened-system-packages",
+      "docker-zfs",
+      "open-webui-docker-model-runner-self-hosted-llm-dep",
+      "run-openclaw-securely-in-docker-sandboxes"
+    ],
+    "kubernetes": [
+      "node-readiness-controller",
+      "kubernetes-ai-gateway",
+      "ingress-nginx-deprecation-guide",
+      "ai-gateway-working-group",
+      "api-governance",
+      "kubernetes",
+      "before-you-migrate-five-surprising-ingress-nginx-b",
+      "the-invisible-rewrite-modernizing-the-kubernetes-i",
+      "announcing-the-ai-gateway-working-group",
+      "cgroup-migration",
+      "409"
     ],
     "frontend": [
-      "vite-plugin-pwa.md",
-      "incremental-static-regeneration.md",
-      "react-concurrent-rendering.md",
-      "webp-client-side-converter.md",
-      "api-service-layer.md",
-      "react-query.md",
-      "monaco-editor-react.md"
+      "incremental-static-regeneration",
+      "react-query",
+      "webp-client-side-converter",
+      "api-service-layer",
+      "vite-plugin-pwa",
+      "monaco-editor-react",
+      "react-concurrent-rendering"
     ],
     "bun": [
-      "comparison-pnpm-npm.md",
-      "overview.md",
-      "github-actions-setup.md"
+      "comparison-pnpm-npm",
+      "overview",
+      "github-actions-setup"
     ],
     "dependencies": [
-      "dompurify-bump-3.3.2.md",
-      "lucide-react-bump-0.564-to-0.576.md",
-      "mermaid-bump-11.13.0.md",
-      "react-router-dom-7-13-1-bump-no-longer-needed.md"
-    ],
-    "github": [
-      "dependencies-label.md",
-      "what-s-new-with-github-copilot-coding-agent.md"
+      "dompurify-bump-3.3.2",
+      "lucide-react-bump-0.564-to-0.576",
+      "mermaid-bump-11.13.0",
+      "react-router-dom-7-13-1-bump-no-longer-needed"
     ],
     "dependabot": [
-      "dependencies-label.md",
-      "labels-setup.md",
-      "bump-dev-dependencies-2026-03-09.md",
-      "adding-dependencies-label.md"
+      "labels-setup",
+      "bump-dev-dependencies-2026-03-09",
+      "dependencies-label",
+      "missing-dependencies-label",
+      "pnpm-transitive-dependencies-limitations",
+      "@types-node-update-cancelled"
+    ],
+    "github": [
+      "getting-started-with-github-actions",
+      "copilot-coding-agent",
+      "github-secret-scanning-2026-03"
+    ],
+    "issues": [
+      "dependabot-label-missing",
+      "dependencies-label-missing",
+      "untitled-1772736110655"
+    ],
+    "troubleshooting": [
+      "dependabot-label-missing",
+      "dependabot-missing-label",
+      "dependabot-labels"
     ],
     "devops": [
-      "gitops-implementation.md",
-      "shared-workflows-nodejs-aws.md",
-      "github-copilot-ci-cd.md",
-      "search-architecture-high-availability.md",
-      "shared-workflows-for-node-js-backend-and-aws-deploy.md"
+      "gitops-implementation",
+      "shared-workflows-nodejs-aws",
+      "dependabot",
+      "dependabot-labels",
+      "github-copilot-ci-cd",
+      "search-architecture-high-availability",
+      "shared-workflows-for-node-js-backend-and-aws-deplo"
     ],
     "cloud": [
-      "aws-nat-gateway-cost-trap.md",
-      "persistent-terminal-design.md"
+      "aws-cost-optimization",
+      "persistent-terminal-design",
+      "aws-nat-gateway-cost-trap"
     ],
     "meta": [
-      "weekly-2026-09.md",
-      "weekly-2026-08.md",
-      "label-dependencies.md"
+      "weekly-2026-09",
+      "label-dependencies",
+      "weekly-2026-08"
+    ],
+    "guides": [
+      "dependabot-labels"
     ]
   },
   "results": {
-    "appliedActions": 53,
-    "skippedActions": 6,
+    "appliedActions": 16,
+    "skippedActions": 4,
     "dryRunPreviewedActions": 0,
     "createdIssues": 2
   },
@@ -224,452 +248,135 @@
       {
         "type": "rename",
         "priority": "high",
-        "source": "snkv-sqlite-b-tree-c-c-python.md",
-        "target": "backend/snkv-sqlite-btree-kv-store.md",
-        "reason": "Move root SNKV document into the backend category and rename to the canonical slug used by the existing backend version.",
+        "source": "openapi-builder-openapi.md",
+        "target": "projects/openapi-builder.md",
+        "reason": "Move root file into projects and rename to slug format",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "github-for-beginners-getting-started-with-github-a.md",
+        "target": "github/getting-started-with-github-actions.md",
+        "reason": "Move root file into github category and slugify name",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "bytedance-seedance-2-0-ai.md",
+        "target": "ai/byte-dance-seedance-2-0.md",
+        "reason": "Place AI video‑app guide into ai category with slugified name",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "telegram-based-access-layer-authentication-with-oi.md",
+        "target": "security/telegram-access-layer.md",
+        "reason": "Move security‑related guide into security category and slugify",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "ai.md",
+        "target": "ai/agent-skill-guide.md",
+        "reason": "Root file about AI agent skills belongs in ai category with slugified name",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "539.md",
+        "target": "projects/openapi-builder-draft.md",
+        "reason": "Duplicate of openapi‑builder‑openapi.md; will be merged and deleted",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "522.md",
+        "target": "ai/pentagon-llm-policy.md",
+        "reason": "Move Pentagon LLM policy guide into ai category",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "541.md",
+        "target": "ai/tmux-ide-guide.md",
+        "reason": "Move tmux‑IDE guide into ai category and slugify",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "532.md",
+        "target": "ai/superlocalmemory-v3.md",
+        "reason": "Move SuperLocalMemory V3 guide into ai category",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "llm.md",
+        "target": "ai/llm-prompt-injection.md",
+        "reason": "Move LLM prompt‑injection guide into ai category",
+        "autoApply": true
+      },
+      {
+        "type": "rename",
+        "priority": "high",
+        "source": "557.md",
+        "target": "ai/enterprise-agentic-ai-guide.md",
+        "reason": "Move enterprise agentic AI guide into ai category",
         "autoApply": true
       },
       {
         "type": "merge",
         "priority": "high",
-        "source": "backend/snkv-sqlite-btree-kv-store.md",
-        "target": "backend/snkv-sqlite-btree-kv-store.md",
-        "reason": "Duplicate of the same SNKV document – keep the more complete draft (status: draft) and delete the other.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "ai-cold-start-impact-on-kubernetes-autoscaling.md",
-        "target": "ai/kubernetes-autoscaling-cold-start.md",
-        "reason": "Root‑level AI cold‑start article belongs in the AI category and should follow the slug naming convention.",
+        "source": "projects/agentspace-private-chat-room.md",
+        "target": "projects/agentspace.md",
+        "reason": "Duplicate AgentSpace content; keep single file",
         "autoApply": true
       },
       {
         "type": "merge",
         "priority": "high",
-        "source": "ai/kubernetes-autoscaling-cold-start.md",
-        "target": "ai/kubernetes-autoscaling-cold-start.md",
-        "reason": "Duplicate of the same content – keep the published version and delete the draft.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "observability/open-telemetry-guide.md",
-        "target": "observability/opentelemetry.md",
-        "reason": "Rename deleted duplicate to the canonical slug used by the published OpenTelemetry guide.",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "observability/opentelemetry-observability-warehouse.md",
-        "target": "observability/opentelemetry.md",
-        "reason": "Both files cover OpenTelemetry; the warehouse version is a sub‑topic and can be merged as a section of the main OpenTelemetry guide.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "kubernetes/spotlight-on-sig-architecture-api-governance.md",
-        "target": "kubernetes/api-governance.md",
-        "reason": "Duplicate of the same API Governance guide – keep the published file and delete the deleted one.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "kubernetes/before-you-migrate-ingress-nginx.md",
-        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
-        "reason": "Standardise the Ingress‑NGINX retirement guide under a single slug.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "github/labels/dependencies.md",
-        "target": "github/dependencies-label.md",
-        "reason": "Normalise the GitHub dependencies‑label file name to match other label guides.",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "github/dependencies-label.md",
-        "target": "github/dependencies-label.md",
-        "reason": "Duplicate of the same guide – keep the published version and delete the draft.",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "dependabot/labels-setup.md",
-        "target": "dependabot/dependencies-label.md",
-        "reason": "Both files explain how to create the `dependencies` label – keep the published version and delete the duplicate.",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "dependabot/dependencies-label.md",
-        "target": "dependabot/dependencies-label.md",
-        "reason": "Duplicate – keep the published version.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "issues/dependabot-label-missing.md",
-        "target": "issues/dependabot-label-missing.md",
-        "reason": "Rename to lower‑case hyphen slug (already correct) – no move needed, just ensure consistent naming.",
-        "autoApply": true
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "issues/dependencies-label-missing.md",
-        "target": "issues/dependabot-label-missing.md",
-        "reason": "Both issue templates describe the same problem – keep one and delete the other.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/vite-plugin-pwa-pwa.md",
-        "target": "frontend/vite-plugin-pwa.md",
-        "reason": "Remove duplicate “pwa” suffix and normalise slug.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/next-js-incremental-static-regeneration-isr.md",
-        "target": "frontend/incremental-static-regeneration.md",
-        "reason": "Standardise ISR guide slug.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/react-19.md",
-        "target": "frontend/react-concurrent-rendering.md",
-        "reason": "Give a clear English slug for the React 18+ guide.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/441.md",
-        "target": "frontend/react-concurrent-rendering.md",
-        "reason": "Duplicate of the React concurrent rendering guide – merge into the same slug.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/410.md",
-        "target": "frontend/webp-client-side-converter.md",
-        "reason": "Give a clear English slug for the client‑side WebP converter guide.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/api-client-service-guide.md",
-        "target": "frontend/api-service-layer.md",
-        "reason": "Standardise the slug to match the document title.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/api-service-layer.md",
-        "target": "frontend/api-service-layer.md",
-        "reason": "Ensure consistent lower‑case hyphen naming (no change needed).",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/monaco-editor-react.md",
-        "target": "frontend/monaco-editor-react.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/react-query.md",
-        "target": "frontend/react-query.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "frontend/webp.md",
-        "target": "frontend/webp-client-side-converter.md",
-        "reason": "Give a descriptive English slug.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "bun/comparison-pnpm-npm.md",
-        "target": "bun/comparison-pnpm-npm.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "bun/overview.md",
-        "target": "bun/overview.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "bun/github-actions-setup.md",
-        "target": "bun/github-actions-setup.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "ai/fastapi-ai-api.md",
-        "target": "ai/fastapi-ai-api.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "ai/tensorflow-2-21-litert.md",
-        "target": "ai/tensorflow-2-21-litert.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "rename",
-        "priority": "high",
-        "source": "ai/ai-code-review-agent-guide.md",
-        "target": "ai/ai-code-review-agent-guide.md",
-        "reason": "File name already follows slug convention.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "backend/wiki-api-route-guide.md",
-        "order": 1,
-        "reason": "Place the API route guide first in the backend category (overview).",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "backend/agentic-faas-mdl.md",
-        "order": 2,
-        "reason": "Second most important backend guide.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "backend/lazy-backend-agentic-faas-mdl.md",
-        "order": 3,
-        "reason": "Related to Agentic FaaS, placed after the main guide.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "backend/label-dependencies.md",
-        "order": 4,
-        "reason": "Label guide after core backend docs.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "observability/opentelemetry.md",
-        "order": 1,
-        "reason": "Primary OpenTelemetry guide should be first in observability.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "observability/opentelemetry-observability-warehouse.md",
-        "order": 2,
-        "reason": "Warehouse is a sub‑topic of OpenTelemetry.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "observability/319.md",
-        "order": 3,
-        "reason": "OpenTelemetry + Observability Warehouse guide.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "observability/logmera-self-hosted-llm-observability-tool.md",
-        "order": 5,
-        "reason": "Specific LLM observability tool after general guides.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "security/serv-u-15-5.md",
-        "order": 1,
-        "reason": "First security patch guide in the category.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "security/microsoft-patch-tuesday-2026-03-cve.md",
-        "order": 2,
-        "reason": "Second security guide.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "security/github-secret-scanning-pattern-updates-march-2026.md",
-        "order": 3,
-        "reason": "Third security guide.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "security/ai-slopsquatting.md",
-        "order": 4,
-        "reason": "AI‑based supply‑chain attack guide.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "security/ai.md",
-        "order": 5,
-        "reason": "General AI security guide.",
-        "autoApply": true
-      },
-      {
-        "type": "set_order",
-        "priority": "medium",
-        "target": "security/ai-slopsquatting.md",
-        "order": 6,
-        "reason": "Duplicate of 4 – will be merged and removed.",
+        "source": "projects/agentspace.md",
+        "target": "projects/agentspace.md",
+        "reason": "Ensure the retained file stays at the target path",
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "low",
-        "target": "backend",
-        "metadata": {
-          "displayName": "Backend & Server",
-          "order": 2
-        },
-        "reason": "Add a friendly display name and ordering for the backend category.",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "low",
-        "target": "observability",
-        "metadata": {
-          "displayName": "Observability",
-          "order": 3
-        },
-        "reason": "Add display name and ordering.",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "low",
-        "target": "security",
-        "metadata": {
-          "displayName": "Security",
-          "order": 4
-        },
-        "reason": "Add display name and ordering.",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "low",
-        "target": "kubernetes",
-        "metadata": {
-          "displayName": "Kubernetes",
-          "order": 5
-        },
-        "reason": "Add display name and ordering.",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "low",
-        "target": "docker",
-        "metadata": {
-          "displayName": "Docker",
-          "order": 6
-        },
-        "reason": "Add display name and ordering.",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "low",
+        "priority": "medium",
         "target": "projects",
         "metadata": {
           "displayName": "Projects",
-          "order": 7
+          "order": 1
         },
-        "reason": "Add display name and ordering.",
+        "reason": "Add human‑readable name and ordering for the projects category",
         "autoApply": true
       },
       {
         "type": "update_category_meta",
-        "priority": "low",
+        "priority": "medium",
         "target": "ai",
         "metadata": {
           "displayName": "AI & LLM",
-          "order": 8
+          "order": 2
         },
-        "reason": "Add display name and ordering.",
+        "reason": "Add display name and ordering for AI category",
         "autoApply": true
       },
       {
-        "type": "update_category_meta",
+        "type": "set_order",
         "priority": "low",
-        "target": "frontend",
-        "metadata": {
-          "displayName": "Frontend",
-          "order": 9
-        },
-        "reason": "Add display name and ordering.",
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "low",
-        "target": "bun",
-        "metadata": {
-          "displayName": "Bun",
-          "order": 10
-        },
-        "reason": "Add display name and ordering.",
+        "target": "projects/agentspace.md",
+        "order": 2,
+        "reason": "Second doc in projects after OpenAPI Builder",
         "autoApply": true
       }
     ],
@@ -677,70 +384,52 @@
       {
         "type": "merge",
         "priority": "high",
-        "source": "observability/open-telemetry-guide.md",
-        "target": "observability/opentelemetry.md",
-        "reason": "Duplicate content – keep the published file and delete the deleted one.",
+        "source": "539.md",
+        "target": "projects/openapi-builder.md",
+        "reason": "Duplicate OpenAPI Builder content; keep published version",
         "autoApply": true,
-        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/observability/open-telemetry-guide.md'"
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "kubernetes/spotlight-on-sig-architecture-api-governance.md",
-        "target": "kubernetes/api-governance.md",
-        "reason": "Duplicate content – delete the deleted version.",
-        "autoApply": true,
-        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes/spotlight-on-sig-architecture-api-governance.md'"
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "kubernetes/before-you-migrate-ingress-nginx.md",
-        "target": "kubernetes/ingress-nginx-deprecation-guide.md",
-        "reason": "Duplicate of the same retirement guide – keep the published version.",
-        "autoApply": true,
-        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes/before-you-migrate-ingress-nginx.md'"
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "github/label-dependencies.md",
-        "target": "github/dependencies-label.md",
-        "reason": "Duplicate of the same guide – delete the deleted file.",
-        "autoApply": true,
-        "error": "소스 문서를 찾을 수 없음: github/label-dependencies.md"
-      },
-      {
-        "type": "merge",
-        "priority": "high",
-        "source": "frontend/441.md",
-        "target": "frontend/react-concurrent-rendering.md",
-        "reason": "Duplicate content – keep the published version and delete the draft.",
-        "autoApply": true,
-        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/frontend/441.md'"
+        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/539.md'"
       },
       {
         "type": "set_order",
-        "priority": "medium",
-        "target": "observability/2026-vigilops-zabbix-prometheus-grafana.md",
-        "order": 4,
-        "reason": "Monitoring‑tool comparison guide.",
+        "priority": "low",
+        "target": "projects/openapi-builder.md",
+        "order": 1,
+        "reason": "Make OpenAPI Builder the first doc in the projects category",
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: observability/2026-vigilops-zabbix-prometheus-grafana.md"
+        "error": "문서를 찾을 수 없음: projects/openapi-builder.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "ai/agent-skill-guide.md",
+        "order": 1,
+        "reason": "First doc in AI category (agent skill guide)",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: ai/agent-skill-guide.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "ai/tmux-ide-guide.md",
+        "order": 2,
+        "reason": "Second doc in AI category",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: ai/tmux-ide-guide.md"
       }
     ],
     "dryRunPreviewed": []
   },
   "createdIssues": [
     {
-      "number": 519,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/519",
-      "title": "Critical duplicate content – SNKV key‑value store"
+      "number": 560,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/560",
+      "title": "Root‑level markdown files violate the “only home.md at root” rule"
     },
     {
-      "number": 520,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/520",
-      "title": "Duplicate OpenTelemetry documentation"
+      "number": 561,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/561",
+      "title": "Duplicate content for OpenAPI Builder and AgentSpace"
     }
   ]
 }

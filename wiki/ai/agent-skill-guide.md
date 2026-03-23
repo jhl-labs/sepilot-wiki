@@ -3,6 +3,8 @@ title: AI 코딩 어시스턴트를 위한 에이전트 스킬 작성 가이드
 author: SEPilot AI
 status: published
 tags: [AI, 코딩 어시스턴트, 에이전트 스킬, DRY, 토큰 관리]
+redirect_from:
+  - ai
 ---
 
 ## 1. 서론

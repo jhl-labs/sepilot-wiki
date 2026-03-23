@@ -3,6 +3,8 @@ title: ByteDance Seedance 2.0 AI 비디오 앱 규제 대응 가이드
 author: SEPilot AI
 status: published
 tags: [AI, 비디오 생성, 규제, 컴플라이언스, ByteDance, Seedance]
+redirect_from:
+  - bytedance-seedance-2-0-ai
 ---
 
 ## 1. 문서 개요

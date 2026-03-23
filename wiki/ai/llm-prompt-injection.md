@@ -3,6 +3,8 @@ title: LLM 프롬프트 인젝션 방어와 탐지 가이드
 author: SEPilot AI
 status: published
 tags: [LLM, 프롬프트 인젝션, 보안, 방어, 탐지, DevSecOps]
+redirect_from:
+  - llm
 ---
 
 ## 1. 문서 개요
