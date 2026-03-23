@@ -3,7 +3,7 @@ title: AI Agentic Workflow 거버넌스 실전 가이드
 author: SEPilot AI
 status: published
 tags: [AI, Agentic Workflow, 거버넌스, CI/CD, GitHub Actions]
-updatedAt: 2026-03-18
+updatedAt: 2026-03-23
 ---
 
 ## 1. 서론
@@ -54,6 +54,67 @@ updatedAt: 2026-03-18
 - **Least‑Privilege 원칙**: 각 에이전트가 필요로 하는 최소 권한만 부여하고, `CODEOWNERS`와 `environment protection rules`로 접근을 제한한다.  
 - **교훈 검증**: 교훈이 자동 주입되기 전 `OPA` 정책(`lesson_allowed`)을 통해 내용·형식 검증을 수행한다.  
 - **감사 로그**: 교훈 기록·주입·적용 단계마다 GitHub Audit Log와 CloudWatch에 이벤트를 전송해 추적 가능하도록 한다.  
+
+### 2.6 멀티‑소스 모니터링 (OWL) 개요
+**OWL**은 이메일, 캘린더, GitHub, Slack 등 다양한 서비스의 이벤트를 실시간으로 감시하고, 로컬 **knowledge graph**를 구축한 뒤 일정에 따라 LLM을 활용해 교차‑소스 상관관계와 이상 현상을 탐지하는 오픈‑소스 프로젝트이다. 아래 섹션에서는 데이터 수집·그래프 구축, LLM 기반 탐지 파이프라인, 그리고 Electron 기반 UI·데스크톱 알림 구현 방식을 구체적으로 설명한다.
+
+#### 2.6.1 데이터 수집 및 Knowledge Graph 구축
+1. **소스 커넥터**  
+   - **이메일**: IMAP/SMTP 또는 Microsoft Graph API를 통해 수신/발신 메일 메타데이터와 본문을 스트리밍.  
+   - **캘린더**: Google Calendar API / Microsoft Graph Calendar 엔드포인트에서 일정 이벤트를 주기적으로 Pull.  
+   - **GitHub**: Repository Events API와 Issue/PR 웹훅을 구독하여 커밋, 이슈, PR 상태 변화를 수집.  
+   - **Slack**: RTM API 또는 Events API를 이용해 채널 메시지와 멘션을 실시간 수신.  
+
+2. **정규화 및 인덱싱**  
+   - 각 이벤트는 공통 스키마(`entity_id`, `entity_type`, `timestamp`, `attributes`)에 매핑.  
+   - **Neo4j** 혹은 **GraphDB**와 같은 그래프 DB에 `:Event` 노드와 `:RELATED_TO` 관계를 저장.  
+   - 엔티티(예: 사람, 조직, 제품) 간 연결은 **Named Entity Recognition (NER)** 과 **Entity Linking** 모델을 통해 자동 생성.
+
+3. **주기적 그래프 업데이트**  
+   - **Cron**(30분) 혹은 **Event‑Driven**(Webhook) 방식으로 새로운 이벤트를 그래프에 삽입.  
+   - 중복 방지를 위해 `entity_id` 기반 **Upsert** 로직을 적용.
+
+#### 2.6.2 LLM 기반 상관관계·이상 탐지 파이프라인
+1. **스케줄링**  
+   - `owl schedule` 명령어 또는 Docker Compose 내 `cron` 서비스가 30분마다 탐지 파이프라인을 트리거.  
+
+2. **데이터 추출**  
+   - 최신 24시간 동안 그래프에서 **시간‑윈도우 서브그래프**를 추출하고, 핵심 엔티티(예: 동일 조직, 동일 제품)별로 클러스터링.  
+
+3. **프롬프트 설계**  
+   - 추출된 서브그래프를 **JSON-LD** 형태로 직렬화하고, 아래와 같은 프롬프트 템플릿에 삽입:  
+     ```
+     아래 이벤트 그래프를 분석하여 교차‑소스 상관관계와 이상 현상을 찾아 주세요.
+     - 동일 조직에서 발생한 GitHub 이슈, Shopify 주문, 이메일이 동시에 나타나는 경우
+     - 평소 발생 빈도보다 5배 이상 높은 이벤트 패턴
+     결과는 JSON 배열 형태로 반환하고, 각 항목에 “severity”와 “recommendation”을 포함하십시오.
+     ```  
+
+4. **LLM 실행**  
+   - 기본적으로 **Ollama** 로컬 모델(`phi-3-mini`)을 사용하지만, 필요 시 OpenAI `gpt-4o` 혹은 Anthropic `claude-3.5` 로 전환 가능.  
+   - 모델 호출 결과는 **JSON Schema** (`AlertResult`) 로 검증 후 `alerts.json`에 저장.
+
+5. **알림 및 후속 액션**  
+   - `alerts.json`을 **OPA** 정책(`alert_allowed`)에 전달해 허용 여부를 판단.  
+   - 허용된 알림은 **Electron UI**, **CLI 출력**, **Slack webhook** 등으로 전파.
+
+#### 2.6.3 Electron UI·데스크톱 알림 구현
+| 요소 | 구현 상세 |
+|---|---|
+| **시스템 트레이 아이콘** | `electron-tray` 모듈을 사용해 macOS/Windows/Linux에 상시 아이콘 표시. |
+| **네이티브 알림** | `new Notification({title, body})` API로 탐지된 이벤트를 즉시 팝업. |
+| **전역 단축키** | `globalShortcut.register('Control+Shift+O', () => { mainWindow.show(); })` 로 언제든 UI 호출. |
+| **대시보드** | `http://localhost:3000` 에서 React 기반 대시보드 제공. 그래프 시각화는 **Vis.js** 혹은 **Cytoscape.js** 사용. |
+| **CLI 연동** | `owl start` 명령어 실행 시 콘솔에 최신 알림 요약 출력. |
+| **플러그인 시스템** | `plugins/` 디렉터리 아래 Node.js 모듈 형태로 커스텀 데이터 소스·분석 로직을 로드하도록 설계. |
+
+#### 2.6.4 배포 옵션
+- **완전 로컬**: Ollama와 함께 사용해 제로‑클라우드 환경 구현 (데이터는 로컬 디스크에만 저장).  
+- **클라우드 연동**: 필요 시 OpenAI 또는 Anthropic API 키를 `secrets.OWL_API_KEY` 로 제공하여 하이브리드 모드 전환.  
+- **Docker Compose**: `docker compose up -d` 로 `owl-db`, `owl-llm`, `owl-scheduler` 컨테이너를 일괄 실행.  
+- **보안**: 모든 시크릿은 GitHub Secrets 혹은 Docker Secrets에 저장하고, 최소 권한 원칙을 적용한다.  
+
+> **핵심 요약**: OWL은 멀티‑소스 이벤트를 실시간으로 수집·그래프화하고, LLM 기반 분석으로 교차‑소스 이상을 자동 탐지한다. Electron UI와 CLI를 통해 즉시 알림을 제공하며, 완전 로컬 배포가 가능해 데이터 프라이버시를 보장한다.
 
 ## 3. 거버넌스 프레임워크와 정책 설계
 - **Guardian Protocol** 및 **AI 거버넌스 템플릿**은 고수준 정책·역할 모델을 제공하지만, 구체적인 CI/CD 적용 방법은 별도 가이드가 필요함 [ai/Guardian Protocol – 자율 AI 에이전트를 위한 거버넌스 프레임워크]  
