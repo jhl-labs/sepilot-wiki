@@ -1,25 +1,25 @@
 {
   "title": "Dependabot 라벨 설정 가이드",
   "slug": "devops/dependabot-labels",
-  "content": "\n# Dependabot 라벨 설정 가이드\n\n## 배경\nDependabot은 보안 및 버그 수정 업데이트를 자동으로 PR에 적용하고, 해당 PR에 라벨을 붙여서 팀이 쉽게 식별할 수 있게 합니다. 기본적으로 `dependencies` 라벨을 사용하지만, 레포지토리에서 해당 라벨이 존재하지 않으면 **\"The following labels could not be found: `dependencies`\"** 와 같은 오류가 발생합니다.\n\n## 1️⃣ 라벨 생성 방법\n1. 레포지토리 메인 페이지에서 **\"Issues\"** 탭을 클릭합니다.\n2. 오른쪽 사이드바의 **\"Labels\"** 를 선택합니다.\n3. **\"New label\"** 버튼을 클릭합니다.\n4. **Name** 에 `dependencies` 를 입력하고, 색상은 원하는 대로 선택합니다.\n5. **Create label** 을 눌러 라벨을 생성합니다.\n\n> 라벨 이름은 정확히 `dependencies` 이어야 Dependabot이 자동으로 매핑합니다.\n\n## 2️⃣ `dependabot.yml` 파일 검증\n`dependabot.yml` 파일에 라벨을 지정하는 옵션이 있는 경우, 올바른 라벨 이름이 사용됐는지 확인합니다.\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # ← 여기 라벨 이름이 정확해야 함\n```\n- 라벨 이름에 오타가 있거나, 존재하지 않는 라벨을 지정하면 위와 같은 오류가 발생합니다.\n- 필요에 따라 여러 라벨을 지정할 수 있지만, 각 라벨은 레포지토리에 사전에 생성돼 있어야 합니다.\n\n## 3️⃣ 라벨이 자동으로 붙지 않을 때 확인 사항\n- **라벨 권한**: 라벨을 생성한 사용자가 레포지토리에서 라벨을 관리할 권한이 있는지 확인합니다.\n- **Dependabot 설정**: `dependabot.yml` 파일이 레포지토리 루트에 존재하고, 올바른 YAML 구문을 따르는지 검증합니다.\n- **GitHub Actions**: Dependabot이 작동하도록 `dependabot.yml` 외에 별도의 워크플로가 필요하지는 않지만, 다른 CI 설정이 PR을 차단하고 있지는 않은지 확인합니다.\n\n## 4️⃣ 참고 자료\n- Dependencies vs devDependencies 차이점에 대한 이해: [How to Understand dependencies vs devDependencies in package.json](https://oneuptime.com/blog/post/2026-01-22-nodejs-dependencies-vs-devdependencies/view) (출처)\n- GitHub 라벨 관리 공식 문서: <https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-labels>\n\n## 5️⃣ 요약\n1. 레포지토리 **Labels** 페이지에서 `dependencies` 라벨을 생성한다.\n2. `dependabot.yml` 파일의 `labels` 섹션에 정확히 `dependencies` 라벨을 지정한다.\n3. 라벨 권한 및 파일 구문 오류를 점검한다.\n\n위 과정을 따라 하면 Dependabot이 PR에 `dependencies` 라벨을 정상적으로 붙이고, 자동 업데이트 흐름이 원활히 동작합니다.\n",
-  "lastModified": "2026-03-23T18:19:33Z",
+  "content": "\n# Dependabot 라벨 설정 가이드\n\nDependabot이 Pull Request에 자동으로 라벨을 붙이려면 해당 라벨이 레포지토리 내에 존재해야 합니다. 현재 **`dependencies`** 라벨이 없다는 오류가 발생했으므로, 아래 절차에 따라 라벨을 생성하거나 `dependabot.yml` 파일에서 라벨 설정을 제거하세요.\n\n## 1. GitHub UI를 이용해 라벨 만들기\n\n1. 레포지토리 메인 페이지에서 **`Issues`** 탭을 클릭합니다.\n2. 오른쪽 사이드바에서 **`Labels`** 를 선택합니다.\n3. **`New label`** 버튼을 클릭합니다.\n4. **Name** 에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택합니다.\n5. **Create label** 을 눌러 라벨을 생성합니다.\n\n> 이 라벨은 Dependabot이 `dependencies` 그룹에 해당하는 업데이트를 감지했을 때 자동으로 적용됩니다.\n\n## 2. `dependabot.yml` 파일 검토\n\n`dependabot.yml` 파일에 라벨을 지정하는 옵션이 있다면, 올바른 라벨 이름이 사용되고 있는지 확인합니다. 예시:\n\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # 여기서 라벨 이름을 확인\n```\n\n- 라벨 이름이 정확히 `dependencies` 와 일치해야 합니다.\n- 라벨이 필요 없을 경우 `labels` 섹션을 삭제하거나 비워둘 수 있습니다.\n\n## 3. 라벨 자동 생성 (GitHub API) (선택 사항)\n\n스크립트나 CI 파이프라인에서 라벨을 자동으로 만들고 싶다면 GitHub REST API 를 사용할 수 있습니다.\n\n```bash\ncurl -X POST \\\n  -H \"Authorization: token <YOUR_PERSONAL_ACCESS_TOKEN>\" \\\n  -H \"Accept: application/vnd.github+json\" \\\n  https://api.github.com/repos/<OWNER>/<REPO>/labels \\\n  -d '{\"name\":\"dependencies\",\"color\":\"0E8A16\"}'\n```\n\n## 4. 검증\n\n라벨을 만든 후 Dependabot이 새 PR을 생성하면 자동으로 `dependencies` 라벨이 붙는지 확인합니다.\n\n## 참고 자료\n- [GitHub Docs – Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels-for-issues-and-pull-requests) \n- Dependabot 오류 메시지: \"The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\"\n\n---\n\n*이 문서는 현재 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*",
+  "lastModified": "2026-03-23T19:49:26Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
   "isInvalid": false,
   "tags": [
-    "Dependabot",
-    "GitHub",
-    "라벨",
-    "CI"
+    "dependabot",
+    "labels",
+    "github",
+    "automation"
   ],
   "history": [
     {
-      "sha": "59886f0",
-      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
+      "sha": "d94f0f3",
+      "message": "chore: 대시보드 통계 수집 - 2026-03-23 19:49",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-23T18:19:33Z",
+      "date": "2026-03-23T19:49:26Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
