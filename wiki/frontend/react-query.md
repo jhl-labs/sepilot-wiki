@@ -5,13 +5,15 @@ status: draft
 tags: [React, React-Query, 데이터 패칭, 캐싱, TypeScript]
 redirect_from:
   - frontend-react-query
+updatedAt: 2026-03-24
 ---
 
 ## 1. 문서 개요
 **목적** – `@tanstack/react-query` 를 활용해 데이터 패칭·캐싱·동기화를 일관되게 구현하고, 유지보수 비용을 최소화하는 방법을 제시합니다.  
 **대상 독자** – React와 TypeScript 기반 프론트엔드 개발자, 기존에 Redux/Context 로 상태를 관리하던 팀, 신규 프로젝트에서 데이터 레이어를 설계하려는 아키텍트.  
-**React‑Query 도입 배경** – 복잡한 비동기 로직을 UI 로직에서 분리하고, 자동 재시도·백그라운드 업데이트·전역 캐시를 제공함으로써 코드 가독성과 안정성을 높일 수 있습니다[[React Query 도입 시, 왜 상태 관리와 아키텍처도 함께 바꿔야 ...](https://sigridjin.medium.com/react-query-%EB%8F%84%EC%9E%85-%EC%8B%9C-%EC%99%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%EC%99%80-%EC%95%84%EB%82%B4%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EB%8F%99%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9E%90%EB%8F%99%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%9C%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%99%20...  
-**문서 구성** – 아래 15개 섹션으로 체계적으로 정리합니다.
+**React‑Query 도입 배경** – 복잡한 비동기 로직을 UI 로직에서 분리하고, 자동 재시도·백그라운드 업데이트·전역 캐시를 제공함으로써 코드 가독성과 안정성을 높일 수 있습니다[[React Query 도입 시, 왜 상태 관리와 아키텍처도 함께 바꿔야 ...](https://sigridjin.medium.com/react-query-%EB%8F%84%EC%9E%85-%EC%8B%9C-%EC%99%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%EC%99%80-%EC%95%84%EB%82%B4%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%99%EC%9D%99-...).
+
+**문서 구성** – 아래 19개 섹션으로 체계적으로 정리합니다.
 
 ## 2. React‑Query 핵심 개념
 - **Query** – `useQuery` 로 데이터를 읽고 캐시합니다. **Mutation** – `useMutation` 은 데이터를 변경하고, 성공 시 자동으로 관련 Query 를 무효화하거나 업데이트합니다.  
@@ -88,15 +90,76 @@ redirect_from:
 - **Stale 데이터 노출** – `staleTime` 을 너무 길게 설정하면 오래된 데이터가 UI에 남을 수 있습니다. `refetchOnWindowFocus` 를 활성화하거나, `stale-while-revalidate` 패턴을 적용합니다.  
 - **무한 스크롤 메모리 누수** – 페이지가 계속 쌓이면 메모리 사용량이 증가합니다. `cacheTime` 을 짧게 조정하거나, 오래된 페이지를 `queryClient.removeQueries` 로 수동 삭제합니다.  
 
-## 14. FAQ
+## 14. Stale Data 문제 정의
+Next.js 14에서 **Incremental Static Regeneration (ISR)** 은 페이지를 정적 HTML 로 사전 렌더링하고, 지정된 `revalidate` 간격이 지나면 백그라운드에서 새 데이터를 받아 다시 빌드합니다.  
+React‑Query는 클라이언트 측에서 **staleTime** 과 **cacheTime** 으로 데이터를 관리합니다. ISR 로 생성된 페이지가 `staleTime` 보다 오래된 데이터를 보여줄 경우, 사용자는 **stale data** 를 경험하게 됩니다. 이는 특히 실시간 센서값, 주문 현황 등 **시간에 민감한 데이터**에서 치명적일 수 있습니다.
+
+## 15. React‑Query와 Next.js ISR 연동 시 주의점
+1. **데이터 프리패칭** – `getStaticProps` 혹은 `getServerSideProps` 에서 `QueryClient` 로 `prefetchQuery` 후 `dehydrate` 하여 초기 상태를 전달합니다. 이렇게 하면 서버에서 미리 패치한 데이터가 클라이언트에 **hydrate** 되어 즉시 캐시됩니다[[Next.js(v14) + React Query 과정에서 발생했던 트러블슈팅 AS](https://www.mintmin.dev/blog/2502/20250201)].  
+2. **staleTime 설정** – ISR 의 `revalidate` 주기와 맞추어 `staleTime` 을 조정합니다. 예를 들어 `revalidate: 60` (1분) 인 페이지라면 `staleTime` 을 `55 * 1000` 로 설정해 페이지가 재생성되기 직전까지는 캐시를 신선하게 유지할 수 있습니다.  
+3. **refetchOnWindowFocus 비활성화** – 정적 페이지가 클라이언트에서 열릴 때 자동 재패칭이 발생하면 ISR 의 의도와 충돌할 수 있습니다. 필요에 따라 `refetchOnWindowFocus: false` 로 끄는 것이 안전합니다.  
+4. **수동 invalidate** – 데이터가 즉시 변해야 하는 경우(예: 사용자가 설정을 변경했을 때) `queryClient.invalidateQueries` 로 해당 키를 강제 재패칭하고, `revalidate` 를 트리거하지 않아도 최신 UI를 제공할 수 있습니다.  
+
+## 16. Cache Invalidation 전략
+| 전략 | 적용 시점 | 주요 옵션 | 비고 |
+|------|----------|----------|------|
+| **자동 재패칭** | ISR `revalidate` 주기와 동기화 | `staleTime`, `refetchInterval` | `staleTime` 을 짧게 잡고 `refetchInterval` 로 백그라운드 업데이트 |
+| **포커스 기반 재패칭** | 사용자가 탭을 전환할 때 | `refetchOnWindowFocus` | UI가 오래된 데이터를 보여줄 위험이 있을 때 `true` 로 설정 |
+| **수동 무효화** | Mutation 성공, 설정 변경 등 | `queryClient.invalidateQueries(['key'])` | 즉시 최신 데이터를 강제 가져옴 |
+| **SSR/ISR 프리패칭** | 페이지 최초 로드 | `dehydrate` + `hydrate` | 서버에서 미리 패치한 데이터를 클라이언트 캐시와 동기화 |
+| **stale‑while‑revalidate** | UI 즉시 응답 필요 시 | `staleTime` 짧게, `cacheTime` 길게 | 캐시된 데이터를 즉시 보여주고 백그라운드에서 최신 데이터 교체 |
+
+> **Tip**: `refetchInterval` 은 `refetchIntervalInBackground` 와 함께 사용하면 탭이 백그라운드에 있을 때도 주기적 재패칭을 유지할 수 있습니다[[React Query를 통한 데이터 패칭, 캐싱, 동기화 방법 총정리](https://www.elancer.co.kr/blog/detail/279)].
+
+## 17. 실제 사례: SensorWatch 대시보드
+**배경** – SensorWatch AI는 Next.js 14, TypeScript, PostgreSQL, OpenRouter 기반의 산업용 센서 모니터링 대시보드이며, 실시간 차트와 AI 기반 유지보수 권고를 제공한다.  
+
+**문제** – 대시보드는 **타임스탬프** 가 정상적으로 업데이트되었지만, 실제 **센서값** 은 20분 이상 변하지 않았다. 원인은 서버 API에서 오래된 레코드를 반환한 것이었다.  
+
+**원인 분석**  
+```ts
+const readings = await prisma.sensorReading.findMany({
+  where: { sensorId: sensor.id },
+  orderBy: { createdAt: "asc" }, // ← 오래된 순 정렬 (버그)
+  take: 50,
+});
+```
+`orderBy: { createdAt: "asc" }` 은 가장 오래된 50개의 레코드를 가져와, 데이터베이스에 수천 건이 쌓여도 **항상 동일한** 오래된 데이터만 반환했다. React‑Query는 이 응답을 캐시했기 때문에 **stale data** 가 UI에 고정되었다.
+
+**해결**  
+```ts
+const readings = await prisma.sensorReading.findMany({
+  where: { sensorId: sensor.id },
+  orderBy: { createdAt: "desc" }, // 최신 순
+  take: 50,
+  select: { value: true, isAnomaly: true, createdAt: true },
+});
+const sortedReadings = readings.reverse(); // 차트용 시간 순 정렬
+```
+- 최신 50개 레코드를 가져와 매 요청마다 변하는 데이터를 확보.  
+- `reverse()` 로 차트가 왼쪽에 오래된, 오른쪽에 최신이 되도록 재정렬.  
+
+**React‑Query와 ISR 연계**  
+- `getStaticProps` 에서 `prefetchQuery(['sensorReadings', sensorId])` 로 초기 50개를 미리 패치하고 `dehydrate` 했다.  
+- 페이지는 `revalidate: 30` (30초) 로 설정했으며, `staleTime: 20 * 1000` (20초) 로 지정해 **stale‑while‑revalidate** 패턴을 적용했다.  
+- Mutation(센서 설정 변경) 후 `queryClient.invalidateQueries(['sensorReadings', sensorId])` 로 즉시 최신 데이터를 가져와 UI와 서버 상태를 동기화했다.  
+
+**교훈**  
+1. **데이터 정렬 오류**는 가장 흔한 **stale data** 원인 중 하나다. API 레이어에서 반환되는 데이터가 최신인지 항상 검증해야 한다.  
+2. **ISR + React‑Query** 조합 시 `staleTime` 과 `revalidate` 를 일치시켜 정적 페이지와 클라이언트 캐시가 서로 충돌하지 않도록 설계한다.  
+3. **수동 invalidate** 를 적절히 활용하면 실시간 요구사항을 만족하면서도 ISR 의 캐시 이점을 유지할 수 있다.  
+
+## 18. FAQ
 - **데이터가 바로 업데이트되지 않을 때** – `invalidateQueries` 가 호출되지 않았을 가능성이 있습니다. Mutation 의 `onSuccess` 에서 명시적으로 무효화하세요.  
 - **서버와 클라이언트 상태가 다를 때** – 옵티미스틱 업데이트 후 `onError` 에서 롤백하거나, `refetch` 로 최신 데이터를 강제 가져옵니다.  
-- **React‑Query와 다른 상태 관리 라이브러리 병행** – 전역 UI 상태(모달, 토스트 등)는 별도 상태 관리 툴(예: Recoil) 로 유지하고, 데이터 페칭은 React‑Query 전용으로 분리하는 것이 권장됩니다[[React Query 도입 시, 왜 상태 관리와 아키텍처도 함께 바꿔야 ...](https://sigridjin.medium.com/react-query-%EB%8F%84%EC%9E%85-%EC%8B%9C-%EC%99%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%EC%99%80-%EC%95%84%EB%82%B4%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%99%20...)).  
+- **React‑Query와 다른 상태 관리 라이브러리 병행** – 전역 UI 상태(모달, 토스트 등)는 별도 상태 관리 툴(예: Recoil) 로 유지하고, 데이터 페칭은 React‑Query 전용으로 분리하는 것이 권장됩니다[[React Query 도입 시, 왜 상태 관리와 아키텍처도 함께 바꿔야 ...](https://sigridjin.medium.com/react-query-%EB%8F%84%EC%9E%85-%EC%8B%9C-%EC%99%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%EC%99%80-%EC%95%84%EB%82%B4%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%99%EC%9D%99-...)).  
 
-## 15. 참고 자료 및 링크
+## 19. 참고 자료 및 링크
 - **React Query 공식 문서** – 핵심 API와 옵션 설명 (공식 사이트).  
 - **React Query를 통한 데이터 패칭, 캐싱, 동기화 방법 총정리** – 전체 흐름과 실전 팁[[링크](https://www.elancer.co.kr/blog/detail/279)].  
 - **React-Query 캐싱 원리 (w. staleTime, cacheTime, Lifecycle)** – 캐시 옵션 상세 해설[[링크](https://velog.io/@juhyeon1114/React-Query-%EC%BA%90%EC%8B%B1-%EC%9B%90%EB%A6%AC-w.-staleTime-cacheTime-Lifecycle)].  
-- **React Query 도입 시, 왜 상태 관리와 아키텍처도 함께 바꿔야 하는가** – 도입 배경과 조직 변화 논의[[링크](https://sigridjin.medium.com/react-query-%EB%8F%84%EC%9E%85-%EC%8B%9C-%EC%99%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%EC%99%80-%EC%95%84%EB%82%B4%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%99%20...)).  
+- **React Query 도입 시, 왜 상태 관리와 아키텍처도 함께 바꿔야 하는가** – 도입 배경과 조직 변화 논의[[링크](https://sigridjin.medium.com/react-query-%EB%8F%84%EC%9E%85-%EC%8B%9C-%EC%99%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%EC%99%80-%EC%95%84%EB%82%B4%EC%9D%98-%EC%9E%90%EC%84%B8%EC%9D%99-...)].  
+- **Next.js(v14) + React Query 과정에서 발생했던 트러블슈팅 AS** – SSR/ISR 와 React‑Query 연계 시 주의점[[링크](https://www.mintmin.dev/blog/2502/20250201)].  
+- **ReactQuery + ISR 적용기** – 실제 프로젝트에 ISR 과 React‑Query 를 적용한 사례[[링크](https://techblog.uplus.co.kr/next-js-reactquery-isr-%EC%A0%81%EC%9A%A9%EA%B8%B0-2c7b5b73fe24)].  
 
 *본 문서는 현재까지 공개된 자료를 기반으로 작성되었습니다. 최신 React‑Query 버전(>5) 에서는 일부 옵션 명칭이 변경될 수 있으므로, 실제 적용 시 공식 문서를 재확인하시기 바랍니다.*
