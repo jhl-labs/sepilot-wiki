@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-03-24T09:50:33.617Z",
+  "collectedAt": "2026-03-24T10:49:55.097Z",
   "overview": {
     "totalDocuments": 260,
     "publishedDocuments": 135,
     "draftDocuments": 125,
-    "openRequests": 159,
+    "openRequests": 162,
     "closedRequests": 19,
-    "totalAIActions": 694
+    "totalAIActions": 703
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
+      "aiActions": 6,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 3,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 30,
-      "documentsCreated": 9,
-      "documentsModified": 14,
-      "tavilyApiCalls": 27,
-      "tavilyResults": 68,
-      "estimatedTokens": 22383,
-      "totalPipelineDurationMs": 480646
+      "aiActions": 39,
+      "documentsCreated": 12,
+      "documentsModified": 17,
+      "tavilyApiCalls": 36,
+      "tavilyResults": 93,
+      "estimatedTokens": 30538,
+      "totalPipelineDurationMs": 663948
     },
     "last7d": {
-      "aiActions": 124,
-      "documentsCreated": 45,
+      "aiActions": 127,
+      "documentsCreated": 48,
       "documentsModified": 39,
-      "tavilyApiCalls": 135,
-      "tavilyResults": 341,
-      "estimatedTokens": 105636,
-      "totalPipelineDurationMs": 2282642
+      "tavilyApiCalls": 144,
+      "tavilyResults": 366,
+      "estimatedTokens": 113791,
+      "totalPipelineDurationMs": 2465944
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-24T09:53:09.973Z",
+      "actionType": "quality_score",
+      "issueNumber": 590,
+      "documentTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-24T09:52:55.580Z",
+      "actionType": "quality_score",
+      "issueNumber": 591,
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-24T09:52:45.031Z",
+      "actionType": "quality_score",
+      "issueNumber": 592,
+      "documentTitle": "[Wiki Maintenance] [요청] Securing Production Debugging in Kubernetes",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-24T09:52:28.563Z",
+      "actionType": "modify",
+      "issueNumber": 593,
+      "documentTitle": "주간 위키 보고서 - 2026년 11주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-24T09:51:47.138Z",
+      "actionType": "modify",
+      "issueNumber": 594,
+      "documentTitle": "DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-24T09:51:10.226Z",
+      "actionType": "modify",
+      "issueNumber": 595,
+      "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-24T09:49:47.394Z",
+      "actionType": "generate",
+      "issueNumber": 590,
+      "documentTitle": "Trivy 공급망 침해 – Docker Hub 사용자 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 73474,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3153
+    },
+    {
+      "timestamp": "2026-03-24T09:48:19.352Z",
+      "actionType": "generate",
+      "issueNumber": 591,
+      "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 53569,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2327
+    },
+    {
+      "timestamp": "2026-03-24T09:47:09.049Z",
+      "actionType": "generate",
+      "issueNumber": 592,
+      "documentTitle": "Securing Production Debugging in Kubernetes",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 56259,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2675
+    },
     {
       "timestamp": "2026-03-24T09:24:33.321Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 41722,
       "tavilyApiCalls": 3,
       "estimatedTokens": 1900
-    },
-    {
-      "timestamp": "2026-03-24T00:27:30.785Z",
-      "actionType": "generate",
-      "issueNumber": 584,
-      "documentTitle": "Auth0 Token Vault for AI Agents – 보안 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 40409,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1852
-    },
-    {
-      "timestamp": "2026-03-24T00:26:47.429Z",
-      "actionType": "modify",
-      "issueNumber": 583,
-      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-24T00:25:36.430Z",
-      "actionType": "modify",
-      "issueNumber": 582,
-      "documentTitle": "Persistent Memory for AI Coding Agents – Introducing Mind Keg MCP",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-24T00:24:37.774Z",
-      "actionType": "generate",
-      "issueNumber": 581,
-      "documentTitle": "DigitalOcean Droplet에 1‑Click으로 NemoClaw 배포 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 45373,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2094
-    },
-    {
-      "timestamp": "2026-03-24T00:23:49.174Z",
-      "actionType": "modify",
-      "issueNumber": 580,
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-24T00:22:14.104Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-23T19:51:08.526Z",
-      "actionType": "recover",
-      "issueNumber": 578,
-      "documentTitle": "chore(deps): bump the react group across 1 directory with 4 updates",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-23T18:26:31.153Z",
-      "actionType": "generate",
-      "issueNumber": 577,
-      "documentTitle": "Kusari × CNCF 파트너십을 통한 소프트웨어 공급망 보안 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 48901,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2262
-    },
-    {
-      "timestamp": "2026-03-23T18:25:39.144Z",
-      "actionType": "generate",
-      "issueNumber": 576,
-      "documentTitle": "자동 감지: 뉴스 인텔리전스 – LLM 드리프트 모니터링 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 68477,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3232
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 687,
+      "totalEstimatedTokens": 498397,
+      "avgDurationMs": 52431
+    },
     "unknown": {
       "totalActions": 16,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 678,
-      "totalEstimatedTokens": 490242,
-      "avgDurationMs": 52305
     }
   }
 }
