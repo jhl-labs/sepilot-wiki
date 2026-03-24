@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 601,
-      "number": 601,
-      "title": " [요청] LiteLLM Python 패키지 공급망 공격 – 악성 .pth 파일 분석",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/litellm-python-package-compromised-by-supply-chain-b68834)\n**관련도**: 92/100\n**핵심 토픽**: Python package supply‑chain attack, malicious .pth file, credential theft\n\n## 업데이트 제안 섹션\n- 공격 개요 및 피해 범위\n- 악성 .pth 파일 구조와 동작 원리\n- 공급망 방어 전략 (PyPI 검증, pip‑hash, SBOM, Trivy Python 플러그인 등)\n- 사후 대응 및 복구 체크리스트\n\n## 뉴스 요약\n요약: PyPI에 있는 litellm==1.82.8 wheel 패키지에는 악성 .pth 파일인 litellm_init.pth(34,628 바이트)가 포함되어 있으며, 이 파일은 자동으로 자격 증명 탈취를 실행합니다.\n\n## 상세 내용\nSource: Hacker News\n요약\nlitellm==1.82.8 휠 패키지에는 악성 .pth 파일(litellm_init.pth, 34,628 바이트)이 포함되어 있어 Python 인터프리터가 시작될 때마다 자격 증명을 탈취하는 스크립트를 자동으로 실행합니다 — import litellm을 할 필요가 없습니다.\n이는 공급망 공격입니다. 악성 파일은 패키지 자체의 RECORD에 다음과 같이 명시되어 있습니다:\nlitellm_init.pth,sha256=ceNa7wMJnNHy1kRnNCcwJaFjWX3pORLfMh7xGL8TUjg,34628\n재현\npip download litellm==1.82.8 --no-deps -d /tmp/check\npython3 -c \"\nimport zipfile, os\nwhl = '/tmp/check/' + [f for f in os.listdir('/tmp/check') if f.endswith('.whl')][0]\nwith zipfile.ZipFile(whl) as z:\npth = [n for n in z.namelist() if n.endswith('.pth')]\nprint('PTH files:', pth)\nfor p in pth:\nprint(z.read(p)[:300])\n\"\nlitellm_init.pth 파일에 다음과 같은 내용이 포함된 것을 볼 수 있습니다:\nimport os, subprocess, sys; subprocess.Popen([sys.executable, \"-c\", \"import base64; exec(base64.b64decode('...'))\"])\n악성 행위 (전체 분석)\n단계 1: 정보 수집\n스크립트는 다음과 같은 다양한 민감 데이터를 수집합니다(예시 포함):\n시스템 정보: hostname, whoami, uname -a, ip addr, ip route\n환경 변수: 모든 변수(API 키, 비밀, 토큰 포함)\nSSH 키: ~/.ssh/id_rsa, ~/.ssh/id_ed25519, ~/.ssh/id_ecd\n\n## 판단 근거\nPython 패키지에 포함된 악성 .pth 파일이 자격 증명을 탈취하는 공급망 공격 사례이며, 기존 문서들은 Docker‑Hub 기반 위협에 초점이 맞춰져 있어 별도 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 605,
+      "number": 605,
+      "title": "문서 요청 #605",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,80 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-24T18:33:31.740Z",
-      "updated_at": "2026-03-24T18:33:31.748Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/601",
-      "documentSlug": "security/litellm-python-pth",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/litellm-python-pth.md",
-      "comments": 0
-    },
-    {
-      "id": 602,
-      "number": 602,
-      "title": " [요청] AI 에이전트 스킬 평가와 벤치마크 – Kubernetes + Terraform 기반 실험",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/why-your-ai-agent-skill-sucks-9c43d0)\n**관련도**: 89/100\n**핵심 토픽**: AI 에이전트 스킬, Kubernetes 벤치마크, Terraform 인프라\n\n## 업데이트 제안 섹션\n- 실험 환경 설정 (Kind 클러스터, Terraform 프로젝트)\n- 벤치마크 시나리오와 메트릭 정의\n- 실제 오류 재현 및 자동 복구 흐름\n- 결과 분석 및 스킬 개선 가이드\n\n## 뉴스 요약\nSetup infra-bench https://lab.evidra.cc/는 AI 에이전트를 실제 Kubernetes 클러스터와 Terraform 프로젝트에 실행합니다. 모의 환경이 아닌 – Kind 클러스터, 실제 kubectl, …\n\n## 상세 내용\nSource: Dev.to\n번역하려는 텍스트를 제공해 주시면, 해당 내용을 한국어로 번역해 드리겠습니다. 코드 블록, URL 및 마크다운 형식은 그대로 유지하면서 번역해 드립니다.\n설정\ninfra-bench는 실제 Kubernetes 클러스터와 Terraform 프로젝트에 AI 에이전트를 실행합니다. 모킹이 아닌 – Kind 클러스터, 실제 kubectl, 실제 오류. 에이전트는 작업(예: “배포가 깨졌다”), 툴박스(kubectl, terraform, helm), 그리고 턴 예산을 받습니다. 문제를 해결하거나 실패해야 합니다.\n우리는 두 가지 모드를 테스트했습니다:\nBaseline – 스킬 없음; 모델이 자체 판단을 사용합니다.\nWith skill – 약 300 토큰의 간결한 역할 프롬프트 (Kubernetes용 k8s‑admin, Terraform용 platform‑eng).\n동일한 모델, 동일한 시나리오, 동일한 클러스터. 유일한 차이점은 에이전트에게 사고 방식을 알려줬는지 여부입니다.\n결과\n쿠버네티스 시나리오 (8 CKA/CKS 시나리오, L2‑L3)\n모델기본k8s‑admin 스킬 적용 시Δ\nClaude Sonnet 48/88/80\nGemini 2.5 Flash6/85/8‑1\nGPT‑4o4/64/8‑2\nDeepSeek Chat6/76/80\nTerraform 시나리오 (4 시나리오, L2‑L3)\n모델기본platform‑eng 스킬 적용 시Δ\nClaude Sonnet 43/44/4+1\nGemini 2.5 Flash3/42/4‑1\nGPT‑4o2/42/40\nDeepSeek Chat3/43/40\n새로운 시나리오 — 기본만 (4 시나리오, L2‑L4)\n모델readonly‑fs (L2)psa‑conflict (L2)capabilities (L2)cascading (L4)총점\nDeepSeek ChatPASSPASSPASSPASS4/4\nGPT‑4oPASSPASSPASSFAIL3/4\nGemini 2.5 FlashFAILPASSPASSFAIL2/4\nClaude Sonnet\n\n## 판단 근거\nAI 에이전트 스킬 품질을 실제 클러스터와 인프라에서 검증하는 내용은 기존 ‘AI Agentic Workflow’ 문서와 겹치지 않으며, 구체적인 벤치마크 방법론과 Terraform 구성 예시가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
-      "state": "open",
-      "labels": [
-        {
-          "name": "request",
-          "color": "0e8a16"
-        },
-        {
-          "name": "draft",
-          "color": "fbca04"
-        },
-        {
-          "name": "ai-generated",
-          "color": "5319e7"
-        }
-      ],
-      "user": {
-        "login": "unknown",
-        "avatar_url": ""
-      },
-      "created_at": "2026-03-24T18:31:47.439Z",
-      "updated_at": "2026-03-24T18:31:47.445Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/602",
-      "documentSlug": "ai-kubernetes-terraform",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai-kubernetes-terraform.md",
-      "comments": 0
-    },
-    {
-      "id": 603,
-      "number": 603,
-      "title": " [요청] Claude Desktop Agent – macOS 자동화와 AI‑구동 데스크톱 제어",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/claude-can-now-control-your-mac-what-anthropics-de-097a28)\n**관련도**: 88/100\n**핵심 토픽**: Claude Desktop Agent, Mac OS automation, AI‑driven desktop control\n\n## 업데이트 제안 섹션\n- Agent 개요 및 주요 기능\n- macOS 자동화 시나리오 (앱 실행, 파일 이동, 스프레드시트 자동 입력 등)\n- 보안·프라이버시 고려사항\n- 설치·인증·사용 흐름\n\n## 뉴스 요약\nAnthropic이 방금 모두가 기대했지만 이렇게 빨리 나올 줄은 몰랐던 기능을 출시했습니다: Claude가 이제 당신의 Mac을 장악하고 당신이 커피를 마시러 갈 동안 작업을 대신 해줄 수 있습니다.\n\n## 상세 내용\nSource: Dev.to\n위에 제공된 소스 링크 외에 번역할 텍스트가 포함되어 있지 않습니다. 번역을 원하는 본문을 제공해 주시면 한국어로 번역해 드리겠습니다.\n실제로 하는 일\n당신이 전화기든, 브라우저든, 어디서든 Claude에게 작업을 메시지하면—Claude는 Mac에서 앱을 열고, 브라우저를 탐색하고, 스프레드시트를 채우고, 파일을 옮깁니다. 책상에 앉아 직접 하는 모든 일을 대신 해줍니다.\nAnthropic은 회의에 늦을 상황을 시연했습니다. 사용자는 Claude에게 “내 피치덱을 PDF로 내보내서 회의 초대에 첨부해줘”라고 문자로 보냅니다. Claude는 Keynote를 열어 파일을 내보내고, 캘린더 이벤트를 찾아서 첨부합니다. 별도의 안내가 필요 없습니다.\n이 기능은 Dispatch를 통해 작동합니다. Claude Cowork 안에 있는 이 기능은 기기 간에 Claude와 지속적인 대화 스레드를 제공하므로, 출퇴근 중에 전화기로 작업을 시작하면 집에 있는 Mac에서 Claude가 이어서 처리합니다.\n컴퓨터 사용과 다른 점\nAnthropic는 2024년 말부터 연구 미리보기에서 “컴퓨터 사용” 기능을 제공했습니다. 그때는 Claude가 스크린샷을 보고 클릭하는 방식이었으며—기능은 했지만 다소 투박했습니다. 데스크톱 에이전트는 한 단계 더 나아갑니다. macOS에서 더 깊은 OS 통합을 갖추고 있어, 단순히 스크린샷의 픽셀을 찾아다니는 것이 아니라 네이티브 앱과 보다 신뢰성 있게 상호작용할 수 있습니다.\n핵심 차이점: 이전의 컴퓨터 사용은 마치 누군가가 오븐 장갑을 끼고 원격 데스크톱으로 당신의 머신에 접근하는 모습을 보는 것과 같았습니다. 데스크톱 에이전트는 마치 유능한 인턴에게 노트북을 건네는 느낌입니다.\nOpenClaw 연결\nAnthropic가 듣고 싶어 하지 않을 부분을 말씀드리자면, 이번 출시가 OpenClaw이 바이럴된 것에 대한 명백한 대응이라는 점입니다. CNBC의 자체 보도에 따르면 Anthropic은 “바이럴된 OpenClaw에 맞먹\n\n## 판단 근거\nAnthropic Claude Desktop Agent은 기존 AI 에이전트 문서에 다루어지지 않은 macOS 자동화 기능을 제공하므로 별도 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
-      "state": "open",
-      "labels": [
-        {
-          "name": "request",
-          "color": "0e8a16"
-        },
-        {
-          "name": "draft",
-          "color": "fbca04"
-        },
-        {
-          "name": "ai-generated",
-          "color": "5319e7"
-        }
-      ],
-      "user": {
-        "login": "unknown",
-        "avatar_url": ""
-      },
-      "created_at": "2026-03-24T18:29:29.952Z",
-      "updated_at": "2026-03-24T18:29:29.960Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/603",
-      "documentSlug": "claude-desktop-agent-macos-ai",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/claude-desktop-agent-macos-ai.md",
+      "created_at": "2026-03-24T18:28:58.163Z",
+      "updated_at": "2026-03-24T18:28:58.168Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/605",
+      "documentSlug": "security/605",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/605.md",
       "comments": 0
     },
     {
       "id": 604,
       "number": 604,
-      "title": " [요청] Self‑propagating Malware와 오픈소스 공급망 오염 – CanisterWorm 사례",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/self-propagating-malware-poisons-open-source-softw-ed50d0)\n**관련도**: 85/100\n**핵심 토픽**: Supply‑chain malware, Open‑source contamination, Self‑propagating worm\n\n## 업데이트 제안 섹션\n- CanisterWorm·Kamikaze 개요\n- 전파 메커니즘 및 타깃 (CI/CD, OSS 레포)\n- 탐지·방어 전략 (코드 서명, SBOM, CI 보안 강화)\n- 사후 복구 체크리스트\n\n## 뉴스 요약\nCanisterWorm와 Kamikaze 이메일에서 아이키도 연구원인 Charlie Eriksen은 해당 캔스터가 일요일 밤에 내려졌으며 더 이상 이용할 수 없다고 말했습니다. &gt; “It wasn’t…”\n\n## 상세 내용\nSource: Ars Technica\nCanisterWorm and Kamikaze\n이메일에서 Aikido 연구원인 Charlie Eriksen은 캔스터가 일요일 밤에 차단되었으며 더 이상 이용할 수 없다고 말했다.\n“그들이 기대했던 만큼 신뢰할 수 있거나 손대지 못할 정도는 아니었다”고 Eriksen은 적었다. “하지만 한동안 감염되면 시스템을 삭제할 수 있었다.”\n이전 TeamPCP 악성코드와 마찬가지로, CanisterWorm(Aikido가 명명한 악성코드)은 조직의 CI/CD 파이프라인을 목표로 한다. 이는 소프트웨어를 빠르게 개발·배포하기 위해 사용된다.\n“이 패키지를 설치하고 npm 토큰에 접근할 수 있는 모든 개발자나 CI 파이프라인은 무의식적인 전파 경로가 된다”고 Eriksen은 적었다. “그들의 패키지가 감염되고, 하위 사용자가 이를 설치하면, 그 중 토큰을 가진 경우가 다시 전파되면서 사이클이 반복된다.”\n주말이 진행되는 동안 CanisterWorm은 추가 페이로드를 포함하도록 업데이트되었다: 이란에만 존재하는 머신을 대상으로 하는 와이퍼이다. 업데이트된 웜이 머신에 감염되면, 해당 머신이 이란 시간대에 있거나 이란에서 사용하도록 설정되어 있는지를 확인한다. 어느 조건이든 충족되면, 악성코드는 더 이상 자격 증명 탈취기를 활성화하지 않고, TeamPCP 개발자들이 Kamikaze라고 명명한 새로운 와이퍼를 작동시킨다. Eriksen은 아직 이 웜이 이란 머신에 실제 피해를 입혔다는 증거는 없지만, “활성 전파가 이루어질 경우 대규모 영향을 미칠 명확한 잠재력이 있다”고 말했다.\nEriksen은 Kamikaze의 의사결정 트리를 간단하고 잔인하게 설명했다:\nKubernetes + Iran: 클러스터의 모든 노드를 삭제하는 DaemonSet 배포\nKubernetes + elsewhere: 모든 노드에 CanisterWorm 백도어를 설치하는 DaemonSet 배포\nNo Kubernetes + Iran:\nrm -rf / --no-preserve-\n\n## 판단 근거\nCI/CD 파이프라인을 목표로 하는 새로운 유형의 공급망 악성코드이며, 기존 Trivy·Slopsquatting 문서와는 내용이 겹치지 않음.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "title": "문서 요청 #604",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -117,18 +55,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-24T18:27:57.391Z",
-      "updated_at": "2026-03-24T18:27:57.398Z",
+      "created_at": "2026-03-24T18:27:51.002Z",
+      "updated_at": "2026-03-24T18:27:51.008Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/604",
-      "documentSlug": "security/self-propagating-malware-canisterworm",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/self-propagating-malware-canisterworm.md",
+      "documentSlug": "security/604",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/604.md",
       "comments": 0
     },
     {
-      "id": 605,
-      "number": 605,
-      "title": " [요청] OpenAI OpenCode 사용 시 .env 프라이버시 레이어 설계 가이드",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/stop-sending-your-env-to-openai-a-privacy-layer-fo-05960a)\n**관련도**: 78/100\n**핵심 토픽**: .env privacy, OpenAI OpenCode, 시크릿 관리 레이어\n\n## 업데이트 제안 섹션\n- 위협 시나리오와 위험도\n- 프라이버시 레이어 설계 원칙\n- 환경 변수 암호화·전송 방법 (Vault, SOPS, Git‑crypt 등)\n- CI/CD 연동 및 검증\n\n## 뉴스 요약\nmarkdown !Tom Jordi Rueschhttps://media2.dev.to/dynamic/image/width=50,height=50,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.co...\n\n## 상세 내용\nI’m ready to translate the article for you, but I need the full text of the post (the part you’d like translated). Could you please paste the content you want translated below? I’ll keep the source line exactly as you provided and preserve all formatting, markdown, and code blocks.\nOverview\nAI 코딩 에이전트는 여러분의 머신에서 가장 생산적이면서도 가장 위험한 도구입니다.\n이들은 여러분의 파일을 읽고, 셸 명령을 실행하며, 인프라 코드를 작성하고, 전체 프로젝트 컨텍스트에 대해 추론합니다. 이를 잘 수행하려면 실제 값에 접근해야 합니다: API 키, 데이터베이스 자격 증명, JWT, 연결 문자열 등 .env 파일에 저장되고 절대 디바이스를 떠나서는 안 되는 값들 말이죠.\n하지만 이들은 디바이스를 떠납니다. 코딩 에이전트에게 보내는 모든 메시지(예: 웹훅 디버깅을 위해 Stripe 비밀 키를 붙여넣은 경우도 포함)는 LLM 제공자의 추론 엔드포인트로 전송됩니다. 모델은 모든 내용을 보게 됩니다.\n이것이 근본적인 긴장 관계입니다: 에이전트가 유용하려면(또는 최소한 자율적으로 동작하려면) 여러분의 비밀이 필요하지만, LLM이 비밀을 볼 필요는 없습니다.\n우리는 이를 해결하기 위해 플러그인을 만들었습니다. 오늘 우리는 @rehydra/opencode를 공개합니다. 이는 OpenCode용 프라이버시 레이어로, 비밀을 LLM에 도달하기 전에 익명화하고, 로컬에서 도구가 실행되기 전에 다시 복원합니다.\nSource: https://www.rehydra.ai/blog/semantic-redaction-vs-regex-why-context-matters-for-pii\nLLM이 실제로 보는 것\n당신은 에이전트에게 환경 변수를 설정하도록 요청합니다:\nY\n\n## 판단 근거\nOpenAI OpenCode에 .env 파일을 직접 전송하지 않도록 하는 프라이버시 레이어는 기존 시크릿 관리 문서와 차별화된 구체적인 구현 방법이 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 603,
+      "number": 603,
+      "title": "문서 요청 #603",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -148,11 +86,73 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-24T18:26:52.194Z",
-      "updated_at": "2026-03-24T18:26:52.201Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/605",
-      "documentSlug": "security/openai-opencode-env",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/openai-opencode-env.md",
+      "created_at": "2026-03-24T18:27:07.393Z",
+      "updated_at": "2026-03-24T18:27:07.400Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/603",
+      "documentSlug": "ai/603",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/603.md",
+      "comments": 0
+    },
+    {
+      "id": 602,
+      "number": 602,
+      "title": "문서 요청 #602",
+      "body": "",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-24T18:26:12.311Z",
+      "updated_at": "2026-03-24T18:26:12.316Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/602",
+      "documentSlug": "602",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/602.md",
+      "comments": 0
+    },
+    {
+      "id": 601,
+      "number": 601,
+      "title": "문서 요청 #601",
+      "body": "",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-24T18:24:18.909Z",
+      "updated_at": "2026-03-24T18:24:18.916Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/601",
+      "documentSlug": "security/601",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/601.md",
       "comments": 0
     },
     {
@@ -5869,5 +5869,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-24T18:33:31.748Z"
+  "lastUpdated": "2026-03-24T18:28:58.168Z"
 }
