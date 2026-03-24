@@ -1,6 +1,238 @@
 {
   "entries": [
     {
+      "id": "e69f7f8a-a426-4a72-8e63-16a1efc0db4b",
+      "timestamp": "2026-03-24T09:53:09.973Z",
+      "actionType": "quality_score",
+      "issueNumber": 590,
+      "issueTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "documentSlug": "security/trivy-supply-chain-compromise-what-docker-hub-user",
+      "documentTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "2bf50a42-573f-4195-8620-7bea75bfd61a",
+      "timestamp": "2026-03-24T09:52:55.580Z",
+      "actionType": "quality_score",
+      "issueNumber": 591,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "summary": "자동 품질 검토 통과 (91점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "f345e6bb-823c-4c14-8957-9b2910090d25",
+      "timestamp": "2026-03-24T09:52:45.031Z",
+      "actionType": "quality_score",
+      "issueNumber": 592,
+      "issueTitle": "[Wiki Maintenance] [요청] Securing Production Debugging in Kubernetes",
+      "documentSlug": "securing-production-debugging-in-kubernetes",
+      "documentTitle": "[Wiki Maintenance] [요청] Securing Production Debugging in Kubernetes",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "a8cc94bb-8023-44a4-91c7-776e3b567401",
+      "timestamp": "2026-03-24T09:52:28.563Z",
+      "actionType": "modify",
+      "issueNumber": 593,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] reports/weekly-2026-11 문서 참조 URL 확인 필요",
+      "documentSlug": "reports/weekly-2026-11",
+      "documentTitle": "주간 위키 보고서 - 2026년 11주차",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/weekly-2026-11 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 2,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "94c965f4-0904-464f-aec4-8f26bab1f237",
+      "timestamp": "2026-03-24T09:51:47.138Z",
+      "actionType": "modify",
+      "issueNumber": 594,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] reports/devsecops-paradox 문서 참조 URL 확인 필요",
+      "documentSlug": "reports/devsecops-paradox",
+      "documentTitle": "DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/devsecops-paradox 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "11d6d65c-cdda-4fdc-8e54-171951431a42",
+      "timestamp": "2026-03-24T09:51:10.226Z",
+      "actionType": "modify",
+      "issueNumber": 595,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요",
+      "documentSlug": "backend/wiki-api-route-guide",
+      "documentTitle": "Wiki 페이지 API 라우트 상세 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] backend/wiki-api-route-guide 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 104,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "bd7226fe-af2a-4ba8-b1db-34928be3936d",
+      "timestamp": "2026-03-24T09:49:47.394Z",
+      "actionType": "generate",
+      "issueNumber": 590,
+      "issueTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "documentSlug": "security/trivy-supply-chain-compromise-what-docker-hub-user",
+      "documentTitle": "Trivy 공급망 침해 – Docker Hub 사용자 가이드",
+      "summary": "새 문서 \"Trivy 공급망 침해 – Docker Hub 사용자 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 10417
+            },
+            {
+              "step": "outline",
+              "durationMs": 8701
+            },
+            {
+              "step": "write",
+              "durationMs": 17820
+            },
+            {
+              "step": "review",
+              "durationMs": 8112
+            },
+            {
+              "step": "refine",
+              "durationMs": 28424
+            }
+          ],
+          "totalDurationMs": 73474,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3153,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "cd543ef2-51e2-4b35-ac26-5a97fd1c436c",
+      "timestamp": "2026-03-24T09:48:19.352Z",
+      "actionType": "generate",
+      "issueNumber": 591,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
+      "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
+      "summary": "새 문서 \"Announcing Ingress2Gateway 1.0 – Your Path to Gateway API\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 7041
+            },
+            {
+              "step": "outline",
+              "durationMs": 11103
+            },
+            {
+              "step": "write",
+              "durationMs": 29670
+            },
+            {
+              "step": "review",
+              "durationMs": 5755
+            }
+          ],
+          "totalDurationMs": 53569,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2327,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "f513e51b-f646-407a-97ff-5f3126a6d027",
+      "timestamp": "2026-03-24T09:47:09.049Z",
+      "actionType": "generate",
+      "issueNumber": 592,
+      "issueTitle": "[Wiki Maintenance] [요청] Securing Production Debugging in Kubernetes",
+      "documentSlug": "securing-production-debugging-in-kubernetes",
+      "documentTitle": "Securing Production Debugging in Kubernetes",
+      "summary": "새 문서 \"Securing Production Debugging in Kubernetes\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 2751
+            },
+            {
+              "step": "outline",
+              "durationMs": 10257
+            },
+            {
+              "step": "write",
+              "durationMs": 38043
+            },
+            {
+              "step": "review",
+              "durationMs": 5208
+            }
+          ],
+          "totalDurationMs": 56259,
+          "researchSources": 5,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 7
+          },
+          "estimatedTokens": {
+            "estimated": 2675,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "06cba5da-6ca4-4ea7-9d46-e79366d1dfd1",
       "timestamp": "2026-03-24T09:24:33.321Z",
       "actionType": "maintain",
@@ -16854,5 +17086,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-24T09:24:33.321Z"
+  "lastUpdated": "2026-03-24T09:53:09.973Z"
 }
