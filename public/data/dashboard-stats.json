@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-24T08:49:58.768Z",
+  "collectedAt": "2026-03-24T09:50:33.617Z",
   "overview": {
     "totalDocuments": 260,
     "publishedDocuments": 135,
     "draftDocuments": 125,
     "openRequests": 159,
     "closedRequests": 19,
-    "totalAIActions": 692
+    "totalAIActions": 694
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 29,
+      "aiActions": 30,
       "documentsCreated": 9,
       "documentsModified": 14,
       "tavilyApiCalls": 27,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 480646
     },
     "last7d": {
-      "aiActions": 127,
-      "documentsCreated": 48,
+      "aiActions": 124,
+      "documentsCreated": 45,
       "documentsModified": 39,
-      "tavilyApiCalls": 144,
-      "tavilyResults": 368,
-      "estimatedTokens": 113067,
-      "totalPipelineDurationMs": 2450804
+      "tavilyApiCalls": 135,
+      "tavilyResults": 341,
+      "estimatedTokens": 105636,
+      "totalPipelineDurationMs": 2282642
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-24T09:24:33.321Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-24T09:24:24.304Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-24T06:31:26.259Z",
       "actionType": "modify",
@@ -217,38 +237,18 @@
       "durationMs": 68477,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3232
-    },
-    {
-      "timestamp": "2026-03-23T18:24:23.628Z",
-      "actionType": "modify",
-      "issueNumber": 575,
-      "documentTitle": "바이브 코딩이란?",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-23T18:22:54.041Z",
-      "actionType": "generate",
-      "issueNumber": 574,
-      "documentTitle": "자율 AI 에이전트와 NVIDIA OpenShell을 활용한 Secure‑by‑Design 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 95082,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4538
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 677,
-      "totalEstimatedTokens": 490242,
-      "avgDurationMs": 52305
-    },
     "unknown": {
-      "totalActions": 15,
+      "totalActions": 16,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 678,
+      "totalEstimatedTokens": 490242,
+      "avgDurationMs": 52305
     }
   }
 }
