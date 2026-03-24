@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "731707d6-caa2-46b8-8b9c-89c0ac5f7a13",
+      "timestamp": "2026-03-24T12:26:07.800Z",
+      "actionType": "quality_score",
+      "issueNumber": 597,
+      "issueTitle": " [요청] ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
+      "documentSlug": "ai/proofshot-ai-ui-cli",
+      "documentTitle": " [요청] ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "fa1f4a17-3cac-41a5-a473-7600be2e0ba2",
+      "timestamp": "2026-03-24T12:25:55.250Z",
+      "actionType": "quality_score",
+      "issueNumber": 598,
+      "issueTitle": " [요청] llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
+      "documentSlug": "kubernetes/llm-d-cncf-ai-native-kubernetes",
+      "documentTitle": " [요청] llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "a119dd01-9a39-472f-b105-0b2be9070ba8",
+      "timestamp": "2026-03-24T12:25:39.230Z",
+      "actionType": "quality_score",
+      "issueNumber": 600,
+      "issueTitle": " [요청] FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
+      "documentSlug": "fastconvert-ai",
+      "documentTitle": " [요청] FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "179f4cd4-9aa8-42c1-b277-fe10a3c63cd5",
+      "timestamp": "2026-03-24T12:25:23.014Z",
+      "actionType": "generate",
+      "issueNumber": 597,
+      "issueTitle": " [요청] ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
+      "documentSlug": "ai/proofshot-ai-ui-cli",
+      "documentTitle": "ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
+      "summary": "새 문서 \"ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1038
+            },
+            {
+              "step": "outline",
+              "durationMs": 9988
+            },
+            {
+              "step": "write",
+              "durationMs": 26126
+            },
+            {
+              "step": "review",
+              "durationMs": 8102
+            }
+          ],
+          "totalDurationMs": 45255,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2210,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "bfc948d8-c661-4f2f-8359-125b23523422",
+      "timestamp": "2026-03-24T12:24:22.947Z",
+      "actionType": "generate",
+      "issueNumber": 598,
+      "issueTitle": " [요청] llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
+      "documentSlug": "kubernetes/llm-d-cncf-ai-native-kubernetes",
+      "documentTitle": "llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
+      "summary": "새 문서 \"llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1006
+            },
+            {
+              "step": "outline",
+              "durationMs": 11069
+            },
+            {
+              "step": "write",
+              "durationMs": 24260
+            },
+            {
+              "step": "review",
+              "durationMs": 7439
+            }
+          ],
+          "totalDurationMs": 43774,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2138,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5109d464-e22c-4e32-8208-56055198be2d",
+      "timestamp": "2026-03-24T12:23:23.166Z",
+      "actionType": "generate",
+      "issueNumber": 600,
+      "issueTitle": " [요청] FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
+      "documentSlug": "fastconvert-ai",
+      "documentTitle": "FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
+      "summary": "새 문서 \"FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1159
+            },
+            {
+              "step": "outline",
+              "durationMs": 7854
+            },
+            {
+              "step": "write",
+              "durationMs": 25104
+            },
+            {
+              "step": "review",
+              "durationMs": 5212
+            }
+          ],
+          "totalDurationMs": 39329,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 1909,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "d561f6f4-6431-4049-a599-25c0bc57fb64",
       "timestamp": "2026-03-24T12:18:58.614Z",
       "actionType": "maintain",
@@ -17100,5 +17277,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-24T12:18:58.614Z"
+  "lastUpdated": "2026-03-24T12:26:07.800Z"
 }
