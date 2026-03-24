@@ -1,56 +1,14 @@
 {
   "entries": [
     {
-      "id": "731707d6-caa2-46b8-8b9c-89c0ac5f7a13",
-      "timestamp": "2026-03-24T12:26:07.800Z",
-      "actionType": "quality_score",
-      "issueNumber": 597,
-      "issueTitle": " [요청] ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
-      "documentSlug": "ai/proofshot-ai-ui-cli",
-      "documentTitle": " [요청] ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "fa1f4a17-3cac-41a5-a473-7600be2e0ba2",
-      "timestamp": "2026-03-24T12:25:55.250Z",
-      "actionType": "quality_score",
-      "issueNumber": 598,
-      "issueTitle": " [요청] llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
-      "documentSlug": "kubernetes/llm-d-cncf-ai-native-kubernetes",
-      "documentTitle": " [요청] llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "a119dd01-9a39-472f-b105-0b2be9070ba8",
-      "timestamp": "2026-03-24T12:25:39.230Z",
-      "actionType": "quality_score",
-      "issueNumber": 600,
-      "issueTitle": " [요청] FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
-      "documentSlug": "fastconvert-ai",
-      "documentTitle": " [요청] FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "179f4cd4-9aa8-42c1-b277-fe10a3c63cd5",
-      "timestamp": "2026-03-24T12:25:23.014Z",
+      "id": "8d9a7c1a-de55-4d4f-b221-4a1a674ddacb",
+      "timestamp": "2026-03-24T12:23:44.387Z",
       "actionType": "generate",
-      "issueNumber": 597,
-      "issueTitle": " [요청] ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
-      "documentSlug": "ai/proofshot-ai-ui-cli",
-      "documentTitle": "ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구",
-      "summary": "새 문서 \"ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구\" 생성",
+      "issueNumber": 600,
+      "issueTitle": "문서 요청 #600",
+      "documentSlug": "600",
+      "documentTitle": "FastConvert.ai 파일 변환 및 이미지 최적화 가이드",
+      "summary": "새 문서 \"FastConvert.ai 파일 변환 및 이미지 최적화 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -59,43 +17,60 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1038
+              "durationMs": 996
             },
             {
               "step": "outline",
-              "durationMs": 9988
+              "durationMs": 8249
             },
             {
               "step": "write",
-              "durationMs": 26126
+              "durationMs": 21333
             },
             {
               "step": "review",
-              "durationMs": 8102
+              "durationMs": 7360
             }
           ],
-          "totalDurationMs": 45255,
+          "totalDurationMs": 37938,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 2210,
+            "estimated": 1847,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "bfc948d8-c661-4f2f-8359-125b23523422",
-      "timestamp": "2026-03-24T12:24:22.947Z",
+      "id": "eb7622f2-9ff3-404b-863c-7f595dc6c723",
+      "timestamp": "2026-03-24T12:23:02.770Z",
+      "actionType": "modify",
+      "issueNumber": 599,
+      "issueTitle": " [업데이트] Claude Code 사례 연구: Chroma 구문 강조를 위한 AI‑지원 Pull Request",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code 사례 연구: Chroma 구문 강조를 위한 AI‑지원 Pull Request\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 8,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "a53b7545-9270-4e74-a631-108b20723920",
+      "timestamp": "2026-03-24T12:21:45.752Z",
       "actionType": "generate",
       "issueNumber": 598,
-      "issueTitle": " [요청] llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
-      "documentSlug": "kubernetes/llm-d-cncf-ai-native-kubernetes",
-      "documentTitle": "llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라",
-      "summary": "새 문서 \"llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라\" 생성",
+      "issueTitle": "문서 요청 #598",
+      "documentSlug": "kubernetes/598",
+      "documentTitle": "llm‑d와 CNCF 샌드박스 프로젝트 통합 가이드",
+      "summary": "새 문서 \"llm‑d와 CNCF 샌드박스 프로젝트 통합 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -104,43 +79,43 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1006
+              "durationMs": 3448
             },
             {
               "step": "outline",
-              "durationMs": 11069
+              "durationMs": 8736
             },
             {
               "step": "write",
-              "durationMs": 24260
+              "durationMs": 25986
             },
             {
               "step": "review",
-              "durationMs": 7439
+              "durationMs": 7873
             }
           ],
-          "totalDurationMs": 43774,
-          "researchSources": 1,
+          "totalDurationMs": 46043,
+          "researchSources": 10,
           "tavilyUsage": {
-            "apiCalls": 0,
-            "totalResults": 0
+            "apiCalls": 3,
+            "totalResults": 9
           },
           "estimatedTokens": {
-            "estimated": 2138,
+            "estimated": 2130,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "5109d464-e22c-4e32-8208-56055198be2d",
-      "timestamp": "2026-03-24T12:23:23.166Z",
+      "id": "7cd1387d-c142-4810-93b4-579fb338990b",
+      "timestamp": "2026-03-24T12:20:54.724Z",
       "actionType": "generate",
-      "issueNumber": 600,
-      "issueTitle": " [요청] FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
-      "documentSlug": "fastconvert-ai",
-      "documentTitle": "FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스",
-      "summary": "새 문서 \"FastConvert.ai – 브라우저 기반 멀티미디어 파일 변환 서비스\" 생성",
+      "issueNumber": 597,
+      "issueTitle": "문서 요청 #597",
+      "documentSlug": "ai/597",
+      "documentTitle": "ProofShot – AI 코딩 에이전트를 위한 UI 검증 도구",
+      "summary": "새 문서 \"ProofShot – AI 코딩 에이전트를 위한 UI 검증 도구\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -149,32 +124,49 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1159
+              "durationMs": 4228
             },
             {
               "step": "outline",
-              "durationMs": 7854
+              "durationMs": 6050
             },
             {
               "step": "write",
-              "durationMs": 25104
+              "durationMs": 23091
             },
             {
               "step": "review",
-              "durationMs": 5212
+              "durationMs": 6109
             }
           ],
-          "totalDurationMs": 39329,
-          "researchSources": 1,
+          "totalDurationMs": 39478,
+          "researchSources": 8,
           "tavilyUsage": {
-            "apiCalls": 0,
-            "totalResults": 0
+            "apiCalls": 3,
+            "totalResults": 7
           },
           "estimatedTokens": {
-            "estimated": 1909,
+            "estimated": 1763,
             "method": "duration_based"
           }
         }
+      }
+    },
+    {
+      "id": "b5150aec-22ec-4aee-aa59-f3da5331b7a4",
+      "timestamp": "2026-03-24T12:20:12.126Z",
+      "actionType": "modify",
+      "issueNumber": 596,
+      "issueTitle": " [업데이트] Gemini Code Assist: Enhancing the Coding Experience (2026‑03‑10 Update)",
+      "documentSlug": "ai/gemini-3-1",
+      "documentTitle": "Google AI Pro 활용 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Gemini Code Assist: Enhancing the Coding Experience (2026‑03‑10 Update)\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 140
       }
     },
     {
@@ -17277,5 +17269,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-24T12:26:07.800Z"
+  "lastUpdated": "2026-03-24T12:23:44.387Z"
 }
