@@ -1,5 +1,5 @@
 ---
-title: OpenAPI Builder – 코드‑없는 빠른 API 문서화 실전 가이드
+title: "[업데이트] OpenAPI Builder – 코드‑없는 빠른 API 문서화 실전 가이드"
 author: SEPilot AI
 status: published
 tags: [OpenAPI, No-code, API Documentation, Swagger UI]
@@ -31,59 +31,60 @@ OpenAPI 3.0 스펙을 직접 YAML 파일로 작성하면 들여쓰기 오류, 
 | 샘플 PetStore | 전체 예제 프로젝트를 로드해 학습 및 테스트 가능 | [출처](https://euno.news/posts/ko/writing-yaml-for-api-docs-stop-i-built-a-free-open-3c483b)
 
 ## 4. Zero‑Code Quick Start
-아래 단계만 따라 하면 코드 한 줄 없이 바로 API 문서를 만들 수 있습니다.
+가장 빠르게 API 문서를 만들고 싶다면 아래 5단계만 따라 하면 됩니다.
 
-1. **Builder 접속** – `https://openapi-builder.dev` 에 접속하고 “New Project” 클릭.  
-2. **프로젝트 기본 정보 입력** – API 이름, 버전, 간단한 설명, 그리고 Base URL(예: `https://api.example.com`)을 입력.  
-3. **엔드포인트 추가** – “Add Endpoint” → 경로 입력(`/users`) → 메서드 선택(GET) → 한 줄 요약과 태그 입력.  
-4. **요청·응답 예시 붙여넣기** – 요청 본문과 응답 JSON 샘플을 복사·붙여넣으면 자동으로 스키마가 생성됩니다.  
-5. **보안 설정** – 필요 시 “Security” 탭에서 API 키 또는 Bearer 토큰을 지정.  
-6. **실시간 프리뷰 확인** – 오른쪽 Swagger UI가 즉시 업데이트되므로 결과를 바로 검증.  
-7. **스펙 내보내기** – “Export” → JSON 또는 YAML 선택 → 파일 다운로드 또는 클립보드 복사.  
+1. **Builder 접속** – `https://openapi-builder.dev` 에 접속 후 “New Project” 클릭.  
+2. **API 기본 정보 입력** – 프로젝트 이름, 베이스 URL, 간단한 설명을 입력하고 “Save”.  
+3. **엔드포인트 추가** – “Add Endpoint” → 경로와 메서드 선택 → 한 줄 요약과 태그 입력.  
+4. **요청·응답 예시** – “Request Body”에 샘플 JSON을 붙여넣고, “Response”에 200 예시 JSON을 입력.  
+5. **즉시 공유** – “Export” → “YAML” 선택 → 파일을 다운로드하거나 클립보드 복사 후 GitHub/README 등에 삽입.
 
-이 흐름은 **DocForge** 등 다른 도구가 제시한 “Zero‑Code” 접근법과 동일하게, 별도의 서버 설정이나 계정 없이 브라우저만으로 문서를 완성합니다.
+> **핵심 체크리스트** (EUNO.NEWS 요약)  
+> - Base URL  
+> - Method + Path  
+> - 한 줄 설명  
+> - 인증 요구사항 (Bearer, API‑Key 등)  
+> - 요청 파라미터 / Body  
+> - 응답 예시  
+> - 상태 코드  
+
+위 7가지만 채우면 개발자는 바로 API를 통합할 수 있습니다. [출처](https://euno.news/posts/ko/the-fastest-way-to-document-your-api-without-learn-a89348)
 
 ## 5. 자동 스키마 추출 (Express, FastAPI, Go)
-OpenAPI Builder 자체는 코드 분석 기능을 제공하지 않지만, 기존 프레임워크가 자동으로 생성한 OpenAPI 스펙을 손쉽게 가져올 수 있습니다.
+완전한 Zero‑Code 접근이 아니라 이미 코드가 존재하는 경우, 아래와 같이 자동으로 OpenAPI 스펙을 추출한 뒤 Builder에 임포트할 수 있습니다.
 
-| 프레임워크 | 자동 스키마 생성 방법 | Builder 로 가져오기 |
-|------------|----------------------|-------------------|
-| **Express (Node.js)** | `express-openapi` 혹은 `swagger-jsdoc` 사용 | 생성된 JSON/YAML을 복사 → Builder “Import” 영역에 붙여넣기 |
-| **FastAPI (Python)** | FastAPI는 `/openapi.json` 엔드포인트를 자동 제공 | 브라우저에서 `http://localhost:8000/openapi.json` 열고 복사 → Builder에 임포트 |
-| **Go** | `go-swagger` 혹은 `swaggo/swag` 로 OpenAPI 3.0 JSON 생성 | `go run main.go` 로 스펙 파일 생성 후 Builder에 업로드 |
+| 언어/프레임워크 | 자동 추출 도구 | Builder 임포트 방법 |
+|----------------|----------------|----------------------|
+| **Node.js (Express)** | `swagger-jsdoc` + `swagger-ui-express` | 생성된 JSON 파일을 Builder “Import” 창에 붙여넣기 |
+| **Python (FastAPI)** | FastAPI는 실행 시 `/openapi.json` 자동 제공 | 해당 URL에서 JSON을 다운로드 후 Builder에 임포트 |
+| **Go** | `go-swagger` 또는 `swaggo/swag` | `swag init` 로 생성된 `swagger.json`을 Builder에 붙여넣기 |
 
-이렇게 하면 기존 코드베이스에서 이미 검증된 스키마를 그대로 활용하면서도 Builder UI를 통해 추가 편집·프리뷰가 가능합니다.
+이 과정을 통해 기존 코드베이스를 손쉽게 문서화하고, Builder UI에서 추가 편집·보완이 가능합니다.
 
 ## 6. Swagger UI 자동 배포
-생성된 OpenAPI 스펙을 별도 서버 없이 바로 공유하고 싶다면 다음과 같은 정적 호스팅 서비스를 활용합니다.
+Builder에서 내보낸 OpenAPI 스펙을 바로 공개 문서로 배포하는 가장 간단한 방법은 **GitHub Pages** 혹은 **Netlify** 를 이용하는 것입니다.
 
-1. **스펙 파일 준비** – Builder에서 YAML 또는 JSON을 다운로드.  
-2. **Swagger UI 레포 만들기** – GitHub에 `swagger-ui` 레포를 포크하거나 `https://github.com/swagger-api/swagger-ui` 를 클론.  
-3. **스펙 파일 복사** – `dist` 폴더에 `openapi.yaml`(또는 `openapi.json`) 파일을 넣고 `index.html` 의 `url` 파라미터를 해당 파일명으로 수정.  
-4. **GitHub Pages 활성화** – 레포 설정 → Pages → `gh-pages` 브랜치 선택 → 배포 URL 확인.  
-5. **대체 옵션** – Netlify, Vercel, Cloudflare Pages 등에서도 동일하게 정적 파일만 업로드하면 자동으로 Swagger UI가 제공됩니다.  
+1. **스펙 파일 저장** – Builder → “Export” → YAML(또는 JSON) 다운로드.  
+2. **리포지토리 생성** – `docs/` 폴더에 `openapi.yaml` 파일을 커밋.  
+3. **Swagger UI 설정** – `index.html` 에 아래와 같이 삽입:  
 
-이 과정을 통해 **문서 URL 하나**만 공유하면 팀원·고객이 언제든 최신 스펙을 확인하고 “Try it out” 기능까지 사용할 수 있습니다.
+   ```html
+   <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+   <script>
+     SwaggerUIBundle({
+       url: "openapi.yaml",
+       dom_id: '#swagger-ui',
+     });
+   </script>
+   <div id="swagger-ui"></div>
+   ```
 
-## 7. 실전 프로젝트 예시
-### 예시 1 – 간단한 Todo API
-| 단계 | 내용 |
-|------|------|
-| 1️⃣ 프로젝트 생성 | “Todo API” 라는 이름으로 Builder에 새 프로젝트 생성 |
-| 2️⃣ 엔드포인트 정의 | `GET /todos`, `POST /todos`, `PUT /todos/{id}`, `DELETE /todos/{id}` 추가 |
-| 3️⃣ 요청·응답 샘플 | 각각의 엔드포인트에 JSON 예시를 붙여넣어 자동 스키마 생성 |
-| 4️⃣ 보안 설정 | API 키 기반 인증을 “Security” 탭에 추가 |
-| 5️⃣ 프리뷰 & 수정 | Swagger UI 프리뷰에서 동작 확인 후 필요 시 파라미터 수정 |
-| 6️⃣ 내보내기 & 배포 | YAML 파일을 GitHub 레포에 커밋 → 위의 **Swagger UI 자동 배포** 절차대로 공개 URL 생성 |
+4. **GitHub Pages 활성화** – `Settings → Pages → source: main /docs`.  
+5. **자동 배포** – 파일을 푸시하면 즉시 `https://<username>.github.io/<repo>/` 에서 인터랙티브 문서 확인 가능.
 
-### 예시 2 – 기존 FastAPI 프로젝트와 연동
-1. FastAPI 프로젝트에 `uvicorn main:app --reload` 로 실행하고 `http://localhost:8000/openapi.json` 에서 스펙을 다운로드.  
-2. Builder에 “Import” 기능으로 JSON을 붙여넣고 UI에서 추가 설명·태그를 보강.  
-3. 수정된 스펙을 다시 내보내어 팀 내부 문서 레포에 커밋하고, GitHub Pages 로 Swagger UI 배포.  
+Netlify, Vercel 등 다른 정적 호스팅 서비스에서도 동일하게 `swagger-ui` 를 포함한 정적 파일을 배포하면 됩니다.
 
-이와 같이 **Zero‑Code** 방식으로 빠르게 문서를 만들고, 필요 시 기존 코드에서 자동 생성된 스키마를 가져와 보강할 수 있습니다.
-
-## 8. 사용 방법 – 단계별 가이드
+## 7. 사용 방법 – 단계별 가이드
 1. **Builder 접속 및 프로젝트 생성**  
    브라우저에서 OpenAPI Builder URL에 접속하고 “New Project” 버튼을 눌러 작업 공간을 엽니다.  
 2. **API Info 입력**  
@@ -101,13 +102,13 @@ OpenAPI Builder 자체는 코드 분석 기능을 제공하지 않지만, 기존
 7. **스펙 다운로드·버전 관리**  
    “Export” 버튼을 클릭해 JSON 또는 YAML 파일을 다운로드하거나 클립보드에 복사합니다. 필요 시 Git 레포에 커밋해 버전 관리합니다. [출처](https://euno.news/posts/ko/writing-yaml-for-api-docs-stop-i-built-a-free-open-3c483b)
 
-## 9. 실시간 미리보기 & 내보내기
+## 8. 실시간 미리보기 & 내보내기
 - **Swagger UI 연동**: Builder 내부에 내장된 Swagger UI가 입력 내용과 1:1 매핑되어 즉시 시각화됩니다.  
 - **코드 탭 동기화**: 폼 수정 시 JSON/YAML 코드 탭이 자동으로 업데이트되며, 직접 편집도 가능하지만 권장되는 흐름은 UI 기반 입력입니다.  
 - **단일 클릭 내보내기**: “Export” 메뉴에서 원하는 포맷(JSON·YAML)을 선택해 파일을 다운로드하거나 클립보드에 복사합니다.  
 - **Git 연동 팁**: 다운로드한 스펙 파일을 레포에 커밋하고 CI 파이프라인에서 `swagger-codegen`·`openapi-generator`와 연동하면 자동 SDK 생성이 가능합니다. [출처](https://euno.news/posts/ko/writing-yaml-for-api-docs-stop-i-built-a-free-open-3c483b)
 
-## 10. 차별점 및 장점
+## 9. 차별점 및 장점
 | 구분 | 기존 텍스트 편집 | OpenAPI Builder |
 |------|----------------|-----------------|
 | 인터페이스 | YAML/JSON 직접 입력, 들여쓰기·구문 오류 위험 | 폼 기반 No‑code UI |
@@ -116,14 +117,14 @@ OpenAPI Builder 자체는 코드 분석 기능을 제공하지 않지만, 기존
 | 보안·프라이버시 | 파일을 로컬·클라우드에 저장 | 100 % 브라우저 내 처리, 파일이 사용자 머신을 떠나지 않음 |
 | 비용 | IDE·플러그인 별도 구매·설정 필요 | 무료, 회원가입·제한 없음 | [출처](https://euno.news/posts/ko/writing-yaml-for-api-docs-stop-i-built-a-free-open-3c483b)
 
-## 11. 통합 및 활용 사례
+## 10. 통합 및 활용 사례
 - **Swagger UI / ReDoc**: 내보낸 스펙을 그대로 로드해 인터랙티브 문서 제공  
 - **Postman**: 스펙을 임포트해 컬렉션 자동 생성 및 테스트 가능  
 - **API 게이트웨이**: AWS API Gateway, Azure API Management, Kong 등에서 OpenAPI 3.0 스펙을 직접 입력해 라우팅·보안 정책 적용  
 - **코드 생성기**: `swagger-codegen`, `openapi-generator`와 연계해 서버·클라이언트 SDK 자동 생성  
 - **CI/CD 파이프라인**: 레포에 커밋된 스펙 파일을 감지해 자동 문서·SDK 빌드 단계에 활용 (예: GitHub Actions) [출처](https://euno.news/posts/ko/writing-yaml-for-api-docs-stop-i-built-a-free-open-3c483b)
 
-## 12. 적용 시나리오
+## 11. 적용 시나리오
 ### 언제 사용해야 할까?
 - 신규 API 설계·프로토타이핑 단계  
 - 문서가 전무한 레거시 API에 문서화가 필요할 때  
@@ -134,12 +135,26 @@ OpenAPI Builder 자체는 코드 분석 기능을 제공하지 않지만, 기존
 - 이미 존재하는 스펙을 단순히 보기만 할 때는 Swagger Viewer 사용 권장  
 - 실시간 엔드포인트 테스트가 필요한 경우(예: Postman의 테스트 스위트)  
 
-## 13. 실제 워크플로우 예시
+## 12. 실제 워크플로우 예시
 1. **Builder** → 엔드포인트 정의 및 파라미터/응답 설정  
 2. **Swagger UI** 프리뷰에서 검증·수정  
 3. **YAML** 내보내기 → Git 레포에 커밋  
 4. CI 파이프라인이 스펙 변화를 감지 → `openapi-generator`로 SDK 자동 생성  
 5. 생성된 SDK를 배포·사용  
+
+## 13. 실전 프로젝트 예시
+### PetStore 샘플
+Builder에 내장된 **PetStore** 예제는 전체 CRUD 흐름을 포함합니다. 이를 로드하면:
+- 엔드포인트 구조 확인  
+- 요청·응답 샘플 확인  
+- 보안 스키마 적용 방법 학습  
+
+### 사이드 프로젝트 “Todo API”
+1. **Zero‑Code Quick Start** 로 `Todo` API 기본 정보를 입력하고 `/todos` GET/POST, `/todos/{id}` PUT/DELETE 엔드포인트를 추가.  
+2. **자동 스키마 추출**: Express 프로젝트에 `swagger-jsdoc` 로 생성한 `swagger.json`을 Builder에 임포트해 기존 구현과 동기화.  
+3. **Swagger UI 자동 배포**: GitHub Pages에 `openapi.yaml` 과 `index.html` 을 배포해 `https://<user>.github.io/todo-api/` 로 실시간 문서 제공.  
+
+이와 같이 작은 사이드 프로젝트도 10분 내에 완전한 인터랙티브 문서를 갖출 수 있습니다.
 
 ## 14. 보안 및 데이터 저장
 - **브라우저 로컬 자동 저장**: 입력 내용은 로컬 스토리지에 암호화 없이 저장되며, 페이지를 닫아도 복구 가능합니다.  
