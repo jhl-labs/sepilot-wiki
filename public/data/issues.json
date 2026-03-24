@@ -3,8 +3,8 @@
     {
       "id": 584,
       "number": 584,
-      "title": "문서 요청 #584",
-      "body": "",
+      "title": " [요청] AI 에이전트를 위한 Auth0 Token Vault 보안 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/securing-the-autonomous-future-with-auth0-token-va-2a70b5)\n**관련도**: 75/100\n**핵심 토픽**: Auth0, Token Vault, AI 에이전트 보안\n\n## 뉴스 요약\n전통적인 API 키의 문제점 Auth0의 AI Agent Vault 이전에, AI가 제3자 서비스와 상호 작용해야 할 경우, 개발자들은 보통 pas...\n\n## 상세 내용\nSource: Dev.to\n위에 제공된 링크만으로는 번역할 본문이 포함되어 있지 않습니다. 번역을 원하는 텍스트를 제공해 주시면, 요청하신 대로 한국어로 번역해 드리겠습니다.\n전통적인 API 키의 문제점\nAuth0의 AI Agent Vault가 등장하기 전에는, AI가 제3자 서비스와 상호작용해야 할 경우 개발자들이 보통 정적이고 장기간 유효한 API 키를 에이전트 컨텍스트에 전달하는 방법을 사용했습니다. 이는 근본적으로 안전하지 않습니다: 에이전트의 프롬프트가 탈취되거나 로그가 유출되면 해당 정적 키가 무기한으로 노출됩니다. 전통적인 OAuth 흐름은 기계를 위해 설계된 것이 아니라, 사용자가 브라우저 창에서 “Authorize”(승인) 버튼을 클릭하도록 설계되었습니다.\nAuth0 Token Vault 활용 방법\n원시 키를 직접 다루는 대신, 우리 애플리케이션은 Auth0 Token Vault를 안전한 중개 브로커로 사용합니다. AI 에이전트가 마켓플레이스 내에서 작업을 수행해야 할 때, 정적인 .env 자격 증명을 사용하지 않습니다.\n에이전트는 Auth0에 인증하여 해당 트랜잭션에 정확히 맞춰진 위임된 단기간 액세스 토큰을 요청합니다.\n범위 제한\nAI 에이전트가 사용자의 마켓플레이스 잔액을 읽기만 하면 되는 경우, Auth0는 생성된 토큰에 오직 read:balance 권한만 포함되도록 보장합니다. 해당 토큰은 거래를 실행하거나 기존 자격 증명을 취소할 수 없습니다.\n일시적인 수명\nVault에서 AI에게 발급된 토큰은 빠르게 만료됩니다. 설령 가로채더라도 공격 가능한 시간 창은 무시할 정도로 짧습니다.\n감사 가능성\n모든 AI 트랜잭션이 Auth0를 거치기 때문에, 어떤 AI 에이전트가 언제 어떤 목적으로 접근을 요청했는지에 대한 완전하고 중앙화된 감사 로그를 보유하고 있습니다.\nAuth0 커뮤니티에 왜 중요한가\nAuth0 커뮤니티는 오랫동안 인간 신원 관리의 금본위제 역할을 해왔습니다. AI 에이전트를 위한 Token Vault를 기능적인 마켓플레이스에 통\n\n## 판단 근거\nAuth0 기반 토큰 금고는 기존 보안 문서에 언급되지 않은 새로운 솔루션이며, AI 에이전트 비밀 관리에 특화된 가이드가 필요함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-24T00:27:30.789Z",
-      "updated_at": "2026-03-24T00:27:30.796Z",
+      "updated_at": "2026-03-24T00:30:56.841Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/584",
-      "documentSlug": "security/584",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/584.md",
+      "documentSlug": "security/ai-auth0-token-vault",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/ai-auth0-token-vault.md",
       "comments": 0
     },
     {
       "id": 581,
       "number": 581,
-      "title": "문서 요청 #581",
-      "body": "",
+      "title": " [요청] DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/how-to-set-up-nemoclaw-on-a-digitalocean-droplet-w-ba4815)\n**관련도**: 85/100\n**핵심 토픽**: DigitalOcean Droplet, NemoClaw, 1‑Click 배포\n\n## 뉴스 요약\n전제 조건 - DigitalOcean 계정 (없다면 가입) - NVIDIA API 키 (build.nvidia.com/settings/api-keys에서 생성) - NemoClaw 1 생성​\n\n## 상세 내용\nSource: Dev.to\n전제 조건\nDigitalOcean 계정 (없다면 가입하세요)\nNVIDIA API 키 (build.nvidia.com/settings/api-keys에서 생성)\nNemoClaw 1‑Click Droplet 만들기\n디지털오션 마켓플레이스에서 NemoClaw 1‑Click Droplet 페이지로 이동하여 Create NemoClaw Droplet을 클릭합니다.\nCPU‑Optimized 플랜 중 Premium Intel을 선택하고 32 GB RAM과 16 CPU를 선택합니다.\n가까운 데이터센터 지역을 선택하고, SSH 키를 추가한 뒤 Create Droplet을 클릭합니다.\nNote: 이 Droplet은 $336 /월입니다. 실험이 끝나면 삭제하세요.\n초기 SSH 접속 및 온보딩 마법사\nssh root@your_server_ip\n로그인하면 NemoClaw 온보딩 마법사가 자동으로 실행됩니다:\n사전 점검 수행 (Docker, OpenShell CLI, 게이트웨이)\n샌드박스 컨테이너 구축\n필요한 정보를 입력받음\n마법사 프롬프트\n프롬프트동작\nSandbox name기본값(my-assistant)을 사용하려면 Enter를 누르세요.\nNVIDIA API keybuild.nvidia.com/settings/api-keys에서 키를 생성하고, 값을 복사( nvapi- 로 시작)하여 프롬프트에 붙여넣고 Enter를 누르세요.\nPolicy presetsApply suggested presets (pypi, npm)? [Y/n/list]: 질문에 **n**을 입력하고 Enter를 누르세요(필요하면 나중에 추가 가능).\n마법사가 끝나면 다음과 같은 요약이 표시됩니다:\nSandbox    my-assistant (Landlock + seccomp + netns)\nModel      nvidia/nemotron-3-super-120b-a12b (NVIDIA Cloud API)\nNIM        not running\nRun:       nemoclaw my-assi\n\n## 판단 근거\nDigitalOcean 마켓플레이스의 1‑Click 배포 절차는 기존 NemoClaw 엔터프라이즈 문서에 포함되지 않아 별도 실전 가이드가 필요함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,10 +56,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-24T00:24:37.778Z",
-      "updated_at": "2026-03-24T00:24:37.786Z",
+      "updated_at": "2026-03-24T00:31:49.305Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/581",
-      "documentSlug": "581",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/581.md",
+      "documentSlug": "digitalocean-droplet-nemoclaw-1-click",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/digitalocean-droplet-nemoclaw-1-click.md",
       "comments": 0
     },
     {
@@ -5528,5 +5528,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-24T00:27:30.796Z"
+  "lastUpdated": "2026-03-24T00:31:49.305Z"
 }
