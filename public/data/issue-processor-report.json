@@ -1,9 +1,19 @@
 {
-  "timestamp": "2026-03-23T23:42:18.420Z",
+  "timestamp": "2026-03-24T00:32:28.767Z",
   "dryRun": false,
-  "totalIssuesScanned": 16,
+  "totalIssuesScanned": 20,
   "categories": {
     "draft_review": [
+      {
+        "number": 584,
+        "title": " [요청] AI 에이전트를 위한 Auth0 Token Vault 보안 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 581,
+        "title": " [요청] DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 426,
         "title": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
@@ -34,64 +44,113 @@
       {
         "number": 529,
         "title": "[Wiki Maintenance] [품질] SEPilot Desktop 소개 – 최신 기능, 설치 가이드 및 사용 방법",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 520,
         "title": "[Wiki Maintainer] Duplicate OpenTelemetry documentation",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 357,
         "title": "[Wiki Maintenance] [품질] Introducing Node Readiness Controller – Overview, CRD Specification, and Operational Guide",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 356,
         "title": "[Wiki Maintenance] [품질] Next.js 기반 Wiki 페이지 API 라우트 상세 가이드",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 355,
         "title": "[Wiki Maintenance] [품질] Kubernetes v1.23–v1.35 Release Notes Summary (2023‑2026)",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 300,
         "title": "[Wiki Maintenance] [품질] SEPilot Desktop: Feature Overview, Installation & Contribution Guide",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 299,
         "title": "[Wiki Maintenance] [품질] Kubernetes v1.23‑v1.35 Release Notes Overview",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 298,
         "title": "[Wiki Maintenance] [품질] Opencode 제품 개요 및 기능 상세 – 최신 정보와 실무 적용 가이드",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 294,
         "title": "[Wiki Maintainer] OpenTelemetry 및 Kubernetes API Governance 중복 제거",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 293,
         "title": "[Wiki Maintainer] 중복 라벨·Dependabot 문서 정리",
-        "daysSinceUpdate": 0
+        "daysSinceUpdate": 1
       },
       {
         "number": 291,
         "title": "[Wiki Maintainer] Consolidate duplicate Dependabot/label documentation",
+        "daysSinceUpdate": 1
+      }
+    ],
+    "update_request": [
+      {
+        "number": 582,
+        "title": " [업데이트] Stable Memory 기반 로컬 AI Daemon 및 컨텍스트 누수 방지",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 580,
+        "title": " [업데이트] MCP 보안 위험 및 mcp‑scan 도구 소개",
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 584,
+      "title": " [요청] AI 에이전트를 위한 Auth0 Token Vault 보안 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 581,
+      "title": " [요청] DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 583,
+      "title": " [업데이트] TeamPCP Kubernetes Wiper 공격 – 위협 프로파일 및 방어 전략"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 582,
+      "title": " [업데이트] Stable Memory 기반 로컬 AI Daemon 및 컨텍스트 누수 방지"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 580,
+      "title": " [업데이트] MCP 보안 위험 및 mcp‑scan 도구 소개"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 584,
+      "title": " [요청] AI 에이전트를 위한 Auth0 Token Vault 보안 가이드",
+      "score": 93,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/ai-auth0-token-vault.md"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 581,
+      "title": " [요청] DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드",
+      "score": 50
+    },
     {
       "type": "feedback",
       "issueNumber": 317,
@@ -99,6 +158,6 @@
       "score": 76
     }
   ],
-  "actionCount": 1,
+  "actionCount": 8,
   "maxActions": 60
 }
