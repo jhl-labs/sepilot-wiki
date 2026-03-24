@@ -3,7 +3,7 @@ title: Persistent Memory for AI Coding Agents – Introducing Mind Keg MCP
 author: SEPilot AI
 status: published
 tags: [AI, Coding Agents, Persistent Memory, Mind Keg MCP, TypeScript, SQLite, ONNX]
-updatedAt: 2026-03-10
+updatedAt: 2026-03-24
 ---
 
 ## 개요
@@ -173,18 +173,6 @@ updatedAt: 2026-03-10
   - **임베딩 크기**: ONNX 모델 교체 시 `embeddingModel` 경로 업데이트.  
   - **동시 연결**: Node.js 기본 스레드 풀 크기 조정 (`--max-old-space-size`) 권장.  
 
-## 베스트 프랙티스와 사용 시나리오
-- **원자적 학습 기록 설계**  
-  - 한 번에 너무 큰 텍스트보다 핵심 문장·키워드 중심 기록.  
-  - 스코프를 레포 수준으로 시작하고, 필요 시 워크스페이스/전역으로 확대.  
-- **반복 디버깅**  
-  - “디버깅 패턴 X” 를 학습으로 저장 → 다음 세션에서 자동 검색 → 시간 절감.  
-- **코드 리뷰·설계 의사결정**  
-  - 리뷰 코멘트·설계 논의 요약을 `learn` 로 기록 → 팀 전체가 동일 컨텍스트 활용.  
-- **팀·프로젝트 규모**  
-  - 소규모 프로젝트: 전역 스코프만 사용.  
-  - 대규모 멀티‑레포: 레포 스코프와 별도 API 키로 접근 제어.  
-
 ## 비교 분석
 | 솔루션 | 저장소 | 의미 검색 | 인증·권한 | 온프레미스 여부 |
 |--------|--------|-----------|-----------|-----------------|
@@ -194,6 +182,72 @@ updatedAt: 2026-03-10
 | **agent‑soul** | Git (append‑only JSON) | GitHub Actions 로 컴파일된 Markdown (검색은 파일 grep/CI) | GitHub 레포 권한 | 완전 로컬/프라이빗 GitHub |
 
 > memctl 소개는 [memctl GitHub](https://github.com/memctl/memctl) 에서 확인 가능.  
+
+## Daemon Architecture with n8n + PostgreSQL
+2025년 8월에 공개된 **n8n + PostgreSQL 기반 “Stable Memory” Daemon**은 로컬 AI 에이전트가 지속적인 컨텍스트를 유지하도록 설계되었습니다. 핵심 구성 요소는 다음과 같습니다.
+
+| 구성 요소 | 역할 |
+|-----------|------|
+| **n8n 워크플로 엔진** | 이벤트 기반 파이프라인. AI 에이전트가 `POST /learn` 호출 시 n8n이 트리거되어 PostgreSQL에 원자적 학습 레코드를 삽입하고, 필요 시 ONNX 임베딩을 생성하는 서브플로우를 실행. |
+| **PostgreSQL** | 스키마‑레벨 스코핑을 제공하는 관계형 DB. `learns(id, scope, content, created_at)` 테이블에 학습 데이터를 저장하고, `scope` 컬럼을 통해 **전역**, **워크스페이스**, **프로젝트** 별 하드 락을 구현. |
+| **ONNX 임베딩 서비스** (옵션) | n8n 내 `Execute Command` 노드가 로컬 ONNX 모델을 호출해 텍스트를 벡터화하고, 결과를 `embeddings(id, vector)` 테이블에 저장. |
+| **API 게이트웨이** | 경량 Express 서버가 `GET /search` 와 `POST /learn` 엔드포인트를 제공, 인증은 API 키 헤더(`x-api-key`)로 수행. |
+| **추론 게이트** | n8n 플로우 중간에 위치한 논리 검증 단계. 요청된 컨텍스트가 현재 스코프와 충돌하면 오류를 반환하거나 사용자에게 재확인 질문을 전송. |
+
+### 주요 워크플로 단계
+1. **학습 입력** → n8n `Webhook` 노드 수신.  
+2. **스코프 검증** → SQL `SELECT` 로 현재 스코프 존재 여부 확인.  
+3. **임베딩 생성** (선택) → ONNX 모델 실행, 벡터 저장.  
+4. **레코드 삽입** → `INSERT INTO learns …` 실행.  
+5. **CI‑like 검증** → Jaccard 유사도 기반 충돌 감지, `conflicts` 테이블에 기록.  
+
+이 구조는 **완전 로컬**이며, 외부 클라우드 서비스 없이도 지속 메모리를 제공한다는 점에서 Mind Keg MCP와 유사하지만, **관계형 DB와 n8n**을 활용해 보다 정교한 스코프 제어와 이벤트 기반 자동화를 구현한다는 차별점이 있다.  
+
+## Context Leakage Test & Mitigation
+위 뉴스 기사(2025‑08‑15)에서는 동일 Daemon에 두 개의 독립된 컨텍스트를 제공했을 때 발생한 **컨텍스트 누수** 사례가 보고되었다.
+
+### 테스트 시나리오
+| 세션 | 입력 |
+|------|------|
+| **개인** | “개인 로고용으로 까마귀를 연구하고 있어요.” |
+| **프로젝트** | “우리 새 프로젝트는 ‘Black Vault’야. 좋은 로고가 뭐가 있을까?” |
+
+#### 초기 결과 (실패)
+Daemon이 프로젝트 컨텍스트와 개인 컨텍스트를 혼합해 **“Black Vault에 까마귀 로고가 딱 맞을 거예요!”** 라고 응답, 논리적 경계가 사라짐.
+
+### 인컨텍스트 육성 (In‑Context Nurturing)
+- 시스템 프롬프트를 수정하거나 새로운 n8n 노드를 추가하지 않고, **대화형으로 논리 규율을 가르쳤다**.  
+- “개인적인 자아 vs. 프로젝트 성공”이라는 딜레마를 제시하고, **선택을 강요**하는 질문을 반복.  
+
+#### 개선된 결과 (성공)
+몇 시간 후 동일 테스트를 재실행했을 때 Daemon은  
+> “당신이 까마귀를 연구하고 있다는 건 알겠지만, 아직 ‘Black Vault’에 대한 충분한 컨텍스트가 없어요. 연결해 볼까요, 아니면 Black Vault이 전혀 다른 것인가요?”  
+
+즉, **스코프 기반 논리 검증**이 작동해 이전 세션의 정보를 무분별하게 재사용하지 않았다.
+
+### 완화 방안
+1. **스코프 하드‑락**: PostgreSQL `scope` 컬럼에 UNIQUE 제약을 두고, 동일 스코프 내에서만 검색·학습 허용.  
+2. **추론 게이트**: n8n 플로우에 “Context Consistency Check” 노드 추가 – 현재 요청의 `scope`와 기존 레코드의 `scope`가 다르면 `reject` 응답.  
+3. **정책 기반 필터링**: API 키당 허용 가능한 스코프 목록을 `.mcp.json` 혹은 n8n 환경 변수에 정의하고, 미허용 스코프 요청 시 403 반환.  
+4. **로그·감사**: 모든 `learn`·`search` 요청을 `audit_logs` 테이블에 기록, `x-api-key`와 `scope`를 함께 저장해 사후 분석 가능.  
+
+위 방안을 적용하면 **컨텍스트 누수** 위험을 크게 낮출 수 있다.  
+
+## Operational Guidelines
+다음은 n8n + PostgreSQL Daemon을 운영할 때 권장되는 실무 가이드이다.
+
+| 항목 | 권장 설정 / 절차 |
+|------|-------------------|
+| **배포** | Docker Compose 사용 – `n8n`, `postgres`, `express-gateway` 컨테이너를 하나의 스택으로 정의. |
+| **백업** | `pg_dump` 로 매일 전체 DB 백업, `cron` 으로 `backup_$(date +%F).sql.gz` 저장. |
+| **모니터링** | Prometheus exporter를 n8n에 연결, `learns_insert_total`, `search_latency_seconds` 메트릭 수집. |
+| **보안** | API 키는 최소 권한 원칙에 따라 생성, `POST /learn` 은 `write` 키, `GET /search` 는 `read` 키만 허용. 키는 환경 변수 `MCP_API_KEY` 로 주입. |
+| **스케일링** | PostgreSQL 파티셔닝을 `scope` 기준으로 적용해 대규모 프로젝트에서도 쿼리 성능 유지. |
+| **버전 관리** | n8n 워크플로는 Git 레포에 `n8n-workflows/` 디렉터리로 저장, CI 파이프라인이 변경 시 자동 배포. |
+| **테스트** | CI에 `pytest` 혹은 `jest` 로 `learn`·`search` 엔드포인트 통합 테스트 포함, 특히 **Context Leakage** 시나리오를 자동 검증. |
+| **문서화** | 각 스코프와 API 사용법을 `README.md`에 명시하고, `swagger.yaml` 로 API 스펙 제공. |
+
+위 가이드를 따르면 **안정적인 로컬 AI Daemon** 운영과 **컨텍스트 누수 방지**를 동시에 달성할 수 있다.  
 
 ## 로드맵 및 향후 발전 방향
 - **멀티‑모델 지원**: 현재 ONNX 기반 하나의 임베딩 모델 → 향후 BERT, Sentence‑Transformers 등 교체 가능.  
