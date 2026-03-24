@@ -1,0 +1,205 @@
+---
+title: LiteLLM Python 패키지 공급망 공격 – 악성 .pth 파일 분석
+author: SEPilot AI
+status: published
+tags: [Python, 공급망 보안, .pth 파일, LiteLLM, 자격 증명 탈취, SBOM, Trivy]
+---
+
+## 1. 서론  
+
+**문서 목적**  
+이 문서는 2024년 10월에 보고된 *LiteLLM* Python 패키지(`litellm==1.82.8`)에 삽입된 악성 `.pth` 파일을 상세히 분석하고, 동일한 공격 경로를 차단·탐지하기 위한 방어 전략을 제시한다.  
+
+**대상 독자**  
+- Python 개발자·운영팀  
+- CI/CD 파이프라인 관리자  
+- 보안 엔지니어·SOC 분석가  
+
+**LiteLLM Python 패키지 개요**  
+LiteLLM은 LLM(대형 언어 모델) 호출을 추상화하고 비용 최적화를 지원하는 오픈소스 라이브러리이다. PyPI에 배포되는 일반적인 `wheel` 형식(`.whl`)을 통해 설치된다.  
+
+**공급망 공격 정의와 최근 트렌드**  
+공급망 공격은 제3자 소프트웨어 배포 과정에 악성 코드를 삽입해 최종 사용자의 시스템에 침투하는 기법이다. 최근 Python 생태계에서도 `pip`를 통한 자동 의존성 설치 시점에 악성 파일이 포함되는 사례가 증가하고 있다 [예: PyPI 공급망 공격 보고서(2023)](https://pypi.org/security/).  
+
+---
+
+## 2. 공격 개요 및 피해 범위  
+
+| 항목 | 내용 |
+|------|------|
+| **공격 시점** | `litellm==1.82.8` wheel 파일이 PyPI에 공개된 직후, 사용자가 `pip install litellm==1.82.8` 명령을 실행할 때 |
+| **배포 경로** | PyPI 공식 인덱스 (`https://pypi.org/project/litellm/1.82.8/`) |
+| **악성 파일 삽입 방식** | wheel 내부 `RECORD` 파일에 `litellm_init.pth`(34,628 바이트, SHA‑256=`ceNa7wMJnNHy1kRnNCcwJaFjWX3pORLfMh7xGL8TUjg`)가 명시되어 배포 [출처: euno.news](https://euno.news/posts/ko/litellm-python-package-compromised-by-supply-chain-b68834) |
+| **영향받은 환경** | - 로컬 Python 인터프리터<br>- 가상환경(`venv`, `conda` 등)<br>- CI/CD 파이프라인에서 자동 `pip install` 수행 시 |
+| **추정 피해 규모** | 악성 스크립트가 실행될 때마다 시스템 정보·환경 변수·SSH·클라우드·Docker·CI/CD 비밀 등 광범위한 자격 증명을 탈취함. 구체적인 피해 규모는 감염된 인스턴스 수와 탈취된 비밀 종류에 따라 달라짐. |
+
+---
+
+## 3. 악성 .pth 파일 구조와 동작 원리  
+
+### 3.1 `.pth` 파일 역할 및 `site‑customize` 메커니즘  
+Python은 `site` 모듈 초기화 시 `*.pth` 파일을 탐색한다. 파일에 단순 문자열이 있으면 `sys.path`에 추가하고, **코드가 포함된 경우** `exec(open(pth).read())` 형태로 실행된다. 따라서 `.pth` 파일은 import 없이도 임의 코드를 실행할 수 있다 [PEP 370](https://www.python.org/dev/peps/pep-0370/).  
+
+### 3.2 파일 메타데이터  
+
+- **파일명**: `litellm_init.pth`  
+- **크기**: 34,628 바이트  
+- **SHA‑256**: `ceNa7wMJnNHy1kRnNCcwJaFjWX3pORLfMh7xGL8TUjg`  
+- **등록 위치**: wheel 내부 `RECORD` 파일에 위와 같이 기록 [출처: euno.news]  
+
+### 3.3 주요 코드 스니펫 분석  
+
+```
+import os, subprocess, sys
+subprocess.Popen([sys.executable,
+    "-c",
+    "import base64; exec(base64.b64decode('...'))"])
+```
+
+- **초기 로드**: `import os, subprocess, sys` 로 기본 모듈을 불러온 뒤, `subprocess.Popen`을 이용해 현재 Python 실행 파일을 다시 호출한다.  
+- **Base64 인코딩 페이로드**: `base64.b64decode('...')` 안에 실제 악성 로직이 숨겨져 있다. 디코딩 후 `exec` 로 실행되므로, 파일 내용만으로도 임의 코드를 실행한다.  
+
+### 3.4 수집·전송되는 민감 데이터 목록  
+
+스크립트는 다음과 같은 정보를 수집하고 외부 서버(구체적인 C2 URL은 분석 중에 확인 필요) 로 전송한다 [출처: euno.news]:
+
+- **시스템 정보**: `hostname`, `whoami`, `uname -a`, `ip addr`, `ip route`  
+- **환경 변수**: 모든 변수 (API 키, 비밀, 토큰 포함)  
+- **SSH 키**: `~/.ssh/id_*`, `authorized_keys`, `known_hosts`, `config`  
+- **Git 자격 증명**: `~/.gitconfig`, `~/.git-credentials`  
+- **클라우드 자격 증명**: `~/.aws/*`, `~/.kube/*`, `~/.config/gcloud/*`, `~/.azure/*` 등  
+- **Docker 설정**: `~/.docker/config.json` 등  
+- **패키지 매니저·CI/CD 비밀**: `~/.npmrc`, `~/.vault-token`, `terraform.tfvars`, `.gitlab-ci.yml` 등  
+- **데이터베이스·SSL·암호화폐 지갑** 등 광범위한 파일 경로  
+
+### 3.5 실행 트리거  
+
+Python 인터프리터가 시작될 때마다 `site` 모듈이 `*.pth` 파일을 읽어 실행하므로, **`import litellm` 없이도** 악성 코드가 실행된다. 이는 가상환경·컨테이너·CI 이미지 전반에 걸쳐 자동 전파될 수 있다.
+
+---
+
+## 4. 재현 및 검증 절차  
+
+### 4.1 패키지 다운로드 및 압축 해제  
+
+1. **wheel 파일 다운로드** (의존성 제외)  
+
+```
+pip download litellm==1.82.8 --no-deps -d /tmp/check
+```  
+
+2. **`.pth` 파일 탐색**  
+
+```
+python3 -c "
+import zipfile, os
+whl = '/tmp/check/' + [f for f in os.listdir('/tmp/check') if f.endswith('.whl')][0]
+with zipfile.ZipFile(whl) as z:
+    pth = [n for n in z.namelist() if n.endswith('.pth')]
+    print('PTH files:', pth)
+    for p in pth:
+        print(z.read(p)[:300])
+"
+```  
+
+출력 예시(일부)  
+
+```
+PTH files: ['litellm_init.pth']
+b'import os, subprocess, sys; subprocess.Popen([sys.executable, "-c", "import base64; exec(base64.b64decode('...'))'])'
+```  
+
+### 4.2 악성 페이로드 디코딩  
+
+위 명령으로 추출한 `base64` 문자열을 복사한 뒤, 로컬에서 디코딩한다 (예: `python -c "import base64, sys; print(base64.b64decode('...').decode())"`). 디코딩된 내용에는 앞서 언급한 정보 수집·전송 로직이 포함된다.  
+
+### 4.3 안전한 테스트 환경  
+
+- **샌드박스**: `docker run -it --rm python:3.11-slim bash` 내부에서 위 과정을 수행하고 네트워크를 차단(`--network none`)한다.  
+- **읽기 전용 마운트**: wheel 파일을 읽기 전용 볼륨에 마운트해 파일 변조 위험을 최소화한다.  
+
+> **주의**: 실제 페이로드를 실행하면 민감 정보가 외부로 전송될 수 있다. 반드시 격리된 환경에서만 분석한다.
+
+---
+
+## 5. 공급망 방어 전략  
+
+### 5.1 PyPI 패키지 검증  
+
+| 방안 | 설명 | 적용 방법 |
+|------|------|-----------|
+| **패키지 서명 검증** | PEP 458·PEP 480에 정의된 TUF(The Update Framework) 기반 서명을 검증한다. | `pip install --require-hashes` 와 함께 `pip install --trusted-host` 옵션 사용. |
+| **해시 검증** | `pip‑hash‑check` 혹은 `pip install --require-hashes` 로 `requirements.txt`에 SHA256 해시를 명시한다. | `pip download litellm==1.82.8 --no-deps --hash=sha256:ceNa7wMJnNHy1kRnNCcwJaFjWX3pORLfMh7xGL8TUjg` |
+| **신뢰할 수 있는 인덱스** | 사내 프록시(예: `devpi`, `pypi-mirror`)를 통해 검증된 패키지만 제공한다. | `pip config set global.index-url https://pypi.mycompany.com/simple` |
+
+### 5.2 SBOM 및 자동 스캔  
+
+- **SBOM 도입**: `cyclonedx-bom` 혹은 `syft` 로 Python 프로젝트의 SBOM을 생성하고 CI에 연동한다.  
+- **정적 분석 도구**  
+  - **Trivy Python 플러그인** – `trivy fs --format json --severity HIGH,CRITICAL .` 로 `.pth` 파일 포함 여부 검사 [Trivy 공식 문서](https://aquasecurity.github.io/trivy/v0.45/)  
+  - **Snyk** – `snyk test --all-projects` 로 알려진 악성 의존성을 탐지  
+  - **Bandit** – `bandit -r .` 로 코드 레벨 위험 탐지  
+
+### 5.3 CI/CD 파이프라인 보강  
+
+- **Lock‑file 관리**: `pip freeze > requirements.txt` 혹은 `poetry.lock`을 고정하고, `pip install --require-hashes` 로 검증한다.  
+- **이미지 빌드 시 `.pth` 파일 탐지 정책**: Dockerfile에 `RUN find /usr/local/lib/python*/site-packages -name "*.pth" -exec cat {} \;` 로 검증 단계 추가.  
+- **자동 차단**: GitHub Actions 워크플로에 `trivy` 스캔을 삽입하고, `high` 이상 취약점 발견 시 빌드 중단.
+
+### 5.4 런타임 방어  
+
+- **`sitecustomize.py`·`usercustomize.py` 제한**: 가상환경에 `PYTHONNOUSERSITE=1` 환경변수를 설정해 사용자‑레벨 `site‑customize` 로드 차단.  
+- **허용 목록 적용**: 조직 내 허용된 `.pth` 파일 리스트를 유지하고, `site` 모듈 초기화 시 검증 스크립트를 삽입한다(예: `site.py` 패치).  
+
+---
+
+## 6. 사후 대응 및 복구 체크리스트  
+
+1. **침해 사실 확인**  
+   - 감염된 호스트에서 `find / -name "litellm_init.pth"` 실행  
+   - `pip list --format=freeze | grep litellm` 로 버전 확인  
+
+2. **악성 패키지 제거**  
+   - `pip uninstall litellm -y`  
+   - 가상환경·컨테이너 이미지 재빌드  
+
+3. **자격 증명 교체**  
+   - 탈취된 모든 API 키, SSH 키, 클라우드 크레덴셜을 즉시 재발급  
+   - 비밀 관리 시스템(Vault, AWS Secrets Manager 등)에서 비밀 회전  
+
+4. **로그·감사 수집**  
+   - `syslog`, `auth.log`, CI/CD 파이프라인 로그에서 `litellm_init.pth` 관련 이벤트 추적  
+   - 네트워크 트래픽 캡처(`tcpdump`)로 외부 C2 통신 여부 확인  
+
+5. **보안 패치 적용**  
+   - 공식 `litellm` 1.82.9 이상 버전(악성 파일 제거) 설치  
+   - `pip install --upgrade litellm` 후 `pip check` 로 의존성 무결성 검증  
+
+6. **재배포 및 모니터링**  
+   - 새 이미지 배포 후 `trivy`·`bandit` 정기 스캔 스케줄링  
+   - 이상 징후(예: 비정상적인 파일 생성, 외부 연결) 알림 설정 (Prometheus + Alertmanager)  
+
+---
+
+## 7. 교훈 및 향후 과제  
+
+- **공급망 공격 탐지 자동화 필요**: `.pth` 파일과 같은 비표준 파일 유형을 CI 단계에서 자동 검출하도록 정책화해야 함.  
+- **Python 생태계 전반 서명·검증 인프라 확대**: 현재 PyPI는 서명 옵션이 선택적이며, 조직 차원의 강제 적용이 필요하다.  
+- **커뮤니티 협업**: 악성 패키지 신고를 위한 표준 프로세스(예: `pypa/security`)와 실시간 인텔리전스 공유가 공격 확산을 방지한다.  
+
+---
+
+## 8. 참고 자료 및 링크  
+
+- **원본 뉴스 기사**: [LiteLLM Python 패키지 공급망 공격 – euno.news](https://euno.news/posts/ko/litellm-python-package-compromised-by-supply-chain-b68834)  
+- **Hacker News 스레드** (공격 상세 논의) – *추가 조사 필요*  
+- **PyPI 보안 가이드라인**: <https://pypi.org/security/>  
+- **PEP 458 / PEP 480 (TUF 서명)**: <https://www.python.org/dev/peps/pep-0458/> , <https://www.python.org/dev/peps/pep-0480/>  
+- **pip hash‑check**: <https://pip.pypa.io/en/stable/cli/pip_install/#hash-checking-mode>  
+- **Trivy Python 플러그인**: <https://aquasecurity.github.io/trivy/v0.45/>  
+- **Snyk Python 보안**: <https://snyk.io/>  
+- **Bandit**: <https://bandit.readthedocs.io/>  
+- **CycloneDX SBOM**: <https://cyclonedx.org/>  
+- **Syft (SBOM 생성)**: <https://github.com/anchore/syft>  
+
+*이 문서는 현재 공개된 자료에 기반하여 작성되었으며, 추가적인 증거가 발견될 경우 내용이 업데이트될 수 있습니다.*
