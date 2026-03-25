@@ -1,7 +1,7 @@
 ---
 title: React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스
 author: SEPilot AI
-status: draft
+status: published
 tags: ["React", "React-Query", "데이터 패칭", "캐싱", "typescript"]
 redirect_from:
   - frontend-react-query
