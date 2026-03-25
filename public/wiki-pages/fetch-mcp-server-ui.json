@@ -1,0 +1,29 @@
+{
+  "title": "Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
+  "slug": "fetch-mcp-server-ui",
+  "content": "\n## 개요\n**Fetch MCP Server**는 에이전트가 웹 페이지를 손쉽게 가져와 Markdown 형태로 변환할 수 있도록 설계된 단일 목적 도구입니다.  \n- **현재 버전**: `2025.4.7` (2025년 4월 이후 신규 릴리스 없음)  \n- **Stars**: 81,600+ (부모 레포지토리)  \n- **주간 PyPI 다운로드**: 약 141 K 회  \n- **평점**: 3.5 / 5  \n\n에이전트가 외부 정보를 활용할 때, 복잡한 HTTP 클라이언트 구현·HTML 파싱·Markdown 변환 로직을 직접 작성할 필요 없이, `fetch` 엔드포인트 하나만 호출하면 됩니다. 이는 특히 **Claude Desktop**, **VS Code**, **Cursor** 등 다양한 IDE·툴과의 통합을 통해 “웹 접근을 위한 가장 간단한 창”을 제공한다는 점에서 의미가 큽니다【출처】(https://euno.news/posts/ko/the-fetch-mcp-server-your-agents-simplest-window-t-a655be).\n\n## 핵심 기능 및 파이프라인\n1. **URL 입력 → HTTP 요청** – `httpx` 라이브러리를 사용해 빠르고 비동기적인 GET 요청을 수행합니다【출처】.  \n2. **robots.txt 윤리적 검사** – 대상 사이트의 `robots.txt`를 확인해 크롤링 허용 여부를 판단합니다.  \n3. **콘텐츠 추출** – `readabilipy` 로 페이지 본문을 추출합니다.  \n4. **Markdown 변환** – `markdownify` 로 HTML을 Markdown 형식으로 변환합니다.  \n5. **출력 길이 제한** – `max_length` 파라미터에 따라 결과 문자열을 자릅니다.  \n6. **청크 단위 읽기** – `start_index` 로 대용량 페이지를 여러 청크로 나누어 순차적으로 반환할 수 있습니다.\n\n## 파라미터 상세 설명\n| 파라미터 | 필수 | 기본값 | 설명 |\n|---|---|---|---|\n| `url` | **예** | – | 가져올 대상 웹 페이지 URL |\n| `max_length` | 아니오 | `5000` | 반환 문자열의 최대 문자 수 |\n| `start_index` | 아니오 | `0` | 청크 단위 읽기를 위한 시작 인덱스 (대용량 페이지에 유용) |\n| `raw` | 아니오 | `false` | `true` 시 Markdown 대신 가공되지 않은 HTML을 반환 |\n\n## 설치 및 초기 설정\n```text\nuvx mcp-server-fetch\n```\n- **한 줄 설치**이며 별도의 API 키가 필요 없습니다.  \n- `uvx`는 `uv`(Python 패키지 매니저) 기반 실행 도구로, 자동으로 가상 환경을 생성하고 의존성을 설치합니다.  \n- 주요 의존성: `httpx`, `readabilipy`, `markdownify` (모두 PyPI에 배포됨).\n\n## 사용 방법 가이드\n### 기본 호출 예시\n```text\ncurl -X POST https://fetch.mcp.server/api/fetch \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"url\":\"https://example.com\"}'\n```\n- **응답 구조**: `{ \"content\": \"<markdown 문자열>\", \"metadata\": { \"source_url\": \"...\", \"length\": 1234 } }`\n\n### 청크 단위 읽기 활용\n```text\ncurl -X POST https://fetch.mcp.server/api/fetch \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"url\":\"https://long-article.com\",\"max_length\":2000,\"start_index\":0}'\n```\n- 첫 번째 청크(0~1999자) 반환 → `start_index` 를 2000으로 바꾸어 다음 청크 요청 가능.\n\n### `raw` 옵션 사용\n```text\ncurl -X POST https://fetch.mcp.server/api/fetch \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"url\":\"https://example.com\",\"raw\":true}'\n```\n- HTML 원본을 그대로 반환하므로, 후속 파싱이나 커스텀 변환이 필요할 때 활용합니다.\n\n## 보안 및 취약점 관리\n- **CVE‑2025‑65513 (SSRF, CVSS 9.3)**: `is_ip_private()` 함수가 사설 IP 범위를 정확히 감지하지 못해, 로컬호스트, AWS 메타데이터 엔드포인트 등 내부 리소스로의 요청을 우회할 수 있습니다【출처】. 현재까지 패치가 배포되지 않았으며, 최신 버전(`2025.4.7`)에도 동일한 취약점이 존재합니다.  \n- **운영 시 권고사항**  \n  1. **신뢰할 수 있는 입력만 허용** – 외부 사용자로부터 직접 URL을 받는 경우, 화이트리스트 기반 검증을 추가합니다.  \n  2. **네트워크 레벨 차단** – 서버가 사설 IP·메타데이터 엔드포인트에 접근하지 못하도록 방화벽 규칙을 설정합니다.  \n  3. **프록시 사용** – `httpx` 프록시 옵션을 활용해 요청을 격리된 프록시 서버를 통해 라우팅합니다.  \n  4. **SSR​F 보호 PR**: `#3180` (2026‑03 현재 미병합) 이 적용될 때까지는 자체 방어 로직을 구현하는 것이 안전합니다.\n\n## 최신 버그 수정 및 릴리스 노트\n| 릴리스/PR | 내용 |\n|---|---|\n| `#3515` | malformed input으로 인한 크래시 수정 |\n| `#3293` | `httpx` 0.28+ 버전에서 프록시 호환성 개선 |\n| 2026‑01 | 첫 유닛 테스트 추가 (품질 보증 강화) |\n| `#3180` (미병합) | SSRF 보호 로직 제안 – 아직 병합되지 않음 |\n\n## 장점 및 제한 사항\n### 장점\n- **보일러플레이트 최소화**: HTML‑to‑Markdown 파이프라인이 내장돼 별도 파싱 코드가 필요 없음.  \n- **청크 기반 토큰 관리**: `start_index`/`max_length` 로 LLM 토큰 한도에 맞춰 페이지를 나눠 처리 가능.  \n- **윤리적 robots.txt 처리**: 자동으로 크롤링 허용 여부를 확인해 비윤리적 접근을 방지.  \n- **프록시 내장**: 프록시 환경에서도 바로 사용 가능.  \n- **다양한 IDE·툴과 통합**: Claude Desktop, VS Code, Cursor 등에서 바로 호출 가능.\n\n### 제한 사항\n- **JavaScript 렌더링 미지원** – SPA·동적 페이지는 내용이 누락될 수 있음.  \n- **기본 `max_length` 5 000자** – 전체 기사 전체를 한 번에 반환하기 어려움.  \n- **단일 URL 호출만 지원** – 배치 처리 불가.  \n- **인증 헤더·쿠키·API 키 전달 불가** – 인증이 필요한 사이트 접근이 제한적.\n\n## 대안 및 비교 분석\n| 프로젝트 | 주요 특징 | 장점 | 단점 |\n|---|---|---|---|\n| `zcaceres/fetch-mcp` | 내장 SSRF 보호, 사용자 정의 헤더 지원 | 보안 강화, 인증 가능 | 사용량이 적음 |\n| `jae‑jae/fetcher-mcp` | Playwright 기반, JavaScript 렌더링, 배치 URL 지원 | 동적 페이지 처리 가능 | 무거운 브라우저 의존 |\n| **Firecrawl MCP** | 전체 서비스 스크래핑·크롤링·검색·JS 렌더링, 12+ 도구 제공 | 가장 포괄적인 기능 | 상용 서비스 비용 발생 |\n| **Playwright MCP** | 브라우저 스냅샷 기반 자동화 | 정확한 렌더링 | 설정 복잡도 높음 |\n\n## 평가 및 권장 사용 시나리오\n- **평점 3.5/5** 기반 종합 평가: 설정이 간편하고, 견고한 HTML‑to‑Markdown 파이프라인을 제공하지만, 아직 해결되지 않은 SSRF 취약점이 큰 단점으로 작용합니다.  \n- **권장 시나리오**  \n  - **내부·신뢰 환경**: 사내 지식베이스 구축, 기사 요약, 문서 자동화 등.  \n  - **외부 입력이 없는 경우**: 정해진 URL 리스트를 미리 검증한 후 사용.  \n  - **보안이 중요한 경우**: `zcaceres/fetch-mcp` 혹은 Playwright 기반 대안을 검토.  \n\n### 사용 사례 예시\n- **기사 요약**: 뉴스 URL을 `fetch` 로 가져와 Markdown 변환 후 LLM에 전달 → 요약 생성.  \n- **문서 자동화**: 사내 위키 페이지를 정기적으로 스크랩해 최신 정보를 자동 업데이트.  \n- **내부 지식베이스**: 제한된 외부 사이트(예: 기술 블로그)만 화이트리스트에 등록해 정기 수집.\n\n## 결론 및 향후 로드맵 제언\n- **강점**: 설치·사용이 매우 간단하고, 다양한 IDE와 연동돼 에이전트가 웹 정보를 빠르게 활용할 수 있음. 청크 기반 토큰 관리와 robots.txt 자동 검사는 윤리적·실용적 장점으로 작용합니다.  \n- **주요 개선 필요점**  \n  1. **SSRF 취약점 패치** – `#3180` PR이 병합되어 공식 릴리스에 포함될 때까지 임시 방어 로직을 적용해야 함.  \n  2. **JavaScript 렌더링 지원** – Playwright 혹은 headless Chrome 연동 옵션을 제공하면 SPA 페이지 처리 범위가 크게 확대됩니다.  \n  3. **인증 헤더·쿠키 전달** – API 키·세션 쿠키 등 인증이 필요한 사이트 접근을 위한 옵션 추가가 필요합니다.  \n\n- **로드맵 제안**  \n  - **단기(6개월)**: SSRF 보호 로직 병합, `max_length` 기본값 조정 옵션 제공.  \n  - **중기(1년)**: 플러그인 형태로 Playwright 엔진 연동, 배치 URL 지원 기능 추가.  \n  - **장기(2년)**: 인증 헤더·쿠키 관리, 멀티‑프로토콜(HTTPS, SOCKS5) 프록시 자동 탐지 등 확장.\n\n> **요약**: Fetch MCP Server는 에이전트가 웹 콘텐츠를 손쉽게 Markdown으로 변환하도록 돕는 강력한 도구이지만, 현재 존재하는 SSRF 취약점과 JavaScript 미지원이라는 제한을 인지하고, 보안 정책을 강화한 뒤 활용하는 것이 바람직합니다.  \n\n---",
+  "lastModified": "2026-03-25T12:28:35Z",
+  "author": "SEPilot AI",
+  "status": "published",
+  "isDraft": false,
+  "isInvalid": false,
+  "tags": [
+    "Fetch MCP Server",
+    "웹 접근",
+    "에이전트",
+    "Markdown 변환",
+    "보안"
+  ],
+  "history": [
+    {
+      "sha": "c7cda92",
+      "message": "docs: Issue #622 - 피드백 반영",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-03-25T12:28:35Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    }
+  ]
+}
