@@ -1,43 +1,123 @@
 {
-  "collectedAt": "2026-03-25T11:48:36.217Z",
+  "collectedAt": "2026-03-25T12:50:50.751Z",
   "overview": {
-    "totalDocuments": 283,
-    "publishedDocuments": 148,
-    "draftDocuments": 135,
-    "openRequests": 178,
+    "totalDocuments": 297,
+    "publishedDocuments": 155,
+    "draftDocuments": 142,
+    "openRequests": 182,
     "closedRequests": 19,
-    "totalAIActions": 739
+    "totalAIActions": 747
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
+      "aiActions": 8,
+      "documentsCreated": 4,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "estimatedTokens": 12780,
+      "totalPipelineDurationMs": 259699
     },
     "last24h": {
-      "aiActions": 36,
-      "documentsCreated": 18,
-      "documentsModified": 7,
-      "tavilyApiCalls": 6,
-      "tavilyResults": 16,
-      "estimatedTokens": 48536,
-      "totalPipelineDurationMs": 995946
+      "aiActions": 38,
+      "documentsCreated": 19,
+      "documentsModified": 6,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 55576,
+      "totalPipelineDurationMs": 1132186
     },
     "last7d": {
-      "aiActions": 135,
-      "documentsCreated": 54,
-      "documentsModified": 41,
-      "tavilyApiCalls": 114,
-      "tavilyResults": 289,
-      "estimatedTokens": 130844,
-      "totalPipelineDurationMs": 2787406
+      "aiActions": 137,
+      "documentsCreated": 57,
+      "documentsModified": 38,
+      "tavilyApiCalls": 111,
+      "tavilyResults": 282,
+      "estimatedTokens": 139874,
+      "totalPipelineDurationMs": 2968481
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-25T12:35:27.966Z",
+      "actionType": "tag_normalize",
+      "issueNumber": null,
+      "documentTitle": "태그 정규화",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-25T12:34:40.359Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "Wiki Tree Maintenance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-25T12:25:07.142Z",
+      "actionType": "generate",
+      "issueNumber": 624,
+      "documentTitle": "Fetch MCP Server – 에이전트를 위한 가장 간단한 웹 접근 도구",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 43446,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2122
+    },
+    {
+      "timestamp": "2026-03-25T12:24:19.145Z",
+      "actionType": "modify",
+      "issueNumber": 623,
+      "documentTitle": "LiteLLM Python 패키지 공급망 공격 – 악성 .pth 파일 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-25T12:23:32.203Z",
+      "actionType": "generate",
+      "issueNumber": 622,
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 – 자율 AI 에이전트 경제학 (2026 전망)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 54440,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2670
+    },
+    {
+      "timestamp": "2026-03-25T12:22:33.809Z",
+      "actionType": "generate",
+      "issueNumber": 621,
+      "documentTitle": "GitMCP – 설정‑프리 GitHub 문서 서버 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 70283,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 3463
+    },
+    {
+      "timestamp": "2026-03-25T12:21:19.517Z",
+      "actionType": "generate",
+      "issueNumber": 620,
+      "documentTitle": "Git MCP Server – 기능·현황·보안 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 91530,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 4525
+    },
+    {
+      "timestamp": "2026-03-25T12:19:41.856Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-25T09:51:05.374Z",
       "actionType": "quality_score",
@@ -157,93 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T06:27:16.630Z",
-      "actionType": "modify",
-      "issueNumber": 611,
-      "documentTitle": "Anthropic Claude 정부 규제와 미국 국방부(DoD) 정책 충돌 (2026)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T06:26:19.829Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T00:34:04.987Z",
-      "actionType": "quality_score",
-      "issueNumber": 581,
-      "documentTitle": " [요청] DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T00:33:38.984Z",
-      "actionType": "quality_score",
-      "issueNumber": 610,
-      "documentTitle": " [요청] n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T00:33:20.142Z",
-      "actionType": "generate",
-      "issueNumber": 608,
-      "documentTitle": "FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 62277,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 3065
-    },
-    {
-      "timestamp": "2026-03-25T00:32:00.522Z",
-      "actionType": "generate",
-      "issueNumber": 610,
-      "documentTitle": "n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 58005,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2842
-    },
-    {
-      "timestamp": "2026-03-25T00:29:16.651Z",
-      "actionType": "generate",
-      "issueNumber": 610,
-      "documentTitle": "n8n MCP Server – AI‑Callable 워크플로 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 44126,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2156
-    },
-    {
-      "timestamp": "2026-03-25T00:28:19.373Z",
-      "actionType": "modify",
-      "issueNumber": 609,
-      "documentTitle": "Google AI Pro 활용 실전 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 723,
-      "totalEstimatedTokens": 546933,
-      "avgDurationMs": 52661
+      "totalActions": 731,
+      "totalEstimatedTokens": 559713,
+      "avgDurationMs": 52873
     },
     "unknown": {
       "totalActions": 16,
