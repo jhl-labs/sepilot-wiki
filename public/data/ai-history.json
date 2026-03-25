@@ -1,6 +1,246 @@
 {
   "entries": [
     {
+      "id": "fc8a0b6e-779d-4518-9e3e-0ec78ec58ffc",
+      "timestamp": "2026-03-25T12:28:01.645Z",
+      "actionType": "quality_score",
+      "issueNumber": 620,
+      "issueTitle": " [요청] Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요",
+      "documentSlug": "git-mcp-server-anthropic",
+      "documentTitle": " [요청] Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "8b8be0d1-7a71-46c5-9c12-cfe3dda00fb2",
+      "timestamp": "2026-03-25T12:27:43.095Z",
+      "actionType": "quality_score",
+      "issueNumber": 621,
+      "issueTitle": " [요청] GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스",
+      "documentSlug": "gitmcp-github",
+      "documentTitle": " [요청] GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "8d9ccd90-9a45-40a2-920f-198b40857c53",
+      "timestamp": "2026-03-25T12:27:32.146Z",
+      "actionType": "quality_score",
+      "issueNumber": 622,
+      "issueTitle": " [요청] 자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
+      "documentSlug": "ai-2026",
+      "documentTitle": " [요청] 자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
+      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "9062de9a-b6c6-4eac-ab27-7ca82c76a343",
+      "timestamp": "2026-03-25T12:27:18.145Z",
+      "actionType": "quality_score",
+      "issueNumber": 624,
+      "issueTitle": " [요청] Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
+      "documentSlug": "fetch-mcp-server-ui",
+      "documentTitle": " [요청] Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "c62713ec-2320-4191-bc70-0f57c8ae1fe2",
+      "timestamp": "2026-03-25T12:26:57.373Z",
+      "actionType": "generate",
+      "issueNumber": 620,
+      "issueTitle": " [요청] Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요",
+      "documentSlug": "git-mcp-server-anthropic",
+      "documentTitle": "Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요",
+      "summary": "새 문서 \"Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1014
+            },
+            {
+              "step": "outline",
+              "durationMs": 7838
+            },
+            {
+              "step": "write",
+              "durationMs": 30637
+            },
+            {
+              "step": "review",
+              "durationMs": 9304
+            },
+            {
+              "step": "refine",
+              "durationMs": 44263
+            }
+          ],
+          "totalDurationMs": 93056,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 4602,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5284fd82-60ba-41e7-bfc8-5b1d3a21cc29",
+      "timestamp": "2026-03-25T12:24:54.798Z",
+      "actionType": "generate",
+      "issueNumber": 621,
+      "issueTitle": " [요청] GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스",
+      "documentSlug": "gitmcp-github",
+      "documentTitle": "GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스",
+      "summary": "새 문서 \"GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 989
+            },
+            {
+              "step": "outline",
+              "durationMs": 8178
+            },
+            {
+              "step": "write",
+              "durationMs": 28759
+            },
+            {
+              "step": "review",
+              "durationMs": 7137
+            }
+          ],
+          "totalDurationMs": 45063,
+          "researchSources": 3,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2204,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "f5460418-7927-4952-bbea-f245c320b5df",
+      "timestamp": "2026-03-25T12:23:54.534Z",
+      "actionType": "generate",
+      "issueNumber": 622,
+      "issueTitle": " [요청] 자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
+      "documentSlug": "ai-2026",
+      "documentTitle": "자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
+      "summary": "새 문서 \"자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1034
+            },
+            {
+              "step": "outline",
+              "durationMs": 11076
+            },
+            {
+              "step": "write",
+              "durationMs": 38811
+            },
+            {
+              "step": "review",
+              "durationMs": 6152
+            }
+          ],
+          "totalDurationMs": 57073,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2803,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "4e6ea15d-c59d-4aa4-aad0-36e0fa70821a",
+      "timestamp": "2026-03-25T12:22:39.542Z",
+      "actionType": "generate",
+      "issueNumber": 624,
+      "issueTitle": " [요청] Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
+      "documentSlug": "fetch-mcp-server-ui",
+      "documentTitle": "Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
+      "summary": "새 문서 \"Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1016
+            },
+            {
+              "step": "outline",
+              "durationMs": 10366
+            },
+            {
+              "step": "write",
+              "durationMs": 26857
+            },
+            {
+              "step": "review",
+              "durationMs": 10732
+            }
+          ],
+          "totalDurationMs": 48971,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2398,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "04874908-3b0b-4539-8751-6fe2bff755a9",
       "timestamp": "2026-03-25T12:19:41.856Z",
       "actionType": "maintain",
@@ -18187,5 +18427,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-25T12:19:41.856Z"
+  "lastUpdated": "2026-03-25T12:28:01.645Z"
 }

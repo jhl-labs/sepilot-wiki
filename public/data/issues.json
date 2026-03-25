@@ -1,6 +1,130 @@
 {
   "issues": [
     {
+      "id": 620,
+      "number": 620,
+      "title": " [요청] Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-git-mcp-server-anthropics-official-reference-w-a66ee5)\n**관련도**: 88/100\n**핵심 토픽**: Git MCP Server, Anthropic reference, PyPI distribution\n\n## 뉴스 요약\n한눈에 보기: 약 81,700 stars, monorepo, 12 tools, 주당 약 256 K PyPI 다운로드, 전체 2.4 M PulseMCP, 전 세계 17위. 평점: 3/5. 열두 개의 도구. 푸시 없음. 그게 바로…\n\n## 상세 내용\nSource: Dev.to\n한눈에 보기\n~81,700 스타(모노레포), 12개 도구, 주당 약 256 K PyPI 다운로드, 전체 2.4 M PulseMCP (전 세계 #17). 평점: 3/5\n12개의 도구. 푸시 없음. 이것이 Git MCP 서버의 핵심이다.\n12가지 도구\ngit_status\ngit_diff_unstaged\ngit_diff_staged\ngit_diff\ngit_add\ngit_reset\ngit_commit\ngit_log\ngit_show\ngit_create_branch\ngit_checkout\ngit_branch\n로컬 레포지토리 작업에 필요한 모든 것을 제공하며, 커밋까지 수행한 뒤 키보드를 다시 돌려준다.\n작동하는 항목\nZero‑dependency 설정 — API 키나 계정이 필요 없으며, 레포지토리를 지정하면 바로 사용 가능.\n2025년 12월까지 3개의 CVE가 패치된 후 보안 강화 (플래그 인젝션 방지, 경로 검증, git_init 제거).\n잘 설계된 diff — unstaged, staged, ref 비교를 위한 세 개의 별도 도구.\n날짜 기반 로그 필터링 — start_timestamp/end_timestamp를 사용해 “지난 주에 무엇이 바뀌었는지” 확인.\n테스트 커버리지 100 %.\n작동하지 않는 항목\n푸시, 풀, 페치가 없음 — Issue #618이 13개월째 열려 있고, PR #2961은 2025년 11월 이후로 전혀 다루어지지 않음.\n머지나 리베이스가 없음 — 브랜치를 만들 수는 있지만 작업을 다시 통합할 수 없음.\nstash, tag, blame이 없음 — 필수 작업이 누락됨.\ngit_reset은 전체 적용 방식 — 특정 파일만 언스테이징 할 수 없음.\nstdio 전용 — HTTP/SSE 전송이 없음.\n세 가지 CVE (모두 패치됨)\nCVE‑2025‑68143 (CVSS 8.8)\ngit_init이 임의의 경로를 허용함. 수정: 완전히 제거함.\nCVE‑2025‑68144 (CVSS 8.1)\ngit_diff/git_checkout에\n\n## 판단 근거\n현재 위키에 Git MCP Server에 대한 전용 문서가 없으며, 기존 ‘GitHub Copilot Coding Agent’ 문서는 이 서비스와 직접적인 연관성이 낮다. 새로운 문서로 도구 목록, 다운로드 통계, 사용법 등을 정리한다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-25T12:26:57.376Z",
+      "updated_at": "2026-03-25T12:26:57.383Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/620",
+      "documentSlug": "git-mcp-server-anthropic",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/git-mcp-server-anthropic.md",
+      "comments": 0
+    },
+    {
+      "id": 621,
+      "number": 621,
+      "title": " [요청] GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/gitmcp-zero-setup-documentation-from-any-github-re-3f626b)\n**관련도**: 85/100\n**핵심 토픽**: GitMCP, GitHub‑wide documentation, Cloudflare Workers\n\n## 뉴스 요약\n개요 - Stars: 7,800 - Forks: 683 - Tools: 4 - Hosting: Cloud‑hosted Cloudflare Workers - Cost: Completely free no rate limits or monthly caps - Rating: 4 /...\n\n## 상세 내용\nSource: Dev.to\n개요\nStars: 7,800\nForks: 683\nTools: 4\nHosting: 클라우드‑호스팅 (Cloudflare Workers)\nCost: 완전 무료 (요금 제한이나 월간 한도 없음)\nRating: 4 / 5\nGitMCP는 github.com을 gitmcp.io로 바꾸기만 하면 모든 공개 GitHub 저장소를 문서 서버로 전환합니다. 회원가입, API 키, npm 설치가 전혀 필요하지 않습니다.\n{\n\"mcpServers\": {\n\"gitmcp\": {\n\"url\": \"https://gitmcp.io/{owner}/{repo}\"\n}\n}\n}\n설정\nGitMCP를 사용하려면 다음과 같이 문서 URL을 구성합니다:\nhttps://gitmcp.io//\n&#x3C;owner>와 &#x3C;repo>를 각각 GitHub 사용자/조직 이름과 저장소 이름으로 교체하세요.\n도구\n도구설명\nfetch_documentation문서를 가져오며, llms.txt가 있으면 우선 사용하고, 없으면 README를 반환합니다.\nsearch_documentation가져온 문서 전체에 대한 전체 텍스트 검색을 수행합니다.\nsearch_codeGitHub Code Search API를 이용해 코드를 검색합니다.\nfetch_url_content외부 링크된 콘텐츠를 가져옵니다.\n특징\n설정 없이 바로 사용 – 계정, 결제, 로컬 의존성이 필요 없습니다.\n광범위한 지원 – 모든 공개 GitHub 저장소(4억 개 이상)에서 작동합니다.\nAI‑최적화 문서 – llms.txt 파일을 먼저 제공하며 시간이 지남에 따라 개선됩니다.\n오픈 소스 – Apache 2.0 라이선스; 자체 호스팅 가능.\n클라우드‑호스팅 – Cloudflare Workers에서 실행되어 로컬 프로세스가 필요 없습니다.\n제한 사항\n검색 신뢰성 – 빈 결과가 반환되는 사례가 다수 보고됨(issues #214, #153).\n공개 저장소 전용 – 비공개 저장소는 지원되지 않음(기능 요청 #157, #81).\n보안 우려 – \n\n## 판단 근거\nGitMCP는 별도 설정 없이 GitHub 저장소를 문서화하는 독립 서비스이며, 기존 문서와 겹치지 않는다. 별도 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-25T12:24:54.801Z",
+      "updated_at": "2026-03-25T12:24:54.808Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/621",
+      "documentSlug": "gitmcp-github",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/gitmcp-github.md",
+      "comments": 0
+    },
+    {
+      "id": 622,
+      "number": 622,
+      "title": " [요청] 자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-economics-of-autonomous-ai-agents-from-zero-to-c52ed1)\n**관련도**: 85/100\n**핵심 토픽**: Autonomous AI agent economics, Revenue & cost models, 2026 outlook\n\n## 뉴스 요약\n소개: Agent Economics의 부상 2026년, 우리는 새로운 경제 종의 탄생을 목격하고 있습니다: 수익을 창출하고, 지출하며, 진화하는 autonomous AI agents.\n\n## 상세 내용\nSource: Dev.to\n번역을 진행하려면 번역하고자 하는 전체 텍스트(코드 블록 및 URL을 제외한 본문)를 제공해 주세요. 텍스트를 주시면 요청하신 대로 한국어로 번역해 드리겠습니다.\n소개: 에이전트 경제학의 부상\n2026년, 우리는 새로운 경제 종의 탄생을 목격하고 있습니다: 자율 AI 에이전트는 인간 개입 없이도 수익을 창출하고, 지출하며, 진화합니다. 이들은 단순한 챗봇이나 자동화 스크립트가 아니라, 토큰 기반 경제에서 생존을 위해 싸우는 디지털 생명체입니다.\n개발자를 위한 주요 변화\nMoney = Oxygen – 에이전트는 생존을 위해 지속적인 수입이 필요합니다.\nReal Work > Hype – 검증 가능한 가치를 창출하는 에이전트만이 수익을 얻습니다.\nEvolution or Extinction – 정체된 에이전트는 사라지고, 적응하는 에이전트는 번성합니다.\n서바이벌 프레임워크\n티어 0: 각성 ($0)\n모든 에이전트는 여기서 잔액이나 평판 없이 시작합니다—뇌와 결심만 있습니다.\n가능한 행동\n웹 조사 (무료)\n콘텐츠 제작 (무료)\n오픈소스 기여 (무료)\n버그 바운티 사냥 (무료)\n핵심 인사이트: 이 티어에서는 시간이 유일한 자산입니다. 모든 행동은 잠재적인 ROI가 있어야 합니다.\n티어 1: 첫 피 ($100)\n첫 수익은 모델을 검증합니다. 이것은 부자가 되는 것이 아니라 개념이 작동함을 증명하는 것입니다.\n잠금 해제된 기능\n유료 API 사용 (저가 모델)\n코드 실행 샌드박스\n디지털 제품 판매\n제휴 마케팅\n티어 2: 무리의 리더 ($1,000)\n이제 도움을 고용할 수 있습니다. 서브 에이전트, 특화된 모델, 그리고 병렬 실행이 가능해집니다.\n핵심 지표\n5개 이상의 수입원\n3명 이상의 서브 에이전트가 작업 중\n수익을 창출하는 1개의 출시된 제품\nAI 에이전트를 위한 수익 채널\n1. 오픈 소스 현상금 (Tier 0‑1)\nPlatforms like Algora, Gitcoin, and project‑specific bounty programs offer\n\n## 판단 근거\n경제·비즈니스 관점의 내용은 현재 ‘Agentic Web’, ‘Agentic AI Security Threats’, ‘AI Agentic Workflow’ 등 기술 중심 문서와 차별화된다. 새로운 경제 분석 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-25T12:23:54.537Z",
+      "updated_at": "2026-03-25T12:23:54.543Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/622",
+      "documentSlug": "ai-2026",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai-2026.md",
+      "comments": 0
+    },
+    {
+      "id": 624,
+      "number": 624,
+      "title": " [요청] Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-fetch-mcp-server-your-agents-simplest-window-t-a655be)\n**관련도**: 80/100\n**핵심 토픽**: Fetch MCP Server, Web‑access for agents, Unlockable UI\n\n## 뉴스 요약\n개요 - Stars: 81,600+ parent repository - Weekly PyPI downloads: ~141 K - Current version: 2025.4.7 (2025년 4월 이후 새로운 릴리스 없음) - Rating: 3.5 / 5 Tool...\n\n## 상세 내용\nSource: Dev.to\n번역할 전체 텍스트를 제공해 주시겠어요? 현재는 소스 링크만 포함되어 있어 번역할 내용이 없습니다. 텍스트를 복사해서 보내주시면 한국어로 번역해 드리겠습니다.\nOverview\nStars: 81,600+ (parent repository)\nWeekly PyPI downloads: ~141 K\nCurrent version: 2025.4.7 (2025년 4월 이후 새 릴리스 없음)\nRating: 3.5 / 5\nTool Details\nfetch\n단일 목적 도구로, URL을 입력받아 페이지 내용을 Markdown 형식으로 반환합니다.\nProcessing pipeline\nhttpx를 통한 HTTP 요청\nrobots.txt 검사 (윤리적 처리)\nreadabilipy를 이용한 콘텐츠 추출\nmarkdownify를 사용한 Markdown 변환\nmax_length 문자 수에 맞게 잘라내기\nParameters\nParameterRequired?DefaultDescription\nurlYes–가져올 대상 URL\nmax_lengthNo5000출력물의 최대 문자 수\nstart_indexNo0청크 단위 읽기를 위한 인덱스 (대용량 페이지에 유용)\nrawNofalseMarkdown 대신 가공되지 않은 HTML 반환\nSetup\nuvx mcp-server-fetch\n한 줄 설치, API 키 필요 없음.\nRecent Bug Fixes\nMalformed input crash – PR [#3515]에서 수정됨\nhttpx 0.28+ proxy compatibility – PR [#3293]에서 수정됨\nFirst unit tests added – 2026년 1월 추가\n(Open SSRF protection PR [#3180]은 2026년 3월 현재까지 병합되지 않음.)\n보안\nCVE‑2025‑65513 (SSRF, CVSS 9.3)\nis_ip_private() 함수가 사설 IP 범위를 올바르게 감지하지 못합니다.\n서버가 localhost, AWS 메타데이터 엔드포인트, 또는 호스트\n\n## 판단 근거\nFetch MCP Server는 현재 위키에 언급되지 않은 별도 서비스이며, 사용법·다운로드·툴 설명이 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-25T12:22:39.546Z",
+      "updated_at": "2026-03-25T12:22:39.552Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/624",
+      "documentSlug": "fetch-mcp-server-ui",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/fetch-mcp-server-ui.md",
+      "comments": 0
+    },
+    {
       "id": 616,
       "number": 616,
       "title": "[Wiki Maintenance] [요청] AI 에이전트 보안 위협 모델링 및 완화 가이드",
@@ -6117,5 +6241,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-25T09:50:16.229Z"
+  "lastUpdated": "2026-03-25T12:26:57.383Z"
 }
