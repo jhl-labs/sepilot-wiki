@@ -1,29 +1,9 @@
 {
-  "timestamp": "2026-03-25T12:28:21.738Z",
+  "timestamp": "2026-03-25T12:46:32.760Z",
   "dryRun": false,
-  "totalIssuesScanned": 24,
+  "totalIssuesScanned": 20,
   "categories": {
     "draft_review": [
-      {
-        "number": 624,
-        "title": " [요청] Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
-        "daysSinceUpdate": 0
-      },
-      {
-        "number": 622,
-        "title": " [요청] 자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
-        "daysSinceUpdate": 0
-      },
-      {
-        "number": 621,
-        "title": " [요청] GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스",
-        "daysSinceUpdate": 0
-      },
-      {
-        "number": 620,
-        "title": " [요청] Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요",
-        "daysSinceUpdate": 0
-      },
       {
         "number": 614,
         "title": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)",
@@ -56,6 +36,11 @@
       }
     ],
     "maintenance": [
+      {
+        "number": 626,
+        "title": "[Wiki Maintainer] Duplicate GitMCP server documentation",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 619,
         "title": "[Wiki Maintenance] [품질] Wiki API 라우트 상세 가이드 (버전 v1) – 인증·인가, 파라미터, 오류 처리 및 보안 가이드",
@@ -122,77 +107,24 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [
-      {
-        "number": 623,
-        "title": " [업데이트] Litellm 공급망 공격 – TeamPCP 백도어 (v1.82.7‑1.82.8) 및 Trivy CI/CD 침해",
-        "daysSinceUpdate": 0
-      }
-    ],
+    "update_request": [],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
     {
-      "type": "retrigger_request",
-      "issueNumber": 624,
-      "title": " [요청] Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI"
-    },
-    {
-      "type": "retrigger_request",
-      "issueNumber": 622,
-      "title": " [요청] 자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델"
-    },
-    {
-      "type": "retrigger_request",
-      "issueNumber": 621,
-      "title": " [요청] GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스"
-    },
-    {
-      "type": "retrigger_request",
-      "issueNumber": 620,
-      "title": " [요청] Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요"
-    },
-    {
-      "type": "retrigger_update_close",
-      "issueNumber": 623,
-      "title": " [업데이트] Litellm 공급망 공격 – TeamPCP 백도어 (v1.82.7‑1.82.8) 및 Trivy CI/CD 침해"
-    },
-    {
-      "type": "auto_publish",
-      "issueNumber": 624,
-      "title": " [요청] Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI",
-      "score": 89,
-      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/fetch-mcp-server-ui.md"
-    },
-    {
-      "type": "auto_publish",
-      "issueNumber": 622,
-      "title": " [요청] 자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
-      "score": 86,
-      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai-2026.md"
-    },
-    {
-      "type": "auto_publish",
-      "issueNumber": 621,
-      "title": " [요청] GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스",
-      "score": 89,
-      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/gitmcp-github.md"
-    },
-    {
-      "type": "auto_publish",
-      "issueNumber": 620,
-      "title": " [요청] Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요",
-      "score": 89,
-      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/git-mcp-server-anthropic.md"
-    },
-    {
       "type": "feedback",
       "issueNumber": 317,
       "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
-      "score": 73
+      "score": 74
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 626,
+      "title": "[Wiki Maintainer] Duplicate GitMCP server documentation",
+      "verdict": "actionable"
     }
   ],
-  "actionCount": 10,
+  "actionCount": 2,
   "maxActions": 60
 }
