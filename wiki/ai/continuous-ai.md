@@ -2,7 +2,7 @@
 title: "Continuous AI – 인간이 AI 오류를 검증하는 방법"
 description: "AI 코딩 에이전트를 활용하면서 인간이 오류를 검증하고 검증 워크플로우를 구축하는 방법"
 category: "Guide"
-tags: ["Continuous AI", "Human-in-the-Loop", "AI 검증", "CI"]
+tags: ["Continuous AI", "Human-in-the-Loop", "AI 검증", "ci/cd"]
 status: "published"
 issueNumber: 198
 createdAt: "2026-02-21T13:05:00Z"

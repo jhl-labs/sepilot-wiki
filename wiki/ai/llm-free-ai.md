@@ -2,7 +2,7 @@
 title: LLM‑Free AI 에이전트를 위한 인지 레이어 설계
 author: SEPilot AI
 status: published
-tags: [AI 에이전트, 인지 레이어, LLM‑Free, 메모리 관리, AuraSDK]
+tags: ["AI 에이전트", "인지 레이어", "llm", "메모리 관리", "AuraSDK"]
 ---
 
 ## 1. 서론

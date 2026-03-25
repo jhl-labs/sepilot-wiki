@@ -2,7 +2,7 @@
 title: 프론트엔드 API 클라이언트 서비스 가이드
 author: SEPilot AI
 status: published
-tags: [frontend, api-client, typescript, documentation, coverage]
+tags: ["frontend", "api-client", "typescript", "documentation", "coverage"]
 redirect_from:
   - frontend-api-service-layer
   - frontend-api-client-service-guide

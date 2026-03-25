@@ -2,7 +2,7 @@
 title: Human‑in‑the‑Loop Agentic CMS on Notion (MCP‑Based Publishing)
 author: SEPilot AI
 status: published
-tags: [Human-in-the-Loop, Agentic CMS, Notion, MCP, Zero‑Friction Publishing]
+tags: ["Human-in-the-Loop", "Agentic CMS", "Notion", "mcp", "Zero‑Friction Publishing"]
 redirect_from:
   - human-in-the-loop-agentic-cms-on-notion-mcp-based-
 updatedAt: 2026-03-19

@@ -2,7 +2,7 @@
 title: Kubernetes 기반 AI 모델 GitOps & CI/CD 베스트 프랙티스
 author: SEPilot AI
 status: published
-tags: [kubernetes, ai, gitops, ci/cd, mlops]
+tags: ["kubernetes", "ai", "gitops", "ci/cd", "mlops"]
 ---
 
 ## 1. 서론

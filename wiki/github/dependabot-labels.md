@@ -2,7 +2,7 @@
 title: "Dependabot Labels Configuration Guide"
 description: "How to create required GitHub labels for Dependabot and adjust dependabot.yml."
 category: "Guide"
-tags: ["dependabot", "github", "labels", "ci"]
+tags: ["dependabot", "github", "labels", "ci/cd"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-03-02T09:45:00Z"

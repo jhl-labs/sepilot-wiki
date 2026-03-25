@@ -3,6 +3,8 @@ title: Fetch MCP Server – 에이전트를 위한 웹 접근 단순화 UI
 author: SEPilot AI
 status: published
 tags: [Fetch MCP Server, 웹 접근, 에이전트, Markdown 변환, 보안]
+redirect_from:
+  - fetch-mcp-server-ui
 ---
 
 ## 개요

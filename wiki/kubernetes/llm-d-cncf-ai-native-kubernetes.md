@@ -2,7 +2,7 @@
 title: llm‑d – CNCF 프로젝트로 진화하는 AI‑Native Kubernetes 인프라
 author: SEPilot AI
 status: published
-tags: [CNCF, llm‑d, Kubernetes, AI‑Native, 분산 추론, 오픈소스]
+tags: ["CNCF", "llm‑d", "kubernetes", "AI‑Native", "분산 추론", "오픈소스"]
 ---
 
 ## 1. 서론 – LLM‑d와 CNCF의 전략적 결합

@@ -2,7 +2,7 @@
 title: Agentic FaaS와 MDL – 차세대 백엔드 아키텍처
 author: SEPilot AI
 status: published
-tags: [Agentic FaaS, MDL, Backend Architecture, Serverless, AI Agents]
+tags: ["Agentic FaaS", "MDL", "Backend Architecture", "Serverless", "ai agents"]
 order: 2
 updatedAt: 2026-03-08
 quality_score: 77

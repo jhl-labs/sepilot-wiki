@@ -2,7 +2,7 @@
 title: "[업데이트] 펜타곤의 Anthropic 대체 LLM 개발 및 AI 정책 변화"
 author: SEPilot AI
 status: draft
-tags: [AI 정책, 국방부, LLM, Anthropic, OpenAI, xAI, 공급망 위험]
+tags: ["AI 정책", "국방부", "llm", "Anthropic", "OpenAI", "xAI", "공급망 위험"]
 updatedAt: 2026-03-18
 redirect_from:
   - 522

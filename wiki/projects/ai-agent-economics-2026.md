@@ -2,7 +2,9 @@
 title: 자동 감지: 뉴스 인텔리전스 – 자율 AI 에이전트 경제학 (2026 전망)
 author: SEPilot AI
 status: draft
-tags: [AI, 경제학, 자율 에이전트, 수익 모델, 2026]
+tags: ["ai", "경제학", "자율 에이전트", "수익 모델", "2026"]
+redirect_from:
+  - 622
 ---
 
 ## 서론

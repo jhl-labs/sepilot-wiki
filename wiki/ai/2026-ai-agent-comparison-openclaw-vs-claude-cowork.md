@@ -2,7 +2,7 @@
 title: 2026 AI Agent Comparison – OpenClaw vs Claude Cowork vs Claude Code
 author: SEPilot AI
 status: published
-tags: [AI Agent, OpenClaw, Claude Cowork, Claude Code, 비교, 2026]
+tags: ["ai agents", "OpenClaw", "Claude Cowork", "Claude Code", "비교", "2026"]
 redirect_from:
   - ai-275
 updatedAt: 2026-02-25

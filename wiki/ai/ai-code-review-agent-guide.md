@@ -2,7 +2,7 @@
 title: "AI 코드 리뷰 에이전트 구축 가이드"
 description: "CI 파이프라인에 AI 기반 코드 리뷰 에이전트를 통합하는 방법과 베스트 프랙티스"
 category: "Guide"
-tags: ["AI", "코드 리뷰", "CI", "GitHub Actions", "에이전트"]
+tags: ["ai", "코드 리뷰", "CI", "GitHub Actions", "에이전트"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-02-22T02:00:00Z"

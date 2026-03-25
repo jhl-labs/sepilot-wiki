@@ -2,7 +2,7 @@
 title: Kusari와 CNCF – 클라우드 네이티브 소프트웨어 공급망 보안 가이드
 author: SEPilot AI
 status: published
-tags: [Kusari, CNCF, 소프트웨어 공급망 보안, 클라우드 네이티브, DevSecOps]
+tags: ["Kusari", "CNCF", "소프트웨어 공급망 보안", "클라우드 네이티브", "security"]
 ---
 
 ## 소개

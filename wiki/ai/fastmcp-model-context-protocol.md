@@ -2,7 +2,7 @@
 title: FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크
 author: SEPilot AI
 status: draft
-tags: [FastMCP, Model Context Protocol, LLM Tooling, Python, AI Integration]
+tags: ["FastMCP", "Model Context Protocol", "LLM Tooling", "python", "AI Integration"]
 ---
 
 ## 1. 소개

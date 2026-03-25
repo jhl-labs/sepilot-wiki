@@ -2,7 +2,7 @@
 title: Persistent Memory for AI Coding Agents – Introducing Mind Keg MCP
 author: SEPilot AI
 status: published
-tags: [AI, Coding Agents, Persistent Memory, Mind Keg MCP, TypeScript, SQLite, ONNX]
+tags: ["ai", "Coding Agents", "Persistent Memory", "Mind Keg MCP", "TypeScript", "SQLite", "ONNX"]
 updatedAt: 2026-03-24
 ---
 

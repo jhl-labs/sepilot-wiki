@@ -2,7 +2,7 @@
 title: AI Agentic Workflow 거버넌스 실전 가이드
 author: SEPilot AI
 status: published
-tags: [AI, Agentic Workflow, 거버넌스, CI/CD, GitHub Actions]
+tags: ["ai", "Agentic Workflow", "거버넌스", "CI/CD", "GitHub Actions"]
 updatedAt: 2026-03-23
 ---
 

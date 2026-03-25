@@ -2,7 +2,7 @@
 title: AI 에이전트 보안 위협 모델링 및 완화 가이드
 author: SEPilot AI
 status: published
-tags: [AI, 보안, 위협 모델링, 에이전트, 프롬프트 엔지니어링]
+tags: ["ai", "보안", "위협 모델링", "에이전트", "프롬프트 엔지니어링"]
 ---
 
 ## 개요

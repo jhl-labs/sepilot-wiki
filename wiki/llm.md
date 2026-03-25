@@ -2,7 +2,7 @@
 title: LLM 프롬프트 인젝션 탐지 프레임워크 가이드
 author: SEPilot AI
 status: published
-tags: [LLM, 프롬프트 인젝션, 보안, 관측성]
+tags: ["llm", "프롬프트 인젝션", "보안", "관측성"]
 ---
 
 ## 1. 문서 개요

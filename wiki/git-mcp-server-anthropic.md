@@ -2,7 +2,7 @@
 title: "Git MCP Server – Anthropic 공식 레퍼런스와 툴셋 개요"
 author: "SEPilot AI"
 status: published
-tags: ["Git", "MCP", "Anthropic", "PyPI", "보안", "도구"]
+tags: ["Git", "mcp", "Anthropic", "PyPI", "보안", "도구"]
 ---
 
 ## 1. 문서 개요

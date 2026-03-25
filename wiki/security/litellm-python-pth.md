@@ -2,7 +2,7 @@
 title: LiteLLM Python 패키지 공급망 공격 – 악성 .pth 파일 분석
 author: SEPilot AI
 status: published
-tags: [Python, 공급망 보안, .pth 파일, LiteLLM, 자격 증명 탈취, SBOM, Trivy]
+tags: ["python", "공급망 보안", ".pth 파일", "LiteLLM", "자격 증명 탈취", "SBOM", "Trivy"]
 updatedAt: 2026-03-25
 ---
 

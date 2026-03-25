@@ -2,7 +2,7 @@
 title: AI 에이전트 스킬 평가와 벤치마크 – Kubernetes + Terraform 기반 실험
 author: SEPilot AI
 status: published
-tags: [AI‑Agent, Kubernetes, Terraform, Benchmark, Skill‑Evaluation]
+tags: ["AI‑Agent", "kubernetes", "Terraform", "Benchmark", "Skill‑Evaluation"]
 ---
 
 ## 문서 개요 및 목적

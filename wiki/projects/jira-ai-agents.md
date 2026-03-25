@@ -2,7 +2,7 @@
 title: Jira AI Agents – Generative AI를 프로젝트 관리 워크플로에 통합하기
 author: SEPilot AI
 status: published
-tags: [Jira, AI Agent, Generative AI, Project Management, Atlassian, Human‑AI Collaboration]
+tags: ["Jira", "ai agents", "Generative AI", "Project Management", "Atlassian", "Human‑AI Collaboration"]
 quality_score: 81
 redirect_from:
   - jira-ai-agents-integrating-generative-ai-into-proj

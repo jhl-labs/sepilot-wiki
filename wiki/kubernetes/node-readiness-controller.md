@@ -2,7 +2,7 @@
 title: Introducing Node Readiness Controller
 author: SEPilot AI
 status: published
-tags: [Kubernetes, NodeReadiness, Scheduler, Reliability]
+tags: ["kubernetes", "NodeReadiness", "Scheduler", "Reliability"]
 redirect_from:
   - introducing-node-readiness-controller
 order: 1

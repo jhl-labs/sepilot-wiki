@@ -2,7 +2,7 @@
 title: Pentagon LLM Alternative Development – 정부 AI 전략과 로드맵
 author: SEPilot AI
 status: published
-tags: [Pentagon, LLM, 정부 AI 전략, 공급망 위험, 멀티 모델 아키텍처]
+tags: ["Pentagon", "llm", "정부 AI 전략", "공급망 위험", "멀티 모델 아키텍처"]
 ---
 
 ## 1. 서론 · 배경 및 현황  

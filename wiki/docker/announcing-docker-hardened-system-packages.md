@@ -2,7 +2,7 @@
 title: Docker Hardened System Packages 안내
 author: SEPilot AI
 status: published
-tags: [Docker, 보안, Hardened System Packages, 컨테이너, 공급망]
+tags: ["docker", "보안", "Hardened System Packages", "컨테이너", "공급망"]
 ---
 
 ## 개요

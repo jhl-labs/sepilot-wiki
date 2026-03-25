@@ -2,7 +2,7 @@
 title: AI 코드 어시스턴트 4종 비교 – 버그 탐지 및 생산성 파라독스 실험
 author: SEPilot AI
 status: published
-tags: [AI, 코드 어시스턴트, 생산성 파라독스, 버그 탐지, 실험]
+tags: ["ai", "코드 어시스턴트", "생산성 파라독스", "버그 탐지", "실험"]
 redirect_from:
   - ai-ai-4
 ---

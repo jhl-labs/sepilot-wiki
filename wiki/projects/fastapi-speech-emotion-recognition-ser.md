@@ -2,7 +2,9 @@
 title: FastAPI 로 구현하는 Speech Emotion Recognition (SER) 서비스
 author: SEPilot AI
 status: published
-tags: [FastAPI, Speech Emotion Recognition, SER, Audio ML, Python, 모델 서빙]
+tags: ["FastAPI", "Speech Emotion Recognition", "SER", "Audio ML", "python", "모델 서빙"]
+redirect_from:
+  - fastapi-speech-emotion-recognition-ser
 ---
 
 ## 프로젝트 개요 및 목표

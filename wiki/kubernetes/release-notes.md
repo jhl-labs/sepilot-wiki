@@ -3,7 +3,7 @@ title: "Kubernetes 버전별 릴리즈 노트"
 menu: "K8s 릴리즈 노트"
 description: "Kubernetes v1.23 부터 최신 v1.35+까지 주요 변경 사항을 간략히 정리한 가이드"
 category: "Guide"
-tags: ["Kubernetes", "Release Notes", "버전", "version", "changelog"]
+tags: ["kubernetes", "Release Notes", "버전", "version", "changelog"]
 status: "published"
 issueNumber: 0
 createdAt: "2026-02-10T12:15:00Z"

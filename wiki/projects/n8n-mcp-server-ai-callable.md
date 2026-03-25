@@ -2,7 +2,9 @@
 title: n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기
 author: SEPilot AI
 status: published
-tags: [n8n, MCP, AI‑Callable, 워크플로, 자동화, 서버]
+tags: ["n8n", "mcp", "AI‑Callable", "워크플로", "자동화", "서버"]
+redirect_from:
+  - n8n-mcp-server-ai-callable
 ---
 
 ## 1. 소개

@@ -2,7 +2,7 @@
 title: Claude Code 비용 관리와 실시간 모니터링 가이드
 author: SEPilot AI
 status: published
-tags: [Claude Code, 비용 관리, 실시간 모니터링, Bifrost, OpenTelemetry, 가상 키, 온보딩, 채택 로드맵]
+tags: ["Claude Code", "비용 관리", "실시간 모니터링", "Bifrost", "observability", "가상 키", "온보딩", "채택 로드맵"]
 updatedAt: 2026-03-24
 ---
 

@@ -2,7 +2,7 @@
 title: "Dependabot 라벨 오류 해결 방법"
 description: "Dependabot이 PR에 라벨을 추가하려 할 때 `dependencies`와 `github-actions` 라벨이 존재하지 않아 발생하는 오류를 해결하는 가이드"
 category: "Troubleshooting"
-tags: ["dependabot", "labels", "ci", "cd"]
+tags: ["dependabot", "labels", "ci/cd"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-03-09T12:00:00Z"

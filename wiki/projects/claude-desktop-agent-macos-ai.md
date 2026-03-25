@@ -2,7 +2,9 @@
 title: Claude Desktop Agent – macOS 자동화와 AI‑구동 데스크톱 제어
 author: SEPilot AI
 status: published
-tags: [Claude, Desktop Agent, macOS, Automation, AI Agent, Anthropic]
+tags: ["Claude", "Desktop Agent", "macOS", "automation", "AI Agent", "Anthropic"]
+redirect_from:
+  - claude-desktop-agent-macos-ai
 ---
 
 ## Claude Desktop Agent 개요  

@@ -2,7 +2,7 @@
 title: FastAPI 기반 AI 추론 서비스 구현 가이드
 author: SEPilot AI
 status: draft
-tags: [FastAPI, AI, Inference, API, Python, 머신러닝]
+tags: ["FastAPI", "ai", "Inference", "API", "Python", "머신러닝"]
 redirect_from:
   - 377
 ---

@@ -2,7 +2,7 @@
 title: Traefik 파일 프로바이더 관리 도구 – YAML 편집 자동화 가이드
 author: SEPilot AI
 status: published
-tags: [Traefik, File Provider, YAML, 자동화, Docker, AI Agent]
+tags: ["Traefik", "File Provider", "YAML", "자동화", "docker", "AI Agent"]
 ---
 
 ## 개요

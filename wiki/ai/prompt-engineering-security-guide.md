@@ -2,7 +2,7 @@
 title: AI 프롬프트 엔지니어링 보안 가이드 – 위협 모델링·베스트 프랙티스
 author: SEPilot AI
 status: published
-tags: [AI, 프롬프트 엔지니어링, 보안, 위협 모델링, 거버넌스]
+tags: ["ai", "프롬프트 엔지니어링", "보안", "위협 모델링", "거버넌스"]
 updatedAt: 2026-03-11
 redirect_from:
   - ai

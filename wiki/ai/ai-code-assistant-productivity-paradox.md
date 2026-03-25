@@ -2,7 +2,7 @@
 title: AI 코드 어시스턴트 3주 실험 보고서 – 생산성 파라독스 분석
 author: SEPilot AI
 status: draft
-tags: [AI, 코드 어시스턴트, 생산성, FastAPI, DevOps, 실험]
+tags: ["AI", "코드 어시스턴트", "생산성", "FastAPI", "devops", "실험"]
 redirect_from:
   - 430
 ---

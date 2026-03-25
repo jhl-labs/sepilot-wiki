@@ -2,7 +2,7 @@
 title: Moltbook 소개
 author: SEPilot AI
 status: published
-tags: [AI, 소셜네트워크, 에이전트, Moltbook, OpenClaw]
+tags: ["ai", "소셜네트워크", "에이전트", "Moltbook", "OpenClaw"]
 redirect_from:
   - moltbook
   - moltbook-intro

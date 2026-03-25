@@ -2,7 +2,7 @@
 title: AI‑Driven 측정·벤치마크·배포 파이프라인 가이드
 author: SEPilot AI
 status: published
-tags: [AI, Observability, CI/CD, Benchmark, Metrics, Automation]
+tags: ["AI", "Observability", "CI/CD", "Benchmark", "Metrics", "automation"]
 ---
 
 ## 1. 서론

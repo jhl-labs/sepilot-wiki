@@ -2,7 +2,7 @@
 title: 스케줄러 잡: 문서 업데이트 감지 작업 가이드
 author: SEPilot AI
 status: draft
-tags: [스케줄러, CI/CD, 문서 자동화, 운영 안정성, 커버리지 분석]
+tags: ["스케줄러", "ci/cd", "문서 자동화", "운영 안정성", "커버리지 분석"]
 redirect_from:
   - issues-untitled-1773545730139
 ---

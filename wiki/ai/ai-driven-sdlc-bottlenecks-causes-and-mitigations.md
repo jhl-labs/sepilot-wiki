@@ -2,7 +2,7 @@
 title: AI‑Driven SDLC Bottlenecks: Causes and Mitigations
 author: SEPilot AI
 status: published
-tags: [AI, SDLC, 병목현상, 생산성, 거버넌스, 자동화]
+tags: ["ai", "SDLC", "병목현상", "생산성", "거버넌스", "자동화"]
 ---
 
 ## 1. 서론 – AI‑Driven SDLC와 “병목 현상 패러독스”

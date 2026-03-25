@@ -1,291 +1,394 @@
 {
-  "timestamp": "2026-03-23T08:54:22.676Z",
+  "timestamp": "2026-03-25T12:34:40.356Z",
   "model": "gpt-oss:120b-cloud",
   "isDryRun": false,
   "analysis": {
-    "summary": "위키는 150개 이상의 문서가 15개의 디렉터리( reports, backend, observability, docker, projects, security, dependencies, dependabot, ai, frontend 등) 로 흩어져 있습니다. 대부분 파일명은 영문 슬러그 형태이지만, 숫자만 있는 파일(`559.md`, `435.md` 등)과 중복된 내용의 파일이 다수 존재합니다. 루트 레벨에 문서가 남아 있는 경우(`tmux-ide-ide.md`, `ai.md` 등)도 있어 카테고리 규칙을 위반하고 있습니다. 또한 `status: deleted` 로 표시된 문서가 여러 카테고리에 남아 있어 정리 필요합니다.",
-    "totalDocuments": 274,
+    "summary": "Root‑level documents are a mix of product guides, AI economics, and miscellaneous items that belong in specific categories (projects, ai, etc.). Several duplicate or near‑duplicate files exist (e.g., `gitmcp-server-anthropic.md` appears twice, `fastconvert-ai.md` vs a draft `600.md`). Many deleted or draft reports are no longer needed. Category distribution is clear: `reports`, `backend`, `observability`, `security`, `github`, `kubernetes`, `ai`, `projects`, `docker`, `frontend`, `devops`, `cloud`, `tmux-ide`, `bun`, `dependencies`, `dependabot`, `troubleshooting`, `meta`.",
+    "totalDocuments": 332,
     "categories": [
       "reports",
       "backend",
       "observability",
-      "docker",
-      "projects",
       "security",
-      "troubleshooting",
-      "dependencies",
-      "dependabot",
-      "issues",
-      "bun",
+      "github",
+      "kubernetes",
       "ai",
+      "projects",
+      "docker",
       "frontend",
       "devops",
       "cloud",
       "tmux-ide",
+      "bun",
+      "dependencies",
+      "dependabot",
+      "troubleshooting",
       "meta"
     ],
     "issues": [
-      "루트 레벨에 문서가 존재함 – `tmux-ide-ide.md`, `ai.md` 등은 적절한 카테고리로 이동 필요",
-      "동일 내용이 중복된 파일 존재 – OpenWebUI + Docker Model Runner 가이드가 두 개(`docker/open-webui-docker-model-runner-self-hosted-llm-dep.md`와 `docker/open-webui-docker-model-runner-self-hosted-llm-dep.md`)으로 중복",
-      "숫자만 있는 파일명은 의미를 알 수 없어 슬러그 형태로 변경 필요",
-      "삭제된 문서가 여러 카테고리에 남아 있어 정리 필요"
+      "Duplicate Git MCP server documents (`gitmcp-server-anthropic.md` appears twice).",
+      "Draft FastConvert.ai guide (`600.md`) duplicates the published `fastconvert-ai.md`."
     ]
   },
   "suggestedStructure": {
+    "projects": [
+      "fetch-mcp-server-ui.md",
+      "fastconvert-ai.md",
+      "claude-desktop-agent-macos-ai.md",
+      "gitmcp-server-anthropic.md",
+      "ai-agent-economics-2026.md",
+      "fastapi-speech-emotion-recognition-ser.md",
+      "digitalocean-droplet-nemoclaw-1-click.md",
+      "calendar-mcp-server-35.md",
+      "n8n-mcp-server-ai-callable.md",
+      "nvidia-openshell-secure-by-design-ai.md",
+      "nvidia-nemoclaw-openclaw-enterprise-solution-overview.md"
+    ],
     "reports": [
-      "weekly-2026-11.md",
-      "weekly-2026-13.md",
-      "weekly-2026-10.md",
-      "x402-week-metrics-agent-payment-layer.md",
-      "x402-week-status-agent-payment-layer.md",
-      "devsecops-paradox.md"
+      "reports/x402-week-status-agent-payment-layer.md",
+      "reports/x402-week-metrics-agent-payment-layer.md",
+      "reports/weekly-2026-10.md",
+      "reports/weekly-2026-11.md",
+      "reports/weekly-2026-12.md",
+      "reports/weekly-2026-13.md",
+      "reports/devsecops-paradox.md",
+      "reports/weekly-2026-14.md"
     ],
     "backend": [
-      "lazy-backend-agentic-faas-mdl.md",
-      "agentic-faas-mdl.md",
-      "label-dependencies.md",
-      "wiki-api-route-guide.md",
-      "snkv-sqlite-btree-kv-store.md"
+      "backend/agentic-faas-mdl.md",
+      "backend/wiki-api-route-guide.md",
+      "backend/snkv-sqlite-btree-kv-store.md",
+      "backend/label-dependencies.md"
     ],
     "observability": [
-      "open-telemetry-overview.md",
-      "vigilops-comparison.md",
-      "logmera-self-hosted-llm-observability-tool.md",
-      "logmera-guide.md",
-      "multi-agent-ai-observability.md",
-      "opentelemetry-overview.md",
-      "opentelemetry-observability-warehouse.md"
-    ],
-    "docker": [
-      "gordon-ai-agent-update.md",
-      "open-webui-docker-model-runner-self-hosted-llm-guide.md",
-      "docker-model-runner-macos-vllm-support.md",
-      "announcing-docker-hardened-system-packages.md",
-      "docker-zfs.md",
-      "run-openclaw-securely-in-docker-sandboxes.md",
-      "docker-zfs-home-lab-guide.md",
-      "hardened-images.md"
-    ],
-    "projects": [
-      "viscat-technology-whitepaper.md",
-      "xcode-cloud-ci-cd.md",
-      "robopocket-ar.md",
-      "openclaw-complete-guide.md",
-      "nvidia-nim.md",
-      "viscat.md",
-      "claude-code-release-history.md",
-      "agentic-web-ai-to-ai.md",
-      "human-in-the-loop-agentic-cms-notion-mcp.md",
-      "github-copilot-coding-agent.md",
-      "openapi-builder-draft.md",
-      "openapi-builder.md",
-      "claude-code-cost-management.md",
-      "opencode.md",
-      "sepilot-desktop-intro.md",
-      "sepilot-technology-stack.md",
-      "enterprise-gitops-implementation.md",
-      "jira-ai-agents.md",
-      "agentbus-rest-api.md",
-      "antigravity-release-notes.md",
-      "rust-gpu-face-crop-tool.md",
-      "neuroskill-bci-ai.md",
-      "github-copilot-cli-guide.md",
-      "moltbook-intro.md",
-      "viscat-tech-whitepaper.md",
-      "homelab-ai-stack-2026.md"
+      "observability/2026-vigilops-zabbix-prometheus-grafana-datadog.md",
+      "observability/logmera-guide.md",
+      "observability/logmera-self-hosted-llm-observability-tool.md",
+      "observability/multi-agent-ai-observability.md",
+      "observability/open-telemetry-overview.md",
+      "observability/vigilops-comparison.md",
+      "observability/opentelemetry-overview.md",
+      "observability/opentelemetry-observability-warehouse.md"
     ],
     "security": [
-      "telegram-access-layer.md",
-      "2026-vps.md",
-      "post-quantum-cryptography-webinar-guide.md",
-      "ai-slopsquatting.md",
-      "microsoft-patch-tuesday-2026-03-cve.md",
-      "github-secret-scanning-pattern-updates-march-2026.md",
-      "ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
-      "ai.md",
-      "serv-u-15-5.md",
-      "web-pentesting-beginner-roadmap-2026-recon-server-.md",
-      "perseus-android-banking-malware-architecture-indic.md",
-      "sql-injection-union.md",
-      "coinbase-x402-sdk-slopsquatting-vulnerability.md",
-      "ai-slopsquatting.md",
-      "cve-2026-27574-oneuptime-probe-vm-rce.md",
-      "github-secret-scanning-2026-03-update.md",
-      "under-the-hood-security-architecture-of-github-age.md",
-      "agentic-ai-security-threats.md",
-      "saas.md",
-      "386.md",
-      "542.md",
-      "380.md",
-      "telegram-access-layer.md",
-      "400.md",
-      "404.md",
-      "386.md"
+      "security/346.md",
+      "security/553.md",
+      "security/411.md",
+      "security/438.md",
+      "security/trivy-supply-chain-compromise-what-docker-hub-user.md",
+      "security/605.md",
+      "security/agentic-ai-security-threats.md",
+      "security/saas.md",
+      "security/577.md",
+      "security/openai-opencode-env.md",
+      "security/386.md",
+      "security/542.md",
+      "security/584.md",
+      "security/380.md",
+      "security/telegram-access-layer.md",
+      "security/400.md",
+      "security/376.md",
+      "security/kusari-cncf.md",
+      "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-.md",
+      "security/npm.md",
+      "security/wordpress-vulnerability-triaging-playbook-2026.md",
+      "security/285.md",
+      "security/devsecops.md",
+      "security/ai.md",
+      "security/ai-auth0-token-vault.md",
+      "security/self-propagating-malware-canisterworm.md",
+      "security/550.md",
+      "security/coinbase-x402-sdk-vulnerability.md",
+      "security/litellm-python-pth.md",
+      "security/ai-slopsquatting.md",
+      "security/windchill-flexplm-remote-code-execution-vulnerabil.md",
+      "security/404.md",
+      "security/microsoft-patch-tuesday-2026-03.md",
+      "security/github-secret-scanning-pattern-updates-march-2026.md",
+      "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
+      "security/601.md",
+      "security/under-the-hood-security-architecture-of-github-age.md",
+      "security/ai-auth0-token-vault.md"
+    ],
+    "github": [
+      "github/what-8217-s-new-with-github-copilot-coding-agent.md",
+      "github/getting-started-with-github-actions.md",
+      "github/dependencies-label.md",
+      "github/dependabot-label.md"
+    ],
+    "kubernetes": [
+      "kubernetes/introducing-node-readiness-controller.md",
+      "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa.md",
+      "kubernetes/kubernetes-ai-gateway.md",
+      "kubernetes/ingress-nginx-deprecation-guide.md",
+      "kubernetes/ai-gateway-working-group.md",
+      "kubernetes/api-governance.md",
+      "kubernetes/kubernetes.md",
+      "kubernetes/598.md",
+      "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b.md",
+      "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
+      "kubernetes/announcing-the-ai-gateway-working-group.md",
+      "kubernetes/cgroup-migration.md",
+      "kubernetes/409.md",
+      "kubernetes/llm-d.md",
+      "kubernetes/release-notes.md"
     ],
     "ai": [
-      "fastapi-ai-api.md",
-      "tensorflow-2-21-litert.md",
-      "ai-code-review-agent-guide.md",
-      "joy-open-trust-network-for-ai-agents.md",
-      "ai-code-assistant-productivity-paradox.md",
-      "pentagon-llm-2026-policy.md",
-      "2026-ai-enhanced-reskilling.md",
-      "openai-pentagon-contract-update.md",
-      "tpv-5e-1-functiongemma-finetuning.md",
-      "steerling-8b.md",
-      "ai-usage-control-rfp.md",
-      "ai-augmented-sdlc-paradox.md",
-      "ai-code-assistant-4-comparison.md",
-      "model-merging.md",
-      "ai-agentic-workflow.md",
-      "tokenwatch-ai.md",
-      "continuous-ai.md",
-      "ai-2024-2026.md",
-      "adaptive-merging-of-lora-modules.md",
-      "ai-agent-deployment-failure-prevention.md",
-      "tmux-ide.md",
-      "ai-agentic-web.md",
-      "ai-llm-prompt-injection.md",
-      "ai-2026-2026.md",
-      "ai-2026-2026.md",
-      "ai-2026-2026.md"
+      "ai/fastapi-ai-api.md",
+      "ai/tensorflow-2-21-litert.md",
+      "ai/ai-code-review-agent-guide.md",
+      "ai/joy-open-trust-network-for-ai-agents.md",
+      "ai/ai-code-assistant-productivity-paradox.md",
+      "ai/pentagon-llm-policy.md",
+      "ai/2026-ai-enhanced-reskilling.md",
+      "ai/openai-pentagon-contract-update.md",
+      "ai/261.md",
+      "ai/steerling-8b.md",
+      "ai/367.md",
+      "ai/477.md",
+      "ai/proofshot-ai-ui-cli.md",
+      "ai/490.md",
+      "ai/fastmcp-model-context-protocol.md",
+      "ai/603.md",
+      "ai/cloud-terminal-persistent-ai-agent-sessions.md",
+      "ai/claude-code.md",
+      "ai/self-healing.md",
+      "ai/prompt-engineering-security-guide.md",
+      "ai/388.md",
+      "ai/gemini-3-1.md",
+      "ai/local-llm-vs-cloud-api-2026.md",
+      "ai/564.md",
+      "ai/312.md",
+      "ai/516.md",
+      "ai/403.md",
+      "ai/275.md",
+      "ai/xcode-cloud-ci-cd-guide.md",
+      "ai/315.md",
+      "ai/610.md",
+      "ai/google-ai-edge-gallery-functiongemma.md",
+      "ai/344.md",
+      "ai/claude-ai.md",
+      "ai/ai-code-assistant-comparison.md",
+      "ai/483.md",
+      "ai/model-merging-for-large-language-models.md",
+      "ai/454.md",
+      "ai/ai-code-assistant-3week-experiment-report.md",
+      "ai/gemini-code-assist-finish-changes-outlines.md",
+      "ai/436.md",
+      "ai/360.md",
+      "ai/426.md",
+      "ai/545.md",
+      "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md",
+      "ai/tmux-ide-guide.md",
+      "ai/openai-pentagon-contract.md",
+      "ai/514.md",
+      "ai/ai-2024-2026.md",
+      "ai/ai-2026.md",
+      "ai/ai-2026.md",
+      "ai/ai-2026.md"
+    ],
+    "docker": [
+      "docker/gordon-ai-agent-update.md",
+      "docker/308.md",
+      "docker/docker-model-runner-macos-vllm.md",
+      "docker/docker-model-runner-macos-vllm.md",
+      "docker/announcing-docker-hardened-system-packages.md",
+      "docker/docker-zfs.md",
+      "docker/run-openclaw-securely-in-docker-sandboxes.md",
+      "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
+      "docker/405.md",
+      "docker/hardened-images.md",
+      "docker/announcing-docker-hardened-system-packages.md"
     ],
     "frontend": [
-      "react-query.md",
-      "vite-plugin-pwa.md",
-      "monaco-editor-react.md",
-      "react-concurrent-rendering.md"
+      "frontend/incremental-static-regeneration.md",
+      "frontend/react-query.md",
+      "frontend/webp-client-side-converter.md",
+      "frontend/api-service-layer.md",
+      "frontend/vite-plugin-pwa.md",
+      "frontend/monaco-editor-react.md",
+      "frontend/react-concurrent-rendering.md"
     ],
     "devops": [
-      "gitops-implementation.md",
-      "shared-workflows-nodejs-aws.md",
-      "github-copilot-ci-cd.md",
-      "search-architecture-high-availability.md",
-      "shared-workflows-for-node-js-backend-and-aws-deployments.md"
+      "devops/traefik-yaml.md",
+      "devops/dependabot-label-fix.md",
+      "devops/gitops-implementation.md",
+      "devops/shared-workflows-nodejs-aws.md",
+      "devops/dependabot.md",
+      "devops/dependabot-missing-labels.md",
+      "devops/dependabot-labels.md",
+      "devops/fix-dependabot-labels.md",
+      "devops/github-copilot-ci-cd.md",
+      "devops/search-architecture-high-availability.md",
+      "devops/shared-workflows-for-node-js-backend-and-aws-deplo.md"
     ],
     "cloud": [
-      "aws-nat-gateway-cost-trap.md",
-      "aws-cost-optimization.md"
+      "cloud/aws-cost-optimization.md",
+      "cloud/persistent-terminal-design.md",
+      "cloud/aws-nat-gateway-cost-trap.md"
     ],
     "tmux-ide": [
-      "ide.md"
+      "tmux-ide/ide.md"
+    ],
+    "bun": [
+      "bun/comparison-pnpm-npm.md",
+      "bun/overview.md",
+      "bun/github-actions-setup.md"
+    ],
+    "dependencies": [
+      "dependencies/dompurify-bump-3.3.2.md",
+      "dependencies/lucide-react-bump-0.564-to-0.576.md",
+      "dependencies/react-group-bump-not-needed.md",
+      "dependencies/mermaid-bump-11.13.0.md",
+      "dependencies/react-router-dom-7-13-1-bump-no-longer-needed.md"
+    ],
+    "dependabot": [
+      "dependabot/labels-setup.md",
+      "dependabot/bump-dev-dependencies-2026-03-09.md",
+      "dependabot/dependencies-label.md",
+      "dependabot/missing-dependencies-label.md",
+      "dependabot/pnpm-transitive-dependencies-limitations.md",
+      "dependabot/@types-node-update-cancelled.md"
+    ],
+    "troubleshooting": [
+      "troubleshooting/dependabot-label-missing.md",
+      "troubleshooting/dependabot-missing-label.md",
+      "troubleshooting/dependabot-labels.md"
     ],
     "meta": [
-      "weekly-2026-09.md",
-      "label-dependencies.md",
-      "weekly-2026-08.md"
+      "meta/weekly-2026-09.md",
+      "meta/label-dependencies.md",
+      "meta/weekly-2026-08.md"
     ]
   },
   "results": {
-    "appliedActions": 24,
-    "skippedActions": 2,
+    "appliedActions": 28,
+    "skippedActions": 14,
     "dryRunPreviewedActions": 0,
     "createdIssues": 1
   },
   "actions": {
     "applied": [
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "reports/559.md",
-        "target": "reports/x402-week-status-agent-payment-layer.md",
-        "reason": "숫자만 있는 파일명 → 의미 있는 슬러그로 변경",
+        "source": "fetch-mcp-server-ui.md",
+        "target": "projects/fetch-mcp-server-ui.md",
+        "reason": "Product guide belongs to the `projects` category.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "issues/untitled-1773545730139.md",
-        "target": "issues/scheduler-doc-update-guide.md",
-        "reason": "숫자와 ‘untitled’ 파일명 → 가독성 있는 슬러그",
+        "source": "fastconvert-ai.md",
+        "target": "projects/fastconvert-ai.md",
+        "reason": "Product guide belongs to the `projects` category.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "security/untitled-1772736110655.md",
-        "target": "security/post-quantum-cryptography-webinar-guide.md",
-        "reason": "숫자만 있는 파일명 → 내용에 맞는 슬러그",
+        "source": "claude-desktop-agent-macos-ai.md",
+        "target": "projects/claude-desktop-agent-macos-ai.md",
+        "reason": "Product guide belongs to the `projects` category.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "ai/ai.md",
-        "target": "ai/multi-ai-coding-agent-orchestration.md",
-        "reason": "루트 레벨 파일 → AI 카테고리로 이동 및 의미 있는 슬러그",
+        "source": "602.md",
+        "target": "projects/gitmcp-server-anthropic.md",
+        "reason": "Project documentation for GitMCP belongs in `projects`.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "merge",
         "priority": "high",
-        "source": "ai/ai-4.md",
-        "target": "ai/ai-code-assistant-comparison.md",
-        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
+        "source": "620.md",
+        "target": "projects/gitmcp-server-anthropic.md",
+        "reason": "Duplicate of `gitmcp-server-anthropic.md`; keep the more complete version.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md",
-        "target": "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
-        "reason": "중복 파일 통합 – 두 파일 내용이 동일함",
+        "source": "622.md",
+        "target": "projects/ai-agent-economics-2026.md",
+        "reason": "AI economics guide fits the `projects` category (product‑focused content).",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "tmux-ide-ide.md",
-        "target": "tmux-ide/ide.md",
-        "reason": "루트 레벨 파일 → tmux-ide 카테고리로 이동",
+        "source": "fastapi-speech-emotion-recognition-ser.md",
+        "target": "projects/fastapi-speech-emotion-recognition-ser.md",
+        "reason": "Service implementation guide belongs to `projects`.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "observability/319.md",
-        "target": "observability/open-telemetry-overview.md",
-        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
+        "source": "digitalocean-droplet-nemoclaw-1-click.md",
+        "target": "projects/digitalocean-droplet-nemoclaw-1-click.md",
+        "reason": "Deployment guide for a product belongs to `projects`.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "observability/435.md",
-        "target": "observability/vigilops-comparison.md",
-        "reason": "숫자 파일명 → 의미 있는 슬러그",
+        "source": "calendar-mcp-server-35.md",
+        "target": "projects/calendar-mcp-server-35.md",
+        "reason": "MCP server implementation is a product‑level guide.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "observability/374.md",
-        "target": "observability/logmera-guide.md",
-        "reason": "숫자 파일명 → 의미 있는 슬러그",
+        "source": "n8n-mcp-server-ai-callable.md",
+        "target": "projects/n8n-mcp-server-ai-callable.md",
+        "reason": "Project guide for n8n MCP server.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "observability/ai.md",
-        "target": "observability/multi-agent-ai-observability.md",
-        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
+        "source": "nvidia-openshell-secure-by-design-ai.md",
+        "target": "projects/nvidia-openshell-secure-by-design-ai.md",
+        "reason": "Product/solution guide belongs in `projects`.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "observability/opentelemetry.md",
-        "target": "observability/opentelemetry-overview.md",
-        "reason": "파일명 의미 부재 → 내용에 맞는 슬러그",
+        "source": "ai-2026.md",
+        "target": "ai/ai-agent-economics-2026.md",
+        "reason": "AI economics content belongs to the `ai` category.",
         "autoApply": true
       },
       {
-        "type": "rename",
+        "type": "move",
         "priority": "high",
-        "source": "observability/opentelemetry-observability-warehouse.md",
-        "target": "observability/opentelemetry-observability-warehouse.md",
-        "reason": "파일명 표준화 – 하이픈 사용",
+        "source": "llm-drift.md",
+        "target": "ai/llm-drift.md",
+        "reason": "LLM drift guide is an AI‑focused document.",
+        "autoApply": true
+      },
+      {
+        "type": "merge",
+        "priority": "high",
+        "source": "600.md",
+        "target": "projects/fastconvert-ai.md",
+        "reason": "Draft duplicate of the published FastConvert.ai guide; keep the published version.",
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "projects",
+        "metadata": {
+          "displayName": "Projects",
+          "order": 1
+        },
         "autoApply": true
       },
       {
@@ -293,8 +396,8 @@
         "priority": "medium",
         "target": "reports",
         "metadata": {
-          "displayName": "보고서",
-          "order": 1
+          "displayName": "Reports",
+          "order": 2
         },
         "autoApply": true
       },
@@ -303,8 +406,8 @@
         "priority": "medium",
         "target": "backend",
         "metadata": {
-          "displayName": "백엔드",
-          "order": 2
+          "displayName": "Backend",
+          "order": 3
         },
         "autoApply": true
       },
@@ -313,28 +416,8 @@
         "priority": "medium",
         "target": "observability",
         "metadata": {
-          "displayName": "관측성",
-          "order": 3
-        },
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "medium",
-        "target": "docker",
-        "metadata": {
-          "displayName": "Docker",
+          "displayName": "Observability",
           "order": 4
-        },
-        "autoApply": true
-      },
-      {
-        "type": "update_category_meta",
-        "priority": "medium",
-        "target": "projects",
-        "metadata": {
-          "displayName": "프로젝트",
-          "order": 5
         },
         "autoApply": true
       },
@@ -343,8 +426,28 @@
         "priority": "medium",
         "target": "security",
         "metadata": {
-          "displayName": "보안",
+          "displayName": "Security",
+          "order": 5
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "github",
+        "metadata": {
+          "displayName": "GitHub",
           "order": 6
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "kubernetes",
+        "metadata": {
+          "displayName": "Kubernetes",
+          "order": 7
         },
         "autoApply": true
       },
@@ -354,65 +457,195 @@
         "target": "ai",
         "metadata": {
           "displayName": "AI",
-          "order": 7
+          "order": 8
         },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "priority": "low",
-        "target": "reports/weekly-2026-11.md",
-        "order": 1,
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "docker",
+        "metadata": {
+          "displayName": "Docker",
+          "order": 9
+        },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "priority": "low",
-        "target": "reports/weekly-2026-13.md",
-        "order": 2,
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "frontend",
+        "metadata": {
+          "displayName": "Frontend",
+          "order": 10
+        },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "priority": "low",
-        "target": "reports/weekly-2026-10.md",
-        "order": 3,
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "devops",
+        "metadata": {
+          "displayName": "DevOps",
+          "order": 11
+        },
         "autoApply": true
       },
       {
-        "type": "set_order",
-        "priority": "low",
-        "target": "reports/x402-week-metrics-agent-payment-layer.md",
-        "order": 4,
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "cloud",
+        "metadata": {
+          "displayName": "Cloud",
+          "order": 12
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "tmux-ide",
+        "metadata": {
+          "displayName": "Tmux‑IDE",
+          "order": 13
+        },
+        "autoApply": true
+      },
+      {
+        "type": "update_category_meta",
+        "priority": "medium",
+        "target": "bun",
+        "metadata": {
+          "displayName": "Bun",
+          "order": 14
+        },
         "autoApply": true
       }
     ],
     "skipped": [
       {
-        "type": "merge",
+        "type": "move",
         "priority": "high",
-        "source": "docker/open-webui-docker-model-runner-self-hosted-llm-dep.md",
-        "target": "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
-        "reason": "동일 내용 중복 – 하나만 유지하고 다른 파일 삭제",
+        "source": "nvidia-nemoclaw-openclaw-enterprise-solution-overv.md",
+        "target": "projects/nvidia-nemoclaw-openclaw-enterprise-solution-overview.md",
+        "reason": "Enterprise solution overview belongs to `projects`.",
         "autoApply": true,
-        "error": "ENOENT: no such file or directory, open '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/docker/open-webui-docker-model-runner-self-hosted-llm-dep.md'"
+        "error": "문서를 찾을 수 없음: nvidia-nemoclaw-openclaw-enterprise-solution-overv.md"
+      },
+      {
+        "type": "move",
+        "priority": "high",
+        "source": "n8n-mcp-server-ai-callable.md",
+        "target": "projects/n8n-mcp-server-ai-callable.md",
+        "reason": "Project documentation for n8n MCP server.",
+        "autoApply": true,
+        "error": "ENOENT: no such file or directory, rename '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/n8n-mcp-server-ai-callable.md' -> '/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/projects/n8n-mcp-server-ai-callable.md'"
+      },
+      {
+        "type": "rename",
+        "priority": "medium",
+        "source": "gitmcp-server-anthropic.md",
+        "target": "projects/gitmcp-server-anthropic.md",
+        "reason": "Standardize naming and place under `projects`.",
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: gitmcp-server-anthropic.md"
       },
       {
         "type": "set_order",
         "priority": "low",
-        "target": "reports/x402-week-status-agent-payment-layer.md",
+        "target": "projects/fetch-mcp-server-ui.md",
+        "order": 1,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/fetch-mcp-server-ui.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/fastconvert-ai.md",
+        "order": 2,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/fastconvert-ai.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/claude-desktop-agent-macos-ai.md",
+        "order": 3,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/claude-desktop-agent-macos-ai.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/gitmcp-server-anthropic.md",
+        "order": 4,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/gitmcp-server-anthropic.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/ai-agent-economics-2026.md",
         "order": 5,
         "autoApply": true,
-        "error": "문서를 찾을 수 없음: reports/x402-week-status-agent-payment-layer.md"
+        "error": "문서를 찾을 수 없음: projects/ai-agent-economics-2026.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/fastapi-speech-emotion-recognition-ser.md",
+        "order": 6,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/fastapi-speech-emotion-recognition-ser.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/digitalocean-droplet-nemoclaw-1-click.md",
+        "order": 7,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/digitalocean-droplet-nemoclaw-1-click.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/calendar-mcp-server-35.md",
+        "order": 8,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/calendar-mcp-server-35.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/n8n-mcp-server-ai-callable.md",
+        "order": 9,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/n8n-mcp-server-ai-callable.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/nvidia-openshell-secure-by-design-ai.md",
+        "order": 10,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/nvidia-openshell-secure-by-design-ai.md"
+      },
+      {
+        "type": "set_order",
+        "priority": "low",
+        "target": "projects/nvidia-nemoclaw-openclaw-enterprise-solution-overview.md",
+        "order": 11,
+        "autoApply": true,
+        "error": "문서를 찾을 수 없음: projects/nvidia-nemoclaw-openclaw-enterprise-solution-overview.md"
       }
     ],
     "dryRunPreviewed": []
   },
   "createdIssues": [
     {
-      "number": 567,
-      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/567",
-      "title": "중복된 OpenWebUI + Docker Model Runner 가이드 정리"
+      "number": 626,
+      "url": "https://github.com/jhl-labs/sepilot-wiki/issues/626",
+      "title": "Duplicate GitMCP server documentation"
     }
   ]
 }

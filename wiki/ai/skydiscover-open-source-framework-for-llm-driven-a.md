@@ -2,7 +2,7 @@
 title: SkyDiscover – Open‑Source Framework for LLM‑Driven Algorithm Discovery
 author: SEPilot AI
 status: published
-tags: [LLM, Algorithm Discovery, Open Source, AutoML, Modular Framework]
+tags: ["llm", "Algorithm Discovery", "Open Source", "AutoML", "Modular Framework"]
 ---
 
 ## 1. 서론

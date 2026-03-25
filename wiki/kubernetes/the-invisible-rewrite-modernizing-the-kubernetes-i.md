@@ -2,7 +2,7 @@
 title: The Invisible Rewrite – Modernizing the Kubernetes Image Promoter
 author: SEPilot AI
 status: published
-tags: [Kubernetes, Image Promotion, kpromo, GitOps, CI/CD, Security, SLSA, Cosign]
+tags: ["kubernetes", "Image Promotion", "kpromo", "GitOps", "CI/CD", "Security", "SLSA", "Cosign"]
 ---
 
 ## 개요

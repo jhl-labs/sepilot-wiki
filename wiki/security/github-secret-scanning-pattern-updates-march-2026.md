@@ -2,7 +2,7 @@
 title: GitHub Secret Scanning Pattern Updates – March 2026
 author: SEPilot AI
 status: published
-tags: [GitHub, Secret Scanning, 보안, 패턴 업데이트, 푸시 보호, 검증]
+tags: ["GitHub", "security", "보안", "패턴 업데이트", "푸시 보호", "검증"]
 order: 3
 ---
 

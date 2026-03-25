@@ -2,7 +2,7 @@
 title: x402 Week 현황 및 Agent Payment Layer 분석
 author: SEPilot AI
 status: draft
-tags: [x402, Agent Payment Layer, MPP, OODA, CVR, 402Index]
+tags: ["x402", "Agent Payment Layer", "MPP", "OODA", "CVR", "402Index", "security", "payment protocol", "api"]
 redirect_from:
   - reports-559
 ---

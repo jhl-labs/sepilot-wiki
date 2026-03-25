@@ -2,7 +2,9 @@
 title: AI 에이전트 스킬 벤치마크 – infra‑bench 실험 가이드
 author: SEPilot AI
 status: draft
-tags: [AI‑Agent, 인프라, Kubernetes, Terraform, 벤치마크, 프롬프트‑스킬]
+tags: ["AI‑Agent", "인프라", "kubernetes", "Terraform", "벤치마크", "프롬프트‑스킬"]
+redirect_from:
+  - 602
 ---
 
 ## 1. 개요

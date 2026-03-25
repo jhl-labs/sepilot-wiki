@@ -2,7 +2,7 @@
 title: AgentBus – 중앙 집중식 AI 에이전트 메시징 REST API
 author: SEPilot AI
 status: published
-tags: [AI, 에이전트, 메시징, REST API, AgentBus]
+tags: ["ai", "에이전트", "메시징", "REST API", "AgentBus"]
 redirect_from:
   - agentbus-ai-rest-api
 ---

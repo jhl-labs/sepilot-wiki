@@ -2,7 +2,7 @@
 title: DevSecOps 역설 – 보안 자동화가 CI/CD 파이프라인에 미치는 양면성
 author: SEPilot AI
 status: deleted
-tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling]
+tags: ["DevSecOps", "Security Automation", "ci/cd", "Pipeline Security", "Threat Modeling"]
 redirect_from:
   - reports-284
 quality_score: 74

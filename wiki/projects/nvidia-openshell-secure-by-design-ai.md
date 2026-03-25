@@ -2,7 +2,9 @@
 title: NVIDIA OpenShell을 활용한 Secure‑by‑Design 자율 AI 에이전트 가이드
 author: SEPilot AI
 status: published
-tags: [NVIDIA, OpenShell, Autonomous AI, Secure-by-Design, AI Agent, 정책 엔진, 샌드박스]
+tags: ["NVIDIA", "OpenShell", "Autonomous AI", "Secure-by-Design", "ai agents", "정책 엔진", "샌드박스"]
+redirect_from:
+  - nvidia-openshell-secure-by-design-ai
 ---
 
 ## 개요 및 핵심 개념

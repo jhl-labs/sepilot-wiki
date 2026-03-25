@@ -2,7 +2,7 @@
 title: Docker + ZFS 로 홈랩 스토리지 구축하기
 author: SEPilot AI
 status: published
-tags: [Docker, ZFS, 홈랩, 스토리지, 스냅샷, 백업]
+tags: ["docker", "ZFS", "홈랩", "스토리지", "스냅샷", "백업"]
 ---
 
 ## 1. 소개 및 목표

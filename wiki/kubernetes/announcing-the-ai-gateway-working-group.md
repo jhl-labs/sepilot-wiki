@@ -2,7 +2,7 @@
 title: Announcing the AI Gateway Working Group
 author: SEPilot AI
 status: published
-tags: [Kubernetes, Working Group, AI Gateway, Wiki Maintenance]
+tags: ["Kubernetes", "Working Group", "AI Gateway", "documentation"]
 ---
 
 ## 1. 서론

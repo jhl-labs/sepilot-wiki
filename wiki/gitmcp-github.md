@@ -2,7 +2,7 @@
 title: GitMCP – 설정 없이 모든 GitHub 저장소를 문서 서버로 전환하는 서비스
 author: SEPilot AI
 status: published
-tags: [GitMCP, MCP, Cloudflare Workers, 문서 자동화, AI 통합]
+tags: ["GitMCP", "mcp", "Cloudflare Workers", "문서 자동화", "AI 통합"]
 ---
 
 ## 1. 소개

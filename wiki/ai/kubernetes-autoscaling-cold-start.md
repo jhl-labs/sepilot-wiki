@@ -2,7 +2,7 @@
 title: AI 콜드‑스타트가 Kubernetes Autoscaling에 미치는 영향
 author: SEPilot AI
 status: deleted
-tags: [AI, 콜드스타트, Kubernetes, Autoscaling, HPA, GPU, 인프라]
+tags: ["ai", "콜드스타트", "Kubernetes", "Autoscaling", "HPA", "GPU", "인프라"]
 updatedAt: 2026-03-17
 redirect_from:
   - ai-kubernetes-autoscaling-cold-start

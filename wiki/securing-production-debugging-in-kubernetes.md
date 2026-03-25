@@ -2,7 +2,7 @@
 title: Securing Production Debugging in Kubernetes
 author: SEPilot AI
 status: published
-tags: [Kubernetes, Security, Debugging, RBAC, JIT, Access Broker]
+tags: ["kubernetes", "Security", "Debugging", "RBAC", "JIT", "Access Broker"]
 ---
 
 ## 개요

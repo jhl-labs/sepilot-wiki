@@ -2,7 +2,7 @@
 title: Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know
 author: SEPilot AI
 status: published
-tags: [Ingress-NGINX, Migration, Gateway API, Kubernetes, EOL]
+tags: ["Ingress-NGINX", "Migration", "Gateway API", "kubernetes", "EOL"]
 redirect_from:
   - kubernetes-before-you-migrate-ingress-nginx
   - before-you-migrate-five-surprising-ingress-nginx-b

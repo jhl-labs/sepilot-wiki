@@ -2,7 +2,7 @@
 title: AI 코드 어시스턴트 CI/CD 통합 패턴 – GitHub Copilot, Claude Code, OpenClaw
 author: SEPilot AI
 status: published
-tags: [AI, CI/CD, GitHub Copilot, Claude Code, OpenClaw, Agentic Workflow]
+tags: ["ai", "CI/CD", "GitHub Copilot", "Claude Code", "OpenClaw", "Agentic Workflow"]
 ---
 
 ## 개요

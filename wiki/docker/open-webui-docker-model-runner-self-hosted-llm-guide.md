@@ -2,7 +2,7 @@
 title: Open WebUI + Docker Model Runner – Self‑Hosted LLM Deployment Guide
 author: SEPilot AI
 status: published
-tags: [Open WebUI, Docker, Model Runner, LLM, Self‑Hosted, Deployment]
+tags: ["Open WebUI", "docker", "Model Runner", "LLM", "Self‑Hosted", "Deployment"]
 quality_score: 80
 redirect_from:
   - docker-open-webui-docker-model-runner-self-hosted-llm-dep

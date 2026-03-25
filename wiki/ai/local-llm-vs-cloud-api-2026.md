@@ -2,7 +2,7 @@
 title: Local LLM vs Cloud API 비용 비교 – 2026 실제 운영 실험
 author: SEPilot AI
 status: published
-tags: [LLM, 비용비교, 로컬배포, 클라우드API, TCO, 성능]
+tags: ["llm", "비용비교", "로컬배포", "클라우드API", "TCO", "성능"]
 ---
 
 ## 1. 서론

@@ -2,7 +2,7 @@
 title: AI Agent 배포 실패 방지와 테스트 전략 가이드
 author: SEPilot AI
 status: draft
-tags: [AI Agent, 테스트, LangChain, 배포, 품질 보증]
+tags: ["ai agents", "테스트", "LangChain", "배포", "품질 보증"]
 order: 12
 redirect_from:
   - ai-240

@@ -1,16 +1,351 @@
 {
-  "generatedAt": "2026-03-23T08:55:07.596Z",
+  "generatedAt": "2026-03-25T12:35:27.961Z",
   "model": "gpt-oss:120b-cloud",
-  "totalTags": 781,
-  "merges": [],
-  "suggestions": [],
-  "taxonomy": {},
+  "totalTags": 886,
+  "merges": [
+    {
+      "target": "agent payment layer",
+      "sources": [
+        "Agent Payment Layer",
+        "agent payment layer"
+      ],
+      "reason": "Unify case and spacing for the same concept."
+    },
+    {
+      "target": "ai agents",
+      "sources": [
+        "AI Agents",
+        "AI Agent",
+        "AI‑Agents",
+        "AI‑Agent",
+        "ai agents",
+        "ai agent",
+        "ai‑agents",
+        "ai‑agent"
+      ],
+      "reason": "Standardize naming and case for AI‑agent related tags."
+    },
+    {
+      "target": "llm",
+      "sources": [
+        "LLM",
+        "Large Language Model",
+        "Large Language Models",
+        "LLM‑free",
+        "LLM‑d"
+      ],
+      "reason": "All refer to large language models; keep a single canonical tag."
+    },
+    {
+      "target": "security",
+      "sources": [
+        "Security",
+        "Security Automation",
+        "DevSecOps",
+        "DevSecOps",
+        "Pipeline Security",
+        "Threat Modeling",
+        "Vulnerability",
+        "Vulnerability Management",
+        "Secret Scanning",
+        "secret‑scanning",
+        "Secret‑Scanning",
+        "Secret Scanning"
+      ],
+      "reason": "Group all security‑related concepts under one tag."
+    },
+    {
+      "target": "ci/cd",
+      "sources": [
+        "CI/CD",
+        "CI",
+        "CD",
+        "GitHub Actions",
+        "Actions"
+      ],
+      "reason": "CI/CD is the umbrella term for continuous integration and delivery pipelines."
+    },
+    {
+      "target": "observability",
+      "sources": [
+        "Observability",
+        "Monitoring",
+        "Metrics",
+        "Logging",
+        "Tracing",
+        "OpenTelemetry",
+        "opentelemetry",
+        "Distributed Tracing"
+      ],
+      "reason": "All refer to the practice of observing systems; unify under a single tag."
+    },
+    {
+      "target": "kubernetes",
+      "sources": [
+        "Kubernetes",
+        "k8s"
+      ],
+      "reason": "k8s is a common abbreviation for Kubernetes."
+    },
+    {
+      "target": "cloud",
+      "sources": [
+        "Cloud",
+        "Cloud Terminal",
+        "Cloud Native"
+      ],
+      "reason": "All refer to cloud‑related concepts."
+    },
+    {
+      "target": "documentation",
+      "sources": [
+        "Documentation",
+        "Wiki",
+        "Wiki Maintenance"
+      ],
+      "reason": "Unify all documentation‑related tags."
+    },
+    {
+      "target": "python",
+      "sources": [
+        "Python",
+        "python"
+      ],
+      "reason": "Case normalization."
+    },
+    {
+      "target": "typescript",
+      "sources": [
+        "TypeScript",
+        "typescript"
+      ],
+      "reason": "Case normalization."
+    },
+    {
+      "target": "javascript",
+      "sources": [
+        "JavaScript",
+        "javascript"
+      ],
+      "reason": "Case normalization."
+    },
+    {
+      "target": "docker",
+      "sources": [
+        "Docker"
+      ],
+      "reason": "Standard tag for Docker‑related content."
+    },
+    {
+      "target": "git",
+      "sources": [
+        "Git"
+      ],
+      "reason": "Standard tag for Git‑related content."
+    },
+    {
+      "target": "mcp",
+      "sources": [
+        "MCP",
+        "mcp"
+      ],
+      "reason": "Case normalization for Model Context Protocol."
+    },
+    {
+      "target": "ai",
+      "sources": [
+        "AI",
+        "ai"
+      ],
+      "reason": "Case normalization."
+    },
+    {
+      "target": "devops",
+      "sources": [
+        "DevOps",
+        "devops"
+      ],
+      "reason": "Case normalization."
+    },
+    {
+      "target": "automation",
+      "sources": [
+        "Automation",
+        "automation"
+      ],
+      "reason": "Case normalization."
+    }
+  ],
+  "suggestions": [
+    {
+      "document": "reports/x402-week-status-agent-payment-layer.md",
+      "currentTags": [
+        "x402",
+        "Agent Payment Layer",
+        "MPP",
+        "OODA",
+        "CVR",
+        "402Index"
+      ],
+      "suggestedTags": [
+        "security",
+        "payment protocol",
+        "api"
+      ],
+      "reason": "The report discusses a payment‑layer protocol; adding security and payment‑protocol tags improves discoverability."
+    },
+    {
+      "document": "ai/ai-2024-2026.md",
+      "currentTags": [
+        "ai"
+      ],
+      "suggestedTags": [
+        "history",
+        "timeline",
+        "large language model"
+      ],
+      "reason": "The article is a historical overview of LLMs; tags for history, timeline, and LLM give context."
+    },
+    {
+      "document": "security/400.md",
+      "currentTags": [
+        "AI",
+        "시크릿 관리",
+        "SSH 키",
+        "보안 베스트 프랙티스",
+        "GitGuardian",
+        "DevOps"
+      ],
+      "suggestedTags": [
+        "security",
+        "secret management",
+        "ssh"
+      ],
+      "reason": "Standardize to the unified security tag and add a specific secret‑management tag."
+    },
+    {
+      "document": "observability/logmera-guide.md",
+      "currentTags": [
+        "LLM",
+        "Observability",
+        "Logmera",
+        "OpenTelemetry",
+        "FastAPI",
+        "PostgreSQL",
+        "AI"
+      ],
+      "suggestedTags": [
+        "observability",
+        "llm",
+        "monitoring"
+      ],
+      "reason": "Add a generic monitoring tag and keep the unified observability tag."
+    },
+    {
+      "document": "frontend/webp-client-side-converter.md",
+      "currentTags": [
+        "WebP",
+        "이미지 변환",
+        "Vercel",
+        "Canvas",
+        "Web Worker"
+      ],
+      "suggestedTags": [
+        "cloud",
+        "frontend",
+        "image optimization"
+      ],
+      "reason": "The guide runs on Vercel (cloud) and deals with frontend image optimization."
+    }
+  ],
+  "taxonomy": {
+    "ai": [
+      "ai",
+      "ai agents",
+      "agentic ai",
+      "llm",
+      "large language model",
+      "ai agent",
+      "ai‑agent",
+      "ai‑agents",
+      "ai‑agentic",
+      "ai‑agentic"
+    ],
+    "security": [
+      "security",
+      "vulnerability",
+      "threat modeling",
+      "pipeline security",
+      "secret scanning",
+      "secret‑scanning",
+      "secret‑scanning",
+      "secret management"
+    ],
+    "devops": [
+      "ci/cd",
+      "automation",
+      "gitops",
+      "mlops",
+      "docker",
+      "kubernetes",
+      "observability",
+      "cloud",
+      "terraform",
+      "git",
+      "mcp",
+      "devops"
+    ],
+    "documentation": [
+      "documentation",
+      "wiki",
+      "wiki maintenance"
+    ],
+    "programming": [
+      "python",
+      "typescript",
+      "javascript",
+      "c++",
+      "go",
+      "rust"
+    ],
+    "cloud": [
+      "aws",
+      "cloud",
+      "cloud terminal",
+      "cloud native"
+    ],
+    "observability": [
+      "observability",
+      "monitoring",
+      "metrics",
+      "logging",
+      "tracing",
+      "opentelemetry",
+      "distributed tracing"
+    ],
+    "robotics": [
+      "robotics",
+      "autonomous ai",
+      "edge ai",
+      "bci",
+      "robot"
+    ],
+    "frontend": [
+      "frontend",
+      "react",
+      "next.js",
+      "vite",
+      "webp",
+      "image optimization"
+    ]
+  },
   "tagStats": [
     {
       "tag": "2026",
-      "count": 3,
+      "count": 4,
       "documents": [
         "security/web-pentesting-beginner-roadmap-2026-recon-server-.md",
+        "projects/ai-agent-economics-2026.md",
         "ai/275.md",
         "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md"
       ]
@@ -121,10 +456,11 @@
     },
     {
       "tag": "DevSecOps",
-      "count": 6,
+      "count": 7,
       "documents": [
         "reports/devsecops-paradox.md",
         "security/376.md",
+        "security/kusari-cncf.md",
         "security/wordpress-vulnerability-triaging-playbook-2026.md",
         "security/285.md",
         "security/devsecops.md",
@@ -141,12 +477,15 @@
     },
     {
       "tag": "CI/CD",
-      "count": 23,
+      "count": 25,
       "documents": [
         "reports/devsecops-paradox.md",
         "github/getting-started-with-github-actions.md",
+        "kubernetes-ai-gitops-ci-cd.md",
+        "security/self-propagating-malware-canisterworm.md",
         "security/devsecops.md",
         "security/under-the-hood-security-architecture-of-github-age.md",
+        "security/604.md",
         "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
         "projects/xcode-cloud-ci-cd.md",
         "projects/enterprise-gitops-implementation.md",
@@ -158,7 +497,6 @@
         "ai/ai-agentic-workflow.md",
         "ai/425.md",
         "ai/github-agentic-workflows.md",
-        "ai.md",
         "565.md",
         "devops/gitops-implementation.md",
         "devops/shared-workflows-nodejs-aws.md",
@@ -182,6 +520,78 @@
       "documents": [
         "reports/devsecops-paradox.md",
         "security/devsecops.md"
+      ]
+    },
+    {
+      "tag": "Traefik",
+      "count": 4,
+      "documents": [
+        "572.md",
+        "projects/homelab-ai-stack-2026.md",
+        "ai/426.md",
+        "devops/traefik-yaml.md"
+      ]
+    },
+    {
+      "tag": "File Provider",
+      "count": 2,
+      "documents": [
+        "572.md",
+        "devops/traefik-yaml.md"
+      ]
+    },
+    {
+      "tag": "YAML",
+      "count": 3,
+      "documents": [
+        "572.md",
+        "ai/tmux-ide-guide.md",
+        "devops/traefik-yaml.md"
+      ]
+    },
+    {
+      "tag": "라우트 관리",
+      "count": 1,
+      "documents": [
+        "572.md"
+      ]
+    },
+    {
+      "tag": "Docker",
+      "count": 12,
+      "documents": [
+        "572.md",
+        "docker/gordon-ai-agent-update.md",
+        "docker/308.md",
+        "docker/docker-model-runner-macos-vllm-support.md",
+        "docker/docker-model-runner-macos-vllm.md",
+        "docker/announcing-docker-hardened-system-packages.md",
+        "docker/docker-zfs.md",
+        "docker/run-openclaw-securely-in-docker-sandboxes.md",
+        "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
+        "docker/405.md",
+        "docker/hardened-images.md",
+        "devops/traefik-yaml.md"
+      ]
+    },
+    {
+      "tag": "AI 에이전트",
+      "count": 14,
+      "documents": [
+        "572.md",
+        "security/ai-auth0-token-vault.md",
+        "projects/viscat-technology-whitepaper.md",
+        "projects/viscat.md",
+        "projects/viscat-tech-whitepaper.md",
+        "ai/603.md",
+        "ai/cloud-terminal-persistent-ai-agent-sessions.md",
+        "ai/ai-agent-economics-2026.md",
+        "ai/275.md",
+        "ai/310.md",
+        "ai/llm-free-ai.md",
+        "ai/613.md",
+        "ai/514.md",
+        "581.md"
       ]
     },
     {
@@ -255,17 +665,18 @@
     },
     {
       "tag": "dependencies",
-      "count": 4,
+      "count": 5,
       "documents": [
         "backend/label-dependencies.md",
         "troubleshooting/dependabot-labels.md",
+        "dependencies/react-group-bump-not-needed.md",
         "dependabot/missing-dependencies-label.md",
         "meta/label-dependencies.md"
       ]
     },
     {
       "tag": "dependabot",
-      "count": 22,
+      "count": 24,
       "documents": [
         "backend/label-dependencies.md",
         "github/dependencies-label.md",
@@ -274,6 +685,7 @@
         "troubleshooting/dependabot-missing-label.md",
         "troubleshooting/dependabot-labels.md",
         "dependencies/dompurify-bump-3.3.2.md",
+        "dependencies/react-group-bump-not-needed.md",
         "dependencies/react-router-dom-7-13-1-bump-no-longer-needed.md",
         "dependabot/labels-setup.md",
         "dependabot/bump-dev-dependencies-2026-03-09.md",
@@ -285,6 +697,7 @@
         "issues/dependencies-label-missing.md",
         "devops/dependabot-label-fix.md",
         "devops/dependabot.md",
+        "devops/dependabot-missing-labels.md",
         "devops/dependabot-labels.md",
         "devops/fix-dependabot-labels.md",
         "guides/dependabot-labels.md",
@@ -366,12 +779,16 @@
     },
     {
       "tag": "Python",
-      "count": 7,
+      "count": 11,
       "documents": [
         "backend/snkv-sqlite-btree-kv-store.md",
-        "fastapi-speech-emotion-recognition-ser.md",
+        "security/litellm-python-pth.md",
+        "security/601.md",
         "security/shinobi-scan-secret-scanning-cli.md",
+        "projects/fastapi-speech-emotion-recognition-ser.md",
         "ai/fastapi-ai-api.md",
+        "ai/fastmcp-model-context-protocol.md",
+        "ai/608.md",
         "ai/fastapi-ai-inference.md",
         "ai/fastapi-inference-service-guide.md",
         "565.md"
@@ -401,7 +818,7 @@
     },
     {
       "tag": "Observability",
-      "count": 7,
+      "count": 9,
       "documents": [
         "observability/2026-vigilops-zabbix-prometheus-grafana-datadog.md",
         "observability/logmera-guide.md",
@@ -409,12 +826,14 @@
         "observability/open-telemetry-overview.md",
         "observability/opentelemetry-overview.md",
         "observability/opentelemetry-observability-warehouse.md",
+        "576.md",
+        "ai/llm-drift.md",
         "ai-driven.md"
       ]
     },
     {
       "tag": "DevOps",
-      "count": 11,
+      "count": 10,
       "documents": [
         "observability/2026-vigilops-zabbix-prometheus-grafana-datadog.md",
         "security/411.md",
@@ -424,7 +843,6 @@
         "bun/github-actions-setup.md",
         "ai/ai-code-assistant-productivity-paradox.md",
         "ai/ai-code-assistant-3week-experiment-report.md",
-        "ai.md",
         "565.md",
         "devops/gitops-implementation.md"
       ]
@@ -449,10 +867,12 @@
     },
     {
       "tag": "LLM",
-      "count": 23,
+      "count": 28,
       "documents": [
         "observability/logmera-guide.md",
         "observability/logmera-self-hosted-llm-observability-tool.md",
+        "576.md",
+        "security/605.md",
         "docker/308.md",
         "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
         "projects/sepilot-desktop-intro.md",
@@ -466,14 +886,17 @@
         "ai/mcp-model-context-protocol.md",
         "ai/llm-prompt-injection.md",
         "ai/qwen3-5.md",
+        "ai/llm-drift.md",
         "ai/llms-txt-llm.md",
         "ai/263.md",
         "ai/skydiscover-open-source-framework-for-llm-driven-a.md",
         "ai/ai-llm-2017-2026.md",
         "ai/pentagon-llm-alternative-development-ai.md",
         "ai/545.md",
+        "ai/608.md",
         "ai/adaptive-merging-of-lora-modules-lora.md",
-        "ai/419.md"
+        "ai/419.md",
+        "llm.md"
       ]
     },
     {
@@ -486,7 +909,7 @@
     },
     {
       "tag": "OpenTelemetry",
-      "count": 7,
+      "count": 9,
       "documents": [
         "observability/logmera-guide.md",
         "observability/logmera-self-hosted-llm-observability-tool.md",
@@ -494,7 +917,9 @@
         "observability/open-telemetry-overview.md",
         "observability/opentelemetry-overview.md",
         "observability/opentelemetry-observability-warehouse.md",
-        "ai/claude-code.md"
+        "576.md",
+        "ai/claude-code.md",
+        "ai/llm-drift.md"
       ]
     },
     {
@@ -503,7 +928,7 @@
       "documents": [
         "observability/logmera-guide.md",
         "observability/logmera-self-hosted-llm-observability-tool.md",
-        "fastapi-speech-emotion-recognition-ser.md",
+        "projects/fastapi-speech-emotion-recognition-ser.md",
         "563.md",
         "ai/fastapi-ai-api.md",
         "ai/ai-code-assistant-productivity-paradox.md",
@@ -523,13 +948,16 @@
     },
     {
       "tag": "AI",
-      "count": 51,
+      "count": 54,
       "documents": [
         "observability/logmera-guide.md",
         "observability/multi-agent-ai-observability.md",
+        "kubernetes-ai-gitops-ci-cd.md",
+        "security/577.md",
         "security/400.md",
         "security/ai.md",
         "docker/gordon-ai-agent-update.md",
+        "projects/ai-agent-economics-2026.md",
         "projects/github-copilot-coding-agent.md",
         "projects/sepilot-desktop-intro.md",
         "projects/agentbus-rest-api.md",
@@ -589,13 +1017,14 @@
     },
     {
       "tag": "관측성",
-      "count": 6,
+      "count": 7,
       "documents": [
         "observability/multi-agent-ai-observability.md",
         "observability/open-telemetry-overview.md",
         "kubernetes/kubernetes-ai-gateway.md",
         "ai/self-healing.md",
         "ai/multi-agent-workflows-often-fail-here-s-how-to-eng.md",
+        "llm.md",
         "566.md"
       ]
     },
@@ -649,9 +1078,11 @@
     },
     {
       "tag": "AI‑native",
-      "count": 1,
+      "count": 3,
       "documents": [
-        "observability/vigilops-comparison.md"
+        "observability/vigilops-comparison.md",
+        "kubernetes/598.md",
+        "kubernetes/llm-d-cncf-ai-native-kubernetes.md"
       ]
     },
     {
@@ -670,14 +1101,20 @@
     },
     {
       "tag": "오픈소스",
-      "count": 8,
+      "count": 14,
       "documents": [
         "observability/vigilops-comparison.md",
+        "security/self-propagating-malware-canisterworm.md",
+        "security/577.md",
+        "security/604.md",
+        "kubernetes/598.md",
+        "kubernetes/llm-d-cncf-ai-native-kubernetes.md",
         "projects/emdash.md",
         "projects/emdash-agentic-development-environment.md",
         "projects/openclaw-complete-guide.md",
         "projects/agentspace-private-chat-room.md",
         "projects/agentspace.md",
+        "621.md",
         "ai/315.md",
         "ai/344.md"
       ]
@@ -700,9 +1137,13 @@
     },
     {
       "tag": "CNCF",
-      "count": 1,
+      "count": 5,
       "documents": [
-        "observability/opentelemetry-overview.md"
+        "observability/opentelemetry-overview.md",
+        "security/577.md",
+        "security/kusari-cncf.md",
+        "kubernetes/598.md",
+        "kubernetes/llm-d-cncf-ai-native-kubernetes.md"
       ]
     },
     {
@@ -736,33 +1177,69 @@
       ]
     },
     {
-      "tag": "Speech Emotion Recognition",
+      "tag": "Git",
       "count": 2,
       "documents": [
-        "fastapi-speech-emotion-recognition-ser.md",
-        "563.md"
+        "620.md",
+        "git-mcp-server-anthropic.md"
       ]
     },
     {
-      "tag": "SER",
-      "count": 1,
+      "tag": "MCP",
+      "count": 14,
       "documents": [
-        "fastapi-speech-emotion-recognition-ser.md"
+        "620.md",
+        "projects/claude-code-release-history.md",
+        "projects/human-in-the-loop-agentic-cms-notion-mcp.md",
+        "projects/calendar-mcp-server-35.md",
+        "projects/n8n-mcp-server-ai-callable.md",
+        "621.md",
+        "git-mcp-server-anthropic.md",
+        "ai/610.md",
+        "ai/mcp-model-context-protocol.md",
+        "ai/608.md",
+        "ai/colab-mcp-server-google-colab-ai.md",
+        "ai/613.md",
+        "gitmcp-github.md",
+        "615.md"
       ]
     },
     {
-      "tag": "Audio ML",
+      "tag": "Anthropic",
+      "count": 9,
+      "documents": [
+        "620.md",
+        "projects/claude-desktop-agent-macos-ai.md",
+        "git-mcp-server-anthropic.md",
+        "ai/pentagon-llm-policy.md",
+        "ai/403.md",
+        "ai/mcp-model-context-protocol.md",
+        "ai/claude-marketplace.md",
+        "ai/287.md",
+        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
+      ]
+    },
+    {
+      "tag": "PyPI",
       "count": 2,
       "documents": [
-        "fastapi-speech-emotion-recognition-ser.md",
-        "563.md"
+        "620.md",
+        "git-mcp-server-anthropic.md"
       ]
     },
     {
-      "tag": "모델 서빙",
-      "count": 1,
+      "tag": "Security",
+      "count": 9,
       "documents": [
-        "fastapi-speech-emotion-recognition-ser.md"
+        "620.md",
+        "security/376.md",
+        "security/285.md",
+        "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
+        "docker/run-openclaw-securely-in-docker-sandboxes.md",
+        "docker/hardened-images.md",
+        "securing-production-debugging-in-kubernetes.md",
+        "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv.md",
+        "ai/574.md"
       ]
     },
     {
@@ -820,7 +1297,7 @@
     },
     {
       "tag": "GitHub",
-      "count": 12,
+      "count": 13,
       "documents": [
         "github/getting-started-with-github-actions.md",
         "github/dependencies-label.md",
@@ -832,6 +1309,7 @@
         "dependabot/labels-setup.md",
         "issues/dependencies-label-missing.md",
         "ai/github-agentic-workflows.md",
+        "devops/dependabot-missing-labels.md",
         "devops/dependabot-labels.md",
         "guides/dependabot-labels.md"
       ]
@@ -854,22 +1332,29 @@
     },
     {
       "tag": "자동화",
-      "count": 9,
+      "count": 16,
       "documents": [
         "github/getting-started-with-github-actions.md",
         "docker/gordon-ai-agent-update.md",
         "projects/xcode-cloud-ci-cd.md",
+        "projects/digitalocean-droplet-nemoclaw-1-click.md",
         "projects/github-copilot-cli-guide.md",
+        "projects/n8n-mcp-server-ai-callable.md",
+        "ai/603.md",
         "ai/564.md",
         "ai/xcode-cloud-ci-cd-guide.md",
+        "ai/610.md",
         "ai/ai-driven-sdlc-bottlenecks-causes-and-mitigations.md",
+        "ai/597.md",
+        "ai/colab-mcp-server-google-colab-ai.md",
+        "devops/traefik-yaml.md",
         "566.md",
         "guides/dependabot-labels.md"
       ]
     },
     {
       "tag": "labels",
-      "count": 14,
+      "count": 15,
       "documents": [
         "github/dependencies-label.md",
         "github/dependabot-labels.md",
@@ -884,6 +1369,7 @@
         "issues/dependencies-label-missing.md",
         "devops/dependabot-label-fix.md",
         "devops/dependabot.md",
+        "devops/dependabot-labels.md",
         "devops/fix-dependabot-labels.md"
       ]
     },
@@ -898,8 +1384,79 @@
         "ai/ai-code-review-agent-guide.md",
         "ai/continuous-ai.md",
         "devops/dependabot-label-fix.md",
-        "devops/dependabot-labels.md",
+        "devops/dependabot-missing-labels.md",
         "devops/fix-dependabot-labels.md"
+      ]
+    },
+    {
+      "tag": "kubernetes",
+      "count": 22,
+      "documents": [
+        "kubernetes-ai-gitops-ci-cd.md",
+        "security/604.md",
+        "kubernetes/node-readiness-controller.md",
+        "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa.md",
+        "kubernetes/kubernetes-ai-gateway.md",
+        "kubernetes/ingress-nginx-deprecation-guide.md",
+        "kubernetes/ai-gateway-working-group.md",
+        "kubernetes/api-governance.md",
+        "kubernetes/kubernetes.md",
+        "kubernetes/598.md",
+        "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b.md",
+        "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
+        "kubernetes/announcing-the-ai-gateway-working-group.md",
+        "kubernetes/cgroup-migration.md",
+        "kubernetes/409.md",
+        "kubernetes/llm-d-cncf-ai-native-kubernetes.md",
+        "kubernetes/release-notes.md",
+        "projects/gitmcp-server-anthropic.md",
+        "securing-production-debugging-in-kubernetes.md",
+        "ai/kubernetes-autoscaling-cold-start.md",
+        "ai/kubernetes-ai-gitops.md",
+        "ai-kubernetes-terraform.md"
+      ]
+    },
+    {
+      "tag": "gitops",
+      "count": 5,
+      "documents": [
+        "kubernetes-ai-gitops-ci-cd.md",
+        "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
+        "projects/enterprise-gitops-implementation.md",
+        "ai/kubernetes-ai-gitops.md",
+        "devops/gitops-implementation.md"
+      ]
+    },
+    {
+      "tag": "mlops",
+      "count": 2,
+      "documents": [
+        "kubernetes-ai-gitops-ci-cd.md",
+        "ai/kubernetes-ai-gitops.md"
+      ]
+    },
+    {
+      "tag": "Drift",
+      "count": 2,
+      "documents": [
+        "576.md",
+        "ai/llm-drift.md"
+      ]
+    },
+    {
+      "tag": "Prometheus",
+      "count": 2,
+      "documents": [
+        "576.md",
+        "ai/llm-drift.md"
+      ]
+    },
+    {
+      "tag": "Production",
+      "count": 2,
+      "documents": [
+        "576.md",
+        "565.md"
       ]
     },
     {
@@ -983,21 +1540,25 @@
     },
     {
       "tag": "보안",
-      "count": 30,
+      "count": 40,
       "documents": [
         "security/553.md",
         "security/411.md",
+        "security/trivy-supply-chain-compromise-what-docker-hub-user.md",
         "security/2026-vps.md",
         "security/303.md",
+        "security/ai-auth0-token-vault.md",
         "security/550.md",
         "security/coinbase-x402-sdk-vulnerability.md",
         "security/404.md",
         "security/github-secret-scanning-pattern-updates-march-2026.md",
         "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
         "security/agentic-ai-security-threats.md",
+        "security/584.md",
         "security/telegram-access-layer.md",
         "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-.md",
         "security/ai.md",
+        "security/614.md",
         "security/coinbase-x402-sdk-slopsquatting-vulnerability.md",
         "security/serv-u-15-5.md",
         "security/385.md",
@@ -1005,16 +1566,22 @@
         "security/475.md",
         "kubernetes/kubernetes-ai-gateway.md",
         "docker/announcing-docker-hardened-system-packages.md",
+        "projects/fetch-mcp-server-ui.md",
+        "git-mcp-server-anthropic.md",
         "ai/joy-open-trust-network-for-ai-agents.md",
         "ai/367.md",
+        "ai/603.md",
         "ai/prompt-engineering-security-guide.md",
         "ai/llm-prompt-injection.md",
         "ai/agentic-walmart-vs-openai.md",
         "ai/459.md",
         "ai/ai-rfp.md",
         "ai/521.md",
+        "ai.md",
         "faq-agentic-ai.md",
-        "cloud/persistent-terminal-design.md"
+        "llm.md",
+        "cloud/persistent-terminal-design.md",
+        "624.md"
       ]
     },
     {
@@ -1070,6 +1637,91 @@
       "documents": [
         "security/438.md",
         "security/sql-injection-union.md"
+      ]
+    },
+    {
+      "tag": "공급망",
+      "count": 2,
+      "documents": [
+        "security/trivy-supply-chain-compromise-what-docker-hub-user.md",
+        "docker/announcing-docker-hardened-system-packages.md"
+      ]
+    },
+    {
+      "tag": "Trivy",
+      "count": 3,
+      "documents": [
+        "security/trivy-supply-chain-compromise-what-docker-hub-user.md",
+        "security/litellm-python-pth.md",
+        "security/601.md"
+      ]
+    },
+    {
+      "tag": "Docker Hub",
+      "count": 1,
+      "documents": [
+        "security/trivy-supply-chain-compromise-what-docker-hub-user.md"
+      ]
+    },
+    {
+      "tag": "사고 대응",
+      "count": 1,
+      "documents": [
+        "security/trivy-supply-chain-compromise-what-docker-hub-user.md"
+      ]
+    },
+    {
+      "tag": "프라이버시",
+      "count": 6,
+      "documents": [
+        "security/605.md",
+        "security/openai-opencode-env.md",
+        "ai/367.md",
+        "ai/ai-rfp.md",
+        "ai/tokenwatch-ai.md",
+        "ai/517.md"
+      ]
+    },
+    {
+      "tag": ".env",
+      "count": 2,
+      "documents": [
+        "security/605.md",
+        "security/openai-opencode-env.md"
+      ]
+    },
+    {
+      "tag": "시크릿 관리",
+      "count": 5,
+      "documents": [
+        "security/605.md",
+        "security/openai-opencode-env.md",
+        "security/400.md",
+        "security/ai.md",
+        "security/568.md"
+      ]
+    },
+    {
+      "tag": "OpenCode",
+      "count": 3,
+      "documents": [
+        "security/605.md",
+        "security/openai-opencode-env.md",
+        "projects/opencode.md"
+      ]
+    },
+    {
+      "tag": "Rehydra",
+      "count": 1,
+      "documents": [
+        "security/605.md"
+      ]
+    },
+    {
+      "tag": "Semantic Redaction",
+      "count": 1,
+      "documents": [
+        "security/605.md"
       ]
     },
     {
@@ -1150,6 +1802,64 @@
       ]
     },
     {
+      "tag": "Auth0",
+      "count": 2,
+      "documents": [
+        "security/ai-auth0-token-vault.md",
+        "security/584.md"
+      ]
+    },
+    {
+      "tag": "Token Vault",
+      "count": 2,
+      "documents": [
+        "security/ai-auth0-token-vault.md",
+        "security/584.md"
+      ]
+    },
+    {
+      "tag": "IAM",
+      "count": 1,
+      "documents": [
+        "security/ai-auth0-token-vault.md"
+      ]
+    },
+    {
+      "tag": "공급망 보안",
+      "count": 7,
+      "documents": [
+        "security/self-propagating-malware-canisterworm.md",
+        "security/litellm-python-pth.md",
+        "security/ai-slopsquatting.md",
+        "security/601.md",
+        "security/npm.md",
+        "security/568.md",
+        "security/604.md"
+      ]
+    },
+    {
+      "tag": "악성코드",
+      "count": 2,
+      "documents": [
+        "security/self-propagating-malware-canisterworm.md",
+        "security/604.md"
+      ]
+    },
+    {
+      "tag": "CanisterWorm",
+      "count": 1,
+      "documents": [
+        "security/self-propagating-malware-canisterworm.md"
+      ]
+    },
+    {
+      "tag": "Kamikaze",
+      "count": 1,
+      "documents": [
+        "security/self-propagating-malware-canisterworm.md"
+      ]
+    },
+    {
       "tag": "웹펜테스팅",
       "count": 1,
       "documents": [
@@ -1200,10 +1910,11 @@
     },
     {
       "tag": "취약점",
-      "count": 5,
+      "count": 6,
       "documents": [
         "security/coinbase-x402-sdk-vulnerability.md",
         "security/ghsa-qr2g-p6q7-w82m-coinbase-x402-sdk-solana.md",
+        "security/614.md",
         "security/coinbase-x402-sdk-slopsquatting-vulnerability.md",
         "security/serv-u-15-5.md",
         "security/558.md"
@@ -1251,14 +1962,42 @@
       ]
     },
     {
-      "tag": "AI 환각",
-      "count": 1,
+      "tag": ".pth 파일",
+      "count": 2,
       "documents": [
-        "security/ai-slopsquatting.md"
+        "security/litellm-python-pth.md",
+        "security/601.md"
       ]
     },
     {
-      "tag": "공급망 보안",
+      "tag": "LiteLLM",
+      "count": 4,
+      "documents": [
+        "security/litellm-python-pth.md",
+        "security/601.md",
+        "projects/homelab-ai-stack-2026.md",
+        "ai/426.md"
+      ]
+    },
+    {
+      "tag": "자격 증명 탈취",
+      "count": 3,
+      "documents": [
+        "security/litellm-python-pth.md",
+        "security/npm.md",
+        "security/568.md"
+      ]
+    },
+    {
+      "tag": "SBOM",
+      "count": 2,
+      "documents": [
+        "security/litellm-python-pth.md",
+        "security/601.md"
+      ]
+    },
+    {
+      "tag": "AI 환각",
       "count": 1,
       "documents": [
         "security/ai-slopsquatting.md"
@@ -1287,20 +2026,59 @@
       ]
     },
     {
+      "tag": "CVE-2026-4681",
+      "count": 1,
+      "documents": [
+        "security/windchill-flexplm-remote-code-execution-vulnerabil.md"
+      ]
+    },
+    {
+      "tag": "Windchill",
+      "count": 2,
+      "documents": [
+        "security/windchill-flexplm-remote-code-execution-vulnerabil.md",
+        "security/614.md"
+      ]
+    },
+    {
+      "tag": "FlexPLM",
+      "count": 2,
+      "documents": [
+        "security/windchill-flexplm-remote-code-execution-vulnerabil.md",
+        "security/614.md"
+      ]
+    },
+    {
+      "tag": "RCE",
+      "count": 5,
+      "documents": [
+        "security/windchill-flexplm-remote-code-execution-vulnerabil.md",
+        "security/404.md",
+        "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-.md",
+        "security/614.md",
+        "security/558.md"
+      ]
+    },
+    {
+      "tag": "PLM Security",
+      "count": 1,
+      "documents": [
+        "security/windchill-flexplm-remote-code-execution-vulnerabil.md"
+      ]
+    },
+    {
+      "tag": "Incident Response",
+      "count": 1,
+      "documents": [
+        "security/windchill-flexplm-remote-code-execution-vulnerabil.md"
+      ]
+    },
+    {
       "tag": "OneUptime",
       "count": 2,
       "documents": [
         "security/404.md",
         "security/cve-2026-27574-oneuptime-probe-vm-rce.md"
-      ]
-    },
-    {
-      "tag": "RCE",
-      "count": 3,
-      "documents": [
-        "security/404.md",
-        "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-.md",
-        "security/558.md"
       ]
     },
     {
@@ -1425,6 +2203,13 @@
       ]
     },
     {
+      "tag": "credential theft",
+      "count": 1,
+      "documents": [
+        "security/601.md"
+      ]
+    },
+    {
       "tag": "Agentic AI",
       "count": 8,
       "documents": [
@@ -1440,10 +2225,11 @@
     },
     {
       "tag": "위협 모델링",
-      "count": 3,
+      "count": 4,
       "documents": [
         "security/agentic-ai-security-threats.md",
         "ai/prompt-engineering-security-guide.md",
+        "ai.md",
         "faq-agentic-ai.md"
       ]
     },
@@ -1502,6 +2288,44 @@
       "count": 1,
       "documents": [
         "security/saas.md"
+      ]
+    },
+    {
+      "tag": "Kusari",
+      "count": 2,
+      "documents": [
+        "security/577.md",
+        "security/kusari-cncf.md"
+      ]
+    },
+    {
+      "tag": "소프트웨어 공급망 보안",
+      "count": 2,
+      "documents": [
+        "security/577.md",
+        "security/kusari-cncf.md"
+      ]
+    },
+    {
+      "tag": "OpenAI",
+      "count": 9,
+      "documents": [
+        "security/openai-opencode-env.md",
+        "ai/pentagon-llm-policy.md",
+        "ai/openai-pentagon-contract-update.md",
+        "ai/openai-gpt-5-4-mini-nano.md",
+        "ai/agentic-walmart-vs-openai.md",
+        "ai/525.md",
+        "ai/openai-pentagon-contract-revision-and-policy-impli.md",
+        "ai/544.md",
+        "ai/openai-pentagon-contract.md"
+      ]
+    },
+    {
+      "tag": "플러그인",
+      "count": 1,
+      "documents": [
+        "security/openai-opencode-env.md"
       ]
     },
     {
@@ -1568,6 +2392,27 @@
       ]
     },
     {
+      "tag": "AI Agent",
+      "count": 8,
+      "documents": [
+        "security/584.md",
+        "projects/claude-desktop-agent-macos-ai.md",
+        "projects/jira-ai-agents.md",
+        "projects/nvidia-openshell-secure-by-design-ai.md",
+        "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
+        "ai/colab-mcp-server-google-colab-ai.md",
+        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md",
+        "devops/traefik-yaml.md"
+      ]
+    },
+    {
+      "tag": "비밀 관리",
+      "count": 1,
+      "documents": [
+        "security/584.md"
+      ]
+    },
+    {
       "tag": "AI 보안",
       "count": 1,
       "documents": [
@@ -1603,11 +2448,10 @@
       ]
     },
     {
-      "tag": "시크릿 관리",
-      "count": 2,
+      "tag": "SSH 키",
+      "count": 1,
       "documents": [
-        "security/400.md",
-        "security/ai.md"
+        "security/400.md"
       ]
     },
     {
@@ -1641,24 +2485,20 @@
     },
     {
       "tag": "CLI",
-      "count": 4,
+      "count": 5,
       "documents": [
         "security/376.md",
         "security/shinobi-scan-secret-scanning-cli.md",
         "projects/claude-code-release-history.md",
-        "projects/github-copilot-cli-guide.md"
+        "projects/github-copilot-cli-guide.md",
+        "ai/proofshot-ai-ui-cli.md"
       ]
     },
     {
-      "tag": "security",
-      "count": 6,
+      "tag": "클라우드 네이티브",
+      "count": 1,
       "documents": [
-        "security/376.md",
-        "security/285.md",
-        "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
-        "docker/run-openclaw-securely-in-docker-sandboxes.md",
-        "docker/hardened-images.md",
-        "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv.md"
+        "security/kusari-cncf.md"
       ]
     },
     {
@@ -1689,6 +2529,31 @@
       "count": 1,
       "documents": [
         "security/polyshell-cve-2026-xxxx-magento-open-source-adobe-.md"
+      ]
+    },
+    {
+      "tag": "npm",
+      "count": 4,
+      "documents": [
+        "security/npm.md",
+        "security/568.md",
+        "bun/comparison-pnpm-npm.md",
+        "bun/overview.md"
+      ]
+    },
+    {
+      "tag": "악성 패키지",
+      "count": 2,
+      "documents": [
+        "security/npm.md",
+        "security/568.md"
+      ]
+    },
+    {
+      "tag": "시크릿 스캐닝",
+      "count": 1,
+      "documents": [
+        "security/npm.md"
       ]
     },
     {
@@ -1810,6 +2675,27 @@
       ]
     },
     {
+      "tag": "PLM",
+      "count": 1,
+      "documents": [
+        "security/614.md"
+      ]
+    },
+    {
+      "tag": "CVE‑2026‑4681",
+      "count": 1,
+      "documents": [
+        "security/614.md"
+      ]
+    },
+    {
+      "tag": "BKA",
+      "count": 1,
+      "documents": [
+        "security/614.md"
+      ]
+    },
+    {
       "tag": "Agentic Workflows",
       "count": 3,
       "documents": [
@@ -1892,9 +2778,10 @@
     },
     {
       "tag": "위협 인텔리전스",
-      "count": 1,
+      "count": 2,
       "documents": [
-        "security/385.md"
+        "security/385.md",
+        "security/604.md"
       ]
     },
     {
@@ -1975,26 +2862,6 @@
       ]
     },
     {
-      "tag": "Kubernetes",
-      "count": 14,
-      "documents": [
-        "kubernetes/node-readiness-controller.md",
-        "kubernetes/kubernetes-ai-gateway.md",
-        "kubernetes/ingress-nginx-deprecation-guide.md",
-        "kubernetes/ai-gateway-working-group.md",
-        "kubernetes/api-governance.md",
-        "kubernetes/kubernetes.md",
-        "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b.md",
-        "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
-        "kubernetes/announcing-the-ai-gateway-working-group.md",
-        "kubernetes/cgroup-migration.md",
-        "kubernetes/409.md",
-        "kubernetes/release-notes.md",
-        "ai/kubernetes-autoscaling-cold-start.md",
-        "ai/kubernetes-ai-gitops.md"
-      ]
-    },
-    {
       "tag": "NodeReadiness",
       "count": 1,
       "documents": [
@@ -2016,6 +2883,40 @@
       ]
     },
     {
+      "tag": "Ingress2Gateway",
+      "count": 1,
+      "documents": [
+        "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa.md"
+      ]
+    },
+    {
+      "tag": "Gateway API",
+      "count": 2,
+      "documents": [
+        "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa.md",
+        "kubernetes/ingress-nginx-deprecation-guide.md"
+      ]
+    },
+    {
+      "tag": "Migration",
+      "count": 4,
+      "documents": [
+        "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa.md",
+        "kubernetes/ingress-nginx-deprecation-guide.md",
+        "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b.md",
+        "devops/search-architecture-high-availability.md"
+      ]
+    },
+    {
+      "tag": "Networking",
+      "count": 3,
+      "documents": [
+        "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa.md",
+        "kubernetes/ai-gateway-working-group.md",
+        "kubernetes/kubernetes.md"
+      ]
+    },
+    {
       "tag": "AI Gateway",
       "count": 3,
       "documents": [
@@ -2033,9 +2934,10 @@
     },
     {
       "tag": "배포",
-      "count": 3,
+      "count": 4,
       "documents": [
         "kubernetes/kubernetes-ai-gateway.md",
+        "projects/digitalocean-droplet-nemoclaw-1-click.md",
         "ai/426.md",
         "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
       ]
@@ -2046,22 +2948,6 @@
       "documents": [
         "kubernetes/ingress-nginx-deprecation-guide.md",
         "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b.md"
-      ]
-    },
-    {
-      "tag": "Migration",
-      "count": 3,
-      "documents": [
-        "kubernetes/ingress-nginx-deprecation-guide.md",
-        "kubernetes/before-you-migrate-five-surprising-ingress-nginx-b.md",
-        "devops/search-architecture-high-availability.md"
-      ]
-    },
-    {
-      "tag": "Gateway API",
-      "count": 1,
-      "documents": [
-        "kubernetes/ingress-nginx-deprecation-guide.md"
       ]
     },
     {
@@ -2077,14 +2963,6 @@
       "documents": [
         "kubernetes/ai-gateway-working-group.md",
         "kubernetes/announcing-the-ai-gateway-working-group.md"
-      ]
-    },
-    {
-      "tag": "Networking",
-      "count": 2,
-      "documents": [
-        "kubernetes/ai-gateway-working-group.md",
-        "kubernetes/kubernetes.md"
       ]
     },
     {
@@ -2142,6 +3020,22 @@
       ]
     },
     {
+      "tag": "LLM‑d",
+      "count": 2,
+      "documents": [
+        "kubernetes/598.md",
+        "kubernetes/llm-d-cncf-ai-native-kubernetes.md"
+      ]
+    },
+    {
+      "tag": "분산 추론",
+      "count": 2,
+      "documents": [
+        "kubernetes/598.md",
+        "kubernetes/llm-d-cncf-ai-native-kubernetes.md"
+      ]
+    },
+    {
       "tag": "Gateway-API",
       "count": 1,
       "documents": [
@@ -2167,16 +3061,6 @@
       "count": 1,
       "documents": [
         "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md"
-      ]
-    },
-    {
-      "tag": "GitOps",
-      "count": 4,
-      "documents": [
-        "kubernetes/the-invisible-rewrite-modernizing-the-kubernetes-i.md",
-        "projects/enterprise-gitops-implementation.md",
-        "ai/kubernetes-ai-gitops.md",
-        "devops/gitops-implementation.md"
       ]
     },
     {
@@ -2303,22 +3187,6 @@
       ]
     },
     {
-      "tag": "Docker",
-      "count": 10,
-      "documents": [
-        "docker/gordon-ai-agent-update.md",
-        "docker/308.md",
-        "docker/docker-model-runner-macos-vllm-support.md",
-        "docker/docker-model-runner-macos-vllm.md",
-        "docker/announcing-docker-hardened-system-packages.md",
-        "docker/docker-zfs.md",
-        "docker/run-openclaw-securely-in-docker-sandboxes.md",
-        "docker/open-webui-docker-model-runner-self-hosted-llm-guide.md",
-        "docker/405.md",
-        "docker/hardened-images.md"
-      ]
-    },
-    {
       "tag": "Gordon",
       "count": 1,
       "documents": [
@@ -2368,10 +3236,12 @@
     },
     {
       "tag": "macOS",
-      "count": 2,
+      "count": 4,
       "documents": [
         "docker/docker-model-runner-macos-vllm-support.md",
-        "docker/docker-model-runner-macos-vllm.md"
+        "docker/docker-model-runner-macos-vllm.md",
+        "projects/claude-desktop-agent-macos-ai.md",
+        "ai/603.md"
       ]
     },
     {
@@ -2403,13 +3273,6 @@
       "documents": [
         "docker/announcing-docker-hardened-system-packages.md",
         "docker/405.md"
-      ]
-    },
-    {
-      "tag": "공급망",
-      "count": 1,
-      "documents": [
-        "docker/announcing-docker-hardened-system-packages.md"
       ]
     },
     {
@@ -2502,6 +3365,43 @@
       ]
     },
     {
+      "tag": "Fetch MCP Server",
+      "count": 2,
+      "documents": [
+        "projects/fetch-mcp-server-ui.md",
+        "624.md"
+      ]
+    },
+    {
+      "tag": "웹 접근",
+      "count": 1,
+      "documents": [
+        "projects/fetch-mcp-server-ui.md"
+      ]
+    },
+    {
+      "tag": "에이전트",
+      "count": 8,
+      "documents": [
+        "projects/fetch-mcp-server-ui.md",
+        "projects/agentbus-rest-api.md",
+        "projects/moltbook-intro.md",
+        "ai/ai-code-review-agent-guide.md",
+        "ai/315.md",
+        "ai/351.md",
+        "ai/ai-2024-2026.md",
+        "ai.md"
+      ]
+    },
+    {
+      "tag": "Markdown 변환",
+      "count": 2,
+      "documents": [
+        "projects/fetch-mcp-server-ui.md",
+        "624.md"
+      ]
+    },
+    {
       "tag": "이기종 로봇",
       "count": 2,
       "documents": [
@@ -2515,20 +3415,6 @@
       "documents": [
         "projects/viscat-technology-whitepaper.md",
         "projects/viscat-tech-whitepaper.md"
-      ]
-    },
-    {
-      "tag": "AI 에이전트",
-      "count": 8,
-      "documents": [
-        "projects/viscat-technology-whitepaper.md",
-        "projects/viscat.md",
-        "projects/viscat-tech-whitepaper.md",
-        "ai/cloud-terminal-persistent-ai-agent-sessions.md",
-        "ai/275.md",
-        "ai/310.md",
-        "ai/llm-free-ai.md",
-        "ai/514.md"
       ]
     },
     {
@@ -2575,11 +3461,13 @@
     },
     {
       "tag": "AI 코딩 에이전트",
-      "count": 3,
+      "count": 5,
       "documents": [
         "projects/emdash.md",
         "projects/emdash-agentic-development-environment.md",
-        "ai/388.md"
+        "ai/proofshot-ai-ui-cli.md",
+        "ai/388.md",
+        "ai/597.md"
       ]
     },
     {
@@ -2640,6 +3528,42 @@
       "count": 1,
       "documents": [
         "projects/robopocket-ar.md"
+      ]
+    },
+    {
+      "tag": "FastConvert.ai",
+      "count": 1,
+      "documents": [
+        "projects/fastconvert-ai.md"
+      ]
+    },
+    {
+      "tag": "파일 변환",
+      "count": 2,
+      "documents": [
+        "projects/fastconvert-ai.md",
+        "600.md"
+      ]
+    },
+    {
+      "tag": "WebP 최적화",
+      "count": 1,
+      "documents": [
+        "projects/fastconvert-ai.md"
+      ]
+    },
+    {
+      "tag": "브라우저 기반 서비스",
+      "count": 1,
+      "documents": [
+        "projects/fastconvert-ai.md"
+      ]
+    },
+    {
+      "tag": "AI 압축",
+      "count": 1,
+      "documents": [
+        "projects/fastconvert-ai.md"
       ]
     },
     {
@@ -2720,6 +3644,92 @@
       ]
     },
     {
+      "tag": "Claude",
+      "count": 7,
+      "documents": [
+        "projects/claude-desktop-agent-macos-ai.md",
+        "ai/603.md",
+        "ai/275.md",
+        "ai/claude-ai.md",
+        "ai/enterprise-adoption-of-user-aware-ai-agents-deep-p.md",
+        "ai/287.md",
+        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
+      ]
+    },
+    {
+      "tag": "Desktop Agent",
+      "count": 2,
+      "documents": [
+        "projects/claude-desktop-agent-macos-ai.md",
+        "ai/603.md"
+      ]
+    },
+    {
+      "tag": "Automation",
+      "count": 4,
+      "documents": [
+        "projects/claude-desktop-agent-macos-ai.md",
+        "bun/github-actions-setup.md",
+        "devops/dependabot-labels.md",
+        "ai-driven.md"
+      ]
+    },
+    {
+      "tag": "경제학",
+      "count": 2,
+      "documents": [
+        "projects/ai-agent-economics-2026.md",
+        "ai/ai-agent-economics-2026.md"
+      ]
+    },
+    {
+      "tag": "자율 에이전트",
+      "count": 3,
+      "documents": [
+        "projects/ai-agent-economics-2026.md",
+        "ai/guardian-protocol-ai.md",
+        "ai/multi-agent-system.md"
+      ]
+    },
+    {
+      "tag": "수익 모델",
+      "count": 2,
+      "documents": [
+        "projects/ai-agent-economics-2026.md",
+        "ai/ai-agent-economics-2026.md"
+      ]
+    },
+    {
+      "tag": "Speech Emotion Recognition",
+      "count": 2,
+      "documents": [
+        "projects/fastapi-speech-emotion-recognition-ser.md",
+        "563.md"
+      ]
+    },
+    {
+      "tag": "SER",
+      "count": 1,
+      "documents": [
+        "projects/fastapi-speech-emotion-recognition-ser.md"
+      ]
+    },
+    {
+      "tag": "Audio ML",
+      "count": 2,
+      "documents": [
+        "projects/fastapi-speech-emotion-recognition-ser.md",
+        "563.md"
+      ]
+    },
+    {
+      "tag": "모델 서빙",
+      "count": 1,
+      "documents": [
+        "projects/fastapi-speech-emotion-recognition-ser.md"
+      ]
+    },
+    {
       "tag": "로봇 통합",
       "count": 1,
       "documents": [
@@ -2756,15 +3766,6 @@
       "count": 1,
       "documents": [
         "projects/claude-code-release-history.md"
-      ]
-    },
-    {
-      "tag": "MCP",
-      "count": 3,
-      "documents": [
-        "projects/claude-code-release-history.md",
-        "projects/human-in-the-loop-agentic-cms-notion-mcp.md",
-        "ai/mcp-model-context-protocol.md"
       ]
     },
     {
@@ -2831,6 +3832,31 @@
       ]
     },
     {
+      "tag": "DigitalOcean",
+      "count": 2,
+      "documents": [
+        "projects/digitalocean-droplet-nemoclaw-1-click.md",
+        "581.md"
+      ]
+    },
+    {
+      "tag": "NemoClaw",
+      "count": 4,
+      "documents": [
+        "projects/digitalocean-droplet-nemoclaw-1-click.md",
+        "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv.md",
+        "ai/521.md",
+        "581.md"
+      ]
+    },
+    {
+      "tag": "1‑Click",
+      "count": 1,
+      "documents": [
+        "projects/digitalocean-droplet-nemoclaw-1-click.md"
+      ]
+    },
+    {
       "tag": "Human-in-the-Loop",
       "count": 2,
       "documents": [
@@ -2875,6 +3901,51 @@
         "projects/agentspace-private-chat-room.md",
         "projects/agentspace.md",
         "ai/agentspace-openclaw.md"
+      ]
+    },
+    {
+      "tag": "Calendar",
+      "count": 1,
+      "documents": [
+        "projects/calendar-mcp-server-35.md"
+      ]
+    },
+    {
+      "tag": "Google Calendar",
+      "count": 2,
+      "documents": [
+        "projects/calendar-mcp-server-35.md",
+        "615.md"
+      ]
+    },
+    {
+      "tag": "Microsoft Graph",
+      "count": 2,
+      "documents": [
+        "projects/calendar-mcp-server-35.md",
+        "615.md"
+      ]
+    },
+    {
+      "tag": "Apple EventKit",
+      "count": 1,
+      "documents": [
+        "projects/calendar-mcp-server-35.md"
+      ]
+    },
+    {
+      "tag": "CalDAV",
+      "count": 2,
+      "documents": [
+        "projects/calendar-mcp-server-35.md",
+        "615.md"
+      ]
+    },
+    {
+      "tag": "통합",
+      "count": 1,
+      "documents": [
+        "projects/calendar-mcp-server-35.md"
       ]
     },
     {
@@ -3012,13 +4083,6 @@
       ]
     },
     {
-      "tag": "Opencode",
-      "count": 1,
-      "documents": [
-        "projects/opencode.md"
-      ]
-    },
-    {
       "tag": "Goose CLI",
       "count": 1,
       "documents": [
@@ -3083,9 +4147,10 @@
     },
     {
       "tag": "React",
-      "count": 5,
+      "count": 6,
       "documents": [
         "projects/sepilot-technology-stack.md",
+        "dependencies/react-group-bump-not-needed.md",
         "frontend/incremental-static-regeneration.md",
         "frontend/react-query.md",
         "frontend/monaco-editor-react.md",
@@ -3157,15 +4222,6 @@
       ]
     },
     {
-      "tag": "AI Agent",
-      "count": 3,
-      "documents": [
-        "projects/jira-ai-agents.md",
-        "ai/2026-ai-agent-comparison-openclaw-vs-claude-cowork.md",
-        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
-      ]
-    },
-    {
       "tag": "Generative AI",
       "count": 2,
       "documents": [
@@ -3196,18 +4252,6 @@
       ]
     },
     {
-      "tag": "에이전트",
-      "count": 6,
-      "documents": [
-        "projects/agentbus-rest-api.md",
-        "projects/moltbook-intro.md",
-        "ai/ai-code-review-agent-guide.md",
-        "ai/315.md",
-        "ai/351.md",
-        "ai/ai-2024-2026.md"
-      ]
-    },
-    {
       "tag": "메시징",
       "count": 2,
       "documents": [
@@ -3229,6 +4273,55 @@
       "documents": [
         "projects/agentbus-rest-api.md",
         "ai/351.md"
+      ]
+    },
+    {
+      "tag": "NVIDIA",
+      "count": 4,
+      "documents": [
+        "projects/nvidia-openshell-secure-by-design-ai.md",
+        "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv.md",
+        "ai/574.md",
+        "ai/521.md"
+      ]
+    },
+    {
+      "tag": "OpenShell",
+      "count": 3,
+      "documents": [
+        "projects/nvidia-openshell-secure-by-design-ai.md",
+        "ai/574.md",
+        "581.md"
+      ]
+    },
+    {
+      "tag": "Autonomous AI",
+      "count": 2,
+      "documents": [
+        "projects/nvidia-openshell-secure-by-design-ai.md",
+        "ai/574.md"
+      ]
+    },
+    {
+      "tag": "Secure-by-Design",
+      "count": 2,
+      "documents": [
+        "projects/nvidia-openshell-secure-by-design-ai.md",
+        "ai/574.md"
+      ]
+    },
+    {
+      "tag": "정책 엔진",
+      "count": 1,
+      "documents": [
+        "projects/nvidia-openshell-secure-by-design-ai.md"
+      ]
+    },
+    {
+      "tag": "샌드박스",
+      "count": 1,
+      "documents": [
+        "projects/nvidia-openshell-secure-by-design-ai.md"
       ]
     },
     {
@@ -3367,6 +4460,86 @@
       ]
     },
     {
+      "tag": "AI‑Agent",
+      "count": 2,
+      "documents": [
+        "projects/gitmcp-server-anthropic.md",
+        "ai-kubernetes-terraform.md"
+      ]
+    },
+    {
+      "tag": "인프라",
+      "count": 2,
+      "documents": [
+        "projects/gitmcp-server-anthropic.md",
+        "ai/kubernetes-autoscaling-cold-start.md"
+      ]
+    },
+    {
+      "tag": "Terraform",
+      "count": 6,
+      "documents": [
+        "projects/gitmcp-server-anthropic.md",
+        "devops/shared-workflows-nodejs-aws.md",
+        "devops/shared-workflows-for-node-js-backend-and-aws-deplo.md",
+        "cloud/aws-cost-optimization.md",
+        "cloud/aws-nat-gateway-cost-trap.md",
+        "ai-kubernetes-terraform.md"
+      ]
+    },
+    {
+      "tag": "벤치마크",
+      "count": 5,
+      "documents": [
+        "projects/gitmcp-server-anthropic.md",
+        "ai/qwen3-5.md",
+        "ai/openai-gpt-5-4-mini-nano.md",
+        "ai/glm-5.md",
+        "566.md"
+      ]
+    },
+    {
+      "tag": "프롬프트‑스킬",
+      "count": 1,
+      "documents": [
+        "projects/gitmcp-server-anthropic.md"
+      ]
+    },
+    {
+      "tag": "n8n",
+      "count": 4,
+      "documents": [
+        "projects/n8n-mcp-server-ai-callable.md",
+        "projects/homelab-ai-stack-2026.md",
+        "ai/610.md",
+        "ai/426.md"
+      ]
+    },
+    {
+      "tag": "AI‑Callable",
+      "count": 2,
+      "documents": [
+        "projects/n8n-mcp-server-ai-callable.md",
+        "ai/610.md"
+      ]
+    },
+    {
+      "tag": "워크플로",
+      "count": 3,
+      "documents": [
+        "projects/n8n-mcp-server-ai-callable.md",
+        "ai/610.md",
+        "ai/multi-ai-coding-agent-orchestration.md"
+      ]
+    },
+    {
+      "tag": "서버",
+      "count": 1,
+      "documents": [
+        "projects/n8n-mcp-server-ai-callable.md"
+      ]
+    },
+    {
       "tag": "Homelab",
       "count": 1,
       "documents": [
@@ -3379,30 +4552,6 @@
       "documents": [
         "projects/homelab-ai-stack-2026.md",
         "ai/ollama-claude-code.md",
-        "ai/426.md"
-      ]
-    },
-    {
-      "tag": "Traefik",
-      "count": 2,
-      "documents": [
-        "projects/homelab-ai-stack-2026.md",
-        "ai/426.md"
-      ]
-    },
-    {
-      "tag": "n8n",
-      "count": 2,
-      "documents": [
-        "projects/homelab-ai-stack-2026.md",
-        "ai/426.md"
-      ]
-    },
-    {
-      "tag": "LiteLLM",
-      "count": 2,
-      "documents": [
-        "projects/homelab-ai-stack-2026.md",
         "ai/426.md"
       ]
     },
@@ -3453,6 +4602,13 @@
       ]
     },
     {
+      "tag": "update",
+      "count": 1,
+      "documents": [
+        "dependencies/react-group-bump-not-needed.md"
+      ]
+    },
+    {
       "tag": "mermaid",
       "count": 1,
       "documents": [
@@ -3472,6 +4628,29 @@
       "count": 1,
       "documents": [
         "dependencies/react-router-dom-7-13-1-bump-no-longer-needed.md"
+      ]
+    },
+    {
+      "tag": "GitMCP",
+      "count": 2,
+      "documents": [
+        "621.md",
+        "gitmcp-github.md"
+      ]
+    },
+    {
+      "tag": "Cloudflare Workers",
+      "count": 2,
+      "documents": [
+        "621.md",
+        "gitmcp-github.md"
+      ]
+    },
+    {
+      "tag": "AI‑최적화 문서",
+      "count": 1,
+      "documents": [
+        "621.md"
       ]
     },
     {
@@ -3501,6 +4680,70 @@
       "count": 1,
       "documents": [
         "tmux-ide/ide.md"
+      ]
+    },
+    {
+      "tag": "FastConvert",
+      "count": 1,
+      "documents": [
+        "600.md"
+      ]
+    },
+    {
+      "tag": "이미지 최적화",
+      "count": 1,
+      "documents": [
+        "600.md"
+      ]
+    },
+    {
+      "tag": "WebP",
+      "count": 2,
+      "documents": [
+        "600.md",
+        "frontend/webp-client-side-converter.md"
+      ]
+    },
+    {
+      "tag": "HEIC",
+      "count": 1,
+      "documents": [
+        "600.md"
+      ]
+    },
+    {
+      "tag": "온라인 도구",
+      "count": 1,
+      "documents": [
+        "600.md"
+      ]
+    },
+    {
+      "tag": "Debugging",
+      "count": 1,
+      "documents": [
+        "securing-production-debugging-in-kubernetes.md"
+      ]
+    },
+    {
+      "tag": "RBAC",
+      "count": 1,
+      "documents": [
+        "securing-production-debugging-in-kubernetes.md"
+      ]
+    },
+    {
+      "tag": "JIT",
+      "count": 1,
+      "documents": [
+        "securing-production-debugging-in-kubernetes.md"
+      ]
+    },
+    {
+      "tag": "Access Broker",
+      "count": 1,
+      "documents": [
+        "securing-production-debugging-in-kubernetes.md"
       ]
     },
     {
@@ -3570,6 +4813,13 @@
       ]
     },
     {
+      "tag": "도구",
+      "count": 1,
+      "documents": [
+        "git-mcp-server-anthropic.md"
+      ]
+    },
+    {
       "tag": "스케줄러",
       "count": 1,
       "documents": [
@@ -3578,10 +4828,11 @@
     },
     {
       "tag": "문서 자동화",
-      "count": 2,
+      "count": 3,
       "documents": [
         "issues/scheduler-doc-update-guide.md",
-        "ai/llms-txt-llm.md"
+        "ai/llms-txt-llm.md",
+        "gitmcp-github.md"
       ]
     },
     {
@@ -3608,14 +4859,6 @@
       ]
     },
     {
-      "tag": "npm",
-      "count": 2,
-      "documents": [
-        "bun/comparison-pnpm-npm.md",
-        "bun/overview.md"
-      ]
-    },
-    {
       "tag": "가이드",
       "count": 4,
       "documents": [
@@ -3634,10 +4877,11 @@
     },
     {
       "tag": "benchmark",
-      "count": 3,
+      "count": 4,
       "documents": [
         "bun/comparison-pnpm-npm.md",
         "ai/gemini-3-1-pro.md",
+        "ai-kubernetes-terraform.md",
         "ai-driven.md"
       ]
     },
@@ -3690,14 +4934,6 @@
       "count": 1,
       "documents": [
         "bun/github-actions-setup.md"
-      ]
-    },
-    {
-      "tag": "automation",
-      "count": 2,
-      "documents": [
-        "bun/github-actions-setup.md",
-        "ai-driven.md"
       ]
     },
     {
@@ -3850,32 +5086,6 @@
       "documents": [
         "ai/pentagon-llm-policy.md",
         "ai/anthropic-claude-government-regulation-and-dod-pol.md"
-      ]
-    },
-    {
-      "tag": "Anthropic",
-      "count": 6,
-      "documents": [
-        "ai/pentagon-llm-policy.md",
-        "ai/403.md",
-        "ai/mcp-model-context-protocol.md",
-        "ai/claude-marketplace.md",
-        "ai/287.md",
-        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
-      ]
-    },
-    {
-      "tag": "OpenAI",
-      "count": 8,
-      "documents": [
-        "ai/pentagon-llm-policy.md",
-        "ai/openai-pentagon-contract-update.md",
-        "ai/openai-gpt-5-4-mini-nano.md",
-        "ai/agentic-walmart-vs-openai.md",
-        "ai/525.md",
-        "ai/openai-pentagon-contract-revision-and-policy-impli.md",
-        "ai/544.md",
-        "ai/openai-pentagon-contract.md"
       ]
     },
     {
@@ -4045,16 +5255,6 @@
       ]
     },
     {
-      "tag": "프라이버시",
-      "count": 4,
-      "documents": [
-        "ai/367.md",
-        "ai/ai-rfp.md",
-        "ai/tokenwatch-ai.md",
-        "ai/517.md"
-      ]
-    },
-    {
       "tag": "규제",
       "count": 5,
       "documents": [
@@ -4088,6 +5288,22 @@
       ]
     },
     {
+      "tag": "UI 검증",
+      "count": 2,
+      "documents": [
+        "ai/proofshot-ai-ui-cli.md",
+        "ai/597.md"
+      ]
+    },
+    {
+      "tag": "ProofShot",
+      "count": 2,
+      "documents": [
+        "ai/proofshot-ai-ui-cli.md",
+        "ai/597.md"
+      ]
+    },
+    {
       "tag": "모델 병합",
       "count": 1,
       "documents": [
@@ -4113,6 +5329,38 @@
       "count": 1,
       "documents": [
         "ai/490.md"
+      ]
+    },
+    {
+      "tag": "FastMCP",
+      "count": 2,
+      "documents": [
+        "ai/fastmcp-model-context-protocol.md",
+        "ai/608.md"
+      ]
+    },
+    {
+      "tag": "Model Context Protocol",
+      "count": 3,
+      "documents": [
+        "ai/fastmcp-model-context-protocol.md",
+        "ai/mcp-model-context-protocol.md",
+        "ai/608.md"
+      ]
+    },
+    {
+      "tag": "LLM Tooling",
+      "count": 1,
+      "documents": [
+        "ai/fastmcp-model-context-protocol.md"
+      ]
+    },
+    {
+      "tag": "AI Integration",
+      "count": 2,
+      "documents": [
+        "ai/fastmcp-model-context-protocol.md",
+        "ai/mcp-model-context-protocol.md"
       ]
     },
     {
@@ -4202,9 +5450,10 @@
     },
     {
       "tag": "프롬프트 엔지니어링",
-      "count": 1,
+      "count": 2,
       "documents": [
-        "ai/prompt-engineering-security-guide.md"
+        "ai/prompt-engineering-security-guide.md",
+        "ai.md"
       ]
     },
     {
@@ -4279,6 +5528,27 @@
       "count": 1,
       "documents": [
         "ai/local-llm-vs-cloud-api-2026.md"
+      ]
+    },
+    {
+      "tag": "비용 구조",
+      "count": 1,
+      "documents": [
+        "ai/ai-agent-economics-2026.md"
+      ]
+    },
+    {
+      "tag": "성장 프레임워크",
+      "count": 1,
+      "documents": [
+        "ai/ai-agent-economics-2026.md"
+      ]
+    },
+    {
+      "tag": "2026 전망",
+      "count": 1,
+      "documents": [
+        "ai/ai-agent-economics-2026.md"
       ]
     },
     {
@@ -4371,17 +5641,6 @@
       ]
     },
     {
-      "tag": "Claude",
-      "count": 5,
-      "documents": [
-        "ai/275.md",
-        "ai/claude-ai.md",
-        "ai/enterprise-adoption-of-user-aware-ai-agents-deep-p.md",
-        "ai/287.md",
-        "ai/anthropic-claude-government-regulation-and-dod-pol.md"
-      ]
-    },
-    {
       "tag": "비교 분석",
       "count": 1,
       "documents": [
@@ -4400,6 +5659,20 @@
       "count": 1,
       "documents": [
         "ai/315.md"
+      ]
+    },
+    {
+      "tag": "클라우드",
+      "count": 1,
+      "documents": [
+        "ai/610.md"
+      ]
+    },
+    {
+      "tag": "셀프‑호스팅",
+      "count": 1,
+      "documents": [
+        "ai/610.md"
       ]
     },
     {
@@ -4603,20 +5876,6 @@
       ]
     },
     {
-      "tag": "Model Context Protocol",
-      "count": 1,
-      "documents": [
-        "ai/mcp-model-context-protocol.md"
-      ]
-    },
-    {
-      "tag": "AI Integration",
-      "count": 1,
-      "documents": [
-        "ai/mcp-model-context-protocol.md"
-      ]
-    },
-    {
       "tag": "JSON-RPC",
       "count": 1,
       "documents": [
@@ -4716,9 +5975,10 @@
     },
     {
       "tag": "프롬프트 인젝션",
-      "count": 1,
+      "count": 2,
       "documents": [
-        "ai/llm-prompt-injection.md"
+        "ai/llm-prompt-injection.md",
+        "llm.md"
       ]
     },
     {
@@ -4757,13 +6017,6 @@
       ]
     },
     {
-      "tag": "인프라",
-      "count": 1,
-      "documents": [
-        "ai/kubernetes-autoscaling-cold-start.md"
-      ]
-    },
-    {
       "tag": "Qwen",
       "count": 1,
       "documents": [
@@ -4782,16 +6035,6 @@
       "count": 1,
       "documents": [
         "ai/qwen3-5.md"
-      ]
-    },
-    {
-      "tag": "벤치마크",
-      "count": 4,
-      "documents": [
-        "ai/qwen3-5.md",
-        "ai/openai-gpt-5-4-mini-nano.md",
-        "ai/glm-5.md",
-        "566.md"
       ]
     },
     {
@@ -4910,6 +6153,13 @@
       ]
     },
     {
+      "tag": "Monitoring",
+      "count": 1,
+      "documents": [
+        "ai/llm-drift.md"
+      ]
+    },
+    {
       "tag": "쇼핑 챗봇",
       "count": 2,
       "documents": [
@@ -4930,6 +6180,13 @@
       "count": 1,
       "documents": [
         "ai/agentic-walmart-vs-openai.md"
+      ]
+    },
+    {
+      "tag": "브라우저 기록",
+      "count": 1,
+      "documents": [
+        "ai/597.md"
       ]
     },
     {
@@ -5031,22 +6288,6 @@
       ]
     },
     {
-      "tag": "NVIDIA",
-      "count": 2,
-      "documents": [
-        "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv.md",
-        "ai/521.md"
-      ]
-    },
-    {
-      "tag": "NemoClaw",
-      "count": 2,
-      "documents": [
-        "ai/nvidia-nemoclaw-openclaw-enterprise-solution-overv.md",
-        "ai/521.md"
-      ]
-    },
-    {
       "tag": "Enterprise AI",
       "count": 1,
       "documents": [
@@ -5122,9 +6363,10 @@
     },
     {
       "tag": "AI 통합",
-      "count": 1,
+      "count": 2,
       "documents": [
-        "ai/ollama-claude-code.md"
+        "ai/ollama-claude-code.md",
+        "gitmcp-github.md"
       ]
     },
     {
@@ -5246,6 +6488,13 @@
       ]
     },
     {
+      "tag": "AI Tooling",
+      "count": 1,
+      "documents": [
+        "ai/608.md"
+      ]
+    },
+    {
       "tag": "Deep Personalization",
       "count": 2,
       "documents": [
@@ -5280,6 +6529,21 @@
       "count": 1,
       "documents": [
         "ai/enterprise-adoption-of-user-aware-ai-agents-deep-p.md"
+      ]
+    },
+    {
+      "tag": "Google Colab",
+      "count": 1,
+      "documents": [
+        "ai/colab-mcp-server-google-colab-ai.md"
+      ]
+    },
+    {
+      "tag": "프로토타이핑",
+      "count": 2,
+      "documents": [
+        "ai/colab-mcp-server-google-colab-ai.md",
+        "ai/613.md"
       ]
     },
     {
@@ -5463,13 +6727,6 @@
       ]
     },
     {
-      "tag": "워크플로",
-      "count": 1,
-      "documents": [
-        "ai/multi-ai-coding-agent-orchestration.md"
-      ]
-    },
-    {
       "tag": "Jupiter",
       "count": 1,
       "documents": [
@@ -5481,6 +6738,13 @@
       "count": 1,
       "documents": [
         "ai/multi-agent-workflows-often-fail-here-s-how-to-eng.md"
+      ]
+    },
+    {
+      "tag": "Agent Toolkit",
+      "count": 1,
+      "documents": [
+        "ai/574.md"
       ]
     },
     {
@@ -5555,6 +6819,20 @@
       ]
     },
     {
+      "tag": "Colab",
+      "count": 1,
+      "documents": [
+        "ai/613.md"
+      ]
+    },
+    {
+      "tag": "클라우드 샌드박스",
+      "count": 1,
+      "documents": [
+        "ai/613.md"
+      ]
+    },
+    {
       "tag": "Repository Automation",
       "count": 1,
       "documents": [
@@ -5580,14 +6858,6 @@
       "count": 1,
       "documents": [
         "ai/474.md"
-      ]
-    },
-    {
-      "tag": "자율 에이전트",
-      "count": 2,
-      "documents": [
-        "ai/guardian-protocol-ai.md",
-        "ai/multi-agent-system.md"
       ]
     },
     {
@@ -5712,13 +6982,6 @@
       ]
     },
     {
-      "tag": "YAML",
-      "count": 1,
-      "documents": [
-        "ai/tmux-ide-guide.md"
-      ]
-    },
-    {
       "tag": "바이브코딩",
       "count": 1,
       "documents": [
@@ -5803,29 +7066,14 @@
       ]
     },
     {
-      "tag": "mlops",
+      "tag": "1‑Click 배포",
       "count": 1,
       "documents": [
-        "ai/kubernetes-ai-gitops.md"
+        "581.md"
       ]
     },
     {
       "tag": "Agent",
-      "count": 2,
-      "documents": [
-        "ai.md",
-        "565.md"
-      ]
-    },
-    {
-      "tag": "Tutorial",
-      "count": 1,
-      "documents": [
-        "ai.md"
-      ]
-    },
-    {
-      "tag": "Production",
       "count": 1,
       "documents": [
         "565.md"
@@ -5879,13 +7127,6 @@
       "count": 1,
       "documents": [
         "frontend/react-query.md"
-      ]
-    },
-    {
-      "tag": "WebP",
-      "count": 1,
-      "documents": [
-        "frontend/webp-client-side-converter.md"
       ]
     },
     {
@@ -6083,16 +7324,6 @@
       ]
     },
     {
-      "tag": "Terraform",
-      "count": 4,
-      "documents": [
-        "devops/shared-workflows-nodejs-aws.md",
-        "devops/shared-workflows-for-node-js-backend-and-aws-deplo.md",
-        "cloud/aws-cost-optimization.md",
-        "cloud/aws-nat-gateway-cost-trap.md"
-      ]
-    },
-    {
       "tag": "ECS",
       "count": 2,
       "documents": [
@@ -6118,7 +7349,7 @@
       "tag": "라벨",
       "count": 2,
       "documents": [
-        "devops/dependabot-labels.md",
+        "devops/dependabot-missing-labels.md",
         "guides/dependabot-labels.md"
       ]
     },
@@ -6194,10 +7425,52 @@
       ]
     },
     {
+      "tag": "Skill‑Evaluation",
+      "count": 1,
+      "documents": [
+        "ai-kubernetes-terraform.md"
+      ]
+    },
+    {
+      "tag": "웹 스크래핑",
+      "count": 1,
+      "documents": [
+        "624.md"
+      ]
+    },
+    {
+      "tag": "도구 가이드",
+      "count": 1,
+      "documents": [
+        "624.md"
+      ]
+    },
+    {
       "tag": "측정",
       "count": 1,
       "documents": [
         "566.md"
+      ]
+    },
+    {
+      "tag": "캘린더",
+      "count": 1,
+      "documents": [
+        "615.md"
+      ]
+    },
+    {
+      "tag": "Apple Calendar",
+      "count": 1,
+      "documents": [
+        "615.md"
+      ]
+    },
+    {
+      "tag": "자동 스케줄링",
+      "count": 1,
+      "documents": [
+        "615.md"
       ]
     }
   ]

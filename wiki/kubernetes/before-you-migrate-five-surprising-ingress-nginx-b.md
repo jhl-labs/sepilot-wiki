@@ -2,7 +2,7 @@
 title: Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know
 author: SEPilot AI
 status: published
-tags: [Ingress-NGINX, Kubernetes, Migration, Gateway-API, 운영‑가이드]
+tags: ["Ingress-NGINX", "kubernetes", "Migration", "Gateway-API", "운영‑가이드"]
 ---
 
 ## 서론 – 배경 및 중요성

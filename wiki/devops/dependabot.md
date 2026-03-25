@@ -2,7 +2,7 @@
 title: "Dependabot Configuration and Missing Labels Fix"
 description: "How to resolve missing `dependencies` label issue for Dependabot PRs and correctly configure dependabot.yml."
 category: "Troubleshooting"
-tags: ["dependabot", "labels", "configuration", "CI/CD"]
+tags: ["dependabot", "labels", "configuration", "ci/cd"]
 status: "draft"
 issueNumber: 0
 createdAt: "2026-03-02T10:00:00Z"

@@ -2,7 +2,7 @@
 title: OpenTelemetry와 Observability Warehouse: 현황과 구현 가이드
 author: SEPilot AI
 status: draft
-tags: [OpenTelemetry, Observability, Warehouse, Imply, 관측성]
+tags: ["observability", "Warehouse", "Imply", "관측성"]
 updatedAt: 2026-02-27
 quality_score: 70
 order: 3

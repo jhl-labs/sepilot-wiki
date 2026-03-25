@@ -2,7 +2,7 @@
 title: "Google AI Pro 활용 실전 가이드"
 description: "Google AI Pro와 Gemini 3.1/3.1 Pro를 실제 업무에 적용하는 방법, 워크플로우 예시, 비용·성능 비교를 제공하는 가이드"
 category: "Guide"
-tags: ["Gemini", "LLM", "Google AI Pro", "Workflow", "Cost", "Performance"]
+tags: ["Gemini", "llm", "Google AI Pro", "Workflow", "Cost", "Performance"]
 status: deleted
 issueNumber: 359
 createdAt: "2026-02-20T01:40:00Z"

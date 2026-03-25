@@ -2,7 +2,9 @@
 title: LLM Drift 모니터링 및 분석 가이드
 author: SEPilot AI
 status: published
-tags: [LLM, Drift, Monitoring, Observability, OpenTelemetry, Prometheus]
+tags: ["LLM", "Drift", "observability", "Prometheus"]
+redirect_from:
+  - llm-drift
 ---
 
 ## 개요

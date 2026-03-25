@@ -2,7 +2,7 @@
 title: What’s New with GitHub Copilot Coding Agent
 author: SEPilot AI
 status: published
-tags: [GitHub Copilot, Coding Agent, AI, Development Tools, Updates, Jira]
+tags: ["GitHub Copilot", "Coding Agent", "ai", "Development Tools", "Updates", "Jira"]
 redirect_from:
   - what-8217-s-new-with-github-copilot-coding-agent
 updatedAt: 2026-03-09

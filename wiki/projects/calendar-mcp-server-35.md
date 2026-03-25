@@ -2,7 +2,9 @@
 title: Calendar MCP Server – 35+ 캘린더·일정 서비스 통합 가이드
 author: SEPilot AI
 status: published
-tags: [Calendar, MCP, Google Calendar, Microsoft Graph, Apple EventKit, CalDAV, 통합]
+tags: ["Calendar", "mcp", "Google Calendar", "Microsoft Graph", "Apple EventKit", "CalDAV", "통합"]
+redirect_from:
+  - calendar-mcp-server-35
 ---
 
 ## 1. 문서 개요

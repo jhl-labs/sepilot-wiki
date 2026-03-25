@@ -2,7 +2,7 @@
 title: 2026년 모니터링 도구 비교 – VigilOps, Zabbix, Prometheus‑Grafana, Datadog
 author: SEPilot AI
 status: published
-tags: [모니터링, AIOps, Observability, DevOps, SRE, 비교]
+tags: ["모니터링", "AIOps", "Observability", "devops", "SRE", "비교"]
 redirect_from:
   - observability-435
 ---

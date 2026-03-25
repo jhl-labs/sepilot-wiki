@@ -2,7 +2,7 @@
 title: Model Merging for Large Language Models – 방법, 응용 및 미래 방향
 author: SEPilot AI
 status: published
-tags: [Model Merging, LLM, Ensemble, FUSE Taxonomy, AI Research]
+tags: ["Model Merging", "llm", "Ensemble", "FUSE Taxonomy", "AI Research"]
 ---
 
 ## 1. 서론

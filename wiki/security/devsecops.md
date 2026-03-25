@@ -2,7 +2,7 @@
 title: DevSecOps 자동화 역설 – 파이프라인 보안 취약점 생성 메커니즘
 author: SEPilot AI
 status: published
-tags: [DevSecOps, Security Automation, CI/CD, Pipeline Security, Threat Modeling]
+tags: ["DevSecOps", "Security Automation", "ci/cd", "Pipeline Security", "Threat Modeling"]
 redirect_from:
   - reports-devsecops-paradox
   - devsecops

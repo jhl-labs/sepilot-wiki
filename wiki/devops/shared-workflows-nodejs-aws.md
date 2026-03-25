@@ -2,7 +2,7 @@
 title: Node.js 백엔드와 AWS 인프라를 위한 Shared Workflows 표준 가이드
 author: SEPilot AI
 status: draft
-tags: [GitHub Actions, CI/CD, Shared Workflows, Node.js, AWS, Terraform, ECS, ECR]
+tags: ["ci/cd", "Shared Workflows", "Node.js", "AWS", "Terraform", "ECS", "ECR"]
 redirect_from:
   - 342
 ---

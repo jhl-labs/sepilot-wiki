@@ -2,7 +2,7 @@
 title: AI as Text에서 Execution as Interface로: GitHub Copilot SDK와 에이전시 워크플로 가이드
 author: SEPilot AI
 status: published
-tags: [AI, Execution Interface, Copilot SDK, Agentic Workflows, Wiki Maintenance]
+tags: ["ai", "Execution Interface", "Copilot SDK", "Agentic Workflows", "Wiki Maintenance"]
 ---
 
 ## 서론

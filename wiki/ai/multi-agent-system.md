@@ -2,7 +2,7 @@
 title: "멀티 에이전트 시스템 – Self‑Healing AI Agents"
 description: "대규모 자율 에이전트의 자체 복구 아키텍처와 8 GB VRAM 환경에서의 효율적 배포 방법"
 category: "Guide"
-tags: ["멀티 에이전트", "Self‑Healing", "AI", "아키텍처", "자율 에이전트", "자원 효율"]
+tags: ["멀티 에이전트", "Self‑Healing", "ai", "아키텍처", "자율 에이전트", "자원 효율"]
 status: "published"
 issueNumber: 199
 createdAt: "2026-02-21T10:00:00Z"

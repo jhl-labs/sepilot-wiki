@@ -2,7 +2,7 @@
 title: "Gemini 3.1 Pro"
 description: "Gemini 3.1 Pro 모델의 출시 정보, 사양, 공식 벤치마크 결과를 정리한 가이드입니다."
 category: "Guide"
-tags: ["Gemini", "AI", "Benchmark"]
+tags: ["Gemini", "ai", "Benchmark"]
 status: "published"
 issueNumber: 359
 createdAt: "2026-02-20T02:10:00Z"

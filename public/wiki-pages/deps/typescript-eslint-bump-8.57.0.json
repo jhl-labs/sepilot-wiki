@@ -2,7 +2,7 @@
   "title": "Dependency Update: @typescript-eslint packages to v8.57.0",
   "slug": "deps/typescript-eslint-bump-8.57.0",
   "content": "\n# Dependency Update: @typescript-eslint to v8.57.0\n\n**Superseded by #506**\n\n## What changed\n- Bumped `@typescript-eslint/parser` from **8.56.1** to **8.57.0**.\n- Bumped `@typescript-eslint/eslint-plugin` from **8.56.1** to **8.57.0**.\n\n## Release notes (v8.57.0)\n- **🚀 Features**\n  - `eslint-plugin`: `[no-unnecessary-condition]` allow literal loop conditions in `for/do` loops ([#12080](https://github.com/typescript-eslint/typescript-eslint/pull/12080)).\n- **🩹 Fixes**\n  - `eslint-plugin`: `[strict-void-return]` false positives with overloads ([#12055](https://github.com/typescript-eslint/typescript-eslint/pull/12055)).\n  - `eslint-plugin`: handle statically analyzable computed keys in `prefer-readonly` ([#12079](https://github.com/typescript-eslint/typescript-eslint/pull/12079)).\n  - `eslint-plugin`: guard against negative `paramIndex` in `no-useless-default-assignment` ([#12077](https://github.com/typescript-eslint/typescript-eslint/pull/12077)).\n  - `eslint-plugin`: `[prefer-promise-reject-errors]` add allow `TypeOrValueSpecifier` ([#12094](https://github.com/typescript-eslint/typescript-eslint/pull/12094)).\n  - `eslint-plugin`: `[no-base-to-string]` fix false positive for `toString` with overloads ([#12089](https://github.com/typescript-eslint/typescript-eslint/pull/12089)).\n  - `typescript-estree`: switch back to use `ts.getModifiers()` ([#12034](https://github.com/typescript-eslint/typescript-eslint/pull/12034)).\n  - `typescript-estree`: if the template literal is tagged and the text has an invalid escape, `cooked` will be `null` ([#11355](https://github.com/typescript-eslint/typescript-eslint/pull/11355)).\n\n## Why this PR was superseded\nThe change was later incorporated into PR #506, which includes additional updates and resolves the same version bump. This document records the original intent and notes the supersession for historical reference.\n\n## References\n- [GitHub Release v8.57.0](https://github.com/typescript-eslint/typescript-eslint/releases/tag/v8.57.0)\n- [Changelog entry for v8.57.0](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/CHANGELOG.md#8570-2026-03-09)\n- Dependabot PR for the bump (original): `chore(deps): bump typescript-eslint from 8.56.1 to 8.57.0`.\n",
-  "lastModified": "2026-03-25T12:28:35Z",
+  "lastModified": "2026-03-16T20:26:45Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -14,12 +14,12 @@
   ],
   "history": [
     {
-      "sha": "c7cda92",
-      "message": "docs: Issue #622 - 피드백 반영",
+      "sha": "caf4497",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-25T12:28:35Z",
-      "isAutoCommit": false,
+      "date": "2026-03-16T20:26:45Z",
+      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }

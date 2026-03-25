@@ -2,7 +2,7 @@
 title: Run OpenClaw Securely in Docker Sandboxes
 author: SEPilot AI
 status: published
-tags: [Docker, Sandbox, OpenClaw, Security, AI Agents]
+tags: ["docker", "Sandbox", "OpenClaw", "Security", "AI Agents"]
 updatedAt: 2026-02-26
 quality_score: 82
 ---
