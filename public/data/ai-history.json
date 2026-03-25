@@ -1,6 +1,183 @@
 {
   "entries": [
     {
+      "id": "10f0d969-cba8-4c37-8b49-ebf2f898066a",
+      "timestamp": "2026-03-25T18:29:18.609Z",
+      "actionType": "quality_score",
+      "issueNumber": 629,
+      "issueTitle": " [요청] GitHub Actions Storage Quota Management – Best Practices",
+      "documentSlug": "github/github-actions-storage-quota-management-best-pract",
+      "documentTitle": " [요청] GitHub Actions Storage Quota Management – Best Practices",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "647aac3e-fbd1-4d76-ae5e-b000d4e71e2b",
+      "timestamp": "2026-03-25T18:29:04.330Z",
+      "actionType": "quality_score",
+      "issueNumber": 630,
+      "issueTitle": " [요청] Amazon Route 53 Hosted Zone Setup – Step‑by‑Step Guide",
+      "documentSlug": "amazon-route-53-hosted-zone-setup-step-by-step-gui",
+      "documentTitle": " [요청] Amazon Route 53 Hosted Zone Setup – Step‑by‑Step Guide",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "c8681ceb-acdf-4aeb-b770-8bbd31e5596f",
+      "timestamp": "2026-03-25T18:28:44.855Z",
+      "actionType": "quality_score",
+      "issueNumber": 631,
+      "issueTitle": " [요청] AI Safety Legislation & Data‑Center Moratorium – Policy Overview",
+      "documentSlug": "ai/ai-safety-legislation-data-center-moratorium-polic",
+      "documentTitle": " [요청] AI Safety Legislation & Data‑Center Moratorium – Policy Overview",
+      "summary": "자동 품질 검토 통과 (91점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "0bbf8ff8-6810-468e-b86d-4e7a30cc4670",
+      "timestamp": "2026-03-25T18:28:26.758Z",
+      "actionType": "generate",
+      "issueNumber": 629,
+      "issueTitle": " [요청] GitHub Actions Storage Quota Management – Best Practices",
+      "documentSlug": "github/github-actions-storage-quota-management-best-pract",
+      "documentTitle": "GitHub Actions 스토리지 할당량 관리 – 베스트 프랙티스",
+      "summary": "새 문서 \"GitHub Actions 스토리지 할당량 관리 – 베스트 프랙티스\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 979
+            },
+            {
+              "step": "outline",
+              "durationMs": 16291
+            },
+            {
+              "step": "write",
+              "durationMs": 38960
+            },
+            {
+              "step": "review",
+              "durationMs": 10530
+            }
+          ],
+          "totalDurationMs": 66761,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 3290,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "64fdcfdc-caec-49d3-ad7e-ca7247e9a8f0",
+      "timestamp": "2026-03-25T18:26:53.586Z",
+      "actionType": "generate",
+      "issueNumber": 630,
+      "issueTitle": " [요청] Amazon Route 53 Hosted Zone Setup – Step‑by‑Step Guide",
+      "documentSlug": "amazon-route-53-hosted-zone-setup-step-by-step-gui",
+      "documentTitle": "Amazon Route 53 퍼블릭 Hosted Zone 설정 단계별 가이드",
+      "summary": "새 문서 \"Amazon Route 53 퍼블릭 Hosted Zone 설정 단계별 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1027
+            },
+            {
+              "step": "outline",
+              "durationMs": 8077
+            },
+            {
+              "step": "write",
+              "durationMs": 24484
+            },
+            {
+              "step": "review",
+              "durationMs": 8650
+            }
+          ],
+          "totalDurationMs": 42238,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2061,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "c97f0a81-0557-4c54-82e3-a2ec3ebaf252",
+      "timestamp": "2026-03-25T18:25:57.519Z",
+      "actionType": "generate",
+      "issueNumber": 631,
+      "issueTitle": " [요청] AI Safety Legislation & Data‑Center Moratorium – Policy Overview",
+      "documentSlug": "ai/ai-safety-legislation-data-center-moratorium-polic",
+      "documentTitle": "AI Safety Legislation & Data‑Center Moratorium – Policy Overview",
+      "summary": "새 문서 \"AI Safety Legislation & Data‑Center Moratorium – Policy Overview\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1019
+            },
+            {
+              "step": "outline",
+              "durationMs": 7532
+            },
+            {
+              "step": "write",
+              "durationMs": 27197
+            },
+            {
+              "step": "review",
+              "durationMs": 7299
+            }
+          ],
+          "totalDurationMs": 43048,
+          "researchSources": 0,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2102,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "b26319f4-f43e-4610-92d3-1e3315afcd80",
       "timestamp": "2026-03-25T18:22:47.182Z",
       "actionType": "maintain",
@@ -18434,5 +18611,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-25T18:22:47.182Z"
+  "lastUpdated": "2026-03-25T18:29:18.610Z"
 }
