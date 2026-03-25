@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-03-25T08:45:13.073Z",
+  "timestamp": "2026-03-25T09:51:38.322Z",
   "dryRun": false,
-  "totalIssuesScanned": 18,
+  "totalIssuesScanned": 22,
   "categories": {
     "draft_review": [
+      {
+        "number": 618,
+        "title": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지 프레임워크 가이드",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 617,
+        "title": "[Wiki Maintenance] [요청] Kubernetes AI 모델 GitOps & CI/CD 베스트 프랙티스",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 616,
+        "title": "[Wiki Maintenance] [요청] AI 에이전트 보안 위협 모델링 및 완화 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 614,
         "title": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)",
@@ -36,6 +51,11 @@
       }
     ],
     "maintenance": [
+      {
+        "number": 619,
+        "title": "[Wiki Maintenance] [품질] Wiki API 라우트 상세 가이드 (버전 v1) – 인증·인가, 파라미터, 오류 처리 및 보안 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 561,
         "title": "[Wiki Maintainer] Duplicate content for OpenAPI Builder and AgentSpace",
@@ -103,12 +123,54 @@
   },
   "actionsPerformed": [
     {
+      "type": "retrigger_request",
+      "issueNumber": 618,
+      "title": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지 프레임워크 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 617,
+      "title": "[Wiki Maintenance] [요청] Kubernetes AI 모델 GitOps & CI/CD 베스트 프랙티스"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 616,
+      "title": "[Wiki Maintenance] [요청] AI 에이전트 보안 위협 모델링 및 완화 가이드"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 618,
+      "title": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지 프레임워크 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/llm.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 617,
+      "title": "[Wiki Maintenance] [요청] Kubernetes AI 모델 GitOps & CI/CD 베스트 프랙티스",
+      "score": 94,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-ai-gitops-ci-cd.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 616,
+      "title": "[Wiki Maintenance] [요청] AI 에이전트 보안 위협 모델링 및 완화 가이드",
+      "score": 93,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai.md"
+    },
+    {
       "type": "feedback",
       "issueNumber": 317,
       "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
       "score": 76
+    },
+    {
+      "type": "suggestion",
+      "issueNumber": 619,
+      "title": "[Wiki Maintenance] [품질] Wiki API 라우트 상세 가이드 (버전 v1) – 인증·인가, 파라미터, 오류 처리 및 보안 가이드",
+      "verdict": "actionable"
     }
   ],
-  "actionCount": 1,
+  "actionCount": 8,
   "maxActions": 60
 }
