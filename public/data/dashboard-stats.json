@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-25T08:49:55.227Z",
+  "collectedAt": "2026-03-25T09:50:22.161Z",
   "overview": {
     "totalDocuments": 283,
     "publishedDocuments": 148,
     "draftDocuments": 135,
     "openRequests": 175,
     "closedRequests": 19,
-    "totalAIActions": 731
+    "totalAIActions": 733
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,45 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 39,
-      "documentsCreated": 18,
+      "aiActions": 36,
+      "documentsCreated": 15,
       "documentsModified": 10,
-      "tavilyApiCalls": 15,
-      "tavilyResults": 41,
-      "estimatedTokens": 47322,
-      "totalPipelineDurationMs": 988701
+      "tavilyApiCalls": 6,
+      "tavilyResults": 16,
+      "estimatedTokens": 39167,
+      "totalPipelineDurationMs": 805399
     },
     "last7d": {
-      "aiActions": 135,
-      "documentsCreated": 54,
+      "aiActions": 129,
+      "documentsCreated": 51,
       "documentsModified": 41,
-      "tavilyApiCalls": 123,
-      "tavilyResults": 309,
-      "estimatedTokens": 128477,
-      "totalPipelineDurationMs": 2747391
+      "tavilyApiCalls": 114,
+      "tavilyResults": 289,
+      "estimatedTokens": 121475,
+      "totalPipelineDurationMs": 2596859
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-25T09:23:38.310Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "콘텐츠 리뷰",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-25T09:21:51.129Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "지식 확장 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-25T06:30:23.465Z",
       "actionType": "generate",
@@ -217,31 +237,11 @@
       "durationMs": 41226,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2004
-    },
-    {
-      "timestamp": "2026-03-24T18:27:07.390Z",
-      "actionType": "generate",
-      "issueNumber": 603,
-      "documentTitle": "Claude Desktop Agent – macOS 자동화 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 51387,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2518
-    },
-    {
-      "timestamp": "2026-03-24T18:26:12.308Z",
-      "actionType": "generate",
-      "issueNumber": 602,
-      "documentTitle": "AI 에이전트 스킬 벤치마크 – infra‑bench 실험 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 108487,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 5372
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 715,
+      "totalActions": 717,
       "totalEstimatedTokens": 537564,
       "avgDurationMs": 52515
     },
