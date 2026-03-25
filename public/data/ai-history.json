@@ -1,6 +1,147 @@
 {
   "entries": [
     {
+      "id": "1019f73d-dad9-46cd-a11e-c78cceb4c811",
+      "timestamp": "2026-03-25T00:29:16.651Z",
+      "actionType": "generate",
+      "issueNumber": 610,
+      "issueTitle": "문서 요청 #610",
+      "documentSlug": "ai/610",
+      "documentTitle": "n8n MCP Server – AI‑Callable 워크플로 가이드",
+      "summary": "새 문서 \"n8n MCP Server – AI‑Callable 워크플로 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1011
+            },
+            {
+              "step": "outline",
+              "durationMs": 7028
+            },
+            {
+              "step": "write",
+              "durationMs": 28351
+            },
+            {
+              "step": "review",
+              "durationMs": 7736
+            }
+          ],
+          "totalDurationMs": 44126,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2156,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "be801a35-5a18-46b5-8a6b-de3da7c3feb8",
+      "timestamp": "2026-03-25T00:28:19.373Z",
+      "actionType": "modify",
+      "issueNumber": 609,
+      "issueTitle": " [업데이트] Gemini 3.1 – Google TV 통합 및 멀티모달 업데이트",
+      "documentSlug": "ai/gemini-3-1",
+      "documentTitle": "Google AI Pro 활용 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Gemini 3.1 – Google TV 통합 및 멀티모달 업데이트\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 3,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "66160b2d-df55-4efb-afac-c709016e5f48",
+      "timestamp": "2026-03-25T00:27:15.331Z",
+      "actionType": "generate",
+      "issueNumber": 608,
+      "issueTitle": "문서 요청 #608",
+      "documentSlug": "ai/608",
+      "documentTitle": "FastMCP 소개 및 사용 가이드",
+      "summary": "새 문서 \"FastMCP 소개 및 사용 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1000
+            },
+            {
+              "step": "outline",
+              "durationMs": 8501
+            },
+            {
+              "step": "write",
+              "durationMs": 27150
+            },
+            {
+              "step": "review",
+              "durationMs": 10653
+            }
+          ],
+          "totalDurationMs": 47304,
+          "researchSources": 2,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2316,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "97b569a0-8ea0-4956-8bbc-0701c98a2375",
+      "timestamp": "2026-03-25T00:25:58.308Z",
+      "actionType": "modify",
+      "issueNumber": 607,
+      "issueTitle": " [업데이트] TokenWatch – 실시간 LLM 토큰 비용 추적 및 숨은 비용 방지 팁",
+      "documentSlug": "ai/517",
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 – TokenWatch 로 AI 비용 관리",
+      "summary": "문서 수정 요청 처리: \" [업데이트] TokenWatch – 실시간 LLM 토큰 비용 추적 및 숨은 비용 방지 팁\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 53,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "029320b4-4f8c-4f31-bad5-dc5d0a802db1",
+      "timestamp": "2026-03-25T00:25:31.176Z",
+      "actionType": "modify",
+      "issueNumber": 606,
+      "issueTitle": " [업데이트] Self‑Propagating Malware (Canisterworm) – 최신 위협 동향 및 완화 방안",
+      "documentSlug": "security/self-propagating-malware-canisterworm",
+      "documentTitle": "Self‑propagating Malware와 오픈소스 공급망 오염 – CanisterWorm 사례",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Self‑Propagating Malware (Canisterworm) – 최신 위협 동향 및 완화 방안\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 27,
+        "deletions": 0
+      }
+    },
+    {
       "id": "54037a2e-ecc0-4780-9be0-14d46a2cd6a7",
       "timestamp": "2026-03-25T00:24:55.095Z",
       "actionType": "maintain",
@@ -17526,5 +17667,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-25T00:24:55.095Z"
+  "lastUpdated": "2026-03-25T00:29:16.651Z"
 }
