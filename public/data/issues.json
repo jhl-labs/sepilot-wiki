@@ -1,10 +1,10 @@
 {
   "issues": [
     {
-      "id": 629,
-      "number": 629,
-      "title": " [요청] GitHub Actions Storage Quota Management – Best Practices",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-phantom-quota-reclaiming-github-actions-storag-c53db6)\n**관련도**: 75/100\n**핵심 토픽**: GitHub Actions 스토리지 쿼터, CI/CD 최적화, 아티팩트 정리\n\n## 뉴스 요약\nGitHub Actions 스토리지 할당량 – 왜 “Expired” 아티팩트가 여전히 계산되는가 빠르게 변화하는 소프트웨어 개발 세계에서, 워크플로우의 모든 측면을 최적화하는 것은...\n\n## 상세 내용\nSource: Dev.to\n죄송합니다만, 번역하려는 본문 텍스트를 제공해 주시면 해당 내용을 한국어로 번역해 드리겠습니다. 현재는 링크만 제공되어 있어 실제 기사 내용을 확인할 수 없습니다. 텍스트를 복사해서 붙여 주시면 바로 번역해 드리겠습니다.\n문제\nWarning email: 조직에 Actions 저장소 할당량이 거의 다 찼다는 알림 이메일이 도착했습니다.\nUsage report: 단일 리포지토리에서 하루에 약 45 GB‑시간이 사용된 것으로 나타났습니다.\nNo recent runs: 해당 리포지토리는 10개월 이상 워크플로를 실행한 적이 없습니다.\nExpiration set: 몇 개의 오래된 워크플로 실행에 대해 아티팩트가 하루 후 만료되도록 설정되어 있었으며, UI에서는 이를 만료됨으로 표시했습니다.\nExpectation: 저장소에 전혀 영향을 주지 않을 것이라 기대했습니다.\nReality: 청구 미터는 계속해서 증가했습니다.\nSource: …\n커뮤니티가 발견한 내용\n1. 지연된 정리 프로세스\nGitHub은 만료된 아티팩트를 삭제하기 위해 백그라운드 작업에 의존합니다. 아티팩트가 만료된 시점과 실제로 삭제되는 시점 사이에 상당한 지연이 발생할 수 있습니다. 이 중간 기간 동안 데이터는 여전히 디스크 공간을 차지하며 할당량에 포함됩니다.\n2. “유령 파일” 오류\n“Expired” ≠ “Deleted.”\nBryanBradfo가 지적한 알려진 백엔드 이슈로, UI에서는 아티팩트가 만료된 것으로 표시되지만 실제 파일은 서버에 남아 있습니다. 이러한 “유령 파일”은 계속해서 청구됩니다.\n3. 스토리지는 아티팩트만이 아니다\n워크플로우 로그, 캐시 및 기타 메타데이터도 공간을 차지합니다. 이들은 아티팩트가 사라지거나 만료된 후에도 남아 전체 사용량을 증가시킬 수 있습니다.\n4. 시간 가중 청구\nash‑iiiiish가 설명한 바와 같이, 스토리지 청구는 시간 가중 방식입니다. 아티팩트를 삭제하면 미래의 청구는 중단되지만, 그 시점까지 이미 사용된 스토리지는 소급해서 \n\n## 판단 근거\n스토리지 할당량 초과 경고와 정리 방법은 기존 CI/CD 워크플로 가이드에 포함되지 않아 별도 실용 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 631,
+      "number": 631,
+      "title": "문서 요청 #631",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -24,18 +24,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-25T18:28:26.761Z",
-      "updated_at": "2026-03-25T18:28:26.768Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/629",
-      "documentSlug": "github/github-actions-storage-quota-management-best-pract",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/github/github-actions-storage-quota-management-best-pract.md",
+      "created_at": "2026-03-25T18:28:59.874Z",
+      "updated_at": "2026-03-25T18:28:59.883Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/631",
+      "documentSlug": "ai/631",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/631.md",
       "comments": 0
     },
     {
       "id": 630,
       "number": 630,
-      "title": " [요청] Amazon Route 53 Hosted Zone Setup – Step‑by‑Step Guide",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/setting-up-a-dns-hosted-zone-in-amazon-route-53-4f821c)\n**관련도**: 72/100\n**핵심 토픽**: Amazon Route 53, DNS Hosted Zone, 클라우드 인프라 가이드\n\n## 뉴스 요약\n개요 이 가이드는 도메인의 DNS 레코드를 관리하기 위해 Amazon Route 53에서 퍼블릭 호스티드 존을 생성하는 과정을 안내합니다. 호스티드 존이란? 호스티드 존은…\n\n## 상세 내용\nSource: Dev.to\nOverview\n이 가이드는 Amazon Route 53에서 퍼블릭 호스티드 존을 생성하여 도메인의 DNS 레코드를 관리하는 방법을 단계별로 안내합니다.\nWhat is a Hosted Zone?\n호스티드 존은 DNS 레코드의 컨테이너입니다. 도메인 이름과 IP 주소 사이의 매핑을 저장합니다.\nTypes of Hosted Zones\nPublic hosted zone – 인터넷상의 DNS 쿼리를 해결합니다.\nPrivate hosted zone – Amazon VPC 내부에서 DNS 쿼리를 해결합니다(여기서는 다루지 않음).\nSteps to Create a Public Hosted Zone\n1. Log in to AWS\nAWS Management Console에 로그인합니다.\n서비스 목록에서 Route 53을 검색합니다.\n2. Open Hosted Zones\nRoute 53 콘솔에서 Hosted zones를 선택합니다.\nCreate hosted zone를 클릭합니다.\n3. Enter Domain Details\n도메인 이름을 입력합니다(예: example.com).\nPublic hosted zone을 선택합니다.\nCreate hosted zone를 클릭합니다.\n4. Review Default Records\nRoute 53이 자동으로 NS(Name Server) 레코드와 SOA 레코드를 생성합니다.\nNS 레코드에는 AWS가 해당 존에 할당한 네임 서버가 나열됩니다.\n5. Add a DNS Record\nCreate record를 클릭합니다.\n레코드 이름을 입력합니다(예: www).\n레코드 유형을 지정합니다(예: A) 및 대상 IP 주소를 입력합니다.\n레코드를 저장합니다.\n6. Update Name Servers at Your Registrar\nNS 레코드에 표시된 네임 서버 네 개를 복사합니다.\n도메인 등록기관 콘솔에 로그인합니다.\n기존 네임 서버를 AWS에서 제공한 네임 서버로 교체합니다.\n이 변경으로 도메인의 DNS 해석이 Route 53으\n\n## 판단 근거\nRoute 53 Hosted Zone 생성 및 관리 방법은 현재 문서에 다루어지지 않아 AWS 인프라 가이드에 추가가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "title": "문서 요청 #630",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -55,18 +55,18 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-25T18:26:53.590Z",
-      "updated_at": "2026-03-25T18:26:53.596Z",
+      "created_at": "2026-03-25T18:27:27.542Z",
+      "updated_at": "2026-03-25T18:27:27.549Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/630",
-      "documentSlug": "amazon-route-53-hosted-zone-setup-step-by-step-gui",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/amazon-route-53-hosted-zone-setup-step-by-step-gui.md",
+      "documentSlug": "cloud/630",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/cloud/630.md",
       "comments": 0
     },
     {
-      "id": 631,
-      "number": 631,
-      "title": " [요청] AI Safety Legislation & Data‑Center Moratorium – Policy Overview",
-      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/new-bernie-sanders-ai-safety-bill-would-halt-data-0a33a3)\n**관련도**: 72/100\n**핵심 토픽**: AI safety legislation, data‑center moratorium, AI governance\n\n## 뉴스 요약\n미국 상원의원은 화요일에 모라토리엄이 입법자들에게 AI가 안전하도록 보장할 시간을 줄 것이라고 말했다. 알렉산드리아 오카시오‑코르테즈는 유사한 법안을 발의할 예정이다…\n\n## 판단 근거\n새로운 AI 안전 법안과 데이터센터 건설 중단 조치는 AI 거버넌스와 보안 전략에 중요한 영향을 미치므로 독립적인 정책 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "id": 629,
+      "number": 629,
+      "title": "문서 요청 #629",
+      "body": "",
       "state": "open",
       "labels": [
         {
@@ -86,11 +86,11 @@
         "login": "unknown",
         "avatar_url": ""
       },
-      "created_at": "2026-03-25T18:25:57.523Z",
-      "updated_at": "2026-03-25T18:25:57.530Z",
-      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/631",
-      "documentSlug": "ai/ai-safety-legislation-data-center-moratorium-polic",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai-safety-legislation-data-center-moratorium-polic.md",
+      "created_at": "2026-03-25T18:26:22.270Z",
+      "updated_at": "2026-03-25T18:26:22.277Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/629",
+      "documentSlug": "629",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/629.md",
       "comments": 0
     },
     {
@@ -6334,5 +6334,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-25T18:28:26.768Z"
+  "lastUpdated": "2026-03-25T18:28:59.883Z"
 }
