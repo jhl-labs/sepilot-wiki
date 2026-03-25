@@ -1,43 +1,103 @@
 {
-  "collectedAt": "2026-03-25T09:50:22.161Z",
+  "collectedAt": "2026-03-25T10:49:32.506Z",
   "overview": {
     "totalDocuments": 283,
     "publishedDocuments": 148,
     "draftDocuments": 135,
-    "openRequests": 175,
+    "openRequests": 178,
     "closedRequests": 19,
-    "totalAIActions": 733
+    "totalAIActions": 739
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
+      "aiActions": 4,
+      "documentsCreated": 1,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "estimatedTokens": 2801,
+      "totalPipelineDurationMs": 57128
     },
     "last24h": {
       "aiActions": 36,
-      "documentsCreated": 15,
-      "documentsModified": 10,
+      "documentsCreated": 18,
+      "documentsModified": 7,
       "tavilyApiCalls": 6,
       "tavilyResults": 16,
-      "estimatedTokens": 39167,
-      "totalPipelineDurationMs": 805399
+      "estimatedTokens": 48536,
+      "totalPipelineDurationMs": 995946
     },
     "last7d": {
-      "aiActions": 129,
-      "documentsCreated": 51,
+      "aiActions": 135,
+      "documentsCreated": 54,
       "documentsModified": 41,
       "tavilyApiCalls": 114,
       "tavilyResults": 289,
-      "estimatedTokens": 121475,
-      "totalPipelineDurationMs": 2596859
+      "estimatedTokens": 130844,
+      "totalPipelineDurationMs": 2787406
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-25T09:51:05.374Z",
+      "actionType": "quality_score",
+      "issueNumber": 616,
+      "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트 보안 위협 모델링 및 완화 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-25T09:50:41.596Z",
+      "actionType": "quality_score",
+      "issueNumber": 617,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes AI 모델 GitOps & CI/CD 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-25T09:50:30.903Z",
+      "actionType": "quality_score",
+      "issueNumber": 618,
+      "documentTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지 프레임워크 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-25T09:50:16.218Z",
+      "actionType": "generate",
+      "issueNumber": 616,
+      "documentTitle": "AI 에이전트 보안 위협 모델링 및 완화 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 57128,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2801
+    },
+    {
+      "timestamp": "2026-03-25T09:48:50.955Z",
+      "actionType": "generate",
+      "issueNumber": 617,
+      "documentTitle": "Kubernetes 기반 AI 모델 GitOps & CI/CD 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 75897,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 3743
+    },
+    {
+      "timestamp": "2026-03-25T09:47:04.213Z",
+      "actionType": "generate",
+      "issueNumber": 618,
+      "documentTitle": "LLM 프롬프트 인젝션 탐지 프레임워크 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 57522,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2825
+    },
     {
       "timestamp": "2026-03-25T09:23:38.310Z",
       "actionType": "maintain",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T00:27:15.331Z",
-      "actionType": "generate",
-      "issueNumber": 608,
-      "documentTitle": "FastMCP 소개 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 47304,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2316
-    },
-    {
-      "timestamp": "2026-03-25T00:25:58.308Z",
-      "actionType": "modify",
-      "issueNumber": 607,
-      "documentTitle": "자동 감지: 뉴스 인텔리전스 – TokenWatch 로 AI 비용 관리",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T00:25:31.176Z",
-      "actionType": "modify",
-      "issueNumber": 606,
-      "documentTitle": "Self‑propagating Malware와 오픈소스 공급망 오염 – CanisterWorm 사례",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-25T00:24:55.095Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-24T18:28:58.159Z",
-      "actionType": "generate",
-      "issueNumber": 605,
-      "documentTitle": "OpenCode 프라이버시 레이어 설계·구현 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 59562,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2922
-    },
-    {
-      "timestamp": "2026-03-24T18:27:50.999Z",
-      "actionType": "generate",
-      "issueNumber": 604,
-      "documentTitle": "자동 감지 – 뉴스 인텔리전스 (euno.news) – CanisterWorm·Kamikaze 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 41226,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2004
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 717,
-      "totalEstimatedTokens": 537564,
-      "avgDurationMs": 52515
+      "totalActions": 723,
+      "totalEstimatedTokens": 546933,
+      "avgDurationMs": 52661
     },
     "unknown": {
       "totalActions": 16,
