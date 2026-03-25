@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-25T19:49:16.931Z",
+  "collectedAt": "2026-03-25T20:48:28.301Z",
   "overview": {
     "totalDocuments": 297,
     "publishedDocuments": 155,
     "draftDocuments": 142,
     "openRequests": 185,
     "closedRequests": 19,
-    "totalAIActions": 753
+    "totalAIActions": 754
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 38,
+      "aiActions": 39,
       "documentsCreated": 17,
       "documentsModified": 8,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 1009427
     },
     "last7d": {
-      "aiActions": 137,
+      "aiActions": 138,
       "documentsCreated": 59,
       "documentsModified": 36,
       "tavilyApiCalls": 108,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-25T20:43:59.038Z",
+      "actionType": "quality_score",
+      "issueNumber": 327,
+      "documentTitle": "[Wiki Maintenance] [문서] React‑Query 기반 데이터 패칭·캐싱 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-25T18:28:59.870Z",
       "actionType": "generate",
@@ -227,21 +237,11 @@
       "durationMs": 75897,
       "tavilyApiCalls": 0,
       "estimatedTokens": 3743
-    },
-    {
-      "timestamp": "2026-03-25T09:47:04.213Z",
-      "actionType": "generate",
-      "issueNumber": 618,
-      "documentTitle": "LLM 프롬프트 인젝션 탐지 프레임워크 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 57522,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2825
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 737,
+      "totalActions": 738,
       "totalEstimatedTokens": 569455,
       "avgDurationMs": 53041
     },
