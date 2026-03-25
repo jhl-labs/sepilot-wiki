@@ -3,8 +3,8 @@
     {
       "id": 610,
       "number": 610,
-      "title": "문서 요청 #610",
-      "body": "",
+      "title": " [요청] n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/n8n-mcp-server-turn-any-workflow-into-an-ai-callab-3ffff2)\n**관련도**: 76/100\n**핵심 토픽**: n8n, MCP Server, AI‑callable workflow\n\n## 뉴스 요약\n개요 - Stars: 181 k - Forks: 56.1 k - License: Fair‑code 내부 사용은 무료; 상업적 재배포는 Enterprise 필요 - Features: SSE + Streamable...\n\n## 상세 내용\nSource: Dev.to\n개요\n별표: 181 k\n포크: 56.1 k\n라이선스: Fair‑code (내부 사용은 무료; 상업적 재배포는 Enterprise 필요)\n특징: SSE + 스트리밍 가능한 HTTP, 400개 이상의 통합, 25억 달러 평가액, 4000만 달러 ARR\nn8n은 단순한 독립 MCP 서버가 아닙니다. 전체 n8n 워크플로 자동화 플랫폼을 양방향 MCP 허브로 변환합니다:\n모든 n8n 워크플로를 Claude Desktop, Cursor, VS Code가 호출할 수 있는 MCP 도구로 노출할 수 있습니다.\nn8n의 AI 에이전트는 외부 MCP 서버의 도구를 사용할 수 있습니다.\nMCP 서버 트리거\nMCP Server Trigger 노드는 어떤 워크플로든 MCP 엔드포인트로 전환합니다:\nhttps://your-n8n-instance.com/mcp/your-workflow-id\n예시: CRM을 조회하고, 티켓 데이터베이스와 교차 참조한 뒤 고객 요약을 생성하는 워크플로를 구축합니다. 이를 get_customer_360으로 노출하면 Claude가 내부 시스템에 직접 접근할 필요 없이 호출할 수 있습니다.\nMCP 클라이언트 도구\nMCP Client Tool 노드를 사용하면 n8n의 AI 에이전트가 GitHub, Slack, 데이터베이스 또는 기타 MCP 서버의 도구를 활용할 수 있습니다.\n외부 AI 에이전트 → MCP 서버 트리거 → 워크플로우 → MCP 클라이언트 도구 → 외부 MCP 서버\n(Claude, Cursor)          (도구를 노출함)          (도구를 사용함)   (GitHub, Slack, DB)\n이렇게 n8n은 오류 처리와 인간‑인‑루프(HITL) 제어가 포함된 단일 조정 인터페이스 뒤에서 여러 MCP 서버를 조합하는 미들웨어 역할을 합니다.\n호스팅 및 비용\n항목자체 호스팅n8n 클라우드\n비용무료 (+ 인프라)€24 – €800 / mo\n실행무제한2,500 – 40,000 / mo\n데이터귀하의 서버n8n 클라우드\n청구 \n\n## 판단 근거\nn8n을 MCP 허브로 전환해 AI 에이전트가 워크플로를 호출하도록 하는 새로운 활용 사례가 기존 문서에 없으며, 설치·구성·예제 코드를 제공하는 전용 가이드가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-25T00:29:16.656Z",
-      "updated_at": "2026-03-25T00:29:16.664Z",
+      "updated_at": "2026-03-25T00:32:00.532Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/610",
-      "documentSlug": "ai/610",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/610.md",
+      "documentSlug": "n8n-mcp-server-ai-callable",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/n8n-mcp-server-ai-callable.md",
       "comments": 0
     },
     {
       "id": 608,
       "number": 608,
-      "title": "문서 요청 #608",
-      "body": "",
+      "title": " [요청] FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/welcome-to-fastmcp-1d9d96)\n**관련도**: 82/100\n**핵심 토픽**: FastMCP, Model Context Protocol, LLM Tooling\n\n## 뉴스 요약\nFastMCP는 MCP 애플리케이션을 구축하기 위한 표준 프레임워크입니다. Model Context Protocol https://modelcontextprotocol.io/ MCP는 LLM을 도구 및 데이터와 연결합니다....\n\n## 상세 내용\nSource: Hacker News\n개요\nFastMCP는 MCP 애플리케이션을 구축하기 위한 표준 프레임워크입니다. Model Context Protocol (MCP)은 LLM을 도구와 데이터에 연결합니다. FastMCP는 프로토타입에서 프로덕션까지 필요한 모든 것을 제공합니다 — 기능을 노출하는 서버를 구축하고, 클라이언트를 어떤 MCP 서비스에도 연결하며, 도구에 인터랙티브 UI를 제공합니다:\nfrom fastmcp import FastMCP\nmcp = FastMCP(\"Demo 🚀\")\n@mcp.tool\ndef add(a: int, b: int) -> int:\n\"\"\"Add two numbers\"\"\"\nreturn a + b\nif __name__ == \"__main__\":\nmcp.run()\n빠르게 움직이고 만들기\nModel Context Protocol (MCP)을 사용하면 에이전트에게 도구와 데이터에 대한 접근 권한을 부여할 수 있습니다. 효과적인 MCP 애플리케이션을 구축하는 것은 복잡할 수 있지만, FastMCP가 무거운 작업을 처리합니다. 파이썬 함수로 도구를 선언하면 스키마, 검증, 문서가 자동으로 생성됩니다. URL로 서버에 연결하면 전송 협상, 인증, 프로토콜 수명 주기가 자동으로 관리됩니다. 여러분은 로직에 집중하고, MCP 부분은 그대로 작동합니다: FastMCP와 함께라면 모범 사례가 기본으로 포함됩니다.\nFastMCP는 세 가지 핵심 요소를 가지고 있습니다:\nServers – 파이썬 함수를 MCP‑준수 도구, 리소스, 프롬프트로 래핑합니다.\nClients – 전체 프로토콜 지원을 통해 어떤 서버든 연결합니다.\nApps – 대화 안에서 직접 렌더링되는 인터랙티브 UI로 도구를 제공합니다.\n시작할 준비가 되셨나요? 설치 가이드부터 시작하거나 바로 퀵스타트로 넘어가세요. 배포 준비가 되면, Prefect Horizon이 FastMCP 사용자에게 무료 호스팅을 제공합니다.\nFastMCP는 Prefect에 의해 💙와 함께 만들어졌습니다.\nLLM‑친\n\n## 판단 근거\nFastMCP는 MCP 애플리케이션을 신속히 구축하도록 설계된 새로운 프레임워크이며, 기존 MCP 문서에서는 다루지 않는다. 독립 문서로 소개해 사용법, API, 배포 예시 등을 제공해야 함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,10 +56,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-25T00:27:15.334Z",
-      "updated_at": "2026-03-25T00:27:15.343Z",
+      "updated_at": "2026-03-25T00:33:20.153Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/608",
-      "documentSlug": "ai/608",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/608.md",
+      "documentSlug": "ai/fastmcp-model-context-protocol",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/fastmcp-model-context-protocol.md",
       "comments": 0
     },
     {
@@ -5931,5 +5931,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-25T00:29:16.665Z"
+  "lastUpdated": "2026-03-25T00:33:20.153Z"
 }

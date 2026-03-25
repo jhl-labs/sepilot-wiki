@@ -1,7 +1,7 @@
 ---
 title: DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [DigitalOcean, NemoClaw, 1‑Click, 배포, 자동화]
 ---
 
