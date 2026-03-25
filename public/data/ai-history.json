@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "de621660-200e-4fcc-9aa9-787ec8d0fc84",
+      "timestamp": "2026-03-25T00:34:04.987Z",
+      "actionType": "quality_score",
+      "issueNumber": 581,
+      "issueTitle": " [요청] DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드",
+      "documentSlug": "digitalocean-droplet-nemoclaw-1-click",
+      "documentTitle": " [요청] DigitalOcean Droplet에서 NemoClaw 1‑Click 배포 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "a024ce7c-54b3-4779-8b7b-93306f3794c7",
+      "timestamp": "2026-03-25T00:33:38.984Z",
+      "actionType": "quality_score",
+      "issueNumber": 610,
+      "issueTitle": " [요청] n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
+      "documentSlug": "n8n-mcp-server-ai-callable",
+      "documentTitle": " [요청] n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "a19c4a37-3bae-4b8a-8051-68e0c5dd1cb0",
+      "timestamp": "2026-03-25T00:33:20.142Z",
+      "actionType": "generate",
+      "issueNumber": 608,
+      "issueTitle": " [요청] FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
+      "documentSlug": "ai/fastmcp-model-context-protocol",
+      "documentTitle": "FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
+      "summary": "새 문서 \"FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 994
+            },
+            {
+              "step": "outline",
+              "durationMs": 11731
+            },
+            {
+              "step": "write",
+              "durationMs": 42170
+            },
+            {
+              "step": "review",
+              "durationMs": 7382
+            }
+          ],
+          "totalDurationMs": 62277,
+          "researchSources": 2,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 3065,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ca4aa7f0-16f7-4702-9f65-8b6572de6ecc",
+      "timestamp": "2026-03-25T00:32:00.522Z",
+      "actionType": "generate",
+      "issueNumber": 610,
+      "issueTitle": " [요청] n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
+      "documentSlug": "n8n-mcp-server-ai-callable",
+      "documentTitle": "n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
+      "summary": "새 문서 \"n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1186
+            },
+            {
+              "step": "outline",
+              "durationMs": 13230
+            },
+            {
+              "step": "write",
+              "durationMs": 37353
+            },
+            {
+              "step": "review",
+              "durationMs": 6236
+            }
+          ],
+          "totalDurationMs": 58005,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2842,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "1019f73d-dad9-46cd-a11e-c78cceb4c811",
       "timestamp": "2026-03-25T00:29:16.651Z",
       "actionType": "generate",
@@ -17667,5 +17785,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-25T00:29:16.651Z"
+  "lastUpdated": "2026-03-25T00:34:04.988Z"
 }
