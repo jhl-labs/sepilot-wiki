@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 613,
+      "number": 613,
+      "title": " [요청] Colab MCP Server – Google Colab에서 AI 에이전트 실행하기",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/announcing-the-colab-mcp-server-connect-any-ai-age-0182c2)\n**관련도**: 86/100\n**핵심 토픽**: Colab MCP server, Google Colab, AI agent prototyping\n\n## 뉴스 요약\nAI 에이전트인 Gemini CLI, Claude Code, 혹은 직접 만든 에이전트를 로컬에서 프로토타이핑할 때, 그 잠재력은 종종 로컬 머신에 의해 병목 현상이 발생합니다. Wai...\n\n## 상세 내용\nSource: Google Developers Blog\nSource:\n소개\nAI 에이전트인 Gemini CLI, Claude Code, 혹은 직접 만든 에이전트를 로컬에서 프로토타이핑할 때, 그 잠재력은 종종 로컬 머신에 의해 병목 현상이 발생합니다. 에이전트가 프로젝트를 스캐폴드하거나 종속성을 설치하기를 기다리는 동안 시간이 지연됩니다. 또한, 자율 에이전트가 하드웨어에서 직접 코드를 실행하도록 하는 것은 최선의 선택이 아닐 수 있습니다.\n빠르고 안전한 샌드박스와 강력한 컴퓨팅이 필요합니다. MCP‑호환 에이전트를 Google Colab에 연결함으로써, 로컬 워크플로우와 Colab의 클라우드 환경을 연결합니다.\n오늘부터 우리는 새로운 오픈‑소스 Colab MCP (Model Context Protocol) 서버를 공개합니다. 이를 통해 Google Colab을 어떤 AI 에이전트라도 직접 접근할 수 있게 합니다. 이는 새로운 UI나 노트북을 공유하는 다른 방식을 의미하는 것이 아니라, Colab의 네이티브 개발 기능에 대한 프로그래밍적 접근을 의미합니다. Colab을 개방적이고 확장 가능한 호스트로 설정함으로써, 이제 MCP‑호환 에이전트에게 Colab을 자동화된 작업 공간으로 활용할 수 있습니다.\nColab Notebooks as a Tool\n우리는 단순히 백그라운드에서 코드를 실행하는 것을 넘어, 어떤 에이전트든 Colab 노트북 인터페이스를 원시적으로 제어할 수 있는 능력을 부여하고 있습니다. 이를 통해 선택한 에이전트가 전체 노트북 개발 라이프사이클을 자동화할 수 있습니다. 에이전트에게 “이 데이터셋에 대한 데이터 분석을 만들어줘”라고 요청하면 이제 프로그래밍 방식으로 다음을 수행할 수 있습니다:\n셀 추가 및 구조화: 새로운 .ipynb 파일을 만들고 마크다운 셀을 삽입하여 방법론을 설명합니다.\n코드 작성 및 실행: pandas와 matplotlib 같은 라이브러리를 로드하는 파이썬 셀을 초안하고 실시간으로 실행합니다.\n콘텐츠 이동 및 정리: 셀을 재\n\n## 판단 근거\nGoogle Colab에 MCP‑호환 에이전트를 연결하는 새로운 배포 옵션이 기존 문서에 없으며, 프로토타이핑 워크플로우에 중요한 최신 정보임\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-25T06:33:48.166Z",
+      "updated_at": "2026-03-25T06:33:48.172Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/613",
+      "documentSlug": "ai/colab-mcp-server-google-colab-ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/colab-mcp-server-google-colab-ai.md",
+      "comments": 0
+    },
+    {
+      "id": 614,
+      "number": 614,
+      "title": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/ptc-warns-of-imminent-threat-from-critical-windchi-9d7e72)\n**관련도**: 85/100\n**핵심 토픽**: RCE vulnerability, PLM security, Windchill/FlexPLM\n\n## 뉴스 요약\n!https://www.bleepstatic.com/content/hl-images/2026/03/24/hacker_box.jpg PTC Inc.는 Windchill 및 FlexPLM에서 발견된 치명적인 취약점에 대해 경고하고 있습니다. 널리 사용되는 …\n\n## 상세 내용\nSource: Bleeping Computer\nVulnerability Overview\nPTC Inc.는 원격 코드 실행을 허용할 수 있는 Windchill 및 FlexPLM(광범위하게 사용되는 제품 수명 주기 관리(PLM) 솔루션)에서 심각한 취약점이 발견되었다고 경고하고 있습니다. 이 보안 문제는 CVE‑2026‑4681으로 식별되며, 신뢰된 데이터의 역직렬화를 통해 악용될 수 있습니다.\n그 심각성 때문에 독일 당국이 긴급 조치를 취했으며, 연방 경찰(BKA)이 영향을 받는 기업에 사이버 보안 위험을 알리기 위해 요원을 파견한 것으로 알려졌습니다.\nFix Under Development\n아직 공식 패치는 제공되지 않았습니다.\nPTC는 “지원되는 모든 Windchill 버전에 대해 보안 패치를 적극적으로 개발·배포하고 있다”고 밝혔으며, 이를 통해 문제를 해결할 예정입니다.\n이 결함은 대부분의 지원되는 Windchill 및 FlexPLM 버전, 모든 중요 패치 세트(CPS) 버전에 영향을 미칩니다.\nMitigation Recommendations Until Patches Are Released\n공급업체가 제공한 Apache/IIS 규칙을 적용하여 영향을 받는 서블릿 경로에 대한 접근을 차단합니다(기능에는 영향을 주지 않음).\n동일한 완화 조치를 모든 배포 환경—Windchill, FlexPLM 및 파일/복제 서버—에 적용합니다. 인터넷에 노출된 시스템뿐만 아니라 모든 인스턴스를 우선 순위에 두고 적용합니다.\n완화 조치를 적용할 수 없는 경우, 영향을 받는 인스턴스를 일시적으로 인터넷에서 차단하거나 서비스를 중단합니다.\nIndicators of Compromise (IoCs)\nPTC는 현재 고객을 대상으로 이 취약점이 악용되고 있다는 증거는 없다고 보고했지만, 다음과 같은 구체적인 침해 지표를 공개했습니다:\nUser‑agent 문자열 및 악성 파일.\n탐지 권고 사항에는 GW.class, payload.bin, dpr_.jsp 파일과 같은 웹쉘을 확인하는 것이 \n\n## 판단 근거\nPTC 제품군의 심각한 RCE 취약점은 현재 보안 가이드에 포함되지 않아 별도 문서가 필요함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-25T06:31:39.182Z",
+      "updated_at": "2026-03-25T06:31:39.189Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/614",
+      "documentSlug": "security/windchill-flexplm-remote-code-execution-vulnerabil",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/windchill-flexplm-remote-code-execution-vulnerabil.md",
+      "comments": 0
+    },
+    {
+      "id": 615,
+      "number": 615,
+      "title": " [요청] Calendar MCP Server – 35+ 캘린더·일정 서비스 통합 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/calendar-scheduling-mcp-servers-google-calendar-ou-628c21)\n**관련도**: 84/100\n**핵심 토픽**: Calendar MCP server, Google Calendar, 다중 캘린더 연동\n\n## 뉴스 요약\n개요 - 7개 하위 카테고리에서 35개 이상의 캘린더 및 일정 관리 MCP 서버. - Google Calendar가 구현을 주도하고; Microsoft는 공식 서버를 제공하며; Apple C...\n\n## 상세 내용\nSource: Dev.to\n개요\n7개의 하위 카테고리로 구성된 35개 이상의 캘린더 및 일정 관리 MCP 서버.\nGoogle Calendar가 구현을 주도하고; Microsoft는 공식 서버를 제공; Apple Calendar는 apple‑mcp(3,000 ⭐)를 통해 제공.\n평점: 4/5\n주요 특징\n교차 계정 충돌 감지를 지원하는 다중 계정 기능.\n캘린더 전체 수명 주기를 포괄하는 12가지 도구.\n고급 기능: 반복 이벤트 수정, 자연어 일정 지정, 이미지/PDF/웹 링크에서 지능형 이벤트 가져오기(예: 회의 전단지를 스크린샷 → 캘린더 이벤트).\n최신 버전 v2.6.1 (2026년 3월), 활발히 유지 관리 중.\n구현 목록\n일반 목적\ncalendar-mcp (25 ⭐) — 상호 회의 슬롯 감지, 일일 바쁨도 분석.\nmcp-google-calendar (9 ⭐) — 자동 시간대 감지, 충돌 검사.\nGoogle Calendar API 접근성 덕분에 총 6개 이상의 구현이 존재.\nMicrosoft\nMicrosoft 공식 원격 MCP 서버 — 2,800 ⭐ MCP 단일 저장소의 일부이며, Microsoft 인프라에서 테넌트‑스코프 인증으로 호스팅. Graph API를 통해 이벤트 생성, 업데이트, 삭제, 초대 관리, 가용성 확인을 지원.\nOutlook_Calendar_MCP (33 ⭐) — Windows 전용 로컬 접근, 6가지 도구.\noffice-365-mcp-server (12 ⭐) — 이메일, 캘린더, Teams, Planner을 아우르는 24가지 도구.\nApple\napple-mcp (3,000 ⭐) — 캘린더 분야에서 가장 많은 별을 받은 서버(캘린더는 7개 앱 통합 중 하나).\nmcp-ical (278 ⭐) — 자연어 기반 macOS 캘린더.\napple-calendar-mcp — EventKit 네이티브 구현.\nCalDAV 범용\nCalDAV MCP (56 ⭐) — 표준을 준수하는 모든 캘린더와 호환(Nextcloud, Radicale, Baikal, iCl\n\n## 판단 근거\n다중 캘린더 연동 MCP 서버는 기존 MCP 문서와 별도 기능 영역이며, 구체적인 설정·사용법을 제공해야 함\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-25T06:30:19.715Z",
+      "updated_at": "2026-03-25T06:30:19.721Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/615",
+      "documentSlug": "calendar-mcp-server-35",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/calendar-mcp-server-35.md",
+      "comments": 0
+    },
+    {
       "id": 610,
       "number": 610,
       "title": " [요청] n8n MCP Server – 워크플로를 AI‑Callable 도구로 변환하기",
@@ -5931,5 +6024,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-25T00:33:20.153Z"
+  "lastUpdated": "2026-03-25T06:33:48.172Z"
 }
