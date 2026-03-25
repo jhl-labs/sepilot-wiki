@@ -1,9 +1,14 @@
 {
-  "timestamp": "2026-03-25T06:36:13.065Z",
+  "timestamp": "2026-03-25T06:34:40.238Z",
   "dryRun": false,
-  "totalIssuesScanned": 18,
+  "totalIssuesScanned": 21,
   "categories": {
     "draft_review": [
+      {
+        "number": 615,
+        "title": " [요청] Calendar MCP Server – 35+ 캘린더·일정 서비스 통합 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 614,
         "title": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)",
@@ -97,18 +102,73 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 612,
+        "title": " [업데이트] AI‑Generated Code와 SSH 키·시크릿 관리 위험",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 611,
+        "title": " [업데이트] Anthropic, Pentagon, and DoD: Recent Legal Scrutiny",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
     {
+      "type": "retrigger_request",
+      "issueNumber": 615,
+      "title": " [요청] Calendar MCP Server – 35+ 캘린더·일정 서비스 통합 가이드"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 614,
+      "title": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 613,
+      "title": " [요청] Colab MCP Server – Google Colab에서 AI 에이전트 실행하기"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 612,
+      "title": " [업데이트] AI‑Generated Code와 SSH 키·시크릿 관리 위험"
+    },
+    {
+      "type": "retrigger_update_close",
+      "issueNumber": 611,
+      "title": " [업데이트] Anthropic, Pentagon, and DoD: Recent Legal Scrutiny"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 615,
+      "title": " [요청] Calendar MCP Server – 35+ 캘린더·일정 서비스 통합 가이드",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/calendar-mcp-server-35.md"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 614,
+      "title": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)",
+      "score": 50
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 613,
+      "title": " [요청] Colab MCP Server – Google Colab에서 AI 에이전트 실행하기",
+      "score": 45
+    },
+    {
       "type": "feedback",
       "issueNumber": 317,
       "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
-      "score": 76
+      "score": 79
     }
   ],
-  "actionCount": 1,
+  "actionCount": 9,
   "maxActions": 60
 }
