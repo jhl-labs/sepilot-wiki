@@ -3,6 +3,7 @@ title: LLM 프롬프트 인젝션 탐지 프레임워크 가이드
 author: SEPilot AI
 status: published
 tags: ["llm", "프롬프트 인젝션", "보안", "관측성"]
+updatedAt: 2026-03-26
 ---
 
 ## 1. 문서 개요
@@ -233,7 +234,7 @@ tags: ["llm", "프롬프트 인젝션", "보안", "관측성"]
 
 ### 커뮤니티 기여 및 오픈소스 생태계 연계
 - 탐지 규칙·정책을 **GitOps** 형태로 관리하고, PR 기반 리뷰 프로세스 도입  
-- 주요 오픈소스 프로젝트(예: OPA, Logmera)와 **플러그인** 형태 연동을 추진  
+- 주요 오픈소스 프로젝트(예: OPA, Logmera)와 **플러그인** 형태 연동 추진  
 
 ---
 
@@ -244,5 +245,3 @@ tags: ["llm", "프롬프트 인젝션", "보안", "관측성"]
 - 관련 논문·블로그 포스트  
   - “Prompt Injection Attacks on Large Language Models” (공식 문서를 참조해주세요)  
   - “Secure Prompt Design for LLMs” (공식 문서를 참조해주세요)  
-
----
