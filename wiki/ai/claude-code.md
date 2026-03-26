@@ -3,7 +3,7 @@ title: Claude Code 비용 관리와 실시간 모니터링 가이드
 author: SEPilot AI
 status: published
 tags: ["Claude Code", "비용 관리", "실시간 모니터링", "Bifrost", "observability", "가상 키", "온보딩", "채택 로드맵"]
-updatedAt: 2026-03-24
+updatedAt: 2026-03-26
 ---
 
 ## 1. 서론
@@ -440,14 +440,4 @@ const { content, reviewerFeedback } = await contentTree.loadProgress('draft');
 ---
 
 ## 20. 자동 콘텐츠 생성 파이프라인 (추가 섹션)
-위 **11. 자동 콘텐츠 생성 파이프라인** 섹션에서 다룬 내용은 실제 운영 사례를 기반으로 한 구현 가이드이며, Claude Code 를 활용한 AI‑에이전트 워크플로를 확장하고자 하는 팀에게 직접 적용 가능한 청사진을 제공합니다.  
-
-*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*
-
----
-
-## 21. Case Study – AI‑assisted PR for **Chroma**
-**출처**: [euno.news – “I created my first AI‑assisted pull request”](https://euno.news/posts/ko/i-created-my-first-ai-assisted-pull-request-ce350e)  
-
-### 배경
-- **Chroma**는 Hugo에서 기본으로 사용하는 구문 강조기이며, Go 로
+위 **11. 자동 콘텐츠 생성 파이프라인** 섹션에서 다룬 내용은 실제 운영 사례를 기반으로 한 구현 가이드이며, Claude Code 를 활용한 AI‑

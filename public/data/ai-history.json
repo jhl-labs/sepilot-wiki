@@ -1,50 +1,8 @@
 {
   "entries": [
     {
-      "id": "3e6cb228-5b94-479d-8381-43712064ab43",
-      "timestamp": "2026-03-26T06:35:09.086Z",
-      "actionType": "quality_score",
-      "issueNumber": 613,
-      "issueTitle": " [요청] Colab MCP Server – Google Colab에서 AI 에이전트 실행하기",
-      "documentSlug": "ai/colab-mcp-server-google-colab-ai",
-      "documentTitle": " [요청] Colab MCP Server – Google Colab에서 AI 에이전트 실행하기",
-      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "d0e4e636-b31f-4122-aa01-a9719dd8c816",
-      "timestamp": "2026-03-26T06:34:55.297Z",
-      "actionType": "quality_score",
-      "issueNumber": 614,
-      "issueTitle": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)",
-      "documentSlug": "security/windchill-flexplm-remote-code-execution-vulnerabil",
-      "documentTitle": " [요청] Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑4681)",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "bc79d809-08c6-4756-9042-5a3d3d6b1178",
-      "timestamp": "2026-03-26T06:34:23.120Z",
-      "actionType": "quality_score",
-      "issueNumber": 640,
-      "issueTitle": " [요청] Stochastic Gap: 마코프 기반 Agentic AI 신뢰성·감시 비용 프레임워크",
-      "documentSlug": "ai/stochastic-gap-agentic-ai",
-      "documentTitle": " [요청] Stochastic Gap: 마코프 기반 Agentic AI 신뢰성·감시 비용 프레임워크",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "8e961683-e2f4-4a9d-9131-68857482c342",
-      "timestamp": "2026-03-26T06:34:00.509Z",
+      "id": "7343b927-8268-4cce-8612-33540b5068ca",
+      "timestamp": "2026-03-26T06:34:48.026Z",
       "actionType": "modify",
       "issueNumber": 641,
       "issueTitle": " [업데이트] TensorFlow 2.21 – LiteRT 통합 및 신규 기능 정리",
@@ -55,19 +13,19 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": {
-        "additions": 7,
+        "additions": 3,
         "deletions": 0
       }
     },
     {
-      "id": "2f223faa-c684-4ddf-a5eb-1f49ca0ba4a5",
-      "timestamp": "2026-03-26T06:32:38.023Z",
+      "id": "3fbf09e1-5ba4-4434-9cca-31e1f3472ad7",
+      "timestamp": "2026-03-26T06:33:36.467Z",
       "actionType": "generate",
       "issueNumber": 640,
-      "issueTitle": " [요청] Stochastic Gap: 마코프 기반 Agentic AI 신뢰성·감시 비용 프레임워크",
-      "documentSlug": "ai/stochastic-gap-agentic-ai",
-      "documentTitle": "Stochastic Gap: 마코프 기반 Agentic AI 신뢰성·감시 비용 프레임워크",
-      "summary": "새 문서 \"Stochastic Gap: 마코프 기반 Agentic AI 신뢰성·감시 비용 프레임워크\" 생성",
+      "issueTitle": "문서 요청 #640",
+      "documentSlug": "ai/640",
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 – Stochastic Gap 마코프 프레임워크",
+      "summary": "새 문서 \"자동 감지: 뉴스 인텔리전스 – Stochastic Gap 마코프 프레임워크\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -76,32 +34,83 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1046
+              "durationMs": 1007
             },
             {
               "step": "outline",
-              "durationMs": 8245
+              "durationMs": 9132
             },
             {
               "step": "write",
-              "durationMs": 37806
+              "durationMs": 32181
             },
             {
               "step": "review",
-              "durationMs": 7845
+              "durationMs": 4965
             }
           ],
-          "totalDurationMs": 54942,
+          "totalDurationMs": 47286,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 2694,
+            "estimated": 2314,
             "method": "duration_based"
           }
         }
+      }
+    },
+    {
+      "id": "4c4f95f0-0dbd-4af5-b634-884d96be015c",
+      "timestamp": "2026-03-26T06:32:45.910Z",
+      "actionType": "modify",
+      "issueNumber": 639,
+      "issueTitle": " [업데이트] LLM 에이전트 스킬로 지식 격차 해소하기",
+      "documentSlug": "llm",
+      "documentTitle": "LLM 프롬프트 인젝션 탐지 프레임워크 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] LLM 에이전트 스킬로 지식 격차 해소하기\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 1
+      }
+    },
+    {
+      "id": "f1433674-5fdf-4e4c-8234-cc858ce78c86",
+      "timestamp": "2026-03-26T06:32:01.668Z",
+      "actionType": "modify",
+      "issueNumber": 638,
+      "issueTitle": " [업데이트] Claude Code용 자율 AI 에이전트 10가지 – 설계와 활용 가이드",
+      "documentSlug": "ai/claude-code",
+      "documentTitle": "Claude Code 비용 관리와 실시간 모니터링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Claude Code용 자율 AI 에이전트 10가지 – 설계와 활용 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 10
+      }
+    },
+    {
+      "id": "82b4b094-3e44-4e45-ac7a-3518406df383",
+      "timestamp": "2026-03-26T06:30:51.927Z",
+      "actionType": "modify",
+      "issueNumber": 637,
+      "issueTitle": " [업데이트] Gemini Code Assist – Finish Changes와 Outlines 기능 상세",
+      "documentSlug": "ai/gemini-code-assist-finish-changes-outlines",
+      "documentTitle": "Gemini Code Assist – Finish Changes & Outlines 기능 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Gemini Code Assist – Finish Changes와 Outlines 기능 상세\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 59,
+        "deletions": 0
       }
     },
     {
@@ -19085,5 +19094,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-26T06:35:09.086Z"
+  "lastUpdated": "2026-03-26T06:34:48.026Z"
 }
