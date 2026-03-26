@@ -1,42 +1,14 @@
 {
   "entries": [
     {
-      "id": "2e3fd48d-bb8a-4858-9e17-2a94d83d806d",
-      "timestamp": "2026-03-26T18:30:29.512Z",
-      "actionType": "quality_score",
-      "issueNumber": 642,
-      "issueTitle": " [요청] Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
-      "documentSlug": "production-ready-multi-agent-systems-lessons-learn",
-      "documentTitle": " [요청] Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
-      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "33ff1b25-caae-445e-8c05-6a8d361afe91",
-      "timestamp": "2026-03-26T18:30:14.078Z",
-      "actionType": "quality_score",
-      "issueNumber": 646,
-      "issueTitle": " [요청] RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
-      "documentSlug": "security/redline-infostealer",
-      "documentTitle": " [요청] RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "1fcc5517-0db1-4c78-abba-feea6e579174",
-      "timestamp": "2026-03-26T18:29:54.924Z",
+      "id": "f633f016-d7ad-4051-9522-b3bdfd63f757",
+      "timestamp": "2026-03-26T18:29:13.794Z",
       "actionType": "generate",
-      "issueNumber": 642,
-      "issueTitle": " [요청] Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
-      "documentSlug": "production-ready-multi-agent-systems-lessons-learn",
-      "documentTitle": "Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
-      "summary": "새 문서 \"Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents\" 생성",
+      "issueNumber": 646,
+      "issueTitle": "문서 요청 #646",
+      "documentSlug": "security/646",
+      "documentTitle": "RedLine Infostealer 최신 법·수사 사건 및 대응 가이드",
+      "summary": "새 문서 \"RedLine Infostealer 최신 법·수사 사건 및 대응 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -45,78 +17,129 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1151
+              "durationMs": 1010
             },
             {
               "step": "outline",
-              "durationMs": 10321
+              "durationMs": 8086
             },
             {
               "step": "write",
-              "durationMs": 32337
+              "durationMs": 32199
             },
             {
               "step": "review",
-              "durationMs": 8223
-            }
-          ],
-          "totalDurationMs": 52032,
-          "researchSources": 0,
-          "tavilyUsage": {
-            "apiCalls": 0,
-            "totalResults": 0
-          },
-          "estimatedTokens": {
-            "estimated": 2544,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "ec4621cf-762c-4e6c-8742-d7cc8791a63c",
-      "timestamp": "2026-03-26T18:28:33.243Z",
-      "actionType": "generate",
-      "issueNumber": 646,
-      "issueTitle": " [요청] RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
-      "documentSlug": "security/redline-infostealer",
-      "documentTitle": "RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
-      "summary": "새 문서 \"RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 1042
-            },
-            {
-              "step": "outline",
-              "durationMs": 9776
-            },
-            {
-              "step": "write",
-              "durationMs": 24605
-            },
-            {
-              "step": "review",
-              "durationMs": 7461
+              "durationMs": 11931
             },
             {
               "step": "refine",
-              "durationMs": 24537
+              "durationMs": 28922
             }
           ],
-          "totalDurationMs": 67421,
+          "totalDurationMs": 82149,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 3319,
+            "estimated": 4057,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "35bf3f34-6c73-42b8-ab0d-6bf9b347f9c0",
+      "timestamp": "2026-03-26T18:27:48.360Z",
+      "actionType": "modify",
+      "issueNumber": 645,
+      "issueTitle": " [업데이트] 멀티‑테넌트 SaaS 보안·컴플라이언스 – 서비스형 컴플라이언스 아키텍처 문제점",
+      "documentSlug": "security/saas",
+      "documentTitle": "멀티테넌트 SaaS 데이터 누출 방지 전략",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 멀티‑테넌트 SaaS 보안·컴플라이언스 – 서비스형 컴플라이언스 아키텍처 문제점\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 26,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "df959218-8bb4-47b8-9854-401b5d243297",
+      "timestamp": "2026-03-26T18:26:55.703Z",
+      "actionType": "modify",
+      "issueNumber": 644,
+      "issueTitle": " [업데이트] AI 코딩 보안·인증 – Auth0 Token Vault와 Agentic AI 거버넌스",
+      "documentSlug": "security/ai-auth0-token-vault",
+      "documentTitle": "AI 에이전트를 위한 Auth0 Token Vault 보안 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI 코딩 보안·인증 – Auth0 Token Vault와 Agentic AI 거버넌스\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 39,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "47c0cea1-d108-42bb-9755-a49fdb38c3ae",
+      "timestamp": "2026-03-26T18:26:15.730Z",
+      "actionType": "modify",
+      "issueNumber": 643,
+      "issueTitle": " [업데이트] 멀티 에이전트 오케스트레이션 – Hand‑off 패턴과 구현 가이드",
+      "documentSlug": "ai/multi-ai-coding-agent-orchestration",
+      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 멀티 에이전트 오케스트레이션 – Hand‑off 패턴과 구현 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 1,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "d369e72a-ea53-4d0b-a9b7-be2a30c5dbe3",
+      "timestamp": "2026-03-26T18:25:05.140Z",
+      "actionType": "generate",
+      "issueNumber": 642,
+      "issueTitle": "문서 요청 #642",
+      "documentSlug": "ai/642",
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 (euno.news) – 프로덕션 멀티‑에이전트 운영 가이드",
+      "summary": "새 문서 \"자동 감지: 뉴스 인텔리전스 (euno.news) – 프로덕션 멀티‑에이전트 운영 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1080
+            },
+            {
+              "step": "outline",
+              "durationMs": 10726
+            },
+            {
+              "step": "write",
+              "durationMs": 33307
+            },
+            {
+              "step": "review",
+              "durationMs": 7679
+            }
+          ],
+          "totalDurationMs": 52792,
+          "researchSources": 0,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2585,
             "method": "duration_based"
           }
         }
@@ -19230,5 +19253,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-26T18:30:29.512Z"
+  "lastUpdated": "2026-03-26T18:29:13.795Z"
 }

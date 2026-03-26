@@ -3,7 +3,7 @@ title: 멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 
 author: SEPilot AI
 status: draft
 tags: [AI 코딩, 멀티 에이전트, 오케스트레이션, 워크플로, Jupiter]
-updatedAt: 2026-03-10
+updatedAt: 2026-03-26
 redirect_from:
   - ai-ai
 ---
@@ -91,7 +91,7 @@ redirect_from:
 | 체크 항목 | 설명 |
 |---|---|
 | **작업이 정의된 범위 내에 있는지 확인** | 작업 명세와 정책을 검증 |
-| **필요한 컨텍스트가 로드되고 최신인지 확인** | `MEMORY.md`·`SOUL.md` 등 최신 정보 확보 |
+| **필요한 컨텍스트가 로드되고 최신인지 확인** | `MEMORY.md·SOUL.md` 등 최신 정보 확보 |
 | **보류 중인 에스컬레이션이 있는지 `outbox.json` 확인** | 이전 실패·승인 대기 항목 존재 여부 |
 | **검사 실패 시** | 이유를 `outbox.json`에 기록하고 즉시 중단 |
 
@@ -472,4 +472,5 @@ curl -X POST http://localhost:3000/api/verify \
 
 ### 21.5 적용 가이드
 1. **작업 정의 단계**에서 `status: pending_review` 와 `output_file` 경로를 명시합니다.  
-2. **검토 에이전
+2. **검토 에이전트**는 독립적인 컨텍스트(`SOUL.md` 등)만 사용해 `review.json`을 작성합니다.  
+3. **주기적 청소**: 일정 기간(예: 24 h) 이후 `pending_review` 상태가 남
