@@ -1,6 +1,37 @@
 {
   "issues": [
     {
+      "id": 640,
+      "number": 640,
+      "title": " [요청] Stochastic Gap: 마코프 기반 Agentic AI 신뢰성·감시 비용 프레임워크",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/the-stochastic-gap-a-markovian-framework-for-pre-d-6b1888)\n**관련도**: 88/100\n**핵심 토픽**: Stochastic Gap, agentic AI reliability, oversight‑cost auditing\n\n## 뉴스 요약\n조직에서의 Agentic artificial intelligence (AI)는 신뢰성 및 감독 비용에 의해 제한되는 순차적 의사결정 문제이다. 결정론적 워크플로우가…\n\n## 상세 내용\nSource: arXiv - 2603.24582v1\nOverview\n이 논문은 자율 AI 시스템이 실제 배포되기 전에 비즈니스 프로세스 워크플로를 실행하도록 허용하는 것이 얼마나 신뢰할 수 있고 비용 효율적인지를 평가하기 위한 마코프 프레임워크를 소개합니다. 워크플로를 상태와 행동의 확률적 연속으로 취급함으로써, 저자들은 AI의 다음 움직임이 과거 데이터에 의해 충분히 뒷받침되지 않는 “블라인드 스팟”을 정량화하고, 이러한 블라인드 스팟을 시스템을 감시하기 위해 필요한 예상 인간 감독 비용과 연결시킵니다.\n주요 기여\n형식적 측도‑이론 모델을 도입하여 에이전트형 AI의 사전 배포 신뢰성을 상태‑수준 및 상태‑행동‑수준 불확실성을 모두 포착함.\n블라인드‑스팟 질량 지표(B_n(τ) 및 B^SA_{π,n}(τ))를 제시하여 의사결정 공간 중 통계적으로 지원되지 않는 부분이 얼마나 되는지를 정량화함.\n엔트로피 기반 에스컬레이션 게이트를 구현해 인간 개입이 필요할 시점을 판단하고, 통계적 신뢰도와 감독 비용을 연결함.\n실제 기업 조달 데이터셋(≈25만 건, 160만 이벤트)에서 실증 검증을 수행, 상태 표현을 정교화할수록 블라인드‑스팟 질량이 증가함을 보여줌.\n최대 예측 행동 확률(m(s) = max_a π̂(a|s))이 실제 자율 단계 정확도를 약 3 % 이내로 신뢰성 있게 예측한다는 것을 입증함.\n실용적인 레시피를 제공하여 이벤트 로그를 생성하는 모든 프로세스에 프레임워크를 적용할 수 있게 하고, 엔지니어가 AI‑구동 자동화를 롤아웃 전에 감사할 수 있도록 함.\n방법론\nLog‑driven Markov model – 저자들은 각 기록된 이벤트(예: “create purchase order”)를 이산‑시간 마코프 체인의 전이로 간주한다.\nState definition – 두 가지 세분화 수준을 탐색한다:\nCoarse (42개의 구별된 워크플로우 작업).\nFine (668개 상태) – 작업에 사례 컨텍스트, 금액 규모, 행위자 역할을 추가하여.\nBlind‑spot mas\n\n## 판단 근거\n논문에서 제시된 새로운 이론적 프레임워크는 기존 위키에 다루어지지 않은 주제이며, AI 시스템 배포 전 검증에 중요한 인사이트 제공.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-26T06:32:38.027Z",
+      "updated_at": "2026-03-26T06:32:38.035Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/640",
+      "documentSlug": "ai/stochastic-gap-agentic-ai",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/stochastic-gap-agentic-ai.md",
+      "comments": 0
+    },
+    {
       "id": 636,
       "number": 636,
       "title": " [요청] Monitoring AI Agent Wallet Transactions – Best Practices",
@@ -6427,5 +6458,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-26T00:35:16.281Z"
+  "lastUpdated": "2026-03-26T06:32:38.035Z"
 }
