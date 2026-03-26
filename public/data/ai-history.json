@@ -1,6 +1,128 @@
 {
   "entries": [
     {
+      "id": "2e3fd48d-bb8a-4858-9e17-2a94d83d806d",
+      "timestamp": "2026-03-26T18:30:29.512Z",
+      "actionType": "quality_score",
+      "issueNumber": 642,
+      "issueTitle": " [요청] Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
+      "documentSlug": "production-ready-multi-agent-systems-lessons-learn",
+      "documentTitle": " [요청] Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "33ff1b25-caae-445e-8c05-6a8d361afe91",
+      "timestamp": "2026-03-26T18:30:14.078Z",
+      "actionType": "quality_score",
+      "issueNumber": 646,
+      "issueTitle": " [요청] RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
+      "documentSlug": "security/redline-infostealer",
+      "documentTitle": " [요청] RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "1fcc5517-0db1-4c78-abba-feea6e579174",
+      "timestamp": "2026-03-26T18:29:54.924Z",
+      "actionType": "generate",
+      "issueNumber": 642,
+      "issueTitle": " [요청] Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
+      "documentSlug": "production-ready-multi-agent-systems-lessons-learn",
+      "documentTitle": "Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents",
+      "summary": "새 문서 \"Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 8+ Agents\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1151
+            },
+            {
+              "step": "outline",
+              "durationMs": 10321
+            },
+            {
+              "step": "write",
+              "durationMs": 32337
+            },
+            {
+              "step": "review",
+              "durationMs": 8223
+            }
+          ],
+          "totalDurationMs": 52032,
+          "researchSources": 0,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2544,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ec4621cf-762c-4e6c-8742-d7cc8791a63c",
+      "timestamp": "2026-03-26T18:28:33.243Z",
+      "actionType": "generate",
+      "issueNumber": 646,
+      "issueTitle": " [요청] RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
+      "documentSlug": "security/redline-infostealer",
+      "documentTitle": "RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석",
+      "summary": "새 문서 \"RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1042
+            },
+            {
+              "step": "outline",
+              "durationMs": 9776
+            },
+            {
+              "step": "write",
+              "durationMs": 24605
+            },
+            {
+              "step": "review",
+              "durationMs": 7461
+            },
+            {
+              "step": "refine",
+              "durationMs": 24537
+            }
+          ],
+          "totalDurationMs": 67421,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 3319,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "afbf2e6a-ed3c-4c10-9357-d8be5a712ff8",
       "timestamp": "2026-03-26T18:24:07.517Z",
       "actionType": "maintain",
@@ -19108,5 +19230,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-26T18:24:07.517Z"
+  "lastUpdated": "2026-03-26T18:30:29.512Z"
 }
