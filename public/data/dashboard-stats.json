@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-03-27T09:50:24.336Z",
+  "collectedAt": "2026-03-27T10:49:53.370Z",
   "overview": {
     "totalDocuments": 319,
     "publishedDocuments": 166,
     "draftDocuments": 153,
-    "openRequests": 195,
+    "openRequests": 198,
     "closedRequests": 19,
-    "totalAIActions": 795
+    "totalAIActions": 804
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
+      "aiActions": 6,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 3,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 24,
-      "documentsCreated": 8,
-      "documentsModified": 9,
+      "aiActions": 33,
+      "documentsCreated": 11,
+      "documentsModified": 12,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 27782,
-      "totalPipelineDurationMs": 563863
+      "estimatedTokens": 34272,
+      "totalPipelineDurationMs": 696769
     },
     "last7d": {
-      "aiActions": 140,
-      "documentsCreated": 56,
-      "documentsModified": 43,
+      "aiActions": 149,
+      "documentsCreated": 59,
+      "documentsModified": 46,
       "tavilyApiCalls": 54,
       "tavilyResults": 139,
-      "estimatedTokens": 154085,
-      "totalPipelineDurationMs": 3196265
+      "estimatedTokens": 160575,
+      "totalPipelineDurationMs": 3329171
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-27T09:51:57.801Z",
+      "actionType": "quality_score",
+      "issueNumber": 657,
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T09:51:42.686Z",
+      "actionType": "quality_score",
+      "issueNumber": 658,
+      "documentTitle": "[Wiki Maintenance] [요청] Running Agents on Kubernetes with Agent Sandbox",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T09:51:30.699Z",
+      "actionType": "quality_score",
+      "issueNumber": 659,
+      "documentTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T09:51:12.796Z",
+      "actionType": "modify",
+      "issueNumber": 660,
+      "documentTitle": "주간 위키 보고서 - 2026년 11주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T09:50:42.684Z",
+      "actionType": "modify",
+      "issueNumber": 661,
+      "documentTitle": "Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T09:49:56.509Z",
+      "actionType": "modify",
+      "issueNumber": 662,
+      "documentTitle": "Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T09:49:09.748Z",
+      "actionType": "generate",
+      "issueNumber": 657,
+      "documentTitle": "Ingress2Gateway 1.0 발표 및 Gateway API 마이그레이션 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 49741,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2435
+    },
+    {
+      "timestamp": "2026-03-27T09:47:59.172Z",
+      "actionType": "generate",
+      "issueNumber": 658,
+      "documentTitle": "Running Agents on Kubernetes with Agent Sandbox",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 47546,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2324
+    },
+    {
+      "timestamp": "2026-03-27T09:46:44.735Z",
+      "actionType": "generate",
+      "issueNumber": 659,
+      "documentTitle": "Trivy 공급망 침해 사건 – Docker Hub 사용자 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 35619,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 1731
+    },
     {
       "timestamp": "2026-03-27T09:24:12.285Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 56010,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2749
-    },
-    {
-      "timestamp": "2026-03-27T00:33:51.461Z",
-      "actionType": "generate",
-      "issueNumber": 651,
-      "documentTitle": "Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 51473,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2519
-    },
-    {
-      "timestamp": "2026-03-27T00:31:47.309Z",
-      "actionType": "generate",
-      "issueNumber": 651,
-      "documentTitle": "Neovim + Java LSP (JDTLS) + Play Framework 3.x sbt 프로젝트 설정 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 54284,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2664
-    },
-    {
-      "timestamp": "2026-03-27T00:30:47.281Z",
-      "actionType": "generate",
-      "issueNumber": 650,
-      "documentTitle": "Ops Hub – Notion MCP 대시보드 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 52530,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2577
-    },
-    {
-      "timestamp": "2026-03-27T00:29:50.547Z",
-      "actionType": "modify",
-      "issueNumber": 649,
-      "documentTitle": "자율 AI 에이전트 경제학 – 2026년 수익·비용·성장 모델",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T00:29:03.084Z",
-      "actionType": "modify",
-      "issueNumber": 648,
-      "documentTitle": "FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T00:28:03.335Z",
-      "actionType": "modify",
-      "issueNumber": 647,
-      "documentTitle": "Google AI Pro 활용 실전 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T00:26:46.989Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-26T18:29:13.794Z",
-      "actionType": "generate",
-      "issueNumber": 646,
-      "documentTitle": "RedLine Infostealer 최신 법·수사 사건 및 대응 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 82149,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 4057
-    },
-    {
-      "timestamp": "2026-03-26T18:27:48.360Z",
-      "actionType": "modify",
-      "issueNumber": 645,
-      "documentTitle": "멀티테넌트 SaaS 데이터 누출 방지 전략",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 787,
+      "totalEstimatedTokens": 619212,
+      "avgDurationMs": 53275
+    },
     "unknown": {
       "totalActions": 17,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 778,
-      "totalEstimatedTokens": 612722,
-      "avgDurationMs": 53384
     }
   }
 }
