@@ -3,8 +3,8 @@
     {
       "id": 651,
       "number": 651,
-      "title": "문서 요청 #651",
-      "body": "",
+      "title": " [요청] Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/neovim-java-lsp-on-a-play-framework-sbt-project-th-7bfc5d)\n**관련도**: 70/100\n**핵심 토픽**: Neovim, Java LSP, Play Framework, sbt\n\n## 뉴스 요약\n간단히 말하면 sbt-eclipse가 Eclipse 프로젝트 파일을 생성하고, JDTLS Eclipse의 Java language server가 이를 사용합니다. 그것이 다리이며, 나머지는 모두 config입니다.\n\n## 상세 내용\nI’m sorry, but I can’t retrieve the article from the link you provided. If you paste the text you’d like translated here, I’ll be happy to translate it into Korean while preserving the formatting and code blocks.\nThe short answer\nsbt-eclipse는 Eclipse 프로젝트 파일을 생성하고, 이는 JDTLS(Eclipse의 Java 언어 서버)가 사용합니다. 이것이 다리 역할을 하며, 나머지는 모두 설정 세부 사항입니다.\n여기에 오셨다면, 아마도 Metals를 시도해 보고 벽에 부딪힌 뒤 실망스러운 검색 결과를 보셨을 겁니다. 실제로 작동하는 설정은 다음과 같습니다.\nProject context\nPlay Framework 3.x, Java (Scala가 아님)\nsbt와 7개의 서브 모듈, 약 3 000개의 소스 파일\n무거운 코드 생성(OpenAPI, Avro, WSDL)\n팀은 IntelliJ를 사용하고, 당신은 Neovim을 사용\nMetals는 sbt를 네이티브하게 이해하지만, Java 지원은 최소 수준입니다(자동 완성, 툴팁, import 정리 기능이 없음). Metals 유지보수자는 다음과 같이 말했습니다:\n“전체 Java 프로젝트에서 Metals를 사용하고 싶어 하는 경우를 상상할 수 없습니다.”\nJDTLS는 완전한 Java 지원을 제공하지만 Maven, Gradle, Eclipse 프로젝트 형식만 이해합니다—build.sbt는 알지 못합니다. 해결책은 sbt가 JDTLS가 기대하는 파일, 즉 .classpath와 .project를 생성하도록 하는 것입니다.\n내가 힘들게 배운 세 가지\n함정이유\nThisBuild / 스코프를 사용하지 마세요sbt‑eclipse는 키를 프로젝트 수준에서 읽으며 ThisBuild에서는 읽지 않습니다. ThisBuild 아래에 설정을 두면 조용히 무\n\n## 판단 근거\nNeovim + Java LSP + Play Framework 조합에 대한 가이드가 전혀 존재하지 않아, 개발자들이 최신 IDE‑less 워크플로를 구현할 수 있도록 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -25,17 +25,17 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-27T00:31:47.313Z",
-      "updated_at": "2026-03-27T00:31:47.320Z",
+      "updated_at": "2026-03-27T00:33:51.472Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/651",
-      "documentSlug": "651",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/651.md",
+      "documentSlug": "neovim-java-lsp-play-framework-sbt",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/neovim-java-lsp-play-framework-sbt.md",
       "comments": 0
     },
     {
       "id": 650,
       "number": 650,
-      "title": "문서 요청 #650",
-      "body": "",
+      "title": " [요청] Ops Hub – Notion MCP Dashboard 로 자산·구독·일일 요약 관리하기",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/ops-hub-notion-mcp-dashboard-for-assets-subscripti-0c18e8)\n**관련도**: 70/100\n**핵심 토픽**: Notion MCP dashboard, Ops Hub, 자산·구독 관리\n\n## 뉴스 요약\nOps Hub는 Notion‑first 대시보드로, Notion MCP와 Python으로 구축된 자산 및 구독 운영을 위한 툴입니다. 분산된 운영 정보—디바이스, …—를 중앙에 집중시킵니다.\n\n## 상세 내용\nSource: Dev.to\n제가 만든 것\nAssets Ops: 장비(3C / 가전), 유지보수 일정, 보증 기간, 매뉴얼을 추적합니다.\nSubscription Ops: 갱신, 가격을 추적하고 취소 초안을 생성합니다.\nDaily Digest: 한 번의 명령으로 Notion에 Daily Digest — YYYY‑MM‑DD 페이지를 생성합니다. 포함 내용:\nKPI 요약(카운트 + 예정된 갱신 비용)\n정확한 항목으로 바로 연결되는 실행 가능한 리스트\n모든 출력이 Notion 안에 머무르므로 검토와 실행이 쉽고(인간‑인‑루프 친화적) 합니다.\n비디오 데모\n(비디오 임베드 제거됨)\n코드를 보여 주세요\nGitHub 저장소\n로컬에서 실행 (Poetry):\ncp .env.example .env\npoetry install\npoetry run python -c \"from homeops_mcp.server import create_daily_digest; print(create_daily_digest(14))\"\nNotion MCP를 어떻게 사용했는가\nNotion은 진실의 원천(데이터베이스, 뷰, 템플릿, 대시보드)으로 작동합니다. MCP 서버는 Notion 컨텍스트를 자동화된 운영 워크플로우로 변환합니다:\n읽기 Notion 데이터베이스에서 찾음:\n곧 유지보수가 필요한 자산\n곧 만료되는 보증\nN일 이내에 갱신되는 구독\n쓰기 Notion에 다시 기록:\nNext Action, Lifecycle Stage와 같은 상태 필드\nManual Notes(유지보수 안내)와 Cancel Instructions(취소 초안)와 같은 유용한 메모\n생성 Notion에 KPI와 클릭 가능한 액션 리스트가 포함된 Daily Digest 페이지를 만들어 대시보드를 한 번의 명령으로 업데이트하고 바로 실행 가능한 일일 보고서를 제공합니다.\n데이터 모델 (Notion 데이터베이스)\nAssets\n유지보수: Last Maintenance + Maintenance Interval (days) → Next Maintena\n\n## 판단 근거\nNotion MCP 대시보우는 현재 위키에 문서가 없으며, 자산·구독·데일리 다이제스트 기능을 상세히 다룰 필요가 있다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
       "state": "open",
       "labels": [
         {
@@ -56,10 +56,10 @@
         "avatar_url": ""
       },
       "created_at": "2026-03-27T00:30:47.285Z",
-      "updated_at": "2026-03-27T00:30:47.292Z",
+      "updated_at": "2026-03-27T00:35:02.812Z",
       "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/650",
-      "documentSlug": "650",
-      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/650.md",
+      "documentSlug": "ops-hub-notion-mcp-dashboard",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ops-hub-notion-mcp-dashboard.md",
       "comments": 0
     },
     {
@@ -6582,5 +6582,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-27T00:31:47.320Z"
+  "lastUpdated": "2026-03-27T00:35:02.812Z"
 }
