@@ -1,11 +1,12 @@
 ---
-title: Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know
+title: "[업데이트] Ingress NGiNX Deprecation and Gateway API Migration Guide"
 author: SEPilot AI
 status: published
 tags: ["Ingress-NGINX", "Migration", "Gateway API", "kubernetes", "EOL"]
 redirect_from:
   - kubernetes-before-you-migrate-ingress-nginx
   - before-you-migrate-five-surprising-ingress-nginx-b
+updatedAt: 2026-03-27
 ---
 
 ## 개요  
@@ -124,6 +125,165 @@ Kubernetes는 2025년 11월 Ingress‑NGINX 커뮤니티 컨트롤러가 2026년
   2. **Canary**: 트래픽의 일부만 새로운 컨트롤러에 라우팅  
   3. **전체 전환**: 검증이 완료되면 Ingress‑NGINX 를 비활성화  
 
+## 최신 마이그레이션 가이드: NGINX Gateway Fabric 설치 및 설정  
+
+### 1️⃣ Install the Gateway API & NGINX Gateway Fabric CRDs  
+```bash
+kubectl kustomize "https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.4.2" \
+| kubectl apply -f -
+```  
+
+### 2️⃣ Install NGINX Gateway Fabric with Helm  
+```bash
+helm install ngf oci://ghcr.io/nginx/charts/nginx-gateway-fabric \
+  --create-namespace -n nginx-gateway
+```  
+
+### 3️⃣ Deploy a sample application and a Gateway  
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mynamespace
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app
+  namespace: mynamespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: hello
+        image: hashicorp/http-echo
+        args:
+        - "-text=hello from NGINX Gateway Fabric"
+        ports:
+        - containerPort: 5678
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-svc
+  namespace: mynamespace
+spec:
+  selector:
+    app: hello
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5678
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: mygateway-nginx
+  namespace: mynamespace
+spec:
+  gatewayClassName: nginx
+  listeners:
+  - name: http
+    protocol: HTTP
+    port: 80
+  - name: https
+    protocol: HTTPS
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: tls-secret   # cert‑manager가 생성한 시크릿
+```  
+
+> **Note**: 클라우드 제공자가 외부 IP를 할당하는 데 몇 분 정도 걸릴 수 있습니다.  
+
+```bash
+export GW=$(kubectl get svc mygateway-nginx -n mynamespace \
+  -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+```  
+
+### 4️⃣ Create an HTTPRoute to expose the application  
+```yaml
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: hello-route
+  namespace: mynamespace
+spec:
+  parentRefs:
+  - name: mygateway-nginx
+    namespace: mynamespace
+  hostnames:
+  - "hello.$GW.nip.io"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/"
+    forwardTo:
+    - serviceName: hello-svc
+      port: 80
+```  
+
+### 5️⃣ TLS configuration with cert‑manager  
+
+1. **Install cert‑manager** (if not already installed)  
+   ```bash
+   kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
+   ```  
+
+2. **Create a ClusterIssuer for Let’s Encrypt**  
+   ```yaml
+   apiVersion: cert-manager.io/v1
+   kind: ClusterIssuer
+   metadata:
+     name: letsencrypt-prod
+   spec:
+     acme:
+       server: https://acme-v02.api.letsencrypt.org/directory
+       email: your-email@example.com
+       privateKeySecretRef:
+         name: letsencrypt-prod-key
+       solvers:
+       - http01:
+           ingress:
+             class: nginx
+   ```  
+
+3. **Request a TLS secret for the Gateway**  
+   ```yaml
+   apiVersion: cert-manager.io/v1
+   kind: Certificate
+   metadata:
+     name: mygateway-tls
+     namespace: mynamespace
+   spec:
+     secretName: tls-secret
+     dnsNames:
+     - "hello.$GW.nip.io"
+     issuerRef:
+       name: letsencrypt-prod
+       kind: ClusterIssuer
+   ```  
+
+After the certificate is issued, the Gateway defined earlier will automatically terminate TLS using `tls-secret`.  
+
+### 6️⃣ Verify the setup  
+
+```bash
+curl https://hello.$GW.nip.io --insecure   # 처음에는 --insecure 로 테스트
+```  
+
+When the Let’s Encrypt certificate is trusted, the `--insecure` flag can be removed.  
+
 ## 부록  
 
 ### 주요 용어 정의  
@@ -135,6 +295,7 @@ Kubernetes는 2025년 11월 Ingress‑NGINX 커뮤니티 컨트롤러가 2026년
 - **Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know** – Steven Jin, 2026‑02‑27 [링크](https://kubernetes.io/blog/2026/02/27/ingress-nginx-before-you-migrate/)  
 - **Ingress‑NGINX Retirement: What You Need to Know** – Tabitha Sable, 2025‑11‑11 [링크](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/)  
 - **Gateway API 공식 문서** – https://gateway-api.sigs.k8s.io/  
+- **NGINX Gateway Fabric 설치 가이드** – https://github.com/nginx/nginx-gateway-fabric  
 
 ### FAQ  
 

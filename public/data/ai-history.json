@@ -1,6 +1,151 @@
 {
   "entries": [
     {
+      "id": "44c62e1a-513f-4282-8227-a404c853f0f0",
+      "timestamp": "2026-03-27T06:37:25.536Z",
+      "actionType": "modify",
+      "issueNumber": 656,
+      "issueTitle": " [업데이트] Pentagon‑Anthropic Policy – Recent Court Ruling Update",
+      "documentSlug": "ai/pentagon-llm-policy",
+      "documentTitle": "[업데이트] 펜타곤의 Anthropic 대체 LLM 개발 및 AI 정책 변화",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Pentagon‑Anthropic Policy – Recent Court Ruling Update\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 13,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "78a06c2c-7a98-41ae-87b9-27a723788113",
+      "timestamp": "2026-03-27T06:36:29.049Z",
+      "actionType": "generate",
+      "issueNumber": 655,
+      "issueTitle": "문서 요청 #655",
+      "documentSlug": "security/655",
+      "documentTitle": "MCP 서버용 OAuth 2.1 사이드카 프록시 — mcp‑gate 가이드",
+      "summary": "새 문서 \"MCP 서버용 OAuth 2.1 사이드카 프록시 — mcp‑gate 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 997
+            },
+            {
+              "step": "outline",
+              "durationMs": 29755
+            },
+            {
+              "step": "write",
+              "durationMs": 56283
+            },
+            {
+              "step": "review",
+              "durationMs": 15216
+            }
+          ],
+          "totalDurationMs": 102251,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 5063,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "976f5f36-c939-4763-92e7-4679f9e7095d",
+      "timestamp": "2026-03-27T06:34:29.701Z",
+      "actionType": "generate",
+      "issueNumber": 654,
+      "issueTitle": "문서 요청 #654",
+      "documentSlug": "ai/654",
+      "documentTitle": "Claude Code용 이미지 생성 MCP — mcp‑imagenate 가이드",
+      "summary": "새 문서 \"Claude Code용 이미지 생성 MCP — mcp‑imagenate 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1025
+            },
+            {
+              "step": "outline",
+              "durationMs": 10145
+            },
+            {
+              "step": "write",
+              "durationMs": 33779
+            },
+            {
+              "step": "review",
+              "durationMs": 16450
+            },
+            {
+              "step": "refine",
+              "durationMs": 50975
+            }
+          ],
+          "totalDurationMs": 112374,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 5568,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5183a0f4-4025-4ec4-8977-dc84a775a71b",
+      "timestamp": "2026-03-27T06:32:25.754Z",
+      "actionType": "modify",
+      "issueNumber": 653,
+      "issueTitle": " [업데이트] AI Agentic Workflow – Intake Layer Bottlenecks and Mitigations",
+      "documentSlug": "ai/ai-agentic-workflow",
+      "documentTitle": "AI Agentic Workflow 거버넌스 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI Agentic Workflow – Intake Layer Bottlenecks and Mitigations\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 39,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "22b73d1a-edc3-4409-bace-1b371f1631d3",
+      "timestamp": "2026-03-27T06:30:29.223Z",
+      "actionType": "modify",
+      "issueNumber": 652,
+      "issueTitle": " [업데이트] Ingress NGiNX Deprecation and Gateway API Migration Guide",
+      "documentSlug": "kubernetes/ingress-nginx-deprecation-guide",
+      "documentTitle": "Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Ingress NGiNX Deprecation and Gateway API Migration Guide\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 161,
+        "deletions": 0
+      }
+    },
+    {
       "id": "67b4995e-ccc8-4c0f-9eec-3bb9a62730a0",
       "timestamp": "2026-03-27T06:29:29.369Z",
       "actionType": "maintain",
@@ -19540,5 +19685,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-27T06:29:29.369Z"
+  "lastUpdated": "2026-03-27T06:37:25.536Z"
 }
