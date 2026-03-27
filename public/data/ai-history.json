@@ -1,42 +1,31 @@
 {
   "entries": [
     {
-      "id": "c18f3a65-152b-48ad-817b-1915607c1899",
-      "timestamp": "2026-03-27T06:38:01.501Z",
-      "actionType": "quality_score",
-      "issueNumber": 654,
-      "issueTitle": " [요청] Claude Code Image Generation MCP – Integrating Gemini, OpenAI, and FLUX",
-      "documentSlug": "ai/claude-code-image-generation-mcp-integrating-gemin",
-      "documentTitle": " [요청] Claude Code Image Generation MCP – Integrating Gemini, OpenAI, and FLUX",
-      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
-      "trigger": "issue_processor",
+      "id": "44c62e1a-513f-4282-8227-a404c853f0f0",
+      "timestamp": "2026-03-27T06:37:25.536Z",
+      "actionType": "modify",
+      "issueNumber": 656,
+      "issueTitle": " [업데이트] Pentagon‑Anthropic Policy – Recent Court Ruling Update",
+      "documentSlug": "ai/pentagon-llm-policy",
+      "documentTitle": "[업데이트] 펜타곤의 Anthropic 대체 LLM 개발 및 AI 정책 변화",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Pentagon‑Anthropic Policy – Recent Court Ruling Update\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
-      "changes": null
+      "changes": {
+        "additions": 13,
+        "deletions": 0
+      }
     },
     {
-      "id": "f6165750-c8bf-4c4e-b79a-7cab8c57e176",
-      "timestamp": "2026-03-27T06:37:44.841Z",
-      "actionType": "quality_score",
-      "issueNumber": 655,
-      "issueTitle": " [요청] Building a Custom OAuth 2.1 Proxy for MCP Servers",
-      "documentSlug": "security/building-a-custom-oauth-2-1-proxy-for-mcp-servers",
-      "documentTitle": " [요청] Building a Custom OAuth 2.1 Proxy for MCP Servers",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "109e90fc-7a8b-4473-8647-6efbecfc909a",
-      "timestamp": "2026-03-27T06:37:24.929Z",
+      "id": "78a06c2c-7a98-41ae-87b9-27a723788113",
+      "timestamp": "2026-03-27T06:36:29.049Z",
       "actionType": "generate",
-      "issueNumber": 654,
-      "issueTitle": " [요청] Claude Code Image Generation MCP – Integrating Gemini, OpenAI, and FLUX",
-      "documentSlug": "ai/claude-code-image-generation-mcp-integrating-gemin",
-      "documentTitle": "Claude Code 이미지 생성 MCP – Gemini, OpenAI, 그리고 FLUX 통합 가이드",
-      "summary": "새 문서 \"Claude Code 이미지 생성 MCP – Gemini, OpenAI, 그리고 FLUX 통합 가이드\" 생성",
+      "issueNumber": 655,
+      "issueTitle": "문서 요청 #655",
+      "documentSlug": "security/655",
+      "documentTitle": "MCP 서버용 OAuth 2.1 사이드카 프록시 — mcp‑gate 가이드",
+      "summary": "새 문서 \"MCP 서버용 OAuth 2.1 사이드카 프록시 — mcp‑gate 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -45,43 +34,43 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1043
+              "durationMs": 997
             },
             {
               "step": "outline",
-              "durationMs": 33346
+              "durationMs": 29755
             },
             {
               "step": "write",
-              "durationMs": 64598
+              "durationMs": 56283
             },
             {
               "step": "review",
-              "durationMs": 20966
+              "durationMs": 15216
             }
           ],
-          "totalDurationMs": 119953,
+          "totalDurationMs": 102251,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 5945,
+            "estimated": 5063,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "6cec5f65-31f7-4a87-a62f-f75b9b3f98b0",
-      "timestamp": "2026-03-27T06:34:27.213Z",
+      "id": "976f5f36-c939-4763-92e7-4679f9e7095d",
+      "timestamp": "2026-03-27T06:34:29.701Z",
       "actionType": "generate",
-      "issueNumber": 655,
-      "issueTitle": " [요청] Building a Custom OAuth 2.1 Proxy for MCP Servers",
-      "documentSlug": "security/building-a-custom-oauth-2-1-proxy-for-mcp-servers",
-      "documentTitle": "Custom OAuth 2.1 Proxy for MCP Servers (mcp‑gate) 가이드",
-      "summary": "새 문서 \"Custom OAuth 2.1 Proxy for MCP Servers (mcp‑gate) 가이드\" 생성",
+      "issueNumber": 654,
+      "issueTitle": "문서 요청 #654",
+      "documentSlug": "ai/654",
+      "documentTitle": "Claude Code용 이미지 생성 MCP — mcp‑imagenate 가이드",
+      "summary": "새 문서 \"Claude Code용 이미지 생성 MCP — mcp‑imagenate 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -90,32 +79,70 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1100
+              "durationMs": 1025
             },
             {
               "step": "outline",
-              "durationMs": 25068
+              "durationMs": 10145
             },
             {
               "step": "write",
-              "durationMs": 47744
+              "durationMs": 33779
             },
             {
               "step": "review",
-              "durationMs": 19820
+              "durationMs": 16450
+            },
+            {
+              "step": "refine",
+              "durationMs": 50975
             }
           ],
-          "totalDurationMs": 93732,
+          "totalDurationMs": 112374,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 4631,
+            "estimated": 5568,
             "method": "duration_based"
           }
         }
+      }
+    },
+    {
+      "id": "5183a0f4-4025-4ec4-8977-dc84a775a71b",
+      "timestamp": "2026-03-27T06:32:25.754Z",
+      "actionType": "modify",
+      "issueNumber": 653,
+      "issueTitle": " [업데이트] AI Agentic Workflow – Intake Layer Bottlenecks and Mitigations",
+      "documentSlug": "ai/ai-agentic-workflow",
+      "documentTitle": "AI Agentic Workflow 거버넌스 실전 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] AI Agentic Workflow – Intake Layer Bottlenecks and Mitigations\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 39,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "22b73d1a-edc3-4409-bace-1b371f1631d3",
+      "timestamp": "2026-03-27T06:30:29.223Z",
+      "actionType": "modify",
+      "issueNumber": 652,
+      "issueTitle": " [업데이트] Ingress NGiNX Deprecation and Gateway API Migration Guide",
+      "documentSlug": "kubernetes/ingress-nginx-deprecation-guide",
+      "documentTitle": "Before You Migrate: Five Surprising Ingress‑NGINX Behaviors You Need to Know",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Ingress NGiNX Deprecation and Gateway API Migration Guide\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 161,
+        "deletions": 0
       }
     },
     {
@@ -19658,5 +19685,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-27T06:38:01.501Z"
+  "lastUpdated": "2026-03-27T06:37:25.536Z"
 }
