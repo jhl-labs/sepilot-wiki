@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "7531e802-5c11-4620-a3b3-99092238f18b",
+      "timestamp": "2026-03-27T00:35:44.771Z",
+      "actionType": "quality_score",
+      "issueNumber": 650,
+      "issueTitle": " [요청] Ops Hub – Notion MCP Dashboard 로 자산·구독·일일 요약 관리하기",
+      "documentSlug": "ops-hub-notion-mcp-dashboard",
+      "documentTitle": " [요청] Ops Hub – Notion MCP Dashboard 로 자산·구독·일일 요약 관리하기",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "e8aaf78a-f5b4-4274-8a65-35b787c26648",
+      "timestamp": "2026-03-27T00:35:32.144Z",
+      "actionType": "quality_score",
+      "issueNumber": 651,
+      "issueTitle": " [요청] Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기",
+      "documentSlug": "neovim-java-lsp-play-framework-sbt",
+      "documentTitle": " [요청] Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "fda615ed-bbf6-49fb-a239-8371d259c7a0",
+      "timestamp": "2026-03-27T00:35:02.801Z",
+      "actionType": "generate",
+      "issueNumber": 650,
+      "issueTitle": " [요청] Ops Hub – Notion MCP Dashboard 로 자산·구독·일일 요약 관리하기",
+      "documentSlug": "ops-hub-notion-mcp-dashboard",
+      "documentTitle": "Ops Hub – Notion MCP Dashboard 로 자산·구독·일일 요약 관리하기",
+      "summary": "새 문서 \"Ops Hub – Notion MCP Dashboard 로 자산·구독·일일 요약 관리하기\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1028
+            },
+            {
+              "step": "outline",
+              "durationMs": 8371
+            },
+            {
+              "step": "write",
+              "durationMs": 40103
+            },
+            {
+              "step": "review",
+              "durationMs": 6508
+            }
+          ],
+          "totalDurationMs": 56010,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2749,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "28d80b73-2db6-4fec-84fe-53bd24261466",
+      "timestamp": "2026-03-27T00:33:51.461Z",
+      "actionType": "generate",
+      "issueNumber": 651,
+      "issueTitle": " [요청] Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기",
+      "documentSlug": "neovim-java-lsp-play-framework-sbt",
+      "documentTitle": "Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기",
+      "summary": "새 문서 \"Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1084
+            },
+            {
+              "step": "outline",
+              "durationMs": 9088
+            },
+            {
+              "step": "write",
+              "durationMs": 33034
+            },
+            {
+              "step": "review",
+              "durationMs": 8265
+            }
+          ],
+          "totalDurationMs": 51473,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2519,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "b20a856b-f276-4a99-ae3a-3b429510d2de",
       "timestamp": "2026-03-27T00:31:47.309Z",
       "actionType": "generate",
@@ -19408,5 +19526,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-27T00:31:47.309Z"
+  "lastUpdated": "2026-03-27T00:35:44.771Z"
 }
