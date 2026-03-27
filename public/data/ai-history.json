@@ -1,6 +1,175 @@
 {
   "entries": [
     {
+      "id": "79d4700b-c12a-4c1a-8792-df1ba4f307cc",
+      "timestamp": "2026-03-27T12:23:16.985Z",
+      "actionType": "generate",
+      "issueNumber": 667,
+      "issueTitle": "문서 요청 #667",
+      "documentSlug": "667",
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 – 자동 일기 에이전트 가이드",
+      "summary": "새 문서 \"자동 감지: 뉴스 인텔리전스 – 자동 일기 에이전트 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 978
+            },
+            {
+              "step": "outline",
+              "durationMs": 10046
+            },
+            {
+              "step": "write",
+              "durationMs": 34648
+            },
+            {
+              "step": "review",
+              "durationMs": 10299
+            }
+          ],
+          "totalDurationMs": 55971,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2749,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "d6e71661-2821-4b19-a2f8-afdd039c3906",
+      "timestamp": "2026-03-27T12:22:16.569Z",
+      "actionType": "generate",
+      "issueNumber": 666,
+      "issueTitle": "문서 요청 #666",
+      "documentSlug": "security/666",
+      "documentTitle": "자동 감지 – 뉴스 인텔리전스(euno.news) · SBOM 배포와 공급망 보안 통합 관리",
+      "summary": "새 문서 \"자동 감지 – 뉴스 인텔리전스(euno.news) · SBOM 배포와 공급망 보안 통합 관리\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 986
+            },
+            {
+              "step": "outline",
+              "durationMs": 9456
+            },
+            {
+              "step": "write",
+              "durationMs": 26988
+            },
+            {
+              "step": "review",
+              "durationMs": 9557
+            }
+          ],
+          "totalDurationMs": 46987,
+          "researchSources": 0,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2300,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "b0c30adf-facb-403d-905d-7ea623cc0b4b",
+      "timestamp": "2026-03-27T12:21:23.428Z",
+      "actionType": "generate",
+      "issueNumber": 665,
+      "issueTitle": "문서 요청 #665",
+      "documentSlug": "ai/665",
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 (euno.news) – AI 에이전트 운영 일지",
+      "summary": "새 문서 \"자동 감지: 뉴스 인텔리전스 (euno.news) – AI 에이전트 운영 일지\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1038
+            },
+            {
+              "step": "outline",
+              "durationMs": 13346
+            },
+            {
+              "step": "write",
+              "durationMs": 22657
+            },
+            {
+              "step": "review",
+              "durationMs": 11295
+            }
+          ],
+          "totalDurationMs": 48336,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2365,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "5fe36a07-94e9-454d-9fb6-7d599042da16",
+      "timestamp": "2026-03-27T12:20:27.955Z",
+      "actionType": "modify",
+      "issueNumber": 664,
+      "issueTitle": " [업데이트] LiteLLM 공급망 백도어 공격 – 최신 상황 및 대응",
+      "documentSlug": "security/litellm-python-pth",
+      "documentTitle": "LiteLLM Python 패키지 공급망 공격 – 악성 .pth 파일 분석",
+      "summary": "문서 수정 요청 처리: \" [업데이트] LiteLLM 공급망 백도어 공격 – 최신 상황 및 대응\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 43,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "73561cb4-0488-4e30-828a-1c0a5c508654",
+      "timestamp": "2026-03-27T12:19:41.435Z",
+      "actionType": "modify",
+      "issueNumber": 663,
+      "issueTitle": " [업데이트] LangChain 및 LangGraph 보안 취약점 – 파일·비밀·DB 노출",
+      "documentSlug": "security/agentic-ai-security-threats",
+      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] LangChain 및 LangGraph 보안 취약점 – 파일·비밀·DB 노출\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 3,
+        "deletions": 0
+      }
+    },
+    {
       "id": "694f09b1-9297-491c-9550-be0398505075",
       "timestamp": "2026-03-27T12:18:10.048Z",
       "actionType": "maintain",
@@ -19955,5 +20124,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-27T12:18:10.048Z"
+  "lastUpdated": "2026-03-27T12:23:16.985Z"
 }
