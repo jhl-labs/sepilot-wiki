@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 669,
+      "number": 669,
+      "title": " [요청] Grafana Loki – 무료 멀티‑테넌트 로그 집계 시스템 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/grafana-loki-has-a-free-log-aggregation-system-lik-d10fc6)\n**관련도**: 82/100\n**핵심 토픽**: log aggregation, LogQL, multi‑tenant logging\n\n## 뉴스 요약\n무료로 제공되는 것 - 전체 텍스트 인덱싱 없음 — 압축된 로그를 저렴하게 저장 - LogQL을 사용한 라벨 기반 쿼리 - Grafana와의 네이티브 통합 - 멀티 테넌시 —\n\n## 상세 내용\nSource: Dev.to\n무료로 제공되는 것\n전체 텍스트 인덱싱 없음 — 압축된 로그를 저렴하게 저장\nLogQL을 이용한 라벨 기반 쿼리\nGrafana와의 네이티브 통합\n멀티 테넌시 — 내장된 테넌트 격리\nS3/GCS 백엔드 — 저렴한 객체 스토리지\nLogQL로 로그 쿼리\n{job=\"nginx\"} |= \"error\" | json | status >= 500\nElasticsearch 대신 Loki를 선택하는 이유\n기능LokiElasticsearch\n스토리지 비용10~50배 저렴비쌈\n설정몇 분몇 시간\n최적 활용로그 + Grafana전체 텍스트 검색\n관측 인프라가 필요하신가요? GitHub에서 제 작업을 확인하세요 또는 이메일 spinov001@gmail.com 로 컨설팅 문의 주세요.\n\n## 판단 근거\n현재 관측성 섹션에 Loki에 대한 전용 문서가 없으며, 뉴스는 Loki의 핵심 특징(무료, LogQL, 멀티‑테넌시, S3/GCS 백엔드 등)을 제공한다. 별도 문서로 정리하면 로그 수집·분석 워크플로에 바로 활용 가능.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-27T18:27:58.954Z",
+      "updated_at": "2026-03-27T18:27:58.961Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/669",
+      "documentSlug": "observability/grafana-loki",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/observability/grafana-loki.md",
+      "comments": 0
+    },
+    {
+      "id": 670,
+      "number": 670,
+      "title": " [요청] LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-built-a-token-compressor-that-cuts-llm-context-s-8af208)\n**관련도**: 82/100\n**핵심 토픽**: LLM token compression, Context‑window cost reduction, Prompt efficiency\n\n## 뉴스 요약\n소개 LLM에 보내는 모든 토큰은 비용이 들고 컨텍스트 윈도우를 차지합니다. 구조화된 데이터를 임베드할 때—JSON 배열, 데이터베이스 레코드, API …\n\n## 상세 내용\nSource: Dev.to\n토큰 압축기 만들기: LLM 컨텍스트 크기를 60% 절감\n소개\n대형 언어 모델(LLM)을 사용할 때 가장 큰 제약 중 하나는 컨텍스트 길이입니다.\n컨텍스트가 길어질수록 토큰 비용이 급격히 증가하고, 모델이 한 번에 처리할 수 있는 입력 길이에도 제한이 생깁니다.\n이 글에서는 토큰 압축기(token compressor) 를 구현해, 동일한 의미를 유지하면서 입력 텍스트의 토큰 수를 평균 60% 정도 줄일 수 있었던 과정을 공유합니다.\n핵심 아이디어\n문장 단위 요약 – 긴 문장을 핵심만 남기고 짧게 재작성합니다.\n중복 제거 – 동일하거나 매우 유사한 문장을 한 번만 남깁니다.\n키워드 압축 – 중요한 키워드만 남기고 나머지는 생략합니다.\n이 세 가지 단계를 거치면 원본 텍스트와 의미적으로 큰 차이가 없으면서도 토큰 수가 크게 감소합니다.\n구현 상세\n1. 환경 설정\npip install transformers sentencepiece tqdm\n2. 모델 로드\nfrom transformers import AutoTokenizer, AutoModelForSeq2SeqLM\ntokenizer = AutoTokenizer.from_pretrained(\"facebook/bart-large-cnn\")\nmodel = AutoModelForSeq2SeqLM.from_pretrained(\"facebook/bart-large-cnn\")\n3. 문장 요약 함수\ndef summarize_sentence(sentence, max_length=30):\ninputs = tokenizer.encode(sentence, return_tensors=\"pt\", truncation=True)\nsummary_ids = model.generate(\ninputs,\nmax_length=max_length,\nnum_beams=4,\nearly_stopping=True\n)\nreturn tokenizer.decode(summary_ids[0], skip_special_tokens=True)\n4\n\n## 판단 근거\n‘Token Compressor’는 기존 문서에 다루어지지 않은 새로운 최적화 기법이다. 토큰 압축 알고리즘, 구현 예시, 비용·성능 평가를 독립 문서로 제공하면 프롬프트 효율성을 크게 향상시킬 수 있다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-27T18:26:17.861Z",
+      "updated_at": "2026-03-27T18:26:17.869Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/670",
+      "documentSlug": "ai/llm-60",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/llm-60.md",
+      "comments": 0
+    },
+    {
+      "id": 671,
+      "number": 671,
+      "title": " [요청] Qdrant – Rust 기반 무료 벡터 데이터베이스 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/qdrant-has-a-free-vector-database-optimized-for-ai-00457b)\n**관련도**: 78/100\n**핵심 토픽**: vector database, Rust, AI retrieval‑augmented generation\n\n## 뉴스 요약\n개요 Qdrant는 Rust로 구축된 vector similarity search engine입니다. 고차원 벡터를 저장하고 검색하여 Retrieval‑Augmented와 같은 AI 애플리케이션에 활용합니다.\n\n## 상세 내용\nSource: Dev.to\n개요\nQdrant는 Rust로 구축된 벡터 유사도 검색 엔진입니다. Retrieval‑Augmented Generation (RAG), 추천 시스템, 의미 검색 등 AI 애플리케이션을 위해 고차원 벡터를 저장하고 검색합니다.\nHNSW 인덱싱 – 빠른 근사 최근접 이웃 검색\n필터링 – 벡터 검색과 페이로드 필터 결합\n양자화 – 메모리 사용량을 최대 4배 감소\n분산 모드 – 수평 확장\nREST + gRPC API – 다양한 클라이언트 라이브러리 제공\n스냅샷 – 백업 및 복원\n멀티‑테넌시 – 페이로드를 통한 테넌트 격리\n시작하기\ndocker run -p 6333:6333 qdrant/qdrant\nfrom qdrant_client import QdrantClient\nfrom qdrant_client.models import VectorParams, Distance, PointStruct\nclient = QdrantClient('localhost', port=6333)\n# \"docs\" 라는 컬렉션 생성\nclient.create_collection(\n'docs',\nvectors_config=VectorParams(size=384, distance=Distance.COSINE)\n)\n# 포인트 업서트\nclient.upsert('docs', points=[\nPointStruct(id=1, vector=[0.1] * 384, payload={'text': 'Hello world'}),\n])\n# 검색 수행\nresults = client.search('docs', query_vector=[0.1] * 384, limit=5)\n기능 비교\n기능QdrantPinecone\n가격무료 (OSS)프리미엄 모델\n호스팅자체‑호스팅 + 클라우드클라우드 전용\n필터링풍부한 페이로드 필터메타데이터 필터\n성능Rust (빠름)관리형 서비스\n연락처\n벡터 검색 설정이 필요하신가요? GitHub에서 제 작업을 확인하거나 컨설팅을 원하시면 spinov001@gmail.com 으로 이메일 \n\n## 판단 근거\n벡터 검색 엔진 Qdrant은 현재 위키에 언급되지 않는다. 뉴스는 핵심 기능(HNSW, 필터링, 양자화, 멀티‑테넌시 등)을 제공하므로 별도 문서로 정리해 RAG·검색 애플리케이션에 바로 적용 가능.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-27T18:25:18.347Z",
+      "updated_at": "2026-03-27T18:25:18.355Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/671",
+      "documentSlug": "ai/qdrant-rust",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/qdrant-rust.md",
+      "comments": 0
+    },
+    {
       "id": 667,
       "number": 667,
       "title": "문서 요청 #667",
@@ -6830,5 +6923,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-27T12:23:16.996Z"
+  "lastUpdated": "2026-03-27T18:27:58.961Z"
 }
