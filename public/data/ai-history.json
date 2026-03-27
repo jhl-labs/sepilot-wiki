@@ -1,6 +1,169 @@
 {
   "entries": [
     {
+      "id": "94f5a165-4abe-4ca4-bd89-c6239dd8239d",
+      "timestamp": "2026-03-27T12:25:36.738Z",
+      "actionType": "quality_score",
+      "issueNumber": 665,
+      "issueTitle": " [요청] AI 에이전트 첫 주 일지 – 도구와 운영 경험",
+      "documentSlug": "ai",
+      "documentTitle": " [요청] AI 에이전트 첫 주 일지 – 도구와 운영 경험",
+      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "d46e998c-2091-4cbe-be0a-1e7f2c45a0d3",
+      "timestamp": "2026-03-27T12:25:15.649Z",
+      "actionType": "quality_score",
+      "issueNumber": 666,
+      "issueTitle": " [요청] 활성화된 SBOM 배포와 통합 관리 전략",
+      "documentSlug": "security/sbom",
+      "documentTitle": " [요청] 활성화된 SBOM 배포와 통합 관리 전략",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "bf364adc-69ae-442c-9543-b09e75b743d8",
+      "timestamp": "2026-03-27T12:24:34.993Z",
+      "actionType": "generate",
+      "issueNumber": 665,
+      "issueTitle": " [요청] AI 에이전트 첫 주 일지 – 도구와 운영 경험",
+      "documentSlug": "ai/ai",
+      "documentTitle": "AI 에이전트 첫 주 일지 – 도구와 운영 경험",
+      "summary": "새 문서 \"AI 에이전트 첫 주 일지 – 도구와 운영 경험\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1037
+            },
+            {
+              "step": "outline",
+              "durationMs": 12425
+            },
+            {
+              "step": "write",
+              "durationMs": 33624
+            },
+            {
+              "step": "review",
+              "durationMs": 7366
+            }
+          ],
+          "totalDurationMs": 54452,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2670,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "dbfa4673-a532-4434-bfd7-4bc92bdfadd7",
+      "timestamp": "2026-03-27T12:23:03.987Z",
+      "actionType": "generate",
+      "issueNumber": 666,
+      "issueTitle": " [요청] 활성화된 SBOM 배포와 통합 관리 전략",
+      "documentSlug": "security/sbom",
+      "documentTitle": "활성화된 SBOM 배포와 통합 관리 전략",
+      "summary": "새 문서 \"활성화된 SBOM 배포와 통합 관리 전략\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1027
+            },
+            {
+              "step": "outline",
+              "durationMs": 19406
+            },
+            {
+              "step": "write",
+              "durationMs": 25748
+            },
+            {
+              "step": "review",
+              "durationMs": 11356
+            }
+          ],
+          "totalDurationMs": 57537,
+          "researchSources": 0,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2825,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "0190cd23-7011-4d7e-89e5-bfde2c48ceac",
+      "timestamp": "2026-03-27T12:21:50.442Z",
+      "actionType": "generate",
+      "issueNumber": 667,
+      "issueTitle": " [요청] 자동 일기 AI 에이전트 – OpenClaw 크론 기반 워크플로",
+      "documentSlug": "ai-openclaw",
+      "documentTitle": "자동 일기 AI 에이전트 – OpenClaw 크론 기반 워크플로",
+      "summary": "새 문서 \"자동 일기 AI 에이전트 – OpenClaw 크론 기반 워크플로\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 983
+            },
+            {
+              "step": "outline",
+              "durationMs": 18589
+            },
+            {
+              "step": "write",
+              "durationMs": 42621
+            },
+            {
+              "step": "review",
+              "durationMs": 8033
+            }
+          ],
+          "totalDurationMs": 70226,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 3462,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "694f09b1-9297-491c-9550-be0398505075",
       "timestamp": "2026-03-27T12:18:10.048Z",
       "actionType": "maintain",
@@ -19955,5 +20118,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-27T12:18:10.048Z"
+  "lastUpdated": "2026-03-27T12:25:36.738Z"
 }
