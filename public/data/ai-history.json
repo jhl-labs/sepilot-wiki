@@ -1,6 +1,234 @@
 {
   "entries": [
     {
+      "id": "4e5e0401-9b26-43c1-bbda-8b0055274dc7",
+      "timestamp": "2026-03-27T09:51:57.801Z",
+      "actionType": "quality_score",
+      "issueNumber": 657,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "572f6961-0150-4ed6-ab95-1412f1f593ed",
+      "timestamp": "2026-03-27T09:51:42.686Z",
+      "actionType": "quality_score",
+      "issueNumber": 658,
+      "issueTitle": "[Wiki Maintenance] [요청] Running Agents on Kubernetes with Agent Sandbox",
+      "documentSlug": "kubernetes/running-agents-on-kubernetes-with-agent-sandbox",
+      "documentTitle": "[Wiki Maintenance] [요청] Running Agents on Kubernetes with Agent Sandbox",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "58e7b162-c128-4686-90ec-6e41d7806f78",
+      "timestamp": "2026-03-27T09:51:30.699Z",
+      "actionType": "quality_score",
+      "issueNumber": 659,
+      "issueTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "documentSlug": "security/trivy-supply-chain-compromise-what-docker-hub-user",
+      "documentTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "f8341b05-1509-4f47-8c9a-38cc9f78ea69",
+      "timestamp": "2026-03-27T09:51:12.796Z",
+      "actionType": "modify",
+      "issueNumber": 660,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] reports/weekly-2026-11 문서 참조 URL 확인 필요",
+      "documentSlug": "reports/weekly-2026-11",
+      "documentTitle": "주간 위키 보고서 - 2026년 11주차",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/weekly-2026-11 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "2ee95813-18b8-46d3-806e-6bb510e2c422",
+      "timestamp": "2026-03-27T09:50:42.684Z",
+      "actionType": "modify",
+      "issueNumber": 661,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] 572 문서 참조 URL 확인 필요",
+      "documentSlug": "572",
+      "documentTitle": "Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 572 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 22,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "09dc5c1d-983c-4a46-83a3-1c7132820b3d",
+      "timestamp": "2026-03-27T09:49:56.509Z",
+      "actionType": "modify",
+      "issueNumber": 662,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] 572 문서 참조 URL 확인 필요",
+      "documentSlug": "572",
+      "documentTitle": "Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 572 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 1,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "dba3e018-f50d-4647-bd46-d41565a57e37",
+      "timestamp": "2026-03-27T09:49:09.748Z",
+      "actionType": "generate",
+      "issueNumber": 657,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
+      "documentTitle": "Ingress2Gateway 1.0 발표 및 Gateway API 마이그레이션 가이드",
+      "summary": "새 문서 \"Ingress2Gateway 1.0 발표 및 Gateway API 마이그레이션 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1036
+            },
+            {
+              "step": "outline",
+              "durationMs": 8564
+            },
+            {
+              "step": "write",
+              "durationMs": 31006
+            },
+            {
+              "step": "review",
+              "durationMs": 9135
+            }
+          ],
+          "totalDurationMs": 49741,
+          "researchSources": 2,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2435,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "9b19a4c8-b764-468d-88e9-6c3f6d8fc56f",
+      "timestamp": "2026-03-27T09:47:59.172Z",
+      "actionType": "generate",
+      "issueNumber": 658,
+      "issueTitle": "[Wiki Maintenance] [요청] Running Agents on Kubernetes with Agent Sandbox",
+      "documentSlug": "kubernetes/running-agents-on-kubernetes-with-agent-sandbox",
+      "documentTitle": "Running Agents on Kubernetes with Agent Sandbox",
+      "summary": "새 문서 \"Running Agents on Kubernetes with Agent Sandbox\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1046
+            },
+            {
+              "step": "outline",
+              "durationMs": 12865
+            },
+            {
+              "step": "write",
+              "durationMs": 25547
+            },
+            {
+              "step": "review",
+              "durationMs": 8088
+            }
+          ],
+          "totalDurationMs": 47546,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2324,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "385d2b19-218f-48b2-a51a-364a7c23c703",
+      "timestamp": "2026-03-27T09:46:44.735Z",
+      "actionType": "generate",
+      "issueNumber": 659,
+      "issueTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
+      "documentSlug": "security/trivy-supply-chain-compromise-what-docker-hub-user",
+      "documentTitle": "Trivy 공급망 침해 사건 – Docker Hub 사용자 가이드",
+      "summary": "새 문서 \"Trivy 공급망 침해 사건 – Docker Hub 사용자 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1016
+            },
+            {
+              "step": "outline",
+              "durationMs": 8638
+            },
+            {
+              "step": "write",
+              "durationMs": 17933
+            },
+            {
+              "step": "review",
+              "durationMs": 8032
+            }
+          ],
+          "totalDurationMs": 35619,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 1731,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "0d544995-05ef-4fa0-86e4-c1069d1afe7b",
       "timestamp": "2026-03-27T09:24:12.285Z",
       "actionType": "maintain",
@@ -19713,5 +19941,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-27T09:24:12.285Z"
+  "lastUpdated": "2026-03-27T09:51:57.801Z"
 }
