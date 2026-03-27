@@ -1,6 +1,68 @@
 {
   "issues": [
     {
+      "id": 654,
+      "number": 654,
+      "title": " [요청] Claude Code Image Generation MCP – Integrating Gemini, OpenAI, and FLUX",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-built-an-image-generation-mcp-for-claude-code-ge-33d963)\n**관련도**: 82/100\n**핵심 토픽**: Claude Code, 이미지 생성 MCP, Gemini·OpenAI·FLUX 통합\n\n## 뉴스 요약\n표지 이미지: I Built an Image Generation MCP for Claude Code — Gemini, OpenAI, and FLUX in One Place https://media2.dev.to/dynamic/image/width=1000,height=42...\n\n## 상세 내용\nSource: Dev.to\nSource: …\n왜 이걸 만들었는가\n저는 Claude Code를 주요 개발 환경으로 사용합니다. 코드 작성, 리뷰, 배포 — 거의 모든 작업이 Claude Code 안에서 이루어집니다. 하지만 저를 계속해서 끌어내는 한 가지가 있었는데, 바로 이미지 생성이었습니다.\n다이어그램이나 일러스트가 필요할 때마다 Google AI Studio로 전환하고, 원래 컨텍스트를 제외한 프롬프트를 다시 작성한 뒤, 결과물을 수동으로 프로젝트에 저장했습니다. 하루에 약 30번씩 반복되는 작업이었습니다.\n그래서 저는 mcp-imagenate 를 만들었습니다. 이 MCP 서버는 이미지 생성을 Claude Code와 Claude Desktop에 직접 통합해 줍니다. 출시 후 4일 만에 npm에서 1,000회 다운로드를 기록했습니다.\nNote: This is an alpha release, built as a personal project. Use at your own risk.\nSource: …\nUse Cases\nHere are three ways I actually use this daily.\n1. Generate system architecture diagrams from Claude Code\nAfter designing and implementing a system in Claude Code, I just say “generate an architecture diagram for this system.” Claude Code already understands the full project context, so it constructs a solid prompt and generates the diagram via Gemini’s nano-banana-2. The image is saved directly into the project directory.\n2. Turn daily journaling into illustrated entries\nI ke\n\n## 판단 근거\nClaude Code 환경에 이미지 생성 기능을 제공하는 새로운 MCP가 소개된다. 기존 Claude Code 문서에는 이미지 생성 파이프라인이 없으므로 별도 가이드가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-27T06:37:24.932Z",
+      "updated_at": "2026-03-27T06:37:24.939Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/654",
+      "documentSlug": "ai/claude-code-image-generation-mcp-integrating-gemin",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/claude-code-image-generation-mcp-integrating-gemin.md",
+      "comments": 0
+    },
+    {
+      "id": 655,
+      "number": 655,
+      "title": " [요청] Building a Custom OAuth 2.1 Proxy for MCP Servers",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/i-couldnt-find-an-oauth-21-proxy-for-mcp-servers-s-439368)\n**관련도**: 78/100\n**핵심 토픽**: OAuth 2.1, MCP 서버 인증 프록시, 보안 토큰 흐름\n\n## 뉴스 요약\n!커버 이미지: I Couldn&apos;t Find an OAuth 2.1 Proxy for MCP Servers, So I Built One https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=a...\n\n## 상세 내용\nSource: Dev.to\n소개\nClaude.ai에 연결하기 위해 커스텀 MCP 서버를 배포하기 시작했을 때, 금방 벽에 부딪혔습니다.\nClaude.ai의 커스텀 커넥터 흐름은 인증을 시도하기 전에 MCP 서버가 OAuth 2.1 Protected Resource Metadata (RFC 9728)를 구현하도록 요구합니다. /.well-known/oauth-protected-resource 엔드포인트가 없나요? 조용히 실패합니다. 오류도 없습니다. 커넥터가 작동하지 않습니다.\n저는 기존 솔루션—어떤 MCP 서버 앞에 배치될 수 있는 사이드카로, 사양 준수를 처리하고 JWT를 검증하며 방해되지 않게 하는—을 찾아보았습니다. 아무것도 없었기에 직접 만들었습니다: mcp-gate.\n실제 문제는 무엇인가\nClaude.ai가 커스텀 MCP 서버에 연결할 때 흐름은 대략 다음과 같습니다:\nClaude.ai가 서버에서 /.well-known/oauth-protected-resource 를 가져옵니다.\n해당 엔드포인트는 인증 서버를 가리키는 RFC 9728 메타데이터를 반환해야 합니다.\nClaude.ai는 그 인증 서버와 OAuth 2.1 토큰을 협상합니다.\n이후 요청은 Bearer JWT를 포함하며, 서버는 이를 JWKS를 통해 검증해야 합니다.\n대부분의 MCP 서버 구현—Go, Python, TypeScript로 작성되었든, 기성 서버를 사용했든—은 이 중 어느 것도 구현하지 않습니다. 이들은 인증 인프라가 아니라 MCP 프로토콜 자체에 집중합니다. RFC 9728 + JWKS 검증을 배포하는 모든 서버에 직접 삽입하는 것은 잘못된 추상화입니다.\n실제로 필요한 것은 사이드카 프록시이며, 이는 뒤에서 어떤 서비스가 실행되든 인증을 일관되게 처리합니다.\nmcp-gate가 하는 일\nmcp-gate는 Claude.ai와 여러분의 MCP 서버 사이에 위치하는 상태 비저장 Go 바이너리입니다:\n다음 세 가지 작업을 수행합니다:\n/.well-known/oauth-protected-r\n\n## 판단 근거\nMCP 서버 앞에 배치할 OAuth 2.1 Protected Resource Metadata 엔드포인트가 없을 때 직접 구현하는 방법이 소개된다. 기존 MCP 문서에 해당 구현 가이드가 없으므로 신규 문서가 필요하다.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-27T06:34:27.216Z",
+      "updated_at": "2026-03-27T06:34:27.222Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/655",
+      "documentSlug": "security/building-a-custom-oauth-2-1-proxy-for-mcp-servers",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/building-a-custom-oauth-2-1-proxy-for-mcp-servers.md",
+      "comments": 0
+    },
+    {
       "id": 651,
       "number": 651,
       "title": " [요청] Neovim + Java LSP 로 Play Framework sbt 프로젝트 개발하기",
@@ -6582,5 +6644,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-27T00:35:02.812Z"
+  "lastUpdated": "2026-03-27T06:37:24.939Z"
 }
