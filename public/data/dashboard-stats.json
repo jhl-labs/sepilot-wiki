@@ -1,43 +1,103 @@
 {
-  "collectedAt": "2026-03-27T17:49:47.635Z",
+  "collectedAt": "2026-03-27T18:50:34.760Z",
   "overview": {
-    "totalDocuments": 324,
-    "publishedDocuments": 170,
-    "draftDocuments": 154,
-    "openRequests": 201,
+    "totalDocuments": 330,
+    "publishedDocuments": 171,
+    "draftDocuments": 159,
+    "openRequests": 204,
     "closedRequests": 19,
-    "totalAIActions": 810
+    "totalAIActions": 816
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
+      "aiActions": 6,
+      "documentsCreated": 3,
+      "documentsModified": 2,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "estimatedTokens": 6177,
+      "totalPipelineDurationMs": 127110
     },
     "last24h": {
       "aiActions": 39,
-      "documentsCreated": 14,
-      "documentsModified": 14,
+      "documentsCreated": 15,
+      "documentsModified": 13,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 41686,
-      "totalPipelineDurationMs": 848063
+      "estimatedTokens": 41221,
+      "totalPipelineDurationMs": 840232
     },
     "last7d": {
-      "aiActions": 155,
-      "documentsCreated": 62,
-      "documentsModified": 48,
+      "aiActions": 161,
+      "documentsCreated": 65,
+      "documentsModified": 50,
       "tavilyApiCalls": 54,
       "tavilyResults": 139,
-      "estimatedTokens": 167989,
-      "totalPipelineDurationMs": 3480465
+      "estimatedTokens": 174166,
+      "totalPipelineDurationMs": 3607575
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-27T18:25:40.454Z",
+      "actionType": "modify",
+      "issueNumber": 672,
+      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T18:24:42.319Z",
+      "actionType": "generate",
+      "issueNumber": 671,
+      "documentTitle": "Qdrant – Rust 기반 무료 벡터 데이터베이스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 44029,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2151
+    },
+    {
+      "timestamp": "2026-03-27T18:23:54.197Z",
+      "actionType": "generate",
+      "issueNumber": 670,
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 – LLM 토큰 압축기 구현 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 37910,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 1844
+    },
+    {
+      "timestamp": "2026-03-27T18:23:12.162Z",
+      "actionType": "generate",
+      "issueNumber": 669,
+      "documentTitle": "Grafana Loki 자동 감지·뉴스 인텔리전스 정리",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 45171,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2182
+    },
+    {
+      "timestamp": "2026-03-27T18:22:22.238Z",
+      "actionType": "modify",
+      "issueNumber": 668,
+      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T18:21:24.155Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-27T12:23:16.985Z",
       "actionType": "generate",
@@ -177,73 +237,13 @@
       "durationMs": 47546,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2324
-    },
-    {
-      "timestamp": "2026-03-27T09:46:44.735Z",
-      "actionType": "generate",
-      "issueNumber": 659,
-      "documentTitle": "Trivy 공급망 침해 사건 – Docker Hub 사용자 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 35619,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 1731
-    },
-    {
-      "timestamp": "2026-03-27T09:24:12.285Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:23:53.228Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T06:37:25.536Z",
-      "actionType": "modify",
-      "issueNumber": 656,
-      "documentTitle": "[업데이트] 펜타곤의 Anthropic 대체 LLM 개발 및 AI 정책 변화",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T06:36:29.049Z",
-      "actionType": "generate",
-      "issueNumber": 655,
-      "documentTitle": "MCP 서버용 OAuth 2.1 사이드카 프록시 — mcp‑gate 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 102251,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 5063
-    },
-    {
-      "timestamp": "2026-03-27T06:34:29.701Z",
-      "actionType": "generate",
-      "issueNumber": 654,
-      "documentTitle": "Claude Code용 이미지 생성 MCP — mcp‑imagenate 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 112374,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 5568
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 793,
-      "totalEstimatedTokens": 626626,
-      "avgDurationMs": 53242
+      "totalActions": 799,
+      "totalEstimatedTokens": 632803,
+      "avgDurationMs": 53116
     },
     "unknown": {
       "totalActions": 17,
