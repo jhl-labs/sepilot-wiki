@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-27T08:50:11.755Z",
+  "collectedAt": "2026-03-27T09:50:24.336Z",
   "overview": {
     "totalDocuments": 319,
     "publishedDocuments": 166,
     "draftDocuments": 153,
     "openRequests": 195,
     "closedRequests": 19,
-    "totalAIActions": 793
+    "totalAIActions": 795
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 22,
+      "aiActions": 24,
       "documentsCreated": 8,
       "documentsModified": 9,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 563863
     },
     "last7d": {
-      "aiActions": 138,
+      "aiActions": 140,
       "documentsCreated": 56,
       "documentsModified": 43,
       "tavilyApiCalls": 54,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-27T09:24:12.285Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-27T09:23:53.228Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-27T06:37:25.536Z",
       "actionType": "modify",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-26T18:26:55.703Z",
-      "actionType": "modify",
-      "issueNumber": 644,
-      "documentTitle": "AI 에이전트를 위한 Auth0 Token Vault 보안 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-26T18:26:15.730Z",
-      "actionType": "modify",
-      "issueNumber": 643,
-      "documentTitle": "멀티 AI 코딩 에이전트 오케스트레이션 가이드 – 혼돈 방지와 효율적 워크플로",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 777,
-      "totalEstimatedTokens": 612722,
-      "avgDurationMs": 53384
-    },
     "unknown": {
-      "totalActions": 16,
+      "totalActions": 17,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 778,
+      "totalEstimatedTokens": 612722,
+      "avgDurationMs": 53384
     }
   }
 }
