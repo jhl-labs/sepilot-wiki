@@ -1,56 +1,31 @@
 {
   "entries": [
     {
-      "id": "f3bd8126-33fa-40d3-a738-a3242b799734",
-      "timestamp": "2026-03-27T18:28:40.120Z",
-      "actionType": "quality_score",
-      "issueNumber": 669,
-      "issueTitle": " [요청] Grafana Loki – 무료 멀티‑테넌트 로그 집계 시스템 가이드",
-      "documentSlug": "observability/grafana-loki",
-      "documentTitle": " [요청] Grafana Loki – 무료 멀티‑테넌트 로그 집계 시스템 가이드",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
+      "id": "00d2a8f0-2535-4ef0-a5b8-f3b0084c1f9a",
+      "timestamp": "2026-03-27T18:25:40.454Z",
+      "actionType": "modify",
+      "issueNumber": 672,
+      "issueTitle": " [업데이트] 멀티‑에이전트 워크플로우 – 탐색 세금(Exploration Tax) 설계 가이드",
+      "documentSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng",
+      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] 멀티‑에이전트 워크플로우 – 탐색 세금(Exploration Tax) 설계 가이드\"",
+      "trigger": "update_request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
-      "changes": null
+      "changes": {
+        "additions": 45,
+        "deletions": 0
+      }
     },
     {
-      "id": "86c2fa05-ad58-43b1-8d82-0e196982b3c3",
-      "timestamp": "2026-03-27T18:28:26.824Z",
-      "actionType": "quality_score",
-      "issueNumber": 670,
-      "issueTitle": " [요청] LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법",
-      "documentSlug": "ai/llm-60",
-      "documentTitle": " [요청] LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "e8491454-0297-4da2-8158-c9e175102f87",
-      "timestamp": "2026-03-27T18:28:15.381Z",
-      "actionType": "quality_score",
-      "issueNumber": 671,
-      "issueTitle": " [요청] Qdrant – Rust 기반 무료 벡터 데이터베이스 가이드",
-      "documentSlug": "ai/qdrant-rust",
-      "documentTitle": " [요청] Qdrant – Rust 기반 무료 벡터 데이터베이스 가이드",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "57f129ef-30fb-4d6f-a778-df5ed651bce7",
-      "timestamp": "2026-03-27T18:27:58.950Z",
+      "id": "08a64c36-7838-49f3-8b18-63b9f765d910",
+      "timestamp": "2026-03-27T18:24:42.319Z",
       "actionType": "generate",
-      "issueNumber": 669,
-      "issueTitle": " [요청] Grafana Loki – 무료 멀티‑테넌트 로그 집계 시스템 가이드",
-      "documentSlug": "observability/grafana-loki",
-      "documentTitle": "Grafana Loki – 무료 멀티‑테넌트 로그 집계 시스템 가이드",
-      "summary": "새 문서 \"Grafana Loki – 무료 멀티‑테넌트 로그 집계 시스템 가이드\" 생성",
+      "issueNumber": 671,
+      "issueTitle": "문서 요청 #671",
+      "documentSlug": "ai/671",
+      "documentTitle": "Qdrant – Rust 기반 무료 벡터 데이터베이스",
+      "summary": "새 문서 \"Qdrant – Rust 기반 무료 벡터 데이터베이스\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -59,47 +34,43 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1015
+              "durationMs": 1012
             },
             {
               "step": "outline",
-              "durationMs": 15056
+              "durationMs": 15588
             },
             {
               "step": "write",
-              "durationMs": 28057
+              "durationMs": 20670
             },
             {
               "step": "review",
-              "durationMs": 8478
-            },
-            {
-              "step": "refine",
-              "durationMs": 35017
+              "durationMs": 6759
             }
           ],
-          "totalDurationMs": 87624,
+          "totalDurationMs": 44029,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 4331,
+            "estimated": 2151,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "f2fdd85f-ec57-41d6-a55a-4926460e7ae3",
-      "timestamp": "2026-03-27T18:26:17.857Z",
+      "id": "f542676c-87de-4068-bb42-4d0c33f16995",
+      "timestamp": "2026-03-27T18:23:54.197Z",
       "actionType": "generate",
       "issueNumber": 670,
-      "issueTitle": " [요청] LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법",
-      "documentSlug": "ai/llm-60",
-      "documentTitle": "LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법",
-      "summary": "새 문서 \"LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법\" 생성",
+      "issueTitle": "문서 요청 #670",
+      "documentSlug": "ai/670",
+      "documentTitle": "자동 감지: 뉴스 인텔리전스 – LLM 토큰 압축기 구현 가이드",
+      "summary": "새 문서 \"자동 감지: 뉴스 인텔리전스 – LLM 토큰 압축기 구현 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -108,43 +79,43 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1202
+              "durationMs": 1037
             },
             {
               "step": "outline",
-              "durationMs": 10200
+              "durationMs": 8655
             },
             {
               "step": "write",
-              "durationMs": 19781
+              "durationMs": 21793
             },
             {
               "step": "review",
-              "durationMs": 8643
+              "durationMs": 6425
             }
           ],
-          "totalDurationMs": 39826,
+          "totalDurationMs": 37910,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 1931,
+            "estimated": 1844,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "6ee51868-64ae-411f-9953-1566532e8cfc",
-      "timestamp": "2026-03-27T18:25:18.343Z",
+      "id": "b20a2689-c934-4b08-bff7-0ed6fe2ab051",
+      "timestamp": "2026-03-27T18:23:12.162Z",
       "actionType": "generate",
-      "issueNumber": 671,
-      "issueTitle": " [요청] Qdrant – Rust 기반 무료 벡터 데이터베이스 가이드",
-      "documentSlug": "ai/qdrant-rust",
-      "documentTitle": "Qdrant – Rust 기반 무료 벡터 데이터베이스 가이드",
-      "summary": "새 문서 \"Qdrant – Rust 기반 무료 벡터 데이터베이스 가이드\" 생성",
+      "issueNumber": 669,
+      "issueTitle": "문서 요청 #669",
+      "documentSlug": "observability/669",
+      "documentTitle": "Grafana Loki 자동 감지·뉴스 인텔리전스 정리",
+      "summary": "새 문서 \"Grafana Loki 자동 감지·뉴스 인텔리전스 정리\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -153,32 +124,49 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1014
+              "durationMs": 1526
             },
             {
               "step": "outline",
-              "durationMs": 9205
+              "durationMs": 7689
             },
             {
               "step": "write",
-              "durationMs": 37920
+              "durationMs": 26922
             },
             {
               "step": "review",
-              "durationMs": 10495
+              "durationMs": 9034
             }
           ],
-          "totalDurationMs": 58634,
+          "totalDurationMs": 45171,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 2881,
+            "estimated": 2182,
             "method": "duration_based"
           }
         }
+      }
+    },
+    {
+      "id": "3dd72187-dbb5-4983-beb4-77595e25eb1f",
+      "timestamp": "2026-03-27T18:22:22.238Z",
+      "actionType": "modify",
+      "issueNumber": 668,
+      "issueTitle": " [업데이트] Agentic AI 보안 위협 – 명령 실행 안전 가이드",
+      "documentSlug": "security/agentic-ai-security-threats",
+      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Agentic AI 보안 위협 – 명령 실행 안전 가이드\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 57
       }
     },
     {
@@ -20319,5 +20307,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-27T18:28:40.121Z"
+  "lastUpdated": "2026-03-27T18:25:40.454Z"
 }
