@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-27T18:21:24.152Z",
+  "generatedAt": "2026-03-28T00:24:45.021Z",
   "config": {
     "rssUrl": "https://euno.news/rss.xml",
     "maxAiBatch": 30,
@@ -7,214 +7,172 @@
     "maxIssues": 5
   },
   "summary": {
-    "scannedAt": "2026-03-27T18:21:24.151Z",
+    "scannedAt": "2026-03-28T00:24:45.020Z",
     "totalScanned": 200,
-    "newItems": 86,
+    "newItems": 64,
     "prefiltered": 30,
-    "relevant": 13,
+    "relevant": 10,
     "issuesCreated": 5,
-    "durationMs": 108095
+    "durationMs": 102230
   },
   "items": [
     {
-      "title": "LLM 에이전트는 원시 명령을 절대로 실행해서는 안 된다",
-      "link": "https://euno.news/posts/ko/llm-agents-should-never-execute-raw-commands-3fd9c2",
-      "guid": "https://euno.news/posts/ko/llm-agents-should-never-execute-raw-commands-3fd9c2",
-      "relevanceScore": 85,
+      "title": "인기 LiteLLM PyPI 패키지, 백도어 삽입돼 자격 증명 및 인증 토큰 탈취",
+      "link": "https://euno.news/posts/ko/popular-litellm-pypi-package-backdoored-to-steal-c-bde7cc",
+      "guid": "https://euno.news/posts/ko/popular-litellm-pypi-package-backdoored-to-steal-c-bde7cc",
+      "relevanceScore": 90,
       "relatedDocuments": [
+        "security/liteLLM-python-pth.md",
+        "security/trivy-supply-chain-compromise-what-docker-hub-user.md"
+      ],
+      "keyTopics": [
+        "LiteLLM 백도어",
+        "PyPI 악성 패키지",
+        "자격 증명 탈취"
+      ],
+      "sourceUrl": null
+    },
+    {
+      "title": "OIXA Protocol: 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "link": "https://euno.news/posts/ko/oixa-protocol-the-open-infrastructure-for-agent-to-286a67",
+      "guid": "https://euno.news/posts/ko/oixa-protocol-the-open-infrastructure-for-agent-to-286a67",
+      "relevanceScore": 88,
+      "relatedDocuments": [
+        "ai/ai-agent-economics-2026.md",
+        "ai/agentic-walmart-vs-openai.md",
         "security/agentic-ai-security-threats.md",
-        "ai/ai-code-review-agent-guide.md",
         "ai/ai-agentic-workflow.md"
       ],
       "keyTopics": [
-        "LLM agents",
-        "command execution safety",
-        "security best practices"
+        "OIXA Protocol",
+        "Agent‑to‑Agent commerce",
+        "Autonomous AI marketplace"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Grafana Loki는 Prometheus와 같은 무료 로그 집계 시스템이지만 로그용.",
-      "link": "https://euno.news/posts/ko/grafana-loki-has-a-free-log-aggregation-system-lik-d10fc6",
-      "guid": "https://euno.news/posts/ko/grafana-loki-has-a-free-log-aggregation-system-lik-d10fc6",
-      "relevanceScore": 82,
+      "title": "개발자를 대상으로 한 공급망 공격: LiteLLM 및 Trivy에서 얻은 교훈",
+      "link": "https://euno.news/posts/ko/supply-chain-attacks-on-developers-lessons-from-li-b583f6",
+      "guid": "https://euno.news/posts/ko/supply-chain-attacks-on-developers-lessons-from-li-b583f6",
+      "relevanceScore": 85,
       "relatedDocuments": [
-        "observability/2026-vigilops-zabbix-prometheus-grafana-datadog.md",
-        "observability/opentelemetry-overview.md"
+        "security/liteLLM-python-pth.md",
+        "security/trivy-supply-chain-compromise-what-docker-hub-user.md",
+        "security/devsecops.md"
       ],
       "keyTopics": [
-        "log aggregation",
-        "LogQL",
-        "multi‑tenant logging"
+        "LiteLLM 공급망 공격",
+        "Trivy 탐지",
+        "개발자 대상 위협"
       ],
       "sourceUrl": null
     },
     {
-      "title": "나는 LLM 컨텍스트 크기를 60% 줄이는 Token Compressor를 만들었다",
-      "link": "https://euno.news/posts/ko/i-built-a-token-compressor-that-cuts-llm-context-s-8af208",
-      "guid": "https://euno.news/posts/ko/i-built-a-token-compressor-that-cuts-llm-context-s-8af208",
-      "relevanceScore": 82,
+      "title": "/pair approve가 Scope Guard를 우회할 때",
+      "link": "https://euno.news/posts/ko/when-pair-approve-bypasses-the-scope-guard-5b3bfb",
+      "guid": "https://euno.news/posts/ko/when-pair-approve-bypasses-the-scope-guard-5b3bfb",
+      "relevanceScore": 84,
       "relatedDocuments": [
-        "ai/llm-prompt-injection.md",
-        "ai/ai-code-assistant-productivity-paradox.md"
+        "projects/openclaw-complete-guide.md",
+        "ai/ai-openclaw.md",
+        "docker/run-openclaw-securely-in-docker-sandboxes.md"
       ],
       "keyTopics": [
-        "LLM token compression",
-        "Context‑window cost reduction",
-        "Prompt efficiency"
+        "OpenClaw device‑pairing",
+        "Scope Guard bypass",
+        "보안 완화 방안"
       ],
       "sourceUrl": null
     },
     {
-      "title": "Qdrant는 AI 및 의미 검색에 최적화된 무료 벡터 데이터베이스를 제공합니다",
-      "link": "https://euno.news/posts/ko/qdrant-has-a-free-vector-database-optimized-for-ai-00457b",
-      "guid": "https://euno.news/posts/ko/qdrant-has-a-free-vector-database-optimized-for-ai-00457b",
-      "relevanceScore": 78,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "vector database",
-        "Rust",
-        "AI retrieval‑augmented generation"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "당신의 AI 에이전트가 맹목적으로 탐색하고 있습니다. 여기 그들에게 지도를 주는 방법.",
-      "link": "https://euno.news/posts/ko/your-ai-agents-are-exploring-blind-heres-how-to-gi-986375",
-      "guid": "https://euno.news/posts/ko/your-ai-agents-are-exploring-blind-heres-how-to-gi-986375",
+      "title": "SQLite는 어떤 인덱스를 사용해야 합니까?",
+      "link": "https://euno.news/posts/ko/which-index-should-sqlite-use-9257c8",
+      "guid": "https://euno.news/posts/ko/which-index-should-sqlite-use-9257c8",
       "relevanceScore": 78,
       "relatedDocuments": [
-        "ai/multi-agent-workflows-often-fail-here-s-how-to-eng.md",
-        "ai/agentic-web-enabling-ai-to-ai-interactions.md",
-        "ai/ai-agent-economics-2026.md"
+        "backend/snkv-sqlite-btree-kv-store.md"
       ],
       "keyTopics": [
-        "Exploration Tax",
-        "멀티‑에이전트 워크플로우",
-        "비용 모델링"
+        "SQLite 인덱스 선택",
+        "쿼리 옵티마이저",
+        "성능 튜닝"
       ],
       "sourceUrl": null
     },
     {
-      "title": "나는 사고 조사용 AI 도구를 만들었습니다 (솔직한 피드백을 원합니다)",
-      "link": "https://euno.news/posts/ko/i-built-an-ai-tool-for-incident-investigation-look-cab154",
-      "guid": "https://euno.news/posts/ko/i-built-an-ai-tool-for-incident-investigation-look-cab154",
-      "relevanceScore": 78,
+      "title": "4월 24일까지 옵트 아웃하지 않으면 GitHub가 당신의 프라이빗 레포를 학습합니다",
+      "link": "https://euno.news/posts/ko/if-you-dont-opt-out-by-apr-24-github-will-train-on-653743",
+      "guid": "https://euno.news/posts/ko/if-you-dont-opt-out-by-apr-24-github-will-train-on-653743",
+      "relevanceScore": 76,
       "relatedDocuments": [
-        "production-ready-multi-agent-systems-lessons-learn.md",
-        "observability/multi-agent-ai-observability.md"
+        "github/github-secret-scanning-pattern-updates-march-2026.md",
+        "github/what-8217-s-new-with-github-copilot-coding-agent.md"
       ],
       "keyTopics": [
-        "AI‑assisted incident investigation",
-        "Ops‑automation",
-        "Observability"
+        "GitHub private‑repo training opt‑out",
+        "Copilot data usage",
+        "보안·프라이버시 설정"
       ],
       "sourceUrl": null
     },
     {
-      "title": "당신의 AI Agent가 47단계에서 충돌했습니다. 이제 무엇을 해야 할까요?",
-      "link": "https://euno.news/posts/ko/your-ai-agent-crashed-at-step-47-now-what-4f31d8",
-      "guid": "https://euno.news/posts/ko/your-ai-agent-crashed-at-step-47-now-what-4f31d8",
-      "relevanceScore": 75,
+      "title": "아무도 경고하지 않는 Webhook 실패 모드",
+      "link": "https://euno.news/posts/ko/the-webhook-failure-modes-nobody-warns-you-about-71a75a",
+      "guid": "https://euno.news/posts/ko/the-webhook-failure-modes-nobody-warns-you-about-71a75a",
+      "relevanceScore": 72,
       "relatedDocuments": [
-        "production-ready-multi-agent-systems-lessons-learn.md",
-        "ai/ai-agent-deployment-failure-prevention-and-testing-strategy.md"
+        "backend/wiki-api-route-guide.md"
       ],
       "keyTopics": [
-        "AI 에이전트 OOM",
-        "파이프라인 실패",
-        "디버깅"
+        "Webhook failure modes",
+        "Retry & idempotency",
+        "Operational monitoring"
       ],
       "sourceUrl": null
     },
     {
-      "title": "판사가 펜타곤의 Anthropic에 대한 &apos;처벌&apos; 시도, Supply Chain Risk Label 부착을 차단",
-      "link": "https://euno.news/posts/ko/judge-blocks-pentagons-effort-to-punish-anthropic-340c66",
-      "guid": "https://euno.news/posts/ko/judge-blocks-pentagons-effort-to-punish-anthropic-340c66",
+      "title": "NPM 고고학: 5년간 땅에 묻혀도, 아직도 숨 쉬고 있다",
+      "link": "https://euno.news/posts/ko/npm-archaeology-5-years-in-the-ground-still-breath-809781",
+      "guid": "https://euno.news/posts/ko/npm-archaeology-5-years-in-the-ground-still-breath-809781",
       "relevanceScore": 70,
       "relatedDocuments": [
-        "ai/pentagon-llm-policy.md",
-        "security/devsecops.md",
-        "security/sbom.md"
+        "security/npm.md"
       ],
       "keyTopics": [
-        "AI supply‑chain risk",
-        "government labeling",
-        "legal policy"
+        "npm 공급망 보안",
+        "오래된 패키지 위험",
+        "디지털 고고학"
       ],
       "sourceUrl": null
     },
     {
-      "title": "당신의 AI는 한계에 도달했습니다. 당신의 지식은 그렇지 않아야 합니다.",
-      "link": "https://euno.news/posts/ko/your-ai-hit-its-limit-your-knowledge-shouldnt-b14291",
-      "guid": "https://euno.news/posts/ko/your-ai-hit-its-limit-your-knowledge-shouldnt-b14291",
-      "relevanceScore": 70,
+      "title": "유럽연합 집행위원회, 해커들의 데이터 유출 주장 이후 사이버 공격 확인",
+      "link": "https://euno.news/posts/ko/european-commission-confirms-cyberattack-after-hac-4d49d3",
+      "guid": "https://euno.news/posts/ko/european-commission-confirms-cyberattack-after-hac-4d49d3",
+      "relevanceScore": 60,
       "relatedDocuments": [
-        "ai/claude-code.md",
-        "ai/tokenwatch-ai.md",
-        "ai/ai.md"
+        "security/2026-vps.md",
+        "security/microsoft-patch-tuesday-2026-03-cve.md"
       ],
       "keyTopics": [
-        "AI 대화 제한",
-        "토큰 소진",
-        "세션 관리"
+        "EU 사이버 공격",
+        "클라우드 스토리지 유출",
+        "공공기관 보안"
       ],
       "sourceUrl": null
     },
     {
-      "title": "React에서 RBAC와 feature flags를 별도로 관리하지 마세요",
-      "link": "https://euno.news/posts/ko/stop-managing-rbac-and-feature-flags-separately-in-bd35ed",
-      "guid": "https://euno.news/posts/ko/stop-managing-rbac-and-feature-flags-separately-in-bd35ed",
-      "relevanceScore": 68,
-      "relatedDocuments": [
-        "frontend/react-query.md",
-        "frontend/api-service-layer.md"
-      ],
-      "keyTopics": [
-        "React RBAC",
-        "Feature flags",
-        "Unified permission management"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "JavaScript에서 Sync vs Async (가장 쉬운 방법으로 설명)",
-      "link": "https://euno.news/posts/ko/sync-vs-async-in-javascript-explained-in-the-simpl-1b8fe8",
-      "guid": "https://euno.news/posts/ko/sync-vs-async-in-javascript-explained-in-the-simpl-1b8fe8",
-      "relevanceScore": 65,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "JavaScript",
-        "동기 vs 비동기",
-        "프로그래밍 개념"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "Certbot을 사용해 Brother 프린터에 Let&apos;s Encrypt TLS 인증서 설치",
-      "link": "https://euno.news/posts/ko/installing-a-lets-encrypt-tls-certificate-on-a-bro-4bd413",
-      "guid": "https://euno.news/posts/ko/installing-a-lets-encrypt-tls-certificate-on-a-bro-4bd413",
+      "title": "데이터 센터, AI 및 에너지 최신 소식",
+      "link": "https://euno.news/posts/ko/the-latest-in-data-centers-ai-and-energy-d5719f",
+      "guid": "https://euno.news/posts/ko/the-latest-in-data-centers-ai-and-energy-d5719f",
       "relevanceScore": 58,
-      "relatedDocuments": [],
-      "keyTopics": [
-        "Let's Encrypt",
-        "TLS 인증서",
-        "프린터 보안"
-      ],
-      "sourceUrl": null
-    },
-    {
-      "title": "번역 팀 없이 20개 언어로 임시 메일 서비스 운영",
-      "link": "https://euno.news/posts/ko/running-a-temp-mail-service-in-20-languages-withou-b95230",
-      "guid": "https://euno.news/posts/ko/running-a-temp-mail-service-in-20-languages-withou-b95230",
-      "relevanceScore": 55,
       "relatedDocuments": [
-        "devops/traefik-yaml.md"
+        "observability/2026-vigilops-zabbix-prometheus-grafana-datadog.md"
       ],
       "keyTopics": [
-        "Multilingual temporary‑mail service",
-        "i18n infrastructure",
-        "Server‑less email handling"
+        "AI 데이터센터",
+        "에너지 소비",
+        "인프라 비용 최적화"
       ],
       "sourceUrl": null
     }
@@ -222,38 +180,38 @@
   "actions": [
     {
       "action": "update_existing",
-      "targetSlug": "security/agentic-ai-security-threats.md",
-      "suggestedTitle": "Agentic AI 보안 위협 – 명령 실행 안전 가이드",
+      "targetSlug": "security/liteLLM-python-pth.md",
+      "suggestedTitle": "LiteLLM 백도어 공격 상세 분석 및 최신 대응",
       "priority": "high",
-      "issueNumber": 668
+      "issueNumber": 673
     },
     {
       "action": "new_document",
-      "targetSlug": "observability/grafana-loki-guide.md",
-      "suggestedTitle": "Grafana Loki – 무료 멀티‑테넌트 로그 집계 시스템 가이드",
-      "priority": "medium",
-      "issueNumber": 669
-    },
-    {
-      "action": "new_document",
-      "targetSlug": "ai/token-compressor-guide.md",
-      "suggestedTitle": "LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법",
-      "priority": "medium",
-      "issueNumber": 670
-    },
-    {
-      "action": "new_document",
-      "targetSlug": "ai/qdrant-vector-database.md",
-      "suggestedTitle": "Qdrant – Rust 기반 무료 벡터 데이터베이스 가이드",
-      "priority": "medium",
-      "issueNumber": 671
+      "targetSlug": "ai/oixa-protocol.md",
+      "suggestedTitle": "OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "priority": "high",
+      "issueNumber": 674
     },
     {
       "action": "update_existing",
-      "targetSlug": "ai/multi-agent-workflows-often-fail-here-s-how-to-eng.md",
-      "suggestedTitle": "멀티‑에이전트 워크플로우 – 탐색 세금(Exploration Tax) 설계 가이드",
+      "targetSlug": "security/liteLLM-python-pth.md",
+      "suggestedTitle": "LiteLLM 공급망 공격 개발자 교훈",
+      "priority": "medium",
+      "issueNumber": 675
+    },
+    {
+      "action": "new_document",
+      "targetSlug": "security/openclaw-scope-guard-bypass.md",
+      "suggestedTitle": "OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
       "priority": "high",
-      "issueNumber": 672
+      "issueNumber": 676
+    },
+    {
+      "action": "update_existing",
+      "targetSlug": "backend/snkv-sqlite-btree-kv-store.md",
+      "suggestedTitle": "SQLite 인덱스 선택 가이드 – 성능 최적화 팁",
+      "priority": "medium",
+      "issueNumber": 677
     }
   ]
 }
