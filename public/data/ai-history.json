@@ -1,6 +1,113 @@
 {
   "entries": [
     {
+      "id": "4105d85e-b9d7-4c48-83fa-c9a1142307b9",
+      "timestamp": "2026-03-28T00:27:27.595Z",
+      "actionType": "modify",
+      "issueNumber": 677,
+      "issueTitle": " [업데이트] SQLite 인덱스 선택 가이드 – 성능 최적화 팁",
+      "documentSlug": "backend/snkv-sqlite-btree-kv-store",
+      "documentTitle": "SNKV – SQLite B‑Tree 기반 키‑값 저장소 (C/C++ & Python 바인딩)",
+      "summary": "문서 수정 요청 처리: \" [업데이트] SQLite 인덱스 선택 가이드 – 성능 최적화 팁\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 76,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "e37d373a-c90b-4489-b1fe-17d58642209d",
+      "timestamp": "2026-03-28T00:26:37.097Z",
+      "actionType": "generate",
+      "issueNumber": 676,
+      "issueTitle": "문서 요청 #676",
+      "documentSlug": "security/676",
+      "documentTitle": "OpenClaw 디바이스 페어링 Scope Guard 우회 취약점 분석 및 완화 가이드",
+      "summary": "새 문서 \"OpenClaw 디바이스 페어링 Scope Guard 우회 취약점 분석 및 완화 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1006
+            },
+            {
+              "step": "outline",
+              "durationMs": 11335
+            },
+            {
+              "step": "write",
+              "durationMs": 23190
+            },
+            {
+              "step": "review",
+              "durationMs": 7931
+            }
+          ],
+          "totalDurationMs": 43462,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2124,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "20a734fe-56ec-43bd-89ff-340f64ce13c3",
+      "timestamp": "2026-03-28T00:25:46.557Z",
+      "actionType": "generate",
+      "issueNumber": 674,
+      "issueTitle": "문서 요청 #674",
+      "documentSlug": "ai/674",
+      "documentTitle": "OIXA Protocol – Agent‑to‑Agent Commerce Technical Specification",
+      "summary": "새 문서 \"OIXA Protocol – Agent‑to‑Agent Commerce Technical Specification\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1006
+            },
+            {
+              "step": "outline",
+              "durationMs": 11596
+            },
+            {
+              "step": "write",
+              "durationMs": 32083
+            },
+            {
+              "step": "review",
+              "durationMs": 7512
+            }
+          ],
+          "totalDurationMs": 52197,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2560,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "f2715685-517f-47c5-8192-8fc5207df901",
       "timestamp": "2026-03-28T00:24:45.024Z",
       "actionType": "maintain",
@@ -20321,5 +20428,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-28T00:24:45.025Z"
+  "lastUpdated": "2026-03-28T00:27:27.595Z"
 }
