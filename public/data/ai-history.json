@@ -1,42 +1,14 @@
 {
   "entries": [
     {
-      "id": "4088690f-f450-4b38-b411-f8ff73ec236f",
-      "timestamp": "2026-03-28T06:32:26.269Z",
-      "actionType": "quality_score",
-      "issueNumber": 678,
-      "issueTitle": " [요청] OpenClaw Desktop Control Center with Tauri + Rust",
-      "documentSlug": "openclaw-desktop-control-center-with-tauri-rust",
-      "documentTitle": " [요청] OpenClaw Desktop Control Center with Tauri + Rust",
-      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "3b67e0cc-1744-4c19-9ec5-57380744b7d3",
-      "timestamp": "2026-03-28T06:31:54.298Z",
-      "actionType": "quality_score",
+      "id": "6e275a8f-deae-4e8f-8cea-a1ac2fb4e74b",
+      "timestamp": "2026-03-28T06:28:12.404Z",
+      "actionType": "generate",
       "issueNumber": 682,
-      "issueTitle": " [요청] Telnyx PyPI 공급망 침해 – 원인·피해·예방 가이드",
-      "documentSlug": "security/telnyx-pypi",
-      "documentTitle": " [요청] Telnyx PyPI 공급망 침해 – 원인·피해·예방 가이드",
-      "summary": "자동 품질 검토 통과 (92점) → 자동 발행",
-      "trigger": "issue_processor",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "deaa4794-2cf8-477e-83d1-3037ba9ad8c1",
-      "timestamp": "2026-03-28T06:31:42.519Z",
-      "actionType": "generate",
-      "issueNumber": 678,
-      "issueTitle": " [요청] OpenClaw Desktop Control Center with Tauri + Rust",
-      "documentSlug": "openclaw-desktop-control-center-with-tauri-rust",
-      "documentTitle": "OpenClaw Desktop Control Center with Tauri + Rust",
-      "summary": "새 문서 \"OpenClaw Desktop Control Center with Tauri + Rust\" 생성",
+      "issueTitle": "문서 요청 #682",
+      "documentSlug": "security/682",
+      "documentTitle": "자동 감지 : 뉴스 인텔리전스 – Telnet PyPI 공급망 공격 대응 가이드",
+      "summary": "새 문서 \"자동 감지 : 뉴스 인텔리전스 – Telnet PyPI 공급망 공격 대응 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -45,92 +17,43 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 979
+              "durationMs": 995
             },
             {
               "step": "outline",
-              "durationMs": 8177
+              "durationMs": 7198
             },
             {
               "step": "write",
-              "durationMs": 23169
+              "durationMs": 25844
             },
             {
               "step": "review",
-              "durationMs": 10926
-            },
-            {
-              "step": "refine",
-              "durationMs": 38628
+              "durationMs": 7051
             }
           ],
-          "totalDurationMs": 81879,
+          "totalDurationMs": 41088,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 4044,
+            "estimated": 2005,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "9f0db9d7-330f-4f97-8f60-2ae2d53dd26c",
-      "timestamp": "2026-03-28T06:30:02.266Z",
-      "actionType": "generate",
-      "issueNumber": 679,
-      "issueTitle": " [요청] .claude 폴더 해부 – Claude Code 설정 레이어 상세 가이드",
-      "documentSlug": "ai/claude-claude-code",
-      "documentTitle": ".claude 폴더 해부 – Claude Code 설정 레이어 상세 가이드",
-      "summary": "새 문서 \".claude 폴더 해부 – Claude Code 설정 레이어 상세 가이드\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 1099
-            },
-            {
-              "step": "outline",
-              "durationMs": 8191
-            },
-            {
-              "step": "write",
-              "durationMs": 36788
-            },
-            {
-              "step": "review",
-              "durationMs": 5169
-            }
-          ],
-          "totalDurationMs": 51247,
-          "researchSources": 1,
-          "tavilyUsage": {
-            "apiCalls": 0,
-            "totalResults": 0
-          },
-          "estimatedTokens": {
-            "estimated": 2507,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "0219ed1a-4c06-4da2-bd65-3022352a6e5a",
-      "timestamp": "2026-03-28T06:28:50.450Z",
+      "id": "5806b5ed-1a26-4ca3-991b-68f68c168423",
+      "timestamp": "2026-03-28T06:27:26.375Z",
       "actionType": "generate",
       "issueNumber": 681,
-      "issueTitle": " [요청] AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI",
-      "documentSlug": "ai/ai-mcp-a2a-ucp-ap2-a2ui-ag-ui",
-      "documentTitle": "AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI",
-      "summary": "새 문서 \"AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI\" 생성",
+      "issueTitle": "문서 요청 #681",
+      "documentSlug": "ai/681",
+      "documentTitle": "AI 에이전트 프로토콜 스위트 가이드",
+      "summary": "새 문서 \"AI 에이전트 프로토콜 스위트 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -139,47 +62,60 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1018
+              "durationMs": 1049
             },
             {
               "step": "outline",
-              "durationMs": 8179
+              "durationMs": 9137
             },
             {
               "step": "write",
-              "durationMs": 33499
+              "durationMs": 32171
             },
             {
               "step": "review",
-              "durationMs": 8057
-            },
-            {
-              "step": "refine",
-              "durationMs": 54393
+              "durationMs": 6847
             }
           ],
-          "totalDurationMs": 105146,
+          "totalDurationMs": 49205,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 5207,
+            "estimated": 2408,
             "method": "duration_based"
           }
         }
       }
     },
     {
-      "id": "ab58656c-14a3-43d9-8200-f358729d1c26",
-      "timestamp": "2026-03-28T06:26:46.727Z",
+      "id": "74b0bd44-06c1-4c5f-b56b-1cd17c4c4ac6",
+      "timestamp": "2026-03-28T06:26:32.680Z",
+      "actionType": "modify",
+      "issueNumber": 680,
+      "issueTitle": " [업데이트] Finish Changes·Outlines – Gemini Code Assist 최신 기능 안내",
+      "documentSlug": "ai/483",
+      "documentTitle": "Gemini Code Assist – Finish Changes와 Outlines 가이드",
+      "summary": "문서 수정 요청 처리: \" [업데이트] Finish Changes·Outlines – Gemini Code Assist 최신 기능 안내\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 70,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "148683de-0ec5-46b7-a78c-a81de2fb3d28",
+      "timestamp": "2026-03-28T06:25:42.806Z",
       "actionType": "generate",
-      "issueNumber": 682,
-      "issueTitle": " [요청] Telnyx PyPI 공급망 침해 – 원인·피해·예방 가이드",
-      "documentSlug": "security/telnyx-pypi",
-      "documentTitle": "Telnyx PyPI 공급망 침해 – 원인·피해·예방 가이드",
-      "summary": "새 문서 \"Telnyx PyPI 공급망 침해 – 원인·피해·예방 가이드\" 생성",
+      "issueNumber": 679,
+      "issueTitle": "문서 요청 #679",
+      "documentSlug": "ai/679",
+      "documentTitle": ".claude 폴더 해부 – Claude Code 맞춤형 설정 가이드",
+      "summary": "새 문서 \".claude 폴더 해부 – Claude Code 맞춤형 설정 가이드\" 생성",
       "trigger": "request_label",
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
@@ -188,29 +124,74 @@
           "steps": [
             {
               "step": "research",
-              "durationMs": 1034
+              "durationMs": 1022
             },
             {
               "step": "outline",
-              "durationMs": 6837
+              "durationMs": 15541
             },
             {
               "step": "write",
-              "durationMs": 19466
+              "durationMs": 20346
             },
             {
               "step": "review",
-              "durationMs": 9241
+              "durationMs": 13568
             }
           ],
-          "totalDurationMs": 36580,
+          "totalDurationMs": 50478,
           "researchSources": 1,
           "tavilyUsage": {
             "apiCalls": 0,
             "totalResults": 0
           },
           "estimatedTokens": {
-            "estimated": 1777,
+            "estimated": 2472,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "fe6ac1ea-6da9-4f19-8c95-7b605b4786fd",
+      "timestamp": "2026-03-28T06:24:48.301Z",
+      "actionType": "generate",
+      "issueNumber": 678,
+      "issueTitle": "문서 요청 #678",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "새 문서 \"OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1067
+            },
+            {
+              "step": "outline",
+              "durationMs": 9490
+            },
+            {
+              "step": "write",
+              "durationMs": 37383
+            },
+            {
+              "step": "review",
+              "durationMs": 7285
+            }
+          ],
+          "totalDurationMs": 55225,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2708,
             "method": "duration_based"
           }
         }
@@ -20776,5 +20757,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-28T06:32:26.269Z"
+  "lastUpdated": "2026-03-28T06:28:12.404Z"
 }
