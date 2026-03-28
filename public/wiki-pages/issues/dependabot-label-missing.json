@@ -2,7 +2,7 @@
   "title": "Dependabot 라벨 `dependencies` 누락 문제 해결 방법",
   "slug": "issues/dependabot-label-missing",
   "content": "\n# 문제 개요\n\nDependabot이 Pull Request에 `dependencies` 라벨을 자동으로 붙이려 시도했지만, 해당 라벨이 레포지토리에 존재하지 않아 아래와 같은 오류가 발생했습니다.\n\n```\nThe following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\n```\n\n이 오류는 **dependabot.yml** 파일에 `dependencies` 라벨이 지정되어 있으나, 실제 레포지토리 라벨 목록에 해당 라벨이 없을 때 발생합니다.\n\n# 해결 방법\n\n1. **GitHub 레포지토리 설정에서 라벨 생성**\n   - 레포지토리 메인 페이지 → **Issues** 탭 → **Labels** 메뉴로 이동합니다.\n   - **New label** 버튼을 클릭합니다.\n   - **Name**에 `dependencies` 를 입력하고, 색상은 원하는 대로 선택합니다 (예: `#5319e7`).\n   - **Create label**을 눌러 라벨을 생성합니다.\n\n2. **dependabot.yml 검토 (선택 사항)**\n   - `.github/dependabot.yml` 파일을 열어 `labels:` 섹션에 `dependencies` 라벨이 명시되어 있는지 확인합니다.\n   - 라벨 이름이 정확히 일치해야 합니다. 오타가 있으면 수정합니다.\n\n3. **PR 재시도**\n   - 라벨을 만든 뒤, 기존 Dependabot PR에 코멘트 `@dependabot rebase` 혹은 `@dependabot recreate` 를 남겨 PR을 다시 실행합니다.\n   - 라벨이 정상적으로 붙는지 확인합니다.\n\n# 참고 자료\n- [Dependabot 공식 문서 – 라벨링](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/managing-dependabot-updates#adding-labels-to-dependabot-pull-requests) (공식 문서를 참조해주세요)\n- Issue에서 제공된 **Dependabot** PR 예시와 릴리즈 노트\n\n# 요약\n- `dependencies` 라벨이 없으면 Dependabot이 PR에 라벨을 추가하지 못합니다.\n- 레포지토리 **Issues → Labels** 에서 라벨을 직접 생성하면 문제를 해결할 수 있습니다.\n- 라벨 생성 후 Dependabot PR을 재시도하면 정상 동작합니다.\n\n---\n*이 문서는 Dependabot 라벨 누락 문제에 대한 가이드이며, 필요에 따라 업데이트하십시오.*",
-  "lastModified": "2026-03-28T06:23:46Z",
+  "lastModified": "2026-03-28T11:41:58Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "62b16d6",
-      "message": "chore: 뉴스 인텔리전스 보고서 업데이트",
+      "sha": "ca5055e",
+      "message": "chore: 대시보드 통계 수집 - 2026-03-28 11:41",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-28T06:23:46Z",
+      "date": "2026-03-28T11:41:58Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
