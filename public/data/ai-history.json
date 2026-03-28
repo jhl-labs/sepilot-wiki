@@ -1,6 +1,124 @@
 {
   "entries": [
     {
+      "id": "baa59579-6604-4b24-a5d6-6c6cb2bc4b46",
+      "timestamp": "2026-03-28T00:31:06.930Z",
+      "actionType": "quality_score",
+      "issueNumber": 674,
+      "issueTitle": " [요청] OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "documentSlug": "ai/oixa-protocol",
+      "documentTitle": " [요청] OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "cea3f3eb-740c-4881-a3ad-2f2264c3ba33",
+      "timestamp": "2026-03-28T00:30:51.652Z",
+      "actionType": "quality_score",
+      "issueNumber": 676,
+      "issueTitle": " [요청] OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
+      "documentSlug": "security/openclaw-scope-guard",
+      "documentTitle": " [요청] OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "5beadebf-0755-4bb3-8653-0ad8473160f0",
+      "timestamp": "2026-03-28T00:30:28.559Z",
+      "actionType": "generate",
+      "issueNumber": 674,
+      "issueTitle": " [요청] OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "documentSlug": "ai/oixa-protocol",
+      "documentTitle": "OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "summary": "새 문서 \"OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1003
+            },
+            {
+              "step": "outline",
+              "durationMs": 16427
+            },
+            {
+              "step": "write",
+              "durationMs": 21392
+            },
+            {
+              "step": "review",
+              "durationMs": 11609
+            }
+          ],
+          "totalDurationMs": 50431,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2471,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "77ac555b-76bd-46cd-8bf4-1452db9f3a52",
+      "timestamp": "2026-03-28T00:29:24.824Z",
+      "actionType": "generate",
+      "issueNumber": 676,
+      "issueTitle": " [요청] OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
+      "documentSlug": "security/openclaw-scope-guard",
+      "documentTitle": "OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
+      "summary": "새 문서 \"OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 1055
+            },
+            {
+              "step": "outline",
+              "durationMs": 7990
+            },
+            {
+              "step": "write",
+              "durationMs": 26481
+            },
+            {
+              "step": "review",
+              "durationMs": 5193
+            }
+          ],
+          "totalDurationMs": 40720,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 1984,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "4105d85e-b9d7-4c48-83fa-c9a1142307b9",
       "timestamp": "2026-03-28T00:27:27.595Z",
       "actionType": "modify",
@@ -20428,5 +20546,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-28T00:27:27.595Z"
+  "lastUpdated": "2026-03-28T00:31:06.930Z"
 }
