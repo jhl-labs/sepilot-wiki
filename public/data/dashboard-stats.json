@@ -1,43 +1,123 @@
 {
-  "collectedAt": "2026-03-27T23:45:07.830Z",
+  "collectedAt": "2026-03-28T00:56:49.821Z",
   "overview": {
-    "totalDocuments": 330,
-    "publishedDocuments": 171,
-    "draftDocuments": 159,
-    "openRequests": 204,
+    "totalDocuments": 338,
+    "publishedDocuments": 174,
+    "draftDocuments": 164,
+    "openRequests": 206,
     "closedRequests": 19,
-    "totalAIActions": 816
+    "totalAIActions": 824
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
+      "aiActions": 8,
+      "documentsCreated": 4,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "estimatedTokens": 9139,
+      "totalPipelineDurationMs": 186810
     },
     "last24h": {
-      "aiActions": 39,
+      "aiActions": 37,
       "documentsCreated": 15,
-      "documentsModified": 13,
+      "documentsModified": 11,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 41221,
-      "totalPipelineDurationMs": 840232
+      "estimatedTokens": 39851,
+      "totalPipelineDurationMs": 812745
     },
     "last7d": {
-      "aiActions": 161,
-      "documentsCreated": 65,
-      "documentsModified": 50,
+      "aiActions": 169,
+      "documentsCreated": 69,
+      "documentsModified": 51,
       "tavilyApiCalls": 54,
       "tavilyResults": 139,
-      "estimatedTokens": 174166,
-      "totalPipelineDurationMs": 3607575
+      "estimatedTokens": 183305,
+      "totalPipelineDurationMs": 3794385
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-28T00:31:06.930Z",
+      "actionType": "quality_score",
+      "issueNumber": 674,
+      "documentTitle": " [요청] OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-28T00:30:51.652Z",
+      "actionType": "quality_score",
+      "issueNumber": 676,
+      "documentTitle": " [요청] OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-28T00:30:28.559Z",
+      "actionType": "generate",
+      "issueNumber": 674,
+      "documentTitle": "OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 50431,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2471
+    },
+    {
+      "timestamp": "2026-03-28T00:29:24.824Z",
+      "actionType": "generate",
+      "issueNumber": 676,
+      "documentTitle": "OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 40720,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 1984
+    },
+    {
+      "timestamp": "2026-03-28T00:27:27.595Z",
+      "actionType": "modify",
+      "issueNumber": 677,
+      "documentTitle": "SNKV – SQLite B‑Tree 기반 키‑값 저장소 (C/C++ & Python 바인딩)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-28T00:26:37.097Z",
+      "actionType": "generate",
+      "issueNumber": 676,
+      "documentTitle": "OpenClaw 디바이스 페어링 Scope Guard 우회 취약점 분석 및 완화 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 43462,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2124
+    },
+    {
+      "timestamp": "2026-03-28T00:25:46.557Z",
+      "actionType": "generate",
+      "issueNumber": 674,
+      "documentTitle": "OIXA Protocol – Agent‑to‑Agent Commerce Technical Specification",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 52197,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2560
+    },
+    {
+      "timestamp": "2026-03-28T00:24:45.024Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "뉴스 인텔리전스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-27T18:25:40.454Z",
       "actionType": "modify",
@@ -157,93 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:51:57.801Z",
-      "actionType": "quality_score",
-      "issueNumber": 657,
-      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:51:42.686Z",
-      "actionType": "quality_score",
-      "issueNumber": 658,
-      "documentTitle": "[Wiki Maintenance] [요청] Running Agents on Kubernetes with Agent Sandbox",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:51:30.699Z",
-      "actionType": "quality_score",
-      "issueNumber": 659,
-      "documentTitle": "[Wiki Maintenance] [요청] Trivy supply chain compromise: What Docker Hub users should know",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:51:12.796Z",
-      "actionType": "modify",
-      "issueNumber": 660,
-      "documentTitle": "주간 위키 보고서 - 2026년 11주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:50:42.684Z",
-      "actionType": "modify",
-      "issueNumber": 661,
-      "documentTitle": "Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:49:56.509Z",
-      "actionType": "modify",
-      "issueNumber": 662,
-      "documentTitle": "Traefik Route Manager (TRM) – 파일 프로바이더 라우트 관리 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T09:49:09.748Z",
-      "actionType": "generate",
-      "issueNumber": 657,
-      "documentTitle": "Ingress2Gateway 1.0 발표 및 Gateway API 마이그레이션 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 49741,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2435
-    },
-    {
-      "timestamp": "2026-03-27T09:47:59.172Z",
-      "actionType": "generate",
-      "issueNumber": 658,
-      "documentTitle": "Running Agents on Kubernetes with Agent Sandbox",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 47546,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2324
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 799,
-      "totalEstimatedTokens": 632803,
-      "avgDurationMs": 53116
+      "totalActions": 807,
+      "totalEstimatedTokens": 641942,
+      "avgDurationMs": 53018
     },
     "unknown": {
       "totalActions": 17,
