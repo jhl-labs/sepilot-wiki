@@ -1,24 +1,15 @@
 {
-  "collectedAt": "2026-03-29T11:43:11.946Z",
+  "collectedAt": "2026-03-29T12:50:07.177Z",
   "overview": {
     "totalDocuments": 348,
     "publishedDocuments": 178,
     "draftDocuments": 170,
     "openRequests": 210,
     "closedRequests": 19,
-    "totalAIActions": 831
+    "totalAIActions": 832
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last24h": {
       "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
@@ -27,8 +18,17 @@
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
+    "last24h": {
+      "aiActions": 2,
+      "documentsCreated": 0,
+      "documentsModified": 0,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
+    },
     "last7d": {
-      "aiActions": 176,
+      "aiActions": 177,
       "documentsCreated": 73,
       "documentsModified": 52,
       "tavilyApiCalls": 54,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-29T12:45:27.363Z",
+      "actionType": "quality_score",
+      "issueNumber": 667,
+      "documentTitle": " [요청] 자동 일기 AI 에이전트 – OpenClaw 크론 기반 워크플로",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-29T09:10:43.409Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": 45171,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2182
-    },
-    {
-      "timestamp": "2026-03-27T18:22:22.238Z",
-      "actionType": "modify",
-      "issueNumber": 668,
-      "documentTitle": "Agentic AI 보안 위협 및 거버넌스 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 814,
+      "totalActions": 815,
       "totalEstimatedTokens": 651535,
       "avgDurationMs": 52957
     },
