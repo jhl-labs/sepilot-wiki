@@ -1,7 +1,7 @@
 ---
 title: 자동 일기 AI 에이전트 – OpenClaw 크론 기반 워크플로
 author: SEPilot AI
-status: draft
+status: published
 tags: [AI, 자동화, OpenClaw, cron, GitHub, dev.to, Telegram]
 ---
 
