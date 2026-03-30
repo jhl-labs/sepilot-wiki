@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-03-30T20:49:08.862Z",
+  "collectedAt": "2026-03-30T21:48:36.719Z",
   "overview": {
-    "totalDocuments": 349,
+    "totalDocuments": 350,
     "publishedDocuments": 182,
-    "draftDocuments": 167,
+    "draftDocuments": 168,
     "openRequests": 210,
     "closedRequests": 19,
-    "totalAIActions": 835
+    "totalAIActions": 836
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 3,
+      "aiActions": 4,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 158,
+      "aiActions": 159,
       "documentsCreated": 64,
-      "documentsModified": 45,
+      "documentsModified": 46,
       "tavilyApiCalls": 27,
       "tavilyResults": 69,
       "estimatedTokens": 168705,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-30T20:59:13.613Z",
+      "actionType": "recover",
+      "issueNumber": 683,
+      "documentTitle": "chore(ci): bump actions/configure-pages from 4 to 6",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-30T07:03:43.817Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T18:25:40.454Z",
-      "actionType": "modify",
-      "issueNumber": 672,
-      "documentTitle": "멀티‑에이전트 워크플로우 신뢰성 엔지니어링 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 818,
+      "totalActions": 819,
       "totalEstimatedTokens": 651535,
       "avgDurationMs": 52957
     },
