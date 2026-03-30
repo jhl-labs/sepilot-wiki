@@ -2,7 +2,7 @@
   "title": "Dependabot 라벨 설정 가이드",
   "slug": "devops/dependabot-labels",
   "content": "\n# Dependabot 라벨 설정 가이드\n\nDependabot이 Pull Request에 자동으로 라벨을 붙이려면 해당 라벨이 레포지토리 내에 존재해야 합니다. 현재 **`dependencies`** 라벨이 없다는 오류가 발생했으므로, 아래 절차에 따라 라벨을 생성하거나 `dependabot.yml` 파일에서 라벨 설정을 제거하세요.\n\n## 1. GitHub UI를 이용해 라벨 만들기\n\n1. 레포지토리 메인 페이지에서 **`Issues`** 탭을 클릭합니다.\n2. 오른쪽 사이드바에서 **`Labels`** 를 선택합니다.\n3. **`New label`** 버튼을 클릭합니다.\n4. **Name** 에 `dependencies` 를 입력하고, 필요에 따라 색상을 선택합니다.\n5. **Create label** 을 눌러 라벨을 생성합니다.\n\n> 이 라벨은 Dependabot이 `dependencies` 그룹에 해당하는 업데이트를 감지했을 때 자동으로 적용됩니다.\n\n## 2. `dependabot.yml` 파일 검토\n\n`dependabot.yml` 파일에 라벨을 지정하는 옵션이 있다면, 올바른 라벨 이름이 사용되고 있는지 확인합니다. 예시:\n\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"   # 여기서 라벨 이름을 확인\n```\n\n- 라벨 이름이 정확히 `dependencies` 와 일치해야 합니다.\n- 라벨이 필요 없을 경우 `labels` 섹션을 삭제하거나 비워둘 수 있습니다.\n\n## 3. 라벨 자동 생성 (GitHub API) (선택 사항)\n\n스크립트나 CI 파이프라인에서 라벨을 자동으로 만들고 싶다면 GitHub REST API 를 사용할 수 있습니다.\n\n```bash\ncurl -X POST \\\n  -H \"Authorization: token <YOUR_PERSONAL_ACCESS_TOKEN>\" \\\n  -H \"Accept: application/vnd.github+json\" \\\n  https://api.github.com/repos/<OWNER>/<REPO>/labels \\\n  -d '{\"name\":\"dependencies\",\"color\":\"0E8A16\"}'\n```\n\n## 4. 검증\n\n라벨을 만든 후 Dependabot이 새 PR을 생성하면 자동으로 `dependencies` 라벨이 붙는지 확인합니다.\n\n## 참고 자료\n- [GitHub Docs – Managing labels for issues and pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-and-editing-labels-for-issues-and-pull-requests) \n- Dependabot 오류 메시지: \"The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\"\n\n---\n\n*이 문서는 현재 피드백을 반영하여 초안(draft) 상태로 생성되었습니다.*",
-  "lastModified": "2026-03-16T20:07:31Z",
+  "lastModified": "2026-03-30T06:10:10Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,52 +15,12 @@
   ],
   "history": [
     {
-      "sha": "1650125",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "sha": "d57e06d",
+      "message": "chore: 대시보드 통계 수집 - 2026-03-30 06:10",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-23T19:52:46Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "fea34a0",
-      "message": "docs: Issue #503 - 피드백 반영",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-03-16T20:07:31Z",
+      "date": "2026-03-30T06:10:10Z",
       "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "e164091",
-      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-03-09T21:09:05Z",
-      "isAutoCommit": true,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "95fac7e",
-      "message": "docs: Issue #446 - 피드백 반영",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-03-09T21:05:48Z",
-      "isAutoCommit": false,
-      "additions": 0,
-      "deletions": 0
-    },
-    {
-      "sha": "8c0b92b",
-      "message": "🌳 Wiki Tree Maintenance: 전체 150개의 문서가 존재합니다. 대부분은 이미 적절한 서브디렉터리에 배치돼 있으나, 루트('/')에 위치한 다수의 파일이 카테고리 규칙에 맞지 않아 이동이 필요합니다. 또한 중복된 SNKV 문서와 Ingress‑NGINX 마이그레이션 가이드가 각각 두 위치에 존재합니다. 파일명은 영문 소문자‑하이픈 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 지정하면 탐색성이 크게 향상됩니다.",
-      "author": "GitHub Action",
-      "authorEmail": "action@github.com",
-      "date": "2026-03-09T00:47:49Z",
-      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }
