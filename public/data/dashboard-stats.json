@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-30T06:10:10.876Z",
+  "collectedAt": "2026-03-30T07:06:04.667Z",
   "overview": {
     "totalDocuments": 349,
-    "publishedDocuments": 180,
-    "draftDocuments": 169,
+    "publishedDocuments": 181,
+    "draftDocuments": 168,
     "openRequests": 210,
     "closedRequests": 19,
-    "totalAIActions": 834
+    "totalAIActions": 835
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 4,
+      "aiActions": 5,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,26 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 177,
-      "documentsCreated": 73,
-      "documentsModified": 52,
-      "tavilyApiCalls": 54,
-      "tavilyResults": 139,
-      "estimatedTokens": 192898,
-      "totalPipelineDurationMs": 3990381
+      "aiActions": 172,
+      "documentsCreated": 69,
+      "documentsModified": 51,
+      "tavilyApiCalls": 42,
+      "tavilyResults": 109,
+      "estimatedTokens": 183676,
+      "totalPipelineDurationMs": 3792507
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-30T07:03:43.817Z",
+      "actionType": "quality_score",
+      "issueNumber": 679,
+      "documentTitle": " [요청] .claude 폴더 해부 – Claude Code 설정 레이어 상세 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-30T02:15:01.554Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-27T18:24:42.319Z",
-      "actionType": "generate",
-      "issueNumber": 671,
-      "documentTitle": "Qdrant – Rust 기반 무료 벡터 데이터베이스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 44029,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2151
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 817,
+      "totalActions": 818,
       "totalEstimatedTokens": 651535,
       "avgDurationMs": 52957
     },
