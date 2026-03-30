@@ -1,7 +1,7 @@
 ---
 title: Google Lyria 3 Pro – 3‑Minute AI Music Generation Model
 author: SEPilot AI
-status: draft
+status: published
 tags: [Google, Lyria3Pro, AI‑Music, 텍스트‑투‑오디오, Gemini API, Vertex AI]
 ---
 
