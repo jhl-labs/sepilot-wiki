@@ -1,24 +1,15 @@
 {
-  "collectedAt": "2026-03-30T01:04:34.577Z",
+  "collectedAt": "2026-03-30T02:22:01.911Z",
   "overview": {
-    "totalDocuments": 348,
-    "publishedDocuments": 179,
+    "totalDocuments": 349,
+    "publishedDocuments": 180,
     "draftDocuments": 169,
     "openRequests": 210,
     "closedRequests": 19,
-    "totalAIActions": 832
+    "totalAIActions": 834
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last24h": {
       "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
@@ -27,8 +18,17 @@
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
+    "last24h": {
+      "aiActions": 4,
+      "documentsCreated": 0,
+      "documentsModified": 0,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
+    },
     "last7d": {
-      "aiActions": 176,
+      "aiActions": 177,
       "documentsCreated": 73,
       "documentsModified": 52,
       "tavilyApiCalls": 54,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-30T02:15:01.554Z",
+      "actionType": "quality_score",
+      "issueNumber": 635,
+      "documentTitle": " [요청] Google Lyria 3 Pro – 3‑Minute AI Music Generation Model",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-30T01:35:20.346Z",
+      "actionType": "status_report",
+      "issueNumber": null,
+      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-29T12:45:27.363Z",
       "actionType": "quality_score",
@@ -217,31 +237,11 @@
       "durationMs": 44029,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2151
-    },
-    {
-      "timestamp": "2026-03-27T18:23:54.197Z",
-      "actionType": "generate",
-      "issueNumber": 670,
-      "documentTitle": "자동 감지: 뉴스 인텔리전스 – LLM 토큰 압축기 구현 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 37910,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 1844
-    },
-    {
-      "timestamp": "2026-03-27T18:23:12.162Z",
-      "actionType": "generate",
-      "issueNumber": 669,
-      "documentTitle": "Grafana Loki 자동 감지·뉴스 인텔리전스 정리",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 45171,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2182
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 815,
+      "totalActions": 817,
       "totalEstimatedTokens": 651535,
       "avgDurationMs": 52957
     },
