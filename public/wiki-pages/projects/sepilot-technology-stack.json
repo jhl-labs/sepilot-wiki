@@ -2,7 +2,7 @@
   "title": "Sepilot Wiki가 어떤 언어/프레임워크로 구현되어 있나요?",
   "slug": "projects/sepilot-technology-stack",
   "content": "\n## 기술 스택\n\nSEPilot Wiki는 다음과 같은 기술 스택으로 구현되어 있습니다:\n\n### 프론트엔드\n- **React 18** - UI 라이브러리\n- **TypeScript** - 타입 안전성을 위한 정적 타입 언어\n- **Vite** - 빌드 도구 및 개발 서버\n- **React Router DOM** - SPA 라우팅\n- **TanStack Query (React Query)** - 서버 상태 관리\n\n### Next.js 사용 여부\n- SEPilot Wiki는 **Next.js**를 사용하지 않습니다.\n- 대신 **Vite**와 **React**를 조합하여 클라이언트 사이드 렌더링 SPA 형태로 구현되었습니다.\n- Next.js는 서버 사이드 렌더링(SSR) 및 정적 사이트 생성(SSG) 기능을 제공하지만, 현재 프로젝트는 GitHub Pages에 정적 파일을 배포하는 구조이므로 Vite 기반 빌드가 적합합니다.\n- 필요 시 향후 SSR이나 SSG가 요구될 경우 Next.js로 마이그레이션을 고려할 수 있습니다.\n\n### 마크다운 렌더링\n- **react-markdown** - 마크다운 파싱 및 렌더링\n- **remark-gfm** - GitHub Flavored Markdown 지원\n- **rehype-raw** - HTML 태그 지원\n- **rehype-sanitize** - XSS 방지를 위한 HTML 살균\n- **react-syntax-highlighter** - 코드 구문 강조\n\n### 스타일링\n- **CSS Variables** - 테마 시스템\n- **Lucide React** - 아이콘 라이브러리\n\n### 개발 도구\n- **ESLint** - 코드 린팅\n- **Vitest** - 테스트 프레임워크\n- **Husky** - Git hooks\n\n### CI/CD\n- **GitHub Actions** - 자동화 워크플로우\n- **GitHub Pages** - 정적 사이트 호스팅\n- **Bun** - 패키지 매니저 및 런타임\n\n### AI 통합\n- **OpenAI API 호환** - LLM을 통한 문서 자동 생성\n\n## 참고 링크\n\n- [SEPilot Wiki GitHub Repository](https://github.com/jhl-labs/sepilot-wiki)\n",
-  "lastModified": "2026-03-29T23:45:54Z",
+  "lastModified": "2026-03-01T03:03:46Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -22,12 +22,202 @@
   "order": 5,
   "history": [
     {
-      "sha": "e302b6e",
-      "message": "chore: 대시보드 통계 수집 - 2026-03-29 23:45",
+      "sha": "ffb0141",
+      "message": "📊 문서 품질 평가: 평균 76점",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-03-01T03:03:46Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "3cd7bad",
+      "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-29T23:45:54Z",
-      "isAutoCommit": false,
+      "date": "2026-02-21T11:20:48Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e0d1a24",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 대부분 파일명은 이미 slug 형태이며, 내용 중 중복된 문서는 Opencode 관련 두 파일뿐입니다. ‘reports’ 카테고리는 문서가 1개뿐이라 향후 통합을 검토할 필요가 있습니다. 전체 구조는 논리적이지만, 일부 파일명을 더 일관된 형태로 정규화하고, 카테고리 메타데이터와 문서 순서를 명시하면 가독성과 탐색성이 크게 향상됩니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T02:07:27Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "02eda25",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 고르게 배치되어 있으나,  가 중복된 내용이며 삭제 상태이므로  로 병합이 필요합니다. 또한 모든 카테고리마다 문서 순서를 지정하고, 카테고리 메타데이터를 추가해 한국어 표시명과 정렬 순서를 정의하면 탐색성이 향상됩니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:42:05Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "f08fbbd",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 4개의 주요 카테고리(ai, projects, kubernetes, bun)와 보조 카테고리(reports)로 구성돼 있습니다. 파일명은 대부분 규칙에 맞지만,  카테고리에 동일 내용의 Opencode 문서가 두 개 존재합니다(하나는 published, 다른 하나는 deleted). 전체적으로 문서가 흩어져 있어 카테고리 내 정렬(order)과 카테고리 메타데이터가 필요합니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:32:22Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "997dd2a",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한  가 잘못된 위치·오타이며,  가  와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:15:23Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "9459c99",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T02:01:59Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0b99235",
+      "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T01:25:27Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "bbce2ca",
+      "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-12T07:26:28Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "a897516",
+      "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T12:50:57Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0190970",
+      "message": "🔗 교차 참조 업데이트: 16개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T08:01:05Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e873878",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T07:48:29Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "f640314",
+      "message": "🔗 교차 참조 업데이트: 14개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T06:10:24Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "105157f",
+      "message": "🔗 교차 참조 업데이트: 17개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T04:47:56Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e71d220",
+      "message": "🔗 교차 참조 업데이트: 13개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T00:39:06Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "c60662c",
+      "message": "🌳 Wiki Tree Maintenance: The wiki contains 9 documents covering Kubernetes, AI/Multi‑Agent systems, the Model Context Protocol, the SEPilot projects and the Bun runtime. Files are currently placed in a flat root with a few sub‑folders (projects, bun). Several filenames are not slug‑ified, drafts are mixed with published content, and there is no clear top‑level categorisation.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-10T12:15:56Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "b59f781",
+      "message": "🌳 Wiki Tree Maintenance: 9개의 문서가 3개의 상위 카테고리(root, projects, bun)로 흩어져 있습니다. Kubernetes·AI 관련 문서는 루트에 그대로 놓여 있어 주제별 폴더가 부족합니다. 파일명은 영문 슬러그 규칙을 따르지 않아 URL 일관성이 떨어집니다. 중복 문서는 없으며, 대부분의 파일은 올바른 디렉터리에 위치하고 있습니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-10T12:09:42Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "bfa6711",
+      "message": "🔗 교차 참조 업데이트: 2개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-09T11:06:38Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "cdc1e0b",
+      "message": "🔗 교차 참조 업데이트: 6개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-09T10:32:24Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "face820",
+      "message": "🔗 교차 참조 업데이트: 5개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-09T10:05:18Z",
+      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }
