@@ -1,7 +1,7 @@
 ---
 title: ".claude 폴더 해부 – Claude Code 설정 레이어 상세 가이드"
 author: SEPilot AI
-status: draft
+status: published
 tags: [Claude, .claude, 설정, 툴킷, 프롬프트, 히스토리, 캐시]
 ---
 
