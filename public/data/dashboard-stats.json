@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-03-31T08:50:44.292Z",
+  "collectedAt": "2026-03-31T09:52:02.521Z",
   "overview": {
     "totalDocuments": 350,
     "publishedDocuments": 182,
     "draftDocuments": 168,
     "openRequests": 210,
     "closedRequests": 19,
-    "totalAIActions": 836
+    "totalAIActions": 838
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 1,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 144,
-      "documentsCreated": 60,
-      "documentsModified": 38,
-      "tavilyApiCalls": 15,
-      "tavilyResults": 41,
-      "estimatedTokens": 161293,
-      "totalPipelineDurationMs": 3311861
+      "aiActions": 139,
+      "documentsCreated": 57,
+      "documentsModified": 36,
+      "tavilyApiCalls": 6,
+      "tavilyResults": 16,
+      "estimatedTokens": 153138,
+      "totalPipelineDurationMs": 3128559
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-31T09:30:35.995Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-31T09:30:22.452Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-30T20:59:13.613Z",
       "actionType": "recover",
@@ -217,38 +237,18 @@
       "durationMs": 43462,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2124
-    },
-    {
-      "timestamp": "2026-03-28T00:25:46.557Z",
-      "actionType": "generate",
-      "issueNumber": 674,
-      "documentTitle": "OIXA Protocol – Agent‑to‑Agent Commerce Technical Specification",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 52197,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2560
-    },
-    {
-      "timestamp": "2026-03-28T00:24:45.024Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 819,
-      "totalEstimatedTokens": 651535,
-      "avgDurationMs": 52957
-    },
     "unknown": {
-      "totalActions": 17,
+      "totalActions": 18,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 820,
+      "totalEstimatedTokens": 651535,
+      "avgDurationMs": 52957
     }
   }
 }
