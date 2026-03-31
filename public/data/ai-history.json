@@ -1,6 +1,234 @@
 {
   "entries": [
     {
+      "id": "a703b537-bb23-4bad-85bf-916e3ec9b376",
+      "timestamp": "2026-03-31T09:55:58.129Z",
+      "actionType": "quality_score",
+      "issueNumber": 684,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+      "documentSlug": "kubernetes/kubernetes-v1-36-sneak-peek",
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+      "summary": "자동 품질 검토 통과 (83점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "bc927899-d40a-4c52-a02a-24195ec29b0b",
+      "timestamp": "2026-03-31T09:55:43.324Z",
+      "actionType": "quality_score",
+      "issueNumber": 685,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "4fc1a894-d548-4241-b767-eaaf8d468818",
+      "timestamp": "2026-03-31T09:55:28.981Z",
+      "actionType": "quality_score",
+      "issueNumber": 686,
+      "issueTitle": "[Wiki Maintenance] [요청] What&#8217;s coming to our GitHub Actions 2026 security roadmap",
+      "documentSlug": "github/what-8217-s-coming-to-our-github-actions-2026-secu",
+      "documentTitle": "[Wiki Maintenance] [요청] What&#8217;s coming to our GitHub Actions 2026 security roadmap",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "0179598f-648d-4b8a-9ff7-3ea5fd49f7b5",
+      "timestamp": "2026-03-31T09:55:09.835Z",
+      "actionType": "modify",
+      "issueNumber": 687,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] reports/weekly-2026-14 문서 참조 URL 확인 필요",
+      "documentSlug": "reports/weekly-2026-14",
+      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/weekly-2026-14 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 47,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "c261c334-32b8-4009-aa83-181fde6a527a",
+      "timestamp": "2026-03-31T09:54:34.637Z",
+      "actionType": "modify",
+      "issueNumber": 688,
+      "issueTitle": "[Wiki Maintenance] [URL 깨짐] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "f376ea0d-85be-4911-898b-60e7deeb4789",
+      "timestamp": "2026-03-31T09:53:50.095Z",
+      "actionType": "modify",
+      "issueNumber": 689,
+      "issueTitle": "[Wiki Maintenance] [URL 깨짐] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 1,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "62eca33c-fbdf-4dd5-b7c3-61e88dc81a1c",
+      "timestamp": "2026-03-31T09:53:00.130Z",
+      "actionType": "generate",
+      "issueNumber": 684,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+      "documentSlug": "kubernetes/kubernetes-v1-36-sneak-peek",
+      "documentTitle": "Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서",
+      "summary": "새 문서 \"Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 974
+            },
+            {
+              "step": "outline",
+              "durationMs": 7327
+            },
+            {
+              "step": "write",
+              "durationMs": 25195
+            },
+            {
+              "step": "review",
+              "durationMs": 8591
+            }
+          ],
+          "totalDurationMs": 42088,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2056,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "a7cd4b4a-9537-4886-82d4-042853ac9bd6",
+      "timestamp": "2026-03-31T09:51:58.926Z",
+      "actionType": "generate",
+      "issueNumber": 685,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
+      "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
+      "summary": "새 문서 \"Announcing Ingress2Gateway 1.0 – Your Path to Gateway API\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 998
+            },
+            {
+              "step": "outline",
+              "durationMs": 10148
+            },
+            {
+              "step": "write",
+              "durationMs": 39136
+            },
+            {
+              "step": "review",
+              "durationMs": 9151
+            }
+          ],
+          "totalDurationMs": 59433,
+          "researchSources": 2,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2922,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "4ede9d5a-ac42-4a68-bb79-206ba803c992",
+      "timestamp": "2026-03-31T09:50:41.654Z",
+      "actionType": "generate",
+      "issueNumber": 686,
+      "issueTitle": "[Wiki Maintenance] [요청] What&#8217;s coming to our GitHub Actions 2026 security roadmap",
+      "documentSlug": "github/what-8217-s-coming-to-our-github-actions-2026-secu",
+      "documentTitle": "GitHub Actions 2026 보안 로드맵 개요",
+      "summary": "새 문서 \"GitHub Actions 2026 보안 로드맵 개요\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 999
+            },
+            {
+              "step": "outline",
+              "durationMs": 14750
+            },
+            {
+              "step": "write",
+              "durationMs": 28420
+            },
+            {
+              "step": "review",
+              "durationMs": 7858
+            }
+          ],
+          "totalDurationMs": 52027,
+          "researchSources": 1,
+          "tavilyUsage": {
+            "apiCalls": 0,
+            "totalResults": 0
+          },
+          "estimatedTokens": {
+            "estimated": 2552,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "a356e24b-676e-400d-b7ec-8f4351f3b286",
       "timestamp": "2026-03-31T09:30:35.995Z",
       "actionType": "maintain",
@@ -20869,5 +21097,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-03-31T09:30:35.995Z"
+  "lastUpdated": "2026-03-31T09:55:58.130Z"
 }

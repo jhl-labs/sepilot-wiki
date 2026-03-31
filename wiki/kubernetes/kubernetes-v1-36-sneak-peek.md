@@ -1,0 +1,106 @@
+---
+title: Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서
+author: SEPilot AI
+status: published
+tags: [Kubernetes, v1.36, 릴리즈, Deprecation, 마이그레이션, 업그레이드]
+---
+
+## 개요
+Kubernetes v1.36은 2026년 4월 말에 정식 출시될 예정이며, 이번 스니크 피크에서는 **제거·폐기 예정 API**와 **다양한 기능 향상**이 강조됩니다. 본 문서는 해당 릴리즈의 배경, 일정, 주요 변경 사항, 마이그레이션 가이드 등을 정리하여 클러스터 운영자와 개발자가 원활히 대비할 수 있도록 돕는 것을 목표로 합니다. 주요 독자는 **클러스터 관리자, 플랫폼 엔지니어, SIG 담당자** 등이며, 향후 위키 페이지 구조 및 문서 업데이트에도 활용됩니다.
+
+## 릴리즈 일정 및 버전 관리
+- **정식 릴리즈 예정일**: 2026년 4월 말  
+- **프리릴리즈 단계**: 현재 알파/베타 릴리즈가 진행 중이며, 블로그 포스트(2026‑03‑30)에서 최신 진행 상황을 확인할 수 있습니다.  
+- **버전 번호 체계**: Kubernetes는 `v<주버전>.<부버전>` 형식을 유지하며, **주버전**이 바뀔 때마다 API 호환성 정책이 적용됩니다.  
+
+## API 제거·폐기 정책 요약
+Kubernetes 프로젝트는 **공식 Deprecation 정책**에 따라 API의 수명 주기를 관리합니다[출처](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/).
+
+- **Stable (GA) API**  
+  - 새로운 Stable 버전이 존재할 경우에만 Deprecated 처리 가능  
+  - Deprecated 후 최소 **1년** 동안 유지되며, 사용 시 경고가 표시됨  
+  - 같은 메이저 버전 내에서 제거되지 않음  
+
+- **Beta / Pre‑release API**  
+  - Deprecated 후 **3개의 릴리즈** 동안 지원됨  
+
+- **Alpha / Experimental API**  
+  - 사전 공지 없이 언제든 제거 가능  
+
+- **제거 흐름**  
+  1. **Deprecation Announcement** → 경고 표시 시작  
+  2. **Deprecation Period** (위 정책에 명시된 최소 기간)  
+  3. **Removal** → 해당 API는 현재 버전에서 완전히 사라짐, 대체 API 사용 필요  
+
+## 이번 릴리즈에서 폐기·폐지되는 API
+현재 블로그 포스트에서는 **구체적인 폐기 API 리스트**가 공개되지 않았습니다. 공식 **Deprecation Guide**를 통해 상세 목록을 확인하시기 바랍니다.  
+
+> *추가 조사 필요*: 폐기 대상 API와 대체 API에 대한 정확한 정보는 Kubernetes 공식 문서 및 SIG 발표 자료를 참고해 업데이트해야 합니다.
+
+## 이번 릴리즈에서 새롭게 도입되는 주요 기능
+블로그에서는 **다양한 향상 기능**이 포함될 것이라고 언급했지만, 구체적인 항목은 아직 공개되지 않았습니다. 일반적으로 기대되는 영역은 다음과 같습니다.
+
+- **스케줄러 알고리즘 개선** 및 **성능 최적화**  
+- **보안 강화** (예: 인증·인가 메커니즘 업데이트)  
+- **네트워킹 및 서비스 메시** 개선  
+- **CRD 확장**, **kubectl CLI** 개선 등  
+
+> *추가 조사 필요*: 각 기능에 대한 상세 스펙과 사용 방법은 정식 릴리즈 노트에서 확인 후 문서에 반영해야 합니다.
+
+## 마이그레이션 가이드
+1. **폐기 API 사용 현황 진단**  
+   - `kubectl api-versions` 및 `kubectl get <resource> -o yaml` 로 현재 사용 중인 API 버전을 확인  
+   - 경고 로그(`Deprecated`)를 모니터링  
+
+2. **자동/수동 마이그레이션 툴**  
+   - 현재 Kubernetes는 `kubectl convert` 등 자동 변환 툴을 제공하지만, v1.36에서 지원되는 구체적인 툴은 공식 문서를 확인 필요  
+
+3. **단계별 체크리스트**  
+   - 폐기 API 식별 → 대체 API 적용 → 테스트 환경에서 검증 → 프로덕션 적용  
+
+4. **테스트 및 검증**  
+   - 스테이징 클러스터에서 **회귀 테스트** 수행  
+   - CI 파이프라인에 **Deprecation 경고 검사** 단계 추가  
+
+## 업그레이드 시 고려사항
+- **사전 점검**  
+  - 클러스터 버전 호환성, 노드 OS 및 kubelet 버전 확인  
+  - 리소스 요구량(예: CPU, 메모리) 변화 여부 검토  
+
+- **업그레이드 전략**  
+  - **롤링 업그레이드**: 기본 권장 방식  
+  - **블루‑그린**, **카나리** 배포: 고가용성 요구 시 선택  
+
+- **장애 복구 및 롤백**  
+  - `kubeadm upgrade plan` 로 단계 확인  
+  - 롤백 시 `kubeadm upgrade undo` 사용 가능 (버전별 지원 여부 확인 필요)  
+
+## 에코시스템 및 플러그인 영향
+- **Ingress‑nginx** 프로젝트는 SIG‑Security가 2026‑03‑24에 **퇴출**을 발표했으며, 해당 변경이 v1.36에 반영될 가능성이 있습니다[출처](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/).  
+- **CSI 드라이버**, **CNI 플러그인** 등 주요 서드파티 프로젝트는 각 프로젝트의 릴리즈 노트를 통해 호환성을 확인해야 합니다.  
+
+## 문서 및 위키 업데이트 가이드
+- **위키 페이지 구조**: 버전별 섹션(`v1.36`)을 추가하고, **신규 API**와 **폐기 API**를 각각 별도 페이지로 분리  
+- **문서 포맷**:  
+  - API 명세 → `apiVersion`, `kind`, `deprecation` 상태, `replacement` 정보 포함  
+  - 변경 로그 → `Added`, `Deprecated`, `Removed` 태그 사용  
+
+- **버전별 변경 로그 관리**: `CHANGELOG.md`에 `v1.36.0` 섹션을 생성하고, 주요 기능·폐기 항목을 정리  
+
+## FAQ
+**Q1. v1.36에서 GA API가 바로 제거될 수 있나요?**  
+A. GA API는 동일 메이저 버전 내에서는 제거되지 않으며, 최소 1년의 Deprecation 기간을 거칩니다.  
+
+**Q2. Alpha API가 사라졌을 때 어떻게 대처해야 하나요?**  
+A. Alpha API는 사전 공지 없이 제거될 수 있으므로, 가능한 한 빠르게 Stable/Beta 대체 API로 전환하는 것이 권장됩니다.  
+
+**Q3. Ingress‑nginx 퇴출에 대비하려면 무엇을 해야 하나요?**  
+A. 현재 사용 중인 Ingress‑nginx 컨트롤러를 확인하고, 대체 솔루션(예: Ingress‑controller‑gateway)으로 마이그레이션 계획을 수립합니다.  
+
+## 참고 자료 및 링크
+- **공식 블로그 포스트**: [Kubernetes v1.36 Sneak Peek](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)  
+- **Deprecation 정책 문서**: Kubernetes 공식 Deprecation 정책 (Kubernetes 홈페이지에서 “Deprecation Policy” 검색)  
+- **SIG‑Security 발표**: 2026‑03‑24 Ingress‑nginx 퇴출 발표 (SIG‑Security 회의록)  
+- **마이그레이션 툴**: `kubectl convert`, `kubeadm upgrade` 등 공식 CLI 도구 (Kubernetes 문서)  
+
+*본 문서는 현재 공개된 정보에 기반하여 작성되었으며, 향후 공식 릴리즈 노트와 SIG 발표에 따라 내용이 업데이트될 수 있습니다.*
