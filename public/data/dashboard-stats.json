@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-03-31T09:52:02.521Z",
+  "collectedAt": "2026-03-31T10:50:33.957Z",
   "overview": {
     "totalDocuments": 350,
     "publishedDocuments": 182,
     "draftDocuments": 168,
-    "openRequests": 210,
+    "openRequests": 213,
     "closedRequests": 19,
-    "totalAIActions": 838
+    "totalAIActions": 847
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
+      "aiActions": 9,
+      "documentsCreated": 3,
+      "documentsModified": 3,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "estimatedTokens": 7530,
+      "totalPipelineDurationMs": 153548
     },
     "last24h": {
-      "aiActions": 3,
-      "documentsCreated": 0,
-      "documentsModified": 1,
+      "aiActions": 12,
+      "documentsCreated": 3,
+      "documentsModified": 4,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "estimatedTokens": 7530,
+      "totalPipelineDurationMs": 153548
     },
     "last7d": {
-      "aiActions": 139,
-      "documentsCreated": 57,
-      "documentsModified": 36,
+      "aiActions": 144,
+      "documentsCreated": 60,
+      "documentsModified": 38,
       "tavilyApiCalls": 6,
       "tavilyResults": 16,
-      "estimatedTokens": 153138,
-      "totalPipelineDurationMs": 3128559
+      "estimatedTokens": 160668,
+      "totalPipelineDurationMs": 3282107
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-03-31T09:55:58.129Z",
+      "actionType": "quality_score",
+      "issueNumber": 684,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-31T09:55:43.324Z",
+      "actionType": "quality_score",
+      "issueNumber": 685,
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-31T09:55:28.981Z",
+      "actionType": "quality_score",
+      "issueNumber": 686,
+      "documentTitle": "[Wiki Maintenance] [요청] What&#8217;s coming to our GitHub Actions 2026 security roadmap",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-31T09:55:09.835Z",
+      "actionType": "modify",
+      "issueNumber": 687,
+      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-31T09:54:34.637Z",
+      "actionType": "modify",
+      "issueNumber": 688,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-31T09:53:50.095Z",
+      "actionType": "modify",
+      "issueNumber": 689,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-03-31T09:53:00.130Z",
+      "actionType": "generate",
+      "issueNumber": 684,
+      "documentTitle": "Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 42088,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2056
+    },
+    {
+      "timestamp": "2026-03-31T09:51:58.926Z",
+      "actionType": "generate",
+      "issueNumber": 685,
+      "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 59433,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2922
+    },
+    {
+      "timestamp": "2026-03-31T09:50:41.654Z",
+      "actionType": "generate",
+      "issueNumber": 686,
+      "documentTitle": "GitHub Actions 2026 보안 로드맵 개요",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 52027,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": 2552
+    },
     {
       "timestamp": "2026-03-31T09:30:35.995Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-28T06:25:42.806Z",
-      "actionType": "generate",
-      "issueNumber": 679,
-      "documentTitle": ".claude 폴더 해부 – Claude Code 맞춤형 설정 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 50478,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2472
-    },
-    {
-      "timestamp": "2026-03-28T06:24:48.301Z",
-      "actionType": "generate",
-      "issueNumber": 678,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 55225,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2708
-    },
-    {
-      "timestamp": "2026-03-28T06:23:45.977Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "뉴스 인텔리전스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-28T00:31:06.930Z",
-      "actionType": "quality_score",
-      "issueNumber": 674,
-      "documentTitle": " [요청] OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-28T00:30:51.652Z",
-      "actionType": "quality_score",
-      "issueNumber": 676,
-      "documentTitle": " [요청] OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-28T00:30:28.559Z",
-      "actionType": "generate",
-      "issueNumber": 674,
-      "documentTitle": "OIXA Protocol – 에이전트 간 상거래를 위한 오픈 인프라스트럭처",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 50431,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2471
-    },
-    {
-      "timestamp": "2026-03-28T00:29:24.824Z",
-      "actionType": "generate",
-      "issueNumber": 676,
-      "documentTitle": "OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 40720,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 1984
-    },
-    {
-      "timestamp": "2026-03-28T00:27:27.595Z",
-      "actionType": "modify",
-      "issueNumber": 677,
-      "documentTitle": "SNKV – SQLite B‑Tree 기반 키‑값 저장소 (C/C++ & Python 바인딩)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-28T00:26:37.097Z",
-      "actionType": "generate",
-      "issueNumber": 676,
-      "documentTitle": "OpenClaw 디바이스 페어링 Scope Guard 우회 취약점 분석 및 완화 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 43462,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2124
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 829,
+      "totalEstimatedTokens": 659065,
+      "avgDurationMs": 52937
+    },
     "unknown": {
       "totalActions": 18,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 820,
-      "totalEstimatedTokens": 651535,
-      "avgDurationMs": 52957
     }
   }
 }
