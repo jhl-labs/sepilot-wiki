@@ -1,43 +1,103 @@
 {
-  "collectedAt": "2026-04-01T09:54:19.916Z",
+  "collectedAt": "2026-04-01T10:50:21.491Z",
   "overview": {
     "totalDocuments": 352,
     "publishedDocuments": 184,
     "draftDocuments": 168,
-    "openRequests": 213,
+    "openRequests": 216,
     "closedRequests": 19,
-    "totalAIActions": 850
+    "totalAIActions": 856
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
+      "aiActions": 6,
+      "documentsCreated": 3,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 9,
+      "tavilyResults": 23,
+      "estimatedTokens": 7683,
+      "totalPipelineDurationMs": 162439
     },
     "last24h": {
-      "aiActions": 8,
-      "documentsCreated": 0,
-      "documentsModified": 2,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 9,
+      "documentsCreated": 3,
+      "documentsModified": 0,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 23,
+      "estimatedTokens": 7683,
+      "totalPipelineDurationMs": 162439
     },
     "last7d": {
-      "aiActions": 111,
-      "documentsCreated": 42,
+      "aiActions": 117,
+      "documentsCreated": 45,
       "documentsModified": 31,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 112132,
-      "totalPipelineDurationMs": 2286161
+      "tavilyApiCalls": 9,
+      "tavilyResults": 23,
+      "estimatedTokens": 119815,
+      "totalPipelineDurationMs": 2448600
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-01T09:55:52.372Z",
+      "actionType": "quality_score",
+      "issueNumber": 690,
+      "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-01T09:55:38.071Z",
+      "actionType": "quality_score",
+      "issueNumber": 691,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 보안 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-01T09:55:22.482Z",
+      "actionType": "quality_score",
+      "issueNumber": 692,
+      "documentTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-01T09:55:03.984Z",
+      "actionType": "generate",
+      "issueNumber": 690,
+      "documentTitle": "AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 50968,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2390
+    },
+    {
+      "timestamp": "2026-04-01T09:53:48.521Z",
+      "actionType": "generate",
+      "issueNumber": 691,
+      "documentTitle": "Kubernetes AI Gateway 보안 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 42164,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1971
+    },
+    {
+      "timestamp": "2026-04-01T09:52:47.846Z",
+      "actionType": "generate",
+      "issueNumber": 692,
+      "documentTitle": "LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 69307,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3322
+    },
     {
       "timestamp": "2026-04-01T09:31:43.091Z",
       "actionType": "maintain",
@@ -177,73 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-30T20:59:13.613Z",
-      "actionType": "recover",
-      "issueNumber": 683,
-      "documentTitle": "chore(ci): bump actions/configure-pages from 4 to 6",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-30T07:03:43.817Z",
-      "actionType": "quality_score",
-      "issueNumber": 679,
-      "documentTitle": " [요청] .claude 폴더 해부 – Claude Code 설정 레이어 상세 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-30T02:15:01.554Z",
-      "actionType": "quality_score",
-      "issueNumber": 635,
-      "documentTitle": " [요청] Google Lyria 3 Pro – 3‑Minute AI Music Generation Model",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-30T01:35:20.346Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-29T12:45:27.363Z",
-      "actionType": "quality_score",
-      "issueNumber": 667,
-      "documentTitle": " [요청] 자동 일기 AI 에이전트 – OpenClaw 크론 기반 워크플로",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-29T09:10:43.409Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "학습 루프",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 832,
-      "totalEstimatedTokens": 659065,
-      "avgDurationMs": 52937
+      "totalActions": 838,
+      "totalEstimatedTokens": 666748,
+      "avgDurationMs": 52951
     },
     "unknown": {
       "totalActions": 18,
