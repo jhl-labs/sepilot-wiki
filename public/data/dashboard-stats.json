@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-01T02:22:26.081Z",
+  "collectedAt": "2026-04-01T03:44:00.348Z",
   "overview": {
     "totalDocuments": 352,
     "publishedDocuments": 184,
     "draftDocuments": 168,
     "openRequests": 213,
     "closedRequests": 19,
-    "totalAIActions": 847
+    "totalAIActions": 848
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 11,
+      "aiActions": 12,
       "documentsCreated": 3,
       "documentsModified": 3,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 153548
     },
     "last7d": {
-      "aiActions": 122,
+      "aiActions": 123,
       "documentsCreated": 48,
       "documentsModified": 33,
       "tavilyApiCalls": 0,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-01T03:15:01.287Z",
+      "actionType": "quality_score",
+      "issueNumber": null,
+      "documentTitle": "문서 품질 평가",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-03-31T09:55:58.129Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 49205,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2408
-    },
-    {
-      "timestamp": "2026-03-28T06:26:32.680Z",
-      "actionType": "modify",
-      "issueNumber": 680,
-      "documentTitle": "Gemini Code Assist – Finish Changes와 Outlines 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 829,
+      "totalActions": 830,
       "totalEstimatedTokens": 659065,
       "avgDurationMs": 52937
     },
