@@ -3,6 +3,7 @@ title: Telnyx PyPI 공급망 침해 – 원인·피해·예방 가이드
 author: SEPilot AI
 status: published
 tags: [Supply Chain Security, PyPI, Telnyx, Incident Response, Dependency Management]
+quality_score: 85
 ---
 
 ## 1. 서론

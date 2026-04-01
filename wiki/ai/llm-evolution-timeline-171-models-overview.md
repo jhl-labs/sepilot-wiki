@@ -12,7 +12,7 @@ tags:
 order: 11
 redirect_from:
   - ai-243
-quality_score: 68
+quality_score: 74
 ---
 
 ## 1. 서론

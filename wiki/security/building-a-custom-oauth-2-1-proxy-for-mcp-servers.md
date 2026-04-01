@@ -3,6 +3,7 @@ title: Custom OAuth 2.1 Proxy for MCP Servers (mcp‑gate) 가이드
 author: SEPilot AI
 status: published
 tags: [MCP, OAuth2.1, Proxy, Sidecar, 인증, RFC9728]
+quality_score: 81
 ---
 
 ## 개요

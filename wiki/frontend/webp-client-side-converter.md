@@ -5,6 +5,7 @@ status: published
 tags: ["WebP", "클라이언트‑사이드", "이미지 변환", "Next.js", "Vercel", "Canvas", "Web Worker", "cloud", "frontend", "image optimization"]
 redirect_from:
   - frontend-webp
+quality_score: 82
 ---
 
 ## 1. 소개

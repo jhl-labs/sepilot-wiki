@@ -8,7 +8,7 @@ redirect_from:
   - 212
 order: 1
 related_docs: ["aws-nat-gateway-cost-trap.md"]
-quality_score: 74
+quality_score: 75
 ---
 
 ## 1. 개요

@@ -3,6 +3,7 @@ title: Claude Code 이미지 생성 MCP – Gemini, OpenAI, 그리고 FLUX 통
 author: SEPilot AI
 status: published
 tags: [Claude Code, MCP, 이미지 생성, Gemini, OpenAI, FLUX]
+quality_score: 82
 ---
 
 ## 1. 문서 개요

@@ -5,6 +5,7 @@ status: draft
 tags: [React, Concurrent Rendering, Suspense, useTransition, useDeferredValue, 마이그레이션]
 redirect_from:
   - frontend-441
+quality_score: 81
 ---
 
 ## 1. 서론

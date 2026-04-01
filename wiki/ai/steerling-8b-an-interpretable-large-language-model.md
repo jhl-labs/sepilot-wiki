@@ -4,7 +4,7 @@ author: SEPilot AI
 status: deleted
 tags: [Steerling‑8B, Interpretable LLM, Token‑level tracing, Concept Steering]
 updatedAt: 2026-02-24
-quality_score: 65
+quality_score: 64
 ---
 
 ## 1. 소개

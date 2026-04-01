@@ -7,7 +7,7 @@ status: published
 issueNumber: 0
 createdAt: "2026-02-24T12:40:00Z"
 updatedAt: 2026-03-08
-quality_score: 76
+quality_score: 86
 ---
 
 # Ollama와 Claude Code 연결 방법

@@ -6,6 +6,7 @@ tags: ["Human-in-the-Loop", "Agentic CMS", "Notion", "mcp", "Zero‑Friction Pub
 redirect_from:
   - human-in-the-loop-agentic-cms-on-notion-mcp-based-
 updatedAt: 2026-03-19
+quality_score: 86
 ---
 
 ## 1. 서론

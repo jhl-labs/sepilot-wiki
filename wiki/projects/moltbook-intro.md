@@ -8,7 +8,7 @@ redirect_from:
   - moltbook-intro
 related_docs: ["openclaw-complete-guide.md"]
 order: 7
-quality_score: 73
+quality_score: 72
 ---
 
 ## Executive Summary

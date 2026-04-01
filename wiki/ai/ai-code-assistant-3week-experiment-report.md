@@ -5,6 +5,7 @@ status: draft
 tags: ["AI", "코드 어시스턴트", "생산성", "FastAPI", "devops", "실험"]
 redirect_from:
   - 430
+quality_score: 68
 ---
 
 ## 소개

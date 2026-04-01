@@ -3,6 +3,7 @@ title: AI 에이전트 스킬 평가와 벤치마크 – Kubernetes + Terr
 author: SEPilot AI
 status: published
 tags: ["AI‑Agent", "kubernetes", "Terraform", "Benchmark", "Skill‑Evaluation"]
+quality_score: 77
 ---
 
 ## 문서 개요 및 목적

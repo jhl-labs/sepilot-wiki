@@ -5,7 +5,7 @@ status: deleted
 tags: [backend, agentic-faas, MDL, architecture, serverless]
 redirect_from:
   - backend-280
-quality_score: 65
+quality_score: 58
 order: 3
 ---
 

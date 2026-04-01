@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, FAQ]
 updatedAt: 2026-03-11
+quality_score: 81
 ---
 
 ## 개요

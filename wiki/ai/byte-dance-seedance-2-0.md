@@ -5,6 +5,7 @@ status: published
 tags: ["ai", "비디오 생성", "규제", "컴플라이언스", "ByteDance", "Seedance"]
 redirect_from:
   - bytedance-seedance-2-0-ai
+quality_score: 82
 ---
 
 ## 1. 문서 개요

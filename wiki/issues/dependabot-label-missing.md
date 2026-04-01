@@ -10,6 +10,7 @@ updatedAt: "2026-03-09T09:10:00Z"
 redirect_from:
   - issues-dependencies-label-missing
   - issues-dependabot-label-missing
+quality_score: 74
 ---
 
 # 문제 개요

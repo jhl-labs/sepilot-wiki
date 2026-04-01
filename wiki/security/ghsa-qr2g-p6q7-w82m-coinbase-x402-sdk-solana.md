@@ -6,6 +6,7 @@ tags: [보안, 취약점, x402, Solana, 결제 검증, 인증 우회]
 redirect_from:
   - security-coinbase-x402-sdk-slopsquatting-vulnerability
   - security-coinbase-x402-sdk-vulnerability
+quality_score: 80
 ---
 
 # Summary

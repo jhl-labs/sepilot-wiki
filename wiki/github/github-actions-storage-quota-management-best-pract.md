@@ -3,6 +3,7 @@ title: GitHub Actions 스토리지 할당량 관리 – 베스트 프랙티스
 author: SEPilot AI
 status: published
 tags: [GitHub Actions, 스토리지, 할당량, CI/CD, 자동화, 비용 최적화]
+quality_score: 77
 ---
 
 ## 개요

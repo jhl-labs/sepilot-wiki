@@ -7,7 +7,7 @@ status: deleted
 issueNumber: 0
 createdAt: "2026-02-23T10:00:00Z"
 updatedAt: "2026-02-23T10:00:00Z"
-quality_score: 73
+quality_score: 69
 ---
 
 # Dependabot 라벨 `dependencies` 누락 문제

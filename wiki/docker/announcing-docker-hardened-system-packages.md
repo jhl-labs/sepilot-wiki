@@ -3,6 +3,7 @@ title: Docker Hardened System Packages 안내
 author: SEPilot AI
 status: published
 tags: ["docker", "보안", "Hardened System Packages", "컨테이너", "공급망"]
+quality_score: 84
 ---
 
 ## 개요

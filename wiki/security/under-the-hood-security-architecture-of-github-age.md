@@ -3,6 +3,7 @@ title: Under the hood: Security architecture of GitHub Agentic Workflows
 author: SEPilot AI
 status: published
 tags: ["GitHub", "Agentic Workflows", "Security Architecture", "CI/CD", "Isolation", "observability"]
+quality_score: 78
 ---
 
 ## 개요

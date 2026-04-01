@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["python", "공급망 보안", ".pth 파일", "LiteLLM", "자격 증명 탈취", "SBOM", "Trivy"]
 updatedAt: 2026-03-27
+quality_score: 86
 ---
 
 ## 1. 서론  

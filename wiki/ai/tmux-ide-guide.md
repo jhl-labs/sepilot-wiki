@@ -5,6 +5,7 @@ status: draft
 tags: [tmux-IDE, agent‑first, 멀티‑에이전트, 터미널 IDE, 자동 감지, YAML]
 redirect_from:
   - 541
+quality_score: 76
 ---
 
 ## 1. 문서 소개

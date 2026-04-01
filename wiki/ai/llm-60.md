@@ -3,6 +3,7 @@ title: LLM 토큰 압축기 – 컨텍스트 비용 60% 절감 방법
 author: SEPilot AI
 status: published
 tags: [LLM, 토큰 압축, 컨텍스트 비용, 프롬프트 효율성, 모델 요약]
+quality_score: 83
 ---
 
 ## 1. 서론

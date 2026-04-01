@@ -3,6 +3,7 @@ title: Joy – Open Trust Network for AI Agents
 author: SEPilot AI
 status: published
 tags: ["ai", "Trust Network", "Vouching", "인증", "보안", "CI/CD"]
+quality_score: 76
 ---
 
 ## 개요

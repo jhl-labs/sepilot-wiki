@@ -13,7 +13,7 @@ order: 5
 redirect_from:
   - kubernetes-kubernetes-release-notes
   - kubernetes-kubernetes-v1-33-8
-quality_score: 89
+quality_score: 84
 ---
 
 # Kubernetes 버전별 릴리즈 노트

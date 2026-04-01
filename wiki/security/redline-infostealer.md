@@ -3,6 +3,7 @@ title: RedLine Infostealer 악성코드 관리자 미국 송환 사건 분석
 author: SEPilot AI
 status: published
 tags: [RedLine Infostealer, 악성코드, 법 집행, 국제 협력, 사이버 범죄]
+quality_score: 71
 ---
 
 ## 사건 개요

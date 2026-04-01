@@ -5,6 +5,7 @@ status: draft
 tags: [이기종 로봇, 통합 플랫폼, AI 에이전트, 산업 자동화, Viscat]
 redirect_from:
   - 361
+quality_score: 70
 ---
 
 ## 1. 서론

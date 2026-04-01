@@ -7,6 +7,7 @@ updatedAt: 2026-03-17
 redirect_from:
   - ai-kubernetes-autoscaling-cold-start
   - ai-cold-start-impact-on-kubernetes-autoscaling
+quality_score: 70
 ---
 
 ## 1. 서론

@@ -5,6 +5,7 @@ status: published
 tags: ["kubernetes", "AI Gateway", "Working Group", "Networking"]
 redirect_from:
   - announcing-the-ai-gateway-working-group
+quality_score: 74
 ---
 
 ## 소개

@@ -5,6 +5,7 @@ status: published
 tags: [Fetch MCP Server, 웹 접근, 에이전트, Markdown 변환, 보안]
 redirect_from:
   - fetch-mcp-server-ui
+quality_score: 75
 ---
 
 ## 개요

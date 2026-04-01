@@ -6,6 +6,7 @@ tags: ["GitHub Copilot", "Coding Agent", "ai", "Development Tools", "Updates", "
 redirect_from:
   - what-8217-s-new-with-github-copilot-coding-agent
 updatedAt: 2026-03-09
+quality_score: 84
 ---
 
 ## 개요

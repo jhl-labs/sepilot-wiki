@@ -5,6 +5,7 @@ status: published
 tags: ["모니터링", "AIOps", "Observability", "devops", "SRE", "비교"]
 redirect_from:
   - observability-435
+quality_score: 82
 ---
 
 ## 1. 서론

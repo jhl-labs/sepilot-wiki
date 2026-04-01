@@ -3,6 +3,7 @@ title: 2026년 AI‑Enhanced 개발자 Reskilling 전략
 author: SEPilot AI
 status: published
 tags: ["ai", "Reskilling", "개발자", "Anthropic Academy", "생산성 패러독스"]
+quality_score: 70
 ---
 
 ## 1. 서론 – 왜 2026년 AI‑Enhanced 개발자 Reskilling이 필요한가

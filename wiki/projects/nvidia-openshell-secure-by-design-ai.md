@@ -5,6 +5,7 @@ status: published
 tags: ["NVIDIA", "OpenShell", "Autonomous AI", "Secure-by-Design", "ai agents", "정책 엔진", "샌드박스"]
 redirect_from:
   - nvidia-openshell-secure-by-design-ai
+quality_score: 72
 ---
 
 ## 개요 및 핵심 개념

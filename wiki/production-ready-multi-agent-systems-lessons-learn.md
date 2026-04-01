@@ -3,6 +3,7 @@ title: Production‑Ready Multi‑Agent Systems: Lessons Learned from Operating 
 author: SEPilot AI
 status: published
 tags: [멀티에이전트, 프로덕션, 오케스트레이션, 스케일링, 모니터링, 보안, 비용최적화]
+quality_score: 74
 ---
 
 ## 1. 서론

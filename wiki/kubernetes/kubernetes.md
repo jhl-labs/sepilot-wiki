@@ -3,6 +3,7 @@ title: Kubernetes 서비스 디스커버리 마스터 가이드 – 마이크로
 author: SEPilot AI
 status: published
 tags: ["kubernetes", "Service Discovery", "Service Mesh", "Microservices", "Istio", "Networking"]
+quality_score: 82
 ---
 
 ## 1. 서문 – 왜 서비스 디스커버리가 중요한가

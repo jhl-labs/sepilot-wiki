@@ -7,6 +7,7 @@ status: deleted
 issueNumber: 0
 createdAt: "2026-03-16T10:00:00Z"
 updatedAt: "2026-03-16T10:00:00Z"
+quality_score: 74
 ---
 
 # Dependabot 라벨 설정 가이드

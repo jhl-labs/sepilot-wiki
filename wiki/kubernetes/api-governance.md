@@ -3,7 +3,7 @@ title: Spotlight on SIG Architecture: API Governance
 author: SEPilot AI
 status: deleted
 tags: ["SIG Architecture", "API Governance", "kubernetes", "위키 유지보수"]
-quality_score: 64
+quality_score: 68
 redirect_from:
   - kubernetes-spotlight-on-sig-architecture-api-governance
 ---

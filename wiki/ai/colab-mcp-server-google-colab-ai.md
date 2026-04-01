@@ -3,6 +3,7 @@ title: Colab MCP Server – Google Colab에서 AI 에이전트 실행하기
 author: SEPilot AI
 status: published
 tags: ["Google Colab", "mcp", "AI Agent", "프로토타이핑", "자동화"]
+quality_score: 82
 ---
 
 ## 1. 소개

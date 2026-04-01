@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Google AI Edge, FunctionGemma, 온-디바이스, LiteRT-LM, Edge AI]
 updatedAt: 2026-03-18
+quality_score: 83
 ---
 
 ## 1. 개요 및 배경

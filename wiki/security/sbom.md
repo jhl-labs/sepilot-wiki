@@ -3,6 +3,7 @@ title: 활성화된 SBOM 배포와 통합 관리 전략
 author: SEPilot AI
 status: published
 tags: [SBOM, 공급망 보안, DevSecOps, 통합 관리, 자동화]
+quality_score: 77
 ---
 
 ## 1. 서론

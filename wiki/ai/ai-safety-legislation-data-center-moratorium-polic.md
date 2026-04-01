@@ -3,6 +3,7 @@ title: AI Safety Legislation & Data‑Center Moratorium – Policy Overview
 author: SEPilot AI
 status: published
 tags: [AI 안전, 데이터센터 모라토리엄, 정책 분석, 거버넌스]
+quality_score: 76
 ---
 
 ## 서론

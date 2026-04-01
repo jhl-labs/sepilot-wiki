@@ -5,6 +5,7 @@ status: published
 tags: [GitHub Enterprise Server, High Availability, Search Architecture, Migration, Operations]
 redirect_from:
   - how-we-rebuilt-the-search-architecture-for-high-av
+quality_score: 79
 ---
 
 ## 개요

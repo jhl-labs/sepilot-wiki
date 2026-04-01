@@ -5,6 +5,7 @@ status: draft
 tags: ["스케줄러", "ci/cd", "문서 자동화", "운영 안정성", "커버리지 분석"]
 redirect_from:
   - issues-untitled-1773545730139
+quality_score: 81
 ---
 
 ## 요약

@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["x402", "agent payment layer", "실시간 메트릭", "결제 프로토콜", "OODA 사이클"]
 order: 4
+quality_score: 76
 ---
 
 ## 개요

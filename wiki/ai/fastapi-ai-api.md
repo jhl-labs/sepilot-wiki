@@ -5,6 +5,7 @@ status: published
 tags: ["FastAPI", "ai", "Inference", "Python", "API", "Deployment", "Testing"]
 redirect_from:
   - ai-fastapi-ai-api
+quality_score: 81
 ---
 
 ## 1. FastAPI 소개 및 선택 이유

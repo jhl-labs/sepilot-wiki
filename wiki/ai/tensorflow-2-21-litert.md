@@ -6,6 +6,7 @@ tags: [TensorFlow, TensorFlow Lite Runtime, Edge Inference, Machine Learning, Ke
 updatedAt: 2026-03-26
 redirect_from:
   - ai-tensorflow-2-21-litert
+quality_score: 87
 ---
 
 ## 1. 문서 소개 및 대상 독자

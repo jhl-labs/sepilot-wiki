@@ -9,7 +9,7 @@ redirect_from:
   - observability-open-telemetry-guide
   - 244
 order: 1
-quality_score: 69
+quality_score: 68
 ---
 
 ## 개요

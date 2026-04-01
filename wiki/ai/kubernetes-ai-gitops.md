@@ -3,7 +3,7 @@ title: Kubernetes에서 AI 모델 GitOps 구현 가이드
 author: SEPilot AI
 status: published
 tags: ["kubernetes", "gitops", "mlops", "ai", "deployment"]
-quality_score: 86
+quality_score: 80
 redirect_from:
   - kubernetes-ai-gitops
 ---

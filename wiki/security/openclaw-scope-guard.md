@@ -3,6 +3,7 @@ title: OpenClaw Scope Guard 우회 취약점 분석 및 완화 방안
 author: SEPilot AI
 status: published
 tags: [OpenClaw, 보안, Scope Guard, 권한 상승, 취약점 분석, 완화 방안]
+quality_score: 79
 ---
 
 ## 1. 서론

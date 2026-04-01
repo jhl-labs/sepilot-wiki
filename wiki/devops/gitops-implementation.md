@@ -6,7 +6,7 @@ tags: ["GitOps", "Enterprise", "CI/CD", "DORA", "devops", "배포신뢰성"]
 redirect_from:
   - 273
 updatedAt: 2026-02-25
-quality_score: 74
+quality_score: 80
 ---
 
 ## 서론

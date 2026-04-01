@@ -5,6 +5,7 @@ status: published
 tags: ["ai", "에이전트", "메시징", "REST API", "AgentBus"]
 redirect_from:
   - agentbus-ai-rest-api
+quality_score: 73
 ---
 
 ## Overview & Motivation

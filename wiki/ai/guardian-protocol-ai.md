@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [AI 거버넌스, 자율 에이전트, 구조화된 의사결정 양식, Relational Autonomy, Provenance Chain]
 updatedAt: 2026-03-10
+quality_score: 77
 ---
 
 ## 1. 서문

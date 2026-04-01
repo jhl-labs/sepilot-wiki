@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["ai", "Agentic Workflow", "거버넌스", "CI/CD", "GitHub Actions"]
 updatedAt: 2026-03-27
+quality_score: 68
 ---
 
 ## 1. 서론

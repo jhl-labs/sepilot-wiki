@@ -8,6 +8,7 @@ redirect_from:
   - observability-ai
 order: 5
 updatedAt: 2026-03-20
+quality_score: 73
 ---
 
 ## 1. 서론

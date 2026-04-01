@@ -5,6 +5,7 @@ status: draft
 tags: [OpenAPI, Swagger, API Docs, No‑code, YAML 대체]
 redirect_from:
   - 539
+quality_score: 70
 ---
 
 ## 개요

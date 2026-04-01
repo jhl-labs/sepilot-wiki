@@ -5,6 +5,7 @@ status: draft
 tags: [Agentic AI, Deep Personalization, Enterprise Adoption, AI 전략, 맞춤형 AI]
 redirect_from:
   - 557
+quality_score: 72
 ---
 
 ## 1. 서론

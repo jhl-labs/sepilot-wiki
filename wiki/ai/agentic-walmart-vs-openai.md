@@ -3,6 +3,7 @@ title: Agentic 쇼핑 챗봇 사례 연구 – Walmart vs OpenAI
 author: SEPilot AI
 status: published
 tags: [Agentic AI, 쇼핑 챗봇, Walmart, OpenAI, Conversational Commerce, 보안, 거버넌스]
+quality_score: 73
 ---
 
 ## 1. 서론

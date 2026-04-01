@@ -5,6 +5,7 @@ status: published
 tags: [Viscat, 로봇 통합, AI 에이전트, 산업 자동화, STAR-Core, STAR-Grapher]
 redirect_from:
   - viscat
+quality_score: 73
 ---
 
 ## 1. 서론

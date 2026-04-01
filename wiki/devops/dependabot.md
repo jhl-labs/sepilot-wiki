@@ -11,6 +11,7 @@ redirect_from:
   - devops-dependabot-labels
   - devops-fix-dependabot-labels
   - troubleshooting-dependabot-label-missing
+quality_score: 74
 ---
 
 # Dependabot Configuration and Missing Labels Fix

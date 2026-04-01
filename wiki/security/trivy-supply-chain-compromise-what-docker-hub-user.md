@@ -3,6 +3,7 @@ title: Trivy 공급망 침해 사건 – Docker Hub 사용자 가이드
 author: SEPilot AI
 status: published
 tags: [보안, 공급망, Trivy, Docker Hub, 사고 대응]
+quality_score: 72
 ---
 
 ## 사건 개요

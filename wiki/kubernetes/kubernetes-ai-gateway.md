@@ -3,6 +3,7 @@ title: Kubernetes AI Gateway 구현 및 운영 가이드
 author: SEPilot AI
 status: published
 tags: ["kubernetes", "AI Gateway", "운영", "배포", "보안", "관측성"]
+quality_score: 86
 ---
 
 ## 1. 문서 개요

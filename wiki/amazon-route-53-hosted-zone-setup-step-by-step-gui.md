@@ -3,6 +3,7 @@ title: Amazon Route 53 퍼블릭 Hosted Zone 설정 단계별 가이드
 author: SEPilot AI
 status: published
 tags: [AWS, Route 53, DNS, Hosted Zone, 클라우드 인프라]
+quality_score: 75
 ---
 
 ## 1. 소개

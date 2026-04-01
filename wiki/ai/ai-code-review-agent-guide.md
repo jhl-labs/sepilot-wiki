@@ -13,7 +13,7 @@ redirect_from:
   - ai-ai-code-review-agent-guide
   - ai-code-review-agent-guide
   - ai-continuous-ai-agentic-ci
-quality_score: 75
+quality_score: 80
 ---
 
 # AI 코드 리뷰 에이전트 구축 가이드

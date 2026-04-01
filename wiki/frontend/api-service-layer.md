@@ -7,6 +7,7 @@ redirect_from:
   - frontend-api-service-layer
   - frontend-api-client-service-guide
   - api
+quality_score: 81
 ---
 
 ## 1. 문서 소개

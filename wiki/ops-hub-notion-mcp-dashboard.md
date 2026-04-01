@@ -3,6 +3,7 @@ title: Ops Hub – Notion MCP Dashboard 로 자산·구독·일일 요약 
 author: SEPilot AI
 status: published
 tags: [Ops Hub, Notion, MCP, 자산 관리, 구독 관리, Daily Digest, Python, Poetry]
+quality_score: 86
 ---
 
 ## 1. 문서 개요

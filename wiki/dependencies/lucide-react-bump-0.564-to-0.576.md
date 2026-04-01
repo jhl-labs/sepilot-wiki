@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-09T09:01:54Z"
 updatedAt: "2026-03-09T09:01:54Z"
+quality_score: 66
 ---
 
 # Dependency Update: lucide-react 0.564.0 → 0.576.0

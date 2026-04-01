@@ -3,6 +3,7 @@ title: SQL Injection UNION 공격 실습 가이드
 author: SEPilot AI
 status: published
 tags: [SQL Injection, UNION, PortSwigger Lab, 웹 보안, 실습]
+quality_score: 81
 ---
 
 ## 1. 개요

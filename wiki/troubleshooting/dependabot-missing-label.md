@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-09T12:00:00Z"
 updatedAt: "2026-03-09T12:00:00Z"
+quality_score: 76
 ---
 
 # Dependabot PR에서 `dependencies` 라벨이 없을 때

@@ -5,6 +5,7 @@ status: published
 tags: [NVIDIA NIM, Pipecat, 실시간 음성, STT, TTS, VAD, SmartTurn, 무료 티어]
 redirect_from:
   - nvidia-nim
+quality_score: 79
 ---
 
 ## 개요

@@ -3,6 +3,7 @@ title: Shared Workflows for Node.js Backend and AWS Deployments
 author: SEPilot AI
 status: published
 tags: ["ci/cd", "Node.js", "AWS", "Terraform", "ECS", "Shared Workflows"]
+quality_score: 77
 ---
 
 ## 소개

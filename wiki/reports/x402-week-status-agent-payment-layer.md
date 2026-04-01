@@ -5,6 +5,7 @@ status: draft
 tags: ["x402", "Agent Payment Layer", "MPP", "OODA", "CVR", "402Index", "security", "payment protocol", "api"]
 redirect_from:
   - reports-559
+quality_score: 72
 ---
 
 ## 개요

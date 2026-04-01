@@ -5,6 +5,7 @@ status: draft
 tags: ["ai", "경제학", "자율 에이전트", "수익 모델", "2026"]
 redirect_from:
   - 622
+quality_score: 67
 ---
 
 ## 서론

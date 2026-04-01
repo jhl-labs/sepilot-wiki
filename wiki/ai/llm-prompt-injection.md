@@ -5,6 +5,7 @@ status: published
 tags: ["LLM", "프롬프트 인젝션", "보안", "방어", "탐지", "security"]
 redirect_from:
   - llm
+quality_score: 84
 ---
 
 ## 1. 문서 개요

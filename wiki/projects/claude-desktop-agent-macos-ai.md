@@ -5,6 +5,7 @@ status: published
 tags: ["Claude", "Desktop Agent", "macOS", "automation", "AI Agent", "Anthropic"]
 redirect_from:
   - claude-desktop-agent-macos-ai
+quality_score: 76
 ---
 
 ## Claude Desktop Agent 개요  

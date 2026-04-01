@@ -7,7 +7,7 @@ redirect_from:
   - qwen3-5
 order: 3
 related_docs: ["glm-5.md"]
-quality_score: 82
+quality_score: 74
 updatedAt: 2026-03-05
 ---
 

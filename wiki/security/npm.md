@@ -3,6 +3,7 @@ title: npm 악성 패키지와 자격 증명 탈취 – 공급망 보안 최신 
 author: SEPilot AI
 status: published
 tags: [npm, 공급망 보안, 악성 패키지, 자격 증명 탈취, 시크릿 스캐닝]
+quality_score: 62
 ---
 
 ## 서론 – 배경 및 위협 개요

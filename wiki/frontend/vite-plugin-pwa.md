@@ -6,6 +6,7 @@ tags: [vite, vite-plugin-pwa, PWA, 오프라인, 서비스워커, 매니페스�
 redirect_from:
   - frontend-vite-plugin-pwa-pwa
   - vite-plugin-pwa-pwa
+quality_score: 83
 ---
 
 ## 1. 개요 및 목적

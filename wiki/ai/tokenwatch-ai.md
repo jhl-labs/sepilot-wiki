@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [AI 비용 관리, TokenWatch, 토큰 추적, 예산 최적화, 프라이버시]
 updatedAt: 2026-03-26
+quality_score: 77
 ---
 
 ## 1. 서론 – AI 비용 관리의 필요성

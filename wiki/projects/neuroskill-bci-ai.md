@@ -5,6 +5,7 @@ status: published
 tags: [NeuroSkill, BCI, Edge AI, 프로액티브 에이전시, SKILL.md, NeuroLoop]
 redirect_from:
   - neuroskill-bci-ai
+quality_score: 76
 ---
 
 ## 1. 서론

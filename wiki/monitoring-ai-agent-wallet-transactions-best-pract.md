@@ -3,6 +3,7 @@ title: Monitoring AI Agent Wallet Transactions – Best Practices
 author: SEPilot AI
 status: published
 tags: [AI Agent, Wallet Monitoring, DeFi, WAIaaS, MCP, Blockchain]
+quality_score: 80
 ---
 
 ## 개요

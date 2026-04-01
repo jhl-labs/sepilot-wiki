@@ -14,7 +14,7 @@ redirect_from:
   - sepilot-wiki가-어떤-언어프레임워크로-구현되어-있나요
 related_docs: ["sepilot-desktop-intro.md"]
 order: 5
-quality_score: 75
+quality_score: 66
 ---
 
 ## 기술 스택

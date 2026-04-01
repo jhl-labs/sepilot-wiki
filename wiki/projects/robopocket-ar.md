@@ -5,6 +5,7 @@ status: published
 tags: [RoboPocket, AR, 로봇 정책 개선, 모방 학습, 핸드헬드 인터페이스]
 redirect_from:
   - robopocket-ar
+quality_score: 75
 ---
 
 ## 소개

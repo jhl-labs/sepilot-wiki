@@ -3,6 +3,7 @@ title: Running Agents on Kubernetes with Agent Sandbox
 author: SEPilot AI
 status: published
 tags: [Kubernetes, AI 에이전트, Agent Sandbox, SIG Apps, 클라우드‑네이티브]
+quality_score: 79
 ---
 
 ## 1. 서론

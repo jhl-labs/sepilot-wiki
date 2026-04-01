@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["llm", "프롬프트 인젝션", "보안", "관측성"]
 updatedAt: 2026-03-26
+quality_score: 77
 ---
 
 ## 1. 문서 개요

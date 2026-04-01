@@ -10,6 +10,7 @@ tags:
   - AI 에이전트
 redirect_from:
   - github-copilot-ci-cd
+quality_score: 79
 ---
 
 ## 1. 서론

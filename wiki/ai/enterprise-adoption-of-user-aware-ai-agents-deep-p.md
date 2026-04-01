@@ -3,6 +3,7 @@ title: Enterprise Adoption of User‑Aware AI Agents – Deep Personalization Tr
 author: SEPilot AI
 status: published
 tags: ["ai", "Agentic AI", "Deep Personalization", "Enterprise Adoption", "Governance", "Zoom", "Claude", "OpenClaw", "Red Dragon AI"]
+quality_score: 68
 ---
 
 ## 1. 서론 – 왜 “User‑Aware AI Agent”가 기업 전략의 핵심이 되는가

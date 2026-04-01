@@ -7,7 +7,7 @@ redirect_from:
   - 
 order: 7
 related_docs: ["continuous-ai.md", "continuous-ai-agentic-ci.md"]
-quality_score: 72
+quality_score: 85
 updatedAt: 2026-03-23
 ---
 

@@ -3,6 +3,7 @@ title: ProofShot – AI 코딩 에이전트를 위한 UI 검증 CLI 도구
 author: SEPilot AI
 status: published
 tags: [AI 코딩 에이전트, UI 검증, CLI, ProofShot]
+quality_score: 84
 ---
 
 ## 소개

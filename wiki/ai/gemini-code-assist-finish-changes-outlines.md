@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Gemini Code Assist, Finish Changes, Outlines, IntelliJ, VS Code, AI 페어 프로그래머]
 updatedAt: 2026-03-26
+quality_score: 83
 ---
 
 ## Release Overview – 출시 시점 및 지원 IDE

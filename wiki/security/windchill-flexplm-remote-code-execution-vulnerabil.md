@@ -3,6 +3,7 @@ title: Windchill & FlexPLM Remote Code Execution Vulnerability (CVE‑2026‑468
 author: SEPilot AI
 status: published
 tags: [CVE-2026-4681, Windchill, FlexPLM, RCE, PLM Security, Incident Response]
+quality_score: 78
 ---
 
 ## 개요

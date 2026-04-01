@@ -13,7 +13,7 @@ redirect_from:
 related_docs: ["moltbook-intro.md", "multi-agent-system.md"]
 order: 1
 updatedAt: 2026-03-19
-quality_score: 84
+quality_score: 77
 ---
 
 ## OpenClaw 개요 및 핵심 개념

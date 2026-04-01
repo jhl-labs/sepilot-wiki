@@ -7,6 +7,7 @@ status: deleted
 issueNumber: 0
 createdAt: "2026-03-09T21:00:00Z"
 updatedAt: "2026-03-09T21:00:00Z"
+quality_score: 65
 ---
 
 # DOMPurify 3.3.2 업데이트

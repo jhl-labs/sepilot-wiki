@@ -6,6 +6,7 @@ tags: [AI 코딩, 멀티 에이전트, 오케스트레이션, 워크플로, Jupi
 updatedAt: 2026-03-26
 redirect_from:
   - ai-ai
+quality_score: 79
 ---
 
 ## 1. 서론

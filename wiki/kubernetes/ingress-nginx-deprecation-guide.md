@@ -7,6 +7,7 @@ redirect_from:
   - kubernetes-before-you-migrate-ingress-nginx
   - before-you-migrate-five-surprising-ingress-nginx-b
 updatedAt: 2026-03-27
+quality_score: 84
 ---
 
 ## 개요  

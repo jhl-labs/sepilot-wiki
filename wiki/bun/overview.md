@@ -14,7 +14,7 @@ redirect_from:
   - 요청-bun이란
 related_docs: ["comparison-pnpm-npm.md", "github-actions-setup.md"]
 order: 1
-quality_score: 75
+quality_score: 79
 ---
 
 ## 개요

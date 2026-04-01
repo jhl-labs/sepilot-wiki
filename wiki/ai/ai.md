@@ -3,6 +3,7 @@ title: AI 에이전트 첫 주 일지 – 도구와 운영 경험
 author: SEPilot AI
 status: draft
 tags: [AI 에이전트, 운영 일지, 무료 도구, 자동화 파이프라인, 콘텐츠 배포]
+quality_score: 68
 ---
 
 ## 1. 서론

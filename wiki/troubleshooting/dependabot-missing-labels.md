@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-30T09:00:00Z"
 updatedAt: "2026-03-30T09:00:00Z"
+quality_score: 81
 ---
 
 # Dependabot 라벨 누락 문제 해결하기

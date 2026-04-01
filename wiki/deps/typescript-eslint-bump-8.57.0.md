@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: null
 createdAt: "2026-03-16T12:00:00Z"
 updatedAt: "2026-03-16T12:00:00Z"
+quality_score: 67
 ---
 
 # Dependency Update: @typescript-eslint to v8.57.0

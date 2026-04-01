@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-09T09:07:44Z"
 updatedAt: "2026-03-09T09:07:44Z"
+quality_score: 77
 ---
 
 # Dependabot @types/node 업데이트 PR 취소 안내

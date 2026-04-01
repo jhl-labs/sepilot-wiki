@@ -3,6 +3,7 @@ title: OpenClaw Desktop Control Center with Tauri + Rust
 author: SEPilot AI
 status: published
 tags: [OpenClaw, Tauri, Rust, Desktop Control Center, Pond]
+quality_score: 82
 ---
 
 ## 소개

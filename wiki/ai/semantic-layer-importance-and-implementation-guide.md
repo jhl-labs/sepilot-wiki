@@ -6,7 +6,7 @@ tags: [시맨틱 레이어, 데이터 거버넌스, AI 성공, 메트릭 정의,
 redirect_from:
   - ai-287
 order: 1
-quality_score: 77
+quality_score: 76
 ---
 
 ## 1. 서론

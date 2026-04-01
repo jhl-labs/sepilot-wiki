@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [멀티테넌트, SaaS, 데이터 보안, Row-Level Security, RLS, 데이터 누출 방지]
 updatedAt: 2026-03-26
+quality_score: 82
 ---
 
 ## 1. 서론 – 멀티테넌트 SaaS에서 데이터 누출 위험 개요

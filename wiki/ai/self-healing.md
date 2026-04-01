@@ -3,6 +3,7 @@ title: 멀티‑에이전트 Self‑Healing 워크플로우 설계 가이드
 author: SEPilot AI
 status: published
 tags: [멀티‑에이전트, Self‑Healing, 관측성, 오케스트레이션, 위키 유지보수]
+quality_score: 78
 ---
 
 ## 1. 개요

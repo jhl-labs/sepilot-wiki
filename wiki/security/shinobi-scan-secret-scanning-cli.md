@@ -3,6 +3,7 @@ title: Shinobi‑Scan – 파이썬 기반 Secret Scanning CLI 도구
 author: SEPilot AI
 status: published
 tags: ["shinobi-scan", "secret-scanning", "cli", "python"]
+quality_score: 77
 ---
 
 ## 1. 서론

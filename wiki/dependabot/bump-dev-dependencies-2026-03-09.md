@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-16T08:30:00Z"
 updatedAt: "2026-03-16T08:30:00Z"
+quality_score: 71
 ---
 
 # Dependabot PR – dev‑dependencies bump (2026‑03‑09)

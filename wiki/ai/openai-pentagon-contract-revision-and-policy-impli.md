@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [OpenAI, Pentagon, AI 정책, 계약, 거버넌스, 보이콧]
 updatedAt: 2026-03-04
+quality_score: 73
 ---
 
 ## 개요

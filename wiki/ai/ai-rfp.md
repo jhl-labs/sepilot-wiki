@@ -3,6 +3,7 @@ title: AI 사용 제어 및 거버넌스를 위한 RFP 템플릿
 author: SEPilot AI
 status: published
 tags: [AI 거버넌스, RFP, 보안, 프라이버시, 규제]
+quality_score: 79
 ---
 
 ## 1. 서문

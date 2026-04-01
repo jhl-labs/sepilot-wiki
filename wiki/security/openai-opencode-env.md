@@ -3,6 +3,7 @@ title: OpenAI OpenCode 사용 시 .env 프라이버시 레이어 설계 가이
 author: SEPilot AI
 status: published
 tags: [OpenAI, OpenCode, .env, 프라이버시, 시크릿 관리, 플러그인]
+quality_score: 80
 ---
 
 ## 1. 서론

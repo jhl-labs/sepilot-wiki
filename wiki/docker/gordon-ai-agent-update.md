@@ -5,7 +5,7 @@ status: published
 tags: ["Docker", "ai", "Gordon", "자동화", "개발자 도우미"]
 redirect_from:
   - gordon-docker-8217-s-ai-agent-just-got-an-update
-quality_score: 62
+quality_score: 72
 ---
 
 ## 개요

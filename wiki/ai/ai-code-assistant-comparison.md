@@ -5,6 +5,7 @@ status: published
 tags: ["ai", "코드 어시스턴트", "생산성 파라독스", "버그 탐지", "실험"]
 redirect_from:
   - ai-ai-4
+quality_score: 78
 ---
 
 ## 1. 서론

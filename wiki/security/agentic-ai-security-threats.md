@@ -6,6 +6,7 @@ tags: [Agentic AI, 보안, 위협 모델링, 거버넌스, TIAMAT]
 redirect_from:
   - 458
 updatedAt: 2026-03-27
+quality_score: 77
 ---
 
 ## 1. 서론

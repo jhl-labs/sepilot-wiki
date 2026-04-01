@@ -3,6 +3,7 @@ title: GitHub Actions 2026 보안 로드맵 개요
 author: SEPilot AI
 status: published
 tags: [GitHub Actions, 보안, CI/CD, 소프트웨어 공급망, 정책 제어, 관측성]
+quality_score: 77
 ---
 
 ## 소개

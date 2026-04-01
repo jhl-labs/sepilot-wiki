@@ -6,6 +6,7 @@ tags: ["LLM", "observability", "Logmera", "Self‑Hosted", "FastAPI", "PostgreSQ
 redirect_from:
   - observability-374
 order: 5
+quality_score: 82
 ---
 
 ## 1. 서론

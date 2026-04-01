@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-03-02T09:45:00Z"
 updatedAt: "2026-03-02T09:45:00Z"
+quality_score: 75
 ---
 
 # Dependabot Labels Configuration Guide

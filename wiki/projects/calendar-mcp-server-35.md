@@ -5,6 +5,7 @@ status: published
 tags: ["Calendar", "mcp", "Google Calendar", "Microsoft Graph", "Apple EventKit", "CalDAV", "통합"]
 redirect_from:
   - calendar-mcp-server-35
+quality_score: 87
 ---
 
 ## 1. 문서 개요

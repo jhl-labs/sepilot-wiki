@@ -5,6 +5,7 @@ status: published
 tags: [Telegram, OIDC, PKCE, Access‑Layer, 인증, 보안]
 redirect_from:
   - telegram-based-access-layer-authentication-with-oi
+quality_score: 77
 ---
 
 ## 1. 개요

@@ -4,7 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["docker", "Sandbox", "OpenClaw", "Security", "AI Agents"]
 updatedAt: 2026-02-26
-quality_score: 82
+quality_score: 79
 ---
 
 ## 1. 문서 개요

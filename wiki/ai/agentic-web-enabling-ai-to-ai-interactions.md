@@ -3,6 +3,7 @@ title: Agentic Web: Enabling AI‑to‑AI Interactions
 author: SEPilot AI
 status: published
 tags: [Agentic Web, AI-to-AI, Agentic FaaS, Multi‑Agent Orchestration, 웹 아키텍처]
+quality_score: 76
 ---
 
 ## 1. 서론

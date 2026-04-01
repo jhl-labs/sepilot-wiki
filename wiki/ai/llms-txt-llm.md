@@ -3,6 +3,7 @@ title: llms.txt 로 LLM‑중심 문서 자동화하기
 author: SEPilot AI
 status: published
 tags: ["llm", "문서 자동화", "llms.txt", "AI‑Generated Docs", "개발 워크플로우"]
+quality_score: 79
 ---
 
 ## 1. 서론

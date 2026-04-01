@@ -2,8 +2,8 @@
   "title": "SEPilot Desktop 소개",
   "slug": "projects/sepilot-desktop-intro",
   "content": "\n# SEPilot Desktop 소개\n\nSEPilot Desktop은 오픈소스 LLM 기반 데스크톱 애플리케이션으로, **Chat**, **Editor**, **Browser** 세 가지 모드를 제공하여 강력하고 유연한 AI 워크플로우를 지원합니다. LangGraph 워크플로우, RAG, MCP 도구, Monaco Editor, Vision 기반 브라우저 자동화 등 다양한 기능을 통합했습니다.\n\n---\n\n## 📦 다운로드 & 소스\n- **다운로드**: [SEPilot Desktop 다운로드](https://jhl-labs.github.io/sepilot_desktop/#download)\n- **GitHub**: [GitHub 저장소](https://github.com/jhl-labs/sepilot_desktop)\n- **데모 영상**: assets/videos/demo-main.mp4\n\n---\n\n## 🧭 3가지 애플리케이션 모드\n\n### 1. Chat 모드\nAI와 대화하고 질문할 수 있습니다.\n- LangGraph 워크플로우 (Instant, Sequential, Deep, Coding, RAG, Browser 등 6가지)\n- RAG 문서 검색 & 편집, 폴더 관리, Export/Import\n- MCP 도구 통합 (GitHub, Brave Search, Filesystem 등)\n- 이미지 생성 & 해석 (ComfyUI, Vision API)\n- Persona 시스템 (AI 역할 정의, SQLite 영구 저장)\n- Quick Question (최대 5개 단축키)\n- GitHub Sync (AES‑256‑GCM 암호화)\n\n> **데모**: assets/videos/chat-mode-demo.mp4\n\n### 2. Editor 모드\n코드 작성 및 파일 관리에 최적화된 환경입니다.\n- Monaco Editor (VS Code 엔진, 구문 강조, AI 자동완성)\n- 파일 탐색기 (Working Directory, 파일 생성/삭제/이름변경)\n- 다중 파일 탭, Markdown 미리보기\n- 통합 터미널 (xterm.js, PowerShell/bash/zsh, 탭 관리)\n- 전체 파일 검색 (ripgrep 기반, Ctrl+Shift+F)\n- Advanced Editor Agent (50회 반복, 9개 Built‑in Tools)\n- 10가지 Notion 스타일 Writing Tools\n\n> **데모**: assets/videos/editor-mode-demo.mp4\n\n### 3. Browser 모드\nAI와 함께 웹을 탐색하고 자동화합니다.\n- Chromium 기반 브라우저 (BrowserView, Chrome 스타일 탭)\n- 18개 자동화 도구 (Navigate, DOM Inspection, Vision Tools 등)\n- Google Search Tools (검색, 뉴스, Scholar, 이미지, 고급 필터)\n- Vision 기반 UI 제어 (Set‑of‑Mark, 좌표 클릭)\n- Bot 감지 우회 (Stealth Fingerprint, 자연스러운 타이밍)\n- 페이지 캡처 (MHTML + 스크린샷, 오프라인 뷰어)\n- 북마크 관리 (폴더별 정리)\n\n> **데모**: assets/videos/browser-mode-demo.mp4\n\n---\n\n## 🌟 주요 기능\n\n### LangGraph 워크플로우\n다양한 사고(Thinking) 모드 지원: Instant, Sequential, Tree‑of‑Thought, Deep 등. 실시간 스트리밍으로 사고 과정 시각화 및 conversationId 기반 격리.\n\n### AI Persona 시스템 (v0.6.0)\n- 기본 페르소나: 일반 어시스턴트, 번역가, 영어 선생님, 시니어 개발자\n- 사용자 정의 페르소나 추가/수정/삭제\n- 슬래시 커맨드 자동완성 (/persona)\n- SQLite 기반 영구 저장\n\n### RAG (검색 증강 생성)\n- 텍스트, URL, 파일(PDF, DOCX, TXT, MD) 업로드 지원\n- SQLite‑vec, OpenSearch, Elasticsearch, pgvector 지원\n- 문서 편집 AI (정제, 확장, 축약, 검증, 커스텀 프롬프트)\n- 폴더 구조 관리 (드래그 앤 드롭, Tree/List/Grid 뷰)\n- Export/Import (JSON 형식, 백업/복원)\n\n> **데모**: assets/videos/rag-demo.gif\n\n### 브라우저 자동화 (v0.6.0)\n- Electron BrowserView 기반 Chromium 통합\n- Vision 기반 UI 제어 및 Google Search Tools\n- DOM Inspection, Vision Tools, Bot 감지 우회 등 27개 도구\n\n> **데모**: assets/videos/browser-automation.gif\n\n### MCP 프로토콜\n- Model Context Protocol을 통한 도구 및 컨텍스트 표준화\n- GitHub, Brave Search, Git, Filesystem 등 템플릿 제공\n- 환경 변수 UI 설정, 실행 전 사용자 승인 (5분 타임아웃)\n\n> **데모**: assets/videos/mcp-tools.gif\n\n### GitHub Sync (v0.6.0)\n- Personal Access Token 기반 안전한 데이터 동기화\n- AES‑256‑GCM 암호화로 민감 정보 보호\n- 설정, 문서, 페르소나, 이미지, 대화 내역 동기화\n\n> **데모**: assets/videos/github-sync.gif\n\n### 이미지 기능\n- ComfyUI 통합 이미지 생성\n- Vision API 기반 이미지 해석 및 질의응답\n\n> **데모**: assets/videos/image-generation.gif\n\n---\n\n## 🛠️ 기술 스택\n- **프론트엔드**: Next.js 15.3, React 19, TypeScript 5.7, Tailwind CSS, shadcn/ui, Zustand\n- **에디터**: Monaco Editor (VS Code 엔진)\n- **데스크톱**: Electron 35 (크로스‑플랫폼)\n- **백엔드 런타임**: Node.js 20+\n- **데이터베이스**: better‑sqlite3, SQLite‑vec (벡터 검색)\n- **IPC**: Context Bridge (안전한 통신)\n- **LLM & AI**: LangGraph, LangChain, OpenAI, Anthropic, Google, Groq, MCP Protocol, ComfyUI\n\n---\n\n## 🚀 빠른 시작 (5분 안에 시작)\n1. **다운로드 및 설치**\n   - Windows: `SEPilot-Setup-0.6.0.exe`\n   - macOS: `SEPilot-0.6.0.dmg`\n   - Linux: `SEPilot-0.6.0.AppImage`\n2. **LLM 설정**\n   - 좌측 하단 설정 아이콘 → LLM 제공자 및 API 키 입력\n   - 지원: OpenAI, Anthropic, Google, Custom (OpenAI‑compatible)\n3. **모드 및 그래프 선택**\n   - Chat, Editor, Browser 중 선택\n   - 필요 시 LangGraph 워크플로우 타입 선택 (Instant, RAG, Agent 등)\n4. **대화 시작**\n   - 준비가 완료되면 AI와 대화를 시작하세요!\n\n---\n\n## 📋 시스템 요구사항\n- **최소**: Node.js 20.9+, 4 GB RAM, 500 MB 디스크\n- **권장**: Node.js 22+, 8 GB RAM, 1 GB 디스크\n\n---\n\n*이 문서는 초안(draft) 상태이며, 검토 후 `published` 로 전환될 예정입니다.*",
-  "lastModified": "2026-03-31T23:46:35Z",
-  "author": "GitHub Action",
+  "lastModified": "2026-03-01T03:03:46Z",
+  "author": "github-actions[bot]",
   "status": "published",
   "isDraft": false,
   "isInvalid": false,
@@ -20,12 +20,202 @@
   "order": 1,
   "history": [
     {
-      "sha": "342300f",
-      "message": "chore: 대시보드 통계 수집 - 2026-03-31 23:46",
+      "sha": "ffb0141",
+      "message": "📊 문서 품질 평가: 평균 76점",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-03-01T03:03:46Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "230e2d6",
+      "message": "🌳 Wiki Tree Maintenance: Wiki contains 84 documents across many topics. Most files are correctly placed, but several root‑level documents, duplicate/deleted versions, and mis‑categorized items exist. Duplicate content is found for SNKV, Emdash, Gemini‑3.1, Incremental‑Static‑Regeneration, Dependabot label guides, and AI‑agent comparison. Root‑level docs (e.g., devsecops.md, 273.md, emdash.md, enterprise‑gitops‑implementation…) violate the rule that only home.md may stay at the repository root.",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-03-31T23:46:35Z",
+      "date": "2026-02-25T03:02:09Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "f9181e2",
+      "message": "docs: Issue #216 - draft 문서 published 전환",
+      "author": "JHL",
+      "authorEmail": "bkperio@gmail.com",
+      "date": "2026-02-22T11:00:45+09:00",
       "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "3cd7bad",
+      "message": "🌳 Wiki Tree Maintenance: 전체 38개의 문서가 존재하며, 루트 레벨에 파일이 다수 존재하고 일부 중복·불필요한 문서가 발견되었습니다. 주요 문제는 루트에 위치한 문서들을 적절한 카테고리로 이동하지 않은 점, 동일 주제의 문서가 중복되어 관리가 어려운 점, 파일명 표준화가 부족한 점입니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-21T11:20:48Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "1a39f60",
+      "message": "🔗 교차 참조 업데이트: 9개 문서",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T02:09:33Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "997dd2a",
+      "message": "🌳 Wiki Tree Maintenance: Wiki는 21개의 문서가 5개의 주요 카테고리( reports, kubernetes, projects, bun, ai )에 흩어져 있습니다. 대부분 파일명은 영문 슬러그 규칙을 따르고 있으나, 루트에 위치한  가 잘못된 위치·오타이며,  가  와 중복됩니다. 카테고리 구조는 전반적으로 적절하지만, 루트 레벨에 문서가 존재하면 안 되고, 중복 문서는 병합해야 합니다.",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-02-20T01:15:23Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "9459c99",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 5개의 주요 카테고리( reports, ai, kubernetes, projects, bun )에 분산되어 있다. 루트 레벨에 존재하는 Qwen3.5 문서가 중복되어 있으며, 루트에 파일이 존재하는 것은 금지 규칙을 위반한다. 또한 동일한 Opencode 문서가 두 개 존재하지만 하나는 이미 deleted 상태이므로 삭제만으로 충분하다. 파일명은 대부분 slug 규칙을 따르고 있어 별도 rename이 필요하지 않다. 각 카테고리별 문서 순서를 정리하고, 카테고리 메타데이터를 추가하면 탐색성이 향상된다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T02:01:59Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e9ead79",
+      "message": "🌳 Wiki Tree Maintenance: 전체 23개의 문서가 5개의 주요 카테고리(projects, ai, kubernetes, bun, reports)로 나뉘어 있습니다. 루트에 위치한 Qwen3.5 문서가 ai 카테고드와 중복되어 있으며, Opencode 관련 중복 문서가 존재합니다. 파일명은 대부분 slug 형태이지만, 루트에 남아 있는 문서는 이동이 필요합니다. 각 카테고리 내 문서 순서를 정의하고, 카테고리 메타데이터를 추가하면 탐색성이 향상됩니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T01:41:58Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0b99235",
+      "message": "🌳 Wiki Tree Maintenance: 전체 위키는 5개의 주요 카테고리( reports, ai, kubernetes, bun, projects ) 로 구성되어 있으나, 루트에 일반 문서가 존재하고 중복된 Opencode 문서가 남아 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-19T01:25:27Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "894b632",
+      "message": "🔗 교차 참조 업데이트: 7개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-18T00:35:00Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "bbce2ca",
+      "message": "🌳 Wiki Tree Maintenance: 현재 위키는 루트 레벨에 두 개의 문서(glm5, opencode)와 중복된 Opencode 가이드가 존재합니다. 전체적으로 카테고리 구분은 적절하지만, 파일명을 영문 슬러그 형태로 정규화하고, 문서 순서를 명시적으로 지정하면 가독성과 유지보수가 크게 향상됩니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-12T07:26:28Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "a897516",
+      "message": "🌳 Wiki Tree Maintenance: 전체 Wiki는 4개의 주요 카테고리(projects, ai, kubernetes, bun)로 구성되어야 합니다. 현재 루트 레벨에 위치한 비정형 파일(.md)과 삭제된 Opencode 문서가 존재해 URL 깨짐 위험이 있습니다. 파일명은 대부분 slug 규칙을 따르고 있으나, 루트 파일은 이동이 필요합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T12:50:57Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "0190970",
+      "message": "🔗 교차 참조 업데이트: 16개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T08:01:05Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e873878",
+      "message": "🌳 Wiki Tree Maintenance: 전체 22개의 문서가 6개의 디렉터리(ci, ai, projects, kubernetes, bun, root) 에 흩어져 있습니다. 루트에 파일이 존재하고,  가 단일 문서만 포함하고 있어 불필요한 카테고리이며, 루트에 있는 Opencode 문서가  와 내용이 중복됩니다. 파일명은 대부분 규칙에 맞지만, 이동·이름 변경이 필요한 문서가 있습니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T07:48:29Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "f640314",
+      "message": "🔗 교차 참조 업데이트: 14개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T06:10:24Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "ff8a92a",
+      "message": "🔗 교차 참조 업데이트: 10개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T05:57:28Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "105157f",
+      "message": "🔗 교차 참조 업데이트: 17개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T04:47:56Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "c6480b9",
+      "message": "🌳 Wiki Tree Maintenance: 14개의 위키 문서가 현재 루트와 몇 개의 하위 디렉터리(bun, projects, ci)만 사용하고 있습니다. 파일명에 일반적인 이름(overview.md, github-actions-setup.md 등)이 포함돼 있어 URL 가독성이 낮고, 릴리즈 노트와 가이드 문서가 같은 레벨에 섞여 있어 탐색이 비효율적입니다. 또한 다수 문서가 draft 상태이며, 파일명을 영문 slug 형태로 통일하지 않아 일관성이 부족합니다.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T02:56:32Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "e71d220",
+      "message": "🔗 교차 참조 업데이트: 13개 문서",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-11T00:39:06Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "c60662c",
+      "message": "🌳 Wiki Tree Maintenance: The wiki contains 9 documents covering Kubernetes, AI/Multi‑Agent systems, the Model Context Protocol, the SEPilot projects and the Bun runtime. Files are currently placed in a flat root with a few sub‑folders (projects, bun). Several filenames are not slug‑ified, drafts are mixed with published content, and there is no clear top‑level categorisation.",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-02-10T12:15:56Z",
+      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }

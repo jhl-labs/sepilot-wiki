@@ -5,6 +5,7 @@ status: published
 tags: [DigitalOcean, NemoClaw, 1‑Click, 배포, 자동화]
 redirect_from:
   - digitalocean-droplet-nemoclaw-1-click
+quality_score: 82
 ---
 
 ## 1. 개요

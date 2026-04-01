@@ -4,7 +4,7 @@ author: SEPilot AI
 status: draft
 tags: ["observability", "Warehouse", "Imply", "관측성"]
 updatedAt: 2026-02-27
-quality_score: 70
+quality_score: 66
 order: 3
 redirect_from:
   - observability-319

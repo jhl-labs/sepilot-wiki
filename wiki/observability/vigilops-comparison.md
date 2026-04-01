@@ -5,6 +5,7 @@ status: deleted
 tags: [모니터링, AI‑native, 자동복구, 알림노이즈, 오픈소스, SaaS]
 redirect_from:
   - observability-435
+quality_score: 73
 ---
 
 ## 서론

@@ -3,7 +3,7 @@ title: AI 생산성 역설 – 개발자 처리량 정체 원인 분석
 author: SEPilot AI
 status: published
 tags: ["ai", "생산성", "개발자", "코딩 어시스턴트", "ROI"]
-quality_score: 66
+quality_score: 69
 ---
 
 ## 서론 – AI 생산성 역설 개념 정의 및 연구 동기  

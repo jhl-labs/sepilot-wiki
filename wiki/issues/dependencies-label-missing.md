@@ -7,6 +7,7 @@ status: deleted
 issueNumber: 0
 createdAt: "2026-03-16T08:00:00Z"
 updatedAt: "2026-03-16T08:00:00Z"
+quality_score: 75
 ---
 
 # 문제 개요

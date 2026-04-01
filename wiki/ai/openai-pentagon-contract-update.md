@@ -5,6 +5,7 @@ status: draft
 tags: [OpenAI, Pentagon, AI 정책, 거버넌스, 계약 수정]
 redirect_from:
   - 345
+quality_score: 67
 ---
 
 ## 1. 배경 및 사건 개요

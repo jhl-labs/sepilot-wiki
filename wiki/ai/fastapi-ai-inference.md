@@ -5,6 +5,7 @@ status: draft
 tags: ["FastAPI", "ai", "Inference", "API", "Python", "머신러닝"]
 redirect_from:
   - 377
+quality_score: 82
 ---
 
 ## 1. 문서 개요

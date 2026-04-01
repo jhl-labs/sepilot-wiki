@@ -5,6 +5,7 @@ status: draft
 tags: [Agentic Web, AI-to-AI, 멀티에이전트, Agentic FaaS, 웹 아키텍처]
 redirect_from:
   - 456
+quality_score: 67
 ---
 
 ## 1. 서론
