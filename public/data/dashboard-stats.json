@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-01T08:51:50.667Z",
+  "collectedAt": "2026-04-01T09:54:19.916Z",
   "overview": {
     "totalDocuments": 352,
     "publishedDocuments": 184,
     "draftDocuments": 168,
     "openRequests": 213,
     "closedRequests": 19,
-    "totalAIActions": 848
+    "totalAIActions": 850
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,45 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 12,
-      "documentsCreated": 3,
-      "documentsModified": 3,
+      "aiActions": 8,
+      "documentsCreated": 0,
+      "documentsModified": 2,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 7530,
-      "totalPipelineDurationMs": 153548
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 117,
-      "documentsCreated": 45,
+      "aiActions": 111,
+      "documentsCreated": 42,
       "documentsModified": 31,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
-      "estimatedTokens": 121501,
-      "totalPipelineDurationMs": 2476708
+      "estimatedTokens": 112132,
+      "totalPipelineDurationMs": 2286161
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-01T09:31:43.091Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "콘텐츠 리뷰",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-01T09:30:09.955Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "지식 확장 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-01T03:15:01.287Z",
       "actionType": "quality_score",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-28T06:28:12.404Z",
-      "actionType": "generate",
-      "issueNumber": 682,
-      "documentTitle": "자동 감지 : 뉴스 인텔리전스 – Telnet PyPI 공급망 공격 대응 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 41088,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2005
-    },
-    {
-      "timestamp": "2026-03-28T06:27:26.375Z",
-      "actionType": "generate",
-      "issueNumber": 681,
-      "documentTitle": "AI 에이전트 프로토콜 스위트 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 49205,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2408
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 830,
+      "totalActions": 832,
       "totalEstimatedTokens": 659065,
       "avgDurationMs": 52937
     },
