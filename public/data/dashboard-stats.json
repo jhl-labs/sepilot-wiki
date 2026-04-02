@@ -1,43 +1,53 @@
 {
-  "collectedAt": "2026-04-02T06:00:59.169Z",
+  "collectedAt": "2026-04-02T06:55:16.819Z",
   "overview": {
     "totalDocuments": 354,
     "publishedDocuments": 186,
     "draftDocuments": 168,
     "openRequests": 216,
     "closedRequests": 19,
-    "totalAIActions": 856
+    "totalAIActions": 857
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 8,
+      "aiActions": 9,
       "documentsCreated": 3,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 9,
       "tavilyResults": 23,
       "estimatedTokens": 7683,
       "totalPipelineDurationMs": 162439
     },
     "last7d": {
-      "aiActions": 91,
-      "documentsCreated": 32,
-      "documentsModified": 26,
+      "aiActions": 86,
+      "documentsCreated": 31,
+      "documentsModified": 23,
       "tavilyApiCalls": 9,
       "tavilyResults": 23,
-      "estimatedTokens": 84122,
-      "totalPipelineDurationMs": 1721252
+      "estimatedTokens": 81808,
+      "totalPipelineDurationMs": 1673966
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-02T06:02:30.176Z",
+      "actionType": "modify",
+      "issueNumber": 608,
+      "documentTitle": " [요청] FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-01T09:55:52.372Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:30:22.452Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 838,
+      "totalActions": 839,
       "totalEstimatedTokens": 666748,
       "avgDurationMs": 52951
     },
