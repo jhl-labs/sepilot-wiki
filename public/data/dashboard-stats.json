@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-02T07:54:20.778Z",
+  "collectedAt": "2026-04-02T08:50:25.308Z",
   "overview": {
     "totalDocuments": 354,
     "publishedDocuments": 186,
     "draftDocuments": 168,
     "openRequests": 216,
     "closedRequests": 19,
-    "totalAIActions": 857
+    "totalAIActions": 858
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 9,
+      "aiActions": 10,
       "documentsCreated": 3,
       "documentsModified": 1,
       "tavilyApiCalls": 9,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 162439
     },
     "last7d": {
-      "aiActions": 86,
+      "aiActions": 87,
       "documentsCreated": 31,
       "documentsModified": 23,
       "tavilyApiCalls": 9,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-02T08:46:06.656Z",
+      "actionType": "quality_score",
+      "issueNumber": 681,
+      "documentTitle": " [요청] AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-02T06:02:30.176Z",
       "actionType": "modify",
@@ -227,21 +237,11 @@
       "durationMs": 52027,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2552
-    },
-    {
-      "timestamp": "2026-03-31T09:30:35.995Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 839,
+      "totalActions": 840,
       "totalEstimatedTokens": 666748,
       "avgDurationMs": 52951
     },
