@@ -40,12 +40,12 @@ MCP는 **AI 애플리케이션을 외부 시스템(데이터 소스, 도구, 워
 ### 핵심 구성 요소  
 - **Servers**: 도구·리소스·프롬프트를 MCP‑준수 형태로 래핑하는 엔드포인트  
 - **Clients**: 전체 프로토콜을 지원해 어떤 MCP 서버든 연결·호출 가능  
-- **Protocol**: 전송 협상, 인증, 버전 관리, 오류 처리 등을 정의한 사양  
+- **Protocol**: 전송 협상, 인증, 버전 관리, 오류 처리 등을 정의한 사양
 
 ### MCP가 AI‑Tool 연동에 제공하는 이점  
 - **표준화**: 다양한 도구를 동일한 인터페이스로 호출  
 - **보안**: TLS·OAuth2 등 표준 인증 메커니즘 포함  
-- **확장성**: 플러그인·미들웨어 형태로 기능 추가 가능  
+- **확장성**: 플러그인·미들웨어 형태로 기능 추가 가능
 
 ---
 
@@ -53,7 +53,7 @@ MCP는 **AI 애플리케이션을 외부 시스템(데이터 소스, 도구, 워
 ### FastMCP가 해결하는 문제점  
 - **복잡한 프로토콜 구현**: 전송 협상·인증·버전 관리 등을 직접 구현해야 하는 부담을 해소  
 - **도구 스키마·문서화**: 함수 시그니처를 기반으로 자동 생성되지 않아 발생하는 일관성 문제 해결  
-- **프로덕션 전환**: 로컬 개발 → 클라우드 배포까지 일관된 파이프라인 제공  
+- **프로덕션 전환**: 로컬 개발 → 클라우드 배포까지 일관된 파이프라인 제공
 
 ### FastMCP의 세 가지 핵심 요소  
 | 요소 | 역할 | 주요 특징 |
@@ -73,7 +73,7 @@ FastMCP는 **Prefect** 가 지원하는 **Prefect Horizon** 에서 무료 호스
 2. FastMCP **Server**가 함수 시그니처를 읽어 **JSON Schema**와 **OpenAPI** 문서 자동 생성  
 3. **Client**는 서버 URL에 연결해 **프로토콜 협상**(TLS, 인증) 수행  
 4. LLM(예: Claude, ChatGPT) 은 **MCP** 를 통해 클라이언트가 제공하는 도구를 호출  
-5. **App** 은 LLM 대화 흐름 안에서 UI 컴포넌트를 렌더링해 사용자와 인터랙션 제공  
+5. **App** 은 LLM 대화 흐름 안에서 UI 컴포넌트를 렌더링해 사용자와 인터랙션 제공
 
 ### 서버‑툴 래핑 메커니즘  
 - `@mcp.tool` 데코레이터는 함수 메타데이터를 추출해 **MCP Tool Specification** 에 맞는 엔드포인트를 자동 등록합니다.  
@@ -115,27 +115,21 @@ FastMCP는 **Prefect** 가 지원하는 **Prefect Horizon** 에서 무료 호스
 1. **모델 선택 최적화**  
    - 실시간 응답이 필요 없는 작업은 비용이 낮은 `gpt‑3.5‑turbo` 혹은 `Claude 3.5‑Sonnet` 등 저가 모델을 사용합니다.  
    - 고품질이 반드시 필요한 경우에만 `gpt‑4o`·`Claude 3 Opus` 등 고가 모델을 호출합니다.
-
 2. **프롬프트 길이 최소화**  
    - 불필요한 시스템 프롬프트, 예시, 설명을 제거해 입력 토큰 수를 줄입니다.  
    - 출력 토큰을 제한(`max_tokens` 파라미터)하여 과도한 응답을 방지합니다.
-
 3. **배치 호출**  
    - 여러 개의 작은 요청을 하나의 배치 엔드포인트(`@mcp.batch_tool`)로 묶어 **요청당 오버헤드**를 감소시킵니다.  
    - 배치 시 토큰당 요금은 동일하지만, 네트워크 비용과 레이턴시가 절감됩니다.
-
 4. **캐싱 활용**  
    - 동일 프롬프트에 대한 결과를 로컬 혹은 분산 캐시(Redis, Memcached)로 저장해 재요청을 방지합니다.  
    - FastMCP 서버 레이어에 `add_middleware(CacheMiddleware)` 형태로 미들웨어를 삽입할 수 있습니다.
-
 5. **온디맨드 vs 예약 인스턴스**  
    - Azure OpenAI와 같이 **예약 용량**을 구매하면 토큰당 비용을 20 % 이상 절감할 수 있습니다.  
    - 장기 사용이 예상되는 경우 벤더와 협상해 **볼륨 할인**을 적용받으세요.
-
 6. **모니터링 및 알림**  
    - `fastmcp` 로그와 클라우드 비용 대시보드를 연동해 **일일/주간 사용량**을 시각화합니다.  
    - 비용 급증 시 Slack·Email 알림을 설정해 조기에 대응합니다.
-
 7. **토큰 압축**  
    - 텍스트 전처리 단계에서 중복 문구를 제거하거나, 압축 알고리즘(예: BPE)으로 토큰 수를 감소시킵니다.  
    - 특히 한글·중국어 등 다바이트 문자에서 효과적입니다.
@@ -147,10 +141,10 @@ FastMCP는 **Prefect** 가 지원하는 **Prefect Horizon** 에서 무료 호스
 ## 6. 퀵스타트 가이드
 ### 첫 FastMCP 프로젝트 생성 단계  
 1. 프로젝트 디렉터리 생성 및 가상 환경 활성화  
-2. `fastmcp` 패키지 설치  
+2. `fastmcp` 패키지 설치
 
 ### `@mcp.tool` 데코레이터를 이용한 간단한 도구 정의 예시 (인덴트 코드)  
-```text
+```python
 from fastmcp import FastMCP
 
 mcp = FastMCP("Demo 🚀")
@@ -169,7 +163,7 @@ if __name__ == "__main__":
 - 자동 생성된 **OpenAPI** 문서는 `http://127.0.0.1:8000/docs` 에서 확인 가능합니다.
 
 ### 기본 클라이언트 호출 흐름 (비동기)  
-```text
+```python
 import asyncio
 from fastmcp import Client
 
@@ -205,7 +199,7 @@ asyncio.run(main())
 ### MCP‑준수 도구, 리소스, 프롬프트 래핑 방법  
 - **도구**: `@mcp.tool` 데코레이터 사용 (함수 → RPC 엔드포인트)  
 - **리소스**: `@mcp.resource` (예: 파일, DB 커넥션) 로 선언, 읽기/쓰기 메서드 자동 매핑  
-- **프롬프트**: `@mcp.prompt` 로 템플릿 기반 프롬프트 정의, 파라미터 바인딩 지원  
+- **프롬프트**: `@mcp.prompt` 로 템플릿 기반 프롬프트 정의, 파라미터 바인딩 지원
 
 ### 인증·인가 플러그인 적용 방법  
 - FastMCP는 **미들웨어** 형태로 인증 플러그인을 삽입 가능. 예시: API 키 검증 미들웨어를 `mcp.add_middleware(AuthMiddleware)` 로 등록.  
@@ -215,6 +209,9 @@ asyncio.run(main())
 - MCP 사양은 **버전 번호**(예: `v1`) 로 구분되며, FastMCP 서버는 `Accept-Version` 헤더를 통해 클라이언트와 협상합니다.  
 - 구체적인 버전 정책은 MCP 공식 스펙을 참고해야 하며, 상세 내용은 **추가 조사가 필요합니다**.
 
+### MCP 서버 관리 도구  
+- **claude-mcp-hub**: GitHub에서 제공되는 MCP 서버 관리 툴로, 여러 FastMCP 서버를 중앙에서 등록·모니터링하고, 버전 관리·헬스 체크·배포 파이프라인을 지원합니다. 자세한 내용은 [claude-mcp-hub GitHub 레포지토리](https://github.com/Dymnw/claude-mcp-hub) 를 참고하세요.
+
 ---
 
 ## 9. 클라이언트 사용법
@@ -222,7 +219,7 @@ asyncio.run(main())
 - `Client.call_tool` 은 **비동기** (`await`) 로 사용되며, `Client.sync_call_tool` 은 **동기** 버전으로 제공될 수 있습니다(현재 비동기만 공식).  
 
 ### 원격 서버 연결 설정 (URL, TLS)  
-```text
+```python
 async with Client(
     "https://gofastmcp.com/mcp",
     tls=True,
@@ -233,7 +230,7 @@ async with Client(
 - TLS 활성화와 API 키 전달은 **자동 협상** 단계에서 처리됩니다[출처](https://euno.news/posts/ko/welcome-to-fastmcp-1d96).
 
 ### 도구 호출, 결과 파싱, 오류 처리  
-```text
+```python
 try:
     result = await client.call_tool(
         name="SearchFastMcp",
@@ -249,12 +246,11 @@ except Exception as e:
 
 ## 10. 인터랙티브 앱(App) 개발
 ### 대화형 UI 컴포넌트 제공 방식  
-- FastMCP는 **LLM 대화** 흐름 안에서 UI를 렌더링하기 위해 **Markdown** 혹은 **HTML** 블록을 반환합니다.  
-- 예: 도구 호출 결과를 테이블 형태로 포맷해 LLM이 사용자에게 보여줄 수 있습니다.
+- FastMCP는 **LLM 대화** 흐름 안에서 UI를 렌더링하기 위해 **Markdown** 혹은 **HTML** 블록을 반환합니다.
 
 ### 프론트엔드와 FastMCP 연동 예시  
-```text
-# 프론트엔드 (React) pseudo-code
+```javascript
+// 프론트엔드 (React) pseudo-code
 fetch("https://gofastmcp.com/mcp/tools/add", {
     method: "POST",
     body: JSON.stringify({a: 2, b: 4}),
@@ -267,7 +263,7 @@ fetch("https://gofastmcp.com/mcp/tools/add", {
 
 ### UX 최적화 팁  
 - **스키마 기반 자동 완성**: 클라이언트 UI에서 입력 폼을 자동 생성해 사용자 오류 감소  
-- **실시간 검증**: 입력 단계에서 즉시 피드백 제공  
+- **실시간 검증**: 입력 단계에서 즉시 피드백 제공
 
 ---
 
@@ -278,7 +274,7 @@ fetch("https://gofastmcp.com/mcp/tools/add", {
 3. Prefect Horizon 에 프로젝트를 연결하고 **자동 배포 파이프라인** 설정 (Prefect UI 에서 “Deploy” 클릭)  
 
 ### Docker 이미지 생성 및 CI/CD 파이프라인 예시  
-```text
+```yaml
 # .github/workflows/ci.yml (예시)
 name: CI
 on: [push, pull_request]
@@ -305,7 +301,7 @@ jobs:
 
 ### 스케일링 및 로드밸런싱 고려사항  
 - FastMCP 서버는 **ASGI** 호환이므로 `uvicorn` 혹은 `gunicorn` + `uvicorn workers` 로 멀티 프로세스 실행 가능.  
-- 클라우드 환경에서는 **Horizontal Pod Autoscaler**(K8s) 혹은 **Prefect Autoscale** 기능을 활용합니다.  
+- 클라우드 환경에서는 **Horizontal Pod Autoscaler**(K8s) 혹은 **Prefect Autoscale** 기능을 활용합니다.
 
 ---
 
@@ -331,23 +327,23 @@ jobs:
 
 ### 에러 핸들링 및 재시도 전략  
 - 도구 내부에서 발생한 예외는 `FastMCPError` 로 래핑해 클라이언트에 전달합니다.  
-- 클라이언트 측에서는 **exponential backoff** 로 재시도 로직을 구현하는 것이 권장됩니다.
+- 클라이언트 측에서는 **exponential backoff** 로 재시도 로직 구현이 권장됩니다.
 
 ### 성능 최적화 (캐싱·배치 처리)  
-- **함수 레벨 캐시**(`functools.lru_cache`) 를 활용해 동일 입력에 대한 반복 호출을 방지.  
+- **함수 레벨 캐시**(`functools.lru_cache`) 를 활용해 동일 입력에 대한 반복 호출 방지.  
 - 대량 작업은 **배치 엔드포인트**(`@mcp.batch_tool`) 로 구현해 한 번에 여러 요청 처리 가능(구현 상세는 **추가 조사가 필요합니다**).
 
 ---
 
 ## 14. 고급 기능
 ### 커스텀 확장(플러그인·미들웨어) 개발  
-- FastMCP는 `add_middleware` 메서드로 **인증**, **로깅**, **트레이싱** 등 커스텀 미들웨어를 삽입 가능.  
+- FastMCP는 `add_middleware` 메서드로 **인증**, **로깅**, **트레이싱** 등 커스텀 미들웨어 삽입 가능.
 
 ### 다중 서버·멀티 클라이언트 환경 구성  
-- 여러 MCP 서버를 **로드밸런서** 뒤에 두고, 클라이언트는 **service discovery**(Consul, etcd) 를 통해 동적으로 엔드포인트를 선택합니다.  
+- 여러 MCP 서버를 **로드밸런서** 뒤에 두고, 클라이언트는 **service discovery**(Consul, etcd) 를 통해 동적으로 엔드포인트 선택.
 
 ### 이벤트 기반 워크플로와 MCP 연동  
-- **Prefect** 와 연계해 이벤트(예: 파일 업로드) 발생 시 자동으로 MCP 도구를 호출하는 워크플로를 정의할 수 있습니다.  
+- **Prefect** 와 연계해 이벤트(예: 파일 업로드) 발생 시 자동으로 MCP 도구 호출 워크플로 정의 가능.
 
 ---
 
@@ -365,9 +361,9 @@ jobs:
 
 ### 자주 묻는 질문 정리  
 - **Q:** FastMCP와 기존 REST API 서버를 동시에 운영할 수 있나요?  
-  **A:** 가능하며, FastMCP 서버는 표준 HTTP 엔드포인트를 제공하므로 라우팅 설정만 적절히 하면 됩니다.  
+  **A:** 가능하며, FastMCP 서버는 표준 HTTP 엔드포인트를 제공하므로 라우팅 설정만 적절히 하면 됩니다.
 - **Q:** Prefect Horizon 외에 자체 호스팅이 가능한가요?  
-  **A:** 네, Docker 이미지와 Helm 차트를 이용해 Kubernetes 클러스터에 직접 배포할 수 있습니다.  
+  **A:** 네, Docker 이미지와 Helm 차트를 이용해 Kubernetes 클러스터에 직접 배포할 수 있습니다.
 
 ---
 
@@ -377,6 +373,7 @@ jobs:
 - **GitHub 레포지토리** – https://github.com/fastmcp/fastmcp (예제 코드, 이슈 트래커)  
 - **Prefect Horizon** – https://www.prefect.io/horizon (무료 호스팅 안내)  
 - **커뮤니티 포럼** – https://community.fastmcp.io/ (Slack, Discord 채널)  
+- **claude-mcp-hub** – https://github.com/Dymnw/claude-mcp-hub (MCP 서버 관리 도구)
 
 ---
 
@@ -386,7 +383,7 @@ jobs:
 - **FastMCP**: MCP 기반 서버·클라이언트·앱 프레임워크  
 - **Tool**: MCP 서버가 제공하는 함수형 인터페이스  
 - **Resource**: 데이터 저장소·스트리밍 등 상태ful 엔티티  
-- **Prompt**: LLM에게 전달되는 템플릿 기반 입력  
+- **Prompt**: LLM에게 전달되는 템플릿 기반 입력
 
 ### 전체 API 시그니처 표
 | 메서드 | 동기/비동기 | 설명 |
@@ -397,7 +394,7 @@ jobs:
 | `FastMCP.run(host, port)` | 동기 | 서버 시작 |
 
 ### 샘플 프로젝트 구조와 설정 파일 예시 (인덴트)  
-```text
+```
 my_fastmcp_project/
 ├── pyproject.toml          # Poetry/PEP 518 설정
 ├── fastmcp_app.py          # FastMCP 인스턴스 정의
@@ -408,7 +405,7 @@ my_fastmcp_project/
 ```
 
 **fastmcp_app.py**  
-```text
+```python
 from fastmcp import FastMCP
 from tools.math_tools import add, multiply
 
@@ -421,6 +418,6 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
 ```
 
---- 
+---
 
 *본 문서는 euno.news 의 FastMCP 소개 기사와 Model Context Protocol 공식 스펙을 기반으로 작성되었습니다. 최신 버전 정보나 상세 구현 예시는 공식 레포지토리와 커뮤니티 채널을 참고하시기 바랍니다.*
