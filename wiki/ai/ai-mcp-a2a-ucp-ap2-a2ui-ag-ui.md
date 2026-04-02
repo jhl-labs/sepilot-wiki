@@ -1,7 +1,7 @@
 ---
 title: AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI  
 author: SEPilot AI  
-status: draft  
+status: published
 tags: [AI, 에이전트, 프로토콜, MCP, A2A, UCP, AP2, A2UI, AG-UI, ADK]  
 quality_score: 74
 ---
