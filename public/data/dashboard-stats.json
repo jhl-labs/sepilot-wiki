@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-04-03T09:50:15.690Z",
+  "collectedAt": "2026-04-03T10:48:36.374Z",
   "overview": {
     "totalDocuments": 354,
     "publishedDocuments": 187,
     "draftDocuments": 167,
-    "openRequests": 216,
+    "openRequests": 219,
     "closedRequests": 19,
-    "totalAIActions": 860
+    "totalAIActions": 869
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 8,
+      "documentsCreated": 2,
+      "documentsModified": 3,
+      "tavilyApiCalls": 6,
+      "tavilyResults": 16,
+      "estimatedTokens": 4909,
+      "totalPipelineDurationMs": 107434
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last7d": {
-      "aiActions": 61,
-      "documentsCreated": 20,
-      "documentsModified": 13,
+      "aiActions": 11,
+      "documentsCreated": 3,
+      "documentsModified": 3,
       "tavilyApiCalls": 9,
       "tavilyResults": 23,
-      "estimatedTokens": 47536,
-      "totalPipelineDurationMs": 977197
+      "estimatedTokens": 8570,
+      "totalPipelineDurationMs": 190933
+    },
+    "last7d": {
+      "aiActions": 65,
+      "documentsCreated": 23,
+      "documentsModified": 14,
+      "tavilyApiCalls": 18,
+      "tavilyResults": 46,
+      "estimatedTokens": 56106,
+      "totalPipelineDurationMs": 1168130
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-03T09:52:45.689Z",
+      "actionType": "quality_score",
+      "issueNumber": 696,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-03T09:52:33.188Z",
+      "actionType": "quality_score",
+      "issueNumber": 697,
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-03T09:52:19.841Z",
+      "actionType": "quality_score",
+      "issueNumber": 698,
+      "documentTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-03T09:52:04.034Z",
+      "actionType": "modify",
+      "issueNumber": 699,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-03T09:51:15.713Z",
+      "actionType": "modify",
+      "issueNumber": 700,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-03T09:50:24.956Z",
+      "actionType": "modify",
+      "issueNumber": 701,
+      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-03T09:49:55.364Z",
+      "actionType": "generate",
+      "issueNumber": 696,
+      "documentTitle": "Kubernetes v1.36 Sneak Peek 위키 유지보수 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 52641,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2476
+    },
+    {
+      "timestamp": "2026-04-03T09:48:48.124Z",
+      "actionType": "generate",
+      "issueNumber": 697,
+      "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 54793,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2433
+    },
+    {
+      "timestamp": "2026-04-03T09:47:37.765Z",
+      "actionType": "generate",
+      "issueNumber": 698,
+      "documentTitle": "Defending Your Software Supply Chain – Engineering Teams’ Immediate Action Guide",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 83499,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3661
+    },
     {
       "timestamp": "2026-04-03T09:24:42.146Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-01T09:30:09.955Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "지식 확장 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-01T03:15:01.287Z",
-      "actionType": "quality_score",
-      "issueNumber": null,
-      "documentTitle": "문서 품질 평가",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:55:58.129Z",
-      "actionType": "quality_score",
-      "issueNumber": 684,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:55:43.324Z",
-      "actionType": "quality_score",
-      "issueNumber": 685,
-      "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:55:28.981Z",
-      "actionType": "quality_score",
-      "issueNumber": 686,
-      "documentTitle": "[Wiki Maintenance] [요청] What&#8217;s coming to our GitHub Actions 2026 security roadmap",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:55:09.835Z",
-      "actionType": "modify",
-      "issueNumber": 687,
-      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:54:34.637Z",
-      "actionType": "modify",
-      "issueNumber": 688,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:53:50.095Z",
-      "actionType": "modify",
-      "issueNumber": 689,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-03-31T09:53:00.130Z",
-      "actionType": "generate",
-      "issueNumber": 684,
-      "documentTitle": "Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 42088,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2056
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 850,
+      "totalEstimatedTokens": 675318,
+      "avgDurationMs": 53067
+    },
     "unknown": {
       "totalActions": 19,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 841,
-      "totalEstimatedTokens": 666748,
-      "avgDurationMs": 52951
     }
   }
 }
