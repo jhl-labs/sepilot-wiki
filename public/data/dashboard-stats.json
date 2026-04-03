@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-03T08:50:04.044Z",
+  "collectedAt": "2026-04-03T09:50:15.690Z",
   "overview": {
     "totalDocuments": 354,
     "publishedDocuments": 187,
     "draftDocuments": 167,
     "openRequests": 216,
     "closedRequests": 19,
-    "totalAIActions": 858
+    "totalAIActions": 860
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 65,
-      "documentsCreated": 23,
-      "documentsModified": 14,
+      "aiActions": 61,
+      "documentsCreated": 20,
+      "documentsModified": 13,
       "tavilyApiCalls": 9,
       "tavilyResults": 23,
-      "estimatedTokens": 54026,
-      "totalPipelineDurationMs": 1110103
+      "estimatedTokens": 47536,
+      "totalPipelineDurationMs": 977197
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-03T09:24:42.146Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-03T09:24:28.455Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-02T08:46:06.656Z",
       "actionType": "quality_score",
@@ -217,38 +237,18 @@
       "durationMs": 42088,
       "tavilyApiCalls": 0,
       "estimatedTokens": 2056
-    },
-    {
-      "timestamp": "2026-03-31T09:51:58.926Z",
-      "actionType": "generate",
-      "issueNumber": 685,
-      "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 59433,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2922
-    },
-    {
-      "timestamp": "2026-03-31T09:50:41.654Z",
-      "actionType": "generate",
-      "issueNumber": 686,
-      "documentTitle": "GitHub Actions 2026 보안 로드맵 개요",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 52027,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": 2552
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 840,
-      "totalEstimatedTokens": 666748,
-      "avgDurationMs": 52951
-    },
     "unknown": {
-      "totalActions": 18,
+      "totalActions": 19,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 841,
+      "totalEstimatedTokens": 666748,
+      "avgDurationMs": 52951
     }
   }
 }
