@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-05T08:48:43.384Z",
+  "collectedAt": "2026-04-05T09:48:09.373Z",
   "overview": {
     "totalDocuments": 355,
     "publishedDocuments": 188,
     "draftDocuments": 167,
     "openRequests": 219,
     "closedRequests": 19,
-    "totalAIActions": 869
+    "totalAIActions": 870
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-05T09:12:38.256Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-03T09:52:45.689Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 69307,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3322
-    },
-    {
-      "timestamp": "2026-04-01T09:31:43.091Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "콘텐츠 리뷰",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 850,
+      "totalActions": 851,
       "totalEstimatedTokens": 675318,
       "avgDurationMs": 53067
     },
