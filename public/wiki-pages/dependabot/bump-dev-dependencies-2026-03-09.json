@@ -2,7 +2,7 @@
   "title": "Dependabot PR: dev‑dependencies bump (2026‑03‑09) – no longer needed",
   "slug": "dependabot/bump-dev-dependencies-2026-03-09",
   "content": "\n# Dependabot PR – dev‑dependencies bump (2026‑03‑09)\n\nA Dependabot pull request was opened to bump the **dev‑dependencies** group in the repository root:\n\n- `@types/node` from **25.3.0 → 25.4.0**\n- `@typescript-eslint/eslint-plugin` from **8.56.1 → 8.57.0**\n- `@typescript-eslint/parser` from **8.56.1 → 8.57.0**\n\n## Why the PR was closed\n\nThe repository maintainers observed that these dependencies can be updated through an alternative workflow (e.g., a shared internal upgrade script or a monorepo‑wide version management tool). Consequently, the automatic Dependabot PR was deemed unnecessary and was closed with the comment:\n\n> \"Looks like these dependencies are updatable in another way, so this is no longer needed.\"\n\n## References\n\n- **@types/node** source tree: [DefinitelyTyped/types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/node) – shows the latest typings and version history.\n- **@typescript-eslint/eslint-plugin** repository: [typescript-eslint/packages/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin) – includes changelog for v8.57.0.\n- **@typescript-eslint/parser** repository: [typescript-eslint/packages/parser](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/parser) – includes changelog for v8.57.0.\n- Dependabot grouping feature announcement: [GitHub Blog – Dependabot can group updates by dependency name across multiple directories](https://github.blog/changelog/2026-02-24-dependabot-can-group-updates-by-dependency-name-across-multiple-directories/)\n\n## What to do next?\n\nIf you need to manually bump these dependencies in the future, consider using the same alternative workflow that the team employs (e.g., a centralized upgrade script). Keep an eye on the official release notes of the packages for any breaking changes before applying version bumps.\n\n---\n*This document was generated automatically based on the Dependabot PR feedback.*",
-  "lastModified": "2026-04-06T17:49:34Z",
+  "lastModified": "2026-04-06T22:47:51Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -16,11 +16,11 @@
   ],
   "history": [
     {
-      "sha": "b292da7",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-06 17:49",
+      "sha": "ff2d066",
+      "message": "chore: 대시보드 통계 수집 - 2026-04-06 22:47",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-06T17:49:34Z",
+      "date": "2026-04-06T22:47:51Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
