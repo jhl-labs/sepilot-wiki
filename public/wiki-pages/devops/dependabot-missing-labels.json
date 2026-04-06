@@ -2,7 +2,7 @@
   "title": "Dependabot 라벨 누락 해결 방법",
   "slug": "devops/dependabot-missing-labels",
   "content": "\n# Dependabot 라벨 누락 해결 방법\n\nWhen Dependabot tries to add the `dependencies` label to a pull request but the label does not exist in the repository, the workflow fails with an error like:\n\n> The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\n\n## 해결 단계\n\n1. **라벨 생성**  \n   - Repository → **Issues** → **Labels** → **New label**  \n   - Name: `dependencies`  \n   - Color: (choose any, e.g., `#0366d6`)  \n   - Description: *Label applied by Dependabot to dependency update PRs.*\n\n2. **dependabot.yml 검토**  \n   Ensure the `labels` field in `.github/dependabot.yml` references the correct label name.\n\n   ```yaml\n   version: 2\n   updates:\n     - package-ecosystem: \"npm\"\n       directory: \"/\"\n       schedule:\n         interval: \"weekly\"\n       labels:\n         - \"dependencies\"   # <-- must match the label created above\n   ```\n   If the label name is different, either rename the label or update this file accordingly.\n\n3. **커밋 및 푸시**  \n   ```bash\n   git add .github/dependabot.yml\n   git commit -m \"fix: add correct dependencies label for Dependabot\"\n   git push\n   ```\n\n4. **PR 재시도**  \n   - Dependabot will automatically create a new PR, or you can trigger a rebase with `@dependabot rebase`.\n\n## 참고 자료\n\n- Dependabot documentation: [GitHub Docs – Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-dependency-updates)  \n- Example of missing label error (GitHub Actions log) – *source from issue description*.\n\n## FAQ\n\n**Q:** Do I need to add the label to existing PRs?  \n**A:** No. The label is only required for new PRs created after the label exists.\n\n**Q:** Can I use a different label name?  \n**A:** Yes, but update `dependabot.yml` to match the chosen name.",
-  "lastModified": "2026-04-06T06:10:24Z",
+  "lastModified": "2026-04-06T11:49:26Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,11 +15,11 @@
   ],
   "history": [
     {
-      "sha": "b9b2a2d",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-06 06:10",
+      "sha": "77e8701",
+      "message": "chore: 대시보드 통계 수집 - 2026-04-06 11:49",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-06T06:10:24Z",
+      "date": "2026-04-06T11:49:26Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
