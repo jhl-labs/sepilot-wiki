@@ -2,8 +2,8 @@
   "title": "Dependabot 라벨 누락 문제 해결하기",
   "slug": "troubleshooting/dependabot-missing-labels",
   "content": "\n# Dependabot 라벨 누락 문제 해결하기\n\n## 문제 상황\nDependabot이 PR에 자동으로 라벨을 붙이려고 할 때 다음과 같은 오류가 발생합니다.\n\n```\nThe following labels could not be found: `dependencies`, `github-actions`. Please create them before Dependabot can add them to a pull request.\nPlease fix the above issues or remove invalid values from `dependabot.yml`.\n```\n\n이 메시지는 **dependabot.yml** 파일에 지정된 라벨이 레포지토리에 존재하지 않을 때 나타납니다.\n\n## 해결 단계\n\n1. **필요한 라벨 확인**\n   - `dependencies`\n   - `github-actions`\n   - (필요에 따라 추가 라벨이 있을 수 있습니다.)\n\n2. **레포지토리에서 라벨 생성**\n   - 레포지토리 메인 페이지 → **Issues** 탭 → **Labels** 메뉴 클릭\n   - **New label** 버튼을 눌러 아래와 같이 라벨을 추가합니다.\n     - **Name**: `dependencies`\n       - **Color**: 원하는 색 (예: `#0366d6`)\n     - **Name**: `github-actions`\n       - **Color**: 원하는 색 (예: `#008672`)\n   - 라벨을 저장합니다.\n\n3. **dependabot.yml 파일 검증**\n   - 레포지토리 루트에 있는 `.github/dependabot.yml` 파일을 엽니다.\n   - `labels:` 섹션에 존재하지 않는 라벨이 있으면 삭제하거나 올바른 라벨 이름으로 수정합니다.\n   - 예시:\n\n   ```yaml\n   version: 2\n   updates:\n     - package-ecosystem: \"github-actions\"\n       directory: \"/\"\n       schedule:\n         interval: \"weekly\"\n       labels:\n         - \"github-actions\"   # 존재하는 라벨 이름\n   ```\n\n4. **변경 사항 커밋 및 푸시**\n   - 라벨을 만든 후, `dependabot.yml` 파일을 수정했다면 커밋하고 푸시합니다.\n   - Dependabot이 다음 실행 시 정상적으로 라벨을 붙일 수 있습니다.\n\n5. **동작 확인**\n   - Dependabot이 새 PR을 생성하거나 기존 PR에 라벨이 자동으로 붙는지 확인합니다.\n   - 여전히 문제가 발생한다면 **Actions** 로그와 **Dependabot** 로그를 확인하고, 라벨 이름에 오타가 없는지 재검토합니다.\n\n## 추가 팁\n- 라벨 이름은 **대소문자를 구분**합니다. `Dependencies`와 `dependencies`는 다른 라벨로 인식됩니다.\n- 여러 라벨을 지정하고 싶다면 `labels:` 아래에 배열 형태로 나열합니다.\n- 라벨 색상은 팀 정책에 맞게 지정하면 가시성을 높일 수 있습니다.\n\n## 참고 자료\n- [GitHub Docs: Configuring Dependabot](https://docs.github.com/en/code-security/dependabot/configuring-dependabot) – 공식 문서\n- [GitHub Docs: Managing Labels](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-labels) – 라벨 관리 방법\n\n---\n*이 문서는 Dependabot 라벨 문제를 해결하기 위한 가이드이며, 필요에 따라 레포지토리 정책에 맞게 조정하세요.*",
-  "lastModified": "2026-04-05T23:46:29Z",
-  "author": "GitHub Action",
+  "lastModified": "2026-04-01T03:15:04Z",
+  "author": "github-actions[bot]",
   "status": "draft",
   "isDraft": true,
   "isInvalid": false,
@@ -14,11 +14,21 @@
   ],
   "history": [
     {
-      "sha": "7e2b7c8",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-05 23:46",
+      "sha": "a7979a3",
+      "message": "📊 문서 품질 평가: 평균 76점",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-04-01T03:15:04Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "ab1ffae",
+      "message": "docs: Issue #683 - 피드백 반영",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-05T23:46:29Z",
+      "date": "2026-03-30T20:59:26Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0

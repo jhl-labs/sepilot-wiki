@@ -2,8 +2,8 @@
   "title": "Dependency Update: mermaid 11.13.0",
   "slug": "dependencies/mermaid-bump-11.13.0",
   "content": "\n# Dependency Update: mermaid 11.13.0\n\nThis document records the **Dependabot** pull‑request that bumps the `mermaid` JavaScript library from version **11.12.3** to **11.13.0**.\n\n## Why the bump?\n- Security‑related updates and bug‑fixes in the 11.13.0 release.\n- New diagram types and configuration options that improve developer experience.\n\n## Release notes (summarised)\n### Minor Changes\n- Export `AsyncIconLoader`, `SyncIconLoader`, and `IconLoader` types. ([#7352](https://github.com/mermaid-js/mermaid/pull/7352))\n- Add **venn‑beta** diagram. ([#5932](https://github.com/mermaid-js/mermaid/pull/5932))\n- Add **half‑arrowheads** (solid & stick) and central connection support. ([#6789](https://github.com/mermaid-js/mermaid/pull/6789))\n- Add **Ishikawa** diagram (ishikawa‑beta). ([#7387](https://github.com/mermaid-js/mermaid/pull/7387))\n- Deprecate `flowchart.htmlLabels` in favour of root‑level `htmlLabels`. ([#6995](https://github.com/mermaid-js/mermaid/pull/6995))\n- Allow notes in namespaces on `classDiagram`. ([#5814](https://github.com/mermaid-js/mermaid/pull/5814))\n\n### Patch Changes\n- Prevent HTML tags from being escaped in sandbox label rendering. ([#7075](https://github.com/mermaid-js/mermaid/pull/7075))\n- Support edge animation in hand‑drawn look. ([#6843](https://github.com/mermaid-js/mermaid/pull/6843))\n- Fix ER diagram edge label positioning. ([#7453](https://github.com/mermaid-js/mermaid/pull/7453))\n- Resolve parsing error where direction `TD` was not recognised within subgraphs. ([#6989](https://github.com/mermaid-js/mermaid/pull/6989))\n- Various SVG, viewBox, and layout fixes (e.g., responsive SVGs, correct viewBox casing, participant parsing, markdown auto‑wrap handling, architecture diagram line lengths, BT orientation arc sweep flags, etc.).\n- Support the `htmlLabels` config value wherever possible. ([#6995](https://github.com/mermaid-js/mermaid/pull/6995))\n- Prevent browser hangs with multiline `accDescr` in XY charts, improve block positioning for nested blocks, and many other stability improvements.\n\n## References\n- Official mermaid release page: https://github.com/mermaid-js/mermaid/releases (version 11.13.0)  \n- Dependabot PR details (bump from 11.12.3 → 11.13.0) – see the original issue on Ecosyste.ms: https://dependabot.ecosyste.ms/hosts/GitHub/repositories/jagreehal/executable-stories/issues/51  \n- Full changelog and commit list are available in the mermaid repository.\n\n---\n*This document was generated automatically to keep track of dependency updates.*",
-  "lastModified": "2026-04-05T23:46:29Z",
-  "author": "GitHub Action",
+  "lastModified": "2026-04-01T03:15:04Z",
+  "author": "github-actions[bot]",
   "status": "draft",
   "isDraft": true,
   "isInvalid": false,
@@ -14,12 +14,22 @@
   ],
   "history": [
     {
-      "sha": "7e2b7c8",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-05 23:46",
+      "sha": "a7979a3",
+      "message": "📊 문서 품질 평가: 평균 76점",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-04-01T03:15:04Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "af09b0b",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-05T23:46:29Z",
-      "isAutoCommit": false,
+      "date": "2026-03-09T21:08:48Z",
+      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }
