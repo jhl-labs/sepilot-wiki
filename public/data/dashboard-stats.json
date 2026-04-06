@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-04-06T22:47:50.947Z",
+  "collectedAt": "2026-04-06T23:47:06.201Z",
   "overview": {
-    "totalDocuments": 356,
+    "totalDocuments": 357,
     "publishedDocuments": 189,
-    "draftDocuments": 167,
+    "draftDocuments": 168,
     "openRequests": 219,
     "closedRequests": 19,
-    "totalAIActions": 871
+    "totalAIActions": 872
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 35,
+      "aiActions": 36,
       "documentsCreated": 9,
-      "documentsModified": 7,
+      "documentsModified": 8,
       "tavilyApiCalls": 18,
       "tavilyResults": 46,
       "estimatedTokens": 23783,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-06T23:32:20.730Z",
+      "actionType": "recover",
+      "issueNumber": 702,
+      "documentTitle": "chore(deps): bump vite from 7.3.1 to 7.3.2",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-06T01:35:40.283Z",
       "actionType": "status_report",
@@ -227,21 +237,11 @@
       "durationMs": 50968,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2390
-    },
-    {
-      "timestamp": "2026-04-01T09:53:48.521Z",
-      "actionType": "generate",
-      "issueNumber": 691,
-      "documentTitle": "Kubernetes AI Gateway 보안 베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 42164,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1971
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 852,
+      "totalActions": 853,
       "totalEstimatedTokens": 675318,
       "avgDurationMs": 53067
     },
