@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-04-07T09:53:57.832Z",
+  "collectedAt": "2026-04-07T10:50:46.233Z",
   "overview": {
     "totalDocuments": 357,
     "publishedDocuments": 189,
     "draftDocuments": 168,
-    "openRequests": 219,
+    "openRequests": 222,
     "closedRequests": 19,
-    "totalAIActions": 874
+    "totalAIActions": 883
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 9,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 25,
+      "estimatedTokens": 8732,
+      "totalPipelineDurationMs": 189344
     },
     "last24h": {
-      "aiActions": 3,
-      "documentsCreated": 0,
-      "documentsModified": 1,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 12,
+      "documentsCreated": 3,
+      "documentsModified": 4,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 25,
+      "estimatedTokens": 8732,
+      "totalPipelineDurationMs": 189344
     },
     "last7d": {
-      "aiActions": 32,
-      "documentsCreated": 6,
-      "documentsModified": 7,
-      "tavilyApiCalls": 18,
-      "tavilyResults": 46,
-      "estimatedTokens": 16253,
-      "totalPipelineDurationMs": 353372
+      "aiActions": 36,
+      "documentsCreated": 9,
+      "documentsModified": 8,
+      "tavilyApiCalls": 27,
+      "tavilyResults": 71,
+      "estimatedTokens": 24985,
+      "totalPipelineDurationMs": 542716
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-07T09:57:29.582Z",
+      "actionType": "quality_score",
+      "issueNumber": 703,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-07T09:57:14.625Z",
+      "actionType": "quality_score",
+      "issueNumber": 704,
+      "documentTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-07T09:56:59.185Z",
+      "actionType": "quality_score",
+      "issueNumber": 705,
+      "documentTitle": "[Wiki Maintenance] [요청] Securing the open source supply chain across GitHub",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-07T09:56:43.106Z",
+      "actionType": "modify",
+      "issueNumber": 706,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-07T09:55:51.470Z",
+      "actionType": "modify",
+      "issueNumber": 707,
+      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-07T09:55:11.082Z",
+      "actionType": "modify",
+      "issueNumber": 708,
+      "documentTitle": "Kubernetes AI Gateway 보안 베스트 프랙티스",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-07T09:54:38.394Z",
+      "actionType": "generate",
+      "issueNumber": 703,
+      "documentTitle": "Kubernetes v1.36 Sneak Peek – 위키 유지보수 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 96878,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4692
+    },
+    {
+      "timestamp": "2026-04-07T09:52:45.119Z",
+      "actionType": "generate",
+      "issueNumber": 704,
+      "documentTitle": "Defending Your Software Supply Chain – Action Guide for Engineering Teams",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 61996,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2680
+    },
+    {
+      "timestamp": "2026-04-07T09:51:26.578Z",
+      "actionType": "generate",
+      "issueNumber": 705,
+      "documentTitle": "Securing the Open Source Supply Chain across GitHub",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 30470,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1360
+    },
     {
       "timestamp": "2026-04-07T09:31:21.465Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-03T09:49:55.364Z",
-      "actionType": "generate",
-      "issueNumber": 696,
-      "documentTitle": "Kubernetes v1.36 Sneak Peek 위키 유지보수 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 52641,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2476
-    },
-    {
-      "timestamp": "2026-04-03T09:48:48.124Z",
-      "actionType": "generate",
-      "issueNumber": 697,
-      "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 54793,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2433
-    },
-    {
-      "timestamp": "2026-04-03T09:47:37.765Z",
-      "actionType": "generate",
-      "issueNumber": 698,
-      "documentTitle": "Defending Your Software Supply Chain – Engineering Teams’ Immediate Action Guide",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 83499,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3661
-    },
-    {
-      "timestamp": "2026-04-03T09:24:42.146Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-03T09:24:28.455Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-02T08:46:06.656Z",
-      "actionType": "quality_score",
-      "issueNumber": 681,
-      "documentTitle": " [요청] AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-02T06:02:30.176Z",
-      "actionType": "modify",
-      "issueNumber": 608,
-      "documentTitle": " [요청] FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-01T09:55:52.372Z",
-      "actionType": "quality_score",
-      "issueNumber": 690,
-      "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-01T09:55:38.071Z",
-      "actionType": "quality_score",
-      "issueNumber": 691,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 보안 베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 863,
+      "totalEstimatedTokens": 684050,
+      "avgDurationMs": 53176
+    },
     "unknown": {
       "totalActions": 20,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 854,
-      "totalEstimatedTokens": 675318,
-      "avgDurationMs": 53067
     }
   }
 }
