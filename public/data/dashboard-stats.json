@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-07T08:51:24.248Z",
+  "collectedAt": "2026-04-07T09:53:57.832Z",
   "overview": {
     "totalDocuments": 357,
     "publishedDocuments": 189,
     "draftDocuments": 168,
     "openRequests": 219,
     "closedRequests": 19,
-    "totalAIActions": 872
+    "totalAIActions": 874
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 1,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 36,
-      "documentsCreated": 9,
-      "documentsModified": 8,
+      "aiActions": 32,
+      "documentsCreated": 6,
+      "documentsModified": 7,
       "tavilyApiCalls": 18,
       "tavilyResults": 46,
-      "estimatedTokens": 23783,
-      "totalPipelineDurationMs": 506920
+      "estimatedTokens": 16253,
+      "totalPipelineDurationMs": 353372
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-07T09:31:21.465Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-07T09:31:13.171Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-06T23:32:20.730Z",
       "actionType": "recover",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-01T09:55:22.482Z",
-      "actionType": "quality_score",
-      "issueNumber": 692,
-      "documentTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-01T09:55:03.984Z",
-      "actionType": "generate",
-      "issueNumber": 690,
-      "documentTitle": "AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 50968,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2390
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 853,
-      "totalEstimatedTokens": 675318,
-      "avgDurationMs": 53067
-    },
     "unknown": {
-      "totalActions": 19,
+      "totalActions": 20,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 854,
+      "totalEstimatedTokens": 675318,
+      "avgDurationMs": 53067
     }
   }
 }
