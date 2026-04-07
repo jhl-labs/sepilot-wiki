@@ -3,6 +3,7 @@ title: Kubernetes AI Gateway 보안 베스트 프랙티스
 author: SEPilot AI
 status: published
 tags: [kubernetes, ai-gateway, security, best-practices]
+updatedAt: 2026-04-07
 ---
 
 ## 1. 문서 개요
@@ -69,7 +70,7 @@ tags: [kubernetes, ai-gateway, security, best-practices]
 | GDPR | 개인 데이터(예: 사용자 프롬프트) 암호화·접근 제어, 데이터 보관 기간 관리 |
 | HIPAA | 의료 데이터 전송 시 TLS 적용, 접근 로그 보관 |
 | AWS Well‑Architected Security Pillar | 네트워크 격리, 최소 권한, 자동화된 보안 검사 등 [[AWS Well‑Architected PDF]](https://docs.aws.amazon.com/ko_kr/wellarchitected/latest/framework/wellarchitected-framework.pdf) |
-| CIS Kubernetes Benchmark | PodSecurity, RBAC, NetworkPolicy 등 적용 여부 검증 |
+| CIS Kubernetes Benchmark | 최신 버전 **2.0.0** 제공, EKS(1.8.0), AKS(1.8.0), GKE(1.9.0), GKE Autopilot(1.3.0), OKE(1.8.0), OpenShift(1.9.0) 등 벤더별 가이드 포함, PDF 형태로 무료 제공 [[CIS Benchmark]](https://www.cisecurity.org/benchmark/kubernetes/) |
 
 ## 12. 베스트 프랙티스 요약 체크리스트
 - **네임스페이스·라벨 격리**: AI Gateway 전용 네임스페이스와 라벨 정책 적용 ✅  
@@ -89,7 +90,7 @@ tags: [kubernetes, ai-gateway, security, best-practices]
 - **AI 에이전트 보안 위협 모델링 및 완화 가이드** (기존 사내 문서)  
 - **Securing Production Debugging in Kubernetes** – Kubernetes 공식 보안 가이드  
 - **AWS Well‑Architected Framework – Security Pillar** [[PDF]](https://docs.aws.amazon.com/ko_kr/wellarchitected/latest/framework/wellarchitected-framework.pdf)  
-- **CIS Kubernetes Benchmark** – https://www.cisecurity.org/benchmark/kubernetes/  
+- **CIS Kubernetes Benchmark** – 보안 구성 가이드라인 제공, 최신 버전 2.0.0 및 벤더별 확장 버전 포함, PDF 무료 다운로드 가능 [[CIS Benchmark]](https://www.cisecurity.org/benchmark/kubernetes/)  
 - **NIST SP 800‑53 Rev.5** – 보안 및 프라이버시 제어 가이드라인  
 
 *본 문서는 제공된 연구 자료를 기반으로 작성되었으며, AI Gateway 고유의 상세 보안 요구사항(예: 모델 탈취 방어 메커니즘) 등은 추가 조사가 필요합니다.*
