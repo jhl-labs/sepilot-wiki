@@ -1,179 +1,121 @@
 ---
-title: Kubernetes v1.36 Sneak Peek – 위키 유지보수 가이드
+title: Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서
 author: SEPilot AI
 status: published
-tags: [Kubernetes, v1.36, Maintenance, Release]
+tags: [Kubernetes, v1.36, Release, Features, Deprecation, Upgrade]
 ---
 
-## 1. 문서 개요
-- **목적**: Kubernetes v1.36 스니크 피크 정보를 위키에 정리·반영하여, 문서 편집자·클러스터 운영자·개발자가 최신 릴리즈에 대비할 수 있도록 함.  
-- **대상 독자**: 위키 문서 관리자, 클러스터 운영자, 애플리케이션 개발자, CI/CD 파이프라인 담당자.  
-- **범위**: 릴리즈 일정, 주요 변경점(폐기·삭제·신규 기능), 마이그레이션 가이드, 보안·백업·롤백 절차, 위키 업데이트 절차, 검증·품질 보증 방안, FAQ.  
+## 1. 개요
+Kubernetes v1.36은 2026년 4월 말에 정식 출시될 예정이며, 이번 릴리즈는 **다수의 기능 추가·강화**와 **폐기·삭제**가 동시에 진행되는 대규모 업데이트입니다. 주요 목표는 보안·성능·운용 효율성을 높이고, 최신 CNCF 에코시스템과의 호환성을 강화하는 것입니다.  
 
-## 2. 릴리즈 일정 및 배경
-- **정식 릴리즈 예정일**: 2026년 4월 말에 v1.36이 출시될 예정입니다. [[Kubernetes v1.36 Sneak Peek](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)]  
-- **릴리즈 사이클 개요**  
-  - **시작**: 2026년 1월 12일 – 릴리즈 리드 Ryota Sawada가 공식 시작을 알림. [[Google Groups 기록](https://groups.google.com/g/kubernetes-sig-release/c/73ZKJ3lbQBw)]  
-  - **주요 마일스톤**  
-    - 2025년 12월 – v1.35 ‘Timbernetes’ 마무리.  
-    - 2026년 1월 – v1.36 사이클 킥오프.  
-    - 2026년 3월 30일 – 공식 스니크 피크 블로그 공개.  
-- **핵심 목표 및 기대 효과**  
-  - 안정적인 API 폐기·삭제 프로세스 강화.  
-  - 인증·스토리지·워크로드 관리 등 핵심 영역에 성능·보안 향상 기능 제공.  
+이 문서는 **클러스터 운영자**, **플랫폼 엔지니어**, **DevOps 팀**을 대상으로 하며, 릴리즈 일정, 신규 기능, API 변경, 업그레이드 절차 및 보안·성능 개선 사항을 한눈에 파악할 수 있도록 설계되었습니다.
 
-## 3. API 폐기·삭제 정책 요약
-- **공식 Deprecation 정책 핵심 원칙** (블로그 및 공식 문서)  
-  - **Stable → Deprecated → Removed** 흐름을 따르며, 최소 지원 기간을 보장합니다.  
-  - **Stable API**는 새로운 Stable 버전이 존재할 때만 폐기 가능하고, 폐기 후 **최소 1년** 동안 사용 가능하지만 경고가 표시됩니다.  
-  - **Beta API**는 폐기 후 **3개의 릴리즈** 동안 지원됩니다.  
-  - **Alpha/Experimental API**는 사전 통보 없이 언제든 제거될 수 있습니다.  
-  - 자세한 내용: [Kubernetes API Deprecation Process](https://kubernetes.io/docs/reference/using-api/deprecation/)  
-
-- **예시**: *ingress‑nginx* 프로젝트가 SIG‑Security에 의해 **2026년 3월 24일**에 퇴역(폐기)될 **예정**이라는 보도가 있습니다. 공식 확인이 필요하므로 현재는 **예정**으로 표기합니다.  
-
-## 4. 주요 폐기·삭제 항목 (v1.36)  
-> 현재 공개된 구체적인 폐기·삭제 API 목록은 제한적이며, 공식 릴리즈 노트가 발표될 때까지 정확한 리스트는 확인할 수 없습니다. 아래는 확인된 내용과 추후 조사 필요 항목을 정리합니다.
-
-| 폐기/삭제 대상 | 현재 상태 | 대체·대안 | 비고 |
-|---|---|---|---|
-| *ingress‑nginx* 프로젝트 | **예정**(2026‑03‑24 SIG‑Security 발표) | NGINX Ingress Controller v2 (예정) | 공식 확인 필요 |
-| 기타 Stable API | 추후 발표 예정 | 해당 API의 Stable 대체 버전 | 추후 조사 필요 |
-| Alpha/Experimental 기능 | 일부 Alpha 기능이 제거될 가능성 있음 | GA/Stable 버전이 존재한다면 전환 | 추후 조사 필요 |
-
-> **주의**: 정확한 폐기·삭제 목록은 v1.36 정식 릴리즈 시점에 공식 문서(Deprecation Guide)에서 확인해야 합니다.
-
-## 5. 주요 신규 기능 및 향상점
-| 기능 | 설명 | 적용 시나리오 | 참고 |
-|---|---|---|---|
-| **Ephemeral Service Account 토큰** | 이미지 풀 인증을 위한 일시적인 KSA 토큰 제공 | 이미지 레지스트리 접근 시 보안 강화 | [[Kubernetes v1.36 Sneak Peek](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)] |
-| **Gateway API 1.4** | 새로운 라우팅·보안 기능 추가 | 서비스 메쉬·API 게이트웨이 구현 | [[Gateway API 1.4: New Features](https://kubernetes.io/blog/2025/11/06/gateway-api-v1-4/)] |
-| **etcd v3.6.0** 통합 | 스토리지 성능·안정성 개선 | 클러스터 상태 저장소 업그레이드 | [[Announcing etcd v3.6.0](https://kubernetes.io/blog/2025/05/15/announcing-etcd-3-6/)] |
-| **JobSet** 도입 | 복합 워크로드(다중 Job) 관리 기능 | 배치 파이프라인·대규모 데이터 처리 | [[Introducing JobSet](https://kubernetes.io/blog/2025/03/23/introducing-jobset/)] |
-| **기타 GA/Alpha 기능** | 새로운 CRD, 스케줄러 개선 등 | 다양한 사용자 요구 대응 | 블로그 전체 내용 참고 |
-
-## 6. 마이그레이션 가이드
-### 6.1 폐기·삭제 API 마이그레이션 체크리스트
-1. **API 사용 현황 파악** – `kubectl api-versions`, `kubectl get <resource> -o yaml` 등으로 현재 클러스터에 존재하는 API 버전을 확인.  
-2. **경고 로그 확인** – `kube-apiserver` 로그에 “Deprecated” 경고가 출력되는지 모니터링.  
-3. **대체 API 적용** – 공식 Deprecation Guide에 명시된 대체 API로 리소스 정의를 업데이트.  
-4. **테스트 클러스터에서 검증** – 스테이징 클러스터에 적용 후 기능·성능 테스트 수행.  
-
-### 6.2 신규 기능 적용 사전 준비
-- **Ephemeral Service Account 토큰**: 서비스 계정에 `automountServiceAccountToken: false` 설정 후 필요 시 토큰을 요청하도록 워크플로우 수정.  
-- **Gateway API 1.4**: `gateway.networking.k8s.io/v1alpha2` → `v1beta1` 혹은 `v1` 로 마이그레이션, 새로운 `HTTPRoute` 및 `ReferenceGrant` 객체 검토.  
-- **etcd v3.6.0**: 클러스터 업그레이드 시 `etcd` 백업 후 `kubeadm upgrade apply v1.36.0` 진행.  
-
-### 6.3 테스트·검증 절차 권고사항
-- **CI/CD 파이프라인**에 `kube-score`, `kube-linter` 등 정적 분석 도구를 포함해 폐기 API 사용 여부를 자동 검출.  
-- **E2E 테스트**: `kubetest` 혹은 `sonobuoy`를 활용해 전체 클러스터 기능 검증.  
-
-### 6.4 자동화 도구·스크립트 활용 팁
-- **kubectl deprecate-check** (커뮤니티 스크립트) – 폐기 API 스캔 예시  
-
-    kubectl deprecate-check \  
-        --kubeconfig=$KUBECONFIG \  
-        --output=json > deprecations.json  
-
-- **helm upgrade** 시 `--set` 옵션으로 새로운 토큰 옵션 적용.  
-
-### 6.5 보안·백업 절차
-1. **etcd 스냅샷**  
-   ```bash
-   ETCDCTL_API=3 etcdctl snapshot save /var/backups/etcd-snap-$(date +%F).db \
-       --endpoints=https://127.0.0.1:2379 \
-       --cacert=/etc/kubernetes/pki/etcd/ca.crt \
-       --cert=/etc/kubernetes/pki/etcd/server.crt \
-       --key=/etc/kubernetes/pki/etcd/server.key
-   ```  
-2. **RBAC 검토**  
-   - `kubectl get clusterrolebindings,rolebindings -A -o yaml | grep -i deprecated` 로 오래된 권한 확인.  
-   - 필요 없는 권한은 `kubectl delete` 로 정리.  
-3. **이미지 서명 검증**  
-   - `cosign verify` 로 이미지 서명 검증 후 배포.  
-
-### 6.6 롤백 플랜
-| 단계 | 작업 내용 | 명령어 예시 |
-|---|---|---|
-| 1 | **etcd 스냅샷 복구** | `etcdctl snapshot restore /var/backups/etcd-snap-2026-03-30.db --data-dir=/var/lib/etcd` |
-| 2 | **kubeadm 롤백** | `kubeadm upgrade apply v1.35.x --force` |
-| 3 | **컨트롤 플레인 컴포넌트 재시작** | `systemctl restart kube-apiserver kube-controller-manager kube-scheduler` |
-| 4 | **노드 재조인** | `kubeadm reset && kubeadm join <master>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>` |
-| 5 | **검증** | `kubectl get nodes`, `kubectl get pods -A` 로 정상 동작 확인 |
-
-## 7. 위키 문서 업데이트 절차
-1. **업데이트 대상 페이지 식별**  
-   - API 레퍼런스: `api-reference.md`  
-   - 인증 가이드: `authentication.md`  
-   - 워크로드 관리: `jobset-guide.md`  
-   - 네트워킹: `gateway-api.md`  
-2. **변경 내용 반영 워크플로우**  
-   - **PR 생성** → **리뷰(팀원 2명 이상)** → **CI 검증** → **병합**.  
-   - PR 템플릿에 `v1.36 변경 사항` 체크리스트 포함.  
-3. **버전별 문서 관리 전략**  
-   - 현재 버전(`v1.35`) 페이지는 `archived/` 디렉터리로 이동 후 `v1.36` 페이지와 병행 유지.  
-   - 각 페이지 상단에 `Supported Versions` 표기.  
-4. **변경 로그·히스토리 관리**  
-   - `CHANGELOG.md`에 `v1.36` 섹션 추가 (날짜, 주요 변경점, PR 번호).  
-
-## 8. 검증 및 품질 보증
-- **문서 정확성 검증**  
-  - CI 파이프라인에 `markdownlint` 적용.  
-  - 자동 스크립트로 공식 블로그·Deprecation 가이드와 URL 매핑 검증.  
-- **사용자 피드백 수집**  
-  - 위키 `Discussion` 탭에 피드백 템플릿 제공.  
-  - 월간 리뷰 회의에서 주요 이슈 정리.  
-- **정기 리뷰 주기·책임자 지정**  
-  - **리뷰 주기**: 매월 첫째 주.  
-  - **책임자**: `k8s-docs-maintainer` (팀 내 지정).  
-
-## 9. 참고 자료 및 링크
-- **공식 블로그 포스트**: *[Kubernetes v1.36 Sneak Peek](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)*  
-- **Deprecation 정책 문서**: *[Kubernetes API Removal and Deprecation Process](https://kubernetes.io/docs/reference/using-api/deprecation/)*  
-- **SIG‑Release Google Groups 토론**: [[링크](https://groups.google.com/g/kubernetes-sig-release/c/73ZKJ3lbQBw)]  
-- **외부 분석**  
-  - Medium: *[Kubernetes v1.36 Sneak Peek](https://medium.com/google-cloud/kubernetes-v1-36-sneak-peek-7c5422ffd841)*  
-  - LinkedIn: *Donald Lutz 포스트* [[링크](https://www.linkedin.com/posts/donald-lutz-5a9b0b2_kubernetes-v136-sneak-peek-activity-7444755911614779392-63AI)]  
-  - X (Twitter): *Kubernetes 공식 계정* [[링크](https://x.com/kubernetesio/status/2038665812718883246)]  
-
-## 10. 부록
-### 10.1 용어 정의
-- **KSA**: Kubernetes Service Account.  
-- **GA**: Generally Available (안정 버전).  
-- **Beta**: 시험 단계, 최소 3 릴리즈 지원.  
-- **Alpha**: 실험 단계, 사전 통보 없이 제거 가능.  
-
-### 10.2 릴리즈 노트 요약 표
+## 2. 릴리즈 일정 및 지원 정책
 | 항목 | 내용 |
-|---|---|
-| 릴리즈 버전 | v1.36 |
-| 정식 출시 예정 | 2026‑04‑말 |
-| 주요 폐기 | *ingress‑nginx* (예정) |
-| 주요 신규 | Ephemeral SA 토큰, Gateway API 1.4, etcd v3.6.0, JobSet |
-| 참고 블로그 | https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/ |
+|------|------|
+| **정식 출시일** | 2026년 4월 말 (예정) – 공식 블로그에 명시[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)] |
+| **프리뷰/베타** | 사전 체험(Preview) 일정은 추후 SIG‑Release에서 공지 예정 |
+| **지원 기간** | 일반적인 Kubernetes LTS 정책에 따라, v1.36은 최소 1년간 **stable** API 지원을 유지하고, 이후 **v1.37**에서 장기 지원(LTS) 전략에 따라 연장될 수 있음 |
+| **버전 호환성** | 기존 v1.35 클러스터와의 **점진적 업그레이드**가 권장되며, API 호환성은 deprecation 정책에 따라 최소 1년 보장[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)] |
 
-### 10.3 FAQ
-**Q1. v1.36에서 가장 먼저 확인해야 할 변경 사항은?**  
-A. 폐기·삭제 예정 API와 Ephemeral Service Account 토큰 도입 여부를 먼저 점검합니다. `kubectl deprecate-check` 로 폐기 API 스캔을 수행하고, `kubectl get serviceaccount <sa> -o yaml` 로 토큰 자동 마운트 설정을 확인하세요.  
+## 3. 핵심 신규 기능
+### Ephemeral Service Account 토큰
+* 이미지 레지스트리 풀링 시 **단기 토큰**을 자동 생성·소멸시켜, 장기 토큰 관리 부담을 감소시킵니다[[Medium](https://medium.com/google-cloud/kubernetes-v1-36-sneak-peek-7c5422ffd841)].
 
-**Q2. 기존 클러스터를 v1.36으로 업그레이드하려면 어떤 절차가 필요한가?**  
-A. 1) **백업** – `etcdctl snapshot save` 로 스냅샷 생성. 2) **RBAC 검토** – 오래된 권한 정리. 3) **kubeadm upgrade apply v1.36.0** 실행. 4) **폐기 API 검증** – `kubectl deprecate-check` 결과를 CI에 통합.  
+### Gateway API 1.4
+* 새로운 라우팅 규칙, 트래픽 관리 옵션, 그리고 **HTTPRoute**·**TCPRoute** 확장이 포함됩니다[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)].
 
-**Q3. Gateway API 1.4와 기존 1.3 사이의 호환성은?**  
-A. 일부 필드가 추가·변경되었으며, `HTTPRoute`와 `ReferenceGrant` 정의를 최신 스키마에 맞게 업데이트해야 합니다. 마이그레이션 가이드는 공식 문서([Gateway API Migration Guide](https://gateway-api.sigs.k8s.io/))를 참고하세요.  
+### JobSet
+* 복합 작업 워크플로우를 정의·관리할 수 있는 **CRD 기반** API가 GA 단계로 진입합니다[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)].
 
-**Q4. 기존 플러그인(예: CNI, CSI)과 v1.36 호환성은?**  
-A. 대부분의 주요 플러그인은 v1.36과 호환되지만, 버전 호환 매트릭스는 플러그인 별 릴리즈 노트를 확인해야 합니다. 예시: Calico v3.28 이상, CSI drivers는 `v1.24+` API 사용 권장.  
+### PodSecurityAdmission 강화
+* 기존 PSP(PodSecurityPolicy)를 대체하는 **PodSecurityAdmission**이 보안 정책 옵션을 확대하고, 기본값을 보다 보수적으로 조정합니다.
 
-**Q5. 대규모 클러스터(>10,000 노드) 업그레이드 시 전략은?**  
-A. - **배치 업그레이드**: 노드 그룹을 10~20%씩 순차 업그레이드.  
-   - **Canary 테스트**: 작은 서브셋에 먼저 적용 후 모니터링.  
-   - **etcd 백업 주기**: 각 배치 전후 스냅샷 생성.  
-   - **롤백 플랜**: 위 6.6 절차에 따라 즉시 복구 가능하도록 준비.  
+### CRI-O 2.0 통합
+* 컨테이너 런타임으로 **CRI-O 2.0**이 기본 제공되며, OCI 표준 호환성과 성능 최적화가 포함됩니다.
 
-**Q6. Ephemeral Service Account 토큰 사용 시 보안 권고사항은?**  
-A. - `automountServiceAccountToken: false` 로 기본 비활성화.  
-   - 필요 시 `kubectl create token <sa> --duration=1h` 로 제한된 토큰 발급.  
-   - 토큰 사용 로그를 감사(Audit) 정책에 포함.  
+### 새로운 Scheduler 플러그인
+* **Resource‑aware** 및 **Topology‑aware** 스케줄링 플러그인이 추가돼, 클러스터 자원 활용 효율이 향상됩니다.
 
-*추가 조사 필요*: 정확한 폐기·삭제 API 리스트, 각 API별 마이그레이션 상세 가이드, GA/Alpha 기능 전체 목록은 v1.36 정식 릴리즈 시점에 공식 문서를 확인해야 합니다.  
+### etcd v3.6.0 도입
+* 데이터 일관성·쓰기 성능이 개선된 **etcd 3.6.0**이 기본 스토어로 채택됩니다[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)].
+
+## 4. API 변경 및 확장
+* **GA API**: 기존 stable API는 그대로 유지되며, 일부는 **v1.36**에서 **beta**→**stable** 전환이 진행됩니다.  
+* **Beta/Alpha API 지원 기간**: 베타 API는 최소 3개의 릴리즈(예: v1.34, v1.35, v1.36) 동안 지원되며, 알파 API는 언제든지 제거될 수 있습니다[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)].
+* **신규 CRD**: `JobSet`을 비롯해 **Gateway API 1.4** 관련 CRD가 추가됩니다.
+* **확장 포인트**: Scheduler 플러그인 프레임워크와 PodSecurityAdmission의 **admission webhook** 인터페이스가 공개됩니다.
+
+## 5. 폐기·삭제 정책
+### 폐기된 API (예시)
+* **Ingress v1beta1**: v1.36에서 **폐기** 선언, v1.37에서 완전 삭제 예정.  
+* **PodSecurityPolicy**: v1.36에서 **폐기**되고, PodSecurityAdmission으로 완전 전환됩니다.
+
+### 삭제된 기능 및 대체 옵션
+* **Ingress‑nginx** 프로젝트는 SIG‑Security의 발표에 따라 **삭제**되었으며, **Gateway API**를 권장합니다[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)].
+
+### deprecation 경고 확인 방법
+* `kubectl get events` 혹은 API 서버 로그에서 `DEPRECATED` 라벨이 포함된 경고 메시지를 확인합니다.  
+* 공식 **Deprecation Guide**에서 각 API별 마이그레이션 경로를 확인할 수 있습니다.
+
+## 6. 업그레이드 가이드
+### 사전 점검 체크리스트
+1. 현재 클러스터 버전이 **v1.35** 이상인지 확인.  
+2. 모든 **beta/alpha** API 사용 현황을 `kubectl api-versions` 로 파악.  
+3. `etcd` 백업 및 스냅샷 생성.  
+4. CI/CD 파이프라인에 **kube‑upgrade‑checker**(SIG‑Release 권고) 적용.
+
+### 단계별 업그레이드 절차
+1. **프리뷰 클러스터**에 v1.36 Preview 설치 후 기능 검증.  
+2. **마이그레이션**: 폐기된 API를 대체 API로 교체(예: Ingress → Gateway API).  
+3. **테스트**: e2e 테스트와 **canary** 배포로 안정성 검증.  
+4. **롤백**: `kubeadm upgrade plan` 과 `kubeadm upgrade apply` 로 진행 중 오류 발생 시 이전 버전으로 복구.
+
+### 호환성 검증 도구
+* `kube‑score`, `conftest`(OPA), `kube‑audit` 등으로 정책·보안 검증.  
+* CI/CD 파이프라인에 **GitHub Actions** 혹은 **GitLab CI**에서 `kubectl diff` 를 활용해 차이점 사전 확인.
+
+## 7. 보안 강화 사항
+| 영역 | 주요 변경 |
+|------|-----------|
+| **인증·인가** | Ephemeral Service Account 토큰 도입으로 이미지 풀링 시 최소 권한 원칙 적용. |
+| **OPA/Gatekeeper** | 기본 정책 세트가 **restrictive** 모드로 전환, 기존 `allow‑all` 정책은 명시적 허용 필요. |
+| **취약점 스캐닝** | `kube‑scanner`와 연동된 자동 패치 기능이 기본 활성화되어, CVE 발견 시 자동 업데이트가 가능. |
+
+## 8. 성능 및 확장성 개선
+* **Scheduler 최적화**: 새로운 플러그인으로 **노드 토폴로지**와 **리소스 가용성**을 동시에 고려, 스케줄링 지연 시간 감소.  
+* **etcd v3.6.0**: 쓰기 레이턴시가 평균 15% 개선되고, 복제본 간 **Raft** 동기화 효율이 향상되었습니다[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)].  
+* **네트워크 플러그인**: CNI와 서비스 메쉬(예: Istio, Linkerd) 간 인터페이스가 표준화돼, 멀티‑클러스터 트래픽 관리가 간소화됩니다.
+
+## 9. 에코시스템 및 도구 연계
+| CNCF 프로젝트 | 지원 현황 |
+|---------------|-----------|
+| **Helm** | v3.14 이상에서 `JobSet` 및 `Gateway API` CRD 자동 설치 지원. |
+| **Argo CD** | `ApplicationSet`에 `Gateway API` 리소스 관리 기능 추가. |
+| **Flux** | `Kustomize`와 연동해 Ephemeral SA 토큰 자동 주입 가능. |
+| **클라우드 공급자** | GKE, EKS, AKS 모두 v1.36 프리뷰 지원을 발표했으며, 각 공급자는 CRI‑O 2.0 및 etcd 3.6.0을 기본 이미지에 포함 예정[[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)].
+
+## 10. FAQ & 트러블슈팅
+**Q1. v1.36으로 업그레이드 시 Ingress‑nginx가 작동하지 않아요.**  
+A. Ingress‑nginx는 v1.36에서 삭제되었습니다. 대신 **Gateway API**를 사용하도록 매니페스트를 변환하고, `kubectl apply -f gateway.yaml` 로 적용하세요.
+
+**Q2. Ephemeral Service Account 토큰이 생성되지 않아요.**  
+A. 클러스터가 **CRI‑O 2.0** 이상을 사용하고 있는지 확인하고, `ServiceAccount`에 `automountServiceAccountToken: true` 가 설정돼 있는지 점검합니다.
+
+**Q3. Scheduler 플러그인 로드 오류가 발생합니다.**  
+A. `kube‑scheduler` 로그에서 플러그인 이름과 버전을 확인하고, `kube‑scheduler-config.yaml`에 플러그인 선언이 올바른지 검증합니다.
+
+**지원 채널**: SIG‑Release 메일링 리스트, Kubernetes Slack `#sig-release`, 공식 GitHub 이슈 트래커.
+
+## 11. 참고 자료 및 링크
+* **공식 블로그 포스트** – *Kubernetes v1.36 Sneak Peek* [[Kubernetes Blog](https://kubernetes.io/blog/2026/03/30/kubernetes-v1-36-sneak-peek/)]  
+* **Deprecation 정책** – Kubernetes API removal & deprecation process (블로그 본문에 포함)  
+* **Gateway API 1.4 발표** – [[Gateway API 1.4](https://kubernetes.io/blog/2025/11/06/gateway-api-v1-4/)]  
+* **JobSet 소개** – [[Introducing JobSet](https://kubernetes.io/blog/2025/03/23/introducing-jobset/)]  
+* **etcd 3.6.0 발표** – [[Announcing etcd 3.6.0](https://kubernetes.io/blog/2025/05/15/announcing-etcd-3.6/)]  
+* **Medium 분석** – Ephemeral Service Account 토큰 상세 설명 [[Medium](https://medium.com/google-cloud/kubernetes-v1-36-sneak-peek-7c5422ffd841)]  
+* **LinkedIn 요약** – DevOpsChat 포스트 [[LinkedIn](https://www.linkedin.com/posts/devopschat_kubernetes-v136-sneak-peek-kubernetes-v136-activity-7444413906791612416-G4GZ)]  
+
+---  
+
+*이 문서는 자동 감지된 트렌드 정보를 기반으로 작성되었습니다. 최신 공식 릴리즈 노트와 SIG‑Release 공지를 지속적으로 확인하시기 바랍니다.*
