@@ -1,12 +1,12 @@
 {
-  "collectedAt": "2026-04-11T00:59:33.753Z",
+  "collectedAt": "2026-04-11T02:21:01.562Z",
   "overview": {
-    "totalDocuments": 359,
+    "totalDocuments": 361,
     "publishedDocuments": 191,
-    "draftDocuments": 168,
+    "draftDocuments": 170,
     "openRequests": 225,
     "closedRequests": 19,
-    "totalAIActions": 894
+    "totalAIActions": 895
   },
   "activity": {
     "last1h": {
@@ -19,18 +19,18 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 11,
+      "aiActions": 12,
       "documentsCreated": 3,
-      "documentsModified": 3,
+      "documentsModified": 4,
       "tavilyApiCalls": 9,
       "tavilyResults": 24,
       "estimatedTokens": 15312,
       "totalPipelineDurationMs": 324903
     },
     "last7d": {
-      "aiActions": 25,
+      "aiActions": 26,
       "documentsCreated": 6,
-      "documentsModified": 7,
+      "documentsModified": 8,
       "tavilyApiCalls": 18,
       "tavilyResults": 49,
       "estimatedTokens": 24044,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-11T01:01:13.552Z",
+      "actionType": "recover",
+      "issueNumber": 518,
+      "documentTitle": "chore(deps): bump next from 16.1.6 to 16.1.7",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-10T10:03:00.379Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 61996,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2680
-    },
-    {
-      "timestamp": "2026-04-07T09:51:26.578Z",
-      "actionType": "generate",
-      "issueNumber": 705,
-      "documentTitle": "Securing the Open Source Supply Chain across GitHub",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 30470,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1360
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 873,
+      "totalActions": 874,
       "totalEstimatedTokens": 699362,
       "avgDurationMs": 53764
     },
