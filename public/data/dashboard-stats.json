@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-12T08:49:24.539Z",
+  "collectedAt": "2026-04-12T09:49:32.088Z",
   "overview": {
     "totalDocuments": 361,
     "publishedDocuments": 191,
     "draftDocuments": 170,
     "openRequests": 225,
     "closedRequests": 19,
-    "totalAIActions": 895
+    "totalAIActions": 896
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-12T09:15:23.749Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-11T01:01:13.552Z",
       "actionType": "recover",
@@ -227,21 +237,11 @@
       "durationMs": 96878,
       "tavilyApiCalls": 3,
       "estimatedTokens": 4692
-    },
-    {
-      "timestamp": "2026-04-07T09:52:45.119Z",
-      "actionType": "generate",
-      "issueNumber": 704,
-      "documentTitle": "Defending Your Software Supply Chain – Action Guide for Engineering Teams",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 61996,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2680
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 874,
+      "totalActions": 875,
       "totalEstimatedTokens": 699362,
       "avgDurationMs": 53764
     },
