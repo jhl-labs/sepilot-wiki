@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-12T23:49:49.307Z",
+  "collectedAt": "2026-04-13T02:23:44.135Z",
   "overview": {
-    "totalDocuments": 361,
-    "publishedDocuments": 191,
+    "totalDocuments": 362,
+    "publishedDocuments": 192,
     "draftDocuments": 170,
     "openRequests": 225,
     "closedRequests": 19,
-    "totalAIActions": 896
+    "totalAIActions": 897
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-13T01:37:02.696Z",
+      "actionType": "status_report",
+      "issueNumber": null,
+      "documentTitle": "주간 위키 보고서 - 2026년 16주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-12T09:15:23.749Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-07T09:54:38.394Z",
-      "actionType": "generate",
-      "issueNumber": 703,
-      "documentTitle": "Kubernetes v1.36 Sneak Peek – 위키 유지보수 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 96878,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4692
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 875,
+      "totalActions": 876,
       "totalEstimatedTokens": 699362,
       "avgDurationMs": 53764
     },
