@@ -1,51 +1,65 @@
 {
-  "generatedAt": "2026-04-06T01:35:40.280Z",
-  "weekNumber": 15,
+  "generatedAt": "2026-04-13T01:37:02.690Z",
+  "weekNumber": 16,
   "year": 2026,
   "period": {
-    "start": "2026-03-30T01:35:26.865Z",
-    "end": "2026-04-06T01:35:26.865Z"
+    "start": "2026-04-06T01:36:46.922Z",
+    "end": "2026-04-13T01:36:46.922Z"
   },
   "documents": {
-    "total": 394,
+    "total": 400,
     "statusDistribution": {
-      "draft": 154,
-      "published": 198,
+      "draft": 157,
+      "published": 201,
       "deleted": 42
     },
-    "newCount": 9,
-    "modifiedCount": 7,
+    "newCount": 6,
+    "modifiedCount": 6,
     "publishedCount": 0
   },
   "aiActivity": {
-    "totalActions": 37,
+    "totalActions": 25,
     "byType": {
-      "maintain": 7,
-      "quality_score": 13,
-      "modify": 7,
-      "generate": 9,
-      "recover": 1
+      "maintain": 5,
+      "recover": 2,
+      "quality_score": 6,
+      "modify": 6,
+      "generate": 6
     },
     "entries": [
       {
-        "id": "84e03fac-e4d8-4692-9571-e54441532016",
-        "timestamp": "2026-04-05T09:12:38.256Z",
+        "id": "5c278940-5753-495c-bd3d-a3f14293809a",
+        "timestamp": "2026-04-12T09:15:23.749Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "학습 루프",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "학습 루프: 5개 패턴 감지, 2개 에이전트 개선",
+        "summary": "학습 루프: 3개 패턴 감지, 2개 에이전트 개선",
         "trigger": "weekly_schedule",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "d4b44eec-0907-4005-b074-dd5676d5a0d3",
-        "timestamp": "2026-04-03T09:52:45.689Z",
+        "id": "d473fac4-def9-4550-9821-95115bc55095",
+        "timestamp": "2026-04-11T01:01:13.552Z",
+        "actionType": "recover",
+        "issueNumber": 518,
+        "issueTitle": "chore(deps): bump next from 16.1.6 to 16.1.7",
+        "documentSlug": "dependencies/nextjs-16.1.7-superseded",
+        "documentTitle": "chore(deps): bump next from 16.1.6 to 16.1.7",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "c1a7b02d-3714-45dd-8e77-21517018c765",
+        "timestamp": "2026-04-10T10:03:00.379Z",
         "actionType": "quality_score",
-        "issueNumber": 696,
+        "issueNumber": 709,
         "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
         "documentSlug": "kubernetes/kubernetes-v1-36-sneak-peek",
         "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
@@ -56,13 +70,13 @@
         "changes": null
       },
       {
-        "id": "2d80bd02-2bb4-4322-922f-727851331739",
-        "timestamp": "2026-04-03T09:52:33.188Z",
+        "id": "b967ebcf-9c7b-4026-b3be-d0df477496fa",
+        "timestamp": "2026-04-10T10:02:42.802Z",
         "actionType": "quality_score",
-        "issueNumber": 697,
-        "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
-        "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
-        "documentTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
+        "issueNumber": 710,
+        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0-rc.0",
+        "documentSlug": "kubernetes/kubernetes-kubernetes-v1-36-0-rc-0",
+        "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0-rc.0",
         "summary": "자동 품질 검토 통과 (84점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -70,24 +84,24 @@
         "changes": null
       },
       {
-        "id": "bf566d92-dfc7-4108-bf7a-f330cb48b173",
-        "timestamp": "2026-04-03T09:52:19.841Z",
+        "id": "f1e71c43-9c79-43a5-a1e2-2e0fa00f754b",
+        "timestamp": "2026-04-10T10:02:16.321Z",
         "actionType": "quality_score",
-        "issueNumber": 698,
+        "issueNumber": 711,
         "issueTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
         "documentSlug": "security/defending-your-software-supply-chain-what-every-en",
         "documentTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
-        "summary": "자동 품질 검토 통과 (92점) → 자동 발행",
+        "summary": "자동 품질 검토 통과 (94점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "9b7380ca-3341-4a4a-91e4-26962b75c764",
-        "timestamp": "2026-04-03T09:52:04.034Z",
+        "id": "ac666816-489a-432a-86a5-19367f3c6dd1",
+        "timestamp": "2026-04-10T10:01:52.607Z",
         "actionType": "modify",
-        "issueNumber": 699,
+        "issueNumber": 712,
         "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
         "documentSlug": "678",
         "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
@@ -96,32 +110,15 @@
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 3,
+          "additions": 0,
           "deletions": 0
         }
       },
       {
-        "id": "d3a6f985-a6c3-4424-8144-97b7ad1a54ae",
-        "timestamp": "2026-04-03T09:51:15.713Z",
+        "id": "1bb4467b-2cd7-4e64-a1c3-17779ad35455",
+        "timestamp": "2026-04-10T10:00:12.646Z",
         "actionType": "modify",
-        "issueNumber": 700,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
-        "documentSlug": "678",
-        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 1,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "4085140d-a643-4452-b1e8-64c52c6abb7e",
-        "timestamp": "2026-04-03T09:50:24.956Z",
-        "actionType": "modify",
-        "issueNumber": 701,
+        "issueNumber": 713,
         "issueTitle": "[Wiki Maintenance] [URL 변경] reports/weekly-2026-14 문서 참조 URL 확인 필요",
         "documentSlug": "reports/weekly-2026-14",
         "documentTitle": "주간 위키 보고서 - 2026년 14주차",
@@ -135,14 +132,31 @@
         }
       },
       {
-        "id": "3bfd5368-d0ad-47ed-88cf-b2043c4a8cf2",
-        "timestamp": "2026-04-03T09:49:55.364Z",
+        "id": "26021ca4-8f44-4106-afaf-a7b9d5f7827c",
+        "timestamp": "2026-04-10T09:59:27.491Z",
+        "actionType": "modify",
+        "issueNumber": 714,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] 636 문서 참조 URL 확인 필요",
+        "documentSlug": "636",
+        "documentTitle": "AI 에이전트 지갑 입출금 트랜잭션 모니터링 가이드",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 636 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 1,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "2751a8c1-fb35-42c5-af1d-d742fb492ac0",
+        "timestamp": "2026-04-10T09:58:32.738Z",
         "actionType": "generate",
-        "issueNumber": 696,
+        "issueNumber": 709,
         "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
         "documentSlug": "kubernetes/kubernetes-v1-36-sneak-peek",
-        "documentTitle": "Kubernetes v1.36 Sneak Peek 위키 유지보수 가이드",
-        "summary": "새 문서 \"Kubernetes v1.36 Sneak Peek 위키 유지보수 가이드\" 생성",
+        "documentTitle": "Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서",
+        "summary": "새 문서 \"Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -151,43 +165,43 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 3144
+                "durationMs": 3018
               },
               {
                 "step": "outline",
-                "durationMs": 8091
+                "durationMs": 9864
               },
               {
                 "step": "write",
-                "durationMs": 31052
+                "durationMs": 42291
               },
               {
                 "step": "review",
-                "durationMs": 10354
+                "durationMs": 9679
               }
             ],
-            "totalDurationMs": 52641,
+            "totalDurationMs": 64853,
             "researchSources": 5,
             "tavilyUsage": {
               "apiCalls": 3,
-              "totalResults": 7
+              "totalResults": 8
             },
             "estimatedTokens": {
-              "estimated": 2476,
+              "estimated": 3092,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "bbb7f8e6-e96e-424c-88ac-e7fe3cef3ac9",
-        "timestamp": "2026-04-03T09:48:48.124Z",
+        "id": "01cf824f-8ba8-44ad-84d1-a852d1c2bf5d",
+        "timestamp": "2026-04-10T09:57:00.370Z",
         "actionType": "generate",
-        "issueNumber": 697,
-        "issueTitle": "[Wiki Maintenance] [요청] Announcing Ingress2Gateway 1.0: Your Path to Gateway API",
-        "documentSlug": "kubernetes/announcing-ingress2gateway-1-0-your-path-to-gatewa",
-        "documentTitle": "Announcing Ingress2Gateway 1.0 – Your Path to Gateway API",
-        "summary": "새 문서 \"Announcing Ingress2Gateway 1.0 – Your Path to Gateway API\" 생성",
+        "issueNumber": 710,
+        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0-rc.0",
+        "documentSlug": "kubernetes/kubernetes-kubernetes-v1-36-0-rc-0",
+        "documentTitle": "Kubernetes v1.36.0‑rc.0 릴리즈 유지보수 가이드",
+        "summary": "새 문서 \"Kubernetes v1.36.0‑rc.0 릴리즈 유지보수 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -196,86 +210,90 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 6135
+                "durationMs": 7197
               },
               {
                 "step": "outline",
-                "durationMs": 6959
+                "durationMs": 6257
               },
               {
                 "step": "write",
-                "durationMs": 37097
+                "durationMs": 29715
               },
               {
                 "step": "review",
-                "durationMs": 4602
+                "durationMs": 8292
+              },
+              {
+                "step": "refine",
+                "durationMs": 122232
               }
             ],
-            "totalDurationMs": 54793,
+            "totalDurationMs": 173693,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 7
+            },
+            "estimatedTokens": {
+              "estimated": 8326,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "f9d87d15-2ab8-4082-a217-fbee4ac2f6e8",
+        "timestamp": "2026-04-10T09:53:46.127Z",
+        "actionType": "generate",
+        "issueNumber": 711,
+        "issueTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
+        "documentSlug": "security/defending-your-software-supply-chain-what-every-en",
+        "documentTitle": "Defending Your Software Supply Chain – Engineering Teams Guide",
+        "summary": "새 문서 \"Defending Your Software Supply Chain – Engineering Teams Guide\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 8482
+              },
+              {
+                "step": "outline",
+                "durationMs": 8300
+              },
+              {
+                "step": "write",
+                "durationMs": 29434
+              },
+              {
+                "step": "review",
+                "durationMs": 11087
+              },
+              {
+                "step": "refine",
+                "durationMs": 29054
+              }
+            ],
+            "totalDurationMs": 86357,
             "researchSources": 10,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 2433,
+              "estimated": 3894,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "6a14e206-bca0-4c44-b555-c46488320af5",
-        "timestamp": "2026-04-03T09:47:37.765Z",
-        "actionType": "generate",
-        "issueNumber": 698,
-        "issueTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
-        "documentSlug": "security/defending-your-software-supply-chain-what-every-en",
-        "documentTitle": "Defending Your Software Supply Chain – Engineering Teams’ Immediate Action Guide",
-        "summary": "새 문서 \"Defending Your Software Supply Chain – Engineering Teams’ Immediate Action Guide\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 10272
-              },
-              {
-                "step": "outline",
-                "durationMs": 9106
-              },
-              {
-                "step": "write",
-                "durationMs": 24862
-              },
-              {
-                "step": "review",
-                "durationMs": 9530
-              },
-              {
-                "step": "refine",
-                "durationMs": 29728
-              }
-            ],
-            "totalDurationMs": 83499,
-            "researchSources": 8,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 7
-            },
-            "estimatedTokens": {
-              "estimated": 3661,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "92f91d26-29c5-492f-a6fc-dda3b67a7d15",
-        "timestamp": "2026-04-03T09:24:42.146Z",
+        "id": "6781af98-7034-4250-b7e5-05e141b13034",
+        "timestamp": "2026-04-10T09:34:16.462Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "URL 변경 감지",
@@ -288,69 +306,41 @@
         "changes": null
       },
       {
-        "id": "4f2a1fbe-94e0-4b3f-b633-0c47cec06fc4",
-        "timestamp": "2026-04-03T09:24:28.455Z",
+        "id": "01f4d94c-3f7e-4ab7-b9d3-ca8e66e4d929",
+        "timestamp": "2026-04-10T09:34:07.165Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "트렌드 모니터링",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "트렌드 모니터링: 21건 수집, 3건 감지, 3건 Issue 생성",
+        "summary": "트렌드 모니터링: 22건 수집, 3건 감지, 3건 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "aeaabdae-f23d-4690-92e4-253d3136a305",
-        "timestamp": "2026-04-02T08:46:06.656Z",
+        "id": "c054a789-6408-4ed4-8700-e28c915f62a8",
+        "timestamp": "2026-04-07T09:57:29.582Z",
         "actionType": "quality_score",
-        "issueNumber": 681,
-        "issueTitle": " [요청] AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI",
-        "documentSlug": "ai/ai-mcp-a2a-ucp-ap2-a2ui-ag-ui",
-        "documentTitle": " [요청] AI 에이전트 프로토콜 종합 가이드 – MCP, A2A, UCP, AP2, A2UI, AG‑UI",
-        "summary": "자동 품질 검토 통과 (83점) → 자동 발행",
+        "issueNumber": 703,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+        "documentSlug": "kubernetes/kubernetes-v1-36-sneak-peek",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "856fbd75-c1e2-4bb6-8e6c-2247766a2c28",
-        "timestamp": "2026-04-02T06:02:30.176Z",
-        "actionType": "modify",
-        "issueNumber": 608,
-        "issueTitle": " [요청] FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
-        "documentSlug": "ai/fastmcp-model-context-protocol",
-        "documentTitle": " [요청] FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
-        "summary": "피드백에 따라 문서 수정",
-        "trigger": "maintainer_comment",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "d0befbc3-cac9-427c-af2c-c2c338563523",
-        "timestamp": "2026-04-01T09:55:52.372Z",
+        "id": "8dac3799-c63d-4e3e-867a-aebe979c2792",
+        "timestamp": "2026-04-07T09:57:14.625Z",
         "actionType": "quality_score",
-        "issueNumber": 690,
-        "issueTitle": "[Wiki Maintenance] [요청] AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
-        "documentSlug": "ai",
-        "documentTitle": "[Wiki Maintenance] [요청] AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
-        "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "2a0d509e-2410-490b-82d7-94547d52611d",
-        "timestamp": "2026-04-01T09:55:38.071Z",
-        "actionType": "quality_score",
-        "issueNumber": 691,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 보안 베스트 프랙티스",
-        "documentSlug": "kubernetes-ai-gateway",
-        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 보안 베스트 프랙티스",
+        "issueNumber": 704,
+        "issueTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
+        "documentSlug": "security/defending-your-software-supply-chain-what-every-en",
+        "documentTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
         "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -358,73 +348,79 @@
         "changes": null
       },
       {
-        "id": "23775af4-fe57-49f5-850e-e6700e837e5a",
-        "timestamp": "2026-04-01T09:55:22.482Z",
+        "id": "dea3fbdc-7e52-4915-8db1-67b692489c18",
+        "timestamp": "2026-04-07T09:56:59.185Z",
         "actionType": "quality_score",
-        "issueNumber": 692,
-        "issueTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드",
-        "documentSlug": "llm-observability",
-        "documentTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드",
-        "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+        "issueNumber": 705,
+        "issueTitle": "[Wiki Maintenance] [요청] Securing the open source supply chain across GitHub",
+        "documentSlug": "security/securing-the-open-source-supply-chain-across-githu",
+        "documentTitle": "[Wiki Maintenance] [요청] Securing the open source supply chain across GitHub",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "5eddc08b-cd09-4e08-862f-5d0daf5aea27",
-        "timestamp": "2026-04-01T09:55:03.984Z",
-        "actionType": "generate",
-        "issueNumber": 690,
-        "issueTitle": "[Wiki Maintenance] [요청] AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
-        "documentSlug": "ai/ai",
-        "documentTitle": "AI 에이전트 거버넌스 프레임워크 종합 비교 가이드",
-        "summary": "새 문서 \"AI 에이전트 거버넌스 프레임워크 종합 비교 가이드\" 생성",
-        "trigger": "request_label",
+        "id": "ccbc4d57-f147-415b-b72f-0cd10a226cfc",
+        "timestamp": "2026-04-07T09:56:43.106Z",
+        "actionType": "modify",
+        "issueNumber": 706,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+        "documentSlug": "678",
+        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3170
-              },
-              {
-                "step": "outline",
-                "durationMs": 9500
-              },
-              {
-                "step": "write",
-                "durationMs": 32611
-              },
-              {
-                "step": "review",
-                "durationMs": 5686
-              }
-            ],
-            "totalDurationMs": 50968,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 2390,
-              "method": "duration_based"
-            }
-          }
+          "additions": 0,
+          "deletions": 0
         }
       },
       {
-        "id": "07ae8425-c846-4c48-8766-6b63f2987fa1",
-        "timestamp": "2026-04-01T09:53:48.521Z",
-        "actionType": "generate",
-        "issueNumber": 691,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes AI Gateway 보안 베스트 프랙티스",
+        "id": "1e61a3a3-0151-4a1b-aa18-9a0476683935",
+        "timestamp": "2026-04-07T09:55:51.470Z",
+        "actionType": "modify",
+        "issueNumber": 707,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] reports/weekly-2026-14 문서 참조 URL 확인 필요",
+        "documentSlug": "reports/weekly-2026-14",
+        "documentTitle": "주간 위키 보고서 - 2026년 14주차",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/weekly-2026-14 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 40,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "61e19fb5-df27-43f1-9ae5-25a69b2c5cff",
+        "timestamp": "2026-04-07T09:55:11.082Z",
+        "actionType": "modify",
+        "issueNumber": 708,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-ai-gateway 문서 참조 URL 확인 필요",
         "documentSlug": "kubernetes-ai-gateway",
         "documentTitle": "Kubernetes AI Gateway 보안 베스트 프랙티스",
-        "summary": "새 문서 \"Kubernetes AI Gateway 보안 베스트 프랙티스\" 생성",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-ai-gateway 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 1,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "88fb1d8f-b317-4b5e-8828-2133a9aa5b8e",
+        "timestamp": "2026-04-07T09:54:38.394Z",
+        "actionType": "generate",
+        "issueNumber": 703,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
+        "documentSlug": "kubernetes/kubernetes-v1-36-sneak-peek",
+        "documentTitle": "Kubernetes v1.36 Sneak Peek – 위키 유지보수 가이드",
+        "summary": "새 문서 \"Kubernetes v1.36 Sneak Peek – 위키 유지보수 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -433,74 +429,33 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 2746
+                "durationMs": 3033
               },
               {
                 "step": "outline",
-                "durationMs": 8808
+                "durationMs": 8945
               },
               {
                 "step": "write",
-                "durationMs": 22396
+                "durationMs": 44884
               },
               {
                 "step": "review",
-                "durationMs": 8214
+                "durationMs": 8154
+              },
+              {
+                "step": "refine",
+                "durationMs": 31862
               }
             ],
-            "totalDurationMs": 42164,
+            "totalDurationMs": 96878,
             "researchSources": 6,
             "tavilyUsage": {
               "apiCalls": 3,
-              "totalResults": 9
+              "totalResults": 8
             },
             "estimatedTokens": {
-              "estimated": 1971,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "870f36dc-ccb6-4012-bd55-31c152f27cc3",
-        "timestamp": "2026-04-01T09:52:47.846Z",
-        "actionType": "generate",
-        "issueNumber": 692,
-        "issueTitle": "[Wiki Maintenance] [요청] LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드",
-        "documentSlug": "llm-observability",
-        "documentTitle": "LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드",
-        "summary": "새 문서 \"LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 2871
-              },
-              {
-                "step": "outline",
-                "durationMs": 9514
-              },
-              {
-                "step": "write",
-                "durationMs": 47902
-              },
-              {
-                "step": "review",
-                "durationMs": 9020
-              }
-            ],
-            "totalDurationMs": 69307,
-            "researchSources": 4,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 5
-            },
-            "estimatedTokens": {
-              "estimated": 3322,
+              "estimated": 4692,
               "method": "duration_based"
             }
           }
@@ -509,65 +464,47 @@
     ]
   },
   "issues": {
-    "totalOpen": 219,
-    "recentActivity": 10
+    "totalOpen": 225,
+    "recentActivity": 6
   },
   "commits": {
-    "total": 9,
+    "total": 6,
     "entries": [
       {
-        "sha": "d9c3bcb7f",
+        "sha": "33bc3b484",
+        "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+        "author": "GitHub Action",
+        "date": "2026-04-11T01:01:50Z"
+      },
+      {
+        "sha": "78b155c06",
+        "message": "docs: Issue #715 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-04-11T01:01:28Z"
+      },
+      {
+        "sha": "f7b107323",
+        "message": "docs: Issue #518 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-04-11T01:01:25Z"
+      },
+      {
+        "sha": "858e20495",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-04-03T09:53:08Z"
+        "date": "2026-04-10T10:03:36Z"
       },
       {
-        "sha": "4a76aa14a",
+        "sha": "cc306df92",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-04-02T08:46:24Z"
+        "date": "2026-04-07T09:58:01Z"
       },
       {
-        "sha": "4a67e7267",
-        "message": "docs: Issue #608 - 피드백 반영",
+        "sha": "7a3be295a",
+        "message": "docs: Issue #702 - 피드백 반영",
         "author": "GitHub Action",
-        "date": "2026-04-02T06:02:43Z"
-      },
-      {
-        "sha": "1b231a7c3",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-04-01T09:56:28Z"
-      },
-      {
-        "sha": "a7979a3a5",
-        "message": "📊 문서 품질 평가: 평균 76점",
-        "author": "github-actions[bot]",
-        "date": "2026-04-01T03:15:04Z"
-      },
-      {
-        "sha": "c745c7f2b",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-03-31T09:56:22Z"
-      },
-      {
-        "sha": "ab1ffaea2",
-        "message": "docs: Issue #683 - 피드백 반영",
-        "author": "GitHub Action",
-        "date": "2026-03-30T20:59:26Z"
-      },
-      {
-        "sha": "519abf836",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-03-30T07:04:04Z"
-      },
-      {
-        "sha": "a04790d0e",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-03-30T02:15:30Z"
+        "date": "2026-04-06T23:32:33Z"
       }
     ]
   }
