@@ -1,6 +1,110 @@
 {
   "entries": [
     {
+      "id": "b2ada2ca-62b3-419b-8965-0eb70cb0a7d9",
+      "timestamp": "2026-04-15T03:41:44.302Z",
+      "actionType": "quality_score",
+      "issueNumber": 719,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "documentSlug": "guides/api",
+      "documentTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "a16ea72f-50a8-46b0-8923-a945ac04db5a",
+      "timestamp": "2026-04-15T03:41:22.460Z",
+      "actionType": "generate",
+      "issueNumber": 719,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "documentSlug": "guides/api",
+      "documentTitle": "프론트엔드 API 클라이언트 서비스 가이드",
+      "summary": "새 문서 \"프론트엔드 API 클라이언트 서비스 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3638
+            },
+            {
+              "step": "outline",
+              "durationMs": 10293
+            },
+            {
+              "step": "write",
+              "durationMs": 38176
+            },
+            {
+              "step": "review",
+              "durationMs": 9137
+            }
+          ],
+          "totalDurationMs": 61244,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2881,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "974a63b0-6075-4967-8328-3405be85b007",
+      "timestamp": "2026-04-15T03:40:02.317Z",
+      "actionType": "generate",
+      "issueNumber": 720,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용 가이드",
+      "documentSlug": "untitled-1776224402310",
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "summary": "새 문서 \"검색 서비스 구현 및 사용 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3534
+            },
+            {
+              "step": "outline",
+              "durationMs": 16007
+            },
+            {
+              "step": "write",
+              "durationMs": 49590
+            },
+            {
+              "step": "review",
+              "durationMs": 11667
+            }
+          ],
+          "totalDurationMs": 80798,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3863,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "d2e7aabc-b8a8-4004-9944-dd7e78919bf3",
       "timestamp": "2026-04-15T03:01:25.203Z",
       "actionType": "coverage_analysis",
@@ -22226,5 +22330,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-04-15T03:01:25.204Z"
+  "lastUpdated": "2026-04-15T03:41:44.302Z"
 }

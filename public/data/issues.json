@@ -1,6 +1,68 @@
 {
   "issues": [
     {
+      "id": 719,
+      "number": 719,
+      "title": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: services/api.ts\n- **소스 경로**: `services/api.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n프론트엔드에서 백엔드와 통신하기 위한 핵심 API 래퍼이며, 요청/응답 처리, 에러 핸들링, 인증 토큰 관리 로직을 포함합니다. 현재 Wiki에 해당 내용이 없으므로, 사용법·구조·확장 방법을 문서화해야 합니다.\n\n> **제안 문서 제목**: 프론트엔드 API 클라이언트 서비스 가이드\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-04-15T03:41:22.466Z",
+      "updated_at": "2026-04-15T03:41:22.476Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/719",
+      "documentSlug": "guides/api",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/guides/api.md",
+      "comments": 0
+    },
+    {
+      "id": 720,
+      "number": 720,
+      "title": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용 가이드",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: services/search.ts\n- **소스 경로**: `services/search.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n위키 검색 기능을 제공하는 서비스 레이어로, 인덱스 조회, 필터링, 페이징 로직을 담당합니다. API 설계·쿼리 파라미터·성능 최적화 방안을 문서화해야 합니다.\n\n> **제안 문서 제목**: 검색 서비스 구현 및 사용 가이드\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-04-15T03:40:02.325Z",
+      "updated_at": "2026-04-15T03:40:02.337Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/720",
+      "documentSlug": "untitled-1776224402310",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/untitled-1776224402310.md",
+      "comments": 0
+    },
+    {
       "id": 709,
       "number": 709,
       "title": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
@@ -7574,5 +7636,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-04-10T09:58:32.753Z"
+  "lastUpdated": "2026-04-15T03:41:22.476Z"
 }
