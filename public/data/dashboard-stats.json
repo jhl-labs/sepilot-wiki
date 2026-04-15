@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-15T02:22:51.675Z",
+  "collectedAt": "2026-04-15T03:41:47.490Z",
   "overview": {
     "totalDocuments": 362,
     "publishedDocuments": 192,
     "draftDocuments": 170,
     "openRequests": 225,
     "closedRequests": 19,
-    "totalAIActions": 897
+    "totalAIActions": 898
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 14,
+      "aiActions": 15,
       "documentsCreated": 3,
       "documentsModified": 4,
       "tavilyApiCalls": 9,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-15T03:01:25.203Z",
+      "actionType": "coverage_analysis",
+      "issueNumber": null,
+      "documentTitle": "문서 커버리지 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-13T01:37:02.696Z",
       "actionType": "status_report",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-07T09:55:11.082Z",
-      "actionType": "modify",
-      "issueNumber": 708,
-      "documentTitle": "Kubernetes AI Gateway 보안 베스트 프랙티스",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 876,
+      "totalActions": 877,
       "totalEstimatedTokens": 699362,
       "avgDurationMs": 53764
     },
