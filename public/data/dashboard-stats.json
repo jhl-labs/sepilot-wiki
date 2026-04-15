@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-15T03:41:47.490Z",
+  "collectedAt": "2026-04-15T05:20:18.737Z",
   "overview": {
     "totalDocuments": 362,
     "publishedDocuments": 192,
     "draftDocuments": 170,
-    "openRequests": 225,
+    "openRequests": 227,
     "closedRequests": 19,
-    "totalAIActions": 898
+    "totalAIActions": 901
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
+      "aiActions": 0,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,55 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
-      "documentsCreated": 0,
+      "aiActions": 4,
+      "documentsCreated": 2,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 6,
+      "tavilyResults": 18,
+      "estimatedTokens": 6744,
+      "totalPipelineDurationMs": 142042
     },
     "last7d": {
-      "aiActions": 15,
-      "documentsCreated": 3,
+      "aiActions": 18,
+      "documentsCreated": 5,
       "documentsModified": 4,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 24,
-      "estimatedTokens": 15312,
-      "totalPipelineDurationMs": 324903
+      "tavilyApiCalls": 15,
+      "tavilyResults": 42,
+      "estimatedTokens": 22056,
+      "totalPipelineDurationMs": 466945
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-15T03:41:44.302Z",
+      "actionType": "quality_score",
+      "issueNumber": 719,
+      "documentTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-15T03:41:22.460Z",
+      "actionType": "generate",
+      "issueNumber": 719,
+      "documentTitle": "프론트엔드 API 클라이언트 서비스 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 61244,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2881
+    },
+    {
+      "timestamp": "2026-04-15T03:40:02.317Z",
+      "actionType": "generate",
+      "issueNumber": 720,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 80798,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3863
+    },
     {
       "timestamp": "2026-04-15T03:01:25.203Z",
       "actionType": "coverage_analysis",
@@ -207,43 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-07T09:56:59.185Z",
-      "actionType": "quality_score",
-      "issueNumber": 705,
-      "documentTitle": "[Wiki Maintenance] [요청] Securing the open source supply chain across GitHub",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-07T09:56:43.106Z",
-      "actionType": "modify",
-      "issueNumber": 706,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-07T09:55:51.470Z",
-      "actionType": "modify",
-      "issueNumber": 707,
-      "documentTitle": "주간 위키 보고서 - 2026년 14주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 877,
-      "totalEstimatedTokens": 699362,
-      "avgDurationMs": 53764
+      "totalActions": 880,
+      "totalEstimatedTokens": 706106,
+      "avgDurationMs": 53886
     },
     "unknown": {
       "totalActions": 21,
