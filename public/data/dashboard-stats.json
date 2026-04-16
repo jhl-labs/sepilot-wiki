@@ -1,12 +1,12 @@
 {
-  "collectedAt": "2026-04-16T03:44:46.744Z",
+  "collectedAt": "2026-04-16T05:21:45.864Z",
   "overview": {
-    "totalDocuments": 364,
+    "totalDocuments": 365,
     "publishedDocuments": 193,
-    "draftDocuments": 171,
+    "draftDocuments": 172,
     "openRequests": 227,
     "closedRequests": 19,
-    "totalAIActions": 901
+    "totalAIActions": 902
   },
   "activity": {
     "last1h": {
@@ -19,18 +19,18 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 18,
+      "aiActions": 19,
       "documentsCreated": 5,
-      "documentsModified": 4,
+      "documentsModified": 5,
       "tavilyApiCalls": 15,
       "tavilyResults": 42,
       "estimatedTokens": 22056,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-16T04:00:10.930Z",
+      "actionType": "recover",
+      "issueNumber": 721,
+      "documentTitle": "chore(deps): bump dompurify from 3.3.1 to 3.4.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-15T03:41:44.302Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-07T09:57:14.625Z",
-      "actionType": "quality_score",
-      "issueNumber": 704,
-      "documentTitle": "[Wiki Maintenance] [요청] Defending Your Software Supply Chain: What Every Engineering Team Should Do Now",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 880,
+      "totalActions": 881,
       "totalEstimatedTokens": 706106,
       "avgDurationMs": 53886
     },
