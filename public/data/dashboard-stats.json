@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-17T09:03:45.343Z",
+  "collectedAt": "2026-04-17T09:59:06.855Z",
   "overview": {
     "totalDocuments": 365,
     "publishedDocuments": 193,
     "draftDocuments": 172,
     "openRequests": 227,
     "closedRequests": 19,
-    "totalAIActions": 902
+    "totalAIActions": 904
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 19,
-      "documentsCreated": 5,
+      "aiActions": 16,
+      "documentsCreated": 2,
       "documentsModified": 5,
-      "tavilyApiCalls": 15,
-      "tavilyResults": 42,
-      "estimatedTokens": 22056,
-      "totalPipelineDurationMs": 466945
+      "tavilyApiCalls": 6,
+      "tavilyResults": 18,
+      "estimatedTokens": 6744,
+      "totalPipelineDurationMs": 142042
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-17T09:38:07.789Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-17T09:37:58.203Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-16T04:00:10.930Z",
       "actionType": "recover",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-10T09:34:07.165Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-07T09:57:29.582Z",
-      "actionType": "quality_score",
-      "issueNumber": 703,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 881,
-      "totalEstimatedTokens": 706106,
-      "avgDurationMs": 53886
-    },
     "unknown": {
-      "totalActions": 21,
+      "totalActions": 22,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 882,
+      "totalEstimatedTokens": 706106,
+      "avgDurationMs": 53886
     }
   }
 }
