@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-19T10:00:00.154Z",
+  "collectedAt": "2026-04-19T10:48:12.045Z",
   "overview": {
     "totalDocuments": 368,
     "publishedDocuments": 194,
     "draftDocuments": 174,
     "openRequests": 230,
     "closedRequests": 19,
-    "totalAIActions": 913
+    "totalAIActions": 914
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 17,
+      "aiActions": 18,
       "documentsCreated": 5,
       "documentsModified": 4,
       "tavilyApiCalls": 15,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-19T09:50:01.087Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-17T10:14:18.636Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-10T10:03:00.379Z",
-      "actionType": "quality_score",
-      "issueNumber": 709,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36 Sneak Peek",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 891,
+      "totalActions": 892,
       "totalEstimatedTokens": 725562,
       "avgDurationMs": 54769
     },
