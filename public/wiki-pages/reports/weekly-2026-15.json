@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 15주차",
   "slug": "reports/weekly-2026-15",
   "content": "\n## 요약\n- 전체 문서 394개 중 초안 154개, 발행 198개, 삭제 42개이며 이번 주에 신규 문서 9개, 수정 문서 7개가 발생했습니다.  \n- AI가 37건의 작업을 수행했으며, 품질 점수 평가 13건, 문서 생성 9건이 주요 활동이었습니다.  \n- 현재 열려 있는 이슈는 219건이며, 이번 주에 10건이 새로 활동했습니다.  \n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 394 |\n| 초안(draft) | 154 |\n| 발행(published) | 198 |\n| 삭제(deleted) | 42 |\n| 신규 문서 | 9 |\n| 수정 문서 | 7 |\n| 자동 발행(이번 주) | 0 |\n\n## AI 활동 요약\n- **총 작업**: 37건  \n- **작업 유형별**  \n  - maintain: 7건 (학습 루프 감지, URL 변경 감지 30건 중 3건 변경·8건 깨짐, 트렌드 모니터링 등)  \n  - quality_score: 13건 (자동 품질 검토 후 자동 발행)  \n  - modify: 7건 (문서 URL 변경 및 피드백 반영)  \n  - generate: 9건 (새 문서 생성)  \n  - recover: 1건  \n\n### 주요 AI 작업 예시\n- **품질 점수 평가**  \n  - Issue #696, #697, #698, #681, #690‑#692 등 13건이 자동 품질 검토를 통과(점수 83‑93점)하고 자동 발행되었습니다.  \n- **문서 생성**  \n  - `Kubernetes v1.36 Sneak Peek 위키 유지보수 가이드`  \n  - `Announcing Ingress2Gateway 1.0 – Your Path to Gateway API`  \n  - `Defending Your Software Supply Chain – Engineering Teams’ Immediate Action Guide`  \n  - `AI 에이전트 거버넌스 프레임워크 종합 비교 가이드`  \n  - `Kubernetes AI Gateway 보안 베스트 프랙티스`  \n  - `LLM 프롬프트 인젝션 탐지를 위한 Observability 스택 가이드` 등 총 9건.  \n- **문서 수정**  \n  - Issue #699, #700: `OpenClaw 데스크톱 제어 센터 구축 가이드` URL 변경 (추가 4줄)  \n  - Issue #701: `주간 위키 보고서 - 2026년 14주차` URL 검증 (변경 없음)  \n\n## 열린 이슈\n- **전체 오픈 이슈**: 219건  \n- **최근 활동 이슈**: 10건 (이번 주에 업데이트 또는 새로 생성된 이슈)  \n\n## 주간 변경사항\n| 커밋 SHA | 메시지 | 작성자 | 날짜 |\n|----------|--------|--------|------|\n| d9c3bcb7f | chore: Issue Processor 실행 결과 | GitHub Action | 2026-04-03T09:53:08Z |\n| 4a76aa14a | chore: Issue Processor 실행 결과 | GitHub Action | 2026-04-02T08:46:24Z |\n| 4a67e7267 | docs: Issue #608 - 피드백 반영 | GitHub Action | 2026-04-02T06:02:43Z |\n| 1b231a7c3 | chore: Issue Processor 실행 결과 | GitHub Action | 2026-04-01T09:56:28Z |\n| a7979a3a5 | 📊 문서 품질 평가: 평균 76점 | github-actions[bot] | 2026-04-01T03:15:04Z |\n| c745c7f2b | chore: Issue Processor 실행 결과 | GitHub Action | 2026-03-31T09:56:22Z |\n| ab1ffaea2 | docs: Issue #683 - 피드백 반영 | GitHub Action | 2026-03-30T20:59:26Z |\n| 519abf836 | chore: Issue Processor 실행 결과 | GitHub Action | 2026-03-30T07:04:04Z |\n| a04790d0e | chore: Issue Processor 실행 결과 | GitHub Action | 2026-03-30T02:15:30Z |\n\n## 향후 과제\n- **URL 변경 이슈**: 감지된 8건의 깨진 URL를 조사·수정하고, 남은 3건의 변경을 추적합니다.  \n- **오픈 이슈 감소**: 현재 219건의 이슈 중 우선순위가 높은 항목을 선정해 주간 처리량을 늘립니다.  \n- **품질 점수 향상**: 평균 품질 점수 76점(최근 커밋)보다 높은 수준을 목표로, 자동 평가 기준을 재검토합니다.  \n- **삭제된 문서 관리**: 삭제된 42개 문서 중 복구가 필요한 경우 recover 작업을 진행합니다.  \n- **AI 작업 로그 정비**: maintain 작업 중 “학습 루프”와 “트렌드 모니터링” 결과를 정기 보고서에 포함해 장기적인 개선 방향을 도출합니다.  ",
-  "lastModified": "2026-04-17T17:50:52Z",
+  "lastModified": "2026-04-18T03:36:19Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "ee3f244",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-17 17:50",
+      "sha": "e6d72d4",
+      "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-17T17:50:52Z",
+      "date": "2026-04-18T03:36:19Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
