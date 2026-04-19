@@ -1,33 +1,33 @@
 {
-  "lastAnalyzed": "2026-04-12T09:15:23.739Z",
-  "totalFeedbackEntries": 233,
+  "lastAnalyzed": "2026-04-19T09:50:01.081Z",
+  "totalFeedbackEntries": 236,
   "patterns": [
     {
-      "pattern": "동일 문서에 대해 ‘[Wiki Maintenance] [URL 변경]’ 또는 ‘[URL 깨짐]’ 메시지가 여러 차례 반복됨 (예: OpenClaw 데스크톱 제어 센터 구축 가이드 – 678 문서)",
+      "pattern": "동일 문서에 대해 ‘URL 변경’ 또는 ‘URL 깨짐’ 요청이 여러 차례(3회 이상) 중복 기록됨 – 예: “OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)”가 8번 반복",
       "frequency": 8,
       "affectedAgents": [
         "writer",
         "editor"
       ],
-      "suggestedPromptFix": "프롬프트에 ‘문서 수정 요청 시 URL 검증을 먼저 수행하고, 동일 문서에 대해 같은 종류의 URL 오류가 이미 보고된 경우 중복 보고를 생략한다’는 구체적인 지시를 추가한다."
+      "suggestedPromptFix": "프롬프트에 ‘문서 수정 전 현재 URL 유효성 검사를 수행하고, 문제가 발견되면 한 번에 수정하도록’ 명시하고, ‘같은 문서에 대한 동일 유형의 수정 요청은 중복되지 않도록 자동으로 병합’하도록 지시한다."
     },
     {
-      "pattern": "‘주간 위키 보고서 - 2026년 14주차’(및 11주차) 문서에 대해 ‘[Wiki Maintenance] [URL 변경] reports/weekly‑2026‑XX’ 메시지가 여러 번 등장",
-      "frequency": 7,
+      "pattern": "‘주간 위키 보고서 - 2026년 14주차’에 대해 ‘URL 변경’ 요청이 4번 중복 기록됨",
+      "frequency": 4,
       "affectedAgents": [
         "writer",
         "editor"
       ],
-      "suggestedPromptFix": "프롬프트에 ‘주간 보고서 문서의 URL은 자동으로 최신 보고서 ID와 매핑되도록 하고, 동일 주차에 대한 URL 변경 요청이 중복되지 않도록 체크한다’는 지시를 포함한다."
+      "suggestedPromptFix": "프롬프트에 ‘주간 보고서와 같은 정기 문서는 URL 변경이 필요할 경우, 최신 URL을 한 번만 반영하고 이후 동일 요청은 무시하도록’ 추가한다. 또한 ‘문서 ID와 URL 매핑 테이블을 유지해 중복 요청을 사전에 차단’하라는 지시를 포함한다."
     },
     {
-      "pattern": "‘Google AI Pro 활용 실전 가이드’ 문서가 서로 다른 업데이트 내용과 함께 3번 이상 수정 요청됨",
+      "pattern": "‘Google AI Pro 활용 실전 가이드’가 3번 연속 업데이트 요청(‘[업데이트] …’)으로 나타남",
       "frequency": 3,
       "affectedAgents": [
         "writer",
         "editor"
       ],
-      "suggestedPromptFix": "프롬프트에 ‘같은 문서 제목이 여러 번 수정될 경우, 최신 업데이트 내용만 반영하고 이전 업데이트는 병합하거나 삭제하도록 한다’는 구체적인 절차를 명시한다."
+      "suggestedPromptFix": "프롬프트에 ‘동일 문서에 대한 업데이트는 최신 내용만 반영하고, 이전 업데이트 내용은 자동으로 병합하거나 삭제하도록’ 명시한다. 또한 ‘업데이트 내용이 중복되지 않도록 변경 로그를 확인하고, 필요 시 하나의 커밋에 모두 포함시키라’는 지시를 추가한다."
     }
   ]
 }
