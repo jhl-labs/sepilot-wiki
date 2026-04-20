@@ -2,7 +2,7 @@
   "title": "Microsoft Patch Tuesday 2026‑03 요약 및 주요 CVE 분석",
   "slug": "security/microsoft-patch-tuesday-2026-03-cve",
   "content": "\n## 개요\n- **Microsoft Patch Tuesday 2026‑03**은 매월 둘째 화요일에 발표되는 정기 보안 업데이트이며, 이번 발표일은 **2026‑03‑10**이다.  \n- 이번 업데이트에서는 **77건**의 취약점이 해결되었으며, **제로‑데이**(공개 직후 패치가 없는) 취약점은 보고되지 않았다【1】.  \n- 일부 보안 매체는 전체 **83건**의 CVE가 포함되었다고 보도하고 있으나, 집계 기준에 따라 차이가 있을 수 있다【2】.  \n- 이번 달 주요 목표는 **권한 상승(EoP)**, **원격 코드 실행(RCE)**, **서비스 거부(DoS)** 등 고위험 취약점 차단이며, **AI‑발견 취약점**에 대한 최초 공식 패치를 제공하는 점도 특징이다.\n\n## 업데이트 개요\n| 구분 | 포함된 제품·컴포넌트 | 비고 |\n|------|-------------------|------|\n| **Windows OS** | Windows 10, Windows 11, Windows Server 2022 등 | Windows Server 2022 인증서 갱신(Windows Hello for Business) – 3월 2일 배포【1】 |\n| **SQL Server** | SQL Server 2016‑2022 | 권한 상승 CVE‑2026‑21262 포함 |\n| **.NET** | .NET 9.0, .NET 10.0 (Windows, macOS, Linux) | 서비스 거부 CVE‑2026‑26127 포함 |\n| **Microsoft Office** | Office 365, Office 2019 등 | 원격 코드 실행 CVE‑2026‑26113, CVE‑2026‑26110 포함 |\n| **기타 Microsoft 제품** | Azure, Edge 등 (브라우저 관련 9건) | 주요 집계에 포함되지 않음【1】 |\n\n## 주요 CVE 요약\n\n### 권한 상승 (Elevation of Privilege, EoP)\n\n| CVE | 제품·컴포넌트 | 설명 | CVSS |\n|-----|--------------|------|------|\n| **CVE‑2026‑21262** | SQL Server 2016‑2022 | 인증된 공격자가 네트워크를 통해 sysadmin 권한으로 상승 가능 | 8.8【1】 |\n| **CVE‑2026‑24291** | Windows 접근성 인프라 | 잘못된 권한 할당으로 SYSTEM 권한 획득 | 7.8【1】 |\n| **CVE‑2026‑24294** | SMB 핵심 구성 요소 | 인증 절차 부적절로 권한 상승 가능 | 7.8【1】 |\n| **CVE‑2026‑24289** | Windows 메모리 관리 | 메모리 손상 및 레이스 컨디션을 이용한 권한 상승 | 7.8【1】 |\n| **CVE‑2026‑25187** | Winlogon 프로세스 | Google Project Zero가 발견한 취약점으로, Winlogon 인증 토큰 처리 오류를 이용해 로컬 사용자가 SYSTEM 권한을 획득 | 7.8【1】 |\n| **CVE‑2026‑21522** | ACI Confidential Containers | 컨테이너 격리 우회에 따른 권한 상승 (비공개 공개) | 6.7 (Tenable)【3】 |\n\n> **참고**: 이번 달 CVE 중 약 **55 %**가 권한 상승 유형이며, 이는 Tenable이 “악용 가능성 높음”으로 평가한 비율과 일치한다【1】.\n\n### 원격 코드 실행 (Remote Code Execution, RCE)\n\n| CVE | 제품·컴포넌트 | 설명 | CVSS |\n|-----|--------------|------|------|\n| **CVE‑2026‑26113** | Microsoft Office | Outlook 미리 보기 창에서 악성 메일을 열면 임의 코드 실행 | N/A【1】 |\n| **CVE‑2026‑26110** | Microsoft Office | 동일한 메커니즘을 이용한 원격 코드 실행 | N/A【1】 |\n| **CVE‑2026‑21536** *(추가 정보)* | Devices Pricing Program | AI‑기반 자동 탐지 도구가 식별한 최초 공식 CVE, 원격 코드 실행 가능성 보고 | 9.8 (AI‑발견)【1】 |\n\n> *CVE‑2026‑21536은 현재 Microsoft 공식 문서에 포함되지 않아 별도 “추가 정보” 섹션에 보관한다.*\n\n### 서비스 거부 (Denial‑of‑Service, DoS)\n\n| CVE | 제품·컴포넌트 | 설명 | CVSS |\n|-----|--------------|------|------|\n| **CVE‑2026‑26127** | .NET 9.0/10.0 | 서비스 충돌 및 재시작 중 추가 공격 가능 | N/A【1】 |\n\n## 위험도 및 영향 평가\n- **CVSS 점수 분포**  \n  - **고위험 (≥ 8.0)**: CVE‑2026‑21262 (8.8), CVE‑2026‑21536 (9.8) 등  \n  - **중위험 (6.0‑7.9)**: CVE‑2026‑21522 (6.7), 기타 EoP CVE (7.8) 등  \n  - **저위험 (< 6)**: 현재 보고된 바 없음\n- **영향받는 제품 버전**  \n  - **서버**: Windows Server 2022, SQL Server 2016‑2022, .NET 9/10  \n  - **클라이언트**: Windows 10/11, Office 365, Edge  \n  - **클라우드·온‑프레미스** 모두 적용 가능 (특히 SMB, 접근성, Winlogon 등 시스템 레벨 컴포넌트)\n- **공격 경로**  \n  - 대부분 **인증 필요**(EoP) 또는 **특정 파일·메일 열기**(Office RCE) 형태이며, **원격**(AI‑발견 RCE)도 존재한다.\n\n## 권고사항 및 대응 절차\n1. **패치 적용 우선순위**  \n   - **고위험 EoP·RCE·AI 취약점** → **중위험 EoP** → **DoS** → **기타**  \n   - 특히 **CVE‑2026‑21536**(AI‑발견 RCE)와 **CVE‑2026‑21262**(SQL Server EoP)는 즉시 적용 권고.\n2. **패치 검증 방법**  \n   - Microsoft Update Guide(https://msrc.microsoft.com/update-guide)에서 각 CVE 별 KB 번호 확인.  \n   - PowerShell `Get-HotFix` 혹은 `wmic qfe list` 로 설치 여부 검증.  \n   - Windows Server 2022 긴급 업데이트는 `wusa.exe` 로그(시스템 이벤트 ID 19)로 확인.\n3. **보안 모니터링**  \n   - 이벤트 로그(`Security`, `System`, `Application`)에 필터링 규칙 추가.  \n   - IDS/IPS 시그니처 업데이트: Microsoft Security Advisory에 포함된 시그니처 적용.  \n   - Office RCE 관련: Outlook/Exchange 메일 필터링 정책 강화.\n4. **임시 완화 조치**  \n   - **SQL Server**: 불필요한 원격 관리 포트 차단, 최소 권한 원칙 적용.  \n   - **.NET DoS**: 해당 서비스 일시 중지 혹은 자동 재시작 스크립트 운영.  \n   - **Office**: Outlook 미리 보기 창 비활성화(옵션 > 미리 보기).  \n   - **SMB**: SMBv1 비활성화, SMB signing 강제 적용.\n\n## 관련 외부 업데이트\n- **Adobe**: Acrobat, Commerce 등 80개 취약점이 패치됨(세부 목록은 별도 문서 필요)【1】.  \n- **Mozilla Firefox 148.0.2**: 고위험 3건이 해결되었으며, 상세 CVE는 Firefox 보안 공지 참조【1】.  \n- **다음 Patch Tuesday**: 2026‑04‑07 예정, 현재 공개된 CVE는 없으며 MSRC Security Bulletin 구독을 권고한다【1】.\n\n## 참고 자료\n1. **EUNO.NEWS 원문** – https://euno.news/posts/ko/microsoft-patch-tuesday-march-2026-edition-185076  \n2. **Splashtop 분석** – “March 2026 Patch Tuesday: 83 CVEs and Key Risks” https://www.splashtop.com/blog/patch-tuesday-march-2026  \n3. **Tenable 보안 권고** – https://www.tenable.com/blog/microsoft-february-2026-patch-tuesday  \n\n### 용어 정의\n- **CVE**: Common Vulnerabilities and Exposures, 취약점 고유 식별자.  \n- **CVSS**: Common Vulnerability Scoring System, 취약점 심각도 점수.  \n- **EoP**: Elevation of Privilege, 권한 상승.  \n- **RCE**: Remote Code Execution, 원격 코드 실행.  \n- **DoS**: Denial of Service, 서비스 거부.  \n- **AI‑발견 취약점**: 인공지능 기반 자동 탐지 도구가 식별하고 공식 CVE 번호가 부여된 취약점.  \n\n*본 문서는 2026‑03‑10 기준 공개된 자료에 근거하여 작성되었습니다. 추가적인 취약점이나 업데이트가 발표될 경우, 별도 문서로 보완이 필요합니다.*",
-  "lastModified": "2026-04-19T23:48:05Z",
+  "lastModified": "2026-04-01T03:15:04Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -23,12 +23,32 @@
   "order": 2,
   "history": [
     {
-      "sha": "4250f56",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-19 23:48",
+      "sha": "a7979a3",
+      "message": "📊 문서 품질 평가: 평균 76점",
+      "author": "github-actions[bot]",
+      "authorEmail": "github-actions[bot]@users.noreply.github.com",
+      "date": "2026-04-01T03:15:04Z",
+      "isAutoCommit": false,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "b0d5b98",
+      "message": "🌳 Wiki Tree Maintenance: The wiki contains 274 documents spread across many top‑level folders. Most files are already placed in sensible categories (e.g., , , , , , , , , , , , , , , ). However there are a number of root‑level files that belong in a category, many files with Korean titles that should be renamed to English slugs, several duplicated documents (SNKV, Ingress‑NGINX, OpenTelemetry, Dependabot‑labels, GitHub‑labels, etc.), and a few orphaned “deleted” drafts that can be removed or merged. The structure can be tightened by moving root files into their proper categories, normalising file names, and consolidating duplicates.",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-19T23:48:05Z",
-      "isAutoCommit": false,
+      "date": "2026-03-17T22:33:15Z",
+      "isAutoCommit": true,
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "sha": "4910527",
+      "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
+      "author": "GitHub Action",
+      "authorEmail": "action@github.com",
+      "date": "2026-03-11T06:25:16Z",
+      "isAutoCommit": true,
       "additions": 0,
       "deletions": 0
     }
