@@ -1,0 +1,15 @@
+{
+  "title": "Dependency Bump PR No Longer Needed",
+  "slug": "maintenance/dependency-bump-no-longer-needed",
+  "content": "\n# Dependency Bump PR No Longer Needed\n\nA recent pull request aimed at bumping the following development dependencies in the root directory was opened:\n\n| Package | From | To |\n|---|---|---|\n| `@types/node` | `25.3.0` | `25.5.0` |\n| `@typescript-eslint/eslint-plugin` | `8.56.1` | `8.57.2` |\n| `@typescript-eslint/parser` | `8.56.1` | `8.57.2` |\n| `@vitest/coverage-v8` | `4.0.18` | `4.1.1` |\n| `eslint-config-next` | `16.1.6` | `16.2.1` |\n| `vitest` | `4.0.18` | `4.1.1` |\n\nAfter review, it was determined that these dependencies can be updated through an alternative mechanism, making this PR unnecessary. Consequently, the PR will be closed without merging.\n\n> **Note:** No changes are required in the repository codebase for these updates at this time.\n\n---\n\n*This document is a draft and may be updated if the situation changes.*",
+  "lastModified": "2026-04-20T21:55:08.557Z",
+  "status": "draft",
+  "isDraft": true,
+  "isInvalid": false,
+  "tags": [
+    "dependencies",
+    "chore",
+    "dev-dependencies"
+  ],
+  "history": []
+}
