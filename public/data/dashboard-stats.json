@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-20T01:08:51.632Z",
+  "collectedAt": "2026-04-20T02:22:58.568Z",
   "overview": {
-    "totalDocuments": 368,
-    "publishedDocuments": 194,
+    "totalDocuments": 369,
+    "publishedDocuments": 195,
     "draftDocuments": 174,
     "openRequests": 230,
     "closedRequests": 19,
-    "totalAIActions": 914
+    "totalAIActions": 915
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-20T01:35:50.595Z",
+      "actionType": "status_report",
+      "issueNumber": null,
+      "documentTitle": "주간 위키 보고서 - 2026년 17주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-19T09:50:01.087Z",
       "actionType": "maintain",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-11T01:01:13.552Z",
-      "actionType": "recover",
-      "issueNumber": 518,
-      "documentTitle": "chore(deps): bump next from 16.1.6 to 16.1.7",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 892,
+      "totalActions": 893,
       "totalEstimatedTokens": 725562,
       "avgDurationMs": 54769
     },
