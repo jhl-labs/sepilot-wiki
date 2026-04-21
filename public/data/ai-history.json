@@ -1,6 +1,238 @@
 {
   "entries": [
     {
+      "id": "974014c8-c749-4141-8216-457e9747d458",
+      "timestamp": "2026-04-21T10:11:18.584Z",
+      "actionType": "quality_score",
+      "issueNumber": 729,
+      "issueTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
+      "documentSlug": "why-microvms-the-architecture-behind-docker-sandbo",
+      "documentTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "fdd973df-e29c-45e8-9917-a01307424e31",
+      "timestamp": "2026-04-21T10:11:02.076Z",
+      "actionType": "quality_score",
+      "issueNumber": 730,
+      "issueTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
+      "documentSlug": "why-we-chose-the-harder-path-docker-hardened-image",
+      "documentTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "97f82782-a3a9-4160-ba44-6408ca14e9f2",
+      "timestamp": "2026-04-21T10:10:42.869Z",
+      "actionType": "quality_score",
+      "issueNumber": 731,
+      "issueTitle": "[Wiki Maintenance] [요청] How to Analyze Hugging Face for Arm64 Readiness",
+      "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
+      "documentTitle": "[Wiki Maintenance] [요청] How to Analyze Hugging Face for Arm64 Readiness",
+      "summary": "자동 품질 검토 통과 (86점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "ec398e0a-7134-48f6-959d-b46a1c8bf0a4",
+      "timestamp": "2026-04-21T10:10:13.666Z",
+      "actionType": "modify",
+      "issueNumber": 732,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "938b01aa-66a1-407b-a29b-5de49061cf63",
+      "timestamp": "2026-04-21T10:09:08.972Z",
+      "actionType": "modify",
+      "issueNumber": 733,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] reports/weekly-2026-16 문서 참조 URL 확인 필요",
+      "documentSlug": "reports/weekly-2026-16",
+      "documentTitle": "주간 위키 보고서 - 2026년 16주차",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] reports/weekly-2026-16 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 15,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "c99b1714-dba1-456d-8061-70ead75b8406",
+      "timestamp": "2026-04-21T10:08:26.454Z",
+      "actionType": "modify",
+      "issueNumber": 734,
+      "issueTitle": "[Wiki Maintenance] [URL 깨짐] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "5b359500-a556-4284-8c30-b698f7cfa7b2",
+      "timestamp": "2026-04-21T10:07:02.538Z",
+      "actionType": "generate",
+      "issueNumber": 729,
+      "issueTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
+      "documentSlug": "why-microvms-the-architecture-behind-docker-sandbo",
+      "documentTitle": "Why MicroVMs: The Architecture Behind Docker Sandboxes",
+      "summary": "새 문서 \"Why MicroVMs: The Architecture Behind Docker Sandboxes\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4924
+            },
+            {
+              "step": "outline",
+              "durationMs": 17185
+            },
+            {
+              "step": "write",
+              "durationMs": 50975
+            },
+            {
+              "step": "review",
+              "durationMs": 12111
+            },
+            {
+              "step": "refine",
+              "durationMs": 50549
+            }
+          ],
+          "totalDurationMs": 135745,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 6541,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "d837911d-64fa-4dcd-8601-f0b05af6dff5",
+      "timestamp": "2026-04-21T10:04:27.089Z",
+      "actionType": "generate",
+      "issueNumber": 730,
+      "issueTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
+      "documentSlug": "why-we-chose-the-harder-path-docker-hardened-image",
+      "documentTitle": "Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
+      "summary": "새 문서 \"Why We Chose the Harder Path: Docker Hardened Images, One Year Later\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 9789
+            },
+            {
+              "step": "outline",
+              "durationMs": 16095
+            },
+            {
+              "step": "write",
+              "durationMs": 53739
+            },
+            {
+              "step": "review",
+              "durationMs": 16313
+            }
+          ],
+          "totalDurationMs": 95936,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 4308,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "18c31358-4665-4fa3-b388-bbceba7f736f",
+      "timestamp": "2026-04-21T10:02:25.769Z",
+      "actionType": "generate",
+      "issueNumber": 731,
+      "issueTitle": "[Wiki Maintenance] [요청] How to Analyze Hugging Face for Arm64 Readiness",
+      "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "summary": "새 문서 \"How to Analyze Hugging Face for Arm64 Readiness\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 5496
+            },
+            {
+              "step": "outline",
+              "durationMs": 22986
+            },
+            {
+              "step": "write",
+              "durationMs": 58873
+            },
+            {
+              "step": "review",
+              "durationMs": 24313
+            }
+          ],
+          "totalDurationMs": 111668,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 5309,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "7bff54f9-9081-4581-bf95-0db15ba55b21",
       "timestamp": "2026-04-21T09:38:27.870Z",
       "actionType": "maintain",
@@ -22678,5 +22910,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-04-21T09:38:27.870Z"
+  "lastUpdated": "2026-04-21T10:11:18.584Z"
 }

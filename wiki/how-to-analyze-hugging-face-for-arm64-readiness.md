@@ -1,0 +1,191 @@
+---
+title: How to Analyze Hugging Face for Arm64 Readiness
+author: SEPilot AI
+status: published
+tags: [Docker, Arm, Hugging Face, MCP, Arm64, CI/CD]
+---
+
+## 1. 문서 개요
+**목적**  
+Hugging Face Spaces 를 Arm64 환경(예: AWS Graviton, Azure Cobalt, Google Axion)에서 실행할 수 있는지 빠르게 판단하고, 발견된 문제를 자동화된 워크플로우로 해결하는 방법을 제공한다.  
+
+**대상 독자**  
+- AI/ML 엔지니어·데이터 사이언티스트  
+- DevOps·SRE 팀 (CI/CD 파이프라인에 Arm64 검증을 추가하고 싶은 경우)  
+- 플랫폼 운영자 (Arm 기반 클라우드·엣지 디바이스에 모델을 배포하려는 경우)  
+
+**비즈니스·기술적 가치**  
+- Arm64는 비용·전력 효율이 높아 AI 워크로드 비용 절감에 기여한다.  
+- Docker + Arm MCP 체인을 이용하면 기존 Docker SDK 기반 Space 를 15분 내에 분석해 배포 장벽을 사전에 제거할 수 있다(~에 따르면 “약 80 %의 Hugging Face Docker Spaces가 하드코드된 x86_64 의존성 때문에 Arm64에서 실패한다”[[Docker Blog]](https://www.docker.com/blog/how-to-analyze-hugging-face-for-arm64-readiness/)).  
+
+---
+
+## 2. 사전 준비
+| 항목 | 내용 | 비고 |
+|------|------|------|
+| **계정·권한** | Docker Hub (이미지 푸시/풀), Hugging Face (Space 조회·클론), Arm MCP (스캔 API 사용) | 각각 로그인·API 토큰 필요 |
+| **로컬 환경** | Docker ≥ 20.10, `docker-mcp` CLI (Docker MCP Toolkit), Git, `jq` (JSON 파싱) | `docker-mcp` 설치는 Docker MCP Toolkit 문서 참고 |
+| **지원 SDK** | Docker SDK (Dockerfile 기반), Gradio SDK, Streamlit SDK | Space 가 어떤 SDK 로 구현됐는지 메타데이터에서 확인 |
+
+---
+
+## 3. Arm64 준비도 문제 이해
+- **흔히 발생하는 실패 패턴**  
+  1. **하드코드된 x86_64 의존성** – `requirements.txt`에 `pip install https://.../flash-attn‑linux_x86_64.whl` 와 같이 플랫폼‑특정 URL이 명시돼 있음.  
+  2. **휠 호환성 부족** – Arm64용 휠이 존재하지 않거나 `manylinux2014` 대신 `manylinux2010` 등 구버전이 지정돼 있음.  
+- **Docker SDK 가 차지하는 비중**  
+  Hugging Face는 1 백만 개 이상의 Spaces 를 호스팅하며, 그 중 상당수가 Docker SDK 로 구현돼 있다(“Docker SDK 를 사용하는 Space 가 상당 부분을 차지한다”[[Docker Blog]]).  
+- **목표 하드웨어·클라우드**  
+  - **AWS Graviton** (Arm 기반 EC2)  
+  - **Azure Cobalt** (Arm 기반 VM)  
+  - **Google Axion** (Arm 기반 클라우드)  
+
+---
+
+## 4. 분석 도구 체인 소개
+1. **Docker MCP Toolkit** – `docker-mcp` CLI 로 이미지 스캔, 메타데이터 추출, 레이어 매핑을 수행.  
+2. **Arm MCP Server** – 이미지 내부 의존성을 분석하고, Arm64 호환 여부를 판단하는 메타데이터 매핑 서비스.  
+3. **GitHub MCP** – Space 의 Git 리포지터리를 클론하고, 코드·Dockerfile 변화를 추적.  
+4. **Hugging Face MCP** – Space 메타데이터(SDK 타입, 런타임 설정) 조회 API.  
+5. **Sequential** – 앞선 단계들을 순차적으로 실행하도록 오케스트레이션.  
+
+전체 7‑tool 체인은 **약 15 분** 안에 하나의 Space 를 완전 분석한다(~에 따르면)[[Docker Blog]].
+
+---
+
+## 5. 단계별 Arm64 준비도 분석 워크플로우
+1. **대상 Space 식별**  
+   ```bash
+   HF_SPACE="ACE-Step/ACE-Step-v1.5"
+   ```  
+   `docker-mcp hf discover $HF_SPACE` 로 SDK 타입과 기본 이미지 정보를 얻는다.  
+
+2. **SDK 타입 확인**  
+   반환된 메타데이터에 `sdk: docker` 혹은 `sdk: gradio` 가 포함된다. Docker SDK 인 경우 다음 단계로 진행.  
+
+3. **스캔 실행**  
+   ```bash
+   docker-mcp scan --space $HF_SPACE --output report.json
+   ```  
+   이 명령은 Dockerfile, `requirements.txt`, 레이어 별 바이너리를 분석하고 Arm64 차단 요소를 `report.json` 에 기록한다.  
+
+4. **의존성 그래프 생성**  
+   `docker-mcp graph --input report.json --format dot > deps.dot` 로 의존성 그래프를 만든 뒤, `dot -Tpng deps.dot -o deps.png` 로 시각화한다(선택 사항).  
+
+5. **차단 요소 자동 리포트**  
+   `jq '.blockers[]' report.json` 로 차단 요소 리스트를 확인한다. 일반적인 항목은 **hard‑coded pip URL** 와 **non‑Arm native library** 이다.  
+
+---
+
+## 6. 스캔 결과 해석
+### 주요 섹션
+- **Blockers** – Arm64 빌드가 즉시 실패하는 요소. 예: `flash-attn` 휠 URL이 `linux_x86_64` 로 고정.  
+- **Warnings** – 권장 사항이지만 현재 빌드에 치명적이지 않은 항목. 예: `torch` 버전이 최신이 아닌 경우.  
+- **Recommendations** – 자동 수정이 가능한 패턴(예: `PEP 508` 조건부 의존성).  
+
+### 대표 차단 요소 예시
+| 차단 요소 | 설명 | 해결 힌트 |
+|-----------|------|----------|
+| hard‑coded pip URL | `requirements.txt`에 `https://.../flash-attn‑linux_x86_64.whl` 가 명시 | URL을 `https://.../flash-attn-{platform}.whl` 로 교체하거나 `pip install flash-attn` 로 변경 |
+| 비호환 native 라이브러리 | `apt-get install libopencv-dev` 등 x86 전용 바이너리 | `apt-get install libopencv-dev:arm64` 혹은 `conda` 로 대체 |
+
+### 우선순위 결정
+1. **Blockers** → 반드시 수정 후 재스캔.  
+2. **Warnings** → CI 단계에서 자동 검증.  
+3. **Recommendations** → 장기적인 의존성 관리 정책에 포함.  
+
+---
+
+## 7. 일반적인 차단 요소와 해결 방안
+- **하드코드된 휠 URL 교체**  
+  - `requirements.txt` 를 템플릿화하고 `{platform}` 변수로 대체.  
+  - 예: `pip install https://download.pytorch.org/whl/{platform}/torch-2.0.0+cpu.whl`  
+
+- **멀티‑아키 이미지 빌드**  
+  - `docker buildx create --use` 로 빌더 설정 후  
+  - `docker buildx build --platform linux/amd64,linux/arm64 -t <repo>/<image>:latest --push .`  
+
+- **플랫폼‑조건부 의존성 선언 (PEP 508)**  
+  ```text
+  torch; platform_machine == "x86_64"
+  torch; platform_machine == "aarch64"
+  ```  
+
+- **테스트 자동화**  
+  - GitHub Actions 에 `docker-mcp scan` 스텝을 추가하고, `if: failure()` 로 라벨링.  
+
+---
+
+## 8. 자동화 및 CI/CD 통합
+### GitHub Actions 예시
+```yaml
+name: Arm64 Readiness Scan
+on:
+  pull_request:
+    paths:
+      - '**/requirements.txt'
+      - '**/Dockerfile'
+jobs:
+  mcp-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Docker MCP Toolkit
+        run: |
+          curl -sSL https://download.docker.com/cli-plugins/docker-mcp -o /usr/local/bin/docker-mcp
+          chmod +x /usr/local/bin/docker-mcp
+      - name: Scan Space
+        env:
+          HF_SPACE: ACE-Step/ACE-Step-v1.5
+          DOCKER_MCP_TOKEN: ${{ secrets.DOCKER_MCP_TOKEN }}
+        run: |
+          docker-mcp scan --space $HF_SPACE --output report.json
+      - name: Fail on Blockers
+        run: |
+          if jq '.blockers | length > 0' report.json; then
+            echo "🚨 Blockers detected"
+            exit 1
+          fi
+      - name: Add label on failure
+        if: failure()
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: arm64‑blocker
+```
+
+- **PR 검증 단계**에 위 스캔을 삽입하면, 차단 요소가 발견될 경우 자동 라벨링·알림이 이루어진다.  
+
+---
+
+## 9. 베스트 프랙티스
+1. **Dockerfile 작성 시 아키텍처 중립성**  
+   - `FROM python:3.11-slim` 대신 `FROM --platform=$BUILDPLATFORM python:3.11-slim` 사용.  
+2. **의존성 관리**  
+   - `requirements-arm.txt` (Arm 전용)와 `requirements-amd.txt` (x86 전용) 파일을 유지하고, `requirements.txt` 에는 공통 의존성만 포함.  
+   - `constraints.txt` 로 휠 버전을 고정해 예기치 않은 업데이트 방지.  
+3. **정기적인 MCP 재스캔**  
+   - 매주 혹은 주요 의존성 업데이트 시 `docker-mcp scan` 을 실행해 최신 호환성을 확인한다.  
+
+---
+
+## 10. 자주 묻는 질문(FAQ)
+**Q1. MCP 스캔이 오래 걸릴 때 대처법은?**  
+- `docker-mcp scan --parallel` 옵션으로 병렬 스캔을 활성화한다.  
+- 불필요한 레이어를 제외하고 `--exclude-layer` 로 스캔 범위를 축소한다.  
+
+**Q2. Arm64 전용 휠이 없을 경우 대안은?**  
+- 소스 빌드 (`pip install --no-binary :all:`) 로 직접 컴파일하거나, `conda-forge` 에서 제공되는 Arm64 패키지를 사용한다.  
+
+**Q3. Gradio SDK 를 Docker 없이 분석하는 방법은?**  
+- `docker-mcp hf discover <space>` 로 메타데이터만 조회하면, Gradio 기반 Space 의 `requirements.txt` 를 로컬에 복제해 `pip check` 로 검증할 수 있다.  
+
+---
+
+## 11. 참고 자료 및 링크
+- **Docker 공식 블로그 포스트** – “How to Analyze Hugging Face for Arm64 Readiness” [[Docker Blog]](https://www.docker.com/blog/how-to-analyze-hugging-face-for-arm64-readiness/)  
+- **Arm MCP Server 문서** – https://arm.com/mcp (공식 문서)  
+- **Hugging Face Spaces 개발 가이드** – https://huggingface.co/docs/spaces  
+- **Docker MCP Toolkit GitHub** – https://github.com/docker/mcp-toolkit  
+- **관련 커뮤니티·포럼** – Docker Community Forums, Arm Community Slack, Hugging Face Discuss  
+
+---
