@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-04-21T10:02:56.847Z",
+  "collectedAt": "2026-04-21T10:54:48.443Z",
   "overview": {
     "totalDocuments": 371,
     "publishedDocuments": 195,
     "draftDocuments": 176,
-    "openRequests": 230,
+    "openRequests": 233,
     "closedRequests": 19,
-    "totalAIActions": 918
+    "totalAIActions": 927
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 9,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 16158,
+      "totalPipelineDurationMs": 343349
     },
     "last24h": {
-      "aiActions": 3,
-      "documentsCreated": 0,
-      "documentsModified": 1,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 12,
+      "documentsCreated": 3,
+      "documentsModified": 4,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 16158,
+      "totalPipelineDurationMs": 343349
     },
     "last7d": {
-      "aiActions": 21,
-      "documentsCreated": 5,
-      "documentsModified": 5,
-      "tavilyApiCalls": 15,
-      "tavilyResults": 42,
-      "estimatedTokens": 26200,
-      "totalPipelineDurationMs": 556064
+      "aiActions": 30,
+      "documentsCreated": 8,
+      "documentsModified": 8,
+      "tavilyApiCalls": 24,
+      "tavilyResults": 69,
+      "estimatedTokens": 42358,
+      "totalPipelineDurationMs": 899413
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-21T10:11:18.584Z",
+      "actionType": "quality_score",
+      "issueNumber": 729,
+      "documentTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-21T10:11:02.076Z",
+      "actionType": "quality_score",
+      "issueNumber": 730,
+      "documentTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-21T10:10:42.869Z",
+      "actionType": "quality_score",
+      "issueNumber": 731,
+      "documentTitle": "[Wiki Maintenance] [요청] How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-21T10:10:13.666Z",
+      "actionType": "modify",
+      "issueNumber": 732,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-21T10:09:08.972Z",
+      "actionType": "modify",
+      "issueNumber": 733,
+      "documentTitle": "주간 위키 보고서 - 2026년 16주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-21T10:08:26.454Z",
+      "actionType": "modify",
+      "issueNumber": 734,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-21T10:07:02.538Z",
+      "actionType": "generate",
+      "issueNumber": 729,
+      "documentTitle": "Why MicroVMs: The Architecture Behind Docker Sandboxes",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 135745,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 6541
+    },
+    {
+      "timestamp": "2026-04-21T10:04:27.089Z",
+      "actionType": "generate",
+      "issueNumber": 730,
+      "documentTitle": "Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 95936,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4308
+    },
+    {
+      "timestamp": "2026-04-21T10:02:25.769Z",
+      "actionType": "generate",
+      "issueNumber": 731,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 111668,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 5309
+    },
     {
       "timestamp": "2026-04-21T09:38:27.870Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-17T10:05:43.224Z",
-      "actionType": "generate",
-      "issueNumber": 722,
-      "documentTitle": "Why MicroVMs: The Architecture Behind Docker Sandboxes",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 176845,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 8511
-    },
-    {
-      "timestamp": "2026-04-17T10:02:07.846Z",
-      "actionType": "generate",
-      "issueNumber": 723,
-      "documentTitle": "Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 113258,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 5260
-    },
-    {
-      "timestamp": "2026-04-17T09:59:49.993Z",
-      "actionType": "generate",
-      "issueNumber": 724,
-      "documentTitle": "Kubernetes v1.28.4 릴리즈 유지보수 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 123919,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 5685
-    },
-    {
-      "timestamp": "2026-04-17T09:38:07.789Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-17T09:37:58.203Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-16T04:00:10.930Z",
-      "actionType": "recover",
-      "issueNumber": 721,
-      "documentTitle": "chore(deps): bump dompurify from 3.3.1 to 3.4.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-15T03:41:44.302Z",
-      "actionType": "quality_score",
-      "issueNumber": 719,
-      "documentTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-15T03:41:22.460Z",
-      "actionType": "generate",
-      "issueNumber": 719,
-      "documentTitle": "프론트엔드 API 클라이언트 서비스 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 61244,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2881
-    },
-    {
-      "timestamp": "2026-04-15T03:40:02.317Z",
-      "actionType": "generate",
-      "issueNumber": 720,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 80798,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3863
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 904,
+      "totalEstimatedTokens": 741720,
+      "avgDurationMs": 55388
+    },
     "unknown": {
       "totalActions": 23,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 895,
-      "totalEstimatedTokens": 725562,
-      "avgDurationMs": 54769
     }
   }
 }
