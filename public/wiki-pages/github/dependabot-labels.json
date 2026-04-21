@@ -2,7 +2,7 @@
   "title": "Dependabot Labels Configuration Guide",
   "slug": "github/dependabot-labels",
   "content": "\n# Dependabot Labels Configuration Guide\n\nWhen Dependabot creates or updates pull requests, it can automatically add labels defined in your repository. If the labels referenced in **`.github/dependabot.yml`** do not exist, Dependabot will fail with an error like:\n\n```\nThe following labels could not be found: `dependencies`, `github-actions`. Please create them before Dependabot can add them to a pull request.\n```\n\nThis guide explains how to create the missing labels and how to modify `dependabot.yml` if you prefer not to use them.\n\n---\n\n## 1. Creating Labels via the GitHub UI\n\n1. Navigate to your repository on GitHub.\n2. Click **Issues** → **Labels** (or directly go to `https://github.com/<owner>/<repo>/labels`).\n3. Click the **New label** button.\n4. Fill in the **Name** field (e.g., `dependencies`).\n5. Optionally choose a color and description.\n6. Click **Create label**.\n7. Repeat the steps for any additional labels such as `github-actions`.\n\n---\n\n## 2. Creating Labels via the GitHub API\n\nYou can also create labels programmatically using the REST API:\n\n```bash\ncurl -X POST \\\n  -H \"Accept: application/vnd.github+json\" \\\n  -H \"Authorization: token <YOUR_TOKEN>\" \\\n  https://api.github.com/repos/<owner>/<repo>/labels \\\n  -d '{\"name\":\"dependencies\",\"color\":\"0366d6\",\"description\":\"Dependabot dependency updates\"}'\n```\n\nReplace `<YOUR_TOKEN>`, `<owner>`, and `<repo>` with appropriate values. Run the command again for `github-actions` or any other label you need.\n\n---\n\n## 3. Verifying `dependabot.yml`\n\nYour **`.github/dependabot.yml`** may contain a `labels` section, for example:\n\n```yaml\nupdates:\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    labels:\n      - \"dependencies\"\n      - \"github-actions\"\n```\n\nMake sure the names listed under `labels:` exactly match the labels you created (case‑sensitive).\n\n---\n\n## 4. Removing Invalid Labels from `dependabot.yml`\n\nIf you do not want Dependabot to add any labels, simply remove the `labels:` block or comment it out:\n\n```yaml\nupdates:\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    # labels:\n    #   - \"dependencies\"\n    #   - \"github-actions\"\n```\n\nAfter committing the change, Dependabot will no longer attempt to apply those labels.\n\n---\n\n## 5. Common Pitfalls\n\n- **Typo in label names** – Ensure the label names in `dependabot.yml` match exactly.\n- **Missing permissions** – The token used for the API must have `repo` scope for private repositories.\n- **Case sensitivity** – GitHub treats label names as case‑sensitive when matching.\n\n---\n\n## 6. References\n\n- [GitHub Docs – Managing labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels)\n- [GitHub Docs – Dependabot configuration options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-dependency-updates)\n\n---\n\n*This document was created to address the missing `dependencies` and `github-actions` labels reported by Dependabot.*\n",
-  "lastModified": "2026-04-21T11:51:54Z",
+  "lastModified": "2026-04-21T17:51:08Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -15,11 +15,11 @@
   ],
   "history": [
     {
-      "sha": "8d8b10a",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-21 11:51",
+      "sha": "975ec98",
+      "message": "chore: 대시보드 통계 수집 - 2026-04-21 17:51",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-21T11:51:54Z",
+      "date": "2026-04-21T17:51:08Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
