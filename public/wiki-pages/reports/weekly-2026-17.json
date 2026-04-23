@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 17주차",
   "slug": "reports/weekly-2026-17",
   "content": "\n## 요약\n- 전체 문서 수 407개 (Draft 159, Published 206, Deleted 42)  \n- 이번 주 신규 문서 5개, 수정 문서 3개, 자동 발행된 문서 없음  \n- AI 활동 18건 수행 (Generate 5, Quality Score 4, Modify 3, Maintain 3, 기타 3)  \n- 열려 있는 Issue 230건, 최근 5건 활동  \n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 407 |\n| Draft | 159 |\n| Published | 206 |\n| Deleted | 42 |\n| 신규 문서 | 5 |\n| 수정 문서 | 3 |\n| 자동 발행 문서 | 0 |\n\n## AI 활동 요약\n- **총 작업 수**: 18\n- **작업 유형별**  \n  - `generate` (새 문서 생성): 5건  \n  - `quality_score` (자동 품질 검토 & 발행): 4건  \n  - `modify` (문서 수정): 3건  \n  - `maintain` (유지보수·모니터링): 3건  \n  - `recover` (복구): 1건  \n  - `coverage_analysis` (커버리지 분석): 1건  \n  - `status_report` (주간 보고서 생성): 1건  \n\n### 주요 AI 작업 상세\n- **새 문서 생성**  \n  - *Why MicroVMs: The Architecture Behind Docker Sandboxes* (연구·작성·리뷰·Refine 총 176 845 ms)  \n  - *Why We Chose the Harder Path: Docker Hardened Images, One Year Later* (총 113 258 ms)  \n  - *Kubernetes v1.28.4 릴리즈 유지보수 가이드* (총 123 919 ms)  \n  - *프론트엔드 API 클라이언트 서비스 가이드* (총 61 244 ms)  \n  - *검색 서비스 구현 및 사용 가이드* (총 80 798 ms)  \n\n- **품질 점수 검토 & 자동 발행**  \n  - `Why MicroVMs` (89점)  \n  - `Why We Chose the Harder Path` (91점)  \n  - `kubernetes/kubernetes v1.35.4` (83점)  \n  - `프론트엔드 API 클라이언트 서비스 가이드` (89점)  \n\n- **문서 수정**  \n  - `검색 서비스 구현 및 사용 가이드` URL 검증 (12줄 추가)  \n  - `OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)` URL 검증 (변경 없음)  \n\n- **유지보수·모니터링**  \n  - 학습 루프 패턴 3개 감지, 에이전트 2개 개선  \n  - URL 변경 감지: 30개 체크, 5개 변경, 5개 깨짐, 3건 Issue 생성  \n  - 트렌드 모니터링: 22건 수집, 3건 감지, 3건 Issue 생성  \n\n- **커버리지 분석**  \n  - 전체 커버리지 점수 35점, 미문서화 모듈 10개 발견  \n\n## 열린 이슈\n- **전체 오픈 이슈**: 230건  \n- **최근 활동**: 5건 (주요 이슈 번호 719‑724, 721, 722 등)  \n\n## 주간 변경사항\n| SHA | 커밋 메시지 | 작성자 | 날짜 |\n|-----|-------------|--------|------|\n| f2eb03406 | chore: Issue Processor 실행 결과 | GitHub Action | 2026-04-17T10:15:23Z |\n| 395429173 | docs: Issue #721 - 피드백 반영 | GitHub Action | 2026-04-16T04:00:25Z |\n| ce9cfdb03 | chore: Issue Processor 실행 결과 | GitHub Action | 2026-04-15T03:42:55Z |\n| 230cfdaf3 | 📊 주간 위키 상태 보고서 생성 | github-actions[bot] | 2026-04-13T01:37:04Z |\n\n## 향후 과제\n1. **자동 발행된 문서가 없음** – Draft 상태인 신규 문서 5개를 검토 후 적절히 발행할 필요.  \n2. **오픈 이슈 230건** – 특히 커버리지 분석에서 발견된 10개 미문서화 모듈을 우선 순위로 처리.  \n3. **삭제된 문서 관리** – Deleted 상태 42개의 이유를 파악하고, 필요 시 복구 혹은 영구 삭제 절차 진행.  \n4. **AI 품질 점수 기준 검토** – 현재 80점 이상 자동 발행 기준이 적용되고 있으나, 품질 향상을 위한 추가 검토 로직 도입 검토.  \n5. **URL·링크 정합성** – 최근 감지된 URL 깨짐 5건을 빠르게 복구하고, 정기적인 URL 모니터링 주기를 강화.  ",
-  "lastModified": "2026-04-23T06:15:48Z",
+  "lastModified": "2026-04-23T11:51:45Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "ff81164",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-23 06:15",
+      "sha": "6bb7dce",
+      "message": "chore: 대시보드 통계 수집 - 2026-04-23 11:51",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-23T06:15:48Z",
+      "date": "2026-04-23T11:51:45Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
