@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-04-24T10:04:13.136Z",
+  "collectedAt": "2026-04-24T10:55:24.585Z",
   "overview": {
     "totalDocuments": 373,
     "publishedDocuments": 196,
     "draftDocuments": 177,
-    "openRequests": 233,
+    "openRequests": 236,
     "closedRequests": 19,
-    "totalAIActions": 929
+    "totalAIActions": 938
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 9,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 24,
+      "estimatedTokens": 12222,
+      "totalPipelineDurationMs": 272145
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 11,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 24,
+      "estimatedTokens": 12222,
+      "totalPipelineDurationMs": 272145
     },
     "last7d": {
-      "aiActions": 23,
-      "documentsCreated": 4,
+      "aiActions": 25,
+      "documentsCreated": 6,
       "documentsModified": 7,
-      "tavilyApiCalls": 12,
-      "tavilyResults": 33,
-      "estimatedTokens": 24669,
-      "totalPipelineDurationMs": 520194
+      "tavilyApiCalls": 18,
+      "tavilyResults": 51,
+      "estimatedTokens": 28380,
+      "totalPipelineDurationMs": 615494
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-24T10:10:58.349Z",
+      "actionType": "quality_score",
+      "issueNumber": 735,
+      "documentTitle": "[Wiki Maintenance] [요청] SELinux Volume Label Changes goes GA (and likely implications in v1.37)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-24T10:10:35.748Z",
+      "actionType": "quality_score",
+      "issueNumber": 736,
+      "documentTitle": "[Wiki Maintenance] [요청] Gateway API v1.5: Moving features to Stable",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-24T10:10:14.278Z",
+      "actionType": "quality_score",
+      "issueNumber": 737,
+      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-24T10:09:54.336Z",
+      "actionType": "modify",
+      "issueNumber": 738,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-24T10:08:39.407Z",
+      "actionType": "modify",
+      "issueNumber": 739,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-24T10:07:21.817Z",
+      "actionType": "modify",
+      "issueNumber": 740,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-24T10:06:15.827Z",
+      "actionType": "generate",
+      "issueNumber": 735,
+      "documentTitle": "SELinux Volume Label Changes GA 및 v1.37 적용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 99547,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4166
+    },
+    {
+      "timestamp": "2026-04-24T10:04:07.660Z",
+      "actionType": "generate",
+      "issueNumber": 736,
+      "documentTitle": "Gateway API v1.5 – Stable 로 승격된 기능 정리 및 Wiki 유지보수 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 70269,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3305
+    },
+    {
+      "timestamp": "2026-04-24T10:02:36.395Z",
+      "actionType": "generate",
+      "issueNumber": 737,
+      "documentTitle": "Kubernetes v1.30.0 릴리즈 문서 및 위키 유지보수 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 102329,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4751
+    },
     {
       "timestamp": "2026-04-24T09:40:24.680Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 111668,
       "tavilyApiCalls": 3,
       "estimatedTokens": 5309
-    },
-    {
-      "timestamp": "2026-04-21T09:38:27.870Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T09:38:18.574Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-20T21:55:08.480Z",
-      "actionType": "recover",
-      "issueNumber": 579,
-      "documentTitle": "chore(deps): bump the dev-dependencies group across 1 directory with 6 updates",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-20T01:35:50.595Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 17주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-19T09:50:01.087Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "학습 루프",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-17T10:14:18.636Z",
-      "actionType": "quality_score",
-      "issueNumber": 722,
-      "documentTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-17T10:13:58.107Z",
-      "actionType": "quality_score",
-      "issueNumber": 723,
-      "documentTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-17T10:13:41.513Z",
-      "actionType": "quality_score",
-      "issueNumber": 724,
-      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.35.4",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-17T10:13:14.155Z",
-      "actionType": "modify",
-      "issueNumber": 725,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 914,
+      "totalEstimatedTokens": 753942,
+      "avgDurationMs": 55751
+    },
     "unknown": {
       "totalActions": 24,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 905,
-      "totalEstimatedTokens": 741720,
-      "avgDurationMs": 55388
     }
   }
 }
