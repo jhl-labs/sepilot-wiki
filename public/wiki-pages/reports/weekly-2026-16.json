@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 16주차",
   "slug": "reports/weekly-2026-16",
   "content": "\n## 요약\n- 전체 문서 수는 **400개**이며, 현재 **게시된 문서 201개**, **초안 157개**, **삭제된 문서 42개**가 존재합니다.  \n- 이번 주에 **신규 문서 6개**와 **수정된 문서 6개**가 발생했으며, AI가 수행한 총 작업은 **25건**입니다.  \n- 열린 이슈는 **225개**이며, 최근 6개의 이슈가 활동했습니다. 커밋은 **6건**이 기록되었습니다.\n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 400 |\n| 초안(draft) | 157 |\n| 게시(published) | 201 |\n| 삭제(deleted) | 42 |\n| 신규 문서 | 6 |\n| 수정된 문서 | 6 |\n| 이번 주 자동 발행 | 0 |\n\n## AI 활동 요약\n- **총 작업 수**: 25건  \n- **작업 유형별**  \n  - maintain: 5건  \n  - recover: 2건  \n  - quality_score: 6건 (자동 품질 검토 후 자동 발행)  \n  - modify: 6건 (URL 변경 및 내용 수정)  \n  - generate: 6건 (새 문서 생성)\n\n### 주요 AI 작업\n1. **학습 루프 유지** – 3개 패턴 감지, 2개 에이전트 개선 (maintain).  \n2. **의존성 업데이트 복구** – `next` 패키지 버전 업데이트 문서 생성 (recover, Issue #518).  \n3. **품질 점수 검토 및 자동 발행** –  \n   - Kubernetes v1.36 Sneak Peek (89점)  \n   - Kubernetes v1.36.0‑rc.0 (84점)  \n   - Defending Your Software Supply Chain (94점) 등 (quality_score).  \n4. **문서 수정** – URL 변경 요청에 따라 678, 636, reports/weekly-2026-14 등 3개 문서 수정 (modify).  \n5. **새 문서 생성** –  \n   - “Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서”  \n   - “Kubernetes v1.36.0‑rc.0 릴리즈 유지보수 가이드”  \n   - “Defending Your Software Supply Chain – Engineering Teams Guide” (generate).  \n\n## 열린 이슈\n- **전체 오픈 이슈**: 225개  \n- **최근 활동 이슈**: 6개 (주요 활동은 URL 변경, 품질 점수 검토, 문서 복구 등)\n\n## 주간 변경사항\n| SHA | 커밋 메시지 | 작성자 | 날짜 |\n|-----|-------------|--------|------|\n| 33bc3b484 | Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki | GitHub Action | 2026-04-11T01:01:50Z |\n| 78b155c06 | docs: Issue #715 - 피드백 반영 | GitHub Action | 2026-04-11T01:01:28Z |\n| f7b107323 | docs: Issue #518 - 피드백 반영 | GitHub Action | 2026-04-11T01:01:25Z |\n| 858e20495 | chore: Issue Processor 실행 결과 | GitHub Action | 2026-04-10T10:03:36Z |\n| cc306df92 | chore: Issue Processor 실행 결과 | GitHub Action | 2026-04-07T09:58:01Z |\n| 7a3be295a | docs: Issue #702 - 피드백 반영 | GitHub Action | 2026-04-06T23:32:33Z |\n\n## 참고 URL 정보\n**URL**: https://github.com/jhl-labs/sepilot-wiki  \n\nSEPilot Wiki는 AI 에이전트 기반의 자동화된 위키 시스템으로, 저장소의 `/wiki` 폴더를 데이터 저장소로 활용합니다. 주요 특징은 다음과 같습니다.\n\n- **저장소 기반 Wiki**: `/wiki` 폴더에 있는 마크다운 파일을 GitHub Contents API를 통해 관리합니다.  \n- **GitHub Pages 프론트엔드**: React + TypeScript + Vite 로 구축된 정적 사이트를 제공합니다.  \n- **AI 기반 문서 작성**: Issue에 `request` 라벨을 붙이면 AI가 자동으로 초안을 생성하고, Maintainer가 검토·피드백을 제공하면 AI가 반영합니다.  \n- **자동 워크플로우**: Issue 댓글, 라벨, `invalid` 라벨 등을 활용해 문서 수정·삭제·생성을 자동화합니다.  \n- **기술 스택**: React 18.3.1, TypeScript 5.x, Vite 7.2.6, Bun 1.0+, TanStack Query 5.x 등.  \n- **보안**: 경로 검증, XSS 방지(DOMPurify), CSP 헤더, 프롬프트 인젝션 방지 등 다양한 보안 메커니즘을 적용합니다.  \n\n위 내용은 최신 커밋 기준으로 업데이트된 정보이며, 기존 보고서에 포함된 URL 설명과 일치하도록 반영되었습니다.\n\n## 향후 과제\n- **URL 변경 관리**: 이번 주에 3건의 URL 변경 이슈가 발생했으며, 깨진 링크 8건이 감지되었습니다. 자동 탐지 및 사전 알림 체계 강화가 필요합니다.  \n- **초안 문서 전환**: 초안이 157개로 전체의 39%를 차지하고 있습니다. 품질 점수 기반 자동 전환 정책을 확대해 게시 문서 비율을 높이는 방안을 검토합니다.  \n- **삭제 문서 추적**: 삭제된 문서 42개에 대한 보존 정책 및 복구 가능성 검토가 필요합니다.  \n- **AI 작업 효율성**: 현재 AI가 수행한 작업 중 `maintain`과 `recover`가 상대적으로 적은 편이므로, 자동 복구 및 유지보수 로직을 추가로 최적화합니다.  \n- **이슈 처리 속도**: 열린 이슈 225개 중 최근 활동이 6개에 불과하므로, 우선순위 기반 자동 라벨링 및 할당 체계를 강화해 처리 속도를 개선합니다.",
-  "lastModified": "2026-04-24T17:49:54Z",
+  "lastModified": "2026-04-24T23:48:12Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "5afddad",
-      "message": "chore: 대시보드 통계 수집 - 2026-04-24 17:49",
+      "sha": "2b159e5",
+      "message": "chore: 대시보드 통계 수집 - 2026-04-24 23:48",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-04-24T17:49:54Z",
+      "date": "2026-04-24T23:48:12Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
