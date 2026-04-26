@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-26T22:07:37.361Z",
+  "collectedAt": "2026-04-26T22:48:23.971Z",
   "overview": {
     "totalDocuments": 376,
     "publishedDocuments": 199,
     "draftDocuments": 177,
     "openRequests": 236,
     "closedRequests": 19,
-    "totalAIActions": 938
+    "totalAIActions": 939
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 24,
+      "aiActions": 25,
       "documentsCreated": 6,
       "documentsModified": 7,
       "tavilyApiCalls": 18,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-26T22:08:04.284Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-24T10:10:58.349Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 95936,
       "tavilyApiCalls": 3,
       "estimatedTokens": 4308
-    },
-    {
-      "timestamp": "2026-04-21T10:02:25.769Z",
-      "actionType": "generate",
-      "issueNumber": 731,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 111668,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 5309
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 914,
+      "totalActions": 915,
       "totalEstimatedTokens": 753942,
       "avgDurationMs": 55751
     },
