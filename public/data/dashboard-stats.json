@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-04-28T10:19:04.101Z",
+  "collectedAt": "2026-04-28T11:14:41.110Z",
   "overview": {
     "totalDocuments": 376,
     "publishedDocuments": 199,
     "draftDocuments": 177,
-    "openRequests": 236,
+    "openRequests": 239,
     "closedRequests": 19,
-    "totalAIActions": 941
+    "totalAIActions": 950
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last7d": {
-      "aiActions": 14,
+      "aiActions": 9,
       "documentsCreated": 3,
       "documentsModified": 3,
       "tavilyApiCalls": 9,
-      "tavilyResults": 24,
-      "estimatedTokens": 12222,
-      "totalPipelineDurationMs": 272145
+      "tavilyResults": 27,
+      "estimatedTokens": 9804,
+      "totalPipelineDurationMs": 225856
+    },
+    "last24h": {
+      "aiActions": 11,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 9804,
+      "totalPipelineDurationMs": 225856
+    },
+    "last7d": {
+      "aiActions": 23,
+      "documentsCreated": 6,
+      "documentsModified": 6,
+      "tavilyApiCalls": 18,
+      "tavilyResults": 51,
+      "estimatedTokens": 22026,
+      "totalPipelineDurationMs": 498001
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-28T10:23:55.364Z",
+      "actionType": "quality_score",
+      "issueNumber": 741,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-28T10:23:41.319Z",
+      "actionType": "quality_score",
+      "issueNumber": 742,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-28T10:23:17.431Z",
+      "actionType": "quality_score",
+      "issueNumber": 743,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-28T10:22:48.665Z",
+      "actionType": "modify",
+      "issueNumber": 744,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-28T10:21:45.957Z",
+      "actionType": "modify",
+      "issueNumber": 745,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-28T10:20:28.344Z",
+      "actionType": "modify",
+      "issueNumber": 746,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-28T10:19:25.730Z",
+      "actionType": "generate",
+      "issueNumber": 741,
+      "documentTitle": "Kubernetes v1.36 – User Namespaces GA 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 102461,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4680
+    },
+    {
+      "timestamp": "2026-04-28T10:17:23.078Z",
+      "actionType": "generate",
+      "issueNumber": 742,
+      "documentTitle": "Kubernetes v1.36 – Mutable Pod Resources for Suspended Jobs (beta)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 62071,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2635
+    },
+    {
+      "timestamp": "2026-04-28T10:15:51.113Z",
+      "actionType": "generate",
+      "issueNumber": 743,
+      "documentTitle": "Kubernetes v1.36 – Fine‑Grained Kubelet API Authorization GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 61324,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2489
+    },
     {
       "timestamp": "2026-04-28T09:53:52.839Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 70269,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3305
-    },
-    {
-      "timestamp": "2026-04-24T10:02:36.395Z",
-      "actionType": "generate",
-      "issueNumber": 737,
-      "documentTitle": "Kubernetes v1.30.0 릴리즈 문서 및 위키 유지보수 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 102329,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4751
-    },
-    {
-      "timestamp": "2026-04-24T09:40:24.680Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T09:40:04.281Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T10:11:18.584Z",
-      "actionType": "quality_score",
-      "issueNumber": 729,
-      "documentTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T10:11:02.076Z",
-      "actionType": "quality_score",
-      "issueNumber": 730,
-      "documentTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T10:10:42.869Z",
-      "actionType": "quality_score",
-      "issueNumber": 731,
-      "documentTitle": "[Wiki Maintenance] [요청] How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T10:10:13.666Z",
-      "actionType": "modify",
-      "issueNumber": 732,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T10:09:08.972Z",
-      "actionType": "modify",
-      "issueNumber": 733,
-      "documentTitle": "주간 위키 보고서 - 2026년 16주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T10:08:26.454Z",
-      "actionType": "modify",
-      "issueNumber": 734,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 925,
+      "totalEstimatedTokens": 763746,
+      "avgDurationMs": 55950
+    },
     "unknown": {
       "totalActions": 25,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 916,
-      "totalEstimatedTokens": 753942,
-      "avgDurationMs": 55751
     }
   }
 }
