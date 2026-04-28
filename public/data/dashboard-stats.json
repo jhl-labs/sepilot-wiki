@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-04-28T09:19:59.576Z",
+  "collectedAt": "2026-04-28T10:19:04.101Z",
   "overview": {
     "totalDocuments": 376,
     "publishedDocuments": 199,
     "draftDocuments": 177,
     "openRequests": 236,
     "closedRequests": 19,
-    "totalAIActions": 939
+    "totalAIActions": 941
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 23,
-      "documentsCreated": 6,
-      "documentsModified": 6,
-      "tavilyApiCalls": 18,
-      "tavilyResults": 51,
-      "estimatedTokens": 28380,
-      "totalPipelineDurationMs": 615494
+      "aiActions": 14,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 24,
+      "estimatedTokens": 12222,
+      "totalPipelineDurationMs": 272145
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-04-28T09:53:52.839Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-04-28T09:53:35.469Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-26T22:08:04.284Z",
       "actionType": "maintain",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-21T10:07:02.538Z",
-      "actionType": "generate",
-      "issueNumber": 729,
-      "documentTitle": "Why MicroVMs: The Architecture Behind Docker Sandboxes",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 135745,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 6541
-    },
-    {
-      "timestamp": "2026-04-21T10:04:27.089Z",
-      "actionType": "generate",
-      "issueNumber": 730,
-      "documentTitle": "Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 95936,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4308
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 915,
-      "totalEstimatedTokens": 753942,
-      "avgDurationMs": 55751
-    },
     "unknown": {
-      "totalActions": 24,
+      "totalActions": 25,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 916,
+      "totalEstimatedTokens": 753942,
+      "avgDurationMs": 55751
     }
   }
 }
