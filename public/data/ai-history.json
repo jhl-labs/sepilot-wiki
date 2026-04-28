@@ -1,6 +1,238 @@
 {
   "entries": [
     {
+      "id": "03d0cf23-3a6b-44a8-a63a-c7e967c11c10",
+      "timestamp": "2026-04-28T10:23:55.364Z",
+      "actionType": "quality_score",
+      "issueNumber": 741,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+      "documentSlug": "kubernetes/kubernetes-v1-36-user-namespaces-in-kubernetes-are",
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "d150c5f2-0a74-45c9-9adc-04b5410e3393",
+      "timestamp": "2026-04-28T10:23:41.319Z",
+      "actionType": "quality_score",
+      "issueNumber": 742,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
+      "documentSlug": "kubernetes-v1-36-mutable-pod-resources-for-suspend",
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "2c064570-7d76-4d1d-9292-f4c60d721f22",
+      "timestamp": "2026-04-28T10:23:17.431Z",
+      "actionType": "quality_score",
+      "issueNumber": 743,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+      "documentSlug": "kubernetes-v1-36-fine-grained-kubelet-api-authoriz",
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "4610e8de-c7f6-4dc9-bce7-7cc3c6640ba7",
+      "timestamp": "2026-04-28T10:22:48.665Z",
+      "actionType": "modify",
+      "issueNumber": 744,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+      "documentSlug": "untitled-1776224402310",
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 5,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "4af64701-cb11-4cb6-aa5b-05203ae6cedf",
+      "timestamp": "2026-04-28T10:21:45.957Z",
+      "actionType": "modify",
+      "issueNumber": 745,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 10,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "84b12d7c-2121-4874-9416-2fcf0ddcfe61",
+      "timestamp": "2026-04-28T10:20:28.344Z",
+      "actionType": "modify",
+      "issueNumber": 746,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 15,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "d57c9de6-c240-4870-a712-845688697a70",
+      "timestamp": "2026-04-28T10:19:25.730Z",
+      "actionType": "generate",
+      "issueNumber": 741,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+      "documentSlug": "kubernetes/kubernetes-v1-36-user-namespaces-in-kubernetes-are",
+      "documentTitle": "Kubernetes v1.36 – User Namespaces GA 가이드",
+      "summary": "새 문서 \"Kubernetes v1.36 – User Namespaces GA 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 8865
+            },
+            {
+              "step": "outline",
+              "durationMs": 8474
+            },
+            {
+              "step": "write",
+              "durationMs": 33119
+            },
+            {
+              "step": "review",
+              "durationMs": 12099
+            },
+            {
+              "step": "refine",
+              "durationMs": 39904
+            }
+          ],
+          "totalDurationMs": 102461,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 4680,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "65737cb6-aefd-4054-b664-a7134667f6ed",
+      "timestamp": "2026-04-28T10:17:23.078Z",
+      "actionType": "generate",
+      "issueNumber": 742,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
+      "documentSlug": "kubernetes-v1-36-mutable-pod-resources-for-suspend",
+      "documentTitle": "Kubernetes v1.36 – Mutable Pod Resources for Suspended Jobs (beta)",
+      "summary": "새 문서 \"Kubernetes v1.36 – Mutable Pod Resources for Suspended Jobs (beta)\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 9370
+            },
+            {
+              "step": "outline",
+              "durationMs": 13372
+            },
+            {
+              "step": "write",
+              "durationMs": 29927
+            },
+            {
+              "step": "review",
+              "durationMs": 9402
+            }
+          ],
+          "totalDurationMs": 62071,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2635,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "f3cad255-55fd-44ed-b038-dd90d8208a3b",
+      "timestamp": "2026-04-28T10:15:51.113Z",
+      "actionType": "generate",
+      "issueNumber": 743,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+      "documentSlug": "kubernetes-v1-36-fine-grained-kubelet-api-authoriz",
+      "documentTitle": "Kubernetes v1.36 – Fine‑Grained Kubelet API Authorization GA",
+      "summary": "새 문서 \"Kubernetes v1.36 – Fine‑Grained Kubelet API Authorization GA\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 11534
+            },
+            {
+              "step": "outline",
+              "durationMs": 10260
+            },
+            {
+              "step": "write",
+              "durationMs": 31026
+            },
+            {
+              "step": "review",
+              "durationMs": 8504
+            }
+          ],
+          "totalDurationMs": 61324,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2489,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "41c025ed-cd54-4c37-bbbf-2d788cebaed9",
       "timestamp": "2026-04-28T09:53:52.839Z",
       "actionType": "maintain",
@@ -23212,5 +23444,5 @@
       "changes": null
     }
   ],
-  "lastUpdated": "2026-04-28T09:53:52.839Z"
+  "lastUpdated": "2026-04-28T10:23:55.364Z"
 }

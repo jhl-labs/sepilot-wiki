@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 741,
+      "number": 741,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/04/23/kubernetes-v1-36-userns-ga/\n**관련도**: 94/100\n\n## 감지 내용\n&lt;p>After several years of development, User Namespaces support in\nKubernetes reached General Availability (GA) with the v1.36 release.\nThis is a Linux-only feature.&lt;/p>\n&lt;p>For those of us working on low level container runtimes and rootless\ntechnologies, this has been a long awaited milesto\n\n## 판단 근거\nUser Namespaces reaching GA is a major feature for container isolation and rootless operation; essential content for a Kubernetes security/operations guide.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-04-28T10:19:25.733Z",
+      "updated_at": "2026-04-28T10:19:25.742Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/741",
+      "documentSlug": "kubernetes/kubernetes-v1-36-user-namespaces-in-kubernetes-are",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes/kubernetes-v1-36-user-namespaces-in-kubernetes-are.md",
+      "comments": 0
+    },
+    {
+      "id": 742,
+      "number": 742,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/04/27/kubernetes-v1-36-mutable-pod-resources-for-suspended-jobs/\n**관련도**: 92/100\n\n## 감지 내용\n&lt;p>Kubernetes v1.36 promotes the ability to modify container resource requests and limits\nin the pod template of a suspended Job to beta. First introduced as alpha in v1.35, this\nfeature allows queue controllers and cluster administrators to adjust CPU, memory, GPU,\nand extended resource specific\n\n## 판단 근거\nKubernetes v1.36 introduces a beta feature (Mutable Pod Resources for Suspended Jobs) that is a notable change in workload management. Highly relevant for a Kubernetes documentation section.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-04-28T10:17:23.082Z",
+      "updated_at": "2026-04-28T10:17:23.091Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/742",
+      "documentSlug": "kubernetes-v1-36-mutable-pod-resources-for-suspend",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-mutable-pod-resources-for-suspend.md",
+      "comments": 0
+    },
+    {
+      "id": 743,
+      "number": 743,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/04/24/kubernetes-v1-36-fine-grained-kubelet-authorization-ga/\n**관련도**: 90/100\n\n## 감지 내용\n&lt;p>On behalf of Kubernetes SIG Auth and SIG Node, we are pleased to announce the\ngraduation of fine-grained &lt;code>kubelet&lt;/code> API authorization to General Availability\n(GA) in Kubernetes v1.36!&lt;/p>\n&lt;p>The &lt;code>KubeletFineGrainedAuthz&lt;/code> feature gate was introduced as an \n\n## 판단 근거\nFine‑grained Kubelet API authorization graduating to GA is a security‑related milestone for Kubernetes and warrants its own wiki page.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-04-28T10:15:51.117Z",
+      "updated_at": "2026-04-28T10:15:51.126Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/743",
+      "documentSlug": "kubernetes-v1-36-fine-grained-kubelet-api-authoriz",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-fine-grained-kubelet-api-authoriz.md",
+      "comments": 0
+    },
+    {
       "id": 735,
       "number": 735,
       "title": "[Wiki Maintenance] [요청] SELinux Volume Label Changes goes GA (and likely implications in v1.37)",
@@ -7915,5 +8008,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-04-24T10:06:15.839Z"
+  "lastUpdated": "2026-04-28T10:19:25.742Z"
 }
