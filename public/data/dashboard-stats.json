@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-05-01T02:23:14.213Z",
+  "collectedAt": "2026-05-01T03:48:21.846Z",
   "overview": {
     "totalDocuments": 379,
     "publishedDocuments": 202,
     "draftDocuments": 177,
     "openRequests": 239,
     "closedRequests": 19,
-    "totalAIActions": 950
+    "totalAIActions": 951
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 23,
+      "aiActions": 24,
       "documentsCreated": 6,
       "documentsModified": 6,
       "tavilyApiCalls": 18,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-01T03:17:12.038Z",
+      "actionType": "quality_score",
+      "issueNumber": null,
+      "documentTitle": "문서 품질 평가",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-04-28T10:23:55.364Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 99547,
       "tavilyApiCalls": 3,
       "estimatedTokens": 4166
-    },
-    {
-      "timestamp": "2026-04-24T10:04:07.660Z",
-      "actionType": "generate",
-      "issueNumber": 736,
-      "documentTitle": "Gateway API v1.5 – Stable 로 승격된 기능 정리 및 Wiki 유지보수 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 70269,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3305
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 925,
+      "totalActions": 926,
       "totalEstimatedTokens": 763746,
       "avgDurationMs": 55950
     },
