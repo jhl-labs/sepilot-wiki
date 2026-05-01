@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-05-01T10:04:42.181Z",
+  "collectedAt": "2026-05-01T10:57:33.199Z",
   "overview": {
     "totalDocuments": 379,
     "publishedDocuments": 202,
     "draftDocuments": 177,
-    "openRequests": 239,
+    "openRequests": 242,
     "closedRequests": 19,
-    "totalAIActions": 953
+    "totalAIActions": 962
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 9,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 12422,
+      "totalPipelineDurationMs": 272478
     },
     "last24h": {
-      "aiActions": 3,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 12,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 12422,
+      "totalPipelineDurationMs": 272478
     },
     "last7d": {
-      "aiActions": 22,
-      "documentsCreated": 4,
+      "aiActions": 24,
+      "documentsCreated": 6,
       "documentsModified": 6,
-      "tavilyApiCalls": 12,
-      "tavilyResults": 36,
-      "estimatedTokens": 13970,
-      "totalPipelineDurationMs": 325403
+      "tavilyApiCalls": 18,
+      "tavilyResults": 54,
+      "estimatedTokens": 22226,
+      "totalPipelineDurationMs": 498334
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-01T10:10:01.789Z",
+      "actionType": "quality_score",
+      "issueNumber": 747,
+      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-01T10:09:34.157Z",
+      "actionType": "quality_score",
+      "issueNumber": 748,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: In-Place Vertical Scaling for Pod-Level Resources Graduates to Beta",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-01T10:09:11.372Z",
+      "actionType": "quality_score",
+      "issueNumber": 749,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-01T10:08:55.785Z",
+      "actionType": "modify",
+      "issueNumber": 750,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-01T10:07:53.804Z",
+      "actionType": "modify",
+      "issueNumber": 751,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-01T10:07:14.454Z",
+      "actionType": "modify",
+      "issueNumber": 752,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-01T10:06:23.195Z",
+      "actionType": "generate",
+      "issueNumber": 747,
+      "documentTitle": "Kubernetes v1.28.0 릴리즈 위키 유지보수 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 120640,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 5811
+    },
+    {
+      "timestamp": "2026-05-01T10:03:55.313Z",
+      "actionType": "generate",
+      "issueNumber": 748,
+      "documentTitle": "Kubernetes v1.36: In‑Place Vertical Scaling for Pod‑Level Resources (Beta)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 77668,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3365
+    },
+    {
+      "timestamp": "2026-05-01T10:02:16.497Z",
+      "actionType": "generate",
+      "issueNumber": 749,
+      "documentTitle": "Kubernetes v1.36: Fine‑Grained Kubelet API Authorization Graduates to GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 74170,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3246
+    },
     {
       "timestamp": "2026-05-01T09:39:34.038Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 62071,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2635
-    },
-    {
-      "timestamp": "2026-04-28T10:15:51.113Z",
-      "actionType": "generate",
-      "issueNumber": 743,
-      "documentTitle": "Kubernetes v1.36 – Fine‑Grained Kubelet API Authorization GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 61324,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2489
-    },
-    {
-      "timestamp": "2026-04-28T09:53:52.839Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-28T09:53:35.469Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-26T22:08:04.284Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "학습 루프",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T10:10:58.349Z",
-      "actionType": "quality_score",
-      "issueNumber": 735,
-      "documentTitle": "[Wiki Maintenance] [요청] SELinux Volume Label Changes goes GA (and likely implications in v1.37)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T10:10:35.748Z",
-      "actionType": "quality_score",
-      "issueNumber": 736,
-      "documentTitle": "[Wiki Maintenance] [요청] Gateway API v1.5: Moving features to Stable",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T10:10:14.278Z",
-      "actionType": "quality_score",
-      "issueNumber": 737,
-      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T10:09:54.336Z",
-      "actionType": "modify",
-      "issueNumber": 738,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T10:08:39.407Z",
-      "actionType": "modify",
-      "issueNumber": 739,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 936,
+      "totalEstimatedTokens": 776168,
+      "avgDurationMs": 56301
+    },
     "unknown": {
       "totalActions": 26,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 927,
-      "totalEstimatedTokens": 763746,
-      "avgDurationMs": 55950
     }
   }
 }
