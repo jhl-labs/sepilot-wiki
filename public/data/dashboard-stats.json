@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-05-01T09:11:31.062Z",
+  "collectedAt": "2026-05-01T10:04:42.181Z",
   "overview": {
     "totalDocuments": 379,
     "publishedDocuments": 202,
     "draftDocuments": 177,
     "openRequests": 239,
     "closedRequests": 19,
-    "totalAIActions": 951
+    "totalAIActions": 953
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 24,
-      "documentsCreated": 6,
+      "aiActions": 22,
+      "documentsCreated": 4,
       "documentsModified": 6,
-      "tavilyApiCalls": 18,
-      "tavilyResults": 51,
-      "estimatedTokens": 22026,
-      "totalPipelineDurationMs": 498001
+      "tavilyApiCalls": 12,
+      "tavilyResults": 36,
+      "estimatedTokens": 13970,
+      "totalPipelineDurationMs": 325403
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-01T09:39:34.038Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-01T09:39:12.904Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-01T03:17:12.038Z",
       "actionType": "quality_score",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T10:07:21.817Z",
-      "actionType": "modify",
-      "issueNumber": 740,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-24T10:06:15.827Z",
-      "actionType": "generate",
-      "issueNumber": 735,
-      "documentTitle": "SELinux Volume Label Changes GA 및 v1.37 적용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 99547,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4166
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 926,
-      "totalEstimatedTokens": 763746,
-      "avgDurationMs": 55950
-    },
     "unknown": {
-      "totalActions": 25,
+      "totalActions": 26,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 927,
+      "totalEstimatedTokens": 763746,
+      "avgDurationMs": 55950
     }
   }
 }
