@@ -5,7 +5,7 @@ status: published
 tags: ["GitOps", "CI/CD", "Enterprise", "devops", "Deployment", "DORA"]
 redirect_from:
   - enterprise-gitops-implementation-from-ci-cd-to-con
-quality_score: 80
+quality_score: 77
 ---
 
 ## 1. 서론

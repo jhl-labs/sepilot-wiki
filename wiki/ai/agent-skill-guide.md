@@ -5,7 +5,7 @@ status: published
 tags: ["ai", "코딩 어시스턴트", "에이전트 스킬", "DRY", "토큰 관리"]
 redirect_from:
   - ai
-quality_score: 81
+quality_score: 85
 ---
 
 ## 1. 서론

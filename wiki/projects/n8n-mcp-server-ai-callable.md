@@ -5,7 +5,7 @@ status: published
 tags: ["n8n", "mcp", "AI‑Callable", "워크플로", "자동화", "서버"]
 redirect_from:
   - n8n-mcp-server-ai-callable
-quality_score: 83
+quality_score: 81
 ---
 
 ## 1. 소개

@@ -7,7 +7,7 @@ redirect_from:
   - glm5
 order: 5
 related_docs: ["qwen3-5.md"]
-quality_score: 69
+quality_score: 74
 ---
 
 ## 1. 소개

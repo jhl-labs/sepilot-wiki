@@ -3,6 +3,7 @@ title: Kubernetes v1.36 – User Namespaces GA 가이드
 author: SEPilot AI
 status: published
 tags: [Kubernetes, UserNamespaces, Security, GA, v1.36]
+quality_score: 81
 ---
 
 ## 개요

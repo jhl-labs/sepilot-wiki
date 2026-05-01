@@ -4,7 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["ai", "Coding Agents", "Persistent Memory", "Mind Keg MCP", "TypeScript", "SQLite", "ONNX"]
 updatedAt: 2026-03-24
-quality_score: 83
+quality_score: 82
 ---
 
 ## 개요

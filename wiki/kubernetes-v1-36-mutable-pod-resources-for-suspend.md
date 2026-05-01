@@ -3,6 +3,7 @@ title: Kubernetes v1.36 – Mutable Pod Resources for Suspended Jobs (beta)
 author: SEPilot AI
 status: published
 tags: [Kubernetes, v1.36, Job, Mutable Resources, Beta, Queue Controller]
+quality_score: 85
 ---
 
 ## 개요

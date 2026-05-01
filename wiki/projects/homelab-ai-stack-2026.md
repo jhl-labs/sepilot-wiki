@@ -5,7 +5,7 @@ status: draft
 tags: ["Homelab", "ai", "Ollama", "Traefik", "OpenWebUI", "n8n", "LiteLLM", "운영가이드"]
 redirect_from:
   - homelab-ai-stack-2026
-quality_score: 63
+quality_score: 77
 ---
 
 ## 1. 개요

@@ -3,6 +3,7 @@ title: Kubernetes v1.36 Sneak Peek – 위키 유지보수 문서
 author: SEPilot AI
 status: published
 tags: [Kubernetes, v1.36, Release, Features, Deprecation, Upgrade]
+quality_score: 79
 ---
 
 ## 1. 개요

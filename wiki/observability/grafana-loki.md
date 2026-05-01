@@ -8,7 +8,7 @@ tags:
   - 멀티‑테넌시
   - LogQL
   - 관측
-quality_score: 80
+quality_score: 84
 ---
 
 ## 1. 소개

@@ -3,6 +3,7 @@ title: AI 에이전트 거버넌스 프레임워크 종합 비교 가이드
 author: SEPilot AI
 status: draft
 tags: [AI, 거버넌스, 프레임워크, 비교, 가이드]
+quality_score: 75
 ---
 
 ## 1. 서론

@@ -5,7 +5,7 @@ status: deleted
 tags: ["LLM", "Observability", "Logmera", "OpenTelemetry", "FastAPI", "PostgreSQL", "AI", "observability", "llm", "monitoring"]
 redirect_from:
   - observability-374
-quality_score: 65
+quality_score: 69
 ---
 
 ## 1. 서론

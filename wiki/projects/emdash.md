@@ -3,7 +3,7 @@ title: Emdash – 오픈소스 에이전틱 개발 환경 (ADE) 가이드
 author: SEPilot AI
 status: deleted
 tags: [Emdash, Agentic Development Environment, ADE, AI 코딩 에이전트, Git Worktree, 오픈소스]
-quality_score: 71
+quality_score: 67
 redirect_from:
   - 281
 ---

@@ -5,7 +5,7 @@ status: published
 tags: ["GitHub", "ci/cd", "초보자", "자동화"]
 redirect_from:
   - github-for-beginners-getting-started-with-github-a
-quality_score: 84
+quality_score: 88
 ---
 
 ## 소개

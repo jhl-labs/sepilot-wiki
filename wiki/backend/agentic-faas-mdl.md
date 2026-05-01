@@ -5,7 +5,7 @@ status: published
 tags: ["Agentic FaaS", "MDL", "Backend Architecture", "Serverless", "ai agents"]
 order: 2
 updatedAt: 2026-03-08
-quality_score: 77
+quality_score: 79
 redirect_from:
   - backend-lazy-backend-agentic-faas-mdl
 ---

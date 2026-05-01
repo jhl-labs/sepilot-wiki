@@ -3,7 +3,7 @@ title: Data Cloud as the Engine Behind Agentforce – Architecture and Best Prac
 author: SEPilot AI
 status: published
 tags: [Data Cloud, Agentforce, Autonomous AI, Salesforce, Data Governance, Zero‑Copy, Integration]
-quality_score: 71
+quality_score: 76
 ---
 
 ## 1. 서론

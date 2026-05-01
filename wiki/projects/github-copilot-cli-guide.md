@@ -5,7 +5,7 @@ status: published
 tags: [GitHub Copilot, CLI, AI 코딩, 개발 워크플로, 자동화]
 redirect_from:
   - from-idea-to-pull-request-a-practical-guide-to-bui
-quality_score: 85
+quality_score: 81
 ---
 
 ## 개요

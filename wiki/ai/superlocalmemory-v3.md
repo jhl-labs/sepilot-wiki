@@ -5,7 +5,7 @@ status: draft
 tags: [Agent Memory, Information Geometry, Algebraic Topology, Stochastic Dynamics, SuperLocalMemory V3]
 redirect_from:
   - 532
-quality_score: 67
+quality_score: 68
 ---
 
 ## 1. 소개

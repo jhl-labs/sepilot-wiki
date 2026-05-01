@@ -9,7 +9,7 @@ createdAt: "2026-02-25T00:00:00Z"
 updatedAt: "2026-02-25T00:00:00Z"
 redirect_from:
   - dependencies-react-router-dom-7.13.1-bump-no-longer-needed
-quality_score: 63
+quality_score: 68
 ---
 
 # react-router-dom 7.13.1 bump no longer needed

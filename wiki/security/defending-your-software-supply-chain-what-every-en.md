@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [software-supply-chain, security, DevSecOps, CI/CD, container-security, supply-chain‑risk]  
 date: 2026-04-10  
+quality_score: 77
 ---
 
 ## 요약 & 체크리스트

@@ -12,7 +12,7 @@ related_docs: ["gemini-3-1.md"]
 redirect_from:
   - ai-gemini-3-1
   - ai-gemini-3-1
-quality_score: 72
+quality_score: 65
 ---
 
 # Gemini 3.1 Pro

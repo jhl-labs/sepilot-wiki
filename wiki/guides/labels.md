@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-04-16T04:00:00Z"
 updatedAt: "2026-04-16T04:00:00Z"
+quality_score: 76
 ---
 
 # Dependabot 라벨 `dependencies` 추가하기

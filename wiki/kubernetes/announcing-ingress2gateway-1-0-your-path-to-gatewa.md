@@ -3,6 +3,7 @@ title: Announcing Ingress2Gateway 1.0 – Your Path to Gateway API
 author: SEPilot AI
 status: published
 tags: [Ingress, Gateway API, Kubernetes, Migration, Networking]
+quality_score: 79
 ---
 
 ## 개요

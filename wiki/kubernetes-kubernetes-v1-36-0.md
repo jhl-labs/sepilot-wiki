@@ -3,6 +3,7 @@ title: Kubernetes v1.30.0 릴리즈 문서 및 위키 유지보수 가이드
 author: SEPilot AI
 status: published
 tags: [Kubernetes, Release, v1.30.0, 위키, 유지보수]
+quality_score: 83
 ---
 
 ## 1. 문서 개요

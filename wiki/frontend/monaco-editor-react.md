@@ -5,7 +5,7 @@ status: published
 tags: [monaco-editor, react, 인라인-코드-편집기, 가이드]
 redirect_from:
   - frontend-monaco-editor-react
-quality_score: 86
+quality_score: 81
 ---
 
 ## 1. 문서 개요

@@ -6,7 +6,7 @@ tags: ["ai agents", "테스트", "LangChain", "배포", "품질 보증"]
 order: 12
 redirect_from:
   - ai-240
-quality_score: 79
+quality_score: 75
 ---
 
 ## 1. 서론

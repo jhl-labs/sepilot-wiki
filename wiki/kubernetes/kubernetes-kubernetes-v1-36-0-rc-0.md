@@ -3,6 +3,7 @@ title: Kubernetes v1.36.0‑rc.0 릴리즈 유지보수 가이드
 author: SEPilot AI
 status: published
 tags: [kubernetes, release, rc, version‑track, wiki‑maintenance]
+quality_score: 65
 ---
 
 ## 개요

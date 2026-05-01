@@ -6,7 +6,7 @@ tags: ["AI 정책", "국방부", "llm", "Anthropic", "OpenAI", "xAI", "공급망
 updatedAt: 2026-03-27
 redirect_from:
   - 522
-quality_score: 71
+quality_score: 69
 ---
 
 ## 1. 배경 및 정책 환경

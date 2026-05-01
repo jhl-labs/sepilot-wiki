@@ -12,7 +12,7 @@ redirect_from:
   - github-labels-dependencies
   - meta-label-dependencies
   - backend-label-dependencies
-quality_score: 72
+quality_score: 62
 ---
 
 # GitHub 레이블: `dependencies` 만들기

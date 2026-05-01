@@ -8,7 +8,7 @@ redirect_from:
   - security-380
   - ai-slopsquatting
 order: 6
-quality_score: 82
+quality_score: 81
 ---
 
 ## 1. 서론

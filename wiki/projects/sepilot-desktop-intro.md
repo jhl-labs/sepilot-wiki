@@ -15,7 +15,7 @@ redirect_from:
   - Projects-sepilot-desktop-intro
 related_docs: ["sepilot-technology-stack.md"]
 order: 1
-quality_score: 76
+quality_score: 78
 ---
 
 # SEPilot Desktop 소개

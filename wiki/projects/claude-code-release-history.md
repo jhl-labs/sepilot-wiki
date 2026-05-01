@@ -11,7 +11,7 @@ redirect_from:
   - ai-claude-code
   - projects-claude-code
 order: 3
-quality_score: 84
+quality_score: 82
 ---
 
 ## 1. 서문

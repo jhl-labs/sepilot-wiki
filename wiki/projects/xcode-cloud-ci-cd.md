@@ -5,7 +5,7 @@ status: draft
 tags: ["iOS", "ci/cd", "Xcode Cloud", "TestFlight", "자동화"]
 redirect_from:
   - 366
-quality_score: 74
+quality_score: 76
 ---
 
 ## 1. 서론 – iOS 개발에서 CI/CD의 필요성

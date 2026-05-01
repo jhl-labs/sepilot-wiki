@@ -3,6 +3,7 @@ title: Why MicroVMs: The Architecture Behind Docker Sandboxes
 author: SEPilot AI
 status: published
 tags: [Docker, MicroVM, Sandbox, Container Security, Architecture]
+quality_score: 76
 ---
 
 ## 1. 서론

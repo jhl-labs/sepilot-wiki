@@ -4,7 +4,7 @@ author: SEPilot AI
 status: published
 tags: ["ai", "보안", "위협 모델링", "에이전트", "프롬프트 엔지니어링"]
 updatedAt: 2026-03-25
-quality_score: 62
+quality_score: 74
 ---
 
 ## 개요

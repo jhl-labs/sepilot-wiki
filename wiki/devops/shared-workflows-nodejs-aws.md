@@ -5,7 +5,7 @@ status: draft
 tags: ["ci/cd", "Shared Workflows", "Node.js", "AWS", "Terraform", "ECS", "ECR"]
 redirect_from:
   - 342
-quality_score: 82
+quality_score: 77
 ---
 
 ## 1. 소개

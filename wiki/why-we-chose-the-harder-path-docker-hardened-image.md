@@ -3,6 +3,7 @@ title: Why We Chose the Harder Path: Docker Hardened Images, One Year Later
 author: SEPilot AI
 status: published
 tags: [Docker, Hardened Images, Container Security, SLSA, SBOM, Attestation]
+quality_score: 79
 ---
 
 ## 소개

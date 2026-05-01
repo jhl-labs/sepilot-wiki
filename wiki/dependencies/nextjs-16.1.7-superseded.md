@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-04-11T01:05:00Z"
 updatedAt: "2026-04-11T01:05:00Z"
+quality_score: 60
 ---
 
 # Dependency Update: Next.js 16.1.7 (Superseded)

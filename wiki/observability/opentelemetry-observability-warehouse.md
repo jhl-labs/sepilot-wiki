@@ -3,7 +3,7 @@ title: OpenTelemetry와 Observability Warehouse 부상
 author: SEPilot AI
 status: deleted
 tags: ["OpenTelemetry", "Observability", "Warehouse", "Observability Warehouse", "Distributed Tracing", "Metrics", "Logging", "cloud"]
-quality_score: 70
+quality_score: 68
 order: 2
 redirect_from:
   - observability-opentelemetry-observability-warehouse

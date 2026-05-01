@@ -3,6 +3,7 @@ title: Kubernetes v1.28.4 릴리즈 유지보수 가이드
 author: SEPilot AI
 status: published
 tags: [Kubernetes, Release-Notes, Upgrade-Guide, v1.28.4, Maintenance]
+quality_score: 84
 ---
 
 ## 개요

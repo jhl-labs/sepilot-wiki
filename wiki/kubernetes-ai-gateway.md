@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [kubernetes, ai-gateway, security, best-practices]
 updatedAt: 2026-04-07
+quality_score: 83
 ---
 
 ## 1. 문서 개요

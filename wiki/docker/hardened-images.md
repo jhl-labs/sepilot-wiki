@@ -6,7 +6,7 @@ tags: ["docker", "Hardened Images", "Security", "Vulnerability Management", "Sup
 redirect_from:
   - hardened-images-are-free-now-what
 order: 1
-quality_score: 81
+quality_score: 79
 ---
 
 ## 1. 서론

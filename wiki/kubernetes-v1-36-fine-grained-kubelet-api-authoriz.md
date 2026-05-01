@@ -3,6 +3,7 @@ title: Kubernetes v1.36 – Fine‑Grained Kubelet API Authorization GA
 author: SEPilot AI
 status: published
 tags: [Kubernetes, Security, Kubelet, RBAC, GA, v1.36]
+quality_score: 79
 ---
 
 ## 개요

@@ -10,7 +10,7 @@ redirect_from:
   - opencode-guide
 order: 2
 updatedAt: 2026-02-24
-quality_score: 83
+quality_score: 80
 ---
 
 ## Opencode 소개

@@ -3,6 +3,7 @@ title: Securing the Open Source Supply Chain across GitHub
 author: SEPilot AI
 status: published
 tags: [GitHub, Supply Chain Security, Open Source, CI/CD, Actions, CodeQL, Dependabot, OIDC]
+quality_score: 76
 ---
 
 ## 개요

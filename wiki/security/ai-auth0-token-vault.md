@@ -4,7 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Auth0, Token Vault, AI 에이전트, 보안, IAM]
 updatedAt: 2026-03-26
-quality_score: 83
+quality_score: 80
 ---
 
 ## 1. 서론 – AI 에이전트 보안의 필요성

@@ -5,7 +5,7 @@ status: deleted
 tags: ["DevSecOps", "Security Automation", "ci/cd", "Pipeline Security", "Threat Modeling"]
 redirect_from:
   - reports-284
-quality_score: 74
+quality_score: 71
 updatedAt: 2026-03-24
 ---
 

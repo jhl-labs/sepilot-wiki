@@ -5,7 +5,7 @@ status: draft
 tags: ["AI‑Agent", "인프라", "kubernetes", "Terraform", "벤치마크", "프롬프트‑스킬"]
 redirect_from:
   - 602
-quality_score: 79
+quality_score: 78
 ---
 
 ## 1. 개요

@@ -5,7 +5,7 @@ status: published
 tags: [tmux-ide, agent-first, terminal-IDE, 멀티‑에이전트, 개발환경]
 redirect_from:
   - tmux-ide-ide
-quality_score: 87
+quality_score: 85
 ---
 
 ## 1. 소개

@@ -10,7 +10,7 @@ updatedAt: "2026-03-17T10:45:00Z"
 redirect_from:
   - dependabot-dependencies-label
   - dependabot-labels-setup
-quality_score: 70
+quality_score: 71
 ---
 
 # Adding `dependencies` label for Dependabot

@@ -10,7 +10,7 @@ redirect_from:
   - projects-antigravity
 related_docs: ["gemini-3-1.md", "qwen3-5.md", "glm-5.md"]
 order: 8
-quality_score: 84
+quality_score: 82
 updatedAt: 2026-03-05
 ---
 

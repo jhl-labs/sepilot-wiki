@@ -3,6 +3,7 @@ title: SELinux Volume Label Changes GA 및 v1.37 적용 가이드
 author: SEPilot AI
 status: published
 tags: [SELinux, VolumeLabel, FeatureGate, Kubernetes, v1.36, v1.37, Migration]
+quality_score: 77
 ---
 
 ## 개요

@@ -7,6 +7,7 @@ status: "draft"
 issueNumber: 0
 createdAt: "2026-04-11T10:00:00Z"
 updatedAt: "2026-04-11T10:00:00Z"
+quality_score: 83
 ---
 
 # Dependabot PR 라벨 `dependencies` 누락 문제 해결 방법

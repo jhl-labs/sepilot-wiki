@@ -5,7 +5,7 @@ status: published
 tags: ["FastAPI", "Speech Emotion Recognition", "SER", "Audio ML", "python", "모델 서빙"]
 redirect_from:
   - fastapi-speech-emotion-recognition-ser
-quality_score: 82
+quality_score: 79
 ---
 
 ## 프로젝트 개요 및 목표

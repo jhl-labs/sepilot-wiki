@@ -16,7 +16,7 @@ redirect_from:
   - bun-pnpm-npm-comparison
 related_docs: ["overview.md", "github-actions-setup.md"]
 order: 2
-quality_score: 78
+quality_score: 81
 ---
 
 # bun과 pnpm, npm의 차이
