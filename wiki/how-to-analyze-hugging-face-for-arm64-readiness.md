@@ -4,6 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Docker, Arm, Hugging Face, MCP, Arm64, CI/CD]
 quality_score: 81
+updatedAt: 2026-05-01
 ---
 
 ## 1. 문서 개요
@@ -100,7 +101,10 @@ Hugging Face Spaces 를 Arm64 환경(예: AWS Graviton, Azure Cobalt, Google A
 ## 7. 일반적인 차단 요소와 해결 방안
 - **하드코드된 휠 URL 교체**  
   - `requirements.txt` 를 템플릿화하고 `{platform}` 변수로 대체.  
-  - 예: `pip install https://download.pytorch.org/whl/{platform}/torch-2.0.0+cpu.whl`  
+  - 예시 (유효한 PyTorch 휠 인덱스 사용):  
+    ```text
+    pip install torch==2.0.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+    ```  
 
 - **멀티‑아키 이미지 빌드**  
   - `docker buildx create --use` 로 빌더 설정 후  
@@ -133,7 +137,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install Docker MCP Toolkit
         run: |
-          curl -sSL https://download.docker.com/cli-plugins/docker-mcp -o /usr/local/bin/docker-mcp
+          curl -sSL https://github.com/docker/mcp-toolkit/releases/latest/download/docker-mcp -o /usr/local/bin/docker-mcp
           chmod +x /usr/local/bin/docker-mcp
       - name: Scan Space
         env:
@@ -188,5 +192,3 @@ jobs:
 - **Hugging Face Spaces 개발 가이드** – https://huggingface.co/docs/spaces  
 - **Docker MCP Toolkit GitHub** – https://github.com/docker/mcp-toolkit  
 - **관련 커뮤니티·포럼** – Docker Community Forums, Arm Community Slack, Hugging Face Discuss  
-
----
