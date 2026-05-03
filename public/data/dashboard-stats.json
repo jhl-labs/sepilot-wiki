@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-05-03T09:04:04.958Z",
+  "collectedAt": "2026-05-03T09:55:52.029Z",
   "overview": {
     "totalDocuments": 381,
     "publishedDocuments": 201,
     "draftDocuments": 180,
     "openRequests": 242,
     "closedRequests": 19,
-    "totalAIActions": 962
+    "totalAIActions": 963
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 24,
+      "aiActions": 25,
       "documentsCreated": 6,
       "documentsModified": 6,
       "tavilyApiCalls": 18,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-03T09:29:10.053Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-01T10:10:01.789Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 102461,
       "tavilyApiCalls": 3,
       "estimatedTokens": 4680
-    },
-    {
-      "timestamp": "2026-04-28T10:17:23.078Z",
-      "actionType": "generate",
-      "issueNumber": 742,
-      "documentTitle": "Kubernetes v1.36 – Mutable Pod Resources for Suspended Jobs (beta)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 62071,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2635
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 936,
+      "totalActions": 937,
       "totalEstimatedTokens": 776168,
       "avgDurationMs": 56301
     },
