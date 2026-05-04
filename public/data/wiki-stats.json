@@ -1,37 +1,34 @@
 {
-  "generatedAt": "2026-04-20T01:35:50.592Z",
-  "weekNumber": 17,
+  "generatedAt": "2026-05-04T01:36:22.214Z",
+  "weekNumber": 19,
   "year": 2026,
   "period": {
-    "start": "2026-04-13T01:35:29.770Z",
-    "end": "2026-04-20T01:35:29.770Z"
+    "start": "2026-04-27T01:36:12.947Z",
+    "end": "2026-05-04T01:36:12.947Z"
   },
   "documents": {
-    "total": 407,
+    "total": 420,
     "statusDistribution": {
-      "draft": 159,
-      "published": 206,
+      "published": 216,
+      "draft": 162,
       "deleted": 42
     },
-    "newCount": 5,
-    "modifiedCount": 3,
+    "newCount": 6,
+    "modifiedCount": 6,
     "publishedCount": 0
   },
   "aiActivity": {
-    "totalActions": 18,
+    "totalActions": 24,
     "byType": {
-      "maintain": 3,
-      "quality_score": 4,
-      "modify": 3,
-      "generate": 5,
-      "recover": 1,
-      "coverage_analysis": 1,
-      "status_report": 1
+      "maintain": 5,
+      "quality_score": 7,
+      "modify": 6,
+      "generate": 6
     },
     "entries": [
       {
-        "id": "2dce8726-17c6-4044-aea4-57defa4c3854",
-        "timestamp": "2026-04-19T09:50:01.087Z",
+        "id": "61c75deb-9d20-4bc1-962a-99372c334ec6",
+        "timestamp": "2026-05-03T09:29:10.053Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "학습 루프",
@@ -44,13 +41,27 @@
         "changes": null
       },
       {
-        "id": "200ba812-fd37-4c33-bdbe-81d33583d158",
-        "timestamp": "2026-04-17T10:14:18.636Z",
+        "id": "c3297da6-9d66-4b9b-8425-9c92c7ab8caf",
+        "timestamp": "2026-05-01T10:10:01.789Z",
         "actionType": "quality_score",
-        "issueNumber": 722,
-        "issueTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
-        "documentSlug": "docker/why-microvms-the-architecture-behind-docker-sandbo",
-        "documentTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
+        "issueNumber": 747,
+        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
+        "documentSlug": "kubernetes-kubernetes-v1-36-0",
+        "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
+        "summary": "자동 품질 검토 통과 (85점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "cfab339f-89aa-488a-be4c-7e7bd19e6616",
+        "timestamp": "2026-05-01T10:09:34.157Z",
+        "actionType": "quality_score",
+        "issueNumber": 748,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: In-Place Vertical Scaling for Pod-Level Resources Graduates to Beta",
+        "documentSlug": "kubernetes-v1-36-in-place-vertical-scaling-for-pod",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: In-Place Vertical Scaling for Pod-Level Resources Graduates to Beta",
         "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -58,38 +69,24 @@
         "changes": null
       },
       {
-        "id": "4004c045-e8a7-4e01-a925-09a3548ddb8f",
-        "timestamp": "2026-04-17T10:13:58.107Z",
+        "id": "c27e3713-8cbf-4a2d-9e92-ddc4399e75a6",
+        "timestamp": "2026-05-01T10:09:11.372Z",
         "actionType": "quality_score",
-        "issueNumber": 723,
-        "issueTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-        "documentSlug": "why-we-chose-the-harder-path-docker-hardened-image",
-        "documentTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-        "summary": "자동 품질 검토 통과 (91점) → 자동 발행",
+        "issueNumber": 749,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+        "documentSlug": "kubernetes-v1-36-fine-grained-kubelet-api-authoriz",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "9146e394-ddd8-4323-a920-d71c78b9ff61",
-        "timestamp": "2026-04-17T10:13:41.513Z",
-        "actionType": "quality_score",
-        "issueNumber": 724,
-        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.35.4",
-        "documentSlug": "kubernetes/kubernetes-kubernetes-v1-35-4",
-        "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.35.4",
-        "summary": "자동 품질 검토 통과 (83점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "3de1f62a-a3ad-456f-bf99-c3087ace19fc",
-        "timestamp": "2026-04-17T10:13:14.155Z",
+        "id": "2524e8c3-d577-4cb9-bab2-0112e1f850c2",
+        "timestamp": "2026-05-01T10:08:55.785Z",
         "actionType": "modify",
-        "issueNumber": 725,
+        "issueNumber": 750,
         "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
         "documentSlug": "untitled-1776224402310",
         "documentTitle": "검색 서비스 구현 및 사용 가이드",
@@ -98,53 +95,53 @@
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 12,
+          "additions": 33,
           "deletions": 0
         }
       },
       {
-        "id": "54d1eb4f-e0af-4218-b1a7-653df11a58d9",
-        "timestamp": "2026-04-17T10:12:03.903Z",
+        "id": "82c6db90-5dd2-4fd1-96a2-c873468fbab8",
+        "timestamp": "2026-05-01T10:07:53.804Z",
         "actionType": "modify",
-        "issueNumber": 726,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
-        "documentSlug": "678",
-        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+        "issueNumber": 751,
+        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
+        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
+        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
         "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 0,
+          "additions": 1,
           "deletions": 0
         }
       },
       {
-        "id": "afb5efcd-3501-40fc-a695-b03e1ce9ace1",
-        "timestamp": "2026-04-17T10:07:11.970Z",
+        "id": "42538e2b-475b-4396-ae8d-c47ab1449385",
+        "timestamp": "2026-05-01T10:07:14.454Z",
         "actionType": "modify",
-        "issueNumber": 727,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
-        "documentSlug": "678",
-        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+        "issueNumber": 752,
+        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
+        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
+        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
         "trigger": "update_request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 0,
+          "additions": 1,
           "deletions": 0
         }
       },
       {
-        "id": "1b0ce79e-ecc7-4f6a-bdac-c8e3acdcbeb0",
-        "timestamp": "2026-04-17T10:05:43.224Z",
+        "id": "b567c0af-aa69-44da-9a1b-200125b26f16",
+        "timestamp": "2026-05-01T10:06:23.195Z",
         "actionType": "generate",
-        "issueNumber": 722,
-        "issueTitle": "[Wiki Maintenance] [요청] Why MicroVMs: The Architecture Behind Docker Sandboxes",
-        "documentSlug": "docker/why-microvms-the-architecture-behind-docker-sandbo",
-        "documentTitle": "Why MicroVMs: The Architecture Behind Docker Sandboxes",
-        "summary": "새 문서 \"Why MicroVMs: The Architecture Behind Docker Sandboxes\" 생성",
+        "issueNumber": 747,
+        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
+        "documentSlug": "maintenance/kubernetes-kubernetes-v1-36-0",
+        "documentTitle": "Kubernetes v1.28.0 릴리즈 위키 유지보수 가이드",
+        "summary": "새 문서 \"Kubernetes v1.28.0 릴리즈 위키 유지보수 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -153,182 +150,192 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 6648
+                "durationMs": 4422
               },
               {
                 "step": "outline",
-                "durationMs": 18460
+                "durationMs": 7108
               },
               {
                 "step": "write",
-                "durationMs": 64732
+                "durationMs": 46694
               },
               {
                 "step": "review",
-                "durationMs": 23493
+                "durationMs": 15422
               },
               {
                 "step": "refine",
-                "durationMs": 63512
+                "durationMs": 46994
               }
             ],
-            "totalDurationMs": 176845,
+            "totalDurationMs": 120640,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 5811,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "8cbf3cc8-2489-42b9-8f45-1ffe0d151a85",
+        "timestamp": "2026-05-01T10:03:55.313Z",
+        "actionType": "generate",
+        "issueNumber": 748,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: In-Place Vertical Scaling for Pod-Level Resources Graduates to Beta",
+        "documentSlug": "kubernetes-v1-36-in-place-vertical-scaling-for-pod",
+        "documentTitle": "Kubernetes v1.36: In‑Place Vertical Scaling for Pod‑Level Resources (Beta)",
+        "summary": "새 문서 \"Kubernetes v1.36: In‑Place Vertical Scaling for Pod‑Level Resources (Beta)\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 10372
+              },
+              {
+                "step": "outline",
+                "durationMs": 9107
+              },
+              {
+                "step": "write",
+                "durationMs": 44750
+              },
+              {
+                "step": "review",
+                "durationMs": 13439
+              }
+            ],
+            "totalDurationMs": 77668,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 3365,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "62c6c6e4-ca8b-4cef-94d5-afec9d86c12b",
+        "timestamp": "2026-05-01T10:02:16.497Z",
+        "actionType": "generate",
+        "issueNumber": 749,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+        "documentSlug": "kubernetes-v1-36-fine-grained-kubelet-api-authoriz",
+        "documentTitle": "Kubernetes v1.36: Fine‑Grained Kubelet API Authorization Graduates to GA",
+        "summary": "새 문서 \"Kubernetes v1.36: Fine‑Grained Kubelet API Authorization Graduates to GA\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 9242
+              },
+              {
+                "step": "outline",
+                "durationMs": 11405
+              },
+              {
+                "step": "write",
+                "durationMs": 44798
+              },
+              {
+                "step": "review",
+                "durationMs": 8725
+              }
+            ],
+            "totalDurationMs": 74170,
             "researchSources": 6,
             "tavilyUsage": {
               "apiCalls": 3,
-              "totalResults": 6
-            },
-            "estimatedTokens": {
-              "estimated": 8511,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "d3afde56-0338-47bd-8158-ffe6ebf7b76d",
-        "timestamp": "2026-04-17T10:02:07.846Z",
-        "actionType": "generate",
-        "issueNumber": 723,
-        "issueTitle": "[Wiki Maintenance] [요청] Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-        "documentSlug": "why-we-chose-the-harder-path-docker-hardened-image",
-        "documentTitle": "Why We Chose the Harder Path: Docker Hardened Images, One Year Later",
-        "summary": "새 문서 \"Why We Chose the Harder Path: Docker Hardened Images, One Year Later\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 8069
-              },
-              {
-                "step": "outline",
-                "durationMs": 16803
-              },
-              {
-                "step": "write",
-                "durationMs": 55556
-              },
-              {
-                "step": "review",
-                "durationMs": 32830
-              }
-            ],
-            "totalDurationMs": 113258,
-            "researchSources": 10,
-            "tavilyUsage": {
-              "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 5260,
+              "estimated": 3246,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "5d648c9c-8cf5-4eec-9365-587ae2cd90b3",
-        "timestamp": "2026-04-17T09:59:49.993Z",
-        "actionType": "generate",
-        "issueNumber": 724,
-        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.35.4",
-        "documentSlug": "kubernetes/kubernetes-kubernetes-v1-35-4",
-        "documentTitle": "Kubernetes v1.28.4 릴리즈 유지보수 가이드",
-        "summary": "새 문서 \"Kubernetes v1.28.4 릴리즈 유지보수 가이드\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 10223
-              },
-              {
-                "step": "outline",
-                "durationMs": 11903
-              },
-              {
-                "step": "write",
-                "durationMs": 33340
-              },
-              {
-                "step": "review",
-                "durationMs": 13697
-              },
-              {
-                "step": "refine",
-                "durationMs": 54756
-              }
-            ],
-            "totalDurationMs": 123919,
-            "researchSources": 11,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 5685,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "4794b6b5-0a59-44d9-9346-342fde5b9eeb",
-        "timestamp": "2026-04-17T09:38:07.789Z",
+        "id": "9814ea58-d95a-4c1b-8399-e75d28d55586",
+        "timestamp": "2026-05-01T09:39:34.038Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "URL 변경 감지",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "URL 변경 감지: 30개 체크, 5개 변경, 5개 깨짐, 3건 Issue",
+        "summary": "URL 변경 감지: 30개 체크, 1개 변경, 6개 깨짐, 3건 Issue",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "unknown",
         "changes": null
       },
       {
-        "id": "6950142d-8ed1-4957-981d-0575d258c536",
-        "timestamp": "2026-04-17T09:37:58.203Z",
+        "id": "af5268f4-5b45-433e-b9eb-f09840922553",
+        "timestamp": "2026-05-01T09:39:12.904Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "트렌드 모니터링",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "트렌드 모니터링: 22건 수집, 3건 감지, 3건 Issue 생성",
+        "summary": "트렌드 모니터링: 19건 수집, 3건 감지, 3건 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "772c77be-3463-47fc-812b-7b13412bc683",
-        "timestamp": "2026-04-16T04:00:10.930Z",
-        "actionType": "recover",
-        "issueNumber": 721,
-        "issueTitle": "chore(deps): bump dompurify from 3.3.1 to 3.4.0",
-        "documentSlug": "guides/labels",
-        "documentTitle": "chore(deps): bump dompurify from 3.3.1 to 3.4.0",
-        "summary": "피드백에 따라 문서 생성",
-        "trigger": "maintainer_comment",
+        "id": "4139dbc3-a1a1-4b6f-8946-45026ccf5bf3",
+        "timestamp": "2026-05-01T03:17:12.038Z",
+        "actionType": "quality_score",
+        "issueNumber": null,
+        "issueTitle": "문서 품질 평가",
+        "documentSlug": "_quality-score",
+        "documentTitle": "문서 품질 평가",
+        "summary": "418개 문서 평가, 평균 76점, 0개 저품질",
+        "trigger": "monthly_schedule",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "b2ada2ca-62b3-419b-8965-0eb70cb0a7d9",
-        "timestamp": "2026-04-15T03:41:44.302Z",
+        "id": "03d0cf23-3a6b-44a8-a63a-c7e967c11c10",
+        "timestamp": "2026-04-28T10:23:55.364Z",
         "actionType": "quality_score",
-        "issueNumber": 719,
-        "issueTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
-        "documentSlug": "guides/api",
-        "documentTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
+        "issueNumber": 741,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+        "documentSlug": "kubernetes/kubernetes-v1-36-user-namespaces-in-kubernetes-are",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+        "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "d150c5f2-0a74-45c9-9adc-04b5410e3393",
+        "timestamp": "2026-04-28T10:23:41.319Z",
+        "actionType": "quality_score",
+        "issueNumber": 742,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
+        "documentSlug": "kubernetes-v1-36-mutable-pod-resources-for-suspend",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
         "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -336,59 +343,79 @@
         "changes": null
       },
       {
-        "id": "a16ea72f-50a8-46b0-8923-a945ac04db5a",
-        "timestamp": "2026-04-15T03:41:22.460Z",
-        "actionType": "generate",
-        "issueNumber": 719,
-        "issueTitle": "[커버리지 분석] 문서 작성 필요: 프론트엔드 API 클라이언트 서비스 가이드",
-        "documentSlug": "guides/api",
-        "documentTitle": "프론트엔드 API 클라이언트 서비스 가이드",
-        "summary": "새 문서 \"프론트엔드 API 클라이언트 서비스 가이드\" 생성",
-        "trigger": "request_label",
+        "id": "2c064570-7d76-4d1d-9292-f4c60d721f22",
+        "timestamp": "2026-04-28T10:23:17.431Z",
+        "actionType": "quality_score",
+        "issueNumber": 743,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+        "documentSlug": "kubernetes-v1-36-fine-grained-kubelet-api-authoriz",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
+        "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+        "trigger": "issue_processor",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3638
-              },
-              {
-                "step": "outline",
-                "durationMs": 10293
-              },
-              {
-                "step": "write",
-                "durationMs": 38176
-              },
-              {
-                "step": "review",
-                "durationMs": 9137
-              }
-            ],
-            "totalDurationMs": 61244,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 2881,
-              "method": "duration_based"
-            }
-          }
-        }
+        "changes": null
       },
       {
-        "id": "974a63b0-6075-4967-8328-3405be85b007",
-        "timestamp": "2026-04-15T03:40:02.317Z",
-        "actionType": "generate",
-        "issueNumber": 720,
-        "issueTitle": "[커버리지 분석] 문서 작성 필요: 검색 서비스 구현 및 사용 가이드",
+        "id": "4610e8de-c7f6-4dc9-bce7-7cc3c6640ba7",
+        "timestamp": "2026-04-28T10:22:48.665Z",
+        "actionType": "modify",
+        "issueNumber": 744,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
         "documentSlug": "untitled-1776224402310",
         "documentTitle": "검색 서비스 구현 및 사용 가이드",
-        "summary": "새 문서 \"검색 서비스 구현 및 사용 가이드\" 생성",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 5,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "4af64701-cb11-4cb6-aa5b-05203ae6cedf",
+        "timestamp": "2026-04-28T10:21:45.957Z",
+        "actionType": "modify",
+        "issueNumber": 745,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+        "documentSlug": "678",
+        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 10,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "84b12d7c-2121-4874-9416-2fcf0ddcfe61",
+        "timestamp": "2026-04-28T10:20:28.344Z",
+        "actionType": "modify",
+        "issueNumber": 746,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+        "documentSlug": "678",
+        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 15,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "d57c9de6-c240-4870-a712-845688697a70",
+        "timestamp": "2026-04-28T10:19:25.730Z",
+        "actionType": "generate",
+        "issueNumber": 741,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
+        "documentSlug": "kubernetes/kubernetes-v1-36-user-namespaces-in-kubernetes-are",
+        "documentTitle": "Kubernetes v1.36 – User Namespaces GA 가이드",
+        "summary": "새 문서 \"Kubernetes v1.36 – User Namespaces GA 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -397,94 +424,64 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 3534
+                "durationMs": 8865
               },
               {
                 "step": "outline",
-                "durationMs": 16007
+                "durationMs": 8474
               },
               {
                 "step": "write",
-                "durationMs": 49590
+                "durationMs": 33119
               },
               {
                 "step": "review",
-                "durationMs": 11667
+                "durationMs": 12099
+              },
+              {
+                "step": "refine",
+                "durationMs": 39904
               }
             ],
-            "totalDurationMs": 80798,
-            "researchSources": 9,
+            "totalDurationMs": 102461,
+            "researchSources": 8,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 3863,
+              "estimated": 4680,
               "method": "duration_based"
             }
           }
         }
-      },
-      {
-        "id": "d2e7aabc-b8a8-4004-9944-dd7e78919bf3",
-        "timestamp": "2026-04-15T03:01:25.203Z",
-        "actionType": "coverage_analysis",
-        "issueNumber": null,
-        "issueTitle": "문서 커버리지 분석",
-        "documentSlug": "_coverage-analysis",
-        "documentTitle": "문서 커버리지 분석",
-        "summary": "커버리지 35점, 10개 미문서화 모듈 발견",
-        "trigger": "monthly_schedule",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "a35b34d8-672c-4a40-bdd1-6ff032e4ac67",
-        "timestamp": "2026-04-13T01:37:02.696Z",
-        "actionType": "status_report",
-        "issueNumber": null,
-        "issueTitle": "주간 보고서 2026-W16",
-        "documentSlug": "reports/weekly-2026-16",
-        "documentTitle": "주간 위키 보고서 - 2026년 16주차",
-        "summary": "주간 보고서 생성: 400개 문서, 25개 AI 활동",
-        "trigger": "weekly_schedule",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
       }
     ]
   },
   "issues": {
-    "totalOpen": 230,
-    "recentActivity": 5
+    "totalOpen": 242,
+    "recentActivity": 6
   },
   "commits": {
-    "total": 4,
+    "total": 3,
     "entries": [
       {
-        "sha": "f2eb03406",
+        "sha": "a8bcff9fe",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-04-17T10:15:23Z"
+        "date": "2026-05-01T10:11:45Z"
       },
       {
-        "sha": "395429173",
-        "message": "docs: Issue #721 - 피드백 반영",
-        "author": "GitHub Action",
-        "date": "2026-04-16T04:00:25Z"
-      },
-      {
-        "sha": "ce9cfdb03",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-04-15T03:42:55Z"
-      },
-      {
-        "sha": "230cfdaf3",
-        "message": "📊 주간 위키 상태 보고서 생성",
+        "sha": "05289e48e",
+        "message": "📊 문서 품질 평가: 평균 76점",
         "author": "github-actions[bot]",
-        "date": "2026-04-13T01:37:04Z"
+        "date": "2026-05-01T03:17:13Z"
+      },
+      {
+        "sha": "07784a2d5",
+        "message": "chore: Issue Processor 실행 결과",
+        "author": "GitHub Action",
+        "date": "2026-04-28T10:24:43Z"
       }
     ]
   }
