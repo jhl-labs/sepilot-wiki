@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-05-05T10:12:49.610Z",
+  "collectedAt": "2026-05-05T11:03:12.843Z",
   "overview": {
     "totalDocuments": 382,
     "publishedDocuments": 202,
     "draftDocuments": 180,
-    "openRequests": 242,
+    "openRequests": 245,
     "closedRequests": 19,
-    "totalAIActions": 966
+    "totalAIActions": 975
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 9,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 22,
+      "estimatedTokens": 10270,
+      "totalPipelineDurationMs": 235758
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 11,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 22,
+      "estimatedTokens": 10270,
+      "totalPipelineDurationMs": 235758
     },
     "last7d": {
       "aiActions": 25,
       "documentsCreated": 6,
       "documentsModified": 6,
       "tavilyApiCalls": 18,
-      "tavilyResults": 54,
-      "estimatedTokens": 22226,
-      "totalPipelineDurationMs": 498334
+      "tavilyResults": 49,
+      "estimatedTokens": 22692,
+      "totalPipelineDurationMs": 508236
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-05T10:20:03.742Z",
+      "actionType": "quality_score",
+      "issueNumber": 753,
+      "documentTitle": "[Wiki Maintenance] [요청] Securing the git push pipeline: Responding to a critical remote code execution vulnerability",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-05T10:19:49.191Z",
+      "actionType": "quality_score",
+      "issueNumber": 754,
+      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-05T10:19:32.081Z",
+      "actionType": "quality_score",
+      "issueNumber": 755,
+      "documentTitle": "[Wiki Maintenance] [요청] Trivy, KICS, and the shape of supply chain attacks so far in 2026",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-05T10:19:12.223Z",
+      "actionType": "modify",
+      "issueNumber": 756,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-05T10:17:42.268Z",
+      "actionType": "modify",
+      "issueNumber": 757,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-05T10:16:53.861Z",
+      "actionType": "modify",
+      "issueNumber": 758,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-05T10:16:00.937Z",
+      "actionType": "generate",
+      "issueNumber": 753,
+      "documentTitle": "Securing the git push pipeline – Critical Remote Code Execution Vulnerability 대응 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 65911,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2467
+    },
+    {
+      "timestamp": "2026-05-05T10:14:23.990Z",
+      "actionType": "generate",
+      "issueNumber": 754,
+      "documentTitle": "Kubernetes v1.30.0 Release Notes",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 107226,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 5111
+    },
+    {
+      "timestamp": "2026-05-05T10:12:06.022Z",
+      "actionType": "generate",
+      "issueNumber": 755,
+      "documentTitle": "Trivy·KICS 공급망 공격 현황 및 대응 가이드 (2026)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 62621,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2692
+    },
     {
       "timestamp": "2026-05-05T09:44:05.790Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 120640,
       "tavilyApiCalls": 3,
       "estimatedTokens": 5811
-    },
-    {
-      "timestamp": "2026-05-01T10:03:55.313Z",
-      "actionType": "generate",
-      "issueNumber": 748,
-      "documentTitle": "Kubernetes v1.36: In‑Place Vertical Scaling for Pod‑Level Resources (Beta)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 77668,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3365
-    },
-    {
-      "timestamp": "2026-05-01T10:02:16.497Z",
-      "actionType": "generate",
-      "issueNumber": 749,
-      "documentTitle": "Kubernetes v1.36: Fine‑Grained Kubelet API Authorization Graduates to GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 74170,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3246
-    },
-    {
-      "timestamp": "2026-05-01T09:39:34.038Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-01T09:39:12.904Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-01T03:17:12.038Z",
-      "actionType": "quality_score",
-      "issueNumber": null,
-      "documentTitle": "문서 품질 평가",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-28T10:23:55.364Z",
-      "actionType": "quality_score",
-      "issueNumber": 741,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: User Namespaces in Kubernetes are finally GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-28T10:23:41.319Z",
-      "actionType": "quality_score",
-      "issueNumber": 742,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mutable Pod Resources for Suspended Jobs (beta)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-28T10:23:17.431Z",
-      "actionType": "quality_score",
-      "issueNumber": 743,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Fine-Grained Kubelet API Authorization Graduates to GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-04-28T10:22:48.665Z",
-      "actionType": "modify",
-      "issueNumber": 744,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 948,
+      "totalEstimatedTokens": 786438,
+      "avgDurationMs": 56523
+    },
     "unknown": {
       "totalActions": 27,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 939,
-      "totalEstimatedTokens": 776168,
-      "avgDurationMs": 56301
     }
   }
 }
