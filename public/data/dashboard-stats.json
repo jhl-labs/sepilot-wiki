@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-05-05T23:49:40.434Z",
+  "collectedAt": "2026-05-06T01:10:26.957Z",
   "overview": {
     "totalDocuments": 384,
     "publishedDocuments": 204,
     "draftDocuments": 180,
     "openRequests": 245,
     "closedRequests": 19,
-    "totalAIActions": 975
+    "totalAIActions": 976
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 11,
+      "aiActions": 12,
       "documentsCreated": 3,
       "documentsModified": 3,
       "tavilyApiCalls": 9,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 235758
     },
     "last7d": {
-      "aiActions": 25,
+      "aiActions": 26,
       "documentsCreated": 6,
       "documentsModified": 6,
       "tavilyApiCalls": 18,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-06T00:46:15.486Z",
+      "actionType": "cross_reference",
+      "issueNumber": null,
+      "documentTitle": "교차 참조 업데이트",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-05T10:20:03.742Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-01T10:06:23.195Z",
-      "actionType": "generate",
-      "issueNumber": 747,
-      "documentTitle": "Kubernetes v1.28.0 릴리즈 위키 유지보수 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 120640,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 5811
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 948,
+      "totalActions": 949,
       "totalEstimatedTokens": 786438,
       "avgDurationMs": 56523
     },
