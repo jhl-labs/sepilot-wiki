@@ -5,6 +5,7 @@ status: published
 tags: [kubernetes, ai-gateway, security, best-practices]
 updatedAt: 2026-04-07
 quality_score: 83
+related_docs: ["kubernetes-v1-36-in-place-vertical-scaling-for-pod.md", "kubernetes-v1-36-fine-grained-kubelet-api-authoriz.md", "kubernetes-v1-36-sneak-peek.md", "kubernetes-v1-36-user-namespaces-in-kubernetes-are.md", "kubernetes-v1-36-mutable-pod-resources-for-suspend.md"]
 ---
 
 ## 1. 문서 개요

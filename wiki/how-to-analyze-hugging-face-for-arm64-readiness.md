@@ -5,6 +5,7 @@ status: published
 tags: [Docker, Arm, Hugging Face, MCP, Arm64, CI/CD]
 quality_score: 81
 updatedAt: 2026-05-05
+related_docs: ["why-we-chose-the-harder-path-docker-hardened-image.md", "announcing-docker-hardened-system-packages.md", "docker-zfs.md"]
 ---
 
 ## 1. 문서 개요
