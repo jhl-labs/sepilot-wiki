@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 759,
+      "number": 759,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/05/07/kubernetes-v1-36-dra-136-updates/\n**관련도**: 92/100\n\n## 감지 내용\n&lt;p>Dynamic Resource Allocation (DRA) has fundamentally changed how platform administrators handle hardware\naccelerators and specialized resources in Kubernetes. In the v1.36 release, DRA\ncontinues to mature, bringing a wave of feature graduations, critical usability\nimprovements, and new capabili\n\n## 판단 근거\nIntroduces Dynamic Resource Allocation (DRA) in Kubernetes v1.36 – a core platform feature that is not covered in the current Wiki.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-05-08T10:05:57.091Z",
+      "updated_at": "2026-05-08T10:05:57.100Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/759",
+      "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-more-drivers-new-features-and-the.md",
+      "comments": 0
+    },
+    {
+      "id": 760,
+      "number": 760,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Server-Side Sharded List and Watch",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/05/06/kubernetes-v1-36-server-side-sharded-list-and-watch/\n**관련도**: 90/100\n\n## 감지 내용\n&lt;p>As Kubernetes clusters grow to tens of thousands of nodes, controllers that watch\nhigh-cardinality resources like Pods face a scaling wall. Every replica of a\nhorizontally scaled controller receives the full stream of events from the API\nserver, paying the CPU, memory, and network cost to dese\n\n## 판단 근거\nDescribes Server‑Side Sharded List and Watch, a scalability improvement for large clusters; highly relevant for Kubernetes operational docs.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-05-08T10:04:26.027Z",
+      "updated_at": "2026-05-08T10:04:26.034Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/760",
+      "documentSlug": "kubernetes/kubernetes-v1-36-server-side-sharded-list-and-watc",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes/kubernetes-v1-36-server-side-sharded-list-and-watc.md",
+      "comments": 0
+    },
+    {
+      "id": 761,
+      "number": 761,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Declarative Validation Graduates to GA",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/05/05/kubernetes-v1-36-declarative-validation-ga/\n**관련도**: 88/100\n\n## 감지 내용\n&lt;p>In Kubernetes v1.36, &lt;strong>Declarative Validation&lt;/strong> for Kubernetes native types has reached General Availability (GA).&lt;/p>\n&lt;p>For users, this means more reliable, predictable, and better-documented APIs. By moving to a declarative model, the project also unlocks the future\n\n## 판단 근거\nDeclarative Validation reaches GA in v1.36 – important for API design and validation guidance.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-05-08T10:02:28.661Z",
+      "updated_at": "2026-05-08T10:02:28.670Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/761",
+      "documentSlug": "kubernetes-v1-36-declarative-validation-graduates-",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-declarative-validation-graduates-.md",
+      "comments": 0
+    },
+    {
       "id": 753,
       "number": 753,
       "title": "[Wiki Maintenance] [요청] Securing the git push pipeline: Responding to a critical remote code execution vulnerability",
@@ -8194,5 +8287,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-05-05T10:16:00.950Z"
+  "lastUpdated": "2026-05-08T10:05:57.100Z"
 }
