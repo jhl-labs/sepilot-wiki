@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-05-08T08:59:39.956Z",
+  "collectedAt": "2026-05-08T10:03:37.960Z",
   "overview": {
     "totalDocuments": 384,
     "publishedDocuments": 204,
     "draftDocuments": 180,
     "openRequests": 245,
     "closedRequests": 19,
-    "totalAIActions": 976
+    "totalAIActions": 978
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 25,
-      "documentsCreated": 6,
+      "aiActions": 24,
+      "documentsCreated": 5,
       "documentsModified": 6,
-      "tavilyApiCalls": 18,
-      "tavilyResults": 49,
-      "estimatedTokens": 22692,
-      "totalPipelineDurationMs": 508236
+      "tavilyApiCalls": 15,
+      "tavilyResults": 40,
+      "estimatedTokens": 19446,
+      "totalPipelineDurationMs": 434066
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-08T09:39:59.935Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-08T09:39:39.920Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-06T00:46:15.486Z",
       "actionType": "cross_reference",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-01T10:07:53.804Z",
-      "actionType": "modify",
-      "issueNumber": 751,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-01T10:07:14.454Z",
-      "actionType": "modify",
-      "issueNumber": 752,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 949,
-      "totalEstimatedTokens": 786438,
-      "avgDurationMs": 56523
-    },
     "unknown": {
-      "totalActions": 27,
+      "totalActions": 28,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 950,
+      "totalEstimatedTokens": 786438,
+      "avgDurationMs": 56523
     }
   }
 }
