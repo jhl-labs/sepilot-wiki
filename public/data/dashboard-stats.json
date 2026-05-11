@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-05-11T01:20:52.866Z",
+  "collectedAt": "2026-05-11T02:23:55.366Z",
   "overview": {
-    "totalDocuments": 387,
-    "publishedDocuments": 205,
+    "totalDocuments": 388,
+    "publishedDocuments": 206,
     "draftDocuments": 182,
     "openRequests": 248,
     "closedRequests": 19,
-    "totalAIActions": 987
+    "totalAIActions": 988
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-11T01:37:17.962Z",
+      "actionType": "status_report",
+      "issueNumber": null,
+      "documentTitle": "주간 위키 보고서 - 2026년 20주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-08T10:10:01.549Z",
       "actionType": "quality_score",
@@ -227,21 +237,11 @@
       "durationMs": 65911,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2467
-    },
-    {
-      "timestamp": "2026-05-05T10:14:23.990Z",
-      "actionType": "generate",
-      "issueNumber": 754,
-      "documentTitle": "Kubernetes v1.30.0 Release Notes",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 107226,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 5111
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 959,
+      "totalActions": 960,
       "totalEstimatedTokens": 797229,
       "avgDurationMs": 56732
     },
