@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-05-11T02:41:00.756Z",
+  "collectedAt": "2026-05-11T02:38:31.691Z",
   "repository": "jhl-labs/sepilot-wiki",
   "summary": {
     "totalWorkflows": 23,
@@ -165,7 +165,31 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/issue-handler.yml",
       "recentRuns": [
         {
-          "id": 25647453977,
+          "id": 25647394320,
+          "name": "Issue Handler",
+          "status": "pending",
+          "conclusion": null,
+          "branch": "main",
+          "event": "issue_comment",
+          "createdAt": "2026-05-11T02:37:50Z",
+          "updatedAt": "2026-05-11T02:37:52Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647394320",
+          "actor": "matisaar"
+        },
+        {
+          "id": 25647368294,
+          "name": "Issue Handler",
+          "status": "in_progress",
+          "conclusion": null,
+          "branch": "main",
+          "event": "issue_comment",
+          "createdAt": "2026-05-11T02:36:51Z",
+          "updatedAt": "2026-05-11T02:37:07Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647368294",
+          "actor": "matisaar"
+        },
+        {
+          "id": 25636862152,
           "name": "Issue Handler",
           "status": "pending",
           "conclusion": null,
@@ -219,15 +243,27 @@
           "conclusion": "success",
           "branch": "main",
           "event": "issue_comment",
-          "createdAt": "2026-05-11T02:36:51Z",
-          "updatedAt": "2026-05-11T02:39:14Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647368294",
-          "actor": "matisaar"
+          "createdAt": "2026-04-20T21:53:55Z",
+          "updatedAt": "2026-04-20T21:56:28Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/24692340128",
+          "actor": "dependabot[bot]"
+        },
+        {
+          "id": 24692317205,
+          "name": "Issue Handler",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "issue_comment",
+          "createdAt": "2026-04-20T21:53:23Z",
+          "updatedAt": "2026-04-20T21:56:02Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/24692317205",
+          "actor": "dependabot[bot]"
         }
       ],
-      "avgDurationMs": 76000,
-      "failureRate": 0,
-      "mostFailedStep": null
+      "avgDurationMs": 130667,
+      "failureRate": 33,
+      "mostFailedStep": "Fail if script failed"
     },
     {
       "id": 213134663,
@@ -387,18 +423,6 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/wiki-tree-maintainer.yml",
       "recentRuns": [
         {
-          "id": 25647423181,
-          "name": "Wiki Tree Maintainer",
-          "status": "in_progress",
-          "conclusion": null,
-          "branch": "main",
-          "event": "repository_dispatch",
-          "createdAt": "2026-05-11T02:38:55Z",
-          "updatedAt": "2026-05-11T02:38:59Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647423181",
-          "actor": "github-actions[bot]"
-        },
-        {
           "id": 25645011415,
           "name": "Wiki Tree Maintainer",
           "status": "completed",
@@ -445,9 +469,21 @@
           "updatedAt": "2026-04-20T22:02:45Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/24692427053",
           "actor": "github-actions[bot]"
+        },
+        {
+          "id": 24692411114,
+          "name": "Wiki Tree Maintainer",
+          "status": "completed",
+          "conclusion": "failure",
+          "branch": "main",
+          "event": "repository_dispatch",
+          "createdAt": "2026-04-20T21:55:44Z",
+          "updatedAt": "2026-04-20T21:59:20Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/24692411114",
+          "actor": "github-actions[bot]"
         }
       ],
-      "avgDurationMs": 2007500,
+      "avgDurationMs": 1649200,
       "failureRate": 100,
       "mostFailedStep": "Normalize tags"
     },
@@ -1518,23 +1554,13 @@
   ],
   "inProgress": [
     {
-      "id": 25647423181,
-      "workflowName": "Wiki Tree Maintainer",
-      "status": "in_progress",
-      "branch": "main",
-      "event": "repository_dispatch",
-      "createdAt": "2026-05-11T02:38:55Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647423181",
-      "actor": "github-actions[bot]"
-    },
-    {
-      "id": 25647408989,
+      "id": 25647368294,
       "workflowName": "Issue Handler",
       "status": "in_progress",
       "branch": "main",
       "event": "issue_comment",
-      "createdAt": "2026-05-11T02:38:23Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647408989",
+      "createdAt": "2026-05-11T02:36:51Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647368294",
       "actor": "matisaar"
     }
   ],
