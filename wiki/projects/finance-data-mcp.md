@@ -1,0 +1,63 @@
+---
+title: "Finance Data MCP – Stocks, Crypto, Forex, Macro Data Download Guide"
+description: "Clean historical financial data (stocks, crypto, forex, macro) available for download via a flash sale."
+category: "Guide"
+tags: ["Finance", "Data", "MCP", "Stocks", "Crypto", "Forex", "Macro"]
+status: "draft"
+issueNumber: 0
+createdAt: "2026-05-11T00:00:00Z"
+updatedAt: "2026-05-11T00:00:00Z"
+---
+
+## 1. 개요
+
+이 가이드는 **Finance Data MCP** 를 통해 제공되는 **주식, 암호화폐, 외환, 거시경제 데이터** 를 간편하게 다운로드 받을 수 있는 방법을 안내합니다. 2026년 현재, 해당 데이터는 **정제된 히스토리** 로 제공되며, 별도의 API 호출 없이 바로 파일 형태로 받을 수 있습니다.
+
+> **핵심 포인트**
+> - **데이터 종류**: 주식 시세, 암호화폐 가격, 외환 레이트, 거시경제 지표
+> - **포맷**: CSV / Parquet (압축 포함)
+> - **가격**: 플래시 세일 $5 (한 번 구매 시 무제한 다운로드)
+
+## 2. 제공 데이터 상세
+
+| 데이터 카테고리 | 주요 항목 | 기간 | 파일 포맷 |
+|----------------|-----------|------|-----------|
+| **Stocks** | 종목 코드, 일일 종가, 고가·저가, 거래량 | 2000‑2025 | CSV, Parquet |
+| **Crypto** | BTC, ETH, 주요 알트코인 시세, 시가·종가·거래량 | 2015‑2025 | CSV, Parquet |
+| **Forex** | 주요 통화쌍 (USD/EUR, USD/JPY 등) | 1995‑2025 | CSV, Parquet |
+| **Macro** | GDP, CPI, 실업률, 금리 등 거시 지표 | 1990‑2025 | CSV, Parquet |
+
+데이터는 **시간 순서대로 정렬** 되어 있으며, 각 파일은 압축(`.zip`) 형태로 제공됩니다.
+
+## 3. 플래시 세일 구매 및 다운로드 방법
+
+1. **플래시 세일 페이지**에 접속합니다: https://tinyurl.com/2axt4k9b
+2. $5 결제 후 **다운로드 링크**가 이메일로 전송됩니다.
+3. 이메일에 포함된 링크를 클릭하면 전체 데이터 세트를 한 번에 다운로드할 수 있습니다.
+
+> **주의**: 결제 후 24시간 이내에 다운로드를 완료하시기 바랍니다. 링크는 일회성이며, 재발급이 필요할 경우 지원팀에 문의하세요.
+
+## 4. 미리 보기 (Preview)
+
+데이터 구조와 샘플 레코드를 확인하고 싶다면 아래 프리뷰 페이지를 참고하세요:
+
+- https://matisaar.github.io/dataforge-sales/
+
+프리뷰 페이지에서는 각 데이터 카테고리별 **스키마**와 **샘플 레코드**를 확인할 수 있습니다.
+
+## 5. API 사용을 건너뛰는 이유
+
+전통적인 데이터 제공 방식은 REST/GraphQL API 호출을 요구하지만, **Finance Data MCP** 는 파일 기반 배포를 지원합니다. 따라서 별도의 API 키 관리, 호출 제한, 응답 파싱이 필요 없으며, 로컬 환경에서 바로 분석 파이프라인에 연결할 수 있습니다.
+
+## 6. 참고 자료
+
+- **Finance Data MCP OpenAPI 정의** – Apify (공식 OpenAPI 스키마) – <https://apify.com/amicable_grid/finance-data-mcp/api/openapi>  
+- **Finance Data MCP 서버 소개** – Apify (서비스 개요) – <https://apify.com/amicable_grid/finance-data-mcp/api/mcp>
+
+## 7. 지원 및 문의
+
+- **지원 이메일**: support@finance-data-mcp.com (보안상의 이유로 이메일 주소는 예시이며, 실제 구매 시 제공되는 연락처를 사용하세요.)
+- **문의 내용**: 다운로드 오류, 데이터 포맷 변환, 추가 데이터 요청 등
+
+---
+*본 가이드는 2026년 5월 현재 공개된 자료와 플래시 세일 정보를 기반으로 작성되었습니다.*
