@@ -1,36 +1,36 @@
 {
-  "collectedAt": "2026-05-11T02:23:55.366Z",
+  "collectedAt": "2026-05-11T03:48:50.778Z",
   "overview": {
-    "totalDocuments": 388,
+    "totalDocuments": 390,
     "publishedDocuments": 206,
-    "draftDocuments": 182,
+    "draftDocuments": 184,
     "openRequests": 248,
     "closedRequests": 19,
-    "totalAIActions": 988
+    "totalAIActions": 990
   },
   "activity": {
     "last1h": {
       "aiActions": 1,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 1,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
-      "documentsModified": 0,
+      "documentsModified": 2,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 24,
+      "aiActions": 26,
       "documentsCreated": 6,
-      "documentsModified": 6,
+      "documentsModified": 8,
       "tavilyApiCalls": 18,
       "tavilyResults": 46,
       "estimatedTokens": 21061,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-11T02:51:14.451Z",
+      "actionType": "recover",
+      "issueNumber": 426,
+      "documentTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-11T02:40:44.320Z",
+      "actionType": "recover",
+      "issueNumber": 426,
+      "documentTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-11T01:37:17.962Z",
       "actionType": "status_report",
@@ -217,31 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-05T10:16:53.861Z",
-      "actionType": "modify",
-      "issueNumber": 758,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-05T10:16:00.937Z",
-      "actionType": "generate",
-      "issueNumber": 753,
-      "documentTitle": "Securing the git push pipeline – Critical Remote Code Execution Vulnerability 대응 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 65911,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2467
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 960,
+      "totalActions": 962,
       "totalEstimatedTokens": 797229,
       "avgDurationMs": 56732
     },
