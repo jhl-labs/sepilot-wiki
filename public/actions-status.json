@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-05-12T00:43:49.102Z",
+  "collectedAt": "2026-05-12T07:04:19.552Z",
   "repository": "jhl-labs/sepilot-wiki",
   "summary": {
     "totalWorkflows": 23,
@@ -12,10 +12,34 @@
       "name": "CI",
       "path": ".github/workflows/ci.yml",
       "state": "active",
-      "overallStatus": "success",
+      "overallStatus": "failure",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/workflows/CI/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/ci.yml",
       "recentRuns": [
+        {
+          "id": 25709732491,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "failure",
+          "branch": "dependabot/npm_and_yarn/dev-dependencies-af8031a849",
+          "event": "pull_request",
+          "createdAt": "2026-05-12T02:32:58Z",
+          "updatedAt": "2026-05-12T02:33:41Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709732491",
+          "actor": "dependabot[bot]"
+        },
+        {
+          "id": 25709704143,
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "dependabot/npm_and_yarn/react-201e55cbc9",
+          "event": "pull_request",
+          "createdAt": "2026-05-12T02:32:04Z",
+          "updatedAt": "2026-05-12T02:35:38Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709704143",
+          "actor": "dependabot[bot]"
+        },
         {
           "id": 25701207661,
           "name": "CI",
@@ -51,33 +75,9 @@
           "updatedAt": "2026-05-04T23:57:01Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25350032228",
           "actor": "dependabot[bot]"
-        },
-        {
-          "id": 25024877608,
-          "name": "CI",
-          "status": "completed",
-          "conclusion": "failure",
-          "branch": "dependabot/npm_and_yarn/dev-dependencies-af8031a849",
-          "event": "pull_request",
-          "createdAt": "2026-04-27T23:22:52Z",
-          "updatedAt": "2026-04-27T23:23:30Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25024877608",
-          "actor": "dependabot[bot]"
-        },
-        {
-          "id": 25024849319,
-          "name": "CI",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "dependabot/npm_and_yarn/react-201e55cbc9",
-          "event": "pull_request",
-          "createdAt": "2026-04-27T23:22:01Z",
-          "updatedAt": "2026-04-27T23:25:41Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25024849319",
-          "actor": "dependabot[bot]"
         }
       ],
-      "avgDurationMs": 138800,
+      "avgDurationMs": 138600,
       "failureRate": 40,
       "mostFailedStep": "Lint"
     },
@@ -239,14 +239,26 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/scheduled-collect.yml",
       "recentRuns": [
         {
-          "id": 25706072046,
+          "id": 25718965443,
           "name": "Scheduled Status Collection",
           "status": "in_progress",
           "conclusion": null,
           "branch": "main",
           "event": "schedule",
+          "createdAt": "2026-05-12T07:03:10Z",
+          "updatedAt": "2026-05-12T07:03:14Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25718965443",
+          "actor": "declue"
+        },
+        {
+          "id": 25706072046,
+          "name": "Scheduled Status Collection",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "schedule",
           "createdAt": "2026-05-12T00:42:47Z",
-          "updatedAt": "2026-05-12T00:42:51Z",
+          "updatedAt": "2026-05-12T00:44:22Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25706072046",
           "actor": "declue"
         },
@@ -285,21 +297,9 @@
           "updatedAt": "2026-05-11T07:19:21Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25655974947",
           "actor": "declue"
-        },
-        {
-          "id": 25644530442,
-          "name": "Scheduled Status Collection",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-05-11T00:47:23Z",
-          "updatedAt": "2026-05-11T00:49:03Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25644530442",
-          "actor": "declue"
         }
       ],
-      "avgDurationMs": 93000,
+      "avgDurationMs": 91750,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -308,10 +308,34 @@
       "name": "Dependabot Updates",
       "path": "dynamic/dependabot/dependabot-updates",
       "state": "active",
-      "overallStatus": "failure",
+      "overallStatus": "success",
       "badgeUrl": "https://github.com/jhl-labs/sepilot-wiki/actions/workflows/dependabot/dependabot-updates/badge.svg",
       "url": "https://github.com/jhl-labs/sepilot-wiki/actions/workflows/dependabot/dependabot-updates",
       "recentRuns": [
+        {
+          "id": 25709614178,
+          "name": "npm_and_yarn in / for @types/node, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, @vitest/coverage-v8, eslint-config-next, eslint-plugin-react-hooks, vitest - Update #1361458005",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "dynamic",
+          "createdAt": "2026-05-12T02:29:21Z",
+          "updatedAt": "2026-05-12T02:32:54Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709614178",
+          "actor": "dependabot[bot]"
+        },
+        {
+          "id": 25709613970,
+          "name": "npm_and_yarn in / for @tanstack/react-query, @tanstack/react-virtual, react, react-dom, react-router-dom, react-syntax-highlighter - Update #1361458004",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "dynamic",
+          "createdAt": "2026-05-12T02:29:21Z",
+          "updatedAt": "2026-05-12T02:31:59Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709613970",
+          "actor": "dependabot[bot]"
+        },
         {
           "id": 25704225412,
           "name": "npm_and_yarn in /. for mermaid - Update #1361097314",
@@ -347,34 +371,10 @@
           "updatedAt": "2026-05-11T23:01:35Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25702372731",
           "actor": "dependabot[bot]"
-        },
-        {
-          "id": 25701141170,
-          "name": "npm_and_yarn in /. for mermaid - Update #1360901471",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "dynamic",
-          "createdAt": "2026-05-11T22:30:41Z",
-          "updatedAt": "2026-05-11T22:32:08Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25701141170",
-          "actor": "dependabot[bot]"
-        },
-        {
-          "id": 25607847449,
-          "name": "npm_and_yarn in /. for @babel/plugin-transform-modules-systemjs - Update #1358155146",
-          "status": "completed",
-          "conclusion": "failure",
-          "branch": "main",
-          "event": "dynamic",
-          "createdAt": "2026-05-09T17:53:24Z",
-          "updatedAt": "2026-05-09T17:54:50Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25607847449",
-          "actor": "dependabot[bot]"
         }
       ],
-      "avgDurationMs": 65400,
-      "failureRate": 80,
+      "avgDurationMs": 105000,
+      "failureRate": 60,
       "mostFailedStep": "Run Dependabot"
     },
     {
@@ -535,6 +535,30 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/codeql.yml",
       "recentRuns": [
         {
+          "id": 25709732478,
+          "name": "CodeQL",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "dependabot/npm_and_yarn/dev-dependencies-af8031a849",
+          "event": "pull_request",
+          "createdAt": "2026-05-12T02:32:58Z",
+          "updatedAt": "2026-05-12T02:34:42Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709732478",
+          "actor": "dependabot[bot]"
+        },
+        {
+          "id": 25709704144,
+          "name": "CodeQL",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "dependabot/npm_and_yarn/react-201e55cbc9",
+          "event": "pull_request",
+          "createdAt": "2026-05-12T02:32:04Z",
+          "updatedAt": "2026-05-12T02:33:37Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709704144",
+          "actor": "dependabot[bot]"
+        },
+        {
           "id": 25701207678,
           "name": "CodeQL",
           "status": "completed",
@@ -569,33 +593,9 @@
           "updatedAt": "2026-05-04T23:56:14Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25350065523",
           "actor": "dependabot[bot]"
-        },
-        {
-          "id": 25350032249,
-          "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "dependabot/npm_and_yarn/react-201e55cbc9",
-          "event": "pull_request",
-          "createdAt": "2026-05-04T23:53:34Z",
-          "updatedAt": "2026-05-04T23:55:01Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25350032249",
-          "actor": "dependabot[bot]"
-        },
-        {
-          "id": 25305498028,
-          "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-05-04T06:59:07Z",
-          "updatedAt": "2026-05-04T07:00:56Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25305498028",
-          "actor": "declue"
         }
       ],
-      "avgDurationMs": 100000,
+      "avgDurationMs": 100200,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -1216,6 +1216,54 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/dashboard-collect.yml",
       "recentRuns": [
         {
+          "id": 25715963776,
+          "name": "Dashboard Stats Collection",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "schedule",
+          "createdAt": "2026-05-12T05:45:50Z",
+          "updatedAt": "2026-05-12T05:47:11Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25715963776",
+          "actor": "declue"
+        },
+        {
+          "id": 25712109904,
+          "name": "Dashboard Stats Collection",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "schedule",
+          "createdAt": "2026-05-12T03:47:26Z",
+          "updatedAt": "2026-05-12T03:48:50Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25712109904",
+          "actor": "declue"
+        },
+        {
+          "id": 25709386820,
+          "name": "Dashboard Stats Collection",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "schedule",
+          "createdAt": "2026-05-12T02:22:15Z",
+          "updatedAt": "2026-05-12T02:23:34Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709386820",
+          "actor": "declue"
+        },
+        {
+          "id": 25707104001,
+          "name": "Dashboard Stats Collection",
+          "status": "completed",
+          "conclusion": "success",
+          "branch": "main",
+          "event": "schedule",
+          "createdAt": "2026-05-12T01:13:11Z",
+          "updatedAt": "2026-05-12T01:14:21Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25707104001",
+          "actor": "declue"
+        },
+        {
           "id": 25704220905,
           "name": "Dashboard Stats Collection",
           "status": "completed",
@@ -1226,57 +1274,9 @@
           "updatedAt": "2026-05-11T23:51:12Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25704220905",
           "actor": "declue"
-        },
-        {
-          "id": 25701919158,
-          "name": "Dashboard Stats Collection",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-05-11T22:49:16Z",
-          "updatedAt": "2026-05-11T22:50:29Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25701919158",
-          "actor": "declue"
-        },
-        {
-          "id": 25699569048,
-          "name": "Dashboard Stats Collection",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-05-11T21:53:59Z",
-          "updatedAt": "2026-05-11T21:55:22Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25699569048",
-          "actor": "declue"
-        },
-        {
-          "id": 25697170662,
-          "name": "Dashboard Stats Collection",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-05-11T21:02:44Z",
-          "updatedAt": "2026-05-11T21:04:06Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25697170662",
-          "actor": "declue"
-        },
-        {
-          "id": 25694356197,
-          "name": "Dashboard Stats Collection",
-          "status": "completed",
-          "conclusion": "success",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-05-11T20:07:20Z",
-          "updatedAt": "2026-05-11T20:08:41Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25694356197",
-          "actor": "declue"
         }
       ],
-      "avgDurationMs": 78800,
+      "avgDurationMs": 77800,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -1303,67 +1303,67 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/issue-processor.yml",
       "recentRuns": [
         {
-          "id": 25705817592,
+          "id": 25718821213,
           "name": "Issue Processor",
           "status": "completed",
           "conclusion": "skipped",
           "branch": "main",
           "event": "workflow_run",
-          "createdAt": "2026-05-12T00:35:29Z",
-          "updatedAt": "2026-05-12T00:35:30Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25705817592",
+          "createdAt": "2026-05-12T06:59:50Z",
+          "updatedAt": "2026-05-12T06:59:51Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25718821213",
           "actor": "declue"
         },
         {
-          "id": 25704045834,
+          "id": 25715838583,
           "name": "Issue Processor",
           "status": "completed",
           "conclusion": "success",
           "branch": "main",
           "event": "schedule",
-          "createdAt": "2026-05-11T23:45:11Z",
-          "updatedAt": "2026-05-11T23:48:45Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25704045834",
+          "createdAt": "2026-05-12T05:42:13Z",
+          "updatedAt": "2026-05-12T05:46:30Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25715838583",
           "actor": "declue"
         },
         {
-          "id": 25701742360,
+          "id": 25711951107,
           "name": "Issue Processor",
           "status": "completed",
           "conclusion": "success",
           "branch": "main",
           "event": "schedule",
-          "createdAt": "2026-05-11T22:44:47Z",
-          "updatedAt": "2026-05-11T22:48:20Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25701742360",
+          "createdAt": "2026-05-12T03:42:21Z",
+          "updatedAt": "2026-05-12T03:46:20Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25711951107",
           "actor": "declue"
         },
         {
-          "id": 25699491745,
+          "id": 25709148549,
           "name": "Issue Processor",
           "status": "completed",
           "conclusion": "success",
           "branch": "main",
           "event": "schedule",
-          "createdAt": "2026-05-11T21:52:20Z",
-          "updatedAt": "2026-05-11T21:56:12Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25699491745",
+          "createdAt": "2026-05-12T02:14:53Z",
+          "updatedAt": "2026-05-12T02:18:42Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709148549",
           "actor": "declue"
         },
         {
-          "id": 25696969912,
+          "id": 25707037917,
           "name": "Issue Processor",
           "status": "completed",
           "conclusion": "success",
           "branch": "main",
           "event": "schedule",
-          "createdAt": "2026-05-11T20:58:46Z",
-          "updatedAt": "2026-05-11T21:03:37Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25696969912",
+          "createdAt": "2026-05-12T01:11:14Z",
+          "updatedAt": "2026-05-12T01:14:47Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25707037917",
           "actor": "declue"
         }
       ],
-      "avgDurationMs": 190200,
+      "avgDurationMs": 187800,
       "failureRate": 0,
       "mostFailedStep": null
     },
@@ -1451,6 +1451,18 @@
       "url": "https://github.com/jhl-labs/sepilot-wiki/blob/main/.github/workflows/news-intelligence.yml",
       "recentRuns": [
         {
+          "id": 25718773958,
+          "name": "News Intelligence",
+          "status": "completed",
+          "conclusion": "failure",
+          "branch": "main",
+          "event": "schedule",
+          "createdAt": "2026-05-12T06:58:42Z",
+          "updatedAt": "2026-05-12T06:59:48Z",
+          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25718773958",
+          "actor": "declue"
+        },
+        {
           "id": 25705769530,
           "name": "News Intelligence",
           "status": "completed",
@@ -1497,38 +1509,46 @@
           "updatedAt": "2026-05-11T07:13:21Z",
           "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25655745704",
           "actor": "declue"
-        },
-        {
-          "id": 25644258092,
-          "name": "News Intelligence",
-          "status": "completed",
-          "conclusion": "failure",
-          "branch": "main",
-          "event": "schedule",
-          "createdAt": "2026-05-11T00:36:38Z",
-          "updatedAt": "2026-05-11T00:37:46Z",
-          "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25644258092",
-          "actor": "declue"
         }
       ],
-      "avgDurationMs": 70400,
+      "avgDurationMs": 70000,
       "failureRate": 100,
       "mostFailedStep": "Run news intelligence"
     }
   ],
   "inProgress": [
     {
-      "id": 25706072046,
+      "id": 25718965443,
       "workflowName": "Scheduled Status Collection",
       "status": "in_progress",
       "branch": "main",
       "event": "schedule",
-      "createdAt": "2026-05-12T00:42:47Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25706072046",
+      "createdAt": "2026-05-12T07:03:10Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25718965443",
       "actor": "declue"
     }
   ],
   "recentFailures": [
+    {
+      "id": 25718773958,
+      "workflowName": "News Intelligence",
+      "conclusion": "failure",
+      "branch": "main",
+      "event": "schedule",
+      "createdAt": "2026-05-12T06:58:42Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25718773958",
+      "actor": "declue"
+    },
+    {
+      "id": 25709732491,
+      "workflowName": "CI",
+      "conclusion": "failure",
+      "branch": "dependabot/npm_and_yarn/dev-dependencies-af8031a849",
+      "event": "pull_request",
+      "createdAt": "2026-05-12T02:32:58Z",
+      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25709732491",
+      "actor": "dependabot[bot]"
+    },
     {
       "id": 25705769530,
       "workflowName": "News Intelligence",
@@ -1608,26 +1628,6 @@
       "createdAt": "2026-05-11T07:12:14Z",
       "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25655745704",
       "actor": "declue"
-    },
-    {
-      "id": 25647769111,
-      "workflowName": "Wiki Tree Maintainer",
-      "conclusion": "failure",
-      "branch": "main",
-      "event": "repository_dispatch",
-      "createdAt": "2026-05-11T02:51:53Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647769111",
-      "actor": "github-actions[bot]"
-    },
-    {
-      "id": 25647677393,
-      "workflowName": "Wiki Tree Maintainer",
-      "conclusion": "failure",
-      "branch": "main",
-      "event": "repository_dispatch",
-      "createdAt": "2026-05-11T02:48:23Z",
-      "url": "https://github.com/jhl-labs/sepilot-wiki/actions/runs/25647677393",
-      "actor": "github-actions[bot]"
     }
   ]
 }
