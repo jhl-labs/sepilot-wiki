@@ -1,25 +1,25 @@
 {
-  "collectedAt": "2026-05-12T09:26:28.846Z",
+  "collectedAt": "2026-05-12T10:22:07.340Z",
   "overview": {
     "totalDocuments": 393,
     "publishedDocuments": 206,
     "draftDocuments": 187,
     "openRequests": 248,
     "closedRequests": 19,
-    "totalAIActions": 992
+    "totalAIActions": 994
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
+      "aiActions": 2,
       "documentsCreated": 0,
-      "documentsModified": 1,
+      "documentsModified": 0,
       "tavilyApiCalls": 0,
       "tavilyResults": 0,
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
+      "aiActions": 4,
       "documentsCreated": 0,
       "documentsModified": 2,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 28,
-      "documentsCreated": 6,
-      "documentsModified": 10,
-      "tavilyApiCalls": 18,
-      "tavilyResults": 46,
-      "estimatedTokens": 21061,
-      "totalPipelineDurationMs": 468847
+      "aiActions": 19,
+      "documentsCreated": 3,
+      "documentsModified": 7,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 24,
+      "estimatedTokens": 10791,
+      "totalPipelineDurationMs": 233089
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-12T09:59:09.595Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-12T09:58:51.311Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-12T09:17:02.039Z",
       "actionType": "recover",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-05T10:19:49.191Z",
-      "actionType": "quality_score",
-      "issueNumber": 754,
-      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-05T10:19:32.081Z",
-      "actionType": "quality_score",
-      "issueNumber": 755,
-      "documentTitle": "[Wiki Maintenance] [요청] Trivy, KICS, and the shape of supply chain attacks so far in 2026",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 964,
-      "totalEstimatedTokens": 797229,
-      "avgDurationMs": 56732
-    },
     "unknown": {
-      "totalActions": 28,
+      "totalActions": 29,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 965,
+      "totalEstimatedTokens": 797229,
+      "avgDurationMs": 56732
     }
   }
 }
