@@ -1,43 +1,133 @@
 {
-  "collectedAt": "2026-05-12T10:22:07.340Z",
+  "collectedAt": "2026-05-12T11:21:08.182Z",
   "overview": {
     "totalDocuments": 393,
     "publishedDocuments": 206,
     "draftDocuments": 187,
-    "openRequests": 248,
+    "openRequests": 251,
     "closedRequests": 19,
-    "totalAIActions": 994
+    "totalAIActions": 1000
   },
   "activity": {
     "last1h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 7,
+      "documentsCreated": 1,
+      "documentsModified": 3,
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 3111,
+      "totalPipelineDurationMs": 68050
     },
     "last24h": {
-      "aiActions": 4,
-      "documentsCreated": 0,
-      "documentsModified": 2,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 13,
+      "documentsCreated": 3,
+      "documentsModified": 5,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 10865,
+      "totalPipelineDurationMs": 238411
     },
     "last7d": {
-      "aiActions": 19,
-      "documentsCreated": 3,
-      "documentsModified": 7,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 24,
-      "estimatedTokens": 10791,
-      "totalPipelineDurationMs": 233089
+      "aiActions": 28,
+      "documentsCreated": 6,
+      "documentsModified": 10,
+      "tavilyApiCalls": 18,
+      "tavilyResults": 51,
+      "estimatedTokens": 21656,
+      "totalPipelineDurationMs": 471500
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-12T10:26:26.048Z",
+      "actionType": "quality_score",
+      "issueNumber": 771,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Moving Volume Group Snapshots to GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-12T10:26:08.772Z",
+      "actionType": "quality_score",
+      "issueNumber": 772,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Declarative Validation Graduates to GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-12T10:25:51.968Z",
+      "actionType": "quality_score",
+      "issueNumber": 773,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-12T10:25:24.925Z",
+      "actionType": "modify",
+      "issueNumber": 774,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-12T10:24:17.000Z",
+      "actionType": "modify",
+      "issueNumber": 775,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-12T10:22:42.487Z",
+      "actionType": "modify",
+      "issueNumber": 776,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-12T10:21:54.909Z",
+      "actionType": "generate",
+      "issueNumber": 771,
+      "documentTitle": "Kubernetes v1.36: Volume Group Snapshots GA 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 68050,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3111
+    },
+    {
+      "timestamp": "2026-05-12T10:20:26.734Z",
+      "actionType": "generate",
+      "issueNumber": 772,
+      "documentTitle": "Kubernetes v1.36: Declarative Validation Graduates to GA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 62316,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2780
+    },
+    {
+      "timestamp": "2026-05-12T10:18:59.604Z",
+      "actionType": "generate",
+      "issueNumber": 773,
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 108045,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4974
+    },
     {
       "timestamp": "2026-05-12T09:59:09.595Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-08T10:07:37.760Z",
-      "actionType": "modify",
-      "issueNumber": 763,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-08T10:06:51.315Z",
-      "actionType": "modify",
-      "issueNumber": 764,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-08T10:05:57.087Z",
-      "actionType": "generate",
-      "issueNumber": 759,
-      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 62782,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2745
-    },
-    {
-      "timestamp": "2026-05-08T10:04:26.022Z",
-      "actionType": "generate",
-      "issueNumber": 760,
-      "documentTitle": "Kubernetes v1.36 – Server‑Side Sharded List and Watch",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 80747,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3884
-    },
-    {
-      "timestamp": "2026-05-08T10:02:28.655Z",
-      "actionType": "generate",
-      "issueNumber": 761,
-      "documentTitle": "Kubernetes v1.36: Declarative Validation Graduates to GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 89560,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4162
-    },
-    {
-      "timestamp": "2026-05-08T09:39:59.935Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-08T09:39:39.920Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-06T00:46:15.486Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "documentTitle": "교차 참조 업데이트",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-05T10:20:03.742Z",
-      "actionType": "quality_score",
-      "issueNumber": 753,
-      "documentTitle": "[Wiki Maintenance] [요청] Securing the git push pipeline: Responding to a critical remote code execution vulnerability",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 972,
+      "totalEstimatedTokens": 808094,
+      "avgDurationMs": 56954
+    },
     "unknown": {
-      "totalActions": 29,
+      "totalActions": 28,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 965,
-      "totalEstimatedTokens": 797229,
-      "avgDurationMs": 56732
     }
   }
 }
