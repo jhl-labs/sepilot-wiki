@@ -1,24 +1,15 @@
 {
-  "collectedAt": "2026-05-12T08:26:58.001Z",
+  "collectedAt": "2026-05-12T09:26:28.846Z",
   "overview": {
-    "totalDocuments": 391,
+    "totalDocuments": 393,
     "publishedDocuments": 206,
-    "draftDocuments": 185,
+    "draftDocuments": 187,
     "openRequests": 248,
     "closedRequests": 19,
-    "totalAIActions": 991
+    "totalAIActions": 992
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last24h": {
       "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 1,
@@ -27,10 +18,19 @@
       "estimatedTokens": 0,
       "totalPipelineDurationMs": 0
     },
+    "last24h": {
+      "aiActions": 2,
+      "documentsCreated": 0,
+      "documentsModified": 2,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
+    },
     "last7d": {
-      "aiActions": 27,
+      "aiActions": 28,
       "documentsCreated": 6,
-      "documentsModified": 9,
+      "documentsModified": 10,
       "tavilyApiCalls": 18,
       "tavilyResults": 46,
       "estimatedTokens": 21061,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-12T09:17:02.039Z",
+      "actionType": "recover",
+      "issueNumber": 769,
+      "documentTitle": "chore(deps): bump next from 16.1.6 to 16.2.6",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-11T22:33:31.675Z",
       "actionType": "recover",
@@ -227,21 +237,11 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-05T10:19:12.223Z",
-      "actionType": "modify",
-      "issueNumber": 756,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 963,
+      "totalActions": 964,
       "totalEstimatedTokens": 797229,
       "avgDurationMs": 56732
     },
