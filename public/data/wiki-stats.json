@@ -1,40 +1,40 @@
 {
-  "generatedAt": "2026-05-11T01:37:17.958Z",
-  "weekNumber": 20,
+  "generatedAt": "2026-05-18T01:42:29.965Z",
+  "weekNumber": 21,
   "year": 2026,
   "period": {
-    "start": "2026-05-04T01:37:06.029Z",
-    "end": "2026-05-11T01:37:06.029Z"
+    "start": "2026-05-11T01:42:15.693Z",
+    "end": "2026-05-18T01:42:15.693Z"
   },
   "documents": {
-    "total": 426,
+    "total": 433,
     "statusDistribution": {
-      "published": 222,
-      "draft": 162,
+      "published": 224,
+      "draft": 167,
       "deleted": 42
     },
-    "newCount": 6,
-    "modifiedCount": 6,
+    "newCount": 3,
+    "modifiedCount": 3,
     "publishedCount": 0
   },
   "aiActivity": {
-    "totalActions": 23,
+    "totalActions": 15,
     "byType": {
-      "quality_score": 6,
-      "modify": 6,
-      "generate": 6,
-      "maintain": 4,
-      "cross_reference": 1
+      "quality_score": 3,
+      "modify": 3,
+      "generate": 3,
+      "maintain": 2,
+      "recover": 4
     },
     "entries": [
       {
-        "id": "b7577b5f-f670-4d6c-9a3c-8b0de8121e40",
-        "timestamp": "2026-05-08T10:10:01.549Z",
+        "id": "44b95bdc-bfc0-44a0-bea6-dbd0d9dc8e0f",
+        "timestamp": "2026-05-12T10:26:26.048Z",
         "actionType": "quality_score",
-        "issueNumber": 759,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-        "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
-        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+        "issueNumber": 771,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Moving Volume Group Snapshots to GA",
+        "documentSlug": "kubernetes-v1-36-moving-volume-group-snapshots-to-",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Moving Volume Group Snapshots to GA",
         "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -42,24 +42,10 @@
         "changes": null
       },
       {
-        "id": "29250c35-9870-4f11-a2fd-ce07ed7bcf3a",
-        "timestamp": "2026-05-08T10:09:35.156Z",
+        "id": "53176167-faba-4609-abca-e1ace2f9adc5",
+        "timestamp": "2026-05-12T10:26:08.772Z",
         "actionType": "quality_score",
-        "issueNumber": 760,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Server-Side Sharded List and Watch",
-        "documentSlug": "kubernetes/kubernetes-v1-36-server-side-sharded-list-and-watc",
-        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Server-Side Sharded List and Watch",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "d6ef49a9-6ee6-4383-8226-be4aa6c1989a",
-        "timestamp": "2026-05-08T10:09:09.617Z",
-        "actionType": "quality_score",
-        "issueNumber": 761,
+        "issueNumber": 772,
         "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Declarative Validation Graduates to GA",
         "documentSlug": "kubernetes-v1-36-declarative-validation-graduates-",
         "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Declarative Validation Graduates to GA",
@@ -70,10 +56,41 @@
         "changes": null
       },
       {
-        "id": "0ee95e01-a6c7-4b94-a1f6-9fcc25c17284",
-        "timestamp": "2026-05-08T10:08:42.155Z",
+        "id": "fadfc8f8-195c-4e68-ae55-49d253f29f6d",
+        "timestamp": "2026-05-12T10:25:51.968Z",
+        "actionType": "quality_score",
+        "issueNumber": 773,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+        "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "695c5219-dbbb-43e4-acf7-9f462d3381c8",
+        "timestamp": "2026-05-12T10:25:24.925Z",
         "actionType": "modify",
-        "issueNumber": 762,
+        "issueNumber": 774,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+        "documentSlug": "untitled-1776224402310",
+        "documentTitle": "검색 서비스 구현 및 사용 가이드",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 0,
+          "deletions": 5
+        }
+      },
+      {
+        "id": "bf765593-f17b-4ee6-89bf-677cc031874c",
+        "timestamp": "2026-05-12T10:24:17.000Z",
+        "actionType": "modify",
+        "issueNumber": 775,
         "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
         "documentSlug": "678",
         "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
@@ -82,15 +99,15 @@
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 1,
+          "additions": 0,
           "deletions": 0
         }
       },
       {
-        "id": "60b5a3a7-489f-4bbe-b6f6-c6deffcb42cf",
-        "timestamp": "2026-05-08T10:07:37.760Z",
+        "id": "db0ee904-b083-43d2-a5f5-65911004defb",
+        "timestamp": "2026-05-12T10:22:42.487Z",
         "actionType": "modify",
-        "issueNumber": 763,
+        "issueNumber": 776,
         "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
         "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
         "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
@@ -104,31 +121,14 @@
         }
       },
       {
-        "id": "94e8a166-3513-45ef-8789-031101312259",
-        "timestamp": "2026-05-08T10:06:51.315Z",
-        "actionType": "modify",
-        "issueNumber": 764,
-        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
-        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
-        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "419d694e-a7db-4d16-a2b2-a0552efbf0e3",
-        "timestamp": "2026-05-08T10:05:57.087Z",
+        "id": "e2f9c94c-6d11-41b4-a507-dccf5ce065e1",
+        "timestamp": "2026-05-12T10:21:54.909Z",
         "actionType": "generate",
-        "issueNumber": 759,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-        "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
-        "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-        "summary": "새 문서 \"Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA\" 생성",
+        "issueNumber": 771,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Moving Volume Group Snapshots to GA",
+        "documentSlug": "kubernetes-v1-36-moving-volume-group-snapshots-to-",
+        "documentTitle": "Kubernetes v1.36: Volume Group Snapshots GA 가이드",
+        "summary": "새 문서 \"Kubernetes v1.36: Volume Group Snapshots GA 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -137,84 +137,39 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 7883
+                "durationMs": 5830
               },
               {
                 "step": "outline",
-                "durationMs": 9323
+                "durationMs": 11367
               },
               {
                 "step": "write",
-                "durationMs": 35739
+                "durationMs": 41893
               },
               {
                 "step": "review",
-                "durationMs": 9837
+                "durationMs": 8960
               }
             ],
-            "totalDurationMs": 62782,
-            "researchSources": 10,
+            "totalDurationMs": 68050,
+            "researchSources": 11,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 2745,
+              "estimated": 3111,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "261f501c-c9b9-4dc0-9cb9-780934c76167",
-        "timestamp": "2026-05-08T10:04:26.022Z",
+        "id": "2f9bc93e-ddae-40c7-809e-52fb49cf39d9",
+        "timestamp": "2026-05-12T10:20:26.734Z",
         "actionType": "generate",
-        "issueNumber": 760,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Server-Side Sharded List and Watch",
-        "documentSlug": "kubernetes/kubernetes-v1-36-server-side-sharded-list-and-watc",
-        "documentTitle": "Kubernetes v1.36 – Server‑Side Sharded List and Watch",
-        "summary": "새 문서 \"Kubernetes v1.36 – Server‑Side Sharded List and Watch\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 3079
-              },
-              {
-                "step": "outline",
-                "durationMs": 16545
-              },
-              {
-                "step": "write",
-                "durationMs": 51470
-              },
-              {
-                "step": "review",
-                "durationMs": 9652
-              }
-            ],
-            "totalDurationMs": 80747,
-            "researchSources": 4,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 7
-            },
-            "estimatedTokens": {
-              "estimated": 3884,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "24e4cac1-ac59-4df8-aa17-0a74eb09896f",
-        "timestamp": "2026-05-08T10:02:28.655Z",
-        "actionType": "generate",
-        "issueNumber": 761,
+        "issueNumber": 772,
         "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Declarative Validation Graduates to GA",
         "documentSlug": "kubernetes-v1-36-declarative-validation-graduates-",
         "documentTitle": "Kubernetes v1.36: Declarative Validation Graduates to GA",
@@ -227,293 +182,217 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 6303
+                "durationMs": 6721
               },
               {
                 "step": "outline",
-                "durationMs": 10223
+                "durationMs": 10122
               },
               {
                 "step": "write",
-                "durationMs": 26921
+                "durationMs": 31299
               },
               {
                 "step": "review",
-                "durationMs": 10129
-              },
-              {
-                "step": "refine",
-                "durationMs": 35984
+                "durationMs": 14174
               }
             ],
-            "totalDurationMs": 89560,
-            "researchSources": 7,
+            "totalDurationMs": 62316,
+            "researchSources": 10,
             "tavilyUsage": {
               "apiCalls": 3,
-              "totalResults": 8
+              "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 4162,
+              "estimated": 2780,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "98b11a8e-67a9-4584-a9e2-7a203971dbc3",
-        "timestamp": "2026-05-08T09:39:59.935Z",
+        "id": "4ea02c7a-bbd9-4f0d-8189-e80addce4523",
+        "timestamp": "2026-05-12T10:18:59.604Z",
+        "actionType": "generate",
+        "issueNumber": 773,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+        "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+        "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+        "summary": "새 문서 \"Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 8557
+              },
+              {
+                "step": "outline",
+                "durationMs": 7033
+              },
+              {
+                "step": "write",
+                "durationMs": 43549
+              },
+              {
+                "step": "review",
+                "durationMs": 12766
+              },
+              {
+                "step": "refine",
+                "durationMs": 36140
+              }
+            ],
+            "totalDurationMs": 108045,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 4974,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "25624807-59b0-45f9-9cf1-fc938eb63b40",
+        "timestamp": "2026-05-12T09:59:09.595Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "URL 변경 감지",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "URL 변경 감지: 30개 체크, 1개 변경, 5개 깨짐, 3건 Issue",
+        "summary": "URL 변경 감지: 30개 체크, 2개 변경, 3개 깨짐, 3건 Issue",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "unknown",
         "changes": null
       },
       {
-        "id": "de221cf0-0ea6-45be-bd32-dcf60d45f456",
-        "timestamp": "2026-05-08T09:39:39.920Z",
+        "id": "46a1833d-4247-49c3-8d8c-64e511994471",
+        "timestamp": "2026-05-12T09:58:51.311Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "트렌드 모니터링",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "트렌드 모니터링: 22건 수집, 3건 감지, 3건 Issue 생성",
+        "summary": "트렌드 모니터링: 23건 수집, 3건 감지, 3건 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "c4443676-0a68-4e7b-897a-f33def5c3b75",
-        "timestamp": "2026-05-06T00:46:15.486Z",
-        "actionType": "cross_reference",
-        "issueNumber": null,
-        "issueTitle": "교차 참조 업데이트",
-        "documentSlug": "_cross-reference",
-        "documentTitle": "교차 참조 업데이트",
-        "summary": "5개 문서의 교차 참조 업데이트",
-        "trigger": "scheduled",
+        "id": "f9b69b9f-4243-492b-863e-743b74524d08",
+        "timestamp": "2026-05-12T09:17:02.039Z",
+        "actionType": "recover",
+        "issueNumber": 769,
+        "issueTitle": "chore(deps): bump next from 16.1.6 to 16.2.6",
+        "documentSlug": "labels/dependencies",
+        "documentTitle": "chore(deps): bump next from 16.1.6 to 16.2.6",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "9dff56a8-c07a-429e-b665-de994e357a0e",
-        "timestamp": "2026-05-05T10:20:03.742Z",
-        "actionType": "quality_score",
-        "issueNumber": 753,
-        "issueTitle": "[Wiki Maintenance] [요청] Securing the git push pipeline: Responding to a critical remote code execution vulnerability",
-        "documentSlug": "securing-the-git-push-pipeline-responding-to-a-cri",
-        "documentTitle": "[Wiki Maintenance] [요청] Securing the git push pipeline: Responding to a critical remote code execution vulnerability",
-        "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
-        "trigger": "issue_processor",
+        "id": "7aaa56f8-b7f8-4416-9783-67cef7543601",
+        "timestamp": "2026-05-11T22:33:31.675Z",
+        "actionType": "recover",
+        "issueNumber": 768,
+        "issueTitle": "chore(deps): bump mermaid from 11.12.3 to 11.15.0",
+        "documentSlug": "guides/create-dependencies-label",
+        "documentTitle": "chore(deps): bump mermaid from 11.12.3 to 11.15.0",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "4bf75162-73dd-4464-b0ce-a4d675c2776d",
-        "timestamp": "2026-05-05T10:19:49.191Z",
-        "actionType": "quality_score",
-        "issueNumber": 754,
-        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
-        "documentSlug": "kubernetes-kubernetes-v1-36-0",
-        "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
+        "id": "5ed5972e-ef72-402e-aedb-7e7908d5c06c",
+        "timestamp": "2026-05-11T02:51:14.451Z",
+        "actionType": "recover",
+        "issueNumber": 426,
+        "issueTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+        "documentSlug": "projects/finance-data-mcp",
+        "documentTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "522a58d8-da32-435f-83f8-a941f5f4de55",
-        "timestamp": "2026-05-05T10:19:32.081Z",
-        "actionType": "quality_score",
-        "issueNumber": 755,
-        "issueTitle": "[Wiki Maintenance] [요청] Trivy, KICS, and the shape of supply chain attacks so far in 2026",
-        "documentSlug": "trivy-kics-and-the-shape-of-supply-chain-attacks-s",
-        "documentTitle": "[Wiki Maintenance] [요청] Trivy, KICS, and the shape of supply chain attacks so far in 2026",
-        "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
-        "trigger": "issue_processor",
+        "id": "88c1fa22-da93-48af-a4c2-0c55c688ea78",
+        "timestamp": "2026-05-11T02:40:44.320Z",
+        "actionType": "recover",
+        "issueNumber": 426,
+        "issueTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+        "documentSlug": "services/web-scraping",
+        "documentTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
-      },
-      {
-        "id": "5e472163-5ed5-4223-8b65-70d9b39daa71",
-        "timestamp": "2026-05-05T10:19:12.223Z",
-        "actionType": "modify",
-        "issueNumber": 756,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
-        "documentSlug": "678",
-        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 5
-        }
-      },
-      {
-        "id": "11f2e460-781e-4348-b4d2-6d268267b805",
-        "timestamp": "2026-05-05T10:17:42.268Z",
-        "actionType": "modify",
-        "issueNumber": 757,
-        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
-        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
-        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 1,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "98247dc6-5bd3-4e9a-b353-00fb4e309217",
-        "timestamp": "2026-05-05T10:16:53.861Z",
-        "actionType": "modify",
-        "issueNumber": 758,
-        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
-        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
-        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "c0d4d1de-843f-4cf7-b8f5-43d7096941ed",
-        "timestamp": "2026-05-05T10:16:00.937Z",
-        "actionType": "generate",
-        "issueNumber": 753,
-        "issueTitle": "[Wiki Maintenance] [요청] Securing the git push pipeline: Responding to a critical remote code execution vulnerability",
-        "documentSlug": "securing-the-git-push-pipeline-responding-to-a-cri",
-        "documentTitle": "Securing the git push pipeline – Critical Remote Code Execution Vulnerability 대응 가이드",
-        "summary": "새 문서 \"Securing the git push pipeline – Critical Remote Code Execution Vulnerability 대응 가이드\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 16570
-              },
-              {
-                "step": "outline",
-                "durationMs": 8721
-              },
-              {
-                "step": "write",
-                "durationMs": 28067
-              },
-              {
-                "step": "review",
-                "durationMs": 12552
-              }
-            ],
-            "totalDurationMs": 65911,
-            "researchSources": 7,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 6
-            },
-            "estimatedTokens": {
-              "estimated": 2467,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "323e565b-5eee-4730-a36d-c59788d0c474",
-        "timestamp": "2026-05-05T10:14:23.990Z",
-        "actionType": "generate",
-        "issueNumber": 754,
-        "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.0",
-        "documentSlug": "maintenance/kubernetes-kubernetes-v1-36-0",
-        "documentTitle": "Kubernetes v1.30.0 Release Notes",
-        "summary": "새 문서 \"Kubernetes v1.30.0 Release Notes\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 5009
-              },
-              {
-                "step": "outline",
-                "durationMs": 11389
-              },
-              {
-                "step": "write",
-                "durationMs": 35854
-              },
-              {
-                "step": "review",
-                "durationMs": 12310
-              },
-              {
-                "step": "refine",
-                "durationMs": 42663
-              }
-            ],
-            "totalDurationMs": 107226,
-            "researchSources": 9,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 7
-            },
-            "estimatedTokens": {
-              "estimated": 5111,
-              "method": "duration_based"
-            }
-          }
-        }
       }
     ]
   },
   "issues": {
-    "totalOpen": 248,
-    "recentActivity": 6
+    "totalOpen": 251,
+    "recentActivity": 4
   },
   "commits": {
-    "total": 3,
+    "total": 7,
     "entries": [
       {
-        "sha": "8f0257e5d",
+        "sha": "4eecd4ed1",
         "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-05-08T10:14:30Z"
+        "date": "2026-05-12T10:28:58Z"
       },
       {
-        "sha": "b4d69d459",
-        "message": "🔗 교차 참조 업데이트: 5개 문서",
+        "sha": "b6e1cb307",
+        "message": "Merge branch 'main' of https://github.com/jhl-labs/sepilot-wiki",
         "author": "GitHub Action",
-        "date": "2026-05-06T00:46:16Z"
+        "date": "2026-05-12T09:17:52Z"
       },
       {
-        "sha": "b57b6ae80",
-        "message": "chore: Issue Processor 실행 결과",
+        "sha": "687507b38",
+        "message": "docs: Issue #715 - 피드백 반영",
         "author": "GitHub Action",
-        "date": "2026-05-05T10:22:03Z"
+        "date": "2026-05-12T09:17:25Z"
+      },
+      {
+        "sha": "f2a4d0331",
+        "message": "docs: Issue #769 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-05-12T09:17:18Z"
+      },
+      {
+        "sha": "7efd41ead",
+        "message": "docs: Issue #768 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-05-11T22:33:47Z"
+      },
+      {
+        "sha": "87b8a2cf6",
+        "message": "docs: Issue #426 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-05-11T02:51:29Z"
+      },
+      {
+        "sha": "ef07f9b0b",
+        "message": "docs: Issue #426 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-05-11T02:41:01Z"
       }
     ]
   }
