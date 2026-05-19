@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-05-19T09:49:05.014Z",
+  "collectedAt": "2026-05-19T11:36:24.785Z",
   "overview": {
     "totalDocuments": 396,
     "publishedDocuments": 207,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 1,
       "tavilyApiCalls": 0,
@@ -28,16 +28,36 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 13,
-      "documentsCreated": 3,
-      "documentsModified": 4,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 27,
-      "estimatedTokens": 10865,
-      "totalPipelineDurationMs": 238411
+      "aiActions": 4,
+      "documentsCreated": 0,
+      "documentsModified": 1,
+      "tavilyApiCalls": 0,
+      "tavilyResults": 0,
+      "estimatedTokens": 0,
+      "totalPipelineDurationMs": 0
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-19T10:22:28.317Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-19T10:22:09.472Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-18T16:45:33.886Z",
       "actionType": "recover",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-08T10:10:01.549Z",
-      "actionType": "quality_score",
-      "issueNumber": 759,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-08T10:09:35.156Z",
-      "actionType": "quality_score",
-      "issueNumber": 760,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Server-Side Sharded List and Watch",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 972,
-      "totalEstimatedTokens": 808094,
-      "avgDurationMs": 56954
-    },
     "unknown": {
-      "totalActions": 28,
+      "totalActions": 29,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 971,
+      "totalEstimatedTokens": 808094,
+      "avgDurationMs": 56954
     }
   }
 }
