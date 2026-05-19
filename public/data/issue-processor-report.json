@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-05-19T09:46:51.228Z",
+  "timestamp": "2026-05-19T11:44:44.409Z",
   "dryRun": false,
-  "totalIssuesScanned": 23,
+  "totalIssuesScanned": 27,
   "categories": {
     "draft_review": [
+      {
+        "number": 782,
+        "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 781,
+        "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 780,
+        "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 608,
         "title": " [요청] FastMCP – Model Context Protocol 기반 빠른 프로토타입·프로덕션 프레임워크",
@@ -122,11 +137,68 @@
         "daysSinceUpdate": 0
       }
     ],
-    "update_request": [],
+    "update_request": [
+      {
+        "number": 783,
+        "title": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+        "daysSinceUpdate": 0
+      }
+    ],
     "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 782,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 781,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 780,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 785,
+      "title": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 784,
+      "title": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요"
+    },
+    {
+      "type": "retrigger_update",
+      "issueNumber": 783,
+      "title": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 782,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
+      "score": 87,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-mixed-version-proxy-graduates-to-.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 781,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-advancing-workload-aware-scheduli.md"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 780,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-new-metric-for-route-sync-in-the-.md"
+    },
     {
       "type": "feedback",
       "issueNumber": 608,
@@ -188,6 +260,6 @@
       "verdict": "actionable"
     }
   ],
-  "actionCount": 10,
+  "actionCount": 19,
   "maxActions": 60
 }

@@ -4,7 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Docker, Arm, Hugging Face, MCP, Arm64, CI/CD]
 quality_score: 81
-updatedAt: 2026-05-12
+updatedAt: 2026-05-19
 related_docs: ["why-we-chose-the-harder-path-docker-hardened-image.md", "announcing-docker-hardened-system-packages.md", "docker-zfs.md"]
 ---
 
@@ -139,7 +139,7 @@ jobs:
       - name: Install Docker MCP Toolkit
         run: |
           # 최신 설치 스크립트를 사용해 docker-mcp 바이너리를 다운로드
-          curl -sSL https://raw.githubusercontent.com/docker/mcp-toolkit/main/install.sh -o /usr/local/bin/docker-mcp
+          curl -sSL https://github.com/docker/mcp-toolkit/releases/latest/download/install.sh -o /usr/local/bin/docker-mcp
           chmod +x /usr/local/bin/docker-mcp
       - name: Scan Space
         env:
@@ -192,5 +192,5 @@ jobs:
 - **Docker 공식 블로그 포스트** – “How to Analyze Hugging Face for Arm64 Readiness” [[Docker Blog]](https://www.docker.com/blog/how-to-analyze-hugging-face-for-arm64-readiness/)  
 - **Arm MCP Server 문서** – https://arm.com/mcp (공식 문서)  
 - **Hugging Face Spaces 개발 가이드** – https://huggingface.co/docs/hub/spaces  
-- **Docker MCP Toolkit GitHub** – https://github.com/docker/mcp-toolkit (레포지터리)  
-- **관련 커뮤니티·포럼** – Docker Community Forums, Arm Community Slack, Hugging Face Discuss  
+- **Docker MCP Toolkit 공식 문서** – https://docs.docker.com/mcp-toolkit/  
+- **관련 커뮤니티·포럼** – Docker Community Forums, Arm Community Slack, Hugging Face Discuss

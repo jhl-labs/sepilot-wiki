@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 780,
+      "number": 780,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/05/15/ccm-new-metric-route-sync-total/\n**관련도**: 85/100\n\n## 감지 내용\n&lt;p>&lt;em>This article was originally published with the wrong date. It was later republished, dated the 15th of\nMay 2026.&lt;/em>&lt;/p>\n&lt;p>Kubernetes v1.36 introduces a new alpha counter metric &lt;code>route_controller_route_sync_total&lt;/code>\nto the Cloud Controller Manager (CCM) route c\n\n## 판단 근거\nIntroduces a brand‑new alpha metric for the Cloud Controller Manager – a core Kubernetes component. No existing wiki page covers this metric, so a dedicated article is required.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-05-19T11:39:21.432Z",
+      "updated_at": "2026-05-19T11:39:21.441Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/780",
+      "documentSlug": "kubernetes-v1-36-new-metric-for-route-sync-in-the-",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-new-metric-for-route-sync-in-the-.md",
+      "comments": 0
+    },
+    {
+      "id": 781,
+      "number": 781,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/05/13/kubernetes-v1-36-advancing-workload-aware-scheduling/\n**관련도**: 82/100\n\n## 감지 내용\n&lt;p>AI/ML and batch workloads introduce unique scheduling challenges that go beyond simple Pod-by-Pod scheduling.\nIn Kubernetes v1.35, we introduced the first tranche of &lt;em>workload-aware scheduling&lt;/em> improvements,\nfeaturing the foundational Workload API alongside basic &lt;em>gang sched\n\n## 판단 근거\nWorkload‑aware scheduling is a major enhancement for AI/ML and batch workloads. No current documentation exists on the new Workload API.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-05-19T11:37:50.461Z",
+      "updated_at": "2026-05-19T11:37:50.470Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/781",
+      "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-advancing-workload-aware-scheduli.md",
+      "comments": 0
+    },
+    {
+      "id": 782,
+      "number": 782,
+      "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
+      "body": "> 🤖 자동 감지: 트렌드 모니터링\n\n**출처**: Kubernetes Blog\n**URL**: https://kubernetes.io/blog/2026/05/15/kubernetes-1-36-feature-mixed-version-proxy-beta/\n**관련도**: 80/100\n\n## 감지 내용\n&lt;p>Back in Kubernetes 1.28, we introduced the &lt;code>Mixed Version Proxy (MVP)&lt;/code> as an Alpha feature (under the feature gate &lt;code>UnknownVersionInteroperabilityProxy&lt;/code>) in a &lt;a href=\"https://kubernetes.io/blog/2023/08/28/kubernetes-1-28-feature-mixed-version-proxy-alpha/\"\n\n## 판단 근거\nThe Mixed Version Proxy graduating to beta is a significant change to Kubernetes networking compatibility. The wiki lacks coverage of this feature.\n\n\n\n---\n*이 Issue는 자동으로 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-05-19T11:36:02.482Z",
+      "updated_at": "2026-05-19T11:36:02.489Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/782",
+      "documentSlug": "kubernetes-v1-36-mixed-version-proxy-graduates-to-",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/kubernetes-v1-36-mixed-version-proxy-graduates-to-.md",
+      "comments": 0
+    },
+    {
       "id": 771,
       "number": 771,
       "title": "[Wiki Maintenance] [요청] Kubernetes v1.36: Moving Volume Group Snapshots to GA",
@@ -8380,5 +8473,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-05-12T10:21:54.923Z"
+  "lastUpdated": "2026-05-19T11:39:21.442Z"
 }
