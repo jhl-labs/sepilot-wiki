@@ -1,10 +1,10 @@
 {
-  "collectedAt": "2026-05-19T11:36:24.785Z",
+  "collectedAt": "2026-05-19T13:37:18.408Z",
   "overview": {
-    "totalDocuments": 396,
-    "publishedDocuments": 207,
-    "draftDocuments": 189,
-    "openRequests": 251,
+    "totalDocuments": 399,
+    "publishedDocuments": 208,
+    "draftDocuments": 191,
+    "openRequests": 254,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
@@ -19,25 +19,115 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 3,
-      "documentsCreated": 0,
-      "documentsModified": 1,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 12,
+      "documentsCreated": 3,
+      "documentsModified": 4,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 10037,
+      "totalPipelineDurationMs": 222475
     },
     "last7d": {
-      "aiActions": 4,
-      "documentsCreated": 0,
-      "documentsModified": 1,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 13,
+      "documentsCreated": 3,
+      "documentsModified": 4,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 10037,
+      "totalPipelineDurationMs": 222475
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-19T11:42:52.553Z",
+      "actionType": "quality_score",
+      "issueNumber": 780,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-19T11:42:29.700Z",
+      "actionType": "quality_score",
+      "issueNumber": 781,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-19T11:42:14.988Z",
+      "actionType": "quality_score",
+      "issueNumber": 782,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-19T11:41:59.185Z",
+      "actionType": "modify",
+      "issueNumber": 783,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-19T11:40:48.249Z",
+      "actionType": "modify",
+      "issueNumber": 784,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-19T11:40:09.224Z",
+      "actionType": "modify",
+      "issueNumber": 785,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-19T11:39:21.428Z",
+      "actionType": "generate",
+      "issueNumber": 780,
+      "documentTitle": "Kubernetes v1.36 – 새 메트릭 `route_controller_route_sync_total` 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 57618,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2382
+    },
+    {
+      "timestamp": "2026-05-19T11:37:50.456Z",
+      "actionType": "generate",
+      "issueNumber": 781,
+      "documentTitle": "Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 84378,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3874
+    },
+    {
+      "timestamp": "2026-05-19T11:36:02.477Z",
+      "actionType": "generate",
+      "issueNumber": 782,
+      "documentTitle": "Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 80479,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3781
+    },
     {
       "timestamp": "2026-05-19T10:22:28.317Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 68050,
       "tavilyApiCalls": 3,
       "estimatedTokens": 3111
-    },
-    {
-      "timestamp": "2026-05-12T10:20:26.734Z",
-      "actionType": "generate",
-      "issueNumber": 772,
-      "documentTitle": "Kubernetes v1.36: Declarative Validation Graduates to GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 62316,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2780
-    },
-    {
-      "timestamp": "2026-05-12T10:18:59.604Z",
-      "actionType": "generate",
-      "issueNumber": 773,
-      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 108045,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4974
-    },
-    {
-      "timestamp": "2026-05-12T09:59:09.595Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T09:58:51.311Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T09:17:02.039Z",
-      "actionType": "recover",
-      "issueNumber": 769,
-      "documentTitle": "chore(deps): bump next from 16.1.6 to 16.2.6",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-11T22:33:31.675Z",
-      "actionType": "recover",
-      "issueNumber": 768,
-      "documentTitle": "chore(deps): bump mermaid from 11.12.3 to 11.15.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-11T02:51:14.451Z",
-      "actionType": "recover",
-      "issueNumber": 426,
-      "documentTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-11T02:40:44.320Z",
-      "actionType": "recover",
-      "issueNumber": 426,
-      "documentTitle": " [요청] Homelab AI Stack 2026 – 배포 순서와 운영 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-11T01:37:17.962Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 20주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 971,
+      "totalEstimatedTokens": 818131,
+      "avgDurationMs": 57121
+    },
     "unknown": {
       "totalActions": 29,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 971,
-      "totalEstimatedTokens": 808094,
-      "avgDurationMs": 56954
     }
   }
 }
