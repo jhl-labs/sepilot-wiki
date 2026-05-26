@@ -1,6 +1,116 @@
 {
   "entries": [
     {
+      "id": "295c091d-522f-4af4-815d-1048e34f0522",
+      "timestamp": "2026-05-26T13:11:47.507Z",
+      "actionType": "quality_score",
+      "issueNumber": 788,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "516f04f5-3e0b-4fca-b31c-a4cf88642f19",
+      "timestamp": "2026-05-26T13:11:25.303Z",
+      "actionType": "modify",
+      "issueNumber": 789,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+      "documentSlug": "untitled-1776224402310",
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "d1caad73-90bb-42c9-a6b5-5553fa10249a",
+      "timestamp": "2026-05-26T13:10:20.811Z",
+      "actionType": "modify",
+      "issueNumber": 790,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
+      "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 1,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "09a3eb6b-a3df-492e-be9a-d15abaef8721",
+      "timestamp": "2026-05-26T13:09:36.594Z",
+      "actionType": "modify",
+      "issueNumber": 791,
+      "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
+      "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "2aaff735-819d-4b7c-82a5-1b625cf3b456",
+      "timestamp": "2026-05-26T13:08:51.217Z",
+      "actionType": "generate",
+      "issueNumber": 788,
+      "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
+      "documentTitle": "Kubernetes v1.36 – Advancing Workload‑Aware Scheduling",
+      "summary": "새 문서 \"Kubernetes v1.36 – Advancing Workload‑Aware Scheduling\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 8383
+            },
+            {
+              "step": "outline",
+              "durationMs": 10453
+            },
+            {
+              "step": "write",
+              "durationMs": 40851
+            },
+            {
+              "step": "review",
+              "durationMs": 7047
+            }
+          ],
+          "totalDurationMs": 66734,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2918,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "25816a5a-926c-43eb-99cb-2980be1556b2",
       "timestamp": "2026-05-26T10:28:53.761Z",
       "actionType": "maintain",
@@ -24570,81 +24680,7 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": null
-    },
-    {
-      "id": "939fbb6d-1f22-49ae-8409-2fbbb18b7bf7",
-      "timestamp": "2025-12-07T22:49:34.424Z",
-      "actionType": "recover",
-      "issueNumber": 31,
-      "issueTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "documentSlug": "guide/llm-workflow",
-      "documentTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "be99bc6a-9c69-46d5-8281-dd57efab4e53",
-      "timestamp": "2025-12-07T22:49:34.424Z",
-      "actionType": "recover",
-      "issueNumber": 31,
-      "issueTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "documentSlug": "guide/theme-customization",
-      "documentTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "df975658-03f6-4ed5-92d9-9d8929440a62",
-      "timestamp": "2025-12-07T22:49:34.424Z",
-      "actionType": "recover",
-      "issueNumber": 31,
-      "issueTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "documentSlug": "guide/configuration-guide",
-      "documentTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "5484be8b-3fed-4a62-a125-83b4d2e0bfe5",
-      "timestamp": "2025-12-07T22:49:34.423Z",
-      "actionType": "recover",
-      "issueNumber": 31,
-      "issueTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "documentSlug": "guide/getting-started",
-      "documentTitle": "[Wiki Maintainer] Clarify document statuses (draft / published)",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "6d119382-f3dc-440f-893a-63cf79f5f0f6",
-      "timestamp": "2025-12-07T18:05:30.197Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 1개 자동 적용, 11개 보류, 3개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 1,
-        "skipped": 11,
-        "issues": 3
-      }
     }
   ],
-  "lastUpdated": "2026-05-26T10:28:53.761Z"
+  "lastUpdated": "2026-05-26T13:11:47.507Z"
 }

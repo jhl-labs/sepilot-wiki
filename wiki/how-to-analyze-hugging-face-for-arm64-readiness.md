@@ -4,7 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Docker, Arm, Hugging Face, MCP, Arm64, CI/CD]
 quality_score: 81
-updatedAt: 2026-05-19
+updatedAt: 2026-05-26
 related_docs: ["why-we-chose-the-harder-path-docker-hardened-image.md", "announcing-docker-hardened-system-packages.md", "docker-zfs.md"]
 ---
 
@@ -139,7 +139,7 @@ jobs:
       - name: Install Docker MCP Toolkit
         run: |
           # 최신 설치 스크립트를 사용해 docker-mcp 바이너리를 다운로드
-          curl -sSL https://github.com/docker/mcp-toolkit/releases/latest/download/install.sh -o /usr/local/bin/docker-mcp
+          curl -sSL https://raw.githubusercontent.com/docker/mcp-toolkit/main/install.sh -o /usr/local/bin/docker-mcp
           chmod +x /usr/local/bin/docker-mcp
       - name: Scan Space
         env:
