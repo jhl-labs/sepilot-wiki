@@ -1,43 +1,113 @@
 {
-  "collectedAt": "2026-05-26T09:50:18.833Z",
+  "collectedAt": "2026-05-26T13:36:09.661Z",
   "overview": {
     "totalDocuments": 400,
     "publishedDocuments": 209,
     "draftDocuments": 191,
-    "openRequests": 254,
+    "openRequests": 255,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 5,
+      "documentsCreated": 1,
+      "documentsModified": 3,
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 2918,
+      "totalPipelineDurationMs": 66734
     },
     "last24h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 7,
+      "documentsCreated": 1,
+      "documentsModified": 3,
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 2918,
+      "totalPipelineDurationMs": 66734
     },
     "last7d": {
-      "aiActions": 12,
-      "documentsCreated": 3,
+      "aiActions": 8,
+      "documentsCreated": 1,
       "documentsModified": 3,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 27,
-      "estimatedTokens": 10037,
-      "totalPipelineDurationMs": 222475
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 2918,
+      "totalPipelineDurationMs": 66734
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-26T13:11:47.507Z",
+      "actionType": "quality_score",
+      "issueNumber": 788,
+      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-26T13:11:25.303Z",
+      "actionType": "modify",
+      "issueNumber": 789,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-26T13:10:20.811Z",
+      "actionType": "modify",
+      "issueNumber": 790,
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-26T13:09:36.594Z",
+      "actionType": "modify",
+      "issueNumber": 791,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-26T13:08:51.217Z",
+      "actionType": "generate",
+      "issueNumber": 788,
+      "documentTitle": "Kubernetes v1.36 – Advancing Workload‑Aware Scheduling",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 66734,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2918
+    },
+    {
+      "timestamp": "2026-05-26T10:28:53.761Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-26T10:28:35.269Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-05-25T01:43:47.611Z",
       "actionType": "status_report",
@@ -167,86 +237,16 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-18T01:42:29.969Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 21주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T10:26:26.048Z",
-      "actionType": "quality_score",
-      "issueNumber": 771,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Moving Volume Group Snapshots to GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T10:26:08.772Z",
-      "actionType": "quality_score",
-      "issueNumber": 772,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Declarative Validation Graduates to GA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T10:25:51.968Z",
-      "actionType": "quality_score",
-      "issueNumber": 773,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T10:25:24.925Z",
-      "actionType": "modify",
-      "issueNumber": 774,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T10:24:17.000Z",
-      "actionType": "modify",
-      "issueNumber": 775,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-12T10:22:42.487Z",
-      "actionType": "modify",
-      "issueNumber": 776,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
-      "totalActions": 971,
-      "totalEstimatedTokens": 818131,
-      "avgDurationMs": 57121
+      "totalActions": 970,
+      "totalEstimatedTokens": 821049,
+      "avgDurationMs": 57152
     },
     "unknown": {
-      "totalActions": 29,
+      "totalActions": 30,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
     }
