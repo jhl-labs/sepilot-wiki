@@ -2,7 +2,7 @@
   "title": "Next.js 16.2.3 Dependency Update",
   "slug": "dependencies/next-16.2.3-update",
   "content": "\n# Next.js 16.2.3 Dependency Update\n\n## Overview\nThis document records the upgrade of the **Next.js** framework from version **16.1.6** to **16.2.3** in the SEPilot Wiki repository. The bump is driven by Dependabot and includes important security and bug‑fix releases.\n\n## Release notes (v16.2.3)\n- **Core Changes**\n  - Ensure app‑page reports stale ISR revalidation errors via `onRequestError` [#92282]([https://redirect.github.com/vercel/next.js/issues/92282](https://redirect.github.com/vercel/next.js/issues/92282))\n  - Fix manifest.ts breaks HMR in Next.js 16.2 [#91981]([https://redirect.github.com/vercel/next.js/issues/91981](https://redirect.github.com/vercel/next.js/issues/91981))\n  - Deduplicate output assets and detect content conflicts on emit [#92292]([https://redirect.github.com/vercel/next.js/issues/92292](https://redirect.github.com/vercel/next.js/issues/92292))\n  - Fix styled‑jsx race condition: styles lost due to concurrent rendering [#92459]([https://redirect.github.com/vercel/next.js/issues/92459](https://redirect.github.com/vercel/next.js/issues/92459))\n  - turbo‑tasks‑backend: stability fixes for task cancellation and error handling [#92254]([https://redirect.github.com/vercel/next.js/issues/92254](https://redirect.github.com/vercel/next.js/issues/92254))\n\n*Full release notes are available on the official Next.js releases page* [[GitHub Releases](https://github.com/vercel/next.js/releases)](https://github.com/vercel/next.js/releases).\n\n## Security fix – CVE‑2026‑23869\nNext.js 16.2.3 contains the patch for **CVE‑2026‑23869**, a high‑severity (CVSS 7.5) denial‑of‑service vulnerability in React Server Components.\n- Fixed in: **Next.js 16.2.3** (previously affected versions 13.x‑16.x) [[Vercel Changelog](https://vercel.com/changelog/summary-of-cve-2026-23869)](https://vercel.com/changelog/summary-of-cve-2026-23869).\n- Recommendation: upgrade to 16.2.3 or later as soon as possible.\n\n## Superseded notice\nThe original Dependabot pull request for this bump has been **superseded by #769**. No further action is required on that PR; the upgrade is now tracked by this document.\n\n## References\n- Next.js repository – [GitHub](https://github.com/vercel/next.js)\n- Release notes – [GitHub Releases](https://github.com/vercel/next.js/releases)\n- CVE‑2026‑23869 details – [Vercel Changelog](https://vercel.com/changelog/summary-of-cve-2026-23869)\n- Dependabot update example – [Beaulewis1977/lazy‑agents#19](https://dependabot.ecosyste.ms/hosts/GitHub/repositories/Beaulewis1977/lazy-agents/issues/19)\n\n---\n*Document created automatically in response to Dependabot feedback.*",
-  "lastModified": "2026-05-26T17:38:49Z",
+  "lastModified": "2026-05-26T23:53:25Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "07ecf0a",
-      "message": "chore: 대시보드 통계 수집 - 2026-05-26 17:38",
+      "sha": "0313849",
+      "message": "chore: 대시보드 통계 수집 - 2026-05-26 23:53",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-05-26T17:38:49Z",
+      "date": "2026-05-26T23:53:25Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
