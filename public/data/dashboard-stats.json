@@ -1,10 +1,10 @@
 {
-  "collectedAt": "2026-05-29T15:49:04.132Z",
+  "collectedAt": "2026-05-29T19:23:44.788Z",
   "overview": {
     "totalDocuments": 400,
     "publishedDocuments": 210,
     "draftDocuments": 190,
-    "openRequests": 255,
+    "openRequests": 257,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
@@ -19,25 +19,85 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 8,
+      "documentsCreated": 2,
+      "documentsModified": 3,
+      "tavilyApiCalls": 6,
+      "tavilyResults": 18,
+      "estimatedTokens": 4499,
+      "totalPipelineDurationMs": 106145
     },
     "last7d": {
-      "aiActions": 10,
-      "documentsCreated": 1,
-      "documentsModified": 3,
-      "tavilyApiCalls": 3,
-      "tavilyResults": 9,
-      "estimatedTokens": 2918,
-      "totalPipelineDurationMs": 66734
+      "aiActions": 16,
+      "documentsCreated": 3,
+      "documentsModified": 6,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 7417,
+      "totalPipelineDurationMs": 172879
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-05-29T15:51:51.063Z",
+      "actionType": "quality_score",
+      "issueNumber": 792,
+      "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-29T15:51:12.429Z",
+      "actionType": "modify",
+      "issueNumber": 795,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-29T15:50:09.589Z",
+      "actionType": "modify",
+      "issueNumber": 796,
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-29T15:49:30.788Z",
+      "actionType": "modify",
+      "issueNumber": 797,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-05-29T15:48:27.098Z",
+      "actionType": "generate",
+      "issueNumber": 792,
+      "documentTitle": "Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 50489,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2150
+    },
+    {
+      "timestamp": "2026-05-29T15:47:04.182Z",
+      "actionType": "generate",
+      "issueNumber": 793,
+      "documentTitle": "Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 55656,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2349
+    },
     {
       "timestamp": "2026-05-29T10:25:39.565Z",
       "actionType": "maintain",
@@ -177,78 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-19T11:40:48.249Z",
-      "actionType": "modify",
-      "issueNumber": 784,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-19T11:40:09.224Z",
-      "actionType": "modify",
-      "issueNumber": 785,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-19T11:39:21.428Z",
-      "actionType": "generate",
-      "issueNumber": 780,
-      "documentTitle": "Kubernetes v1.36 – 새 메트릭 `route_controller_route_sync_total` 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 57618,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2382
-    },
-    {
-      "timestamp": "2026-05-19T11:37:50.456Z",
-      "actionType": "generate",
-      "issueNumber": 781,
-      "documentTitle": "Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 84378,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3874
-    },
-    {
-      "timestamp": "2026-05-19T11:36:02.477Z",
-      "actionType": "generate",
-      "issueNumber": 782,
-      "documentTitle": "Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 80479,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3781
-    },
-    {
-      "timestamp": "2026-05-19T10:22:28.317Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 969,
+      "totalEstimatedTokens": 825548,
+      "avgDurationMs": 57126
+    },
     "unknown": {
       "totalActions": 31,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 969,
-      "totalEstimatedTokens": 821049,
-      "avgDurationMs": 57152
     }
   }
 }
