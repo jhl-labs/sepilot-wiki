@@ -1,6 +1,161 @@
 {
   "entries": [
     {
+      "id": "65fe4db6-8fc9-404d-8334-31c6ba42cf74",
+      "timestamp": "2026-05-29T15:51:51.063Z",
+      "actionType": "quality_score",
+      "issueNumber": 792,
+      "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "documentSlug": "security/reconciling-the-past-correcting-records-for-unfixe",
+      "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "d938c656-e35b-4c8c-80e8-e5da215a578f",
+      "timestamp": "2026-05-29T15:51:12.429Z",
+      "actionType": "modify",
+      "issueNumber": 795,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+      "documentSlug": "untitled-1776224402310",
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 11,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "31af1364-7934-4df9-b6a9-9549492817b3",
+      "timestamp": "2026-05-29T15:50:09.589Z",
+      "actionType": "modify",
+      "issueNumber": 796,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
+      "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "7c2045ff-8112-4c70-a16c-35686c116c56",
+      "timestamp": "2026-05-29T15:49:30.788Z",
+      "actionType": "modify",
+      "issueNumber": 797,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "ca18f702-0186-4cc4-8711-16716562cd02",
+      "timestamp": "2026-05-29T15:48:27.098Z",
+      "actionType": "generate",
+      "issueNumber": 792,
+      "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "documentSlug": "security/reconciling-the-past-correcting-records-for-unfixe",
+      "documentTitle": "Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드",
+      "summary": "새 문서 \"Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 7488
+            },
+            {
+              "step": "outline",
+              "durationMs": 8266
+            },
+            {
+              "step": "write",
+              "durationMs": 27355
+            },
+            {
+              "step": "review",
+              "durationMs": 7380
+            }
+          ],
+          "totalDurationMs": 50489,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2150,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "7cd150e8-048f-4a51-9d4b-c9f7eb5c872f",
+      "timestamp": "2026-05-29T15:47:04.182Z",
+      "actionType": "generate",
+      "issueNumber": 793,
+      "issueTitle": "[Wiki Maintenance] [요청] Mitigating CVE-2026-31431 (&#8220;Copy Fail&#8221;) in Docker Engine",
+      "documentSlug": "security/mitigating-cve-2026-31431-8220-copy-fail-8221-in-d",
+      "documentTitle": "Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine",
+      "summary": "새 문서 \"Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 8684
+            },
+            {
+              "step": "outline",
+              "durationMs": 7610
+            },
+            {
+              "step": "write",
+              "durationMs": 30017
+            },
+            {
+              "step": "review",
+              "durationMs": 9345
+            }
+          ],
+          "totalDurationMs": 55656,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2349,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "e067b580-278f-4803-af40-a7718f75d7dc",
       "timestamp": "2026-05-29T10:25:39.565Z",
       "actionType": "maintain",
@@ -24592,91 +24747,7 @@
           "researchSources": 0
         }
       }
-    },
-    {
-      "id": "197fc8e0-6fb1-45e4-8f68-29e285c5dbc2",
-      "timestamp": "2026-02-09T11:06:38.312Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "2개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "16b73883-04e8-4397-88fe-a8c09c2044ff",
-      "timestamp": "2026-02-09T10:32:23.080Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "6개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "1b11bc95-308a-4d77-808a-7fd568e39b88",
-      "timestamp": "2026-02-09T10:27:30.731Z",
-      "actionType": "generate",
-      "issueNumber": 120,
-      "issueTitle": "[요청] MAS(Multi Agent System)에 대해 자세히 조사해줘",
-      "documentSlug": "요청-masmulti-agent-system에-대해-자세히-조사해줘",
-      "documentTitle": "MAS (Multi Agent System)",
-      "summary": "새 문서 \"MAS (Multi Agent System)\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "440a6f75-3fe3-413a-b4c8-896ba75e2b43",
-      "timestamp": "2026-02-09T10:07:42.121Z",
-      "actionType": "modify",
-      "issueNumber": 120,
-      "issueTitle": "[요청] MAS(Multi Agent System)에 대해 자세히 조사해줘",
-      "documentSlug": "mas-multi-agent-system",
-      "documentTitle": "[요청] MAS(Multi Agent System)에 대해 자세히 조사해줘",
-      "summary": "피드백에 따라 문서 수정",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "c8131638-fab2-485a-8133-71a61105a829",
-      "timestamp": "2026-02-09T10:05:18.822Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "5개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "b1a5cce3-b374-4c66-b587-d5a02caa540b",
-      "timestamp": "2026-02-09T09:42:37.816Z",
-      "actionType": "generate",
-      "issueNumber": 120,
-      "issueTitle": "[요청] MAS(Multi Agent System)에 대해 자세히 조사해줘",
-      "documentSlug": "요청-masmulti-agent-system에-대해-자세히-조사해줘",
-      "documentTitle": "MAS (Multi Agent System)",
-      "summary": "새 문서 \"MAS (Multi Agent System)\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
     }
   ],
-  "lastUpdated": "2026-05-29T10:25:39.565Z"
+  "lastUpdated": "2026-05-29T15:51:51.063Z"
 }
