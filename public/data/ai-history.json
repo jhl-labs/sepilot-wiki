@@ -1,6 +1,20 @@
 {
   "entries": [
     {
+      "id": "51d5717f-3103-413f-a338-8962f4a4c14f",
+      "timestamp": "2026-05-31T01:13:17.046Z",
+      "actionType": "freshness_check",
+      "issueNumber": null,
+      "issueTitle": "문서 최신성 점검",
+      "documentSlug": "_freshness-check",
+      "documentTitle": "문서 최신성 점검",
+      "summary": "441개 문서 점검, 1개 outdated, 0개 긴급",
+      "trigger": "weekly_schedule",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "65fe4db6-8fc9-404d-8334-31c6ba42cf74",
       "timestamp": "2026-05-29T15:51:51.063Z",
       "actionType": "quality_score",
@@ -24706,48 +24720,7 @@
           "researchSources": 9
         }
       }
-    },
-    {
-      "id": "6a95788f-3c8b-4ebb-abb4-bb1bd9369c38",
-      "timestamp": "2026-02-10T08:22:25.382Z",
-      "actionType": "generate",
-      "issueNumber": 134,
-      "issueTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "documentSlug": "mcp-model-context-protocol",
-      "documentTitle": "MCP (Model Context Protocol) 완벽 가이드",
-      "summary": "새 문서 \"MCP (Model Context Protocol) 완벽 가이드\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 1016
-            },
-            {
-              "step": "outline",
-              "durationMs": 7159
-            },
-            {
-              "step": "write",
-              "durationMs": 46336
-            },
-            {
-              "step": "review",
-              "durationMs": 6315
-            },
-            {
-              "step": "refine",
-              "durationMs": 38285
-            }
-          ],
-          "totalDurationMs": 99111,
-          "researchSources": 0
-        }
-      }
     }
   ],
-  "lastUpdated": "2026-05-29T15:51:51.063Z"
+  "lastUpdated": "2026-05-31T01:13:17.046Z"
 }
