@@ -1,40 +1,54 @@
 {
-  "generatedAt": "2026-05-25T01:43:47.607Z",
-  "weekNumber": 22,
+  "generatedAt": "2026-06-01T01:54:31.465Z",
+  "weekNumber": 23,
   "year": 2026,
   "period": {
-    "start": "2026-05-18T01:43:34.474Z",
-    "end": "2026-05-25T01:43:34.474Z"
+    "start": "2026-05-25T01:54:16.710Z",
+    "end": "2026-06-01T01:54:16.710Z"
   },
   "documents": {
-    "total": 438,
+    "total": 441,
     "statusDistribution": {
-      "published": 228,
-      "draft": 168,
+      "published": 230,
+      "draft": 169,
       "deleted": 42
     },
     "newCount": 3,
-    "modifiedCount": 3,
+    "modifiedCount": 6,
     "publishedCount": 0
   },
   "aiActivity": {
-    "totalActions": 12,
+    "totalActions": 16,
     "byType": {
-      "quality_score": 3,
-      "modify": 3,
+      "freshness_check": 1,
+      "quality_score": 2,
+      "modify": 6,
       "generate": 3,
-      "maintain": 2,
-      "recover": 1
+      "maintain": 4
     },
     "entries": [
       {
-        "id": "25478c28-97b2-4694-9c19-cc138c42885a",
-        "timestamp": "2026-05-19T11:42:52.553Z",
+        "id": "51d5717f-3103-413f-a338-8962f4a4c14f",
+        "timestamp": "2026-05-31T01:13:17.046Z",
+        "actionType": "freshness_check",
+        "issueNumber": null,
+        "issueTitle": "문서 최신성 점검",
+        "documentSlug": "_freshness-check",
+        "documentTitle": "문서 최신성 점검",
+        "summary": "441개 문서 점검, 1개 outdated, 0개 긴급",
+        "trigger": "weekly_schedule",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "65fe4db6-8fc9-404d-8334-31c6ba42cf74",
+        "timestamp": "2026-05-29T15:51:51.063Z",
         "actionType": "quality_score",
-        "issueNumber": 780,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
-        "documentSlug": "kubernetes-v1-36-new-metric-for-route-sync-in-the-",
-        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
+        "issueNumber": 792,
+        "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+        "documentSlug": "security/reconciling-the-past-correcting-records-for-unfixe",
+        "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
         "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -42,38 +56,44 @@
         "changes": null
       },
       {
-        "id": "78086688-73bf-47f4-905f-8e58686565d0",
-        "timestamp": "2026-05-19T11:42:29.700Z",
-        "actionType": "quality_score",
-        "issueNumber": 781,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-        "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
-        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "d16c4912-365c-4783-bf01-bd52f7186f31",
-        "timestamp": "2026-05-19T11:42:14.988Z",
-        "actionType": "quality_score",
-        "issueNumber": 782,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
-        "documentSlug": "kubernetes-v1-36-mixed-version-proxy-graduates-to-",
-        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
-        "summary": "자동 품질 검토 통과 (87점) → 자동 발행",
-        "trigger": "issue_processor",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": null
-      },
-      {
-        "id": "96c15d9e-adba-4a23-aac8-ccb7664e76e6",
-        "timestamp": "2026-05-19T11:41:59.185Z",
+        "id": "d938c656-e35b-4c8c-80e8-e5da215a578f",
+        "timestamp": "2026-05-29T15:51:12.429Z",
         "actionType": "modify",
-        "issueNumber": 783,
+        "issueNumber": 795,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+        "documentSlug": "untitled-1776224402310",
+        "documentTitle": "검색 서비스 구현 및 사용 가이드",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 11,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "31af1364-7934-4df9-b6a9-9549492817b3",
+        "timestamp": "2026-05-29T15:50:09.589Z",
+        "actionType": "modify",
+        "issueNumber": 796,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
+        "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+        "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 0,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "7c2045ff-8112-4c70-a16c-35686c116c56",
+        "timestamp": "2026-05-29T15:49:30.788Z",
+        "actionType": "modify",
+        "issueNumber": 797,
         "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
         "documentSlug": "678",
         "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
@@ -87,48 +107,14 @@
         }
       },
       {
-        "id": "ea06c4ef-6528-4697-a73f-8c0af503c850",
-        "timestamp": "2026-05-19T11:40:48.249Z",
-        "actionType": "modify",
-        "issueNumber": 784,
-        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
-        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
-        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "562e07d3-1173-400f-bd8a-ab90747dc2a9",
-        "timestamp": "2026-05-19T11:40:09.224Z",
-        "actionType": "modify",
-        "issueNumber": 785,
-        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
-        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
-        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "dc93d5ee-d1d9-4994-91aa-ee8a1d0b3d1d",
-        "timestamp": "2026-05-19T11:39:21.428Z",
+        "id": "ca18f702-0186-4cc4-8711-16716562cd02",
+        "timestamp": "2026-05-29T15:48:27.098Z",
         "actionType": "generate",
-        "issueNumber": 780,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
-        "documentSlug": "kubernetes-v1-36-new-metric-for-route-sync-in-the-",
-        "documentTitle": "Kubernetes v1.36 – 새 메트릭 `route_controller_route_sync_total` 가이드",
-        "summary": "새 문서 \"Kubernetes v1.36 – 새 메트릭 `route_controller_route_sync_total` 가이드\" 생성",
+        "issueNumber": 792,
+        "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+        "documentSlug": "security/reconciling-the-past-correcting-records-for-unfixe",
+        "documentTitle": "Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드",
+        "summary": "새 문서 \"Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -137,43 +123,43 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 9993
+                "durationMs": 7488
               },
               {
                 "step": "outline",
-                "durationMs": 10996
+                "durationMs": 8266
               },
               {
                 "step": "write",
-                "durationMs": 29557
+                "durationMs": 27355
               },
               {
                 "step": "review",
-                "durationMs": 7072
+                "durationMs": 7380
               }
             ],
-            "totalDurationMs": 57618,
+            "totalDurationMs": 50489,
             "researchSources": 8,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 2382,
+              "estimated": 2150,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "58653bad-cb1a-43a0-9d4f-4b8b039eacc7",
-        "timestamp": "2026-05-19T11:37:50.456Z",
+        "id": "7cd150e8-048f-4a51-9d4b-c9f7eb5c872f",
+        "timestamp": "2026-05-29T15:47:04.182Z",
         "actionType": "generate",
-        "issueNumber": 781,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-        "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
-        "documentTitle": "Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-        "summary": "새 문서 \"Kubernetes v1.36: Advancing Workload-Aware Scheduling\" 생성",
+        "issueNumber": 793,
+        "issueTitle": "[Wiki Maintenance] [요청] Mitigating CVE-2026-31431 (&#8220;Copy Fail&#8221;) in Docker Engine",
+        "documentSlug": "security/mitigating-cve-2026-31431-8220-copy-fail-8221-in-d",
+        "documentTitle": "Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine",
+        "summary": "새 문서 \"Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -182,117 +168,196 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 6876
+                "durationMs": 8684
               },
               {
                 "step": "outline",
-                "durationMs": 12767
+                "durationMs": 7610
               },
               {
                 "step": "write",
-                "durationMs": 57546
+                "durationMs": 30017
               },
               {
                 "step": "review",
-                "durationMs": 7188
+                "durationMs": 9345
               }
             ],
-            "totalDurationMs": 84378,
-            "researchSources": 8,
+            "totalDurationMs": 55656,
+            "researchSources": 9,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 3874,
+              "estimated": 2349,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "58fe5d6f-6842-4fd7-afa2-2d66c618671d",
-        "timestamp": "2026-05-19T11:36:02.477Z",
-        "actionType": "generate",
-        "issueNumber": 782,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
-        "documentSlug": "kubernetes-v1-36-mixed-version-proxy-graduates-to-",
-        "documentTitle": "Kubernetes v1.36: Mixed Version Proxy Graduates to Beta",
-        "summary": "새 문서 \"Kubernetes v1.36: Mixed Version Proxy Graduates to Beta\" 생성",
-        "trigger": "request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "pipeline": {
-            "steps": [
-              {
-                "step": "research",
-                "durationMs": 4872
-              },
-              {
-                "step": "outline",
-                "durationMs": 16059
-              },
-              {
-                "step": "write",
-                "durationMs": 48657
-              },
-              {
-                "step": "review",
-                "durationMs": 10891
-              }
-            ],
-            "totalDurationMs": 80479,
-            "researchSources": 10,
-            "tavilyUsage": {
-              "apiCalls": 3,
-              "totalResults": 9
-            },
-            "estimatedTokens": {
-              "estimated": 3781,
-              "method": "duration_based"
-            }
-          }
-        }
-      },
-      {
-        "id": "990f97e5-f8a7-4a3c-9c16-39753a702022",
-        "timestamp": "2026-05-19T10:22:28.317Z",
+        "id": "e067b580-278f-4803-af40-a7718f75d7dc",
+        "timestamp": "2026-05-29T10:25:39.565Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "URL 변경 감지",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "URL 변경 감지: 30개 체크, 1개 변경, 9개 깨짐, 3건 Issue",
+        "summary": "URL 변경 감지: 30개 체크, 3개 변경, 8개 깨짐, 3건 Issue",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "unknown",
         "changes": null
       },
       {
-        "id": "65b992b9-405e-48f0-8985-4e5de31047c4",
-        "timestamp": "2026-05-19T10:22:09.472Z",
+        "id": "601881d3-9fd5-4b52-8023-681809c6b737",
+        "timestamp": "2026-05-29T10:25:21.756Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "트렌드 모니터링",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "트렌드 모니터링: 29건 수집, 3건 감지, 3건 Issue 생성",
+        "summary": "트렌드 모니터링: 18건 수집, 3건 감지, 3건 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "aa5080bc-6b65-4291-886f-c5fc0a6791ab",
-        "timestamp": "2026-05-18T16:45:33.886Z",
-        "actionType": "recover",
-        "issueNumber": 777,
-        "issueTitle": "chore(deps): bump brace-expansion from 1.1.12 to 5.0.6",
-        "documentSlug": "guides/dependabot-missing-label",
-        "documentTitle": "chore(deps): bump brace-expansion from 1.1.12 to 5.0.6",
-        "summary": "피드백에 따라 문서 생성",
-        "trigger": "maintainer_comment",
+        "id": "295c091d-522f-4af4-815d-1048e34f0522",
+        "timestamp": "2026-05-26T13:11:47.507Z",
+        "actionType": "quality_score",
+        "issueNumber": 788,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+        "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
+        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "516f04f5-3e0b-4fca-b31c-a4cf88642f19",
+        "timestamp": "2026-05-26T13:11:25.303Z",
+        "actionType": "modify",
+        "issueNumber": 789,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+        "documentSlug": "untitled-1776224402310",
+        "documentTitle": "검색 서비스 구현 및 사용 가이드",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 0,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "d1caad73-90bb-42c9-a6b5-5553fa10249a",
+        "timestamp": "2026-05-26T13:10:20.811Z",
+        "actionType": "modify",
+        "issueNumber": 790,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
+        "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+        "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 1,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "09a3eb6b-a3df-492e-be9a-d15abaef8721",
+        "timestamp": "2026-05-26T13:09:36.594Z",
+        "actionType": "modify",
+        "issueNumber": 791,
+        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
+        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
+        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 0,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "2aaff735-819d-4b7c-82a5-1b625cf3b456",
+        "timestamp": "2026-05-26T13:08:51.217Z",
+        "actionType": "generate",
+        "issueNumber": 788,
+        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+        "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
+        "documentTitle": "Kubernetes v1.36 – Advancing Workload‑Aware Scheduling",
+        "summary": "새 문서 \"Kubernetes v1.36 – Advancing Workload‑Aware Scheduling\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 8383
+              },
+              {
+                "step": "outline",
+                "durationMs": 10453
+              },
+              {
+                "step": "write",
+                "durationMs": 40851
+              },
+              {
+                "step": "review",
+                "durationMs": 7047
+              }
+            ],
+            "totalDurationMs": 66734,
+            "researchSources": 8,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 2918,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "25816a5a-926c-43eb-99cb-2980be1556b2",
+        "timestamp": "2026-05-26T10:28:53.761Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "URL 변경 감지",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "URL 변경 감지: 30개 체크, 2개 변경, 9개 깨짐, 3건 Issue",
+        "trigger": "scheduled",
+        "triggerUser": null,
+        "model": "unknown",
+        "changes": null
+      },
+      {
+        "id": "ffd9495e-032e-4793-9cc0-d4b2408cf1b7",
+        "timestamp": "2026-05-26T10:28:35.269Z",
+        "actionType": "maintain",
+        "issueNumber": null,
+        "issueTitle": "트렌드 모니터링",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "트렌드 모니터링: 26건 수집, 3건 감지, 3건 Issue 생성",
+        "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
@@ -300,23 +365,29 @@
     ]
   },
   "issues": {
-    "totalOpen": 254,
+    "totalOpen": 257,
     "recentActivity": 3
   },
   "commits": {
-    "total": 2,
+    "total": 3,
     "entries": [
       {
-        "sha": "c29a2e398",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-05-19T11:44:44Z"
+        "sha": "688ec2580",
+        "message": "🔍 문서 최신성 점검: 1개 outdated 발견",
+        "author": "github-actions[bot]",
+        "date": "2026-05-31T01:13:18Z"
       },
       {
-        "sha": "a6e34e13d",
-        "message": "docs: Issue #777 - 피드백 반영",
+        "sha": "f61ca3509",
+        "message": "chore: Issue Processor 실행 결과",
         "author": "GitHub Action",
-        "date": "2026-05-18T16:45:52Z"
+        "date": "2026-05-29T15:52:20Z"
+      },
+      {
+        "sha": "5b398045e",
+        "message": "chore: Issue Processor 실행 결과",
+        "author": "GitHub Action",
+        "date": "2026-05-26T13:11:53Z"
       }
     ]
   }
