@@ -1,9 +1,9 @@
 {
-  "collectedAt": "2026-06-02T00:02:03.258Z",
+  "collectedAt": "2026-06-04T09:54:03.903Z",
   "overview": {
-    "totalDocuments": 403,
+    "totalDocuments": 404,
     "publishedDocuments": 212,
-    "draftDocuments": 191,
+    "draftDocuments": 192,
     "openRequests": 257,
     "closedRequests": 19,
     "totalAIActions": 1000
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 0,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,16 +28,26 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 17,
-      "documentsCreated": 3,
-      "documentsModified": 6,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 27,
-      "estimatedTokens": 7417,
-      "totalPipelineDurationMs": 172879
+      "aiActions": 11,
+      "documentsCreated": 2,
+      "documentsModified": 4,
+      "tavilyApiCalls": 6,
+      "tavilyResults": 18,
+      "estimatedTokens": 4499,
+      "totalPipelineDurationMs": 106145
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-02T00:03:11.941Z",
+      "actionType": "recover",
+      "issueNumber": 798,
+      "documentTitle": "chore(deps): bump vitest from 4.0.18 to 4.1.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-06-01T01:54:31.475Z",
       "actionType": "status_report",
@@ -227,23 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-19T11:42:29.700Z",
-      "actionType": "quality_score",
-      "issueNumber": 781,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
       "totalActions": 969,
-      "totalEstimatedTokens": 817126,
-      "avgDurationMs": 56939
+      "totalEstimatedTokens": 815112,
+      "avgDurationMs": 56983
     },
     "unknown": {
       "totalActions": 31,
