@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 23주차",
   "slug": "reports/weekly-2026-23",
   "content": "\n## 요약\n- 전체 문서 441개(발행 230개, 초안 169개, 삭제 42개) 중 최신성 점검 결과 1개가 오래된(outdated) 상태로 확인되었습니다.  \n- 이번 주에 새 문서 3개가 생성되었고, 6개의 문서가 수정되었습니다.  \n- AI가 수행한 총 작업은 16건이며, 품질 점수 검토 2건, 문서 생성 3건, URL·트렌드 유지·감지 4건, 기타 수정·신선도 점검 7건이 포함됩니다.  \n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 441 |\n| 발행(published) | 230 |\n| 초안(draft) | 169 |\n| 삭제(deleted) | 42 |\n| 신규 생성(newCount) | 3 |\n| 수정(modifiedCount) | 6 |\n| 이번 주 자동 발행(publishedCount) | 0 |\n\n## AI 활동 요약\n- **총 작업 수**: 16  \n- **작업 유형별**  \n  - freshness_check: 1  \n  - quality_score: 2  \n  - modify: 6  \n  - generate: 3  \n  - maintain: 4  \n\n### 주요 AI 작업 내역\n1. **신선도 점검** (2026‑05‑31) – 441문서 중 1개가 outdated, 긴급 항목 없음.  \n2. **품질 점수 검토** (2026‑05‑29) – Issue #792, #788 두 건 모두 89점으로 자동 발행 처리.  \n3. **문서 수정** – Issue #795‑#797, #789‑#791 등 6건의 URL·내용 수정 수행 (총 추가 12줄, 삭제 0줄).  \n4. **문서 생성**  \n   - “Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드” (Issue #792) – 연구·아웃라인·작성·리뷰 4단계, 총 50 489 ms 소요, 8개 소스 활용.  \n   - “Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine” (Issue #793) – 총 55 656 ms, 9개 소스 활용.  \n   - “Kubernetes v1.36 – Advancing Workload‑Aware Scheduling” (Issue #788) – 총 66 734 ms, 8개 소스 활용.  \n5. **유지·감시** – URL 변경 감지 2회, 트렌드 모니터링 2회 수행 (각 30·18·26·18개의 대상 검사, 변화·깨짐 감지 후 Issue 자동 생성).  \n\n## 열린 이슈\n- 현재 열려 있는 Issue 총수: **257건**  \n- 이번 주에 활동이 있었던 Issue: **3건** (주요 내용은 품질 점수 검토 및 URL 변경 처리)  \n\n## 주간 변경사항\n| 커밋 SHA | 메시지 | 작성자 | 날짜 |\n|----------|--------|--------|------|\n| 688ec2580 | 🔍 문서 최신성 점검: 1개 outdated 발견 | github-actions[bot] | 2026‑05‑31T01:13:18Z |\n| f61ca3509 | chore: Issue Processor 실행 결과 | GitHub Action | 2026‑05‑29T15:52:20Z |\n| 5b398045e | chore: Issue Processor 실행 결과 | GitHub Action | 2026‑05‑26T13:11:53Z |\n\n## 향후 과제\n1. **Outdated 문서 처리** – 현재 1개의 오래된 문서가 확인되었으므로, 해당 문서의 최신 정보 반영 및 검증 작업을 진행합니다.  \n2. **자동 발행 흐름 검토** – 이번 주 자동 발행된 문서가 없었으므로, 품질 점수 기준(89점 이상)과 발행 트리거를 재점검해 발행 기회를 놓치지 않도록 합니다.  \n3. **URL·깨짐 감지 정확도 향상** – 유지 작업에서 감지된 URL 깨짐·변경 건이 다수 발생했으니, 자동 교정 스크립트 도입을 검토합니다.  \n4. **Issue 관리 효율화** – 열려 있는 Issue가 257건으로 높은 편이므로, 우선순위 기반 정리 및 주기적인 클로징 정책을 강화합니다.  ",
-  "lastModified": "2026-06-04T12:44:21Z",
+  "lastModified": "2026-06-04T18:19:41Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "4dd8371",
+      "sha": "84d26ad",
       "message": "chore: Issue Processor 실행 결과",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-06-04T12:44:21Z",
+      "date": "2026-06-04T18:19:41Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
