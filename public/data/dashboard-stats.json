@@ -1,43 +1,63 @@
 {
-  "collectedAt": "2026-06-04T19:20:22.268Z",
+  "collectedAt": "2026-06-04T20:17:25.168Z",
   "overview": {
     "totalDocuments": 404,
     "publishedDocuments": 212,
     "draftDocuments": 192,
-    "openRequests": 257,
+    "openRequests": 258,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 2,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 1796,
+      "totalPipelineDurationMs": 43642
     },
     "last24h": {
-      "aiActions": 0,
-      "documentsCreated": 0,
+      "aiActions": 2,
+      "documentsCreated": 1,
       "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "tavilyApiCalls": 3,
+      "tavilyResults": 9,
+      "estimatedTokens": 1796,
+      "totalPipelineDurationMs": 43642
     },
     "last7d": {
-      "aiActions": 11,
-      "documentsCreated": 2,
+      "aiActions": 13,
+      "documentsCreated": 3,
       "documentsModified": 4,
-      "tavilyApiCalls": 6,
-      "tavilyResults": 18,
-      "estimatedTokens": 4499,
-      "totalPipelineDurationMs": 106145
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 6295,
+      "totalPipelineDurationMs": 149787
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-04T20:14:20.322Z",
+      "actionType": "quality_score",
+      "issueNumber": 794,
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-04T20:14:05.630Z",
+      "actionType": "generate",
+      "issueNumber": 794,
+      "documentTitle": "Announcing etcd 3.7.0‑beta.0",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 43642,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 1796
+    },
     {
       "timestamp": "2026-06-02T00:03:11.941Z",
       "actionType": "recover",
@@ -217,33 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-25T01:43:47.611Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 22주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-19T11:42:52.553Z",
-      "actionType": "quality_score",
-      "issueNumber": 780,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
       "totalActions": 969,
-      "totalEstimatedTokens": 815112,
-      "avgDurationMs": 56983
+      "totalEstimatedTokens": 816908,
+      "avgDurationMs": 56940
     },
     "unknown": {
       "totalActions": 31,
