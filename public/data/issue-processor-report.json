@@ -1,9 +1,14 @@
 {
-  "timestamp": "2026-06-04T19:16:20.125Z",
+  "timestamp": "2026-06-04T20:15:08.079Z",
   "dryRun": false,
   "totalIssuesScanned": 15,
   "categories": {
     "draft_review": [
+      {
+        "number": 794,
+        "title": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 317,
         "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
@@ -78,16 +83,22 @@
       }
     ],
     "update_request": [],
-    "pending_request": [
-      {
-        "number": 794,
-        "title": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
-        "daysSinceUpdate": 1
-      }
-    ],
+    "pending_request": [],
     "stale": []
   },
   "actionsPerformed": [
+    {
+      "type": "retrigger_request",
+      "issueNumber": 794,
+      "title": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 794,
+      "title": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+      "score": 89,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/announcing-etcd-3-7-0-beta-0.md"
+    },
     {
       "type": "feedback",
       "issueNumber": 317,
@@ -113,6 +124,6 @@
       "verdict": "actionable"
     }
   ],
-  "actionCount": 4,
+  "actionCount": 6,
   "maxActions": 60
 }

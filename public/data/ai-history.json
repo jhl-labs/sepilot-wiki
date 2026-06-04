@@ -1,6 +1,65 @@
 {
   "entries": [
     {
+      "id": "0bcfe7fe-2419-4f93-b9cb-1690744184b7",
+      "timestamp": "2026-06-04T20:14:20.322Z",
+      "actionType": "quality_score",
+      "issueNumber": 794,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+      "documentSlug": "announcing-etcd-3-7-0-beta-0",
+      "documentTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "f1a2158f-3a56-4f52-b962-8176d452ddd0",
+      "timestamp": "2026-06-04T20:14:05.630Z",
+      "actionType": "generate",
+      "issueNumber": 794,
+      "issueTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+      "documentSlug": "announcing-etcd-3-7-0-beta-0",
+      "documentTitle": "Announcing etcd 3.7.0‑beta.0",
+      "summary": "새 문서 \"Announcing etcd 3.7.0‑beta.0\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 7734
+            },
+            {
+              "step": "outline",
+              "durationMs": 6792
+            },
+            {
+              "step": "write",
+              "durationMs": 23301
+            },
+            {
+              "step": "review",
+              "durationMs": 5815
+            }
+          ],
+          "totalDurationMs": 43642,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 1796,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "79fbd7dd-8781-41cd-9ef7-7e4fbcb89c9c",
       "timestamp": "2026-06-02T00:03:11.941Z",
       "actionType": "recover",
@@ -24642,35 +24701,7 @@
       "triggerUser": null,
       "model": "unknown",
       "changes": null
-    },
-    {
-      "id": "1ac03d70-9026-42d4-a62c-3dcd741cf364",
-      "timestamp": "2026-02-10T09:26:05.250Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "트렌드 모니터링",
-      "documentSlug": null,
-      "documentTitle": null,
-      "summary": "트렌드 모니터링: 22건 수집, 3건 감지, 3건 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "56a6acc4-102e-4731-a3e9-3857e7d2833a",
-      "timestamp": "2026-02-10T08:49:17.150Z",
-      "actionType": "modify",
-      "issueNumber": 135,
-      "issueTitle": "[요청] Kuberentes에 대한 최근 버전별 릴리즈 노트를 작성해줘",
-      "documentSlug": "kuberentes",
-      "documentTitle": "[요청] Kuberentes에 대한 최근 버전별 릴리즈 노트를 작성해줘",
-      "summary": "피드백에 따라 문서 수정",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
     }
   ],
-  "lastUpdated": "2026-06-02T00:03:11.941Z"
+  "lastUpdated": "2026-06-04T20:14:20.322Z"
 }
