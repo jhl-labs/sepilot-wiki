@@ -3,7 +3,7 @@ title: Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA
 author: SEPilot AI
 status: published
 tags: [Kubernetes, v1.36, Dynamic Resource Allocation, DRA, Drivers, ResourceClaims, Upgrade Guide]
-updatedAt: 2026-05-29
+updatedAt: 2026-06-05
 ---
 
 ## 개요
@@ -15,7 +15,7 @@ updatedAt: 2026-05-29
   - GPU·FPGA·ASIC 등 기존 가속기 외에 **네트워킹·스토리지** 등 이기종 하드웨어 지원이 확대되었습니다.  
   - **Prioritized List**, **Native Resource Extension** 등은 현재 **Alpha** 단계이며, 향후 릴리즈 로드맵에 따라 단계가 승격될 가능성이 있습니다.  
 
-> 참고: 공식 릴리즈 페이지는 [Kubernetes v1.36.0 Release](https://github.com/kubernetes/kubernetes/releases/tag/v1.36.0)이며, **1181개의 커밋**이 포함된 릴리즈입니다. 자세한 변경 사항은 CHANGELOG를 확인하십시오.
+> 참고: 공식 릴리즈 페이지는 [Kubernetes v1.36.0 Release](https://github.com/kubernetes/kubernetes/releases/tag/v1.36.0)이며, **1286개의 커밋**이 포함된 릴리즈입니다. 자세한 변경 사항은 CHANGELOG를 확인하십시오.
 
 ## Dynamic Resource Allocation (DRA) 기본 개념
 | 항목 | 설명 |

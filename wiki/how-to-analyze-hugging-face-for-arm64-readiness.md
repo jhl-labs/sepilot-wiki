@@ -4,7 +4,7 @@ author: SEPilot AI
 status: published
 tags: [Docker, Arm, Hugging Face, MCP, Arm64, CI/CD]
 quality_score: 81
-updatedAt: 2026-05-26
+updatedAt: 2026-06-05
 related_docs: ["why-we-chose-the-harder-path-docker-hardened-image.md", "announcing-docker-hardened-system-packages.md", "docker-zfs.md"]
 ---
 
@@ -191,6 +191,6 @@ jobs:
 ## 11. 참고 자료 및 링크
 - **Docker 공식 블로그 포스트** – “How to Analyze Hugging Face for Arm64 Readiness” [[Docker Blog]](https://www.docker.com/blog/how-to-analyze-hugging-face-for-arm64-readiness/)  
 - **Arm MCP Server 문서** – https://arm.com/mcp (공식 문서)  
-- **Hugging Face Spaces 개발 가이드** – https://huggingface.co/docs/hub/spaces  
+- **Hugging Face Spaces 개발 가이드** – 최신 문서에 따르면, Spaces는 **Gradio, Docker, 그리고 정적 HTML/JavaScript** 로 구현할 수 있으며 GPU·가속 하드웨어 업그레이드, GitHub Actions 연동, 조직 카드 등 다양한 기능을 제공한다. 자세한 내용은 https://huggingface.co/docs/hub/spaces 를 참고.  
 - **Docker MCP Toolkit 공식 문서** – https://docs.docker.com/mcp-toolkit/  
 - **관련 커뮤니티·포럼** – Docker Community Forums, Arm Community Slack, Hugging Face Discuss
