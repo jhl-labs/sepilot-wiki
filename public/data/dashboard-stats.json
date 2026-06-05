@@ -1,10 +1,10 @@
 {
-  "collectedAt": "2026-06-05T11:38:36.473Z",
+  "collectedAt": "2026-06-05T13:34:56.253Z",
   "overview": {
-    "totalDocuments": 405,
-    "publishedDocuments": 213,
-    "draftDocuments": 192,
-    "openRequests": 258,
+    "totalDocuments": 408,
+    "publishedDocuments": 215,
+    "draftDocuments": 193,
+    "openRequests": 261,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
@@ -19,25 +19,115 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 4,
-      "documentsCreated": 1,
-      "documentsModified": 0,
-      "tavilyApiCalls": 3,
-      "tavilyResults": 9,
-      "estimatedTokens": 1796,
-      "totalPipelineDurationMs": 43642
+      "aiActions": 13,
+      "documentsCreated": 4,
+      "documentsModified": 3,
+      "tavilyApiCalls": 12,
+      "tavilyResults": 36,
+      "estimatedTokens": 8762,
+      "totalPipelineDurationMs": 205858
     },
     "last7d": {
-      "aiActions": 13,
-      "documentsCreated": 3,
-      "documentsModified": 4,
-      "tavilyApiCalls": 9,
-      "tavilyResults": 27,
-      "estimatedTokens": 6295,
-      "totalPipelineDurationMs": 149787
+      "aiActions": 22,
+      "documentsCreated": 6,
+      "documentsModified": 7,
+      "tavilyApiCalls": 18,
+      "tavilyResults": 54,
+      "estimatedTokens": 13261,
+      "totalPipelineDurationMs": 312003
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-05T11:42:53.665Z",
+      "actionType": "quality_score",
+      "issueNumber": 800,
+      "documentTitle": "[Wiki Maintenance] [요청] From Kubernetes Dashboard to Headlamp: Understanding the Transition",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-05T11:42:39.390Z",
+      "actionType": "quality_score",
+      "issueNumber": 801,
+      "documentTitle": "[Wiki Maintenance] [요청] Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-05T11:42:32.011Z",
+      "actionType": "quality_score",
+      "issueNumber": 802,
+      "documentTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-05T11:42:14.557Z",
+      "actionType": "modify",
+      "issueNumber": 803,
+      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-05T11:41:32.521Z",
+      "actionType": "modify",
+      "issueNumber": 804,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-05T11:40:40.095Z",
+      "actionType": "modify",
+      "issueNumber": 805,
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-05T11:40:00.806Z",
+      "actionType": "generate",
+      "issueNumber": 800,
+      "documentTitle": "From Kubernetes Dashboard to Headlamp – Transition Guide",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 54737,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2267
+    },
+    {
+      "timestamp": "2026-06-05T11:38:54.151Z",
+      "actionType": "generate",
+      "issueNumber": 801,
+      "documentTitle": "Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 51802,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2077
+    },
+    {
+      "timestamp": "2026-06-05T11:37:46.174Z",
+      "actionType": "generate",
+      "issueNumber": 802,
+      "documentTitle": "What is Software Supply Chain Security?",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 55677,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2622
+    },
     {
       "timestamp": "2026-06-05T10:26:10.186Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-29T15:48:27.098Z",
-      "actionType": "generate",
-      "issueNumber": 792,
-      "documentTitle": "Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 50489,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2150
-    },
-    {
-      "timestamp": "2026-05-29T15:47:04.182Z",
-      "actionType": "generate",
-      "issueNumber": 793,
-      "documentTitle": "Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 55656,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2349
-    },
-    {
-      "timestamp": "2026-05-29T10:25:39.565Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-29T10:25:21.756Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-26T13:11:47.507Z",
-      "actionType": "quality_score",
-      "issueNumber": 788,
-      "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-26T13:11:25.303Z",
-      "actionType": "modify",
-      "issueNumber": 789,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-26T13:10:20.811Z",
-      "actionType": "modify",
-      "issueNumber": 790,
-      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-26T13:09:36.594Z",
-      "actionType": "modify",
-      "issueNumber": 791,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-26T13:08:51.217Z",
-      "actionType": "generate",
-      "issueNumber": 788,
-      "documentTitle": "Kubernetes v1.36 – Advancing Workload‑Aware Scheduling",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 66734,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2918
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 970,
+      "totalEstimatedTokens": 811388,
+      "avgDurationMs": 56777
+    },
     "unknown": {
       "totalActions": 30,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 970,
-      "totalEstimatedTokens": 816908,
-      "avgDurationMs": 56940
     }
   }
 }
