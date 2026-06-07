@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-06-07T09:40:43.416Z",
+  "collectedAt": "2026-06-07T11:15:24.086Z",
   "overview": {
     "totalDocuments": 408,
     "publishedDocuments": 215,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 15,
+      "aiActions": 16,
       "documentsCreated": 4,
       "documentsModified": 4,
       "tavilyApiCalls": 12,
@@ -38,6 +38,16 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-07T10:00:22.065Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "학습 루프",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-06-05T11:42:53.665Z",
       "actionType": "quality_score",
@@ -227,23 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-29T15:49:30.788Z",
-      "actionType": "modify",
-      "issueNumber": 797,
-      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
       "totalActions": 970,
-      "totalEstimatedTokens": 811388,
-      "avgDurationMs": 56777
+      "totalEstimatedTokens": 807219,
+      "avgDurationMs": 56677
     },
     "unknown": {
       "totalActions": 30,
