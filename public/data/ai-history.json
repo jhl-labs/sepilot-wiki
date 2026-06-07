@@ -1,6 +1,20 @@
 {
   "entries": [
     {
+      "id": "de742690-4f53-417a-99e2-961b5653b77c",
+      "timestamp": "2026-06-07T10:00:22.065Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "학습 루프",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "학습 루프: 3개 패턴 감지, 2개 에이전트 개선",
+      "trigger": "weekly_schedule",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "04afe727-6ae4-4571-a1ec-814f92308672",
       "timestamp": "2026-06-05T11:42:53.665Z",
       "actionType": "quality_score",
@@ -24654,48 +24668,7 @@
       "triggerUser": null,
       "model": "unknown",
       "changes": null
-    },
-    {
-      "id": "211e6de0-786a-44f5-bfd9-15226235c340",
-      "timestamp": "2026-02-10T12:48:04.303Z",
-      "actionType": "generate",
-      "issueNumber": 147,
-      "issueTitle": "OpenClaw 완벽 가이드",
-      "documentSlug": "openclaw",
-      "documentTitle": "OpenClaw 완벽 가이드",
-      "summary": "새 문서 \"OpenClaw 완벽 가이드\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 4206
-            },
-            {
-              "step": "outline",
-              "durationMs": 9028
-            },
-            {
-              "step": "write",
-              "durationMs": 34232
-            },
-            {
-              "step": "review",
-              "durationMs": 6877
-            },
-            {
-              "step": "refine",
-              "durationMs": 33249
-            }
-          ],
-          "totalDurationMs": 87592,
-          "researchSources": 9
-        }
-      }
     }
   ],
-  "lastUpdated": "2026-06-05T11:42:53.666Z"
+  "lastUpdated": "2026-06-07T10:00:22.065Z"
 }
