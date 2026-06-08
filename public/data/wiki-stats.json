@@ -1,54 +1,55 @@
 {
-  "generatedAt": "2026-06-01T01:54:31.465Z",
-  "weekNumber": 23,
+  "generatedAt": "2026-06-08T01:48:24.757Z",
+  "weekNumber": 24,
   "year": 2026,
   "period": {
-    "start": "2026-05-25T01:54:16.710Z",
-    "end": "2026-06-01T01:54:16.710Z"
+    "start": "2026-06-01T01:48:12.491Z",
+    "end": "2026-06-08T01:48:12.491Z"
   },
   "documents": {
-    "total": 441,
+    "total": 447,
     "statusDistribution": {
-      "published": 230,
-      "draft": 169,
+      "published": 235,
+      "draft": 170,
       "deleted": 42
     },
-    "newCount": 3,
-    "modifiedCount": 6,
+    "newCount": 4,
+    "modifiedCount": 3,
     "publishedCount": 0
   },
   "aiActivity": {
     "totalActions": 16,
     "byType": {
-      "freshness_check": 1,
-      "quality_score": 2,
-      "modify": 6,
-      "generate": 3,
-      "maintain": 4
+      "maintain": 3,
+      "quality_score": 4,
+      "modify": 3,
+      "generate": 4,
+      "recover": 1,
+      "status_report": 1
     },
     "entries": [
       {
-        "id": "51d5717f-3103-413f-a338-8962f4a4c14f",
-        "timestamp": "2026-05-31T01:13:17.046Z",
-        "actionType": "freshness_check",
+        "id": "de742690-4f53-417a-99e2-961b5653b77c",
+        "timestamp": "2026-06-07T10:00:22.065Z",
+        "actionType": "maintain",
         "issueNumber": null,
-        "issueTitle": "문서 최신성 점검",
-        "documentSlug": "_freshness-check",
-        "documentTitle": "문서 최신성 점검",
-        "summary": "441개 문서 점검, 1개 outdated, 0개 긴급",
+        "issueTitle": "학습 루프",
+        "documentSlug": null,
+        "documentTitle": null,
+        "summary": "학습 루프: 3개 패턴 감지, 2개 에이전트 개선",
         "trigger": "weekly_schedule",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "65fe4db6-8fc9-404d-8334-31c6ba42cf74",
-        "timestamp": "2026-05-29T15:51:51.063Z",
+        "id": "04afe727-6ae4-4571-a1ec-814f92308672",
+        "timestamp": "2026-06-05T11:42:53.665Z",
         "actionType": "quality_score",
-        "issueNumber": 792,
-        "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
-        "documentSlug": "security/reconciling-the-past-correcting-records-for-unfixe",
-        "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+        "issueNumber": 800,
+        "issueTitle": "[Wiki Maintenance] [요청] From Kubernetes Dashboard to Headlamp: Understanding the Transition",
+        "documentSlug": "from-kubernetes-dashboard-to-headlamp-understandin",
+        "documentTitle": "[Wiki Maintenance] [요청] From Kubernetes Dashboard to Headlamp: Understanding the Transition",
         "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -56,10 +57,55 @@
         "changes": null
       },
       {
-        "id": "d938c656-e35b-4c8c-80e8-e5da215a578f",
-        "timestamp": "2026-05-29T15:51:12.429Z",
+        "id": "4627542d-3e85-49af-8b53-d4cd4624dc59",
+        "timestamp": "2026-06-05T11:42:39.390Z",
+        "actionType": "quality_score",
+        "issueNumber": 801,
+        "issueTitle": "[Wiki Maintenance] [요청] Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
+        "documentSlug": "hardened-images-explained-fewer-cves-smaller-attac",
+        "documentTitle": "[Wiki Maintenance] [요청] Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "81d04634-1f74-4364-a9c2-9ddf0e174c9c",
+        "timestamp": "2026-06-05T11:42:32.011Z",
+        "actionType": "quality_score",
+        "issueNumber": 802,
+        "issueTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+        "documentSlug": "what-is-software-supply-chain-security",
+        "documentTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+        "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+        "trigger": "issue_processor",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": null
+      },
+      {
+        "id": "c3996e30-5b0f-484b-9e31-1a6743996be3",
+        "timestamp": "2026-06-05T11:42:14.557Z",
         "actionType": "modify",
-        "issueNumber": 795,
+        "issueNumber": 803,
+        "issueTitle": "[Wiki Maintenance] [URL 변경] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
+        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
+        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
+        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
+        "trigger": "update_request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "additions": 0,
+          "deletions": 0
+        }
+      },
+      {
+        "id": "8936f74e-149a-4554-8752-a44305a0b227",
+        "timestamp": "2026-06-05T11:41:32.521Z",
+        "actionType": "modify",
+        "issueNumber": 804,
         "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
         "documentSlug": "untitled-1776224402310",
         "documentTitle": "검색 서비스 구현 및 사용 가이드",
@@ -68,15 +114,15 @@
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": {
-          "additions": 11,
+          "additions": 2,
           "deletions": 0
         }
       },
       {
-        "id": "31af1364-7934-4df9-b6a9-9549492817b3",
-        "timestamp": "2026-05-29T15:50:09.589Z",
+        "id": "85343117-de01-4e7f-ad4b-1c8a94b9884a",
+        "timestamp": "2026-06-05T11:40:40.095Z",
         "actionType": "modify",
-        "issueNumber": 796,
+        "issueNumber": 805,
         "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
         "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
         "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
@@ -90,31 +136,14 @@
         }
       },
       {
-        "id": "7c2045ff-8112-4c70-a16c-35686c116c56",
-        "timestamp": "2026-05-29T15:49:30.788Z",
-        "actionType": "modify",
-        "issueNumber": 797,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
-        "documentSlug": "678",
-        "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "ca18f702-0186-4cc4-8711-16716562cd02",
-        "timestamp": "2026-05-29T15:48:27.098Z",
+        "id": "90a3a804-ee15-4e0e-bd07-c0f7fedb4ead",
+        "timestamp": "2026-06-05T11:40:00.806Z",
         "actionType": "generate",
-        "issueNumber": 792,
-        "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
-        "documentSlug": "security/reconciling-the-past-correcting-records-for-unfixe",
-        "documentTitle": "Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드",
-        "summary": "새 문서 \"Reconciling the Past – 미해결 Kubernetes CVE 기록 정정 가이드\" 생성",
+        "issueNumber": 800,
+        "issueTitle": "[Wiki Maintenance] [요청] From Kubernetes Dashboard to Headlamp: Understanding the Transition",
+        "documentSlug": "from-kubernetes-dashboard-to-headlamp-understandin",
+        "documentTitle": "From Kubernetes Dashboard to Headlamp – Transition Guide",
+        "summary": "새 문서 \"From Kubernetes Dashboard to Headlamp – Transition Guide\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -123,43 +152,43 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 7488
+                "durationMs": 9406
               },
               {
                 "step": "outline",
-                "durationMs": 8266
+                "durationMs": 7996
               },
               {
                 "step": "write",
-                "durationMs": 27355
+                "durationMs": 28455
               },
               {
                 "step": "review",
-                "durationMs": 7380
+                "durationMs": 8880
               }
             ],
-            "totalDurationMs": 50489,
+            "totalDurationMs": 54737,
             "researchSources": 8,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 2150,
+              "estimated": 2267,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "7cd150e8-048f-4a51-9d4b-c9f7eb5c872f",
-        "timestamp": "2026-05-29T15:47:04.182Z",
+        "id": "30a10fe2-c8ce-4926-9d64-5d16555654c0",
+        "timestamp": "2026-06-05T11:38:54.151Z",
         "actionType": "generate",
-        "issueNumber": 793,
-        "issueTitle": "[Wiki Maintenance] [요청] Mitigating CVE-2026-31431 (&#8220;Copy Fail&#8221;) in Docker Engine",
-        "documentSlug": "security/mitigating-cve-2026-31431-8220-copy-fail-8221-in-d",
-        "documentTitle": "Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine",
-        "summary": "새 문서 \"Mitigating CVE‑2026‑31431 (“Copy Fail”) in Docker Engine\" 생성",
+        "issueNumber": 801,
+        "issueTitle": "[Wiki Maintenance] [요청] Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
+        "documentSlug": "hardened-images-explained-fewer-cves-smaller-attac",
+        "documentTitle": "Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
+        "summary": "새 문서 \"Hardened Images Explained: Fewer CVEs, Smaller Attack Surface\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -168,37 +197,82 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 8684
+                "durationMs": 10262
               },
               {
                 "step": "outline",
-                "durationMs": 7610
+                "durationMs": 6565
               },
               {
                 "step": "write",
-                "durationMs": 30017
+                "durationMs": 26897
               },
               {
                 "step": "review",
-                "durationMs": 9345
+                "durationMs": 8078
               }
             ],
-            "totalDurationMs": 55656,
-            "researchSources": 9,
+            "totalDurationMs": 51802,
+            "researchSources": 10,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 2349,
+              "estimated": 2077,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "e067b580-278f-4803-af40-a7718f75d7dc",
-        "timestamp": "2026-05-29T10:25:39.565Z",
+        "id": "166a1963-bf28-4a57-968b-b86fc87298f6",
+        "timestamp": "2026-06-05T11:37:46.174Z",
+        "actionType": "generate",
+        "issueNumber": 802,
+        "issueTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+        "documentSlug": "what-is-software-supply-chain-security",
+        "documentTitle": "What is Software Supply Chain Security?",
+        "summary": "새 문서 \"What is Software Supply Chain Security?\" 생성",
+        "trigger": "request_label",
+        "triggerUser": null,
+        "model": "gpt-oss:120b-cloud",
+        "changes": {
+          "pipeline": {
+            "steps": [
+              {
+                "step": "research",
+                "durationMs": 3243
+              },
+              {
+                "step": "outline",
+                "durationMs": 10852
+              },
+              {
+                "step": "write",
+                "durationMs": 34379
+              },
+              {
+                "step": "review",
+                "durationMs": 7203
+              }
+            ],
+            "totalDurationMs": 55677,
+            "researchSources": 9,
+            "tavilyUsage": {
+              "apiCalls": 3,
+              "totalResults": 9
+            },
+            "estimatedTokens": {
+              "estimated": 2622,
+              "method": "duration_based"
+            }
+          }
+        }
+      },
+      {
+        "id": "848443a4-ab9e-4c9c-a25f-9788ffd9c410",
+        "timestamp": "2026-06-05T10:26:10.186Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "URL 변경 감지",
@@ -211,27 +285,27 @@
         "changes": null
       },
       {
-        "id": "601881d3-9fd5-4b52-8023-681809c6b737",
-        "timestamp": "2026-05-29T10:25:21.756Z",
+        "id": "42e36433-52b6-45b0-bdb3-d34b7448ecd6",
+        "timestamp": "2026-06-05T10:25:52.619Z",
         "actionType": "maintain",
         "issueNumber": null,
         "issueTitle": "트렌드 모니터링",
         "documentSlug": null,
         "documentTitle": null,
-        "summary": "트렌드 모니터링: 18건 수집, 3건 감지, 3건 Issue 생성",
+        "summary": "트렌드 모니터링: 19건 수집, 3건 감지, 3건 Issue 생성",
         "trigger": "scheduled",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "295c091d-522f-4af4-815d-1048e34f0522",
-        "timestamp": "2026-05-26T13:11:47.507Z",
+        "id": "0bcfe7fe-2419-4f93-b9cb-1690744184b7",
+        "timestamp": "2026-06-04T20:14:20.322Z",
         "actionType": "quality_score",
-        "issueNumber": 788,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-        "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
-        "documentTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
+        "issueNumber": 794,
+        "issueTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+        "documentSlug": "announcing-etcd-3-7-0-beta-0",
+        "documentTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
         "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
         "trigger": "issue_processor",
         "triggerUser": null,
@@ -239,65 +313,14 @@
         "changes": null
       },
       {
-        "id": "516f04f5-3e0b-4fca-b31c-a4cf88642f19",
-        "timestamp": "2026-05-26T13:11:25.303Z",
-        "actionType": "modify",
-        "issueNumber": 789,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
-        "documentSlug": "untitled-1776224402310",
-        "documentTitle": "검색 서비스 구현 및 사용 가이드",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "d1caad73-90bb-42c9-a6b5-5553fa10249a",
-        "timestamp": "2026-05-26T13:10:20.811Z",
-        "actionType": "modify",
-        "issueNumber": 790,
-        "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
-        "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
-        "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 1,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "09a3eb6b-a3df-492e-be9a-d15abaef8721",
-        "timestamp": "2026-05-26T13:09:36.594Z",
-        "actionType": "modify",
-        "issueNumber": 791,
-        "issueTitle": "[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요",
-        "documentSlug": "how-to-analyze-hugging-face-for-arm64-readiness",
-        "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-        "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 깨짐] how-to-analyze-hugging-face-for-arm64-readiness 문서 참조 URL 확인 필요\"",
-        "trigger": "update_request_label",
-        "triggerUser": null,
-        "model": "gpt-oss:120b-cloud",
-        "changes": {
-          "additions": 0,
-          "deletions": 0
-        }
-      },
-      {
-        "id": "2aaff735-819d-4b7c-82a5-1b625cf3b456",
-        "timestamp": "2026-05-26T13:08:51.217Z",
+        "id": "f1a2158f-3a56-4f52-b962-8176d452ddd0",
+        "timestamp": "2026-06-04T20:14:05.630Z",
         "actionType": "generate",
-        "issueNumber": 788,
-        "issueTitle": "[Wiki Maintenance] [요청] Kubernetes v1.36: Advancing Workload-Aware Scheduling",
-        "documentSlug": "kubernetes-v1-36-advancing-workload-aware-scheduli",
-        "documentTitle": "Kubernetes v1.36 – Advancing Workload‑Aware Scheduling",
-        "summary": "새 문서 \"Kubernetes v1.36 – Advancing Workload‑Aware Scheduling\" 생성",
+        "issueNumber": 794,
+        "issueTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
+        "documentSlug": "announcing-etcd-3-7-0-beta-0",
+        "documentTitle": "Announcing etcd 3.7.0‑beta.0",
+        "summary": "새 문서 \"Announcing etcd 3.7.0‑beta.0\" 생성",
         "trigger": "request_label",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
@@ -306,58 +329,58 @@
             "steps": [
               {
                 "step": "research",
-                "durationMs": 8383
+                "durationMs": 7734
               },
               {
                 "step": "outline",
-                "durationMs": 10453
+                "durationMs": 6792
               },
               {
                 "step": "write",
-                "durationMs": 40851
+                "durationMs": 23301
               },
               {
                 "step": "review",
-                "durationMs": 7047
+                "durationMs": 5815
               }
             ],
-            "totalDurationMs": 66734,
-            "researchSources": 8,
+            "totalDurationMs": 43642,
+            "researchSources": 9,
             "tavilyUsage": {
               "apiCalls": 3,
               "totalResults": 9
             },
             "estimatedTokens": {
-              "estimated": 2918,
+              "estimated": 1796,
               "method": "duration_based"
             }
           }
         }
       },
       {
-        "id": "25816a5a-926c-43eb-99cb-2980be1556b2",
-        "timestamp": "2026-05-26T10:28:53.761Z",
-        "actionType": "maintain",
-        "issueNumber": null,
-        "issueTitle": "URL 변경 감지",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "URL 변경 감지: 30개 체크, 2개 변경, 9개 깨짐, 3건 Issue",
-        "trigger": "scheduled",
+        "id": "79fbd7dd-8781-41cd-9ef7-7e4fbcb89c9c",
+        "timestamp": "2026-06-02T00:03:11.941Z",
+        "actionType": "recover",
+        "issueNumber": 798,
+        "issueTitle": "chore(deps): bump vitest from 4.0.18 to 4.1.0",
+        "documentSlug": "github/create-dependencies-label",
+        "documentTitle": "chore(deps): bump vitest from 4.0.18 to 4.1.0",
+        "summary": "피드백에 따라 문서 생성",
+        "trigger": "maintainer_comment",
         "triggerUser": null,
-        "model": "unknown",
+        "model": "gpt-oss:120b-cloud",
         "changes": null
       },
       {
-        "id": "ffd9495e-032e-4793-9cc0-d4b2408cf1b7",
-        "timestamp": "2026-05-26T10:28:35.269Z",
-        "actionType": "maintain",
+        "id": "df94f340-057c-4171-9f87-538b0119ec18",
+        "timestamp": "2026-06-01T01:54:31.475Z",
+        "actionType": "status_report",
         "issueNumber": null,
-        "issueTitle": "트렌드 모니터링",
-        "documentSlug": null,
-        "documentTitle": null,
-        "summary": "트렌드 모니터링: 26건 수집, 3건 감지, 3건 Issue 생성",
-        "trigger": "scheduled",
+        "issueTitle": "주간 보고서 2026-W23",
+        "documentSlug": "reports/weekly-2026-23",
+        "documentTitle": "주간 위키 보고서 - 2026년 23주차",
+        "summary": "주간 보고서 생성: 441개 문서, 16개 AI 활동",
+        "trigger": "weekly_schedule",
         "triggerUser": null,
         "model": "gpt-oss:120b-cloud",
         "changes": null
@@ -365,29 +388,35 @@
     ]
   },
   "issues": {
-    "totalOpen": 257,
-    "recentActivity": 3
+    "totalOpen": 261,
+    "recentActivity": 4
   },
   "commits": {
-    "total": 3,
+    "total": 4,
     "entries": [
       {
-        "sha": "688ec2580",
-        "message": "🔍 문서 최신성 점검: 1개 outdated 발견",
+        "sha": "892f25abc",
+        "message": "chore: Issue Processor 실행 결과",
+        "author": "GitHub Action",
+        "date": "2026-06-05T11:43:42Z"
+      },
+      {
+        "sha": "d1b0f928b",
+        "message": "chore: Issue Processor 실행 결과",
+        "author": "GitHub Action",
+        "date": "2026-06-04T20:15:08Z"
+      },
+      {
+        "sha": "32d51838e",
+        "message": "docs: Issue #798 - 피드백 반영",
+        "author": "GitHub Action",
+        "date": "2026-06-02T00:03:30Z"
+      },
+      {
+        "sha": "64af61765",
+        "message": "📊 주간 위키 상태 보고서 생성",
         "author": "github-actions[bot]",
-        "date": "2026-05-31T01:13:18Z"
-      },
-      {
-        "sha": "f61ca3509",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-05-29T15:52:20Z"
-      },
-      {
-        "sha": "5b398045e",
-        "message": "chore: Issue Processor 실행 결과",
-        "author": "GitHub Action",
-        "date": "2026-05-26T13:11:53Z"
+        "date": "2026-06-01T01:54:32Z"
       }
     ]
   }
