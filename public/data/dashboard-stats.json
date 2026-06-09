@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-06-09T09:49:08.896Z",
+  "collectedAt": "2026-06-09T11:35:43.725Z",
   "overview": {
     "totalDocuments": 409,
     "publishedDocuments": 216,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 15,
+      "aiActions": 17,
       "documentsCreated": 4,
       "documentsModified": 3,
       "tavilyApiCalls": 12,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-09T10:19:44.232Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-09T10:19:22.324Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-06-08T01:48:24.762Z",
       "actionType": "status_report",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-29T15:51:51.063Z",
-      "actionType": "quality_score",
-      "issueNumber": 792,
-      "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-29T15:51:12.429Z",
-      "actionType": "modify",
-      "issueNumber": 795,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 971,
-      "totalEstimatedTokens": 807219,
-      "avgDurationMs": 56677
-    },
     "unknown": {
-      "totalActions": 29,
+      "totalActions": 30,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 970,
+      "totalEstimatedTokens": 807219,
+      "avgDurationMs": 56677
     }
   }
 }
