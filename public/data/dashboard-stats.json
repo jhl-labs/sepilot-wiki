@@ -1,10 +1,10 @@
 {
-  "collectedAt": "2026-06-09T11:35:43.725Z",
+  "collectedAt": "2026-06-09T13:31:04.793Z",
   "overview": {
-    "totalDocuments": 409,
-    "publishedDocuments": 216,
-    "draftDocuments": 193,
-    "openRequests": 261,
+    "totalDocuments": 412,
+    "publishedDocuments": 217,
+    "draftDocuments": 195,
+    "openRequests": 264,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
@@ -19,25 +19,115 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 11,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 11472,
+      "totalPipelineDurationMs": 252431
     },
     "last7d": {
-      "aiActions": 17,
-      "documentsCreated": 4,
-      "documentsModified": 3,
-      "tavilyApiCalls": 12,
-      "tavilyResults": 36,
-      "estimatedTokens": 8762,
-      "totalPipelineDurationMs": 205858
+      "aiActions": 26,
+      "documentsCreated": 7,
+      "documentsModified": 6,
+      "tavilyApiCalls": 21,
+      "tavilyResults": 63,
+      "estimatedTokens": 20234,
+      "totalPipelineDurationMs": 458289
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-09T11:42:35.862Z",
+      "actionType": "quality_score",
+      "issueNumber": 806,
+      "documentTitle": "[Wiki Maintenance] [요청] 5 Software Supply Chain Security Best Practices for Development Teams",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-09T11:42:23.344Z",
+      "actionType": "quality_score",
+      "issueNumber": 807,
+      "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-09T11:42:06.049Z",
+      "actionType": "quality_score",
+      "issueNumber": 808,
+      "documentTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-09T11:41:51.705Z",
+      "actionType": "modify",
+      "issueNumber": 809,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-09T11:40:54.147Z",
+      "actionType": "modify",
+      "issueNumber": 810,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-09T11:39:55.509Z",
+      "actionType": "modify",
+      "issueNumber": 811,
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-09T11:39:14.258Z",
+      "actionType": "generate",
+      "issueNumber": 806,
+      "documentTitle": "5 Software Supply Chain Security Best Practices for Development Teams",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 82269,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3648
+    },
+    {
+      "timestamp": "2026-06-09T11:37:26.089Z",
+      "actionType": "generate",
+      "issueNumber": 807,
+      "documentTitle": "Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 72953,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3128
+    },
+    {
+      "timestamp": "2026-06-09T11:35:50.429Z",
+      "actionType": "generate",
+      "issueNumber": 808,
+      "documentTitle": "What is Software Supply Chain Security?",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 97209,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 4696
+    },
     {
       "timestamp": "2026-06-09T10:19:44.232Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 54737,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2267
-    },
-    {
-      "timestamp": "2026-06-05T11:38:54.151Z",
-      "actionType": "generate",
-      "issueNumber": 801,
-      "documentTitle": "Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 51802,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2077
-    },
-    {
-      "timestamp": "2026-06-05T11:37:46.174Z",
-      "actionType": "generate",
-      "issueNumber": 802,
-      "documentTitle": "What is Software Supply Chain Security?",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 55677,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2622
-    },
-    {
-      "timestamp": "2026-06-05T10:26:10.186Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-05T10:25:52.619Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-04T20:14:20.322Z",
-      "actionType": "quality_score",
-      "issueNumber": 794,
-      "documentTitle": "[Wiki Maintenance] [요청] Announcing etcd 3.7.0-beta.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-04T20:14:05.630Z",
-      "actionType": "generate",
-      "issueNumber": 794,
-      "documentTitle": "Announcing etcd 3.7.0‑beta.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 43642,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 1796
-    },
-    {
-      "timestamp": "2026-06-02T00:03:11.941Z",
-      "actionType": "recover",
-      "issueNumber": 798,
-      "documentTitle": "chore(deps): bump vitest from 4.0.18 to 4.1.0",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-01T01:54:31.475Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 23주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-05-31T01:13:17.046Z",
-      "actionType": "freshness_check",
-      "issueNumber": null,
-      "documentTitle": "문서 최신성 점검",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 970,
+      "totalEstimatedTokens": 816678,
+      "avgDurationMs": 56965
+    },
     "unknown": {
       "totalActions": 30,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 970,
-      "totalEstimatedTokens": 807219,
-      "avgDurationMs": 56677
     }
   }
 }
