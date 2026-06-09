@@ -1,6 +1,238 @@
 {
   "entries": [
     {
+      "id": "6a3d2799-a939-40dc-8248-040c5c96a99b",
+      "timestamp": "2026-06-09T11:42:35.862Z",
+      "actionType": "quality_score",
+      "issueNumber": 806,
+      "issueTitle": "[Wiki Maintenance] [요청] 5 Software Supply Chain Security Best Practices for Development Teams",
+      "documentSlug": "5-software-supply-chain-security-best-practices-fo",
+      "documentTitle": "[Wiki Maintenance] [요청] 5 Software Supply Chain Security Best Practices for Development Teams",
+      "summary": "자동 품질 검토 통과 (91점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "299e2eb1-6b46-40e4-9857-3e53b496a69c",
+      "timestamp": "2026-06-09T11:42:23.344Z",
+      "actionType": "quality_score",
+      "issueNumber": 807,
+      "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "documentSlug": "reconciling-the-past-correcting-records-for-unfixe",
+      "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "f8107569-6d18-44f6-b326-06ed0abe029e",
+      "timestamp": "2026-06-09T11:42:06.049Z",
+      "actionType": "quality_score",
+      "issueNumber": 808,
+      "issueTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+      "documentSlug": "what-is-software-supply-chain-security",
+      "documentTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "db468d56-531d-4174-b932-9ee359300766",
+      "timestamp": "2026-06-09T11:41:51.705Z",
+      "actionType": "modify",
+      "issueNumber": 809,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+      "documentSlug": "untitled-1776224402310",
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 2
+      }
+    },
+    {
+      "id": "55ef3c6b-5cf2-4a0b-9f74-36e02e1ac2d9",
+      "timestamp": "2026-06-09T11:40:54.147Z",
+      "actionType": "modify",
+      "issueNumber": 810,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+      "documentSlug": "untitled-1776224402310",
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 2
+      }
+    },
+    {
+      "id": "ad8faa15-1168-4179-8f3a-903ff742ce1c",
+      "timestamp": "2026-06-09T11:39:55.509Z",
+      "actionType": "modify",
+      "issueNumber": 811,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
+      "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "74145509-b3ea-48ae-b1d0-b7f83abe92b4",
+      "timestamp": "2026-06-09T11:39:14.258Z",
+      "actionType": "generate",
+      "issueNumber": 806,
+      "issueTitle": "[Wiki Maintenance] [요청] 5 Software Supply Chain Security Best Practices for Development Teams",
+      "documentSlug": "5-software-supply-chain-security-best-practices-fo",
+      "documentTitle": "5 Software Supply Chain Security Best Practices for Development Teams",
+      "summary": "새 문서 \"5 Software Supply Chain Security Best Practices for Development Teams\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 9307
+            },
+            {
+              "step": "outline",
+              "durationMs": 6620
+            },
+            {
+              "step": "write",
+              "durationMs": 25546
+            },
+            {
+              "step": "review",
+              "durationMs": 8398
+            },
+            {
+              "step": "refine",
+              "durationMs": 32397
+            }
+          ],
+          "totalDurationMs": 82269,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3648,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "95f5c9a4-a825-4ef2-9216-fe237e4eca5f",
+      "timestamp": "2026-06-09T11:37:26.089Z",
+      "actionType": "generate",
+      "issueNumber": 807,
+      "issueTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "documentSlug": "reconciling-the-past-correcting-records-for-unfixe",
+      "documentTitle": "Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
+      "summary": "새 문서 \"Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 10385
+            },
+            {
+              "step": "outline",
+              "durationMs": 21356
+            },
+            {
+              "step": "write",
+              "durationMs": 31423
+            },
+            {
+              "step": "review",
+              "durationMs": 9789
+            }
+          ],
+          "totalDurationMs": 72953,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3128,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "ba155c66-d6d6-4eee-ad13-1c491fc5ba01",
+      "timestamp": "2026-06-09T11:35:50.429Z",
+      "actionType": "generate",
+      "issueNumber": 808,
+      "issueTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
+      "documentSlug": "security/what-is-software-supply-chain-security",
+      "documentTitle": "What is Software Supply Chain Security?",
+      "summary": "새 문서 \"What is Software Supply Chain Security?\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3302
+            },
+            {
+              "step": "outline",
+              "durationMs": 25637
+            },
+            {
+              "step": "write",
+              "durationMs": 40819
+            },
+            {
+              "step": "review",
+              "durationMs": 27451
+            }
+          ],
+          "totalDurationMs": 97209,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 4696,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "340ab5d1-d4e5-407d-8089-ea76382b9cbd",
       "timestamp": "2026-06-09T10:19:44.232Z",
       "actionType": "maintain",
@@ -24499,176 +24731,7 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": null
-    },
-    {
-      "id": "e0f55314-3917-495f-95d1-b2cc07d31693",
-      "timestamp": "2026-02-11T05:57:26.694Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "10개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "1f0b704d-01de-4387-ab5d-b69b330d40ee",
-      "timestamp": "2026-02-11T05:13:59.762Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "5개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "01d38e08-24bc-4427-9356-643b4dda1793",
-      "timestamp": "2026-02-11T05:10:06.615Z",
-      "actionType": "recover",
-      "issueNumber": 139,
-      "issueTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
-      "documentSlug": "ai/multi-agent-system",
-      "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "9327a6bf-4773-49ca-9245-c11e294bd7e8",
-      "timestamp": "2026-02-11T05:10:06.614Z",
-      "actionType": "recover",
-      "issueNumber": 139,
-      "issueTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
-      "documentSlug": "kubernetes/kubernetes-release-notes",
-      "documentTitle": "[Wiki Maintainer] 루트 디렉터리 정리 및 주제별 폴더 생성 필요",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "7f5159c2-eb04-4288-a3ea-e3ff5647dfa4",
-      "timestamp": "2026-02-11T04:47:55.752Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "17개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "10e6bec4-9ce9-4fef-9cde-152785d3a6a8",
-      "timestamp": "2026-02-11T02:56:11.248Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 7개 자동 적용, 10개 보류, 1개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 7,
-        "skipped": 10,
-        "issues": 1
-      }
-    },
-    {
-      "id": "7b167d41-445c-4359-9ed1-3e15c7cf9bd6",
-      "timestamp": "2026-02-11T02:55:20.555Z",
-      "actionType": "generate",
-      "issueNumber": 153,
-      "issueTitle": "[요청] moltbook 이 뭐야?",
-      "documentSlug": "moltbook",
-      "documentTitle": "Moltbook 소개",
-      "summary": "새 문서 \"Moltbook 소개\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 9387
-            },
-            {
-              "step": "outline",
-              "durationMs": 6170
-            },
-            {
-              "step": "write",
-              "durationMs": 14292
-            },
-            {
-              "step": "review",
-              "durationMs": 4452
-            },
-            {
-              "step": "refine",
-              "durationMs": 15327
-            }
-          ],
-          "totalDurationMs": 49629,
-          "researchSources": 7,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 5
-          },
-          "estimatedTokens": {
-            "estimated": 2013,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "db6e8be0-ad2e-4bf8-9e21-61238f84c74c",
-      "timestamp": "2026-02-11T00:39:05.597Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "13개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "89ec0edc-d4b3-4704-86d0-5d181b825ed8",
-      "timestamp": "2026-02-10T22:43:41.786Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 6개 자동 적용, 12개 보류, 2개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 6,
-        "skipped": 12,
-        "issues": 2
-      }
     }
   ],
-  "lastUpdated": "2026-06-09T10:19:44.232Z"
+  "lastUpdated": "2026-06-09T11:42:35.862Z"
 }
