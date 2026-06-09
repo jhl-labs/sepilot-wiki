@@ -1,6 +1,34 @@
 {
   "entries": [
     {
+      "id": "340ab5d1-d4e5-407d-8089-ea76382b9cbd",
+      "timestamp": "2026-06-09T10:19:44.232Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "URL 변경 감지",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "URL 변경 감지: 30개 체크, 3개 변경, 8개 깨짐, 3건 Issue",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "unknown",
+      "changes": null
+    },
+    {
+      "id": "fbb32f10-7ccb-4602-916a-eedaf98d9cbc",
+      "timestamp": "2026-06-09T10:19:22.324Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "트렌드 모니터링",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "트렌드 모니터링: 18건 수집, 3건 감지, 3건 Issue 생성",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "1a05ac7b-f5ca-4a1e-87d0-ed6fa7de4b51",
       "timestamp": "2026-06-08T01:48:24.762Z",
       "actionType": "status_report",
@@ -24640,35 +24668,7 @@
         "skipped": 12,
         "issues": 2
       }
-    },
-    {
-      "id": "1a75fa9e-cf94-41fc-8e45-4cd599682052",
-      "timestamp": "2026-02-10T22:42:46.422Z",
-      "actionType": "recover",
-      "issueNumber": 149,
-      "issueTitle": "[Wiki Maintainer] 🔗 URL 리다이렉트 계획 수립",
-      "documentSlug": "redirects.yml",
-      "documentTitle": "[Wiki Maintainer] 🔗 URL 리다이렉트 계획 수립",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "67b31077-72b7-448a-8396-6c918cf99467",
-      "timestamp": "2026-02-10T22:31:30.590Z",
-      "actionType": "recover",
-      "issueNumber": 138,
-      "issueTitle": "[Wiki Maintenance] [요청] Continuous AI in practice: What developers can automate today with agentic CI",
-      "documentSlug": "ci/continuous-ai-kr",
-      "documentTitle": "[Wiki Maintenance] [요청] Continuous AI in practice: What developers can automate today with agentic CI",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
     }
   ],
-  "lastUpdated": "2026-06-08T01:48:24.762Z"
+  "lastUpdated": "2026-06-09T10:19:44.232Z"
 }
