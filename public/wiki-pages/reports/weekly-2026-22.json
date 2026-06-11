@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 22주차",
   "slug": "reports/weekly-2026-22",
   "content": "\n## 요약\n- 전체 문서 수는 438개이며, 그 중 228개가 발행(published) 상태, 168개는 초안(draft), 42개는 삭제(deleted)되었습니다.  \n- 이번 주 신규 문서 3개, 수정 문서 3개가 발생했으며, AI가 수행한 총 작업은 12건(품질 점수 3건, 수정 3건, 생성 3건, 유지보수 2건, 복구 1건)입니다.  \n- 오픈 이슈는 254건이며, 이번 주에 3건의 새로운 이슈 활동이 있었습니다.\n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 438 |\n| 발행(published) | 228 |\n| 초안(draft) | 168 |\n| 삭제(deleted) | 42 |\n| 신규 생성 | 3 |\n| 수정 | 3 |\n| 자동 발행 | 0 |\n\n## AI 활동 요약\n- **총 작업 수**: 12\n- **작업 유형별 건수**  \n  - quality_score: 3  \n  - modify: 3  \n  - generate: 3  \n  - maintain: 2  \n  - recover: 1  \n\n### 주요 AI 작업 상세\n| 시간 (UTC) | 유형 | 관련 이슈 | 문서 제목 | 요약 |\n|------------|------|-----------|-----------|------|\n| 2026-05-19 11:42:52 | quality_score | #780 | Kubernetes v1.36: New Metric for Route Sync in the Cloud Controller Manager | 자동 품질 검토 통과 (89점) → 자동 발행 |\n| 2026-05-19 11:42:29 | quality_score | #781 | Kubernetes v1.36: Advancing Workload-Aware Scheduling | 자동 품질 검토 통과 (89점) → 자동 발행 |\n| 2026-05-19 11:42:14 | quality_score | #782 | Kubernetes v1.36: Mixed Version Proxy Graduates to Beta | 자동 품질 검토 통과 (87점) → 자동 발행 |\n| 2026-05-19 11:41:59 | modify | #783 | OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust) | URL 변경 요청 처리 |\n| 2026-05-19 11:40:48 | modify | #784 | How to Analyze Hugging Face for Arm64 Readiness | URL 깨짐 수정 |\n| 2026-05-19 11:40:09 | modify | #785 | How to Analyze Hugging Face for Arm64 Readiness | 동일 이슈 재처리 |\n| 2026-05-19 11:39:21 | generate | #780 | Kubernetes v1.36 – 새 메트릭 `route_controller_route_sync_total` 가이드 | 문서 생성 (연구·아웃라인·작성·리뷰 총 57.6 s) |\n| 2026-05-19 11:37:50 | generate | #781 | Kubernetes v1.36: Advancing Workload-Aware Scheduling | 문서 생성 (총 84.4 s) |\n| 2026-05-19 11:36:02 | generate | #782 | Kubernetes v1.36: Mixed Version Proxy Graduates to Beta | 문서 생성 (총 80.5 s) |\n| 2026-05-19 10:22:28 | maintain | – | – | URL 변경 감지: 30개 체크, 1개 변경, 9개 깨짐, 3건 Issue 생성 |\n| 2026-05-19 10:22:09 | maintain | – | – | 트렌드 모니터링: 29건 수집, 3건 감지, 3건 Issue 생성 |\n| 2026-05-18 16:45:33 | recover | #777 | chore(deps): bump brace-expansion from 1.1.12 to 5.0.6 | 피드백 반영 후 문서 복구 |\n\n## 열린 이슈\n- **전체 오픈 이슈**: 254건  \n- **최근 활동(이번 주)**: 3건 (이슈 #777 복구, URL 관련 이슈 #783‑#785 등)\n\n## 주간 변경사항\n| 커밋 SHA | 메시지 | 작성자 | 날짜 (UTC) |\n|----------|--------|--------|------------|\n| c29a2e398 | chore: Issue Processor 실행 결과 | GitHub Action | 2026-05-19 11:44:44 |\n| a6e34e13d | docs: Issue #777 - 피드백 반영 | GitHub Action | 2026-05-18 16:45:52 |\n\n## 향후 과제\n1. **문서 품질 유지** – 자동 품질 점수가 87~89점 수준이므로, 90점 이상을 목표로 리뷰 프로세스 개선 필요.  \n2. **URL 깨짐 이슈** – 이번 주에 동일 문서에 2건의 URL 깨짐 수정이 발생했으며, 재발 방지를 위한 자동 검증 로직 강화 검토.  \n3. **신규 문서 발행 프로세스** – 현재 신규 문서가 3건 생성되었지만 자동 발행이 0건이므로, 품질 검토 후 자동 발행 파이프라인을 활성화하는 방안 모색.  \n4. **오픈 이슈 관리** – 254건의 누적 이슈 중 오래된 이슈 정리 및 라벨링 작업을 진행해 처리 효율성을 높일 필요.  \n\n---",
-  "lastModified": "2026-06-11T06:08:33Z",
+  "lastModified": "2026-06-11T11:59:05Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "6feaa12",
-      "message": "chore: Issue Processor 실행 결과",
+      "sha": "92e6a9f",
+      "message": "chore: 대시보드 통계 수집 - 2026-06-11 11:59",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-06-11T06:08:33Z",
+      "date": "2026-06-11T11:59:05Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
