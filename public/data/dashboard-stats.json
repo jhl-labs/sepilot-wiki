@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-06-15T03:50:12.486Z",
+  "collectedAt": "2026-06-15T06:20:10.927Z",
   "overview": {
     "totalDocuments": 413,
     "publishedDocuments": 218,
     "draftDocuments": 195,
-    "openRequests": 264,
+    "openRequests": 267,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
   "activity": {
     "last1h": {
-      "aiActions": 1,
+      "aiActions": 0,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,25 +19,65 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
-    },
-    "last7d": {
-      "aiActions": 13,
+      "aiActions": 6,
       "documentsCreated": 3,
-      "documentsModified": 3,
+      "documentsModified": 0,
       "tavilyApiCalls": 9,
       "tavilyResults": 27,
-      "estimatedTokens": 11472,
-      "totalPipelineDurationMs": 252431
+      "estimatedTokens": 7910,
+      "totalPipelineDurationMs": 168867
+    },
+    "last7d": {
+      "aiActions": 17,
+      "documentsCreated": 6,
+      "documentsModified": 3,
+      "tavilyApiCalls": 18,
+      "tavilyResults": 54,
+      "estimatedTokens": 19382,
+      "totalPipelineDurationMs": 421298
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-15T03:48:46.602Z",
+      "actionType": "quality_score",
+      "issueNumber": 814,
+      "documentTitle": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-15T03:48:31.246Z",
+      "actionType": "generate",
+      "issueNumber": 813,
+      "documentTitle": "Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 78670,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3760
+    },
+    {
+      "timestamp": "2026-06-15T03:46:46.678Z",
+      "actionType": "generate",
+      "issueNumber": 814,
+      "documentTitle": "Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 43983,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2014
+    },
+    {
+      "timestamp": "2026-06-15T03:45:46.154Z",
+      "actionType": "generate",
+      "issueNumber": 815,
+      "documentTitle": "문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 46214,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 2136
+    },
     {
       "timestamp": "2026-06-15T03:04:24.076Z",
       "actionType": "coverage_analysis",
@@ -197,53 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-05T11:42:39.390Z",
-      "actionType": "quality_score",
-      "issueNumber": 801,
-      "documentTitle": "[Wiki Maintenance] [요청] Hardened Images Explained: Fewer CVEs, Smaller Attack Surface",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-05T11:42:32.011Z",
-      "actionType": "quality_score",
-      "issueNumber": 802,
-      "documentTitle": "[Wiki Maintenance] [요청] What is Software Supply Chain Security?",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-05T11:42:14.557Z",
-      "actionType": "modify",
-      "issueNumber": 803,
-      "documentTitle": "How to Analyze Hugging Face for Arm64 Readiness",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-05T11:41:32.521Z",
-      "actionType": "modify",
-      "issueNumber": 804,
-      "documentTitle": "검색 서비스 구현 및 사용 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
       "totalActions": 970,
-      "totalEstimatedTokens": 815275,
-      "avgDurationMs": 57043
+      "totalEstimatedTokens": 821310,
+      "avgDurationMs": 57086
     },
     "unknown": {
       "totalActions": 30,
