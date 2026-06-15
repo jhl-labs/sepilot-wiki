@@ -1,8 +1,8 @@
 {
-  "collectedAt": "2026-06-15T01:37:43.013Z",
+  "collectedAt": "2026-06-15T03:50:12.486Z",
   "overview": {
-    "totalDocuments": 412,
-    "publishedDocuments": 217,
+    "totalDocuments": 413,
+    "publishedDocuments": 218,
     "draftDocuments": 195,
     "openRequests": 264,
     "closedRequests": 19,
@@ -10,7 +10,7 @@
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 1,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 12,
+      "aiActions": 13,
       "documentsCreated": 3,
       "documentsModified": 3,
       "tavilyApiCalls": 9,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-15T03:04:24.076Z",
+      "actionType": "coverage_analysis",
+      "issueNumber": null,
+      "documentTitle": "문서 커버리지 분석",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-15T01:51:33.459Z",
+      "actionType": "status_report",
+      "issueNumber": null,
+      "documentTitle": "주간 위키 보고서 - 2026년 25주차",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-06-09T11:42:35.862Z",
       "actionType": "quality_score",
@@ -217,33 +237,13 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-05T11:40:40.095Z",
-      "actionType": "modify",
-      "issueNumber": 805,
-      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-05T11:40:00.806Z",
-      "actionType": "generate",
-      "issueNumber": 800,
-      "documentTitle": "From Kubernetes Dashboard to Headlamp – Transition Guide",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 54737,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2267
     }
   ],
   "models": {
     "gpt-oss:120b-cloud": {
       "totalActions": 970,
-      "totalEstimatedTokens": 816678,
-      "avgDurationMs": 56965
+      "totalEstimatedTokens": 815275,
+      "avgDurationMs": 57043
     },
     "unknown": {
       "totalActions": 30,
