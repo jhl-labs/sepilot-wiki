@@ -1,6 +1,20 @@
 {
   "entries": [
     {
+      "id": "47f71439-4a03-4401-85bc-3060c7f03e68",
+      "timestamp": "2026-06-15T03:04:24.076Z",
+      "actionType": "coverage_analysis",
+      "issueNumber": null,
+      "issueTitle": "문서 커버리지 분석",
+      "documentSlug": "_coverage-analysis",
+      "documentTitle": "문서 커버리지 분석",
+      "summary": "커버리지 35점, 15개 미문서화 모듈 발견",
+      "trigger": "monthly_schedule",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "2476d99f-e49c-448a-b16a-eebc0098b7ef",
       "timestamp": "2026-06-15T01:51:33.459Z",
       "actionType": "status_report",
@@ -24686,52 +24700,7 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": null
-    },
-    {
-      "id": "91b4929f-e028-4200-884e-fe696a9767c1",
-      "timestamp": "2026-02-11T07:42:21.405Z",
-      "actionType": "generate",
-      "issueNumber": 156,
-      "issueTitle": "[요청]",
-      "documentSlug": "",
-      "documentTitle": "Opencode에 대해",
-      "summary": "새 문서 \"Opencode에 대해\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 4726
-            },
-            {
-              "step": "outline",
-              "durationMs": 5292
-            },
-            {
-              "step": "write",
-              "durationMs": 17677
-            },
-            {
-              "step": "review",
-              "durationMs": 5086
-            }
-          ],
-          "totalDurationMs": 32781,
-          "researchSources": 9,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 1403,
-            "method": "duration_based"
-          }
-        }
-      }
     }
   ],
-  "lastUpdated": "2026-06-15T01:51:33.459Z"
+  "lastUpdated": "2026-06-15T03:04:24.076Z"
 }
