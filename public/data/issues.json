@@ -1,6 +1,99 @@
 {
   "issues": [
     {
+      "id": 813,
+      "number": 813,
+      "title": "[커버리지 분석] 문서 작성 필요: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: Scheduler Manager\n- **소스 경로**: `lib/scheduler/scheduler-manager.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n스케줄러 매니저는 모든 백그라운드 잡을 조정·실행하는 핵심 엔진이며, 잡 스케줄링 정책, 오류 처리, 로그 구조 등을 문서화해야 운영·디버깅이 가능해집니다.\n\n> **제안 문서 제목**: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-06-15T03:48:31.250Z",
+      "updated_at": "2026-06-15T03:48:31.260Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/813",
+      "documentSlug": "guides/scheduler-manager",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/guides/scheduler-manager.md",
+      "comments": 0
+    },
+    {
+      "id": 814,
+      "number": 814,
+      "title": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: Scheduler Jobs – Update Cross References\n- **소스 경로**: `lib/scheduler/jobs/update-cross-references.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n위키 문서 간 교차 참조를 자동으로 정리·업데이트하는 잡으로, 데이터 일관성 유지에 핵심적인 역할을 합니다. 입력·출력, 트리거 시점, 오류 복구 방안을 문서화해야 합니다.\n\n> **제안 문서 제목**: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-06-15T03:46:46.682Z",
+      "updated_at": "2026-06-15T03:46:46.692Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/814",
+      "documentSlug": "cross-reference",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/cross-reference.md",
+      "comments": 0
+    },
+    {
+      "id": 815,
+      "number": 815,
+      "title": "[커버리지 분석] 문서 작성 필요: 문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름",
+      "body": "## 문서화 커버리지 분석 결과\n\n- **모듈**: Scheduler Jobs – Detect Doc Updates\n- **소스 경로**: `lib/scheduler/jobs/detect-doc-updates.ts`\n- **중요도**: high\n\n### 문서 작성 사유\n위키 페이지 변경을 감지하고 후속 작업을 트리거하는 로직을 상세히 설명해야, 새로운 콘텐츠가 즉시 반영되고 인덱싱이 유지됩니다.\n\n> **제안 문서 제목**: 문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름\n\n이 Issue에 `request` 라벨을 추가하면 AI가 자동으로 문서를 생성합니다.\n\n---\n*🤖 이 Issue는 문서 커버리지 분석에 의해 자동 생성되었습니다.*",
+      "state": "open",
+      "labels": [
+        {
+          "name": "request",
+          "color": "0e8a16"
+        },
+        {
+          "name": "draft",
+          "color": "fbca04"
+        },
+        {
+          "name": "ai-generated",
+          "color": "5319e7"
+        }
+      ],
+      "user": {
+        "login": "unknown",
+        "avatar_url": ""
+      },
+      "created_at": "2026-06-15T03:45:46.159Z",
+      "updated_at": "2026-06-15T03:45:46.170Z",
+      "html_url": "https://github.com/jhl-labs/sepilot-wiki/issues/815",
+      "documentSlug": "untitled-1781495146150",
+      "documentPath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/untitled-1781495146150.md",
+      "comments": 0
+    },
+    {
       "id": 806,
       "number": 806,
       "title": "[Wiki Maintenance] [요청] 5 Software Supply Chain Security Best Practices for Development Teams",
@@ -8783,5 +8876,5 @@
       "documentPath": "wiki/about/technology-stack.md"
     }
   ],
-  "lastUpdated": "2026-06-09T11:39:14.271Z"
+  "lastUpdated": "2026-06-15T03:48:31.260Z"
 }

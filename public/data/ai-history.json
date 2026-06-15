@@ -1,6 +1,159 @@
 {
   "entries": [
     {
+      "id": "5e2ad05b-9160-49fc-bb7c-63ff6b3fbe49",
+      "timestamp": "2026-06-15T03:48:46.602Z",
+      "actionType": "quality_score",
+      "issueNumber": 814,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "documentSlug": "cross-reference",
+      "documentTitle": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "summary": "자동 품질 검토 통과 (93점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "c283d065-2f5e-44c3-98e4-8a01aa94643e",
+      "timestamp": "2026-06-15T03:48:31.246Z",
+      "actionType": "generate",
+      "issueNumber": 813,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
+      "documentSlug": "guides/scheduler-manager",
+      "documentTitle": "Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
+      "summary": "새 문서 \"Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3479
+            },
+            {
+              "step": "outline",
+              "durationMs": 8937
+            },
+            {
+              "step": "write",
+              "durationMs": 25470
+            },
+            {
+              "step": "review",
+              "durationMs": 5643
+            },
+            {
+              "step": "refine",
+              "durationMs": 35140
+            }
+          ],
+          "totalDurationMs": 78670,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3760,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "c5b3a38d-d7a4-4e05-b500-299d4335eea2",
+      "timestamp": "2026-06-15T03:46:46.678Z",
+      "actionType": "generate",
+      "issueNumber": 814,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "documentSlug": "cross-reference",
+      "documentTitle": "Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "summary": "새 문서 \"Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3705
+            },
+            {
+              "step": "outline",
+              "durationMs": 7031
+            },
+            {
+              "step": "write",
+              "durationMs": 27180
+            },
+            {
+              "step": "review",
+              "durationMs": 6067
+            }
+          ],
+          "totalDurationMs": 43983,
+          "researchSources": 7,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2014,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "be0a11f7-81c3-45bd-97d7-18e6e4009fde",
+      "timestamp": "2026-06-15T03:45:46.154Z",
+      "actionType": "generate",
+      "issueNumber": 815,
+      "issueTitle": "[커버리지 분석] 문서 작성 필요: 문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름",
+      "documentSlug": "untitled-1781495146150",
+      "documentTitle": "문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름",
+      "summary": "새 문서 \"문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3480
+            },
+            {
+              "step": "outline",
+              "durationMs": 7820
+            },
+            {
+              "step": "write",
+              "durationMs": 28865
+            },
+            {
+              "step": "review",
+              "durationMs": 6048
+            }
+          ],
+          "totalDurationMs": 46214,
+          "researchSources": 8,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 2136,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "47f71439-4a03-4401-85bc-3060c7f03e68",
       "timestamp": "2026-06-15T03:04:24.076Z",
       "actionType": "coverage_analysis",
@@ -24609,98 +24762,7 @@
         "skipped": 1,
         "issues": 1
       }
-    },
-    {
-      "id": "615d7270-c4d5-4479-94b0-fbed775db8f4",
-      "timestamp": "2026-02-11T12:49:41.466Z",
-      "actionType": "generate",
-      "issueNumber": 158,
-      "issueTitle": "[요청] 바이브코딩에 대해",
-      "documentSlug": "",
-      "documentTitle": "바이브 코딩이란?",
-      "summary": "새 문서 \"바이브 코딩이란?\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 3734
-            },
-            {
-              "step": "outline",
-              "durationMs": 6231
-            },
-            {
-              "step": "write",
-              "durationMs": 25380
-            },
-            {
-              "step": "review",
-              "durationMs": 5889
-            }
-          ],
-          "totalDurationMs": 41234,
-          "researchSources": 9,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 1875,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "e3a9a988-9979-44f1-9f06-ae2b89343c06",
-      "timestamp": "2026-02-11T08:01:04.445Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "16개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "b3872208-d0a5-4eb3-859c-da64806380df",
-      "timestamp": "2026-02-11T07:47:59.613Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 20개 자동 적용, 1개 보류, 1개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 20,
-        "skipped": 1,
-        "issues": 1
-      }
-    },
-    {
-      "id": "9dfab0cd-7f35-402c-b0b5-f33ac33fb63c",
-      "timestamp": "2026-02-11T07:47:03.819Z",
-      "actionType": "recover",
-      "issueNumber": 156,
-      "issueTitle": "[요청] opencode",
-      "documentSlug": "projects/opencode-guide",
-      "documentTitle": "[요청] opencode",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
     }
   ],
-  "lastUpdated": "2026-06-15T03:04:24.076Z"
+  "lastUpdated": "2026-06-15T03:48:46.602Z"
 }

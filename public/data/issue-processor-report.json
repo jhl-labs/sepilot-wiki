@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-06-15T01:36:10.389Z",
+  "timestamp": "2026-06-15T03:49:50.746Z",
   "dryRun": false,
-  "totalIssuesScanned": 15,
+  "totalIssuesScanned": 18,
   "categories": {
     "draft_review": [
+      {
+        "number": 815,
+        "title": "[커버리지 분석] 문서 작성 필요: 문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 814,
+        "title": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+        "daysSinceUpdate": 0
+      },
+      {
+        "number": 813,
+        "title": "[커버리지 분석] 문서 작성 필요: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
+        "daysSinceUpdate": 0
+      },
       {
         "number": 317,
         "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
@@ -88,16 +103,43 @@
   },
   "actionsPerformed": [
     {
+      "type": "retrigger_request",
+      "issueNumber": 815,
+      "title": "[커버리지 분석] 문서 작성 필요: 문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 814,
+      "title": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법"
+    },
+    {
+      "type": "retrigger_request",
+      "issueNumber": 813,
+      "title": "[커버리지 분석] 문서 작성 필요: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드"
+    },
+    {
+      "type": "orphan_draft_close",
+      "issueNumber": 815,
+      "title": "[커버리지 분석] 문서 작성 필요: 문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름"
+    },
+    {
+      "type": "auto_publish",
+      "issueNumber": 814,
+      "title": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
+      "score": 93,
+      "filepath": "/home/runner/_work/sepilot-wiki/sepilot-wiki/wiki/cross-reference.md"
+    },
+    {
+      "type": "feedback",
+      "issueNumber": 813,
+      "title": "[커버리지 분석] 문서 작성 필요: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
+      "score": 50
+    },
+    {
       "type": "feedback",
       "issueNumber": 317,
       "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
       "score": 79
-    },
-    {
-      "type": "suggestion",
-      "issueNumber": 812,
-      "title": "[Wiki Maintainer] Root‑level documents violate category hierarchy",
-      "verdict": "actionable"
     },
     {
       "type": "suggestion",
@@ -130,6 +172,6 @@
       "verdict": "actionable"
     }
   ],
-  "actionCount": 7,
+  "actionCount": 12,
   "maxActions": 60
 }
