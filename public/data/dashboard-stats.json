@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-06-16T08:32:14.722Z",
+  "collectedAt": "2026-06-16T11:18:42.340Z",
   "overview": {
     "totalDocuments": 416,
     "publishedDocuments": 220,
@@ -10,7 +10,7 @@
   },
   "activity": {
     "last1h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 1,
+      "aiActions": 3,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-16T10:42:24.854Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-16T10:42:06.958Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-06-16T06:18:40.442Z",
       "actionType": "quality_score",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-08T01:48:24.762Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 24주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-07T10:00:22.065Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "학습 루프",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 970,
-      "totalEstimatedTokens": 821310,
-      "avgDurationMs": 57086
-    },
     "unknown": {
       "totalActions": 30,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 970,
+      "totalEstimatedTokens": 819785,
+      "avgDurationMs": 57141
     }
   }
 }
