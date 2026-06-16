@@ -1,6 +1,34 @@
 {
   "entries": [
     {
+      "id": "8bf234ba-8595-404e-b5f6-df404a2bde46",
+      "timestamp": "2026-06-16T10:42:24.854Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "URL 변경 감지",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "URL 변경 감지: 30개 체크, 3개 변경, 8개 깨짐, 3건 Issue",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "unknown",
+      "changes": null
+    },
+    {
+      "id": "960f0018-bbea-40b2-8d62-0a33b9a5647d",
+      "timestamp": "2026-06-16T10:42:06.958Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "트렌드 모니터링",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "트렌드 모니터링: 17건 수집, 3건 감지, 3건 Issue 생성",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "9b365ea4-9e27-4606-9c85-4d08446707e6",
       "timestamp": "2026-06-16T06:18:40.442Z",
       "actionType": "quality_score",
@@ -24699,66 +24727,7 @@
         "skipped": 1,
         "issues": 0
       }
-    },
-    {
-      "id": "9149037b-7118-4403-9f99-c76a0f639d1a",
-      "timestamp": "2026-02-12T07:25:13.200Z",
-      "actionType": "generate",
-      "issueNumber": 160,
-      "issueTitle": "[요청] 어제 발표한 glm5 에 대해 조사해줘",
-      "documentSlug": "glm5",
-      "documentTitle": "glm 5",
-      "summary": "새 문서 \"glm 5\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 9464
-            },
-            {
-              "step": "outline",
-              "durationMs": 4149
-            },
-            {
-              "step": "write",
-              "durationMs": 16993
-            },
-            {
-              "step": "review",
-              "durationMs": 9365
-            }
-          ],
-          "totalDurationMs": 39971,
-          "researchSources": 9,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 1525,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "bf470721-d300-45cb-93c0-fe495e7990d2",
-      "timestamp": "2026-02-12T00:23:27.280Z",
-      "actionType": "publish",
-      "issueNumber": 156,
-      "issueTitle": "[요청] opencode",
-      "documentSlug": "opencode",
-      "documentTitle": "[요청] opencode",
-      "summary": "문서 발행: draft → published 상태 전환",
-      "trigger": "issue_close",
-      "triggerUser": null,
-      "model": "unknown",
-      "changes": null
     }
   ],
-  "lastUpdated": "2026-06-16T06:18:40.443Z"
+  "lastUpdated": "2026-06-16T10:42:24.854Z"
 }
