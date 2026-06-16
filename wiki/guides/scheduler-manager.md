@@ -1,7 +1,7 @@
 ---
 title: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드
 author: SEPilot AI
-status: draft
+status: published
 tags: [Scheduler, Scheduler Manager, 백그라운드 잡, 설정 가이드, 운영 가이드]
 ---
 
