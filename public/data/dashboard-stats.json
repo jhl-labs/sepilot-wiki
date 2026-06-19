@@ -1,10 +1,10 @@
 {
-  "collectedAt": "2026-06-19T11:55:26.093Z",
+  "collectedAt": "2026-06-19T13:46:06.863Z",
   "overview": {
-    "totalDocuments": 419,
-    "publishedDocuments": 223,
+    "totalDocuments": 420,
+    "publishedDocuments": 224,
     "draftDocuments": 196,
-    "openRequests": 270,
+    "openRequests": 273,
     "closedRequests": 19,
     "totalAIActions": 1000
   },
@@ -19,25 +19,115 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 2,
-      "documentsCreated": 0,
-      "documentsModified": 0,
-      "tavilyApiCalls": 0,
-      "tavilyResults": 0,
-      "estimatedTokens": 0,
-      "totalPipelineDurationMs": 0
+      "aiActions": 11,
+      "documentsCreated": 3,
+      "documentsModified": 3,
+      "tavilyApiCalls": 9,
+      "tavilyResults": 27,
+      "estimatedTokens": 14524,
+      "totalPipelineDurationMs": 304603
     },
     "last7d": {
-      "aiActions": 20,
-      "documentsCreated": 6,
-      "documentsModified": 3,
-      "tavilyApiCalls": 18,
-      "tavilyResults": 54,
-      "estimatedTokens": 18177,
-      "totalPipelineDurationMs": 384432
+      "aiActions": 29,
+      "documentsCreated": 9,
+      "documentsModified": 6,
+      "tavilyApiCalls": 27,
+      "tavilyResults": 81,
+      "estimatedTokens": 32701,
+      "totalPipelineDurationMs": 689035
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-19T12:05:34.368Z",
+      "actionType": "quality_score",
+      "issueNumber": 822,
+      "documentTitle": "[Wiki Maintenance] [요청] Docker Content Trust: Retirement and Migration Guidance",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-19T12:05:11.896Z",
+      "actionType": "quality_score",
+      "issueNumber": 823,
+      "documentTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Storage",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-19T12:04:52.293Z",
+      "actionType": "quality_score",
+      "issueNumber": 824,
+      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.2",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-19T12:04:16.043Z",
+      "actionType": "modify",
+      "issueNumber": 825,
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-19T12:03:04.089Z",
+      "actionType": "modify",
+      "issueNumber": 826,
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-19T12:02:06.524Z",
+      "actionType": "modify",
+      "issueNumber": 827,
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-19T12:00:30.621Z",
+      "actionType": "generate",
+      "issueNumber": 822,
+      "documentTitle": "Docker Content Trust 퇴역 및 마이그레이션 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 144292,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 6906
+    },
+    {
+      "timestamp": "2026-06-19T11:57:10.772Z",
+      "actionType": "generate",
+      "issueNumber": 823,
+      "documentTitle": "Spotlight on SIG Storage 위키 유지보수 가이드",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 81004,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3837
+    },
+    {
+      "timestamp": "2026-06-19T11:55:29.673Z",
+      "actionType": "generate",
+      "issueNumber": 824,
+      "documentTitle": "Kubernetes v1.36.2 릴리즈 위키 업데이트 가이드 (검증 필요)",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": 79307,
+      "tavilyApiCalls": 3,
+      "estimatedTokens": 3781
+    },
     {
       "timestamp": "2026-06-19T10:36:00.823Z",
       "actionType": "maintain",
@@ -147,108 +237,18 @@
       "durationMs": 48308,
       "tavilyApiCalls": 3,
       "estimatedTokens": 2243
-    },
-    {
-      "timestamp": "2026-06-16T10:42:24.854Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "URL 변경 감지",
-      "model": "unknown",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-16T10:42:06.958Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "documentTitle": "트렌드 모니터링",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-16T06:18:40.442Z",
-      "actionType": "quality_score",
-      "issueNumber": 813,
-      "documentTitle": "[커버리지 분석] 문서 작성 필요: Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-15T03:48:46.602Z",
-      "actionType": "quality_score",
-      "issueNumber": 814,
-      "documentTitle": "[커버리지 분석] 문서 작성 필요: Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-15T03:48:31.246Z",
-      "actionType": "generate",
-      "issueNumber": 813,
-      "documentTitle": "Scheduler Manager – 스케줄러 전체 흐름 및 설정 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 78670,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 3760
-    },
-    {
-      "timestamp": "2026-06-15T03:46:46.678Z",
-      "actionType": "generate",
-      "issueNumber": 814,
-      "documentTitle": "Cross‑Reference 업데이트 잡 – 동작 원리와 설정 방법",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 43983,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2014
-    },
-    {
-      "timestamp": "2026-06-15T03:45:46.154Z",
-      "actionType": "generate",
-      "issueNumber": 815,
-      "documentTitle": "문서 업데이트 감지 잡 – 변경 감지 로직 및 알림 흐름",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 46214,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 2136
-    },
-    {
-      "timestamp": "2026-06-15T03:04:24.076Z",
-      "actionType": "coverage_analysis",
-      "issueNumber": null,
-      "documentTitle": "문서 커버리지 분석",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-15T01:51:33.459Z",
-      "actionType": "status_report",
-      "issueNumber": null,
-      "documentTitle": "주간 위키 보고서 - 2026년 25주차",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
+    "gpt-oss:120b-cloud": {
+      "totalActions": 971,
+      "totalEstimatedTokens": 838232,
+      "avgDurationMs": 57641
+    },
     "unknown": {
       "totalActions": 29,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
-    },
-    "gpt-oss:120b-cloud": {
-      "totalActions": 971,
-      "totalEstimatedTokens": 826958,
-      "avgDurationMs": 57256
     }
   }
 }
