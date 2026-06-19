@@ -1,6 +1,242 @@
 {
   "entries": [
     {
+      "id": "762196fd-b4f5-4238-8a57-e45cb542bcc9",
+      "timestamp": "2026-06-19T12:05:34.368Z",
+      "actionType": "quality_score",
+      "issueNumber": 822,
+      "issueTitle": "[Wiki Maintenance] [요청] Docker Content Trust: Retirement and Migration Guidance",
+      "documentSlug": "docker-content-trust-retirement-and-migration-guid",
+      "documentTitle": "[Wiki Maintenance] [요청] Docker Content Trust: Retirement and Migration Guidance",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "30745a3f-5edb-470d-abeb-c7b3971c3c1e",
+      "timestamp": "2026-06-19T12:05:11.896Z",
+      "actionType": "quality_score",
+      "issueNumber": 823,
+      "issueTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Storage",
+      "documentSlug": "spotlight-on-sig-storage",
+      "documentTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Storage",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "5d747b44-95b3-460e-b578-ffd7099dfe1b",
+      "timestamp": "2026-06-19T12:04:52.293Z",
+      "actionType": "quality_score",
+      "issueNumber": 824,
+      "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.2",
+      "documentSlug": "kubernetes-kubernetes-v1-36-2",
+      "documentTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.2",
+      "summary": "자동 품질 검토 통과 (89점) → 자동 발행",
+      "trigger": "issue_processor",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
+      "id": "900b69a1-3e2a-45f0-8afc-211b88c73b03",
+      "timestamp": "2026-06-19T12:04:16.043Z",
+      "actionType": "modify",
+      "issueNumber": 825,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요",
+      "documentSlug": "untitled-1776224402310",
+      "documentTitle": "검색 서비스 구현 및 사용 가이드",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] untitled-1776224402310 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 15,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "fa14f846-a06e-48f4-8886-140c5e012085",
+      "timestamp": "2026-06-19T12:03:04.089Z",
+      "actionType": "modify",
+      "issueNumber": 826,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요",
+      "documentSlug": "kubernetes-v1-36-more-drivers-new-features-and-the",
+      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] kubernetes-v1-36-more-drivers-new-features-and-the 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "95c90027-92bc-4527-8cca-8e8d6599be61",
+      "timestamp": "2026-06-19T12:02:06.524Z",
+      "actionType": "modify",
+      "issueNumber": 827,
+      "issueTitle": "[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요",
+      "documentSlug": "678",
+      "documentTitle": "OpenClaw 데스크톱 제어 센터 구축 가이드 (Tauri·Rust)",
+      "summary": "문서 수정 요청 처리: \"[Wiki Maintenance] [URL 변경] 678 문서 참조 URL 확인 필요\"",
+      "trigger": "update_request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "additions": 0,
+        "deletions": 0
+      }
+    },
+    {
+      "id": "5d6e64a4-f64c-4e6c-8fae-6e7ed971d79a",
+      "timestamp": "2026-06-19T12:00:30.621Z",
+      "actionType": "generate",
+      "issueNumber": 822,
+      "issueTitle": "[Wiki Maintenance] [요청] Docker Content Trust: Retirement and Migration Guidance",
+      "documentSlug": "docker-content-trust-retirement-and-migration-guid",
+      "documentTitle": "Docker Content Trust 퇴역 및 마이그레이션 가이드",
+      "summary": "새 문서 \"Docker Content Trust 퇴역 및 마이그레이션 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 6152
+            },
+            {
+              "step": "outline",
+              "durationMs": 15182
+            },
+            {
+              "step": "write",
+              "durationMs": 56202
+            },
+            {
+              "step": "review",
+              "durationMs": 7607
+            },
+            {
+              "step": "refine",
+              "durationMs": 59149
+            }
+          ],
+          "totalDurationMs": 144292,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 6906,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "513a2944-ffba-4f9c-b8c8-011205a3db0a",
+      "timestamp": "2026-06-19T11:57:10.772Z",
+      "actionType": "generate",
+      "issueNumber": 823,
+      "issueTitle": "[Wiki Maintenance] [요청] Spotlight on SIG Storage",
+      "documentSlug": "spotlight-on-sig-storage",
+      "documentTitle": "Spotlight on SIG Storage 위키 유지보수 가이드",
+      "summary": "새 문서 \"Spotlight on SIG Storage 위키 유지보수 가이드\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 4278
+            },
+            {
+              "step": "outline",
+              "durationMs": 5494
+            },
+            {
+              "step": "write",
+              "durationMs": 49452
+            },
+            {
+              "step": "review",
+              "durationMs": 21780
+            }
+          ],
+          "totalDurationMs": 81004,
+          "researchSources": 9,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3837,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
+      "id": "a1591eb7-e3f5-4cd9-bd65-7bd01e1bd87e",
+      "timestamp": "2026-06-19T11:55:29.673Z",
+      "actionType": "generate",
+      "issueNumber": 824,
+      "issueTitle": "[Wiki Maintenance] [요청] kubernetes/kubernetes v1.36.2",
+      "documentSlug": "kubernetes-kubernetes-v1-36-2",
+      "documentTitle": "Kubernetes v1.36.2 릴리즈 위키 업데이트 가이드 (검증 필요)",
+      "summary": "새 문서 \"Kubernetes v1.36.2 릴리즈 위키 업데이트 가이드 (검증 필요)\" 생성",
+      "trigger": "request_label",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": {
+        "pipeline": {
+          "steps": [
+            {
+              "step": "research",
+              "durationMs": 3669
+            },
+            {
+              "step": "outline",
+              "durationMs": 10105
+            },
+            {
+              "step": "write",
+              "durationMs": 18901
+            },
+            {
+              "step": "review",
+              "durationMs": 12545
+            },
+            {
+              "step": "refine",
+              "durationMs": 34086
+            }
+          ],
+          "totalDurationMs": 79307,
+          "researchSources": 10,
+          "tavilyUsage": {
+            "apiCalls": 3,
+            "totalResults": 9
+          },
+          "estimatedTokens": {
+            "estimated": 3781,
+            "method": "duration_based"
+          }
+        }
+      }
+    },
+    {
       "id": "b4e4247e-8912-47b4-a491-3cdd5f6f075f",
       "timestamp": "2026-06-19T10:36:00.823Z",
       "actionType": "maintain",
@@ -24613,188 +24849,7 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": null
-    },
-    {
-      "id": "e67d50b2-be96-48f5-8820-dd3e137424ce",
-      "timestamp": "2026-02-20T01:31:49.864Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 26개 자동 적용, 0개 보류, 2개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 26,
-        "skipped": 0,
-        "issues": 2
-      }
-    },
-    {
-      "id": "8096e3e8-17df-43c5-9878-544f03a5fa67",
-      "timestamp": "2026-02-20T01:30:27.820Z",
-      "actionType": "recover",
-      "issueNumber": 186,
-      "issueTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
-      "documentSlug": "ai/gemini-3-1",
-      "documentTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "5ad6e9e7-5881-40e1-bf7f-e6eae58207ef",
-      "timestamp": "2026-02-20T01:14:57.347Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 26개 자동 적용, 1개 보류, 0개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 26,
-        "skipped": 1,
-        "issues": 0
-      }
-    },
-    {
-      "id": "1f233fb4-0f0c-4168-95c0-5ec293ba099f",
-      "timestamp": "2026-02-20T01:13:32.930Z",
-      "actionType": "generate",
-      "issueNumber": 186,
-      "issueTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
-      "documentSlug": "gemni-3-1",
-      "documentTitle": "Gemini 3.1",
-      "summary": "새 문서 \"Gemini 3.1\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 3727
-            },
-            {
-              "step": "outline",
-              "durationMs": 11623
-            },
-            {
-              "step": "write",
-              "durationMs": 24656
-            },
-            {
-              "step": "review",
-              "durationMs": 5425
-            },
-            {
-              "step": "refine",
-              "durationMs": 23290
-            }
-          ],
-          "totalDurationMs": 68722,
-          "researchSources": 10,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 3250,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "4baaa350-615d-49fa-b776-47d066d8d31c",
-      "timestamp": "2026-02-19T02:01:28.392Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 25개 자동 적용, 0개 보류, 1개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 25,
-        "skipped": 0,
-        "issues": 1
-      }
-    },
-    {
-      "id": "49660247-72f9-4826-a037-cd87194272e3",
-      "timestamp": "2026-02-19T02:00:29.777Z",
-      "actionType": "modify",
-      "issueNumber": 183,
-      "issueTitle": "[요청] qwen3.5 문서를 작성해줘",
-      "documentSlug": "qwen3-5",
-      "documentTitle": "[요청] qwen3.5 문서를 작성해줘",
-      "summary": "피드백에 따라 문서 수정",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "25658601-6cff-4519-872c-c7b9973a1a62",
-      "timestamp": "2026-02-19T01:41:28.911Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 25개 자동 적용, 0개 보류, 0개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 25,
-        "skipped": 0,
-        "issues": 0
-      }
-    },
-    {
-      "id": "d4cb6aeb-4f71-4c47-aac0-e1c614462af3",
-      "timestamp": "2026-02-19T01:40:41.951Z",
-      "actionType": "recover",
-      "issueNumber": 183,
-      "issueTitle": "[요청] qwen3.5 문서를 작성해줘",
-      "documentSlug": "qwen3-5",
-      "documentTitle": "[요청] qwen3.5 문서를 작성해줘",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
-    },
-    {
-      "id": "6aa7e30c-2807-47bb-a692-1a0763945056",
-      "timestamp": "2026-02-19T01:25:01.083Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 24개 자동 적용, 1개 보류, 1개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 24,
-        "skipped": 1,
-        "issues": 1
-      }
     }
   ],
-  "lastUpdated": "2026-06-19T10:36:00.823Z"
+  "lastUpdated": "2026-06-19T12:05:34.368Z"
 }
