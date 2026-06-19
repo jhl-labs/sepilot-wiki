@@ -1,6 +1,34 @@
 {
   "entries": [
     {
+      "id": "b4e4247e-8912-47b4-a491-3cdd5f6f075f",
+      "timestamp": "2026-06-19T10:36:00.823Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "URL 변경 감지",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "URL 변경 감지: 30개 체크, 3개 변경, 8개 깨짐, 3건 Issue",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "unknown",
+      "changes": null
+    },
+    {
+      "id": "50efadf6-b63b-40b3-b1f3-5eeb8e4d4e89",
+      "timestamp": "2026-06-19T10:35:42.119Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "트렌드 모니터링",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "트렌드 모니터링: 20건 수집, 3건 감지, 3건 Issue 생성",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "02fb36d9-7304-4e69-83da-96bf4a7ec391",
       "timestamp": "2026-06-16T12:21:24.995Z",
       "actionType": "quality_score",
@@ -24766,70 +24794,7 @@
         "skipped": 1,
         "issues": 1
       }
-    },
-    {
-      "id": "05b2bec9-719a-4ab4-8ab7-cc0dfaafd34a",
-      "timestamp": "2026-02-19T01:24:10.322Z",
-      "actionType": "generate",
-      "issueNumber": 183,
-      "issueTitle": "[요청] qwen3.5 문서를 작성해줘",
-      "documentSlug": "qwen3-5",
-      "documentTitle": "Qwen 3.5",
-      "summary": "새 문서 \"Qwen 3.5\" 생성",
-      "trigger": "request_label",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "pipeline": {
-          "steps": [
-            {
-              "step": "research",
-              "durationMs": 3571
-            },
-            {
-              "step": "outline",
-              "durationMs": 4311
-            },
-            {
-              "step": "write",
-              "durationMs": 23002
-            },
-            {
-              "step": "review",
-              "durationMs": 6247
-            },
-            {
-              "step": "refine",
-              "durationMs": 28313
-            }
-          ],
-          "totalDurationMs": 65444,
-          "researchSources": 9,
-          "tavilyUsage": {
-            "apiCalls": 3,
-            "totalResults": 9
-          },
-          "estimatedTokens": {
-            "estimated": 3094,
-            "method": "duration_based"
-          }
-        }
-      }
-    },
-    {
-      "id": "df9f468c-f0a7-4322-b1ac-34656d6ec882",
-      "timestamp": "2026-02-18T00:34:59.214Z",
-      "actionType": "cross_reference",
-      "issueNumber": null,
-      "issueTitle": "교차 참조 업데이트",
-      "documentSlug": "_cross-reference",
-      "documentTitle": "교차 참조 업데이트",
-      "summary": "7개 문서의 교차 참조 업데이트",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
     }
   ],
-  "lastUpdated": "2026-06-16T12:21:24.995Z"
+  "lastUpdated": "2026-06-19T10:36:00.823Z"
 }
