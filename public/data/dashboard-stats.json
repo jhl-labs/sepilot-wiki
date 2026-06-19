@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-06-19T10:02:38.601Z",
+  "collectedAt": "2026-06-19T11:55:26.093Z",
   "overview": {
     "totalDocuments": 419,
     "publishedDocuments": 223,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -28,7 +28,7 @@
       "totalPipelineDurationMs": 0
     },
     "last7d": {
-      "aiActions": 18,
+      "aiActions": 20,
       "documentsCreated": 6,
       "documentsModified": 3,
       "tavilyApiCalls": 18,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-19T10:36:00.823Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-19T10:35:42.119Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-06-16T12:21:24.995Z",
       "actionType": "quality_score",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-09T11:42:35.862Z",
-      "actionType": "quality_score",
-      "issueNumber": 806,
-      "documentTitle": "[Wiki Maintenance] [요청] 5 Software Supply Chain Security Best Practices for Development Teams",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-09T11:42:23.344Z",
-      "actionType": "quality_score",
-      "issueNumber": 807,
-      "documentTitle": "[Wiki Maintenance] [요청] Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 972,
-      "totalEstimatedTokens": 830052,
-      "avgDurationMs": 57282
-    },
     "unknown": {
-      "totalActions": 28,
+      "totalActions": 29,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 971,
+      "totalEstimatedTokens": 826958,
+      "avgDurationMs": 57256
     }
   }
 }
