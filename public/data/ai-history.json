@@ -1,6 +1,34 @@
 {
   "entries": [
     {
+      "id": "31d921a0-920d-44ee-8a16-cca87ee3dafe",
+      "timestamp": "2026-06-23T10:19:57.586Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "URL 변경 감지",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "URL 변경 감지: 30개 체크, 2개 변경, 9개 깨짐, 3건 Issue",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "unknown",
+      "changes": null
+    },
+    {
+      "id": "3ae58403-c637-4cfc-9713-fccf504c9422",
+      "timestamp": "2026-06-23T10:19:40.633Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "issueTitle": "트렌드 모니터링",
+      "documentSlug": null,
+      "documentTitle": null,
+      "summary": "트렌드 모니터링: 18건 수집, 3건 감지, 3건 Issue 생성",
+      "trigger": "scheduled",
+      "triggerUser": null,
+      "model": "gpt-oss:120b-cloud",
+      "changes": null
+    },
+    {
       "id": "770c8afd-5ec5-4555-b23f-6820fb675824",
       "timestamp": "2026-06-22T01:53:12.332Z",
       "actionType": "status_report",
@@ -24813,39 +24841,7 @@
       "triggerUser": null,
       "model": "gpt-oss:120b-cloud",
       "changes": null
-    },
-    {
-      "id": "cec0b127-9ca5-4908-9896-2172960bd806",
-      "timestamp": "2026-02-20T02:07:04.417Z",
-      "actionType": "maintain",
-      "issueNumber": null,
-      "issueTitle": "Wiki Tree Maintenance",
-      "documentSlug": "_wiki-tree",
-      "documentTitle": "Wiki Tree Maintenance",
-      "summary": "구조 분석 완료. 27개 자동 적용, 1개 보류, 1개 Issue 생성",
-      "trigger": "scheduled",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": {
-        "applied": 27,
-        "skipped": 1,
-        "issues": 1
-      }
-    },
-    {
-      "id": "41baec9e-c421-4965-bd27-04826f904380",
-      "timestamp": "2026-02-20T02:05:42.094Z",
-      "actionType": "recover",
-      "issueNumber": 186,
-      "issueTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
-      "documentSlug": "ai/gemini-3-1-pro",
-      "documentTitle": "[요청] 어제 출시한 gemni 3.1 대해 자료 작성을 해줘",
-      "summary": "피드백에 따라 문서 생성",
-      "trigger": "maintainer_comment",
-      "triggerUser": null,
-      "model": "gpt-oss:120b-cloud",
-      "changes": null
     }
   ],
-  "lastUpdated": "2026-06-22T01:53:12.332Z"
+  "lastUpdated": "2026-06-23T10:19:57.587Z"
 }
