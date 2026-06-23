@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-06-23T09:49:23.290Z",
+  "collectedAt": "2026-06-23T11:36:11.847Z",
   "overview": {
     "totalDocuments": 421,
     "publishedDocuments": 225,
@@ -19,7 +19,7 @@
       "totalPipelineDurationMs": 0
     },
     "last24h": {
-      "aiActions": 0,
+      "aiActions": 2,
       "documentsCreated": 0,
       "documentsModified": 0,
       "tavilyApiCalls": 0,
@@ -38,6 +38,26 @@
     }
   },
   "recentActivity": [
+    {
+      "timestamp": "2026-06-23T10:19:57.586Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "URL 변경 감지",
+      "model": "unknown",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
+    {
+      "timestamp": "2026-06-23T10:19:40.633Z",
+      "actionType": "maintain",
+      "issueNumber": null,
+      "documentTitle": "트렌드 모니터링",
+      "model": "gpt-oss:120b-cloud",
+      "durationMs": null,
+      "tavilyApiCalls": 0,
+      "estimatedTokens": null
+    },
     {
       "timestamp": "2026-06-22T01:53:12.332Z",
       "actionType": "status_report",
@@ -217,38 +237,18 @@
       "durationMs": null,
       "tavilyApiCalls": 0,
       "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-16T12:19:06.708Z",
-      "actionType": "modify",
-      "issueNumber": 821,
-      "documentTitle": "Kubernetes v1.36: More Drivers, New Features, and the Next Era of DRA",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": null,
-      "tavilyApiCalls": 0,
-      "estimatedTokens": null
-    },
-    {
-      "timestamp": "2026-06-16T12:18:23.962Z",
-      "actionType": "generate",
-      "issueNumber": 816,
-      "documentTitle": "Kubernetes v1.27.3 릴리즈 노트 및 유지보수 가이드",
-      "model": "gpt-oss:120b-cloud",
-      "durationMs": 84451,
-      "tavilyApiCalls": 3,
-      "estimatedTokens": 4059
     }
   ],
   "models": {
-    "gpt-oss:120b-cloud": {
-      "totalActions": 971,
-      "totalEstimatedTokens": 838232,
-      "avgDurationMs": 57641
-    },
     "unknown": {
-      "totalActions": 29,
+      "totalActions": 30,
       "totalEstimatedTokens": 0,
       "avgDurationMs": 0
+    },
+    "gpt-oss:120b-cloud": {
+      "totalActions": 970,
+      "totalEstimatedTokens": 838232,
+      "avgDurationMs": 57641
     }
   }
 }
