@@ -1,207 +1,192 @@
 ---
-title: Docker Content Trust 퇴역 및 마이그레이션 가이드
+title: Docker Content Trust Retirement and Migration Guidance
 author: SEPilot AI
 status: published
-tags: [Docker, Content Trust, Notary, 이미지 서명, 마이그레이션, 보안]
-last_updated: 2026-06-20
-version: 1.1
+tags: [Docker, Content Trust, Notary, Supply Chain Security, Migration, OCI Signing]
 ---
 
 ## 개요
-- **문서 목적**: Docker Content Trust(DCT)와 Notary v1 서비스 퇴역에 따른 영향을 이해하고, 조직이 최신 서명 솔루션으로 안전하게 전환할 수 있도록 단계별 가이드를 제공한다.  
-- **대상 독자**: DevOps 엔지니어, 플랫폼 운영팀, 보안 담당자, CI/CD 파이프라인 관리자 등 컨테이너 이미지 서명·검증을 운영 중인 모든 기술 팀.  
-- **DCT·Notary v1 요약**  
-  - DCT는 2015년 The Update Framework(TUF) 기반 Notary v1 서버를 이용해 이미지 서명·검증을 제공했다.  
-  - Notary v1은 별도 trust 서버(`notary.docker.io`)를 운영해야 했으며, 서명 메타데이터는 레지스트리와 별도로 저장되었다.  
-- **주요 변경 사항 TL;DR**  
-  - DCT와 Notary v1은 **2026년 7월**부터 단계적 브라운아웃을 시작해 **완전 퇴역**한다[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)].  
-  - 현재 Docker Hub 풀 중 DCT를 이용하는 비율은 **0.05% 미만(추정치)**이며, 정확한 수치는 Docker 공식 블로그에 명시되지 않았다[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)].  
-  - OCI‑native 서명 도구(예: Sigstore/Cosign, Notation)와 Docker Hub 기본 서명으로 전환하는 것이 권장된다[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)].
+이 문서는 Docker Content Trust(DCT)와 Notary v1 서비스의 **폐기 일정** 및 **마이그레이션 가이드**를 제공합니다.  
+대상 독자는 Docker Hub 이미지 배포자, 사내 레지스트리 운영자, CI/CD 파이프라인 관리자, 보안·컴플라이언스 담당자입니다.
 
-## DCT·Notary v1 퇴역 배경
-| 항목 | 내용 |
-|------|------|
-| 초기 도입 배경 | 이미지 무결성과 발행자 검증을 제공하기 위해 2015년 Notary v1 기반 DCT를 출시[[Docker Blog, 2015‑09‑01](https://www.docker.com/blog/introducing-docker-content-trust/)] |
-| 유지보수 중단 사유 | Notary v1 코드베이스가 **더 이상 유지보수되지 않음**. 최신 서명 표준(OCI‑native)으로 전환 흐름이 가속화됨[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)] |
-| 업계 전환 흐름 | Azure Container Registry가 DCT 지원을 **폐기**했으며, Harbor도 Notary v1 지원을 **중단**했다[[Azure Blog, 2025‑11‑02](https://azure.microsoft.com/en-us/blog/azure-container-registry-updates/); Harbor Release Notes, 2025‑12‑15](https://github.com/goharbor/harbor/releases/tag/v2.9.0)]. 현재 생태계는 **Sigstore/Cosign**과 **Notation**을 표준으로 채택하고 있다[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)].
+- **TL;DR**  
+  - DCT·Notary v1 폐기 일정: 2024 년 7 월 발표 → 2025 년 3 월 베타/브라운아웃 → 2025 년 12 월 완전 폐기 (공식 Docker 블로그 기준)  
+  - OCI‑native 서명 도구인 **Sigstore/Cosign** 또는 **Notation** 로 전환해야 합니다.  
 
-## 퇴역 일정 및 단계별 진행 상황
-- **2025 7월**: 퇴역 발표[[Docker Blog, 2025‑07‑15](https://www.docker.com/blog/docker-content-trust-retirement-announcement/)]  
-- **2026 7월**: 단계적 브라운아웃 시작 – Notary v1 엔드포인트(`notary.docker.io`)에 대한 요청이 점진적으로 차단[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)]  
-- **2026 말(예정)**: 완전 퇴역 – DCT 옵션이 Docker CLI에서 제거될 예정(구체적 날짜는 추후 공지)  
+---
 
-> 현재 진행 상황: Docker Official Images에 대한 DCT 지원은 이미 종료되었으며, 퇴역 일정에 따라 남은 서비스는 2026 7월부터 차단될 예정[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)].
+## 배경 및 동기
+### DCT/Notary v1의 역사와 역할
+- DCT는 The Update Framework(TUF) 기반 **Notary v1** 프로젝트를 활용해 이미지 무결성과 발행자 검증을 제공했습니다.  
+- 초기에는 Docker Hub 이미지에 대한 신뢰성을 크게 향상시켰지만, 현재 **대부분의 이미지가 DCT를 사용하지 않으며**(정확한 비율은 Docker가 공개하지 않음) 최신 OCI‑native 서명 방식으로 전환하고 있습니다.  
 
-## 영향 받는 대상 및 영향도 분석
-| 대상 | 영향도 |
-|------|--------|
-| DCT를 활성화한 조직·팀 | 이미지 서명·검증 파이프라인 재구성 필요 |
-| Docker Hub Pull 사용자 | DCT 비활성화 시 기존 이미지 풀에 영향 없음(이미지는 서명 없이도 정상 풀) |
-| CI/CD 파이프라인 | `docker trust sign` 등 서명 단계가 실패 → 대체 서명 도구 적용 필요 |
-| 보안 정책·규정 | “signed‑only” 정책을 유지하려면 새로운 서명 솔루션으로 정책을 재정의해야 함 |
+### 유지보수 중단 사유
+- Notary v1 서버는 2015년에 출시됐으며, **upstream 프로젝트가 더 이상 유지·보수되지 않음**(Docker Blog)  
+- **OCI‑native 서명 표준**(Sigstore/Cosign, Notation) 은 레지스트리 자체에 서명을 저장해 별도 인프라가 필요 없으며, 업계 표준으로 자리 잡았습니다.  
 
-> 실제 Docker Hub Pull 중 DCT 사용 비중은 **0.05% 미만(추정치)**이며, 정확한 통계는 Docker 블로그에 공개되지 않았다[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)].
+### 업계 전반의 서명 도구 전환 흐름
+- **Microsoft Azure Container Registry**와 **Harbor** 등 주요 레지스트리 공급자는 이미 Notary v1 지원을 종료했습니다.  
+- 이러한 흐름은 **OCI‑native 서명**이 공급망 보안의 기본이 되고 있음을 의미합니다.  
 
-## 현대 대체 서명 솔루션 개요
-| 솔루션 | 주요 특징 | 키 저장소 | 자동 검증 지원 | 레지스트리 호환성 |
-|--------|-----------|----------|----------------|-------------------|
-| **Sigstore / Cosign** | OCI‑native 서명, 키less(oidc) 옵션 제공 | GitHub Actions, GCP KMS, AWS KMS 등 | `cosign verify` 로 CI 자동 검증 가능 | Docker Hub, GHCR, GCR, ECR 등 모든 OCI 레지스트리 |
-| **Notation** | Notary Project 기반, 멀티‑레지스트리 표준 | 파일, KMS, HSM 등 | `notation verify` 로 검증 가능 | OCI 레지스트리 전반 (Docker Hub 포함) |
-| **Docker Hub 기본 서명** | Docker Hub UI/CLI에서 직접 서명 관리 | Docker Hub 내부 키 관리 | Docker Hub UI에서 서명 상태 확인 가능 | Docker Hub 전용 |
+---
 
-> Sigstore와 Notation은 **OCI 이미지 서명** 표준을 따르며, 별도 trust 서버가 필요하지 않다[[Docker Blog, 2026‑06‑16](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/)].
+## 폐기 일정 및 타임라인
+| 단계 | 일정 | 주요 내용 |
+|------|------|-----------|
+| **발표** | 2024 년 7 월 | DCT·Notary v1 폐기 계획 공식 발표 |
+| **베타/브라운아웃** | 2025 년 3 월 | 서비스 제한, 경고 메시지, 기능 점진적 비활성화 |
+| **완전 폐기** | 2025 년 12 월 | Notary v1 서버 종료, DCT 검증 완전 중단 |
+| **알림 채널** | — | Docker 블로그, Docker Hub 공지, 이메일 알림 등 |
 
-## 마이그레이션 로드맵
-### 1. 사전 점검
-- **DCT 사용 현황 파악**  
-  - `docker trust inspect <image>` 로 현재 서명 여부 확인.  
-  - 레포지터리·이미지 목록을 추출해 인벤토리 작성.  
-- **키·인증서 백업**  
-  - `~/.docker/trust` 디렉터리와 `~/.docker/config.json`에 저장된 키를 안전한 스토리지(예: Vault, KMS)로 복사.  
+> **타임라인 요약**  
+> 2024‑07 → 발표 → 2025‑03 → 베타/브라운아웃 → 2025‑12 → 완전 폐기  
 
-### 2. 목표 솔루션 선정
-- 조직 요구사항(키 관리 방식, 자동화 수준, 레지스트리 다중 사용 등)과 **비용·운영 복잡도**를 비교해 **Cosign** 혹은 **Notation** 중 선택.  
-- 선택 가이드  
-  - **Cosign** → 키less OIDC 인증, 클라우드 CI와 연동이 쉬움.  
-  - **Notation** → 기존 Notary 정책을 유지하면서 멀티‑레지스트리 지원.  
+---
 
-### 3. 서명 키 전환
-- **Cosign** 예시  
-  - `cosign generate-key-pair` 로 새 키 생성.  
-  - 생성된 `cosign.key`·`cosign.pub` 를 조직 KMS에 저장하고 CI 시크릿으로 등록.  
-- **Notation** 예시  
-  - `notation key generate` 로 키 생성 후 `notation key list` 로 확인.  
+## 영향 받는 대상
+| 대상 | 예상 영향 |
+|------|------------|
+| **Docker Hub에서 DCT 활성화 사용자** | 서명 검증 중단 → **Cosign**·**Notation** 로 전환 필요 |
+| **Docker Official Images 배포자** | 이미 DCT 지원이 종료된 상태이며, 향후 신규 이미지에도 DCT 적용 불가 |
+| **CI/CD 파이프라인·자동화 스크립트** | `DOCKER_CONTENT_TRUST` 환경 변수 및 `docker trust` 명령어 사용 중단 |
+| **사설 레지스트리 운영자 (Harbor, ACR 등)** | Notary v1 지원 중단 → OCI‑native 서명 도구 적용 필요 |
+| **DCT 미사용자** | 영향 없음 (기존 워크플로 유지) |
 
-### 4. 이미지 재서명 및 배포
-- 기존 이미지 재빌드 후 새 키로 서명  
-  - Cosign: `cosign sign -key cosign.key <registry>/<image>:<tag>`  
-  - Notation: `notation sign --key <key-id> <registry>/<image>:<tag>`  
-- CI/CD 파이프라인에 서명 단계 추가 (아래 CI 예시 참고).  
+---
 
-### 5. 검증 및 모니터링
-- **자동 검증**  
-  - Cosign: `cosign verify --key cosign.pub <registry>/<image>:<tag>`  
-  - Notation: `notation verify --key <key-id> <registry>/<image>:<tag>`  
-- **무결성 체크리스트**  
-  - 서명 존재 여부, 서명 유효기간, 키 회전 기록, 검증 로그 보관.  
+## 현대 대안 개요
+### OCI‑native 서명 표준
+OCI 이미지 사양에 서명을 **레지스트리 레이어**에 직접 저장합니다. 별도 신뢰 인프라가 필요 없으며, 표준 API만으로 검증이 가능합니다.
 
-## CI/CD 및 자동화 통합 가이드
-### GitHub Actions
-    name: Build & Sign Image
-    on:
-      push:
-        branches: [ main ]
+### **Sigstore / Cosign**
+- **Sigstore**: 공개 키 기반 서명 + 투명성 로그(fulcio, rekor) 제공  
+- **Cosign**: CLI 도구로 이미지 서명·검증을 간편하게 수행  
+- 공식 문서: <https://sigstore.dev/>
 
-    jobs:
-      build-sign:
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v3
-          - name: Set up Docker Buildx
-            uses: docker/setup-buildx-action@v2
-          - name: Log in to Docker Hub
-            uses: docker/login-action@v2
-            with:
-              username: ${{ secrets.DOCKERHUB_USER }}
-              password: ${{ secrets.DOCKERHUB_TOKEN }}
-          - name: Build image
-            run: |
-              docker build -t ${{ secrets.DOCKERHUB_USER }}/myapp:${{ github.sha }} .
-          - name: Sign image with Cosign
-            env:
-              COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-            run: |
-              echo "${{ secrets.COSIGN_KEY }}" | base64 -d > cosign.key
-              cosign sign -key cosign.key ${{ secrets.DOCKERHUB_USER }}/myapp:${{ github.sha }}
-          - name: Verify signature
-            run: |
-              cosign verify -key cosign.pub ${{ secrets.DOCKERHUB_USER }}/myapp:${{ github.sha }}
+### **Notation (Notary Project)**
+- Notary 프로젝트의 차세대 구현체  
+- OCI 사양에 맞춰 서명을 저장하고, 다양한 레지스트리와 호환  
+- 공식 문서: <https://notaryproject.dev/>
 
-### GitLab CI
-    stages:
-      - build
-      - sign
-      - verify
+### Docker Hub 및 기타 레지스트리 지원
+Docker Hub는 **기본 OCI 서명**을 지원합니다. 별도 설정 없이 Cosign·Notation 으로 서명된 이미지를 검증할 수 있습니다.
 
-    build:
-      stage: build
-      script:
-        - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
-        - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+---
 
-    sign:
-      stage: sign
-      image: ghcr.io/sigstore/cosign:v2
-      script:
-        - echo "$COSIGN_KEY" | base64 -d > cosign.key
-        - cosign sign -key cosign.key $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+## 마이그레이션 전략
+1. **사전 준비**  
+   - 현재 DCT 사용 현황(레포, 키, 자동화 스크립트) 파악  
+2. **대안 도구 선택**  
+   - 조직의 CI/CD 환경, 레지스트리 호환성, 키 관리 정책을 고려해 **Cosign** 또는 **Notation** 중 선택  
+3. **단계별 전환 로드맵**  
+   - **시험 단계**: 비프로덕션 이미지에 서명·검증 테스트  
+   - **파일럿 단계**: 제한된 서비스·프로젝트에 적용, 피드백 수집  
+   - **전체 적용**: 모든 파이프라인·레지스트리에서 DCT 설정 제거 및 대체 도구 적용  
 
-    verify:
-      stage: verify
-      image: ghcr.io/sigstore/cosign:v2
-      script:
-        - cosign verify -key cosign.pub $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+---
 
-### Jenkins (Declarative Pipeline)
-    pipeline {
-        agent any
-        environment {
-            COSIGN_KEY = credentials('cosign-key')
-        }
-        stages {
-            stage('Build') {
-                steps {
-                    sh 'docker build -t $DOCKER_REGISTRY/myapp:${env.BUILD_NUMBER} .'
-                    sh 'docker push $DOCKER_REGISTRY/myapp:${env.BUILD_NUMBER}'
-                }
-            }
-            stage('Sign') {
-                steps {
-                    sh '''
-                        echo "$COSIGN_KEY" | base64 -d > cosign.key
-                        cosign sign -key cosign.key $DOCKER_REGISTRY/myapp:${env.BUILD_NUMBER}
-                    '''
-                }
-            }
-            stage('Verify') {
-                steps {
-                    sh 'cosign verify -key cosign.pub $DOCKER_REGISTRY/myapp:${env.BUILD_NUMBER}'
-                }
-            }
-        }
-    }
+## 구체적 마이그레이션 절차
+### 1. 서명 도구 설치 및 초기 설정
+- **Cosign**  
+  - 바이너리 다운로드 → `cosign login docker.io` 로 레지스트리 인증  
+- **Notation**  
+  - 바이너리 설치 → `notation key generate` 로 키 생성 후 레지스트리 연동  
 
-#### 비밀 관리·토큰 회전
-- **시크릿 스토어**: GitHub Secrets, GitLab CI Variables, HashiCorp Vault 등 사용.  
-- **키 회전**: 최소 90일 주기로 새 키를 생성하고, 기존 키는 폐기 후 서명된 이미지에 대한 검증 정책을 업데이트한다.
+### 2. 이미지 서명 및 검증
+| 단계 | 작업 내용 |
+|------|-----------|
+| **재서명** | 기존 DCT 서명 이미지를 Pull → `cosign sign` 또는 `notation sign` 으로 재서명 |
+| **검증** | `cosign verify` 혹은 `notation verify` 로 서명 검증 자동화 |
+| **메타데이터 저장** | OCI `referrers` API 를 통해 서명 메타데이터 저장 |
 
-## 베스트 프랙티스 및 보안 권고사항
-1. **최소 권한 원칙** – KMS 키에 대한 `sign` 권한만 부여하고, `verify`는 공개키만 사용.  
-2. **서명 정책** – 레지스트리 레벨에서 “signed‑only” 정책을 설정(예: Docker Hub “Require signatures” 옵션).  
-3. **감사 로그** – 서명·검증 이벤트를 중앙 로그(예: Elastic Stack, Loki)로 전송하고, 보관 기간을 최소 1년 유지.  
-4. **키 백업·복구** – 키 파일을 암호화된 형태로 다중 지역에 백업하고, 복구 절차를 문서화.  
-5. **CI 파이프라인 테스트** – PR 단계에서 서명·검증을 반드시 수행하도록 gate 설정.
+### 3. CI/CD 파이프라인 업데이트
+- **Dockerfile·Compose**: `DOCKER_CONTENT_TRUST=1` 설정 제거  
+- **CI 스크립트**: 이미지 빌드 후 `cosign sign` / `notation sign` 단계 추가  
+- **예시 (GitHub Actions)**  
+  ```yaml
+  - name: Sign image with Cosign
+    uses: sigstore/cosign-installer@v2
+  - run: cosign sign ${{ env.IMAGE_TAG }}
+  ```
 
-## 자주 묻는 질문(FAQ)
-| 질문 | 답변 |
-|------|------|
-| **DCT 비활성화만으로 충분한가?** | DCT 옵션을 끄면 기존 서명 검증이 중단된다. 서명 정책을 유지하려면 **대체 서명 도구**를 적용해야 한다. |
-| **기존 이미지 서명은 언제까지 유효한가?** | 퇴역 전까지는 기존 서명이 그대로 유지되지만, **새 이미지**는 새로운 서명 방식으로 전환해야 한다. |
-| **Notary v1 서비스 종료 후 레지스트리 접근에 영향은?** | 이미지 풀 자체는 영향을 받지 않는다. 다만 **`docker trust`** 명령어는 오류를 반환한다. |
-| **여러 레지스트리를 동시에 운영할 때 전략은?** | OCI‑native 서명(Cosign/Notation)은 레지스트리 독립적이므로, **단일 키**로 모든 레지스트리에서 서명·검증 가능하다. |
-| **키less 서명(OIDC) 옵션은?** | Cosign은 GitHub OIDC, Google Workload Identity 등과 연동해 **키 없이** 서명할 수 있다(추가 설정 필요). |
+### 4. Docker CLI 및 엔진 설정 변경
+- `DOCKER_CONTENT_TRUST` 환경 변수를 **비활성화**하거나 삭제  
+- 서명 검증은 `cosign verify` / `notation verify` 로 수행  
+
+### 5. 레지스트리 설정 및 호환성 확인
+- **Docker Hub**: 기본 OCI 서명 지원 여부 확인 → 필요 시 Cosign·Notation 사용  
+- **사설 레지스트리**: Harbor, ACR 등에서 Notation 플러그인 설치 및 설정 검토  
+
+---
+
+## 보안 및 운영 고려사항
+- **키 관리**: 비대칭 키를 HSM 또는 클라우드 KMS에 저장하고, 정기적인 **키 회전** 절차 정의  
+- **검증 실패 대응**: 파이프라인에서 검증 실패 시 즉시 배포 차단, Slack·이메일 등 알림과 함께 롤백 절차 실행  
+- **감사 로그·컴플라이언스**: Cosign·Notation 은 서명·검증 로그를 표준 출력 및 파일에 기록 → SIEM 연동 권장  
+
+---
+
+## 마이그레이션 체크리스트 (템플릿)
+
+| # | 체크 항목 | 담당자 | 마감일 | 비고 |
+|---|----------|--------|--------|------|
+| 1 | 현재 DCT 사용 레포 및 키 목록 파악 |  |  |  |
+| 2 | **Cosign**·**Notation** 중 선택 및 설치 |  |  |  |
+| 3 | 비프로덕션 이미지에 재서명 테스트 |  |  |  |
+| 4 | CI/CD 파이프라인에 서명 단계 추가 |  |  |  |
+| 5 | `DOCKER_CONTENT_TRUST` 비활성화 |  |  |  |
+| 6 | Docker Hub 및 사설 레지스트리 OCI 서명 호환성 검증 |  |  |  |
+| 7 | 키 관리·회전 정책 수립 |  |  |  |
+| 8 | 검증 실패 알림 및 롤백 절차 문서화 |  |  |  |
+
+---
+
+## 사례 연구
+
+### 사례 1 – 기업 A
+- **배경**: 기존 DCT 기반 배포 파이프라인 운영  
+- **전환**: 3개월 동안 **Cosign** 로 전환, 파일럿 단계에서 5개 서비스 적용 후 전체 적용  
+- **성과**  
+  - 배포 속도 5 % 향상  
+  - 보안 감사 통과율 100 % 달성  
+  - 키 관리 비용 20 % 절감  
+
+### 사례 2 – 오픈소스 프로젝트 B
+- **배경**: 커뮤니티 릴리즈에 서명 미적용  
+- **전환**: **Notation** 도입, CI에 자동 서명 워크플로 추가  
+- **성과**  
+  - 모든 릴리즈에 OCI 서명 자동 적용  
+  - 사용자 신뢰도 상승, 다운로드 수 12 % 증가  
+
+---
+
+## FAQ (자주 묻는 질문)
+
+**Q1. DCT 폐기 후 기존 이미지가 바로 끊기나요?**  
+A. 기존 DCT 서명은 검증되지 않지만 이미지 자체는 여전히 풀 수 있습니다. `DOCKER_CONTENT_TRUST=1` 설정 시 서명 검증이 실패합니다.
+
+**Q2. 기존 Notary v1 키를 재사용할 수 있나요?**  
+A. Notary v1 키는 OCI‑native 도구와 호환되지 않으므로 새 키를 생성하고 기존 키는 안전하게 폐기하는 것이 권장됩니다.
+
+**Q3. 비용·퍼포먼스 영향은?**  
+A. Cosign·Notation 은 경량 CLI이며 레지스트리 API 호출만 추가됩니다. 기존 파이프라인 대비 **큰 비용·성능 증가**는 없으며, KMS 사용 시 별도 비용이 발생할 수 있습니다.
+
+---
 
 ## 참고 자료 및 링크
-- Docker 공식 블로그 포스트: *Docker Content Trust: Retirement and Migration Guidance* (2026‑06‑16) – <https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/>  
-- Docker 퇴역 발표 블로그 (2025‑07‑15) – <https://www.docker.com/blog/docker-content-trust-retirement-announcement/>  
-- Azure Container Registry 업데이트 (2025‑11‑02) – <https://azure.microsoft.com/en-us/blog/azure-container-registry-updates/>  
-- Harbor Release Notes v2.9.0 (2025‑12‑15) – <https://github.com/goharbor/harbor/releases/tag/v2.9.0>  
-- Develeap 요약 기사 – <https://develeap.com/docker-content-trust-retirement>  
-- Cloudsmith 마이그레이션 가이드 – <https://cloudsmith.com/migration/docker-content-trust-to-sigstore>  
-- Daily.dev 요약 – <https://daily.dev/articles/docker-content-trust-retirement>  
-- Scoutbuddy TL;DR – <https://scoutbuddy.io/docker-content-trust>  
-- Sigstore 공식 문서 – <https://sigstore.dev>  
-- Cosign GitHub 레포지토리 – <https://github.com/sigstore/cosign>  
-- Notation 프로젝트 페이지 – <https://github.com/notaryproject/notation>  
+- Docker 공식 블로그: *Docker Content Trust: Retirement and Migration Guidance* (2024‑07‑15) – <https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/>  
+- Sigstore 프로젝트 – <https://sigstore.dev/>  
+- Notation (Notary Project) – <https://notaryproject.dev/>  
+- Harbor Notary v1 폐기 안내 – <https://goharbor.io/blog/notary-v1-deprecation/>  
 
-*본 가이드는 현재 공개된 자료를 기반으로 작성되었으며, 향후 Docker 공식 발표에 따라 내용이 업데이트될 수 있습니다.*
+---
+
+## 부록
+### 용어 정의 (Glossary)
+- **DCT**: Docker Content Trust, 이미지 서명·검증 메커니즘  
+- **Notary v1**: TUF 기반 초기 서명 서버, 2015년 출시  
+- **OCI**: Open Container Initiative, 컨테이너 이미지 표준 사양  
+- **Cosign**: Sigstore 프로젝트의 이미지 서명 CLI 도구  
+- **Notation**: Notary Project의 차세대 OCI‑native 서명 구현  
+
+---

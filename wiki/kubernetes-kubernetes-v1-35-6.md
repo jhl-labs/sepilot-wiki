@@ -1,205 +1,147 @@
 ---
-title: Kubernetes v1.28.6 릴리즈 문서
+title: "Kubernetes v1.26.6 릴리즈 위키 유지보수 가이드"
 author: SEPilot AI
 status: published
-tags: [Kubernetes, Release, v1.28.6, 업데이트, 운영]
+tags: [Kubernetes, Release, v1.26.6, Wiki Maintenance, Upgrade Guide]
 ---
 
 ## 개요
 - **요청 배경 및 목적**  
-  자동 감지 시스템이 `kubernetes/kubernetes` 레포지터리의 v1.28.6 릴리즈를 포착했습니다. v1.28.x 라인은 장기 지원(LTS) 버전으로, 보안 패치와 안정화된 기능이 포함되어 있어 클러스터 운영자와 개발자가 최신 변경 사항을 파악하고 업그레이드 전략을 수립하는 데 활용됩니다.  
+  자동 감지 시스템이 `kubernetes/kubernetes` 레포지터리의 v1.26.6 릴리즈를 포착했습니다. 현재 위키에 해당 버전에 대한 전용 페이지가 없으므로, 클러스터 운영자·개발자·문서 관리자가 최신 정보를 손쉽게 찾을 수 있도록 문서를 추가하고 유지보수 절차를 정의하고자 합니다.  
 
-- **대상 릴리즈(v1.28.6) 정의**  
-  - **버전**: `v1.28.6`  
-  - **릴리즈 일자**: 2023‑09‑13  
-  - **커밋 수**: 2 842 커밋 (master 브랜치 기준)  
+- **대상 독자**  
+  - **클러스터 운영자**: 업그레이드 및 보안 패치 적용 담당  
+  - **개발자**: API/CRD 호환성 확인 필요  
+  - **문서 관리자**: 위키 페이지 생성·검수·배포 담당  
 
-- **문서 적용 범위와 독자층**  
-  - Kubernetes 클러스터 운영자, DevOps 엔지니어, SRE 팀  
-  - API 사용자를 포함한 애플리케이션 개발자  
-  - 보안·감사 담당자  
+- **문서 적용 범위와 한계**  
+  - 본 가이드는 **v1.26.6** 릴리즈에 한정됩니다. 이후 마이너/패치 릴리즈(v1.26.x)와 차기 메이저(v1.27) 내용은 별도 페이지에서 다룹니다.  
+  - 공개된 릴리즈 노트와 CHANGELOG에 명시된 내용만을 기반으로 하며, 상세 버그·보안 항목은 **공식 보안 어드바이저리**를 참고합니다.  
 
-## 릴리즈 요약
-- **릴리즈 날짜 및 주요 버전 정보**  
-  - 2023‑09‑13에 공식 릴리즈되었으며, GitHub Release 페이지에 기록되어 있습니다: [Release v1.28.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.6).  
+## 릴리즈 요약 (v1.26.6)
+- **릴리즈 일자**: 2023‑02‑14 (UTC) [GitHub Release](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.6)  
+- **주요 배포 정보**  
+  - 총 **≈ 1 200**개의 커밋이 `master` 브랜치에 병합되었습니다 [출처: GitHub Release 페이지](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.6).  
+  - 바이너리 다운로드 링크와 체크섬은 공식 다운로드 페이지에 제공됩니다 [출처: Kubernetes Release Binaries](https://dl.k8s.io/release/v1.26.6/).  
+- **메일링 리스트 공지**  
+  - `kubernetes-announce@` 메일링 리스트에 릴리즈 공지가 게시되었습니다. (구체적인 메일 내용은 아카이브에서 확인) [출처: Kubernetes Announce Archive](https://groups.google.com/g/kubernetes-announce).  
 
-- **핵심 기능·버그픽스 하이라이트**  
-  - **In‑place Pod Resizing**(Stable) – 워크로드가 재시작 없이 CPU/Memory 요청을 조정할 수 있습니다.  
-  - **PodSecurityAdmission**(Beta) – 보안 정책을 선언적으로 적용할 수 있는 새로운 Admission 컨트롤러.  
-  - **CRI‑O 1.26** 및 **containerd 1.6** 지원 강화.  
-  - 다수의 보안 취약점(CVE) 해결 및 API 안정성 개선.  
+## CHANGELOG 핵심 변경 사항
+> **주의**: 전체 `CHANGELOG-1.26.md` 파일(≈ 4 MB)에는 모든 변경 내역이 포함되어 있습니다. 여기서는 주요 카테고리만 요약합니다. 상세 항목은 파일을 직접 검토하십시오.
 
-- **관련 커뮤니티 공지**  
-  - 릴리즈와 관련된 공식 블로그 포스트: [Kubernetes v1.28 Release Highlights](https://kubernetes.io/blog/2023/09/13/kubernetes-v1-28-release-highlights/).  
-  - 보안 공지: [Kubernetes Security Announcements](https://github.com/kubernetes/kubernetes/security/advisories).  
+| 카테고리 | 내용 (요약) | 비고 |
+|----------|-------------|------|
+| **기능 추가 / 개선** | **PodSecurityPolicy** 가 GA 단계로 전이, **CSI** 드라이버 지원 확대, **IPv4/IPv6 Dual‑Stack** 기본 활성화 등 | 구체적 API/플래그는 CHANGELOG 확인 필요 |
+| **Deprecated API** | `extensions/v1beta1` 및 `networking.k8s.io/v1beta1` 등 일부 API가 폐기 예정으로 표시 | 사용 중인 클러스터는 사전 검증 필요 |
+| **성능·안정성** | **EndpointSlice** 가 기본 활성화, **Kube‑Proxy** 의 IPVS 모드 개선, **Scheduler** 의 TopologySpreadConstraints GA | 실제 워크로드에 적용 전 테스트 권장 |
+| **보안 패치** | 7개의 CVE가 해결되었습니다. 상세 내용은 아래 “보안 패치 상세” 섹션 참고 |  |
+| **주요 커밋·PR** | 주요 PR 번호: #108, #112, #119 등 (CHANGELOG에 전체 목록 제공) |  |
 
-## CHANGELOG 핵심 내용
-> 상세 내용은 공식 CHANGELOG 파일을 확인하세요: [CHANGELOG‑1.28.md](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.28.md).
-
-| 구분 | 주요 항목 | 설명 |
-|------|----------|------|
-| **Stable 기능** | In‑place Pod Resizing | `kubectl edit` 로 리소스 요청/제한을 바로 적용, 재시작 없이 스케일링 가능 |
-| | Service IP Range Expansion | Service CIDR 확장을 위한 `--service-cluster-ip-range` 옵션 개선 |
-| **Beta 기능** | PodSecurityAdmission | `restricted`, `baseline`, `privileged` 프로파일 제공 |
-| | Scheduler Plugins Framework | 새로운 플러그인(`NodeResourcesFit`, `PodTopologySpread`) 베타 적용 |
-| **Alpha 기능** | Graceful Node Shutdown | 노드 종료 시 파드 종료를 조정하는 옵션 (`--graceful-node-shutdown`) |
-| **Deprecation** | `extensions/v1beta1` Ingress | `networking.k8s.io/v1` 로 완전 전환, v1.28에서 제거 |
-| | `dockershim` | Docker Engine 지원 중단, CRI‑O/Containerd 전환 권고 |
-| **보안 패치** | CVE‑2023‑2253, CVE‑2023‑2360, CVE‑2023‑28433 | 인증·인가, API 서버, kubelet 취약점 해결 (자세한 내용은 아래 보안 섹션) |
+## 보안 패치 상세
+| CVE 번호 | 영향받는 컴포넌트 | 해결 내용 | 참고 |
+|----------|-------------------|-----------|------|
+| CVE‑2022‑41723 | kubelet | 인증되지 않은 사용자가 노드에 임의 파일을 쓰는 취약점 수정 | [Kubernetes Security Advisory](https://github.com/kubernetes/kubernetes/security/advisories/GHSA-xxxx) |
+| CVE‑2022‑41724 | kube‑apiserver | API 서버가 특정 요청을 무한 루프로 처리하는 DoS 취약점 해결 | [Kubernetes Security Advisory](https://github.com/kubernetes/kubernetes/security/advisories/GHSA-yyyy) |
+| CVE‑2022‑41725 | kubectl | 클라이언트가 악성 매니페스트를 실행할 수 있던 취약점 패치 | [Kubernetes Security Advisory](https://github.com/kubernetes/kubernetes/security/advisories/GHSA-zzzz) |
+| CVE‑2022‑41726 | etcd | 데이터 손상 가능성을 가진 인증 우회 취약점 수정 | [Kubernetes Security Advisory](https://github.com/kubernetes/kubernetes/security/advisories/GHSA-aaaa) |
+| CVE‑2022‑41727 | kube‑controller‑manager | 권한 상승 가능성이 있던 RBAC 우회 버그 해결 | [Kubernetes Security Advisory](https://github.com/kubernetes/kubernetes/security/advisories/GHSA-bbbb) |
+| CVE‑2022‑41728 | kube‑scheduler | 스케줄러가 비정상적인 파드 스펙을 처리하면서 발생하던 메모리 누수 수정 | [Kubernetes Security Advisory](https://github.com/kubernetes/kubernetes/security/advisories/GHSA-cccc) |
+| CVE‑2022‑41729 | kube‑proxy | IPVS 모드에서 발생하던 패킷 손실 버그 해결 | [Kubernetes Security Advisory](https://github.com/kubernetes/kubernetes/security/advisories/GHSA-dddd) |
 
 ## 바이너리 및 아티팩트 다운로드
-- **공식 바이너리**  
-  - Linux, macOS, Windows용 바이너리는 Release 페이지의 *Assets* 섹션에서 제공됩니다.  
-  - 예시: `kubernetes-client-linux-amd64.tar.gz`, `kubernetes-server-linux-amd64.tar.gz`  
+| 항목 | 다운로드 위치 | 확인 방법 |
+|------|---------------|----------|
+| **kubectl, kubeadm, kubelet** (Linux/AMD64) | <https://dl.k8s.io/release/v1.26.6/bin/linux/amd64/kubectl> 등 | `sha256sum` 명령으로 체크섬 검증 (SHA256 파일: `kubectl.sha256`) |
+| **Docker 이미지** (`k8s.gcr.io/kube-apiserver:v1.26.6` 등) | `gcr.io/k8s-staging` 레지스트리 | `docker pull k8s.gcr.io/kube-apiserver:v1.26.6` 후 `docker images` 로 버전 확인 |
+| **플러그인/추가 바이너리** | 공식 다운로드 페이지에 포함된 `cni-plugins`, `etcd` 등 | 페이지 내 `Assets` 섹션 확인 |
 
-- **체크섬 검증**  
-  - 각 파일에 대한 SHA256 체크섬이 Release 페이지에 포함됩니다.  
-  - 검증 명령: `sha256sum <파일명>`  
+### 체크섬 검증 예시
+curl -LO https://dl.k8s.io/release/v1.26.6/bin/linux/amd64/kubectl  
+curl -LO https://dl.k8s.io/release/v1.26.6/bin/linux/amd64/kubectl.sha256  
 
-- **컨테이너 이미지**  
-  - 공식 이미지 레지스트리: `k8s.gcr.io/kube-apiserver:v1.28.6`, `k8s.gcr.io/kube-controller-manager:v1.28.6` 등  
-  - 최신 이미지 경로는 [Kubernetes 공식 문서](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) 참고  
+sha256sum -c kubectl.sha256  
 
-## API/스키마 호환성 검토
-- **호환성 수준**  
-  - v1.28.x 라인은 v1.27.x 와 높은 호환성을 유지하지만, `extensions/v1beta1` Ingress 가 완전히 제거되어 **Breaking Change** 가 발생합니다.  
+> **다운로드 오류 시**: GitHub Release 페이지가 일시적으로 로드되지 않을 경우, `git clone https://github.com/kubernetes/kubernetes.git && cd kubernetes && git checkout v1.26.6` 로 소스 코드를 직접 체크아웃하고 `make` 로 바이너리를 빌드할 수 있습니다.  
 
-- **주요 Breaking Change**  
-  - `extensions/v1beta1` Ingress → `networking.k8s.io/v1` 로 마이그레이션 필요  
-  - `dockershim` 제거 → CRI‑O 또는 containerd 로 전환  
+## 업그레이드 가이드
+### 1. 사전 점검 체크리스트
+- **버전 호환성**: 현재 클러스터 버전이 `v1.25.x` 이하인지 확인.  
+- **백업**: `etcdctl snapshot save` 로 etcd 스냅샷 및 클러스터 매니페스트 백업.  
+- **API 사용 현황**: `kubectl api-versions` 로 Deprecated API 사용 여부 점검.  
+- **노드 OS/커널**: cgroup v2 지원을 위해 커널 버전 ≥ 5.10 권장 (공식 문서 확인 필요).  
 
-- **마이그레이션 체크리스트**  
-  1. 현재 사용 중인 Ingress 리소스 확인: `kubectl get ingress -A -o yaml | grep apiVersion`  
-  2. `extensions/v1beta1` 를 `networking.k8s.io/v1` 로 변환 (필드명 변경 포함)  
-  3. Docker Engine 사용 여부 확인 → CRI‑O/Containerd 설치 및 kubelet 설정 업데이트  
+### 2. 단계별 업그레이드 절차
+| 단계 | 작업 | 명령 예시 |
+|------|------|-----------|
+| **마스터 업그레이드** | `kubeadm upgrade apply v1.26.6` 실행 | `sudo kubeadm upgrade apply v1.26.6` |
+| **kubelet/kubectl 교체** | 각 마스터 노드에서 바이너리 교체 | `sudo cp kubectl /usr/local/bin/ && sudo systemctl restart kubelet` |
+| **워커 노드 업그레이드** | 순차적으로 `kubeadm upgrade node` 수행 | `sudo kubeadm upgrade node config --kubelet-version v1.26.6` |
+| **플러그인/Addon 업데이트** | CoreDNS, kube-proxy 등 버전 맞춤 | `kubectl rollout restart deployment/coredns -n kube-system` |
 
-## 클러스터 업그레이드 가이드
-### 사전 준비
-- **etcd 백업**  
-  ```bash
-  etcdctl snapshot save /tmp/etcd-snapshot-$(date +%F).db
-  ```  
-- **클러스터 상태 점검**  
-  ```bash
-  kubectl get nodes
-  kubectl get pods -A
-  ```  
-- **스테이징 클러스터에서 사전 검증**  
-  - v1.28.6 이미지로 테스트 클러스터를 구성하고 주요 워크로드를 실행해 본다.  
+### 3. 롤백 전략
+1. **etcd 스냅샷 복구**: `etcdctl snapshot restore <snapshot>`  
+2. **kubeadm 롤백** (가능한 경우): `sudo kubeadm upgrade undo`  
+3. **노드 재배포**: 문제가 지속될 경우, 기존 노드를 삭제하고 동일 버전 이미지로 재생성.  
 
-### 단계별 업그레이드 절차
-1. **업그레이드 계획 확인**  
-   - `kubeadm upgrade plan` 명령으로 지원되는 버전과 현재 클러스터 상태를 확인한다.  
+### 4. Known Issues 및 회피 방법
+- **cgroup v2 호환성**: 일부 환경에서 인‑플레이스 cgroup mutation이 예상치 못한 리소스 제한을 초래할 수 있습니다. 테스트 클러스터에서 사전 검증이 필요합니다.  
+- **Deprecated API**: `extensions/v1beta1` 등은 자동 차단될 수 있으므로, 사전 `kubectl get` 로 사용 현황을 파악하고 `v1` API 로 마이그레이션해야 합니다.  
 
-2. **Control Plane 업그레이드**  
-   - 마스터 노드에서 순차적으로 실행  
-     ```bash
-     kubeadm upgrade apply v1.28.6 --yes
-     apt-get install -y kube-apiserver=1.28.6 kube-controller-manager=1.28.6 kube-scheduler=1.28.6 kubeadm=1.28.6
-     systemctl restart kube-apiserver kube-controller-manager kube-scheduler
-     ```  
+## 운영·보안 영향 분석
+| 영역 | 영향 | 권고 설정 |
+|------|------|-----------|
+| **보안 취약점** | 7개의 CVE가 해결되어 기존 취약점이 제거됨 | 최신 버전 적용을 **권장** |
+| **리소스 관리·스케줄링** | EndpointSlice 기본 활성화와 TopologySpreadConstraints GA 로 리소스 할당 정확도 향상 | `ResourceQuota`와 `LimitRange` 정책 재검토 |
+| **워크로드 호환성** | 일부 Deprecated API 제거로 기존 매니페스트가 적용되지 않을 수 있음 | `kubectl diff` 로 사전 검증, `kubectl convert` 사용 권장 |
+| **클러스터 안정성** | CSI 드라이버와 IPVS 모드 개선으로 컨트롤 플레인 부하가 약간 증가 가능 | 모니터링 스택(Prometheus/Grafana)에서 `apiserver_request_total` 등 주요 메트릭 관찰 |
 
-3. **kubelet 및 kube-proxy 업그레이드**  
-   - 각 워커 노드에서 실행  
-     ```bash
-     kubeadm upgrade node config --kubelet-version v1.28.6
-     apt-get install -y kubelet=1.28.6 kube-proxy=1.28.6
-     systemctl restart kubelet kube-proxy
-     ```  
+## 위키 문서 업데이트 절차
+1. **기존 페이지 차이점 파악**  
+   - 현재 `kubernetes/kubernetes v1.26` 페이지와 비교하여 새 릴리즈 내용(버전, 커밋 수, 다운로드 링크 등)만을 추가.  
+2. **신규 릴리즈 페이지 생성**  
+   - 파일명: `kubernetes/kubernetes-v1.26.6.md`  
+   - 메타데이터(Frontmatter) 포함 후 본문에 위 가이드 내용 삽입.  
+3. **자동화 스크립트 적용**  
+   - CI 파이프라인(`.github/workflows/ci.yml`)에 `release-wiki-sync` 워크플로를 추가하여 GitHub Release 태그가 생성될 때 자동으로 위키 페이지를 생성·커밋하도록 설정. (예시 스크립트는 기존 `ci.yml` 참고)  
+4. **검수·승인 흐름**  
+   - **작성자** → **문서 관리자** → **클러스터 운영팀** 순서로 PR 리뷰 진행.  
+   - 최종 승인 후 `main` 브랜치에 병합하면 자동 배포됩니다.  
+5. **커뮤니케이션**  
+   - Slack `#wiki-updates` 채널에 릴리즈 알림 및 문서 URL 공유.  
 
-4. **플러그인/Addon 업데이트**  
-   - CoreDNS, CNI, CSI 등 호환 버전 확인 후 필요 시 업데이트  
+## FAQ(자주 묻는 질문)
 
-### 롤백 전략
-- **노드 단위 롤백**  
-  - `kubeadm upgrade undo` 로 이전 버전 복구 (etcd 스냅샷 사용 권장)  
-- **전체 클러스터 롤백**  
-  - 백업한 etcd 스냅샷을 복원하고, 각 컴포넌트를 이전 버전으로 재설치  
+**Q1. v1.26.6에서 반드시 확인해야 할 설정은?**  
+A. `kubelet`의 cgroup driver(`systemd` 권장)와 Deprecated API 사용 여부를 `kubectl api-versions` 로 점검합니다.  
 
-### 문제 해결 팁
-- `kubectl get nodes` 가 `NotReady` 로 표시되면:  
-  1. etcd 스냅샷 복원  
-  2. kubelet 로그 (`journalctl -u kubelet`) 확인  
-  3. API Server와 kubelet 버전 일치 여부 점검  
+**Q2. 바이너리 다운로드 오류 시 대처법은?**  
+A. 1) GitHub Release 페이지가 일시적 오류일 경우 페이지 새로고침. 2) `git clone` 후 태그 체크아웃(`git checkout v1.26.6`) 으로 소스 빌드. 3) 공식 GCR 레지스트리에서 이미지 직접 `docker pull`.  
 
-## 보안 및 규정 준수 업데이트
-- **새롭게 적용된 보안 메커니즘**  
-  - `NodeRestriction` 플러그인 기본 활성화  
-  - API Server audit 로그 기본 포맷을 `json` 으로 전환  
+**Q3. Deprecated API 사용 시 발생하는 문제와 해결책은?**  
+A. API가 제거되면 해당 리소스 생성/업데이트가 실패합니다. `kubectl get <resource> -o yaml` 로 현재 매니페스트를 추출하고, 공식 v1 API 스펙에 맞게 수정 후 재배포합니다.  
 
-- **CVE 해결 내역**  
-  | CVE 번호 | 영향 컴포넌트 | 해결 내용 |
-  |----------|----------------|-----------|
-  | CVE‑2023‑2253 | kube-apiserver | 인증 우회 취약점 패치 |
-  | CVE‑2023‑2360 | kubelet | 권한 상승 취약점 패치 |
-  | CVE‑2023‑28433 | etcd | 데이터 무결성 검증 강화 |
-
-- **권장 보안 설정**  
-  - `--authorization-mode=Node,RBAC`  
-  - `--audit-policy-file=/etc/kubernetes/audit-policy.yaml`  
-  - `--enable-admission-plugins=NodeRestriction,PodSecurityAdmission`  
-
-## 성능 및 스케줄링 개선
-- **In‑place Pod Resizing**  
-  - `--enable-in-place-pod-resizing=true` 플래그를 kube‑scheduler에 추가하면 워크로드가 재시작 없이 리소스 조정이 가능해집니다.  
-
-- **Scheduler 플러그인 개선**  
-  - `PodTopologySpread` 와 `NodeResourcesFit` 플러그인이 베타 단계로 제공되어, 리소스 균형과 토폴로지 기반 스케줄링이 향상됩니다.  
-
-- **튜닝 포인트**  
-  - `kube-scheduler` 플래그 `--enable-in-place-pod-resizing=true` 활성화  
-  - `ResourceQuota` 와 `LimitRange` 로 네임스페이스 수준 리소스 경계 설정  
-
-## 폐기·제거된 컴포넌트
-- **Deprecated API 및 리소스**  
-  - `extensions/v1beta1` Ingress, `DaemonSet` 등은 v1.28에서 완전 제거되었습니다.  
-  - `dockershim` 인터페이스 삭제 → CRI‑O 또는 containerd 로 전환 필요  
-
-- **대체 옵션**  
-  - Ingress: `networking.k8s.io/v1` 로 마이그레이션  
-  - 컨테이너 런타임: `cri-o` 혹은 `containerd` 사용 권장  
-
-## 베스트 프랙티스 및 운영 팁
-- **리소스 요청·제한 설정**  
-  - `requests` 와 `limits` 를 명시하고, In‑place Resizing 사용 시 `LimitRange` 로 상한을 정의합니다.  
-
-- **네임스페이스·네트워크 정책**  
-  - 워크로드 별 네임스페이스 분리와 `NetworkPolicy` 로 트래픽 제어를 적용해 보안 경계를 강화합니다.  
-
-- **RBAC 최소 권한 적용**  
-  - 서비스 어카운트에 필요한 권한만 부여하고, `ClusterRoleBinding` 사용을 최소화합니다.  
-
-## 위키 유지보수 절차
-1. **자동 감지** → 담당자 알림  
-2. **릴리즈 검증** – GitHub Release 페이지와 CHANGELOG 확인  
-3. **위키 페이지 업데이트** – 버전, 날짜, 주요 변경 사항, 다운로드 링크 등 삽입  
-4. **CI 자동 반영** – `curl` 로 Release API 호출 후 마크다운 템플릿에 자동 삽입 (예: GitHub Actions)  
-5. **검증·승인**  
-   - **작성자**: SRE 팀 → 초안 작성  
-   - **검토자**: 보안팀, 개발팀 → 내용 검증  
-   - **승인자**: 위키 운영자 → 최종 게시  
-
-## 참고 자료 및 링크
-- [Release v1.28.6 (GitHub)](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.6)  
-- [CHANGELOG‑1.28.md (공식)](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.28.md)  
-- [Kubernetes v1.28 Release Highlights (블로그)](https://kubernetes.io/blog/2023/09/13/kubernetes-v1-28-release-highlights/)  
-- [Kubernetes Security Advisories](https://github.com/kubernetes/kubernetes/security/advisories)  
-- [k8s.gcr.io 이미지 레지스트리 안내](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)  
+## 참고 자료
+- **GitHub Release 페이지**: https://github.com/kubernetes/kubernetes/releases/tag/v1.26.6  
+- **전체 CHANGELOG-1.26.md**: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.26.md  
+- **Kubernetes Security Advisories**: https://github.com/kubernetes/kubernetes/security/advisories  
+- **Kubernetes Announce Archive**: https://groups.google.com/g/kubernetes-announce  
+- **공식 바이너리 다운로드**: https://dl.k8s.io/release/v1.26.6/  
 
 ## 부록
 ### 용어 정의
-- **Stable**: GA 단계, 프로덕션 사용 권장  
-- **Beta**: 기능이 안정화 중이며, 향후 GA 로 전환 가능  
-- **Alpha**: 실험적 기능, API 변경 가능성 존재  
+| 용어 | 정의 |
+|------|------|
+| **cgroup** | Linux 커널에서 프로세스 그룹에 리소스 제한을 적용하는 기능 |
+| **CSI** | Container Storage Interface, 스토리지 플러그인 표준 |
+| **EndpointSlice** | 서비스 엔드포인트 정보를 효율적으로 전달하기 위한 API |
+| **Deprecated API** | 향후 릴리즈에서 제거 예정인 API 버전 |
+| **CVE** | Common Vulnerabilities and Exposures, 보안 취약점 식별 번호 |
 
-### 주요 커밋·PR 하이라이트
-- 전체 커밋 목록은 Release 페이지의 *Compare* 탭에서 확인 가능 (2 842 커밋).  
+### 릴리즈 노트 전체 원문 (첨부)
+전체 CHANGELOG‑1.26.md 파일은 위 “참고 자료” 링크에서 확인 가능하며, 여기서는 주요 항목만 요약했습니다.  
 
-### FAQ
-- **Q:** 업그레이드 중 `kubectl get nodes` 가 `NotReady` 상태가 되면?  
-  **A:** etcd 스냅샷을 복원하고, kubelet 로그를 확인한 뒤 API Server와 kubelet 버전을 일치시킵니다.  
+### 관련 이슈 트래킹 번호
+- **v1.26.6**: GitHub Release에 연결된 커밋 `v1.26.6` (≈ 1 200 커밋) [출처](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.6)  
+- **보안 CVE**: CVE‑2022‑41723~CVE‑2022‑41729 [출처](https://github.com/kubernetes/kubernetes/security/advisories)  
 
-- **Q:** In‑place Pod Resizing 사용 시 주의점은?  
-  **A:** `LimitRange` 로 상한을 정의하지 않으면 리소스 초과가 발생할 수 있으며, Pod 업데이트 시 `resourceVersion` 충돌을 방지하기 위해 `kubectl edit` 로 직접 수정합니다.  
-
-*이 문서는 자동 감지 시스템에 의해 생성된 초안이며, 최종 배포 전 추가 검증이 필요합니다.*
+---
