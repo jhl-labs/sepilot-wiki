@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 25주차",
   "slug": "reports/weekly-2026-25",
   "content": "\n## 요약\n- 전체 문서 451개 중 238개가 발행 상태이며, 이번 주에 신규 문서 3개, 수정 문서 3개가 발생했습니다.  \n- AI가 수행한 총 작업 11건(품질 점수 3건, 수정 3건, 생성 3건, 유지보수 2건)으로 자동화 비중이 높아졌습니다.  \n- 현재 열려 있는 이슈는 264건이며, 이번 주에 3건이 새롭게 활동했습니다.\n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 451 |\n| 발행(published) | 238 |\n| 초안(draft) | 171 |\n| 삭제(deleted) | 42 |\n| 신규 문서 | 3 |\n| 수정된 문서 | 3 |\n| 이번 주 발행된 문서 | 0 |\n\n## AI 활동 요약\n- **품질 점수 (quality_score)**: 3건 – 자동 품질 검토를 통과(점수 89~91)하고 자동 발행 처리.  \n- **수정 (modify)**: 3건 – URL 변경 요청에 따라 문서 내용 삭제(총 4줄) 및 메타데이터 정비.  \n- **생성 (generate)**: 3건 –  \n  - *5 Software Supply Chain Security Best Practices for Development Teams* (연구 9,290 ms, 총 소요 82,269 ms)  \n  - *Reconciling the Past: Correcting Records for Unfixed Kubernetes CVEs* (연구 10,385 ms, 총 소요 72,953 ms)  \n  - *What is Software Supply Chain Security?* (연구 3,302 ms, 총 소요 97,209 ms)  \n- **유지보수 (maintain)**: 2건 – URL 변경 감지(30개 체크, 3개 변경, 8개 깨짐)와 트렌드 모니터링(18건 수집, 3건 감지) 자동 실행.\n\n## 열린 이슈\n- **전체 오픈 이슈**: 264건  \n- **최근 활동 이슈**: 3건 (이번 주에 업데이트 또는 새로 생성된 이슈)\n\n## 주간 변경사항\n- **커밋**: `65e587839` – *chore: Issue Processor 실행 결과* (GitHub Action, 2026‑06‑09)  \n- **주요 자동 작업**:  \n  - Issue Processor가 품질 점수 검토 후 3개 문서를 자동 발행.  \n  - URL 변경 감지 및 트렌드 모니터링 스케줄러가 각각 2건의 유지보수 작업을 수행.  \n\n## 향후 과제\n1. **발행 전환 확대** – 현재 신규·수정 문서가 발행되지 않은 경우가 0건이므로, 자동 발행 조건을 검토해 발행 비율을 높일 필요.  \n2. **삭제 문서 관리** – 삭제된 문서 42개(전체의 9.3%)에 대한 원인 분석 및 복구 가능성 검토.  \n3. **URL 정확도 개선** – 이번 주에 8개의 깨진 URL가 발견되었으므로, 정기적인 URL 검증 파이프라인 강화.  \n4. **AI 품질 점수 모니터링** – 품질 점수가 89점 이하인 경우 자동 발행 전 추가 검토 절차 도입 검토.  \n5. **이슈 처리 효율** – 현재 오픈 이슈 264건 중 3건만 활동 중이므로, 우선순위 기반 자동 라벨링 및 할당 로직을 개선해 처리 속도 향상.  ",
-  "lastModified": "2026-07-15T17:55:54Z",
+  "lastModified": "2026-07-15T23:51:00Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "59ba736",
-      "message": "chore: 대시보드 통계 수집 - 2026-07-15 17:55",
+      "sha": "e6ee5f5",
+      "message": "chore: 대시보드 통계 수집 - 2026-07-15 23:51",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-07-15T17:55:54Z",
+      "date": "2026-07-15T23:51:00Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
