@@ -2,7 +2,7 @@
   "title": "Creating the `dependencies` label for Dependabot",
   "slug": "github/create-dependencies-label",
   "content": "\n# Creating the `dependencies` label for Dependabot\n\nDependabot adds a label (by default `dependencies`) to the pull requests it creates. If that label does not exist in the repository, the pull request will fail with the error:\n\n> The following labels could not be found: `dependencies`. Please create it before Dependabot can add it to a pull request.\n\nThis guide explains how to create the missing label and optionally adjust `dependabot.yml`.\n\n## 1. Create the label via the GitHub UI\n\n1. Navigate to your repository on GitHub.\n2. Click **Issues** → **Labels** (or go directly to `https://github.com/<owner>/<repo>/labels`).\n3. Click the **New label** button.\n4. Fill in the fields:\n   - **Name**: `dependencies`\n   - **Description** (optional): `Pull requests opened by Dependabot for dependency updates.`\n   - **Color**: choose a color (e.g., `#0366d6`).\n5. Click **Create label**.\n\nThe label now exists and Dependabot can apply it automatically.\n\n## 2. Create the label via the GitHub API (optional)\n\nIf you prefer automation, you can create the label with a `curl` request:\n\n```bash\ncurl -X POST \\\n  -H \"Accept: application/vnd.github+json\" \\\n  -H \"Authorization: token <YOUR_PERSONAL_ACCESS_TOKEN>\" \\\n  https://api.github.com/repos/<owner>/<repo>/labels \\\n  -d '{\"name\":\"dependencies\",\"color\":\"0366d6\",\"description\":\"Pull requests opened by Dependabot for dependency updates.\"}'\n```\n\nReplace `<owner>`, `<repo>`, and `<YOUR_PERSONAL_ACCESS_TOKEN>` with your values.\n\n## 3. Verify Dependabot configuration\n\nOpen `.github/dependabot.yml` (or `dependabot.yml` at the repository root) and ensure the `labels` field (if present) includes `dependencies` or remove the field to let Dependabot use the default label.\n\n```yaml\nversion: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    # Optional: custom labels – make sure they exist\n    # labels:\n    #   - \"dependencies\"\n```\n\nIf you have custom labels, repeat step 1 for each of them.\n\n## 4. Test the setup\n\nTrigger a manual Dependabot run or wait for the next scheduled run. The new pull request should now appear with the `dependencies` label attached.\n\n---\n\n**References**\n- [GitHub Docs – About labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-labels) (official documentation)\n- [Dependabot configuration options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options) (official documentation)\n",
-  "lastModified": "2026-07-18T11:50:02Z",
+  "lastModified": "2026-07-18T17:50:34Z",
   "author": "GitHub Action",
   "status": "draft",
   "isDraft": true,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "99d1a31",
-      "message": "chore: 대시보드 통계 수집 - 2026-07-18 11:50",
+      "sha": "786b551",
+      "message": "chore: 대시보드 통계 수집 - 2026-07-18 17:50",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-07-18T11:50:02Z",
+      "date": "2026-07-18T17:50:34Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
