@@ -2,7 +2,7 @@
   "title": "주간 위키 보고서 - 2026년 24주차",
   "slug": "reports/weekly-2026-24",
   "content": "\n## 요약\n- 전체 문서 수는 **447개**이며, 현재 **235개**가 발행(published) 상태, **170개**가 초안(draft), **42개**가 삭제(deleted)되었습니다.  \n- 이번 주에 **4개의 신규 문서**가 생성되고 **3개의 문서**가 수정되었습니다.  \n- AI가 수행한 총 작업은 **16건**이며, 그 중 **4건**이 새 문서 생성, **3건**이 품질 점수 검토, **3건**이 유지·모니터링 작업이었습니다.  \n- 현재 열려 있는 이슈는 **261개**이며, 이번 주에 **4건**이 새롭게 활동했습니다.\n\n## 문서 현황\n| 구분 | 개수 |\n|------|------|\n| 전체 문서 | 447 |\n| 발행(published) | 235 |\n| 초안(draft) | 170 |\n| 삭제(deleted) | 42 |\n| 신규 생성 | 4 |\n| 수정 | 3 |\n| 자동 발행 | 0 |\n\n## AI 활동 요약\n- **총 작업 수**: 16\n- **작업 유형별 건수**  \n  - maintain (유지·모니터링): 3  \n  - quality_score (품질 점수 검토): 4  \n  - modify (문서 수정): 3  \n  - generate (새 문서 생성): 4  \n  - recover (복구): 1  \n  - status_report (상태 보고): 1  \n\n### 주요 AI 작업\n1. **새 문서 생성 (4건)**\n   - *From Kubernetes Dashboard to Headlamp – Transition Guide* (Issue #800)  \n   - *Hardened Images Explained: Fewer CVEs, Smaller Attack Surface* (Issue #801)  \n   - *What is Software Supply Chain Security?* (Issue #802)  \n   - *Announcing etcd 3.7.0‑beta.0* (Issue #794)  \n\n2. **품질 점수 검토 및 자동 발행 (4건)**\n   - 위 4개의 신규 문서 모두 자동 품질 점수 89점으로 통과 후 자동 발행 처리.\n\n3. **문서 수정 (3건)**\n   - URL 변경 요청에 따라 `how-to-analyze-hugging-face-for-arm64-readiness`, `untitled-1776224402310`, `kubernetes-v1-36-more-drivers-new-features-and-the` 문서 수정.\n\n4. **유지·모니터링 (3건)**\n   - 학습 루프 패턴 감지 및 에이전트 개선, URL 변경 감지 (30개 체크, 3개 변경, 8개 깨짐), 트렌드 모니터링 (19건 수집, 3건 감지).\n\n5. **복구 (1건)**\n   - Issue #798에 대한 피드백 반영 후 문서 복구.\n\n6. **주간 상태 보고 (1건)**\n   - 2026‑W23 보고서 생성 (문서 441개, AI 활동 16건).\n\n## 열린 이슈\n- **전체 오픈 이슈**: 261개  \n- **최근 활동 이슈**: 4건 (이번 주에 업데이트 또는 새로 생성된 이슈)\n\n## 주간 변경사항\n| 커밋 SHA | 메시지 | 작성자 | 날짜 |\n|----------|--------|--------|------|\n| 892f25abc | chore: Issue Processor 실행 결과 | GitHub Action | 2026-06-05T11:43:42Z |\n| d1b0f928b | chore: Issue Processor 실행 결과 | GitHub Action | 2026-06-04T20:15:08Z |\n| 32d51838e | docs: Issue #798 - 피드백 반영 | GitHub Action | 2026-06-02T00:03:30Z |\n| 64af61765 | 📊 주간 위키 상태 보고서 생성 | github-actions[bot] | 2026-06-01T01:54:32Z |\n\n## 향후 과제\n1. **삭제된 문서 관리** – 현재 42개의 삭제된 문서가 존재하므로, 복구 가능성이 있는 문서는 재검토하고, 불필요한 삭제는 최소화할 방안을 모색합니다.  \n2. **URL 변경 자동화 개선** – 이번 주에 8개의 깨진 URL가 감지되었으며, 추가적인 자동 교정 로직을 도입해 인적 개입을 줄이는 것이 필요합니다.  \n3. **품질 점수 기준 재평가** – 모든 신규 문서가 89점으로 자동 발행되었으나, 향후 품질 기준을 상향 조정해 내용 깊이와 정확성을 강화합니다.  \n4. **이슈 처리 속도 향상** – 오픈 이슈 261개 중 아직 해결되지 않은 항목이 다수 남아 있으므로, 우선순위 기반 triage 프로세스를 도입해 처리 효율을 높입니다.  \n5. **AI 작업 로그 가시성** – AI 활동별 상세 로그를 대시보드에 시각화하여 운영팀이 실시간으로 모니터링하고, 이상 징후를 조기에 감지할 수 있도록 합니다.  ",
-  "lastModified": "2026-07-22T12:08:42Z",
+  "lastModified": "2026-07-22T17:55:34Z",
   "author": "SEPilot AI",
   "status": "published",
   "isDraft": false,
@@ -14,11 +14,11 @@
   ],
   "history": [
     {
-      "sha": "edf1c66",
-      "message": "chore: 대시보드 통계 수집 - 2026-07-22 12:08",
+      "sha": "b7e4088",
+      "message": "chore: 대시보드 통계 수집 - 2026-07-22 17:55",
       "author": "GitHub Action",
       "authorEmail": "action@github.com",
-      "date": "2026-07-22T12:08:42Z",
+      "date": "2026-07-22T17:55:34Z",
       "isAutoCommit": false,
       "additions": 0,
       "deletions": 0
