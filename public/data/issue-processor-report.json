@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-23T06:56:39.795Z",
+  "timestamp": "2026-07-23T07:20:52.536Z",
   "dryRun": false,
   "totalIssuesScanned": 14,
   "categories": {
@@ -14,16 +14,6 @@
       {
         "number": 812,
         "title": "[Wiki Maintainer] Root‑level documents violate category hierarchy",
-        "daysSinceUpdate": 27
-      },
-      {
-        "number": 779,
-        "title": "[Wiki Maintainer] Duplicate Dependabot documentation",
-        "daysSinceUpdate": 27
-      },
-      {
-        "number": 778,
-        "title": "[Wiki Maintainer] Root‑level files need re‑categorisation",
         "daysSinceUpdate": 27
       },
       {
@@ -79,7 +69,18 @@
     ],
     "update_request": [],
     "pending_request": [],
-    "stale": []
+    "stale": [
+      {
+        "number": 779,
+        "title": "[Wiki Maintainer] Duplicate Dependabot documentation",
+        "daysSinceUpdate": 28
+      },
+      {
+        "number": 778,
+        "title": "[Wiki Maintainer] Root‑level files need re‑categorisation",
+        "daysSinceUpdate": 28
+      }
+    ]
   },
   "actionsPerformed": [
     {
@@ -87,8 +88,20 @@
       "issueNumber": 317,
       "title": " [요청] AgentSpace: OpenClaw 에이전트를 위한 자체 호스팅 채팅 방",
       "score": 65
+    },
+    {
+      "type": "stale_reminder",
+      "issueNumber": 779,
+      "title": "[Wiki Maintainer] Duplicate Dependabot documentation",
+      "daysSinceUpdate": 28
+    },
+    {
+      "type": "stale_reminder",
+      "issueNumber": 778,
+      "title": "[Wiki Maintainer] Root‑level files need re‑categorisation",
+      "daysSinceUpdate": 28
     }
   ],
-  "actionCount": 1,
+  "actionCount": 3,
   "maxActions": 60
 }
